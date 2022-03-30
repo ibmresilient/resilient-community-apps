@@ -1,11 +1,13 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
+from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import *
+
+LOG = getLogger(__name__)
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -18,12 +20,11 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_get_rows''"""
+    """Component that implements SOAR function 'dt_utils_get_rows''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
 
@@ -36,10 +37,8 @@ class FunctionComponent(ResilientComponent):
     def _dt_utils_get_rows_function(self, event, *args, **kwargs):
         """Function: Function that returns rows found based on searching/sorting criteria."""
 
-        log = logging.getLogger(__name__)
-
         try:
-            # Instansiate new Resilient API object
+            # Instansiate new SOAR API object
             res_client = self.rest_client()
 
             inputs = {
@@ -89,7 +88,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
-            log.info("Complete")
+            LOG.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

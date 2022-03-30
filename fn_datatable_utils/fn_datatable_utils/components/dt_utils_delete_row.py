@@ -1,12 +1,13 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
+from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, get_function_input
 
+LOG = getLogger(__name__)
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -19,12 +20,11 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_delete_row"""
+    """Component that implements SOAR function 'dt_utils_delete_row"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
 
@@ -37,10 +37,8 @@ class FunctionComponent(ResilientComponent):
     def _dt_utils_delete_row_function(self, event, *args, **kwargs):
         """Function: Function that deletes a row from a Data Table given the row's ID"""
 
-        log = logging.getLogger(__name__)
-
         try:
-            # Instansiate new Resilient API object
+            # Instansiate new SOAR API object
             res_client = self.rest_client()
             workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
@@ -49,10 +47,10 @@ class FunctionComponent(ResilientComponent):
 
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": dt_utils_datatable_api_name,  
-                "dt_utils_row_id": dt_utils_row_id  
+                "dt_utils_datatable_api_name": dt_utils_datatable_api_name,
+                "dt_utils_row_id": dt_utils_row_id
             }
-            log.debug(inputs)
+            LOG.debug(inputs)
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
@@ -62,16 +60,16 @@ class FunctionComponent(ResilientComponent):
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, payload.inputs["incident_id"], dt_utils_datatable_api_name)
 
-            # get datatable row_id if function used on a datatable
+            # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(workflow_instance_id)
-            row_id and log.debug("Current row_id: %s", row_id)
+            row_id and LOG.debug("Current row_id: %s", row_id)
 
-            # if dt_utils_row_id == 0, use row_id
+            # If dt_utils_row_id == 0, use row_id
             if not dt_utils_row_id or not int(dt_utils_row_id):
                 if not row_id:
                     raise ValueError("Run the workflow from a datatable to get the current row_id.")
 
-                log.info("Using current row_id: %s", row_id)
+                LOG.info("Using current row_id: %s", row_id)
                 dt_utils_row_id = row_id
 
             if row_id == int(dt_utils_row_id):
@@ -91,7 +89,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
-            log.info("Complete")
+            LOG.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

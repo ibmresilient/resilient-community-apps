@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "dt_utils_datatable_api_name": {
+          "type": "string"
+        },
+        "dt_utils_row_id": {
+          "type": "integer"
+        },
+        "dt_utils_search_column": {},
+        "dt_utils_search_value": {}
+      }
+    },
+    "row": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cells": {
+          "type": "object",
+          "properties": {
+            "datetime": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "integer"
+                }
+              }
+            },
+            "dt_col_name": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "multi_select": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "number": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "integer"
+                }
+              }
+            },
+            "select": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "text": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "boolean": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
+                  "type": "integer"
+                },
+                "value": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "type_id": {
+          "type": "integer"
+        },
+        "table_name": {
+          "type": "string"
+        },
+        "inc_id": {
+          "type": "integer"
+        },
+        "inc_name": {
+          "type": "string"
+        },
+        "inc_owner": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,13 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
+from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, get_function_input, validate_search_inputs
+
+LOG = getLogger(__name__)
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -18,12 +20,11 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_delete_rows''"""
+    """Component that implements SOAR function 'dt_utils_delete_rows''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
 
@@ -36,10 +37,8 @@ class FunctionComponent(ResilientComponent):
     def _dt_utils_delete_rows_function(self, event, *args, **kwargs):
         """Function: Function that deletes rows from a Data Table"""
 
-        log = logging.getLogger(__name__)
-
         try:
-            # Instansiate new Resilient API object
+            # Instansiate new SOAR API object
             res_client = self.rest_client()
             workflow_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
@@ -52,12 +51,12 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_delete_all_rows": bool(get_function_input(kwargs, "dt_utils_delete_all_rows", optional=True, default=False)), # bool (optional)
             }
 
-            log.info("incident_id: {0}".format(inputs["incident_id"]))
-            log.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
-            log.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
-            log.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
-            log.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
-            log.info(u"dt_utils_delete_all_rows: {0}".format(inputs["dt_utils_delete_all_rows"]))
+            LOG.info("incident_id: {0}".format(inputs["incident_id"]))
+            LOG.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
+            LOG.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
+            LOG.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
+            LOG.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
+            LOG.info(u"dt_utils_delete_all_rows: {0}".format(inputs["dt_utils_delete_all_rows"]))
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
@@ -74,16 +73,16 @@ class FunctionComponent(ResilientComponent):
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, payload.inputs["incident_id"],
                                      payload.inputs["dt_utils_datatable_api_name"])
-            
-            # get datatable row_id if function used on a datatable
+
+            # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(workflow_id)
-            row_id and log.debug("Current row_id: %s", row_id)
+            row_id and LOG.debug("Current row_id: %s", row_id)
 
             # Get the data table data
             datatable.get_data()
 
-            deleted_rows = datatable.delete_rows(payload.inputs["dt_utils_rows_ids"], 
-                                                 payload.inputs["dt_utils_search_column"], 
+            deleted_rows = datatable.delete_rows(payload.inputs["dt_utils_rows_ids"],
+                                                 payload.inputs["dt_utils_search_column"],
                                                  payload.inputs["dt_utils_search_value"],
                                                  payload.inputs["dt_utils_delete_all_rows"],
                                                  row_id,
@@ -105,7 +104,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
-            log.info("Complete")
+            LOG.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

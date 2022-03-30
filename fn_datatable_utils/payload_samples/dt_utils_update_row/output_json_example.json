@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "inputs": {
+    "incident_id": 2096,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "dt_utils_row_id": 5,
+    "dt_utils_cells_to_update": {
+      "datetime": 1648646740137,
+      "text": "Done"
+    }
+  },
+  "row": {
+    "id": 5,
+    "cells": {
+      "datetime": {
+        "id": "datetime",
+        "row_id": 5,
+        "value": 1648646740137
+      },
+      "dt_col_name": {
+        "id": "dt_col_name",
+        "row_id": 5,
+        "value": "something"
+      },
+      "multi_select": {
+        "id": "multi_select",
+        "row_id": 5,
+        "value": [
+          "j",
+          "g"
+        ]
+      },
+      "number": {
+        "id": "number",
+        "row_id": 5,
+        "value": 56
+      },
+      "select": {
+        "id": "select",
+        "row_id": 5,
+        "value": "2"
+      },
+      "text": {
+        "id": "text",
+        "row_id": 5,
+        "value": "Done"
+      },
+      "boolean": {
+        "id": "boolean",
+        "row_id": 5,
+        "value": false
+      }
+    },
+    "actions": [
+      {
+        "id": 14,
+        "name": "Delete Current Row",
+        "enabled": true
+      },
+      {
+        "id": 17,
+        "name": "Delete Rows by Name",
+        "enabled": true
+      },
+      {
+        "id": 21,
+        "name": "Update Current Row",
+        "enabled": true
+      }
+    ],
+    "type_id": 1000,
+    "table_name": "Example CSV Datatable",
+    "inc_id": 2096,
+    "inc_name": "A",
+    "inc_owner": "admin@example.com",
+    "version": 2
+  }
+}

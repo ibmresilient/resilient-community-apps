@@ -1,7 +1,7 @@
 # This file is used to setup permissions applied to an API key which is
 # automatically generated for this integration.
 # Below are a set of base permissions which should not changed.
-# Add any additional permissions if your app directly makes Resilient API calls.
+# Add any additional permissions if your app directly makes SOAR API calls.
 ##START_BASE_PERMISSIONS - DO NOT CHANGE##
 read_data
 read_function

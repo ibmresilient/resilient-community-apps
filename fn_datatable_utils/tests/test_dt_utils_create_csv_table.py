@@ -1,5 +1,5 @@
 import csv
-import logging
+from logging import getLogger
 import pytest
 import sys
 if sys.version_info.major < 3:
@@ -10,7 +10,7 @@ from collections import OrderedDict
 from fn_datatable_utils.components.dt_utils_create_csv_table import build_row, build_mapping_table, \
         convert_field
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S%z' #"2017-06-09T00:00:00+0000"
 DT_COLUMN_NAMES = OrderedDict([
     ("col0", "text"),
@@ -47,13 +47,13 @@ def test_build_row_no_header(inputs, mapping_table, expected_results):
             assert result[col] == expected_results[col]
 
 @pytest.mark.parametrize("inputs, mapping_table, expected_results",[
-    ("'h1','h2','h3'\n'a','b','2020-10-02T16:00:42+0000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
-    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601654442000}}),
-    ("'h1','h2','h3'\n'a','b','1601668842000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    ("'h1','h2','h3'\n'a','b','2020-10-02T16:00:42+0000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
     {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
-    ("'h1','h2','h3'\n'a','b',1601668842000", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    ("'h1','h2','h3'\n'a','b','1601668842000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
     {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
-    ("'h1','h2','h3'\n'a','b','1601668842'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" }, 
+    ("'h1','h2','h3'\n'a','b',1601668842000", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
+    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
+    ("'h1','h2','h3'\n'a','b','1601668842'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
     {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
 ])
 def test_build_row_datetime(inputs, mapping_table, expected_results):
@@ -84,7 +84,7 @@ def test_build_mapping_table(mapping_table, csv_headers, dt_column_names, expect
     ("abc", "text", None, "abc"),
     ("10", "number", None, 10),
     (10, "number", None, 10),
-    ('2020-10-02T16:00:42+0000', "datetimepicker", DATE_FORMAT, 1601654442000),
+    ('2020-10-02T16:00:42+0000', "datetimepicker", DATE_FORMAT, 1601668842000),
     (1601668842000, "datetimepicker", DATE_FORMAT, 1601668842000),
     ("true", "boolean", None, True),
     (True, "boolean", None, True),

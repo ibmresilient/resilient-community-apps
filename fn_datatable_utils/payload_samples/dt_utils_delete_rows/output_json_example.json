@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "inputs": {
+    "incident_id": 2096,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "dt_utils_rows_ids": "[5, 6]",
+    "dt_utils_search_column": null,
+    "dt_utils_search_value": null,
+    "dt_utils_delete_all_rows": false
+  },
+  "rows_ids": [
+    5,
+    6
+  ]
+}

@@ -1,13 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
+from logging import getLogger
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, get_function_input
 
+LOG = getLogger(__name__)
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -20,12 +21,11 @@ class FunctionPayload(object):
         """Return this class as a Dictionary"""
         return self.__dict__
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_update_row"""
+    """Component that implements SOAR function 'dt_utils_update_row"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
 
@@ -38,10 +38,8 @@ class FunctionComponent(ResilientComponent):
     def _dt_utils_update_row_function(self, event, *args, **kwargs):
         """Function: Function that takes a JSON String of 'column name/cell value' pairs to update a Data Table row"""
 
-        log = logging.getLogger(__name__)
-
         try:
-            # Instansiate new Resilient API object
+            # Instansiate new SOAR API object
             res_client = self.rest_client()
             workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
@@ -51,7 +49,7 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id"),  # number (required)
                 "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update")  # text (required)
             }
-            log.info(inputs)
+            LOG.info(inputs)
 
             try:
                 inputs["dt_utils_cells_to_update"] = json.loads(inputs["dt_utils_cells_to_update"])
@@ -69,13 +67,13 @@ class FunctionComponent(ResilientComponent):
             # Get the data table data
             datatable.get_data()
 
-            # use the current row_id if dt_utils_row_id = 0
+            # Use the current row_id if dt_utils_row_id = 0
             if not inputs['dt_utils_row_id'] or not int(inputs['dt_utils_row_id']):
                 row_id = datatable.get_row_id_from_workflow(workflow_instance_id)
                 if not row_id:
                     raise ValueError("Run the workflow from a datatable to get the current row_id.")
 
-                log.info("Using current row_id: %s", row_id)
+                LOG.info("Using current row_id: %s", row_id)
                 inputs['dt_utils_row_id'] = row_id
 
             # Update the row
@@ -93,7 +91,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
-            log.info("Complete")
+            LOG.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

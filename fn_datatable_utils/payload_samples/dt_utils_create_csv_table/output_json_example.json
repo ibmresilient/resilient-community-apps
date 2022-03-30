@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "data_source": "CSV data",
+    "rows_added": 1,
+    "rows_with_errors": 0
+  },
+  "raw": "{\"data_source\": \"CSV data\", \"rows_added\": 1, \"rows_with_errors\": 0}",
+  "inputs": {
+    "dt_date_time_format": "%m/%d/%y %H:%M",
+    "dt_mapping_table": "{\n  \"hdr_number\": \"number\",\n  \"hdr_text\": \"text\",\n  \"hdr_boolean\": \"boolean\",\n  \"hdr_datetime\": \"datetime\",\n  \"hdr_select\": \"select\",\n  \"hdr_multiselect\": \"multi_select\"\n}",
+    "incident_id": 2096,
+    "dt_datable_name": "dt_utils_test_data_table",
+    "dt_csv_data": "hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra \n18023,\"summary \u4e2d\u56fd\u4eba\",yes,6/6/20 8:12,3,\"a, b\",\u4e2d",
+    "dt_has_headers": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "1.3.0",
+    "host": "Richards-MacBook-Pro.local",
+    "execution_time_ms": 9472,
+    "timestamp": "2022-03-30 09:35:48"
+  }
+}

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -7,7 +7,7 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from tests.test_helper import *
-import json 
+import json
 from copy import deepcopy
 
 PACKAGE_NAME = "fn_datatable_utils"
@@ -16,9 +16,8 @@ FUNCTION_NAME = "dt_utils_update_row"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = DTResilientMock
-
 
 def call_dt_utils_update_row_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -29,7 +28,6 @@ def call_dt_utils_update_row_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestDtUtilsUpdateRow:
     """ Tests for the dt_utils_update_row function"""
@@ -53,7 +51,7 @@ class TestDtUtilsUpdateRow:
         "inputs": deepcopy(inputs),
         "row": {
             u'id': 1,
-            u'cells': { 
+            u'cells': {
                 u'dt_col_email': {u'id': u'dt_col_email', u'row_id': 1, u'value': u'mary@example.com'},
                 u'dt_col_id': {u'id': u'dt_col_id', u'row_id': 1, u'value': 3002},
                 u'dt_col_name': {u'id': u'dt_col_name', u'row_id': 1, u'value': u'Mary Blogs'},
@@ -62,7 +60,6 @@ class TestDtUtilsUpdateRow:
         }
     }
     output["inputs"]["dt_utils_cells_to_update"] = json.loads(output["inputs"]["dt_utils_cells_to_update"])
-
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     @pytest.mark.livetest

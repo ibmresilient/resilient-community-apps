@@ -1,9 +1,8 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 import json
 import six
-
 
 class DTResilientMock(BasicResilientMock):
     mock_data_table_rows = [
@@ -40,7 +39,6 @@ class DTResilientMock(BasicResilientMock):
         'success': True,
         'title': None
     }
-
 
     @staticmethod
     def format_datatable_row(row, row_id):
