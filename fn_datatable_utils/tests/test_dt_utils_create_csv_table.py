@@ -48,7 +48,7 @@ def test_build_row_no_header(inputs, mapping_table, expected_results):
 
 @pytest.mark.parametrize("inputs, mapping_table, expected_results",[
     ("'h1','h2','h3'\n'a','b','2020-10-02T16:00:42+0000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
-    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
+    {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601654442000}}),
     ("'h1','h2','h3'\n'a','b','1601668842000'", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
     {'col1': {'value': "a"}, 'col2': {'value': "b"}, 'col3': {'value': 1601668842000}}),
     ("'h1','h2','h3'\n'a','b',1601668842000", { 'h3':"col3", 'h1':"col1", 'h2':"col2" },
@@ -84,7 +84,7 @@ def test_build_mapping_table(mapping_table, csv_headers, dt_column_names, expect
     ("abc", "text", None, "abc"),
     ("10", "number", None, 10),
     (10, "number", None, 10),
-    ('2020-10-02T16:00:42+0000', "datetimepicker", DATE_FORMAT, 1601668842000),
+    ('2020-10-02T16:00:42+0000', "datetimepicker", DATE_FORMAT, 1601654442000),
     (1601668842000, "datetimepicker", DATE_FORMAT, 1601668842000),
     ("true", "boolean", None, True),
     (True, "boolean", None, True),
