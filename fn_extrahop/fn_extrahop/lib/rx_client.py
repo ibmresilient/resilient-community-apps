@@ -236,7 +236,7 @@ class RxClient():
         :param participants: (Optional) Participants (json str)
         :return Result in json format.
         """
-        uri = self._endpoints["detections"].format(detection_id)
+        uri = self._endpoints["detections"] + "/{}".format(detection_id)
         status_map = {
             "A": 'in_progress',  # active
             "C": 'closed',  # done
@@ -249,7 +249,7 @@ class RxClient():
         }
         data = {
             "detection_id": detection_id,
-            "ticket_id": incident_id,
+            "ticket_id": str(incident_id),
             "assignee": owner_id
         }
         data["status"] = status_map[plan_status]

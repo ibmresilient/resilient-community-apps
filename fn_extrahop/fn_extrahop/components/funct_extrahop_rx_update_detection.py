@@ -54,8 +54,8 @@ class FunctionComponent(AppFunctionComponent):
             # Strip off "soar_inc_" prefix from input paramter value before adding to params.
             params.update({i.split('_', 2)[2]: getattr(fn_inputs, i)})
 
-        if hasattr(fn_inputs, i):
-            for i in ["extrahop_detection_id", "extrahop_participants"]:
+        for i in ["extrahop_detection_id", "extrahop_participants"]:
+            if hasattr(fn_inputs, i):
                 # Strip off "extrahop_" prefix from input paramter value before adding to params.
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
 
@@ -63,7 +63,7 @@ class FunctionComponent(AppFunctionComponent):
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.update_detection(**params)
 
-        if response.status_code == 201:
+        if response.status_code in [200, 201, 204]:
             # Action succeeded with empty response message
             result = "success"
         else:
