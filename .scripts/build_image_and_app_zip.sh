@@ -101,9 +101,6 @@ if [ "$BUILD_TYPE" == "DEV" ] ; then
     version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
     print_msg "Updating $path_setup_py_file to version '$version_to_use'"
     python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
-
-    print_msg "Overwriting $path_dockerfile with new PyPi index for resilient-circuits"
-    python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 fi
 
 if [[ "$DEV_DEPS" -eq 1 ]]; then
