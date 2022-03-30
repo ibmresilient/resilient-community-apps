@@ -32,9 +32,9 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     app_configs = opts.get("fn_shadowserver", {})
-
     try:
-        url = "http://bin-test.shadowserver.org/api?md5={}".format("")
+        # url = "https://api.shadowserver.org/malware/info?sample={}".format("")
+        url = "https://api.shadowserver.org/malware/info?sample=15ec7258422772a04bf9641836eb44f7"
         rc = RequestsCommon(opts, app_configs)
         rc.execute('get', url)
         return {"state": "success"}

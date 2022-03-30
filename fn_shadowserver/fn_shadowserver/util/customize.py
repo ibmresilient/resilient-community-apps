@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"shadowserver"],
         "functions": [u"fn_shadowserver"],
         "workflows": [u"shadowserver_hash_query"],
-        "actions": [u"ShadowServer Hash Query"],
+        "actions": [u"Shadowserver Hash Query"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -49,7 +49,7 @@ def customization_data(client=None):
     - Workflows:
         - shadowserver_hash_query
     - Rules:
-        - ShadowServer Hash Query
+        - Shadowserver Hash Query
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Shadow Server Function for IBM SOAR
+# Shadowserver
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -31,7 +31,7 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-- [Function - ShadowServer](#function---shadowserver)
+- [Function - Shadowserver](#function---shadowserver)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -43,7 +43,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 03/2022 | Initial Release |
+| 1.0.0 | 04/2022 | Initial Release |
 
 ---
 
@@ -52,22 +52,24 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM Security SOAR app for ShadowServer**
+**IBM Security SOAR app for Shadowserver**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: main](./doc/screenshots/main.png) 
 
-Queries ShadowServer to check if the hash provided matches an entry in the ShadowServer database. Returns details on the data source if there is a match.
+Queries Shadowserver to check if the hash provided matches an entry in our database. Returns details on the data source if there is a match.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* The workflow checks if the hash provided checks an entry in the ShadowServer database and will then create a hit in the post-processing script with all the information returned from ShadowServer. 
+* The workflow checks if the hash provided checks an entry in the Shadowserver database and will then create a hit in the post-processing script with all the information returned from Shadowserver. 
 
 ---
 
 ## Requirements
-
+<!--
+  List any Requirements 
+--> 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -96,7 +98,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.9
+* IBM Cloud Pak for Security >= 1.4.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -119,7 +121,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| ShadowServer | -- | http://bin-test.shadowserver.org/api | -- |
+| Shadowserver | -- | https://api.shadowserver.org/malware/info | -- |
 
 ---
 
@@ -129,18 +131,10 @@ This app has been implemented using:
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
-| **shadow_server_url** | Yes | `http://bin-test.shadowserver.org/api` | -- |
-
-
 ---
 
-## Function - ShadowServer
-Queries ShadowServer to check if the hash provided matches an entry in the ShadowServer database. Returns details on the data source if there is a match.
+## Function - Shadowserver
+Queries Shadowserver to check if the hash provided matches an entry in the Shadowserver database. Returns details on the data source if there is a match.
 
  ![screenshot: fn-shadowserver ](./doc/screenshots/fn-shadowserver.png)
 
@@ -162,33 +156,141 @@ Queries ShadowServer to check if the hash provided matches an entry in the Shado
 
 ```python
 results = {
-  "content": {
-    "application_type": "Graphic/Drawing",
-    "crc32": "AA6A7B16",
-    "filename": "00br2026.gif",
-    "filesize": "2226",
-    "language": "English",
-    "md5": "0E53C14A3E48D94FF596A2824307B492",
-    "mfg_name": "Corel Corporation",
-    "os_mfg": "Microsoft",
-    "os_name": "Windows NT",
-    "os_version": "Generic",
-    "product_name": "Gallery",
-    "product_version": "750,000",
-    "sha1": "0000004DA6391F7F5D2F7FCCF36CEBDA60C6EA02",
-    "source": "NIST",
-    "source_version": "$version"
-  },
+  "content": [
+    {
+      "adobe_malware_classifier": "malicious",
+      "anti_virus": [
+        {
+          "signature": "Troj/Agent-APCU",
+          "vendor": "Sophos"
+        },
+        {
+          "signature": "W32/Lamer.CQ",
+          "vendor": "Fortinet"
+        },
+        {
+          "signature": "PUA.Win.Packer.Purebasic-2",
+          "vendor": "Clam"
+        },
+        {
+          "signature": "Win32.Generic.VC",
+          "vendor": "AVG"
+        },
+        {
+          "signature": "Gen:Win32.FileInfector.uwZ@a4T!Kcmi",
+          "vendor": "MicroWorld"
+        },
+        {
+          "signature": "Virus ( 004d554e1 )",
+          "vendor": "K7GW"
+        },
+        {
+          "signature": "W32.Sivis.A5",
+          "vendor": "QuickHeal"
+        },
+        {
+          "signature": "Trojan/Win32.FileInfector",
+          "vendor": "AhnLab"
+        },
+        {
+          "signature": "Win32:Malware-gen",
+          "vendor": "Avast"
+        },
+        {
+          "signature": "Trojan.PWS.Onlinegames.KEGA",
+          "vendor": "BitDefender"
+        },
+        {
+          "signature": "Trojan.GenericKD.40542465",
+          "vendor": "BitDefender"
+        },
+        {
+          "signature": "Gen.Win32.FileInfector",
+          "vendor": "Ikarus"
+        },
+        {
+          "signature": "Virus.Win32.sivis.a",
+          "vendor": "Sunbelt"
+        },
+        {
+          "signature": "Gen:Win32.FileInfector.uwZ@a4T!Kcmi",
+          "vendor": "BitDefender"
+        },
+        {
+          "signature": "PUA.Win.Packer.Purebasic-2",
+          "vendor": "Clam"
+        },
+        {
+          "signature": "Gen:Win32.Backdoor.ozZbauKWKdpb",
+          "vendor": "BitDefender"
+        },
+        {
+          "signature": "Win32.Generic.VC",
+          "vendor": "AVG"
+        },
+        {
+          "signature": "Virus ( 004d554e1 )",
+          "vendor": "K7GW"
+        },
+        {
+          "signature": "Win32.HLLW.Siggen.4657",
+          "vendor": "DrWeb"
+        },
+        {
+          "signature": "TR/Dropper.Gen8",
+          "vendor": "Avira"
+        },
+        {
+          "signature": "Win32/Zatoxp.C",
+          "vendor": "Eset"
+        },
+        {
+          "signature": "Win32:Malware-gen",
+          "vendor": "Avast"
+        },
+        {
+          "signature": "Virus ( 004d554e1 )",
+          "vendor": "K7"
+        },
+        {
+          "signature": "Trojan/Win32.FileInfector",
+          "vendor": "AhnLab"
+        },
+        {
+          "signature": "Win32:Lamer-A",
+          "vendor": "Avast"
+        },
+        {
+          "signature": "Gen:Win32.FileInfector.uwZ@a4T!Kcmi",
+          "vendor": "BitDefender"
+        }
+      ],
+      "entropic": "5.952427",
+      "filesize": "2438340",
+      "first_seen": "2016-08-25 02:44:39",
+      "import_hash": "33f98db5bdb6a7013d52f0120248df35",
+      "last_seen": "2016-08-25 02:44:39",
+      "magic": "PE32 executable (GUI) Intel 80386, for MS Windows",
+      "md5": "dfe1832e02888422f48d6896dc8e8f73",
+      "pehash": "243c35935ecc9829f30b30c45839cbf6",
+      "sha1": "c56ba498d41caa7be3c1eb5588cec27c413eb208",
+      "sha256": "d8d395f8744335fba53b0a4308e7b380a0aca86bfc8939ded9f4c8c5cb1e838a",
+      "sha512": "7ca1fdfe537913b8854227efc1f11b00d405f2d21e416e7023c4ebed2bfa887d2bc4d4d553ce41667c99def47ea05e6ce4a773c4ee7173927f1d263e724c16c2",
+      "timestamp": "2016-08-25 02:44:39",
+      "tlsh": "c1b52a5273fa0254f2f35f75a8b7a3944939fea11d22e08e1164314d88b6f808e75bb7",
+      "type": "exe"
+    }
+  ],
   "inputs": {
-    "shadowserver_artifact_type": "Malware MD5 Hash",
-    "shadowserver_artifact_value": "0E53C14A3E48D94FF596A2824307B492"
+    "shadowserver_artifact_type": "Malware SHA-1 Hash",
+    "shadowserver_artifact_value": "c56ba498d41caa7be3c1eb5588cec27c413eb208"
   },
   "metrics": {
-    "execution_time_ms": 210,
+    "execution_time_ms": 386,
     "host": "My Host",
     "package": "fn-shadowserver",
     "package_version": "1.0.0",
-    "timestamp": "2022-03-23 16:37:34",
+    "timestamp": "2022-03-30 11:34:35",
     "version": "1.0"
   },
   "raw": null,
@@ -216,21 +318,22 @@ inputs.shadowserver_artifact_value = artifact.value
 <p>
 
 ```python
-if results:
-  if results.success:
-    if results.content:
-      resp = results.content
-      hit_list = []
-      for attribute, attribute_value in resp.items():
-        hit = {
-          "name": attribute,
-          "type": "string",
-          "value": "{}".format(attribute_value)
-        }
-        hit_list.append(hit)
-      artifact.addHit("ShadowServer Function", hit_list)
-  else:
-    incident.addNote("ShadowServer Hash check failed: {}".format(results.reason))
+
+if results.success:
+  if results.content:
+    resp = results.content
+    hit_list = []
+    for attribute, attribute_value in resp.items():
+      hit = {
+        "name": attribute,
+        "type": "string",
+        "value": "{}".format(attribute_value)
+      }
+      hit_list.append(hit)
+    artifact.addHit("ShadowServer Function", hit_list)
+else:
+  incident.addNote("ShadowServer Hash check failed: {}".format(results.reason))
+    
 ```
 
 </p>
@@ -245,7 +348,7 @@ if results:
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| ShadowServer Hash Query | artifact | `shadowserver_hash_query` |
+| Shadowserver Hash Query | artifact | `shadowserver_hash_query` |
 
 ---
 

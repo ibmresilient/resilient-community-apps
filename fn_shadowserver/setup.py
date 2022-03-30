@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_shadowserver",
-    display_name="Shadow Server Function for IBM SOAR",
+    display_name="Shadowserver",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://github.com/ibmresilient/fn_shadowserver",
-    description="IBM Security SOAR app for ShadowServer",
-    long_description="""Queries ShadowServer to check if the hash provided matches an entry in our database. Returns details on the data source if there is a match.""",
+    description="IBM Security SOAR app for Shadowserver",
+    long_description="""Queries Shadowserver to check if the hash provided matches an entry in our database. Returns details on the data source if there is a match.""",
     install_requires=[
         "resilient-circuits>=44.0.0"
     ],

@@ -67,9 +67,9 @@ class TestFnShadowserver:
             assert(expected_results.get('success') == results.get('success'))
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [ 
-        (mock_inputs_1, 'English')
+        (mock_inputs_1, True)
     ])
     @pytest.mark.livetest
     def test_live_isPublic(self, circuits_app, mock_inputs, expected_results):
         results = call_fn_shadowserver_function(circuits_app, mock_inputs)
-        assert results.get('content').get('language') == expected_results
+        assert results.get('success') == expected_results
