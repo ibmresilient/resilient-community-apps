@@ -290,6 +290,8 @@ results = {
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_triggered_rules"
+inputs.soar_incident_id = incident.id
 ```
 
 </p>
@@ -310,7 +312,7 @@ for event in results.rules_data:
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
   qradar_event.date_created = int(event.creationDate)
   qradar_event.last_modified = int(event.modificationDate)
-
+  qradar_event.reported_time = results.current_time
 ```
 
 </p>
@@ -335,6 +337,7 @@ Search QRadar Top events for the given Offense ID.
 | `qradar_search_param4` | `text` | No | `-` | - |
 | `qradar_search_param5` | `text` | No | `-` | - |
 | `qradar_search_param6` | `text` | No | `-` | - |
+| `qradar_search_param7` | `text` | No | `-` | Used for time to look back for graphql search |
 
 </p>
 </details>
@@ -403,6 +406,19 @@ results = {
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_categories"
+inputs.soar_incident_id = incident.id
+
+# QRadar graphql search look back time default is 5 days
+inputs.qradar_search_param7 = "5 days"
+# If the poller is running and the qr_last_updated_time is changed the 
+# the QRadar graphql look back time will change to 2 days
+if incident.properties.qr_last_updated_time != incident.create_date:
+  inputs.qradar_search_param7 = "2 days"
+# If manual QRadar Update rule is run set the number if days to search to the
+# user entered number
+if rule.properties.number_of_days_to_search:
+  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+" days"
 ```
 
 </p>
@@ -416,13 +432,12 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
-  qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
-  qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
-  qradar_event.event_time = event.eventtime
-  qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
-  qradar_event.destinationip_count = link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
-  
+  qradar_event.category_name = event.categoryname
+  qradar_event.flow_count = event.flowcount
+  qradar_event.last_packet_time = int(event.lastpackettime)
+  qradar_event.sourceip_count = event.sourceipcount
+  qradar_event.destinationip_count = event.destinationipcount
+  qradar_event.reported_time = results.current_time
 ```
 
 </p>
@@ -440,8 +455,8 @@ Create artifact from Destination IP information for the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -451,7 +466,6 @@ type_mapping = {
 
 import re
 
-
 artifact_types = rule.properties.select_to_create_artifact_from_destip
 
 for type in artifact_types:
@@ -459,8 +473,6 @@ for type in artifact_types:
     artifact_description = "QRadar Offense {0}".format(type)
     if type=="Destination IP":
       incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
-    
-
 
 ```
 
@@ -478,8 +490,8 @@ Create artifact from Source IP information for the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -516,8 +528,8 @@ Create artifact from the Events information of the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -528,7 +540,6 @@ type_mapping = {
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact
 
@@ -541,7 +552,6 @@ for type in artifact_types:
       incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
     elif type=="Username":
       incident.addArtifact(type_mapping[type], row.username, artifact_description)
-
 
 ```
 
@@ -560,18 +570,16 @@ Create artifact from Assets information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
 type_mapping = {
     "IP Address": "IP Address",
     "Name": "String",
-
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact_from_asset_info
 
@@ -582,7 +590,6 @@ for type in artifact_types:
      incident.addArtifact(type_mapping[type], row.ip_address["content"], artifact_description)
     elif type=="Name":
        incident.addArtifact(type_mapping[type], row.asset_name["content"], artifact_description)
-
 
 ```
 
@@ -600,8 +607,8 @@ Create artifact from the Flows info of the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -610,11 +617,9 @@ type_mapping = {
     "Destination IP": "IP Address",
     "Source Port": "Port",
     "Destination Port": "Port"
-
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact_from_flows_info
 
@@ -629,7 +634,6 @@ for type in artifact_types:
       incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
     elif type=="Destination Port":
       incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
-
 
 ```
 
@@ -652,6 +656,7 @@ qr_top_destination_ips
 | Destination IP | `destination_ip` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
 | Flow Count | `flow_count` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 
 ---
 ## Data Table - QR Triggered Rules
@@ -668,6 +673,7 @@ qr_triggered_rules
 | Date Created | `date_created` | `datetimepicker` | - |
 | Enabled | `enabled` | `text` | - |
 | Last Modified | `last_modified` | `datetimepicker` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Response | `response` | `text` | - |
 | Rule Group | `rule_group` | `text` | - |
 | Rule Name | `rule_name` | `textarea` | - |
@@ -692,6 +698,7 @@ qr_categories
 | Flow Count | `flow_count` | `textarea` | - |
 | Last Packet Time | `last_packet_time` | `datetimepicker` | - |
 | Magnitude | `magnitude` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `sourceip_count` | `textarea` | - |
 
 ---
@@ -708,11 +715,12 @@ qr_assets
 | ----------- | --------------- | ---- | ------- |
 | Aggregated CVSS | `aggregated_cvss` | `textarea` | - |
 | ID | `asset_id` | `textarea` | - |
-| Name | `asset_name` | `textarea` | - |
 | IP Address | `ip_address` | `textarea` | - |
 | Last User | `last_user` | `textarea` | - |
 | Last User Seen | `last_user_seen` | `datetimepicker` | - |
+| Name | `asset_name` | `textarea` | - |
 | OS ID | `operating_system` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Vulnerabilities | `vulnerabilities` | `textarea` | - |
 
 ---
@@ -733,6 +741,7 @@ qr_top_source_ips
 | Flow Count | `flow_count` | `textarea` | - |
 | MAC | `mac` | `text` | - |
 | Network | `network` | `text` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Usernames | `usernames` | `textarea` | - |
 | Vulnerability Count | `vulnerability_count` | `number` | - |
@@ -756,6 +765,7 @@ qr_offense_top_events
 | Event Time | `event_time` | `datetimepicker` | - |
 | Log Source | `log_source` | `textarea` | - |
 | Magnitude | `magnitude` | `text` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Username | `username` | `text` | - |
 
@@ -778,6 +788,7 @@ qr_flows
 | Destination Port | `destination_port` | `textarea` | - |
 | First Packet Time | `first_packet_time` | `datetimepicker` | - |
 | Protocol | `protocol` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source Bytes | `source_bytes` | `number` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Source Packets | `source_packets` | `number` | - |
@@ -792,14 +803,15 @@ qr_flows
 | QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
 | QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
 | QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
+| QR Incident Last Updated Time | `qr_last_updated_time` | `datetimepicker` | `properties` | - | - |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
 | QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
 | QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
-| QR Offense Source | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
 | QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination. QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
 | QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
-| qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
+| QRadar Destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
 | QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
 
 ---
@@ -807,11 +819,16 @@ qr_flows
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Create artifact from Source IP info | qr_top_source_ips | `-` |
-| QRadar Enhanced Data | incident | `qradar_offense_summary, qradar_triggered_rules, qradar_destination_ips, qradar_source_ips, qradar_categories, qradar_assets_information,example_of_searching_qradar_top_events_using_offense_id ` |
-| Create Artifact from Events info | qr_offense_top_events | `-` |
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
+| Create Artifact from Events info | qr_offense_top_events | `-` |
+| Create artifact from Source IP info | qr_top_source_ips | `-` |
+| Create Artifacts from Flows Info  | qr_flows | `-` |
+| QRadar Enhanced Data | incident | `qradar_triggered_rules` |
+| QRadar Enhanced Data Poller | incident | `qradar_triggered_rules` |
+| QRadar Enhanced Data Refresh | incident | `qradar_triggered_rules` |
 
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
