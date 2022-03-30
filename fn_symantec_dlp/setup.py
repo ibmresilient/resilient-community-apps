@@ -30,9 +30,7 @@ setup(
     long_description="""This app allows bi-directional synchronization between IBM SOAR and Symantec DLP.
     Symantec DLP incidents are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the incident.""",
     install_requires=[
-        'resilient_circuits>=43.0.0',
-        "jinja2 ~= 2.0;python_version<'3.6'",
-        "jinja2 ~= 3.0;python_version>='3.6'"
+        'resilient_circuits>=43.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
