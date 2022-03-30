@@ -38,11 +38,13 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
 # Processing
 def main():
     note_text = u''
+    detection_id = INPUTS["extrahop_detection_id"]
+    limit = INPUTS["extrahop_detection_limit"]
     if CONTENT:
         dets = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
-        note_text += u"<br><b>{}</b>".format(dets)
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for detection " \
+                    u"ID <b>{2}</b> and limit <b>{3}</b> for SOAR function <b>{4}</b>."\
+            .format(WF_NAME, len(dets), detection_id, limit, FN_NAME)
         if dets:
             for det in dets:
                 newrow = incident.addRow(DATA_TABLE)
@@ -50,24 +52,46 @@ def main():
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
                     if f1.startswith("det_"):
-                      f2 = f1.split('_', 1)[1]
-                    if det[f1] is None:
+                        f2 = f1.split('_', 1)[1]
+
+                    if det[f2] is None or isinstance(det[f2], long):
                         newrow[f1] = det[f2]
-                    if isinstance(det[f1], list):
-                      if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                          newrow[f1] = "{}".format(det[f2])
-                      else:
-                          newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f1], list):
+                        if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                            obj_cnt = 0
+                            tbl = u''
+                            for i in det[f2]:
+                                if not obj_cnt:
+                                    tbl += u'<div><hr class="solid"></div>'
+                                for k, v in i.items():
+                                    if k == "legacy_ids":
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
+                                    elif k == "url":
+                                        tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
+                                            .format(k, v, i["id"])
+                                    else:
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                                tbl += u'<div><hr class="solid"></div>'
+                                obj_cnt += 1
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = "{}".format(", ".join(det[f2]))
                     elif isinstance(det[f2], (bool, dict)):
-                        newrow[f1] = str(det[f2])
+                        if f1 in ["properties"]:
+                            tbl = u''
+                            for k, v in det[f2].items():
+                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = str(det[f2])
                     else:
                         newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search detections." \
-            .format(WF_NAME, FN_NAME)
+                     u"to get detections for detection ID <b>{1}</b> and limit <b>{2}</b> for SOAR function <b>{3}</b>"\
+            .format(WF_NAME, detection_id, limit, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
