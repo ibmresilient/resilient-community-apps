@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_extrahop",
-    display_name="ExtraHop App for IBM SOAR",
+    display_name="ExtraHop for IBM SOAR",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
