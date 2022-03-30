@@ -69,7 +69,7 @@ class FunctionComponent(AppFunctionComponent):
                              success=True if results else False,
                              reason=err_msg)
 
-    @retry(SimpleHTTPException, tries=3, delay=2, backoff=1)
+    @retry(SimpleHTTPException, tries=3, delay=2, backoff=20)
     def create_artifact(self, artifact_uri, artifact_type, file_contents, file_name):
         return self.rest_client().post_artifact_file(artifact_uri,
                                                      artifact_type,
