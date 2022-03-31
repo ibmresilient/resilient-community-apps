@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
             file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
                                                                  fn_inputs.reaqta_program_path)
 
-            if file_contents:
+            if not err_msg:
                 rest_client = self.rest_client()
                 soar_common = SOARCommon(rest_client)
                 if soar_common.is_workflow_active(self.get_fn_msg()):
