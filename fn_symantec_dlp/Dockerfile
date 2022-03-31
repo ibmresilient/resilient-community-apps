@@ -1,10 +1,10 @@
 # docker build -t ibmresilient/fn_symantec_dlp:2.0.0 -t ibmresilient/fn_symantec_dlp:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_symantec_dlp
-ARG RESILIENT_CIRCUITS_VERSION=43.0.0
+ARG RESILIENT_CIRCUITS_VERSION=44.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
