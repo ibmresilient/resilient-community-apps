@@ -44,6 +44,7 @@
 * Added support for sending SOAR task notes to Jira -- see updated example workflow
 * Added support for images in notes synchronizing to Jira
 * Added config `jira_task_references` for custom datatables
+* Added option in example rule to set Jira project ID as activity field
 
 ### v2.0.0
 * Added App Host support
@@ -316,7 +317,7 @@ inputs.jira_fields = dict_to_json_str({
   from java.util import Date
 time_now = Date().time
 
-if results.success:
+if results.get("success"):
   row.date = time_now
   row.status = "Closed"
 
@@ -629,7 +630,7 @@ jira_priority = priority_map.get(incident.severity_code, {"name": "Low"})
 
 # Define JIRA fields here
 inputs.jira_fields = dict_to_json_str({
-  "project": "INT",
+  "project": rule.properties.jira_project_id,
   "issuetype": rule.properties.jira_issue_type,
   "priority": jira_priority,
   "summary": u"IBM Resilient: {0}".format(incident.name),
@@ -646,7 +647,7 @@ inputs.jira_fields = dict_to_json_str({
 
   ```python
   
-if results.success:
+if results.get("success"):
   results_content = results.get("content", {})
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
@@ -770,7 +771,7 @@ if note.type == 'task':
 # Import Date
 from java.util import Date
 
-if results.success:
+if results.get("success"):
     # Get the current time
     dt_now = Date()
     

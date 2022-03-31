@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
 
             # loop through any linked images in the note and add them as attachments on Jira
             for src, alt in imgs:
-                img_data = helper.read_img(src)
+                img_data = helper.read_img(self.rest_client(), src)
                 if img_data:
                     yield StatusMessage("Adding attachment '{0}' to {1} in JIRA".format(alt, fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME)))
                     jira_client.add_attachment(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME), attachment=img_data, filename=alt)
