@@ -10,8 +10,9 @@ from fn_jira.util import helper
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import (MarkdownParser, RequestsCommon, ResultPayload,
+from resilient_lib import (IntegrationError, MarkdownParser, RequestsCommon, ResultPayload,
                            validate_fields)
+from resilient.co3base import BasicHTTPException
 
 PACKAGE_NAME = helper.CONFIG_DATA_SECTION
 FUNCT_NAME = "jira_create_comment"
@@ -79,12 +80,15 @@ class FunctionComponent(ResilientComponent):
 
             # loop through any linked images in the note and add them as attachments on Jira
             for src, alt in imgs:
-                img_data = helper.read_img(self.rest_client(), src)
-                if img_data:
+                try:
+                    img_data = helper.read_img(self.rest_client(), src)
+
                     yield StatusMessage("Adding attachment '{0}' to {1} in JIRA".format(alt, fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME)))
                     jira_client.add_attachment(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME), attachment=img_data, filename=alt)
-                else:
-                    yield StatusMessage("Attachment '{0}' could not be loaded".format(alt))
+                except BasicHTTPException as e:
+                    yield StatusMessage("Attachment '{0}' could not be loaded. Details: {1}".format(alt, e))
+                except Exception as e:
+                    raise IntegrationError("Something went wrong when posting attachment to Jira. Details: {0}".format(e))
 
             yield StatusMessage("Adding comment to {0} in JIRA".format(fn_inputs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME)))
 
