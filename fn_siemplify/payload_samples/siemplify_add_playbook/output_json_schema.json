@@ -8,30 +8,26 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "string"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
-        "ErrorCode": {
-          "type": "integer"
-        },
-        "ErrorMessage": {
-          "type": "string"
-        },
-        "InnerException": {},
-        "InnerExceptionType": {}
+        "success": {
+          "type": "boolean"
+        }
       }
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
+        "siemplify_run_playbook_automatically": {
+          "type": "boolean"
+        },
         "siemplify_alert_id": {
           "type": "string"
         },
-        "siemplify_comment": {
+        "siemplify_playbook_name": {
           "type": "string"
         },
         "siemplify_case_id": {

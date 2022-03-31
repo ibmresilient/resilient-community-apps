@@ -6,6 +6,7 @@ import logging
 import json
 import os
 import time
+from json.decoder import JSONDecodeError
 from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import readable_datetime
 
@@ -44,7 +45,12 @@ class JinjaEnvironment():
         template_data = self.get_template(template_override, default_template)
 
         # Render the template.
-        rendered_payload = render_json(template_data, payload)
+        try:
+            rendered_payload = render_json(template_data, payload)
+        except JSONDecodeError as err:
+            LOG.error("Template error: %s. data: %s", str(err), payload)
+            raise err
+
         LOG.debug(rendered_payload)
 
         return rendered_payload

@@ -3,6 +3,50 @@
   "actions": [
     {
       "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.siemplify_case_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "Siemplify Add Playbook",
+      "id": 185,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Siemplify Add Playbook",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "c59ba2eb-f27a-4b9a-9eb2-1a552facf502",
+      "view_items": [
+        {
+          "content": "23f7bf6d-288e-4f1c-bca6-7c642078fcfe",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "a34f8b24-7b34-4d02-b504-a81945e65a14",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "siemplify_add_playbook"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [],
       "enabled": true,
       "export_key": "Siemplify: Add/Update Entity to Blocklist",
@@ -489,7 +533,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1645901341642,
+  "export_date": 1648762335257,
   "export_format_version": 2,
   "fields": [
     {
@@ -592,6 +636,36 @@
       "tooltip": "If left empty, the artifact type is used",
       "type_id": 11,
       "uuid": "c166fab3-4c59-4359-ad85-4e7743ad2478",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/siemplify_playbook_name",
+      "hide_notification": false,
+      "id": 1300,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_playbook_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "siemplify_playbook_name",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "c3e9448d-c211-45ed-b971-9da673b2bb0a",
       "values": []
     },
     {
@@ -898,6 +972,36 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "1aaa5ae3-5882-4e25-a39b-3b0765207789",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/siemplify_run_playbook_automatically",
+      "hide_notification": false,
+      "id": 1301,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_run_playbook_automatically",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "siemplify_run_playbook_automatically",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "2e0837b3-eaf4-4aa8-8e9a-2109171092ce",
       "values": []
     },
     {
@@ -1238,6 +1342,36 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/siemplify_run_playbook_automatically",
+      "hide_notification": false,
+      "id": 1303,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_run_playbook_automatically",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Run Playbook Automatically",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "a34f8b24-7b34-4d02-b504-a81945e65a14",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
@@ -1268,6 +1402,36 @@
       "tooltip": "If left empty, the artifact type is used",
       "type_id": 6,
       "uuid": "0168d870-f533-4ef8-bd3c-892d2d291233",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/siemplify_playbook_name",
+      "hide_notification": false,
+      "id": 1302,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "siemplify_playbook_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Siemplify Playbook Name",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "23f7bf6d-288e-4f1c-bca6-7c642078fcfe",
       "values": []
     },
     {
@@ -1623,6 +1787,80 @@
     }
   ],
   "functions": [
+    {
+      "created_date": 1648759704866,
+      "creator": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Add a playbook to a Siemplify Case",
+        "format": "text"
+      },
+      "destination_handle": "fn_siemplify",
+      "display_name": "Siemplify Add Playbook",
+      "export_key": "siemplify_add_playbook",
+      "id": 178,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 3,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1648759704911,
+      "name": "siemplify_add_playbook",
+      "tags": [],
+      "uuid": "b8f05f74-95fa-4861-8264-5398d247da7b",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "06db2b8f-8af3-4364-98d7-c4b534e00784",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "465a56ac-2586-4013-b674-4164e03385ed",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "c3e9448d-c211-45ed-b971-9da673b2bb0a",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "2e0837b3-eaf4-4aa8-8e9a-2109171092ce",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Siemplify Add Playbook",
+          "object_type": "incident",
+          "programmatic_name": "siemplify_add_playbook",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 152
+        }
+      ]
+    },
     {
       "created_date": 1645797091353,
       "creator": {
@@ -2501,13 +2739,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 34,
+  "id": 62,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1645901340478,
+      "create_date": 1648762327518,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2516,7 +2754,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1645901340478,
+      "update_date": 1648762327518,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2539,7 +2777,9 @@
           "value": null
         }
       ],
-      "users": [],
+      "users": [
+        "a@example.com"
+      ],
       "uuid": "a4fe1c3e-9dff-436c-ba62-1ab465008259"
     }
   ],
@@ -2775,76 +3015,26 @@
       "actions": [],
       "content": {
         "version": 1,
-        "workflow_id": "siemplify_addupdate_entity_to_blocklist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_addupdate_entity_to_blocklist\" isExecutable=\"true\" name=\"Siemplify: Add/Update Entity to Block List\"\u003e\u003cdocumentation\u003eAdd or update an artifact on the Siemplify Block List\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0wvg533\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kie8gk\" name=\"Siemplify: Add/Update Entity to B...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bc122044-f6a1-4c39-b433-842a59eb9bcd\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  entity = results.content\\n  row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n  row[\u0027report_date\u0027] = current_dt\\n  row[\u0027list_name\u0027] = \u0027Block List\u0027\\n  row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n  row[\u0027entity_type\u0027] = entity[\u0027entityType\u0027]\\n  row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\n  incident.addNote(\\\"Siemplify Add/Update Blocklist successful for: {} ({})\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Siemplify Add/Update Blocklist Entity failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = rule.properties.siemplify_environments\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0wvg533\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15k6wil\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0wvg533\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kie8gk\"/\u003e\u003cendEvent id=\"EndEvent_0nlfy5d\"\u003e\u003cincoming\u003eSequenceFlow_15k6wil\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15k6wil\" sourceRef=\"ServiceTask_1kie8gk\" targetRef=\"EndEvent_0nlfy5d\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1aqpfcq\"\u003e\u003ctext\u003e\u003c![CDATA[Successful updates will display in the Siemplify List datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_12x21le\" sourceRef=\"ServiceTask_1kie8gk\" targetRef=\"TextAnnotation_1aqpfcq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kie8gk\" id=\"ServiceTask_1kie8gk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wvg533\" id=\"SequenceFlow_0wvg533_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nlfy5d\" id=\"EndEvent_0nlfy5d_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456.1147208121827\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"474.1147208121827\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15k6wil\" id=\"SequenceFlow_15k6wil_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"415.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1aqpfcq\" id=\"TextAnnotation_1aqpfcq_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"210\" x=\"364\" y=\"75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_12x21le\" id=\"Association_12x21le_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"135\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "siemplify_m_sync_case",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_m_sync_case\" isExecutable=\"true\" name=\"Siemplify Sync Case\"\u003e\u003cdocumentation\u003eSynchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0aytvve\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w67d7h\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = \\\"@Administrator\\\"\\ninputs.siemplify_environment = \\\"Default Environment\\\"\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0aytvve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hhztx1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0aytvve\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w67d7h\"/\u003e\u003cendEvent id=\"EndEvent_0p32n4t\"\u003e\u003cincoming\u003eSequenceFlow_1hhztx1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hhztx1\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"EndEvent_0p32n4t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dq6ysr\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1afda0h\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"TextAnnotation_1dq6ysr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w67d7h\" id=\"ServiceTask_0w67d7h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0aytvve\" id=\"SequenceFlow_0aytvve_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p32n4t\" id=\"EndEvent_0p32n4t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hhztx1\" id=\"SequenceFlow_1hhztx1_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dq6ysr\" id=\"TextAnnotation_1dq6ysr_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"161\" x=\"343\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1afda0h\" id=\"Association_1afda0h_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 1,
       "creator_id": "a@example.com",
-      "description": "Add or update an artifact on the Siemplify Block List",
-      "export_key": "siemplify_addupdate_entity_to_blocklist",
+      "description": "Synchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.",
+      "export_key": "siemplify_m_sync_case",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797093885,
-      "name": "Siemplify: Add/Update Entity to Block List",
-      "object_type": "artifact",
-      "programmatic_name": "siemplify_addupdate_entity_to_blocklist",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "bb64bd31-d6ee-4dbc-a687-47b0f160fae1",
-      "workflow_id": 92
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "siemplify_get_customlist_entities",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_get_customlist_entities\" isExecutable=\"true\" name=\"Siemplify Get Custom List Entities\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get entities associated with Siemplify\u0027s Custom List]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uqgmpq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0uqgmpq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1nklqx7\"/\u003e\u003cendEvent id=\"EndEvent_0dqezus\"\u003e\u003cincoming\u003eSequenceFlow_1hsasdt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1nklqx7\" name=\"Siemplify Get Custom List Entitie...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f7c15417-71ef-4ab5-adff-e3ab84768f4e\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  if isinstance(results.content, list):\\n    entity_list = results.content\\n  else:\\n    entity_list = results.content.get(\\\"objectsList\\\", {})\\n    \\n  for entity in entity_list:\\n    row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n    row[\u0027report_date\u0027] = current_dt\\n    row[\u0027list_name\u0027] = \u0027Custom List\u0027\\n    row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n    row[\u0027entity_type\u0027] = entity[\u0027category\u0027]\\n    row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\nelse:\\n  incident.addNote(\\\"Siemplify Get Custom List Entities failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else None\\ninputs.siemplify_environments = rule.properties.siemplify_environments\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uqgmpq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hsasdt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hsasdt\" sourceRef=\"ServiceTask_1nklqx7\" targetRef=\"EndEvent_0dqezus\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0iq82z7\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Siemplify List Entities datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0czgph8\" sourceRef=\"ServiceTask_1nklqx7\" targetRef=\"TextAnnotation_0iq82z7\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uqgmpq\" id=\"SequenceFlow_0uqgmpq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"203.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dqezus\" id=\"EndEvent_0dqezus_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"502\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"475\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1nklqx7\" id=\"ServiceTask_1nklqx7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"299\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hsasdt\" id=\"SequenceFlow_1hsasdt_di\"\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"502\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"450.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0iq82z7\" id=\"TextAnnotation_0iq82z7_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"167\" x=\"391\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0czgph8\" id=\"Association_0czgph8_di\"\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"143\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@example.com",
-      "description": "Get entities associated with Siemplify\u0027s Custom List",
-      "export_key": "siemplify_get_customlist_entities",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1645899974759,
-      "name": "Siemplify Get Custom List Entities",
+      "last_modified_time": 1645797092524,
+      "name": "Siemplify Sync Case",
       "object_type": "incident",
-      "programmatic_name": "siemplify_get_customlist_entities",
+      "programmatic_name": "siemplify_m_sync_case",
       "tags": [
         {
           "tag_handle": "fn_siemplify",
           "value": null
         }
       ],
-      "uuid": "8ca9d4ae-41be-4aa6-9548-263fa40f6b3f",
-      "workflow_id": 89
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "siemplify_close_case",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_close_case\" isExecutable=\"true\" name=\"Siemplify Close Case\"\u003e\u003cdocumentation\u003eSync SOAR incident close with Siemplify Case\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bwyqvy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ev7ddc\" name=\"Siemplify Close Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bca6302b-7f12-4b86-a931-d1e8b3d58e84\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  note = \\\"Siemplify Sync cased {} closed\\\".format(incident.properties.siemplify_case_id)\\nelse:\\n  note = \\\"Siemplify Sync cased {} failed to close: {}\\\".format(incident.properties.siemplify_case_id, results.reason)\\nincident.addNote(helper.createPlainText(note))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# change as necessary. Value Siemplify values are:  Malicious, Non Malicious, Maintenance, Inconclusive\\nLOOKUP_STATUS = {\\n    \\\"7\\\": \\\"Inconclusive\\\", # Unresolved\\n    \\\"8\\\": \\\"Inconclusive\\\", # Duplicate\\n    \\\"9\\\": \\\"Non Malicious\\\", # Not an Issue\\n    \\\"10\\\": \\\"Malicious\\\" # Resolved\\n}\\n\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_root_cause = incident.resolution_summary.content\\ninputs.siemplify_reason = LOOKUP_STATUS.get(str(incident.resolution_id), \u0027Inconclusive\u0027)\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bwyqvy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_034lepw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bwyqvy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ev7ddc\"/\u003e\u003cendEvent id=\"EndEvent_0k9rsis\"\u003e\u003cincoming\u003eSequenceFlow_034lepw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_034lepw\" sourceRef=\"ServiceTask_1ev7ddc\" targetRef=\"EndEvent_0k9rsis\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07y1lm0\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14io1nw\" sourceRef=\"ServiceTask_1ev7ddc\" targetRef=\"TextAnnotation_07y1lm0\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ev7ddc\" id=\"ServiceTask_1ev7ddc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"303\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bwyqvy\" id=\"SequenceFlow_1bwyqvy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"303\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"250.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0k9rsis\" id=\"EndEvent_0k9rsis_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"504\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_034lepw\" id=\"SequenceFlow_034lepw_di\"\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"444.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07y1lm0\" id=\"TextAnnotation_07y1lm0_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"389\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14io1nw\" id=\"Association_14io1nw_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Sync SOAR incident close with Siemplify Case",
-      "export_key": "siemplify_close_case",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797092905,
-      "name": "Siemplify Close Case",
-      "object_type": "incident",
-      "programmatic_name": "siemplify_close_case",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "d1cf9a32-cc5b-4b58-a22a-88f0505aa6cd",
-      "workflow_id": 87
+      "uuid": "4f78e937-238b-4e31-86f5-095e3dc02efe",
+      "workflow_id": 85
     },
     {
       "actions": [],
@@ -2874,102 +3064,22 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "siemplify_sync_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_task\" isExecutable=\"true\" name=\"Siemplify Sync Task\"\u003e\u003cdocumentation\u003eSync a SOAR incident task to Siemplify\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1igd3a2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0o6ht79\" name=\"Siemplify Sync Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8b35373-e80d-42cc-9120-e0073847252a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  task.addNote(\\\"Siemplify Sync Task: {}\\\".format(task.name))\\nelse:\\n  task.addNote(\\\"Siemplify Sync Task: {} failed: {}\\\".format(task.name, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_soar_task_id = task.id\\ninputs.siemplify_task_assignee = \\\"@Administrator\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1igd3a2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s0qzhm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1igd3a2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0o6ht79\"/\u003e\u003cendEvent id=\"EndEvent_0is86cj\"\u003e\u003cincoming\u003eSequenceFlow_1s0qzhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s0qzhm\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"EndEvent_0is86cj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ynurxt\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a task note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tfbar0\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"TextAnnotation_1ynurxt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0o6ht79\" id=\"ServiceTask_0o6ht79_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1igd3a2\" id=\"SequenceFlow_1igd3a2_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0is86cj\" id=\"EndEvent_0is86cj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0qzhm\" id=\"SequenceFlow_1s0qzhm_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"397\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ynurxt\" id=\"TextAnnotation_1ynurxt_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"162\" x=\"342\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tfbar0\" id=\"Association_1tfbar0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "siemplify_add_playbook",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_add_playbook\" isExecutable=\"true\" name=\"Siemplify Add Playbook\"\u003e\u003cdocumentation\u003eAdd a playbook to a Siemplify Case\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mhr8ri\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0m0ppu0\" name=\"Siemplify Add Playbook\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8f05f74-95fa-4861-8264-5398d247da7b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_playbook_name = rule.properties.siemplify_playbook_name\\ninputs.siemplify_run_playbook_automatically = rule.properties.siemplify_run_playbook_automatically\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mhr8ri\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1x391sy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0mhr8ri\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0m0ppu0\"/\u003e\u003cendEvent id=\"EndEvent_17sdlcf\"\u003e\u003cincoming\u003eSequenceFlow_1x391sy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1x391sy\" sourceRef=\"ServiceTask_0m0ppu0\" targetRef=\"EndEvent_17sdlcf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0m0ppu0\" id=\"ServiceTask_0m0ppu0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mhr8ri\" id=\"SequenceFlow_0mhr8ri_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_17sdlcf\" id=\"EndEvent_17sdlcf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456.8784956605593\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"474.8784956605593\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1x391sy\" id=\"SequenceFlow_1x391sy_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"457\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "creator_id": "a@example.com",
-      "description": "Sync a SOAR incident task to Siemplify",
-      "export_key": "siemplify_sync_task",
+      "description": "Add a playbook to a Siemplify Case",
+      "export_key": "siemplify_add_playbook",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797093712,
-      "name": "Siemplify Sync Task",
-      "object_type": "task",
-      "programmatic_name": "siemplify_sync_task",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "bc450264-e7eb-48e7-8bd3-2039ee9287df",
-      "workflow_id": 91
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "siemplify_sync_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_artifact\" isExecutable=\"true\" name=\"Siemplify Sync Artifact\"\u003e\u003cdocumentation\u003eSync a SOAR Incident artifact to a Siemplify Case alert and entity\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lp0b0i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0bvtpg3\" name=\"Siemplify Sync Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5320892-50c9-4aae-8d08-45bc25b6e682\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) created\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) failed\\\".format(artifact.value, artifact.type))\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = None\\ninputs.siemplify_artifact_id = artifact.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lp0b0i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n8bleh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lp0b0i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0bvtpg3\"/\u003e\u003cendEvent id=\"EndEvent_1wew0w9\"\u003e\u003cincoming\u003eSequenceFlow_1n8bleh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n8bleh\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"EndEvent_1wew0w9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ypf2yo\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_133e51o\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"TextAnnotation_1ypf2yo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0bvtpg3\" id=\"ServiceTask_0bvtpg3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lp0b0i\" id=\"SequenceFlow_1lp0b0i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wew0w9\" id=\"EndEvent_1wew0w9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"459\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n8bleh\" id=\"SequenceFlow_1n8bleh_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ypf2yo\" id=\"TextAnnotation_1ypf2yo_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_133e51o\" id=\"Association_133e51o_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Sync a SOAR Incident artifact to a Siemplify Case alert and entity",
-      "export_key": "siemplify_sync_artifact",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797094053,
-      "name": "Siemplify Sync Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "siemplify_sync_artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "4f23c3cb-c55d-4d3a-bf9f-f1f0c7b55afe",
-      "workflow_id": 93
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "siemplify_get_blocklist_entities",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_get_blocklist_entities\" isExecutable=\"true\" name=\"Siemplify Get Block List Entities\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get entities associated with Siemplify\u0027s Block List]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uqgmpq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rzsl0z\" name=\"Siemplify: Get Blocklist Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2bf54da4-8de2-4b4b-8baf-d7e74d0c2d58\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  if isinstance(results.content, list):\\n    entity_list = results.content\\n  else:\\n    entity_list = results.content.get(\\\"objectsList\\\", {})\\n    \\n  for entity in entity_list:\\n    row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n    row[\u0027report_date\u0027] = current_dt\\n    row[\u0027list_name\u0027] = \u0027Block List\u0027\\n    row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n    row[\u0027entity_type\u0027] = entity[\u0027entityType\u0027]\\n    row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\nelse:\\n  incident.addNote(\\\"Siemplify Get Blocklist Entities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else 100\\ninputs.siemplify_search = rule.properties.siemplify_search_term \",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uqgmpq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vv3388\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0uqgmpq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rzsl0z\"/\u003e\u003cendEvent id=\"EndEvent_0dqezus\"\u003e\u003cincoming\u003eSequenceFlow_0vv3388\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vv3388\" sourceRef=\"ServiceTask_0rzsl0z\" targetRef=\"EndEvent_0dqezus\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1a96ruo\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Siemplify List Entities datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0u1kr0b\" sourceRef=\"ServiceTask_0rzsl0z\" targetRef=\"TextAnnotation_1a96ruo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rzsl0z\" id=\"ServiceTask_0rzsl0z_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"294\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uqgmpq\" id=\"SequenceFlow_0uqgmpq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"246\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dqezus\" id=\"EndEvent_0dqezus_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"466\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"484\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vv3388\" id=\"SequenceFlow_0vv3388_di\"\u003e\u003comgdi:waypoint x=\"394\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"430\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1a96ruo\" id=\"TextAnnotation_1a96ruo_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"186\" x=\"382\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0u1kr0b\" id=\"Association_0u1kr0b_di\"\u003e\u003comgdi:waypoint x=\"390\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Get entities associated with Siemplify\u0027s Block List",
-      "export_key": "siemplify_get_blocklist_entities",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797093512,
-      "name": "Siemplify Get Block List Entities",
+      "last_modified_time": 1648761392940,
+      "name": "Siemplify Add Playbook",
       "object_type": "incident",
-      "programmatic_name": "siemplify_get_blocklist_entities",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "89f744a1-0df5-43e6-a198-45a0b5177df7",
-      "workflow_id": 90
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "siemplify_m_sync_case",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_m_sync_case\" isExecutable=\"true\" name=\"Siemplify Sync Case\"\u003e\u003cdocumentation\u003eSynchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0aytvve\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w67d7h\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = \\\"@Administrator\\\"\\ninputs.siemplify_environment = \\\"Default Environment\\\"\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0aytvve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hhztx1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0aytvve\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w67d7h\"/\u003e\u003cendEvent id=\"EndEvent_0p32n4t\"\u003e\u003cincoming\u003eSequenceFlow_1hhztx1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hhztx1\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"EndEvent_0p32n4t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dq6ysr\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1afda0h\" sourceRef=\"ServiceTask_0w67d7h\" targetRef=\"TextAnnotation_1dq6ysr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w67d7h\" id=\"ServiceTask_0w67d7h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0aytvve\" id=\"SequenceFlow_0aytvve_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0p32n4t\" id=\"EndEvent_0p32n4t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hhztx1\" id=\"SequenceFlow_1hhztx1_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"388.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dq6ysr\" id=\"TextAnnotation_1dq6ysr_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"161\" x=\"343\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1afda0h\" id=\"Association_1afda0h_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Synchronize an incident, artifacts, comments and attachments with a Siemplify Case. An existing case is updated if the custom field Siemplify_case_id is not set.",
-      "export_key": "siemplify_m_sync_case",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1645797092524,
-      "name": "Siemplify Sync Case",
-      "object_type": "incident",
-      "programmatic_name": "siemplify_m_sync_case",
-      "tags": [
-        {
-          "tag_handle": "fn_siemplify",
-          "value": null
-        }
-      ],
-      "uuid": "4f78e937-238b-4e31-86f5-095e3dc02efe",
-      "workflow_id": 85
+      "programmatic_name": "siemplify_add_playbook",
+      "tags": [],
+      "uuid": "7a124e43-c80a-4d63-b8ea-f5dff40b9543",
+      "workflow_id": 152
     },
     {
       "actions": [],
@@ -3000,6 +3110,31 @@
       "actions": [],
       "content": {
         "version": 1,
+        "workflow_id": "siemplify_sync_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_artifact\" isExecutable=\"true\" name=\"Siemplify Sync Artifact\"\u003e\u003cdocumentation\u003eSync a SOAR Incident artifact to a Siemplify Case alert and entity\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lp0b0i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0bvtpg3\" name=\"Siemplify Sync Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5320892-50c9-4aae-8d08-45bc25b6e682\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) created\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Artifact: {} ({}) failed\\\".format(artifact.value, artifact.type))\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = None\\ninputs.siemplify_artifact_id = artifact.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lp0b0i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1n8bleh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lp0b0i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0bvtpg3\"/\u003e\u003cendEvent id=\"EndEvent_1wew0w9\"\u003e\u003cincoming\u003eSequenceFlow_1n8bleh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1n8bleh\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"EndEvent_1wew0w9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ypf2yo\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_133e51o\" sourceRef=\"ServiceTask_0bvtpg3\" targetRef=\"TextAnnotation_1ypf2yo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0bvtpg3\" id=\"ServiceTask_0bvtpg3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lp0b0i\" id=\"SequenceFlow_1lp0b0i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"242\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wew0w9\" id=\"EndEvent_1wew0w9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"459\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1n8bleh\" id=\"SequenceFlow_1n8bleh_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ypf2yo\" id=\"TextAnnotation_1ypf2yo_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_133e51o\" id=\"Association_133e51o_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Sync a SOAR Incident artifact to a Siemplify Case alert and entity",
+      "export_key": "siemplify_sync_artifact",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645797094053,
+      "name": "Siemplify Sync Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "siemplify_sync_artifact",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "4f23c3cb-c55d-4d3a-bf9f-f1f0c7b55afe",
+      "workflow_id": 93
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
         "workflow_id": "siemplify_sync_case",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_case\" isExecutable=\"true\" name=\"Siemplify Auto Sync Case\"\u003e\u003cdocumentation\u003eSync a SOAR Case to Siemplify, specifying the additional synchronization of artifacts, attachments and comments\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_133ewo1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ao7iqd\" name=\"Siemplify Sync Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bf1b6ee8-4853-4a6a-8c21-808446de4c80\"\u003e{\"inputs\":{\"ab66d425-a3e0-4fed-b99e-0fd7ce3e1b97\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"dd93eb58-531b-4807-8ea8-4471b70e204d\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"7b6dde8b-b1f0-476c-a442-f8e7cd706a34\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  incident.properties.siemplify_case_id = results.content.get(\u0027id\u0027)\\n  incident.properties.siemplify_case_link = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results.content.get(\u0027siemplify_case_url\u0027), results.content.get(\u0027title\u0027)))\\n  incident.properties.siemplify_is_important = results.content.get(\u0027isImportant\u0027)\\n  incident.properties.siemplify_stage = results.content.get(\u0027stage\u0027)\\n  incident.properties.siemplify_assignee = results.content.get(\u0027assignedUserName\u0027)\\n  incident.properties.siemplify_priority = results.content.get(\u0027priority\u0027)\\n  incident.properties.siemplify_tags = \\\", \\\".join([tag[\u0027tag\u0027] for tag in results.content.get(\u0027tags\u0027)])\\n  \\n  if results.content.get(\u0027alerts\u0027):\\n    incident.properties.siemplify_alert_id = results.content[\u0027alerts\u0027][0][\u0027identifier\u0027]\\n  incident.addNote(\\\"Siemplify Sync Case {} created\\\".format(results.content.get(\u0027id\u0027)))\\nelse:\\n  incident.addNote(\\\"Siemplify Sync Case failed: {}\\\".format(str(results.content)))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_incident_id = incident.id\\ninputs.siemplify_assigned_user = None\\ninputs.siemplify_environment = None\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_133ewo1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_14vcfso\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_133ewo1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ao7iqd\"/\u003e\u003cendEvent id=\"EndEvent_04a6awv\"\u003e\u003cincoming\u003eSequenceFlow_14vcfso\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_14vcfso\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"EndEvent_04a6awv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02eb4gg\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0a4pfoi\" sourceRef=\"ServiceTask_0ao7iqd\" targetRef=\"TextAnnotation_02eb4gg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ao7iqd\" id=\"ServiceTask_0ao7iqd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_133ewo1\" id=\"SequenceFlow_133ewo1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04a6awv\" id=\"EndEvent_04a6awv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"425\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14vcfso\" id=\"SequenceFlow_14vcfso_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"368\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02eb4gg\" id=\"TextAnnotation_02eb4gg_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"202\" x=\"362\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0a4pfoi\" id=\"Association_0a4pfoi_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -3020,6 +3155,131 @@
       ],
       "uuid": "43ab935d-a6dd-4c48-b44f-00b059891799",
       "workflow_id": 88
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "siemplify_sync_task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_sync_task\" isExecutable=\"true\" name=\"Siemplify Sync Task\"\u003e\u003cdocumentation\u003eSync a SOAR incident task to Siemplify\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1igd3a2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0o6ht79\" name=\"Siemplify Sync Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8b35373-e80d-42cc-9120-e0073847252a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  task.addNote(\\\"Siemplify Sync Task: {}\\\".format(task.name))\\nelse:\\n  task.addNote(\\\"Siemplify Sync Task: {} failed: {}\\\".format(task.name, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_soar_task_id = task.id\\ninputs.siemplify_task_assignee = \\\"@Administrator\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1igd3a2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s0qzhm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1igd3a2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0o6ht79\"/\u003e\u003cendEvent id=\"EndEvent_0is86cj\"\u003e\u003cincoming\u003eSequenceFlow_1s0qzhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s0qzhm\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"EndEvent_0is86cj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ynurxt\"\u003e\u003ctext\u003e\u003c![CDATA[Sync results returned in a task note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tfbar0\" sourceRef=\"ServiceTask_0o6ht79\" targetRef=\"TextAnnotation_1ynurxt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0o6ht79\" id=\"ServiceTask_0o6ht79_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1igd3a2\" id=\"SequenceFlow_1igd3a2_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0is86cj\" id=\"EndEvent_0is86cj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0qzhm\" id=\"SequenceFlow_1s0qzhm_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"397\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ynurxt\" id=\"TextAnnotation_1ynurxt_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"162\" x=\"342\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tfbar0\" id=\"Association_1tfbar0_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Sync a SOAR incident task to Siemplify",
+      "export_key": "siemplify_sync_task",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645797093712,
+      "name": "Siemplify Sync Task",
+      "object_type": "task",
+      "programmatic_name": "siemplify_sync_task",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "bc450264-e7eb-48e7-8bd3-2039ee9287df",
+      "workflow_id": 91
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "siemplify_addupdate_entity_to_blocklist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_addupdate_entity_to_blocklist\" isExecutable=\"true\" name=\"Siemplify: Add/Update Entity to Block List\"\u003e\u003cdocumentation\u003eAdd or update an artifact on the Siemplify Block List\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0wvg533\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kie8gk\" name=\"Siemplify: Add/Update Entity to B...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bc122044-f6a1-4c39-b433-842a59eb9bcd\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  entity = results.content\\n  row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n  row[\u0027report_date\u0027] = current_dt\\n  row[\u0027list_name\u0027] = \u0027Block List\u0027\\n  row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n  row[\u0027entity_type\u0027] = entity[\u0027entityType\u0027]\\n  row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\n  incident.addNote(\\\"Siemplify Add/Update Blocklist successful for: {} ({})\\\".format(artifact.value, artifact.type))\\nelse:\\n  incident.addNote(\\\"Siemplify Add/Update Blocklist Entity failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_artifact_type = artifact.type\\ninputs.siemplify_artifact_value = artifact.value\\ninputs.siemplify_environment = rule.properties.siemplify_environments\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0wvg533\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15k6wil\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0wvg533\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kie8gk\"/\u003e\u003cendEvent id=\"EndEvent_0nlfy5d\"\u003e\u003cincoming\u003eSequenceFlow_15k6wil\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15k6wil\" sourceRef=\"ServiceTask_1kie8gk\" targetRef=\"EndEvent_0nlfy5d\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1aqpfcq\"\u003e\u003ctext\u003e\u003c![CDATA[Successful updates will display in the Siemplify List datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_12x21le\" sourceRef=\"ServiceTask_1kie8gk\" targetRef=\"TextAnnotation_1aqpfcq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kie8gk\" id=\"ServiceTask_1kie8gk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wvg533\" id=\"SequenceFlow_0wvg533_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"236.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nlfy5d\" id=\"EndEvent_0nlfy5d_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456.1147208121827\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"474.1147208121827\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15k6wil\" id=\"SequenceFlow_15k6wil_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"415.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1aqpfcq\" id=\"TextAnnotation_1aqpfcq_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"210\" x=\"364\" y=\"75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_12x21le\" id=\"Association_12x21le_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"135\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Add or update an artifact on the Siemplify Block List",
+      "export_key": "siemplify_addupdate_entity_to_blocklist",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645797093885,
+      "name": "Siemplify: Add/Update Entity to Block List",
+      "object_type": "artifact",
+      "programmatic_name": "siemplify_addupdate_entity_to_blocklist",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "bb64bd31-d6ee-4dbc-a687-47b0f160fae1",
+      "workflow_id": 92
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "siemplify_get_blocklist_entities",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_get_blocklist_entities\" isExecutable=\"true\" name=\"Siemplify Get Block List Entities\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get entities associated with Siemplify\u0027s Block List]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uqgmpq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rzsl0z\" name=\"Siemplify: Get Blocklist Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2bf54da4-8de2-4b4b-8baf-d7e74d0c2d58\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  if isinstance(results.content, list):\\n    entity_list = results.content\\n  else:\\n    entity_list = results.content.get(\\\"objectsList\\\", {})\\n    \\n  for entity in entity_list:\\n    row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n    row[\u0027report_date\u0027] = current_dt\\n    row[\u0027list_name\u0027] = \u0027Block List\u0027\\n    row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n    row[\u0027entity_type\u0027] = entity[\u0027entityType\u0027]\\n    row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\nelse:\\n  incident.addNote(\\\"Siemplify Get Blocklist Entities failed: {}\\\".format(results.reason))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else 100\\ninputs.siemplify_search = rule.properties.siemplify_search_term \",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uqgmpq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vv3388\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0uqgmpq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rzsl0z\"/\u003e\u003cendEvent id=\"EndEvent_0dqezus\"\u003e\u003cincoming\u003eSequenceFlow_0vv3388\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vv3388\" sourceRef=\"ServiceTask_0rzsl0z\" targetRef=\"EndEvent_0dqezus\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1a96ruo\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Siemplify List Entities datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0u1kr0b\" sourceRef=\"ServiceTask_0rzsl0z\" targetRef=\"TextAnnotation_1a96ruo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rzsl0z\" id=\"ServiceTask_0rzsl0z_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"294\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uqgmpq\" id=\"SequenceFlow_0uqgmpq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"246\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dqezus\" id=\"EndEvent_0dqezus_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"466\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"484\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vv3388\" id=\"SequenceFlow_0vv3388_di\"\u003e\u003comgdi:waypoint x=\"394\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"430\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1a96ruo\" id=\"TextAnnotation_1a96ruo_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"186\" x=\"382\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0u1kr0b\" id=\"Association_0u1kr0b_di\"\u003e\u003comgdi:waypoint x=\"390\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"138\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Get entities associated with Siemplify\u0027s Block List",
+      "export_key": "siemplify_get_blocklist_entities",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645797093512,
+      "name": "Siemplify Get Block List Entities",
+      "object_type": "incident",
+      "programmatic_name": "siemplify_get_blocklist_entities",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "89f744a1-0df5-43e6-a198-45a0b5177df7",
+      "workflow_id": 90
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "siemplify_close_case",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_close_case\" isExecutable=\"true\" name=\"Siemplify Close Case\"\u003e\u003cdocumentation\u003eSync SOAR incident close with Siemplify Case\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bwyqvy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ev7ddc\" name=\"Siemplify Close Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bca6302b-7f12-4b86-a931-d1e8b3d58e84\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  note = \\\"Siemplify Sync cased {} closed\\\".format(incident.properties.siemplify_case_id)\\nelse:\\n  note = \\\"Siemplify Sync cased {} failed to close: {}\\\".format(incident.properties.siemplify_case_id, results.reason)\\nincident.addNote(helper.createPlainText(note))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# change as necessary. Value Siemplify values are:  Malicious, Non Malicious, Maintenance, Inconclusive\\nLOOKUP_STATUS = {\\n    \\\"7\\\": \\\"Inconclusive\\\", # Unresolved\\n    \\\"8\\\": \\\"Inconclusive\\\", # Duplicate\\n    \\\"9\\\": \\\"Non Malicious\\\", # Not an Issue\\n    \\\"10\\\": \\\"Malicious\\\" # Resolved\\n}\\n\\ninputs.siemplify_alert_id = incident.properties.siemplify_alert_id\\ninputs.siemplify_case_id = incident.properties.siemplify_case_id\\ninputs.siemplify_root_cause = incident.resolution_summary.content\\ninputs.siemplify_reason = LOOKUP_STATUS.get(str(incident.resolution_id), \u0027Inconclusive\u0027)\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bwyqvy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_034lepw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bwyqvy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ev7ddc\"/\u003e\u003cendEvent id=\"EndEvent_0k9rsis\"\u003e\u003cincoming\u003eSequenceFlow_034lepw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_034lepw\" sourceRef=\"ServiceTask_1ev7ddc\" targetRef=\"EndEvent_0k9rsis\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07y1lm0\"\u003e\u003ctext\u003eCreates a note with sync status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14io1nw\" sourceRef=\"ServiceTask_1ev7ddc\" targetRef=\"TextAnnotation_07y1lm0\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ev7ddc\" id=\"ServiceTask_1ev7ddc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"303\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bwyqvy\" id=\"SequenceFlow_1bwyqvy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"303\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"250.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0k9rsis\" id=\"EndEvent_0k9rsis_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"486\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"504\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_034lepw\" id=\"SequenceFlow_034lepw_di\"\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"444.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07y1lm0\" id=\"TextAnnotation_07y1lm0_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"389\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14io1nw\" id=\"Association_14io1nw_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Sync SOAR incident close with Siemplify Case",
+      "export_key": "siemplify_close_case",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645797092905,
+      "name": "Siemplify Close Case",
+      "object_type": "incident",
+      "programmatic_name": "siemplify_close_case",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "d1cf9a32-cc5b-4b58-a22a-88f0505aa6cd",
+      "workflow_id": 87
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "siemplify_get_customlist_entities",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"siemplify_get_customlist_entities\" isExecutable=\"true\" name=\"Siemplify Get Custom List Entities\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get entities associated with Siemplify\u0027s Custom List]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uqgmpq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0uqgmpq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1nklqx7\"/\u003e\u003cendEvent id=\"EndEvent_0dqezus\"\u003e\u003cincoming\u003eSequenceFlow_1hsasdt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1nklqx7\" name=\"Siemplify Get Custom List Entitie...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f7c15417-71ef-4ab5-adff-e3ab84768f4e\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  if isinstance(results.content, list):\\n    entity_list = results.content\\n  else:\\n    entity_list = results.content.get(\\\"objectsList\\\", {})\\n    \\n  for entity in entity_list:\\n    row = incident.addRow(\u0027siemplify_list_entries\u0027)\\n    row[\u0027report_date\u0027] = current_dt\\n    row[\u0027list_name\u0027] = \u0027Custom List\u0027\\n    row[\u0027entity\u0027] = entity[\u0027entityIdentifier\u0027]\\n    row[\u0027entity_type\u0027] = entity[\u0027category\u0027]\\n    row[\u0027environments\u0027] = \\\", \\\".join(entity[\u0027environments\u0027])\\nelse:\\n  incident.addNote(\\\"Siemplify Get Custom List Entities failed: {}\\\".format(results.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.siemplify_limit = rule.properties.siemplify_limit_result if rule.properties.siemplify_limit_result else None\\ninputs.siemplify_environments = rule.properties.siemplify_environments\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uqgmpq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hsasdt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hsasdt\" sourceRef=\"ServiceTask_1nklqx7\" targetRef=\"EndEvent_0dqezus\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0iq82z7\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Siemplify List Entities datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0czgph8\" sourceRef=\"ServiceTask_1nklqx7\" targetRef=\"TextAnnotation_0iq82z7\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uqgmpq\" id=\"SequenceFlow_0uqgmpq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"203.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dqezus\" id=\"EndEvent_0dqezus_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"502\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"475\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1nklqx7\" id=\"ServiceTask_1nklqx7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"299\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hsasdt\" id=\"SequenceFlow_1hsasdt_di\"\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"502\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"450.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0iq82z7\" id=\"TextAnnotation_0iq82z7_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"167\" x=\"391\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0czgph8\" id=\"Association_0czgph8_di\"\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"143\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "creator_id": "a@example.com",
+      "description": "Get entities associated with Siemplify\u0027s Custom List",
+      "export_key": "siemplify_get_customlist_entities",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1645899974759,
+      "name": "Siemplify Get Custom List Entities",
+      "object_type": "incident",
+      "programmatic_name": "siemplify_get_customlist_entities",
+      "tags": [
+        {
+          "tag_handle": "fn_siemplify",
+          "value": null
+        }
+      ],
+      "uuid": "8ca9d4ae-41be-4aa6-9548-263fa40f6b3f",
+      "workflow_id": 89
     }
   ],
   "workspaces": []

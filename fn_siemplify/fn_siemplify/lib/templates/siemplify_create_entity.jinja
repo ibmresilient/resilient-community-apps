@@ -4,7 +4,7 @@
   "entities": [
     {
       "caseId": 0,
-      "identifier": "{{ siemplify_artifact_value }}",
+      "identifier": "{{ siemplify_artifact_value | replace("\\", "\\\\") }}",
       "entityType": "{{ siemplify_entity_type }}",
       "isInternal": true,
       "isSuspicious": false,
@@ -74,7 +74,7 @@
       ],
       "isManuallyCreated": true,
       "isCustom": true,
-      "id": "{{ siemplify_artifact_value| replace(' ', '_') }}_{{ siemplify_environment| replace(' ', '_') }}"
+      "id": "{{ siemplify_artifact_value| replace("\\", "\\\\") | replace(' ', '_') }}_{{ siemplify_environment| replace(' ', '_') }}"
     }
   ]
 }

@@ -40,6 +40,8 @@ CASES_MODIFIED_URL = "cases/IsCaseUpdated"
 
 SEARCH_CASE_URL = "search/CaseSearchEverything"
 
+ATTACH_PLAYBOOK_URL = "playbooks/AttacheWorkflowToCase"
+
 SOAR_HEADER = "IBM SOAR"
 CREATED_BY_SOAR = "Created by {}".format(SOAR_HEADER)
 SIEMPLIFY_HEADER="From Siemplify"
@@ -328,6 +330,25 @@ class SiemplifyCommon():
             payload['id'] = siemplify_task_id
 
         return self._make_call("POST", CREATE_TASK_URL, payload)
+
+    def attach_paybook(self, inputs):
+        """add a playbook to a case
+
+        Args:
+            inputs (tuple): include fields for adding a playbook
+
+        Returns:
+            dict, str: results, err_msg
+        """
+        payload = {
+            "alertIdentifier": inputs.get("siemplify_alert_id"),
+            "cyberCaseId": inputs.get("siemplify_case_id"),
+            "shouldRunAutomatic": inputs.get("siemplify_run_playbook_automatically"),
+            "wfName": inputs.get("siemplify_playbook_name")
+        }
+        # "alertGroupIdentifier":"Manual Case_ff8ec6bc-1ba4-4ae7-a114-333c3a7e34a4",
+
+        return self._make_call("POST", ATTACH_PLAYBOOK_URL, payload)
 
     def get_version(self):
         # Get the version of the Siemplify platform. Used in Selftest

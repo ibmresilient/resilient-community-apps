@@ -2,14 +2,14 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": {},
+  "content": {
+    "success": false
+  },
   "raw": null,
   "inputs": {
-    "siemplify_artifact_type": "File Path",
+    "siemplify_run_playbook_automatically": true,
     "siemplify_alert_id": "IBM SOAR Alert 3834_64215769-ecb2-4fd7-bfb9-e6ca81c7a869",
-    "siemplify_environment": null,
-    "siemplify_artifact_id": 7656,
-    "siemplify_artifact_value": "c:\\program files\\ibm\\windows s-tap\\bin\\svctrc.exe",
+    "siemplify_playbook_name": "SentinelOne Threat Remediation",
     "siemplify_case_id": 171
   },
   "metrics": {
@@ -17,7 +17,7 @@
     "package": "fn-siemplify",
     "package_version": "1.0.0",
     "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 445,
-    "timestamp": "2022-03-31 17:12:45"
+    "execution_time_ms": 312,
+    "timestamp": "2022-03-31 17:31:39"
   }
 }

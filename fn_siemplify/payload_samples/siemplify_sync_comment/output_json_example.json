@@ -1,20 +1,25 @@
 {
   "version": 2.0,
-  "success": true,
-  "reason": null,
-  "content": {},
+  "success": false,
+  "reason": "Siemplify Error: \n    status code: 500\n    failure: This insight already exists.",
+  "content": {
+    "ErrorCode": 2000,
+    "ErrorMessage": "This insight already exists.",
+    "InnerException": null,
+    "InnerExceptionType": null
+  },
   "raw": null,
   "inputs": {
-    "siemplify_alert_id": "IBM SOAR Alert 2142_492b8ecf-1a40-4752-a498-437468c4d111",
-    "siemplify_comment": "<div class=\"rte\"><div>sync insight 3rd</div></div>",
-    "siemplify_case_id": 64
+    "siemplify_alert_id": "IBM SOAR Alert 3842_48c9cb33-0047-4e6d-b799-dc765d0e5e68",
+    "siemplify_comment": "ReaQta Create Artifact failed: ReaQta Error: \n    status code: 422\n    message: Endpoint offline\n    details: {'endpointId': '847075616325894144', 'lastSeenAt': '2022-03-29T19:09:45.373Z'}",
+    "siemplify_case_id": 179
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
     "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 292,
-    "timestamp": "2022-01-12 11:43:52"
+    "execution_time_ms": 264,
+    "timestamp": "2022-03-31 17:02:28"
   }
 }
