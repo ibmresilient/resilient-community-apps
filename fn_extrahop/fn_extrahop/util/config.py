@@ -26,12 +26,18 @@ polling_interval = <POLLING_INTERVAL>
 # Lookback interval to check for findings at startup  (in seconds).
 # Used in criteria for filtering detections retrieval.
 polling_lookback = <LOOKBACK_INTERVAL>
+# Optional - Filter detection results returned to SOAR using key/value pairs. Filter keys/values are all optional.
+# Example: polling_filters="category": "sec.exploit", "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
+#                          "resolution": [".none", "action_taken", "no_action_taken"], "riskscore_threshold": 80
+# The security categories include the following: sec, sec.action, sec.botnet, sec.caution, sec.command, sec.cryptomining,
+# sec.dos, sec.exploit, sec.exfil, sec.lateral, sec.ransomware, sec.recon
+# Risk score ranges: red (80-99), orange (31-79), or yellow (1-30).
+polling_filters =
 # If your ExtraHop server uses a self-signed TLS certificate, or some
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
 # If you don't want to use a cert you can set extrahop_cafile=false.
 #
-polling_filters=
 #extrahop_cafile=<path to cert file>|false
 #http_proxy=http://proxy:80
 #https_proxy=https://proxy:443

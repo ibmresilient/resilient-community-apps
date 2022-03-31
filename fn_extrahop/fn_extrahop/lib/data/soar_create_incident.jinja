@@ -1,11 +1,10 @@
 {
   {# JINJA template for creating a new SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
-  "description": "{{ title | replace('"', '\\"') }}",
+  "description": "{{ description | replace('"', '\\"') }}",
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start_time }},
   "start_date": {{ start_time }},
-  "inc_last_modified_date": {{ update_time }},
 {% if end_time %}
   "end_date": {{ end_time }},
 {% endif %}
@@ -24,20 +23,11 @@
     "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection</a>"
   },
   "comments": [
-    {% if notes %}
     {
       "text": {
           "format": "text",
-          "content": "Created by ExtraHop:\n{{ notes|replace('"', '\\"') }}"
+          "content": "Created by ExtraHop from a detection."
       }
     }
-    {% else %}
-    {
-      "text": {
-          "format": "text",
-          "content": "Created by ExtraHop"
-      }
-    }
-    {% endif %}
   ]
 }

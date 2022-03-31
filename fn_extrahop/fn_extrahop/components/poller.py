@@ -55,8 +55,7 @@ def get_entities(app_common, last_poller_time, search_filters):
 
     # Enter the code needed to perform a query to the endpoint platform, using the last_poller_time to
     # identify entities changed since that timestamp.
-    # Use options to collect urls, api_keys, etc. needed for the API call.
-    # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
+
     entity_list = app_common.get_entities_since_ts(last_poller_time, search_filters)
 
     return entity_list
@@ -82,7 +81,10 @@ def is_entity_closed(entity):
     Returns
         ([bool]): [true/false if entity is closed]
     """
-    return bool(entity.get("status", False))
+    if entity.get("status") == "closed":
+        return True
+    else:
+        return False
 
 class PollerComponent(ResilientComponent):
     """
@@ -133,7 +135,7 @@ class PollerComponent(ResilientComponent):
         # get the polling filters
         self.polling_filters = {}
         if options.get("polling_filters"):
-            self.polling_filterslters = eval_mapping(options.get("polling_filters"), wrapper="{{ {} }}")
+            self.polling_filters = eval_mapping(options.get("polling_filters"), wrapper="{{ {} }}")
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)
@@ -217,18 +219,23 @@ class PollerComponent(ResilientComponent):
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                     else:
                         # perform an update operation on the existing SOAR case
-                        #soar_update_payload = make_payload_from_template(
-                        #                                self.soar_update_case_template,
-                        #                                UPDATE_INCIDENT_TEMPLATE,
-                        #                                soar_case
-                        #                            )
+                        soar_update_payload = make_payload_from_template(
+                                                        self.soar_update_case_template,
+                                                        UPDATE_INCIDENT_TEMPLATE,
+                                                        entity
+                                                    )
                         # Update description, tags, priority, assignee, stage, important
-                        #_update_soar_case = self.soar_common.update_soar_case(
-                        #                                soar_case,
-                        #                                soar_update_payload
-                        #                            )
-
+                        _update_soar_case = self.soar_common.update_soar_case(
+                                                        soar_case_id,
+                                                        soar_update_payload
+                                                    )
+                        # Add an update note
+                        note = "Updated by ExtraHop from a detection."
+                        comment_header = "ExtraHop"
+                        _update_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
+                                                                                 comment_header, note)
                         cases_updated += 1
+
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
             LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
                      cases_insert, cases_closed, cases_updated)

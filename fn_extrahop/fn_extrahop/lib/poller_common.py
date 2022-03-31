@@ -196,7 +196,7 @@ class SOARCommon():
     def update_soar_case(self, case_id, case_payload):
         """
         Update a IBM SOAR case by rendering a jinja2 template
-        :param case_payload: inciednt fields to update (json object)
+        :param case_payload: incident fields to update (json object)
         :return: IBM SOAR case
         """
         try:

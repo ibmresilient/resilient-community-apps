@@ -177,7 +177,7 @@ class RxClient():
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
 
-        :param search_filter: (Optional) Search filter (json str)
+        :param search_filter: (Optional) Search filter (dict or json str)
         :param active_from: (Optional)  Get Detections that occurred after the specified timestamp (in millisecs).
         Default 0 (int)
         :param active_until: (Optional) Get detections that ended before the specified timestamp (in millisecs).
@@ -193,13 +193,19 @@ class RxClient():
         filter_data = {}
 
         if search_filter:
-            try:
-                filter_data = json.loads(search_filter)
-            except ValueError:
-                raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
+            if isinstance(search_filter, dict):
+                filter_data = search_filter
+            else:
+                try:
+                    filter_data = json.loads(search_filter)
+                except ValueError:
+                    raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
 
-        if filter_data.get("filter"):
-            data["filter"] = filter_data.get("filter")
+        if filter_data:
+            if filter_data.get("filter"):
+                data["filter"] = filter_data.get("filter")
+            else:
+                data["filter"] = filter_data
 
         if sort:
             try:

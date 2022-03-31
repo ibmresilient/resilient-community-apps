@@ -251,6 +251,10 @@ def soar_substitute(value, json_str):
     Returns:
         [str]: [replacement value or original value if no replacement found]
     """
+    if value is None:
+        # Convert value None to string 'None' to allow
+        # replacement of None values
+        value = str(value)
     replace_dict = json.loads(json_str)
     if value in replace_dict:
         return replace_dict[value]

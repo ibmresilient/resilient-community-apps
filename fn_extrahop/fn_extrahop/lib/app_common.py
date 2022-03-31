@@ -34,14 +34,23 @@ class AppCommon():
         Returns:
             list: changed entity list
         """
+        riskscore_threshold = None
 
-        response = self.rx_cli.search_detections(active_from=timestamp, search_filter=search_filter)
+        if search_filter:
+            # Risk score thresholds are managed after the api call is made
+            if "riskscore_threshold" in search_filter:
+                riskscore_threshold = search_filter.pop('riskscore_threshold')
+
+        response = self.rx_cli.search_detections(update_time=timestamp, search_filter=search_filter)
 
         result = response.json()
 
         if response.status_code not in [200, 201, 204]:
             LOG.error("{{package_name}} API call failed: %s", result)
             return None
+
+        if riskscore_threshold:
+            result = self.filter_by_riskscore(result, riskscore_threshold)
 
         return result
 
@@ -56,3 +65,18 @@ class AppCommon():
             str: completed url for linkback
         """
         return urljoin(self.endpoint_url, linkback_url.format(entity_id))
+
+    def filter_by_riskscore(self, result, riskscore_threshold):
+        """Create a url to link back to the endpoint alert, case, etc.
+
+        Args:
+            result (dict): Result returned from ExtraHop
+
+        Returns:
+            filtered_result: Result filtered by risk score threshold
+        """
+        for i in result:
+            rs = i["risk_score"]
+        filtered_result = [i for i in result if i["risk_score"] >= riskscore_threshold]
+
+        return filtered_result
