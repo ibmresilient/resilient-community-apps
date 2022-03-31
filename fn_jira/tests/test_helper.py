@@ -85,9 +85,9 @@ def test_read_img_exception():
     mock_ret_val = mock_response("fake_img_data")
 
     with mock.patch("resilient.co3.SimpleClient.get") as mock_req_get:
-        mock_req_get.side_effect = ConnectionError("url invalid")
+        mock_req_get.side_effect = Exception("url invalid")
 
-        with pytest.raises(ConnectionError) as err:
+        with pytest.raises(Exception) as err:
             read_img(SimpleClient(), mock_img_url)
 
             assert "url invalid" in str(err.value)
