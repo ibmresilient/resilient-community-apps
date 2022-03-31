@@ -1,0 +1,26 @@
+{
+  "reference_items": [
+    {
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 1,
+      "data": [
+        {
+          "last_seen": 1643389092070,
+          "first_seen": 1643389092070,
+          "source": "reference data api",
+          "value": "1.1.1.1",
+          "domain_id": null
+        }
+      ],
+      "creation_time": 1440703811218,
+      "name": "SSH Servers",
+      "namespace": "SHARED",
+      "element_type": "IP",
+      "collection_id": 17
+    }
+  ],
+  "inputs": {
+    "qradar_label": "SOAR_Plugin_Destination_Name",
+    "qradar_reference_set_item_value": "1.1.1.1"
+  }
+}
