@@ -5,6 +5,7 @@
 """AppFunction implementation"""
 import ntpath
 from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
+from fn_reaqta.lib.soar_common import SOARCommon
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from resilient.co3 import SimpleHTTPException
@@ -46,22 +47,29 @@ class FunctionComponent(AppFunctionComponent):
             err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
         else:
             app_common = AppCommon(self.rc, hive_settings)
+            # this can take a couple of minutes
             file_contents, err_msg = app_common.get_program_file(fn_inputs.reaqta_endpoint_id,
-                                                            fn_inputs.reaqta_program_path)
+                                                                 fn_inputs.reaqta_program_path)
 
+            # make sure the workflow is still active
+            rest_client = self.rest_client()
+            soar_common = SOARCommon(rest_client)
             results = {}
             if not err_msg:
-                # collect the file name
-                file_name = ntpath.basename(fn_inputs.reaqta_program_path)
+                if soar_common.is_workflow_active(self.get_fn_msg()):
+                    # collect the file name
+                    file_name = ntpath.basename(fn_inputs.reaqta_program_path)
 
-                artifact_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
+                    artifact_uri = "/incidents/{0}/artifacts/files".format(fn_inputs.reaqta_incident_id)
+                    artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
 
-                artifact_type = ARTIFACT_TYPE_LOOKUP.get(fn_inputs.reaqta_artifact_type, 12)
-
-                results = self.create_artifact(artifact_uri,
-                                               artifact_type,
-                                               file_contents,
-                                               file_name)
+                    results = self.create_artifact(rest_client,
+                                                   artifact_uri,
+                                                   artifact_type,
+                                                   file_contents,
+                                                   file_name)
+                else:
+                    err_msg = "Workflow/Playbook was terminated"
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
@@ -70,10 +78,10 @@ class FunctionComponent(AppFunctionComponent):
                              reason=err_msg)
 
     @retry(SimpleHTTPException, tries=3, delay=2, backoff=20)
-    def create_artifact(self, artifact_uri, artifact_type, file_contents, file_name):
-        return self.rest_client().post_artifact_file(artifact_uri,
-                                                     artifact_type,
-                                                     None,
-                                                     bytes_handle=file_contents,
-                                                     description="Extracted from ReaQta",
-                                                     value=file_name)
+    def create_artifact(self, rest_client, artifact_uri, artifact_type, file_contents, file_name):
+        return rest_client.post_artifact_file(artifact_uri,
+                                              artifact_type,
+                                              None,
+                                              bytes_handle=file_contents,
+                                              description="Extracted from ReaQta",
+                                              value=file_name)

@@ -10,7 +10,7 @@ import traceback
 from ast import literal_eval
 from threading import Event
 from resilient import SimpleHTTPException, Patch
-from resilient_lib import IntegrationError, get_file_attachment, get_file_attachment_name
+from resilient_lib import IntegrationError, get_file_attachment, get_file_attachment_name, get_workflow_status
 from cachetools import cached, LRUCache
 
 LOG = logging.getLogger(__name__)
@@ -432,6 +432,21 @@ class SOARCommon():
             return resp.json()
 
         return {}
+
+    def is_workflow_active(self, message):
+        """ensure the workflow/playbook is still running
+
+        Returns:
+            bool: true if workflow/playbook is active
+        """
+        active = False
+        if message:
+            wf_instance_id = message.get("workflow_instance", {}).get("workflow_instance_id")
+            if wf_instance_id:
+                workflow_status = get_workflow_status(self.rest_client, wf_instance_id)
+                active = not workflow_status.is_terminated
+
+        return active
 
 
 def s_to_b(value):

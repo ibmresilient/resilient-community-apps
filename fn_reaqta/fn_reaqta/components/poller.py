@@ -10,7 +10,7 @@ from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template, build_incident_url, build_resilient_url
 from resilient import get_client
-from fn_reaqta.lib.poller_common import SOARCommon, poller, get_template_dir
+from fn_reaqta.lib.soar_common import SOARCommon, poller, get_template_dir
 from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
 from fn_reaqta.lib.configure_tab import init_reaqta_tab
 

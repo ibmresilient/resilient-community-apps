@@ -4,7 +4,7 @@
 
 """AppFunction implementation"""
 from fn_reaqta.lib.app_common import AppCommon, PACKAGE_NAME, get_hive_options
-from fn_reaqta.lib.poller_common import IBM_SOAR
+from fn_reaqta.lib.soar_common import IBM_SOAR
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 

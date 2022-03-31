@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from io import BytesIO
 from urllib.parse import urljoin
-from fn_reaqta.lib.poller_common import IBM_SOAR, eval_mapping, s_to_b
+from fn_reaqta.lib.soar_common import IBM_SOAR, eval_mapping, s_to_b
 from resilient_lib import validate_fields, str_to_bool, readable_datetime, clean_html
 from cachetools import cached, LRUCache
 
