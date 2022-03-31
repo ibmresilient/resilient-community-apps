@@ -12,26 +12,26 @@
     "completionDateTimeUnixTimeInMs": null,
     "dueDateUnixTimeInMs": null,
     "creatorUserId": "Siemplify automation",
-    "id": 21,
+    "id": 24,
     "type": 2,
-    "caseId": 66,
+    "caseId": 196,
     "isFavorite": false,
-    "modificationTimeUnixTimeInMs": 1641584072788,
-    "creationTimeUnixTimeInMs": 1641584072788,
+    "modificationTimeUnixTimeInMs": 1648766815969,
+    "creationTimeUnixTimeInMs": 1648766815969,
     "alertIdentifier": null
   },
   "raw": null,
   "inputs": {
     "siemplify_task_assignee": "@Administrator",
-    "siemplify_soar_task_id": 803,
-    "siemplify_case_id": 66
+    "siemplify_soar_task_id": 2853,
+    "siemplify_case_id": 196
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 457,
-    "timestamp": "2022-01-07 14:34:32"
+    "host": "localhost",
+    "execution_time_ms": 447,
+    "timestamp": "2022-03-31 18:46:51"
   }
 }

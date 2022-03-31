@@ -16,7 +16,7 @@
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
+    "host": "localhost",
     "execution_time_ms": 312,
     "timestamp": "2022-03-31 17:31:39"
   }

@@ -5,25 +5,27 @@
   "content": {
     "wallData": [
       {
-        "comment": "Case creation reason: IBM SOAR Incident 2149",
+        "comment": "Case creation reason: IBM SOAR Incident 3861",
         "creatorUserId": "Siemplify automation",
-        "id": 66,
+        "id": 197,
         "type": 7,
-        "caseId": 66,
+        "caseId": 197,
         "isFavorite": false,
-        "modificationTimeUnixTimeInMs": 1641584057814,
-        "creationTimeUnixTimeInMs": 1641584057814,
-        "alertIdentifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3"
+        "modificationTimeUnixTimeInMs": 1648766971173,
+        "creationTimeUnixTimeInMs": 1648766971173,
+        "alertIdentifier": "IBM SOAR Alert 3861_eb6723b9-0ab7-4089-814a-1bc9748133eb"
       },
       {
-        "comment": "Playbook SentinelOne Threat Remediation attached to case.",
+        "description": "\u200cDescription some description added to case",
+        "activityKind": 6,
+        "newValue": "some description",
         "creatorUserId": "Siemplify automation",
-        "id": 47,
-        "type": 5,
-        "caseId": 66,
+        "id": 286,
+        "type": 1,
+        "caseId": 197,
         "isFavorite": false,
-        "modificationTimeUnixTimeInMs": 1641584057945,
-        "creationTimeUnixTimeInMs": 1641584057945,
+        "modificationTimeUnixTimeInMs": 1648766971895,
+        "creationTimeUnixTimeInMs": 1648766971895,
         "alertIdentifier": null
       },
       {
@@ -31,12 +33,12 @@
         "activityKind": 15,
         "newValue": "Manual Case",
         "creatorUserId": "Siemplify automation",
-        "id": 98,
+        "id": 285,
         "type": 1,
-        "caseId": 66,
+        "caseId": 197,
         "isFavorite": false,
-        "modificationTimeUnixTimeInMs": 1641584057852,
-        "creationTimeUnixTimeInMs": 1641584057852,
+        "modificationTimeUnixTimeInMs": 1648766971394,
+        "creationTimeUnixTimeInMs": 1648766971394,
         "alertIdentifier": null
       },
       {
@@ -44,49 +46,27 @@
         "activityKind": 10,
         "newValue": null,
         "creatorUserId": "System",
-        "id": 67,
+        "id": 198,
         "type": 1,
-        "caseId": 66,
+        "caseId": 197,
         "isFavorite": false,
-        "modificationTimeUnixTimeInMs": 1641584057714,
-        "creationTimeUnixTimeInMs": 1641584057714,
-        "alertIdentifier": null
-      },
-      {
-        "actionTriggerType": 0,
-        "integration": "Siemplify",
-        "executingUser": null,
-        "playbookName": "SentinelOne Threat Remediation",
-        "playbookIsInDebugMode": false,
-        "status": 5,
-        "actionProvider": "Scripts",
-        "actionIdentifier": "Insight - Threat Information",
-        "actionResult": "Action started",
-        "alertIdentifiers": [
-          "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3"
-        ],
-        "creatorUserId": null,
-        "id": 13,
-        "type": 3,
-        "caseId": 0,
-        "isFavorite": false,
-        "modificationTimeUnixTimeInMs": 1641584058246,
-        "creationTimeUnixTimeInMs": 1641584058246,
+        "modificationTimeUnixTimeInMs": 1648766970821,
+        "creationTimeUnixTimeInMs": 1648766970821,
         "alertIdentifier": null
       }
     ],
     "alerts": [
       {
         "ticketId": "",
-        "identifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
-        "hasWorkflows": true,
-        "workflowsStatus": 1,
+        "identifier": "IBM SOAR Alert 3861_eb6723b9-0ab7-4089-814a-1bc9748133eb",
+        "hasWorkflows": false,
+        "workflowsStatus": 2,
         "sourceSystemName": "",
         "securityEventCards": [
           {
-            "caseId": 66,
+            "caseId": 197,
             "eventId": null,
-            "alertIdentifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+            "alertIdentifier": "IBM SOAR Alert 3861_eb6723b9-0ab7-4089-814a-1bc9748133eb",
             "eventName": null,
             "product": null,
             "sources": [],
@@ -94,7 +74,7 @@
             "artificats": [],
             "port": null,
             "outcome": null,
-            "time": "2022-01-07T19:32:24Z",
+            "time": "2022-03-31T22:48:57Z",
             "deviceEventClassId": null,
             "fields": []
           }
@@ -111,17 +91,17 @@
               {
                 "originalName": "AlertName",
                 "name": "Alert Name",
-                "value": "IBM SOAR Alert 2149"
+                "value": "IBM SOAR Alert 3861"
               },
               {
                 "originalName": "EndTime",
                 "name": "End Time",
-                "value": "1641583944000"
+                "value": "1648766937000"
               },
               {
                 "originalName": "StartTime",
                 "name": "Start Time",
-                "value": "1641583944000"
+                "value": "1648766937000"
               }
             ]
           },
@@ -132,17 +112,17 @@
               {
                 "originalName": "DetectionTime",
                 "name": "Detection Time",
-                "value": "1641583944000"
+                "value": "1648766937000"
               },
               {
                 "originalName": "EndTime",
                 "name": "End Time",
-                "value": "1641583944000"
+                "value": "1648766937000"
               },
               {
                 "originalName": "StartTime",
                 "name": "Start Time",
-                "value": "1641583944000"
+                "value": "1648766937000"
               }
             ]
           },
@@ -153,7 +133,7 @@
               {
                 "originalName": "AlertName",
                 "name": "Alert Name",
-                "value": "IBM SOAR Alert 2149"
+                "value": "IBM SOAR Alert 3861"
               },
               {
                 "originalName": "RuleGenerator",
@@ -169,7 +149,7 @@
               {
                 "originalName": "AlertGroupIdentifier",
                 "name": "AlertGroupIdentifier",
-                "value": "Manual Case_0e65479c-d123-4cae-a017-fc38339e42ab"
+                "value": "Manual Case_3a649db8-8168-4c10-8925-ae3aa3d9307f"
               },
               {
                 "originalName": "IsManualAlert",
@@ -190,9 +170,9 @@
             ]
           }
         ],
-        "name": "IBM SOAR Alert 2149",
+        "name": "IBM SOAR Alert 3861",
         "product": null,
-        "startTimeUnixTimeInMs": 1641583944000,
+        "startTimeUnixTimeInMs": 1648766937000,
         "apiSlaExpiration": {
           "slaExpirationTime": null,
           "criticalExpirationTime": null,
@@ -204,27 +184,87 @@
         "creationTimeUnixTimeInMs": 0,
         "modificationTimeUnixTimeInMs": 0,
         "additionalProperties": {
-          "identifier": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
-          "detectionTime": "1641583944000",
-          "alertName": "IBM SOAR Alert 2149",
+          "identifier": "IBM SOAR Alert 3861_eb6723b9-0ab7-4089-814a-1bc9748133eb",
+          "detectionTime": "1648766937000",
+          "alertName": "IBM SOAR Alert 3861",
           "ruleGenerator": "Manual Case",
-          "alertGroupIdentifier": "Manual Case_0e65479c-d123-4cae-a017-fc38339e42ab",
+          "alertGroupIdentifier": "Manual Case_3a649db8-8168-4c10-8925-ae3aa3d9307f",
           "isManualAlert": "True",
           "priority": "Unchanged",
-          "endTime": "1641583944000",
-          "startTime": "1641583944000"
+          "endTime": "1648766937000",
+          "startTime": "1648766937000"
         }
       }
     ],
-    "caseRecommendations": null,
+    "caseRecommendations": {
+      "similarCases": [
+        {
+          "id": 167,
+          "title": "IBM SOAR - ReaQta Alert - Detection Strategy, Endpoint: REQTA-WINDOWS20",
+          "caseRecommendationOutcomeStatus": 0,
+          "priority": "50",
+          "creationTime": "2022-03-31T20:43:24.799Z",
+          "scorePercent": 100,
+          "isClosed": false,
+          "closedRootCause": null,
+          "closedComment": null
+        },
+        {
+          "id": 192,
+          "title": "IBM SOAR - ReaQta Alert - Code Injection, Endpoint: HOST-9",
+          "caseRecommendationOutcomeStatus": 0,
+          "priority": "50",
+          "creationTime": "2022-03-31T21:02:23.878Z",
+          "scorePercent": 100,
+          "isClosed": false,
+          "closedRootCause": null,
+          "closedComment": null
+        },
+        {
+          "id": 169,
+          "title": "IBM SOAR - ReaQta Alert - Code Injection, Endpoint: CHUCK-SURFACE-B",
+          "caseRecommendationOutcomeStatus": 0,
+          "priority": "50",
+          "creationTime": "2022-03-31T20:43:28.91Z",
+          "scorePercent": 100,
+          "isClosed": false,
+          "closedRootCause": null,
+          "closedComment": null
+        },
+        {
+          "id": 171,
+          "title": "IBM SOAR - ReaQta Alert - Detection Strategy, Endpoint: DESKTOP-DJL",
+          "caseRecommendationOutcomeStatus": 0,
+          "priority": "50",
+          "creationTime": "2022-03-31T20:49:33.825Z",
+          "scorePercent": 100,
+          "isClosed": false,
+          "closedRootCause": null,
+          "closedComment": null
+        },
+        {
+          "id": 196,
+          "title": "IBM SOAR - demonstration synchronization to siemplify",
+          "caseRecommendationOutcomeStatus": 4,
+          "priority": "50",
+          "creationTime": "2022-03-31T22:43:23.87Z",
+          "scorePercent": 100,
+          "isClosed": true,
+          "closedRootCause": "not an issue",
+          "closedComment": "Case closed by Siemplify API. All attached playbooks and playbook blocks have been terminated."
+        }
+      ],
+      "relevantAnalysts": [],
+      "relevantTags": []
+    },
     "tags": [
       {
-        "caseId": 66,
+        "caseId": 197,
         "tag": "IBMSOAR",
         "priority": 0
       },
       {
-        "caseId": 66,
+        "caseId": 197,
         "tag": "Manual Case",
         "priority": 0
       }
@@ -236,20 +276,20 @@
     },
     "entityCards": [],
     "entities": [],
-    "description": null,
+    "description": "some description",
     "canOpenIncident": false,
     "hasIncident": false,
-    "title": "IBM SOAR - sync this with siemplify",
+    "title": "IBM SOAR - Demo Synchronization to Siemplify",
     "isTouched": false,
     "hasSuspiciousEntity": false,
     "isMerged": false,
     "isImportant": true,
     "isIncident": false,
-    "hasWorkflow": true,
+    "hasWorkflow": false,
     "environment": "Default Environment",
     "priority": 50,
     "stage": "Triage",
-    "assignedUserName": "@Administrator",
+    "assignedUserName": "@Tier1",
     "apiSlaExpiration": {
       "slaExpirationTime": null,
       "criticalExpirationTime": null,
@@ -264,29 +304,29 @@
     "isTestCase": false,
     "caseSource": "User",
     "isOverflowCase": false,
-    "id": 66,
-    "creationTimeUnixTimeInMs": 1641584057689,
-    "modificationTimeUnixTimeInMs": 1641584057739,
+    "id": 197,
+    "creationTimeUnixTimeInMs": 1648766970800,
+    "modificationTimeUnixTimeInMs": 1648766971895,
     "additionalProperties": {},
-    "siemplify_case_url": "https://9.55.194.8/#/main/cases/classic-view/66"
+    "siemplify_case_url": "https://9.55.194.8/#/main/cases/classic-view/197"
   },
   "raw": null,
   "inputs": {
-    "siemplify_incident_id": 2149,
+    "siemplify_incident_id": 3861,
     "siemplify_sync_attachments": true,
-    "siemplify_assigned_user": "@Administrator",
-    "siemplify_environment": "Default Environment",
-    "siemplify_alert_id": "IBM SOAR Alert 2149_fab80a96-28cd-4110-ad7b-2d1c9128e864",
+    "siemplify_assigned_user": null,
+    "siemplify_environment": null,
+    "siemplify_alert_id": null,
     "siemplify_sync_comments": true,
     "siemplify_sync_artifacts": true,
-    "siemplify_case_id": 65
+    "siemplify_case_id": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 1775,
-    "timestamp": "2022-01-07 14:34:18"
+    "host": "localhost",
+    "execution_time_ms": 2400,
+    "timestamp": "2022-03-31 18:49:27"
   }
 }

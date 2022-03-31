@@ -3,25 +3,25 @@
   "success": true,
   "reason": null,
   "content": {
-    "entityIdentifier": "abc@example.com",
-    "category": "USERUNIQNAME",
+    "entityIdentifier": "194.34.44.53",
+    "category": "SOAR",
     "environments": [
       "Default Environment"
     ]
   },
   "raw": null,
   "inputs": {
-    "siemplify_artifact_type": "Email Recipient",
-    "siemplify_environment": null,
-    "siemplify_category": null,
-    "siemplify_artifact_value": "abc@example.com"
+    "siemplify_artifact_type": "IP Address",
+    "siemplify_environment": "Default Environment",
+    "siemplify_category": "SOAR",
+    "siemplify_artifact_value": "194.34.44.53"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 282,
-    "timestamp": "2022-01-07 14:35:57"
+    "host": "localhost",
+    "execution_time_ms": 298,
+    "timestamp": "2022-03-31 18:45:48"
   }
 }

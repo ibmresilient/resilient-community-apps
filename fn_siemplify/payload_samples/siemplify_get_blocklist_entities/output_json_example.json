@@ -62,6 +62,56 @@
       "environments": [
         "Default Environment"
       ]
+    },
+    {
+      "id": 7,
+      "entityIdentifier": "abc@example.com",
+      "entityType": "USERUNIQNAME",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 11,
+      "entityIdentifier": "dns.com",
+      "entityType": "DESTINATIONDOMAIN",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 12,
+      "entityIdentifier": "demo.com",
+      "entityType": "DESTINATIONDOMAIN",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 13,
+      "entityIdentifier": "139.28.235.26",
+      "entityType": "IPSET",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
+    },
+    {
+      "id": 14,
+      "entityIdentifier": "194.34.44.53",
+      "entityType": "IPSET",
+      "elementType": 0,
+      "scope": 2,
+      "environments": [
+        "Default Environment"
+      ]
     }
   ],
   "raw": null,
@@ -73,8 +123,8 @@
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 253,
-    "timestamp": "2022-01-07 14:35:14"
+    "host": "localhost",
+    "execution_time_ms": 333,
+    "timestamp": "2022-03-31 18:46:31"
   }
 }

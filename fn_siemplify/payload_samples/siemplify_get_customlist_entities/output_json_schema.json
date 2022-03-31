@@ -45,10 +45,8 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "siemplify_search": {},
-        "siemplify_limit": {
-          "type": "integer"
-        }
+        "siemplify_environments": {},
+        "siemplify_limit": {}
       }
     },
     "metrics": {

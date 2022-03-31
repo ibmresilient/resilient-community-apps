@@ -33,8 +33,12 @@
         "siemplify_artifact_type": {
           "type": "string"
         },
-        "siemplify_environment": {},
-        "siemplify_category": {},
+        "siemplify_environment": {
+          "type": "string"
+        },
+        "siemplify_category": {
+          "type": "string"
+        },
         "siemplify_artifact_value": {
           "type": "string"
         }

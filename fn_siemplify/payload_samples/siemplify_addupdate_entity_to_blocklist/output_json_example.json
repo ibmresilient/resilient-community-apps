@@ -3,8 +3,8 @@
   "success": true,
   "reason": null,
   "content": {
-    "entityIdentifier": "abc@example.com",
-    "entityType": "USERUNIQNAME",
+    "entityIdentifier": "194.34.44.53",
+    "entityType": "IPSET",
     "scope": 2,
     "environments": [
       "Default Environment"
@@ -12,16 +12,16 @@
   },
   "raw": null,
   "inputs": {
-    "siemplify_artifact_type": "Email Recipient",
-    "siemplify_environment": null,
-    "siemplify_artifact_value": "abc@example.com"
+    "siemplify_artifact_type": "IP Address",
+    "siemplify_environment": "Default Environment",
+    "siemplify_artifact_value": "194.34.44.53"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 330,
-    "timestamp": "2022-01-07 14:36:05"
+    "host": "localhost",
+    "execution_time_ms": 279,
+    "timestamp": "2022-03-31 18:45:26"
   }
 }

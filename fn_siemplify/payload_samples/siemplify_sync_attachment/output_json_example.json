@@ -3,33 +3,33 @@
   "success": true,
   "reason": null,
   "content": {
-    "evidenceName": "app-rc_data_feed_plugin_odbcfeed-1",
-    "description": "created by IBM SOAR",
+    "evidenceName": "resilient-44.0.1.tar",
+    "description": "Created by IBM SOAR",
     "evidenceThumbnailBase64": "",
-    "evidenceId": 14,
-    "fileType": ".0.5.zip",
+    "evidenceId": 25,
+    "fileType": ".gz",
     "creatorUserId": "Siemplify automation",
-    "id": 14,
+    "id": 25,
     "type": 4,
-    "caseId": 66,
+    "caseId": 197,
     "isFavorite": false,
-    "modificationTimeUnixTimeInMs": 1641584095781,
-    "creationTimeUnixTimeInMs": 1641584095781,
+    "modificationTimeUnixTimeInMs": 1648766978004,
+    "creationTimeUnixTimeInMs": 1648766978004,
     "alertIdentifier": null
   },
   "raw": null,
   "inputs": {
-    "siemplify_incident_id": 2149,
-    "siemplify_alert_id": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
-    "siemplify_case_id": 66,
-    "siemplify_attachment_id": 16
+    "siemplify_incident_id": 3861,
+    "siemplify_alert_id": "IBM SOAR Alert 3861_eb6723b9-0ab7-4089-814a-1bc9748133eb",
+    "siemplify_case_id": 197,
+    "siemplify_attachment_id": 234
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 748,
-    "timestamp": "2022-01-07 14:34:55"
+    "host": "localhost",
+    "execution_time_ms": 935,
+    "timestamp": "2022-03-31 18:49:33"
   }
 }

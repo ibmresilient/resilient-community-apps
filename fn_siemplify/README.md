@@ -38,6 +38,7 @@
 - [Function - Siemplify Sync Artifact](#function---siemplify-sync-artifact)
 - [Function - Siemplify Sync Comment](#function---siemplify-sync-comment)
 - [Function - Siemplify Close Case](#function---siemplify-close-case)
+- [Function - Siemplify Add Playbook](#function---siemplify-add-playbook)
 - [Function - Siemplify Add/Update Entity to Blocklist](#function---siemplify-addupdate-entity-to-blocklist)
 - [Function - Siemplify Add/Update Entity to Custom List](#function---siemplify-addupdate-entity-to-customlist)
 - [Function - Siemplify Get Block List Entities](#function---siemplify-get-blocklist-entities)
@@ -85,6 +86,7 @@ Bi-directional synchronization with Siemplify Cases from SOAR Incidents. Other S
 * Flexible templates used allowing modification for your environment
 * Get entities added to the Block or Custom list
 * Add entities to the Block or Custom list
+* Add Playbooks to a Case
 
 ---
 
@@ -967,6 +969,84 @@ incident.addNote(helper.createPlainText(note))
 </details>
 
 ---
+
+## Function - Siemplify Add Playbook
+Add a Playbook to a Siemplify Case, optionally running it automatically
+
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_alert_id` | `text` | Yes | `IBM SOAR Alert 2148_abc-1234` | Siemplify alert id saved in the SOAR incident |
+| `siemplify_case_id` | `number` | Yes | `46` | Siemplify case id saved in the SOAR incident |
+| `siemplify_playbook_name` | `text` | Yes | `-` | Name of Playbook to add |
+| `siemplify_run_playbook_automatically` | `bool` | Yes | `True|False` | Allow the Playbook to run as soon as added |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {
+    'success': True
+  },
+  'raw': None,
+  'inputs': {
+    'siemplify_run_playbook_automatically': True,
+    'siemplify_alert_id': 'IBM SOAR Alert 3834_64215769-ecb2-4fd7-bfb9-e6ca81c7a869',
+    'siemplify_playbook_name': 'SentinelOne Threat Remediation',
+    'siemplify_case_id': 171
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'localhost',
+    'execution_time_ms': 312,
+    'timestamp': '2022-03-31 17:31:39'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
+inputs.siemplify_case_id = incident.properties.siemplify_case_id
+inputs.siemplify_playbook_name = rule.properties.siemplify_playbook_name
+inputs.siemplify_run_playbook_automatically = rule.properties.siemplify_run_playbook_automatically
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  incident.addNote("Siemplify Add Playbook: '{}' created".format(rule.properties.siemplify_playbook_name))
+else:
+  incident.addNote("Siemplify Add Playbook: '{}' failed: ".format(rule.properties.siemplify_playbook_name, results.reason))
+```
+
+</p>
+</details>
+
+---
+
 ## Function - Siemplify: Add/Update Entity to Blocklist
 Add an artifact to the Siemplify Blacklist
 

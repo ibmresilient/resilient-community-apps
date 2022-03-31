@@ -21,10 +21,7 @@
                 "type": "string"
               },
               "creatorUserId": {
-                "type": [
-                  "null",
-                  "string"
-                ]
+                "type": "string"
               },
               "id": {
                 "type": "integer"
@@ -61,37 +58,6 @@
                   "null",
                   "string"
                 ]
-              },
-              "actionTriggerType": {
-                "type": "integer"
-              },
-              "integration": {
-                "type": "string"
-              },
-              "executingUser": {},
-              "playbookName": {
-                "type": "string"
-              },
-              "playbookIsInDebugMode": {
-                "type": "boolean"
-              },
-              "status": {
-                "type": "integer"
-              },
-              "actionProvider": {
-                "type": "string"
-              },
-              "actionIdentifier": {
-                "type": "string"
-              },
-              "actionResult": {
-                "type": "string"
-              },
-              "alertIdentifiers": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               }
             }
           }
@@ -258,7 +224,58 @@
             }
           }
         },
-        "caseRecommendations": {},
+        "caseRecommendations": {
+          "type": "object",
+          "properties": {
+            "similarCases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "caseRecommendationOutcomeStatus": {
+                    "type": "integer"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "creationTime": {
+                    "type": "string"
+                  },
+                  "scorePercent": {
+                    "type": "integer"
+                  },
+                  "isClosed": {
+                    "type": "boolean"
+                  },
+                  "closedRootCause": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "closedComment": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "relevantAnalysts": {
+              "type": "array"
+            },
+            "relevantTags": {
+              "type": "array"
+            }
+          }
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -296,7 +313,9 @@
         "entities": {
           "type": "array"
         },
-        "description": {},
+        "description": {
+          "type": "string"
+        },
         "canOpenIncident": {
           "type": "boolean"
         },
@@ -395,24 +414,16 @@
         "siemplify_sync_attachments": {
           "type": "boolean"
         },
-        "siemplify_assigned_user": {
-          "type": "string"
-        },
-        "siemplify_environment": {
-          "type": "string"
-        },
-        "siemplify_alert_id": {
-          "type": "string"
-        },
+        "siemplify_assigned_user": {},
+        "siemplify_environment": {},
+        "siemplify_alert_id": {},
         "siemplify_sync_comments": {
           "type": "boolean"
         },
         "siemplify_sync_artifacts": {
           "type": "boolean"
         },
-        "siemplify_case_id": {
-          "type": "integer"
-        }
+        "siemplify_case_id": {}
       }
     },
     "metrics": {

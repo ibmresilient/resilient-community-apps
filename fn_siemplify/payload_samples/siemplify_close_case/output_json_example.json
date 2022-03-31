@@ -7,17 +7,17 @@
   },
   "raw": null,
   "inputs": {
-    "siemplify_root_cause": "<div class=\"rte\"><div>msg for siemplify</div></div>",
-    "siemplify_alert_id": "IBM SOAR Alert 2149_42e7d42f-f307-4f50-8407-98e2eb49f4f3",
+    "siemplify_root_cause": "<div class=\"rte\"><div>not an issue</div></div>",
+    "siemplify_alert_id": "IBM SOAR Alert 3860_7f3e3ad8-4749-4040-a49d-c09beb673a5e",
     "siemplify_reason": "Inconclusive",
-    "siemplify_case_id": 66
+    "siemplify_case_id": 196
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 626,
-    "timestamp": "2022-01-07 14:36:29"
+    "host": "localhost",
+    "execution_time_ms": 791,
+    "timestamp": "2022-03-31 18:47:16"
   }
 }

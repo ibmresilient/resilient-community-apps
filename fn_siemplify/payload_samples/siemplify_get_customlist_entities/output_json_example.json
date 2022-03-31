@@ -90,19 +90,41 @@
       "id": 8,
       "creationTimeUnixTimeInMs": 1641572735756,
       "modificationTimeUnixTimeInMs": 1641572735756
+    },
+    {
+      "entityIdentifier": "abc@example.com",
+      "category": "USERUNIQNAME",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 9,
+      "creationTimeUnixTimeInMs": 1641584158260,
+      "modificationTimeUnixTimeInMs": 1641584158260
+    },
+    {
+      "entityIdentifier": "194.34.44.53",
+      "category": "SOAR",
+      "forDBMigration": false,
+      "environments": [
+        "Default Environment"
+      ],
+      "id": 12,
+      "creationTimeUnixTimeInMs": 1648766753651,
+      "modificationTimeUnixTimeInMs": 1648766753651
     }
   ],
   "raw": null,
   "inputs": {
-    "siemplify_search": null,
-    "siemplify_limit": 100
+    "siemplify_environments": null,
+    "siemplify_limit": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-siemplify",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 574,
-    "timestamp": "2022-01-07 14:35:19"
+    "host": "localhost",
+    "execution_time_ms": 271,
+    "timestamp": "2022-03-31 18:46:36"
   }
 }
