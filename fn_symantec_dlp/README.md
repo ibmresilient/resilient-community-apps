@@ -31,8 +31,9 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-- [Function - Symantec DLP: Get Incident Details](#function---symantec-dlp-get-incident-details)
+- [Function - Symantec DLP: Close DLP Case](#function---symantec-dlp-close_dlp_case)
 - [Function - Symantec DLP: Get DLP Notes](#function---symantec-dlp-get-dlp-notes)
+- [Function - Symantec DLP: Get Incident Details](#function---symantec-dlp-get-incident-details)
 - [Function - Symantec DLP: Send Note to DLP Incident](#function---symantec-dlp-send-note-to-dlp-incident)
 - [Function - Symantec DLP: Update Incident in DLP](#function---symantec-dlp-update-incident-status-in-dlp)
 - [Function - Symantec DLP: Upload Binaries](#function---symantec-dlp-upload-binaries)
@@ -201,7 +202,74 @@ The following table provides the settings you need to configure the app. These s
 
 
 ---
+## Function - Symantec DLP: Close DLP Case
+Close SOAR case when the DLP incident status is set to **Resolved** or **Dismissed**.
+<p>
 
+ ![screenshot: fn-symantec-dlp-close-dlp-case ](./doc/screenshots/fn-symantec-dlp-close-dlp-case.png) 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | the id of the incident |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3661
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-symantec-dlp",
+    "package_version": "2.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 3326,
+    "timestamp": "2022-04-01 14:47:41"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+
+```
+
+</p>
+</details>
+
+---
 ## Function - Symantec DLP: Get Incident Details
 Get the information on the Symantec DLP incident by calling three DLP REST API incident endpoints to obtain **editableIncidentDetails**, **staticIncidentDetails**, and **notes** JSON objects which are combined into one JSON object which is returned by the function.
 
@@ -1141,10 +1209,12 @@ if 'workflow' in globals():
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
+| Symantec DLP: Close DLP Case | incident| `sdlp_close_dlp_case` |
 | Symantec DLP: Get DLP Notes | incident| `sdlp_get_dlp_notes` |
 | Symantec DLP: Resolve Incident in DLP | incident | `sdlp_resolve_incident_in_dlp` |
 | Symantec DLP: Send SOAR Note to DLP | note | `sdlp_send_soar_note_to_dlp` |
-| Symantec DLP: Update DLP Incident Status | incident | `sdlp_update_incident_status` |
+| Symantec DLP: Update DLP Incident | incident | `sdlp_update_incident` |
+| Symantec DLP: Update Severity in DLP | incident | `sdlp_update_incident_status` |
 | Symantec DLP: Upload Binaries | incident | `sdlp_upload_binaries` |
 | Symantec DLP: Upload Binaries as Artifact | incident | `sdlp_upload_binaries` |
 | Symantec DLP: Write DLP Incident Details to Note | incident | `sdlp_write_incident_details_to_note` |
@@ -1168,7 +1238,7 @@ does not include.
 
 <details><summary>incident_creation_template</summary>
 <pre>
-{%- set comma = joiner(",") -%}
+    {%- set comma = joiner(",") -%}
     "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
     "description": "An incident imported using the Symantec DLP Integration",
     {% if staticIncidentDetails.infoMap.creationDate|soar_datetimeformat > staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat %}
