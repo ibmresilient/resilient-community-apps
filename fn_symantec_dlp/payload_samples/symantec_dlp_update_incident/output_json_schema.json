@@ -20,6 +20,9 @@
         },
         "sdlp_incident_status": {
           "type": "string"
+        },
+        "sdlp_incident_severity_id": {
+          "type": "string"
         }
       }
     },
@@ -31,6 +34,9 @@
           "type": "integer"
         },
         "sdlp_incident_status": {
+          "type": "string"
+        },
+        "sdlp_incident_severity_id": {
           "type": "string"
         }
       }

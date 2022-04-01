@@ -15,7 +15,7 @@
     {#  Custom properties for DLP Attributes #}
     "properties": {
         "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
-        "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName }}",
+        "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName|replace('incident.status.', '') }}",
         "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"},
         "sdlp_policy_name": "{{ staticIncidentDetails.infoMap.policyName }}",
         "sdlp_policy_id": {{ staticIncidentDetails.infoMap.policyId }},

@@ -34,7 +34,7 @@
 - [Function - Symantec DLP: Get Incident Details](#function---symantec-dlp-get-incident-details)
 - [Function - Symantec DLP: Get DLP Notes](#function---symantec-dlp-get-dlp-notes)
 - [Function - Symantec DLP: Send Note to DLP Incident](#function---symantec-dlp-send-note-to-dlp-incident)
-- [Function - Symantec DLP: Update Incident Status in DLP](#function---symantec-dlp-update-incident-status-in-dlp)
+- [Function - Symantec DLP: Update Incident in DLP](#function---symantec-dlp-update-incident-status-in-dlp)
 - [Function - Symantec DLP: Upload Binaries](#function---symantec-dlp-upload-binaries)
 - [Script - Convert JSON to rich text v1.1](#script---convert-json-to-rich-text-v11)
 - [Custom Fields](#custom-fields)
@@ -657,7 +657,7 @@ results = {
   },
   "raw": null,
   "inputs": {
-    "sdlp_note_text": "<b>Symantec DLP: Update Incident Status</b><br /> DLP incident 468 status set to: Resolved.",
+    "sdlp_note_text": "<b>Symantec DLP: Update Incident </b><br /> DLP incident 468 status set to: Resolved.",
     "sdlp_incident_id": 468
   },
   "metrics": {
@@ -703,8 +703,8 @@ if results.success:
 </details>
 
 ---
-## Function - Symantec DLP: Update Incident Status in DLP
-Update the incident status of the Symantec DLP incident in DLP.
+## Function - Symantec DLP: Update Incident in DLP
+Update the status or severity of the Symantec DLP incident in DLP.
 
  ![screenshot: fn-symantec-dlp-update-incident-status-in-dlp ](./doc/screenshots/fn-symantec-dlp-update-incident-status-in-dlp.png) 
 

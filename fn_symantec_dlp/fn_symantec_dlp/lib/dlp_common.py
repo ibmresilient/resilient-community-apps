@@ -319,7 +319,7 @@ class SymantecDLPCommon():
                 index = status.get('id')
         return index
 
-    def update_sdlp_status(self, incident_id, incident_status_name):
+    def update_sdlp_incident_editable_details(self, incident_id, incident_status_name, incident_severity):
         """[ Patch the Symantec DLP incident status name and status Id in DLP ]
 
         Args:
@@ -328,16 +328,23 @@ class SymantecDLPCommon():
         Returns:
             [json]: [ list of DLP incident ids that were updated ]
         """
-
-        incident_status_id = self.get_incident_status_index(incident_status_name)
-        if incident_status_id <= 0:
-            raise IntegrationError("Symantec DLP incident status name {0} not found in DLP".format(incident_status_name))
-
+        # Seems like a bug in DLP: DLP returns the value of "incident.status.New" for "New" incident status.
+        # We want the SOAR and DLP UI to look consistant, so substitute the buggy name when sending the JSON to DLP.
         update_json = {
-           "incidentIds":[ incident_id ],
-           "incidentStatusName": incident_status_name,
-           "incidentStatusId": incident_status_id
-        }
+           "incidentIds":[ incident_id ] }
+
+        if incident_status_name:
+            if incident_status_name == "New":
+                sdlp_status = "incident.status.New"
+            else:
+                sdlp_status = incident_status_name
+            incident_status_id = self.get_incident_status_index(sdlp_status)
+            if incident_status_id <= 0:
+                raise IntegrationError("Symantec DLP incident status name {0} not found in DLP".format(incident_status_name))
+            update_json["incidentStatusId"] = incident_status_id
+            
+        if incident_severity:
+            update_json["severity"] = incident_severity
 
         url = u"{0}/incidents".format(self.base_url)
 

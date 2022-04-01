@@ -5,10 +5,10 @@
 
 # Symantec DLP:  Resolve Incident in DLP
 
-## Function - Symantec DLP: Update Incident Status in DLP
+## Function - Symantec DLP: Update Incident in DLP
 
 ### API Name
-`symantec_dlp_update_incident_status`
+`symantec_dlp_update_incident`
 
 ### Output Name
 `None`
