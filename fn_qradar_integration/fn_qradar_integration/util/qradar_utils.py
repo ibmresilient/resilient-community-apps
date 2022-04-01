@@ -14,7 +14,7 @@ from resilient_lib import RequestsCommon
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
 from resilient_lib import IntegrationError
-from urllib.parse import quote as quote_func
+from urllib.parse import quote as quote_func, urljoin
 
 LOG = logging.getLogger(__name__)
 FORWARD_SLASH = b'%2F'
@@ -282,8 +282,7 @@ class ArielSearch(SearchWaitCommand):
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + ARIEL_SEARCHES_DELETE.format(search_id)
-
+        url = urljoin(auth_info.api_url, ARIEL_SEARCHES_DELETE.format(search_id))
         headers = auth_info.headers.copy()
 
         response = None

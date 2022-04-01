@@ -13,7 +13,11 @@ from fn_qradar_integration.util.qradar_utils import ArielSearch
 @patch("fn_qradar_integration.util.qradar_utils.ArielSearch.get_search_result")
 @patch("fn_qradar_integration.util.qradar_utils.ArielSearch.check_status")
 @patch("fn_qradar_integration.util.qradar_utils.ArielSearch.get_search_id")
-def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mocked_get_search_result):
+@patch("fn_qradar_integration.util.qradar_utils.ArielSearch.delete_search")
+def test_search_and_wait_command(mocked_get_search_id,
+                                 mocked_check_status,
+                                 mocked_get_search_result,
+                                 mocked_make_call):
     # Test data
     timeout = 2
     period = 1
@@ -33,6 +37,7 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
     mocked_get_search_id.return_value = search_id
     mocked_check_status.return_value = SearchWaitCommand.SearchWaitCommand.SEARCH_STATUS_COMPLETED
     mocked_get_search_result.return_value = normal_return
+    mocked_make_call.return_value = True
 
     try:
         ret = search_cmd.perform_search(query_str)
