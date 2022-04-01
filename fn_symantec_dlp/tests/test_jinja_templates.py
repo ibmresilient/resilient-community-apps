@@ -40,7 +40,7 @@ RESULT1 = {
     'start_date': 1644346682000,
     'incident_type_ids': [16],
     'properties': { 'sdlp_incident_id': 444,
-                    'sdlp_incident_status': 'incident.status.New',
+                    'sdlp_incident_status': 'New',
                     'sdlp_policy_group_id': 5,
                     'sdlp_policy_id': 16,
                     'sdlp_policy_group_name': 'Customer Data Protection',
