@@ -85,7 +85,7 @@ inputs.jira_fields = dict_to_json_str({
 from java.util import Date
 time_now = Date().time
 
-if results.success:
+if results.get("success"):
   row.date = time_now
   row.status = "Closed"
 

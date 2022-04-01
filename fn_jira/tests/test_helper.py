@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 import mock
+import pytest
 
 from fn_jira.util.helper import (build_url_to_resilient, extract_images,
-                                 format_dict, prepend_text,
+                                 format_dict, prepend_text, read_img,
                                  validate_app_configs,
                                  validate_task_id_for_jira_issue_id)
+from resilient.co3 import SimpleClient
 
 
 def test_validate_app_configs():
@@ -52,6 +54,43 @@ def test_extract_images():
 
     assert extract_images(mock_html)[0] == expected_imgs
     assert extract_images(mock_html)[1] == expected_formatted_html
+
+def test_read_img_external():
+    mock_img_url = "https://example.com/some_img.jpg"
+    mock_response = namedtuple("Response", "content")
+    mock_ret_val = mock_response("fake_img_data")
+
+    with mock.patch("fn_jira.util.helper.requests.get") as mock_req_get:
+        mock_req_get.return_value = mock_ret_val
+
+        img_content = read_img(None, mock_img_url)
+
+        assert img_content == mock_ret_val.content
+
+def test_read_img_from_soar_upload():
+    mock_img_url = "/rest/images/some_img"
+    mock_response = namedtuple("Response", "content")
+    mock_ret_val = mock_response("fake_img_data")
+
+    with mock.patch("resilient.co3.SimpleClient.get") as mock_req_get:
+        mock_req_get.return_value = mock_ret_val
+
+        img_content = read_img(SimpleClient(), mock_img_url)
+
+        assert img_content == mock_ret_val.content
+
+def test_read_img_exception():
+    mock_img_url = "/rest/images/inaccessible"
+    mock_response = namedtuple("Response", "content")
+    mock_ret_val = mock_response("fake_img_data")
+
+    with mock.patch("resilient.co3.SimpleClient.get") as mock_req_get:
+        mock_req_get.side_effect = Exception("url invalid")
+
+        with pytest.raises(Exception) as err:
+            read_img(SimpleClient(), mock_img_url)
+
+            assert "url invalid" in str(err.value)
 
 def test_validate_task_id_for_jira_issue_id():
     mock_fn_inputs = {"jira_issue_id": "INT-9"}

@@ -169,12 +169,13 @@ def extract_images(html):
     return tuple(zip(srcs, alts)), html
 
 
-def read_img(img_url):
+def read_img(res_client, img_url):
     """Reads a url image to a filestream"""
-    try:
-        return requests.get(img_url).content
-    except Exception as e:
-        return None
+
+    if img_url.startswith("/rest"):
+        return res_client.get(img_url.replace("/rest", ""), is_uri_absolute=True, get_response_object=True).content
+    else:
+        return requests.get(img_url, headers={"User-agent": "SOAR Apphost"}).content
 
 
 def format_dict(dict_to_format):

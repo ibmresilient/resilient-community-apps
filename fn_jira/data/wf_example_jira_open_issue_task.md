@@ -124,7 +124,7 @@ jira_priority = priority_map.get(incident.severity_code, {"name": "Low"})
 
 # Define JIRA fields here
 inputs.jira_fields = dict_to_json_str({
-  "project": "INT",
+  "project": rule.properties.jira_project_id,
   "issuetype": rule.properties.jira_issue_type,
   "priority": jira_priority,
   "summary": u"IBM SOAR: {0}".format(unicode(task.name)),
@@ -138,7 +138,7 @@ inputs.jira_fields = dict_to_json_str({
 from java.util import Date
 time_now = Date().time
 
-if results.success:
+if results.get("success"):
   results_content = results.get("content", {})
 
   url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))

@@ -34,7 +34,8 @@ Example rules and workflows can used used or modified to meet your business proc
 """,
     install_requires=[
         'resilient_circuits>=44.0.0',
-        'jira~=2.0',
+        'jira>=3.1; python_version>="3.0"',
+        'jira>=2.0; python_version<"3.0"',
         'pyjwt~=2.3; python_version>="3.0"',
         'pyjwt~=1.7; python_version<"3.0"'
     ],
