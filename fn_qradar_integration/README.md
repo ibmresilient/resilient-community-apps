@@ -49,17 +49,18 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
-| 2.2.0 | March. 2022 | Allow multiple QRadar instances |
-| 2.1.1 | July. 2021 | Fixed selftest failing when using cafile |
+| 2.2.1 | March 2022 | Cancel QRadar queries which have timed out |
+| 2.2.0 | March 2022 | Allow multiple QRadar instances |
+| 2.1.1 | July 2021 | Fixed selftest failing when using cafile |
 | 2.1.0 | Feb. 2021 | Additional functions for reference table mapping. |
 | 2.0.9 | Feb. 2021 | Bug fixes associated with require input field validation. |
-| 2.0.8 | Nov. 2020 | Fixed a bug failing search function when used with token. | 
+| 2.0.8 | Nov. 2020 | Fixed a bug failing search function when used with token. |
 | 2.0.7 | July 2020 | Correct typos and describe optional Search activity field Update SOAR version. |
 | 2.0.6 | May 2020 | Add option to return all results from Search. |
 | 2.0.4 | April 2020 | Additional configuration notes. |
@@ -79,8 +80,8 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This guide describes the QRadar Function integrations.. 
-The QRadar app with the SOAR platform package provides the following: 
+This guide describes the QRadar Function integrations..
+The QRadar app with the SOAR platform package provides the following:
 
 * Search function to perform a QRadar Ariel query
 * Search function to query an item in a QRadar reference set
@@ -91,13 +92,13 @@ The QRadar app with the SOAR platform package provides the following:
 * View all items associated with a given reference table
 * Add/Update/Delete items to a QRadar reference table
 
-With the above functions, this package includes example workflows that demonstrate how to call the functions, rules that start the example workflows, and custom data tables updated by the example workflows. 
+With the above functions, this package includes example workflows that demonstrate how to call the functions, rules that start the example workflows, and custom data tables updated by the example workflows.
 
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -112,16 +113,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `40.0.6554`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=39.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read, edit |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -131,7 +132,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -573,7 +574,7 @@ Entry: {}
 Reference table: {}
 QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_item_value,
                               results.inputs.qradar_reference_table_name,
                               results.inputs["qradar_label"])
 if results.success:
@@ -673,7 +674,7 @@ Entry: {}
 Reference table: {}
 QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_item_value,
                               results.inputs.qradar_reference_table_name,
                               row["qradar_server"])
 if results.success:
@@ -937,7 +938,7 @@ if results.success:
       table_row['table'] = results.inputs.qradar_reference_table_name
       table_row['outer_key'] = outer_key
       table_row['inner_key'] = inner_key
-      
+
       table_row['value'] = inner_item['value']
       table_row['status'] = 'active'
 else:
@@ -1039,7 +1040,7 @@ Entry: {}
 Reference table: {}
 QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_item_value,
                               results.inputs.qradar_reference_table_name,
                               row["qradar_server"])
 if results.success:
@@ -1107,7 +1108,7 @@ results = {
 inputs.qradar_search_param2 = incident.properties.qradar_id
 
 inputs.qradar_label = rule.properties.qradar_servers
-  
+
 if rule.properties.qradar_query_all_results:
   inputs.qradar_query_all_results = rule.properties.qradar_query_all_results
 ```
@@ -1175,7 +1176,7 @@ Delete an item from a given QRadar reference table
 ```python
 results = {
     # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
     # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
@@ -1205,7 +1206,7 @@ Inner key: {}
 Entry: {}
 Reference table: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
                               results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_item_value,
                               results.inputs.qradar_reference_table_name)
 if results.success:
     incident.addNote(u"Successful delete\n{}".format(note))
