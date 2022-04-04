@@ -143,7 +143,7 @@ Python 3.6+ is supported.
 Additional package dependencies may exist for each of these packages:
 * cachetools
 * resilient-circuits>=43.0.0
-* resilient-lib
+* retry2
 
 ### Endpoint Developed With
 
@@ -192,7 +192,7 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 | **reaqta_url** | Yes | `https://xxx/` | *Base URL to ReaQta instance ending in slash '/'*  |
 | **api_key** | Yes | `7411a4da-c770-...` | *API Key ID from your configured ReaQta API application* |
 | **api_secret** | Yes | `P9zPLkcb-...` | *API Key secret from your configured ReaQta API application*  |
-| **api_version** | Yes | `rqt_api/1/` | *URL path information ending in slash '/'*  |
+| **api_version** | Yes | `rqt_api/1/` | *API version portion of url to append to reaqta_url, ending in slash '/'*  |
 | **cafile** | Yes | `/path/to/cafile.crt or false` | *Path to your ReaQta client certificate, if needed or false for no certificate verification*  |
 | **polling_filters** | No | "severity": ["medium", "high"], "tag": ["hive"], "groups": ["groupA", "groupB"], "impact": 70 | *Set filters for the poller. Groups are either Client or Group names. Impact compares alerts greater or equal to this value* |
 
