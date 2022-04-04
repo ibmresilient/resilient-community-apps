@@ -17,7 +17,7 @@
       ],
       "enabled": true,
       "export_key": "Example: (Artifact) Attachment to Base64",
-      "id": 108,
+      "id": 163,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: (Artifact) Attachment to Base64",
@@ -35,8 +35,27 @@
       "automations": [],
       "conditions": [],
       "enabled": true,
+      "export_key": "Example: Artifact Hash",
+      "id": 179,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: Artifact Hash",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "ad3ee1a1-65cf-4142-8e23-64d882e5c198",
+      "view_items": [],
+      "workflows": [
+        "example_artifact_hash"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
       "export_key": "Example: Attachment Hash",
-      "id": 109,
+      "id": 164,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Attachment Hash",
@@ -55,7 +74,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Attachment to Base64",
-      "id": 110,
+      "id": 165,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Attachment to Base64",
@@ -74,7 +93,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Call REST API",
-      "id": 111,
+      "id": 166,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Call REST API",
@@ -109,7 +128,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Domain Distance",
-      "id": 112,
+      "id": 167,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Domain Distance",
@@ -140,7 +159,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Email Parsing (Artifact)",
-      "id": 113,
+      "id": 168,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Email Parsing (Artifact)",
@@ -159,7 +178,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Email Parsing (Attachment)",
-      "id": 114,
+      "id": 169,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Email Parsing (Attachment)",
@@ -186,7 +205,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Expand URL",
-      "id": 115,
+      "id": 170,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Expand URL",
@@ -217,7 +236,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Extract SSL Certificate",
-      "id": 116,
+      "id": 171,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extract SSL Certificate",
@@ -236,7 +255,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Get Incident Contact Info",
-      "id": 117,
+      "id": 172,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Get Incident Contact Info",
@@ -255,7 +274,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Get Task Contact Info",
-      "id": 118,
+      "id": 173,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Get Task Contact Info",
@@ -274,7 +293,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: JSON2HTML",
-      "id": 119,
+      "id": 151,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: JSON2HTML",
@@ -301,7 +320,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Parse SSL Certificate",
-      "id": 120,
+      "id": 174,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Parse SSL Certificate",
@@ -320,7 +339,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: PDFiD",
-      "id": 121,
+      "id": 175,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: PDFiD",
@@ -339,7 +358,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Resilient Search",
-      "id": 122,
+      "id": 176,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Resilient Search",
@@ -370,7 +389,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Shell Command",
-      "id": 123,
+      "id": 155,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Shell Command",
@@ -389,7 +408,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: String to Attachment",
-      "id": 124,
+      "id": 156,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: String to Attachment",
@@ -408,7 +427,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Timer Epoch",
-      "id": 125,
+      "id": 157,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Timer Epoch",
@@ -436,7 +455,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Timers in Parallel",
-      "id": 126,
+      "id": 158,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Timers in Parallel",
@@ -472,7 +491,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Use Excel Data",
-      "id": 127,
+      "id": 159,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Use Excel Data",
@@ -521,7 +540,7 @@
       ],
       "enabled": true,
       "export_key": "Example: XML Transformation",
-      "id": 128,
+      "id": 160,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: XML Transformation",
@@ -569,7 +588,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Zip Extract",
-      "id": 129,
+      "id": 177,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: Zip Extract",
@@ -634,7 +653,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Zip List",
-      "id": 130,
+      "id": 178,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: Zip List",
@@ -651,7 +670,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1648221290509,
+  "export_date": 1649084402842,
   "export_format_version": 2,
   "fields": [
     {
@@ -664,7 +683,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_parse_email_attachments",
       "hide_notification": false,
-      "id": 623,
+      "id": 718,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -693,7 +712,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 353,
+      "id": 719,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -723,7 +742,7 @@
       "deprecated": false,
       "export_key": "__function/rest_headers",
       "hide_notification": false,
-      "id": 624,
+      "id": 720,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -752,7 +771,7 @@
       "deprecated": false,
       "export_key": "__function/shell_command",
       "hide_notification": false,
-      "id": 625,
+      "id": 721,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -782,7 +801,7 @@
       "deprecated": false,
       "export_key": "__function/domain_name",
       "hide_notification": false,
-      "id": 626,
+      "id": 722,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -811,7 +830,7 @@
       "deprecated": false,
       "export_key": "__function/https_url",
       "hide_notification": false,
-      "id": 627,
+      "id": 723,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -841,7 +860,7 @@
       "deprecated": false,
       "export_key": "__function/zipfile_password",
       "hide_notification": false,
-      "id": 628,
+      "id": 724,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -870,7 +889,7 @@
       "deprecated": false,
       "export_key": "__function/rest_verify",
       "hide_notification": false,
-      "id": 629,
+      "id": 725,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -900,7 +919,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_url",
       "hide_notification": false,
-      "id": 630,
+      "id": 726,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -929,7 +948,7 @@
       "deprecated": false,
       "export_key": "__function/content_type",
       "hide_notification": false,
-      "id": 631,
+      "id": 727,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -958,7 +977,7 @@
       "deprecated": false,
       "export_key": "__function/excel_ranges",
       "hide_notification": false,
-      "id": 632,
+      "id": 728,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -987,7 +1006,7 @@
       "deprecated": false,
       "export_key": "__function/rest_url",
       "hide_notification": false,
-      "id": 633,
+      "id": 729,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1016,7 +1035,7 @@
       "deprecated": false,
       "export_key": "__function/xml_stylesheet",
       "hide_notification": false,
-      "id": 634,
+      "id": 730,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1046,7 +1065,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_certificate",
       "hide_notification": false,
-      "id": 635,
+      "id": 731,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1075,7 +1094,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_search_query",
       "hide_notification": false,
-      "id": 636,
+      "id": 732,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1104,7 +1123,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_id",
       "hide_notification": false,
-      "id": 367,
+      "id": 733,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1133,7 +1152,7 @@
       "deprecated": false,
       "export_key": "__function/resilient_search_template",
       "hide_notification": false,
-      "id": 637,
+      "id": 734,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1147,7 +1166,7 @@
       "tags": [],
       "templates": [
         {
-          "id": 22,
+          "id": 31,
           "name": "Artifacts",
           "template": {
             "content": "{\n  \"types\": [\"artifact\"],\n  \"filters\": {\n    \"incident\": [{\n        \"conditions\": [{\"field_name\": \"plan_status\", \"method\": \"in\", \"value\": [\"A\"]}]\n      }]\n  }\n}",
@@ -1156,7 +1175,7 @@
           "uuid": "1e25a6f4-0fe8-4f73-9eee-9210c07cff50"
         },
         {
-          "id": 23,
+          "id": 32,
           "name": "Attachments",
           "template": {
             "content": "{\n  \"types\": [\"attachment\"],\n  \"filters\": {\n    \"incident\": [{\n        \"conditions\": [{\"field_name\": \"plan_status\", \"method\": \"in\", \"value\": [\"A\"]}]\n      }]\n  }\n}",
@@ -1181,7 +1200,7 @@
       "deprecated": false,
       "export_key": "__function/base64content",
       "hide_notification": false,
-      "id": 638,
+      "id": 735,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1210,7 +1229,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param2",
       "hide_notification": false,
-      "id": 639,
+      "id": 736,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1239,7 +1258,7 @@
       "deprecated": false,
       "export_key": "__function/shell_remote",
       "hide_notification": false,
-      "id": 640,
+      "id": 737,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1269,7 +1288,7 @@
       "deprecated": false,
       "export_key": "__function/xml_source",
       "hide_notification": false,
-      "id": 641,
+      "id": 738,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1298,7 +1317,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 373,
+      "id": 739,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1327,7 +1346,7 @@
       "deprecated": false,
       "export_key": "__function/file_path",
       "hide_notification": false,
-      "id": 642,
+      "id": 740,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1356,7 +1375,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_name",
       "hide_notification": false,
-      "id": 643,
+      "id": 741,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1386,7 +1405,7 @@
       "deprecated": false,
       "export_key": "__function/file_name",
       "hide_notification": false,
-      "id": 644,
+      "id": 742,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1415,7 +1434,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 645,
+      "id": 743,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1444,7 +1463,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_file_type",
       "hide_notification": false,
-      "id": 646,
+      "id": 744,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1469,7 +1488,7 @@
           "label": "Email Attachment",
           "properties": null,
           "uuid": "930b255d-468c-4f45-95db-12b7e690ca7d",
-          "value": 142
+          "value": 227
         },
         {
           "default": false,
@@ -1478,7 +1497,7 @@
           "label": "Malware Sample",
           "properties": null,
           "uuid": "ae1cf279-942b-4609-b2e1-806162e1b151",
-          "value": 143
+          "value": 228
         },
         {
           "default": false,
@@ -1487,7 +1506,7 @@
           "label": "Log File",
           "properties": null,
           "uuid": "c326aaeb-f779-4938-8133-7526f188c006",
-          "value": 144
+          "value": 229
         },
         {
           "default": false,
@@ -1496,7 +1515,7 @@
           "label": "X509 Certificate File",
           "properties": null,
           "uuid": "e029ee34-9dc5-471b-90a8-40de17776ea7",
-          "value": 145
+          "value": 230
         },
         {
           "default": false,
@@ -1505,7 +1524,7 @@
           "label": "RFC 822 Email Message File",
           "properties": null,
           "uuid": "6720a846-a4b1-46ec-b0c8-d8900f0a92a1",
-          "value": 146
+          "value": 231
         },
         {
           "default": false,
@@ -1514,7 +1533,7 @@
           "label": "Other File",
           "properties": null,
           "uuid": "ff9f511e-8b6f-441c-8c0c-dd092893575f",
-          "value": 147
+          "value": 232
         }
       ]
     },
@@ -1528,7 +1547,7 @@
       "deprecated": false,
       "export_key": "__function/json2html_data",
       "hide_notification": false,
-      "id": 647,
+      "id": 745,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1558,7 +1577,7 @@
       "deprecated": false,
       "export_key": "__function/domain_list",
       "hide_notification": false,
-      "id": 648,
+      "id": 746,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1587,7 +1606,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param1",
       "hide_notification": false,
-      "id": 649,
+      "id": 747,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1616,7 +1635,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_time",
       "hide_notification": false,
-      "id": 650,
+      "id": 748,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1645,7 +1664,7 @@
       "deprecated": false,
       "export_key": "__function/utilities_epoch",
       "hide_notification": false,
-      "id": 651,
+      "id": 749,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1674,7 +1693,7 @@
       "deprecated": false,
       "export_key": "__function/description",
       "hide_notification": false,
-      "id": 652,
+      "id": 750,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1703,7 +1722,7 @@
       "deprecated": false,
       "export_key": "__function/rest_timeout",
       "hide_notification": false,
-      "id": 392,
+      "id": 751,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1732,7 +1751,7 @@
       "deprecated": false,
       "export_key": "__function/rest_method",
       "hide_notification": false,
-      "id": 653,
+      "id": 752,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1757,7 +1776,7 @@
           "label": "GET",
           "properties": null,
           "uuid": "660ae4ba-3a9d-45e5-9b08-10c5722ba780",
-          "value": 148
+          "value": 233
         },
         {
           "default": false,
@@ -1766,7 +1785,7 @@
           "label": "HEAD",
           "properties": null,
           "uuid": "5e2ff102-1222-47b4-8a71-83a90b4c8e81",
-          "value": 149
+          "value": 234
         },
         {
           "default": false,
@@ -1775,7 +1794,7 @@
           "label": "POST",
           "properties": null,
           "uuid": "1ddb515c-5ab5-4dc2-8ca0-c37b8a72eedd",
-          "value": 150
+          "value": 235
         },
         {
           "default": false,
@@ -1784,7 +1803,7 @@
           "label": "PUT",
           "properties": null,
           "uuid": "91968afb-e4d5-4a2e-8e37-ac6a26e1569f",
-          "value": 151
+          "value": 236
         },
         {
           "default": false,
@@ -1793,7 +1812,7 @@
           "label": "DELETE",
           "properties": null,
           "uuid": "8af9df69-0c74-4708-bc4f-ea9bcc8fa01c",
-          "value": 152
+          "value": 237
         },
         {
           "default": false,
@@ -1802,7 +1821,7 @@
           "label": "OPTIONS",
           "properties": null,
           "uuid": "67db4b2f-6da8-4f8a-a5df-e30817be8bf3",
-          "value": 153
+          "value": 238
         },
         {
           "default": false,
@@ -1811,7 +1830,7 @@
           "label": "PATCH",
           "properties": null,
           "uuid": "94486df3-4ab1-44df-8ad9-b160a095652d",
-          "value": 154
+          "value": 239
         }
       ]
     },
@@ -1825,7 +1844,7 @@
       "deprecated": false,
       "export_key": "__function/string_to_convert_to_attachment",
       "hide_notification": false,
-      "id": 654,
+      "id": 753,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1855,7 +1874,7 @@
       "deprecated": false,
       "export_key": "__function/shell_param3",
       "hide_notification": false,
-      "id": 655,
+      "id": 754,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1884,7 +1903,7 @@
       "deprecated": false,
       "export_key": "__function/json2html_keys",
       "hide_notification": false,
-      "id": 656,
+      "id": 755,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1913,7 +1932,7 @@
       "deprecated": false,
       "export_key": "__function/rest_cookies",
       "hide_notification": false,
-      "id": 657,
+      "id": 756,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1927,7 +1946,7 @@
       "tags": [],
       "templates": [
         {
-          "id": 24,
+          "id": 33,
           "name": "rest_cookies_example",
           "template": {
             "content": "cookie1: one\ncookie2: two",
@@ -1952,7 +1971,7 @@
       "deprecated": false,
       "export_key": "__function/rest_body",
       "hide_notification": false,
-      "id": 658,
+      "id": 757,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1981,7 +2000,7 @@
       "deprecated": false,
       "export_key": "__function/excel_defined_names",
       "hide_notification": false,
-      "id": 659,
+      "id": 758,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2191,7 +2210,7 @@
   ],
   "functions": [
     {
-      "created_date": 1648220931880,
+      "created_date": 1648557509542,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2205,18 +2224,18 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities Artifact Hash",
       "export_key": "utilities_artifact_hash",
-      "id": 155,
+      "id": 179,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220992170,
+      "last_modified_time": 1648557509586,
       "name": "utilities_artifact_hash",
       "tags": [],
       "uuid": "116d3842-3b2c-4a34-a14a-43cf0b9fc787",
-      "version": 3,
+      "version": 1,
       "view_items": [
         {
           "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
@@ -2244,12 +2263,12 @@
           "programmatic_name": "example_artifact_hash",
           "tags": [],
           "uuid": null,
-          "workflow_id": 165
+          "workflow_id": 230
         }
       ]
     },
     {
-      "created_date": 1648220846880,
+      "created_date": 1648557509610,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2263,14 +2282,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Hash",
       "export_key": "utilities_attachment_hash",
-      "id": 134,
+      "id": 180,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220846917,
+      "last_modified_time": 1648557509648,
       "name": "utilities_attachment_hash",
       "tags": [],
       "uuid": "9e0f46f4-ae8c-4aa6-a296-3a0662a53386",
@@ -2310,12 +2329,12 @@
           "programmatic_name": "example_attachment_hash",
           "tags": [],
           "uuid": null,
-          "workflow_id": 147
+          "workflow_id": 221
         }
       ]
     },
     {
-      "created_date": 1648220846940,
+      "created_date": 1648557509671,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2329,14 +2348,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment to Base64",
       "export_key": "utilities_attachment_to_base64",
-      "id": 135,
+      "id": 181,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220846979,
+      "last_modified_time": 1648557509715,
       "name": "utilities_attachment_to_base64",
       "tags": [],
       "uuid": "3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a",
@@ -2384,7 +2403,7 @@
           "programmatic_name": "example_artifact_attachment_to_base64",
           "tags": [],
           "uuid": null,
-          "workflow_id": 159
+          "workflow_id": 223
         },
         {
           "actions": [],
@@ -2394,7 +2413,7 @@
           "programmatic_name": "example_attachment_to_base64",
           "tags": [],
           "uuid": null,
-          "workflow_id": 161
+          "workflow_id": 228
         },
         {
           "actions": [],
@@ -2404,12 +2423,12 @@
           "programmatic_name": "example_pdfid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 164
+          "workflow_id": 226
         }
       ]
     },
     {
-      "created_date": 1648220847002,
+      "created_date": 1648557509741,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2423,14 +2442,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Zip Extract",
       "export_key": "utilities_attachment_zip_extract",
-      "id": 136,
+      "id": 182,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847043,
+      "last_modified_time": 1648557509784,
       "name": "utilities_attachment_zip_extract",
       "tags": [],
       "uuid": "4d9fb1df-1eab-494b-8375-c4feb0525429",
@@ -2486,12 +2505,12 @@
           "programmatic_name": "example_zip_to_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 143
+          "workflow_id": 222
         }
       ]
     },
     {
-      "created_date": 1648220847066,
+      "created_date": 1648557509814,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2505,14 +2524,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Attachment Zip List",
       "export_key": "utilities_attachment_zip_list",
-      "id": 137,
+      "id": 183,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847103,
+      "last_modified_time": 1648557509851,
       "name": "utilities_attachment_zip_list",
       "tags": [],
       "uuid": "c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2",
@@ -2552,12 +2571,12 @@
           "programmatic_name": "example_zip_list",
           "tags": [],
           "uuid": null,
-          "workflow_id": 151
+          "workflow_id": 227
         }
       ]
     },
     {
-      "created_date": 1648220847127,
+      "created_date": 1648557509875,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2571,14 +2590,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Base64 to Artifact",
       "export_key": "utilities_base64_to_artifact",
-      "id": 138,
+      "id": 184,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847167,
+      "last_modified_time": 1648557509913,
       "name": "utilities_base64_to_artifact",
       "tags": [],
       "uuid": "e82fa06a-584c-4f8d-9429-448ddc3d8bc4",
@@ -2636,7 +2655,7 @@
       "workflows": []
     },
     {
-      "created_date": 1648220847190,
+      "created_date": 1648557509937,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2650,14 +2669,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Base64 to Attachment",
       "export_key": "utilities_base64_to_attachment",
-      "id": 139,
+      "id": 185,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847244,
+      "last_modified_time": 1648557509975,
       "name": "utilities_base64_to_attachment",
       "tags": [],
       "uuid": "11349159-153e-49b7-9a9b-e22676c03687",
@@ -2713,12 +2732,12 @@
           "programmatic_name": "example_zip_to_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 143
+          "workflow_id": 222
         }
       ]
     },
     {
-      "created_date": 1648220847271,
+      "created_date": 1648557509998,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2732,18 +2751,18 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Call REST API",
       "export_key": "utilities_call_rest_api",
-      "id": 140,
+      "id": 186,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847310,
+      "last_modified_time": 1648557510042,
       "name": "utilities_call_rest_api",
       "tags": [],
       "uuid": "47ca08b2-bc06-4ad0-a5ed-d8df6d33045b",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "4c1c5d09-87f0-4fb5-a236-00690b66db92",
@@ -2811,12 +2830,12 @@
           "programmatic_name": "example_call_rest_api",
           "tags": [],
           "uuid": null,
-          "workflow_id": 150
+          "workflow_id": 229
         }
       ]
     },
     {
-      "created_date": 1648220847335,
+      "created_date": 1648557510109,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2830,14 +2849,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Domain Distance",
       "export_key": "utilities_domain_distance",
-      "id": 141,
+      "id": 187,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847376,
+      "last_modified_time": 1648557510151,
       "name": "utilities_domain_distance",
       "tags": [],
       "uuid": "6fd01564-96de-4482-bceb-cf396df6c758",
@@ -2869,12 +2888,12 @@
           "programmatic_name": "example_domain_distance",
           "tags": [],
           "uuid": null,
-          "workflow_id": 160
+          "workflow_id": 211
         }
       ]
     },
     {
-      "created_date": 1648220847408,
+      "created_date": 1648557510174,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2888,14 +2907,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Email Parse",
       "export_key": "utilities_email_parse",
-      "id": 142,
+      "id": 188,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847455,
+      "last_modified_time": 1648557510218,
       "name": "utilities_email_parse",
       "tags": [],
       "uuid": "d83f571e-8904-4123-9c2c-3f404b00cc5e",
@@ -2959,7 +2978,7 @@
           "programmatic_name": "example_email_parsing_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 142
+          "workflow_id": 203
         },
         {
           "actions": [],
@@ -2969,12 +2988,12 @@
           "programmatic_name": "example_email_parsing_attachment",
           "tags": [],
           "uuid": null,
-          "workflow_id": 156
+          "workflow_id": 207
         }
       ]
     },
     {
-      "created_date": 1648220847481,
+      "created_date": 1648557510241,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -2988,14 +3007,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Excel Query",
       "export_key": "utilities_excel_query",
-      "id": 143,
+      "id": 189,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847520,
+      "last_modified_time": 1648557510282,
       "name": "utilities_excel_query",
       "tags": [],
       "uuid": "118bd2c6-f367-4342-93b8-50257121ccf2",
@@ -3051,12 +3070,12 @@
           "programmatic_name": "example_create_artifacts_from_excel_data",
           "tags": [],
           "uuid": null,
-          "workflow_id": 158
+          "workflow_id": 210
         }
       ]
     },
     {
-      "created_date": 1648220847548,
+      "created_date": 1648557510306,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3070,14 +3089,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Expand URL",
       "export_key": "utilities_expand_url",
-      "id": 144,
+      "id": 190,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847588,
+      "last_modified_time": 1648557510346,
       "name": "utilities_expand_url",
       "tags": [],
       "uuid": "173d3d51-3263-4f26-b927-ecd1e2bf6344",
@@ -3101,12 +3120,12 @@
           "programmatic_name": "utilities_expand_url",
           "tags": [],
           "uuid": null,
-          "workflow_id": 162
+          "workflow_id": 225
         }
       ]
     },
     {
-      "created_date": 1648220847612,
+      "created_date": 1648557510372,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3120,14 +3139,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Extract SSL Cert From Url",
       "export_key": "utilities_extract_ssl_cert_from_url",
-      "id": 145,
+      "id": 191,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847650,
+      "last_modified_time": 1648557510412,
       "name": "utilities_extract_ssl_cert_from_url",
       "tags": [],
       "uuid": "69123885-b3b9-4df9-a241-aaa29ba9d7d6",
@@ -3151,12 +3170,12 @@
           "programmatic_name": "example_extract_ssl_cert_from_url",
           "tags": [],
           "uuid": null,
-          "workflow_id": 153
+          "workflow_id": 212
         }
       ]
     },
     {
-      "created_date": 1648220847676,
+      "created_date": 1648557510435,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3170,14 +3189,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Get Contact Info",
       "export_key": "utilities_get_contact_info",
-      "id": 146,
+      "id": 192,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847715,
+      "last_modified_time": 1648557510473,
       "name": "utilities_get_contact_info",
       "tags": [],
       "uuid": "011e399a-4508-4684-986a-e49a8be0b20b",
@@ -3209,7 +3228,7 @@
           "programmatic_name": "example_get_incident_contact_info",
           "tags": [],
           "uuid": null,
-          "workflow_id": 163
+          "workflow_id": 224
         },
         {
           "actions": [],
@@ -3219,12 +3238,12 @@
           "programmatic_name": "example_get_task_contact_info",
           "tags": [],
           "uuid": null,
-          "workflow_id": 152
+          "workflow_id": 199
         }
       ]
     },
     {
-      "created_date": 1648220847742,
+      "created_date": 1648557510499,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3238,14 +3257,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: JSON2HTML",
       "export_key": "utilities_json2html",
-      "id": 147,
+      "id": 193,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847784,
+      "last_modified_time": 1648557510543,
       "name": "utilities_json2html",
       "tags": [],
       "uuid": "7460c6a9-8c2a-42fb-a871-bef9b37c9e9a",
@@ -3277,12 +3296,12 @@
           "programmatic_name": "example_json2html",
           "tags": [],
           "uuid": null,
-          "workflow_id": 157
+          "workflow_id": 215
         }
       ]
     },
     {
-      "created_date": 1648220847810,
+      "created_date": 1648557510569,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3296,14 +3315,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Parse SSL Certificate",
       "export_key": "utilities_parse_ssl_certificate",
-      "id": 148,
+      "id": 194,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847851,
+      "last_modified_time": 1648557510611,
       "name": "utilities_parse_ssl_certificate",
       "tags": [],
       "uuid": "029f623a-ae74-406e-91a5-366a7005d1b0",
@@ -3343,12 +3362,12 @@
           "programmatic_name": "example_parse_ssl_certificate",
           "tags": [],
           "uuid": null,
-          "workflow_id": 144
+          "workflow_id": 201
         }
       ]
     },
     {
-      "created_date": 1648220847876,
+      "created_date": 1648557510639,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3362,18 +3381,18 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: PDFiD",
       "export_key": "utilities_pdfid",
-      "id": 149,
+      "id": 195,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847914,
+      "last_modified_time": 1648557510678,
       "name": "utilities_pdfid",
       "tags": [],
       "uuid": "3f9da4a2-cdac-4aa6-891c-1217565e734c",
-      "version": 3,
+      "version": 1,
       "view_items": [
         {
           "content": "eabbb71e-334b-4765-b143-3dc3427ba273",
@@ -3393,12 +3412,12 @@
           "programmatic_name": "example_pdfid",
           "tags": [],
           "uuid": null,
-          "workflow_id": 164
+          "workflow_id": 226
         }
       ]
     },
     {
-      "created_date": 1648220847938,
+      "created_date": 1648557510701,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3412,14 +3431,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Resilient Search",
       "export_key": "utilities_resilient_search",
-      "id": 150,
+      "id": 196,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220847977,
+      "last_modified_time": 1648557510738,
       "name": "utilities_resilient_search",
       "tags": [],
       "uuid": "213720b5-fc4b-4134-8d40-09c157608600",
@@ -3451,12 +3470,12 @@
           "programmatic_name": "example_resilient_search",
           "tags": [],
           "uuid": null,
-          "workflow_id": 148
+          "workflow_id": 219
         }
       ]
     },
     {
-      "created_date": 1648220848000,
+      "created_date": 1648557510761,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3470,14 +3489,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Shell Command",
       "export_key": "utilities_shell_command",
-      "id": 151,
+      "id": 197,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220848041,
+      "last_modified_time": 1648557510801,
       "name": "utilities_shell_command",
       "tags": [],
       "uuid": "0ecc7cb7-f448-4e9d-a38e-100ddbe7fd18",
@@ -3533,12 +3552,12 @@
           "programmatic_name": "example_shell_command",
           "tags": [],
           "uuid": null,
-          "workflow_id": 146
+          "workflow_id": 214
         }
       ]
     },
     {
-      "created_date": 1648220848068,
+      "created_date": 1648557510826,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3552,14 +3571,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: String to Attachment",
       "export_key": "utilities_string_to_attachment",
-      "id": 152,
+      "id": 198,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220848107,
+      "last_modified_time": 1648557510868,
       "name": "utilities_string_to_attachment",
       "tags": [],
       "uuid": "cd8a23ce-63ba-42cf-8eba-8b63d5e7c872",
@@ -3607,12 +3626,12 @@
           "programmatic_name": "example_string_to_attachment",
           "tags": [],
           "uuid": null,
-          "workflow_id": 149
+          "workflow_id": 206
         }
       ]
     },
     {
-      "created_date": 1648220848132,
+      "created_date": 1648557510894,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3626,14 +3645,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: Timer",
       "export_key": "utilities_timer",
-      "id": 153,
+      "id": 199,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220848171,
+      "last_modified_time": 1648557510934,
       "name": "utilities_timer",
       "tags": [],
       "uuid": "0aa9d601-0a7f-4741-999e-27d3bf6de4a8",
@@ -3665,7 +3684,7 @@
           "programmatic_name": "example_timer",
           "tags": [],
           "uuid": null,
-          "workflow_id": 155
+          "workflow_id": 204
         },
         {
           "actions": [],
@@ -3675,12 +3694,12 @@
           "programmatic_name": "example_timer_parallel",
           "tags": [],
           "uuid": null,
-          "workflow_id": 145
+          "workflow_id": 205
         }
       ]
     },
     {
-      "created_date": 1648220848197,
+      "created_date": 1648557510958,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -3694,14 +3713,14 @@
       "destination_handle": "fn_utilities",
       "display_name": "Utilities: XML Transformation",
       "export_key": "utilities_xml_transformation",
-      "id": 154,
+      "id": 200,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648220848236,
+      "last_modified_time": 1648557510998,
       "name": "utilities_xml_transformation",
       "tags": [],
       "uuid": "b97af810-b808-46d2-90ea-bc5cef1e2fab",
@@ -3733,20 +3752,20 @@
           "programmatic_name": "example_xml_transformation",
           "tags": [],
           "uuid": null,
-          "workflow_id": 154
+          "workflow_id": 216
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 14,
+  "id": 17,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1648221289185,
+      "create_date": 1649084401321,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -3755,7 +3774,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1648221289185,
+      "update_date": 1649084401321,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -3785,15 +3804,15 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1648220845590,
+      "created_date": 1648557508102,
       "creator_id": "admin@example.com",
       "description": "This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.\nTypically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys (sorted if specified) as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.",
       "enabled": false,
       "export_key": "Convert JSON to rich text v1.0",
-      "id": 13,
+      "id": 20,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220845607,
+      "last_modified_time": 1648557508121,
       "name": "Convert JSON to rich text v1.0",
       "object_type": "incident",
       "playbook_handle": null,
@@ -3817,322 +3836,62 @@
     {
       "actions": [],
       "content": {
-        "version": 8,
-        "workflow_id": "example_attachment_hash",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_attachment_hash\" isExecutable=\"true\" name=\"Example: Attachment Hash\"\u003e\u003cdocumentation\u003eAn example that calculates hash artifacts from an attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1qf4wqa\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pb6atz\" name=\"Utilities: Attachment Hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9e0f46f4-ae8c-4aa6-a296-3a0662a53386\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The result contains at least these three hashes\\nif results.get(\u0027sha256\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-256 Hash\\\", results.get(\u0027sha256\u0027), u\\\"SHA-256 hash of \u0027{}\u0027\\\".format(attachment.name))\\n\\nif results.get(\u0027sha1\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-1 Hash\\\", results.get(\u0027sha1\u0027), u\\\"SHA-1 hash of \u0027{}\u0027\\\".format(attachment.name))\\n\\nif results.get(\u0027md5\u0027, None):\\n  incident.addArtifact(\\\"Malware MD5 Hash\\\", results.get(\u0027md5\u0027), u\\\"MD5 hash of \u0027{}\u0027\\\".format(attachment.name))\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qf4wqa\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dhtmov\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qf4wqa\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pb6atz\"/\u003e\u003cendEvent id=\"EndEvent_00tno9m\"\u003e\u003cincoming\u003eSequenceFlow_1dhtmov\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dhtmov\" sourceRef=\"ServiceTask_0pb6atz\" targetRef=\"EndEvent_00tno9m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_140whac\"\u003e\u003ctext\u003e\u003c![CDATA[Calculate hashes of a file attachment.\n\nThe results are added to the incident as new artifacts.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1w4edth\" sourceRef=\"ServiceTask_0pb6atz\" targetRef=\"TextAnnotation_140whac\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pb6atz\" id=\"ServiceTask_0pb6atz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"265\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qf4wqa\" id=\"SequenceFlow_1qf4wqa_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"265\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"186.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00tno9m\" id=\"EndEvent_00tno9m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"389\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dhtmov\" id=\"SequenceFlow_1dhtmov_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"345.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_140whac\" id=\"TextAnnotation_140whac_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"214\" x=\"388\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1w4edth\" id=\"Association_1w4edth_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 7,
+        "workflow_id": "example_zip_list",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_list\" isExecutable=\"true\" name=\"Example: Zip List\"\u003e\u003cdocumentation\u003eAn example showing how to list the contents of a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_19qjaxi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1jqt9h0\" name=\"Utilities: Attachment Zip List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The output contains two lists:\\n# - \\\"namelist\\\", which is just a list of the filenames (paths) within the zip file,\\n# - \\\"infolist\\\", which has full information for each file, including its name, size, and so on.\\n\\n# For this example, let\u0027s create two notes\\n\\n# One with a list of the namelist\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor filename in results.namelist:\\n  html = html + u\\\"{}\u0026lt;br\u0026gt;\\\".format(filename)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\\n# Another with more detailed information\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor fileinfo in results.infolist:\\n  html = html + u\\\"{} ({} bytes, {} compressed) {}\u0026lt;br\u0026gt;\\\".format(fileinfo.filename, fileinfo.file_size, fileinfo.compress_size, fileinfo.comment)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_19qjaxi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16qgouz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_19qjaxi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jqt9h0\"/\u003e\u003cendEvent id=\"EndEvent_1khrp1p\"\u003e\u003cincoming\u003eSequenceFlow_16qgouz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16qgouz\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"EndEvent_1khrp1p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1o48uch\"\u003e\u003ctext\u003eFunction reads the attachment (by id) then produces a list of its contents, in a structured data format.\u00a0 The post-processing script writes these results into a note on the incident.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_01ubqgv\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"TextAnnotation_1o48uch\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jqt9h0\" id=\"ServiceTask_1jqt9h0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19qjaxi\" id=\"SequenceFlow_19qjaxi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"254.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1khrp1p\" id=\"EndEvent_1khrp1p_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"545\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"563\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16qgouz\" id=\"SequenceFlow_16qgouz_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"478\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1o48uch\" id=\"TextAnnotation_1o48uch_di\"\u003e\u003comgdc:Bounds height=\"103\" width=\"310\" x=\"391\" y=\"24\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_01ubqgv\" id=\"Association_01ubqgv_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 8,
+      "content_version": 7,
       "creator_id": "admin@example.com",
-      "description": "An example that calculates hash artifacts from an attachment.",
-      "export_key": "example_attachment_hash",
+      "description": "An example showing how to list the contents of a ZIP file attachment.",
+      "export_key": "example_zip_list",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648221060495,
-      "name": "Example: Attachment Hash",
+      "last_modified_time": 1648832000094,
+      "name": "Example: Zip List",
       "object_type": "attachment",
-      "programmatic_name": "example_attachment_hash",
+      "programmatic_name": "example_zip_list",
       "tags": [],
-      "uuid": "c60fdfd6-d17a-42f2-877b-3b878c30969d",
-      "workflow_id": 147
+      "uuid": "fcc8c11d-1501-4ff8-9447-f65d71e4991f",
+      "workflow_id": 227
     },
     {
       "actions": [],
       "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "example_get_task_contact_info",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_get_task_contact_info\" isExecutable=\"true\" name=\"Example: Get Task Contact Info\"\u003e\u003cdocumentation\u003eGet owner and member contact information for a task in an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ghckhk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0afrq1y\" name=\"Utilities: Get Contact Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"011e399a-4508-4684-986a-e49a8be0b20b\"\u003e{\"inputs\":{},\"post_processing_script\":\"owner = u\\\"{} ({})\\\".format(results[\u0027owner\u0027][\u0027display_name\u0027], results[\u0027owner\u0027][\u0027email\u0027]) if results[\u0027owner\u0027] else \u0027Unassigned\u0027\\nnote_text = u\\\"Owner: {}\\\\nMembers:\\\\n{}\\\".format(owner, u\\\"\\\\n\\\".join([u\\\"{} ({})\\\".format(member[\u0027display_name\u0027], member[\u0027email\u0027]) for member in results[\u0027members\u0027]]))\\ntask.addNote(note_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.task_id = task.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ghckhk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1fean9d\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ghckhk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0afrq1y\"/\u003e\u003cendEvent id=\"EndEvent_0k0ikq0\"\u003e\u003cincoming\u003eSequenceFlow_1fean9d\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1fean9d\" sourceRef=\"ServiceTask_0afrq1y\" targetRef=\"EndEvent_0k0ikq0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0afrq1y\" id=\"ServiceTask_0afrq1y_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"251\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ghckhk\" id=\"SequenceFlow_1ghckhk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"224.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0k0ikq0\" id=\"EndEvent_0k0ikq0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"442.9661214953271\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"460.9661214953271\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1fean9d\" id=\"SequenceFlow_1fean9d_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"397\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "creator_id": "admin@example.com",
       "description": "Get owner and member contact information for a task in an Incident",
       "export_key": "example_get_task_contact_info",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850291,
+      "last_modified_time": 1648832778179,
       "name": "Example: Get Task Contact Info",
       "object_type": "task",
       "programmatic_name": "example_get_task_contact_info",
       "tags": [],
       "uuid": "13df6c8b-a91f-4230-9e20-1069d06de32f",
-      "workflow_id": 152
+      "workflow_id": 199
     },
     {
       "actions": [],
       "content": {
         "version": 7,
-        "workflow_id": "example_zip_to_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_to_artifact\" isExecutable=\"true\" name=\"Example: Zip Extract\"\u003e\u003cdocumentation\u003eAn example showing how to extract a file from a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06xspzk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0eabem4\" name=\"Utilities: Attachment Zip Extract\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d9fb1df-1eab-494b-8375-c4feb0525429\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# The path within the zip that we want to extract\\ninputs.file_path = rule.properties.extract_file_path\\n\\n# If the zipfile is password protected, specify here\\n# inputs.zipfile_password = \\nif rule.properties.zip_password:\\n  inputs.zipfile_password = rule.properties.zip_password\",\"result_name\":\"extracted_file\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06xspzk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xwwmdf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06xspzk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0eabem4\"/\u003e\u003cserviceTask id=\"ServiceTask_1tdad17\" name=\"Utilities: Base64 to Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"11349159-153e-49b7-9a9b-e22676c03687\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#\\ninputs.base64content = workflow.properties.extracted_file.content\\nfile_name = rule.properties.extract_file_path.split(\u0027/\u0027)[-1]\\n\\ninputs.incident_id = incident.id\\ninputs.file_name = file_name + \\\".b64\\\"\\ninputs.content_type = \\\"image/jpeg\\\"\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1xwwmdf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jm5nn7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xwwmdf\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"ServiceTask_1tdad17\"/\u003e\u003cendEvent id=\"EndEvent_0c81k5c\"\u003e\u003cincoming\u003eSequenceFlow_0jm5nn7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jm5nn7\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"EndEvent_0c81k5c\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0w0xpq6\"\u003e\u003ctext\u003e\u003c![CDATA[In this example we assume that the file attachment is a Word, Excel or Powerpoint document (docx, xlsx, pptx).\u00a0 These are zipfiles, and may contain a thumbnail image (\"docProps/thumbnail.jpeg\").\n\n\nThe \"zip extract\" function produces base64-encoded contents of the extracted file.\u00a0 In the \"output\", we give that a name so it can be used downstream.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1od1xot\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"TextAnnotation_0w0xpq6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_177jonc\"\u003e\u003ctext\u003eFrom the output of the first function, create a new file attachment.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hx0bem\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"TextAnnotation_177jonc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0eabem4\" id=\"ServiceTask_0eabem4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"308\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06xspzk\" id=\"SequenceFlow_06xspzk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"308\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"253\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tdad17\" id=\"ServiceTask_1tdad17_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"546\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xwwmdf\" id=\"SequenceFlow_1xwwmdf_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"546\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"464\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0c81k5c\" id=\"EndEvent_0c81k5c_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"730\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"748\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jm5nn7\" id=\"SequenceFlow_0jm5nn7_di\"\u003e\u003comgdi:waypoint x=\"646\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"730\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"675\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0w0xpq6\" id=\"TextAnnotation_0w0xpq6_di\"\u003e\u003comgdc:Bounds height=\"128\" width=\"376\" x=\"128\" y=\"-20\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1od1xot\" id=\"Association_1od1xot_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"333\" xsi:type=\"omgdc:Point\" y=\"108\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_177jonc\" id=\"TextAnnotation_177jonc_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"147\" x=\"600\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hx0bem\" id=\"Association_0hx0bem_di\"\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"654\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_attachment_hash",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_attachment_hash\" isExecutable=\"true\" name=\"Example: Attachment Hash\"\u003e\u003cdocumentation\u003eAn example that calculates hash artifacts from an attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1qf4wqa\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pb6atz\" name=\"Utilities: Attachment Hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9e0f46f4-ae8c-4aa6-a296-3a0662a53386\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The result contains at least these three hashes\\nif results.get(\u0027sha256\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-256 Hash\\\", results.get(\u0027sha256\u0027), u\\\"SHA-256 hash of \u0027{}\u0027\\\".format(attachment.name))\\n\\nif results.get(\u0027sha1\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-1 Hash\\\", results.get(\u0027sha1\u0027), u\\\"SHA-1 hash of \u0027{}\u0027\\\".format(attachment.name))\\n\\nif results.get(\u0027md5\u0027, None):\\n  incident.addArtifact(\\\"Malware MD5 Hash\\\", results.get(\u0027md5\u0027), u\\\"MD5 hash of \u0027{}\u0027\\\".format(attachment.name))\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qf4wqa\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dhtmov\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qf4wqa\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pb6atz\"/\u003e\u003cendEvent id=\"EndEvent_00tno9m\"\u003e\u003cincoming\u003eSequenceFlow_1dhtmov\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dhtmov\" sourceRef=\"ServiceTask_0pb6atz\" targetRef=\"EndEvent_00tno9m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_140whac\"\u003e\u003ctext\u003e\u003c![CDATA[Calculate hashes of a file attachment.\n\nThe results are added to the incident as new artifacts.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1w4edth\" sourceRef=\"ServiceTask_0pb6atz\" targetRef=\"TextAnnotation_140whac\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pb6atz\" id=\"ServiceTask_0pb6atz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"265\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qf4wqa\" id=\"SequenceFlow_1qf4wqa_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"265\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"186.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00tno9m\" id=\"EndEvent_00tno9m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"416\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"389\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dhtmov\" id=\"SequenceFlow_1dhtmov_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"345.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_140whac\" id=\"TextAnnotation_140whac_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"214\" x=\"388\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1w4edth\" id=\"Association_1w4edth_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 7,
       "creator_id": "admin@example.com",
-      "description": "An example showing how to extract a file from a ZIP file attachment.",
-      "export_key": "example_zip_to_artifact",
+      "description": "An example that calculates hash artifacts from an attachment.",
+      "export_key": "example_attachment_hash",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220848709,
-      "name": "Example: Zip Extract",
+      "last_modified_time": 1648831998982,
+      "name": "Example: Attachment Hash",
       "object_type": "attachment",
-      "programmatic_name": "example_zip_to_artifact",
+      "programmatic_name": "example_attachment_hash",
       "tags": [],
-      "uuid": "d1f7b3b6-1aa9-484f-9648-11cb0d16e4ac",
-      "workflow_id": 143
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_parse_ssl_certificate",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_parse_ssl_certificate\" isExecutable=\"true\" name=\"Example: Parse SSL Certificate\"\u003e\u003cdocumentation\u003eAn example workflow that takes a PEM encoded SSL certificate as input and returns structured information about the certificate.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16cp1cj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11kkefg\" name=\"Utilities: Parse SSL Certificate\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"029f623a-ae74-406e-91a5-366a7005d1b0\"\u003e{\"inputs\":{},\"post_processing_script\":\"color = \\\"#45bc27\\\"\\n\\nif (results.expiration_status != \\\"Valid\\\"):\\n  color = \\\"#ff402b\\\"\\nnoteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;Certificate Subject :\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\n              \u0026lt;b\u0026gt;Certificate Expiry After :\u0026lt;/b\u0026gt;{1}\u0026lt;/a\u0026gt;\\n              \u0026lt;b\u0026gt;Expiration Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {2}\\\"\u0026gt;{3}\u0026lt;/b\u0026gt;\\n              \u0026lt;br\u0026gt;Issuer Details :\u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\"\\\".format(results.subject, results.notAfter, color, results.expiration_status,results.issuer)\\n\\nincident.addNote(helper.createRichText(noteText))\\n\\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, { \\n    \\\"version\\\": 1.0,\\n    \\\"header\\\": None,\\n    \\\"padding\\\": 10,\\n    \\\"separator\\\": u\\\"\u0026lt;br\u0026gt;\\\",\\n    \\\"json\\\": results,\\n    \\\"json_omit_list\\\": [],\\n    \\\"incident_field\\\": None\\n  })\",\"pre_processing_script\":\"inputs.utilities_certificate = artifact.value\\ninputs.artifact_id = artifact.id\\ninputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16cp1cj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07qmd0r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1ljcycb\"\u003e\u003cincoming\u003eSequenceFlow_04l4mky\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16cp1cj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11kkefg\"/\u003e\u003csequenceFlow id=\"SequenceFlow_07qmd0r\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"ScriptTask_07jiv14\"/\u003e\u003cscriptTask id=\"ScriptTask_07jiv14\" name=\"Convert json to rich text\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f7276ff0-1770-4058-9e89-40ee79c6e41b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_07qmd0r\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04l4mky\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_04l4mky\" sourceRef=\"ScriptTask_07jiv14\" targetRef=\"EndEvent_1ljcycb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1n6af4p\"\u003e\u003ctext\u003eInputs: certificate OR artifact_id AND incident_id\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0zor1g6\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"TextAnnotation_1n6af4p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0r2063s\"\u003e\u003ctext\u003e\u003c![CDATA[Outputs: certificate data as a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pkxak2\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"TextAnnotation_0r2063s\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11kkefg\" id=\"ServiceTask_11kkefg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"251\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ljcycb\" id=\"EndEvent_1ljcycb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"557\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"530\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16cp1cj\" id=\"SequenceFlow_16cp1cj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"179.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07qmd0r\" id=\"SequenceFlow_07qmd0r_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"328\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1n6af4p\" id=\"TextAnnotation_1n6af4p_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"169\" x=\"135\" y=\"107\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0zor1g6\" id=\"Association_0zor1g6_di\"\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0r2063s\" id=\"TextAnnotation_0r2063s_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"156\" x=\"358\" y=\"103\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pkxak2\" id=\"Association_0pkxak2_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"144\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_07jiv14\" id=\"ScriptTask_07jiv14_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"395\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04l4mky\" id=\"SequenceFlow_04l4mky_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"557\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"526\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "An example workflow that takes a PEM encoded SSL certificate as input and returns structured information about the certificate.",
-      "export_key": "example_parse_ssl_certificate",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220848914,
-      "name": "Example: Parse SSL Certificate",
-      "object_type": "artifact",
-      "programmatic_name": "example_parse_ssl_certificate",
-      "tags": [],
-      "uuid": "2248c896-c3b4-48f6-82fc-a127255d4ab8",
-      "workflow_id": 144
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
-        "workflow_id": "example_artifact_attachment_to_base64",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_artifact_attachment_to_base64\" isExecutable=\"true\" name=\"Example: (Artifact) Attachment to Base64\"\u003e\u003cdocumentation\u003eAn example converting an Artifact of type File to a Base64 Encoded string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1j5vc4b\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rxzx0p\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\", None) is not None:\\n  \\n  file_name = unicode(results.get(\\\"filename\\\", \\\"\\\"))\\n  note_text = u\\\"File {0} converted to base64 format: {1}...\\\".format(file_name, results.get(\\\"content\\\", \\\"\\\")[1:20] )\\n\\n  incident.addNote(note_text)\",\"pre_processing_script\":\"# Required inputs are: incident_id artifact_id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1j5vc4b\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_121ajs6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1j5vc4b\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rxzx0p\"/\u003e\u003cendEvent id=\"EndEvent_0478px6\"\u003e\u003cincoming\u003eSequenceFlow_121ajs6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_121ajs6\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"EndEvent_0478px6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ifa9oc\"\u003e\u003ctext\u003eConvert a file attachment attachment to Base64 string and returns the encoded string.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ou0yhu\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"TextAnnotation_0ifa9oc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rxzx0p\" id=\"ServiceTask_0rxzx0p_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1j5vc4b\" id=\"SequenceFlow_1j5vc4b_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"191.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0478px6\" id=\"EndEvent_0478px6_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"440\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"413\" y=\"228\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_121ajs6\" id=\"SequenceFlow_121ajs6_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"362.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ifa9oc\" id=\"TextAnnotation_0ifa9oc_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"209\" x=\"408\" y=\"60\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ou0yhu\" id=\"Association_1ou0yhu_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "creator_id": "admin@example.com",
-      "description": "An example converting an Artifact of type File to a Base64 Encoded string",
-      "export_key": "example_artifact_attachment_to_base64",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851486,
-      "name": "Example: (Artifact) Attachment to Base64",
-      "object_type": "artifact",
-      "programmatic_name": "example_artifact_attachment_to_base64",
-      "tags": [],
-      "uuid": "33d30954-a9ab-4067-80e7-52a69567da64",
-      "workflow_id": 159
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_email_parsing_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_email_parsing_artifact\" isExecutable=\"true\" name=\"Example: Email Parsing (Artifact)\"\u003e\u003cdocumentation\u003eExample Workflow showing to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nwjr5i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1gnnr3k\" name=\"Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d83f571e-8904-4123-9c2c-3f404b00cc5e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\nif not results.success:\\n  note_text = u\\\"\\\"\\\"Workflow \u0027Example: Email Parsing (Artifact)\u0027 Failed\u0026lt;br\u0026gt;\\n                  \u0026lt;b\u0026gt;Reason:\u0026lt;/b\u0026gt; {0}\\\"\\\"\\\".format(unicode(results.reason))\\n  \\n  incident.addNote(helper.createRichText(note_text))\\n\\nelse:\\n  email = results.content\\n  \\n  # Get Email Subject\\n  eml_subject = email.get(\\\"subject\\\", \\\"BLANK SUBJECT LINE\\\")\\n\\n  #########################################\\n  # Add Artifacts for Email Recipient: to #\\n  #########################################\\n  for eml_addr in email.get(\\\"to\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  #########################################\\n  # Add Artifacts for Email Recipient: cc #\\n  #########################################\\n  for eml_addr in email.get(\\\"cc\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  ########################################\\n  # Add Artifacts for Email Sender: from #\\n  ########################################\\n  for eml_addr in email.get(\\\"from\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Sender\\\", eml_addr[1], eml_addr[0])\\n\\n  ################################################\\n  # Add Artifacts for IPs found in Email Headers #\\n  ################################################\\n  for eml_header in email.get(\\\"received\\\", []):\\n    \\n    the_header = eml_header.get(\\\"from\\\", None)\\n    \\n    if the_header:\\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\\n      unique_ips = set(ips)\\n  \\n      for an_ip in unique_ips:\\n        if an_ip:\\n          incident.addArtifact(\\\"IP Address\\\", an_ip, u\\\"Hop {0} at {1}\\\\n\\\\nHeader: {2}\\\".format(eml_header.get(\\\"hop\\\", \\\"\\\"), eml_header.get(\\\"date_utc\\\", \\\"\\\"), the_header))\\n\\n  ##############################################\\n  # Add Artifacts for URLs found in Email Body #\\n  ##############################################\\n  urls = []\\n  for eml_body_content in [email.get(\\\"plain_body\\\", \\\"\\\"), email.get(\\\"html_body\\\", \\\"\\\")]:\\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026amp;+]|[!*\\\\(\\\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\\n\\n  uniq_urls = set(urls)\\n\\n  for a_url in uniq_urls:\\n    # Remove any backslash as regex can add\\n    a_url = a_url.replace(\u0027\\\\\\\\\u0027,\\\"\\\")\\n    if a_url:\\n      incident.addArtifact(\\\"URL\\\", a_url, \\\"Found in parsed Email\\\")\\n  \\n  ################################################\\n  # Add the Email Body as a Note to the Incident #\\n  ################################################\\n  if email.get(\\\"body\\\"):\\n    note_text = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Parsed Email::\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Subject:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{0}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;From:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;To:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{2}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Body:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n                                  unicode(email.get(\\\"from\\\", \\\"N/A\\\")),\\n                                  unicode(email.get(\\\"to\\\", \\\"N/A\\\")), \\n                                  unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n  \\n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\\n  if email.get(\\\"plain_body\\\"):\\n    note_text = u\\\"\\\"\\\"Parsed Email::\\\\n\\\\nSubject:\\\\n{0}\\\\n\\\\nFrom:\\\\n{1}\\\\n\\\\nTo:\\\\n{2}\\\\n\\\\nBody:\\\\n{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n      unicode(email.get(\\\"from\\\", \\\"N/A\\\")), unicode(email.get(\\\"to\\\", \\\"N/A\\\")), unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createPlainText(note_text))\\n  \u0027\u0027\u0027\",\"pre_processing_script\":\"# Define incident_id and artifact_id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.utilities_parse_email_attachments = True\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nwjr5i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xm73z8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nwjr5i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gnnr3k\"/\u003e\u003cendEvent id=\"EndEvent_1w52vjy\"\u003e\u003cincoming\u003eSequenceFlow_0xm73z8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xm73z8\" sourceRef=\"ServiceTask_1gnnr3k\" targetRef=\"EndEvent_1w52vjy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wzvcnn\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as additional artifacts\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_161e2uo\" sourceRef=\"ServiceTask_1gnnr3k\" targetRef=\"TextAnnotation_0wzvcnn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"168\" y=\"83\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"163\" y=\"118\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gnnr3k\" id=\"ServiceTask_1gnnr3k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nwjr5i\" id=\"SequenceFlow_0nwjr5i_di\"\u003e\u003comgdi:waypoint x=\"204\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"195.5\" y=\"79.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1w52vjy\" id=\"EndEvent_1w52vjy_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"439\" y=\"83\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"412\" y=\"122\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xm73z8\" id=\"SequenceFlow_0xm73z8_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"363\" y=\"79.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wzvcnn\" id=\"TextAnnotation_0wzvcnn_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"176\" x=\"399\" y=\"4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_161e2uo\" id=\"Association_161e2uo_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"43\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "Example Workflow showing to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.",
-      "export_key": "example_email_parsing_artifact",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220848541,
-      "name": "Example: Email Parsing (Artifact)",
-      "object_type": "artifact",
-      "programmatic_name": "example_email_parsing_artifact",
-      "tags": [],
-      "uuid": "3422a9e6-ab15-4637-a70d-f3c874088f83",
-      "workflow_id": 142
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_timer",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_timer\" isExecutable=\"true\" name=\"Example: Timer\"\u003e\u003cdocumentation\u003eThis example workflow demonstrates how to call the Utilities Timer function using an epoch time as input to define when the timer should end.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05isvsf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0z91qwo\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Results: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: False, \u0027reason\u0027: None, \u0027content\u0027: {\u0027instance_id\u0027: 221, \u0027status\u0027: \u0027running\u0027, \u0027start_date\u0027: 1596658216490, \u0027end_date\u0027: None, \u0027reason\u0027: None, \u0027is_terminated\u0027: False}, \u0027raw\u0027: \u0027{\\\"instance_id\\\": 221, \\\"status\\\": \\\"running\\\", \\\"start_date\\\": 1596658216490, \\\"end_date\\\": null, \\\"reason\\\": null, \\\"is_terminated\\\": false}\u0027, \u0027inputs\u0027: {\u0027utilities_epoch\u0027: 1596658320000}, \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-utilities\u0027, \u0027package_version\u0027: \u00272.0.0\u0027, \u0027host\u0027: \u0027Marks-MacBook-Pro.local\u0027, \u0027execution_time_ms\u0027: 102472, \u0027timestamp\u0027: \u00272020-08-05 16:12:00\u0027}}\",\"pre_processing_script\":\"# Get the input date/time for timer end from the rule activity field\\ninputs.utilities_epoch = rule.properties.utilities_timer_end_time\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05isvsf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zxbldm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05isvsf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0z91qwo\"/\u003e\u003cendEvent id=\"EndEvent_1h1hqd5\"\u003e\u003cincoming\u003eSequenceFlow_0zxbldm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0zxbldm\" sourceRef=\"ServiceTask_0z91qwo\" targetRef=\"EndEvent_1h1hqd5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_039vo75\"\u003e\u003ctext\u003e\u003c![CDATA[Input: utilities_time string indicating how long function should sleep\n\u00a0or utilities_epoch with end timer epoch\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0w30yij\" sourceRef=\"ServiceTask_0z91qwo\" targetRef=\"TextAnnotation_039vo75\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0z91qwo\" id=\"ServiceTask_0z91qwo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"327\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05isvsf\" id=\"SequenceFlow_05isvsf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"217.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1h1hqd5\" id=\"EndEvent_1h1hqd5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"523\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"496\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zxbldm\" id=\"SequenceFlow_0zxbldm_di\"\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"523\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"430\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_039vo75\" id=\"TextAnnotation_039vo75_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"205\" x=\"168\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0w30yij\" id=\"Association_0w30yij_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"309\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "This example workflow demonstrates how to call the Utilities Timer function using an epoch time as input to define when the timer should end.",
-      "export_key": "example_timer",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850797,
-      "name": "Example: Timer",
-      "object_type": "incident",
-      "programmatic_name": "example_timer",
-      "tags": [],
-      "uuid": "2ef3b621-8e1f-4f9d-8491-a5f5b16c6356",
-      "workflow_id": 155
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_timer_parallel",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_timer_parallel\" isExecutable=\"true\" name=\"Example: Timers in Parallel\"\u003e\u003cdocumentation\u003eThis example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ys9gau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0tzqwcu\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"30s\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the first timer for this function\\ninputs.utilities_time = time_list[0]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mper68\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1c2sw10\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cparallelGateway id=\"ParallelGateway_0jhjvf7\"\u003e\u003cincoming\u003eSequenceFlow_0ys9gau\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1mper68\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_10m6syb\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ys9gau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ParallelGateway_0jhjvf7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1mper68\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_0tzqwcu\"/\u003e\u003cserviceTask id=\"ServiceTask_129kmr7\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"1m\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the second timer for this function\\ninputs.utilities_time = time_list[1]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10m6syb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1god5ve\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10m6syb\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_129kmr7\"/\u003e\u003cendEvent id=\"EndEvent_1v4h851\"\u003e\u003cincoming\u003eSequenceFlow_0ubh5so\u003c/incoming\u003e\u003c/endEvent\u003e\u003cparallelGateway id=\"ParallelGateway_16jfah3\"\u003e\u003cincoming\u003eSequenceFlow_1c2sw10\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_1god5ve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ubh5so\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ubh5so\" sourceRef=\"ParallelGateway_16jfah3\" targetRef=\"EndEvent_1v4h851\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1c2sw10\" sourceRef=\"ServiceTask_0tzqwcu\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1god5ve\" sourceRef=\"ServiceTask_129kmr7\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0tzqwcu\" id=\"ServiceTask_0tzqwcu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_0jhjvf7\" id=\"ParallelGateway_0jhjvf7_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"298\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"323\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ys9gau\" id=\"SequenceFlow_0ys9gau_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"248\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mper68\" id=\"SequenceFlow_1mper68_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"140.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_129kmr7\" id=\"ServiceTask_129kmr7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"265\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10m6syb\" id=\"SequenceFlow_10m6syb_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"261\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v4h851\" id=\"EndEvent_1v4h851_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"697\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"670\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_16jfah3\" id=\"ParallelGateway_16jfah3_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"564\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"544\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ubh5so\" id=\"SequenceFlow_0ubh5so_di\"\u003e\u003comgdi:waypoint x=\"614\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"697\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"625\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1c2sw10\" id=\"SequenceFlow_1c2sw10_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1god5ve\" id=\"SequenceFlow_1god5ve_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"283.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "This example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.",
-      "export_key": "example_timer_parallel",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220849094,
-      "name": "Example: Timers in Parallel",
-      "object_type": "incident",
-      "programmatic_name": "example_timer_parallel",
-      "tags": [],
-      "uuid": "6b72e56a-7b67-4416-b50b-ad3a1402f4ad",
-      "workflow_id": 145
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_string_to_attachment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_string_to_attachment\" isExecutable=\"true\" name=\"Example: String to Attachment\"\u003e\u003cdocumentation\u003eAn example of creating an attachment from an input string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lr37k8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0tzwdvf\" name=\"Utilities: String to Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cd8a23ce-63ba-42cf-8eba-8b63d5e7c872\"\u003e{\"inputs\":{\"03955f53-5940-49ff-a9df-0b607099657b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"A Test Attachment Name\"}}},\"post_processing_script\":\"# result: {\u0027attachment_id\u0027: 28}\\n\",\"pre_processing_script\":\"# Required inputs are: the string to convert, the incident id and the attachment name\\ninputs.string_to_convert_to_attachment = artifact.value\\ninputs.incident_id = incident.id\\n#inputs.attachment_name = \\\"A Test Attachment Name\\\"\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lr37k8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m0w4as\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lr37k8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0tzwdvf\"/\u003e\u003cendEvent id=\"EndEvent_1czshr5\"\u003e\u003cincoming\u003eSequenceFlow_1m0w4as\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m0w4as\" sourceRef=\"ServiceTask_0tzwdvf\" targetRef=\"EndEvent_1czshr5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0tzwdvf\" id=\"ServiceTask_0tzwdvf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365.27250900360144\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lr37k8\" id=\"SequenceFlow_1lr37k8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1czshr5\" id=\"EndEvent_1czshr5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"669.2725090036015\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"687.2725090036015\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m0w4as\" id=\"SequenceFlow_1m0w4as_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"669\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"567\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "An example of creating an attachment from an input string",
-      "export_key": "example_string_to_attachment",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220849766,
-      "name": "Example: String to Attachment",
-      "object_type": "artifact",
-      "programmatic_name": "example_string_to_attachment",
-      "tags": [],
-      "uuid": "39f4dc31-1eed-41ee-a4db-859724e476d5",
-      "workflow_id": 149
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_email_parsing_attachment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_email_parsing_attachment\" isExecutable=\"true\" name=\"Example: Email Parsing (Attachment)\"\u003e\u003cdocumentation\u003eExample Workflow showing to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0a3f8pj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0mbl607\" name=\"Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d83f571e-8904-4123-9c2c-3f404b00cc5e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\nif not results.success:\\n  note_text = u\\\"\\\"\\\"Workflow \u0027Example: Email Parsing (Artifact)\u0027 Failed\u0026lt;br\u0026gt;\\n                  \u0026lt;b\u0026gt;Reason:\u0026lt;/b\u0026gt; {0}\\\"\\\"\\\".format(unicode(results.reason))\\n  \\n  incident.addNote(helper.createRichText(note_text))\\n\\nelse:\\n  email = results.content\\n  \\n  # Get Email Subject\\n  eml_subject = email.get(\\\"subject\\\", \\\"BLANK SUBJECT LINE\\\")\\n\\n  #########################################\\n  # Add Artifacts for Email Recipient: to #\\n  #########################################\\n  for eml_addr in email.get(\\\"to\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  #########################################\\n  # Add Artifacts for Email Recipient: cc #\\n  #########################################\\n  for eml_addr in email.get(\\\"cc\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  ########################################\\n  # Add Artifacts for Email Sender: from #\\n  ########################################\\n  for eml_addr in email.get(\\\"from\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Sender\\\", eml_addr[1], eml_addr[0])\\n\\n  ################################################\\n  # Add Artifacts for IPs found in Email Headers #\\n  ################################################\\n  for eml_header in email.get(\\\"received\\\", []):\\n    \\n    the_header = eml_header.get(\\\"from\\\", None)\\n    \\n    if the_header:\\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\\n      unique_ips = set(ips)\\n  \\n      for an_ip in unique_ips:\\n        if an_ip:\\n          incident.addArtifact(\\\"IP Address\\\", an_ip, u\\\"Hop {0} at {1}\\\\n\\\\nHeader: {2}\\\".format(eml_header.get(\\\"hop\\\", \\\"\\\"), eml_header.get(\\\"date_utc\\\", \\\"\\\"), the_header))\\n\\n  ##############################################\\n  # Add Artifacts for URLs found in Email Body #\\n  ##############################################\\n  urls = []\\n  for eml_body_content in [email.get(\\\"plain_body\\\", \\\"\\\"), email.get(\\\"html_body\\\", \\\"\\\")]:\\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026amp;+]|[!*\\\\(\\\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\\n\\n  uniq_urls = set(urls)\\n\\n  for a_url in uniq_urls:\\n    # Remove any backslash as regex can add\\n    a_url = a_url.replace(\u0027\\\\\\\\\u0027,\\\"\\\")\\n    if a_url:\\n      incident.addArtifact(\\\"URL\\\", a_url, \\\"Found in parsed Email\\\")\\n  \\n  ################################################\\n  # Add the Email Body as a Note to the Incident #\\n  ################################################\\n  if email.get(\\\"body\\\"):\\n    note_text = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Parsed Email::\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Subject:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{0}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;From:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;To:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{2}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Body:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n                                  unicode(email.get(\\\"from\\\", \\\"N/A\\\")),\\n                                  unicode(email.get(\\\"to\\\", \\\"N/A\\\")), \\n                                  unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n  \\n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\\n  if email.get(\\\"plain_body\\\"):\\n    note_text = u\\\"\\\"\\\"Parsed Email::\\\\n\\\\nSubject:\\\\n{0}\\\\n\\\\nFrom:\\\\n{1}\\\\n\\\\nTo:\\\\n{2}\\\\n\\\\nBody:\\\\n{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n      unicode(email.get(\\\"from\\\", \\\"N/A\\\")), unicode(email.get(\\\"to\\\", \\\"N/A\\\")), unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createPlainText(note_text))\\n  \u0027\u0027\u0027\",\"pre_processing_script\":\"# Define incident_id and attachment_id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.utilities_parse_email_attachments = True\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0a3f8pj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f19d8l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0a3f8pj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0mbl607\"/\u003e\u003cendEvent id=\"EndEvent_0or8ho0\"\u003e\u003cincoming\u003eSequenceFlow_0f19d8l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0f19d8l\" sourceRef=\"ServiceTask_0mbl607\" targetRef=\"EndEvent_0or8ho0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xkpnc6\"\u003e\u003ctext\u003e\u003c![CDATA[Additional artifacts created based on the email message\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rmikmt\" sourceRef=\"ServiceTask_0mbl607\" targetRef=\"TextAnnotation_0xkpnc6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"234\" y=\"123\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"229\" y=\"158\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0mbl607\" id=\"ServiceTask_0mbl607_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"403\" y=\"101\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0a3f8pj\" id=\"SequenceFlow_0a3f8pj_di\"\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"291.5\" y=\"119.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0or8ho0\" id=\"EndEvent_0or8ho0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"619\" y=\"123\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"592\" y=\"162\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f19d8l\" id=\"SequenceFlow_0f19d8l_di\"\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003comgdi:waypoint x=\"619\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"561\" y=\"119.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xkpnc6\" id=\"TextAnnotation_0xkpnc6_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"213\" x=\"492\" y=\"12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rmikmt\" id=\"Association_0rmikmt_di\"\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"108\"/\u003e\u003comgdi:waypoint x=\"557\" xsi:type=\"omgdc:Point\" y=\"70\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "Example Workflow showing to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.",
-      "export_key": "example_email_parsing_attachment",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850986,
-      "name": "Example: Email Parsing (Attachment)",
-      "object_type": "attachment",
-      "programmatic_name": "example_email_parsing_attachment",
-      "tags": [],
-      "uuid": "3d33c5fa-1b83-4fbb-ac62-5d9053b43d40",
-      "workflow_id": 156
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_get_incident_contact_info",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_get_incident_contact_info\" isExecutable=\"true\" name=\"Example: Get Incident Contact Info\"\u003e\u003cdocumentation\u003eGet owner and member contact information for an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_062lhqj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_062lhqj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u4onb0\"/\u003e\u003cendEvent id=\"EndEvent_1h5oo0t\"\u003e\u003cincoming\u003eSequenceFlow_02cq3n3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1u4onb0\" name=\"Utilities: Get Contact Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"011e399a-4508-4684-986a-e49a8be0b20b\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027owner\u0027: {\u0027fname\u0027: \u0027Resilient\u0027, \u0027lname\u0027: \u0027Sysadmin\u0027, \u0027title\u0027: \u0027\u0027, \u0027display_name\u0027: \u0027Resilient Sysadmin\u0027, \u0027email\u0027: \u0027b@a.com\u0027, \u0027phone\u0027: \u0027781 838 4848\u0027, \u0027cell\u0027: \u0027978 373 2839\u0027}, \u0027members\u0027: []}\\n# {\u0027owner\u0027: None, \u0027members\u0027: [{\u0027fname\u0027: \u0027Resilient\u0027, \u0027lname\u0027: \u0027Sysadmin\u0027, \u0027title\u0027: \u0027\u0027, \u0027display_name\u0027: \u0027Resilient Sysadmin\u0027, \u0027email\u0027: \u0027b@a.com\u0027, \u0027phone\u0027: \u0027781 838 4848\u0027, \u0027cell\u0027: \u0027978 373 2839\u0027}]}\\nowner = u\\\"{} ({})\\\".format(results[\u0027owner\u0027][\u0027display_name\u0027], results[\u0027owner\u0027][\u0027email\u0027]) if results[\u0027owner\u0027] else \u0027Unassigned\u0027\\nnote_text = u\\\"Owner: {}\\\\nMembers:\\\\n{}\\\".format(owner, u\\\"\\\\n\\\".join([u\\\"{} ({})\\\".format(member[\u0027display_name\u0027], member[\u0027email\u0027]) for member in results[\u0027members\u0027]]))\\nincident.addNote(note_text)\",\"pre_processing_script\":\"inputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_062lhqj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02cq3n3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_02cq3n3\" sourceRef=\"ServiceTask_1u4onb0\" targetRef=\"EndEvent_1h5oo0t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1hoy6fe\"\u003e\u003ctext\u003e\u003c![CDATA[Results rerturned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1r1nuj4\" sourceRef=\"ServiceTask_1u4onb0\" targetRef=\"TextAnnotation_1hoy6fe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_062lhqj\" id=\"SequenceFlow_062lhqj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"181\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1h5oo0t\" id=\"EndEvent_1h5oo0t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"400\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u4onb0\" id=\"ServiceTask_1u4onb0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02cq3n3\" id=\"SequenceFlow_02cq3n3_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1hoy6fe\" id=\"TextAnnotation_1hoy6fe_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"196\" x=\"346\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1r1nuj4\" id=\"Association_1r1nuj4_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"137\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "Get owner and member contact information for an Incident",
-      "export_key": "example_get_incident_contact_info",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220852144,
-      "name": "Example: Get Incident Contact Info",
-      "object_type": "incident",
-      "programmatic_name": "example_get_incident_contact_info",
-      "tags": [],
-      "uuid": "5934f408-b9da-4c05-871b-aa9320419d16",
-      "workflow_id": 163
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "utilities_expand_url",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"utilities_expand_url\" isExecutable=\"true\" name=\"Example: Expand URL\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Take a url (mostly shortened) and follow it through redirects as it\u0027s expanded]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t6zkar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1eosian\" name=\"Utilities: Expand URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"173d3d51-3263-4f26-b927-ecd1e2bf6344\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Results: {\u0027urllist\u0027: [\u0027https://community.ibm.com/community/user/security/communities/community-home?CommunityKey=d2f71e8c-108e-4652-b59c-29d61af7163e\u0027, \u0027https://community.ibm.com/community/user/security/communities/community-home\u0027]}\\n\\n# Add the url expansions to the Artifact Description\\nexpansions = results.get(\\\"urllist\\\", [])\\nexpansion_list = u\\\"Expansions:\\\\n\\\\n{0}\\\".format(\\\"\\\\n\\\\n\\\".join(expansions)) if expansions else \\\"No Expansions\\\"\\n\\nif artifact.description:\\n  artifact.description = \\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, expansion_list)\\nelse:\\n  artifact.description = expansion_list\\n  \\nfor url in expansions:\\n  incident.addArtifact(\\\"URL\\\", url, u\\\"expansion from {}\\\".format(artifact.value))\\n\",\"pre_processing_script\":\"inputs.resilient_url = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t6zkar\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02a827k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t6zkar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1eosian\"/\u003e\u003cendEvent id=\"EndEvent_0nnm7lj\"\u003e\u003cincoming\u003eSequenceFlow_02a827k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02a827k\" sourceRef=\"ServiceTask_1eosian\" targetRef=\"EndEvent_0nnm7lj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1omkhvp\"\u003e\u003ctext\u003e\u003c![CDATA[New artifacts are created and results update Artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_187filv\" sourceRef=\"ServiceTask_1eosian\" targetRef=\"TextAnnotation_1omkhvp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1eosian\" id=\"ServiceTask_1eosian_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t6zkar\" id=\"SequenceFlow_1t6zkar_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nnm7lj\" id=\"EndEvent_0nnm7lj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"451\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"469\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02a827k\" id=\"SequenceFlow_02a827k_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"412.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1omkhvp\" id=\"TextAnnotation_1omkhvp_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"193\" x=\"371\" y=\"88\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_187filv\" id=\"Association_187filv_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "Get owner and member contact information for an Incident",
-      "export_key": "example_get_incident_contact_info",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851976,
-      "name": "Example: Expand URL",
-      "object_type": "artifact",
-      "programmatic_name": "utilities_expand_url",
-      "tags": [],
-      "uuid": "3009741f-33d8-4cdc-adf1-9aa3f0843995",
-      "workflow_id": 162
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_create_artifacts_from_excel_data",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_artifacts_from_excel_data\" isExecutable=\"true\" name=\"Example: Create Artifacts From Excel Data\"\u003e\u003cdocumentation\u003eCreate artifacts with information extracted from an excel sheet.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0f4swta\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1nyeq2e\" name=\"Utilities: Excel Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"118bd2c6-f367-4342-93b8-50257121ccf2\"\u003e{\"inputs\":{},\"post_processing_script\":\"def format_link(item):\\n  if item and (\\\"https://\\\" in item or \\\"http://\\\" in item):\\n    return \\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\".format(item)\\n  else:\\n    return item\\n\\ndef expand_list(list_value, separator=\\\"\u0026lt;br\u0026gt;\\\"):\\n  if not isinstance(list_value, list):\\n    return format_link(list_value)\\n  else:\\n    try:\\n      items = []\\n      for item in list_value:\\n        if isinstance(item, dict):\\n          items.append(\\\"\u0026lt;div style=\u0027padding:10px\u0027\u0026gt;{}\u0026lt;/div\u0026gt;\\\".format(walk_dict(item)))\\n        elif isinstance(item, list):\\n          items.append(expand_list(item))\\n        else:\\n          items.append(format_link(str(item)))\\n      return separator.join(items)\\n    except Exception as err:\\n        return str(err)\\n\\ndef walk_dict(sub_dict):\\n  notes = []\\n  for key, value in sub_dict.items():\\n    if key not in [\u0027display_content\u0027]:\\n      if isinstance(value, dict):\\n        notes.append(u\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: \u0026lt;div style=\u0027padding:10px\u0027\u0026gt;{}\u0026lt;/div\u0026gt;\\\".format(key, walk_dict(value)))\\n      else:\\n        notes.append(u\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(key, expand_list(value)))\\n\\n  return u\\\"\u0026lt;br\u0026gt;\\\".join(notes)\\n\\n\\nnote = u\\\"Excel Extract for : {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".format(attachment.name)\\n\\nnote = note + walk_dict(results)\\n\\nincident.addNote(helper.createRichText(note))\\n\\n\\n# This example shows how to iterate over the sheets and create artifacts from the returned data\\n\u0027\u0027\u0027\\nkeys = results.sheets[\\\"_keys\\\"]\\nfor sheet in keys:\\n  ranges = results.sheets[sheet][\\\"_keys\\\"]\\n  for range_name in ranges:\\n    rng = results.sheets[sheet][range_name]\\n    for row in rng:\\n      incident.addArtifact(\\\"IP Address\\\", row[0], \\\"Sheet Region {0}  Priority {1}\\\".format(row[1], row[2]))\\n\u0027\u0027\u0027\\n\\n# This example shows how to iterate through the named ranges and create artifacts from them\\n# It is pretty much the same as the previous example, with an exception of extra layer of iterating through the named ranges\\n\u0027\u0027\u0027\\nkeys = results.named_ranges[\\\"_keys\\\"]\\nfor named_range in keys:\\n  sheets = results.named_ranges[named_range][\\\"_keys\\\"]\\n  for sheet in sheets:\\n    range_names = results.named_ranges[named_range][sheet][\\\"_keys\\\"]\\n    for range_name in range_names:\\n      rng = results.named_ranges[named_range][sheet][range_name]\\n      for row in rng:\\n        incident.addArtifact(\\\"IP Address\\\", row[0], \\\"Named Range Region {0}  Priority {1}\\\".format(row[1], row[2]))\\n\u0027\u0027\u0027\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\nif task is not None:\\n  inputs.task_id = task.id\\n  \\nif rule.properties.excel_named_range:\\n  inputs.excel_defined_names = rule.properties.excel_named_range\\n\\nif rule.properties.excel_range:\\n  inputs.excel_ranges = rule.properties.excel_range\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f4swta\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d7gm0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f4swta\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1nyeq2e\"/\u003e\u003cendEvent id=\"EndEvent_0i4recz\"\u003e\u003cincoming\u003eSequenceFlow_0d7gm0q\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d7gm0q\" sourceRef=\"ServiceTask_1nyeq2e\" targetRef=\"EndEvent_0i4recz\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_08ubcwp\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1l7jl29\" sourceRef=\"ServiceTask_1nyeq2e\" targetRef=\"TextAnnotation_08ubcwp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"172\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"207\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1nyeq2e\" id=\"ServiceTask_1nyeq2e_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"150\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f4swta\" id=\"SequenceFlow_0f4swta_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"205\" y=\"183.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0i4recz\" id=\"EndEvent_0i4recz_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"446\" y=\"172\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"464\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d7gm0q\" id=\"SequenceFlow_0d7gm0q_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408.5\" y=\"168\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_08ubcwp\" id=\"TextAnnotation_08ubcwp_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"125\" x=\"364\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1l7jl29\" id=\"Association_1l7jl29_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "Create artifacts with information extracted from an excel sheet.",
-      "export_key": "example_create_artifacts_from_excel_data",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851322,
-      "name": "Example: Create Artifacts From Excel Data",
-      "object_type": "attachment",
-      "programmatic_name": "example_create_artifacts_from_excel_data",
-      "tags": [],
-      "uuid": "c277c3ae-b0f6-4fb2-a6a6-54c4281260de",
-      "workflow_id": 158
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_domain_distance",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_domain_distance\" isExecutable=\"true\" name=\"Example: Domain Distance\"\u003e\u003cdocumentation\u003eAn example testing for confusable domain names\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pyyn79\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07w80p3\" name=\"Utilities: Domain Distance\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6fd01564-96de-4482-bceb-cf396df6c758\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The result includes:\\n#   \\\"domain_name\\\" - the name being tested\\n#   \\\"distances\\\" - a dicctionary of all the distances\\n#   \\\"closest\\\" - the closest match from the list.\\n# If the match distance is only 1 or 0, the domain name is very easily confused with one on the list!\\n\\nif results.closest.distance \u0026lt;= 1:\\n  html = u\\\"\u0026lt;div\u0026gt;Warning!  Domain {} is easily confused with {}!\u0026lt;/div\u0026gt;\\\".format(results.domain_name, results.closest.name)\\n  incident.addNote(helper.createRichText(html))\\n\",\"pre_processing_script\":\"# if email address, return only domain portion\\nif \\\"email\\\" in artifact.type.lower():\\n  split_email = artifact.value.split(\\\"@\\\")\\n  if len(split_email) \u0026gt; 1:\\n    inputs.domain_name = split_email[1]\\n  else:\\n    inputs.domain_name = artifact.value\\nelse:\\n  # The domain name being tested\\n  inputs.domain_name = artifact.value\\n\\n# The list of domains to test against\\ninputs.domain_list = \\\"ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pyyn79\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1062y94\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0fkhffe\"\u003e\u003cincoming\u003eSequenceFlow_1062y94\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1062y94\" sourceRef=\"ServiceTask_07w80p3\" targetRef=\"EndEvent_0fkhffe\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1pyyn79\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07w80p3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1xd68s6\"\u003e\u003ctext\u003e\u003c![CDATA[Calculates the \"word distance\" between a suspect name and a list of names.\u00a0 This can be useful for detecting spoofed URLs.\n\nThe distance is small if the names are similar.\u00a0 For each different or switched character, the distance increases.\u00a0 But \"confusable Unicode characters\" are treated as identical (they have zero distance).]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t5cp3a\" sourceRef=\"ServiceTask_07w80p3\" targetRef=\"TextAnnotation_1xd68s6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07w80p3\" id=\"ServiceTask_07w80p3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"282\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fkhffe\" id=\"EndEvent_0fkhffe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"421\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1062y94\" id=\"SequenceFlow_1062y94_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pyyn79\" id=\"SequenceFlow_1pyyn79_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"282\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"240\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1xd68s6\" id=\"TextAnnotation_1xd68s6_di\"\u003e\u003comgdc:Bounds height=\"74\" width=\"502\" x=\"309\" y=\"36\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t5cp3a\" id=\"Association_0t5cp3a_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "An example testing for confusable domain names",
-      "export_key": "example_domain_distance",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851649,
-      "name": "Example: Domain Distance",
-      "object_type": "artifact",
-      "programmatic_name": "example_domain_distance",
-      "tags": [],
-      "uuid": "46aeb812-3e5d-4e03-a881-a613a90d88ec",
-      "workflow_id": 160
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 7,
-        "workflow_id": "example_extract_ssl_cert_from_url",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_extract_ssl_cert_from_url\" isExecutable=\"true\" name=\"Example: Extract SSL Cert from URL\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This workflow takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.\nThe workflow runs at the artifact level]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ptaupz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_12xb2eo\" name=\"Utilities: Extract SSL Cert From ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69123885-b3b9-4df9-a241-aaa29ba9d7d6\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.addArtifact(\u0027X509 Certificate File\u0027, results.certificate, \u0027A certificate file gathered from provided the provided URL\u0027)\\n\",\"pre_processing_script\":\"inputs.https_url = artifact.value\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ptaupz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s9vql7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ptaupz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_12xb2eo\"/\u003e\u003cendEvent id=\"EndEvent_06nahzq\"\u003e\u003cincoming\u003eSequenceFlow_1s9vql7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s9vql7\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"EndEvent_06nahzq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11zlt8p\"\u003e\u003ctext\u003eInput: HTTPS URL\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_067xt46\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"TextAnnotation_11zlt8p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0b52jx9\"\u003e\u003ctext\u003e\u003c![CDATA[Artifact created of type \u0027X509 Certificate File\u0027 with SSL Certificate data; encoded in JSON]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1fh4amb\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"TextAnnotation_0b52jx9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_12xb2eo\" id=\"ServiceTask_12xb2eo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ptaupz\" id=\"SequenceFlow_1ptaupz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06nahzq\" id=\"EndEvent_06nahzq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"651\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"669\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s9vql7\" id=\"SequenceFlow_1s9vql7_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"557.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11zlt8p\" id=\"TextAnnotation_11zlt8p_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"201\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_067xt46\" id=\"Association_067xt46_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0b52jx9\" id=\"TextAnnotation_0b52jx9_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"258\" x=\"518\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1fh4amb\" id=\"Association_1fh4amb_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 7,
-      "creator_id": "admin@example.com",
-      "description": "This workflow takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.\nThe workflow runs at the artifact level",
-      "export_key": "example_extract_ssl_cert_from_url",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850458,
-      "name": "Example: Extract SSL Cert from URL",
-      "object_type": "artifact",
-      "programmatic_name": "example_extract_ssl_cert_from_url",
-      "tags": [],
-      "uuid": "663fd8b8-315f-41a5-a0d5-005758fabcc1",
-      "workflow_id": 153
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "example_pdfid",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_pdfid\" isExecutable=\"true\" name=\"Example: PDFiD\"\u003e\u003cdocumentation\u003eAn example of using the PDFiD function to get summary information about a PDF file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1qm57dq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_096tnaj\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"attachment_content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qm57dq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zvggno\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qm57dq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_096tnaj\"/\u003e\u003cserviceTask id=\"ServiceTask_087cpkb\" name=\"Utilities: PDFiD\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3f9da4a2-cdac-4aa6-891c-1217565e734c\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The output of PDFiD is a dictionary with the fundamental elements of the PDF file.\\n# These include,\\n#  - \\\"isPdf\\\" (True or False)\\n#  - \\\"header\\\" (the PDF version header)\\n#  - \\\"obj\\\", \\\"endobj\\\" and so on: the count of each element.\\n# More documentation can be found at https://blog.didierstevens.com/programs/pdf-tools/\\n\\n# Some sections of interest\\ninteresting_sections = [\\n  \u0027obj\u0027, \u0027endobj\u0027, \u0027stream\u0027, \u0027endstream\u0027, \u0027startxref\u0027, \u0027xref\u0027, \u0027trailer\u0027,\\n  \u0027/AA\u0027, \u0027/AcroForm\u0027, \u0027/EmbeddedFile\u0027, \u0027/Encrypt\u0027, \u0027/JBIG2Decode\u0027, \u0027/JS\u0027, \u0027/JavaScript\u0027, \u0027/Launch\u0027, \u0027/ObjStm\u0027, \u0027/OpenAction\u0027, \u0027/Page\u0027, \u0027/RichMedia\u0027, \u0027/XFA\u0027\\n  ]\\n\\nif not results.isPdf:\\n  incident.addNote(helper.createRichText(\\\"Not a PDF file: {}\\\".format(attachment.name)))\\nelse:\\n  # In this example we just write them to a note in the incident\\n  note_data = [\\\"PDFiD report for {} ({}):\\\".format(attachment.name, results.header)]\\n\\n  for section in interesting_sections:\\n    value = results.get(section)\\n    if value is not None:\\n      note_data.append(\\\"{}: {}\\\".format(section, value))\\n\\n  text = helper.createPlainText(\\\"\\\\n\\\".join(note_data))\\n  incident.addNote(text)\\n  \\n  # Maybe extend this to alert if (/JS or /JavaScript) and (/AA or /OpenAction)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# The input is the base64-encoded content that was read in a previous component\\n# That object has properties:\\n#  - filename\\n#  - content_type\\n#  - size\\n#  - created\\n#  - content (the base64-encoded data)\\ninputs.base64content = workflow.properties.attachment_content.content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zvggno\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1e0enwz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zvggno\" sourceRef=\"ServiceTask_096tnaj\" targetRef=\"ServiceTask_087cpkb\"/\u003e\u003cendEvent id=\"EndEvent_0rj6mik\"\u003e\u003cincoming\u003eSequenceFlow_1e0enwz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1e0enwz\" sourceRef=\"ServiceTask_087cpkb\" targetRef=\"EndEvent_0rj6mik\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_03l5i5t\"\u003e\u003ctext\u003eInput to the PDFiD function is base64-encoded content.\u00a0 We can read this from an attachment.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pys59q\" sourceRef=\"ServiceTask_096tnaj\" targetRef=\"TextAnnotation_03l5i5t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1n1qjn9\"\u003e\u003ctext\u003ePerforms a quick analysis of the structure of the PDF file.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0wviioh\" sourceRef=\"ServiceTask_087cpkb\" targetRef=\"TextAnnotation_1n1qjn9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_096tnaj\" id=\"ServiceTask_096tnaj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qm57dq\" id=\"SequenceFlow_1qm57dq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_087cpkb\" id=\"ServiceTask_087cpkb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zvggno\" id=\"SequenceFlow_0zvggno_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"427.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rj6mik\" id=\"EndEvent_0rj6mik_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"682\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"700\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e0enwz\" id=\"SequenceFlow_1e0enwz_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"682\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"626\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_03l5i5t\" id=\"TextAnnotation_03l5i5t_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"175\" x=\"307\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pys59q\" id=\"Association_0pys59q_di\"\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"380\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1n1qjn9\" id=\"TextAnnotation_1n1qjn9_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"153\" x=\"509\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0wviioh\" id=\"Association_0wviioh_di\"\u003e\u003comgdi:waypoint x=\"543\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "admin@example.com",
-      "description": "An example of using the PDFiD function to get summary information about a PDF file attachment.",
-      "export_key": "example_pdfid",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648221252957,
-      "name": "Example: PDFiD",
-      "object_type": "attachment",
-      "programmatic_name": "example_pdfid",
-      "tags": [],
-      "uuid": "49a1fc52-bf52-4cfa-b556-c1e1002f9c78",
-      "workflow_id": 164
+      "uuid": "c60fdfd6-d17a-42f2-877b-3b878c30969d",
+      "workflow_id": 221
     },
     {
       "actions": [],
@@ -4146,33 +3905,33 @@
       "description": "An example running shell commands for integration",
       "export_key": "example_shell_command",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220849271,
+      "last_modified_time": 1648557514311,
       "name": "Example: Shell Command",
       "object_type": "artifact",
       "programmatic_name": "example_shell_command",
       "tags": [],
       "uuid": "f3d7cac2-b101-43b4-bbbb-840d5d9fc290",
-      "workflow_id": 146
+      "workflow_id": 214
     },
     {
       "actions": [],
       "content": {
         "version": 7,
-        "workflow_id": "example_json2html",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_json2html\" isExecutable=\"true\" name=\"Example: JSON2HTML\"\u003e\u003cdocumentation\u003eExample to extract json to html table. Optionally specify a path to a portion of the json structure to convert\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0qi450y\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1wgmzwj\" name=\"Utilities: JSON2HTML\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7460c6a9-8c2a-42fb-a871-bef9b37c9e9a\"\u003e{\"inputs\":{\"254477f5-5999-432f-b509-66575b59a7e2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"{\\\"1\\\": \\\"hello\\\", \\\"b\\\": \\\"world\\\", \\\"c\\\": {\\\"d\\\": \\\"D\\\", \\\"e\\\": null, \\\"list\\\": [1, 2, 3, {\\\"keen1n\\\": \\\"m1ch\\\", \\\"ibm\\\": null}], \\\"empty_list\\\": [], \\\"null\\\": \\\"1sdf\\\", \\\"set\\\": [\\\"s\\\", \\\"e\\\", \\\"t\\\"]}, \\\"d\\\": \\\"D2\\\", \\\"test.with.period\\\": \\\"working?\\\"}\"}},\"58f0bd61-cec6-4d85-9ab1-c72f8f5722cb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"c.list\"}}},\"post_processing_script\":\"# example output\\n# {\u0027content\u0027: \u0027\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;1\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;2\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;3\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;table border=\\\"1\\\"\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;th\u0026gt;keen1n\u0026lt;/th\u0026gt;\u0026lt;td\u0026gt;m1ch\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;th\u0026gt;ibm\u0026lt;/th\u0026gt;\u0026lt;td\u0026gt;None\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;/table\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0027}\\nincident.addNote(helper.createRichText(results[\u0027content\u0027]))\",\"pre_processing_script\":\"#data = { \\\"data\\\": artifact.value, \\\"data_type\\\": artifact.type, \\\"description\\\": artifact.description if artifact.description is not None else \\\"\\\"}\\n#inputs.json2html_data = str(data).replace(\\\"\u0027\\\", \u0027\\\"\u0027).replace(\u0027u\\\"\u0027, \u0027\\\"\u0027) # remove unicode references\\n#inputs.json2html_data = str(inputs.json2html_data).replace(\\\"\u0027\\\", \u0027\\\"\u0027).replace(\u0027u\\\"\u0027, \u0027\\\"\u0027) # remove unicode references\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0qi450y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_162u142\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0qi450y\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1wgmzwj\"/\u003e\u003cendEvent id=\"EndEvent_0wrakqo\"\u003e\u003cincoming\u003eSequenceFlow_162u142\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_162u142\" sourceRef=\"ServiceTask_1wgmzwj\" targetRef=\"EndEvent_0wrakqo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0fmyixl\"\u003e\u003ctext\u003e\u003c![CDATA[Example results added as an incident note. Note: tables do not render correctly has rich text.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17xhl7t\" sourceRef=\"ServiceTask_1wgmzwj\" targetRef=\"TextAnnotation_0fmyixl\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1wgmzwj\" id=\"ServiceTask_1wgmzwj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"290\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qi450y\" id=\"SequenceFlow_0qi450y_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0wrakqo\" id=\"EndEvent_0wrakqo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"474\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_162u142\" id=\"SequenceFlow_162u142_di\"\u003e\u003comgdi:waypoint x=\"390\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"474\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"432\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0fmyixl\" id=\"TextAnnotation_0fmyixl_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"205\" x=\"402\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17xhl7t\" id=\"Association_17xhl7t_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_domain_distance",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_domain_distance\" isExecutable=\"true\" name=\"Example: Domain Distance\"\u003e\u003cdocumentation\u003eAn example testing for confusable domain names\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pyyn79\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07w80p3\" name=\"Utilities: Domain Distance\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6fd01564-96de-4482-bceb-cf396df6c758\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The result includes:\\n#   \\\"domain_name\\\" - the name being tested\\n#   \\\"distances\\\" - a dicctionary of all the distances\\n#   \\\"closest\\\" - the closest match from the list.\\n# If the match distance is only 1 or 0, the domain name is very easily confused with one on the list!\\n\\nif results.closest.distance \u0026lt;= 1:\\n  html = u\\\"\u0026lt;div\u0026gt;Warning!  Domain {} is easily confused with {}!\u0026lt;/div\u0026gt;\\\".format(results.domain_name, results.closest.name)\\n  incident.addNote(helper.createRichText(html))\\n\",\"pre_processing_script\":\"# if email address, return only domain portion\\nif \\\"email\\\" in artifact.type.lower():\\n  split_email = artifact.value.split(\\\"@\\\")\\n  if len(split_email) \u0026gt; 1:\\n    inputs.domain_name = split_email[1]\\n  else:\\n    inputs.domain_name = artifact.value\\nelse:\\n  # The domain name being tested\\n  inputs.domain_name = artifact.value\\n\\n# The list of domains to test against\\ninputs.domain_list = \\\"ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pyyn79\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1062y94\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0fkhffe\"\u003e\u003cincoming\u003eSequenceFlow_1062y94\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1062y94\" sourceRef=\"ServiceTask_07w80p3\" targetRef=\"EndEvent_0fkhffe\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1pyyn79\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07w80p3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1xd68s6\"\u003e\u003ctext\u003e\u003c![CDATA[Calculates the \"word distance\" between a suspect name and a list of names.\u00a0 This can be useful for detecting spoofed URLs.\n\nThe distance is small if the names are similar.\u00a0 For each different or switched character, the distance increases.\u00a0 But \"confusable Unicode characters\" are treated as identical (they have zero distance).]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t5cp3a\" sourceRef=\"ServiceTask_07w80p3\" targetRef=\"TextAnnotation_1xd68s6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07w80p3\" id=\"ServiceTask_07w80p3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"282\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0fkhffe\" id=\"EndEvent_0fkhffe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"421\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1062y94\" id=\"SequenceFlow_1062y94_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pyyn79\" id=\"SequenceFlow_1pyyn79_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"282\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"240\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1xd68s6\" id=\"TextAnnotation_1xd68s6_di\"\u003e\u003comgdc:Bounds height=\"74\" width=\"502\" x=\"309\" y=\"36\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t5cp3a\" id=\"Association_0t5cp3a_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 7,
       "creator_id": "admin@example.com",
-      "description": "Example to extract json to html table. Optionally specify a path to a portion of the json structure to convert",
-      "export_key": "example_json2html",
+      "description": "An example testing for confusable domain names",
+      "export_key": "example_domain_distance",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851158,
-      "name": "Example: JSON2HTML",
+      "last_modified_time": 1648557513732,
+      "name": "Example: Domain Distance",
       "object_type": "artifact",
-      "programmatic_name": "example_json2html",
+      "programmatic_name": "example_domain_distance",
       "tags": [],
-      "uuid": "bd5f2bdf-4bd6-408d-9a24-2cd20a36c8ed",
-      "workflow_id": 157
+      "uuid": "46aeb812-3e5d-4e03-a881-a613a90d88ec",
+      "workflow_id": 211
     },
     {
       "actions": [],
@@ -4186,53 +3945,213 @@
       "description": "Transform an XML document using a defined xsl transform file",
       "export_key": "example_xml_transformation",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850629,
+      "last_modified_time": 1648557514679,
       "name": "Example: XML Transformation",
       "object_type": "artifact",
       "programmatic_name": "example_xml_transformation",
       "tags": [],
       "uuid": "929a2244-4030-4677-accc-3eee2352c64f",
-      "workflow_id": 154
+      "workflow_id": 216
     },
     {
       "actions": [],
       "content": {
         "version": 7,
-        "workflow_id": "example_zip_list",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_list\" isExecutable=\"true\" name=\"Example: Zip List\"\u003e\u003cdocumentation\u003eAn example showing how to list the contents of a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_19qjaxi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1jqt9h0\" name=\"Utilities: Attachment Zip List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The output contains two lists:\\n# - \\\"namelist\\\", which is just a list of the filenames (paths) within the zip file,\\n# - \\\"infolist\\\", which has full information for each file, including its name, size, and so on.\\n\\n# For this example, let\u0027s create two notes\\n\\n# One with a list of the namelist\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor filename in results.namelist:\\n  html = html + u\\\"{}\u0026lt;br\u0026gt;\\\".format(filename)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\\n# Another with more detailed information\\nhtml = u\\\"\u0026lt;div\u0026gt;\u0026lt;p\u0026gt;Contents of {}:\u0026lt;/p\u0026gt;\\\".format(attachment.name)\\nfor fileinfo in results.infolist:\\n  html = html + u\\\"{} ({} bytes, {} compressed) {}\u0026lt;br\u0026gt;\\\".format(fileinfo.filename, fileinfo.file_size, fileinfo.compress_size, fileinfo.comment)\\nhtml = html + \\\"\u0026lt;/div\u0026gt;\\\"\\nincident.addNote(helper.createRichText(html))\\n\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_19qjaxi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16qgouz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_19qjaxi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jqt9h0\"/\u003e\u003cendEvent id=\"EndEvent_1khrp1p\"\u003e\u003cincoming\u003eSequenceFlow_16qgouz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16qgouz\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"EndEvent_1khrp1p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1o48uch\"\u003e\u003ctext\u003eFunction reads the attachment (by id) then produces a list of its contents, in a structured data format.\u00a0 The post-processing script writes these results into a note on the incident.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_01ubqgv\" sourceRef=\"ServiceTask_1jqt9h0\" targetRef=\"TextAnnotation_1o48uch\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jqt9h0\" id=\"ServiceTask_1jqt9h0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19qjaxi\" id=\"SequenceFlow_19qjaxi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"254.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1khrp1p\" id=\"EndEvent_1khrp1p_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"545\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"563\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16qgouz\" id=\"SequenceFlow_16qgouz_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"478\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1o48uch\" id=\"TextAnnotation_1o48uch_di\"\u003e\u003comgdc:Bounds height=\"103\" width=\"310\" x=\"391\" y=\"24\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_01ubqgv\" id=\"Association_01ubqgv_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"473\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_timer",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_timer\" isExecutable=\"true\" name=\"Example: Timer\"\u003e\u003cdocumentation\u003eThis example workflow demonstrates how to call the Utilities Timer function using an epoch time as input to define when the timer should end.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05isvsf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0z91qwo\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Results: {\u0027version\u0027: \u00271.0\u0027, \u0027success\u0027: False, \u0027reason\u0027: None, \u0027content\u0027: {\u0027instance_id\u0027: 221, \u0027status\u0027: \u0027running\u0027, \u0027start_date\u0027: 1596658216490, \u0027end_date\u0027: None, \u0027reason\u0027: None, \u0027is_terminated\u0027: False}, \u0027raw\u0027: \u0027{\\\"instance_id\\\": 221, \\\"status\\\": \\\"running\\\", \\\"start_date\\\": 1596658216490, \\\"end_date\\\": null, \\\"reason\\\": null, \\\"is_terminated\\\": false}\u0027, \u0027inputs\u0027: {\u0027utilities_epoch\u0027: 1596658320000}, \u0027metrics\u0027: {\u0027version\u0027: \u00271.0\u0027, \u0027package\u0027: \u0027fn-utilities\u0027, \u0027package_version\u0027: \u00272.0.0\u0027, \u0027host\u0027: \u0027Marks-MacBook-Pro.local\u0027, \u0027execution_time_ms\u0027: 102472, \u0027timestamp\u0027: \u00272020-08-05 16:12:00\u0027}}\",\"pre_processing_script\":\"# Get the input date/time for timer end from the rule activity field\\ninputs.utilities_epoch = rule.properties.utilities_timer_end_time\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05isvsf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zxbldm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05isvsf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0z91qwo\"/\u003e\u003cendEvent id=\"EndEvent_1h1hqd5\"\u003e\u003cincoming\u003eSequenceFlow_0zxbldm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0zxbldm\" sourceRef=\"ServiceTask_0z91qwo\" targetRef=\"EndEvent_1h1hqd5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_039vo75\"\u003e\u003ctext\u003e\u003c![CDATA[Input: utilities_time string indicating how long function should sleep\n\u00a0or utilities_epoch with end timer epoch\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0w30yij\" sourceRef=\"ServiceTask_0z91qwo\" targetRef=\"TextAnnotation_039vo75\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0z91qwo\" id=\"ServiceTask_0z91qwo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"327\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05isvsf\" id=\"SequenceFlow_05isvsf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"217.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1h1hqd5\" id=\"EndEvent_1h1hqd5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"523\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"496\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zxbldm\" id=\"SequenceFlow_0zxbldm_di\"\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"523\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"430\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_039vo75\" id=\"TextAnnotation_039vo75_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"205\" x=\"168\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0w30yij\" id=\"Association_0w30yij_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"309\" xsi:type=\"omgdc:Point\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 7,
       "creator_id": "admin@example.com",
-      "description": "An example showing how to list the contents of a ZIP file attachment.",
-      "export_key": "example_zip_list",
+      "description": "This example workflow demonstrates how to call the Utilities Timer function using an epoch time as input to define when the timer should end.",
+      "export_key": "example_timer",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220850128,
-      "name": "Example: Zip List",
-      "object_type": "attachment",
-      "programmatic_name": "example_zip_list",
+      "last_modified_time": 1648557512487,
+      "name": "Example: Timer",
+      "object_type": "incident",
+      "programmatic_name": "example_timer",
       "tags": [],
-      "uuid": "fcc8c11d-1501-4ff8-9447-f65d71e4991f",
-      "workflow_id": 151
+      "uuid": "2ef3b621-8e1f-4f9d-8491-a5f5b16c6356",
+      "workflow_id": 204
     },
     {
       "actions": [],
       "content": {
         "version": 7,
-        "workflow_id": "example_attachment_to_base64",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_attachment_to_base64\" isExecutable=\"true\" name=\"Example: Attachment to Base64\"\u003e\u003cdocumentation\u003eAn example converting a file attachment to a Base64 encoded string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1k2ey4q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1rw7jx0\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\", None) is not None:\\n  \\n  file_name = unicode(results.get(\\\"filename\\\", \\\"\\\"))\\n  note_text = u\\\"File {0} converted to base64 format: {1}...\\\".format(file_name, results.get(\\\"content\\\")[1:20])\\n    \\n  incident.addNote(note_text)\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1k2ey4q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nnhwi4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1k2ey4q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1rw7jx0\"/\u003e\u003cendEvent id=\"EndEvent_01yksdy\"\u003e\u003cincoming\u003eSequenceFlow_1nnhwi4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1nnhwi4\" sourceRef=\"ServiceTask_1rw7jx0\" targetRef=\"EndEvent_01yksdy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ix6ku6\"\u003e\u003ctext\u003eConvert a file attachment to Base64 string and returns the encoded string.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0eg1i7s\" sourceRef=\"ServiceTask_1rw7jx0\" targetRef=\"TextAnnotation_0ix6ku6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1rw7jx0\" id=\"ServiceTask_1rw7jx0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1k2ey4q\" id=\"SequenceFlow_1k2ey4q_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"189.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01yksdy\" id=\"EndEvent_01yksdy_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"453\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"426\" y=\"228\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nnhwi4\" id=\"SequenceFlow_1nnhwi4_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"367\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ix6ku6\" id=\"TextAnnotation_0ix6ku6_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"279\" x=\"375\" y=\"93\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0eg1i7s\" id=\"Association_0eg1i7s_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_json2html",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_json2html\" isExecutable=\"true\" name=\"Example: JSON2HTML\"\u003e\u003cdocumentation\u003eExample to extract json to html table. Optionally specify a path to a portion of the json structure to convert\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0qi450y\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1wgmzwj\" name=\"Utilities: JSON2HTML\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7460c6a9-8c2a-42fb-a871-bef9b37c9e9a\"\u003e{\"inputs\":{\"254477f5-5999-432f-b509-66575b59a7e2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"{\\\"1\\\": \\\"hello\\\", \\\"b\\\": \\\"world\\\", \\\"c\\\": {\\\"d\\\": \\\"D\\\", \\\"e\\\": null, \\\"list\\\": [1, 2, 3, {\\\"keen1n\\\": \\\"m1ch\\\", \\\"ibm\\\": null}], \\\"empty_list\\\": [], \\\"null\\\": \\\"1sdf\\\", \\\"set\\\": [\\\"s\\\", \\\"e\\\", \\\"t\\\"]}, \\\"d\\\": \\\"D2\\\", \\\"test.with.period\\\": \\\"working?\\\"}\"}},\"58f0bd61-cec6-4d85-9ab1-c72f8f5722cb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"c.list\"}}},\"post_processing_script\":\"# example output\\n# {\u0027content\u0027: \u0027\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;1\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;2\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;3\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;table border=\\\"1\\\"\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;th\u0026gt;keen1n\u0026lt;/th\u0026gt;\u0026lt;td\u0026gt;m1ch\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;tr\u0026gt;\u0026lt;th\u0026gt;ibm\u0026lt;/th\u0026gt;\u0026lt;td\u0026gt;None\u0026lt;/td\u0026gt;\u0026lt;/tr\u0026gt;\u0026lt;/table\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0027}\\nincident.addNote(helper.createRichText(results[\u0027content\u0027]))\",\"pre_processing_script\":\"#data = { \\\"data\\\": artifact.value, \\\"data_type\\\": artifact.type, \\\"description\\\": artifact.description if artifact.description is not None else \\\"\\\"}\\n#inputs.json2html_data = str(data).replace(\\\"\u0027\\\", \u0027\\\"\u0027).replace(\u0027u\\\"\u0027, \u0027\\\"\u0027) # remove unicode references\\n#inputs.json2html_data = str(inputs.json2html_data).replace(\\\"\u0027\\\", \u0027\\\"\u0027).replace(\u0027u\\\"\u0027, \u0027\\\"\u0027) # remove unicode references\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0qi450y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_162u142\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0qi450y\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1wgmzwj\"/\u003e\u003cendEvent id=\"EndEvent_0wrakqo\"\u003e\u003cincoming\u003eSequenceFlow_162u142\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_162u142\" sourceRef=\"ServiceTask_1wgmzwj\" targetRef=\"EndEvent_0wrakqo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0fmyixl\"\u003e\u003ctext\u003e\u003c![CDATA[Example results added as an incident note. Note: tables do not render correctly has rich text.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17xhl7t\" sourceRef=\"ServiceTask_1wgmzwj\" targetRef=\"TextAnnotation_0fmyixl\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1wgmzwj\" id=\"ServiceTask_1wgmzwj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"290\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qi450y\" id=\"SequenceFlow_0qi450y_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0wrakqo\" id=\"EndEvent_0wrakqo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"474\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_162u142\" id=\"SequenceFlow_162u142_di\"\u003e\u003comgdi:waypoint x=\"390\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"474\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"432\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0fmyixl\" id=\"TextAnnotation_0fmyixl_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"205\" x=\"402\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17xhl7t\" id=\"Association_17xhl7t_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 7,
       "creator_id": "admin@example.com",
-      "description": "An example showing how to list the contents of a ZIP file attachment.",
-      "export_key": "example_zip_list",
+      "description": "Example to extract json to html table. Optionally specify a path to a portion of the json structure to convert",
+      "export_key": "example_json2html",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220851810,
-      "name": "Example: Attachment to Base64",
-      "object_type": "attachment",
-      "programmatic_name": "example_zip_list",
+      "last_modified_time": 1648557514491,
+      "name": "Example: JSON2HTML",
+      "object_type": "artifact",
+      "programmatic_name": "example_json2html",
       "tags": [],
-      "uuid": "963a8859-4406-4cdd-b516-ba6f4d50662f",
-      "workflow_id": 161
+      "uuid": "bd5f2bdf-4bd6-408d-9a24-2cd20a36c8ed",
+      "workflow_id": 215
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_email_parsing_attachment",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_email_parsing_attachment\" isExecutable=\"true\" name=\"Example: Email Parsing (Attachment)\"\u003e\u003cdocumentation\u003eExample Workflow showing to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0a3f8pj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0mbl607\" name=\"Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d83f571e-8904-4123-9c2c-3f404b00cc5e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\nif not results.success:\\n  note_text = u\\\"\\\"\\\"Workflow \u0027Example: Email Parsing (Artifact)\u0027 Failed\u0026lt;br\u0026gt;\\n                  \u0026lt;b\u0026gt;Reason:\u0026lt;/b\u0026gt; {0}\\\"\\\"\\\".format(unicode(results.reason))\\n  \\n  incident.addNote(helper.createRichText(note_text))\\n\\nelse:\\n  email = results.content\\n  \\n  # Get Email Subject\\n  eml_subject = email.get(\\\"subject\\\", \\\"BLANK SUBJECT LINE\\\")\\n\\n  #########################################\\n  # Add Artifacts for Email Recipient: to #\\n  #########################################\\n  for eml_addr in email.get(\\\"to\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  #########################################\\n  # Add Artifacts for Email Recipient: cc #\\n  #########################################\\n  for eml_addr in email.get(\\\"cc\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  ########################################\\n  # Add Artifacts for Email Sender: from #\\n  ########################################\\n  for eml_addr in email.get(\\\"from\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Sender\\\", eml_addr[1], eml_addr[0])\\n\\n  ################################################\\n  # Add Artifacts for IPs found in Email Headers #\\n  ################################################\\n  for eml_header in email.get(\\\"received\\\", []):\\n    \\n    the_header = eml_header.get(\\\"from\\\", None)\\n    \\n    if the_header:\\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\\n      unique_ips = set(ips)\\n  \\n      for an_ip in unique_ips:\\n        if an_ip:\\n          incident.addArtifact(\\\"IP Address\\\", an_ip, u\\\"Hop {0} at {1}\\\\n\\\\nHeader: {2}\\\".format(eml_header.get(\\\"hop\\\", \\\"\\\"), eml_header.get(\\\"date_utc\\\", \\\"\\\"), the_header))\\n\\n  ##############################################\\n  # Add Artifacts for URLs found in Email Body #\\n  ##############################################\\n  urls = []\\n  for eml_body_content in [email.get(\\\"plain_body\\\", \\\"\\\"), email.get(\\\"html_body\\\", \\\"\\\")]:\\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026amp;+]|[!*\\\\(\\\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\\n\\n  uniq_urls = set(urls)\\n\\n  for a_url in uniq_urls:\\n    # Remove any backslash as regex can add\\n    a_url = a_url.replace(\u0027\\\\\\\\\u0027,\\\"\\\")\\n    if a_url:\\n      incident.addArtifact(\\\"URL\\\", a_url, \\\"Found in parsed Email\\\")\\n  \\n  ################################################\\n  # Add the Email Body as a Note to the Incident #\\n  ################################################\\n  if email.get(\\\"body\\\"):\\n    note_text = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Parsed Email::\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Subject:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{0}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;From:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;To:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{2}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Body:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n                                  unicode(email.get(\\\"from\\\", \\\"N/A\\\")),\\n                                  unicode(email.get(\\\"to\\\", \\\"N/A\\\")), \\n                                  unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n  \\n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\\n  if email.get(\\\"plain_body\\\"):\\n    note_text = u\\\"\\\"\\\"Parsed Email::\\\\n\\\\nSubject:\\\\n{0}\\\\n\\\\nFrom:\\\\n{1}\\\\n\\\\nTo:\\\\n{2}\\\\n\\\\nBody:\\\\n{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n      unicode(email.get(\\\"from\\\", \\\"N/A\\\")), unicode(email.get(\\\"to\\\", \\\"N/A\\\")), unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createPlainText(note_text))\\n  \u0027\u0027\u0027\",\"pre_processing_script\":\"# Define incident_id and attachment_id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.utilities_parse_email_attachments = True\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0a3f8pj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f19d8l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0a3f8pj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0mbl607\"/\u003e\u003cendEvent id=\"EndEvent_0or8ho0\"\u003e\u003cincoming\u003eSequenceFlow_0f19d8l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0f19d8l\" sourceRef=\"ServiceTask_0mbl607\" targetRef=\"EndEvent_0or8ho0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0xkpnc6\"\u003e\u003ctext\u003e\u003c![CDATA[Additional artifacts created based on the email message\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rmikmt\" sourceRef=\"ServiceTask_0mbl607\" targetRef=\"TextAnnotation_0xkpnc6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"234\" y=\"123\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"229\" y=\"158\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0mbl607\" id=\"ServiceTask_0mbl607_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"403\" y=\"101\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0a3f8pj\" id=\"SequenceFlow_0a3f8pj_di\"\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"291.5\" y=\"119.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0or8ho0\" id=\"EndEvent_0or8ho0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"619\" y=\"123\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"592\" y=\"162\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f19d8l\" id=\"SequenceFlow_0f19d8l_di\"\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003comgdi:waypoint x=\"619\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"561\" y=\"119.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0xkpnc6\" id=\"TextAnnotation_0xkpnc6_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"213\" x=\"492\" y=\"12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rmikmt\" id=\"Association_0rmikmt_di\"\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"108\"/\u003e\u003comgdi:waypoint x=\"557\" xsi:type=\"omgdc:Point\" y=\"70\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Example Workflow showing to parse an Email File (.eml or .msg) from Incident/Task Attachments. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.",
+      "export_key": "example_email_parsing_attachment",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557513006,
+      "name": "Example: Email Parsing (Attachment)",
+      "object_type": "attachment",
+      "programmatic_name": "example_email_parsing_attachment",
+      "tags": [],
+      "uuid": "3d33c5fa-1b83-4fbb-ac62-5d9053b43d40",
+      "workflow_id": 207
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_extract_ssl_cert_from_url",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_extract_ssl_cert_from_url\" isExecutable=\"true\" name=\"Example: Extract SSL Cert from URL\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This workflow takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.\nThe workflow runs at the artifact level]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ptaupz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_12xb2eo\" name=\"Utilities: Extract SSL Cert From ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"69123885-b3b9-4df9-a241-aaa29ba9d7d6\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.addArtifact(\u0027X509 Certificate File\u0027, results.certificate, \u0027A certificate file gathered from provided the provided URL\u0027)\\n\",\"pre_processing_script\":\"inputs.https_url = artifact.value\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ptaupz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1s9vql7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ptaupz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_12xb2eo\"/\u003e\u003cendEvent id=\"EndEvent_06nahzq\"\u003e\u003cincoming\u003eSequenceFlow_1s9vql7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1s9vql7\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"EndEvent_06nahzq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11zlt8p\"\u003e\u003ctext\u003eInput: HTTPS URL\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_067xt46\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"TextAnnotation_11zlt8p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0b52jx9\"\u003e\u003ctext\u003e\u003c![CDATA[Artifact created of type \u0027X509 Certificate File\u0027 with SSL Certificate data; encoded in JSON]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1fh4amb\" sourceRef=\"ServiceTask_12xb2eo\" targetRef=\"TextAnnotation_0b52jx9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_12xb2eo\" id=\"ServiceTask_12xb2eo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ptaupz\" id=\"SequenceFlow_1ptaupz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06nahzq\" id=\"EndEvent_06nahzq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"651\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"669\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s9vql7\" id=\"SequenceFlow_1s9vql7_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"651\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"557.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11zlt8p\" id=\"TextAnnotation_11zlt8p_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"201\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_067xt46\" id=\"Association_067xt46_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0b52jx9\" id=\"TextAnnotation_0b52jx9_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"258\" x=\"518\" y=\"87\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1fh4amb\" id=\"Association_1fh4amb_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "This workflow takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.\nThe workflow runs at the artifact level",
+      "export_key": "example_extract_ssl_cert_from_url",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557513922,
+      "name": "Example: Extract SSL Cert from URL",
+      "object_type": "artifact",
+      "programmatic_name": "example_extract_ssl_cert_from_url",
+      "tags": [],
+      "uuid": "663fd8b8-315f-41a5-a0d5-005758fabcc1",
+      "workflow_id": 212
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_string_to_attachment",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_string_to_attachment\" isExecutable=\"true\" name=\"Example: String to Attachment\"\u003e\u003cdocumentation\u003eAn example of creating an attachment from an input string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lr37k8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0tzwdvf\" name=\"Utilities: String to Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cd8a23ce-63ba-42cf-8eba-8b63d5e7c872\"\u003e{\"inputs\":{\"03955f53-5940-49ff-a9df-0b607099657b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"A Test Attachment Name\"}}},\"post_processing_script\":\"# result: {\u0027attachment_id\u0027: 28}\\n\",\"pre_processing_script\":\"# Required inputs are: the string to convert, the incident id and the attachment name\\ninputs.string_to_convert_to_attachment = artifact.value\\ninputs.incident_id = incident.id\\n#inputs.attachment_name = \\\"A Test Attachment Name\\\"\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lr37k8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m0w4as\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lr37k8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0tzwdvf\"/\u003e\u003cendEvent id=\"EndEvent_1czshr5\"\u003e\u003cincoming\u003eSequenceFlow_1m0w4as\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m0w4as\" sourceRef=\"ServiceTask_0tzwdvf\" targetRef=\"EndEvent_1czshr5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0tzwdvf\" id=\"ServiceTask_0tzwdvf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365.27250900360144\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lr37k8\" id=\"SequenceFlow_1lr37k8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1czshr5\" id=\"EndEvent_1czshr5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"669.2725090036015\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"687.2725090036015\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m0w4as\" id=\"SequenceFlow_1m0w4as_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"669\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"567\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "An example of creating an attachment from an input string",
+      "export_key": "example_string_to_attachment",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557512835,
+      "name": "Example: String to Attachment",
+      "object_type": "artifact",
+      "programmatic_name": "example_string_to_attachment",
+      "tags": [],
+      "uuid": "39f4dc31-1eed-41ee-a4db-859724e476d5",
+      "workflow_id": 206
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_pdfid",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_pdfid\" isExecutable=\"true\" name=\"Example: PDFiD\"\u003e\u003cdocumentation\u003eAn example of using the PDFiD function to get summary information about a PDF file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1qm57dq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_096tnaj\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"attachment_content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qm57dq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zvggno\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qm57dq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_096tnaj\"/\u003e\u003cserviceTask id=\"ServiceTask_087cpkb\" name=\"Utilities: PDFiD\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3f9da4a2-cdac-4aa6-891c-1217565e734c\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The output of PDFiD is a dictionary with the fundamental elements of the PDF file.\\n# These include,\\n#  - \\\"isPdf\\\" (True or False)\\n#  - \\\"header\\\" (the PDF version header)\\n#  - \\\"obj\\\", \\\"endobj\\\" and so on: the count of each element.\\n# More documentation can be found at https://blog.didierstevens.com/programs/pdf-tools/\\n\\n# Some sections of interest\\ninteresting_sections = [\\n  \u0027obj\u0027, \u0027endobj\u0027, \u0027stream\u0027, \u0027endstream\u0027, \u0027startxref\u0027, \u0027xref\u0027, \u0027trailer\u0027,\\n  \u0027/AA\u0027, \u0027/AcroForm\u0027, \u0027/EmbeddedFile\u0027, \u0027/Encrypt\u0027, \u0027/JBIG2Decode\u0027, \u0027/JS\u0027, \u0027/JavaScript\u0027, \u0027/Launch\u0027, \u0027/ObjStm\u0027, \u0027/OpenAction\u0027, \u0027/Page\u0027, \u0027/RichMedia\u0027, \u0027/XFA\u0027\\n  ]\\n\\nif not results.isPdf:\\n  incident.addNote(helper.createRichText(\\\"Not a PDF file: {}\\\".format(attachment.name)))\\nelse:\\n  # In this example we just write them to a note in the incident\\n  note_data = [\\\"PDFiD report for {} ({}):\\\".format(attachment.name, results.header)]\\n\\n  for section in interesting_sections:\\n    value = results.get(section)\\n    if value is not None:\\n      note_data.append(\\\"{}: {}\\\".format(section, value))\\n\\n  text = helper.createPlainText(\\\"\\\\n\\\".join(note_data))\\n  incident.addNote(text)\\n  \\n  # Maybe extend this to alert if (/JS or /JavaScript) and (/AA or /OpenAction)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# The input is the base64-encoded content that was read in a previous component\\n# That object has properties:\\n#  - filename\\n#  - content_type\\n#  - size\\n#  - created\\n#  - content (the base64-encoded data)\\ninputs.base64content = workflow.properties.attachment_content.content\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zvggno\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1e0enwz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zvggno\" sourceRef=\"ServiceTask_096tnaj\" targetRef=\"ServiceTask_087cpkb\"/\u003e\u003cendEvent id=\"EndEvent_0rj6mik\"\u003e\u003cincoming\u003eSequenceFlow_1e0enwz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1e0enwz\" sourceRef=\"ServiceTask_087cpkb\" targetRef=\"EndEvent_0rj6mik\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_03l5i5t\"\u003e\u003ctext\u003eInput to the PDFiD function is base64-encoded content.\u00a0 We can read this from an attachment.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pys59q\" sourceRef=\"ServiceTask_096tnaj\" targetRef=\"TextAnnotation_03l5i5t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1n1qjn9\"\u003e\u003ctext\u003ePerforms a quick analysis of the structure of the PDF file.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0wviioh\" sourceRef=\"ServiceTask_087cpkb\" targetRef=\"TextAnnotation_1n1qjn9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_096tnaj\" id=\"ServiceTask_096tnaj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qm57dq\" id=\"SequenceFlow_1qm57dq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_087cpkb\" id=\"ServiceTask_087cpkb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zvggno\" id=\"SequenceFlow_0zvggno_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"427.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rj6mik\" id=\"EndEvent_0rj6mik_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"682\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"700\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1e0enwz\" id=\"SequenceFlow_1e0enwz_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"682\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"626\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_03l5i5t\" id=\"TextAnnotation_03l5i5t_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"175\" x=\"307\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pys59q\" id=\"Association_0pys59q_di\"\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"380\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1n1qjn9\" id=\"TextAnnotation_1n1qjn9_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"153\" x=\"509\" y=\"72\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0wviioh\" id=\"Association_0wviioh_di\"\u003e\u003comgdi:waypoint x=\"543\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "admin@example.com",
+      "description": "An example of using the PDFiD function to get summary information about a PDF file attachment.",
+      "export_key": "example_pdfid",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648831999881,
+      "name": "Example: PDFiD",
+      "object_type": "attachment",
+      "programmatic_name": "example_pdfid",
+      "tags": [],
+      "uuid": "49a1fc52-bf52-4cfa-b556-c1e1002f9c78",
+      "workflow_id": 226
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "utilities_expand_url",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"utilities_expand_url\" isExecutable=\"true\" name=\"Example: Expand URL\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Take a url (mostly shortened) and follow it through redirects as it\u0027s expanded]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t6zkar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1eosian\" name=\"Utilities: Expand URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"173d3d51-3263-4f26-b927-ecd1e2bf6344\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Results: {\u0027urllist\u0027: [\u0027https://community.ibm.com/community/user/security/communities/community-home?CommunityKey=d2f71e8c-108e-4652-b59c-29d61af7163e\u0027, \u0027https://community.ibm.com/community/user/security/communities/community-home\u0027]}\\n\\n# Add the url expansions to the Artifact Description\\nexpansions = results.get(\\\"urllist\\\", [])\\nexpansion_list = u\\\"Expansions:\\\\n\\\\n{0}\\\".format(\\\"\\\\n\\\\n\\\".join(expansions)) if expansions else \\\"No Expansions\\\"\\n\\nif artifact.description:\\n  artifact.description = \\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, expansion_list)\\nelse:\\n  artifact.description = expansion_list\\n  \\nfor url in expansions:\\n  incident.addArtifact(\\\"URL\\\", url, u\\\"expansion from {}\\\".format(artifact.value))\\n\",\"pre_processing_script\":\"inputs.resilient_url = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t6zkar\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02a827k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t6zkar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1eosian\"/\u003e\u003cendEvent id=\"EndEvent_0nnm7lj\"\u003e\u003cincoming\u003eSequenceFlow_02a827k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02a827k\" sourceRef=\"ServiceTask_1eosian\" targetRef=\"EndEvent_0nnm7lj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1omkhvp\"\u003e\u003ctext\u003e\u003c![CDATA[New artifacts are created and results update Artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_187filv\" sourceRef=\"ServiceTask_1eosian\" targetRef=\"TextAnnotation_1omkhvp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1eosian\" id=\"ServiceTask_1eosian_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"274\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t6zkar\" id=\"SequenceFlow_1t6zkar_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"274\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"236\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0nnm7lj\" id=\"EndEvent_0nnm7lj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"451\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"469\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02a827k\" id=\"SequenceFlow_02a827k_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"412.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1omkhvp\" id=\"TextAnnotation_1omkhvp_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"193\" x=\"371\" y=\"88\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_187filv\" id=\"Association_187filv_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Take a url (mostly shortened) and follow it through redirects as it\u0027s expanded",
+      "export_key": "utilities_expand_url",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648831999700,
+      "name": "Example: Expand URL",
+      "object_type": "artifact",
+      "programmatic_name": "utilities_expand_url",
+      "tags": [],
+      "uuid": "3009741f-33d8-4cdc-adf1-9aa3f0843995",
+      "workflow_id": 225
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_artifact_hash",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_artifact_hash\" isExecutable=\"true\" name=\"Example: Artifact Hash\"\u003e\u003cdocumentation\u003eAn example that calculates hash from an artifact attachment\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rb6uxh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0dwrwzy\" name=\"Utilities Artifact Hash\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"116d3842-3b2c-4a34-a14a-43cf0b9fc787\"\u003e{\"inputs\":{},\"post_processing_script\":\"# The result contains at least these three hashes\\nif results.get(\u0027sha256\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-256 Hash\\\", results.get(\u0027sha256\u0027), u\\\"SHA-256 hash of \u0027{}\u0027\\\".format(artifact.value))\\n\\nif results.get(\u0027sha1\u0027, None):\\n  incident.addArtifact(\\\"Malware SHA-1 Hash\\\", results.get(\u0027sha1\u0027), u\\\"SHA-1 hash of \u0027{}\u0027\\\".format(artifact.value))\\n\\nif results.get(\u0027md5\u0027, None):\\n  incident.addArtifact(\\\"Malware MD5 Hash\\\", results.get(\u0027md5\u0027), u\\\"MD5 hash of \u0027{}\u0027\\\".format(artifact.value))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rb6uxh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0nmx5qc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1p0j4yo\"\u003e\u003cincoming\u003eSequenceFlow_0nmx5qc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0nmx5qc\" sourceRef=\"ServiceTask_0dwrwzy\" targetRef=\"EndEvent_1p0j4yo\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0rb6uxh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0dwrwzy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0dwrwzy\" id=\"ServiceTask_0dwrwzy_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1p0j4yo\" id=\"EndEvent_1p0j4yo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"471\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"489\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nmx5qc\" id=\"SequenceFlow_0nmx5qc_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"471\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"440\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rb6uxh\" id=\"SequenceFlow_0rb6uxh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "admin@example.com",
+      "description": "An example that calculates hash from an artifact attachment",
+      "export_key": "example_artifact_hash",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1649084088171,
+      "name": "Example: Artifact Hash",
+      "object_type": "artifact",
+      "programmatic_name": "example_artifact_hash",
+      "tags": [],
+      "uuid": "456bc89c-16be-4065-98df-3604eaa31908",
+      "workflow_id": 230
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_get_incident_contact_info",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_get_incident_contact_info\" isExecutable=\"true\" name=\"Example: Get Incident Contact Info\"\u003e\u003cdocumentation\u003eGet owner and member contact information for an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_062lhqj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_062lhqj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u4onb0\"/\u003e\u003cendEvent id=\"EndEvent_1h5oo0t\"\u003e\u003cincoming\u003eSequenceFlow_02cq3n3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1u4onb0\" name=\"Utilities: Get Contact Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"011e399a-4508-4684-986a-e49a8be0b20b\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027owner\u0027: {\u0027fname\u0027: \u0027Resilient\u0027, \u0027lname\u0027: \u0027Sysadmin\u0027, \u0027title\u0027: \u0027\u0027, \u0027display_name\u0027: \u0027Resilient Sysadmin\u0027, \u0027email\u0027: \u0027b@a.com\u0027, \u0027phone\u0027: \u0027781 838 4848\u0027, \u0027cell\u0027: \u0027978 373 2839\u0027}, \u0027members\u0027: []}\\n# {\u0027owner\u0027: None, \u0027members\u0027: [{\u0027fname\u0027: \u0027Resilient\u0027, \u0027lname\u0027: \u0027Sysadmin\u0027, \u0027title\u0027: \u0027\u0027, \u0027display_name\u0027: \u0027Resilient Sysadmin\u0027, \u0027email\u0027: \u0027b@a.com\u0027, \u0027phone\u0027: \u0027781 838 4848\u0027, \u0027cell\u0027: \u0027978 373 2839\u0027}]}\\nowner = u\\\"{} ({})\\\".format(results[\u0027owner\u0027][\u0027display_name\u0027], results[\u0027owner\u0027][\u0027email\u0027]) if results[\u0027owner\u0027] else \u0027Unassigned\u0027\\nnote_text = u\\\"Owner: {}\\\\nMembers:\\\\n{}\\\".format(owner, u\\\"\\\\n\\\".join([u\\\"{} ({})\\\".format(member[\u0027display_name\u0027], member[\u0027email\u0027]) for member in results[\u0027members\u0027]]))\\nincident.addNote(note_text)\",\"pre_processing_script\":\"inputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_062lhqj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_02cq3n3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_02cq3n3\" sourceRef=\"ServiceTask_1u4onb0\" targetRef=\"EndEvent_1h5oo0t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1hoy6fe\"\u003e\u003ctext\u003e\u003c![CDATA[Results rerturned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1r1nuj4\" sourceRef=\"ServiceTask_1u4onb0\" targetRef=\"TextAnnotation_1hoy6fe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_062lhqj\" id=\"SequenceFlow_062lhqj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"181\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1h5oo0t\" id=\"EndEvent_1h5oo0t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"400\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u4onb0\" id=\"ServiceTask_1u4onb0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02cq3n3\" id=\"SequenceFlow_02cq3n3_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1hoy6fe\" id=\"TextAnnotation_1hoy6fe_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"196\" x=\"346\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1r1nuj4\" id=\"Association_1r1nuj4_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"137\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Get owner and member contact information for an Incident",
+      "export_key": "example_get_incident_contact_info",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648831999526,
+      "name": "Example: Get Incident Contact Info",
+      "object_type": "incident",
+      "programmatic_name": "example_get_incident_contact_info",
+      "tags": [],
+      "uuid": "5934f408-b9da-4c05-871b-aa9320419d16",
+      "workflow_id": 224
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_zip_to_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_zip_to_artifact\" isExecutable=\"true\" name=\"Example: Zip Extract\"\u003e\u003cdocumentation\u003eAn example showing how to extract a file from a ZIP file attachment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06xspzk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0eabem4\" name=\"Utilities: Attachment Zip Extract\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d9fb1df-1eab-494b-8375-c4feb0525429\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# The path within the zip that we want to extract\\ninputs.file_path = rule.properties.extract_file_path\\n\\n# If the zipfile is password protected, specify here\\n# inputs.zipfile_password = \\nif rule.properties.zip_password:\\n  inputs.zipfile_password = rule.properties.zip_password\",\"result_name\":\"extracted_file\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06xspzk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xwwmdf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06xspzk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0eabem4\"/\u003e\u003cserviceTask id=\"ServiceTask_1tdad17\" name=\"Utilities: Base64 to Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"11349159-153e-49b7-9a9b-e22676c03687\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#\\ninputs.base64content = workflow.properties.extracted_file.content\\nfile_name = rule.properties.extract_file_path.split(\u0027/\u0027)[-1]\\n\\ninputs.incident_id = incident.id\\ninputs.file_name = file_name + \\\".b64\\\"\\ninputs.content_type = \\\"image/jpeg\\\"\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1xwwmdf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jm5nn7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1xwwmdf\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"ServiceTask_1tdad17\"/\u003e\u003cendEvent id=\"EndEvent_0c81k5c\"\u003e\u003cincoming\u003eSequenceFlow_0jm5nn7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jm5nn7\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"EndEvent_0c81k5c\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0w0xpq6\"\u003e\u003ctext\u003e\u003c![CDATA[In this example we assume that the file attachment is a Word, Excel or Powerpoint document (docx, xlsx, pptx).\u00a0 These are zipfiles, and may contain a thumbnail image (\"docProps/thumbnail.jpeg\").\n\n\nThe \"zip extract\" function produces base64-encoded contents of the extracted file.\u00a0 In the \"output\", we give that a name so it can be used downstream.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1od1xot\" sourceRef=\"ServiceTask_0eabem4\" targetRef=\"TextAnnotation_0w0xpq6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_177jonc\"\u003e\u003ctext\u003eFrom the output of the first function, create a new file attachment.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hx0bem\" sourceRef=\"ServiceTask_1tdad17\" targetRef=\"TextAnnotation_177jonc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0eabem4\" id=\"ServiceTask_0eabem4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"308\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06xspzk\" id=\"SequenceFlow_06xspzk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"308\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"253\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tdad17\" id=\"ServiceTask_1tdad17_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"546\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xwwmdf\" id=\"SequenceFlow_1xwwmdf_di\"\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"494\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"546\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"464\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0c81k5c\" id=\"EndEvent_0c81k5c_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"730\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"748\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jm5nn7\" id=\"SequenceFlow_0jm5nn7_di\"\u003e\u003comgdi:waypoint x=\"646\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"705\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"730\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"675\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0w0xpq6\" id=\"TextAnnotation_0w0xpq6_di\"\u003e\u003comgdc:Bounds height=\"128\" width=\"376\" x=\"128\" y=\"-20\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1od1xot\" id=\"Association_1od1xot_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"333\" xsi:type=\"omgdc:Point\" y=\"108\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_177jonc\" id=\"TextAnnotation_177jonc_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"147\" x=\"600\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hx0bem\" id=\"Association_0hx0bem_di\"\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"654\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "An example showing how to extract a file from a ZIP file attachment.",
+      "export_key": "example_zip_to_artifact",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648831999166,
+      "name": "Example: Zip Extract",
+      "object_type": "attachment",
+      "programmatic_name": "example_zip_to_artifact",
+      "tags": [],
+      "uuid": "d1f7b3b6-1aa9-484f-9648-11cb0d16e4ac",
+      "workflow_id": 222
     },
     {
       "actions": [],
@@ -4246,33 +4165,153 @@
       "description": "An example of searching Resilient.",
       "export_key": "example_resilient_search",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648220849597,
+      "last_modified_time": 1648557515252,
       "name": "Example: Resilient Search",
       "object_type": "attachment",
       "programmatic_name": "example_resilient_search",
       "tags": [],
       "uuid": "5c9feedf-9687-4178-8fea-12d44299e95a",
-      "workflow_id": 148
+      "workflow_id": 219
     },
     {
       "actions": [],
       "content": {
-        "version": 5,
+        "version": 4,
         "workflow_id": "example_call_rest_api",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_call_rest_api\" isExecutable=\"true\" name=\"Example: Call REST API\"\u003e\u003cdocumentation\u003eThis is a general-purpose function to call any REST API or other HTTP service.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2kk5d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_127hp8b\" name=\"Utilities: Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"47ca08b2-bc06-4ad0-a5ed-d8df6d33045b\"\u003e{\"inputs\":{\"4c1c5d09-87f0-4fb5-a236-00690b66db92\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"94486df3-4ab1-44df-8ad9-b160a095652d\"}},\"9c32f347-a610-4f0f-8cf7-fad03be630ea\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"# Set the artifact description to the Response (in plain text) of the REST call\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, results.text)\\nelse:\\n  artifact.description = results.text\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.rest_method = \\\"PATCH\\\"\\n\\n# Let\u0027s patch a URL that includes the artifact value\\ninputs.rest_url = u\\\"http://httpbin.org/patch\\\"\\n\\n# For PATCH requests, the body is text\\ninputs.rest_body = \u0027{\\\"key\\\": \\\"\u0027+artifact.value+\u0027\\\"}\u0027\\n\\n# HTTP headers can be specified as a multi-line string\\ninputs.rest_headers = \\\"\\\"\\\"\\nContent-Type: application/json\\nX-Frooble: Baz\\n\\\"\\\"\\\"\\n\\n# The \u0027rest_verify\u0027 parameter (Boolean) indicates whether to verify SSL certificates.\\n# This should be True unless you need to connect to a self-signed or other invalid cert.\\ninputs.rest_verify = True\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2kk5d\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_177aeon\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1jrtwdz\"\u003e\u003cincoming\u003eSequenceFlow_177aeon\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_177aeon\" sourceRef=\"ServiceTask_127hp8b\" targetRef=\"EndEvent_1jrtwdz\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1f2kk5d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_127hp8b\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eCall from an artifact\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1o1jwta\"\u003e\u003ctext\u003e\u003c![CDATA[Results are appended to the artifact description.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0uwb073\" sourceRef=\"ServiceTask_127hp8b\" targetRef=\"TextAnnotation_1o1jwta\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"161\" y=\"178\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"156\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"84\" y=\"247\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"167\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003comgdi:waypoint x=\"141\" xsi:type=\"omgdc:Point\" y=\"247\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_127hp8b\" id=\"ServiceTask_127hp8b_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jrtwdz\" id=\"EndEvent_1jrtwdz_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"178\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"405\" y=\"217\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_177aeon\" id=\"SequenceFlow_177aeon_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"356\" y=\"174.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2kk5d\" id=\"SequenceFlow_1f2kk5d_di\"\u003e\u003comgdi:waypoint x=\"197\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"204\" y=\"189.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1o1jwta\" id=\"TextAnnotation_1o1jwta_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"212\" x=\"357\" y=\"79\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0uwb073\" id=\"Association_0uwb073_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"165\"/\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"125\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
+      "content_version": 4,
       "creator_id": "admin@example.com",
       "description": "This is a general-purpose function to call any REST API or other HTTP service.",
       "export_key": "example_call_rest_api",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648221267892,
+      "last_modified_time": 1648832000455,
       "name": "Example: Call REST API",
       "object_type": "artifact",
       "programmatic_name": "example_call_rest_api",
       "tags": [],
       "uuid": "f6626e9b-1850-41a4-a36d-b59a83286941",
-      "workflow_id": 150
+      "workflow_id": 229
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_email_parsing_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_email_parsing_artifact\" isExecutable=\"true\" name=\"Example: Email Parsing (Artifact)\"\u003e\u003cdocumentation\u003eExample Workflow showing to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nwjr5i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1gnnr3k\" name=\"Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d83f571e-8904-4123-9c2c-3f404b00cc5e\"\u003e{\"inputs\":{},\"post_processing_script\":\"import re\\n\\nif not results.success:\\n  note_text = u\\\"\\\"\\\"Workflow \u0027Example: Email Parsing (Artifact)\u0027 Failed\u0026lt;br\u0026gt;\\n                  \u0026lt;b\u0026gt;Reason:\u0026lt;/b\u0026gt; {0}\\\"\\\"\\\".format(unicode(results.reason))\\n  \\n  incident.addNote(helper.createRichText(note_text))\\n\\nelse:\\n  email = results.content\\n  \\n  # Get Email Subject\\n  eml_subject = email.get(\\\"subject\\\", \\\"BLANK SUBJECT LINE\\\")\\n\\n  #########################################\\n  # Add Artifacts for Email Recipient: to #\\n  #########################################\\n  for eml_addr in email.get(\\\"to\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  #########################################\\n  # Add Artifacts for Email Recipient: cc #\\n  #########################################\\n  for eml_addr in email.get(\\\"cc\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Recipient\\\", eml_addr[1], eml_addr[0])\\n  \\n  ########################################\\n  # Add Artifacts for Email Sender: from #\\n  ########################################\\n  for eml_addr in email.get(\\\"from\\\", []):\\n    if eml_addr[1]:\\n      incident.addArtifact(\\\"Email Sender\\\", eml_addr[1], eml_addr[0])\\n\\n  ################################################\\n  # Add Artifacts for IPs found in Email Headers #\\n  ################################################\\n  for eml_header in email.get(\\\"received\\\", []):\\n    \\n    the_header = eml_header.get(\\\"from\\\", None)\\n    \\n    if the_header:\\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\\n      unique_ips = set(ips)\\n  \\n      for an_ip in unique_ips:\\n        if an_ip:\\n          incident.addArtifact(\\\"IP Address\\\", an_ip, u\\\"Hop {0} at {1}\\\\n\\\\nHeader: {2}\\\".format(eml_header.get(\\\"hop\\\", \\\"\\\"), eml_header.get(\\\"date_utc\\\", \\\"\\\"), the_header))\\n\\n  ##############################################\\n  # Add Artifacts for URLs found in Email Body #\\n  ##############################################\\n  urls = []\\n  for eml_body_content in [email.get(\\\"plain_body\\\", \\\"\\\"), email.get(\\\"html_body\\\", \\\"\\\")]:\\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026amp;+]|[!*\\\\(\\\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\\n\\n  uniq_urls = set(urls)\\n\\n  for a_url in uniq_urls:\\n    # Remove any backslash as regex can add\\n    a_url = a_url.replace(\u0027\\\\\\\\\u0027,\\\"\\\")\\n    if a_url:\\n      incident.addArtifact(\\\"URL\\\", a_url, \\\"Found in parsed Email\\\")\\n  \\n  ################################################\\n  # Add the Email Body as a Note to the Incident #\\n  ################################################\\n  if email.get(\\\"body\\\"):\\n    note_text = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Parsed Email::\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Subject:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{0}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;From:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;To:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{2}\u0026lt;br\u0026gt;\\n                    \u0026lt;b\u0026gt;Body:\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n                                  unicode(email.get(\\\"from\\\", \\\"N/A\\\")),\\n                                  unicode(email.get(\\\"to\\\", \\\"N/A\\\")), \\n                                  unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n  \\n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\\n  if email.get(\\\"plain_body\\\"):\\n    note_text = u\\\"\\\"\\\"Parsed Email::\\\\n\\\\nSubject:\\\\n{0}\\\\n\\\\nFrom:\\\\n{1}\\\\n\\\\nTo:\\\\n{2}\\\\n\\\\nBody:\\\\n{3}\\\"\\\"\\\".format(unicode(eml_subject),\\n      unicode(email.get(\\\"from\\\", \\\"N/A\\\")), unicode(email.get(\\\"to\\\", \\\"N/A\\\")), unicode(email.get(\\\"body\\\", \\\"N/A\\\")))\\n\\n    incident.addNote(helper.createPlainText(note_text))\\n  \u0027\u0027\u0027\",\"pre_processing_script\":\"# Define incident_id and artifact_id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.utilities_parse_email_attachments = True\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nwjr5i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xm73z8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nwjr5i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1gnnr3k\"/\u003e\u003cendEvent id=\"EndEvent_1w52vjy\"\u003e\u003cincoming\u003eSequenceFlow_0xm73z8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xm73z8\" sourceRef=\"ServiceTask_1gnnr3k\" targetRef=\"EndEvent_1w52vjy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wzvcnn\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as additional artifacts\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_161e2uo\" sourceRef=\"ServiceTask_1gnnr3k\" targetRef=\"TextAnnotation_0wzvcnn\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"168\" y=\"83\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"163\" y=\"118\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1gnnr3k\" id=\"ServiceTask_1gnnr3k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nwjr5i\" id=\"SequenceFlow_0nwjr5i_di\"\u003e\u003comgdi:waypoint x=\"204\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"195.5\" y=\"79.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1w52vjy\" id=\"EndEvent_1w52vjy_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"439\" y=\"83\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"412\" y=\"122\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xm73z8\" id=\"SequenceFlow_0xm73z8_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"363\" y=\"79.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wzvcnn\" id=\"TextAnnotation_0wzvcnn_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"176\" x=\"399\" y=\"4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_161e2uo\" id=\"Association_161e2uo_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"43\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Example Workflow showing to parse an Email File (.eml or .msg) from an Artifact File. Sender and recipient email addresses are added as Artifacts. URLs and IPs found in the email headers or body are also added as Artifacts. The body of the email is added as a Note to the Incident. If attachments are found in the parsed email message, they are added as Email Attachment Artifacts.",
+      "export_key": "example_email_parsing_artifact",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557512321,
+      "name": "Example: Email Parsing (Artifact)",
+      "object_type": "artifact",
+      "programmatic_name": "example_email_parsing_artifact",
+      "tags": [],
+      "uuid": "3422a9e6-ab15-4637-a70d-f3c874088f83",
+      "workflow_id": 203
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_attachment_to_base64",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_attachment_to_base64\" isExecutable=\"true\" name=\"Example: Attachment to Base64\"\u003e\u003cdocumentation\u003eAn example converting a file attachment to a Base64 encoded string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1k2ey4q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1rw7jx0\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\", None) is not None:\\n  \\n  file_name = unicode(results.get(\\\"filename\\\", \\\"\\\"))\\n  note_text = u\\\"File {0} converted to base64 format: {1}...\\\".format(file_name, results.get(\\\"content\\\")[1:20])\\n    \\n  incident.addNote(note_text)\",\"pre_processing_script\":\"# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task id\\nif task is not None:\\n  inputs.task_id = task.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1k2ey4q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1nnhwi4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1k2ey4q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1rw7jx0\"/\u003e\u003cendEvent id=\"EndEvent_01yksdy\"\u003e\u003cincoming\u003eSequenceFlow_1nnhwi4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1nnhwi4\" sourceRef=\"ServiceTask_1rw7jx0\" targetRef=\"EndEvent_01yksdy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ix6ku6\"\u003e\u003ctext\u003eConvert a file attachment to Base64 string and returns the encoded string.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0eg1i7s\" sourceRef=\"ServiceTask_1rw7jx0\" targetRef=\"TextAnnotation_0ix6ku6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1rw7jx0\" id=\"ServiceTask_1rw7jx0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1k2ey4q\" id=\"SequenceFlow_1k2ey4q_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"189.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_01yksdy\" id=\"EndEvent_01yksdy_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"453\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"426\" y=\"228\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1nnhwi4\" id=\"SequenceFlow_1nnhwi4_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"367\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ix6ku6\" id=\"TextAnnotation_0ix6ku6_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"279\" x=\"375\" y=\"93\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0eg1i7s\" id=\"Association_0eg1i7s_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"146\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "An example converting a file attachment to a Base64 encoded string",
+      "export_key": "example_attachment_to_base64",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648832000295,
+      "name": "Example: Attachment to Base64",
+      "object_type": "attachment",
+      "programmatic_name": "example_attachment_to_base64",
+      "tags": [],
+      "uuid": "963a8859-4406-4cdd-b516-ba6f4d50662f",
+      "workflow_id": 228
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_artifact_attachment_to_base64",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_artifact_attachment_to_base64\" isExecutable=\"true\" name=\"Example: (Artifact) Attachment to Base64\"\u003e\u003cdocumentation\u003eAn example converting an Artifact of type File to a Base64 Encoded string\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1j5vc4b\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rxzx0p\" name=\"Utilities: Attachment to Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\", None) is not None:\\n  \\n  file_name = unicode(results.get(\\\"filename\\\", \\\"\\\"))\\n  note_text = u\\\"File {0} converted to base64 format: {1}...\\\".format(file_name, results.get(\\\"content\\\", \\\"\\\")[1:20] )\\n\\n  incident.addNote(note_text)\",\"pre_processing_script\":\"# Required inputs are: incident_id artifact_id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1j5vc4b\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_121ajs6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1j5vc4b\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rxzx0p\"/\u003e\u003cendEvent id=\"EndEvent_0478px6\"\u003e\u003cincoming\u003eSequenceFlow_121ajs6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_121ajs6\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"EndEvent_0478px6\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ifa9oc\"\u003e\u003ctext\u003eConvert a file attachment attachment to Base64 string and returns the encoded string.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ou0yhu\" sourceRef=\"ServiceTask_0rxzx0p\" targetRef=\"TextAnnotation_0ifa9oc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rxzx0p\" id=\"ServiceTask_0rxzx0p_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"275\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1j5vc4b\" id=\"SequenceFlow_1j5vc4b_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"191.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0478px6\" id=\"EndEvent_0478px6_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"440\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"413\" y=\"228\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_121ajs6\" id=\"SequenceFlow_121ajs6_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"12\" width=\"90\" x=\"362.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ifa9oc\" id=\"TextAnnotation_0ifa9oc_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"209\" x=\"408\" y=\"60\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ou0yhu\" id=\"Association_1ou0yhu_di\"\u003e\u003comgdi:waypoint x=\"374\" xsi:type=\"omgdc:Point\" y=\"175\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "admin@example.com",
+      "description": "An example converting an Artifact of type File to a Base64 Encoded string",
+      "export_key": "example_artifact_attachment_to_base64",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648831999341,
+      "name": "Example: (Artifact) Attachment to Base64",
+      "object_type": "artifact",
+      "programmatic_name": "example_artifact_attachment_to_base64",
+      "tags": [],
+      "uuid": "33d30954-a9ab-4067-80e7-52a69567da64",
+      "workflow_id": 223
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_create_artifacts_from_excel_data",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_artifacts_from_excel_data\" isExecutable=\"true\" name=\"Example: Create Artifacts From Excel Data\"\u003e\u003cdocumentation\u003eCreate artifacts with information extracted from an excel sheet.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0f4swta\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1nyeq2e\" name=\"Utilities: Excel Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"118bd2c6-f367-4342-93b8-50257121ccf2\"\u003e{\"inputs\":{},\"post_processing_script\":\"def format_link(item):\\n  if item and (\\\"https://\\\" in item or \\\"http://\\\" in item):\\n    return \\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\".format(item)\\n  else:\\n    return item\\n\\ndef expand_list(list_value, separator=\\\"\u0026lt;br\u0026gt;\\\"):\\n  if not isinstance(list_value, list):\\n    return format_link(list_value)\\n  else:\\n    try:\\n      items = []\\n      for item in list_value:\\n        if isinstance(item, dict):\\n          items.append(\\\"\u0026lt;div style=\u0027padding:10px\u0027\u0026gt;{}\u0026lt;/div\u0026gt;\\\".format(walk_dict(item)))\\n        elif isinstance(item, list):\\n          items.append(expand_list(item))\\n        else:\\n          items.append(format_link(str(item)))\\n      return separator.join(items)\\n    except Exception as err:\\n        return str(err)\\n\\ndef walk_dict(sub_dict):\\n  notes = []\\n  for key, value in sub_dict.items():\\n    if key not in [\u0027display_content\u0027]:\\n      if isinstance(value, dict):\\n        notes.append(u\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: \u0026lt;div style=\u0027padding:10px\u0027\u0026gt;{}\u0026lt;/div\u0026gt;\\\".format(key, walk_dict(value)))\\n      else:\\n        notes.append(u\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(key, expand_list(value)))\\n\\n  return u\\\"\u0026lt;br\u0026gt;\\\".join(notes)\\n\\n\\nnote = u\\\"Excel Extract for : {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\".format(attachment.name)\\n\\nnote = note + walk_dict(results)\\n\\nincident.addNote(helper.createRichText(note))\\n\\n\\n# This example shows how to iterate over the sheets and create artifacts from the returned data\\n\u0027\u0027\u0027\\nkeys = results.sheets[\\\"_keys\\\"]\\nfor sheet in keys:\\n  ranges = results.sheets[sheet][\\\"_keys\\\"]\\n  for range_name in ranges:\\n    rng = results.sheets[sheet][range_name]\\n    for row in rng:\\n      incident.addArtifact(\\\"IP Address\\\", row[0], \\\"Sheet Region {0}  Priority {1}\\\".format(row[1], row[2]))\\n\u0027\u0027\u0027\\n\\n# This example shows how to iterate through the named ranges and create artifacts from them\\n# It is pretty much the same as the previous example, with an exception of extra layer of iterating through the named ranges\\n\u0027\u0027\u0027\\nkeys = results.named_ranges[\\\"_keys\\\"]\\nfor named_range in keys:\\n  sheets = results.named_ranges[named_range][\\\"_keys\\\"]\\n  for sheet in sheets:\\n    range_names = results.named_ranges[named_range][sheet][\\\"_keys\\\"]\\n    for range_name in range_names:\\n      rng = results.named_ranges[named_range][sheet][range_name]\\n      for row in rng:\\n        incident.addArtifact(\\\"IP Address\\\", row[0], \\\"Named Range Region {0}  Priority {1}\\\".format(row[1], row[2]))\\n\u0027\u0027\u0027\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\nif task is not None:\\n  inputs.task_id = task.id\\n  \\nif rule.properties.excel_named_range:\\n  inputs.excel_defined_names = rule.properties.excel_named_range\\n\\nif rule.properties.excel_range:\\n  inputs.excel_ranges = rule.properties.excel_range\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f4swta\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d7gm0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f4swta\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1nyeq2e\"/\u003e\u003cendEvent id=\"EndEvent_0i4recz\"\u003e\u003cincoming\u003eSequenceFlow_0d7gm0q\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d7gm0q\" sourceRef=\"ServiceTask_1nyeq2e\" targetRef=\"EndEvent_0i4recz\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_08ubcwp\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1l7jl29\" sourceRef=\"ServiceTask_1nyeq2e\" targetRef=\"TextAnnotation_08ubcwp\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"172\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"207\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1nyeq2e\" id=\"ServiceTask_1nyeq2e_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"150\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f4swta\" id=\"SequenceFlow_0f4swta_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"205\" y=\"183.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0i4recz\" id=\"EndEvent_0i4recz_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"446\" y=\"172\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"464\" y=\"211\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d7gm0q\" id=\"SequenceFlow_0d7gm0q_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003comgdi:waypoint x=\"446\" xsi:type=\"omgdc:Point\" y=\"190\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408.5\" y=\"168\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_08ubcwp\" id=\"TextAnnotation_08ubcwp_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"125\" x=\"364\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1l7jl29\" id=\"Association_1l7jl29_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"150\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "Create artifacts with information extracted from an excel sheet.",
+      "export_key": "example_create_artifacts_from_excel_data",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557513543,
+      "name": "Example: Create Artifacts From Excel Data",
+      "object_type": "attachment",
+      "programmatic_name": "example_create_artifacts_from_excel_data",
+      "tags": [],
+      "uuid": "c277c3ae-b0f6-4fb2-a6a6-54c4281260de",
+      "workflow_id": 210
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_parse_ssl_certificate",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_parse_ssl_certificate\" isExecutable=\"true\" name=\"Example: Parse SSL Certificate\"\u003e\u003cdocumentation\u003eAn example workflow that takes a PEM encoded SSL certificate as input and returns structured information about the certificate.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16cp1cj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11kkefg\" name=\"Utilities: Parse SSL Certificate\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"029f623a-ae74-406e-91a5-366a7005d1b0\"\u003e{\"inputs\":{},\"post_processing_script\":\"color = \\\"#45bc27\\\"\\n\\nif (results.expiration_status != \\\"Valid\\\"):\\n  color = \\\"#ff402b\\\"\\nnoteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;Certificate Subject :\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\\n              \u0026lt;b\u0026gt;Certificate Expiry After :\u0026lt;/b\u0026gt;{1}\u0026lt;/a\u0026gt;\\n              \u0026lt;b\u0026gt;Expiration Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {2}\\\"\u0026gt;{3}\u0026lt;/b\u0026gt;\\n              \u0026lt;br\u0026gt;Issuer Details :\u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\"\\\".format(results.subject, results.notAfter, color, results.expiration_status,results.issuer)\\n\\nincident.addNote(helper.createRichText(noteText))\\n\\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, { \\n    \\\"version\\\": 1.0,\\n    \\\"header\\\": None,\\n    \\\"padding\\\": 10,\\n    \\\"separator\\\": u\\\"\u0026lt;br\u0026gt;\\\",\\n    \\\"json\\\": results,\\n    \\\"json_omit_list\\\": [],\\n    \\\"incident_field\\\": None\\n  })\",\"pre_processing_script\":\"inputs.utilities_certificate = artifact.value\\ninputs.artifact_id = artifact.id\\ninputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16cp1cj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07qmd0r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1ljcycb\"\u003e\u003cincoming\u003eSequenceFlow_04l4mky\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16cp1cj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11kkefg\"/\u003e\u003csequenceFlow id=\"SequenceFlow_07qmd0r\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"ScriptTask_07jiv14\"/\u003e\u003cscriptTask id=\"ScriptTask_07jiv14\" name=\"Convert json to rich text\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f7276ff0-1770-4058-9e89-40ee79c6e41b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_07qmd0r\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04l4mky\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_04l4mky\" sourceRef=\"ScriptTask_07jiv14\" targetRef=\"EndEvent_1ljcycb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1n6af4p\"\u003e\u003ctext\u003eInputs: certificate OR artifact_id AND incident_id\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0zor1g6\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"TextAnnotation_1n6af4p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0r2063s\"\u003e\u003ctext\u003e\u003c![CDATA[Outputs: certificate data as a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pkxak2\" sourceRef=\"ServiceTask_11kkefg\" targetRef=\"TextAnnotation_0r2063s\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11kkefg\" id=\"ServiceTask_11kkefg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"251\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ljcycb\" id=\"EndEvent_1ljcycb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"557\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"530\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16cp1cj\" id=\"SequenceFlow_16cp1cj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"179.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07qmd0r\" id=\"SequenceFlow_07qmd0r_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"395\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"328\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1n6af4p\" id=\"TextAnnotation_1n6af4p_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"169\" x=\"135\" y=\"107\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0zor1g6\" id=\"Association_0zor1g6_di\"\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"141\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0r2063s\" id=\"TextAnnotation_0r2063s_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"156\" x=\"358\" y=\"103\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pkxak2\" id=\"Association_0pkxak2_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"144\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_07jiv14\" id=\"ScriptTask_07jiv14_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"395\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04l4mky\" id=\"SequenceFlow_04l4mky_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"557\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"526\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "An example workflow that takes a PEM encoded SSL certificate as input and returns structured information about the certificate.",
+      "export_key": "example_parse_ssl_certificate",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557511933,
+      "name": "Example: Parse SSL Certificate",
+      "object_type": "artifact",
+      "programmatic_name": "example_parse_ssl_certificate",
+      "tags": [],
+      "uuid": "2248c896-c3b4-48f6-82fc-a127255d4ab8",
+      "workflow_id": 201
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_timer_parallel",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_timer_parallel\" isExecutable=\"true\" name=\"Example: Timers in Parallel\"\u003e\u003cdocumentation\u003eThis example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ys9gau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0tzqwcu\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"30s\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the first timer for this function\\ninputs.utilities_time = time_list[0]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mper68\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1c2sw10\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cparallelGateway id=\"ParallelGateway_0jhjvf7\"\u003e\u003cincoming\u003eSequenceFlow_0ys9gau\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1mper68\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_10m6syb\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ys9gau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ParallelGateway_0jhjvf7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1mper68\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_0tzqwcu\"/\u003e\u003cserviceTask id=\"ServiceTask_129kmr7\" name=\"Utilities: Timer\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aa9d601-0a7f-4741-999e-27d3bf6de4a8\"\u003e{\"inputs\":{\"2e1b9634-f5bc-475e-926b-808493e286b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"1m\"}}},\"pre_processing_script\":\"# Get the timer values from the rule properties custom field\\nlist_time_values = rule.properties.parallel_timers\\n\\n# Get the list of 2 timer values\\ntime_list = list_time_values.split(\u0027,\u0027)\\n\\n# Use the second timer for this function\\ninputs.utilities_time = time_list[1]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10m6syb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1god5ve\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10m6syb\" sourceRef=\"ParallelGateway_0jhjvf7\" targetRef=\"ServiceTask_129kmr7\"/\u003e\u003cendEvent id=\"EndEvent_1v4h851\"\u003e\u003cincoming\u003eSequenceFlow_0ubh5so\u003c/incoming\u003e\u003c/endEvent\u003e\u003cparallelGateway id=\"ParallelGateway_16jfah3\"\u003e\u003cincoming\u003eSequenceFlow_1c2sw10\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_1god5ve\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ubh5so\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ubh5so\" sourceRef=\"ParallelGateway_16jfah3\" targetRef=\"EndEvent_1v4h851\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1c2sw10\" sourceRef=\"ServiceTask_0tzqwcu\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1god5ve\" sourceRef=\"ServiceTask_129kmr7\" targetRef=\"ParallelGateway_16jfah3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0tzqwcu\" id=\"ServiceTask_0tzqwcu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_0jhjvf7\" id=\"ParallelGateway_0jhjvf7_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"298\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"323\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ys9gau\" id=\"SequenceFlow_0ys9gau_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"248\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mper68\" id=\"SequenceFlow_1mper68_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"140.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_129kmr7\" id=\"ServiceTask_129kmr7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"412\" y=\"265\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10m6syb\" id=\"SequenceFlow_10m6syb_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"412\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"338\" y=\"261\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v4h851\" id=\"EndEvent_1v4h851_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"697\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"670\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ParallelGateway_16jfah3\" id=\"ParallelGateway_16jfah3_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"564\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"544\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ubh5so\" id=\"SequenceFlow_0ubh5so_di\"\u003e\u003comgdi:waypoint x=\"614\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"697\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"625\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1c2sw10\" id=\"SequenceFlow_1c2sw10_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1god5ve\" id=\"SequenceFlow_1god5ve_di\"\u003e\u003comgdi:waypoint x=\"512\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"589\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"505.5\" y=\"283.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "This example workflow shows how to use the Utilities Timer function to pause a workflow.  The Timer function is called twice in parallel.",
+      "export_key": "example_timer_parallel",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1648557512655,
+      "name": "Example: Timers in Parallel",
+      "object_type": "incident",
+      "programmatic_name": "example_timer_parallel",
+      "tags": [],
+      "uuid": "6b72e56a-7b67-4416-b50b-ad3a1402f4ad",
+      "workflow_id": 205
     }
   ],
   "workspaces": []

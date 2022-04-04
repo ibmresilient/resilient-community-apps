@@ -17,7 +17,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = ArtifactMock
 
-
 def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
@@ -27,7 +26,6 @@ def call_utilities_parse_ssl_certificate_function(circuits, function_params, tim
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesParseSslCertificate:
     """ Tests for the utilities_parse_ssl_certificate function"""
@@ -43,7 +41,7 @@ class TestUtilitiesParseSslCertificate:
     ])
     def test_success(self, circuits_app, artifact_id, certificate, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "artifact_id": artifact_id,
             "utilities_certificate": certificate,
             "incident_id": incident_id

@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_utilities",
         "message_destinations": [u"fn_utilities"],
         "functions": [u"utilities_artifact_hash", u"utilities_attachment_hash", u"utilities_attachment_to_base64", u"utilities_attachment_zip_extract", u"utilities_attachment_zip_list", u"utilities_base64_to_artifact", u"utilities_base64_to_attachment", u"utilities_call_rest_api", u"utilities_domain_distance", u"utilities_email_parse", u"utilities_excel_query", u"utilities_expand_url", u"utilities_extract_ssl_cert_from_url", u"utilities_get_contact_info", u"utilities_json2html", u"utilities_parse_ssl_certificate", u"utilities_pdfid", u"utilities_resilient_search", u"utilities_shell_command", u"utilities_string_to_attachment", u"utilities_timer", u"utilities_xml_transformation"],
-        "workflows": [u"example_artifact_attachment_to_base64", u"example_attachment_hash", u"example_attachment_to_base64", u"example_call_rest_api", u"example_create_artifacts_from_excel_data", u"example_domain_distance", u"example_email_parsing_artifact", u"example_email_parsing_attachment", u"example_extract_ssl_cert_from_url", u"example_get_incident_contact_info", u"example_get_task_contact_info", u"example_json2html", u"example_parse_ssl_certificate", u"example_pdfid", u"example_resilient_search", u"example_shell_command", u"example_string_to_attachment", u"example_timer", u"example_timer_parallel", u"example_xml_transformation", u"example_zip_list", u"example_zip_to_artifact", u"utilities_expand_url"],
-        "actions": [u"Example: (Artifact) Attachment to Base64", u"Example: Attachment Hash", u"Example: Attachment to Base64", u"Example: Call REST API", u"Example: Domain Distance", u"Example: Email Parsing (Artifact)", u"Example: Email Parsing (Attachment)", u"Example: Expand URL", u"Example: Extract SSL Certificate", u"Example: Get Incident Contact Info", u"Example: Get Task Contact Info", u"Example: JSON2HTML", u"Example: Parse SSL Certificate", u"Example: PDFiD", u"Example: Resilient Search", u"Example: Shell Command", u"Example: String to Attachment", u"Example: Timer Epoch", u"Example: Timers in Parallel", u"Example: Use Excel Data", u"Example: XML Transformation", u"Example: Zip Extract", u"Example: Zip List"],
+        "workflows": [u"example_artifact_attachment_to_base64", u"example_artifact_hash", u"example_attachment_hash", u"example_attachment_to_base64", u"example_call_rest_api", u"example_create_artifacts_from_excel_data", u"example_domain_distance", u"example_email_parsing_artifact", u"example_email_parsing_attachment", u"example_extract_ssl_cert_from_url", u"example_get_incident_contact_info", u"example_get_task_contact_info", u"example_json2html", u"example_parse_ssl_certificate", u"example_pdfid", u"example_resilient_search", u"example_shell_command", u"example_string_to_attachment", u"example_timer", u"example_timer_parallel", u"example_xml_transformation", u"example_zip_list", u"example_zip_to_artifact", u"utilities_expand_url"],
+        "actions": [u"Example: (Artifact) Attachment to Base64", u"Example: Artifact Hash", u"Example: Attachment Hash", u"Example: Attachment to Base64", u"Example: Call REST API", u"Example: Domain Distance", u"Example: Email Parsing (Artifact)", u"Example: Email Parsing (Attachment)", u"Example: Expand URL", u"Example: Extract SSL Certificate", u"Example: Get Incident Contact Info", u"Example: Get Task Contact Info", u"Example: JSON2HTML", u"Example: Parse SSL Certificate", u"Example: PDFiD", u"Example: Resilient Search", u"Example: Shell Command", u"Example: String to Attachment", u"Example: Timer Epoch", u"Example: Timers in Parallel", u"Example: Use Excel Data", u"Example: XML Transformation", u"Example: Zip Extract", u"Example: Zip List"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -69,6 +69,7 @@ def customization_data(client=None):
         - utilities_xml_transformation
     - Workflows:
         - example_artifact_attachment_to_base64
+        - example_artifact_hash
         - example_attachment_hash
         - example_attachment_to_base64
         - example_call_rest_api
@@ -93,6 +94,7 @@ def customization_data(client=None):
         - utilities_expand_url
     - Rules:
         - Example: (Artifact) Attachment to Base64
+        - Example: Artifact Hash
         - Example: Attachment Hash
         - Example: Attachment to Base64
         - Example: Call REST API

@@ -4,16 +4,11 @@
 from __future__ import print_function
 import os
 from resilient_circuits.action_message import FunctionException_, FunctionError_
-
-try:
-    from unittest.mock import patch
-except ImportError:
-    from mock import patch
+from mock import patch
 import pytest
-
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
+from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock_attachment import AttachmentMock
 import json
 import os
@@ -27,7 +22,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
 
-
 def call_utilities_excel_query_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_excel_query", function_params)
@@ -37,7 +31,6 @@ def call_utilities_excel_query_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesExcelQuery:
     """ Tests for the utilities_excel_query function"""
@@ -95,7 +88,6 @@ class TestUtilitiesExcelQuery:
 
         assert expected.replace(' ', '') == results.replace(' ', '')
 
-
 class TestWorksheetData:
     @pytest.mark.parametrize("ranges, expected_result", [
         (None, []),
@@ -133,9 +125,6 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        #fname = os.path.basename(expected_result_path)
-        #with open(fname, "w") as write_file:
-        #    json.dump(wb.result, write_file, default=WorksheetData.serializer)
         assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
@@ -170,7 +159,7 @@ class TestWorksheetData:
         res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
         with open(res_path, 'r') as file:
             expected = file.read()
-        # comparing objects is a work around for the difference in iteration through dictionaries in Python 2 and 3
+        # Comparing objects is a work around for the difference in iteration through dictionaries in Python 2 and 3
         # which creates different json dumps
         assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 

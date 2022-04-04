@@ -33,9 +33,7 @@ setup(
     workflows. The SOAR platform sends data to the function component that performs an activity then returns the results
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
-    setup_requires=['six==1.14.0'],
     install_requires=[
-        'six==1.14.0',
         'resilient_circuits>=30.0.0',
         'resilient-lib>=34.0.0',
         'openpyxl>=2.5.3',

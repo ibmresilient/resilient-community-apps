@@ -15,7 +15,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
 def call_utilities_expand_url_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_expand_url", function_params)
@@ -25,7 +24,6 @@ def call_utilities_expand_url_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesExpandUrl:
     """ Tests for the utilities_expand_url function"""
@@ -44,7 +42,7 @@ class TestUtilitiesExpandUrl:
     ])
     def test_success(self, circuits_app, resilient_url, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "resilient_url": resilient_url
         }
         results = call_utilities_expand_url_function(circuits_app, function_params)

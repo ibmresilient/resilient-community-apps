@@ -13,9 +13,8 @@ import json
 import chardet
 import paramiko
 import winrm
-import re
-from fn_utilities.util.utils_common import s_to_b, b_to_s
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_utilities.util.utils_common import b_to_s
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_circuits.template_functions import render
 
 LOG = logging.getLogger(__name__)

@@ -5,7 +5,7 @@
 
 # Example: Artifact Hash
 
-## Function - Utilities: Artifact Hash
+## Function - Utilities Artifact Hash
 
 ### API Name
 `utilities_artifact_hash`
@@ -26,13 +26,13 @@ inputs.artifact_id = artifact.id
 ```python
 # The result contains at least these three hashes
 if results.get('sha256', None):
-  incident.addArtifact("Malware SHA-256 Hash", results.get('sha256'), u"SHA-256 hash of '{}'".format(attachment.name))
+  incident.addArtifact("Malware SHA-256 Hash", results.get('sha256'), u"SHA-256 hash of '{}'".format(artifact.value))
 
 if results.get('sha1', None):
-  incident.addArtifact("Malware SHA-1 Hash", results.get('sha1'), u"SHA-1 hash of '{}'".format(attachment.name))
+  incident.addArtifact("Malware SHA-1 Hash", results.get('sha1'), u"SHA-1 hash of '{}'".format(artifact.value))
 
 if results.get('md5', None):
-  incident.addArtifact("Malware MD5 Hash", results.get('md5'), u"MD5 hash of '{}'".format(attachment.name))
+  incident.addArtifact("Malware MD5 Hash", results.get('md5'), u"MD5 hash of '{}'".format(artifact.value))
 ```
 
 ---

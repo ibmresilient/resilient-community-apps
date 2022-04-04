@@ -3,7 +3,6 @@
 
 from __future__ import print_function
 import pytest
-import logging
 from mock_artifact import ArtifactMock
 from fn_utilities.util.utils_common import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -11,15 +10,12 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_email_parse"
-LOG = logging.getLogger(__name__)
-
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = ArtifactMock
-
 
 def call_email_parse_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -30,7 +26,6 @@ def call_email_parse_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(evt, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestArtifactEmailParse:
     """ Tests for the artifact_email_parse function"""
@@ -67,13 +62,12 @@ class TestArtifactEmailParse:
     ])
     def test_success(self, circuits_app, base64content, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "base64content": b_to_s(base64content),
             "incident_id": 1001
         }
         result = call_email_parse_function(circuits_app, function_params)
         verify_subset(expected_result, result["content"])
-
 
 def verify_subset(expected, actual):
     """Test that the values match, where expected can be a subset of actual"""

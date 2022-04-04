@@ -17,7 +17,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = ArtifactMock
 
-
 def call_utilities_artifact_hash_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
@@ -27,7 +26,6 @@ def call_utilities_artifact_hash_function(circuits, function_params, timeout=10)
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesArtifactHash:
     """ Tests for the utilities_artifact_hash function"""
@@ -42,7 +40,7 @@ class TestUtilitiesArtifactHash:
     ])
     def test_success(self, circuits_app, incident_id, artifact_id, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "incident_id": incident_id,
             "artifact_id": artifact_id
         }

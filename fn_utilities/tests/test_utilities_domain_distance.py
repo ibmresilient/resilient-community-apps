@@ -16,7 +16,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
 def call_domain_distance_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
@@ -26,7 +25,6 @@ def call_domain_distance_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestDomainDistance:
     """ Tests for the domain_distance function"""
@@ -59,7 +57,7 @@ class TestDomainDistance:
     ])
     def test_success(self, circuits_app, domain_name, domain_list, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "domain_name": domain_name,
             "domain_list": domain_list
         }

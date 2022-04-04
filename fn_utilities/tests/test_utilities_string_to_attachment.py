@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -20,7 +20,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 resilient_mock = AttachmentMock
 
-
 def call_utilities_string_to_attachment_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
@@ -30,7 +29,6 @@ def call_utilities_string_to_attachment_function(circuits, function_params, time
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesStringToAttachment:
     """ Tests for the utilities_string_to_attachment function"""
@@ -46,7 +44,7 @@ class TestUtilitiesStringToAttachment:
     ])
     def test_success(self, circuits_app, string_to_convert_to_attachment, attachment_name, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "string_to_convert_to_attachment": b_to_s(string_to_convert_to_attachment),
             "attachment_name": attachment_name,
             "incident_id": incident_id

@@ -16,7 +16,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = SearchMock
 
-
 def call_utilities_resilient_search_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
@@ -26,7 +25,6 @@ def call_utilities_resilient_search_function(circuits, function_params, timeout=
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesResilientSearch:
     """ Tests for the utilities_resilient_search function"""
@@ -41,7 +39,7 @@ class TestUtilitiesResilientSearch:
     ])
     def test_success(self, circuits_app, resilient_search_template, resilient_search_query, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "resilient_search_template": resilient_search_template,
             "resilient_search_query": resilient_search_query
         }

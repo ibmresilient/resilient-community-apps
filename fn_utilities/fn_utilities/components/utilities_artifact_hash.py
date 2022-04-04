@@ -53,7 +53,7 @@ class FunctionComponent(ResilientComponent):
                 else:
                     results[algo] = impl.hexdigest()
 
-            LOG.info(u"%s sha1=%s", metadata["name"], results["sha1"])
+            LOG.info("%s sha1=%s", metadata["name"], results["sha1"])
 
             # Produce a FunctionResult with the return value
             LOG.debug(dumps(results))
