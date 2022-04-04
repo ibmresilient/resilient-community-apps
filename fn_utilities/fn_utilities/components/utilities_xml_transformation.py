@@ -5,6 +5,7 @@
 
 from logging import getLogger
 from lxml import etree
+from defusedxml import lxml as defused_etree
 from os.path import isdir, join, exists, isfile
 from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -54,12 +55,12 @@ class FunctionComponent(ResilientComponent):
             parser = etree.XMLParser(ns_clean=True, recover=True, encoding="utf-8")
             # Read xsl file
             xsl = open(stylesheet, mode="rb").read()
-            xsl_root = etree.fromstring(xsl, parser=parser)
+            xsl_root = defused_etree.fromstring(xsl, parser=parser)
 
             transform = etree.XSLT(xsl_root)
 
             # Read xml
-            xml_root = etree.fromstring(xml_source.encode("utf-8"), parser=parser)
+            xml_root = defused_etree.fromstring(xml_source.encode("utf-8"), parser=parser)
 
             # Transform xml with xslt
             transformation_doc = transform(xml_root)
