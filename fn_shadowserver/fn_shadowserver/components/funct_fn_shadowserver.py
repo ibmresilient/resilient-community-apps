@@ -10,7 +10,7 @@ FN_NAME = "fn_shadowserver"
 
 LOG = logging.getLogger(__name__)
 
-URL = "https://api.shadowserver.org/malware/info?sample"
+URL = "https://api.shadowserver.org/malware/info?sample="
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_shadowserver'"""
@@ -44,13 +44,19 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info("Shadow Server lookup started for Artifact Type {0} - Artifact Value {1}"
                  .format(artifact_type, artifact_value))
 
-        request = "{0}={1}".format(URL,
+        request = "{0}{1}".format(self.options.get("shadowserver_url", URL),
                                     artifact_value)
 
         LOG.debug("Getting info from {0}".format(request))
+        
         response = self.rc.execute("get", request)
+        if response.status_code == 200:
+            LOG.debug(response.text)
+            results = response.json()
 
-        results = response.json()
+        else:
+            LOG.warn("Got response status {0} from Shadow Server".format(response.status_code))
+
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

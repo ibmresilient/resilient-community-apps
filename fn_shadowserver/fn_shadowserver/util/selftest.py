@@ -33,8 +33,8 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_shadowserver", {})
     try:
-        # url = "https://api.shadowserver.org/malware/info?sample={}".format("")
-        url = "https://api.shadowserver.org/malware/info?sample=15ec7258422772a04bf9641836eb44f7"
+        url ="{0}{1}".format(app_configs.get("shadowserver_url",
+                "https://api.shadowserver.org/malware/info?sample="),"15ec7258422772a04bf9641836eb44f7")
         rc = RequestsCommon(opts, app_configs)
         rc.execute('get', url)
         return {"state": "success"}

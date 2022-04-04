@@ -131,6 +131,13 @@ This app has been implemented using:
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
+### App Configuration
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **shadowserver_url** | Yes | `https://api.shadowserver.org/malware/info?sample=` | -- |
+
 ---
 
 ## Function - Shadowserver
