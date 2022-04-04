@@ -20,6 +20,7 @@
 ```python
 inputs.incident_id = incident.id
 inputs.sdlp_incident_status = "Resolved"
+inputs.sdlp_incident_severity_id = None
 ```
 
 ### Post-Processing Script
