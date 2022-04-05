@@ -1,10 +1,10 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
-import logging
+from logging import getLogger
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 
 class MSGraphHelper(object):

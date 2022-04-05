@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-import logging
+from logging import getLogger
 import jinja2
 import time
 import json
@@ -8,7 +8,7 @@ import ast
 import calendar
 from datetime import datetime
 from threading import Thread
-from os.path import join, pardir, os
+from os.path import join, pardir, dirname, realpath
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
@@ -16,10 +16,8 @@ from fn_microsoft_security_graph.lib.ms_graph_helper import MSGraphHelper
 from resilient_lib import validate_fields, RequestsCommon
 import resilient_circuits.template_functions as template_functions
 
-
-log = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 MSG_FIELD_NAME = "microsoft_security_graph_alert_id"
-
 
 class IntegrationComponent(ResilientComponent):
     """Component that polling MSG for alerts and creates an incident if one doesn't exist"""
@@ -64,13 +62,13 @@ class IntegrationComponent(ResilientComponent):
                 "microsoft_security_graph_alert_search_query")  # text
 
             if microsoft_security_graph_alert_search_query is not None:
-                log.info("microsoft_security_graph_alert_search_query: %s",
+                LOG.info("microsoft_security_graph_alert_search_query: %s",
                          microsoft_security_graph_alert_search_query)
 
             r = alert_search(options.get("microsoft_graph_url"), ms_graph_helper,
                              microsoft_security_graph_alert_search_query)
             if not r:
-                raise FunctionError("Request failed, please check the log.")
+                raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph alert search function complete...")
             end_time = time.time()
@@ -101,14 +99,14 @@ class IntegrationComponent(ResilientComponent):
             microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
 
             if microsoft_security_graph_alert_id is not None:
-                log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
+                LOG.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
             else:
                 raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
 
             r = get_alert_details(options.get("microsoft_graph_url"), ms_graph_helper,
                                   microsoft_security_graph_alert_id)
             if not r:
-                raise FunctionError("Request failed, please check the log.")
+                raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph get alert details function complete...")
             end_time = time.time()
@@ -141,18 +139,18 @@ class IntegrationComponent(ResilientComponent):
                 kwargs.get("microsoft_security_graph_alert_data"))  # textarea
 
             if microsoft_security_graph_alert_id is not None:
-                log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
+                LOG.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
             else:
                 raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
             if microsoft_security_graph_alert_data is not None:
-                log.info("microsoft_security_graph_alert_data: %s", microsoft_security_graph_alert_data)
+                LOG.info("microsoft_security_graph_alert_data: %s", microsoft_security_graph_alert_data)
             else:
                 raise ValueError("microsoft_security_graph_alert_data is required to run this function")
 
             r = update_alert(options.get("microsoft_graph_url"), ms_graph_helper, microsoft_security_graph_alert_id,
                              microsoft_security_graph_alert_data)
             if not r:
-                raise FunctionError("Request failed, please check the log.")
+                raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph update alert function complete...")
             end_time = time.time()
@@ -173,7 +171,7 @@ class IntegrationComponent(ResilientComponent):
 
     def polling_main(self):
         """Spawn second thread to query alerts from the Microsoft Security Graph API and create incidents in the
-        Resilient platform if they do not already exist"""
+        SOAR platform if they do not already exist"""
         options = self.options
 
         if int(options.get("msg_polling_interval", 0)) > 0:
@@ -186,13 +184,13 @@ class IntegrationComponent(ResilientComponent):
             thread = Thread(target=self.msg_polling_thread)
             thread.daemon = True
             thread.start()
-            log.info("Polling for alerts in Microsoft Security Graph is occurring.")
+            LOG.info("Polling for alerts in Microsoft Security Graph is occurring.")
         else:
-            log.info("Polling for alerts in Microsoft Security Graph is not occurring.")
+            LOG.info("Polling for alerts in Microsoft Security Graph is not occurring.")
 
     def msg_polling_thread(self):
         while True:
-            log.debug("Polling for alerts")
+            LOG.debug("Polling for alerts")
             alert_list = get_alerts(self.options, self.Microsoft_security_graph_helper)
             # Amount of time (seconds) to wait to check alerts again, defaults to 10 mins if not set
             wait_time = int(self.options.get("msg_polling_interval", 600))
@@ -213,14 +211,14 @@ class IntegrationComponent(ResilientComponent):
 
             uri = "/incidents"
             payload_dict = json.loads(payload)
-            log.info("Creating incident with payload: {}".format(payload))
-            log.debug("Payload: {}".format(payload_dict))
+            LOG.info("Creating incident with payload: {}".format(payload))
+            LOG.debug("Payload: {}".format(payload_dict))
 
             response = resilient_client.post(uri=uri, payload=payload_dict)
             return response
 
         except SimpleHTTPException as err:
-            log.info("Something went wrong when attempting to create the Incident %s", err)
+            LOG.info("Something went wrong when attempting to create the Incident %s", err)
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, field_value):
@@ -249,7 +247,7 @@ class IntegrationComponent(ResilientComponent):
         try:
             r_incidents = self.rest_client().post(query_uri, query)
         except SimpleHTTPException:
-            # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+            # Some versions of SOAR 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
             query_uri = "/incidents/query?return_level=normal&field_handle={}".format(MSG_FIELD_NAME)
             query = {
@@ -287,14 +285,14 @@ def get_alerts(options, ms_graph_helper):
 
     r = ms_graph_helper.ms_graph_session.get(url)
     if not r:
-        raise FunctionError("Request failed, please check the log.")
+        raise FunctionError("Request failed, please check the LOG.")
 
     response_json = r.json()
     return response_json.get("value")
 
 
 def build_incident_dto(alert, custom_temp_file=None):
-    current_path = os.path.dirname(os.path.realpath(__file__))
+    current_path = dirname(realpath(__file__))
     if custom_temp_file:
         template_file = custom_temp_file
     else:
@@ -303,13 +301,13 @@ def build_incident_dto(alert, custom_temp_file=None):
 
     try:
         with open(template_file, 'r') as template:
-            log.debug("Reading template file")
+            LOG.debug("Reading template file")
             incident_template = template.read()
 
             return template_functions.render(incident_template, alert)
 
     except jinja2.exceptions.TemplateSyntaxError:
-        log.info("'incident_template' is not set correctly in config file.")
+        LOG.info("'incident_template' is not set correctly in config file.")
 
 
 def alert_search(url, ms_helper, search_query=None):
@@ -378,7 +376,7 @@ def create_query(alert_query, createDateTime_filter):
         else:
             query = "&$filter={}".format(createDateTime_filter)
 
-    log.debug("Query: []".format(query))
+    LOG.debug("Query: []".format(query))
     return query
 
 
@@ -393,5 +391,5 @@ def ds_to_millis(val):
         dt = datetime.strptime(ts, ts_format)
         return calendar.timegm(dt.utctimetuple()) * 1000
     except Exception as e:
-        log.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
+        LOG.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
         return None

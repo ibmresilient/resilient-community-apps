@@ -1,7 +1,16 @@
 include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_microsoft_security_graph/util *
 include fn_microsoft_security_graph/data/templates/*.jinja
-include fn_microsoft_security_graph/util/*
-include fn_microsoft_security_graph/components/*
 include fn_microsoft_security_graph/lib/*
 include fn_microsoft_security_graph/LICENSE
-include doc/*
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

@@ -1,4 +1,4 @@
-# Resilient Functions Integration for Microsoft Graph Security API
+# SOAR Functions Integration for Microsoft Graph Security API
 
 ## Release Notes
 <!--
@@ -24,23 +24,23 @@ Edit the required configuration setting as described in the [Integration Server]
 <!--
   List the Key Features of the Integration
 -->
-* Alert Polling Integration that creates new incidents in the Resilient platform from Microsoft Graph Security API alerts.
+* Alert Polling Integration that creates new incidents in the SOAR platform from Microsoft Graph Security API alerts.
 * Search function to query alerts across the tenant's data using Microsoft Graph Security API.
 * Function to get details of specific Microsoft Security alerts.
 * Function to update details of specific Microsoft Security alerts.
-* Update Microsoft Security alerts as "Resolved" when the corresponding Resilient incident is closed.
+* Update Microsoft Security alerts as "Resolved" when the corresponding SOAR incident is closed.
 
 ---
 ## Installation
 
 ### App Format
 
-The app .zip file is in a container format and requires a Resilient platform configured with an App Host. 
+The app .zip file is in a container format and requires a SOAR platform configured with an App Host. 
 
-The app tar.gz file is an extension format and requires a Resilient platform configured with an integration server.
+The app tar.gz file is an extension format and requires a SOAR platform configured with an integration server.
 
 ### App Host
-For a complete guide on how to configure App Host for Resilient and install apps, please reference the Resilient Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
+For a complete guide on how to configure App Host for SOAR and install apps, please reference the SOAR Apps [Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ).
 
 All the components for running this integration in a container already exist when using the App Host app.
 
@@ -78,7 +78,7 @@ To install,
   ```
   $ resilient-circuits config -u -l fn-microsoft-security-graph
   ```
-* Import the fn_microsoft_security_graph **customizations** into the Resilient platform:
+* Import the fn_microsoft_security_graph **customizations** into the SOAR platform:
   ```
   $ resilient-circuits customize -y -l fn-microsoft-security-graph
   ```

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -14,7 +14,6 @@ CONFIG_DATA_SECTION = 'fn_microsoft_security_graph'
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
