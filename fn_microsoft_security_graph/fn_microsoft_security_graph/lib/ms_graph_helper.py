@@ -3,6 +3,7 @@
 from logging import getLogger
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import validate_fields, RequestsCommon
 
 LOG = getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
@@ -40,3 +41,20 @@ class MSGraphHelper(object):
                                               scope=DEFAULT_SCOPE,
                                               proxies=self.proxies)
 
+def connect_MSGraph(opts, reload=False):
+    options = opts.get("fn_microsoft_security_graph", {})
+
+    if reload:
+        return MSGraphHelper(options.get("tenant_id"),
+                               options.get("client_id"),
+                               options.get("client_secret"))
+    else:
+        # Validate required fields in app.config are set
+        validate_fields(["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"], options)
+
+        return MSGraphHelper(options.get("microsoft_graph_token_url"),
+                            options.get("microsoft_graph_url"),
+                            options.get("tenant_id"),
+                            options.get("client_id"),
+                            options.get("client_secret"),
+                            RequestsCommon(opts, options).get_proxies())

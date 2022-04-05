@@ -13,7 +13,6 @@ except ImportError:
 
 RES_FILE = "data/export.res"
 
-
 def codegen_reload_data():
     """
     Parameters required reload codegen for the fn_microsoft_security_graph package
@@ -32,7 +31,6 @@ def codegen_reload_data():
         "scripts": [u"Convert json to rich text"],
         "playbooks": []
     }
-
 
 def customization_data(client=None):
     """
