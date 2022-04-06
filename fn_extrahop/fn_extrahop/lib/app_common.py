@@ -29,31 +29,38 @@ class AppCommon():
         """
         self.endpoint_url = options['extrahop_rx_host_url']
         self.rx_cli = RxClient(opts, options)
+        self.entity_count = 0
 
-    def get_entities_since_ts(self, timestamp, search_filter):
+    def get_entities_since_ts(self, timestamp, search_filter, limit=None, offset=None):
         """Get changed entities since last poller run
 
         Args:
             timestamp (datetime): datetime when the last poller ran
+            search_filter (dict): Filer to use in api call
+            offset (int): Start search at offset
+            limit (int): Limit number of entries in result
 
         Returns:
             list: changed entity list
         """
         categories = None
+        search_filter_api = {}
 
         if search_filter:
             search_filter_api = search_filter.copy()
             # Category filters are managed after the api call is made
             if "category" in search_filter:
-                categories = search_filter_api .pop("category")
+                categories = search_filter_api.pop("category")
 
-        response = self.rx_cli.search_detections(search_filter=search_filter_api)
+        response = self.rx_cli.search_detections(search_filter=search_filter_api, limit=limit, offset=offset)
 
         result = response.json()
 
         if response.status_code not in [200, 201, 204]:
             LOG.error("{{package_name}} API call failed: %s", result)
             return None
+
+        self.entity_count = len(result)
 
         if categories:
             result = self.filter_by_property(result, "categories", categories)
@@ -100,8 +107,14 @@ class AppCommon():
         Returns:
             [bool]: [True if the incident fields modified]
         """
+        det_copy = detection.copy()
+        # Convert None values to string 'None' for the detection to allow
+        # comparison of None values
+        for k in det_copy:
+            if k in UPDATEABLE_FIELDS and det_copy[k] is None:
+                det_copy[k] = str(det_copy[k])
 
-        modified_fields = {k: detection[k] for k in UPDATEABLE_FIELDS if k in detection and detection[k] != case["properties"]["extrahop_"+k]}
+        modified_fields = {k: det_copy[k] for k in UPDATEABLE_FIELDS if k in det_copy and det_copy[k] != case["properties"]["extrahop_"+k]}
 
         if modified_fields:
             LOG.info("Detection ID %s, modified properties: %s. Filtered List: %s", detection["id"], modified_fields)
