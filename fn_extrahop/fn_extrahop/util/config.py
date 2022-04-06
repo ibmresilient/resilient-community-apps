@@ -23,12 +23,9 @@ extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
 # Interval to poll ExtraHop for detections (in seconds).
 # To turn the poller off use value 0
 polling_interval = <POLLING_INTERVAL>
-# Lookback interval to check for findings at startup  (in seconds).
-# Used in criteria for filtering detections retrieval.
-polling_lookback = <LOOKBACK_INTERVAL>
 # Optional - Filter detection results returned to SOAR using key/value pairs. Filter keys/values are all optional.
-# Example: polling_filters="category": "sec.exploit", "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
-#                          "resolution": [".none", "action_taken", "no_action_taken"], "riskscore_threshold": 80
+# Example: polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
+#                          "resolution": [".none", "action_taken", "no_action_taken"], 
 # The security categories include the following: sec, sec.action, sec.botnet, sec.caution, sec.command, sec.cryptomining,
 # sec.dos, sec.exploit, sec.exfil, sec.lateral, sec.ransomware, sec.recon
 # Risk score ranges: red (80-99), orange (31-79), or yellow (1-30).

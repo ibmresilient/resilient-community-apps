@@ -16,6 +16,12 @@
   "severity_code": "High",
 {% endif %}
   "properties": {
-    "extrahop_detection_updated": "True"
+    "extrahop_update_time": {{ update_time }},
+    "extrahop_end_time": {{ end_time }},
+    "extrahop_risk_score": {{ risk_score }},
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_detection_updated": {{ epoch_now }}
   }
 }

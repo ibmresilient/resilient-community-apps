@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Poller implementation"""
-
+import datetime
 import logging
 import os
 from threading import Thread
@@ -18,6 +18,8 @@ ENTITY_ID = "id"
 SOAR_ENTITY_ID_FIELD = "extrahop_detection_id"
 ENTITY_COMMENT_HEADER = "Created by ExtraHop"
 ENTITY_LABEL = "Detection"
+# Millisecond multiplier
+MSEC_MULTIPLIER = 1000
 LOG = logging.getLogger(__name__)
 
 # Default Templates
@@ -183,8 +185,8 @@ class PollerComponent(ResilientComponent):
                 # determine if this is an existing SOAR case
                 soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
 
-                # if case does not exist, create a new one
-                if not soar_case:
+                # if case does not exist, create a new one if detection isn't closed.
+                if not soar_case and not is_entity_closed(entity):
                     # create the SOAR case
                     soar_create_payload = make_payload_from_template(
                                                         self.soar_create_case_template,
@@ -218,25 +220,31 @@ class PollerComponent(ResilientComponent):
                             cases_closed += 1
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                     else:
-                        # perform an update operation on the existing SOAR case
-                        soar_update_payload = make_payload_from_template(
-                                                        self.soar_update_case_template,
-                                                        UPDATE_INCIDENT_TEMPLATE,
-                                                        entity
-                                                    )
-                        # Update description, tags, priority, assignee, stage, important
-                        _update_soar_case = self.soar_common.update_soar_case(
-                                                        soar_case_id,
-                                                        soar_update_payload
-                                                    )
-                        # Add an update note
-                        note = "Updated by ExtraHop from a detection."
-                        comment_header = "ExtraHop"
-                        _update_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
-                                                                                 comment_header, note)
-                        cases_updated += 1
+                        # check if the case has been modified
+                        if self.app_common.is_detection_modified(soar_case, entity):
+                            # Perform an update operation on the existing SOAR case
+                            # Add latest epoch value to the entity dict.
+                            epoch_now = round(datetime.datetime.timestamp(datetime.datetime.now()) * MSEC_MULTIPLIER)
+                            entity.update({"epoch_now": epoch_now})
+                            soar_update_payload = make_payload_from_template(
+                                                            self.soar_update_case_template,
+                                                            UPDATE_INCIDENT_TEMPLATE,
+                                                            entity
+                                                        )
+                            # Update description, tags, priority, assignee, stage, important
+                            _update_soar_case = self.soar_common.update_soar_case(
+                                                            soar_case_id,
+                                                            soar_update_payload
+                                                        )
+                            # Add an update note
+                            note = "Updated by ExtraHop from a detection."
+                            comment_header = "ExtraHop"
+                            _update_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
+                                                                                     comment_header, note)
+                            cases_updated += 1
 
-                        LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                            LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+
             LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
                      cases_insert, cases_closed, cases_updated)
         except Exception as err:
