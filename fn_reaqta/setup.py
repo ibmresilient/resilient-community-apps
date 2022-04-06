@@ -30,7 +30,7 @@ setup(
     url="https://ibm.com/mysupport",
     description="IBM SOAR app bidirectional synchronization and functions for ReaQta",
     long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
-    Additional functions exists to list and kill endpoint processes, isolate the endpiont and synchronize notes and close events.""",
+    Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.""",
     install_requires=[
         "resilient-circuits>=43.0.0",
         "cachetools ~= 2.1",

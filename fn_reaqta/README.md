@@ -72,7 +72,7 @@
 
 Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
 
-    Additional functions exists to list and kill endpoint processes, isolate the endpiont and synchronize notes and close events.
+    Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.
 
  ![screenshot: functions](./doc/screenshots/functions.png)
 
