@@ -131,8 +131,8 @@ The following table describes the settings you need to configure in the app.conf
 | ------ | :------: | ------- | ----------- |
 | **url** | Yes | `https://<jira url>` | The URL of your Jira platform. |
 | **auth_method** | Yes | `AUTH` | The method of authentication to use when connecting to your Jira platform. Supported methods are `AUTH`, `BASIC`, and `OAUTH`. For more information on authentication see: https://jira.readthedocs.io/en/latest/examples.html#authentication |
-| **user** | Required for `AUTH` or `BASIC` | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions.  |
-| **password** | Required for `AUTH` or `BASIC` | `<jira user password>` | The password or API Key for the Jira account to use with this integration. |
+| **user** | Required for `AUTH` or `BASIC` | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions. |
+| **password** | Required for `AUTH` or `BASIC` | `<jira user password>` | The password or API Key for the Jira account to use with this integration. `AUTH` only supports password and `BASIC` supports both password and API Key. |
 | **access_token** | Required for `OAUTH` | `<oauth access token>` | Access token created through Jira OAuth 1.0a 3LO. Details below. |
 | **access_token_secret** | Required for `OAUTH` | `<oauth access secret>` | Access token secret created through Jira OAuth 1.0a 3LO. Details below. |
 | **consumer_key_name** | Required for `OAUTH` | `<oauth consumer key>` | Consumer Key name created through Jira UI. Details below. |
@@ -146,7 +146,7 @@ The following table describes the settings you need to configure in the app.conf
 ### Configuring OAuth
 OAuth authentication is supported with OAuth 1.0a protocol on Jira Server and Jira Cloud. This requires setting some configurations through the Jira UI followed by the 3 legged-dance described in the docs linked below. The main goal of this process is to generate a public and private RSA key, as well as a `access_token` and `access_token_secret`. Follow the steps at the appropriate links to setup the RSA keys and generate an access token. Then set the values as appropriate in your app.config. It is recommended to use App Host secrets to store the tokens if deploying on App Host.
 
-Follow the instructions at the appropriate link:
+Follow the instructions at the appropriate link to create a public and private key and to create an incoming link in Jira:
 
 * [OAuth on Jira Server](https://developer.atlassian.com/server/jira/platform/oauth/#step-1--configure-jira) (only step 1)
 * [OAuth 1.0a on Jira Cloud](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-oauth-authentication/#step-2--configure-the-client-application-as-an-oauth-consumer) (only step 2)
@@ -167,12 +167,14 @@ Once you've completed the linked step above, you can continue with the rest of J
 1. Use the `jirashell` utility to preform the OAuth dance:
 
     ```
-    $ jirashell --oauthdance --consumer-key <name_of_consumer_key_in_jira_ui> --key-cert <path_to_private_rsa_key> --print-tokens
+    $ jirashell -s <url_of_your_jira_server> --oauth-dance --consumer-key <name_of_consumer_key_in_jira_ui> --key-cert <path_to_private_rsa_key> --print-tokens
     ```
 
     This will prompt you at a point to follow a link to sign-in and authorize the OAuth tokens. Click "Allow" and return to the shell. Type `y` and hit enter. The Access Token and Access Token Secret will be printed to your terminal. You can now exit the `jirashell` prompt.
 
-1. Use the token and secret printed to your terminal to provide access to Jira for this app. If running in App Host, it is recommended to enter the values of the tokens as secrets in the app's **Configuration** tab by clicking **Add Secret** and upload the private key as a file by clicking **New File**.
+1. Use the token and secret printed to your terminal to provide access to Jira for this app. If running in App Host, it is recommended to enter the values of the tokens as secrets in the app's **Configuration** tab by clicking **Add Secret**.
+
+1. In App Host, upload the private key as a file by clicking **New File**. Paste the contents of the private key into the file and ensure that the path to the file is the same as what you wrote in your app.config.
 
 ---
 

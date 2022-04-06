@@ -11,10 +11,10 @@ def config_section_data():
     """
     config_data = u"""[fn_jira]
 url=https://<jira url>
-auth_method=AUTH
-user=<jira user>
-password=<jira user password>
-# For OAUTH1 connections use the parameters below and leave user/password blank
+auth_method=BASIC
+user=<jira username or email>
+password=<jira user password or API Key>
+# For OAUTH connections, the four parameters below are required and user/password are ignored
 #access_token = <oauth access token>
 #access_token_secret = <oauth access token secret>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>

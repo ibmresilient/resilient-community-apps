@@ -62,7 +62,8 @@ def get_jira_client(app_configs, rc):
     :return: Instance to jira client
     :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
     """
-    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[0])
+    # set default to "BASIC" as that is what most users should be using
+    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[1])
     server = app_configs.get("url")
     verify = app_configs.get("verify_cert")
     proxies = rc.get_proxies()
@@ -163,7 +164,7 @@ def extract_images(html):
 
     # sub in Jira image syntax for each image tag
     for alt in alts:
-        html = re.subn(r'<img.*?>', "!{0}!".format(alt), html, count=1)[0]
+        html = re.subn(r'<img.*?>', " !{0}! ".format(alt), html, count=1)[0]
 
     # zip together the src and alts and return that as well as the adjusted html
     return tuple(zip(srcs, alts)), html
