@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_remedy",
-    display_name="Remedy for IBM SOAR",
+    display_name="Remedy",
     version="1.0.1",
     license="MIT",
     author="IBM SOAR",
