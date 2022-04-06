@@ -46,15 +46,15 @@ def connect_MSGraph(opts, reload=False):
 
     if reload:
         return MSGraphHelper(options.get("tenant_id"),
-                               options.get("client_id"),
-                               options.get("client_secret"))
+                             options.get("client_id"),
+                             options.get("client_secret"))
     else:
         # Validate required fields in app.config are set
         validate_fields(["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"], options)
 
         return MSGraphHelper(options.get("microsoft_graph_token_url"),
-                            options.get("microsoft_graph_url"),
-                            options.get("tenant_id"),
-                            options.get("client_id"),
-                            options.get("client_secret"),
-                            RequestsCommon(opts, options).get_proxies())
+                             options.get("microsoft_graph_url"),
+                             options.get("tenant_id"),
+                             options.get("client_id"),
+                             options.get("client_secret"),
+                             RequestsCommon(opts, options).get_proxies())

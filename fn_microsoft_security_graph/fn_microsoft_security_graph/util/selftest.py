@@ -35,9 +35,9 @@ def selftest_function(opts):
 
     try:
         log.info(u'Calling MS Graph API with: \n token_url: %s', token_url)
-        log.info(u' MS Graph API url: %s', graph_url)
-        log.info(u' tenant_id: %s', tenant_id)
-        log.info(u' client_id: %s', client_id)
+        log.info(u'MS Graph API url: %s', graph_url)
+        log.info(u'tenant_id: %s', tenant_id)
+        log.info(u'client_id: %s', client_id)
 
         state, reason = "", ""
 

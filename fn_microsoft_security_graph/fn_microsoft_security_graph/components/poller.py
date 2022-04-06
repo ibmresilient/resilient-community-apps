@@ -48,7 +48,7 @@ class PollerComponent(ResilientComponent):
             LOG.debug("Polling for alerts")
             alert_list = get_alerts(self.options, self.ms_graph_helper)
             # Amount of time (seconds) to wait to check alerts again, defaults to 10 mins if not set
-            wait_time = int(self.options.get("msg_polling_interval", 600))
+            wait_time = int(self.options.get("msg_polling_interval"))
 
             # Check for alerts in incidents
             for alert in alert_list:
@@ -61,23 +61,19 @@ class PollerComponent(ResilientComponent):
             sleep(wait_time)
 
     def create_incident(self, payload):
+        # Creates an incident in SOAR
         try:
-            resilient_client = self.rest_client()
-
-            uri = "/incidents"
             payload_dict = loads(payload)
             LOG.info("Creating incident with payload: {}".format(payload))
             LOG.debug("Payload: {}".format(payload_dict))
 
-            response = resilient_client.post(uri=uri, payload=payload_dict)
-            return response
+            return self.rest_client().post(uri="/incidents", payload=payload_dict)
 
         except SimpleHTTPException as err:
             LOG.info("Something went wrong when attempting to create the Incident %s", err)
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, field_value):
-        query_uri = "/incidents/query?return_level=partial"
         query = {
             'filters': [{
                 'conditions': [
@@ -99,11 +95,10 @@ class PollerComponent(ResilientComponent):
             }]
         }
         try:
-            r_incidents = self.rest_client().post(query_uri, query)
+            return self.rest_client().post("/incidents/query?return_level=partial", query)
         except SimpleHTTPException:
             # Some versions of SOAR 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(MSG_FIELD_NAME)
             query = {
                 'filters': [{
                     'conditions': [
@@ -119,11 +114,11 @@ class PollerComponent(ResilientComponent):
                     ]
                 }]
             }
-            r_incidents_tmp = self.rest_client().post(query_uri, query)
-            r_incidents = [r_inc for r_inc in r_incidents_tmp
+            r_incidents_tmp = self.rest_client().post(
+                "/incidents/query?return_level=normal&field_handle={}".format(MSG_FIELD_NAME),
+                query)
+            return [r_inc for r_inc in r_incidents_tmp
                            if r_inc["properties"].get(MSG_FIELD_NAME) == field_value]
-
-        return r_incidents
 
 # Converts string datetime to milliseconds epoch
 def ds_to_millis(val):
@@ -147,27 +142,21 @@ def get_alerts(options, ms_graph_helper):
     url = "{}/security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
 
-    r = ms_graph_helper.ms_graph_session.get(url)
-    if not r:
+    response = ms_graph_helper.ms_graph_session.get(url)
+    if not response:
         raise FunctionError("Request failed, please check the LOG.")
 
-    response_json = r.json()
+    response_json = response.json()
     return response_json.get("value")
 
-def build_incident_dto(alert, custom_temp_file=None):
-    current_path = dirname(realpath(__file__))
-    if custom_temp_file:
-        template_file = custom_temp_file
-    else:
-        default_temp_file = join(current_path, pardir, "data/templates/msg_incident_mapping.jinja")
-        template_file = default_temp_file
+def build_incident_dto(alert, template_file=None):
+    if not template_file:
+        template_file = join(dirname(realpath(__file__)), pardir, "data/templates/msg_incident_mapping.jinja")
 
     try:
         with open(template_file, 'r') as template:
             LOG.debug("Reading template file")
-            incident_template = template.read()
-
-            return template_functions.render(incident_template, alert)
+            return template_functions.render(template.read(), alert)
 
     except TemplateSyntaxError:
         LOG.info("'incident_template' is not set correctly in config file.")
@@ -187,8 +176,7 @@ def create_query(alert_query, createDateTime_filter):
         # Query already has a filter section in it and the date filter should just be added to the end of that section
         elif "$filter=" in query:
             query_sections = query.split('&$')
-            i = 0
-            while i < len(query_sections):
+            for i in range(len(query_sections)):
                 if "filter" in query_sections[i]:
                     query_sections[i] = "{}%20and%20{}".format(query_sections[i], createDateTime_filter)
                     break
