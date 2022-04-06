@@ -41,7 +41,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.1 | 04/2022 | Bug fix |
+| 1.0.1 | 04/2022 | Bug fix for use of 'verify' app.config parameter |
 | 1.0.0 | 04/2021 | Initial Release |
 
 ---
@@ -140,7 +140,7 @@ The following table provides the settings you need to configure the app. These s
 | **remedy_password** | Yes | `xxx` | *Password to use to authenticate with Remedy.* |
 | **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the SOAR API when closing an Incident.* |
 | remedy_port | No | `8443` | *Port number over which the Remedy REST API is exposed.* |
-| verify | No | `true` | *Set to `true` to make verified requests to Remedy, `false` otherwise.* |
+| verify | No | `true|false|/path/to/certificate.crt` | *Set to `true` or `/path/to/cerficate.crt` to make verified requests to Remedy, else set to `false`* |
 | http_proxy | No | `example.domain` | *http proxy for request traffic.* |
 | http_proxy | No | `example.domain` | *https proxy for request traffic.* |
 

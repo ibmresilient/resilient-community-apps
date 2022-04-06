@@ -5,6 +5,7 @@
 import logging
 import json
 from datetime import datetime
+from os.path import isfile
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, str_to_bool
@@ -183,7 +184,9 @@ class FunctionComponent(ResilientComponent):
 
             # get optional settings
             port = self.fn_options.get("remedy_port", None)
-            verify = str_to_bool(self.fn_options.get("verify", "true"))
+            verify = self.fn_options.get("verify", "true")
+            if not isfile(verify):
+                verify = str_to_bool(verify)
 
             # get function inputs
             remedy_payload = kwargs.get("remedy_payload")
