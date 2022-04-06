@@ -64,6 +64,7 @@
 | 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
 | 1.2.0 | 01/2022 | Allow multiple QRadar instances |
 | 1.2.1 | 03/2022 | Bug fix |
+| 1.2.2 | 04/2022 | Delete Search on time-out |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 
 For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration

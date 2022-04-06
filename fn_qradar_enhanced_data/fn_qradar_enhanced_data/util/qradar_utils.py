@@ -170,6 +170,27 @@ class ArielSearch(SearchWaitCommand):
 
         return search_id
 
+
+    def delete_search(self, search_id):
+        """
+        Deletes an AQL search in case of timeout or error
+        """
+        auth_info = AuthInfo.get_authInfo()
+
+        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_DELETE.format(search_id)
+
+        headers = auth_info.headers.copy()
+
+        response = None
+
+        try:
+            response = auth_info.make_call("DELETE", url, headers=headers)
+        except Exception as e:
+            LOG.error(str(e))
+            raise SearchFailure(search_id, None)
+
+        return response.status_code in [200, 202]
+
     def get_search_result(self, search_id):
         """
         Get search result associated with search_id

@@ -14,10 +14,11 @@ from resilient_lib import RequestsCommon
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
 from resilient_lib import IntegrationError
-from urllib.parse import quote as quote_func
+from urllib.parse import quote as quote_func, urljoin
 
 LOG = logging.getLogger(__name__)
 FORWARD_SLASH = b'%2F'
+ARIEL_SEARCHES_DELETE = "ariel/searches/{}"
 
 def quote(input_v, safe=None):
     """
@@ -45,9 +46,9 @@ class QRadarServers():
             server_data = opts.get(server_name)
             if not server_data:
                 raise KeyError(u"Unable to find QRadar server: {}".format(server_name))
-            
+
             servers[server] = server_data
-        
+
         return servers, server_name_list
 
     def qradar_label_test(qradar_label, servers_list):
@@ -274,6 +275,24 @@ class ArielSearch(SearchWaitCommand):
             raise SearchFailure(search_id, status)
 
         return status
+
+    def delete_search(self, search_id):
+        """
+        Deletes an AQL search in case of timeout or error
+        """
+        auth_info = AuthInfo.get_authInfo()
+
+        url = urljoin(auth_info.api_url, ARIEL_SEARCHES_DELETE.format(search_id))
+        headers = auth_info.headers.copy()
+
+        response = None
+        try:
+            response = auth_info.make_call("DELETE", url, headers=headers)
+        except Exception as e:
+            LOG.error(str(e))
+            raise SearchFailure(search_id, None)
+
+        return response.status_code in [200, 202]
 
 class QRadarClient(object):
     # QRadarClient has-a ReferenceTableFacade

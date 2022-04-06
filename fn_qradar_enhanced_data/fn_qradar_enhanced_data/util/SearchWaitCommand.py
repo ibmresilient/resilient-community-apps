@@ -61,6 +61,14 @@ class SearchWaitCommand(object):
         """
         return self.SEARCH_STATUS_ERROR_STOP
 
+    def delete_search(self, search_id):
+        """
+        Override this to delete a search
+        :param search_id:
+        :return:
+        """
+        return True
+
     def get_search_result(self, search_id):
         """
         Override this to get the search result
@@ -88,6 +96,7 @@ class SearchWaitCommand(object):
                 if status == self.SEARCH_STATUS_COMPLETED:
                     done = True
                 elif status == self.SEARCH_STATUS_ERROR_STOP:
+                    self.delete_search(search_id)
                     raise SearchFailure(search_id, status)
                 elif status == self.SEARCH_STATUS_WAITING:
                     done = False
@@ -100,6 +109,7 @@ class SearchWaitCommand(object):
                     # will never timeout
                     if self.search_timeout != 0:
                         if time() - start_time > self.search_timeout:
+                            self.delete_search(search_id)
                             raise SearchTimeout(search_id, status)
                     # polling_interval is defaulted to 5 sec
                     sleep(self.polling_period)
