@@ -170,7 +170,6 @@ class ArielSearch(SearchWaitCommand):
 
         return search_id
 
-
     def delete_search(self, search_id):
         """
         Deletes an AQL search in case of timeout or error
