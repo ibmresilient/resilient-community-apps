@@ -164,7 +164,7 @@ class SymantecDLPPollerComponent(ResilientComponent):
                 sdlp_incident_payload = self.sdlp_env.get_sdlp_incident_editable_detail_payload(sdlp_incident_id)
                 sdlp_incident_status_name = self.sdlp_env.get_incident_status_name(sdlp_incident_payload)
 
-                if sdlp_incident_status_name in ['Resolved', 'Dismissed']:
+                if sdlp_incident_status_name is'Resolved':
                     # Close the case in SOAR
                     incident_close_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("close_case_template"),

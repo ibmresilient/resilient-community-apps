@@ -203,7 +203,7 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 ## Function - Symantec DLP: Close DLP Case
-Close SOAR case when the DLP incident status is set to **Resolved** or **Dismissed**.
+Close SOAR case when the DLP incident status is set to **Resolved**.
 <p>
 
  ![screenshot: fn-symantec-dlp-close-dlp-case ](./doc/screenshots/fn-symantec-dlp-close-dlp-case.png) 
@@ -827,6 +827,7 @@ results = {
 ```python
 inputs.incident_id = incident.id
 inputs.sdlp_incident_status = rule.properties.sdlp_incident_status
+inputs.sdlp_incident_severity_id = rule.properties.sdlp_incident_severity_id
 ```
 
 </p>
@@ -840,10 +841,12 @@ content = results.get("content")
 success = content.get("success", False)
 sdlp_incident_id = content.get("sdlp_incident_id", None)
 sdlp_incident_status = content.get("sdlp_incident_status", None)
+sdlp_incident_severity_id = content.get("sdlp_incident_severity_id", None)
+
 if success:
-  noteText = u'<b>Symantec DLP: Update Incident Status</b><br> DLP incident {0} status set to: {1}.'.format(sdlp_incident_id, sdlp_incident_status)
+  noteText = u'<b>Symantec DLP: Update Incident</b><br> DLP incident {0}<br>   Status set to: {1}<br>   Severity set to: {2}'.format(sdlp_incident_id, sdlp_incident_status, sdlp_incident_severity_id)
 else:
-  noteText = u'<b>Symantec DLP: Update Incident Status</b><br>Error: Check DLP incidentId {0} status in Symantec DLP.'.format(sdlp_incident_id)
+  noteText = u'<b>Symantec DLP: Update Incident</b><br>DLP incident {0} was not updated.  Check input values.'.format(sdlp_incident_id)
 
 incident.addNote(noteText)
 ```
