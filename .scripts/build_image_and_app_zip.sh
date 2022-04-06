@@ -14,7 +14,7 @@ PACKAGE_NAME=$1
 BUILD_TYPE=$2
 PYPI_INDEX_TO_USE=$3
 DOCKERFILE_KEYWORD="RUN pip install --upgrade pip"
-DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install resilient==44.1.2875 resilient-lib==44.1.2875 resilient-circuits==44.1.2875 -i $PYPI_INDEX_TO_USE \\n\"]"
+DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install resilient-circuits -i $PYPI_INDEX_TO_USE \\n\"]"
 
 ##################
 ## Check params ##
