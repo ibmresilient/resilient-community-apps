@@ -1,7 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 # pylint: disable=R0913,C0103,E1101,W0707,W0703
 """ DataTable.py exposes a helper module for GET, UPDATE and DELETE
-    Functions for a Resilient / CP4S Data Table """
+    Functions for a SOAR / CP4S Data Table """
 
 import json
 import logging
@@ -16,7 +16,7 @@ LOG = logging.getLogger(__name__)
 
 
 class Datatable(object):
-    """ A helper class which provides a facade to interface with a Resilient / CP4S Data Table
+    """ A helper class which provides a facade to interface with a SOAR / CP4S Data Table
     Example:
     .. code-block:: python
 
@@ -41,7 +41,7 @@ class Datatable(object):
 
     def get_data(self):
         """get_data Function that gets all the data and rows of a Data Table
-            using the Resilient API
+            using the SOAR API
 
         :raises ValueError: If the datatable api call fails or the result contains no rows, raise an Exception
         """
@@ -208,7 +208,7 @@ class Datatable(object):
 
     def delete_row(self, row_id):
         """delete_row Deletes the row.
-            Returns the response from Resilient API
+            Returns the response from SOAR API
             or dict with the entry 'error'.
 
         :param row_id: The ID of the row to delete
@@ -238,7 +238,7 @@ class Datatable(object):
     def delete_rows(self, rows_ids=None, search_column=None, search_value=None,
                     row_id=None, workflow_id=None):
         """delete_rows Deletes rows.
-            Returns the response from Resilient API
+            Returns the response from SOAR API
             or dict with the entry 'error'.
 
         :param rows_ids: ID numbers of the rows to be deleted, defaults to None
@@ -329,7 +329,7 @@ class Datatable(object):
 
     def get_dt_headers(self):
         """get_dt_headers Function that gets all the data and rows of a Data Table
-            using the Resilient API
+            using the SOAR API
 
         :raises ValueError: Any exception that is raised during the API call raises a ValueError
         :return: The fields for a datatable
@@ -363,7 +363,7 @@ class Datatable(object):
 
     @cached(cache=LRUCache(maxsize=100))
     def get_object_type(self, obj_id):
-        """get_object_type Get information about a Resilient object. This call is cached for multiple calls
+        """get_object_type Get information about a SOAR object. This call is cached for multiple calls
 
         :param obj_id: The ID of the object type to get
         :type obj_id: int

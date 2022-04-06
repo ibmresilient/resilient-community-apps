@@ -26,7 +26,7 @@ LOG = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'remedy_create_incident''"""
+    """Component that implements SOAR function 'remedy_create_incident''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
@@ -39,13 +39,13 @@ class FunctionComponent(ResilientComponent):
         self.fn_options = opts.get(PACKAGE_NAME, {})
 
     def add_dt_row(self, incident_id, task, values):
-        """Adds a row to the datatable correlating the Resilient task
+        """Adds a row to the datatable correlating the SOAR task
         to the Remedy incident.
 
-        :param incident_id: Resilient incident ID
-        :param task: task dictionary payload from Resilient
+        :param incident_id: SOAR incident ID
+        :param task: task dictionary payload from SOAR
         :param values: dictionary of Remedy Incident values
-        :return: Resilient's response to the datatable request
+        :return: SOAR's response to the datatable request
         """
         # instantiate a datatable client
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
         }
         LOG.info(u"Adding row to the remedy_linked_incidents_reference_table DataTable: %s", row)
         dt_response = dt.dt_add_rows(row)
-        LOG.debug(u"Response from the Resilient Datatable API:\n%s", dt_response)
+        LOG.debug(u"Response from the SOAR Datatable API:\n%s", dt_response)
         return dt_response
 
     def post_incident_to_remedy(self, remedy_client, rp, values, incident_id, task):
@@ -72,8 +72,8 @@ class FunctionComponent(ResilientComponent):
         :param remedy_client: RemedyClient object
         :param rp: ResultsPayload object
         :param values: values dict to send to Remedy
-        :param incident_id: Resilient incident ID
-        :param task: task dict from Resilient
+        :param incident_id: SOAR incident ID
+        :param task: task dict from SOAR
         :return: ResultsPayload.done
         """
         # POST an incident to Remedy
@@ -115,7 +115,7 @@ class FunctionComponent(ResilientComponent):
         self.add_dt_row(incident_id, task, entry["values"])
 
         results = rp.done(True, entry)
-        # pass the task back to Resilient to use in the post-script if we were successful
+        # pass the task back to SOAR to use in the post-script if we were successful
         results["content"]["task"] = task
         return results
 
@@ -155,12 +155,12 @@ class FunctionComponent(ResilientComponent):
             # required metadata field to create a resource
             remedy_payload["z1D_Action"] = "CREATE"
 
-            # resilient incident_id
+            # SOAR incident_id
             incident_id = kwargs.get("incident_id")
-            # resilient task id
+            # SOAR task id
             task_id = kwargs.get("task_id")
 
-            # instantiate a resilient API client
+            # instantiate a SOAR API client
             resilientClient = self.rest_client()
             # get the task data
             task = resilientClient.get("/tasks/{0}".format(task_id))

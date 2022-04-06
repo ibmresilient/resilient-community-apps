@@ -20,7 +20,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#SOAR-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
 - [Installation](#installation)
@@ -41,6 +41,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 04/2022 | Bug fix |
 | 1.0.0 | 04/2021 | Initial Release |
 
 ---
@@ -50,11 +51,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_remedy'**
+**Remedy for IBM SOAR**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_remedy.' This integration provides the capability to create new incidents in Remedy from Resilient tasks via the HPD:IncidentInterface_Create form over the REST API. Once the task is complete, this integration also provides the capability to close existing Remedy Incidents by updating their status to "Resolved."
+Remedy for IBM SOAR. This integration provides the capability to create new incidents in Remedy from SOAR tasks via the HPD:IncidentInterface_Create form over the REST API. Once the task is complete, this integration also provides the capability to close existing Remedy Incidents by updating their status to "Resolved."
 
 ### Key Features
 <!--
@@ -69,17 +70,17 @@ Resilient Circuits Components for 'fn_remedy.' This integration provides the cap
 <!--
   List any Requirements 
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `39.0.0`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `39.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `39.0.0`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `39.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=30.0.0` and `resilient-lib>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -96,12 +97,12 @@ If deploying to a Resilient platform with an integration server, the requirement
   | ---- | ----------- |
   | Org Data | Write |
 
-The following Resilient platform guides provide additional information: 
+The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -126,7 +127,7 @@ This app requires Remedy IT Service Management Suite 20.x or above with AR Serve
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -137,7 +138,7 @@ The following table provides the settings you need to configure the app. These s
 | **remedy_host** | Yes | `<example.domain>` | *Hostname or IP for the Remedy instance.* |
 | **remedy_user** | Yes | `<example_user>` | *Username to use to authenticate with Remedy.* |
 | **remedy_password** | Yes | `xxx` | *Password to use to authenticate with Remedy.* |
-| **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the Resilient API when closing an Incident.* |
+| **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the SOAR API when closing an Incident.* |
 | remedy_port | No | `8443` | *Port number over which the Remedy REST API is exposed.* |
 | verify | No | `true` | *Set to `true` to make verified requests to Remedy, `false` otherwise.* |
 | http_proxy | No | `example.domain` | *http proxy for request traffic.* |
@@ -158,7 +159,7 @@ The following table provides the settings you need to configure the app. These s
 
 
 ## Function - Remedy: Create Incident
-Create a new incident in Remedy from a Resilient task.
+Create a new incident in Remedy from a SOAR task.
 
  ![screenshot: fn-remedy-create-incident ](./doc/screenshots/fn-remedy-create-incident.png)
 

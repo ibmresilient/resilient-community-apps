@@ -27,7 +27,7 @@ LOG = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'remedy_close_incident''"""
+    """Component that implements SOAR function 'remedy_close_incident''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
@@ -43,13 +43,13 @@ class FunctionComponent(ResilientComponent):
 
     def close_remedy_incident(self, incident_id, task, remedy_client, rp, remedy_payload):
         """Performs the work of closing (updating) an incident in Remedy and updating the
-        corresponding row in the resilient data table. If the incident is already closed,
+        corresponding row in the SOAR data table. If the incident is already closed,
         the status value on the incident is not changed and we only update the status
-        on the resilient side.
+        on the SOAR side.
 
-        :param incident_id: resilient incident id
+        :param incident_id: SOAR incident id
         :type incident_id: int
-        :param task: resilient task data
+        :param task: SOAR task data
         :type task: dict
         :param remedy_client: remedy API client
         :type remedy_client: RemedyClient
@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
         return rp.done(True, {"closed": closed, "skipped": skipped})
 
     def update_datatable_row(self, row_id, row, incident_id):
-        """Updates the values of a row in a resilient data table
+        """Updates the values of a row in a SOAR data table
 
         :param row_id: target id of the data table row
         :type row_id: int
@@ -143,12 +143,12 @@ class FunctionComponent(ResilientComponent):
         return closed, skipped
 
     def get_dt_rows(self, incident_id, task):
-        """Gets rows from a resilient datatable. Rows matching a query
+        """Gets rows from a SOAR datatable. Rows matching a query
         string concatenated from the task ID and name are returned
 
-        :param incident_id: resilient incident id
+        :param incident_id: SOAR incident id
         :type incident_id: int
-        :param task: resilient task data
+        :param task: SOAR task data
         :type task: dict
         :return: matched rows from the datatable
         :rtype: dict
@@ -192,7 +192,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")
             task_id = kwargs.get("task_id")
 
-            # instantiate a resilient API client
+            # instantiate a SOAR API client
             # get the task data
             task = self.rest_client().get("/tasks/{0}".format(task_id))
 
