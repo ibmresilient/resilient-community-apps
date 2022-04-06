@@ -21,21 +21,19 @@ MSG_FIELD_NAME = "microsoft_security_graph_alert_id"
 class PollerComponent(ResilientComponent):
     """
     Poller to o query alerts from the Microsoft Security Graph API and create incidents in the
-        SOAR platform if they do not already exist
+    SOAR platform if they do not already exist
     """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.options = opts.get("fn_microsoft_security_graph", {})
         # Connect to micosoft security graph
         self.ms_graph_helper = connect_MSGraph(opts)
 
-        if int(self.options.get("msg_polling_interval", 0)) > 0:
+        if int(self.options.get("msg_polling_interval", 0)):
             # Add ds_to_millis to global for use in Jinja templates
-            ds_filter = {"ds_to_millis": ds_to_millis}
-            env = environment()
-            env.globals.update(ds_filter)
+            environment().globals.update({"ds_to_millis": ds_to_millis})
 
             # Create and start polling thread
             thread = Thread(target=self.msg_polling_thread)
@@ -133,13 +131,10 @@ def ds_to_millis(val):
     if not val:
         return val
     try:
-        ts = val[:23]
-        ts_format = "%Y-%m-%dT%H:%M:%S.%f"
-        dt = datetime.strptime(ts, ts_format)
+        dt = datetime.strptime(val[:23], "%Y-%m-%dT%H:%M:%S.%f")
         return timegm(dt.utctimetuple()) * 1000
     except Exception as e:
         LOG.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
-        return None
 
 def get_alerts(options, ms_graph_helper):
     # Set createDateTime start filter

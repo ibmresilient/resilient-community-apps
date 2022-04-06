@@ -34,23 +34,26 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage("Starting Microsoft security graph alert search function...")
 
             # Get the function parameters:
-            microsoft_security_graph_alert_search_query = kwargs.get("microsoft_security_graph_alert_search_query", None)  # text
+            alert_search_query = kwargs.get("microsoft_security_graph_alert_search_query", None)  # text
 
-            LOG.info("microsoft_security_graph_alert_search_query: %s", microsoft_security_graph_alert_search_query)
+            LOG.info("microsoft_security_graph_alert_search_query: %s", alert_search_query)
 
-            response = alert_search(self.options.get("microsoft_graph_url"), self.ms_graph_helper,
-                             microsoft_security_graph_alert_search_query)
+            # If alert_search_query does not equal None then start_query equals "?$"
+            start_query = "?$" if alert_search_query else ""
+
+            response = self.ms_graph_helper.ms_graph_session.get(
+                "{}/security/alerts/{}{}".format(self.options.get("microsoft_graph_url"), start_query, alert_search_query))
+
             if not response:
                 raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph alert search function complete...")
 
-            end_time = time()
             results = {
                 "inputs": {
-                    "microsoft_security_graph_alert_search_query": microsoft_security_graph_alert_search_query
+                    "microsoft_security_graph_alert_search_query": alert_search_query
                 },
-                "run_time": end_time - start_time,
+                "run_time": time() - start_time,
                 "content": response.json(),
                 "success": True
             }
@@ -59,11 +62,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-
-def alert_search(url, ms_helper, search_query=None):
-
-    start_query = ""
-    if search_query:
-        start_query = "?$"
-
-    return ms_helper.ms_graph_session.get("{}/security/alerts/{}{}".format(url, start_query, search_query))

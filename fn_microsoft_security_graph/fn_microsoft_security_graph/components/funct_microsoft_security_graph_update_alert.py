@@ -3,7 +3,7 @@
 
 """AppFunction implementation"""
 
-import ast
+from ast import literal_eval
 from time import time
 from logging import getLogger
 from resilient_lib import validate_fields
@@ -39,26 +39,33 @@ class FunctionComponent(AppFunctionComponent):
             validate_fields(["microsoft_security_graph_alert_id", "microsoft_security_graph_alert_data"], kwargs)
 
             # Get the function parameters:
-            microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
-            microsoft_security_graph_alert_data = self.get_textarea_param(
+            alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
+            alert_data = self.get_textarea_param(
                 kwargs.get("microsoft_security_graph_alert_data"))  # textarea
 
-            LOG.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
-            LOG.info("microsoft_security_graph_alert_data: %s", microsoft_security_graph_alert_data)
+            LOG.info("microsoft_security_graph_alert_id: %s", alert_id)
+            LOG.info("microsoft_security_graph_alert_data: %s", alert_data)
 
-            response = update_alert(self.options.get("microsoft_graph_url"), self.ms_graph_helper, microsoft_security_graph_alert_id,
-                             microsoft_security_graph_alert_data)
+            try:
+                data = literal_eval(alert_data)
+            except ValueError as e:
+                raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
+
+            response = self.ms_graph_helper.ms_graph_session.patch(
+                "{}/security/alerts/{}".format(self.options.get("microsoft_graph_url"), alert_id),
+                headers={"Content-type": "application/json", "Prefer": "return=representation"},
+                json=data)
+
             if not response:
                 raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph update alert function complete...")
-            end_time = time()
             results = {
                 "inputs": {
-                    "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id,
-                    "microsoft_security_graph_alert_data": microsoft_security_graph_alert_data
+                    "microsoft_security_graph_alert_id": alert_id,
+                    "microsoft_security_graph_alert_data": alert_data
                 },
-                "run_time": end_time - start_time,
+                "run_time": time() - start_time,
                 "content": response.json(),
                 "success": True
             }
@@ -67,18 +74,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-
-def update_alert(url, ms_helper, alert_id, alert_data):
-    headers = {
-        "Content-type": "application/json",
-        "Prefer": "return=representation"
-    }
-
-    try:
-        data = ast.literal_eval(alert_data)
-    except ValueError as e:
-        raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
-
-    request_url = "{}/security/alerts/{}".format(url, alert_id)
-
-    return ms_helper.ms_graph_session.patch(request_url, headers=headers, json=data)

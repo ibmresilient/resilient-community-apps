@@ -37,22 +37,22 @@ class FunctionComponent(AppFunctionComponent):
             validate_fields(["microsoft_security_graph_alert_id"], kwargs)
 
             # Get the function parameters:
-            microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
+            alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
 
-            LOG.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
+            LOG.info("microsoft_security_graph_alert_id: %s", alert_id)
 
-            response = get_alert_details(self.options.get("microsoft_graph_url"), self.ms_graph_helper,
-                                  microsoft_security_graph_alert_id)
+            response = self.ms_graph_helper.ms_graph_session.get(
+                "{}/security/alerts/{}".format(self.options.get("microsoft_graph_url"), alert_id))
+
             if not response:
                 raise FunctionError("Request failed, please check the LOG.")
 
             yield StatusMessage("Microsoft security graph get alert details function complete...")
-            end_time = time()
             results = {
                 "inputs": {
-                    "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id
+                    "microsoft_security_graph_alert_id": alert_id
                 },
-                "run_time": end_time - start_time,
+                "run_time": time() - start_time,
                 "content": response.json(),
                 "success": True
             }
@@ -61,7 +61,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-
-def get_alert_details(url, ms_helper, alert_id):
-
-    return ms_helper.ms_graph_session.get("{}/security/alerts/{}".format(url, alert_id))
