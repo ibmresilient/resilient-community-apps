@@ -48,13 +48,13 @@ class TestMicrosoftSecurityGraphGetAlertDetails:
         assert func is not None
 
     mock_inputs_1 = {
-        "microsoft_security_graph_alert_id": "sample text"
+        "microsoft_security_graph_alert_id": 200
     }
 
     expected_results_1 = {"value": "xyz"}
 
     mock_inputs_2 = {
-        "microsoft_security_graph_alert_id": "sample text"
+        "microsoft_security_graph_alert_id": 300
     }
 
     expected_results_2 = {"value": "xyz"}

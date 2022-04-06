@@ -14,30 +14,15 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
-def call_microsoft_security_graph_update_alert_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("microsoft_security_graph_update_alert", function_params)
-
+def call_microsoft_security_graph_update_alert_function(circuits, function_params, timeout=10):
     # Fire a message to the function
+    evt = SubmitTestFunction("microsoft_security_graph_update_alert", function_params)
     circuits.manager.fire(evt)
-
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("microsoft_security_graph_update_alert_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
-
+    event = circuits.watcher.wait("microsoft_security_graph_update_alert_result", parent=evt, timeout=timeout)
+    assert event
+    assert isinstance(event.kwargs["result"], FunctionResult)
+    pytest.wait_for(event, "complete", True)
+    return event.kwargs["result"].value
 
 class TestMicrosoftSecurityGraphUpdateAlert:
     """ Tests for the microsoft_security_graph_update_alert function"""
@@ -48,15 +33,15 @@ class TestMicrosoftSecurityGraphUpdateAlert:
         assert func is not None
 
     mock_inputs_1 = {
-        "microsoft_security_graph_alert_data": {"type": "text", "content": "sample line one\nsample line two"},
-        "microsoft_security_graph_alert_id": "sample text"
+        "microsoft_security_graph_alert_data": '{"assignedTo": "me", "status:: "unkown", "access_token: "fake_access_token"}',
+        "microsoft_security_graph_alert_id": 200
     }
 
     expected_results_1 = {"value": "xyz"}
 
     mock_inputs_2 = {
-        "microsoft_security_graph_alert_data": {"type": "text", "content": "sample line one\nsample line two"},
-        "microsoft_security_graph_alert_id": "sample text"
+        "microsoft_security_graph_alert_data": '{"assignedTo": "", "status:: "unkown", "alert_details": { "details": "updated" } }',
+        "microsoft_security_graph_alert_id": 200
     }
 
     expected_results_2 = {"value": "xyz"}
