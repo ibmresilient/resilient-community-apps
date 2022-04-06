@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_siemplify",
-    display_name="Siemplify App for IBM QRadar SOAR",
+    display_name="Siemplify",
     version="1.0.0",
     license="MIT",
     author="IBM QRadar SOAR",

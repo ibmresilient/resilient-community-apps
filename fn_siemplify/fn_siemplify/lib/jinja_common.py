@@ -120,7 +120,7 @@ def jinja_resilient_substitute(value, json_str):
 
     return value
 
-def jinja_resilient_splitpart (value, index, split_chars=' - '):
+def jinja_resilient_splitpart(value, index, split_chars=' - '):
     """[split a string and return the index]
 
     Args:

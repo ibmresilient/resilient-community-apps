@@ -6,7 +6,7 @@ import logging
 import json
 import os
 from .jinja_common import JinjaEnvironment
-from resilient_lib import clean_html, IntegrationError
+from resilient_lib import clean_html, IntegrationError, readable_datetime
 from simplejson.errors import JSONDecodeError
 
 LOG = logging.getLogger(__name__)
@@ -83,7 +83,7 @@ class SiemplifyCommon():
             with open(lookup_file, 'r') as f:
                 return json.load(f)
         except JSONDecodeError as err:
-            LOG.error("Unable to use artifact type lookup file: %s. Using default mapping")
+            LOG.error("Unable to use artifact type lookup file: %s. Using default mapping", str(err))
             with open(default_lookup, 'r') as f:
                 return json.load(f)
 
@@ -121,7 +121,22 @@ class SiemplifyCommon():
             "requestedPage": 0,
             "timeRangeFilter": 0
         }
-        LOG.debug("Search case payload: %s", payload)
+        LOG.debug("get_cases payload: %s", payload)
+
+        return self._make_call("POST", SEARCH_CASE_URL, payload)
+
+    def get_new_cases(self, last_poller_time, filters):
+        payload = {
+            "startTime": readable_datetime(last_poller_time),
+            "endTime": readable_datetime(last_poller_time+30000),
+            "timeRangeFilter": 0,
+            "isCaseClosed": "false"
+        }
+        if filters:
+            for filter in filters.keys():
+                payload[filter] = filters[filter]
+
+        LOG.debug("get_new_cases payload: %s", payload)
 
         return self._make_call("POST", SEARCH_CASE_URL, payload)
 

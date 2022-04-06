@@ -14,7 +14,7 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon
 from resilient import get_client
 from fn_siemplify.lib.jinja_common import JinjaEnvironment
-from fn_siemplify.lib.resilient_common import ResilientCommon
+from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 
 TICKET_ID_FIELDNAME = "simplify_case_id"
@@ -34,11 +34,11 @@ def poller(named_poller_interval, named_last_poller_time):
         named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
         named_last_poller_time ([datetime]): [name of instance variable containing the lookback value in mseconds]
     """
-    def poller(func):
+    def poller_wrapper(func):
         # decorator for running a function forever, passing the ms timestamp of
         #  when the last poller run to the function it's calling
         @functools.wraps(func)
-        def wrapped(self):
+        def wrapped(self, *args):
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
 
@@ -47,7 +47,7 @@ def poller(named_poller_interval, named_last_poller_time):
                     LOG.info(u"%s polling start.", PACKAGE_NAME)
                     poller_start = datetime.datetime.now()
                     # function execution with the last poller time in ms
-                    func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
+                    func(self, *args, last_poller_time=int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
                     LOG.error(str(err))
@@ -62,7 +62,7 @@ def poller(named_poller_interval, named_last_poller_time):
             exit_event.set() # loop complete
 
         return wrapped
-    return poller
+    return poller_wrapper
 
 class SiemplifyPollerComponent(ResilientComponent):
     """
@@ -102,6 +102,7 @@ class SiemplifyPollerComponent(ResilientComponent):
         LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
         self.timezone = pytz.timezone(options.get("polling_timezone", GMT))
         self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
+        self.polling_filters = eval_mapping(options.get('polling_filters'), "{{ {} }}")
 
         rest_client = get_client(opts)
         self.res_common = ResilientCommon(rest_client)
@@ -115,7 +116,7 @@ class SiemplifyPollerComponent(ResilientComponent):
         return True
 
     @poller('polling_interval', 'last_poller_time')
-    def run(self, last_poller_time=None):
+    def run(self, *args, **kwargs):
         """[Process to query for changes in Siemplify incidents and the cooresponding update SOAR incident]
            The steps taken are to
            1) query SOAR for all open incidents associated with Siemplify
@@ -125,6 +126,10 @@ class SiemplifyPollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
+        # get new siemplify cases to escalate
+        new_case_list, _err_msg = self.siemplify_env.get_new_cases(kwargs.get("last_poller_time"), self.polling_filters)
+        LOG.debug(new_case_list)
+
         # get all open siemplify linked incidents
         soar_incident_list = self.res_common.get_open_siemplify_incidents()
         if not soar_incident_list:
@@ -155,8 +160,8 @@ class SiemplifyPollerComponent(ResilientComponent):
                 self.res_common.create_incident_comment(soar_inc_id, None, msg)
             else:
                 # check if the case has been modified
-                if self.siemplify_env.is_case_modified(case_id, last_poller_time):
-                    case, error_msg = self.siemplify_env.get_case(case_id)
+                if self.siemplify_env.is_case_modified(case_id, kwargs.get("last_poller_time")):
+                    case, _err_msg = self.siemplify_env.get_case(case_id)
 
                     incident_update_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("soar_update_case_template"),
