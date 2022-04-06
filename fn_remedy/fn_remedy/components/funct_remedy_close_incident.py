@@ -14,17 +14,16 @@ from fn_remedy.lib.datatable.data_table import Datatable
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_close_incident"
 TABLE_NAME = "remedy_linked_incidents_reference_table"
-MAX_ROWS = 30 # override option available in app.config as max_datatable_rows
+MAX_ROWS = 30 # Override option available in app.config as max_datatable_rows
 
-# fields we want Remedy to return when creating an incident
+# Fields we want Remedy to return when creating an incident
 RETURN_FIELDS = ["Incident Number", "Request ID"]
-# form name corresponding to a Remedy Incident
+# Form name corresponding to a Remedy Incident
 FORM_NAME = "HPD:IncidentInterface"
-# status values that indicate closure
+# Status values that indicate closure
 CLOSED_LIST = ["Resolved", "Closed", "Cancelled"]
 
 LOG = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'remedy_close_incident''"""
@@ -33,7 +32,7 @@ class FunctionComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.fn_options = opts.get(PACKAGE_NAME, {})
-        # override MAX_ROWS if provided in app.config
+        # Override MAX_ROWS if provided in app.config
         self.max_rows = int(self.fn_options.get("max_datatable_rows", MAX_ROWS))
 
     @handler("reload")
