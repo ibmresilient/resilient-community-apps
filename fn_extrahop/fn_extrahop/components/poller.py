@@ -20,6 +20,7 @@ ENTITY_COMMENT_HEADER = "Created by ExtraHop"
 ENTITY_LABEL = "Detection"
 # Millisecond multiplier
 MSEC_MULTIPLIER = 1000
+PAGINATION_LIMIT = 500
 LOG = logging.getLogger(__name__)
 
 # Default Templates
@@ -42,7 +43,7 @@ def init_app(opts, options):
 
     return endpoint_class
 
-def get_entities(app_common, last_poller_time, search_filters):
+def get_entities(app_common, last_poller_time, search_filters, limit=None, offset=None):
     """Method call to query the endpoint solution for newly created or modified entities for
         synchronization with IBM SOAR
 
@@ -50,6 +51,8 @@ def get_entities(app_common, last_poller_time, search_filters):
         app_common ([obj]): [class for app API calls]
         last_poller_time ([int]): [timestamp in milliseconds to collect the changed entities (alerts, cases, etc.)]
         search_filters (dict): [name value pairs of filter settings for polling detections]
+        offset (int): Start search at offset
+        limit (int): Limit number of entries in result
     Returns:
         [list]: [list of entities to synchronize with SOAR]
     """
@@ -58,7 +61,7 @@ def get_entities(app_common, last_poller_time, search_filters):
     # Enter the code needed to perform a query to the endpoint platform, using the last_poller_time to
     # identify entities changed since that timestamp.
 
-    entity_list = app_common.get_entities_since_ts(last_poller_time, search_filters)
+    entity_list = app_common.get_entities_since_ts(last_poller_time, search_filters, limit, offset)
 
     return entity_list
 
@@ -157,12 +160,20 @@ class PollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
+        search_offset = 0
 
-        # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-        entity_list = get_entities(self.app_common, kwargs['last_poller_time'], self.polling_filters)
+        while True:
+            # Iterate over all the entities which may be paginated
+            # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
+            self.app_common.entity_count = 0
+            entity_list = get_entities(self.app_common, kwargs['last_poller_time'], self.polling_filters,
+                                       limit=PAGINATION_LIMIT, offset=search_offset)
+            self.process_entity_list(entity_list)
 
-        # iterate over all the entities.
-        self.process_entity_list(entity_list)
+            if self.app_common.entity_count < PAGINATION_LIMIT:
+                break
+
+            search_offset += PAGINATION_LIMIT
 
     def process_entity_list(self, entity_list):
         """Perform all the processing on the entity list, creating, updating and closing SOAR
