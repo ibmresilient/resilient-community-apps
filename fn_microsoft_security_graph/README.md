@@ -99,7 +99,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib>=35.0.0
 * resilient_circuits>=35.0.0
@@ -208,7 +208,7 @@ inputs.microsoft_security_graph_alert_search_query = search
 alerts = results.content.value
 note = "Microsoft Security Graph Alert Search<br>There are <b>{}</b> alerts based on the artifact of value <b>{}</b>.".format(str(len(alerts)), artifact.value)
 
-if len(alerts) > 0:
+if alerts:
   note = note + "<br><b>Alert ids:</b>"
   for alert in alerts:
     note = note + "<br>- {}".format(alert.id)
