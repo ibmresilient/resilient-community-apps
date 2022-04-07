@@ -67,7 +67,8 @@
 | 1.2.2 | 04/2022 | Delete Search on time-out |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 
-For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
+For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration and add api permissions
+edit_all_incidents_fields
 ---
 
 ## Overview
@@ -834,6 +835,10 @@ qr_flows
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
+
+## QRadar Enhanced Data Refresh Manual Rule
+When this manual rule is run it will run all of the workflows to update the incident. The look back time for 
+QRadar searches is set to 2 days by default
 
 ## Configuring Real time update to Offenses
 Real time updates to offenses is disabled by default.
