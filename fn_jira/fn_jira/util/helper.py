@@ -173,10 +173,13 @@ def extract_images(html):
 def read_img(res_client, img_url):
     """Reads a url image to a filestream"""
 
-    if img_url.startswith("/rest"):
-        return res_client.get(img_url.replace("/rest", ""), is_uri_absolute=True, get_response_object=True).content
-    else:
+    if img_url.startswith("http"):
+        # external resource
         return requests.get(img_url, headers={"User-agent": "SOAR Apphost"}).content
+    else:
+        # resource from the platform
+        resource_prefix = "/rest"
+        return res_client.get(img_url[img_url.index(resource_prefix)+len(resource_prefix):], is_uri_absolute=True, get_response_object=True).content
 
 
 def format_dict(dict_to_format):
