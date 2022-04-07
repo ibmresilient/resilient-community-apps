@@ -23,36 +23,37 @@ import java.util.Date as Date
 inputs.microsoft_security_graph_alert_id = incident.properties.microsoft_security_graph_alert_id
 
 assignedTo = rule.properties.microsoft_security_graph_alert_assignedto if rule.properties.microsoft_security_graph_alert_assignedto else ""
+
+closedDateTime = ""
 if rule.properties.microsoft_security_graph_alert_closeddatetime:
   time_stamp = rule.properties.microsoft_security_graph_alert_closeddatetime
   epoch_time = Date(time_stamp)
   closedDateTime = "\"closedDateTime\": \"{0}\",".format(str(epoch_time.toInstant()))
-else:
-  closedDateTime = ""
+  
 comment = rule.properties.microsoft_security_graph_alert_comment if rule.properties.microsoft_security_graph_alert_comment else ""
+
+feedback = ""
 if rule.properties.microsoft_security_graph_alert_feedback:
   feedback = rule.properties.microsoft_security_graph_alert_feedback
 elif workflow.properties.msg_alert_details.content.feedback:
   feedback = workflow.properties.msg_alert_details.content.feedback
-else:
-  feedback = ""
+
 status = rule.properties.microsoft_security_graph_alert_status if rule.properties.microsoft_security_graph_alert_status else workflow.properties.msg_alert_details.content.status
 tags = rule.properties.microsoft_security_graph_alert_tags if rule.properties.microsoft_security_graph_alert_tags else ""
 
 provider = workflow.properties.msg_alert_details.content.vendorInformation.provider
 vendor = workflow.properties.msg_alert_details.content.vendorInformation.vendor
 
+all_comments = [""]
 if workflow.properties.msg_alert_details.content.comments:
   all_comments = list(workflow.properties.msg_alert_details.content.comments)
-else:
-  all_comments = [""]
 all_comments = all_comments + [comment]
 
+all_tags = [""]
 if workflow.properties.msg_alert_details.content.tags:
   all_tags = workflow.properties.msg_alert_details.content.tags
-else:
-  all_tags = [""]
 all_tags = all_tags + [tags]
+
 #["{5}"]
 data = u'''{{
         "assignedTo": "{0}",

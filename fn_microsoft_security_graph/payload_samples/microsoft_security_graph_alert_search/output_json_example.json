@@ -1,3 +1,11 @@
 {
-    
+  "inputs": {
+    "microsoft_security_graph_alert_search_query": "filter=userStates/any(user:%20user/accountName%20eq%20'example@example.microsoft.com')"
+  },
+  "run_time": 0.3749861717224121,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/alerts",
+    "value": []
+  },
+  "success": true
 }

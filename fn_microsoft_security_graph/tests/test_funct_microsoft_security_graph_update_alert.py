@@ -2,8 +2,12 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
+from json import dumps
+from mock import patch
+from ast import literal_eval
+from fn_microsoft_security_graph.lib.ms_graph_helper import MSGraphHelper
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
 
 PACKAGE_NAME = "fn_microsoft_security_graph"
 FUNCTION_NAME = "microsoft_security_graph_update_alert"
@@ -13,6 +17,18 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+def generate_response(content, status):
+    class simResponse:
+        def __init__(self, content, status):
+            self.status_code = status
+            self.content = content
+            self.text = dumps(content)
+
+        def json(self):
+            return self.content
+
+    return simResponse(content, status)
 
 def call_microsoft_security_graph_update_alert_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -32,26 +48,29 @@ class TestMicrosoftSecurityGraphUpdateAlert:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {
-        "microsoft_security_graph_alert_data": '{"assignedTo": "me", "status:: "unkown", "access_token: "fake_access_token"}',
-        "microsoft_security_graph_alert_id": 200
-    }
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.patch')
+    @patch('fn_microsoft_security_graph.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
+    def test_update_alert(self, mocked_requests_post, mocked_requests_patch):
+        content = {
+            "access_token": "fake_access_token"
+        }
+        content2 = {
+            "alert_details": {
+                "details": "updated"
+            }
+        }
+        mocked_requests_post.return_value = generate_response(content, 200)
+        mocked_requests_patch.return_value = generate_response(content2, 200)
+        ms_helper = MSGraphHelper("ms_token_url", "ms_graph_url", "tenant_id1234", "client_id1234", "client_secret1234")
 
-    expected_results_1 = {"value": "xyz"}
+        try:
+            data = literal_eval('{"update_data": "data"}')
+        except ValueError as e:
+            raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
-    mock_inputs_2 = {
-        "microsoft_security_graph_alert_data": '{"assignedTo": "", "status:: "unkown", "alert_details": { "details": "updated" } }',
-        "microsoft_security_graph_alert_id": 200
-    }
+        response = ms_helper.ms_graph_session.patch(
+                "{}/security/alerts/{}".format("ms_graph_url", "21354657678"),
+                headers={"Content-type": "application/json", "Prefer": "return=representation"},
+                json=data)
 
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
-        """ Test calling with sample values for the parameters """
-
-        results = call_microsoft_security_graph_update_alert_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert response.json() == content2

@@ -1,3 +1,93 @@
 {
-    
+  "inputs": {
+    "microsoft_security_graph_alert_id": "2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d",
+    "microsoft_security_graph_alert_data": "{\n        \"assignedTo\": \"\",\n        \n        \"comments\": ['', ''],\n        \"feedback\": \"\",\n        \"status\": \"unknown\",\n        \"tags\": ['', ''],\n        \"vendorInformation\":\n        {\n            \"provider\": \"ASC\",\n            \"vendor\": \"Microsoft\"\n        }\n    }"
+  },
+  "run_time": 0.4577150344848633,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity",
+    "id": "2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d",
+    "azureTenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
+    "azureSubscriptionId": "a4b7e24a-c7aa-4d84-8dae-89e99b336784",
+    "riskScore": null,
+    "tags": [
+      "",
+      ""
+    ],
+    "activityGroupName": null,
+    "assignedTo": "",
+    "category": "Network_TrafficFromUnrecommendedIP",
+    "closedDateTime": null,
+    "comments": [],
+    "confidence": null,
+    "createdDateTime": "2022-04-06T17:03:05.9705338Z",
+    "description": "Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn't communicate regularly with this resource.\r\nAlternatively, the IP address has been flagged as malicious by Microsoft's threat intelligence sources.",
+    "detectionIds": [],
+    "eventDateTime": "2022-04-05T01:00:00Z",
+    "feedback": null,
+    "incidentIds": [],
+    "lastEventDateTime": null,
+    "lastModifiedDateTime": "2022-04-07T12:26:36.5586762Z",
+    "recommendedActions": [
+      "{\"kind\":\"openBlade\",\"displayValue\":\"Enforce rule\",\"extension\":\"Microsoft_Azure_Security_R3\",\"detailBlade\":\"AdaptiveNetworkControlsResourceBlade\",\"detailBladeInputs\":\"protectedResourceId=/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder\"}"
+    ],
+    "severity": "low",
+    "sourceMaterials": [
+      "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d/subscriptionId/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus"
+    ],
+    "status": "unknown",
+    "title": "Traffic detected from IP addresses recommended for blocking",
+    "CustomProperties": "[\"{\\\"Investigation Steps\\\":\\\"1. Review the IP addresses and determine if they should be communicating with the virtual machine\\\\r\\\\n2. Enforce the hardening rule recommended by Defender for Cloud which will allow access only to recommended IP addresses. You can edit the rule's properties and change the IP addresses to be allowed, or alternatively edit the Network Security Group's rules directly\\\",\\\"Destination Port\\\":\\\"514\\\",\\\"Protocol\\\":\\\"TCP\\\",\\\"Source IP(s) [Number of attempts]\\\":\\\"IP: 1.2.3.4 [42]\\\",\\\"resourceType\\\":\\\"Virtual Machine\\\",\\\"ReportingSystem\\\":\\\"Azure\\\"}\",\"\\\"PreAttack\\\"\"]",
+    "vendorInformation": {
+      "provider": "ASC",
+      "providerVersion": null,
+      "subProvider": "AdaptiveNetworkHardenings",
+      "vendor": "Microsoft"
+    },
+    "alertDetections": [],
+    "cloudAppStates": [],
+    "fileStates": [],
+    "hostStates": [],
+    "historyStates": [],
+    "investigationSecurityStates": [],
+    "malwareStates": [],
+    "messageSecurityStates": [],
+    "networkConnections": [
+      {
+        "applicationName": null,
+        "destinationAddress": null,
+        "destinationDomain": null,
+        "destinationLocation": null,
+        "destinationPort": "514",
+        "destinationUrl": null,
+        "direction": null,
+        "domainRegisteredDateTime": null,
+        "localDnsName": null,
+        "natDestinationAddress": null,
+        "natDestinationPort": null,
+        "natSourceAddress": null,
+        "natSourcePort": null,
+        "protocol": "tcp",
+        "riskScore": null,
+        "sourceAddress": "12.34.56.78",
+        "sourceLocation": "Fort Worth, Texas, US",
+        "sourcePort": null,
+        "status": null,
+        "urlParameters": null
+      }
+    ],
+    "processes": [],
+    "registryKeyStates": [],
+    "securityResources": [
+      {
+        "resource": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+        "resourceType": "attacked"
+      }
+    ],
+    "triggers": [],
+    "userStates": [],
+    "uriClickSecurityStates": [],
+    "vulnerabilityStates": []
+  },
+  "success": true
 }

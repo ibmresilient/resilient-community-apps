@@ -1,3 +1,31 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "microsoft_security_graph_alert_search_query": {
+          "type": "string"
+        }
+      }
+    },
+    "run_time": {
+      "type": "number"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array"
+        }
+      }
+    },
+    "success": {
+      "type": "boolean"
+    }
+  }
 }

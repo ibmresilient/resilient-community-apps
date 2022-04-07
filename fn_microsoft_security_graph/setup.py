@@ -41,7 +41,6 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "{}FunctionComponent = fn_microsoft_security_graph.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_security_graph/components/funct_[a-zA-Z]*.py")
-            # "MicrosoftSecurityGraphUpdateAlertsIntegrationComponents = fn_microsoft_security_graph.components.microsoft_security_graph_alerts_integrations:IntegrationComponent"
         ] +
         [ "PollerComponent = fn_microsoft_security_graph.components.poller:PollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_security_graph.util.config:config_section_data"],
