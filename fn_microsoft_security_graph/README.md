@@ -69,7 +69,7 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `41.0.6783`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=35.0.0`.
+* Integration server is running `resilient_circuits>=40.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -101,8 +101,7 @@ The app does support a proxy server.
 ### Python Environment
 Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=35.0.0
-* resilient_circuits>=35.0.0
+* resilient_circuits>=40.0.0
 
 
 ## Installation
