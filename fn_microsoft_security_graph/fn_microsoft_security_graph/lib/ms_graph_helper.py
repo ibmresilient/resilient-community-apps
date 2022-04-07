@@ -12,13 +12,14 @@ class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, scope, proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
         self.client_id = client_id
         self.client_secret = client_secret
         self.proxies = proxies
+        self.scope = scope
         self.ms_graph_session = self.authenticate()
 
     @staticmethod
@@ -38,7 +39,7 @@ class MSGraphHelper(object):
         return OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
                                               client_id=self.client_id,
                                               client_secret=self.client_secret,
-                                              scope=DEFAULT_SCOPE,
+                                              scope=self.scope,
                                               proxies=self.proxies)
 
 def connect_MSGraph(opts, reload=False):
@@ -47,7 +48,8 @@ def connect_MSGraph(opts, reload=False):
     if reload:
         return MSGraphHelper(options.get("tenant_id"),
                              options.get("client_id"),
-                             options.get("client_secret"))
+                             options.get("client_secret"),
+                             options.get("scope"))
     else:
         # Validate required fields in app.config are set
         validate_fields(["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"], options)
@@ -57,4 +59,5 @@ def connect_MSGraph(opts, reload=False):
                              options.get("tenant_id"),
                              options.get("client_id"),
                              options.get("client_secret"),
+                             options.get("scope", DEFAULT_SCOPE),
                              RequestsCommon(opts, options).get_proxies())
