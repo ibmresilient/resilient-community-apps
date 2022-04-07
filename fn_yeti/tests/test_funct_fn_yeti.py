@@ -66,8 +66,8 @@ class TestFnYeti:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with mock.patch("pyeti.YetiApi.observable_search") as mock_execute:
-            mock_execute.return_value = MockedResponse().json()
+        with mock.patch("pyeti.YetiApi") as mock_execute:
+            mock_execute.return_value = MockedResponse()
             results = call_fn_yeti_function(circuits_app, mock_inputs)
             assert(expected_results.get('success') == results.get('success'))
 

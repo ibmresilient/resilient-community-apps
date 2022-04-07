@@ -7,7 +7,7 @@ class MockedResponse:
     def __len__(self):
         return len(self.text)
 
-    def json(self):
+    def observable_search(self, **kwargs):
         mock_successful_result = {
             "version": 2.0,
             "success": True,
