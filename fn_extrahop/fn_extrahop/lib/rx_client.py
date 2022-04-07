@@ -87,12 +87,13 @@ class RxClient():
         return r.json()["access_token"]
 
     def get_devices(self, active_from=None, active_until=None, limit=None, offset=None, device_id=None,
-                    search_type=None):
+                    search_type=None, value=None):
         """Get information about devices or a specific computer by device id
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
 
         :param search_type: Search type (str)
+        :param value: Search value (str)
         :param device_id: device_id (str)
         :param active_from: (Optional) The beginning timestamp (in millisecs) for the request.
         :param active_until: (Optional) The ending timestamp (in millisecs) for the request.
@@ -105,14 +106,15 @@ class RxClient():
         uri = self._endpoints["devices"].format('')
         params = {}
 
-        params["active_from"] = active_from
-        params["active_until"] = active_until
-        params["limit"] = int(limit) if limit else None
-        params["offset"] = int(offset) if offset else None
-        params["search_type"] = search_type if offset else "any"
-
         if device_id:
             uri = self._endpoints["devices"].format(device_id)
+        else:
+            params["active_from"] = active_from
+            params["active_until"] = active_until
+            params["limit"] = int(limit) if limit else None
+            params["offset"] = int(offset) if offset else None
+            params["search_type"] = search_type if offset else "any"
+            params["value"] = value
 
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
@@ -182,8 +184,8 @@ class RxClient():
         Default 0 (int)
         :param active_until: (Optional) Get detections that ended before the specified timestamp (in millisecs).
         Default 0 (int)
-        :param limit: (Optional) Limit the number of devices returned to the specified maximum number (int).
-        :param offset: (Optional) Skip the specified number of devices (int).
+        :param limit: (Optional) Limit the number of detections returned to the specified maximum number (int).
+        :param offset: (Optional) Skip the specified number of detections (int).
         :param update_time: (Optional) Get detections that were updated on or after the specified date (int).
         :param sort: (Optional) Sorts returned detections by the specified fields. (int).
         :return Result in json format.`

@@ -26,6 +26,7 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.extrahop_device_id
             -   fn_inputs.extrahop_search_type
+            -   fn_inputs.extrahop_value
             -   fn_inputs.extrahop_active_until
             -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_limit
@@ -41,8 +42,9 @@ class FunctionComponent(AppFunctionComponent):
         params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
         for i in ["extrahop_device_id", "extrahop_search_type",
-                  "extrahop_active_from", "extrahop_active_until",
-                  "extrahop_limit", "extrahop_offset"]:
+                  "extrahop_value", "extrahop_active_from",
+                  "extrahop_active_until", "extrahop_limit",
+                  "extrahop_offset"]:
             if hasattr(fn_inputs, i):
                 # Strip off "extrahop_" prefix from input paramter value before adding to params.
                 params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})

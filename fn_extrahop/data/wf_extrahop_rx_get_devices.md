@@ -18,15 +18,23 @@
 
 ### Pre-Processing Script
 ```python
-if rule.properties.extrahop_active_from:
-  inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-  inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-  inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-  inputs.extrahop_offset = rule.properties.extrahop_offset
-inputs.extrahop_search_type = rule.properties.extrahop_search_type
+inputs.extrahop_device_id = rule.properties.extrahop_device_id
+if not inputs.extrahop_device_id:
+    if rule.properties.extrahop_active_from:
+      inputs.extrahop_active_from = rule.properties.extrahop_active_from
+    if rule.properties.extrahop_active_until:
+      inputs.extrahop_active_until = rule.properties.extrahop_active_until
+    if rule.properties.extrahop_limit:
+      inputs.extrahop_limit = rule.properties.extrahop_limit
+    if rule.properties.extrahop_offset:
+      inputs.extrahop_offset = rule.properties.extrahop_offset
+    if rule.properties.extrahop_search_type and not rule.properties.extrahop_search_value:
+        raise ValueError("The search type is set but the search value is empty.")
+    if rule.properties.extrahop_search_value and not rule.properties.extrahop_search_type:
+        raise ValueError("A search value is set but the search type is not set.")
+    inputs.extrahop_search_type = rule.properties.extrahop_search_type
+    inputs.extrahop_value = rule.properties.extrahop_search_value
+
 ```
 
 ### Post-Processing Script
@@ -34,7 +42,7 @@ inputs.extrahop_search_type = rule.properties.extrahop_search_type
 ##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-WF_NAME = "Example: Extrahop revealx get devices"
+WF_NAME = "Example: Extrahop Reveal(x) get devices"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -43,36 +51,42 @@ DATA_TABLE = "extrahop_devices"
 DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
                    "role", "vendor", "devs_id", "extrahop_id", "activity"]
 
+def process_devs(dev):
+    # Process a device result.
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    for f1 in DATA_TBL_FIELDS:
+        f2 = f1
+        if f1.startswith("devs_"):
+            f2 = f1.split('_', 1)[1]
+        if dev[f1] is None:
+            newrow[f1] = dev[f2]
+        elif isinstance(dev[f2], list):
+            newrow[f1] = "{}".format(", ".join(dev[f2]))
+        elif isinstance(dev[f2], bool):
+            newrow[f1] = str(dev[f2])
+        else:
+            newrow[f1] = "{}".format(dev[f2])
+
 # Processing
 def main():
     note_text = u''
     if CONTENT:
         devs = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
-            note_text += u"<br><b>{}</b>".format(devs)
-            for dev in devs:
-                newrow = incident.addRow(DATA_TABLE)
-                newrow.query_execution_date = QUERY_EXECUTION_DATE
-                for f1 in DATA_TBL_FIELDS:
-                  f2 = f1
-                  if f1.startswith("devs_"):
-                      f2 = f1.split('_', 1)[1]
-                  if dev[f1] is None:
-                      newrow[f1] = dev[f2]
-                  elif isinstance(dev[f2], list):
-                      newrow[f1] = "{}".format(", ".join(dev[f2]))
-                  elif isinstance(dev[f2], bool):
-                      newrow[f1] = str(dev[f2])
-                  else:
-                      newrow[f1] = "{}".format(dev[f2])
+            if isinstance(devs, list):
+                for dev in devs:
+                    process_devs(dev)
+            else:
+                process_devs(devs)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get devices." \
-            .format(WF_NAME, FN_NAME)
+                     u"to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
