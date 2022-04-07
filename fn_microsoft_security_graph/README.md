@@ -29,7 +29,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 04/2022 | <ul><li>Move functions to their own files</li></ul>
+| 1.2.0 | 04/2022 | <ul><li>Move functions to their own files</li><li>Timestamp conversion fix</li></ul>
 | 1.1.0 | 09/2020 | <ul><li>Support for App Host</li><li>Proxy support</li><li>Readable formatting of incident notes containing Alert JSON data</li></ul>
 | 1.0.1 | 08/2020 | UI version changes |
 | 1.0.0 | 10/2018 | Initial Release |
