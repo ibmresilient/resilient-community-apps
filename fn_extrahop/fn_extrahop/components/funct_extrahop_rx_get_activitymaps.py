@@ -6,6 +6,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.app_common import set_params
 
 PACKAGE_NAME = "fn_extrahop"
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
@@ -30,13 +31,11 @@ class FunctionComponent(AppFunctionComponent):
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
-
+        self.LOG.info("fn_inputs: %s", fn_inputs)
 
         # Set params dict:
         params = {}
-        self.LOG.info("fn_inputs: %s", fn_inputs)
-        if hasattr(fn_inputs, "extrahop_activitymap_id"):
-            params.update({"activitymap_id": fn_inputs.extrahop_activitymap_id})
+        params = set_params(fn_inputs, params, "extrahop_")
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)

@@ -36,7 +36,7 @@ class AppCommon():
 
         Args:
             timestamp (datetime): datetime when the last poller ran
-            search_filter (dict): Filer to use in api call
+            search_filter (dict): Filter to use in api call
             offset (int): Start search at offset
             limit (int): Limit number of entries in result
 
@@ -120,3 +120,28 @@ class AppCommon():
             LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
 
         return bool(modified_fields)
+
+def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
+    """[Setup params dict form fn_input named tuple].
+    Make any necessary transformation for api call.
+
+    Args:
+        fn_inputs [namedtuple]: Function inputs
+        params [dict]: Function parameters diect for 3rd party api
+        f_prefix [string]: Function parameter prefix
+        split_index [integer]: Index to split prefix
+
+    Returns:
+        [dict]: 3rd party api parameters dict.
+    """
+    params = params if params else {}
+    index = split_index if split_index else 1
+
+    for k, v in fn_inputs._asdict().items():
+        if f_prefix:
+            # Strip off prefix from input parameter value before adding to params.
+            params.update({k.split('_', index)[index]: v})
+        else:
+            params.update({k: v})
+
+    return params

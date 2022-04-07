@@ -6,6 +6,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.app_common import set_params
 
 PACKAGE_NAME = "fn_extrahop"
 FN_NAME = "funct_extrahop_rx_get_watchlist"
@@ -30,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Set params dict:
         params = {}
-        self.LOG.info("fn_inputs: %s", fn_inputs)
+        params = set_params(fn_inputs, params, "extrahop_")
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)

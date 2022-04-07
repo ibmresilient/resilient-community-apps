@@ -6,6 +6,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.app_common import set_params
 
 PACKAGE_NAME = "fn_extrahop"
 FN_NAME = "funct_extrahop_rx_assign_tag"
@@ -31,19 +32,22 @@ class FunctionComponent(AppFunctionComponent):
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Set params dict:
-        params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
+
+        # Validate required fields
         for i in ["extrahop_tag_id", "extrahop_device_ids"]:
             if not hasattr(fn_inputs, i):
                 raise ValueError("Missing '{}' function parameter".format(i))
-            # Strip off "extrahop_" prefix from input paramter value before adding to params.
-            params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
+
+        # Set params dict:
+        params = {}
+        params = set_params(fn_inputs, params, "extrahop_")
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.assign_tag(**params)
+
+        success = True
 
         if response.status_code == 204:
             result = "success"
@@ -51,9 +55,10 @@ class FunctionComponent(AppFunctionComponent):
             result = "limited_success"
         else:
             result = "failed"
+            success = False
 
         results = {"result": result}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=success)

@@ -9,6 +9,7 @@ from io import BytesIO
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import write_file_attachment
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.app_common import set_params
 
 PACKAGE_NAME = "fn_extrahop"
 FN_NAME = "funct_extrahop_rx_search_packets"
@@ -43,19 +44,11 @@ class FunctionComponent(AppFunctionComponent):
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
+        self.LOG.info("fn_inputs: %s", fn_inputs)
 
         # Set params dict:
         params = {}
-        self.LOG.info("fn_inputs: %s", fn_inputs)
-        for i in ["extrahop_bpf", "extrahop_ip2",
-                  "extrahop_active_until", "extrahop_port1",
-                  "extrahop_output", "extrahop_always_return_body",
-                  "extrahop_active_from", "extrahop_port2",
-                  "extrahop_limit_search_duration", "extrahop_limit_bytes",
-                  "extrahop_ip1",]:
-            if hasattr(fn_inputs, i):
-                # Strip off "extrahop_" prefix from input paramter value before adding to params.
-                params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
+        params = set_params(fn_inputs, params, "extrahop_")
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)

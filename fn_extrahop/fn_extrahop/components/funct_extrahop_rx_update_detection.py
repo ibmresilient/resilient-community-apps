@@ -6,6 +6,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.app_common import set_params
 
 PACKAGE_NAME = "fn_extrahop"
 FN_NAME = "funct_extrahop_rx_update_detection"
@@ -36,9 +37,6 @@ class FunctionComponent(AppFunctionComponent):
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Set params dict:
-        params = {}
         self.LOG.info("fn_inputs: %s", fn_inputs)
 
         for i in ["incident_id", "extrahop_detection_id",
@@ -47,29 +45,28 @@ class FunctionComponent(AppFunctionComponent):
             if not hasattr(fn_inputs, i):
                 raise ValueError("Missing function parameter '{}'.".format(i))
 
-        params.update({"incident_id": fn_inputs.incident_id})
+        # Set params dict for extrahop_ parameters:
+        params = {}
+        params = set_params(fn_inputs, params, "extrahop_")
 
-        for i in ["soar_inc_owner_id", "soar_inc_resolution_id", "soar_inc_plan_status"]:
-            # Strip off "soar_inc_" prefix from input paramter value before adding to params.
-            params.update({i.split('_', 2)[2]: getattr(fn_inputs, i)})
-
-        for i in ["extrahop_detection_id", "extrahop_participants"]:
-            if hasattr(fn_inputs, i):
-                # Strip off "extrahop_" prefix from input paramter value before adding to params.
-                params.update({i.split('_', 1)[1]: getattr(fn_inputs, i)})
+        # Set params dict for soar_inc_ parameters:
+        params = set_params(fn_inputs, params, "soar_inc_", 2)
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)
         response = rx_cli.update_detection(**params)
+
+        success = True
 
         if response.status_code in [200, 201, 204]:
             # Action succeeded with empty response message
             result = "success"
         else:
             result = "failed"
+            success = False
 
         results = {"result": result}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=success)
