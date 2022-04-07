@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-import logging
-import json
-from datetime import datetime
+from json import loads
 from os.path import isfile
-
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, str_to_bool
-from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
+from datetime import datetime
+from logging import getLogger
 from fn_remedy.lib.datatable.data_table import Datatable
+from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
+from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_close_incident"
@@ -24,7 +23,7 @@ FORM_NAME = "HPD:IncidentInterface"
 # Status values that indicate closure
 CLOSED_LIST = ["Resolved", "Closed", "Cancelled"]
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'remedy_close_incident''"""
@@ -51,13 +50,13 @@ class FunctionComponent(ResilientComponent):
         :type incident_id: int
         :param task: SOAR task data
         :type task: dict
-        :param remedy_client: remedy API client
+        :param remedy_client: Remedy API client
         :type remedy_client: RemedyClient
-        :param rp: result payload object
+        :param rp: Result payload object
         :type rp: ResultPayload
-        :param remedy_payload: key value pairs to update on the remedy incident
+        :param remedy_payload: Key value pairs to update on the remedy incident
         :type remedy_payload: dict
-        :return: the results of the method
+        :return: The results of the method
         :rtype: ResultPayload
         """
 
@@ -72,26 +71,26 @@ class FunctionComponent(ResilientComponent):
         if len(rows) > 1:
             LOG.info("Multiple datatable rows found matching task %s: %s.\n"
                      "Any incidents matching these rows in Remedy will be closed.", task["id"], task["name"])
-        # handle multiple rows
+        # Handle multiple rows
         for row in rows:
-            # get remedy UUID from the table
+            # Get remedy UUID from the table
             request_id = row["cells"]["remedy_id"]["value"]
-            # get the remedy incident
+            # Get the remedy incident
             try:
                 incident, _ = remedy_client.get_form_entry(FORM_NAME, request_id)
             except IntegrationError as e:
                 if e.value.find("404 Client Error: Not Found") > -1:
-                    # 404 - the incident was probably deleted
+                    # 404 - The incident was probably deleted
                     LOG.info("Unable to find Request ID %s in Remedy. It may have been deleted. Continuing to the next ID.",
                              request_id)
                 else:
-                    # unknown error case - the remedy_payload supplied might have a bad key
+                    # Unknown error case - the remedy_payload supplied might have a bad key
                     LOG.error("Received error response from Remedy when attempting to close Request ID %s.\n"
                           "Check your remedy_payload input to ensure it matches the HPD:IncidentInterface_Create schema.\n"
                           "Continuing to the next ID.", request_id)
                 skipped.append(incident)
-                continue # move on to the next row
-            # close the incident if not already closed
+                continue # Move on to the next row
+            # Close the incident if not already closed
             closed, skipped = self.update_incident_values(remedy_client, closed, skipped, incident, remedy_payload)
             updated_row = {"status": "Closed", "timestamp": int(datetime.now().timestamp() * 1000)}
             self.update_datatable_row(row["id"], updated_row, incident_id)
@@ -101,32 +100,31 @@ class FunctionComponent(ResilientComponent):
     def update_datatable_row(self, row_id, row, incident_id):
         """Updates the values of a row in a SOAR data table
 
-        :param row_id: target id of the data table row
+        :param row_id: Target id of the data table row
         :type row_id: int
-        :param row: the values to update on the row
+        :param row: The values to update on the row
         :type row: dict
-        :param incident_id: incident the datatable is associated with
+        :param incident_id: Incident the datatable is associated with
         :type incident_id: int
         """
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
         dt.update_row(row_id, row)
-        return
 
     def update_incident_values(self, remedy_client, closed, skipped, incident, remedy_payload):
         """Updates the values dictionary of a remedy incident to indicate the incident is closed.
 
-        :param remedy_client: remedy API client
+        :param remedy_client: Remedy API client
         :type remedy_client: RemedyClient
-        :param closed: previously closed request ID's
+        :param closed: Previously closed request ID's
         :type closed: list
-        :param skipped: previously skipped request ID's
+        :param skipped: Previously skipped request ID's
         :type skipped: list
-        :param incident: remedy incident
+        :param incident: Remedy incident
         :type incident: dict
-        :param remedy_payload: values to update on the remedy incident
+        :param remedy_payload: Values to update on the remedy incident
         :type remedy_payload: dict
-        :return: updated list of request ID's that have been closed or skipped
+        :return: Updated list of request ID's that have been closed or skipped
         :rtype: list, list
         """
         request_id = incident["values"]["Request ID"]
@@ -150,13 +148,13 @@ class FunctionComponent(ResilientComponent):
         :type incident_id: int
         :param task: SOAR task data
         :type task: dict
-        :return: matched rows from the datatable
+        :return: Matched rows from the datatable
         :rtype: dict
         """
-        # instantiate a datatable client
+        # Instantiate a datatable client
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
         dt.get_data()
-        # query the rows
+        # Query the rows
         rows = dt.get_rows(max_rows=self.max_rows, search_column="taskincident_id",
                            search_value=str(task["id"]) + ": " + task["name"])
         return rows
@@ -182,23 +180,27 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Validations complete. Starting business logic")
 
-            # get optional settings
+            # Get optional settings
             port = self.fn_options.get("remedy_port", None)
-            verify = self.fn_options.get("verify", "true")
-            if not isfile(verify):
-                verify = str_to_bool(verify)
 
-            # get function inputs
+            # If verify setting in the app.config is not set then defaults to true
+            verify = self.fn_options.get("verify", "true")
+            # Check if verify in the app.config is a path to a certificate
+            if not isfile(verify):
+                # If verify setting in the app.config is not equal to False then it is set to True
+                verify = False if verify.lower() in ('0', 'false', 'no', 'off') else True
+
+            # Get function inputs
             remedy_payload = kwargs.get("remedy_payload")
-            remedy_payload = json.loads(remedy_payload)
+            remedy_payload = loads(remedy_payload)
             incident_id = kwargs.get("incident_id")
             task_id = kwargs.get("task_id")
 
-            # instantiate a SOAR API client
-            # get the task data
+            # Instantiate a SOAR API client
+            # Get the task data
             task = self.rest_client().get("/tasks/{0}".format(task_id))
 
-            # instantiate a RemedyClient
+            # Instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
                                   app_configs["remedy_password"], rc, port=port, verify=verify)
 

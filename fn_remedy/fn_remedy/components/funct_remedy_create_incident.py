@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-import logging
-import json
-from datetime import datetime
+from json import loads
 from os.path import isfile
-
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html, str_to_bool
-from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
+from datetime import datetime
+from logging import getLogger
 from fn_remedy.lib.datatable.data_table import Datatable
-
+from fn_remedy.lib.remedy.RemedyAPIClient import RemedyClient
+from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 PACKAGE_NAME = "fn_remedy"
 FN_NAME = "remedy_create_incident"
@@ -23,8 +21,7 @@ RETURN_FIELDS = ["Incident Number", "Request ID"]
 FORM_NAME = "HPD:IncidentInterface_Create"
 ENTRY_NAME = "HPD:IncidentInterface"
 
-LOG = logging.getLogger(__name__)
-
+LOG = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'remedy_create_incident''"""
@@ -44,15 +41,15 @@ class FunctionComponent(ResilientComponent):
         to the Remedy incident.
 
         :param incident_id: SOAR incident ID
-        :param task: task dictionary payload from SOAR
-        :param values: dictionary of Remedy Incident values
+        :param task: Task dictionary payload from SOAR
+        :param values: Dictionary of Remedy Incident values
         :return: SOAR's response to the datatable request
         """
-        # instantiate a datatable client
+        # Instantiate a datatable client
         dt = Datatable(self.rest_client(), incident_id, TABLE_NAME)
-        # add the task and its associated Remedy data to the lookup table
+        # Add the task and its associated Remedy data to the lookup table
         row = {
-            # convert to mills and discard fractions of a second
+            # Convert to mills and discard fractions of a second
             "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
             "taskincident_id": {u"value": "{0}: {1}".format(task["id"], task["name"])},
             "remedy_id": {"value": values["Request ID"]},
@@ -72,7 +69,7 @@ class FunctionComponent(ResilientComponent):
         and the incident payload returned under results["content"]
         :param remedy_client: RemedyClient object
         :param rp: ResultsPayload object
-        :param values: values dict to send to Remedy
+        :param values: Values dict to send to Remedy
         :param incident_id: SOAR incident ID
         :param task: task dict from SOAR
         :return: ResultsPayload.done
@@ -87,26 +84,26 @@ class FunctionComponent(ResilientComponent):
 
         # 201 is returned for resource created
         if status_code != 201:
-            # unexpected response from Remedy
+            # Unexpected response from Remedy
             reason = "Expected 201 - resource created response from Remedy. Received {0}".format(status_code)
             LOG.error(reason)
             return rp.done(False, remedy_incident, reason=reason)
 
         LOG.info("Incident successfully posted to Remedy.")
-        # capture the Incident Number
-        # note this is a temporary number for the request to create a new entry
+        # Capture the Incident Number
+        # Note this is a temporary number for the request to create a new entry
         # and this value will be reassigned to reflect the true value
         # by getting the newly created object from Remedy
         incident_number = remedy_incident["values"]["Incident Number"]
 
-        # get the newly created form entry object
+        # Get the newly created form entry object
         entries, status_code = remedy_client.query_form_entry(ENTRY_NAME, incident_number)
         entry = entries["entries"][0]
-        # save the incident number so we can log it. this is the ID that shows in the Remedy UI
+        # Save the incident number so we can log it. This is the ID that shows in the Remedy UI
         incident_number = entry["values"]["Incident Number"]
-        # save the request id so we can log it. this is the ID that shows in the Remedy API
+        # Save the request id so we can log it. This is the ID that shows in the Remedy API
         request_id = entry["values"]["Request ID"]
-        # we expect only one result to be returned
+        # We expect only one result to be returned
         if len(entries["entries"]) > 1:
             LOG.debug("Multiple form entries in Remedy found matching Incident Number: %s."
                       "The Request ID of the first entry will be written to the datatable.", incident_number)
@@ -116,7 +113,7 @@ class FunctionComponent(ResilientComponent):
         self.add_dt_row(incident_id, task, entry["values"])
 
         results = rp.done(True, entry)
-        # pass the task back to SOAR to use in the post-script if we were successful
+        # Pass the task back to SOAR to use in the post-script if we were successful
         results["content"]["task"] = task
         return results
 
@@ -141,21 +138,25 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Validations complete. Starting business logic")
 
-            # get optional settings
+            # Get optional settings
             port = self.fn_options.get("remedy_port", None)
+
+            # If verify setting in the app.config is not set then defaults to true
             verify = self.fn_options.get("verify", "true")
+            # Check if verify in the app.config is a path to a certificate
             if not isfile(verify):
-                verify = str_to_bool(verify)
+                # If verify setting in the app.config is not equal to False then it is set to True
+                verify = False if verify.lower() in ('0', 'false', 'no', 'off') else True
 
-            # get function inputs
+            # Get function inputs
             remedy_payload = kwargs.get("remedy_payload")
-            remedy_payload = json.loads(remedy_payload)
+            remedy_payload = loads(remedy_payload)
 
-            # add in the additional data
+            # Add in the additional data
             addl_data = remedy_payload.pop("additional_data")
             addl_data and remedy_payload.update(addl_data)
 
-            # required metadata field to create a resource
+            # Required metadata field to create a resource
             remedy_payload["z1D_Action"] = "CREATE"
 
             # SOAR incident_id
@@ -163,28 +164,28 @@ class FunctionComponent(ResilientComponent):
             # SOAR task id
             task_id = kwargs.get("task_id")
 
-            # instantiate a SOAR API client
+            # Instantiate a SOAR API client
             resilientClient = self.rest_client()
-            # get the task data
+            # Get the task data
             task = resilientClient.get("/tasks/{0}".format(task_id))
 
-            # add task instructions to the remedy_payload dict if present in the task
+            # Add task instructions to the remedy_payload dict if present in the task
             if task.get("instructions"):
-                # set the description to the task instructions
-                # detailed description is the biggest text field we have available to us
+                # Set the description to the task instructions
+                # Detailed description is the biggest text field we have available to us
                 desc = clean_html(task["instructions"])
-                # add it to the remedy_payload dict
-                # remedy has a typo in their API, the below is correct
+                # Add it to the remedy_payload dict
+                # Remedy has a typo in their API, the below is correct
                 remedy_payload["Detailed_Decription"] = desc
 
-            # add the task name to the description if one wasn't provided in the inputs
+            # Add the task name to the description if one wasn't provided in the inputs
             if not remedy_payload.get("Description"):
                 remedy_payload["Description"] = u"IBM SOAR Case {0}: {1}".format(incident_id, task["name"])
-            # description has a max length of 100
+            # Description has a max length of 100
             if len(remedy_payload.get("Description", "")) > 100:
                 remedy_payload["Description"] = remedy_payload["Description"][:100]
 
-            # instantiate a RemedyClient
+            # Instantiate a RemedyClient
             client = RemedyClient(app_configs["remedy_host"], app_configs["remedy_user"],
                                   app_configs["remedy_password"], rc, port=port, verify=verify)
 

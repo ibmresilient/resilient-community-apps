@@ -22,7 +22,7 @@ max_datatable_rows=30
 #remedy_port=8443
 # Set to true or /path/to/cerficate.crt to make verified requests to Remedy, else set to false
 #verify=true|false|/path/to/certificate.crt
-#http_proxy=
-#http_proxy=
+#https proxy for request traffic.
+#https_proxy=
 """
     return config_data

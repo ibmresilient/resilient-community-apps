@@ -104,7 +104,7 @@ class RemedyClient(RemedyAPI):
     def get_form_entry(self, form_name, req_id, payload={}):
         """
         get_form_entry is a member function used to gather form data
-        based on a form name and request ID
+        based on a form name and request ID.
         The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: Name of the form to query
@@ -124,7 +124,7 @@ class RemedyClient(RemedyAPI):
     def update_form_entry(self, form_name, req_id, values, payload={}):
         """
         update_form_entry is a member function used to update form data
-        based on a form name and request ID
+        based on a form name and request ID.
         The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: Name of the form to query
@@ -180,7 +180,7 @@ class RemedyClient(RemedyAPI):
         """
         query_form_entry is a member function used to query
         a form entry based on a form name and request ID.
-        The query matches an incident number to the provided ID
+        The query matches an incident number to the provided ID.
         The function returns: a tuple with the response content as json and the http status code.
 
         :param form_name: Name of the form to query

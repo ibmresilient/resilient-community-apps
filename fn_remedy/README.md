@@ -141,7 +141,7 @@ The following table provides the settings you need to configure the app. These s
 | **max_datatable_rows** | No | `30` | *Max number of datatable rows to return from the SOAR API when closing an Incident.* |
 | remedy_port | No | `8443` | *Port number over which the Remedy REST API is exposed.* |
 | verify | No | `true|false|/path/to/certificate.crt` | *Set to `true` or `/path/to/cerficate.crt` to make verified requests to Remedy, else set to `false`* |
-| http_proxy | No | `example.domain` | *https proxy for request traffic.* |
+| https_proxy | No | `example.domain` | *https proxy for request traffic.* |
 
 ### Custom Layouts
 <!--
