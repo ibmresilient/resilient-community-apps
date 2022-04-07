@@ -86,10 +86,7 @@ def is_entity_closed(entity):
     Returns
         ([bool]): [true/false if entity is closed]
     """
-    if entity.get("status") == "closed":
-        return True
-    else:
-        return False
+    return bool(entity.get("status") == "closed")
 
 class PollerComponent(ResilientComponent):
     """

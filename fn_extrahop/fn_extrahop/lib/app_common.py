@@ -79,19 +79,19 @@ class AppCommon():
         """
         return urljoin(self.endpoint_url, linkback_url.format(entity_id))
 
-    def filter_by_property(self, result, property, filters):
+    def filter_by_property(self, result, prop, filters):
         """Filter result based on a a property list .
            Used for filters not fully supported inb api or don't support a property lists
 
         Args:
-            property (string): Property to filer by.
+            prop (string): Property to filer by.
             filters (list): List of values to filter by.
             result (dict): Result returned from ExtraHop
 
         Returns:
             filtered_result: Result filtered by risk score threshold
         """
-        filtered_result = [r for r in result if any(i in r[property] for i in filters)]
+        filtered_result = [r for r in result if any(i in r[prop] for i in filters)]
         LOG.info("Original List: %s. Filtered List: %s", len(result), len(filtered_result))
 
         return filtered_result
@@ -117,6 +117,6 @@ class AppCommon():
         modified_fields = {k: det_copy[k] for k in UPDATEABLE_FIELDS if k in det_copy and det_copy[k] != case["properties"]["extrahop_"+k]}
 
         if modified_fields:
-            LOG.info("Detection ID %s, modified properties: %s. Filtered List: %s", detection["id"], modified_fields)
+            LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
 
-        return True if modified_fields else False
+        return bool(modified_fields)

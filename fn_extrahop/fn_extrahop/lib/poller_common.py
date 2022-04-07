@@ -48,6 +48,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
         def wrapped(self, *args):
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
+            poller_start = None
 
             while not exit_event.is_set():
                 try:

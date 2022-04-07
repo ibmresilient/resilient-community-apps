@@ -7,7 +7,7 @@ import re
 from io import BytesIO
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields, write_file_attachment
+from resilient_lib import write_file_attachment
 from fn_extrahop.lib.rx_client import RxClient
 
 PACKAGE_NAME = "fn_extrahop"

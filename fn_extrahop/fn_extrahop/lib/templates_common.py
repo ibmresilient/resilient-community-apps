@@ -9,16 +9,17 @@
 from __future__ import print_function
 import calendar
 import datetime
-import jinja2
+import html
 import json
 import logging
 import os
 import pprint
-import pytz
 import random
 import re
 import sys
 import time
+import pytz
+import jinja2
 from resilient_lib import readable_datetime
 
 if sys.version_info.major < 3:
@@ -311,7 +312,7 @@ def html_filter(val):
     """Jinja2 filter function 'html' produces HTML-encoded string of the value"""
     if isinstance(val, jinja2.Undefined):
         return "[undefined]"
-    return html_escape(val)
+    return html.escape(val)
 
 def url_filter(val):
     """Jinja2 filter function 'url' produces URL-encoded string of the value"""
