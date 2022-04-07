@@ -18,22 +18,41 @@
 
 ### Pre-Processing Script
 ```python
-inputs.extrahop_search_filter = rule.properties.extrahop_device_search_filter.content
-if inputs.extrahop_search_filter is None:
-    raise ValueError("The search filter is not set")
-for prop in ["filter", "field", "operator", "operand"]:
-  if prop not in inputs.extrahop_search_filter:
-    raise ValueError("The search filter is missing property '{}'".format(prop))
-if rule.properties.extrahop_active_from:
-  inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-  inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-  inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-  inputs.extrahop_offset = rule.properties.extrahop_offset
+##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
 
+def get_prop(prop, type=None):
+    if prop:
+        return '{}'.format(prop)
+    else:
+        return None
 
+def main():
+    filter = {}
+    filter_props = {
+        "field": get_prop(rule.properties.extrahop_device_field),
+        "operand": get_prop(rule.properties.extrahop_device_operand),
+        "operator": get_prop(rule.properties.extrahop_device_operator)
+    }
+    filter = {k: v for k, v in filter_props.items() if v}
+
+    if not filter:
+        raise ValueError("The search filter is empty.")
+    else:
+        search_filter = {
+            "filter": filter
+        }
+    
+    inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
+    if rule.properties.extrahop_active_from:
+      inputs.extrahop_active_from = rule.properties.extrahop_active_from
+    if rule.properties.extrahop_active_until:
+      inputs.extrahop_active_until = rule.properties.extrahop_active_until
+    if rule.properties.extrahop_limit:
+      inputs.extrahop_limit = rule.properties.extrahop_limit
+    if rule.properties.extrahop_offset:
+      inputs.extrahop_offset = rule.properties.extrahop_offset
+            
+main()
 ```
 
 ### Post-Processing Script
@@ -41,7 +60,7 @@ if rule.properties.extrahop_offset:
 ##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_devices"
-WF_NAME = "Example: Extrahop revealx search devices"
+WF_NAME = "Example: Extrahop Reveal(x) search devices"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -55,9 +74,8 @@ def main():
     if CONTENT:
         devs = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
-            note_text += u"<br><b>{}</b>".format(devs)
             for dev in devs:
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -77,8 +95,8 @@ def main():
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search devices." \
-            .format(WF_NAME, FN_NAME)
+                     u"to search devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

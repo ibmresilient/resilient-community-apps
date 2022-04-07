@@ -18,22 +18,53 @@
 
 ### Pre-Processing Script
 ```python
-inputs.extrahop_search_filter = rule.properties.extrahop_detection_search_filter.content
-if inputs.extrahop_search_filter is None:
-    raise ValueError("The search filter is not set")
-for prop in ["filter", "category", "assignee", "ticket_id", "status", "resolution"]:
-  if prop not in inputs.extrahop_search_filter:
-    raise ValueError("The search filter is missing property '{}'".format(prop))
-if rule.properties.extrahop_active_from:
-  inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-  inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-  inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-  inputs.extrahop_offset = rule.properties.extrahop_offset
-if rule.properties.extrahop_update_time:
-  inputs.extrahop_update_time = rule.properties.extrahop_update_time
+##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+#raise ValueError("{}".format(rule.properties.extrahop_detection_status))
+
+def get_prop(prop, type=None):
+    if prop:
+        if isinstance(prop, int):
+            return prop
+        elif isinstance(prop, list):
+            return ['{}'.format(i) for i in prop]
+        return '{}'.format(prop)
+    else:
+        return None
+
+def main():
+    filter = {}
+    filter_props = {
+        "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
+        "types": get_prop(rule.properties.extrahop_detection_types),
+        "category": get_prop(rule.properties.extrahop_detection_category),
+        "assignee": get_prop(rule.properties.extrahop_detection_assignee),
+        "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id),
+        "status": get_prop(rule.properties.extrahop_detection_status),
+        "resolution": get_prop(rule.properties.extrahop_detection_resolution)
+    }
+
+    filter = {k: v for k, v in filter_props.items() if v}
+
+    if not filter:
+        raise ValueError("The search filter is empty.")
+    else:
+        search_filter = {
+            "filter": filter
+        }
+    
+    inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
+    if rule.properties.extrahop_active_from:
+      inputs.extrahop_active_from = rule.properties.extrahop_active_from
+    if rule.properties.extrahop_active_until:
+      inputs.extrahop_active_until = rule.properties.extrahop_active_until
+    if rule.properties.extrahop_limit:
+      inputs.extrahop_limit = rule.properties.extrahop_limit
+    if rule.properties.extrahop_offset:
+      inputs.extrahop_offset = rule.properties.extrahop_offset
+    if rule.properties.extrahop_update_time:
+      inputs.extrahop_update_time = rule.properties.extrahop_update_time
+            
+main()
 ```
 
 ### Post-Processing Script
@@ -52,12 +83,12 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
 # Processing
 def main():
     note_text = u''
+
     if CONTENT:
         dets = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    u"function <b>{2}</b>.".format(WF_NAME, len(dets), FN_NAME)
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if dets:
-            note_text += u"<br><b>{}</b>".format(dets)
             for det in dets:
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -65,23 +96,44 @@ def main():
                     f2 = f1
                     if f1.startswith("det_"):
                       f2 = f1.split('_', 1)[1]
-                    if det[f1] is None:
+                    if det[f2] is None or isinstance(det[f2], long):
                         newrow[f1] = det[f2]
-                    if isinstance(det[f1], list):
-                      if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                          newrow[f1] = "{}".format(det[f2])
-                      else:
-                          newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f1], list):
+                        if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                            obj_cnt = 0
+                            tbl = u''
+                            for i in det[f2]:
+                                if not obj_cnt:
+                                    tbl += u'<div><hr class="solid"></div>'
+                                for k, v in i.items():
+                                    if k == "legacy_ids":
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
+                                    elif k == "url":
+                                        tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
+                                            .format(k, v, i["id"])
+                                    else:
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                                tbl += u'<div><hr class="solid"></div>'
+                                obj_cnt += 1
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = "{}".format(", ".join(det[f2]))
                     elif isinstance(det[f2], (bool, dict)):
-                        newrow[f1] = str(det[f2])
+                        if f1 in ["properties"]:
+                            tbl = u''
+                            for k, v in det[f2].items():
+                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = str(det[f2])
                     else:
                         newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search detections." \
-            .format(WF_NAME, FN_NAME)
+                     u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

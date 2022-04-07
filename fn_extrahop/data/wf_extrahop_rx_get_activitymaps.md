@@ -26,7 +26,7 @@ None
 ##  ExtraHop - wf_extrahop_rx_get_activitymaps post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
-WF_NAME = "Example: Extrahop revealx get activitymaps"
+WF_NAME = "Example: Extrahop Reveal(x) get activitymaps"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -39,7 +39,7 @@ def main():
     if CONTENT:
         ams = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
-                    u"function <b>{2}</b>.".format(WF_NAME, len(ams), FN_NAME)
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if ams:
             for am in ams:
                 newrow = incident.addRow(DATA_TABLE)
@@ -62,8 +62,8 @@ def main():
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get activitymaps." \
-            .format(WF_NAME, FN_NAME)
+                     u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAM, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())E)
 
     incident.addNote(helper.createRichText(note_text))
 

@@ -11,7 +11,7 @@
 `funct_extrahop_rx_get_detections`
 
 ### Output Name
-`None`
+`get_detections_result`
 
 ### Message Destination
 `fn_extrahop`
@@ -26,7 +26,7 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 ##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_incident"
-WF_NAME = "Example: Extrahop revealx update incident"
+WF_NAME = "Example: Extrahop Reveal(x) update incident"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -43,7 +43,8 @@ def main():
     if CONTENT:
         det = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
-                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b>.".format(WF_NAME, detection_id, FN_NAME)
+                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
             newrow = incident.addRow(DATA_TABLE)
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -89,11 +90,92 @@ def main():
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME)
-
+                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     u" with parameters <b>{3}</b>." \
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    
     incident.addNote(helper.createRichText(note_text))
 
+
+main()
+
+```
+
+---
+
+## Function - Extrahop Reveal(x) get devices
+
+### API Name
+`funct_extrahop_rx_get_devices`
+
+### Output Name
+``
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+get_tags_content = workflow.properties.get_detections_result.content
+det = get_tags_content["result"]
+participants = det[participants]
+for p in participants:
+    if p["role"] == "victim":
+        pass
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_devices"
+WF_NAME = "Example: Extrahop Reveal(x) update incident"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+# Display subset of fields
+DATA_TABLE = "extrahop_devices"
+DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
+                   "role", "vendor", "devs_id", "extrahop_id", "activity"]
+
+def process_devs(dev):
+    # Process a device result.
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    for f1 in DATA_TBL_FIELDS:
+        f2 = f1
+        if f1.startswith("devs_"):
+            f2 = f1.split('_', 1)[1]
+        if dev[f1] is None:
+            newrow[f1] = dev[f2]
+        elif isinstance(dev[f2], list):
+            newrow[f1] = "{}".format(", ".join(dev[f2]))
+        elif isinstance(dev[f2], bool):
+            newrow[f1] = str(dev[f2])
+        else:
+            newrow[f1] = "{}".format(dev[f2])
+
+# Processing
+def main():
+    note_text = u''
+    if CONTENT:
+        devs = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        if devs:
+            if isinstance(devs, list):
+                for dev in devs:
+                    process_devs(dev)
+            else:
+                process_devs(devs)
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
 
 main()
 

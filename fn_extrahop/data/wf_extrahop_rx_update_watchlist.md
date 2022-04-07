@@ -43,7 +43,7 @@ INPUTS = results.inputs
 def main():
     note_text = u''
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT["result"]
         if result == "success":
             tag = INPUTS.get("extrahop_tag_name")
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the watchlist for SOAR " \
@@ -96,7 +96,7 @@ inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
 ##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_devices"
-WF_NAME = "Example: Extrahop revealx update watchlist"
+WF_NAME = "Example: Extrahop Reveal(x) update watchlist"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -113,16 +113,16 @@ def main():
             if len(devs) > 1:
                 note_text += u"ExtraHop Integration: Workflow: <b>{0}</b> : There were too many results <b>{1}</b> returned " \
                     u"while attempting to search for a device to add to the watchlist " \
-                    u"for Resilient function <b>{2}</b>".format(WF_NAME, len(devs), FN_NAME)
+                    u"for Resilient function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
             else:
                 workflow.addProperty("device_exists", {})
         else:
             note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> device returned while attempting " \
-                  u"to search for a device to add to the watchlist.".format(WF_NAME, FN_NAME)
+                  u"to search for a device to add to the watchlist for Resilient function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search for a device to add to the watchlist." \
-            .format(WF_NAME, FN_NAME)
+                     u"to search for a device to add to the watchlist for Resilient function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
 
     incident.addNote(helper.createRichText(note_text))
 

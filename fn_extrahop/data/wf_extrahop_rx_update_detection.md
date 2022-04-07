@@ -43,17 +43,17 @@ def main():
         if result == "success":
             tag = INPUTS.get("extrahop_tag_name")
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the detection status for SOAR " \
-                        u"function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+                        u"function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the detection status for " \
-                        u"SOAR function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update detection status failed with unexpected " \
-                        u"response for SOAR function <b>{1}</b>.".format(WF_NAME, FN_NAME)
+                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to update the detection status <b>{1}</b>."\
-            .format(WF_NAME, FN_NAME)
+                     u"to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

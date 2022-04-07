@@ -61,7 +61,7 @@ if not inputs.extrahop_tag_id:
 ##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_assign_tag"
-WF_NAME = "Example: Extrahop revealx assign tag"
+WF_NAME = "Example: Extrahop Reveal(x) assign tag"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -75,18 +75,18 @@ def main():
             device_id = INPUTS.get("extrahop_device_ids")
             tag_id = INPUTS.get("extrahop_tag_id")
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully assigned tag id <b>{1}</b> to device id <b>{2}</b> for SOAR " \
-                        u"function <b>{3}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME)
+                        u"function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to assign tag id <b>{1}</b> to device id <b>{2}</b> for " \
-                        u"SOAR function <b>{3}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME)
+                        u"SOAR function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Assign tag id <b>{1}</b> to device id <b>{2}</b> failed with unexpected " \
-                        u"response for SOAR function <b>{3}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME)
+                        u"response for SOAR function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to assign a tag id <b>{1}</b> to device id <b>{2}</b>."\
-            .format(WF_NAME, tag_id, device_id, FN_NAME)
+                     u"to assign a tag id <b>{1}</b> to device id <b>{2}</b> for SOAR function <b>{3}</b> with parameters <b>{4}</b>."\
+            .format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

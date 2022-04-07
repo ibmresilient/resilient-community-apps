@@ -29,7 +29,7 @@ if inputs.extrahop_tag_name is None:
 ##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_create_tag"
-WF_NAME = "Example: Extrahop revealx create tag"
+WF_NAME = "Example: Extrahop Reveal(x) create tag"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -43,21 +43,21 @@ def main():
         if result == "success":
             tag = INPUTS.get("extrahop_tag_name")
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>{1}</b> for SOAR " \
-                        u"function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             newrow = incident.addRow("extrahop_tags")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             newrow.tag = tag
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>{1}</b> for " \
-                        u"SOAR function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>{1}</b> failed with unexpected " \
-                        u"response for SOAR function <b>{2}</b>.".format(WF_NAME, tag, FN_NAME)
+                        u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to create a tag <b>{1}</b>."\
-            .format(WF_NAME, tag, FN_NAME)
+                     u"to create a tag <b>{1}</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
+            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

@@ -26,7 +26,7 @@ None
 ##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_watchlist"
-WF_NAME = "Example: Extrahop revealx get watchlist"
+WF_NAME = "Example: Extrahop Reveal(x) get watchlist"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -40,7 +40,7 @@ def main():
     if CONTENT:
         devs = CONTENT.result
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
-                    u" for SOAR function <b>{2}</b>.".format(WF_NAME, len(devs), FN_NAME)
+                    u" for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
             for dev in devs:
                 newrow = incident.addRow("extrahop_watchlist")
@@ -59,8 +59,8 @@ def main():
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get the watchlist." \
-            .format(WF_NAME, FN_NAME)
+                     u"to get the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

@@ -26,7 +26,7 @@ None
 ##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "Example: Extrahop revealx get tags"
+WF_NAME = "Example: Extrahop Reveal(x) get tags"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -38,8 +38,9 @@ def main():
     note_text = u''
     if CONTENT:
         tags = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b>."\
-        .format(WF_NAME, len(tags), FN_NAME)
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b> "\
+                     u"with parameters <b>{3}</b>."\
+        .format(WF_NAME, len(tags), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if tags:
             for tag in tags:
                 newrow = incident.addRow("extrahop_tags")
@@ -51,8 +52,8 @@ def main():
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get tags."\
-            .format(WF_NAME, FN_NAME)
+                     u"to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
