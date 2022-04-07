@@ -100,6 +100,7 @@ fn_wiki
 fn_whois
 fn_whois_rdap
 fn_xforce
+fn_yeti
 fn_zia
 
 #Not_Rebuilt
