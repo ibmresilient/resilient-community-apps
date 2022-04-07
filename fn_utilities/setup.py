@@ -44,7 +44,7 @@ setup(
         'mail-parser~=3.15',
         'paramiko~=2.10',
         'defusedxml~=0.7.1',
-        'pdfid~=1.1.4',
+        'pdfid~=1.1',
         'chardet==4.0.0'
     ],
     packages=find_packages(),
