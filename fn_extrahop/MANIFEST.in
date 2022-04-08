@@ -9,3 +9,4 @@ include doc/screenshots/*
 recursive-include payload_samples/*/ *.json
 
 exclude *.bak
+global-exclude *.bak
