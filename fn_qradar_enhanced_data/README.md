@@ -37,6 +37,7 @@
 - [Script - Create Artifact from Events info](#script---create-artifact-from-events-info)
 - [Script - Create Artifact from Assets info](#script---create-artifact-from-assets-info)
 - [Script - Create Artifact from Flows info](#script---create-artifact-from-flows-info)
+- [Script - Set Last Updated Time](#script---set-last-updated-time)
 - [Data Table - QR Destination IPs (First 10 Events)](#data-table---qr-destination-ips-first-10-events)
 - [Data Table - QR Triggered Rules](#data-table---qr-triggered-rules)
 - [Data Table - QR Categories](#data-table---qr-categories)
@@ -67,9 +68,7 @@
 | 1.2.2 | 04/2022 | Delete Search on time-out |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 
-For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration and add api permissions
-edit_all_incidents_fields
----
+For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration.
 
 ## Overview
 <!--
@@ -158,6 +157,9 @@ The following table provides the settings you need to configure the app. These s
 | **qradartoken** | Yes | `cb971c75-b2f9-4445-aaae-xxxxxxxxxxxx` | *SEC Token generated in QRadar* |
 | **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
+| **polling_interval** | No | `600` | *Time in seconds to wait between each poller run* |
+| **polling_lookback** | No | `60` | ** |
+| **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 
 ### MSSP Configuration
 
@@ -599,6 +601,29 @@ for type in artifact_types:
 </details>
 
 ---
+## Script - Set Last Updated Time
+qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.
+
+**Object:** Incident
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+import java.util.Date as Date
+
+# If qr_last_updated_time is empty (This will be true on incident creation)
+if not incident.properties.qr_last_updated_time:
+  incident.properties.qr_last_updated_time = incident.create_date
+# If qr_last_updated_time is not empty (This will be true when Manual refresh rule is run)
+else:
+  incident.properties.qr_last_updated_time = Date()
+```
+
+</p>
+</details>
+
+---
 ## Script - Create Artifact from Flows info
 Create artifact from the Flows info of the selected row.
 
@@ -836,9 +861,14 @@ The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new in
 
 ---
 
+## QRadar API Searches
+When a case is first created the search will be set by default to look back 5 days.
+When the manual refresh rule is run the search will look back 2 days unless the activity field, Number of Days to Search, is given a different number.
+When the poller is running it will default to search back 2 days.
+
 ## QRadar Enhanced Data Refresh Manual Rule
-When this manual rule is run it will run all of the workflows to update the incident. The look back time for 
-QRadar searches is set to 2 days by default
+When this manual rule is run it will run all of the workflows to update the incident. This will also set the incidents field, QR Incident Last Updated Time, 
+to the time tis rule was run. If this rule is run while the poller is being used this will cause the poller to run all of the workflows.
 
 ## Configuring Real time update to Offenses
 Real time updates to offenses is disabled by default.
