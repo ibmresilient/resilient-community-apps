@@ -454,7 +454,6 @@ def validate_settings(fn_opts):
     validate_fields([
         {"name": "extrahop_rx_host_url", "placeholder": "<EXTRAHOP_RX_HOST_URL>"},
         {"name": "polling_interval", "placeholder": "<POLLING_INTERVAL>"},
-        {"name": "polling_lookback", "placeholder": "<LOOKBACK_INTERVAL>"},
         {"name": "extrahop_rx_api_version"}],
         fn_opts)
 
