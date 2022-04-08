@@ -18,23 +18,30 @@ gs.getProperty("x_ibmrt_resilient.ServiceNowUsername") != gs.getUserName() && gs
 	//Get the res ID to properly link this new task to a resilient incident
 	resReferenceId = snowHelper.getResReferenceIdFromTaskParent(current, "sn_si_incident");
 
-	//Instantiate new Workflow object (use global. as in Scoped Application)
-	wf = new global.Workflow();
-
-	//Set workflow variable
-	wfVars = { 
-		"u_ibm_resilient_incident_id": resHelper.parseRefId(resReferenceId).incidentId
-	};
-
-	//Check if user has defined a custom workflow
-	wfId = wf.getWorkflowFromName("CUSTOM_RES_WF_CreateTask");
-
-	//If there is no custom workflow, run the default one
-	if(wfId == null){
-		wfId = wf.getWorkflowFromName("RES_WF_CreateTask");
+	if (!resReferenceId){
+		gs.warn("'" + current.getValue("number") + "' has not been sent to SOAR as no Parent SOAR Reference has been found");
 	}
 
-	//Start the workflow
-	wf.startFlow(wfId, current, null, wfVars);
+	else{
+		//Instantiate new Workflow object (use global. as in Scoped Application)
+		wf = new global.Workflow();
+
+		//Set workflow variable
+		wfVars = {
+			"u_ibm_resilient_incident_id": resHelper.parseRefId(resReferenceId).incidentId
+		};
+
+		//Check if user has defined a custom workflow
+		wfId = wf.getWorkflowFromName("CUSTOM_RES_WF_CreateTask");
+
+		//If there is no custom workflow, run the default one
+		if(wfId == null){
+			wfId = wf.getWorkflowFromName("RES_WF_CreateTask");
+		}
+
+		//Start the workflow
+		wf.startFlow(wfId, current, null, wfVars);
+		
+	}
 
 })(current);

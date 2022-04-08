@@ -231,7 +231,7 @@ ResilientHelper.prototype = {
 				var links = '<a target="_blank" href="'+res_link+'">SOAR</a> &nbsp;&nbsp; <a href="'+sn_link+'">SN</a>';
 
 				var resTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Active</div>';
-				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to Resilient</div>';
+				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to SOAR</div>';
 
 				var cells = [
 					["sn_records_dt_time", now],
@@ -318,6 +318,11 @@ ResilientHelper.prototype = {
 	},
 	
 	addNote: function(res_reference_id, noteText, noteFormat){
+
+		//ServiceNow notes can have "[code]" sections which include HTML plain text within them
+		//This link is unecessary on SOAR so filter out the "[code]" tags
+		noteText = noteText.replace(/\[code\].*\[\/code\]/g, "");
+
 		try{
 			if(!noteFormat){
 				noteFormat = "text";

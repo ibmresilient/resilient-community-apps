@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -8,11 +8,10 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
-from fn_qradar_integration.util.qradar_utils import QRadarClient
+from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
+import fn_qradar_integration.util.function_utils as function_utils
 
-"""
-    For a given (artifact) value, find all the QRadar reference sets that contain it.
-"""
+# For a given (artifact) value, find all the QRadar reference sets that contain it.
 
 LOG = logging.getLogger(__name__)
 
@@ -23,49 +22,49 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
-        required_fields = ["host", "verify_cert"]
-        validate_fields(required_fields, self.options)
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.opts = opts
-        self.options = opts.get("fn_qradar_integration", {})
+        self.servers_list = function_utils.get_servers_list(opts)
 
     @function("qradar_find_reference_sets")
     def _qradar_find_reference_sets_function(self, event, *args, **kwargs):
         """Function: Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule."""
         try:
-            required_fields = ["qradar_reference_set_item_value"]
-            validate_fields(required_fields, kwargs)
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
+
+            validate_fields(["qradar_reference_set_item_value"], kwargs)
             # Get the function parameters:
             qradar_reference_set_item_value = kwargs.get("qradar_reference_set_item_value")  # text
+            qradar_label = kwargs.get("qradar_label")  # text
 
             LOG.info("qradar_reference_set_item_value: %s", qradar_reference_set_item_value)
+            LOG.info("qradar_label: %s", qradar_label)
 
-            qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
-                qradar_verify_cert = False
+            options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
+            qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
-            LOG.debug("Connection to {} using {}".format(self.options["host"],
-                                                         self.options.get("username") or "service token"))
+            LOG.debug("Connection to {} using {}".format(options.get("host"),
+                                                         options.get("username") or "service token"))
 
-            yield StatusMessage("starting...")
-            qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options.get("username", None),
-                                         password=self.options.get("qradarpassword", None),
-                                         token=self.options.get("qradartoken", None),
+            qradar_client = QRadarClient(host=options.get("host"),
+                                         username=options.get("username", None),
+                                         password=options.get("qradarpassword", None),
+                                         token=options.get("qradartoken", None),
                                          cafile=qradar_verify_cert,
-                                         opts=self.opts, function_opts=self.options)
-
-            r_items = qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value)
-
-            yield StatusMessage("done...")
+                                         opts=self.opts, function_opts=options)
 
             results = {
-                "reference_items": r_items
+                "reference_items": qradar_client.find_all_ref_set_contains(qradar_reference_set_item_value),
+                "inputs": {"qradar_label": qradar_label, "qradar_reference_set_item_value": qradar_reference_set_item_value}
             }
+
+            yield StatusMessage("Finished 'qradar_find_reference_sets' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

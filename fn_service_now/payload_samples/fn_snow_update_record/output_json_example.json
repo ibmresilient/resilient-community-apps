@@ -9,19 +9,19 @@
       "task_id": null,
       "sn_res_id": null,
       "sn_update_fields": {
-        "business_criticality": 1
+        "severity": 1
       }
     },
     "sn_ref_id": "SIR0010024",
     "sn_time_updated": 1642522493078
   },
-  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_res_id\": null, \"sn_update_fields\": {\"business_criticality\": 1}}, \"sn_ref_id\": \"SIR0010024\", \"sn_time_updated\": 1642522493078}",
+  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_res_id\": null, \"sn_update_fields\": {\"severity\": 1}}, \"sn_ref_id\": \"SIR0010024\", \"sn_time_updated\": 1642522493078}",
   "inputs": {
     "incident_id": 2117,
     "task_id": null,
     "sn_res_id": null,
     "sn_update_fields": {
-      "business_criticality": 1
+      "severity": 1
     }
   },
   "metrics": {

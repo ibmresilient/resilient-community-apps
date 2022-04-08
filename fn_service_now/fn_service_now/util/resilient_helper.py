@@ -19,6 +19,8 @@ SECOPS_PLAYBOOK_TASK_TABLE_NAME = "sn_si_task"
 SECOPS_PLAYBOOK_TASK_PREFIX = "SIT"
 CP4S_CASES_REST_PREFIX = "cases-rest"
 
+LOG = logging.getLogger(__name__)
+
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
     """Class that represents a Resilient Incident. See API notes for more"""
@@ -192,17 +194,18 @@ class ResilientHelper(object):
 
         return {"incident_id": incident_id, "task_id": task_id}
 
-    def generate_res_link(self, incident_id, host, task_id=None):
+    def generate_res_link(self, incident_id, host, org_id, task_id=None):
         """Function that generates a https URL to the incident or task"""
 
         # for CP4S cases endpoint, remove the cases-rest prefix (CP4S_CASES_REST_PREFIX)
         if self.CP4S_PREFIX in host:
-            host = host.replace(self.CP4S_PREFIX + ".", "")
-
-        link = "https://{0}/#incidents/{1}".format(host, incident_id)
+            base_host = host.replace(self.CP4S_PREFIX + ".", "")
+            link = "https://{0}/app/respond/#cases/{1}".format(base_host, incident_id)
+        else:
+            link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
         if task_id is not None:
-            link += "?task_id={0}".format(task_id)
+            link += "?taskId={0}&tabName=details&orgId={1}".format(task_id, org_id)
 
         return link
 
@@ -268,6 +271,27 @@ class ResilientHelper(object):
         return Incident(incident_id, incident["name"], incident["description"])
 
     @staticmethod
+    def rename_incident(client, incident_id, new_incident_name):
+        """
+        Static function to update the name of a incident.
+        Primarily used for prepending sn_ref_id to the incident's name
+        for easy filtering when viewing incident list
+        """
+
+        def change_func(data):
+            data["name"] = new_incident_name
+
+        url = "/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id)
+
+        # Use the get_put option to GET the data, apply the change, and PUT it back to the server
+        try:
+            LOG.debug("PUT Incident from Resilient: ID: %s URL: %s New Name: %s", incident_id, url, new_incident_name)
+            client.get_put(url, change_func)
+            LOG.info("Incident was successfully renamed to '%s'", new_incident_name)
+        except Exception as err:
+            raise ValueError(str(err))
+
+    @staticmethod
     def get_task(client, task_id, incident_id):
         """Function that gets the task from Resilient. Gets the task's instructions too"""
 
@@ -316,6 +340,28 @@ class ResilientHelper(object):
 
 
         return Task(incident_id, task_id, task["name"], task_instructions)
+
+    @staticmethod
+    def rename_task(client, task_id, new_task_name):
+        """
+        Static function to update the name of a task.
+        Primarily used for prepending sn_ref_id to the task's name
+        for easy filtering when viewing task list
+        """
+
+        def change_func(data):
+            data["name"] = new_task_name
+
+        url = "/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id)
+
+        # Use the get_put option to GET the data, apply the change, and PUT it back to the server
+        try:
+            LOG.debug("PUT Task from Resilient: ID: %s URL: %s New Name: %s", task_id, url, new_task_name)
+            client.get_put(url, change_func)
+            LOG.info("Task was successfully renamed to '%s'", new_task_name)
+        except Exception as err:
+            raise ValueError(str(err))
+
 
     @classmethod
     def get_attachment(cls, res_client, attachment_id, incident_id=None, task_id=None):

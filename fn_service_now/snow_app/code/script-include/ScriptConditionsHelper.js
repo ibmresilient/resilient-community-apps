@@ -14,8 +14,8 @@ var SN_SI_TASK_TABLE_NAME = "sn_si_task";
 //SIR TABLES
 //
 
-function isSirTable(current) {
-	return !current.isValidField(INC_RES_ID) && current.isValidField(SIR_RES_ID);
+function isSirTable(current, snowHelper) {
+	return snowHelper.tableIsAllowed(current.getTableName()) && !current.isValidField(INC_RES_ID) && current.isValidField(SIR_RES_ID);
 }
 
 function isSnSiIncidentTable(current) {
@@ -37,22 +37,36 @@ var ScriptConditionsHelper = Class.create();
 ScriptConditionsHelper.prototype = {
 	type: 'ScriptConditionsHelper',
 
-	initialize: function() {},
+	initialize: function() {
+		this.snowHelper = new SNOWRESTHelper();
+	},
+
+	uiCreateIncidentCheck: function(current) {
+		return isSirTable(current, this.snowHelper) && !sirIsLinkedToRes(current);
+	},
+
+	uiCreateTaskCheck: function(current) {
+		return isSirTable(current, this.snowHelper) && !sirIsLinkedToRes(current);
+	},
 
 	sirAddCommentCheck: function(current) {
-		return isSirTable(current) && sirIsLinkedToRes(current);
+		return isSirTable(current, this.snowHelper) && sirIsLinkedToRes(current);
 	},
 
 	sirAddWorkNoteCheck: function(current) {
-		return isSirTable(current) && sirIsLinkedToRes(current);
+		return isSirTable(current, this.snowHelper) && sirIsLinkedToRes(current);
 	},
 
 	sirUpdateStateCheck: function(current) {
-		return isSirTable(current) && sirIsLinkedToRes(current);
+		return isSirTable(current, this.snowHelper) && sirIsLinkedToRes(current);
 	},
 
 	sirCreateOnAssignCheck: function(current) {
-		var condition = isSirTable(current) && !sirIsLinkedToRes(current) && isSnSiIncidentTable(current);
+		var condition = isSirTable(current, this.snowHelper) && !sirIsLinkedToRes(current) && isSnSiIncidentTable(current);
+
+		if (!condition) {
+			return condition;
+		}
 
 		var resHelper = new ResilientHelper();
 		var checkGroupAllowed = resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase());
@@ -61,7 +75,11 @@ ScriptConditionsHelper.prototype = {
 	},
 
 	sitCreateOnAssignCheck: function(current) {
-		var condition = isSirTable(current) && !sirIsLinkedToRes(current) && isSnSiTaskTable(current);
+		var condition = isSirTable(current, this.snowHelper) && !sirIsLinkedToRes(current) && isSnSiTaskTable(current);
+
+		if (!condition) {
+			return condition;
+		}
 
 		var resHelper = new ResilientHelper();
 		var checkGroupAllowed = resHelper.assignGroupIsAllowed(current.getDisplayValue("assignment_group").trim().toLowerCase());

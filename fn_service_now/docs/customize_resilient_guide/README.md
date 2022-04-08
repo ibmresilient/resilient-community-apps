@@ -5,6 +5,7 @@
 - [Functions](#functions)
   - [Function - SNOW: Create Record](#function---snow-create-record)
   - [Function - SNOW: Update Record](#function---snow-update-record)
+    - [Sending SOAR artifacts to SNOW](#sending-soar-artifacts-to-snow)
   - [Function - SNOW: Close Record](#function---snow-close-record)
   - [Function - SNOW: Add Note to Record](#function---snow-add-note-to-record)
   - [Function - SNOW: Add Attachment to Record](#function---snow-add-attachment-to-record)
@@ -12,6 +13,7 @@
   - [Function - SNOW Helper: Update Data Table](#function---snow-helper-update-data-table)
 - [Rules](#rules)
 - [ServiceNow Records Data Table](#servicenow-records)
+- [Security Incident Response Specific Customizations](#security-incident-response-specific-customizations)
 
 ---
 
@@ -215,7 +217,7 @@ sn_severity_map = {
 # Default text of the initial note added to the ServiceNow Record
 init_snow_note_text = u"""Record created from a IBM SOAR Incident ID: {0}.
                           Severity: {1}
-                          Incident Type(s): {2}""".format(incident.id, incident.severity_code, incident.incident_type_ids)
+                          Incident Type(s): {2}""".format(incident.id, incident.severity_code, u", ".join(incident.incident_type_ids))
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
 if rule.properties.sn_initial_note.content is not None:
@@ -229,9 +231,12 @@ inputs.sn_init_work_note = init_snow_note_text
 
 # Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.
 # ServiceNow Example:: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
+# For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
+# (see the example commented out below)
 inputs.sn_optional_fields = dict_to_json_str({
   "short_description": u"RES-{0}: {1}".format(incident.id, unicode(incident.name)),
   "severity": sn_severity_map[incident.severity_code],
+  #"business_criticality": sn_severity_map[incident.severity_code],
   "assignment_group": workflow.properties.assignment_group.sys_id,
   "caller_id": workflow.properties.caller_id.sys_id
 })
@@ -290,19 +295,19 @@ results = {
       "task_id": null,
       "sn_res_id": null,
       "sn_update_fields": {
-        "business_criticality": 1
+        "severity": 1
       }
     },
     "sn_ref_id": "SIR0010024",
     "sn_time_updated": 1642522493078
   },
-  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_res_id\": null, \"sn_update_fields\": {\"business_criticality\": 1}}, \"sn_ref_id\": \"SIR0010024\", \"sn_time_updated\": 1642522493078}",
+  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_res_id\": null, \"sn_update_fields\": {\"severity\": 1}}, \"sn_ref_id\": \"SIR0010024\", \"sn_time_updated\": 1642522493078}",
   "inputs": {
     "incident_id": 2117,
     "task_id": null,
     "sn_res_id": null,
     "sn_update_fields": {
-      "business_criticality": 1
+      "severity": 1
     }
   },
   "metrics": {
@@ -385,6 +390,7 @@ sn_severity_map = {
 inputs.incident_id = incident.id
 
 # List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key
+# The default here is "severity", however if using the SIR Table we recommend switching to the business_criticality field
 inputs.sn_update_fields = dict_to_json_str({
   "severity": sn_severity_map[incident.severity_code],
 })
@@ -402,6 +408,22 @@ incident.addNote(note_text)
 ```
 
 </details>
+
+### Sending SOAR artifacts to SNOW
+You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
+
+1. Using the resilient-sdk, `clone` the example workflow into a new workflow with `changetype` artifact.
+    ```
+    resilient-sdk clone --workflow example_snow_update_record_on_severity_change <new_workflow_name> --changetype artifact
+    ```
+    More information on the resilient-sdk and the `clone` command can be found [here](https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone).
+1. Modify the pre-processing script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
+    ```python
+    inputs.sn_update_fields = dict_to_json_str({
+      "my_snow_column_name": artifact.value # When the artifact type is IP Address the value will be the IP
+    })
+    ```
+1. Create a SOAR Rule to either manually or automatically trigger this new workflow.
 
 ---
 
@@ -422,6 +444,7 @@ Uses the `/close_record` custom endpoint in ServiceNow to change the state of a 
 | `sn_close_work_note` | `String` | Yes | `"This record's state has be changed to 'Resolved' by IBM SOAR"`  | If defined this text is added as a Work Note to the ServiceNow Record |
 
 >**NOTE:** 
+> * If using the **Security Incident Response** table, the initial state of the created ServiceNow record is the ``Analysis`` state. This state must be changed to the ``Contain`` or other state to allow the ServiceNow Record to be closed otherwise this ``Close`` action will be ignored.
 > * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **Incident** > **Column Name** > **incident state/close_code** and see their label and values.
 > * It is the value that we send from SOAR to ServiceNow.
 >
@@ -541,7 +564,7 @@ note_text = None
 
 if results.success:
 
-  note_text = u"""<br>This Incident has been CLOSED in <b>ServiceNow</b>
+  note_text = u"""<br>This Incident has been updated in <b>ServiceNow</b>
               <br><b>ServiceNow ID:</b> {0}
               <br><b>ServiceNow Record State:</b> {1}
               <br><b>ServiceNow Closing Notes:</b> {2}
@@ -936,3 +959,10 @@ inputs.sn_resilient_status = incident.plan_status
 | SOAR Status | `sn_records_dt_res_status` | `Rich Text` |
 | SNOW Status | `sn_records_dt_snow_status` | `Rich Text` |
 | Links | `sn_records_dt_links` | `Rich Text` |
+
+# Security Incident Response Specific Customizations
+By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
+This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`. 
+It is recommend after the install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
+Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. 
+See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.

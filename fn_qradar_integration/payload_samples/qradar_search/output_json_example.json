@@ -1,0 +1,13 @@
+{
+  "events": [],
+  "inputs": {
+    "qradar_query": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days",
+    "qradar_query_all_results": false,
+    "qradar_search_param1": "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",
+    "qradar_search_param2": "8",
+    "qradar_search_param3": "7",
+    "qradar_search_param4": null,
+    "qradar_search_param5": null,
+    "qradar_label": "SOAR_Plugin_Destination_Name"
+  }
+}

@@ -1,4 +1,4 @@
-# IBM Security QRadar SOAR Integration for ServiceNow
+# IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -15,11 +15,12 @@
   notes of a previous release
 -->
 
-### v2.0.0
+### v2.0.9
 * Support added for ServiceNow Security Incident Response (SIR)
 * Support added for API Key authentication from ServiceNow to IBM SOAR
 * AppHost support for proxies
-* Verified on ServiceNow Rome release
+* App renamed to IBM Security QRadar SOAR App for ServiceNow
+* Verified on ServiceNow San Diego release
 
 ### v1.0.5
 * Verified on ServiceNow Quebec release
@@ -61,12 +62,12 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 * ServiceNow Instance with ITSM enabled and running `Kingston`, or newer releases
 * Access to the **Incident Table** in ServiceNow
 * ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
-  * If integrating with ServiceNow Security Incident Table, `IBM SOAR App >= 2.0.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
+  * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.0.9` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
-* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v31.0.0`
-* App Host `>= v1.0.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v31.0.0`.
+* IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v41.2.0`
+* App Host `>= v1.5.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v42.0.0`.
   - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
-  - If integrating with SIR, `fn_service_now >= v2.0.0` is required
+  - If integrating with SIR, `fn_service_now >= v2.0.9` is required
 
 ---
 

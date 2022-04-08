@@ -3,7 +3,9 @@
 //Use to convert JavaScript JSON Object to JSON String and back
 var JSON_PARSER = new global.JSON();
 
+var DEFAULT_TIMEOUT = 60000;
 var RES_DATATABLE_NAME = "sn_records_dt";
+var RES_INTEGRATOR_ROLE = "x_ibmrt_resilient.integrator";
 
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){
@@ -42,15 +44,52 @@ function validateMidServer(midServerName){
 	throw errMsg;
 }
 
+function checkSnUserHasResilientIntegratorRole(snUsername) {
+
+	//Find the sys_id of the RES_INTEGRATOR_ROLE in the sys_user_role table
+	var roleTable = new GlideRecord("sys_user_role");
+	roleTable.addQuery("name", RES_INTEGRATOR_ROLE);
+	roleTable.query();
+
+	//execute query for ibm integrator role sys_id
+	if (roleTable.next()) {
+		var sysIdResIntegratorRole = roleTable.sys_id;
+
+		//Here have to query the sys_user_has_role table to know if the
+		//user has the appropriate role
+		var userRolesTable = new GlideRecord("sys_user_has_role");
+
+		//filter on roles equal to target role
+		userRolesTable.addQuery("role", sysIdResIntegratorRole);
+		//filter on users with sys_id matching snUsername's id
+		userRolesTable.addQuery("user.user_name", snUsername);
+		
+		userRolesTable.query(); //execute query
+
+		if (userRolesTable.next()) {
+			//the query had results - no issue
+			return;
+		} else {
+			throw "ServiceNow Username '" + snUsername + "' does not have the " + RES_INTEGRATOR_ROLE + " role.";
+		}
+	} else {
+		throw "ServiceNow instance is not correctly configured. Could not find " + RES_INTEGRATOR_ROLE + " role.";
+	}
+}
+
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
-function executeRESTMessage(rm, midServerName, restURL){
+function executeRESTMessage(rm, midServerName, restURL, requestTimeout, sendRequestAsync){
 	var response, statusCode, responseBody, responseHeaders, errMsg = null;
 
-	//Set timeout to 60s
-	rm.setHttpTimeout(60000);
+	//Set timeout to the timeout property value
+	rm.setHttpTimeout(requestTimeout);
 
 	try{
-		response = rm.execute();
+		if (sendRequestAsync) {
+			response = rm.executeAsync();
+		} else {
+			response = rm.execute();
+		}
 
 		// If using a mid-server, wait max 60s for response
 		if(midServerName){
@@ -186,19 +225,20 @@ ResilientAPI.prototype = {
 	
 	initialize: function() {
 		
-		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, errMsg, APIKeysEnabled, restEndpointCP4S = null;
+		var hostName, orgName, resAPIId, resAPISecret, userEmail, userPassword, snUsername, midServerName, requestTimeout, errMsg, APIKeysEnabled, restEndpointCP4S = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
-			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost");
-			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName");
-			resAPIId = gs.getProperty("x_ibmrt_resilient.ResilientAPIId");
-			resAPISecret = gs.getProperty("x_ibmrt_resilient.ResilientAPISecret");
-			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail");
-			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
-			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
-			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName");
-			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost");
+			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost").trim();
+			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName").trim();
+			resAPIId = gs.getProperty("x_ibmrt_resilient.ResilientAPIId").trim();
+			resAPISecret = gs.getProperty("x_ibmrt_resilient.ResilientAPISecret").trim();
+			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail").trim();
+			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword").trim();
+			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername").trim();
+			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName").trim();
+			requestTimeout = gs.getProperty("x_ibmrt_resilient.RequestTimeout").trim();
+			restEndpointCP4S = gs.getProperty("x_ibmrt_resilient.ResilientCP4SRestHost").trim();
 			if (gs.getProperty("x_ibmrt_resilient.ResilientIsCP4S").toLowerCase() == "yes") {
 				this.isCP4S = true;
 			} else {
@@ -230,6 +270,10 @@ ResilientAPI.prototype = {
 			APIKeysEnabled = true;
 		}
 
+		//Check snUsername's permissions - will throw appropriate error if
+		//snUsername doesn't have RES_INTEGRATOR_ROLE role or if can't find the role
+		checkSnUserHasResilientIntegratorRole(snUsername);
+
 		//Setup MID Server
 		midServerName = midServerName.trim();
 		if (midServerName.length == 0){
@@ -248,6 +292,11 @@ ResilientAPI.prototype = {
 		this.orgName = orgName;
 		this.userEmail = userEmail;
 		this.APIKeysEnabled = APIKeysEnabled;
+		if (requestTimeout) {
+			this.requestTimeout = requestTimeout * 1000; // convert seconds to milliseconds
+		} else {
+			this.requestTimeout = DEFAULT_TIMEOUT;
+		}
 
 		//Initialise other class variables that will be set in the connect() method
 		this.XSESSID = null;
@@ -300,8 +349,8 @@ ResilientAPI.prototype = {
 			rm.setEccParameter("skip_sensor", true);
 		}
 
-		//Execute and get response
-		res = executeRESTMessage(rm, this.midServerName, this.restURL);
+		//Execute and get response - do not send async, thus last param is "false"
+		res = executeRESTMessage(rm, this.midServerName, this.restURL, this.requestTimeout, false);
 
 		//Get csrfToken and JSESSIONID if authenticating with email
 		if (!this.APIKeysEnabled) {
@@ -313,7 +362,7 @@ ResilientAPI.prototype = {
 		this.orgId = getOrgId(res.body.orgs, this.orgName);
 	},
 	
-	request: function(method, endpoint, dataAsJSONobj, headers){
+	request: function(method, endpoint, dataAsJSONobj, headers, sendAsync){
 		
 		//If headers is null, set to empty object
 		if(!headers){ headers = {}; }
@@ -338,6 +387,7 @@ ResilientAPI.prototype = {
 		
 		//Set the headers
 		headers["content-type"] = "application/json";
+		headers["User-Agent"] = "soar-app-1.0";
 
 		//Figure out how authentication will happen
 		//If using API key, set the ID and secret in header
@@ -358,7 +408,7 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute the request
-		var res = executeRESTMessage(rm, this.midServerName, this.restURL);
+		var res = executeRESTMessage(rm, this.midServerName, this.restURL, this.requestTimeout, sendAsync);
 		return res.body;
 	},
 	
@@ -384,7 +434,7 @@ ResilientAPI.prototype = {
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 	
 	closeIncident: function(incidentId, data){
@@ -399,14 +449,14 @@ ResilientAPI.prototype = {
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/types/" + type + "/fields/" + fieldAPIName;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 	
 	getDatatable: function(incidentId){
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, null, headers);
+		return this.request(method, endpoint, null, headers, true);
 	},
 
 	addDatatableRow: function(incidentId, formattedCells){
@@ -420,7 +470,7 @@ ResilientAPI.prototype = {
 		var method = "put";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME + "/row_data/" + rowId;
 		var headers = {"handle_format": "names"};
-		return this.request(method, endpoint, formattedCells, headers);
+		return this.request(method, endpoint, formattedCells, headers, true);
 	},
 	
 	addNote: function(incidentId, taskId, noteText, noteFormat){
@@ -443,7 +493,7 @@ ResilientAPI.prototype = {
 			}
 		};
 		var method = "post";
-		return this.request(method, endpoint, data);
+		return this.request(method, endpoint, data, null, true);
 	},
 	
 	generateRESid: function(incident_id, task_id){
@@ -465,7 +515,7 @@ ResilientAPI.prototype = {
 		}
 		
 		if(task_id){
-			link += "?task_id=" + String(task_id);
+			link += "?taskId=" + String(task_id) + "&tabName=details&orgId=" + String(this.orgId);
 		}
 		
 		return link;

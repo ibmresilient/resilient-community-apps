@@ -1,6 +1,7 @@
 #ALPHABETICAL-List-of-allowed-image-names
 
 #IBM_SOAR_Apps
+fn_abuseipdb
 fn_alienvault_otx
 fn_anomali_staxx
 fn_ansible
@@ -28,6 +29,7 @@ fn_exchange
 fn_exchange_online
 fn_geocoding
 fn_google_cloud_dlp
+fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
 fn_hibp
@@ -58,6 +60,7 @@ fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
 fn_pagerduty
+fn_passivetotal
 fn_pastebin
 fn_phish_ai
 fn_phish_tank
@@ -82,6 +85,7 @@ fn_shodan
 fn_slack
 fn_splunk_integration
 fn_spamhaus_query
+fn_symantec_dlp
 fn_task_utils
 fn_teams
 fn_threatminer
