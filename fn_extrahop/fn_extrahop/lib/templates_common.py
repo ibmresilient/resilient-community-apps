@@ -19,7 +19,8 @@ import re
 import sys
 import time
 import pytz
-import jinja2
+from jinja2 import Environment, select_autoescape, Undefined
+from jinja2.exceptions import TemplateSyntaxError, TemplateError
 from resilient_lib import readable_datetime
 
 if sys.version_info.major < 3:
@@ -35,7 +36,7 @@ else:
     from base64 import encodebytes as b64encode
 
 if sys.version_info.major < 3:
-    from urllib import quote
+    from urllib import quote # pylint: disable-msg=E0611
 else:
     # Python 3.x
     from urllib.parse import quote
@@ -118,13 +119,13 @@ def render(template, data):
 
     try:
         jtemplate = environment().from_string(stringtemplate)
-    except jinja2.exceptions.TemplateSyntaxError as err:
+    except TemplateSyntaxError as err:
         LOG.error("Render failed: %s, with template: %s", str(err), stringtemplate)
         raise
 
     try:
         stringvalue = jtemplate.render(data)
-    except jinja2.exceptions.TemplateError as Ex:
+    except TemplateError as Ex:
         LOG.error("Render failed, with data: %s", data)
         raise
     return stringvalue
@@ -297,44 +298,44 @@ def soar_trimlist(org_list):
 
 def js_filter(val):
     """Jinja2 filter function 'js' produces JSONified string of the value, without surrounding quotes"""
-    if val is None or isinstance(val, jinja2.Undefined):
+    if val is None or isinstance(val, Undefined):
         return "null"
     js = json_filter(val)
     return js[1:-1]
 
 def json_filter(val, indent=0):
     """Jinja2 filter function 'json' produces JSONified string of the value"""
-    if val is None or isinstance(val, jinja2.Undefined):
+    if val is None or isinstance(val, Undefined):
         return "null"
     return json.dumps(val, indent=indent, sort_keys=True)
 
 def html_filter(val):
     """Jinja2 filter function 'html' produces HTML-encoded string of the value"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     return html.escape(val)
 
 def url_filter(val):
     """Jinja2 filter function 'url' produces URL-encoded string of the value"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     return quote(str(val))
 
 def idna_filter(val):
     """Jinja2 filter function 'idna' encodes the value per RFC 3490"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     return val.encode("idna").decode("utf-8")
 
 def punycode_filter(val):
     """Jinja2 filter function 'punycode' encodes the value per RFC 3492"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     return val.encode("punycode").decode("utf-8")
 
 def ldap_filter(val):
     """Jinja2 filter function 'ldap' produces LDAP-encoded string of the value"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     escaped = []
     for char in str(val):
@@ -345,7 +346,7 @@ def ldap_filter(val):
 
 def ps_filter(val):
     """Jinja2 filter function 'ps' escapes for use in a PowerShell commandline"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     escaped = []
     for char in str(val):
@@ -372,7 +373,7 @@ def ps_filter(val):
 
 def sh_filter(val):
     """Jinja2 filter function 'sh' escapes for use in a Unix shell commandline"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
     escaped = []
     for char in str(val):
@@ -385,13 +386,13 @@ def sh_filter(val):
 
 def pretty_filter(val, indent=2):
     """Jinja2 filter function 'pretty' produces pretty-printed string of the value"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "[undefined]"
 
     def nice_repr(obj, context, maxlevels, level):
         if sys.version_info.major < 3:
             typ = type(obj)
-            if typ is unicode:
+            if typ is unicode: # pylint: disable-msg=E0602
                 obj = obj.encode("utf-8")
         return pprint._safe_repr(obj, context, maxlevels, level)
 
@@ -402,6 +403,7 @@ def pretty_filter(val, indent=2):
 def iso8601(val):
     """Assuming val is an epoch milliseconds timestamp, produce ISO8601 datetime"""
     dt = datetime.datetime.utcfromtimestamp(int(int(val)/1000))
+    # pylint: disable = no-value-for-parameter
     return pytz.UTC.localize(dt).isoformat()
 
 def timestamp(val):
@@ -410,7 +412,7 @@ def timestamp(val):
        >>> timestamp({"year": 2018, "month": 8, "day": 1, "timezoneID": "CET"})
        1533078000000
 
-       >>> timestamp(jinja2.Undefined())
+       >>> timestamp(Undefined)
        'null'
 
        >>> timestamp("now") > 1530000000000
@@ -430,7 +432,7 @@ def timestamp(val):
         z = pytz.timezone(val.get("timezoneID", "UTC"))
         dt = datetime.datetime(y, m, d, h, n, s, u, z)
         return int(calendar.timegm(dt.utctimetuple()) * 1000)
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return "null"
     if isinstance(val, datetime.datetime):
         return int(calendar.timegm(val.utctimetuple()) * 1000)
@@ -495,7 +497,7 @@ def camel_filter(val):
 
 def base64_filter(val, indent=2):
     """Jinja2 filter function 'base64' breaks text into fixed-width blocks"""
-    if isinstance(val, jinja2.Undefined):
+    if isinstance(val, Undefined):
         return ""
     s = json.dumps(val).encode("utf-8")
     return b64encode(s).decode("utf-8")
@@ -526,7 +528,7 @@ JINJA_FILTERS = {
 }
 
 # Maintain one global Environment
-_ENV = jinja2.Environment(autoescape=jinja2.select_autoescape(default_for_string=False))
+_ENV = Environment(autoescape=select_autoescape(default_for_string=False))
 _ENV.globals.update(JINJA_FILTERS)
 _ENV.filters.update(JINJA_FILTERS)
 
