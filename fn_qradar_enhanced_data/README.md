@@ -860,17 +860,17 @@ qr_flows
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
-
-## QRadar API Searches
+## Version 1.2.0 Changes
+### QRadar API Searches
 When a case is first created the search will be set by default to look back 5 days.
 When the manual refresh rule is run the search will look back 2 days unless the activity field, Number of Days to Search, is given a different number.
 When the poller is running it will default to search back 2 days.
 
-## QRadar Enhanced Data Refresh Manual Rule
-When this manual rule is run it will run all of the workflows to update the incident. This will also set the incidents field, QR Incident Last Updated Time, 
-to the time tis rule was run. If this rule is run while the poller is being used this will cause the poller to run all of the workflows.
+### QRadar Enhanced Data Refresh Manual Rule
+When this manual rule is run it will run all of the workflows to update the incident. This will also set the case field, QR Incident Last Updated Time, 
+to the time this rule was run. If this rule is run while the poller is being used this will cause the poller to run all of the workflows. It is advised to either using the poller for automatic case refresh or use the manual refresh capability, but not both.
 
-## Configuring Real time update to Offenses
+### Configuring Real time update to Offenses
 Real time updates to offenses is disabled by default.
 To enable this feature edit the polling_interval setting under [fn_qradar_integration:edm_global_settings] in the app.config for this package.
 The value of the polling_interval setting should be an integer of the amount of time in seconds to wait between checking for updates to offenses.
