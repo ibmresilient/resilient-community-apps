@@ -119,13 +119,6 @@ Additional package dependencies may exist for each of these packages:
 * pyeti-python3~=1.1
 * resilient-circuits>=44.0.0
 
-### Endpoint Developed With
-
-This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| Yeti| -- | -- | -- |
-
 ---
 
 ## Installation
@@ -139,10 +132,10 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_key** | Yes | `<api_key_value>` | Found on the Yeti platform|
+| **apikey** | Yes | `<apikey_value>` | Found on the Yeti platform|
 | **password** | Yes | `` | Can be created in the Yeti Platform|
-| **urlbase** | Yes | `<yeti_server_url>` | --|
-| **username** | Yes | `yeti` | Found on Yeti Platform|
+| **urlbase** | Yes | `<yeti_instance_url>` | URL for your Yeti Instance |
+| **username** | Yes | `<yeti_instance_username` | Found on Yeti Platform|
 
 
 ---

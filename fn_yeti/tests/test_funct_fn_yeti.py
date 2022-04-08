@@ -4,18 +4,18 @@
 import pytest
 import mock
 from .mock_artifact import MockedResponse
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_yeti"
 FUNCTION_NAME = "fn_yeti"
 
-# Read the default configuration-data section from the package
+# Replace apikey with your apikey for livetest
 config_data = """[fn_yeti]
 urlbase=http://localhost:8080/api
 username=yeti
 password=
-api_key=dda39a89be602a714ca2dd834582509585ab0b146a1094d385226988e0a67398e646acc08f6f3738"""
+apikey=thisisadummykey"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"

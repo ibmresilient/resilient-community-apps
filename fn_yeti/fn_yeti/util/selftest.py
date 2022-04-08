@@ -32,9 +32,8 @@ def selftest_function(opts):
 
     try:
         yeti_client = pyeti.YetiApi(app_configs["urlbase"], (app_configs["username"],
-                                        app_configs["password"]), app_configs["api_key"])
-
-        indicators = yeti_client.observable_search(regex=False, value="8.8.8.8")        
+                                        app_configs["password"]), app_configs["apikey"])
+   
         return {"state": "success"}
     except Exception as e:
         return {

@@ -24,7 +24,10 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        ADD DESCRIPTION!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Function: This function makes an API call to Yeti to look for information on the given artifact.
+        Inputs:
+            -   fn_inputs.yeti_artifact_type
+            -   fn_inputs.yeti_artifact_value
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -32,15 +35,15 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info("Querying YETI")
 
         self.yeti_client = pyeti.YetiApi(self.app_configs.urlbase, (self.app_configs.username,
-                                        self.app_configs.password), self.app_configs.api_key)
+                                        self.app_configs.password), self.app_configs.apikey)
 
         artifact_type = fn_inputs.yeti_artifact_type
         artifact_value = fn_inputs.yeti_artifact_value
 
         validate_fields([
-            {"name": "urlbase", "placeholder": "<yeti_server_url>"},
+            {"name": "urlbase", "placeholder": "<yeti_instance_url>"},
             {"name": "username"},
-            {"name": "api_key", "placeholder" : "<api_key_value>"}],
+            {"name": "apikey", "placeholder" : "<apikey_value>"}],
             self.app_configs)
 
         LOG.info("Looking up {}: {}".format(artifact_type, artifact_value))

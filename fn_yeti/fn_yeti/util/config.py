@@ -10,9 +10,9 @@ def config_section_data():
     """
 
     config_data = u"""[fn_yeti]
-urlbase=<yeti_server_url>
-username=yeti
+urlbase=<yeti_instance_url>
+username=<yeti_instance_username> 
 password=
-api_key=<api_key_value>
+apikey=<apikey_value>
 """
     return config_data
