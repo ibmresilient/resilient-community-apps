@@ -53,11 +53,6 @@ class FunctionComponent(AppFunctionComponent):
         if response.status_code == 200:
             LOG.debug(response.text)
             results = response.json()
-
+            yield FunctionResult(results)
         else:
-            LOG.warn("Got response status {0} from Shadow Server".format(response.status_code))
-
-
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-
-        yield FunctionResult(results)
+          yield FunctionResult({}, success=False, reason="Received response status {0}".format(response.status_code))
