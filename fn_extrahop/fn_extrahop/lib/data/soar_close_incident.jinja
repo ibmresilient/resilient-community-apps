@@ -2,9 +2,5 @@
   {# JINJA template for closing a SOAR incident from an ExtraHop detection. #}
   "plan_status": "C",
   "resolution_id": "{{ resolution | soar_substitute('{"None": "Unresolved", "no_action_taken": "Not an Issue", "action_taken": "Resolved"}') }}",
-  "resolution_summary": "Closed by ExtraHop, Detection resolution = {{ resolution }}",
-  {# add additional fields based on your 'on close' field requirements #}
-  "properties": {
-    "extrahop_detection_updated": "True"
-  }
+  "resolution_summary": "Closed by ExtraHop, Detection resolution = {{ resolution }}"
 }
