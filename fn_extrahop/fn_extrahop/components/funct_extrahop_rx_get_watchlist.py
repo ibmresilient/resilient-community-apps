@@ -31,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Set params dict:
         params = {}
-        params = set_params(fn_inputs, params, "extrahop_")
+        params = set_params(fn_inputs, params)
 
         # Call 3rd party API :
         rx_cli = RxClient(self.opts, self.options)

@@ -45,9 +45,12 @@ class FunctionComponent(AppFunctionComponent):
             if not hasattr(fn_inputs, i):
                 raise ValueError("Missing function parameter '{}'.".format(i))
 
-        # Set params dict for extrahop_ parameters:
+        # Set params dict:
         params = {}
-        params = set_params(fn_inputs, params, "extrahop_")
+        params.update({"incident_id": fn_inputs.incident_id})
+
+        # Set params dict for extrahop_ parameters:
+        params = set_params(fn_inputs, params)
 
         # Set params dict for soar_inc_ parameters:
         params = set_params(fn_inputs, params, "soar_inc_", 2)

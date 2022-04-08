@@ -8,15 +8,17 @@ from urllib.parse import urljoin
 from fn_extrahop.lib.rx_client import RxClient
 
 LOG = logging.getLogger(__name__)
-
 # URL fragment to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
-
 # List of fields to check to determine if an update is required.
 UPDATEABLE_FIELDS = [
     "update_time", "end_time", "risk_score",
     "status", "ticket_id", "assignee"
 ]
+# Default prefix for function parameters
+F_PREFIX = "extrahop_"
+
+
 class AppCommon():
     """ Class to support interaction with the 3rd party endpoints for poller.
     """
@@ -127,7 +129,7 @@ def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
 
     Args:
         fn_inputs [namedtuple]: Function inputs
-        params [dict]: Function parameters diect for 3rd party api
+        params [dict]: Function parameters dict for 3rd party api
         f_prefix [string]: Function parameter prefix
         split_index [integer]: Index to split prefix
 
@@ -136,12 +138,13 @@ def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
     """
     params = params if params else {}
     index = split_index if split_index else 1
+    f_prefix = f_prefix if f_prefix else F_PREFIX
 
-    for k, v in fn_inputs._asdict().items():
-        if f_prefix:
-            # Strip off prefix from input parameter value before adding to params.
-            params.update({k.split('_', index)[index]: v})
-        else:
-            params.update({k: v})
+    # Convert f_inputs named tuple to a dict and filter for prefix value
+    f_inputs_as_dict = {k: v for k, v in fn_inputs._asdict().items() if k.startswith(f_prefix)}
+
+    for k, v in f_inputs_as_dict.items():
+        # Strip off prefix from input parameter value before adding to params.
+        params.update({k.split('_', index)[index]: v})
 
     return params
