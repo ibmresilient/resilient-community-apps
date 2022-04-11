@@ -1,3 +1,210 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "microsoft_security_graph_alert_id": {
+          "type": "string"
+        },
+        "microsoft_security_graph_alert_data": {
+          "type": "string"
+        }
+      }
+    },
+    "run_time": {
+      "type": "number"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "azureTenantId": {
+          "type": "string"
+        },
+        "azureSubscriptionId": {
+          "type": "string"
+        },
+        "riskScore": {},
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "activityGroupName": {},
+        "assignedTo": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "closedDateTime": {},
+        "comments": {
+          "type": "array"
+        },
+        "confidence": {},
+        "createdDateTime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "detectionIds": {
+          "type": "array"
+        },
+        "eventDateTime": {
+          "type": "string"
+        },
+        "feedback": {},
+        "incidentIds": {
+          "type": "array"
+        },
+        "lastEventDateTime": {},
+        "lastModifiedDateTime": {
+          "type": "string"
+        },
+        "recommendedActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severity": {
+          "type": "string"
+        },
+        "sourceMaterials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "CustomProperties": {
+          "type": "string"
+        },
+        "vendorInformation": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "providerVersion": {},
+            "subProvider": {
+              "type": "string"
+            },
+            "vendor": {
+              "type": "string"
+            }
+          }
+        },
+        "alertDetections": {
+          "type": "array"
+        },
+        "cloudAppStates": {
+          "type": "array"
+        },
+        "fileStates": {
+          "type": "array"
+        },
+        "hostStates": {
+          "type": "array"
+        },
+        "historyStates": {
+          "type": "array"
+        },
+        "investigationSecurityStates": {
+          "type": "array"
+        },
+        "malwareStates": {
+          "type": "array"
+        },
+        "messageSecurityStates": {
+          "type": "array"
+        },
+        "networkConnections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "applicationName": {},
+              "destinationAddress": {},
+              "destinationDomain": {},
+              "destinationLocation": {},
+              "destinationPort": {
+                "type": "string"
+              },
+              "destinationUrl": {},
+              "direction": {},
+              "domainRegisteredDateTime": {},
+              "localDnsName": {},
+              "natDestinationAddress": {},
+              "natDestinationPort": {},
+              "natSourceAddress": {},
+              "natSourcePort": {},
+              "protocol": {
+                "type": "string"
+              },
+              "riskScore": {},
+              "sourceAddress": {
+                "type": "string"
+              },
+              "sourceLocation": {
+                "type": "string"
+              },
+              "sourcePort": {},
+              "status": {},
+              "urlParameters": {}
+            }
+          }
+        },
+        "processes": {
+          "type": "array"
+        },
+        "registryKeyStates": {
+          "type": "array"
+        },
+        "securityResources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resource": {
+                "type": "string"
+              },
+              "resourceType": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "triggers": {
+          "type": "array"
+        },
+        "userStates": {
+          "type": "array"
+        },
+        "uriClickSecurityStates": {
+          "type": "array"
+        },
+        "vulnerabilityStates": {
+          "type": "array"
+        }
+      }
+    },
+    "success": {
+      "type": "boolean"
+    }
+  }
 }

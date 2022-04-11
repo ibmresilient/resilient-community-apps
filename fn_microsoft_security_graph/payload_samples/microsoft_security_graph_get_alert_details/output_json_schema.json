@@ -1,3 +1,205 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "microsoft_security_graph_alert_id": {
+          "type": "string"
+        }
+      }
+    },
+    "run_time": {
+      "type": "number"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "azureTenantId": {
+          "type": "string"
+        },
+        "azureSubscriptionId": {},
+        "riskScore": {},
+        "tags": {
+          "type": "array"
+        },
+        "activityGroupName": {},
+        "assignedTo": {},
+        "category": {
+          "type": "string"
+        },
+        "closedDateTime": {},
+        "comments": {
+          "type": "array"
+        },
+        "confidence": {},
+        "createdDateTime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "detectionIds": {
+          "type": "array"
+        },
+        "eventDateTime": {
+          "type": "string"
+        },
+        "feedback": {},
+        "incidentIds": {
+          "type": "array"
+        },
+        "lastEventDateTime": {},
+        "lastModifiedDateTime": {
+          "type": "string"
+        },
+        "recommendedActions": {
+          "type": "array"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "sourceMaterials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "vendorInformation": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "providerVersion": {},
+            "subProvider": {
+              "type": "string"
+            },
+            "vendor": {
+              "type": "string"
+            }
+          }
+        },
+        "alertDetections": {
+          "type": "array"
+        },
+        "cloudAppStates": {
+          "type": "array"
+        },
+        "fileStates": {
+          "type": "array"
+        },
+        "hostStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fqdn": {
+                "type": "string"
+              },
+              "isAzureAdJoined": {
+                "type": "boolean"
+              },
+              "isAzureAdRegistered": {},
+              "isHybridAzureDomainJoined": {},
+              "netBiosName": {},
+              "os": {
+                "type": "string"
+              },
+              "privateIpAddress": {
+                "type": "string"
+              },
+              "publicIpAddress": {
+                "type": "string"
+              },
+              "riskScore": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "historyStates": {
+          "type": "array"
+        },
+        "investigationSecurityStates": {
+          "type": "array"
+        },
+        "malwareStates": {
+          "type": "array"
+        },
+        "messageSecurityStates": {
+          "type": "array"
+        },
+        "networkConnections": {
+          "type": "array"
+        },
+        "processes": {
+          "type": "array"
+        },
+        "registryKeyStates": {
+          "type": "array"
+        },
+        "securityResources": {
+          "type": "array"
+        },
+        "triggers": {
+          "type": "array"
+        },
+        "userStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "aadUserId": {
+                "type": "string"
+              },
+              "accountName": {
+                "type": "string"
+              },
+              "domainName": {
+                "type": "string"
+              },
+              "emailRole": {
+                "type": "string"
+              },
+              "isVpn": {},
+              "logonDateTime": {},
+              "logonId": {},
+              "logonIp": {},
+              "logonLocation": {},
+              "logonType": {},
+              "onPremisesSecurityIdentifier": {},
+              "riskScore": {},
+              "userAccountType": {},
+              "userPrincipalName": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "uriClickSecurityStates": {
+          "type": "array"
+        },
+        "vulnerabilityStates": {
+          "type": "array"
+        }
+      }
+    },
+    "success": {
+      "type": "boolean"
+    }
+  }
 }

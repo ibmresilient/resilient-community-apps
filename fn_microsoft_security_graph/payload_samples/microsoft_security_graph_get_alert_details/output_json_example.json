@@ -1,3 +1,88 @@
 {
-    
+  "inputs": {
+    "microsoft_security_graph_alert_id": "da637727919412649530_-883158861"
+  },
+  "run_time": 0.7184658050537109,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity",
+    "id": "da637727919412649530_-883158861",
+    "azureTenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
+    "azureSubscriptionId": null,
+    "riskScore": null,
+    "tags": [],
+    "activityGroupName": null,
+    "assignedTo": null,
+    "category": "Discovery",
+    "closedDateTime": null,
+    "comments": [],
+    "confidence": null,
+    "createdDateTime": "2021-11-18T00:25:41.2649763Z",
+    "description": "A known tool or technique was used to gather information on this device. Attackers might be trying to gather information about the target device or network for later attacks.",
+    "detectionIds": [],
+    "eventDateTime": "2021-11-18T00:21:12.910332Z",
+    "feedback": null,
+    "incidentIds": [],
+    "lastEventDateTime": null,
+    "lastModifiedDateTime": "2021-11-18T00:25:41.7333333Z",
+    "recommendedActions": [],
+    "severity": "low",
+    "sourceMaterials": [
+      "https://securitycenter.microsoft.com/alert/da637727919412649530_-883158861",
+      "https://security.microsoft.com/incidents/37"
+    ],
+    "status": "newAlert",
+    "title": "Suspicious Process Discovery",
+    "vendorInformation": {
+      "provider": "Microsoft Defender ATP",
+      "providerVersion": null,
+      "subProvider": "MicrosoftDefenderATP",
+      "vendor": "Microsoft"
+    },
+    "alertDetections": [],
+    "cloudAppStates": [],
+    "fileStates": [],
+    "hostStates": [
+      {
+        "fqdn": "windowsvmos",
+        "isAzureAdJoined": false,
+        "isAzureAdRegistered": null,
+        "isHybridAzureDomainJoined": null,
+        "netBiosName": null,
+        "os": "Windows10",
+        "privateIpAddress": "1.0.0.0",
+        "publicIpAddress": "2.2.2.2",
+        "riskScore": "Medium"
+      }
+    ],
+    "historyStates": [],
+    "investigationSecurityStates": [],
+    "malwareStates": [],
+    "messageSecurityStates": [],
+    "networkConnections": [],
+    "processes": [],
+    "registryKeyStates": [],
+    "securityResources": [],
+    "triggers": [],
+    "userStates": [
+      {
+        "aadUserId": "ae973ab4-1b5e-48b2-bf2f-c3bf1b3634a2",
+        "accountName": "example",
+        "domainName": "WindowsVMOS",
+        "emailRole": "unknown",
+        "isVpn": null,
+        "logonDateTime": null,
+        "logonId": null,
+        "logonIp": null,
+        "logonLocation": null,
+        "logonType": null,
+        "onPremisesSecurityIdentifier": null,
+        "riskScore": null,
+        "userAccountType": null,
+        "userPrincipalName": "example@example.microsoft.com"
+      }
+    ],
+    "uriClickSecurityStates": [],
+    "vulnerabilityStates": []
+  },
+  "success": true
 }
