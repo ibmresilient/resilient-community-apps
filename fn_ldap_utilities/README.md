@@ -1,6 +1,6 @@
-# Resilient LDAP Utilities v1.1.0
+# SOAR LDAP Utilities v1.1.0
 
-This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
+This Python Package is comprised of various SOAR Functions that allow you to manage users in your Directory Service, without having to leave the UI of SOAR
 
 See [Detailed PDF Documentation here](./docs/Resilient%20Integration%20LDAP%20Utility%20Function.pdf)
 
@@ -16,7 +16,7 @@ See [Detailed PDF Documentation here](./docs/Resilient%20Integration%20LDAP%20Ut
       ldap_is_active_directory=True
     ```
 
-The LDAP search requires **4 input parameters**. The parameters are setup from a Resilient systems workflow on the Resilient console.
+The LDAP search requires **4 input parameters**. The parameters are setup from a SOAR systems workflow on the SOAR console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script. The %param% token
 will be replaced by the actual inputs.param value at time of execution.
 
@@ -26,7 +26,7 @@ inputs.ldap_search_filter = "(&(objectClass=person)(uid=%ldap_param%))"
 inputs.ldap_search_attributes = "cn,sn,mail,telephoneNumber"
 inputs.ldap_search_param =  artifact.value
 ```
-The results returned to Resilient will be in JSON format and will consist of a list of
+The results returned to SOAR will be in JSON format and will consist of a list of
 entries where each entry has a 'dn' entry and a set of attributes
 ```
 {

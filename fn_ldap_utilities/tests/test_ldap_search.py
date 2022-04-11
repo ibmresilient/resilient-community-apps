@@ -22,7 +22,7 @@ MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/search_specific/"
 # Read the default configuration-data section from the package
 config_data = get_mock_config_data()
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 # Create a fake LDAP server from the info and schema json files
 fake_server = Server.from_definition('my_fake_server', MOCK_DATA_PATH + 'mock_server_info.json', MOCK_DATA_PATH + 'mock_server_schema.json')

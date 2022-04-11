@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
-""" Resilient functions component to execute queries against an LDAP server """
+""" SOAR functions component to execute queries against an LDAP server """
 
-import logging
+from logging import getLogger
 import json
 import re
+from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ldap3 import ALL_ATTRIBUTES
 from ldap3.core.exceptions import LDAPSocketOpenError
 from ldap3.utils.conv import escape_filter_chars
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 
+LOG = getLogger(__name__)
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'ldap_utilities_search'
+    """Component that implements SOAR function 'ldap_utilities_search'
 
       The Function does an LDAP lookup and takes the following parameters:
           ldap_search_base , ldap_search_filter, ldap_search_attributes and ldap_param
@@ -46,7 +48,7 @@ class FunctionComponent(ResilientComponent):
     """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_ldap_utilities", {})
 
@@ -57,23 +59,21 @@ class FunctionComponent(ResilientComponent):
 
     @function("ldap_utilities_search")
     def _ldap_utilities_search_function(self, event, *args, **kwargs):
-        """Resilient Function: entry point """
-
-        log = logging.getLogger(__name__)
+        """SOAR Function: entry point """
 
         def replace_ldap_param(ldap_param_value=None, ldap_search_filter=""):
 
             re_pattern = "%ldap_param%"
 
-            # if "ldap_param" in ldap_search_filter:
-
             if re.search(re_pattern, ldap_search_filter) is not None:
                 if ldap_param_value is None:
-                    raise ValueError("The LDAP Search Filter '{0}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.".format(ldap_search_filter))
+                    raise ValueError("The LDAP Search Filter '{}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.".format(
+                        ldap_search_filter))
 
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    ldap_search_filter = re.sub(re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
+                    ldap_search_filter = re.sub(
+                        re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
             return ldap_search_filter
 
@@ -84,11 +84,14 @@ class FunctionComponent(ResilientComponent):
             helper = LDAPUtilitiesHelper(self.options)
             yield StatusMessage("Appconfig Settings OK")
 
+            # Validate that required fields are given
+            validate_fields(["ldap_search_base", "ldap_search_filter"], kwargs)
+
             # Get function inputs
-            input_ldap_search_base = helper.get_function_input(kwargs, "ldap_search_base") # text (required)
-            input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter"))  # textarea (required)
-            input_ldap_search_attributes = helper.get_function_input(kwargs, "ldap_search_attributes", optional=True)  # text (optional)
-            input_ldap_search_param = helper.get_function_input(kwargs, "ldap_search_param", optional=True)  # text (optional)
+            input_ldap_search_base = kwargs.get("ldap_search_base") # text (required)
+            input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter")) # textarea (required)
+            input_ldap_search_attributes = kwargs.get("ldap_search_attributes") # text (optional)
+            input_ldap_search_param = kwargs.get("ldap_search_param") # text (optional)
 
             # If search_attributes is not specified, request that ALL_ATTRIBUTES for the DN be returned
             if input_ldap_search_attributes is None:
@@ -96,13 +99,17 @@ class FunctionComponent(ResilientComponent):
             else:
                 input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
 
+            t = [str(attr) for attr in "*".split(',')]
+
             if input_ldap_search_param is not None:
                 # Escape special chars from the search_param
-                input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
+                input_ldap_search_param = escape_filter_chars(
+                    input_ldap_search_param)
 
             yield StatusMessage("Function Inputs OK")
 
-            input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
+            input_ldap_search_filter = replace_ldap_param(
+                input_ldap_search_param, input_ldap_search_filter)
 
             # Instansiate LDAP Server and Connection
             conn = helper.get_ldap_connection()
@@ -117,7 +124,6 @@ class FunctionComponent(ResilientComponent):
                 # Inform user
                 yield StatusMessage("Connected to {0}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
-                res = None
                 entries = []
                 success = False
 
@@ -129,9 +135,8 @@ class FunctionComponent(ResilientComponent):
                     attributes=input_ldap_search_attributes)
 
                 if res and len(conn.entries) > 0:
-
                     entries = json.loads(conn.response_to_json())["entries"]
-                    log.info("Result contains %s entries", len(entries))
+                    LOG.info("Result contains %s entries", len(entries))
 
                     # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.
                     for entry in entries:
@@ -142,14 +147,11 @@ class FunctionComponent(ResilientComponent):
 
                 else:
                     yield StatusMessage("No entries found")
-                    success = False
 
             except LDAPSocketOpenError:
-                success = False
                 raise ValueError("Invalid Search Base", input_ldap_search_base)
 
             except Exception as err:
-                success = False
                 raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
 
             finally:
@@ -161,8 +163,8 @@ class FunctionComponent(ResilientComponent):
                 "entries": entries
             }
 
-            log.info("Completed")
-            log.debug("RESULTS: %s", results)
+            LOG.info("Completed")
+            LOG.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the return value.
             yield FunctionResult(results)

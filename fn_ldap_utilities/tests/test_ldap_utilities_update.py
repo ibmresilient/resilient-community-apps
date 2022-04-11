@@ -15,7 +15,7 @@ FUNCTION_NAME = "ldap_utilities_update"
 # Read the default configuration-data section from the package
 config_data = get_mock_config_data()
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_ldap_utilities_update_function(circuits, function_params, timeout=10):
