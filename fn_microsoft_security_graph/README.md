@@ -43,7 +43,7 @@
 -->
 **SOAR Components for 'fn_microsoft_security_graph'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 SOAR Components for 'fn_microsoft_security_graph'
 
@@ -130,7 +130,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Microsoft Security Graph Alert Search
 Search across Microsoft Security Graph for alerts which match the corresponding search filters.
 
- ![screenshot: fn-microsoft-security-graph-alert-search ](./doc/screenshots/fn-microsoft-security-graph-alert-search.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-alert-search ](./doc/screenshots/fn-microsoft-security-graph-alert-search.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -222,7 +222,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - Microsoft Security Graph Get Alert Details
 Get the details of an alert from the Microsoft Security Graph API.
 
- ![screenshot: fn-microsoft-security-graph-get-alert-details ](./doc/screenshots/fn-microsoft-security-graph-get-alert-details.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-get-alert-details ](./doc/screenshots/fn-microsoft-security-graph-get-alert-details.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -378,7 +378,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 ## Function - Microsoft Security Graph Update Alert
 Update an alert in the Microsoft Security Graph.
 
- ![screenshot: fn-microsoft-security-graph-update-alert ](./doc/screenshots/fn-microsoft-security-graph-update-alert.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-update-alert ](./doc/screenshots/fn-microsoft-security-graph-update-alert.png)
 
 <details><summary>Inputs:</summary>
 <p>
