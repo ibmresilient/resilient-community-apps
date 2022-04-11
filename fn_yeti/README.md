@@ -134,7 +134,7 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **apikey** | Yes | `<apikey_value>` | Found on the Yeti platform|
 | **password** | Yes | `` | Can be created in the Yeti Platform|
-| **urlbase** | Yes | `<yeti_instance_url>` | URL for your Yeti Instance |
+| **url** | Yes | `http://localhost:8080/api` | URL for your Yeti Instance |
 | **username** | Yes | `<yeti_instance_username` | Found on Yeti Platform|
 
 

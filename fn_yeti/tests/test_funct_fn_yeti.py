@@ -12,7 +12,7 @@ FUNCTION_NAME = "fn_yeti"
 
 # Replace apikey with your apikey for livetest
 config_data = """[fn_yeti]
-urlbase=http://localhost:8080/api
+url=http://localhost:8080/api
 username=yeti
 password=
 apikey=thisisadummykey"""

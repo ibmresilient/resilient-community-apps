@@ -31,7 +31,7 @@ def selftest_function(opts):
     app_configs = opts.get("fn_yeti", {})
 
     try:
-        yeti_client = pyeti.YetiApi(app_configs["urlbase"], (app_configs["username"],
+        yeti_client = pyeti.YetiApi(app_configs["url"], (app_configs["username"],
                                         app_configs["password"]), app_configs["apikey"])
    
         return {"state": "success"}

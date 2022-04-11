@@ -34,14 +34,14 @@ class FunctionComponent(AppFunctionComponent):
 
         LOG.info("Querying YETI")
 
-        self.yeti_client = pyeti.YetiApi(self.app_configs.urlbase, (self.app_configs.username,
+        self.yeti_client = pyeti.YetiApi(self.app_configs.url, (self.app_configs.username,
                                         self.app_configs.password), self.app_configs.apikey)
 
         artifact_type = fn_inputs.yeti_artifact_type
         artifact_value = fn_inputs.yeti_artifact_value
 
         validate_fields([
-            {"name": "urlbase", "placeholder": "<yeti_instance_url>"},
+            {"name": "url", "placeholder": "<yeti_instance_url>"},
             {"name": "username"},
             {"name": "apikey", "placeholder" : "<apikey_value>"}],
             self.app_configs)

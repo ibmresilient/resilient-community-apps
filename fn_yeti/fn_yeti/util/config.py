@@ -10,7 +10,7 @@ def config_section_data():
     """
 
     config_data = u"""[fn_yeti]
-urlbase=<yeti_instance_url>
+url=<yeti_instance_url> # ex. http://localhost:8080/api
 username=<yeti_instance_username> 
 password=
 apikey=<apikey_value>
