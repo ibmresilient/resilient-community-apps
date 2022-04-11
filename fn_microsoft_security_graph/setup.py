@@ -24,7 +24,7 @@ setup(
     license='MIT',
     author='IBM SOAR',
     url = 'https://ibm.com/mysupport',
-    description="SOAR Components for 'fn_microsoft_security_graph'",
+    description="Sync alerts from MS Security Graph with IBM SOAR",
     long_description="""The package contains a polling component and 3 functions.
                     The poller queries for alerts to be brought into the SOAR platform as new incidents, 
                     while the functions allow SOAR users to search the graph, get alert details and update alerts.""",
