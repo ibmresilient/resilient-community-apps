@@ -52,7 +52,7 @@ inputs.microsoft_security_graph_alert_search_query = search
 alerts = results.content.value
 note = "Microsoft Security Graph Alert Search<br>There are <b>{}</b> alerts based on the artifact of value <b>{}</b>.".format(str(len(alerts)), artifact.value)
 
-if len(alerts):
+if alerts:
   note = note + "<br><b>Alert ids:</b>"
   for alert in alerts:
     note = note + "<br>- {}".format(alert.id)
