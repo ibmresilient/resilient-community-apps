@@ -80,6 +80,7 @@ fn_secureworks_ctp
 fn_sentinelone
 fn_sep
 fn_service_now
+fn_shadowserver
 fn_shodan
 fn_slack
 fn_splunk_integration
