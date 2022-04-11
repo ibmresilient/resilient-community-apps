@@ -23,13 +23,14 @@ setup(
     version='1.2.0',
     license='MIT',
     author='IBM SOAR',
-    author_email='',
     url = 'https://ibm.com/mysupport',
-    description="SOAR Components for 'fn_microsoft_security_graph'",
-    long_description="SOAR Components for 'fn_microsoft_security_graph'",
+    description="Sync alerts from MS Security Graph with IBM SOAR",
+    long_description="""The package contains a polling component and 3 functions.
+                    The poller queries for alerts to be brought into the SOAR platform as new incidents, 
+                    while the functions allow SOAR users to search the graph, get alert details and update alerts.""",
     install_requires=[
-        'resilient_circuits>=35.0.0',
-        'resilient-lib>=35.0.0'
+        'resilient_circuits>=40.0.0',
+        'resilient-lib>=40.0.0'
     ],
     packages=find_packages(),
     python_requires='>=3',

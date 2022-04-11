@@ -43,7 +43,7 @@
 -->
 **SOAR Components for 'fn_microsoft_security_graph'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 SOAR Components for 'fn_microsoft_security_graph'
 
@@ -69,7 +69,7 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `41.0.6783`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=35.0.0`.
+* Integration server is running `resilient_circuits>=40.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -99,10 +99,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=35.0.0
-* resilient_circuits>=35.0.0
+* resilient_circuits>=40.0.0
 
 
 ## Installation
@@ -131,7 +130,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Microsoft Security Graph Alert Search
 Search across Microsoft Security Graph for alerts which match the corresponding search filters.
 
- ![screenshot: fn-microsoft-security-graph-alert-search ](./doc/screenshots/fn-microsoft-security-graph-alert-search.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-alert-search ](./doc/screenshots/fn-microsoft-security-graph-alert-search.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -208,7 +207,7 @@ inputs.microsoft_security_graph_alert_search_query = search
 alerts = results.content.value
 note = "Microsoft Security Graph Alert Search<br>There are <b>{}</b> alerts based on the artifact of value <b>{}</b>.".format(str(len(alerts)), artifact.value)
 
-if len(alerts) > 0:
+if alerts:
   note = note + "<br><b>Alert ids:</b>"
   for alert in alerts:
     note = note + "<br>- {}".format(alert.id)
@@ -223,7 +222,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - Microsoft Security Graph Get Alert Details
 Get the details of an alert from the Microsoft Security Graph API.
 
- ![screenshot: fn-microsoft-security-graph-get-alert-details ](./doc/screenshots/fn-microsoft-security-graph-get-alert-details.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-get-alert-details ](./doc/screenshots/fn-microsoft-security-graph-get-alert-details.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -379,7 +378,7 @@ workflow.addProperty('convert_json_to_rich_text', json_note)
 ## Function - Microsoft Security Graph Update Alert
 Update an alert in the Microsoft Security Graph.
 
- ![screenshot: fn-microsoft-security-graph-update-alert ](./doc/screenshots/fn-microsoft-security-graph-update-alert.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-microsoft-security-graph-update-alert ](./doc/screenshots/fn-microsoft-security-graph-update-alert.png)
 
 <details><summary>Inputs:</summary>
 <p>
