@@ -81,63 +81,69 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
 # Processing
-def main():
-    note_text = u''
 
-    if CONTENT:
-        dets = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if dets:
-            for det in dets:
-                newrow = incident.addRow(DATA_TABLE)
-                newrow.query_execution_date = QUERY_EXECUTION_DATE
-                for f1 in DATA_TBL_FIELDS:
-                    f2 = f1
-                    if f1.startswith("det_"):
-                      f2 = f1.split('_', 1)[1]
-                    if det[f2] is None or isinstance(det[f2], long):
-                        newrow[f1] = det[f2]
-                    elif isinstance(det[f1], list):
-                        if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                            obj_cnt = 0
-                            tbl = u''
-                            for i in det[f2]:
-                                if not obj_cnt:
-                                    tbl += u'<div><hr class="solid"></div>'
-                                for k, v in i.items():
-                                    if k == "legacy_ids":
-                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                                    elif k == "url":
-                                        tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
-                                            .format(k, v, i["id"])
-                                    else:
-                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+note_text = u''
+
+if CONTENT:
+    dets = CONTENT.result
+    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    if dets:
+        for det in dets:
+            newrow = incident.addRow(DATA_TABLE)
+            newrow.query_execution_date = QUERY_EXECUTION_DATE
+            for f1 in DATA_TBL_FIELDS:
+                f2 = f1
+                if f1.startswith("det_"):
+                  f2 = f1.split('_', 1)[1]
+                if det[f2] is None or isinstance(det[f2], long):
+                    newrow[f1] = det[f2]
+                elif isinstance(det[f1], list):
+                    if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                        obj_cnt = 0
+                        tbl = u''
+                        for i in det[f2]:
+                            if not obj_cnt:
                                 tbl += u'<div><hr class="solid"></div>'
-                                obj_cnt += 1
-                            newrow[f1] = tbl
-                        else:
-                            newrow[f1] = "{}".format(", ".join(det[f2]))
-                    elif isinstance(det[f2], (bool, dict)):
-                        if f1 in ["properties"]:
-                            tbl = u''
-                            for k, v in det[f2].items():
-                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            newrow[f1] = tbl
-                        else:
-                            newrow[f1] = str(det[f2])
+                            for k, v in i.items():
+                                if k == "legacy_ids":
+                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
+                                elif k == "url":
+                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
+                                        .format(k, v, i["id"])
+                                else:
+                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                            tbl += u'<div><hr class="solid"></div>'
+                            obj_cnt += 1
+                        newrow[f1] = tbl
                     else:
-                        newrow[f1] = "{}".format(det[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+                        newrow[f1] = "{}".format(", ".join(det[f2]))
+                elif isinstance(det[f2], (bool, dict)):
+                    if f1 in ["properties"]:
+                        suspect_ip = False
+                        tbl = u''
+                        for i, j in det[f2].items():
+                            if i == "suspicious_ipaddr":
+                                artifact_type = "IP Address"
+                                type = "Suspicious IP Addresses"
+                                value = j["value"]
+                                tbl += u'<div><b>{0}:'.format(type)
+                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
+                            else:
+                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
+                        newrow[f1] = tbl
+                    else:
+                        newrow[f1] = str(det[f2])
+                else:
+                    newrow[f1] = "{}".format(det[f2])
+        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
-    else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+else:
+    note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                 u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+        .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
-
-main()
+incident.addNote(helper.createRichText(note_text))
 
 ```
 

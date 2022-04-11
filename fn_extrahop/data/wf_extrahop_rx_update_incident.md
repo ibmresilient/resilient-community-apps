@@ -35,6 +35,14 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
 
+def addArtifact(artifact_type, artifact_value, description):
+    """Add new artifacts to the incident.
+
+    :param artifact_type: The type of the artifact.
+    :param artifact_value: - The value of the artifact.
+    :param description: - the description of the artifact.
+    """
+    incident.addArtifact(artifact_type, artifact_value, description)
 
 # Processing
 def main():
@@ -66,7 +74,7 @@ def main():
                                 if k == "legacy_ids":
                                     tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
                                 elif k == "url":
-                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
+                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
                                         .format(k, v, i["id"])
                                 else:
                                     tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
@@ -77,23 +85,31 @@ def main():
                         newrow[f1] = "{}".format(", ".join(det[f2]))
                 elif isinstance(det[f2], (bool, dict)):
                     if f1 in ["properties"]:
-
                         tbl = u''
-                        for k, v in det[f2].items():
-                            tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                        for i, j in det[f2].items():
+                            if i == "suspicious_ipaddr":
+                                artifact_type = "IP Address"
+                                type = "Suspicious IP Addresses"
+                                value = j["value"]
+                                for ip in value:
+                                    addArtifact(artifact_type, ip,
+                                                "Suspicious IP address found by ExtraHop.")
+                                tbl += u'<div><b>{0}:'.format(type)
+                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
+                            else:
+                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
                         newrow[f1] = tbl
                     else:
                         newrow[f1] = str(det[f2])
                 else:
                     newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
-
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
                      u" with parameters <b>{3}</b>." \
             .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-    
+
     incident.addNote(helper.createRichText(note_text))
 
 
@@ -116,12 +132,7 @@ main()
 
 ### Pre-Processing Script
 ```python
-get_tags_content = workflow.properties.get_detections_result.content
-det = get_tags_content["result"]
-participants = det[participants]
-for p in participants:
-    if p["role"] == "victim":
-        pass
+None
 ```
 
 ### Post-Processing Script
@@ -136,7 +147,8 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
 DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "devs_id", "extrahop_id", "activity"]
+                   "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time", 
+                   "last_seen_time"]
 
 def process_devs(dev):
     # Process a device result.
@@ -152,16 +164,33 @@ def process_devs(dev):
             newrow[f1] = "{}".format(", ".join(dev[f2]))
         elif isinstance(dev[f2], bool):
             newrow[f1] = str(dev[f2])
+        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
+            newrow[f1] = long(dev[f2])
         else:
             newrow[f1] = "{}".format(dev[f2])
 
+
+def get_dev_ids():
+    # Get participant dev ids    
+    dev_ids = []
+    get_devices_content = workflow.properties.get_detections_result.content
+    devs = get_devices_content["result"]
+    participants = devs["participants"]
+    for p in participants:
+        if p["object_type"] == "device":
+            dev_ids.append(p["object_id"])
+    return dev_ids
+
+
 # Processing
 def main():
+    participant_dev_ids = get_dev_ids()
     note_text = u''
     if CONTENT:
-        devs = CONTENT.result
+        devs = [d for d in CONTENT.result if d["id"] in participant_dev_ids]
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join(
+            "{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
             if isinstance(devs, list):
                 for dev in devs:
@@ -177,8 +206,8 @@ def main():
 
     incident.addNote(helper.createRichText(note_text))
 
-main()
 
+main()
 ```
 
 ---
