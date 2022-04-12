@@ -65,6 +65,13 @@ def main():
                     newrow[f1] = det[f2]
                 elif isinstance(det[f1], list):
                     if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                        if f1 == "participants":
+                            for p in det[f2]:
+                                if p["object_type"] == "ipaddr":
+                                    artifact_type = "IP Address"
+                                    addArtifact(artifact_type, p["object_value"],
+                                                "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
+                                                .format(det["id"], p["role"]))
                         obj_cnt = 0
                         tbl = u''
                         for i in det[f2]:
@@ -92,8 +99,7 @@ def main():
                                 type = "Suspicious IP Addresses"
                                 value = j["value"]
                                 for ip in value:
-                                    addArtifact(artifact_type, ip,
-                                                "Suspicious IP address found by ExtraHop.")
+                                    addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
                                 tbl += u'<div><b>{0}:'.format(type)
                                 tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
                             else:
