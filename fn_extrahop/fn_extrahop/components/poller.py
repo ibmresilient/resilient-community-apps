@@ -194,21 +194,23 @@ class PollerComponent(ResilientComponent):
                 soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
 
                 # if case does not exist, create a new one if detection isn't closed.
-                if not soar_case and not is_entity_closed(entity):
-                    # create the SOAR case
-                    soar_create_payload = make_payload_from_template(
-                                                        self.soar_create_case_template,
-                                                        CREATE_INCIDENT_TEMPLATE,
-                                                        entity
-                                                    )
-                    create_soar_case = self.soar_common.create_soar_case(
-                                                        soar_create_payload
-                                                    )
 
-                    soar_case_id = create_soar_case['id'] # get newly created case_id
+                if not soar_case:
+                    if not is_entity_closed(entity):
+                        # create the SOAR case
+                        soar_create_payload = make_payload_from_template(
+                                                            self.soar_create_case_template,
+                                                            CREATE_INCIDENT_TEMPLATE,
+                                                            entity
+                                                        )
+                        create_soar_case = self.soar_common.create_soar_case(
+                                                            soar_create_payload
+                                                        )
 
-                    cases_insert += 1
-                    LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)
+                        soar_case_id = create_soar_case['id'] # get newly created case_id
+
+                        cases_insert += 1
+                        LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)
                 else:
                     soar_case_id = soar_case['id']
 
