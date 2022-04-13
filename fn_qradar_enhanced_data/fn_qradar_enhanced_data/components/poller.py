@@ -8,7 +8,7 @@ from threading import Thread
 from logging import getLogger
 from datetime import datetime, timedelta
 from resilient_lib import IntegrationError
-from resilient_circuits import ResilientComponent
+from resilient_circuits import ResilientComponent, StatusMessage
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
@@ -51,6 +51,7 @@ class PollerComponent(ResilientComponent):
         LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
         self.last_poller_time = datetime.now() - timedelta(minutes=int(global_settings.get('polling_lookback', 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
+        yield StatusMessage("Poller started.")
 
         return True
 
@@ -75,6 +76,7 @@ class PollerComponent(ResilientComponent):
             raise IntegrationError(error_msg)
 
         self.process_case_list(case_list)
+        yield StatusMessage("Poller Complete")
 
     def process_case_list(self, case_list):
         """
@@ -107,10 +109,8 @@ class PollerComponent(ResilientComponent):
                 if id_list.index(id) != len(id_list)-1:
                     filters = "{} or ".format(filters)
 
-            # Get configuration for QRadar server specified
-            options = get_server_settings(self.opts, server)
             # Create connection to QRadar server
-            qradar_client = get_qradar_client(self.opts, options)
+            qradar_client = get_qradar_client(self.opts, get_server_settings(self.opts, server))
 
             auth_info = AuthInfo.get_authInfo()
             # Create url to get all offenses in SOAR from the given QRadar server
@@ -131,9 +131,9 @@ class PollerComponent(ResilientComponent):
                     case_id = case_dict['case_id']
                     case_lastPersistedTime = case_dict['case_lastPersistedTime']
                     LOG.debug("QRadar last persisted time: {}".format(
-                        datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M"%S')))
+                        datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')))
                     LOG.debug("SOAR Incident last updated time: {}".format(
-                        datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M"%S')))
+                        datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')))
                     if offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
@@ -161,3 +161,4 @@ class PollerComponent(ResilientComponent):
                     raise IntegrationError(str(response))
 
                 LOG.info("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
+                yield StatusMessage("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
