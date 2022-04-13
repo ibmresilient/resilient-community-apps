@@ -94,7 +94,7 @@ class PollerComponent(ResilientComponent):
             # Add the case_id and case_lastPersistedTime fields to the qradar_id dictionary
             # that is inside of the QRadar servers dictionary
             if qradar_id not in case_server:
-                case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers']}
+                case_server[qradar_id] = { "case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers'] }
         # :End: QRadar servers dictionary
         LOG.debug("Dictionary of QRadar servers with cases on SOAR: {}".format(str(case_server_dict)))
 
@@ -118,6 +118,7 @@ class PollerComponent(ResilientComponent):
             # Makes GET call to QRadar server using api
             response = auth_info.make_call("GET", url)
             offenses_update_list = response.json()
+            LOG.debug("QRadar returned macthing offenses: {}".format(str(offenses_update_list)))
 
             payload = { "patches": {} }
             updated_cases = []
