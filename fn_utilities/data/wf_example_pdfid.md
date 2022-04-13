@@ -73,10 +73,10 @@ interesting_sections = [
   ]
 
 if not results.isPdf:
-  incident.addNote(helper.createRichText("Not a PDF file: {}".format(attachment.name)))
+  incident.addNote(helper.createRichText(u"Not a PDF file: {}".format(attachment.name)))
 else:
   # In this example we just write them to a note in the incident
-  note_data = ["PDFiD report for {} ({}):".format(attachment.name, results.header)]
+  note_data = [u"PDFiD report for {} ({}):".format(attachment.name, results.header)]
 
   for section in interesting_sections:
     value = results.get(section)
