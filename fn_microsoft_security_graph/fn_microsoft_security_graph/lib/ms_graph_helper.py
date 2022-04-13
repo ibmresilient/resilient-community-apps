@@ -12,7 +12,7 @@ class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, scope, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, scope=DEFAULT_SCOPE, proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
@@ -49,7 +49,7 @@ def connect_MSGraph(opts, reload=False):
         return MSGraphHelper(options.get("tenant_id"),
                              options.get("client_id"),
                              options.get("client_secret"),
-                             options.get("scope"))
+                             options.get("scope", DEFAULT_SCOPE))
     else:
         # Validate required fields in app.config are set
         validate_fields(["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"], options)
