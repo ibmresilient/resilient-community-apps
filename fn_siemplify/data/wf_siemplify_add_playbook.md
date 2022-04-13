@@ -26,7 +26,10 @@ inputs.siemplify_run_playbook_automatically = rule.properties.siemplify_run_play
 
 ### Post-Processing Script
 ```python
-None
+if results.success:
+  incident.addNote("Siemplify Add Playbook: '{}' created".format(rule.properties.siemplify_playbook_name))
+else:
+  incident.addNote("Siemplify Add Playbook: '{}' failed: ".format(rule.properties.siemplify_playbook_name, results.reason))
 ```
 
 ---

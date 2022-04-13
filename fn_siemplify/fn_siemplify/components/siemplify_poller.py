@@ -14,13 +14,14 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon
 from resilient import get_client
 from fn_siemplify.lib.jinja_common import JinjaEnvironment
-from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
+from fn_siemplify.lib.soar_common import SOARCommon, eval_mapping
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, build_siemplify_case_url, PACKAGE_NAME
 
 TICKET_ID_FIELDNAME = "simplify_case_id"
 
-DEFAULT_SOAR_CLOSE_CASE = "templates/soar_close_case.jinja"
+DEFAULT_SOAR_CREATE_CASE = "templates/soar_create_case.jinja"
 DEFAULT_SOAR_UPDATE_CASE = "templates/soar_update_case.jinja"
+DEFAULT_SOAR_CLOSE_CASE = "templates/soar_close_case.jinja"
 
 GMT = "Etc/GMT"
 
@@ -101,11 +102,14 @@ class SiemplifyPollerComponent(ResilientComponent):
 
         LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
         self.timezone = pytz.timezone(options.get("polling_timezone", GMT))
-        self.last_poller_time = self._get_last_poller_date(int(options.get('polling_lookback', 0)))
+        polling_lookback = int(options.get('polling_lookback', 0))
+        LOG.info("Polling lookback: %s", polling_lookback)
+        self.last_poller_time = self._get_last_poller_date(polling_lookback)
         self.polling_filters = eval_mapping(options.get('polling_filters'), "{{ {} }}")
+        self.sync_cases = options.get("sync_new_cases", "both")
 
         rest_client = get_client(opts)
-        self.res_common = ResilientCommon(rest_client)
+        self.soar_common = SOARCommon(rest_client)
 
         # Create api client
         rc = RequestsCommon(opts, options)
@@ -126,20 +130,67 @@ class SiemplifyPollerComponent(ResilientComponent):
         Args:
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
-        # get new siemplify cases to escalate
-        new_case_list, _err_msg = self.siemplify_env.get_new_cases(kwargs.get("last_poller_time"), self.polling_filters)
-        LOG.debug(new_case_list)
+        cases_created = cases_closed = cases_updated = 0
+        # if synchronizing from siemplify to soar, find new cases in siemplify to sync
+        if self.sync_cases in ["siemplify", "both"]:
+            # get new siemplify cases to escalate
+            new_case_list, err_msg = self.siemplify_env.get_new_cases(kwargs.get("last_poller_time"),
+                                                                      self.polling_filters)
+            if err_msg:
+                LOG.error("Error retrieving new cases from Siemplify: %s", str(err_msg))
+            else:
+                LOG.debug(new_case_list)
+                for search_case in new_case_list.get("results", []):
+                    # confirm if case already exists in soar
+                    soar_case = self.soar_common.find_incident(search_case.get("id"))
+                    if soar_case:
+                        continue
+
+                    # get the full case record
+                    case, err_msg = self.siemplify_env.get_case(search_case.get("id"))
+                    if not case:
+                        LOG.error("Failed to get case details for Siemplfy case: %s, %s",
+                                  search_case.get("id"),
+                                  err_msg)
+                        continue
+
+                    # if not case in soar
+                    case['siemplify_case_url'] = build_siemplify_case_url(self.options.get("base_url"), case.get("id"))
+
+                    # if artifacts to create, provide a mapping of the SOAR artifact types
+                    case = self.siemplify_env.translate_artifact_types(case)
+
+                    incident_create_payload = self.jinja_env.make_payload_from_template(
+                                                    self.options.get("soar_create_case_template"),
+                                                    DEFAULT_SOAR_CREATE_CASE,
+                                                    case)
+
+
+                    created_soar_incident = self.soar_common.create_incident(
+                                                                incident_create_payload
+                                                            )
+                    LOG.debug("SOAR case created: %s from Siemplify: %s",
+                              created_soar_incident['id'],
+                              case.get("id"))
+                    cases_created += 1
+
+            LOG.debug("get_new_cases: %s", new_case_list)
+
+        # if not synchronizing from soar to siemplify, exit
+        if self.sync_cases not in ["soar", "both"]:
+            LOG.info("IBM SOAR Cases created: %s", cases_created)
+            return
 
         # get all open siemplify linked incidents
-        soar_incident_list = self.res_common.get_open_siemplify_incidents()
+        soar_incident_list = self.soar_common.get_open_siemplify_incidents()
         if not soar_incident_list:
             LOG.info("IBM SOAR open incidents: 0")
             return
 
         # get the list of siemplify cases linked to SOAR to check for closed statuses
         siemplify_case_list, _error_msg = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
-        LOG.debug(siemplify_case_list)
-        cases_closed = cases_updated = 0
+        LOG.debug("get_open_siemplify_incidents: %s", siemplify_case_list)
+
         for case in siemplify_case_list['results']:
             case_id = case['id']
 
@@ -150,14 +201,14 @@ class SiemplifyPollerComponent(ResilientComponent):
                                                     self.options.get("soar_close_case_template"),
                                                     DEFAULT_SOAR_CLOSE_CASE,
                                                     case)
-                _close_resilient_incident = self.res_common.update_incident(
+                _close_soar_incident = self.soar_common.update_incident(
                                                     soar_inc_id,
                                                     incident_close_payload
                                                 )
                 cases_closed += 1
                 msg = "Closed SOAR incident {} from Siemplify case {}".format(soar_inc_id, case_id)
                 LOG.info(msg)
-                self.res_common.create_incident_comment(soar_inc_id, None, msg)
+                self.soar_common.create_incident_comment(soar_inc_id, None, msg)
             else:
                 # check if the case has been modified
                 if self.siemplify_env.is_case_modified(case_id, kwargs.get("last_poller_time")):
@@ -171,19 +222,19 @@ class SiemplifyPollerComponent(ResilientComponent):
                     LOG.debug("Case changed: %s. Updating SOAR incident: %s", case_id, soar_incident_list[case_id])
                     cases_updated += 1
                     # Update description, tags, priority, assignee, stage, important
-                    _update_resilient_incident = self.res_common.update_incident(
+                    _update_soar_incident = self.soar_common.update_incident(
                                                     soar_incident_list[case_id],
                                                     incident_update_payload
                                                 )
 
                     # SYNC Comments
-                    new_comments = self.res_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
+                    new_comments = self.soar_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
                     LOG.info(new_comments)
                     for comment in new_comments:
-                        self.res_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])
+                        self.soar_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])
 
-        LOG.info("IBM SOAR open cases: %s, Cases closed: %s, Cases Updated: %s",
-                 len(soar_incident_list), cases_closed, cases_updated)
+        LOG.info("IBM SOAR Cases open: %s, Cases created: %s, Cases closed: %s, Cases Updated: %s",
+                 len(soar_incident_list), cases_created, cases_closed, cases_updated)
 
     def _get_last_poller_date(self, polling_lookback):
         """get the last poller datetime based on a lookback value

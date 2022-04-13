@@ -5,7 +5,7 @@
 
 import base64
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
-from fn_siemplify.lib.resilient_common import ResilientCommon
+from fn_siemplify.lib.soar_common import SOARCommon
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -45,7 +45,7 @@ class FunctionComponent(AppFunctionComponent):
             fn_inputs._asdict())
 
         # get the contents of the attachment
-        rest_common = ResilientCommon(self.rest_client())
+        rest_common = SOARCommon(self.rest_client())
         file_name, file_content = rest_common.get_incident_attachment(fn_inputs.siemplify_incident_id,
                                                                    None,
                                                                    None,

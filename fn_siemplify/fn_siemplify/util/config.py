@@ -14,6 +14,8 @@ base_url=<changeme>
 api_key=<changeme>
 # false|/path/to/certificate
 cafile=
+# sync_new_cases from 'soar', from 'siemplify' or 'both'
+sync_new_cases=both
 # set polling_interval=0 to disable. Otherwise set in seconds
 polling_interval=120
 # polling_lookback in minutes to look back first time poller starts
@@ -31,6 +33,7 @@ default_case_environment=Default Environment
 #playbook_mappings=
 # override default Siemplify and SOAR templates files as necessary
 siemplify_create_case_template=
+soar_create_case_template=
 soar_close_case_template=
 soar_update_case_template=
 # use artifact_lookup_types to specify a JSON file to override the default settings

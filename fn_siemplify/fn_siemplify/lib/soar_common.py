@@ -24,7 +24,7 @@ TYPES_URI = "/types"
 
 CP4S_PREFIX = "cases-rest."
 
-class ResilientCommon():
+class SOARCommon():
 
     def __init__(self, rest_client):
         self.rest_client = rest_client
@@ -57,7 +57,7 @@ class ResilientCommon():
 
 
     def find_incident(self, siemplify_case_id):
-        """Find a Resilient incident which contains a custom field associated with a Siemplify
+        """Find a SOAR incident which contains a custom field associated with a Siemplify
              incident
 
         Args:
@@ -72,7 +72,7 @@ class ResilientCommon():
                     {
                         "field_name": "properties.{0}".format(SIEMPLIFY_CASE_ID),
                         "method": "equals",
-                        "value": "{}".format(siemplify_case_id)
+                        "value": siemplify_case_id
                     }
                 ]
             }],
@@ -98,13 +98,13 @@ class ResilientCommon():
 
     def create_incident(self, incident_payload):
         """
-        Create a new Resilient incident by rendering a jinja2 template
+        Create a new SOAR incident by rendering a jinja2 template
         :param incident_payload: fields to use for creating a SOAR incident (json object)
 
-        :return: Resilient incident
+        :return: SOAR incident
         """
         try:
-            # Post incident to Resilient
+            # Post incident to SOAR
             incident = self.rest_client.post("/incidents", incident_payload)
             return incident
         except Exception as err:
@@ -122,7 +122,7 @@ class ResilientCommon():
             IntegrationError: [catch any errors]
 
         Returns:
-            [dict]: [returned Resilient data]
+            [dict]: [returned SOAR data]
         """
 
         try:
@@ -134,9 +134,9 @@ class ResilientCommon():
 
     def update_incident(self, incident_id, incident_payload):
         """
-        Update a Resilient incident by rendering a jinja2 template
+        Update a SOAR incident by rendering a jinja2 template
         :param incident_payload: inciednt fields to update (json object)
-        :return: Resilient incident
+        :return: SOAR incident
         """
 
         try:
@@ -327,7 +327,7 @@ class ResilientCommon():
         except Exception as err:
             raise IntegrationError(err)
 
-    def filter_resilient_comments(self, incident_id, siemplify_comments, soar_header=SOAR_HEADER, \
+    def filter_soar_comments(self, incident_id, siemplify_comments, soar_header=SOAR_HEADER, \
                                  sync_header=SIEMPLIFY_HEADER):
         """
             need to avoid creating same comments over and over
@@ -335,7 +335,7 @@ class ResilientCommon():
               and remove those comments which have already sync
 
         Args:
-            incident_id ([str]): [resilient incident id]
+            incident_id ([str]): [SOAR incident id]
             siemplify_comments ([list]): [description]
             soar_header ([str]): [title added to SOAR comment ]
             sync_header ([str]): [title of Siemplify comment already sync'd]
@@ -395,7 +395,7 @@ def b_to_s(value):
 def eval_mapping(value, wrapper=None):
     """
     Args:
-            value ([str]): [resilient incident id]
+            value ([str]): [SOAR incident id]
             wrapper ([str]): [values such as '[{}]' or '{{ {} }}']
         Returns:
             mapping ([list or dict]): converted data
@@ -416,7 +416,7 @@ def eval_mapping(value, wrapper=None):
 
     return None
 
-def make_case_linkback_url(resilient_opts, incident_id):
+def make_case_linkback_url(soar_opts, incident_id):
     """create the appropriate url back to the soar case
 
     Args:
@@ -426,11 +426,11 @@ def make_case_linkback_url(resilient_opts, incident_id):
     Returns:
         str: url back to SOAR case
     """
-    if resilient_opts:
-        host = resilient_opts.get('host')
+    if soar_opts:
+        host = soar_opts.get('host')
         if host:
             if "https://" not in host:
-                host = "https://{}:{}".format(host, resilient_opts.get('port', "443"))
+                host = "https://{}:{}".format(host, soar_opts.get('port', "443"))
 
             if CP4S_PREFIX in host:
                 host = host.replace(CP4S_PREFIX, "")
@@ -438,5 +438,5 @@ def make_case_linkback_url(resilient_opts, incident_id):
             else:
                 url = "/".join([host, "#incidents", str(incident_id)])
 
-            return "{}?orgid={}".format(url, resilient_opts.get("org"))
+            return "{}?orgid={}".format(url, soar_opts.get("org"))
     return None

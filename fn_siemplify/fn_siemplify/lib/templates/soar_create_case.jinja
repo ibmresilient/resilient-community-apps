@@ -1,0 +1,68 @@
+{%- macro artifact_description(fields) -%}
+        {% set desc = [] %}
+        {% for field in fields %}
+            {% for item in field.items %}
+                {{ desc.append("{{ item.name }}: {{ item.value }}") }}
+            {% endfor %}
+        {% endfor %}
+        "description": {
+          "format": "text",
+          "content": "{{ desc | join("\n") }}"
+        }
+{%- endmacro -%}
+{
+  "name": "Siemplify Case - {{ title | replace('"', '\\"') }}",
+  "discovered_date": {{ creationTimeUnixTimeInMs  }},
+  "start_date": {{ creationTimeUnixTimeInMs }},
+  {% if description %}
+    "description": "{{ description | replace('"', '\\"') }}",
+  {% endif %}
+  "properties": {
+    {% if tags %}
+      "siemplify_tags": "{{ tags|map(attribute='tag')|list|join(', ') }}",
+    {% endif %}
+    "siemplify_assignee": "{{ assignedUserName }}",
+    "siemplify_stage": "{{ stage }}",
+    "siemplify_is_important": {{ isImportant|tojson }},
+    "siemplify_priority": {{ priority }},
+    "siemplify_case_id": {{ id }},
+    "siemplify_alert_id": "{{ alerts | map(attribute='identifier') | first }}",
+    "siemplify_environment": "{{ environment }}",
+    "siemplify_case_link": "<a target='blank' href='{{ siemplify_case_url }}'>Siemplify Case {{ id }}</a>"
+  },
+  "comments": [
+  {% for insight in insights %}
+    {% if "IBM SOAR" not in insight.title %}
+      {
+        "text": {
+          "format": "text",
+          "content": "Siemplify Insight: {{ insight.title }}\n{{ insight.content | replace('"', '\\"') | replace("\n", "\\n") }}"
+        }
+      }
+      {% if not loop.last %},{% endif %}
+    {% endif %}
+  {% endfor %}
+  ],
+  "artifacts": [
+  {% for entity in entities %}
+    {
+        "type": {
+            "name": "{{ entity.soar_artifact_type }}"
+        },
+        "value": "{{ entity.identifier | replace('\\', '\\\\') }}",
+        {%- set desc = [] -%}
+        {%- for field in entity.fields -%}
+            {%- for item in field['items'] -%}
+                {%- set msg = "{}: {}".format(item.name, item.value) -%}
+                {%- set desc = desc.append(msg) -%}
+            {%- endfor -%}
+        {%- endfor -%}
+        "description": {
+          "format": "text",
+          "content": "{{ desc | join("\\n") }}"
+        }
+    }
+    {% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
+}

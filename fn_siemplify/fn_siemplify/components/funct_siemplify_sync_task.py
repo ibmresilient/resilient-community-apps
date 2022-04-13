@@ -3,7 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_siemplify.lib.resilient_common import ResilientCommon
+from fn_siemplify.lib.soar_common import SOARCommon
 from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
@@ -48,7 +48,7 @@ class FunctionComponent(AppFunctionComponent):
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
 
         # get the contents of the
-        res_common = ResilientCommon(self.rest_client())
+        res_common = SOARCommon(self.rest_client())
         task_info, siemplify_task_id = res_common.get_incident_task(fn_inputs.siemplify_soar_task_id)
 
         results, error_msg = siemplify_env.sync_task(fn_inputs.siemplify_case_id, fn_inputs.siemplify_task_assignee,

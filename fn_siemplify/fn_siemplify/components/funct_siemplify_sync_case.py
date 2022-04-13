@@ -5,8 +5,9 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, clean_html
-from fn_siemplify.lib.resilient_common import ResilientCommon, eval_mapping, make_case_linkback_url
-from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS
+from fn_siemplify.lib.soar_common import SOARCommon, eval_mapping, make_case_linkback_url
+from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBMSOAR_TAGS, \
+            build_siemplify_case_url
 
 FN_NAME = "siemplify_sync_case"
 SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
@@ -34,6 +35,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        if self.opts.get("sync_new_cases", "both").lower() not in ["soar", "both"]:
+            FunctionResult({}, success=False, reason="sync_new_cases disabled")
+
         inputs = fn_inputs._asdict()
         app_settings = self.app_configs._asdict()
 
@@ -48,7 +52,7 @@ class FunctionComponent(AppFunctionComponent):
         # set the default if the default isn't set
         inputs['siemplify_environment'] = inputs['siemplify_environment'] if inputs.get('siemplify_environment') else self.app_configs.default_environment
 
-        soar_env = ResilientCommon(self.rest_client())
+        soar_env = SOARCommon(self.rest_client())
 
         # collect the incident information
         incident_info = soar_env.get_incident(inputs['siemplify_incident_id'])
@@ -82,7 +86,7 @@ class FunctionComponent(AppFunctionComponent):
                 inputs['siemplify_case_id'] = results
                 inputs['siemplify_alert_id'] = case_results['alerts'][0]['identifier']
 
-                case_results['siemplify_case_url'] = SIEMPLIFY_CASE_URL.format(self.app_configs.base_url, results)
+                case_results['siemplify_case_url'] = build_siemplify_case_url(self.app_configs.base_url, results)
                 results = case_results
 
                 inputs['siemplify_comment'] = '<div><a href="{}" target="blank">SOAR CASE {}</a></div>'.format(incident_info['soar_linkback_url'],

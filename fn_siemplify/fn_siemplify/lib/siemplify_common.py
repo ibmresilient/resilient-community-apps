@@ -5,6 +5,7 @@
 import logging
 import json
 import os
+from datetime import datetime
 from .jinja_common import JinjaEnvironment
 from resilient_lib import clean_html, IntegrationError, readable_datetime
 from simplejson.errors import JSONDecodeError
@@ -49,6 +50,15 @@ IBMSOAR_TAGS = ['IBMSOAR']
 
 GENERICENTITY = "GENERICENTITY"
 
+SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
+
+HASH_LOOKUP = {
+    31: "Malware MD5 Hash",
+    32: "Malware MD5 Hash",
+    40: "Malware SHA-1 Hash",
+    64: "Malware SHA-256 Hash"
+}
+
 # lookup table between SOAR artifact types and Siemplify entity types
 ARTIFACT_TYPE_LOOKUPS_FILE = "artifact_type_lookup.json"
 
@@ -65,7 +75,8 @@ class SiemplifyCommon():
         self.rc = rc
         self.verify = False if self.options.get('cafile').lower() == "false" else self.options.get('cafile')
 
-        self.ARTIFACT_TYPE_LOOKUPS = self._init_artifact_type_lookup(self.options.get('artifact_type_lookup'))
+        self.SOAR_ARTIFACT_TYPE_LOOKUPS, self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS = \
+                self._init_artifact_type_lookup(self.options.get('artifact_type_lookup'))
 
     def _init_artifact_type_lookup(self, override_file):
         # Initialize the artifact type lookup file. Use an optional customer specified file
@@ -81,11 +92,13 @@ class SiemplifyCommon():
 
         try:
             with open(lookup_file, 'r') as f:
-                return json.load(f)
+                lookup = json.load(f)
         except JSONDecodeError as err:
             LOG.error("Unable to use artifact type lookup file: %s. Using default mapping", str(err))
             with open(default_lookup, 'r') as f:
-                return json.load(f)
+                lookup = json.load(f)
+
+        return lookup.get("SOAR_TO_SIEMPLIFY", {}), lookup.get("SIEMPLIFY_TO_SOAR", {})
 
     def sync_case(self, incident_info):
         # perform an update to an existing incident
@@ -128,7 +141,7 @@ class SiemplifyCommon():
     def get_new_cases(self, last_poller_time, filters):
         payload = {
             "startTime": readable_datetime(last_poller_time),
-            "endTime": readable_datetime(last_poller_time+30000),
+            "endTime": readable_datetime(datetime.now().timestamp()*1000),
             "timeRangeFilter": 0,
             "isCaseClosed": "false"
         }
@@ -189,7 +202,7 @@ class SiemplifyCommon():
         """
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
-            "entityType": self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY),
+            "entityType": self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY),
             "scope": 2,
             "environments": inputs['siemplify_environment']
         }
@@ -224,7 +237,7 @@ class SiemplifyCommon():
             [dict]: [Results of the API call]
         """
         category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
-            self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY)
+            self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY)
 
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
@@ -281,12 +294,13 @@ class SiemplifyCommon():
         Returns:
             [dict]: [Results of API call]
         """
-        inputs['siemplify_entity_type'] = self.ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'))
+        inputs['siemplify_entity_type'] = self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'))
         if not inputs['siemplify_entity_type']:
-            LOG.warning("No matching entity type for Artifact type: %s, value: %s",
+            err_msg = "No matching entity type for Artifact type: {}, value: {}".format(
                         inputs['siemplify_artifact_type'],
                         inputs['siemplify_artifact_value'])
-            return None
+            LOG.warning(err_msg)
+            return {}, err_msg
 
         payload = self.jina_env.make_payload_from_template(None, SIEMPLIFY_CREATE_ENTITY_TEMPLATE, inputs)
 
@@ -385,8 +399,6 @@ class SiemplifyCommon():
             "currentModificationTimeUnixTimeInMs": str(modified_ts)
         }
 
-        LOG.debug("is_case_modified payload: %s", payload)
-
         result, err_msg = self._make_call("POST", CASES_MODIFIED_URL, payload)
         return result if not err_msg else False
 
@@ -412,6 +424,26 @@ class SiemplifyCommon():
         except JSONDecodeError:
             return response.text, error_msg
 
+    def translate_artifact_types(self, siemplify_case):
+        """translate siemplify artifact types to SOAR
+
+        Args:
+            siemplify_case (dict): payload from Siemplify
+        Returns:
+            (dict): Updated Siemplify case with SOAR artifact types
+        """
+        for entity in siemplify_case.get("entities", {}):
+            entity['soar_artifact_type'] = self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(
+                entity.get("entityType"),
+                self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get("DEFAULT"))
+            if entity['soar_artifact_type'] == "<hash>":
+                # determine the correct hash length for the type
+                entity['soar_artifact_type'] = HASH_LOOKUP.get(len(entity['identifier']), "String")
+
+        return siemplify_case
+
+def build_siemplify_case_url(base_url, case_id):
+    return SIEMPLIFY_CASE_URL.format(base_url, case_id)
 
 def _make_headers(api_key):
     # return headers used for Siemply API calls
