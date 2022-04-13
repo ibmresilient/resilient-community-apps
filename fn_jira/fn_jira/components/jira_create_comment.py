@@ -43,11 +43,6 @@ class FunctionComponent(ResilientComponent):
             log.info("Validating app configs")
             app_configs = helper.validate_app_configs(self.options)
 
-            # Get + validate the function parameters:
-            log.info("Validating function inputs")
-            fn_inputs = validate_fields([helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, 
-                helper.JIRA_COMMENT_FUNCT_INPUT_NAME, helper.INCIDENT_ID_FUNCT_INPUT_NAME], kwargs)
-
             # if this note is coming from a task
             if kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME):
 
@@ -62,6 +57,11 @@ class FunctionComponent(ResilientComponent):
                     return
                 else:
                     log.info("Found Jira ID %s for task %s in datatable", fn_inputs[helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME], fn_inputs[helper.JIRA_ISSUE_LINK])
+
+            # Get + validate the function parameters:
+            log.info("Validating function inputs")
+            fn_inputs = validate_fields([helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, 
+                helper.JIRA_COMMENT_FUNCT_INPUT_NAME, helper.INCIDENT_ID_FUNCT_INPUT_NAME], kwargs)
 
             log.info("Validated function inputs: %s", fn_inputs)
 
