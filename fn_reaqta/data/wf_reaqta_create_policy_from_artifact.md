@@ -25,15 +25,23 @@ inputs.reaqta_policy_included_groups = rule.properties.reaqta_policy_included_gr
 inputs.reaqta_policy_excluded_groups = rule.properties.reaqta_policy_excluded_groups
 inputs.reaqta_policy_enabled = rule.properties.reaqta_policy_enabled
 inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
-inputs.reaqta_hives = rule.properties.reaqta_hives if rule.properties.reaqta_hives else incident.properties.reaqta_hive 
+inputs.reaqta_hives = rule.properties.hive_labels if rule.properties.hive_labels else incident.properties.reaqta_hive 
 ```
 
 ### Post-Processing Script
 ```python
 if results.success:
   policies = []
+  policies.append("<br>Policy Parameters:<br>Hives: {}<br>Title: {}<br>Description: {}<br>Included Groups: {}<br>Excluded Groups: {}<br>Enabled: {}<br>Block when Triggered: {}<br>".\
+                         format(rule.properties.hive_labels if rule.properties.hive_labels else incident.properties.reaqta_hive,
+                                rule.properties.reaqta_policy_title,
+                                rule.properties.reaqta_policy_description,
+                                rule.properties.reaqta_policy_included_groups,
+                                rule.properties.reaqta_policy_excluded_groups,
+                                rule.properties.reaqta_policy_enabled,
+                                rule.properties.reaqta_policy_block_when_triggered))
   for policy in results.content:
-    policies.append( '<a href="{0}" target="blank">{0}</a>'.format(policy.get("policy_url")))
+    policies.append( 'Hive: {} <a href="{0}" target="blank">{0}</a>'.format(policy.get("policy_hive"), policy.get("policy_url")))
   incident.addNote(helper.createRichText("ReaQta Create Policies successful:<br>{}".format("<br>".join(policies))))
 else:
   incident.addNote(helper.createRichText("ReaQta Create Policy failed: {}".format(results.reason)))

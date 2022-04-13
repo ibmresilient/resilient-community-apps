@@ -68,6 +68,7 @@ class FunctionComponent(AppFunctionComponent):
                     # create the url for the policy created
                     result['policy_url'] = app_common.make_linkback_url(result.get('id'),
                                                                         linkback_url=POLICY_DETAILS)
+                    result['policy_hive'] = hive
                     results.append(result)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

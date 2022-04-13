@@ -45,6 +45,7 @@ if not results.success:
   incident.addNote("ReaQta: Get Alert Information failed: {}".format(results.reason))
 else:
   content = results.content
+  incident.severity_code = "Low" if content.get('severity') in ['safe', 'low'] else content.get('severity', 'low').title()
   incident.properties.reaqta_endpoint_id = content.get("endpointId")
   incident.properties.reaqta_trigger_condition = TRIGGERCONDITION_LOOKUP.get(content.get("triggerCondition"))
   incident.properties.reaqta_impact = content.get("impact")

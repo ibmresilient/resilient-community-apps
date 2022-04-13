@@ -43,11 +43,9 @@ class FunctionComponent(AppFunctionComponent):
             err_msg = "Hive section not found: {}".format(fn_inputs.reaqta_hive)
         else:
             app_common = AppCommon(self.rc, hive_settings)
-            results = app_common.kill_process(
-                                            fn_inputs.reaqta_hive,
-                                            fn_inputs.reaqta_endpoint_id,
-                                            fn_inputs.reaqta_process_pid,
-                                            fn_inputs.reaqta_starttime)
+            results = app_common.kill_process(fn_inputs.reaqta_endpoint_id,
+                                              fn_inputs.reaqta_process_pid,
+                                              fn_inputs.reaqta_starttime)
             err_msg = None
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
