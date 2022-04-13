@@ -43,25 +43,25 @@ class FunctionComponent(ResilientComponent):
             log.info("Validating app configs")
             app_configs = helper.validate_app_configs(self.options)
 
-            # Get + validate the function parameters:
-            log.info("Validating function inputs")
-            fn_inputs = validate_fields([helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, 
-                helper.JIRA_COMMENT_FUNCT_INPUT_NAME, helper.INCIDENT_ID_FUNCT_INPUT_NAME], kwargs)
-
             # if this note is coming from a task
             if kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME):
 
                 # check if the task is synced to Jira already using datatable row with associated task_id
                 # if so, fn_inputs will be updated with the jira id and jira url
                 if not helper.validate_task_id_for_jira_issue_id(self.rest_client(), app_configs,
-                        kwargs.get(helper.INCIDENT_ID_FUNCT_INPUT_NAME), kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME), fn_inputs):
+                        kwargs.get(helper.INCIDENT_ID_FUNCT_INPUT_NAME), kwargs.get(helper.TASK_ID_FUNCT_INPUT_NAME), kwargs):
                     # gracefully exit if task_id wasn't found in datatable -- i.e. task isn't liked to Jira yet
                     log.debug("Skipped function %s for task note because task was not synced to Jira.", FUNCT_NAME)
 
                     yield FunctionResult({}, success=False)
                     return
                 else:
-                    log.info("Found Jira ID %s for task %s in datatable", fn_inputs[helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME], fn_inputs[helper.JIRA_ISSUE_LINK])
+                    log.info("Found Jira ID %s for task %s in datatable", kwargs.get(helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, ""), kwargs.get(helper.JIRA_ISSUE_LINK, ""))
+
+            # Get + validate the function parameters:
+            log.info("Validating function inputs")
+            fn_inputs = validate_fields([helper.JIRA_ISSUE_ID_FUNCT_INPUT_NAME, 
+                helper.JIRA_COMMENT_FUNCT_INPUT_NAME, helper.INCIDENT_ID_FUNCT_INPUT_NAME], kwargs)
 
             log.info("Validated function inputs: %s", fn_inputs)
 

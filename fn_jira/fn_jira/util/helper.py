@@ -62,7 +62,8 @@ def get_jira_client(app_configs, rc):
     :return: Instance to jira client
     :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
     """
-    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[0])
+    # set default to "BASIC" as that is what most users should be using
+    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[1])
     server = app_configs.get("url")
     verify = app_configs.get("verify_cert")
     proxies = rc.get_proxies()
@@ -163,7 +164,7 @@ def extract_images(html):
 
     # sub in Jira image syntax for each image tag
     for alt in alts:
-        html = re.subn(r'<img.*?>', "!{0}!".format(alt), html, count=1)[0]
+        html = re.subn(r'<img.*?>', " !{0}! ".format(alt), html, count=1)[0]
 
     # zip together the src and alts and return that as well as the adjusted html
     return tuple(zip(srcs, alts)), html
@@ -172,10 +173,13 @@ def extract_images(html):
 def read_img(res_client, img_url):
     """Reads a url image to a filestream"""
 
-    if img_url.startswith("/rest"):
-        return res_client.get(img_url.replace("/rest", ""), is_uri_absolute=True, get_response_object=True).content
-    else:
+    if img_url.startswith("http"):
+        # external resource
         return requests.get(img_url, headers={"User-agent": "SOAR Apphost"}).content
+    else:
+        # resource from the platform
+        resource_prefix = "/rest"
+        return res_client.get(img_url[img_url.index(resource_prefix)+len(resource_prefix):], is_uri_absolute=True, get_response_object=True).content
 
 
 def format_dict(dict_to_format):

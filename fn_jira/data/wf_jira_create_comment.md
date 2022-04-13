@@ -20,35 +20,23 @@
 ```python
 # Example: Jira Create Comment pre-processing script
 
-inputs.jira_issue_id = incident.properties.jira_issue_id
-inputs.jira_comment = note.text.content
-inputs.incident_id = incident.id
-
 # If this is a task note, get the taskId
 if note.type == 'task':
   # Set the task_id
   inputs.task_id = task.id
+  inputs.jira_issue_id = "" # leave empty for tasks
+else:
+  inputs.jira_issue_id = incident.properties.jira_issue_id
+
+inputs.jira_comment = note.text.content
+inputs.incident_id = incident.id
+
 
 ```
 
 ### Post-Processing Script
 ```python
-# Example: Jira Create Comment post-process script
-
-# Import Date
-from java.util import Date
-
-if results.success:
-  # Get the current time
-  dt_now = Date()
-  
-  if results.get("content", {}).get("jira_url"):
-    jira_url = results.get("content", {}).get("jira_url")
-  else:
-    jira_url = incident.properties.jira_url.content
-  
-  # Prepend message and time to the note
-  note.text = u"<b>Sent to the Jira issue {0} at {1}</b><br>{2}".format(jira_url, dt_now, unicode(note.text.content))
+None
 ```
 
 ---

@@ -50,7 +50,7 @@ def test_format_dict():
 def test_extract_images():
     mock_html = "<div>Text! <img src=\"https://img.com/img.jpg\" alt=\"img.jpg\" /> middle text! <img src=\"https://test.org/my_pic\" alt=\"my_pic\" /> </div>"
     expected_imgs = (("https://img.com/img.jpg", "img.jpg"), ("https://test.org/my_pic", "my_pic"))
-    expected_formatted_html = "<div>Text! !img.jpg! middle text! !my_pic! </div>"
+    expected_formatted_html = "<div>Text!  !img.jpg!  middle text!  !my_pic!  </div>"
 
     assert extract_images(mock_html)[0] == expected_imgs
     assert extract_images(mock_html)[1] == expected_formatted_html
