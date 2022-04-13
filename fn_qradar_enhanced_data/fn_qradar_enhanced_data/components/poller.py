@@ -69,6 +69,7 @@ class PollerComponent(ResilientComponent):
         :return: None
         """
         case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
+        LOG.debug(str(case_list))
 
         if error_msg:
             raise IntegrationError(error_msg)
@@ -95,6 +96,7 @@ class PollerComponent(ResilientComponent):
             if qradar_id not in case_server:
                 case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers']}
         # :End: QRadar servers dictionary
+        LOG.debug(str(case_server_dict))
 
         for server in case_server_dict:
             # Create filter string which contains the filters for the api call
