@@ -113,18 +113,19 @@ def main():
             if len(devs) > 1:
                 note_text += u"ExtraHop Integration: Workflow: <b>{0}</b> : There were too many results <b>{1}</b> returned " \
                     u"while attempting to search for a device to add to the watchlist " \
-                    u"for Resilient function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
+                    u"for Resilient function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             else:
                 workflow.addProperty("device_exists", {})
         else:
             note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> device returned while attempting " \
-                  u"to search for a device to add to the watchlist for Resilient function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
+                  u"to search for a device to add to the watchlist for Resilient function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to search for a device to add to the watchlist for Resilient function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())))
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
 
 main()
 ```
