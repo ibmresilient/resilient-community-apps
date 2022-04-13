@@ -1,4 +1,10 @@
 include README.md
-include fn_ldap_utilities/util/*
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_ldap_utilities/util *
 include fn_ldap_utilities/LICENSE
-include docs/*
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak

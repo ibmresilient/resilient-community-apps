@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from helper import TestingHelper, get_mock_config_data
 from mock import patch
@@ -22,12 +22,12 @@ def call_ldap_utilities_update_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("ldap_utilities_update", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("ldap_utilities_update_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait(
+        "ldap_utilities_update_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestLdapUtilitiesUpdate:
     """ Tests for the ldap_utilities_update function"""
@@ -38,27 +38,27 @@ class TestLdapUtilitiesUpdate:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-    
+
     inputs = {
-      "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
-      "ldap_attribute_name": "givenName",
-      "ldap_attribute_values": "['Lord Farquaad']"
+        "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "ldap_attribute_name": "givenName",
+        "ldap_attribute_values": "['Lord Farquaad']"
     }
 
     outputs = {
-      'attribute_name': 'givenName',
-      'attribute_values': ['Lord Farquaad'],
-      'success': True,
-      'user_dn': 'CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com'
+        'attribute_name': 'givenName',
+        'attribute_values': ['Lord Farquaad'],
+        'success': True,
+        'user_dn': 'CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com'
     }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
-    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results", 
-    [(inputs["ldap_dn"], inputs["ldap_attribute_name"], inputs["ldap_attribute_values"], outputs)])
+    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results",
+                             [(inputs["ldap_dn"], inputs["ldap_attribute_name"], inputs["ldap_attribute_values"], outputs)])
     def test_success(self, circuits_app, ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "ldap_dn": ldap_dn,
             "ldap_attribute_name": ldap_attribute_name,
             "ldap_attribute_values": ldap_attribute_values

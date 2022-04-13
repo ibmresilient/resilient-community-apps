@@ -4,17 +4,18 @@
 """Function implementation"""
 
 from logging import getLogger
+from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
-
-from ldap3 import Server, Connection, ALL, MODIFY_REPLACE
+from ldap3 import MODIFY_REPLACE
 
 LOG = getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'ldap_utilities_set_password"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_ldap_utilities", {})
 
@@ -34,11 +35,13 @@ class FunctionComponent(ResilientComponent):
             helper = LDAPUtilitiesHelper(self.options)
             yield StatusMessage("Appconfig Settings OK")
 
+            # Validate that required fields are given
+            validate_fields(["ldap_dn", "ldap_new_password"], kwargs)
+
             # Get function inputs
-            input_ldap_dn = helper.get_function_input(
-                kwargs, "ldap_dn")  # text (required)
-            input_ldap_new_password = helper.get_function_input(
-                kwargs, "ldap_new_password")  # text (required)
+            input_ldap_dn = kwargs.get("ldap_dn") # text (required)
+            input_ldap_new_password = kwargs.get("ldap_new_password") # text (required)
+
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate LDAP Server and Connection
@@ -49,26 +52,19 @@ class FunctionComponent(ResilientComponent):
                 c.bind()
             except Exception as err:
                 raise ValueError(
-                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
+                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
 
             # Inform user
-            msg = ""
-            if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                msg = "Connected to {0}".format("Active Directory")
-            else:
-                msg = "Connected to {0}".format("LDAP Server")
-            yield StatusMessage(msg)
+            yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
             res = False
 
             try:
                 yield StatusMessage("Attempting to change password")
                 if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                    res = c.extend.microsoft.modify_password(
-                        str(input_ldap_dn), input_ldap_new_password)
+                    res = c.extend.microsoft.modify_password(str(input_ldap_dn), input_ldap_new_password)
                 else:
-                    res = c.modify(input_ldap_dn, {'userPassword': [
-                                   (MODIFY_REPLACE, [input_ldap_new_password])]})
+                    res = c.modify(input_ldap_dn, {'userPassword': [(MODIFY_REPLACE, [input_ldap_new_password])]})
 
             except Exception:
                 raise ValueError(

@@ -5,8 +5,8 @@
 """ SOAR functions component to execute queries against an LDAP server """
 
 from logging import getLogger
-import json
-import re
+from json import loads
+from re import search, sub
 from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ldap3 import ALL_ATTRIBUTES
@@ -15,6 +15,7 @@ from ldap3.utils.conv import escape_filter_chars
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 
 LOG = getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'ldap_utilities_search'
 
@@ -65,14 +66,13 @@ class FunctionComponent(ResilientComponent):
 
             re_pattern = "%ldap_param%"
 
-            if re.search(re_pattern, ldap_search_filter) is not None:
-                if ldap_param_value is None:
+            if search(re_pattern, ldap_search_filter):
+                if not ldap_param_value:
                     raise ValueError("The LDAP Search Filter '{}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.".format(
                         ldap_search_filter))
-
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    ldap_search_filter = re.sub(
+                    ldap_search_filter = sub(
                         re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
             return ldap_search_filter
@@ -90,26 +90,19 @@ class FunctionComponent(ResilientComponent):
             # Get function inputs
             input_ldap_search_base = kwargs.get("ldap_search_base") # text (required)
             input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter")) # textarea (required)
-            input_ldap_search_attributes = kwargs.get("ldap_search_attributes") # text (optional)
+            input_ldap_search_attributes = kwargs.get("ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
             input_ldap_search_param = kwargs.get("ldap_search_param") # text (optional)
 
-            # If search_attributes is not specified, request that ALL_ATTRIBUTES for the DN be returned
-            if input_ldap_search_attributes is None:
-                input_ldap_search_attributes = ALL_ATTRIBUTES
-            else:
+            if input_ldap_search_attributes and input_ldap_search_attributes is not ALL_ATTRIBUTES:
                 input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
 
-            t = [str(attr) for attr in "*".split(',')]
-
-            if input_ldap_search_param is not None:
+            if input_ldap_search_param:
                 # Escape special chars from the search_param
-                input_ldap_search_param = escape_filter_chars(
-                    input_ldap_search_param)
+                input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
 
             yield StatusMessage("Function Inputs OK")
 
-            input_ldap_search_filter = replace_ldap_param(
-                input_ldap_search_param, input_ldap_search_filter)
+            input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
 
             # Instansiate LDAP Server and Connection
             conn = helper.get_ldap_connection()
@@ -118,11 +111,11 @@ class FunctionComponent(ResilientComponent):
                 # Bind to the connection
                 conn.bind()
             except Exception as err:
-                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
+                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
 
             try:
                 # Inform user
-                yield StatusMessage("Connected to {0}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
+                yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
                 entries = []
                 success = False
@@ -135,7 +128,7 @@ class FunctionComponent(ResilientComponent):
                     attributes=input_ldap_search_attributes)
 
                 if res and len(conn.entries) > 0:
-                    entries = json.loads(conn.response_to_json())["entries"]
+                    entries = loads(conn.response_to_json())["entries"]
                     LOG.info("Result contains %s entries", len(entries))
 
                     # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.

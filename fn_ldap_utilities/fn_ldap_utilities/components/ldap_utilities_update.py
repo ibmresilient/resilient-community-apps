@@ -4,6 +4,7 @@
 """Function implementation"""
 
 from logging import getLogger
+from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 from ldap3 import MODIFY_REPLACE
@@ -34,19 +35,18 @@ class FunctionComponent(ResilientComponent):
             helper = LDAPUtilitiesHelper(self.options)
             yield StatusMessage("Appconfig Settings OK")
 
+            # Validate that required fields are given
+            validate_fields(["ldap_dn", "ldap_attribute_name", "ldap_attribute_values"], kwargs)
+
             # Get function inputs
-            input_ldap_dn = helper.get_function_input(
-                kwargs, "ldap_dn")  # text (required)
-            input_ldap_attribute_name = helper.get_function_input(
-                kwargs, "ldap_attribute_name")  # text (required)
-            input_ldap_attribute_values_asString = helper.get_function_input(
-                kwargs, "ldap_attribute_values")  # text (required) [string repersentation of an array]
+            input_ldap_dn = kwargs.get("ldap_dn") # text (required)
+            input_ldap_attribute_name = kwargs.get("ldap_attribute_name") # text (required)
+            input_ldap_attribute_values_asString = kwargs.get("ldap_attribute_values") # text (required) [string repersentation of an array]
             yield StatusMessage("Function Inputs OK")
 
             try:
                 # Try converting input to an array
-                input_ldap_attribute_values = literal_eval(
-                    input_ldap_attribute_values_asString)
+                input_ldap_attribute_values = literal_eval(input_ldap_attribute_values_asString)
             except Exception:
                 raise ValueError(
                     """input_ldap_attribute_values must be a string repersenation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
@@ -58,28 +58,20 @@ class FunctionComponent(ResilientComponent):
                 # Bind to the connection
                 c.bind()
             except Exception as err:
-                raise ValueError(
-                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
+                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
 
             # Inform user
-            msg = ""
-            if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                msg = "Connected to {0}".format("Active Directory")
-            else:
-                msg = "Connected to {0}".format("LDAP Server")
-            yield StatusMessage(msg)
+            yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
             res = False
 
             try:
                 yield StatusMessage("Attempting to update {0}".format(input_ldap_attribute_name))
-                # perform the Modify operation
-                res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [
-                               (MODIFY_REPLACE, input_ldap_attribute_values)]})
+                # Perform the Modify operation
+                res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, input_ldap_attribute_values)]})
 
             except Exception:
-                raise ValueError(
-                    "Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
+                raise ValueError("Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
 
             finally:
                 # Unbind connection

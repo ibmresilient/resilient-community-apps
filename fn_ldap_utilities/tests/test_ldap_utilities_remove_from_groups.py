@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from helper import TestingHelper, get_mock_config_data
 from mock import patch
@@ -18,7 +18,6 @@ config_data = get_mock_config_data()
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
 def call_ldap_utilities_remove_from_groups_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("ldap_utilities_remove_from_groups", function_params)
@@ -28,7 +27,6 @@ def call_ldap_utilities_remove_from_groups_function(circuits, function_params, t
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestLdapUtilitiesRemoveFromGroups:
     """ Tests for the ldap_utilities_remove_from_groups function"""
@@ -57,7 +55,7 @@ class TestLdapUtilitiesRemoveFromGroups:
         (inputs["ldap_multiple_user_dn"], inputs["ldap_multiple_group_dn"], outputs)])
     def test_success(self, circuits_app, ldap_multiple_user_dn, ldap_multiple_group_dn, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "ldap_multiple_user_dn": ldap_multiple_user_dn,
             "ldap_multiple_group_dn": ldap_multiple_group_dn
         }
