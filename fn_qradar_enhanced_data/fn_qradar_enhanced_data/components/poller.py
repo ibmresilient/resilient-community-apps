@@ -131,9 +131,9 @@ class PollerComponent(ResilientComponent):
                     case_id = case_dict['case_id']
                     case_lastPersistedTime = case_dict['case_lastPersistedTime']
                     LOG.debug("QRadar last persisted time: {}".format(
-                        datetime.fromtimestamp(offense_lastPersistedTime).strftime('%m-%d-%Y %H:%M"%S')))
+                        datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M"%S')))
                     LOG.debug("SOAR Incident last updated time: {}".format(
-                        datetime.fromtimestamp(case_lastPersistedTime).strftime('%m-%d-%Y %H:%M"%S')))
+                        datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M"%S')))
                     if offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
