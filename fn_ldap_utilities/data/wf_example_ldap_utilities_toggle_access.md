@@ -21,7 +21,7 @@
 # Set the ldap_search_base and ldap_search_filter
 # using the ldap_param wildcard then get the email
 # address the user you want to toggle access for from the artifact's value
-
+inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_search_base = "dc=example,dc=com"
 inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
 inputs.ldap_search_param =  artifact.value
@@ -49,7 +49,7 @@ inputs.ldap_search_param =  artifact.value
 ```python
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
-
+inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
 ```
 

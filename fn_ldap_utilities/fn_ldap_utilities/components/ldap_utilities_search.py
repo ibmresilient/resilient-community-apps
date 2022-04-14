@@ -12,7 +12,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from ldap3 import ALL_ATTRIBUTES
 from ldap3.core.exceptions import LDAPSocketOpenError
 from ldap3.utils.conv import escape_filter_chars
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
+from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 LOG = getLogger(__name__)
 
@@ -51,12 +52,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_ldap_utilities", {})
+        self.domains_list = get_domains_list(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_ldap_utilities", {})
+        self.domains_list = get_domains_list(opts)
 
     @function("ldap_utilities_search")
     def _ldap_utilities_search_function(self, event, *args, **kwargs):
@@ -80,14 +81,11 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Starting ldap_utilities_search")
 
-            # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(self.options)
-            yield StatusMessage("Appconfig Settings OK")
-
             # Validate that required fields are given
             validate_fields(["ldap_search_base", "ldap_search_filter"], kwargs)
 
             # Get function inputs
+            ldap_domain_name = kwargs.get("ldap_domain_name") # text
             input_ldap_search_base = kwargs.get("ldap_search_base") # text (required)
             input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter")) # textarea (required)
             input_ldap_search_attributes = kwargs.get("ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
@@ -100,12 +98,17 @@ class FunctionComponent(ResilientComponent):
                 # Escape special chars from the search_param
                 input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
 
+            LOG.info("LDAP Domain Name: %s", ldap_domain_name)
             LOG.info("LDAP Search Base: %s", input_ldap_search_base)
             LOG.info("LDAP Search Filter: %s", input_ldap_search_filter)
             LOG.info("LDAP Search Attributes: %s", input_ldap_search_attributes)
             LOG.info("LDAP Search Param: %s", input_ldap_search_param)
 
             yield StatusMessage("Function Inputs OK")
+
+            # Instansiate helper (which gets appconfigs from file)
+            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            yield StatusMessage("Appconfig Settings OK")
 
             input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
 

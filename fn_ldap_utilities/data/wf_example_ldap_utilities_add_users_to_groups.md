@@ -43,6 +43,7 @@ def into_string_list_format(entries):
 
 list_of_users_dn = ['cn=Breda User11,cn=Users,dc=example,dc=com', 'cn=Breda User10,cn=Users,dc=example,dc=com']
 
+inputs.ldap_domain_name = "Domain1"
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
 inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=example,dc=com')

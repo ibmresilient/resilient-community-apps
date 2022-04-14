@@ -19,6 +19,7 @@
 ### Pre-Processing Script
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
+inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_search_base = "dc=example,dc=com"
 inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
 inputs.ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"

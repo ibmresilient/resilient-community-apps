@@ -1,7 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 from logging import getLogger
+from fn_ldap_utilities.util.ldap_utils import PACKAGE_NAME
 from ldap3 import Server, Connection, ALL, NTLM
+import fn_ldap_utilities.util.ldap_utils as ldap_utils 
 
+PACKAGE_NAME = "fn_ldap_utilites"
 LOG = getLogger(__name__)
 
 class LDAPUtilitiesHelper:
@@ -84,3 +87,26 @@ class LDAPUtilitiesHelper:
             if self.LDAP_USER_DN or self.LDAP_USER_NTLM or self.LDAP_PASSWORD:
                 raise ValueError(
                     "'ldap_user_dn', 'ldap_user_ntlm' and 'ldap_password' must be left blank in the app.config file if using ANONYMOUS authentication to your LDAP Server")
+
+def get_domains_list(opts):
+    """
+    Used for initilizing or reloading the options variable
+    :param opts: list of options
+    :return: list of ldap domains
+    """
+    domains_list = {}
+
+    options = opts.get(PACKAGE_NAME, {})
+
+    if options: # If no domains given [fn_ldap_utilities]
+        domain_list = {PACKAGE_NAME}
+    else: # If domains given [fn_ldap_utilities:domain]
+        domains = ldap_utils.LDAPDomains(opts, options)
+        domain_list = domains.get_domain_name_list()
+
+    # Creates a dictionary that is filled with the LDAP domains
+    # and there configurations
+    for domain_name in domain_list:
+        domains_list[domain_name] = opts.get(domain_name, {})
+
+    return domains_list
