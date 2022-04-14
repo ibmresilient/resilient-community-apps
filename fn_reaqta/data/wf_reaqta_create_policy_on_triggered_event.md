@@ -41,7 +41,7 @@ if results.success:
                                 rule.properties.reaqta_policy_enabled,
                                 rule.properties.reaqta_policy_block_when_triggered))
   for policy in results.content:
-    policies.append( '<a href="{0}" target="blank">{0}</a>'.format(policy.get("policy_url")))
+    policies.append('Hive: {0} <a href="{1}" target="blank">{1}</a>'.format(policy.get('policy_hive'), policy.get("policy_url")))
   incident.addNote(helper.createRichText("ReaQta Create Policies successful: {}".format("<br>".join(policies))))
 else:
   incident.addNote(helper.createRichText("ReaQta Create Policy failed: {}".format(results.reason)))
