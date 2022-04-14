@@ -11,7 +11,6 @@ from shutil import rmtree
 from base64 import b64decode
 from logging import getLogger
 
-from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
 from fn_utilities.util.utils_common import b_to_s, s_to_b
 from mailparser import parse_from_bytes, parse_from_file_msg
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
