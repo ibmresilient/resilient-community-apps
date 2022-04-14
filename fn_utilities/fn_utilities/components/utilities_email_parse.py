@@ -10,6 +10,8 @@ from re import compile
 from shutil import rmtree
 from base64 import b64decode
 from logging import getLogger
+
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
 from fn_utilities.util.utils_common import b_to_s, s_to_b
 from mailparser import parse_from_bytes, parse_from_file_msg
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
@@ -22,6 +24,7 @@ RE_BASE64 = compile("^[A-Za-z0-9+/\r\n]+={0,2}$")
 RE_START_BASE64 = compile("\n\n")
 
 LOG = getLogger(__name__)
+PACKAGE_NAME = 'fn_utilities'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'email_message_parts"""
@@ -39,7 +42,7 @@ class FunctionComponent(ResilientComponent):
             fn_inputs = validate_fields(["incident_id"], kwargs)
 
             # Instansiate ResultPayload
-            rp = ResultPayload('fn_utilities', **kwargs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # If its just base64content as input, use parse_from_string
             if fn_inputs.get("base64content"):
