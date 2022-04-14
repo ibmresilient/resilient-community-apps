@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "success": false,
+  "reason": "Raw email in unsupported format. Failed to parse A Test Attachment Name.txt",
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "incident_id": 2102,
+    "attachment_id": 18,
+    "utilities_parse_email_attachments": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-utilities",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 579,
+    "timestamp": "2022-03-24 11:15:41"
+  }
+}

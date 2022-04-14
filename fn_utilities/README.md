@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# Utility Functions for IBM Resilient
+# Utility Functions for IBM SOAR
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -31,13 +31,14 @@
 -->
 ### Release History
 
-| Version | Date | Notes |
-| ------- | ---- | ----- |
+| Version | Date   | Notes |
+| ------- | ------ |:----- |
+| 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
 | 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
-| 2.0.1   | 9/2020 | bug fixes|
+| 2.0.1   | 9/2020 | bug fixes |
 | 2.0.0   | 7/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
-| 1.0.15 | 5/2020 | Bug fixes, App Host Support |
+| 1.0.15  | 5/2020 | Bug fixes, App Host Support |
 | 1.0.14  | 5/2020 | Shell Command support for Remote Linux Execution |
 
 ---
@@ -47,11 +48,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Useful workflow functions for common automation and integration activities in the Resilient platform**
+**Useful workflow functions for common automation and integration activities in the SOAR platform**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient functions simplify development of integrations by wrapping each external activity into an individual workflow component. These components can be easily installed, then used and combined in Resilient workflows. The Resilient platform sends data to the function component that performs an activity then returns the results to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate the security incident response activities
+SOAR functions simplify development of integrations by wrapping each external activity into an individual workflow component. These components can be easily installed, then used and combined in SOAR workflows. The SOAR platform sends data to the function component that performs an activity then returns the results to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate the security incident response activities
 
 ---
 
@@ -59,8 +60,8 @@ Resilient functions simplify development of integrations by wrapping each extern
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.2`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* SOAR platform >= `v42.0`
+* An Integration Server running `resilient_circuits>=41.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
@@ -84,7 +85,7 @@ Resilient functions simplify development of integrations by wrapping each extern
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn_utilities **customizations** into the Resilient platform:
+* Import the fn_utilities **customizations** into the SOAR platform:
   ```
   $ resilient-circuits customize -y -l fn-utilities
   ```
@@ -125,19 +126,19 @@ Resilient functions simplify development of integrations by wrapping each extern
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
-### Resilient Action Status
+### SOAR Action Status
 * When viewing an incident, use the Actions menu to view **Action Status**.
 * By default, pending and errors are displayed.
 * Modify the filter for actions to also show Completed actions.
 * Clicking on an action displays additional information on the progress made or what error occurred.
 
-### Resilient Scripting Log
+### SOAR Scripting Log
 * A separate log file is available to review scripting errors.
 * This is useful when issues occur in the pre-processing or post-processing scripts.
 * The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
-### Resilient Logs
-* By default, Resilient logs are retained at `/usr/share/co3/logs`.
+### SOAR Logs
+* By default, SOAR logs are retained at `/usr/share/co3/logs`.
 * The `client.log` may contain additional information regarding the execution of functions.
 
 ### Resilient-Circuits
@@ -164,4 +165,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_utilities | 1.0.10 | IBM Resilient | http://ibm.biz/resilientcommunity |
+| fn_utilities | 1.0.10 | IBM SOAR | http://ibm.biz/soarcommunity |

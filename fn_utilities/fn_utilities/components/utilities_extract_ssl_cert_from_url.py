@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, pointless-string-statement
 """
     Function utilities_extract_ssl_cert_from_url receives a HTTPS_URL as a parameter.
@@ -28,7 +28,7 @@ from resilient_lib import RequestsCommon
 SECTION_HDR = "fn_utilities"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_extract_ssl_cert_from_url"""
+    """Component that implements SOAR function 'utilities_extract_ssl_cert_from_url"""
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)

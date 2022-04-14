@@ -13,9 +13,8 @@ FUNCTION_NAME = "utilities_attachment_zip_list"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
-
 
 def call_attachment_zip_list_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -26,7 +25,6 @@ def call_attachment_zip_list_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestAttachmentZipList:
     """ Tests for the attachment_zip_list function"""
@@ -41,7 +39,7 @@ class TestAttachmentZipList:
     ])
     def test_success(self, circuits_app, incident_id, attachment_id, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "incident_id": incident_id,
             "attachment_id": attachment_id
         }
