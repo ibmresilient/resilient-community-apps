@@ -8,7 +8,7 @@ from threading import Thread
 from logging import getLogger
 from datetime import datetime, timedelta
 from resilient_lib import IntegrationError
-from resilient_circuits import ResilientComponent, StatusMessage
+from resilient_circuits import ResilientComponent
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
@@ -51,7 +51,6 @@ class PollerComponent(ResilientComponent):
         LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
         self.last_poller_time = datetime.now() - timedelta(minutes=int(global_settings.get('polling_lookback', 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
-        yield StatusMessage("Poller started.")
 
         return True
 
@@ -76,7 +75,6 @@ class PollerComponent(ResilientComponent):
             raise IntegrationError(error_msg)
 
         self.process_case_list(case_list)
-        yield StatusMessage("Poller Complete")
 
     def process_case_list(self, case_list):
         """
@@ -161,4 +159,3 @@ class PollerComponent(ResilientComponent):
                     raise IntegrationError(str(response))
 
                 LOG.info("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
-                yield StatusMessage("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
