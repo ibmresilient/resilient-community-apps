@@ -707,7 +707,7 @@ For example, www.ibm.com and www.1bm.com would have a low distance. This can use
 ```python
 results = {
   'distances': {
-    'soarsystems.com': 6,
+    'resilientsystems.com': 6,
     'ibmcloud.com': 11,
     'ibm.com': 9,
     'bluemix.com': 9
@@ -715,7 +715,7 @@ results = {
   'domain_name': 'ressystems.com',
   'closest': {
     'distance': 6,
-    'name': 'soarsystems.com'
+    'name': 'resilientsystems.com'
   }
 }
 ```
@@ -739,7 +739,7 @@ else:
   inputs.domain_name = artifact.value
 
 # The list of domains to test against
-inputs.domain_list = "ibm.com, soarsystems.com, ibmcloud.com, bluemix.com"
+inputs.domain_list = "ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com"
 ```
 
 </p>
@@ -2168,8 +2168,6 @@ incident.addNote(content)
 </details>
 
 ---
-
-
 
 
 ## Rules

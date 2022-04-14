@@ -61,7 +61,7 @@ SOAR functions simplify development of integrations by wrapping each external ac
   List any Requirements 
 -->
 * SOAR platform >= `v42.0`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* An Integration Server running `resilient_circuits>=41.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---

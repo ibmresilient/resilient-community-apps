@@ -34,7 +34,7 @@ setup(
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
     install_requires=[
-        'resilient_circuits>=44.0.0',
+        'resilient_circuits>=41.0.0',
         'openpyxl~=3.0',
         'pyOpenSSL~=22.0',
         'cryptography~=36.0',
