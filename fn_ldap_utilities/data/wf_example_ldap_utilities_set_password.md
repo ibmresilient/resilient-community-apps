@@ -60,11 +60,11 @@ inputs.ldap_new_password = "NewTestPassword"
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Set Password workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Set Password workflow <u>complete</u>:</i>
                     A New Password has been set for:
                     <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
                     <b>DN:</b> '{1}'""".format(artifact.value, results.user_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 

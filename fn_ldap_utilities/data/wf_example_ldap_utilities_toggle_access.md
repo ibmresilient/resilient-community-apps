@@ -59,19 +59,15 @@ inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
 # a note is added to the incident
 
 if (results.success):
-  
   color = "#45bc27" #green
-  
   if (results.user_status == "Disabled"):
     color = "#ff402b" #red
-  
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
                     <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
                     <b>Status:</b> <b style="color: {1}">{2}</b>
                     <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)
-  
-  incident.addNote(helper.createRichText(noteText))
 
+  incident.addNote(helper.createRichText(noteText))
 ```
 
 ---

@@ -95,7 +95,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "success": res,
-                "users_dn": users_dn if len(users_dn) > 0 else None,
+                "users_dn": users_dn if len(users_dn) else None,
                 "groups_dn": input_ldap_multiple_group_dn
             }
 

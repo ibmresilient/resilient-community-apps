@@ -29,11 +29,11 @@
 def into_string_list_format(entries):
   """Function that converts a list or single string into a 'string repersentation of a list'"""
   string_list_to_return = "[{0}]"
-  
+
   # If its a string, assume its one DN, one entry
   if isinstance(entries, basestring):
     return string_list_to_return.format('"{0}"'.format(entries))
-  
+
   # Else assume its a List, so multiple DNs, multiple entries
   else:
     entries_to_add = ""
@@ -46,7 +46,6 @@ list_of_users_dn = ['cn=Breda User11,cn=Users,dc=example,dc=com', 'cn=Breda User
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
 inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=example,dc=com')
-
 ```
 
 ### Post-Processing Script
@@ -55,16 +54,14 @@ inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=e
 # a note is added to the incident
 
 if (results.success):
-  
-  if (results.users_dn is None):
-    noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
+  if not results.users_dn:
+    noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                   <b>No users found. Check inputted user DN's</b>"""
-  
   else:
-    noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
+    noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {0}
                     <b>Group(s):</b> {1}""".format(results.users_dn, results.groups_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 

@@ -179,11 +179,11 @@ results = {
 def into_string_list_format(entries):
   """Function that converts a list or single string into a 'string repersentation of a list'"""
   string_list_to_return = "[{0}]"
-  
+
   # If its a string, assume its one DN, one entry
   if isinstance(entries, basestring):
     return string_list_to_return.format('"{0}"'.format(entries))
-  
+
   # Else assume its a List, so multiple DNs, multiple entries
   else:
     entries_to_add = ""
@@ -210,10 +210,10 @@ inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=ex
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {0}
                     <b>Group(s):</b> {1}""".format(results.users_dn, results.groups_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -271,11 +271,11 @@ results = {
 def into_string_list_format(entries):
   """Function that converts a list or single string into a 'string repersentation of a list'"""
   string_list_to_return = "[{0}]"
-  
+
   # If its a string, assume its one DN, one entry
   if isinstance(entries, basestring):
     return string_list_to_return.format('"{0}"'.format(entries))
-  
+
   # Else assume its a List, so multiple DNs, multiple entries
   else:
     entries_to_add = ""
@@ -288,7 +288,6 @@ list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
 inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=example,dc=com')
-
 ```
 
 </p>
@@ -302,16 +301,16 @@ inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=ex
 # a note is added to the incident
 
 if (results.success):
-  
-  if (results.users_dn is None):
+
+  if not results.users_dn:
     noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                   <b>No users found. Check inputted user DN's</b>"""
-  
+
   else:
     noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {0}
                     <b>Group(s):</b> {1}""".format(results.users_dn, results.groups_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -374,7 +373,7 @@ if (results.success):
                     A New Password has been set for:
                     <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
                     <b>DN:</b> '{1}'""".format(artifact.value, results.user_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -451,8 +450,8 @@ inputs.ldap_search_param = artifact.value
 
 # Example of expected results - ActiveDirectory
 """
-'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com', 
-              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton', 
+'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com',
+              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton',
               u'mail': u'einstein@resilient.ibm.com', u'sn': u'Newton'}]
 """
 
@@ -468,35 +467,26 @@ ENTRY_TO_DATATABLE_MAP = {
 # Processing if the function is a success
 if(results.success):
   for entry in results["entries"]:
-    
-    if entry is None:
+    if not entry:
       break
-    
-    else:
-      # Add Row
-      row = incident.addRow("ldap_query_results")
-      
-      for k in ENTRY_TO_DATATABLE_MAP:
-
-        if entry[k] is None:
-          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-
-        else:
-          try:
-            # if 'entry[k]' is empty
-            if len(entry[k]) == 0:
-              row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-            
-            # Handle for Active Directory
-            elif isinstance(entry[k], unicode):
-              row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
-            
-            # Handle for OpenLdap
-            else:
-              row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
-          
-          except IndexError:
+    # Add Row
+    row = incident.addRow("ldap_query_results")
+    for k in ENTRY_TO_DATATABLE_MAP:
+      if not entry[k]:
+        row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+      else:
+        try:
+          # If 'entry[k]' is empty
+          if not len(entry[k]):
             row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+          # Handle for Active Directory
+          elif isinstance(entry[k], unicode):
+            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
+          # Handle for OpenLdap
+          else:
+            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
+        except IndexError:
+          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
 ```
 
 </p>
@@ -562,12 +552,12 @@ inputs.ldap_attribute_values = "['081111111']"
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Update workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Update workflow <u>complete</u>:</i>
                     An LDAP Attribute has been updated
                     <b>Attribute:</b> {0}
                     <b>New Value(s):</b> {1}
                     <b>DN:</b> '{2}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
-  
+
   incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -626,19 +616,15 @@ inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
 # a note is added to the incident
 
 if (results.success):
-  
   color = "#45bc27" #green
-  
   if (results.user_status == "Disabled"):
     color = "#ff402b" #red
-  
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
                     <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
                     <b>Status:</b> <b style="color: {1}">{2}</b>
                     <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)
-  
-  incident.addNote(helper.createRichText(noteText))
 
+  incident.addNote(helper.createRichText(noteText))
 ```
 
 </p>
