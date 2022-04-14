@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "entries": [
+    {
+      "dn": "CN=fiona saml1,CN=Users,dc=example,DC=com",
+      "cn": "fiona saml1",
+      "mail": "fionasaml1@test.com",
+      "sn": "saml1",
+      "telephoneNumber": [],
+      "uid": []
+    }
+  ]
+}

@@ -26,9 +26,11 @@ def codegen_reload_data():
         "actions": [u"Example: LDAP Utilities: Add User(s) to Group(s)", u"Example: LDAP Utilities: Remove User(s) from Group(s)", u"Example: LDAP Utilities: Search", u"Example: LDAP Utilities: Set Password", u"Example: LDAP Utilities: Toggle Access", u"Example: LDAP Utilities: Update"],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [u"ldap_query_results"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -37,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 41.0.6783
 
     Contents:
     - Message Destinations:

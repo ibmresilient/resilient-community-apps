@@ -150,9 +150,14 @@ A function that allows adding multiple users to multiple groups
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "users_dn": [
+    "cn=Breda User11,cn=Users,dc=example,dc=com",
+    "cn=Breda User10,cn=Users,dc=example,dc=com"
+  ],
+  "groups_dn": [
+    "cn=GroupA,cn=Users,dc=example,dc=com"
+  ]
 }
 ```
 
@@ -237,9 +242,14 @@ A function that allows you to remove multiple from multiple groups
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "users_dn": [
+    "cn=Breda User11,cn=Users,dc=example,dc=com",
+    "cn=Breda User10,cn=Users,dc=example,dc=com"
+  ],
+  "groups_dn": [
+    "cn=GroupA,cn=Users,dc=example,dc=com"
+  ]
 }
 ```
 
@@ -330,9 +340,8 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "user_dn": "CN=fiona saml1,CN=Users,dc=example,DC=com"
 }
 ```
 
@@ -396,9 +405,17 @@ Resilient Function to do a search or query against an LDAP server.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "entries": [
+    {
+      "dn": "CN=fiona saml1,CN=Users,dc=example,DC=com",
+      "cn": "fiona saml1",
+      "mail": "fionasaml1@test.com",
+      "sn": "saml1",
+      "telephoneNumber": [],
+      "uid": []
+    }
+  ]
 }
 ```
 
@@ -508,9 +525,12 @@ A function that updates the attribute of a DN with a new value
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "attribute_name": "homePhone",
+  "attribute_values": [
+    "081111111"
+  ],
+  "user_dn": "CN=fiona saml1,CN=Users,dc=example,DC=com"
 }
 ```
 
@@ -576,9 +596,9 @@ A function that allows an LDAP user, with the correct privileges to enable or di
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "success": true,
+  "user_dn": "CN=e,CN=Users,dc=example,DC=com",
+  "user_status": "Enabled"
 }
 ```
 

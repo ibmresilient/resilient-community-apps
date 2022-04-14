@@ -40,7 +40,7 @@ class TestLdapUtilitiesUpdate:
         assert func is not None
 
     inputs = {
-        "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
         "ldap_attribute_name": "givenName",
         "ldap_attribute_values": "['Lord Farquaad']"
     }
@@ -49,7 +49,7 @@ class TestLdapUtilitiesUpdate:
         'attribute_name': 'givenName',
         'attribute_values': ['Lord Farquaad'],
         'success': True,
-        'user_dn': 'CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com'
+        'user_dn': 'CN=Test User8,CN=Users,dc=example,DC=com'
     }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())

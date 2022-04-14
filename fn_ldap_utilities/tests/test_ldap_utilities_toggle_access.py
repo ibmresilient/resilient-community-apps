@@ -40,24 +40,24 @@ class TestLdapUtilitiesToggleAccess:
         assert func is not None
 
     inputs1 = {
-        "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
         "ldap_toggle_access": {"name": "Enable"}
     }
 
     outputs1 = {
         "success": True,
-        "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
         "user_status": "Enabled"
     }
 
     inputs2 = {
-        "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
         "ldap_toggle_access": {"name": "Disable"}
     }
 
     outputs2 = {
         "success": True,
-        "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
         "user_status": "Disabled"
     }
 

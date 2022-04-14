@@ -100,6 +100,11 @@ class FunctionComponent(ResilientComponent):
                 # Escape special chars from the search_param
                 input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
 
+            LOG.info("LDAP Search Base: %s", input_ldap_search_base)
+            LOG.info("LDAP Search Filter: %s", input_ldap_search_filter)
+            LOG.info("LDAP Search Attributes: %s", input_ldap_search_attributes)
+            LOG.info("LDAP Search Param: %s", input_ldap_search_param)
+
             yield StatusMessage("Function Inputs OK")
 
             input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)

@@ -42,6 +42,11 @@ class FunctionComponent(ResilientComponent):
             input_ldap_dn = kwargs.get("ldap_dn") # text (required)
             input_ldap_attribute_name = kwargs.get("ldap_attribute_name") # text (required)
             input_ldap_attribute_values_asString = kwargs.get("ldap_attribute_values") # text (required) [string repersentation of an array]
+
+            LOG.info("LDAP DN: %s", input_ldap_dn)
+            LOG.info("LDAP Attribute name: %s", input_ldap_attribute_name)
+            LOG.info("LDAP Attribute Value: %s", input_ldap_attribute_values_asString)
+
             yield StatusMessage("Function Inputs OK")
 
             try:

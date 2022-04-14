@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "user_dn": "CN=e,CN=Users,dc=example,DC=com",
+  "user_status": "Enabled"
+}

@@ -41,6 +41,9 @@ class FunctionComponent(ResilientComponent):
             input_ldap_dn = kwargs.get("ldap_dn") # text (required)
             input_ldap_toggle_access = kwargs.get("ldap_toggle_access")["name"] # select, values: "Enable", "Disable" (required)
 
+            LOG.info("LDAP DN: %s", input_ldap_dn)
+            LOG.info("LDAP Toggle Access: %s", input_ldap_toggle_access)
+
             yield StatusMessage("Function Inputs OK")
 
             if not helper.LDAP_IS_ACTIVE_DIRECTORY:

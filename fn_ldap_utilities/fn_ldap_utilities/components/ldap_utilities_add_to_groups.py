@@ -42,6 +42,9 @@ class FunctionComponent(ResilientComponent):
             input_ldap_multiple_user_dn_asString = kwargs.get("ldap_multiple_user_dn") # text (required) [string repersentation of an array]
             input_ldap_multiple_group_dn_asString = kwargs.get("ldap_multiple_group_dn") # text (required) [string repersentation of an array]
 
+            LOG.info("LDAP User DN: %s", input_ldap_multiple_user_dn_asString)
+            LOG.info("LDAP Group DN: %s", input_ldap_multiple_group_dn_asString)
+
             yield StatusMessage("Function Inputs OK")
 
             if not helper.LDAP_IS_ACTIVE_DIRECTORY:

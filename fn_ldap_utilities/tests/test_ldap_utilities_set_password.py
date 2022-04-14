@@ -39,11 +39,11 @@ class TestLdapUtilitiesSetPassword:
         assert func is not None
 
     inputs = {
-      "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
       "ldap_new_password": "Passw8rd!"
     }
 
-    outputs = {"success": True, "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"}
+    outputs = {"success": True, "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com"}
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())

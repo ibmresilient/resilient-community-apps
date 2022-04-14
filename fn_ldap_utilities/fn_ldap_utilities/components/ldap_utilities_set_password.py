@@ -42,6 +42,8 @@ class FunctionComponent(ResilientComponent):
             input_ldap_dn = kwargs.get("ldap_dn") # text (required)
             input_ldap_new_password = kwargs.get("ldap_new_password") # text (required)
 
+            LOG.info("LDAP DN: %s", input_ldap_dn)
+
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate LDAP Server and Connection

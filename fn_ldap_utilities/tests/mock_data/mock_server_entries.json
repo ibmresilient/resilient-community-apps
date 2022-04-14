@@ -12,7 +12,7 @@
                     "1601-01-01 00:00:00+00:00"
                 ],
                 "displayName": "Test User8",
-                "distinguishedName": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "distinguishedName": "CN=Test User8,CN=Users,dc=example,DC=com",
                 "givenName": "Test",
                 "instanceType": 4,
                 "lastLogoff": "1601-01-01 00:00:00+00:00",
@@ -20,10 +20,10 @@
                 "logonCount": 0,
                 "mail": "testuser8@test.com",
                 "memberOf": [
-                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=TestGroup5,CN=Users,dc=example,DC=com"
                 ],
                 "name": "Test User8",
-                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,dc=example,DC=com",
                 "objectClass": [
                     "top",
                     "person",
@@ -44,7 +44,7 @@
                 "whenChanged": "2018-07-24 13:11:12+00:00",
                 "whenCreated": "2018-07-24 13:10:59+00:00"
             },
-            "dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "dn": "CN=Test User8,CN=Users,dc=example,DC=com",
             "raw": {
                 "accountExpires": [
                     "9223372036854775807"
@@ -71,7 +71,7 @@
                     "Test User8"
                 ],
                 "distinguishedName": [
-                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=Test User8,CN=Users,dc=example,DC=com"
                 ],
                 "givenName": [
                     "Test"
@@ -92,13 +92,13 @@
                     "testuser8@test.com"
                 ],
                 "memberOf": [
-                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=TestGroup5,CN=Users,dc=example,DC=com"
                 ],
                 "name": [
                     "Test User8"
                 ],
                 "objectCategory": [
-                    "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                    "CN=Person,CN=Schema,CN=Configuration,dc=example,DC=com"
                 ],
                 "objectClass": [
                     "top",
@@ -165,7 +165,7 @@
                     "1601-01-01 00:00:00+00:00"
                 ],
                 "displayName": "Test User9",
-                "distinguishedName": "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "distinguishedName": "CN=Test User9,CN=Users,dc=example,DC=com",
                 "givenName": "Test",
                 "instanceType": 4,
                 "lastLogoff": "1601-01-01 00:00:00+00:00",
@@ -173,10 +173,10 @@
                 "logonCount": 0,
                 "mail": "testuser9@test.com",
                 "memberOf": [
-                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=TestGroup5,CN=Users,dc=example,DC=com"
                 ],
                 "name": "Test User9",
-                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,dc=example,DC=com",
                 "objectClass": [
                     "top",
                     "person",
@@ -197,7 +197,7 @@
                 "whenChanged": "2018-07-24 13:11:56+00:00",
                 "whenCreated": "2018-07-24 13:11:38+00:00"
             },
-            "dn": "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "dn": "CN=Test User9,CN=Users,dc=example,DC=com",
             "raw": {
                 "accountExpires": [
                     "9223372036854775807"
@@ -224,7 +224,7 @@
                     "Test User9"
                 ],
                 "distinguishedName": [
-                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=Test User9,CN=Users,dc=example,DC=com"
                 ],
                 "givenName": [
                     "Test"
@@ -245,13 +245,13 @@
                     "testuser9@test.com"
                 ],
                 "memberOf": [
-                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=TestGroup5,CN=Users,dc=example,DC=com"
                 ],
                 "name": [
                     "Test User9"
                 ],
                 "objectCategory": [
-                    "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                    "CN=Person,CN=Schema,CN=Configuration,dc=example,DC=com"
                 ],
                 "objectClass": [
                     "top",
@@ -312,15 +312,15 @@
                 "dSCorePropagationData": [
                     "1601-01-01 00:00:00+00:00"
                 ],
-                "distinguishedName": "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "distinguishedName": "CN=TestGroup5,CN=Users,dc=example,DC=com",
                 "groupType": -2147483646,
                 "instanceType": 4,
                 "member": [
-                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
-                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=Test User9,CN=Users,dc=example,DC=com",
+                    "CN=Test User8,CN=Users,dc=example,DC=com"
                 ],
                 "name": "TestGroup5",
-                "objectCategory": "CN=Group,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectCategory": "CN=Group,CN=Schema,CN=Configuration,dc=example,DC=com",
                 "objectClass": [
                     "top",
                     "group"
@@ -334,7 +334,7 @@
                 "whenChanged": "2018-07-24 13:12:22+00:00",
                 "whenCreated": "2018-07-24 13:10:22+00:00"
             },
-            "dn": "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "dn": "CN=TestGroup5,CN=Users,dc=example,DC=com",
             "raw": {
                 "cn": [
                     "TestGroup5"
@@ -343,7 +343,7 @@
                     "16010101000000.0Z"
                 ],
                 "distinguishedName": [
-                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=TestGroup5,CN=Users,dc=example,DC=com"
                 ],
                 "groupType": [
                     "-2147483646"
@@ -352,14 +352,14 @@
                     "4"
                 ],
                 "member": [
-                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
-                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                    "CN=Test User9,CN=Users,dc=example,DC=com",
+                    "CN=Test User8,CN=Users,dc=example,DC=com"
                 ],
                 "name": [
                     "TestGroup5"
                 ],
                 "objectCategory": [
-                    "CN=Group,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                    "CN=Group,CN=Schema,CN=Configuration,dc=example,DC=com"
                 ],
                 "objectClass": [
                     "top",

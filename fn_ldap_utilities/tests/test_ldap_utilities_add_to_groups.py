@@ -39,14 +39,14 @@ class TestLdapUtilitiesAddToGroups:
         assert func is not None
 
     inputs = {
-      "ldap_multiple_user_dn": "['CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com']",
-      "ldap_multiple_group_dn": "['CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com']"
+      "ldap_multiple_user_dn": "['CN=Test User8,CN=Users,dc=example,DC=com', 'CN=Test User9,CN=Users,dc=example,DC=com']",
+      "ldap_multiple_group_dn": "['CN=TestGroup5,CN=Users,dc=example,DC=com']"
     }
 
     outputs = {
-      'groups_dn': ['CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com'],
+      'groups_dn': ['CN=TestGroup5,CN=Users,dc=example,DC=com'],
       'success': True,
-      'users_dn': ['CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com','CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com']
+      'users_dn': ['CN=Test User8,CN=Users,dc=example,DC=com','CN=Test User9,CN=Users,dc=example,DC=com']
     }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())

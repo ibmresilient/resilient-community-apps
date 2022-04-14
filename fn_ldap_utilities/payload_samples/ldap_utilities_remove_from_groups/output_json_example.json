@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "users_dn": [
+    "cn=Breda User11,cn=Users,dc=example,dc=com",
+    "cn=Breda User10,cn=Users,dc=example,dc=com"
+  ],
+  "groups_dn": [
+    "cn=GroupA,cn=Users,dc=example,dc=com"
+  ]
+}
