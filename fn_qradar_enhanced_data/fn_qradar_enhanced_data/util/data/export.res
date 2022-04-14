@@ -12,12 +12,17 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifact from Assets info",
-      "id": 267,
+      "id": 279,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifact from Assets info",
       "object_type": "qr_assets",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "c76c8216-cfd8-4338-8f43-a28efb3c9802",
@@ -44,12 +49,17 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create artifact from Destination IP info",
-      "id": 268,
+      "id": 280,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create artifact from Destination IP info",
       "object_type": "qr_top_destination_ips",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "aea0c9ec-256b-4ed6-b5be-eca496742d43",
@@ -76,12 +86,17 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifact from Events info",
-      "id": 269,
+      "id": 281,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifact from Events info",
       "object_type": "qr_offense_top_events",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "74440043-3014-4ec0-b603-c5f8237ca971",
@@ -108,12 +123,17 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create artifact from Source IP info",
-      "id": 270,
+      "id": 282,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create artifact from Source IP info",
       "object_type": "qr_top_source_ips",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "a6ff072d-a0f3-42a9-97ce-cb71b1c86f77",
@@ -140,12 +160,17 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Create Artifacts from Flows Info ",
-      "id": 271,
+      "id": 283,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Create Artifacts from Flows Info ",
       "object_type": "qr_flows",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "125560d7-1a36-44a1-8e2b-2b1a33851ac9",
@@ -164,7 +189,7 @@
     {
       "automations": [
         {
-          "scripts_to_run": "Set Last Updated Time",
+          "scripts_to_run": "Set Incident Last Updated Time",
           "type": "run_script",
           "value": null
         }
@@ -187,12 +212,17 @@
       ],
       "enabled": true,
       "export_key": "QRadar Enhanced Data",
-      "id": 272,
+      "id": 284,
       "logic_type": "all",
       "message_destinations": [],
       "name": "QRadar Enhanced Data",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "ccbd85e5-8a84-4028-b472-d1fcd4547310",
@@ -235,12 +265,17 @@
       ],
       "enabled": true,
       "export_key": "QRadar Enhanced Data Poller",
-      "id": 273,
+      "id": 285,
       "logic_type": "all",
       "message_destinations": [],
       "name": "QRadar Enhanced Data Poller",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "0b49ce9e-4e28-47b3-9666-7025f462c2b5",
@@ -259,7 +294,7 @@
     {
       "automations": [
         {
-          "scripts_to_run": "Set Last Updated Time",
+          "scripts_to_run": "Set Incident Last Updated Time",
           "type": "run_script",
           "value": null
         }
@@ -282,12 +317,17 @@
       ],
       "enabled": true,
       "export_key": "QRadar Enhanced Data Refresh",
-      "id": 274,
+      "id": 286,
       "logic_type": "all",
       "message_destinations": [],
       "name": "QRadar Enhanced Data Refresh",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "c3594283-9bde-4a9d-a071-6e66afd4c23d",
@@ -315,7 +355,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1649692547344,
+  "export_date": 1649950561529,
   "export_format_version": 2,
   "fields": [
     {
@@ -328,7 +368,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param2",
       "hide_notification": false,
-      "id": 1420,
+      "id": 1448,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -339,7 +379,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param2",
       "tooltip": "",
@@ -357,7 +402,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param3",
       "hide_notification": false,
-      "id": 1421,
+      "id": 1449,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -368,7 +413,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param3",
       "tooltip": "",
@@ -386,7 +436,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_offense_id",
       "hide_notification": false,
-      "id": 1422,
+      "id": 1450,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -397,7 +447,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_offense_id",
       "tooltip": "",
@@ -415,7 +470,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param6",
       "hide_notification": false,
-      "id": 1423,
+      "id": 1451,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -426,7 +481,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param6",
       "tooltip": "",
@@ -444,7 +504,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param4",
       "hide_notification": false,
-      "id": 1424,
+      "id": 1452,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -455,7 +515,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param4",
       "tooltip": "",
@@ -473,7 +538,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param1",
       "hide_notification": false,
-      "id": 1425,
+      "id": 1453,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -484,7 +549,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param1",
       "tooltip": "",
@@ -502,7 +572,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query_type",
       "hide_notification": false,
-      "id": 1426,
+      "id": 1454,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -513,7 +583,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_query_type",
       "tooltip": "",
@@ -531,7 +606,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query",
       "hide_notification": false,
-      "id": 1427,
+      "id": 1455,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -542,19 +617,24 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [
         {
-          "id": 70,
-          "name": "search ip address",
+          "id": 73,
+          "name": "search events for offense_id",
           "template": {
-            "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
+            "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
             "format": "text"
           },
-          "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
+          "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
         },
         {
-          "id": 71,
+          "id": 74,
           "name": "search events for username",
           "template": {
             "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
@@ -563,13 +643,13 @@
           "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         },
         {
-          "id": 72,
-          "name": "search events for offense_id",
+          "id": 75,
+          "name": "search ip address",
           "template": {
-            "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
+            "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
             "format": "text"
           },
-          "uuid": "2b88eb5c-504a-4950-8674-0cf8f56f1a83"
+          "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
         }
       ],
       "text": "qradar_query",
@@ -588,7 +668,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param7",
       "hide_notification": false,
-      "id": 1428,
+      "id": 1456,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -599,7 +679,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param7",
       "tooltip": "Used for time to look back for graphql search",
@@ -617,7 +702,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param5",
       "hide_notification": false,
-      "id": 1429,
+      "id": 1457,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -628,7 +713,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_search_param5",
       "tooltip": "",
@@ -646,7 +736,7 @@
       "deprecated": false,
       "export_key": "__function/soar_table_name",
       "hide_notification": false,
-      "id": 1430,
+      "id": 1458,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -657,7 +747,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "soar_table_name",
       "tooltip": "",
@@ -675,7 +770,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_label",
       "hide_notification": false,
-      "id": 1431,
+      "id": 1459,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -686,7 +781,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "qradar_label",
       "tooltip": "Name of QRadar server to use from the app.config",
@@ -704,7 +804,7 @@
       "deprecated": false,
       "export_key": "__function/soar_incident_id",
       "hide_notification": false,
-      "id": 1432,
+      "id": 1460,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -715,7 +815,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "soar_incident_id",
       "tooltip": "",
@@ -733,7 +838,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_flows_info",
       "hide_notification": false,
-      "id": 1414,
+      "id": 1442,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -745,7 +850,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Select to create artifact from flows info",
       "tooltip": "",
@@ -759,7 +869,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "80b2cb3e-43f8-4f5c-a921-db78b04b2fb2",
-          "value": 442
+          "value": 509
         },
         {
           "default": false,
@@ -768,7 +878,7 @@
           "label": "Source Port",
           "properties": null,
           "uuid": "12b6be5c-847a-4ab3-9e50-3f9dd3bff126",
-          "value": 443
+          "value": 510
         },
         {
           "default": false,
@@ -777,7 +887,7 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "0cee1802-e437-4138-b48e-12d357d98d9f",
-          "value": 444
+          "value": 511
         },
         {
           "default": false,
@@ -786,7 +896,7 @@
           "label": "Destination Port",
           "properties": null,
           "uuid": "4ac9fe20-88fe-4c4c-b93c-b6071634c8ef",
-          "value": 445
+          "value": 512
         }
       ]
     },
@@ -800,7 +910,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact",
       "hide_notification": false,
-      "id": 1415,
+      "id": 1443,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -812,7 +922,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Select to create artifact from events info",
       "tooltip": "",
@@ -826,7 +941,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "b7cef607-e4e0-482a-a4e1-dd353b045c7a",
-          "value": 446
+          "value": 513
         },
         {
           "default": false,
@@ -835,7 +950,7 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "0ff0d4ff-ac43-4853-9670-5db505e7053b",
-          "value": 447
+          "value": 514
         },
         {
           "default": false,
@@ -844,7 +959,7 @@
           "label": "Username",
           "properties": null,
           "uuid": "b0eb7729-5fde-43f2-ad7b-77acee1c0c5c",
-          "value": 448
+          "value": 515
         }
       ]
     },
@@ -858,7 +973,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_asset_info",
       "hide_notification": false,
-      "id": 1416,
+      "id": 1444,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -869,7 +984,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Select to create artifact from asset info",
       "tooltip": "",
@@ -883,7 +1003,7 @@
           "label": "Name",
           "properties": null,
           "uuid": "222bd7e3-7492-4f88-ab70-f62eeb810e97",
-          "value": 449
+          "value": 516
         },
         {
           "default": false,
@@ -892,7 +1012,7 @@
           "label": "IP Address",
           "properties": null,
           "uuid": "51619aff-045b-4991-bbeb-e6dee7efd662",
-          "value": 450
+          "value": 517
         }
       ]
     },
@@ -906,7 +1026,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/number_of_days_to_search",
       "hide_notification": false,
-      "id": 1417,
+      "id": 1445,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -917,7 +1037,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Number of Days to Search",
       "tooltip": "Set the number of says back to search for QRadar graphql query",
@@ -935,7 +1060,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_sourceip",
       "hide_notification": false,
-      "id": 1418,
+      "id": 1446,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -946,7 +1071,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Select to create artifact from source info",
       "tooltip": "",
@@ -960,7 +1090,7 @@
           "label": "Source IP",
           "properties": null,
           "uuid": "644132a1-25bc-4f04-8fc0-488a7af8872d",
-          "value": 451
+          "value": 518
         },
         {
           "default": false,
@@ -969,7 +1099,7 @@
           "label": "MAC",
           "properties": null,
           "uuid": "35459b44-f439-4736-85c4-7f8052e3e732",
-          "value": 452
+          "value": 519
         }
       ]
     },
@@ -983,7 +1113,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/select_to_create_artifact_from_destip",
       "hide_notification": false,
-      "id": 1419,
+      "id": 1447,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -994,7 +1124,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Select to create artifact from destination info",
       "tooltip": "",
@@ -1008,9 +1143,67 @@
           "label": "Destination IP",
           "properties": null,
           "uuid": "753758b7-c2b2-4e58-b68a-dcf9051b36df",
-          "value": 453
+          "value": 520
         }
       ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/qr_offense_status",
+      "hide_notification": false,
+      "id": 1433,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qr_offense_status",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QR Offense Status",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "8632d157-312f-49b7-9526-220077ef6131",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/qr_offense_last_updated_time",
+      "hide_notification": false,
+      "id": 1437,
+      "input_type": "datetimepicker",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qr_offense_last_updated_time",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QR Offense Last Updated Time",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "8e612fca-fa1e-448d-9ecd-541ccb158573",
+      "values": []
     },
     {
       "allow_default_value": false,
@@ -1033,7 +1226,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Flow Count",
       "tooltip": "The no. of flows associated with the QRadar Offense",
@@ -1062,7 +1260,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Offense Id",
       "tooltip": "",
@@ -1091,7 +1294,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Offense Index Type",
       "tooltip": "The type on which the QRadar Offense is indexed",
@@ -1120,7 +1328,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Assigned",
       "tooltip": "The analyst to whom the QRadar Offense is assigned to.",
@@ -1149,7 +1362,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Source IP Count",
       "tooltip": "The no. of Source IPs associated with the QRadar Offense",
@@ -1178,7 +1396,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Credibility",
       "tooltip": "Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source.",
@@ -1207,7 +1430,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Relevance",
       "tooltip": "Indicates the importance of the destination. QRadar determines the relevance by the weight that the administrator assigned to the networks and assets.",
@@ -1236,12 +1464,46 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Offense Index Value",
       "tooltip": "The value by which QRadar Offense is indexed",
       "type_id": 0,
       "uuid": "f4354ca9-d038-45a5-a91f-b4beaf3f5f18",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/qr_offense_start_time",
+      "hide_notification": false,
+      "id": 1438,
+      "input_type": "datetimepicker",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qr_offense_start_time",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QR Offense Start Time",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "11e94c0e-62d5-4ef9-8b5d-7073f487b606",
       "values": []
     },
     {
@@ -1265,7 +1527,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Severity",
       "tooltip": "Indicates the threat that an attack poses in relation to how prepared the destination is for the attack.",
@@ -1294,7 +1561,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Incident Last Updated Time",
       "tooltip": "",
@@ -1323,7 +1595,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QRadar Destination",
       "tooltip": "QRadar Destination to Sync With",
@@ -1352,12 +1629,46 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Event Count",
       "tooltip": "The no. of events associated with the QRadar Offense",
       "type_id": 0,
       "uuid": "4f7dfb5c-f38d-471b-b7a7-203e5d5790d9",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/qr_offense_domain",
+      "hide_notification": false,
+      "id": 1434,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "qr_offense_domain",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "QR Offense Domain",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "568fa360-983f-463d-af2d-01bd8c7a0e25",
       "values": []
     },
     {
@@ -1381,7 +1692,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Destination IP Count",
       "tooltip": "The no. of Destination IPs associated with the QRadar Offense",
@@ -1410,7 +1726,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Offense Source ",
       "tooltip": "The source for the QRadar Offense",
@@ -1439,7 +1760,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": true,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "QR Magnitude",
       "tooltip": "Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings.",
@@ -1461,7 +1787,7 @@
   ],
   "functions": [
     {
-      "created_date": 1649417741856,
+      "created_date": 1649863383951,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1475,18 +1801,23 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Offense Summary",
       "export_key": "qradar_offense_summary",
-      "id": 173,
+      "id": 175,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1649417741897,
+      "last_modified_time": 1649950502206,
       "name": "qradar_offense_summary",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "0aee36de-8719-4154-a1e7-6455f065bb94",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "c6cac6bb-9718-40e9-8fb6-2cea26be7b5b",
@@ -1536,9 +1867,14 @@
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "programmatic_name": "qradar_triggered_rules",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 277
+          "workflow_id": 283
         },
         {
           "actions": [],
@@ -1546,9 +1882,14 @@
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "programmatic_name": "qradar_assets_information",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 275
+          "workflow_id": 286
         },
         {
           "actions": [],
@@ -1556,14 +1897,19 @@
           "name": "QRadar Offense Summary",
           "object_type": "incident",
           "programmatic_name": "qradar_offense_summary",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 281
+          "workflow_id": 284
         }
       ]
     },
     {
-      "created_date": 1649417741926,
+      "created_date": 1649863384002,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1577,18 +1923,23 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Top Events",
       "export_key": "qradar_top_events",
-      "id": 174,
+      "id": 176,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1649417741968,
+      "last_modified_time": 1649950502259,
       "name": "qradar_top_events",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "d8e63812-0b58-4ca1-991a-49255f3dd04e",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "035f31c7-3bf8-4b5e-932f-4adb32198572",
@@ -1694,9 +2045,14 @@
           "name": "Example of searching and returning Categories",
           "object_type": "incident",
           "programmatic_name": "qradar_categories",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 278
+          "workflow_id": 287
         },
         {
           "actions": [],
@@ -1704,9 +2060,14 @@
           "name": "Example of searching and returning Destination IPs information",
           "object_type": "incident",
           "programmatic_name": "qradar_destination_ips",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 276
+          "workflow_id": 282
         },
         {
           "actions": [],
@@ -1714,9 +2075,14 @@
           "name": "Example of searching and returning Source IPs information",
           "object_type": "incident",
           "programmatic_name": "qradar_source_ips",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 279
+          "workflow_id": 288
         },
         {
           "actions": [],
@@ -1724,9 +2090,14 @@
           "name": "Example of searching QRadar Flows using offense id",
           "object_type": "incident",
           "programmatic_name": "example_of_searching_qradar_flows_using_offense_id",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 274
+          "workflow_id": 285
         },
         {
           "actions": [],
@@ -1734,22 +2105,27 @@
           "name": "Example of searching QRadar Top Events using offense id",
           "object_type": "incident",
           "programmatic_name": "example_of_searching_qradar_top_events_using_offense_id",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_qradar_enhanced_data",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 280
+          "workflow_id": 289
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 25,
+  "id": 26,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1649692545878,
+      "create_date": 1649950560329,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1758,7 +2134,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1649692545878,
+      "update_date": 1649950560329,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1767,13 +2143,20 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "1db531db-6421-42f8-b63d-a099e4323661"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_qradar_enhanced_data",
       "name": "fn_qradar_enhanced_data",
       "programmatic_name": "fn_qradar_enhanced_data",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "users": [
         "admin@example.com"
       ],
@@ -1788,116 +2171,146 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1649417740910,
+      "created_date": 1649863383261,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Assets info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Assets info",
-      "id": 79,
+      "id": 85,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417740930,
+      "last_modified_time": 1649863383287,
       "name": "Create Artifact from Assets info",
       "object_type": "qr_assets",
       "playbook_handle": null,
       "programmatic_name": "create_artifact_from_assets_info",
       "script_text": "#\n# We create artifacts according to how they can be mapped to\n# SOAR default artifacts. If user has custom artifacts, and wants\n# to map them as well, please modify the following mapping dict.\n#\n\ntype_mapping = {\n    \"IP Address\": \"IP Address\",\n    \"Name\": \"String\",\n}\n\nimport re\n\nartifact_types = rule.properties.select_to_create_artifact_from_asset_info\n\nfor type in artifact_types:\n  if type in type_mapping:\n    artifact_description = \"QRadar Offense {0}\".format(type)\n    if type==\"IP Address\":\n     incident.addArtifact(type_mapping[type], row.ip_address[\"content\"], artifact_description)\n    elif type==\"Name\":\n       incident.addArtifact(type_mapping[type], row.asset_name[\"content\"], artifact_description)\n",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "56272bd6-1c9c-4043-88aa-0b7f1aac382c"
     },
     {
       "actions": [],
-      "created_date": 1649417740956,
+      "created_date": 1649863383304,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Destination IP info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Destination IP info",
-      "id": 80,
+      "id": 86,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417740977,
+      "last_modified_time": 1649863383319,
       "name": "Create Artifact from Destination IP info",
       "object_type": "qr_top_destination_ips",
       "playbook_handle": null,
       "programmatic_name": "create_artifact_from_destination_ip_info",
       "script_text": "#\n# We create artifacts for those observables according to how they can be mapped to\n# SOAR default artifacts. If user has custom artifacts, and wants\n# to map them as well, please modify the following mapping dict.\n#\n\ntype_mapping = {\n    \"Destination IP\": \"IP Address\",\n}\n\nimport re\n\nartifact_types = rule.properties.select_to_create_artifact_from_destip\n\nfor type in artifact_types:\n  if type in type_mapping:\n    artifact_description = \"QRadar Offense {0}\".format(type)\n    if type==\"Destination IP\":\n      incident.addArtifact(type_mapping[type], re.sub(\"\u003c[^\u003c\u003e]+\u003e\",\"\",row.destination_ip[\"content\"]), artifact_description)\n",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "b6f06359-9d13-4244-bd0f-123dc4068317"
     },
     {
       "actions": [],
-      "created_date": 1649417741002,
+      "created_date": 1649863383331,
       "creator_id": "admin@example.com",
       "description": "Create artifact from the Events info of the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Events info",
-      "id": 81,
+      "id": 87,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417741023,
+      "last_modified_time": 1649863383346,
       "name": "Create Artifact from Events info",
       "object_type": "qr_offense_top_events",
       "playbook_handle": null,
       "programmatic_name": "create_artifact_from_events_info",
       "script_text": "#\n# We create artifacts for those observables according to how they can be mapped to\n# SOAR default artifacts. If user has custom artifacts, and wants\n# to map them as well, please modify the following mapping dict.\n#\n\ntype_mapping = {\n    \"Source IP\": \"IP Address\",\n    \"Destination IP\": \"IP Address\",\n    \"Username\": \"User Account\"\n}\n\nimport re\n\nartifact_types = rule.properties.select_to_create_artifact\n\nfor type in artifact_types:\n  if type in type_mapping:\n    artifact_description = \"QRadar Offense {0}\".format(type)\n    if type==\"Source IP\":\n      incident.addArtifact(type_mapping[type],re.sub(\"\u003c[^\u003c\u003e]+\u003e\",\"\",row.source_ip[\"content\"]), artifact_description)\n    elif type==\"Destination IP\":\n      incident.addArtifact(type_mapping[type], re.sub(\"\u003c[^\u003c\u003e]+\u003e\",\"\",row.destination_ip[\"content\"]), artifact_description)\n    elif type==\"Username\":\n      incident.addArtifact(type_mapping[type], row.username, artifact_description)\n",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "c4c431c3-d175-4f68-b401-1b6fc6d69f1a"
     },
     {
       "actions": [],
-      "created_date": 1649417741047,
+      "created_date": 1649863383358,
       "creator_id": "admin@example.com",
       "description": "Create artifact from the Flows info of the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Flows info",
-      "id": 82,
+      "id": 88,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417741069,
+      "last_modified_time": 1649863383374,
       "name": "Create Artifact from Flows info",
       "object_type": "qr_flows",
       "playbook_handle": null,
       "programmatic_name": "create_artifact_from_flows_info",
       "script_text": "#\n# We create artifacts for those observables according to how they can be mapped to\n# SOAR default artifacts. If user has custom artifacts, and wants\n# to map them as well, please modify the following mapping dict.\n#\n\ntype_mapping = {\n    \"Source IP\": \"IP Address\",\n    \"Destination IP\": \"IP Address\",\n    \"Source Port\": \"Port\",\n    \"Destination Port\": \"Port\"\n}\n\nimport re\n\nartifact_types = rule.properties.select_to_create_artifact_from_flows_info\n\nfor type in artifact_types:\n  if type in type_mapping:\n    artifact_description = \"QRadar Offense {0}\".format(type)\n    if type==\"Source IP\":\n      incident.addArtifact(type_mapping[type],row.source_ip[\"content\"], artifact_description)\n    elif type==\"Destination IP\":\n      incident.addArtifact(type_mapping[type],row.destination_ip[\"content\"], artifact_description)\n    elif type==\"Source Port\":\n      incident.addArtifact(type_mapping[type],row.source_ip[\"content\"], artifact_description)\n    elif type==\"Destination Port\":\n      incident.addArtifact(type_mapping[type],row.destination_ip[\"content\"], artifact_description)\n",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "027a462d-ee0e-4e13-b7e6-fa8033888747"
     },
     {
       "actions": [],
-      "created_date": 1649417741094,
+      "created_date": 1649863383387,
       "creator_id": "admin@example.com",
       "description": "Create artifact from Source IP info for the selected row",
       "enabled": false,
       "export_key": "Create Artifact from Source IP info",
-      "id": 83,
+      "id": 89,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417741117,
+      "last_modified_time": 1649863383404,
       "name": "Create Artifact from Source IP info",
       "object_type": "qr_top_source_ips",
       "playbook_handle": null,
       "programmatic_name": "create_artifact_from_source_ip_info",
       "script_text": "#\n# We create artifacts for those observables according to how they can be mapped to\n# SOAR default artifacts. If user has custom artifacts, and wants\n# to map them as well, please modify the following mapping dict.\n#\n\ntype_mapping = {\n    \"Source IP\": \"IP Address\",\n    \"MAC\": \"MAC Address\",\n}\n\nimport re\n\nartifact_types = rule.properties.select_to_create_artifact_from_sourceip\n\nfor type in artifact_types:\n  if type in type_mapping:\n    artifact_description = \"QRadar Offense {0}\".format(type)\n    if type==\"Source IP\":\n      incident.addArtifact(type_mapping[type],re.sub(\"\u003c[^\u003c\u003e]+\u003e\",\"\",row.source_ip[\"content\"]), artifact_description)\n    elif type==\"MAC\":\n      incident.addArtifact(type_mapping[type], row.mac, artifact_description)\n",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "9a02cf5d-a5ac-42f1-a421-b5a642e4feb7"
     },
     {
       "actions": [],
-      "created_date": 1649417741144,
+      "created_date": 1649863383422,
       "creator_id": "admin@example.com",
       "description": "qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.",
       "enabled": false,
-      "export_key": "Set Last Updated Time",
-      "id": 84,
+      "export_key": "Set Incident Last Updated Time",
+      "id": 90,
       "language": "python",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649691783170,
-      "name": "Set Last Updated Time",
+      "last_modified_time": 1649950501807,
+      "name": "Set Incident Last Updated Time",
       "object_type": "incident",
       "playbook_handle": null,
       "programmatic_name": "get_current_time",
       "script_text": "import java.util.Date as Date\n\n# If qr_last_updated_time is empty (This will be true on incident creation)\nif not incident.properties.qr_last_updated_time:\n  incident.properties.qr_last_updated_time = incident.create_date\n# If qr_last_updated_time is not empty (This will be true when Manual refresh rule is run)\nelse:\n  incident.properties.qr_last_updated_time = Date()",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "e93008f7-1249-46a8-8d7e-75c0dc862f4f"
     }
   ],
@@ -2210,7 +2623,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_assets",
       "uuid": "c3e0083f-90dc-4679-9808-cb400d779182"
@@ -2514,7 +2932,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_categories",
       "uuid": "4fc89951-3acc-4d19-b05a-172305cf41fa"
@@ -2911,7 +3334,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_flows",
       "uuid": "c21c1b7a-3f10-4c98-93f5-7853561929a3"
@@ -3246,7 +3674,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_offense_top_events",
       "uuid": "5abb79cb-07a4-466a-93f6-7ada972d920e"
@@ -3426,7 +3859,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_top_destination_ips",
       "uuid": "36c24e29-ff9d-4557-b32b-05bdb7fdf298"
@@ -3761,7 +4199,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_top_source_ips",
       "uuid": "66a57247-1835-4f18-811f-7a4ad96a295c"
@@ -4034,7 +4477,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "qr_triggered_rules",
       "uuid": "34b2b00a-56eb-439a-a93c-74daf0554db2"
@@ -4044,162 +4492,202 @@
     {
       "actions": [],
       "content": {
-        "version": 65,
-        "workflow_id": "qradar_destination_ips",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_destination_ips\" isExecutable=\"true\" name=\"Example of searching and returning Destination IPs information\"\u003e\u003cdocumentation\u003eReturns the information on the Destination IPS associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ie3uhp\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1uuhodb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wa32wd\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ie3uhp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ge3qyy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ie3uhp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wa32wd\"/\u003e\u003cendEvent id=\"EndEvent_0tf1zg5\"\u003e\u003cincoming\u003eSequenceFlow_1ge3qyy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ge3qyy\" sourceRef=\"ServiceTask_0wa32wd\" targetRef=\"EndEvent_0tf1zg5\"/\u003e\u003cserviceTask id=\"ServiceTask_164pxep\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = event.destinationip\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uuhodb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16irdjm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uuhodb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_164pxep\"/\u003e\u003cendEvent id=\"EndEvent_1707dmc\"\u003e\u003cincoming\u003eSequenceFlow_16irdjm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16irdjm\" sourceRef=\"ServiceTask_164pxep\" targetRef=\"EndEvent_1707dmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wa32wd\" id=\"ServiceTask_0wa32wd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ie3uhp\" id=\"SequenceFlow_1ie3uhp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"277\" y=\"192\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tf1zg5\" id=\"EndEvent_0tf1zg5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"577\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ge3qyy\" id=\"SequenceFlow_1ge3qyy_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492.5\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_164pxep\" id=\"ServiceTask_164pxep_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uuhodb\" id=\"SequenceFlow_1uuhodb_di\"\u003e\u003comgdi:waypoint x=\"189\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225.5\" y=\"243\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1707dmc\" id=\"EndEvent_1707dmc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"290\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"577\" y=\"329\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16irdjm\" id=\"SequenceFlow_16irdjm_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"492.5\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 65,
-      "creator_id": "admin@example.com",
-      "description": "Returns the information on the Destination IPS associated with the QRadar Offense ID",
-      "export_key": "qradar_destination_ips",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417742642,
-      "name": "Example of searching and returning Destination IPs information",
-      "object_type": "incident",
-      "programmatic_name": "qradar_destination_ips",
-      "tags": [],
-      "uuid": "c2c032ad-3789-49cd-892c-81112eabc81c",
-      "workflow_id": 276
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 44,
-        "workflow_id": "qradar_triggered_rules",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_triggered_rules\" isExecutable=\"true\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cdocumentation\u003eReturns the contributing rules for the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j7w99n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j6nll2\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.rules_data:\\n  qradar_event = incident.addRow(\\\"qr_triggered_rules\\\")\\n  qradar_event.rule_name = link.format(\\\"rules\\\",event.id,event.name)\\n  qradar_event.rule_group = \\\", \\\".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)\u0026gt;0 else \\\"\\\"\\n  qradar_event.rule_type = event.type\\n  qradar_event.enabled = \\\"True\\\" if event.enabled else \\\"False\\\"\\n  qradar_event.response = \\\"Yes\\\" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else \\\"No\\\"\\n  qradar_event.date_created = int(event.creationDate)\\n  qradar_event.last_modified = int(event.modificationDate)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j7w99n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1emdbk1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j7w99n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j6nll2\"/\u003e\u003cendEvent id=\"EndEvent_1njimqc\"\u003e\u003cincoming\u003eSequenceFlow_1emdbk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1emdbk1\" sourceRef=\"ServiceTask_0j6nll2\" targetRef=\"EndEvent_1njimqc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j6nll2\" id=\"ServiceTask_0j6nll2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j7w99n\" id=\"SequenceFlow_0j7w99n_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1njimqc\" id=\"EndEvent_1njimqc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"678.7668269230769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"696.7668269230769\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1emdbk1\" id=\"SequenceFlow_1emdbk1_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"572\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 44,
-      "creator_id": "admin@example.com",
-      "description": "Returns the contributing rules for the Offense",
-      "export_key": "qradar_triggered_rules",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417742818,
-      "name": "Example of fetching contributing rules for Offense",
-      "object_type": "incident",
-      "programmatic_name": "qradar_triggered_rules",
-      "tags": [],
-      "uuid": "6b47dac2-3b5e-4916-a57b-59c5a6dbed0e",
-      "workflow_id": 277
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 56,
-        "workflow_id": "qradar_offense_summary",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_offense_summary\" isExecutable=\"true\" name=\"QRadar Offense Summary\"\u003e\u003cdocumentation\u003eReturns information about the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05iwsyi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1apebpb\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}{1}\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n  \\nincident.qr_offense_index_type = results.offense.offenseType.name\\nincident.qr_offense_index_value = results.offense.offenseSource\\nincident.qr_offense_source = results.offense.offenseSource\\nincident.qr_source_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.sourceCount)\\nincident.qr_destination_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.remoteDestinationCount+results.offense.localDestinationCount)\\nincident.qr_event_count = link.format(results.offenseid,\\\"/events?page=1\u0026amp;pagesize=10\\\",results.offense.eventCount)\\nincident.qr_flow_count =  link.format(results.offenseid,\\\"/flows?page=1\u0026amp;pagesize=10\\\",results.offense.flowCount)\\nincident.qr_assigned = link.format(\\\"\\\",\\\"?filter=status%3B%3D%3BOpen%3BOPEN\u0026amp;filter=assignedTo%3B%3D%3B%3B\\\"+(results.offense.assignedTo if results.offense.assignedTo is not None else \\\"\\\")+\\\"\u0026amp;page=1\u0026amp;pagesize=10\\\",results.offense.assignedTo) if results.offense.assignedTo else \\\"Unassigned\\\"\\nincident.qr_magnitude = link.format(results.offenseid,\\\"\\\",results.offense.magnitude)\\nincident.qr_credibility = link.format(results.offenseid,\\\"\\\",results.offense.credibility)\\nincident.qr_severity = link.format(results.offenseid,\\\"\\\",results.offense.severity)\\nincident.qr_relevance = link.format(results.offenseid,\\\"\\\",results.offense.relevance)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensesummary\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05iwsyi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ajef8g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05iwsyi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1apebpb\"/\u003e\u003cendEvent id=\"EndEvent_0l7mn1m\"\u003e\u003cincoming\u003eSequenceFlow_1ajef8g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ajef8g\" sourceRef=\"ServiceTask_1apebpb\" targetRef=\"EndEvent_0l7mn1m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1apebpb\" id=\"ServiceTask_1apebpb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"331\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05iwsyi\" id=\"SequenceFlow_05iwsyi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"264.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0l7mn1m\" id=\"EndEvent_0l7mn1m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"587\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"605\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ajef8g\" id=\"SequenceFlow_1ajef8g_di\"\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"509\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 56,
-      "creator_id": "admin@example.com",
-      "description": "Returns information about the Offense",
-      "export_key": "qradar_offense_summary",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649692513725,
-      "name": "QRadar Offense Summary",
-      "object_type": "incident",
-      "programmatic_name": "qradar_offense_summary",
-      "tags": [],
-      "uuid": "c136a786-5d9f-4a80-bf1d-dda574ea75ba",
-      "workflow_id": 281
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 55,
-        "workflow_id": "example_of_searching_qradar_flows_using_offense_id",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_flows_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2h23f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpihlh\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor flow in results.events:\\n  qradar_event = incident.addRow(\\\"qr_flows\\\")\\n  qradar_event.application = link.format(results.offenseid,\\\"application_name\\\",flow.Application,flow.Application)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",flow.sourceip,flow.sourceip)\\n  qradar_event.source_port = link.format(results.offenseid,\\\"sourceport\\\",flow.sourceport,flow.sourceport)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",flow.destinationip,flow.destinationip)\\n  qradar_event.destination_port = link.format(results.offenseid,\\\"destinationport\\\",flow.destinationport,flow.destinationport)\\n  qradar_event.protocol = flow.Protocol\\n  qradar_event.first_packet_time = int(flow.FirstPacketTime)\\n  qradar_event.source_bytes = int(flow.sourcebytes)\\n  qradar_event.source_packets = int(flow.sourcepackets)\\n  qradar_event.destination_bytes = int(flow.destinationbytes)\\n  qradar_event.destination_packets = int(flow.destinationpackets)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2h23f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ysyi1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1f2h23f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpihlh\"/\u003e\u003cendEvent id=\"EndEvent_0om05cp\"\u003e\u003cincoming\u003eSequenceFlow_05ysyi1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ysyi1\" sourceRef=\"ServiceTask_0zpihlh\" targetRef=\"EndEvent_0om05cp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpihlh\" id=\"ServiceTask_0zpihlh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2h23f\" id=\"SequenceFlow_1f2h23f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"268.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0om05cp\" id=\"EndEvent_0om05cp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"653\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"671\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ysyi1\" id=\"SequenceFlow_05ysyi1_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"653\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"546\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_of_searching_qradar_top_events_using_offense_id",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_top_events_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcy3j4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ulfeez\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY starttime\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_offense_top_events\\\")\\n  qradar_event.event_name = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.event_name)\\n  qradar_event.category = link.format(results.offenseid,\\\"category_name\\\",event.category_name,event.category_name)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.log_source = link.format(results.offenseid,\\\"log_source_name\\\",event.logsourcename,event.logsourcename)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.eventcount)\\n  qradar_event.event_time = int(event.event_time)\\n  qradar_event.magnitude = event.magnitude\\n  qradar_event.username = event.username\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcy3j4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bwc288\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcy3j4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ulfeez\"/\u003e\u003cendEvent id=\"EndEvent_031o32j\"\u003e\u003cincoming\u003eSequenceFlow_0bwc288\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bwc288\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"EndEvent_031o32j\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1bqz36v\"\u003e\u003ctext\u003eReturn results in qradar_offense_top_events datatable\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cmw5gy\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"TextAnnotation_1bqz36v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"131\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"-28\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"72\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ulfeez\" id=\"ServiceTask_0ulfeez_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"348\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcy3j4\" id=\"SequenceFlow_1rcy3j4_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"274\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_031o32j\" id=\"EndEvent_031o32j_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"597.0289855072464\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"615.0289855072464\" y=\"135\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bwc288\" id=\"SequenceFlow_0bwc288_di\"\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"597\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"522.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1bqz36v\" id=\"TextAnnotation_1bqz36v_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"137\" x=\"440\" y=\"-4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cmw5gy\" id=\"Association_0cmw5gy_di\"\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"79\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"60\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 55,
       "creator_id": "admin@example.com",
       "description": "Use the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.",
-      "export_key": "example_of_searching_qradar_flows_using_offense_id",
+      "export_key": "example_of_searching_qradar_top_events_using_offense_id",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417742283,
-      "name": "Example of searching QRadar Flows using offense id",
+      "last_modified_time": 1649950502749,
+      "name": "Example of searching QRadar Top Events using offense id",
       "object_type": "incident",
-      "programmatic_name": "example_of_searching_qradar_flows_using_offense_id",
-      "tags": [],
-      "uuid": "248ce036-9d02-4982-b4bd-541d17c23a3d",
-      "workflow_id": 274
+      "programmatic_name": "example_of_searching_qradar_top_events_using_offense_id",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "0bd5327c-9ff5-4f70-9392-6eac92cb3304",
+      "workflow_id": 289
     },
     {
       "actions": [],
       "content": {
-        "version": 42,
+        "version": 47,
         "workflow_id": "qradar_assets_information",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_assets_information\" isExecutable=\"true\" name=\"Example of searching and returning Assets information\"\u003e\u003cdocumentation\u003eReturns the information on the Assets associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0jajzph\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w4xfyt\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"for event in results.assets:\\n  qradar_event = incident.addRow(\\\"qr_assets\\\")\\n  qradar_event.asset_id = event.id\\n  qradar_event.asset_name = event.name\\n  qradar_event.ip_address = event.sourceip\\n  qradar_event.operating_system = event.osid\\n  qradar_event.aggregated_cvss = event.riskScoreSum\\n  qradar_event.vulnerabilities = str(event.vulnerabilityCount)\\n  qradar_event.last_user = event.users[0].username if len(event.users)\u0026gt;0 and event.users[0].username is not None else \\\"\\\"\\n  qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)\u0026gt;0 and event.users[0].lastSeenProfiler is not None else \\\"\\\"\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_query_type = \\\"offenseassets\\\"\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_assets\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jajzph\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_03x7why\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_00nirf1\"\u003e\u003cincoming\u003eSequenceFlow_03x7why\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_03x7why\" sourceRef=\"ServiceTask_0w4xfyt\" targetRef=\"EndEvent_00nirf1\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0jajzph\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w4xfyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"193\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"173\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003comgdi:waypoint x=\"151\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w4xfyt\" id=\"ServiceTask_0w4xfyt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"340\" y=\"136\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00nirf1\" id=\"EndEvent_00nirf1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"629\" y=\"158\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"647\" y=\"197\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03x7why\" id=\"SequenceFlow_03x7why_di\"\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"534.5\" y=\"154\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jajzph\" id=\"SequenceFlow_0jajzph_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"284\" y=\"169.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 42,
+      "content_version": 47,
       "creator_id": "admin@example.com",
       "description": "Returns the information on the Assets associated with the QRadar Offense ID",
       "export_key": "qradar_assets_information",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417742456,
+      "last_modified_time": 1649950503037,
       "name": "Example of searching and returning Assets information",
       "object_type": "incident",
       "programmatic_name": "qradar_assets_information",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "a617ff13-51d0-4697-b729-7590252740bd",
-      "workflow_id": 275
+      "workflow_id": 286
     },
     {
       "actions": [],
       "content": {
-        "version": 74,
-        "workflow_id": "qradar_categories",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_categories\" isExecutable=\"true\" name=\"Example of searching and returning Categories\"\u003e\u003cdocumentation\u003eReturns event categories for the QRadar Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cg7aq8\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_16sbi3h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_193h79o\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category,magnitude\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime)  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.categoryname)\\n  qradar_event.magnitude = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.magnitude)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.eventcount)\\n  qradar_event.event_time = int(event.eventtime)\\n  qradar_event.sourceip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.sourceipcount)\\n  qradar_event.destinationip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.destinationipcount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cg7aq8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08d3uem\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zz07yv\"\u003e\u003cincoming\u003eSequenceFlow_08d3uem\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_08d3uem\" sourceRef=\"ServiceTask_193h79o\" targetRef=\"EndEvent_0zz07yv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0cg7aq8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_193h79o\"/\u003e\u003cserviceTask id=\"ServiceTask_0psm0xv\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY lastpackettime  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = event.categoryname\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.last_packet_time = int(event.lastpackettime)\\n  qradar_event.sourceip_count = event.sourceipcount\\n  qradar_event.destinationip_count = event.destinationipcount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16sbi3h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17dxnd1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16sbi3h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0psm0xv\"/\u003e\u003cendEvent id=\"EndEvent_1ar2znf\"\u003e\u003cincoming\u003eSequenceFlow_17dxnd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17dxnd1\" sourceRef=\"ServiceTask_0psm0xv\" targetRef=\"EndEvent_1ar2znf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_193h79o\" id=\"ServiceTask_193h79o_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zz07yv\" id=\"EndEvent_0zz07yv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"601\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"619\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08d3uem\" id=\"SequenceFlow_08d3uem_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cg7aq8\" id=\"SequenceFlow_0cg7aq8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"271.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0psm0xv\" id=\"ServiceTask_0psm0xv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"297\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16sbi3h\" id=\"SequenceFlow_16sbi3h_di\"\u003e\u003comgdi:waypoint x=\"188\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230\" y=\"257.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ar2znf\" id=\"EndEvent_1ar2znf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"611.4709897610921\" y=\"318.86120591581346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"629.4709897610921\" y=\"357.86120591581346\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17dxnd1\" id=\"SequenceFlow_17dxnd1_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"545\" y=\"330\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 49,
+        "workflow_id": "qradar_triggered_rules",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_triggered_rules\" isExecutable=\"true\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cdocumentation\u003eReturns the contributing rules for the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j7w99n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0j6nll2\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.rules_data:\\n  qradar_event = incident.addRow(\\\"qr_triggered_rules\\\")\\n  qradar_event.rule_name = link.format(\\\"rules\\\",event.id,event.name)\\n  qradar_event.rule_group = \\\", \\\".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)\u0026gt;0 else \\\"\\\"\\n  qradar_event.rule_type = event.type\\n  qradar_event.enabled = \\\"True\\\" if event.enabled else \\\"False\\\"\\n  qradar_event.response = \\\"Yes\\\" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else \\\"No\\\"\\n  qradar_event.date_created = int(event.creationDate)\\n  qradar_event.last_modified = int(event.modificationDate)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j7w99n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1emdbk1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j7w99n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j6nll2\"/\u003e\u003cendEvent id=\"EndEvent_1njimqc\"\u003e\u003cincoming\u003eSequenceFlow_1emdbk1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1emdbk1\" sourceRef=\"ServiceTask_0j6nll2\" targetRef=\"EndEvent_1njimqc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j6nll2\" id=\"ServiceTask_0j6nll2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j7w99n\" id=\"SequenceFlow_0j7w99n_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1njimqc\" id=\"EndEvent_1njimqc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"678.7668269230769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"696.7668269230769\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1emdbk1\" id=\"SequenceFlow_1emdbk1_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"572\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 74,
+      "content_version": 49,
       "creator_id": "admin@example.com",
-      "description": "Returns event categories for the QRadar Offense",
-      "export_key": "qradar_categories",
+      "description": "Returns the contributing rules for the Offense",
+      "export_key": "qradar_triggered_rules",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417743016,
-      "name": "Example of searching and returning Categories",
+      "last_modified_time": 1649950503175,
+      "name": "Example of fetching contributing rules for Offense",
       "object_type": "incident",
-      "programmatic_name": "qradar_categories",
-      "tags": [],
-      "uuid": "0bf4dc61-c103-4805-88bd-91e1c2304538",
-      "workflow_id": 278
+      "programmatic_name": "qradar_triggered_rules",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "6b47dac2-3b5e-4916-a57b-59c5a6dbed0e",
+      "workflow_id": 283
     },
     {
       "actions": [],
       "content": {
-        "version": 75,
+        "version": 62,
+        "workflow_id": "qradar_offense_summary",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_offense_summary\" isExecutable=\"true\" name=\"QRadar Offense Summary\"\u003e\u003cdocumentation\u003eReturns information about the Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05iwsyi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1apebpb\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}{1}\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\\\"\\n  \\nincident.qr_offense_index_type = results.offense.offenseType.name\\nincident.qr_offense_index_value = results.offense.offenseSource\\nincident.qr_offense_source = results.offense.offenseSource\\nincident.qr_source_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.sourceCount)\\nincident.qr_destination_ip_count = link.format(results.offenseid,\\\"\\\",results.offense.remoteDestinationCount+results.offense.localDestinationCount)\\nincident.qr_event_count = link.format(results.offenseid,\\\"/events?page=1\u0026amp;pagesize=10\\\",results.offense.eventCount)\\nincident.qr_flow_count =  link.format(results.offenseid,\\\"\\\",results.offense.flowCount)\\nincident.qr_assigned = link.format(\\\"\\\",\\\"?filter=status%3B%3D%3BOpen%3BOPEN\u0026amp;filter=assignedTo%3B%3D%3B%3B\\\"+(results.offense.assignedTo if results.offense.assignedTo is not None else \\\"\\\")+\\\"\u0026amp;page=1\u0026amp;pagesize=10\\\",results.offense.assignedTo) if results.offense.assignedTo else \\\"Unassigned\\\"\\nincident.qr_magnitude = link.format(results.offenseid,\\\"\\\",results.offense.magnitude)\\nincident.qr_credibility = link.format(results.offenseid,\\\"\\\",results.offense.credibility)\\nincident.qr_severity = link.format(results.offenseid,\\\"\\\",results.offense.severity)\\nincident.qr_relevance = link.format(results.offenseid,\\\"\\\",results.offense.relevance)\\nincident.qr_offense_status = results.offense.status\\nincident.qr_offense_start_time = int(results.offense.startTime)\\nincident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)\\nif results.offense.domain:\\n  incident.qr_offense_domain = results.offense.domain.name\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_offense_id= incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensesummary\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05iwsyi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ajef8g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_05iwsyi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1apebpb\"/\u003e\u003cendEvent id=\"EndEvent_0l7mn1m\"\u003e\u003cincoming\u003eSequenceFlow_1ajef8g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ajef8g\" sourceRef=\"ServiceTask_1apebpb\" targetRef=\"EndEvent_0l7mn1m\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1apebpb\" id=\"ServiceTask_1apebpb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"331\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05iwsyi\" id=\"SequenceFlow_05iwsyi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"331\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"264.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0l7mn1m\" id=\"EndEvent_0l7mn1m_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"587\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"605\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ajef8g\" id=\"SequenceFlow_1ajef8g_di\"\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"509\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 62,
+      "creator_id": "admin@example.com",
+      "description": "Returns information about the Offense",
+      "export_key": "qradar_offense_summary",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1649950542557,
+      "name": "QRadar Offense Summary",
+      "object_type": "incident",
+      "programmatic_name": "qradar_offense_summary",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "c136a786-5d9f-4a80-bf1d-dda574ea75ba",
+      "workflow_id": 284
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 70,
+        "workflow_id": "qradar_destination_ips",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_destination_ips\" isExecutable=\"true\" name=\"Example of searching and returning Destination IPs information\"\u003e\u003cdocumentation\u003eReturns the information on the Destination IPS associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ie3uhp\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1uuhodb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wa32wd\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ie3uhp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ge3qyy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ie3uhp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wa32wd\"/\u003e\u003cendEvent id=\"EndEvent_0tf1zg5\"\u003e\u003cincoming\u003eSequenceFlow_1ge3qyy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ge3qyy\" sourceRef=\"ServiceTask_0wa32wd\" targetRef=\"EndEvent_0tf1zg5\"/\u003e\u003cserviceTask id=\"ServiceTask_164pxep\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY destinationip \"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_destination_ips\\\")\\n  qradar_event.destination_ip = event.destinationip\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uuhodb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16irdjm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1uuhodb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_164pxep\"/\u003e\u003cendEvent id=\"EndEvent_1707dmc\"\u003e\u003cincoming\u003eSequenceFlow_16irdjm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16irdjm\" sourceRef=\"ServiceTask_164pxep\" targetRef=\"EndEvent_1707dmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wa32wd\" id=\"ServiceTask_0wa32wd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ie3uhp\" id=\"SequenceFlow_1ie3uhp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"277\" y=\"192\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0tf1zg5\" id=\"EndEvent_0tf1zg5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"577\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ge3qyy\" id=\"SequenceFlow_1ge3qyy_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492.5\" y=\"170\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_164pxep\" id=\"ServiceTask_164pxep_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"326\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uuhodb\" id=\"SequenceFlow_1uuhodb_di\"\u003e\u003comgdi:waypoint x=\"189\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"326\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225.5\" y=\"243\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1707dmc\" id=\"EndEvent_1707dmc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"559\" y=\"290\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"577\" y=\"329\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16irdjm\" id=\"SequenceFlow_16irdjm_di\"\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"308\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"492.5\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 70,
+      "creator_id": "admin@example.com",
+      "description": "Returns the information on the Destination IPS associated with the QRadar Offense ID",
+      "export_key": "qradar_destination_ips",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1649950503451,
+      "name": "Example of searching and returning Destination IPs information",
+      "object_type": "incident",
+      "programmatic_name": "qradar_destination_ips",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "c2c032ad-3789-49cd-892c-81112eabc81c",
+      "workflow_id": 282
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 80,
         "workflow_id": "qradar_source_ips",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_source_ips\" isExecutable=\"true\" name=\"Example of searching and returning Source IPs information\"\u003e\u003cdocumentation\u003eReturns the information about the source IPs associated with the QRadar Offense ID\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ykiehr\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1bpm9fv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0llgtav\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY sourceip\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_source_ips\\\")\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.vulnerability_count = event.vulnerabilityCount\\n  qradar_event.mac = event.macAddress\\n  qradar_event.network = event.network\\n  qradar_event.domain = event.domain\\n  qradar_event.usernames = event.usernamecount\\n  qradar_event.event_count = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.eventcount)\\n  qradar_event.category_count = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.categorycount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ykiehr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xf36er\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dfgyrw\"\u003e\u003cincoming\u003eSequenceFlow_0ebhn0g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bpm9fv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_01babo2\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1ykiehr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0llgtav\"/\u003e\u003cserviceTask id=\"ServiceTask_01babo2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"sourceip as sourceip,COUNT(*) as flowcount,UNIQUECOUNT(category) as categorycount,max(lastpackettime)\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY sourceip\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(lastpackettime) DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_top_source_ips\\\")\\n  qradar_event.source_ip = event.sourceip\\n  qradar_event.vulnerability_count = event.vulnerabilityCount\\n  qradar_event.mac = event.macAddress\\n  qradar_event.network = event.network\\n  qradar_event.domain = event.domain\\n  qradar_event.usernames = event.usernamecount\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.category_count = event.categorycount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bpm9fv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ebhn0g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ebhn0g\" sourceRef=\"ServiceTask_01babo2\" targetRef=\"EndEvent_0dfgyrw\"/\u003e\u003cendEvent id=\"EndEvent_1hcovth\"\u003e\u003cincoming\u003eSequenceFlow_1xf36er\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xf36er\" sourceRef=\"ServiceTask_0llgtav\" targetRef=\"EndEvent_1hcovth\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0llgtav\" id=\"ServiceTask_0llgtav_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"324\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dfgyrw\" id=\"EndEvent_0dfgyrw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"521\" y=\"315\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"494\" y=\"354\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bpm9fv\" id=\"SequenceFlow_1bpm9fv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"225\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"225\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003comgdi:waypoint x=\"330\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"198\" y=\"272.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ykiehr\" id=\"SequenceFlow_1ykiehr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"324\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"261\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_01babo2\" id=\"ServiceTask_01babo2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"330\" y=\"293\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ebhn0g\" id=\"SequenceFlow_0ebhn0g_di\"\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"333\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"430.5\" y=\"311\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hcovth\" id=\"EndEvent_1hcovth_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"521\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"539\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xf36er\" id=\"SequenceFlow_1xf36er_di\"\u003e\u003comgdi:waypoint x=\"424\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"487\" y=\"199\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 75,
+      "content_version": 80,
       "creator_id": "admin@example.com",
       "description": "Returns the information about the source IPs associated with the QRadar Offense ID",
       "export_key": "qradar_source_ips",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417743182,
+      "last_modified_time": 1649950502895,
       "name": "Example of searching and returning Source IPs information",
       "object_type": "incident",
       "programmatic_name": "qradar_source_ips",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
       "uuid": "7f26897c-eeda-45ea-8c8a-55045f91c4fa",
-      "workflow_id": 279
+      "workflow_id": 288
     },
     {
       "actions": [],
       "content": {
-        "version": 50,
-        "workflow_id": "example_of_searching_qradar_top_events_using_offense_id",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_top_events_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rcy3j4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ulfeez\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY starttime\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_offense_top_events\\\")\\n  qradar_event.event_name = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.event_name)\\n  qradar_event.category = link.format(results.offenseid,\\\"category_name\\\",event.category_name,event.category_name)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",event.sourceip,event.sourceip)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",event.destinationip,event.destinationip)\\n  qradar_event.log_source = link.format(results.offenseid,\\\"log_source_name\\\",event.logsourcename,event.logsourcename)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"event_name\\\",event.event_name,event.eventcount)\\n  qradar_event.event_time = int(event.event_time)\\n  qradar_event.magnitude = event.magnitude\\n  qradar_event.username = event.username\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rcy3j4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0bwc288\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rcy3j4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ulfeez\"/\u003e\u003cendEvent id=\"EndEvent_031o32j\"\u003e\u003cincoming\u003eSequenceFlow_0bwc288\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0bwc288\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"EndEvent_031o32j\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1bqz36v\"\u003e\u003ctext\u003eReturn results in qradar_offense_top_events datatable\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cmw5gy\" sourceRef=\"ServiceTask_0ulfeez\" targetRef=\"TextAnnotation_1bqz36v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"164\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"159\" y=\"131\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"-28\" y=\"99\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"72\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ulfeez\" id=\"ServiceTask_0ulfeez_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"348\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rcy3j4\" id=\"SequenceFlow_1rcy3j4_di\"\u003e\u003comgdi:waypoint x=\"200\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"274\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_031o32j\" id=\"EndEvent_031o32j_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"597.0289855072464\" y=\"96\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"615.0289855072464\" y=\"135\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0bwc288\" id=\"SequenceFlow_0bwc288_di\"\u003e\u003comgdi:waypoint x=\"448\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003comgdi:waypoint x=\"597\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"522.5\" y=\"92.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1bqz36v\" id=\"TextAnnotation_1bqz36v_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"137\" x=\"440\" y=\"-4\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cmw5gy\" id=\"Association_0cmw5gy_di\"\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"79\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"60\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 60,
+        "workflow_id": "example_of_searching_qradar_flows_using_offense_id",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_searching_qradar_flows_using_offense_id\" isExecutable=\"true\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cdocumentation\u003eUse the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1f2h23f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpihlh\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor flow in results.events:\\n  qradar_event = incident.addRow(\\\"qr_flows\\\")\\n  qradar_event.application = link.format(results.offenseid,\\\"application_name\\\",flow.Application,flow.Application)\\n  qradar_event.source_ip = link.format(results.offenseid,\\\"sourceip\\\",flow.sourceip,flow.sourceip)\\n  qradar_event.source_port = link.format(results.offenseid,\\\"sourceport\\\",flow.sourceport,flow.sourceport)\\n  qradar_event.destination_ip = link.format(results.offenseid,\\\"destinationip\\\",flow.destinationip,flow.destinationip)\\n  qradar_event.destination_port = link.format(results.offenseid,\\\"destinationport\\\",flow.destinationport,flow.destinationport)\\n  qradar_event.protocol = flow.Protocol\\n  qradar_event.first_packet_time = int(flow.FirstPacketTime)\\n  qradar_event.source_bytes = int(flow.sourcebytes)\\n  qradar_event.source_packets = int(flow.sourcepackets)\\n  qradar_event.destination_bytes = int(flow.destinationbytes)\\n  qradar_event.destination_packets = int(flow.destinationpackets)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1f2h23f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_05ysyi1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1f2h23f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpihlh\"/\u003e\u003cendEvent id=\"EndEvent_0om05cp\"\u003e\u003cincoming\u003eSequenceFlow_05ysyi1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05ysyi1\" sourceRef=\"ServiceTask_0zpihlh\" targetRef=\"EndEvent_0om05cp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpihlh\" id=\"ServiceTask_0zpihlh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1f2h23f\" id=\"SequenceFlow_1f2h23f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"268.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0om05cp\" id=\"EndEvent_0om05cp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"653\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"671\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05ysyi1\" id=\"SequenceFlow_05ysyi1_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"653\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"546\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 50,
+      "content_version": 60,
       "creator_id": "admin@example.com",
       "description": "Use the qradar_id field of the incident to searchQRadar events, and update the data table, qr_offense_top_events, with the top 10 events.",
-      "export_key": "example_of_searching_qradar_top_events_using_offense_id",
+      "export_key": "example_of_searching_qradar_flows_using_offense_id",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1649417743352,
-      "name": "Example of searching QRadar Top Events using offense id",
+      "last_modified_time": 1649950503313,
+      "name": "Example of searching QRadar Flows using offense id",
       "object_type": "incident",
-      "programmatic_name": "example_of_searching_qradar_top_events_using_offense_id",
-      "tags": [],
-      "uuid": "0bd5327c-9ff5-4f70-9392-6eac92cb3304",
-      "workflow_id": 280
+      "programmatic_name": "example_of_searching_qradar_flows_using_offense_id",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "248ce036-9d02-4982-b4bd-541d17c23a3d",
+      "workflow_id": 285
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 79,
+        "workflow_id": "qradar_categories",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"qradar_categories\" isExecutable=\"true\" name=\"Example of searching and returning Categories\"\u003e\u003cdocumentation\u003eReturns event categories for the QRadar Offense\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cg7aq8\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_16sbi3h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_193h79o\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category,magnitude\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY max(starttime)  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.categoryname)\\n  qradar_event.magnitude = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.magnitude)\\n  qradar_event.event_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.eventcount)\\n  qradar_event.event_time = int(event.eventtime)\\n  qradar_event.sourceip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.sourceipcount)\\n  qradar_event.destinationip_count = link.format(results.offenseid,\\\"category_name\\\",event.categoryname,event.destinationipcount)\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cg7aq8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08d3uem\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zz07yv\"\u003e\u003cincoming\u003eSequenceFlow_08d3uem\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_08d3uem\" sourceRef=\"ServiceTask_193h79o\" targetRef=\"EndEvent_0zz07yv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0cg7aq8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_193h79o\"/\u003e\u003cserviceTask id=\"ServiceTask_0psm0xv\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount \"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"WHERE INOFFENSE(%param3%)\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"GROUP BY category\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"ORDER BY lastpackettime  DESC\"}},\"ca2d7d7f-fe6d-4a21-b011-7953494c350c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"LIMIT 10\"}}},\"post_processing_script\":\"link = \\\"\u0026lt;a href=\\\\\\\"https://\\\"+results.qrhost+\\\"/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}\u0026amp;page=1\u0026amp;pagesize=10\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u0026gt;{3}\u0026lt;/a\u0026gt;\\\"\\n\\nfor event in results.events:\\n  qradar_event = incident.addRow(\\\"qr_categories\\\")\\n  qradar_event.category_name = event.categoryname\\n  qradar_event.flow_count = event.flowcount\\n  qradar_event.last_packet_time = int(event.lastpackettime)\\n  qradar_event.sourceip_count = event.sourceipcount\\n  qradar_event.destinationip_count = event.destinationipcount\\n  qradar_event.reported_time = results.current_time\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\\n\\n# QRadar graphql search look back time default is 5 days\\ninputs.qradar_search_param7 = \\\"5 days\\\"\\n# If the poller is running and the qr_last_updated_time is changed the \\n# the QRadar graphql look back time will change to 2 days\\nif incident.properties.qr_last_updated_time != incident.create_date:\\n  inputs.qradar_search_param7 = \\\"2 days\\\"\\n# If manual QRadar Update rule is run set the number if days to search to the\\n# user entered number\\nif rule.properties.number_of_days_to_search:\\n  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+\\\" days\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16sbi3h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17dxnd1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16sbi3h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0psm0xv\"/\u003e\u003cendEvent id=\"EndEvent_1ar2znf\"\u003e\u003cincoming\u003eSequenceFlow_17dxnd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17dxnd1\" sourceRef=\"ServiceTask_0psm0xv\" targetRef=\"EndEvent_1ar2znf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_193h79o\" id=\"ServiceTask_193h79o_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zz07yv\" id=\"EndEvent_0zz07yv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"601\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"619\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08d3uem\" id=\"SequenceFlow_08d3uem_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cg7aq8\" id=\"SequenceFlow_0cg7aq8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"271.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0psm0xv\" id=\"ServiceTask_0psm0xv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"345\" y=\"297\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16sbi3h\" id=\"SequenceFlow_16sbi3h_di\"\u003e\u003comgdi:waypoint x=\"188\" xsi:type=\"omgdc:Point\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"230\" y=\"257.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ar2znf\" id=\"EndEvent_1ar2znf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"611.4709897610921\" y=\"318.86120591581346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"629.4709897610921\" y=\"357.86120591581346\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17dxnd1\" id=\"SequenceFlow_17dxnd1_di\"\u003e\u003comgdi:waypoint x=\"445\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"530\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"337\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"545\" y=\"330\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 79,
+      "creator_id": "admin@example.com",
+      "description": "Returns event categories for the QRadar Offense",
+      "export_key": "qradar_categories",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1649950502595,
+      "name": "Example of searching and returning Categories",
+      "object_type": "incident",
+      "programmatic_name": "qradar_categories",
+      "tags": [
+        {
+          "tag_handle": "fn_qradar_enhanced_data",
+          "value": null
+        }
+      ],
+      "uuid": "0bf4dc61-c103-4805-88bd-91e1c2304538",
+      "workflow_id": 287
     }
   ],
   "workspaces": []
