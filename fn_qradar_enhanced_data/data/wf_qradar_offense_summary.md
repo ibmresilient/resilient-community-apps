@@ -44,8 +44,8 @@ incident.qr_offense_domain = "Default Domain"
 if results.offense.domain:
   incident.qr_offense_domain = results.offense.domain.name
   
-# incident.qr_offense_start_time = int(results.offense.startTime)
-# incident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)
+incident.qr_offense_start_time = int(results.offense.startTime)
+incident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)
 ```
 
 ---
