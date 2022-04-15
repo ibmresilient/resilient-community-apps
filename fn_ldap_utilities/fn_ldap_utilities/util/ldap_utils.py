@@ -4,15 +4,14 @@
 #
 #   Util classes for LDAP
 
+from . import helper
 from resilient_lib import IntegrationError
 
-PACKAGE_NAME = "fn_ldap_utilities"
-
 class LDAPDomains():
-    def __init__(self, opts, options):
-        self.domains, self.domain_name_list = self._load_domains(opts, options)
+    def __init__(self, opts):
+        self.domains, self.domain_name_list = self._load_domains(opts)
 
-    def _load_domains(self, opts, options):
+    def _load_domains(self, opts):
         domains = {}
         domain_name_list = self._get_domain_name_list(opts)
         for domain in domain_name_list:
@@ -32,10 +31,10 @@ class LDAPDomains():
         :param domains_list: list of ldap domains
         :return: dictionary of options for choosen domain
         """
-        domain_name = PACKAGE_NAME+":"+ldap_domain_name
+        domain_name = helper.PACKAGE_NAME+":"+ldap_domain_name
         if ldap_domain_name and domain_name in domains_list:
             return domains_list[domain_name]
-        elif ldap_domain_name == PACKAGE_NAME or len(domains_list) == 1:
+        elif ldap_domain_name == helper.PACKAGE_NAME or len(domains_list) == 1:
             return domains_list[list(domains_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match domain given in the app.config".format(ldap_domain_name))
@@ -48,7 +47,7 @@ class LDAPDomains():
         """
         domain_list = []
         for key in opts.keys():
-            if key.startswith("{}:".format(PACKAGE_NAME)):
+            if key.startswith("{}:".format(helper.PACKAGE_NAME)):
                 domain_list.append(key)
         return domain_list
 

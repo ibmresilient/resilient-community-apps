@@ -1,10 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+
 from logging import getLogger
-from fn_ldap_utilities.util.ldap_utils import PACKAGE_NAME
 from ldap3 import Server, Connection, ALL, NTLM
 import fn_ldap_utilities.util.ldap_utils as ldap_utils 
 
-PACKAGE_NAME = "fn_ldap_utilites"
+PACKAGE_NAME = "fn_ldap_utilities"
 LOG = getLogger(__name__)
 
 class LDAPUtilitiesHelper:
@@ -37,7 +37,7 @@ class LDAPUtilitiesHelper:
 
             return Connection(
                 server=server,
-                user=self.LDAP_USER_NTLM,
+                user=self.LDAP_USER_NTLM if self.LDAP_AUTH_TYPE == "NTLM" else self.LDAP_USER_DN,
                 password=self.LDAP_PASSWORD,
                 authentication=NTLM if self.LDAP_AUTH_TYPE == "NTLM" else self.LDAP_AUTH_TYPE,
                 return_empty_attributes=True,
@@ -96,12 +96,10 @@ def get_domains_list(opts):
     """
     domains_list = {}
 
-    options = opts.get(PACKAGE_NAME, {})
-
-    if options: # If no domains given [fn_ldap_utilities]
+    if opts.get(PACKAGE_NAME, {}): # If no domains given [fn_ldap_utilities]
         domain_list = {PACKAGE_NAME}
     else: # If domains given [fn_ldap_utilities:domain]
-        domains = ldap_utils.LDAPDomains(opts, options)
+        domains = ldap_utils.LDAPDomains(opts)
         domain_list = domains.get_domain_name_list()
 
     # Creates a dictionary that is filled with the LDAP domains

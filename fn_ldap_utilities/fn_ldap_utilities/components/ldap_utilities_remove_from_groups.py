@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from logging import getLogger
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 from ast import literal_eval
 from ldap3.extend.microsoft.removeMembersFromGroups import ad_remove_members_from_groups as ad_remove_members_from_groups
@@ -96,11 +96,12 @@ class FunctionComponent(ResilientComponent):
                 # Unbind connection
                 c.unbind()
 
-            results = {
-                "success": res,
-                "users_dn": users_dn if len(users_dn) else None,
-                "groups_dn": input_ldap_multiple_group_dn
-            }
+            # Initialize ResultPayload object
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
+            results = rp.done(res, None)
+            results["users_dn"] = users_dn if len(users_dn) else None
+            results["groups_dn"] = input_ldap_multiple_group_dn
 
             LOG.info("Completed")
 

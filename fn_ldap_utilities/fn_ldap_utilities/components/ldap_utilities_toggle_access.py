@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from logging import getLogger
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 from ldap3 import MODIFY_REPLACE
 
@@ -94,11 +94,12 @@ class FunctionComponent(ResilientComponent):
                 # Unbind connection
                 c.unbind()
 
-            results = {
-                "success": res,
-                "user_dn": input_ldap_dn,
-                "user_status": user_status
-            }
+            # Initialize ResultPayload object
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
+            results = rp.done(res, None)
+            results["user_dn"] = input_ldap_dn
+            results["user_status"] = user_status
 
             LOG.info("Completed")
 

@@ -4,7 +4,8 @@
 
 from __future__ import print_function
 import pytest
-from helper import TestingHelper, get_mock_config_data
+from fn_ldap_utilities.util.helper import PACKAGE_NAME
+from tests.helper import TestingHelper, get_mock_config_data
 from mock import patch
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -13,7 +14,6 @@ import os
 import logging
 
 LOG = logging.getLogger(__name__)
-PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_search"
 
 MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/search_specific/"

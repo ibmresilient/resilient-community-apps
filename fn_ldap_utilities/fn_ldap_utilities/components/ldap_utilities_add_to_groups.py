@@ -5,8 +5,8 @@
 
 from logging import getLogger
 from ast import literal_eval
-from resilient_lib import validate_fields
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
+from resilient_lib import validate_fields, ResultPayload
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 from ldap3.extend.microsoft.addMembersToGroups import ad_add_members_to_groups as ad_add_members_to_groups
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -90,11 +90,12 @@ class FunctionComponent(ResilientComponent):
                 # Unbind connection
                 c.unbind()
 
-            results = {
-                "success": res,
-                "users_dn": input_ldap_multiple_user_dn,
-                "groups_dn": input_ldap_multiple_group_dn
-            }
+            # Initialize ResultPayload object
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
+            results = rp.done(res, None)
+            results["users_dn"] = input_ldap_multiple_user_dn,
+            results["groups_dn"] = input_ldap_multiple_group_dn
 
             LOG.info("Completed")
 

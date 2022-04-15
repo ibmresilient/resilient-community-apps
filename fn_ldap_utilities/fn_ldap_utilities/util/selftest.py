@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
+from .helper import LDAPUtilitiesHelper, PACKAGE_NAME
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -13,7 +13,7 @@ def selftest_function(opts):
     Fail if any exceptions are raised.
     """
 
-    options = opts.get("fn_ldap_utilities", {})
+    options = opts.get(PACKAGE_NAME, {})
     state = "success"
     reason = "N/A"
     try:

@@ -6,10 +6,10 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from helper import TestingHelper, get_mock_config_data
+from tests.helper import TestingHelper, get_mock_config_data
+from fn_ldap_utilities.util.helper import PACKAGE_NAME
 from mock import patch
 
-PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_toggle_access"
 
 # Set mock config_data

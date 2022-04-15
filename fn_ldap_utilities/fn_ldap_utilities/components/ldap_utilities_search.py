@@ -7,12 +7,12 @@
 from logging import getLogger
 from json import loads
 from re import search, sub
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ldap3 import ALL_ATTRIBUTES
 from ldap3.core.exceptions import LDAPSocketOpenError
 from ldap3.utils.conv import escape_filter_chars
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 LOG = getLogger(__name__)
@@ -159,10 +159,11 @@ class FunctionComponent(ResilientComponent):
                 # Unbind connection
                 conn.unbind()
 
-            results = {
-                "success": success,
-                "entries": entries
-            }
+            # Initialize ResultPayload object
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+
+            results = rp.done(res, None)
+            results["entries"] = entries
 
             LOG.info("Completed")
             LOG.debug("RESULTS: %s", results)
