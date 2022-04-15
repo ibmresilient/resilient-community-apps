@@ -206,8 +206,10 @@ class PollerComponent(ResilientComponent):
             for entity in entity_list:
                 entity_id = get_entity_id(entity)
 
-                # create linkback url
+                # create linkback urls
                 entity['alert_url'] = app_common.make_linkback_url(entity_id)
+                entity['endpoint_url'] = app_common.make_linkback_url(
+                    entity.get("endpoint", {}).get("id"), linkback_url="endpoints/{}")
                 entity['hive_label'] = hive_label
 
                 # determine if this is an existing SOAR case

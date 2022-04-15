@@ -54,9 +54,6 @@
             "name": {
               "type": "string"
             },
-            "domain": {
-              "type": "string"
-            },
             "state": {
               "type": "integer"
             },
@@ -123,10 +120,7 @@
               "type": "boolean"
             },
             "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "type": "array"
             },
             "groups": {
               "type": "array",
@@ -330,9 +324,6 @@
         "activityState": {
           "type": "string"
         },
-        "terminationReason": {
-          "type": "integer"
-        },
         "receivedAt": {
           "type": "string"
         },
@@ -369,9 +360,6 @@
             "name": {
               "type": "string"
             },
-            "domain": {
-              "type": "string"
-            },
             "isolated": {
               "type": "boolean"
             },
@@ -405,10 +393,7 @@
               "type": "string"
             },
             "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "type": "array"
             },
             "groups": {
               "type": "array",
@@ -439,6 +424,9 @@
       "type": "object",
       "properties": {
         "reaqta_alert_id": {
+          "type": "string"
+        },
+        "reaqta_hive": {
           "type": "string"
         }
       }

@@ -163,6 +163,12 @@ class AppCommon():
         response, err_msg = self.api_call("GET", url, None)
         return response.json()
 
+    def get_endpoint_status(self, endpoint_id):
+        url = ENDPOINT_URI.format(endpoint_id)
+
+        response, err_msg = self.api_call("GET", url, None)
+        return response.json(), err_msg
+
     def kill_process(self, endpoint_id, process_pid, start_time):
         url = urljoin(ENDPOINT_URI.format(endpoint_id), "processes/kill")
         payload = [

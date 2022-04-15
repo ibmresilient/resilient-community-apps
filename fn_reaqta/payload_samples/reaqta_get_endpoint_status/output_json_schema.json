@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "machineId": {
+          "type": "string"
+        },
+        "osType": {
+          "type": "integer"
+        },
+        "cpuVendor": {
+          "type": "integer"
+        },
+        "arch": {
+          "type": "integer"
+        },
+        "cpuDescr": {
+          "type": "string"
+        },
+        "kernel": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "state": {
+          "type": "integer"
+        },
+        "registrationTime": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "componentsVersions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "build": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "isVirtualMachine": {
+          "type": "boolean"
+        },
+        "isDomainController": {
+          "type": "boolean"
+        },
+        "isServer": {
+          "type": "boolean"
+        },
+        "sessionStart": {
+          "type": "string"
+        },
+        "sessionEnd": {
+          "type": "string"
+        },
+        "lastSeenAt": {
+          "type": "string"
+        },
+        "disconnectionReason": {
+          "type": "integer"
+        },
+        "localAddr": {
+          "type": "string"
+        },
+        "hvStatus": {
+          "type": "integer"
+        },
+        "macs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isolated": {
+          "type": "boolean"
+        },
+        "connected": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "avInstalled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "reaqta_hive": {
+          "type": "string"
+        },
+        "reaqta_endpoint_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -23,7 +23,7 @@ inputs.reaqta_policy_title = rule.properties.reaqta_policy_title
 inputs.reaqta_policy_description = rule.properties.reaqta_policy_description or ''
 inputs.reaqta_policy_included_groups = rule.properties.reaqta_policy_included_groups
 inputs.reaqta_policy_excluded_groups = rule.properties.reaqta_policy_excluded_groups
-inputs.reaqta_policy_enabled = rule.properties.reaqta_policy_enabled
+inputs.reaqta_policy_enabled = True
 inputs.reaqta_policy_block = rule.properties.reaqta_policy_block_when_triggered
 inputs.reaqta_hives = rule.properties.hive_labels if rule.properties.hive_labels else incident.properties.reaqta_hive 
 ```

@@ -48,7 +48,7 @@
     "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
+    "host": "local",
     "execution_time_ms": 1283,
     "timestamp": "2022-02-23 21:00:29"
   }

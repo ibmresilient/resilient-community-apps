@@ -3,23 +3,22 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "834832646071648258",
-    "localId": "834832599212890114",
-    "endpointId": "833847379160465408",
+    "id": "853282059173494786",
+    "localId": "853279134984443906",
+    "endpointId": "853260775773437952",
     "triggerCondition": 7,
     "endpoint": {
-      "id": "833847379160465408",
-      "machineId": "de64775b529ad34495bc51cd8b227c254d112185cfd06a92e0d5bd8a9ca19124",
+      "id": "853260775773437952",
+      "machineId": "01531b51db1faae8e9526eee6d3b91c2c530517cc44bef9c5bb5ebfcb2f4ab39",
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
       "kernel": "10.0",
       "os": "Windows 10 Pro",
-      "name": "REAQTAWIN10-CSP",
-      "domain": "csplab.local",
+      "name": "DESKTOP-MITCH",
       "state": 1,
-      "registrationTime": "2022-02-21T00:51:47.330Z",
+      "registrationTime": "2022-04-15T14:33:41.773Z",
       "agentVersion": "3.6.1",
       "componentsVersions": [
         {
@@ -48,183 +47,169 @@
           "build": ""
         }
       ],
-      "isVirtualMachine": true,
+      "isVirtualMachine": false,
       "isDomainController": false,
       "isServer": false,
-      "sessionStart": "2022-02-21T00:51:49.215Z",
-      "sessionEnd": "2022-02-24T01:09:59.043Z",
-      "lastSeenAt": "2022-02-24T01:04:59.043Z",
+      "sessionStart": "2022-04-15T14:33:43.044Z",
+      "sessionEnd": "2022-04-15T16:03:24.293Z",
+      "lastSeenAt": "2022-04-15T15:58:24.293Z",
       "disconnectionReason": 0,
-      "localAddr": "172.16.253.37",
-      "hvStatus": 19,
+      "localAddr": "10.0.0.119",
+      "hvStatus": 0,
       "macs": [
-        "00:50:56:bf:9f:16"
+        "00:50:56:13:a4:c6"
       ],
       "isolated": false,
       "connected": true,
-      "tags": [
-        "vm"
-      ],
+      "tags": [],
       "groups": [
         {
-          "id": "822878129902059527",
-          "name": "Partner Team",
-          "description": "Partner Team Ambassador Rob Fichtel"
+          "id": "847194699834851335",
+          "name": "Digital Sales",
+          "description": "Digital Sales Group"
         }
       ],
       "avInstalled": false
     },
     "triggerEvents": [
       {
-        "id": "834832645178261505",
+        "id": "853282022443974657",
         "category": "hive",
-        "localId": "834832599133194241",
-        "endpointId": "833847379160465408",
-        "receivedAt": "2022-02-23T18:06:53.051Z",
-        "happenedAt": "2022-02-23T18:06:42.073Z",
+        "localId": "853279044794320897",
+        "endpointId": "853260775773437952",
+        "receivedAt": "2022-04-15T15:58:07.364Z",
+        "happenedAt": "2022-04-15T15:46:17.437Z",
         "relevance": 0,
         "severity": "none",
         "trigger": true,
         "manuallyAdded": false,
         "process": {
-          "id": "833847379160465408:7868:1645639602071",
-          "parentId": "833847379160465408:872:1645639598803",
-          "endpointId": "833847379160465408",
+          "id": "853260775773437952:7576:1650037576457",
+          "parentId": "853260775773437952:4568:1650037572779",
+          "endpointId": "853260775773437952",
           "program": {
-            "path": "c:\\users\\melody\\appdata\\local\\temp\\tryme.exe",
+            "path": "c:\\users\\admin\\appdata\\local\\temp\\tryme.exe",
             "filename": "tryme.exe",
             "md5": "a3ce5c07dc7b7d58740b4407a7d3f9d2",
             "sha1": "9fa6c5f1cff4ca41c441e428a847a924627210cc",
             "sha256": "cf8c1b234ad4d72dd6a455b82bf48ff16cd794aaefb682729b0151f0e1c374dd",
             "size": 84992,
-            "arch": "x32",
+            "arch": "x64",
             "fsName": "tryme.exe"
           },
-          "user": "REAQTAWIN10-CSP\\Melody",
-          "pid": 7868,
-          "startTime": "2022-02-23T18:06:42.071Z",
-          "ppid": 872,
-          "pstartTime": "2022-02-23T18:06:38.803Z",
-          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "user": "DESKTOP-MITCH\\Admin",
+          "pid": 7576,
+          "startTime": "2022-04-15T15:46:16.457Z",
+          "ppid": 4568,
+          "pstartTime": "2022-04-15T15:46:12.779Z",
+          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
           "privilegeLevel": "MEDIUM",
           "noGui": false,
-          "logonId": "0x154d314"
+          "logonId": "0x91fa6"
         },
         "eventType": 2,
         "data": {
-          "cmdLine": "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe",
+          "cmdLine": "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe",
           "cmdLineArgs": [
-            "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe"
+            "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe"
           ],
           "_t": "l"
         },
-        "happenedAt_ts": 1645639602000
+        "happenedAt_ts": 1650037577000
       },
       {
-        "id": "834832645488640001",
+        "id": "853282056220704769",
         "category": "hive",
-        "localId": "834832599212886017",
-        "endpointId": "833847379160465408",
-        "receivedAt": "2022-02-23T18:06:53.125Z",
-        "happenedAt": "2022-02-23T18:06:42.092Z",
+        "localId": "853279134984439809",
+        "endpointId": "853260775773437952",
+        "receivedAt": "2022-04-15T15:58:15.417Z",
+        "happenedAt": "2022-04-15T15:46:38.940Z",
         "relevance": 83,
         "severity": "medium",
         "trigger": true,
         "manuallyAdded": false,
         "process": {
-          "id": "833847379160465408:872:1645639598803",
-          "parentId": "833847379160465408:6580:1645471843080",
-          "endpointId": "833847379160465408",
+          "id": "853260775773437952:4568:1650037572779",
+          "parentId": "853260775773437952:3960:1650033309123",
+          "endpointId": "853260775773437952",
           "program": {
             "path": "c:\\program files\\microsoft office\\root\\office16\\winword.exe",
             "filename": "winword.exe",
-            "md5": "313009918ec71770c8f2fdcd416a4485",
-            "sha1": "5d36f6ef6d0f76aaf837c4f7e65b611acd92e0ae",
-            "sha256": "d76c3d25eb625a8475488b14b501e775b3186ad4ff77e9c07edb4ec2ff6923d9",
+            "md5": "eb9b2b5179e1fd9c3e0d11c8191f1963",
+            "sha1": "c08b8a54593258f62f16e7a1045d4c40e39fb423",
+            "sha256": "7092f1ab2c59297fa1f6f70cf7c4de570c6e3babc2085fa69e1e5b9872792daf",
             "certInfo": {
               "signer": "Microsoft Corporation",
               "issuer": "Microsoft Code Signing PCA 2011",
               "trusted": true,
               "expired": false
             },
-            "size": 1638704,
+            "size": 1639800,
             "arch": "x64",
             "fsName": "winword.exe"
           },
-          "user": "REAQTAWIN10-CSP\\Melody",
-          "pid": 872,
-          "startTime": "2022-02-23T18:06:38.803Z",
-          "ppid": 6580,
-          "pstartTime": "2022-02-21T19:30:43.080Z",
-          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "user": "DESKTOP-MITCH\\Admin",
+          "pid": 4568,
+          "startTime": "2022-04-15T15:46:12.779Z",
+          "ppid": 3960,
+          "pstartTime": "2022-04-15T14:35:09.123Z",
+          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
           "privilegeLevel": "MEDIUM",
           "noGui": false,
-          "logonId": "0x154d314"
+          "logonId": "0x91fa6"
         },
         "eventType": 31,
         "data": {
           "behaviourType": 1,
           "_t": "l"
         },
-        "happenedAt_ts": 1645639602000
+        "happenedAt_ts": 1650037598000
       }
     ],
-    "totalEventCount": 452,
+    "totalEventCount": 166,
     "byTypeEventCount": [
       {
-        "type": 11,
-        "count": 140
-      },
-      {
         "type": 21,
-        "count": 73
-      },
-      {
-        "type": 10,
         "count": 59
       },
       {
-        "type": 5,
-        "count": 37
-      },
-      {
-        "type": 12,
-        "count": 34
-      },
-      {
         "type": 65,
-        "count": 29
+        "count": 24
       },
       {
         "type": 8,
-        "count": 28
+        "count": 23
       },
       {
-        "type": 38,
-        "count": 21
+        "type": 11,
+        "count": 23
       },
       {
-        "type": 2,
-        "count": 8
+        "type": 10,
+        "count": 16
       },
       {
         "type": 57,
-        "count": 8
-      },
-      {
-        "type": 37,
         "count": 6
       },
       {
-        "type": 6,
-        "count": 3
+        "type": 37,
+        "count": 5
       },
       {
-        "type": 3,
+        "type": 38,
+        "count": 4
+      },
+      {
+        "type": 2,
         "count": 2
       },
       {
-        "type": 30,
+        "type": 3,
+        "count": 1
+      },
+      {
+        "type": 5,
         "count": 1
       },
       {
@@ -234,34 +219,28 @@
       {
         "type": 62,
         "count": 1
-      },
-      {
-        "type": 89,
-        "count": 1
       }
     ],
     "impact": 83,
     "severity": "medium",
     "closed": false,
-    "activityState": "inactive",
-    "terminationReason": 1,
-    "receivedAt": "2022-02-23T18:06:53.264Z",
-    "happenedAt": "2022-02-23T18:06:42.092Z",
+    "activityState": "active",
+    "receivedAt": "2022-04-15T15:58:16.121Z",
+    "happenedAt": "2022-04-15T15:46:38.940Z",
     "tags": [],
     "endpointState": {
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
       "kernel": "10.0",
       "os": "Windows 10 Pro",
-      "hvStatus": 19,
-      "name": "REAQTAWIN10-CSP",
-      "domain": "csplab.local",
+      "hvStatus": 0,
+      "name": "DESKTOP-MITCH",
       "isolated": false,
-      "localAddr": "172.16.253.37",
+      "localAddr": "10.0.0.119",
       "macs": [
-        "00:50:56:bf:9f:16"
+        "00:50:56:13:a4:c6"
       ],
       "componentsVersions": [
         {
@@ -291,29 +270,28 @@
         }
       ],
       "endpointVersion": "3.6.1",
-      "tags": [
-        "vm"
-      ],
+      "tags": [],
       "groups": [
         {
-          "id": "822878129902059527",
-          "name": "Partner Team",
-          "description": "Partner Team Ambassador Rob Fichtel"
+          "id": "847194699834851335",
+          "name": "Digital Sales",
+          "description": "Digital Sales Group"
         }
       ]
     },
-    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/834832646071648258"
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/853282059173494786"
   },
   "raw": null,
   "inputs": {
-    "reaqta_alert_id": "834832646071648258"
+    "reaqta_alert_id": "853282059173494786",
+    "reaqta_hive": "rhiveam"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
-    "execution_time_ms": 663,
-    "timestamp": "2022-02-23 20:04:58"
+    "host": "local",
+    "execution_time_ms": 8138,
+    "timestamp": "2022-04-15 11:59:06"
   }
 }

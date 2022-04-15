@@ -39,6 +39,7 @@
 - [Function - ReaQta: Create Note](#function---reaqta-create-note)
 - [Function - ReaQta: Create Policy](#function---reaqta-create-policy)
 - [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
+- [Function - ReaQta: Get Endpoint Status](#function---reaqta-get-endpoint-status)
 - [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
 - [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
 - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
@@ -1253,7 +1254,7 @@ results = {
     "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.0.0",
-    "host": "Marks-MacBook-Pro.local",
+    "host": "local",
     "execution_time_ms": 663,
     "timestamp": "2022-02-23 20:04:58"
   }
@@ -1339,6 +1340,171 @@ else:
   endpoint_name = endpoint.get("name")
   incident.addArtifact("IP Address", endpoint.get("localAddr"), "Endpoint: {}".format(endpoint_name))
   incident.addArtifact("System Name", endpoint_name, "")
+```
+
+</p>
+</details>
+
+---
+
+
+## Function - ReaQta: Get Endpoint Status
+Return status details for a ReaQta endpoint
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | Yes | `hive_label` | Label used in app.config to identify which ReaQta hive to access |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "852892681737605120",
+    "machineId": "9f75814184f0e13f5c3229937d30312d660cf8f9256a1e3d6b279da882095981",
+    "osType": 1,
+    "cpuVendor": 1,
+    "arch": 2,
+    "cpuDescr": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "kernel": "10.0",
+    "os": "Windows 10 Enterprise",
+    "name": "LAPTOP-377CDOSQ",
+    "state": 1,
+    "registrationTime": "2022-04-14T14:11:01.315Z",
+    "agentVersion": "3.6.1",
+    "componentsVersions": [
+      {
+        "name": "keeper",
+        "version": "3.6.0",
+        "build": "19.1627291555548.commit"
+      },
+      {
+        "name": "probos",
+        "version": "3.5.0",
+        "build": "3.5.0"
+      },
+      {
+        "name": "rqtsentry",
+        "version": "3.6.1",
+        "build": "119.1632119719010.commit"
+      },
+      {
+        "name": "rqtnetsentry",
+        "version": "3.6.0",
+        "build": "44.1627295520120.commit"
+      },
+      {
+        "name": "installer",
+        "version": "3.6.1",
+        "build": ""
+      }
+    ],
+    "isVirtualMachine": false,
+    "isDomainController": false,
+    "isServer": false,
+    "sessionStart": "2022-04-14T14:11:27.543Z",
+    "sessionEnd": "2022-04-15T16:09:25.661Z",
+    "lastSeenAt": "2022-04-15T16:04:25.661Z",
+    "disconnectionReason": 0,
+    "localAddr": "192.168.2.176",
+    "hvStatus": 19,
+    "macs": [
+      "98:fa:9b:cb:d4:0e",
+      "50:eb:71:1b:8f:9a",
+      "00:05:9a:3c:7a:00",
+      "00:50:56:c0:00:01",
+      "00:50:56:c0:00:08",
+      "80:6d:97:04:b8:08"
+    ],
+    "isolated": false,
+    "connected": true,
+    "tags": [],
+    "groups": [
+      {
+        "id": "825429906883088391",
+        "name": "National Market",
+        "description": "National Market"
+      }
+    ],
+    "avInstalled": false
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_hive": "rhiveam",
+    "reaqta_endpoint_id": "852892681737605120"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 524,
+    "timestamp": "2022-04-15 12:05:10"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+DISCONNECTION_LOOKUP = {
+  0: "Session timeout",
+  1: "Deregistration"
+}
+
+if results.success:
+  endpoint = results.content
+  msg = """ReaQta Get Endpoint Status:
+ID: {}
+Endpoint: {}
+Agent version: {}
+Last Seen At: {}
+Connected: {}
+Isolated: {}
+Disconnection Reason: {}
+Tags: {}
+Groups: {}
+""".format(endpoint.get("id"),
+           endpoint.get("name"),
+           endpoint.get("agentVersion"),
+           endpoint.get("lastSeenAt"),
+           endpoint.get("connected"),
+           endpoint.get("isolated"),
+           DISCONNECTION_LOOKUP.get(endpoint.get("disconnectionReason")),
+           ", ".join(endpoint.get("tags")),
+           ", ".join([group.get("name") for group in endpoint.get("groups", [])])
+           )
+  incident.addNote(helper.createPlainText(msg))
+else:
+  incident.addNote(u"ReaQta Get Endpoint Status failed: {}".format(results.reason))
 ```
 
 </p>
@@ -1766,6 +1932,7 @@ reaqta_trigger_events
 | ReaQta: Close Alert | incident | `reaqta_close_alert` |
 | ReaQta: Create Note | note | `reaqta_create_note` |
 | ReaQta: Get Alert Information | incident | `reaqta_get_alert_information` |
+| ReaQta: Get Endpoint Status | incident | `reaqta_get_endpoint_status` |
 | ReaQta: Refresh Alert Information |  incident | `reaqta_refresh_alert_information` |
 | ReaQta: Get Processes | incident | `reaqta_get_processes` |
 | ReaQta: Isolate Endpoint | incident | `reaqta_isolate_endpoint` |
@@ -1777,6 +1944,7 @@ It may necessary to modify the templates used to create or close SOAR cases base
 `soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
 
 ### soar_create_case_template.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
 ```
 {
   {# JINJA template for creating a new SOAR incident from a ReaQta alert. #}
@@ -1836,6 +2004,7 @@ It may necessary to modify the templates used to create or close SOAR cases base
 ```
 
 ### soar_close_case_template.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
 ```
 {
   {# JINJA template for closing a SOAR incident from a ReaQta alert. #}

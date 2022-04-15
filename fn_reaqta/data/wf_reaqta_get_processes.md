@@ -29,20 +29,27 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 import java.util.Date as Date
 now = Date().getTime()
 
+def bool_to_str(value):
+  return 'True' if value else 'False'
+
 if results.success:
   if isinstance(results.content, list):
-    for process in results.content:
-      row = incident.addRow("reaqta_process_list")
-      
-      row['report_date'] = now
-      row["pid"] = process.get("pid")
-      row["process_name"] = process.get("processName")
-      row["process_path"] = process.get("programPath")
-      row["privilege_level"] = process.get("privilegeLevel")
-      row["user"] = process.get("user")
-      row["has_incident"] = process.get("hasIncident")
-      row["suspended"] = process.get("suspended")
-      row["start_time"] = process.get("startTime")
+    if results.content:
+      for process in results.content:
+        row = incident.addRow("reaqta_process_list")
+        
+        row['report_date'] = now
+        row["pid"] = process.get("pid")
+        row["process_name"] = process.get("processName")
+        row["process_path"] = process.get("programPath")
+        row["privilege_level"] = process.get("privilegeLevel")
+        row["user"] = process.get("user")
+        row["has_incident"] = process.get("hasIncident")
+        row["suspended"] = process.get("suspended")
+        row["start_time"] = process.get("startTime")
+    else:
+        incident.addNote(u"ReaQta Get Processes - no processes found for input parameters: Has Incident: {}, Suspended: {}".\
+            format(bool_to_str(results.inputs.get("reaqta_has_incident")), bool_to_str(results.inputs.get("reaqta_suspended"))))
   else:
     incident.addNote(u"ReaQta Get Processes unsuccessful: {}".format(results.content.get('message')))
 else:

@@ -158,6 +158,9 @@
         "reaqta_artifact_type": {
           "type": "string"
         },
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_program_path": {
           "type": "string"
         },
