@@ -6,7 +6,7 @@ from __future__ import print_function
 import pytest
 from fn_ldap_utilities.util.helper import PACKAGE_NAME
 from tests.helper import TestingHelper, get_mock_config_data
-from mock import patch
+from mock import patch, Mock
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from ldap3 import Server, Connection, MOCK_SYNC
