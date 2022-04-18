@@ -21,14 +21,14 @@ The workflows in this package depend on the following
 ## Import
 Ensure that the above packages have been installed.
 Download the res_hibp package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
-In SOAR server, go to Administrator Settings->Organization->Import->Import Settings 
+In SOAR server, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
 and select the hibp.res file downloaded above.
 
 ## Usage
 Once the resource file is successfully imported, the workflows included in the file are ready for use.
 
 
-### Example of QRadar Advisor Offense Analysis with MITRE
+### Example of Have I Been Pwned Workflow with Hits
 This workflow invokes two functions from the fn_hibp integration packages.
 ![Workflow1](./screenshots/main.png)
 
