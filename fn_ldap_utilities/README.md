@@ -163,17 +163,17 @@ results = {
 
 def into_string_list_format(entries):
   """Function that converts a list or single string into a 'string repersentation of a list'"""
-  string_list_to_return = "[{0}]"
+  string_list_to_return = "[{}]"
 
   # If its a string, assume its one DN, one entry
   if isinstance(entries, basestring):
-    return string_list_to_return.format('"{0}"'.format(entries))
+    return string_list_to_return.format('"{}"'.format(entries))
 
   # Else assume its a List, so multiple DNs, multiple entries
   else:
     entries_to_add = ""
     for e in entries:
-      entries_to_add += '"{0}",'.format(e)
+      entries_to_add += '"{}",'.format(e)
     return string_list_to_return.format(entries_to_add)
 
 list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
@@ -197,8 +197,8 @@ inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=ex
 
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
-                    <b>User(s):</b> {0}
-                    <b>Group(s):</b> {1}""".format(results.users_dn, results.groups_dn)
+                    <b>User(s):</b> {}
+                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -257,17 +257,17 @@ results = {
 
 def into_string_list_format(entries):
   """Function that converts a list or single string into a 'string repersentation of a list'"""
-  string_list_to_return = "[{0}]"
+  string_list_to_return = "[{}]"
 
   # If its a string, assume its one DN, one entry
   if isinstance(entries, basestring):
-    return string_list_to_return.format('"{0}"'.format(entries))
+    return string_list_to_return.format('"{}"'.format(entries))
 
   # Else assume its a List, so multiple DNs, multiple entries
   else:
     entries_to_add = ""
     for e in entries:
-      entries_to_add += '"{0}",'.format(e)
+      entries_to_add += '"{}",'.format(e)
     return string_list_to_return.format(entries_to_add)
 
 list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
@@ -296,8 +296,8 @@ if (results.success):
 
   else:
     noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
-                    <b>User(s):</b> {0}
-                    <b>Group(s):</b> {1}""".format(results.users_dn, results.groups_dn)
+                    <b>User(s):</b> {}
+                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -360,8 +360,8 @@ inputs.ldap_new_password = "NewTestPassword"
 if (results.success):
   noteText = """<br><i style="color: #979ca3">LDAP Utilities: Set Password workflow <u>complete</u>:</i>
                     A New Password has been set for:
-                    <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
-                    <b>DN:</b> '{1}'""".format(artifact.value, results.user_dn)
+                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
+                    <b>DN:</b> '{}'""".format(artifact.value, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -546,9 +546,9 @@ inputs.ldap_attribute_values = "['081111111']"
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Update workflow <u>complete</u>:</i>
                     An LDAP Attribute has been updated
-                    <b>Attribute:</b> {0}
-                    <b>New Value(s):</b> {1}
-                    <b>DN:</b> '{2}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
+                    <b>Attribute:</b> {}
+                    <b>New Value(s):</b> {}
+                    <b>DN:</b> '{}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -613,9 +613,9 @@ if (results.success):
   if (results.user_status == "Disabled"):
     color = "#ff402b" #red
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
-                    <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
-                    <b>Status:</b> <b style="color: {1}">{2}</b>
-                    <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)
+                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
+                    <b>Status:</b> <b style="color: {}">{}</b>
+                    <b>DN:</b> '{}'""".format(artifact.value, color, results.user_status, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

@@ -63,9 +63,9 @@ if (results.success):
   if (results.user_status == "Disabled"):
     color = "#ff402b" #red
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
-                    <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
-                    <b>Status:</b> <b style="color: {1}">{2}</b>
-                    <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)
+                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
+                    <b>Status:</b> <b style="color: {}">{}</b>
+                    <b>DN:</b> '{}'""".format(artifact.value, color, results.user_status, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

@@ -36,9 +36,9 @@ inputs.ldap_attribute_values = "['081111111']"
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Update workflow <u>complete</u>:</i>
                     An LDAP Attribute has been updated
-                    <b>Attribute:</b> {0}
-                    <b>New Value(s):</b> {1}
-                    <b>DN:</b> '{2}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
+                    <b>Attribute:</b> {}
+                    <b>New Value(s):</b> {}
+                    <b>DN:</b> '{}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

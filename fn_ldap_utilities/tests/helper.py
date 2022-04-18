@@ -8,10 +8,10 @@ class TestingHelper():
 
     def __init__(self, isSearch=False):
 
-        self.MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/"
+        self.MOCK_DATA_PATH = os.getcwd() + "/fn_ldap_utilities/tests/mock_data/"
 
         if isSearch:
-            self.MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/search_specific/"
+            self.MOCK_DATA_PATH = os.getcwd() + "/fn_ldap_utilities/tests/mock_data/search_specific/"
 
         # Create a fake LDAP server from the info and schema json files
         self.FAKE_SERVER = Server.from_definition(

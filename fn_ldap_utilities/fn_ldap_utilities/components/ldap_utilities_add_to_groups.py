@@ -3,11 +3,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from logging import getLogger
 from ast import literal_eval
+from logging import getLogger
 from resilient_lib import validate_fields, ResultPayload
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from ldap3.extend.microsoft.addMembersToGroups import ad_add_members_to_groups as ad_add_members_to_groups
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
@@ -30,13 +30,16 @@ class FunctionComponent(ResilientComponent):
     def _ldap_utilities_add_to_groups_function(self, event, *args, **kwargs):
         """Function: A function that allows adding multiple users to multiple groups"""
         try:
-            yield StatusMessage("Starting ldap_utilities_add_to_groups")
+            # Get the wf_instance_id of the workflow this Function was called in
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
+            yield StatusMessage("Starting 'ldap_utilities_add_to_groups' running in workflow '{}'".format(wf_instance_id))
 
             # Validate that required fields are given
             validate_fields(["ldap_multiple_user_dn", "ldap_multiple_group_dn"], kwargs)
 
             # Get function inputs
-            ldap_domain_name = kwargs.get("ldap_domain_name") # text
+            ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
             input_ldap_multiple_user_dn_asString = kwargs.get("ldap_multiple_user_dn") # text (required) [string repersentation of an array]
             input_ldap_multiple_group_dn_asString = kwargs.get("ldap_multiple_group_dn") # text (required) [string repersentation of an array]
 
@@ -76,8 +79,6 @@ class FunctionComponent(ResilientComponent):
             # Inform user
             yield StatusMessage("Connected to Active Directory")
 
-            res = False
-
             try:
                 yield StatusMessage("Attempting to add user(s) to group(s)")
                 # Perform the removeMermbersFromGroups operation
@@ -97,7 +98,7 @@ class FunctionComponent(ResilientComponent):
             results["users_dn"] = input_ldap_multiple_user_dn,
             results["groups_dn"] = input_ldap_multiple_group_dn
 
-            LOG.info("Completed")
+            yield StatusMessage("Finished 'ldap_utilities_add_to_groups' running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

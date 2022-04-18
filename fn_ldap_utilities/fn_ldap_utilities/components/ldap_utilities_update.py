@@ -30,13 +30,16 @@ class FunctionComponent(ResilientComponent):
         """Function: A function that updates the attribute of a DN with a new value"""
 
         try:
-            yield StatusMessage("Starting ldap_utilities_update")
+            # Get the wf_instance_id of the workflow this Function was called in
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
+            yield StatusMessage("Starting 'ldap_utilities_update' running in workflow '{}'".format(wf_instance_id))
 
             # Validate that required fields are given
             validate_fields(["ldap_dn", "ldap_attribute_name", "ldap_attribute_values"], kwargs)
 
             # Get function inputs
-            ldap_domain_name = kwargs.get("ldap_domain_name") # text
+            ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
             input_ldap_dn = kwargs.get("ldap_dn") # text (required)
             input_ldap_attribute_name = kwargs.get("ldap_attribute_name") # text (required)
             input_ldap_attribute_values_asString = kwargs.get("ldap_attribute_values") # text (required) [string repersentation of an array]
@@ -66,15 +69,13 @@ class FunctionComponent(ResilientComponent):
                 # Bind to the connection
                 c.bind()
             except Exception as err:
-                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
+                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
 
             # Inform user
             yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
-            res = False
-
             try:
-                yield StatusMessage("Attempting to update {0}".format(input_ldap_attribute_name))
+                yield StatusMessage("Attempting to update {}".format(input_ldap_attribute_name))
                 # Perform the Modify operation
                 res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, input_ldap_attribute_values)]})
 
@@ -93,7 +94,7 @@ class FunctionComponent(ResilientComponent):
             results["attribute_values"] = input_ldap_attribute_values
             results["user_dn"] = input_ldap_dn
 
-            LOG.info("Completed")
+            yield StatusMessage("Finished 'ldap_utilities_update' running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

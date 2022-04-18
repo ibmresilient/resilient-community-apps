@@ -23,7 +23,7 @@
 # address the user you want to set a new password for from the artifact's value
 inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
+inputs.ldap_search_filter = "(&(objectClass=person)(mail=%ldap_param%))"
 inputs.ldap_search_param =  artifact.value
 ```
 
@@ -51,7 +51,8 @@ inputs.ldap_search_param =  artifact.value
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
-inputs.ldap_new_password = "NewTestPassword"
+inputs.ldap_new_auto_password_len = '12'
+inputs.ldap_return_new_password = True
 ```
 
 ### Post-Processing Script
@@ -60,10 +61,11 @@ inputs.ldap_new_password = "NewTestPassword"
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Set Password workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP MultiDomain Utilities: Set Password workflow <u>complete</u>:</i>
                     A New Password has been set for:
-                    <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
-                    <b>DN:</b> '{1}'""".format(artifact.value, results.user_dn)
+                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
+                    <b>DN:</b> '{}'
+                    <b>New password:</b> '{}'""".format(artifact.value, results.user_dn, results.inputs.ldap_new_password)
 
   incident.addNote(helper.createRichText(noteText))
 ```

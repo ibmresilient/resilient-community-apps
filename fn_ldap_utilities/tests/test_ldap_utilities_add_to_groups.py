@@ -4,11 +4,11 @@
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.helper import TestingHelper, get_mock_config_data
-from fn_ldap_utilities.util.helper import PACKAGE_NAME
 from mock import patch
+from fn_ldap_utilities.util.helper import PACKAGE_NAME
+from resilient_circuits.util import get_function_definition
+from tests.helper import TestingHelper, get_mock_config_data
+from resilient_circuits import SubmitTestFunction, FunctionResult
 
 FUNCTION_NAME = "ldap_utilities_add_to_groups"
 
@@ -60,4 +60,5 @@ class TestLdapUtilitiesAddToGroups:
             "ldap_multiple_group_dn": ldap_multiple_group_dn
         }
         results = call_ldap_utilities_add_to_groups_function(circuits_app, function_params)
-        assert(expected_results == results)
+        for expected_result in expected_results:
+            assert expected_result in results

@@ -31,13 +31,16 @@ class FunctionComponent(ResilientComponent):
         """Function: A function that allows you to remove multiple from multiple groups"""
 
         try:
-            yield StatusMessage("Starting ldap_utilities_remove_from_groups")
+            # Get the wf_instance_id of the workflow this Function was called in
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
+            yield StatusMessage("Starting 'ldap_utilities_remove_from_groups' running in workflow '{}'".format(wf_instance_id))
 
             # Validate that required fields are given
             validate_fields(["ldap_multiple_user_dn", "ldap_multiple_group_dn"], kwargs)
 
             # Get function inputs
-            ldap_domain_name = kwargs.get("ldap_domain_name") # text
+            ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
             input_ldap_multiple_user_dn_asString = kwargs.get("ldap_multiple_user_dn") # text (required) [string repersentation of an array]
             input_ldap_multiple_group_dn_asString = kwargs.get("ldap_multiple_group_dn") # text (required) [string repersentation of an array]
 
@@ -76,14 +79,12 @@ class FunctionComponent(ResilientComponent):
             # Inform user
             yield StatusMessage("Connected to Active Directory")
 
-            res = False
             users_dn = []
 
             try:
                 yield StatusMessage("Attempting to remove user(s) from group(s)")
                 # Perform the removeMermbersFromGroups operation
-                res = ad_remove_members_from_groups(
-                    c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
+                res = ad_remove_members_from_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
                 # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
                 if res and "changes" in c.request:
@@ -103,7 +104,7 @@ class FunctionComponent(ResilientComponent):
             results["users_dn"] = users_dn if len(users_dn) else None
             results["groups_dn"] = input_ldap_multiple_group_dn
 
-            LOG.info("Completed")
+            yield StatusMessage("Finished 'ldap_utilities_remove_from_groups' running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

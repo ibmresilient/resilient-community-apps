@@ -79,13 +79,16 @@ class FunctionComponent(ResilientComponent):
             return ldap_search_filter
 
         try:
-            yield StatusMessage("Starting ldap_utilities_search")
+            # Get the wf_instance_id of the workflow this Function was called in
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
+            yield StatusMessage("Starting 'ldap_utilities_search' running in workflow '{}'".format(wf_instance_id))
 
             # Validate that required fields are given
             validate_fields(["ldap_search_base", "ldap_search_filter"], kwargs)
 
             # Get function inputs
-            ldap_domain_name = kwargs.get("ldap_domain_name") # text
+            ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
             input_ldap_search_base = kwargs.get("ldap_search_base") # text (required)
             input_ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter")) # textarea (required)
             input_ldap_search_attributes = kwargs.get("ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
@@ -143,7 +146,7 @@ class FunctionComponent(ResilientComponent):
                     for entry in entries:
                         entry.update(entry.pop("attributes", None))
 
-                    yield StatusMessage("{0} entries found".format(len(entries)))
+                    yield StatusMessage("{} entries found".format(len(entries)))
                     success = True
 
                 else:
@@ -162,10 +165,10 @@ class FunctionComponent(ResilientComponent):
             # Initialize ResultPayload object
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            results = rp.done(res, None)
+            results = rp.done(success, None)
             results["entries"] = entries
 
-            LOG.info("Completed")
+            yield StatusMessage("Finished 'ldap_utilities_search' running in workflow '{}'".format(wf_instance_id))
             LOG.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the return value.
