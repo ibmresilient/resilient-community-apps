@@ -2,20 +2,19 @@
 
 from ldap3 import Server, Connection, MOCK_SYNC
 from mock import Mock
-import os
+from os import path
 
 class TestingHelper():
 
     def __init__(self, isSearch=False):
-
-        self.MOCK_DATA_PATH = os.getcwd() + "/fn_ldap_utilities/tests/mock_data/"
+        self.MOCK_DATA_PATH = path.join(path.dirname(__file__), "mock_data")
 
         if isSearch:
-            self.MOCK_DATA_PATH = os.getcwd() + "/fn_ldap_utilities/tests/mock_data/search_specific/"
+            self.MOCK_DATA_PATH = path.join(self.MOCK_DATA_PATH, "search_specific")
 
         # Create a fake LDAP server from the info and schema json files
         self.FAKE_SERVER = Server.from_definition(
-            'my_fake_server', self.MOCK_DATA_PATH + 'mock_server_info.json', self.MOCK_DATA_PATH + 'mock_server_schema.json')
+            'my_fake_server', path.join(self.MOCK_DATA_PATH, "mock_server_info.json"), path.join(self.MOCK_DATA_PATH, "mock_server_schema.json"))
 
     def mocked_server(self):
         """Mock ldap3 server.
@@ -32,8 +31,7 @@ class TestingHelper():
             self.FAKE_SERVER, user='cn=my_user,ou=test,o=lab', password='my_password', client_strategy=MOCK_SYNC)
 
         # Populate the DIT of the fake server with mock entries
-        mocked_connection.strategy.entries_from_json(
-            self.MOCK_DATA_PATH + 'mock_server_entries.json')
+        mocked_connection.strategy.entries_from_json(path.join(self.MOCK_DATA_PATH, "mock_server_entries.json"))
 
         return Mock(return_value=mocked_connection)
 
