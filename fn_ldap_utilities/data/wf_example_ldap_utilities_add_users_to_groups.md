@@ -57,7 +57,7 @@ inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=e
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
+                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

@@ -61,11 +61,9 @@ class FunctionComponent(ResilientComponent):
 
             if (input_ldap_toggle_access.lower() == 'enable'):
                 ldap_user_accout_control_value = 512
-                user_status = "Enabled"
 
             elif (input_ldap_toggle_access.lower() == 'disable'):
                 ldap_user_accout_control_value = 514
-                user_status = "Disabled"
 
             else:
                 raise ValueError("ldap_toggle_access function input must be 'Enable' or 'Disable'")
@@ -100,7 +98,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(res, None)
             results["user_dn"] = input_ldap_dn
-            results["user_status"] = user_status
+            results["user_status"] = input_ldap_toggle_access
 
             yield StatusMessage("Finished 'ldap_utilities_toggle_access' running in workflow '{}'".format(wf_instance_id))
 

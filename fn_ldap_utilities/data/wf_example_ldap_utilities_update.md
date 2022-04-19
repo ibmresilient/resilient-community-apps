@@ -22,7 +22,7 @@
 # which will be the DN of the account you want to update. Then set
 # the name of the attribute to update and list the values
 inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
 inputs.ldap_attribute_name = "homePhone"
 inputs.ldap_attribute_values = "['081111111']"
 # inputs.ldap_attribute_values = "['081111111', '082222222']"
@@ -38,7 +38,7 @@ if (results.success):
                     An LDAP Attribute has been updated
                     <b>Attribute:</b> {}
                     <b>New Value(s):</b> {}
-                    <b>DN:</b> '{}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
+                    <b>DN:</b> '{}'""".format(results.inputs.ldap_attribute_name, results.inputs.ldap_attribute_values, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

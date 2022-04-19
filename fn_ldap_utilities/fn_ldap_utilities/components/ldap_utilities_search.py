@@ -165,7 +165,7 @@ class FunctionComponent(ResilientComponent):
             # Initialize ResultPayload object
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            results = rp.done(success, None)
+            results = rp.done(success, entries)
             results["entries"] = entries
 
             yield StatusMessage("Finished 'ldap_utilities_search' running in workflow '{}'".format(wf_instance_id))

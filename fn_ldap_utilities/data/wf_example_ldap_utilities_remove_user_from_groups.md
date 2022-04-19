@@ -61,7 +61,7 @@ if (results.success):
   else:
     noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
+                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```

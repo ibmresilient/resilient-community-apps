@@ -55,7 +55,7 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if(results.success):
-  for entry in results["entries"]:
+  for entry in results.content:
     if not entry:
       break
     # Add Row

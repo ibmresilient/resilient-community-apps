@@ -50,7 +50,8 @@ inputs.ldap_search_param =  artifact.value
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
+inputs.ldap_new_password = ""
 inputs.ldap_new_auto_password_len = '12'
 inputs.ldap_return_new_password = True
 ```
@@ -65,7 +66,7 @@ if (results.success):
                     A New Password has been set for:
                     <b>Email:</b> <u style="color: #7fb0ff">{}</u>
                     <b>DN:</b> '{}'
-                    <b>New password:</b> '{}'""".format(artifact.value, results.user_dn, results.inputs.ldap_new_password)
+                    <b>New password:</b> '{}'""".format(artifact.value, results.inputs.ldap_dn, results.inputs.ldap_new_password)
 
   incident.addNote(helper.createRichText(noteText))
 ```

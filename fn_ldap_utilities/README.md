@@ -1,35 +1,38 @@
 # fn_ldap_utilities
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - LDAP Utilities: Add to Group(s)](#function---ldap-utilities-add-to-groups)
-- [Function - LDAP Utilities: Remove from Group(s)](#function---ldap-utilities-remove-from-groups)
-- [Function - LDAP Utilities: Set Password](#function---ldap-utilities-set-password)
-- [Function - LDAP Utilities: Search](#function---ldap-utilities-search)
-- [Function - LDAP Utilities: Update](#function---ldap-utilities-update)
-- [Function - LDAP Utilities: Toggle Access](#function---ldap-utilities-toggle-access)
-- [Data Table - LDAP Query results](#data-table---ldap-query-results)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [fn_ldap_utilities](#fn_ldap_utilities)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+    - [Resilient platform](#resilient-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - LDAP Utilities: Add to Group(s)](#function---ldap-utilities-add-to-groups)
+  - [Function - LDAP Utilities: Remove from Group(s)](#function---ldap-utilities-remove-from-groups)
+  - [Function - LDAP Utilities: Set Password](#function---ldap-utilities-set-password)
+  - [Function - LDAP Utilities: Search](#function---ldap-utilities-search)
+  - [Function - LDAP Utilities: Update](#function---ldap-utilities-update)
+  - [Function - LDAP Utilities: Toggle Access](#function---ldap-utilities-toggle-access)
+  - [Data Table - LDAP Query results](#data-table---ldap-query-results)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Rules](#rules)
+  - [Troubleshooting & Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.2.0 | 04/2022 | Add ability to have multiple LDAP Domains |
-| 1.1.1 | 00/2000 | Support added for App Host |
-| 1.1.0 | 00/2000 | <ul><li>Handle Unicode in Post-Process Scripts</li><li>Handle NTLM Authentication to Active Directory</li><li>Add functionality to allow for LDAP Wildcard queries with *</li></ul> |
-| 1.0.0 | MM/YYYY | Initial Release |
+| 1.1.1 | 07/2021 | Support added for App Host |
+| 1.1.0 | 03/2019 | <ul><li>Handle Unicode in Post-Process Scripts</li><li>Handle NTLM Authentication to Active Directory</li><li>Add functionality to allow for LDAP Wildcard queries with *</li></ul> |
+| 1.0.0 | 07/2018 | Initial Release |
 
 ---
 
@@ -176,13 +179,12 @@ def into_string_list_format(entries):
       entries_to_add += '"{}",'.format(e)
     return string_list_to_return.format(entries_to_add)
 
-list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
+list_of_users_dn = ['cn=Breda User11,cn=Users,dc=example,dc=com', 'cn=Breda User10,cn=Users,dc=example,dc=com']
 
-inputs.ldap_domain_name = 'Domain1'
+inputs.ldap_domain_name = "Domain1"
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
-inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=example,dc=com')
-
+inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=example,dc=com')
 ```
 
 </p>
@@ -198,7 +200,7 @@ inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=ex
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
+                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -270,12 +272,12 @@ def into_string_list_format(entries):
       entries_to_add += '"{}",'.format(e)
     return string_list_to_return.format(entries_to_add)
 
-list_of_users_dn = ['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']
+list_of_users_dn = ['cn=Breda User11,cn=Users,dc=example,dc=com', 'cn=Breda User10,cn=Users,dc=example,dc=com']
 
-inputs.ldap_domain_name = 'Domain1'
+inputs.ldap_domain_name = "Domain1"
 # Both inputs must be a string representation of a List
 inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
-inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=example,dc=com')
+inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=example,dc=com')
 ```
 
 </p>
@@ -289,15 +291,13 @@ inputs.ldap_multiple_group_dn = into_string_list_format('dn=Accounts Group,dc=ex
 # a note is added to the incident
 
 if (results.success):
-
   if not results.users_dn:
-    noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
+    noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                   <b>No users found. Check inputted user DN's</b>"""
-
   else:
-    noteText = """<br><i style="color: #979ca3">LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
+    noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                     <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.users_dn, results.groups_dn)
+                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -343,8 +343,10 @@ results = {
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
-inputs.ldap_new_password = "NewTestPassword"
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
+inputs.ldap_new_password = ""
+inputs.ldap_new_auto_password_len = '12'
+inputs.ldap_return_new_password = True
 ```
 
 </p>
@@ -358,10 +360,11 @@ inputs.ldap_new_password = "NewTestPassword"
 # a note is added to the incident
 
 if (results.success):
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Set Password workflow <u>complete</u>:</i>
+  noteText = """<br><i style="color: #979ca3"> LDAP MultiDomain Utilities: Set Password workflow <u>complete</u>:</i>
                     A New Password has been set for:
                     <b>Email:</b> <u style="color: #7fb0ff">{}</u>
-                    <b>DN:</b> '{}'""".format(artifact.value, results.user_dn)
+                    <b>DN:</b> '{}'
+                    <b>New password:</b> '{}'""".format(artifact.value, results.inputs.ldap_dn, results.inputs.ldap_new_password)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -457,7 +460,7 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if(results.success):
-  for entry in results["entries"]:
+  for entry in results.content:
     if not entry:
       break
     # Add Row
@@ -527,7 +530,7 @@ results = {
 # which will be the DN of the account you want to update. Then set
 # the name of the attribute to update and list the values
 inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
 inputs.ldap_attribute_name = "homePhone"
 inputs.ldap_attribute_values = "['081111111']"
 # inputs.ldap_attribute_values = "['081111111', '082222222']"
@@ -548,7 +551,7 @@ if (results.success):
                     An LDAP Attribute has been updated
                     <b>Attribute:</b> {}
                     <b>New Value(s):</b> {}
-                    <b>DN:</b> '{}'""".format(results.attribute_name, results.attribute_values, results.user_dn)
+                    <b>DN:</b> '{}'""".format(results.inputs.ldap_attribute_name, results.inputs.ldap_attribute_values, results.user_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -595,7 +598,7 @@ results = {
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
 inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
 ```
 
 </p>
@@ -610,12 +613,12 @@ inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
 
 if (results.success):
   color = "#45bc27" #green
-  if (results.user_status == "Disabled"):
+  if (results.inputs.ldap_toggle_access.get("name") == "Disabled"):
     color = "#ff402b" #red
   noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
                     <b>Email:</b> <u style="color: #7fb0ff">{}</u>
                     <b>Status:</b> <b style="color: {}">{}</b>
-                    <b>DN:</b> '{}'""".format(artifact.value, color, results.user_status, results.user_dn)
+                    <b>DN:</b> '{}'""".format(artifact.value, color, results.inputs.ldap_toggle_access.name, results.inputs.ldap_dn)
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -643,7 +646,6 @@ ldap_query_results
 | UID | `uid` | `text` | - |
 
 ---
-
 
 
 ## Rules

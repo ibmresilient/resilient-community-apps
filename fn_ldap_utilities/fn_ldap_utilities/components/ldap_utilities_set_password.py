@@ -49,8 +49,8 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("LDAP Domain Name: %s", ldap_domain_name)
             LOG.info("LDAP DN: %s", ldap_dn)
-            LOG.debug("ldap_new_auto_pasxxxxx_len: %s", ldap_new_auto_password_len)
-            LOG.info("ldap_return_new_pasxxxxx: %s", ldap_return_new_password)
+            LOG.debug("ldap_new_auto_password_len: %s", ldap_new_auto_password_len)
+            LOG.info("ldap_return_new_password: %s", ldap_return_new_password)
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
@@ -97,6 +97,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(res, None)
             results["user_dn"] = ldap_dn
+            results["inputs"]["ldap_new_password"] = ldap_new_password
 
             yield StatusMessage("Finished 'ldap_utilities_set_password' that was running in workflow '{}'".format(wf_instance_id))
 
