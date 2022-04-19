@@ -50,7 +50,7 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
 DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time", 
+                   "role", "vendor", "devs_id", "extrahop_id", "activity", "on_watchlist", "mod_time", "user_mod_time", "discover_time", 
                    "last_seen_time"]
 
 # Processing
@@ -62,7 +62,7 @@ def process_devs(dev):
         f2 = f1
         if f1.startswith("devs_"):
             f2 = f1.split('_', 1)[1]
-        if dev[f2] is None:
+        if dev[f1] is None:
             newrow[f1] = dev[f2]
         elif isinstance(dev[f2], list):
             newrow[f1] = "{}".format(", ".join(dev[f2]))
