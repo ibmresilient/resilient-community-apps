@@ -34,11 +34,13 @@ setup(
         <br>
         The ExtraHop App provides the following functionality:
         <br>
-        * Functions to get and search and update detections.
+        * A poller which gathers current detections from ExtraHop and escalates to the SOAR platform as incidents.
+        <br>
+        * Functions to get, search and update detections.
         <br>
         * Functions to get and search devices.
         <br>
-        * Functions to get and create and assign tags.
+        * Functions to get, create and assign tags.
         <br>
         * Functions get and set the watchlist.
         <br>
