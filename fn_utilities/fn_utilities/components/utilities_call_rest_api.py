@@ -97,7 +97,7 @@ def build_dict(rest_temp):
 
     return temp_dict
 
-def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout=600):
+def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout):
     rc = RequestsCommon(opts, options)
 
     if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
