@@ -14,13 +14,19 @@
 
 # Utility Functions for IBM SOAR
 
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
+- [Utility Functions for IBM SOAR](#utility-functions-for-ibm-soar)
+  - [Release Notes](#release-notes)
+    - [Release History](#release-history)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Uninstall](#uninstall)
+  - [Troubleshooting](#troubleshooting)
+    - [SOAR Action Status](#soar-action-status)
+    - [SOAR Scripting Log](#soar-scripting-log)
+    - [SOAR Logs](#soar-logs)
+    - [Resilient-Circuits](#resilient-circuits)
+  - [Support](#support)
 
 ---
 
@@ -33,6 +39,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
+| 2.1.1   | 4/2022 | Bug fix for selftest |
 | 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
 | 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |

@@ -12,33 +12,44 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_utilities_v2.1.0
+# **User Guide:** fn_utilities_v2.1.1
 
 ## Table of Contents
-- [App Host Setup](#app-host-setup)
-- [Integration Server Setup](#integration-server-setup)
-- [Function - Utilities: Attachment Hash](#function---utilities-attachment-hash)
-- [Function - Utilities: Attachment to Base64](#function---utilities-attachment-to-base64)
-- [Function - Utilities: Attachment Zip Extract](#function---utilities-attachment-zip-extract)
-- [Function - Utilities: Attachment Zip List](#function---utilities-attachment-zip-list)
-- [Function - Utilities: Base64 to Artifact](#function---utilities-base64-to-artifact)
-- [Function - Utilities: Base64 to Attachment](#function---utilities-base64-to-attachment)
-- [Function - Utilities: Call REST API](#function---utilities-call-rest-api)
-- [Function - Utilities: Domain Distance](#function---utilities-domain-distance)
-- [Function - Utilities: Email Parse](#function---utilities-email-parse)
-- [Function - Utilities: Excel Query](#function---utilities-excel-query)
-- [Function - Utilities: Expand URL](#function---utilities-expand-url)
-- [Function - Utilities: Extract SSL Cert From Url](#function---utilities-extract-ssl-cert-from-url)
-- [Function - Utilities: Get Contact Info](#function---utilities-get-contact-info)
-- [Function - Utilities: JSON2HTML](#function---utilities-json2html)
-- [Function - Utilities: Parse SSL Certificate](#function---utilities-parse-ssl-certificate)
-- [Function - Utilities: PDFiD](#function---utilities-pdfid)
-- [Function - Utilities: Resilient Search](#function---utilities-resilient-search)
-- [Function - Utilities: Shell Command](#function---utilities-shell-command)
-- [Function - Utilities: String to Attachment](#function---utilities-string-to-attachment)
-- [Function - Utilities: Timer](#function---utilities-timer)
-- [Function - Utilities: XML Transformation](#function---utilities-xml-transformation)
-- [Rules](#rules)
+- [**User Guide:** fn_utilities_v2.1.1](#user-guide-fn_utilities_v211)
+  - [Table of Contents](#table-of-contents)
+    - [Release History](#release-history)
+  - [App Host Setup](#app-host-setup)
+  - [Integration Server Setup](#integration-server-setup)
+  - [Function - Utilities: Attachment Hash](#function---utilities-attachment-hash)
+  - [Function - Utilities: Attachment to Base64](#function---utilities-attachment-to-base64)
+  - [Function - Utilities: Attachment Zip Extract](#function---utilities-attachment-zip-extract)
+  - [Function - Utilities: Attachment Zip List](#function---utilities-attachment-zip-list)
+  - [Function - Utilities: Base64 to Artifact](#function---utilities-base64-to-artifact)
+  - [Function - Utilities: Base64 to Attachment](#function---utilities-base64-to-attachment)
+  - [Function - Utilities: Call REST API](#function---utilities-call-rest-api)
+  - [Function - Utilities: Domain Distance](#function---utilities-domain-distance)
+  - [Function - Utilities: Email Parse](#function---utilities-email-parse)
+    - [Supporting Outlook .msg files](#supporting-outlook-msg-files)
+      - [For Integrations Servers:](#for-integrations-servers)
+      - [Install `msgconvert` on CentOS/RHEL based systems:](#install-msgconvert-on-centosrhel-based-systems)
+      - [For App Host Environments:](#for-app-host-environments)
+  - [Function - Utilities: Excel Query](#function---utilities-excel-query)
+  - [Function - Utilities: Expand URL](#function---utilities-expand-url)
+  - [Function - Utilities: Extract SSL Cert From Url](#function---utilities-extract-ssl-cert-from-url)
+  - [Function - Utilities: Get Contact Info](#function---utilities-get-contact-info)
+  - [Function - Utilities: JSON2HTML](#function---utilities-json2html)
+  - [Function - Utilities: Parse SSL Certificate](#function---utilities-parse-ssl-certificate)
+  - [Function - Utilities: PDFiD](#function---utilities-pdfid)
+  - [Function - Utilities: Resilient Search](#function---utilities-resilient-search)
+  - [Function - Utilities: Shell Command](#function---utilities-shell-command)
+    - [app.config examples:](#appconfig-examples)
+    - [Running Powershell Scripts Remotely:](#running-powershell-scripts-remotely)
+    - [Examples of remote commands:](#examples-of-remote-commands)
+  - [Function - Utilities: String to Attachment](#function---utilities-string-to-attachment)
+  - [Function - Utilities: Timer](#function---utilities-timer)
+  - [Function - Utilities: XML Transformation](#function---utilities-xml-transformation)
+    - [For App Host Environments:](#for-app-host-environments-1)
+  - [Rules](#rules)
 
 ---
 
@@ -46,6 +57,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
+| 2.1.1   | 4/2022 | Bug fix for selftest |
 | 2.1.0   | 3/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
 | 2.0.6   | 7/2021 | pin dependency 'chardet' at v4.0.0 |
 | 2.0.2   | 2/2021 | bug fixes for Shell Command |
