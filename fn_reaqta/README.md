@@ -1980,6 +1980,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
     "reaqta_tags": "{{ tags | join(', ') }}",
     "reaqta_endpoint_id": "{{ endpoint.id }}",
+    "reaqta_endpoint_link": "<a target='blank' href='{{ endpoint_url }}'>ReaQta Endpoint</a>",
     "reaqta_groups": "{{ endpoint.groups | map(attribute='name') | join(', ') }}",
     "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}"
   },
