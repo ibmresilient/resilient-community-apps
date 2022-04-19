@@ -1695,7 +1695,7 @@
             "16010101000000.0Z"
         ],
         "distinguishedName": [
-            "CN=Aggregate,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=Aggregate,CN=Schema,CN=Configuration,dc=example,DC=com"
         ],
         "instanceType": [
             "4"
@@ -1711,7 +1711,7 @@
         ],
         "nameForms": [],
         "objectCategory": [
-            "CN=SubSchema,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=SubSchema,CN=Schema,CN=Configuration,dc=example,DC=com"
         ],
         "objectClass": [
             "top",
@@ -1997,6 +1997,6 @@
             "20120426023212.0Z"
         ]
     },
-    "schema_entry": "CN=Aggregate,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+    "schema_entry": "CN=Aggregate,CN=Schema,CN=Configuration,dc=example,DC=com",
     "type": "SchemaInfo"
 }

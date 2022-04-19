@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "users_dn": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "groups_dn": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
