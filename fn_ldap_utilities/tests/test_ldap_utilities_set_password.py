@@ -7,7 +7,7 @@ import pytest
 from mock import patch
 from fn_ldap_utilities.util.helper import PACKAGE_NAME
 from resilient_circuits.util import get_function_definition
-from tests.helper import TestingHelper, get_mock_config_data
+from helper import TestingHelper, get_mock_config_data
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 FUNCTION_NAME = "ldap_utilities_set_password"
