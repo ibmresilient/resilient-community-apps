@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -13,7 +13,7 @@ from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_rule_by_name, add_comment, \
     lookup_object_type, validate_app_config
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 # credentials for API calls back to resiient when a schedule is triggered
 RESILIENT_CONNECTION = None
@@ -48,6 +48,7 @@ class FunctionComponent(ResilientComponent):
             scheduler_rule_name = kwargs.get("scheduler_rule_name")  # text
             scheduler_rule_parameters = kwargs.get("scheduler_rule_parameters")  # text
             scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
+            scheduler_is_playbook = kwargs.get("scheduler_is_playbook", False) # boolean
 
             incident_id = kwargs.get("incident_id")  # number
             object_id = kwargs.get("object_id")  # number
@@ -63,15 +64,16 @@ class FunctionComponent(ResilientComponent):
 
             scheduler_label_prefix = "{}-{}".format(scheduler_label_prefix, incident_id)
 
-            log.info("scheduler_type: %s", scheduler_type)
-            log.info("scheduler_type_value: %s", scheduler_type_value)
-            log.info("scheduler_rule_name: %s", scheduler_rule_name)
-            log.info("scheduler_rule_parameters: %s", scheduler_rule_parameters)
-            log.info("scheduler_label_prefix: %s", scheduler_label_prefix)
+            LOG.info("scheduler_type: %s", scheduler_type)
+            LOG.info("scheduler_type_value: %s", scheduler_type_value)
+            LOG.info("scheduler_rule_name: %s", scheduler_rule_name)
+            LOG.info("scheduler_rule_parameters: %s", scheduler_rule_parameters)
+            LOG.info("scheduler_label_prefix: %s", scheduler_label_prefix)
+            LOG.info("scheduler_is_playbook: %s", scheduler_is_playbook)
 
-            log.info("incident_id: %s", incident_id)
-            log.info("object_id: %s", object_id)
-            log.info("row_id: %s", row_id)
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("object_id: %s", object_id)
+            LOG.info("row_id: %s", row_id)
 
             # get the rule id
             rest_client = self.rest_client()
@@ -85,9 +87,11 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Incident is closed")
 
             # get the rule id
-            rule_id, rule_object_type_id = get_rule_by_name(rest_client, scheduler_rule_name.strip())
+            rule_id, rule_object_type_id = get_rule_by_name(rest_client,
+                                                            scheduler_rule_name.strip(),
+                                                            scheduler_is_playbook)
             if not rule_id:
-                raise ValueError(u"Rule/Plabook name not found: %s", scheduler_rule_name)
+                raise ValueError(u"Rule/Playbook name not found: %s", scheduler_rule_name)
 
             if object_type_id != rule_object_type_id:
                 raise ValueError(u"Rule/Playbook does not match the action object: %s", object_type_name)
@@ -101,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             incident_data = [incident_id, object_id, row_id,
                              scheduler_label_prefix,
                              scheduler_rule_name, rule_id, rule_object_type_id, rule_params,
-                             None,
+                             scheduler_is_playbook,
                              self.opts[SECTION_SCHEDULER]]
 
             # validate the type and type_value
@@ -115,7 +119,7 @@ class FunctionComponent(ResilientComponent):
                                               args=incident_data,
                                               kwargs=rule_params)
 
-            log.debug(u"Scheduled_job: {}".format(scheduled_job))
+            LOG.debug(u"Scheduled_job: {}".format(scheduled_job))
 
             yield StatusMessage("Rule scheduled")
 
@@ -151,7 +155,7 @@ class FunctionComponent(ResilientComponent):
 def triggered_job(incident_id, object_id, row_id,
                   scheduler_label,
                   rule_name, rule_id, rule_object_type_id, rule_params,
-                  opts, options, **kwargs):
+                  is_playbook, options, **kwargs):
     """
     This function is called when a scheduled rule is triggered. It is run asynchronous of the create_scheduled_rule process.
     It's role is to build the api call-back to Resilient to run the rule.
@@ -164,19 +168,19 @@ def triggered_job(incident_id, object_id, row_id,
     :param rule_id:
     :param rule_object_type_id: internal id referring to incident, task, artifact, etc.
     :param rule_params:
-    :param opts: **DEPRECATED** contains [resilient] parameters needed to connect back to Resilient for API calls
+    :param is_playbook: true if a playbook, false if a rule
     :param options: contains [fn_scheduler] parameters
     :param kwargs: catch all for additional arguments as necessary
     :return: None
     """
-    log.debug(incident_id)
-    log.debug(rule_id)
-    log.debug(rule_object_type_id)
-    log.debug(rule_params)
-    log.debug(kwargs)
+    LOG.debug(incident_id)
+    LOG.debug(rule_id)
+    LOG.debug(rule_object_type_id)
+    LOG.debug(rule_params)
+    LOG.debug(kwargs)
 
     disable_notes = str_to_bool(options.get("disable_notes", False))
-    log.debug(disable_notes)
+    LOG.debug(disable_notes)
 
     # get the rest client
     rest_client = get_resilient_client(RESILIENT_CONNECTION)
@@ -189,16 +193,16 @@ def triggered_job(incident_id, object_id, row_id,
         resp = None
 
     if not resp or resp['end_date'] is not None:
-        log.warning(u"Incident %s is not found or closed. Removing scheduled rule: %s", incident_id, rule_name)
+        LOG.warning(u"Incident %s is not found or closed. Removing scheduled rule: %s", incident_id, rule_name)
         scheduler.remove_job(scheduler_label)
         return
 
     # make sure the rule is still enabled
     try:
-        is_playbook = get_rule_by_id(rest_client, rule_id)
+        get_rule_by_id(rest_client, rule_id, is_playbook)
     except KeyError as err:
         # remove rules which no longer exist
-        log.error(u"Rule/Playbook '%s' not found and schedule will be removed.", rule_name)
+        LOG.error(u"Rule/Playbook '%s' not found and schedule will be removed.", rule_name)
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         scheduler.remove_job(scheduler_label)
         return
@@ -220,26 +224,28 @@ def triggered_job(incident_id, object_id, row_id,
 
     # build the JSON for rule
     payload = {
-        "action_id": rule_id,
-        "properties": rule_params
+        "action_id": rule_id
     }
     if is_playbook:
         payload["type_id_handle"] = {"name":"playbookfields"}
+    if rule_params:
+        payload["properties"] = rule_params
 
-    log.info("Executing rule/playbook '{}:{}' for incident {}. Payload {}".format(
-        scheduler_label, rule_name, incident_id, payload))
+    LOG.info("Executing rule/playbook '%s:%s' for incident %s.",
+        scheduler_label, rule_name, incident_id)
+    LOG.debug(payload)
 
     # run the rule
     try:
         resp = rest_client.post(url, payload)
-        log.debug(resp)
+        LOG.debug(resp)
     except SimpleHTTPException as err:
         # is the object removed?
         if "Not Found" in str(err):
-            log.error("Object not found and schedule will be removed for rule/playbook '%s'", rule_id)
+            LOG.error("Object not found and schedule will be removed for rule/playbook '%s'", rule_id)
             scheduler.remove_job(scheduler_label)
         else:
-            log.error("An error occurred for rule/playbook '%s': %s", rule_id, str(err))
+            LOG.error("An error occurred for rule/playbook '%s': %s", rule_id, str(err))
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule/playbook '{}': {}".format(scheduler_label, str(err)))
         return
 

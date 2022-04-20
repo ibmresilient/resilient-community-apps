@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import threading
 from datetime import datetime
@@ -231,6 +231,6 @@ class ResilientScheduler:
 
         # hide settings which contain passwords
         params[8] = None
-        job_json['args'] = tuple(params)
+        job_json['args'] = params
 
         return job_json

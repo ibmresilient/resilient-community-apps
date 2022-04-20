@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "func": {
+          "type": "string"
+        },
+        "trigger": {},
+        "executor": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": [
+                  "integer",
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "thread_max": {
+                    "type": "string"
+                  },
+                  "datastore_dir": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "kwargs": {
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "misfire_grace_time": {
+          "type": "integer"
+        },
+        "coalesce": {
+          "type": "boolean"
+        },
+        "max_instances": {
+          "type": "integer"
+        },
+        "next_run_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "scheduler_type_value": {
+          "type": "string"
+        },
+        "incident_id": {
+          "type": "integer"
+        },
+        "scheduler_type": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "scheduler_label_prefix": {
+          "type": "string"
+        },
+        "scheduler_rule_name": {
+          "type": "string"
+        },
+        "scheduler_rule_parameters": {},
+        "scheduler_is_playbook": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

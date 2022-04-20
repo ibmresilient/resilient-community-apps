@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "mock_key": "Mock Value!"
+  },
+  "raw": null,
+  "inputs": {
+    "scheduler_label": "rl10-4623"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-scheduler",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 4,
+    "timestamp": "2022-04-20 16:31:00"
+  }
+}

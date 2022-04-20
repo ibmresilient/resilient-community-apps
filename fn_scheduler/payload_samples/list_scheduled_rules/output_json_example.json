@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": "rl10-4623",
+      "args": [
+        4623,
+        null,
+        null,
+        "rl10-4623",
+        "test scheduled rule",
+        212,
+        0,
+        null,
+        null,
+        {
+          "timezone": "America/New_York",
+          "thread_max": "20",
+          "datastore_dir": "/tmp/scheduler.sqlite"
+        }
+      ],
+      "next_run_time": "Apr 20 2022 04:35PM",
+      "type": "date",
+      "value": "Apr 20 2022 04:35PM"
+    },
+    {
+      "id": "cron_1649946391-123",
+      "args": [
+        123,
+        null,
+        null,
+        "cron_1649946391-123",
+        "Test Rule",
+        24,
+        0,
+        null,
+        null,
+        {
+          "timezone": "America/New_York",
+          "thread_max": "20",
+          "datastore_dir": "/tmp/scheduler.sqlite"
+        }
+      ],
+      "next_run_time": "Apr 21 2022 02:00AM",
+      "type": "cron",
+      "value": "* 2 * * *"
+    },
+    {
+      "id": "cron_1649949050-123",
+      "args": [
+        123,
+        null,
+        null,
+        "cron_1649949050-123",
+        "Test Rule",
+        24,
+        0,
+        null,
+        null,
+        {
+          "timezone": "America/New_York",
+          "thread_max": "20",
+          "datastore_dir": "/tmp/scheduler.sqlite"
+        }
+      ],
+      "next_run_time": "Apr 21 2022 02:00AM",
+      "type": "cron",
+      "value": "* 2 * * *"
+    }
+  ],
+  "raw": "[{\"id\": \"rl10-4623\", \"args\": [4623, null, null, \"rl10-4623\", \"test scheduled rule\", 212, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 20 2022 04:35PM\", \"type\": \"date\", \"value\": \"Apr 20 2022 04:35PM\"}, {\"id\": \"cron_1649946391-123\", \"args\": [123, null, null, \"cron_1649946391-123\", \"Test Rule\", 24, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 21 2022 02:00AM\", \"type\": \"cron\", \"value\": \"* 2 * * *\"}, {\"id\": \"cron_1649949050-123\", \"args\": [123, null, null, \"cron_1649949050-123\", \"Test Rule\", 24, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 21 2022 02:00AM\", \"type\": \"cron\", \"value\": \"* 2 * * *\"}]",
+  "inputs": {
+    "incident_id": 0
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-scheduler",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1,
+    "timestamp": "2022-04-20 16:30:28"
+  }
+}
