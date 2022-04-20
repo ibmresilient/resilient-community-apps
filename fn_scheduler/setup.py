@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     display_name='Scheduler',
     name='fn_scheduler',
-    version='1.1.2',
+    version='1.2.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',

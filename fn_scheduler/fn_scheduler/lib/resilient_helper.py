@@ -17,51 +17,93 @@ def get_incident(rest_client, incident_id):
 
     return resp
 
-def get_rule_by_name(rest_client, rule_name):
+def get_rule_by_name(rest_client, pb_name):
     """
     api call to get a resilient rule
-    :param rest_client:
-    :param rule_name:
+    :param rest_client: object to make API calls back to SOAR
+    :param pb_name: either a rule name or playbook name (can be pb_name)
     :return: rule in json format
     """
     rules = get_rules(rest_client)
 
+    # try rules
     for rule in rules['entities']:
-        if rule['name'].lower() == rule_name.lower():
+        if rule['name'].lower() == pb_name.lower():
             if not rule['enabled']:
-                raise AttributeError(u"Rule '{}' is disabled".format(rule_name))
+                raise AttributeError(u"Rule '{}' is disabled".format(pb_name))
 
             return (rule['id'], rule["object_type"])
 
+    # try playbooks
+    playbooks = get_playbooks(rest_client)
+
+    for playbook in playbooks['data']:
+        if playbook['name'] == pb_name.lower() or playbook['display_name'].lower() == pb_name.lower():
+            if playbook['status'] != 'enabled':
+                raise AttributeError(u"Playbook '{}' is disabled".format(pb_name))
+
+            return (playbook['id'], playbook["object_type"])
+
     return (None, None)
 
-def get_rule_by_id(rest_client, rule_id):
+def get_rule_by_id(rest_client, pb_id):
     """
-    api call to get a resilient rule by id and ensure the rule is still enabled
-    :param incident_id:
-    :param rule_id:
-    :return: True if rule is enabled for an incident or AttributeError
+    api call to get a SOAR rule/playbook by id and ensure that it is still enabled
+    :param rest_client: object to make API calls back to SOAR
+    :param pb_id: rule or playbook id
+    :return: True is id is a playbook, false if a rule.
+    :raises AttributeError if the rule/playbook disabled
+    :raises KeyError if the id is not found
     """
     rules = get_rules(rest_client)
 
     for rule in rules['entities']:
-        if rule['id'] == rule_id:
+        if rule['id'] == pb_id:
             if rule['enabled']:
+                return False
+            else:
+                raise AttributeError("Rule id '{}' is disabled".format(pb_id))
+
+    # try playbooks
+    playbooks = get_playbooks(rest_client)
+
+    for playbook in playbooks['data']:
+        if playbook['id'] == pb_id:
+            if playbook['status'] == 'enabled':
                 return True
             else:
-                raise AttributeError("Rule is disabled")
+                raise AttributeError(u"Playbook id '{}' is disabled".format(pb_id))
 
-    raise KeyError("Rule id {} is not found".format(rule_id))
+    raise KeyError("Rule/Playbook id '{}' is not found".format(pb_id))
 
 def get_rules(rest_client):
     """
-    api call to get all rules for the resilient organization
+    api call to get all rules for the SOAR organization
     :param rest_client:
     :return: json formatted rule list
     """
     url = "/actions"
 
     return rest_client.get(url)
+
+def get_playbooks(rest_client):
+    """
+    api call to get all playbooks for the SOAR organization
+    :param rest_client:
+    :return: json formatted rule list
+    """
+    url = "/playbooks/query_paged"
+
+    payload = {
+        "sorts": [
+            {
+                "field_name": "display_name",
+                "type": "asc"
+            }
+        ]
+    }
+
+    return rest_client.post(url, payload)
 
 def add_comment(rest_client, incident_id, comment):
     """

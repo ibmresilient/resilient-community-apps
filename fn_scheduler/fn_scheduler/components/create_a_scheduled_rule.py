@@ -87,10 +87,10 @@ class FunctionComponent(ResilientComponent):
             # get the rule id
             rule_id, rule_object_type_id = get_rule_by_name(rest_client, scheduler_rule_name.strip())
             if not rule_id:
-                raise ValueError(u"Rule name not found: %s", scheduler_rule_name)
+                raise ValueError(u"Rule/Plabook name not found: %s", scheduler_rule_name)
 
             if object_type_id != rule_object_type_id:
-                raise ValueError(u"Rule does not match the action object: %s", object_type_name)
+                raise ValueError(u"Rule/Playbook does not match the action object: %s", object_type_name)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
@@ -195,10 +195,10 @@ def triggered_job(incident_id, object_id, row_id,
 
     # make sure the rule is still enabled
     try:
-        get_rule_by_id(rest_client, rule_id)
+        is_playbook = get_rule_by_id(rest_client, rule_id)
     except KeyError as err:
         # remove rules which no longer exist
-        log.error(u"Rule '%s' not found and schedule will be removed.", rule_name)
+        log.error(u"Rule/Playbook '%s' not found and schedule will be removed.", rule_name)
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         scheduler.remove_job(scheduler_label)
         return
@@ -223,8 +223,11 @@ def triggered_job(incident_id, object_id, row_id,
         "action_id": rule_id,
         "properties": rule_params
     }
+    if is_playbook:
+        payload["type_id_handle"] = {"name":"playbookfields"}
 
-    log.info("Executing Rule '{}:{}' for Incident {}".format(scheduler_label, rule_name, incident_id))
+    log.info("Executing rule/playbook '{}:{}' for incident {}. Payload {}".format(
+        scheduler_label, rule_name, incident_id, payload))
 
     # run the rule
     try:
@@ -233,11 +236,11 @@ def triggered_job(incident_id, object_id, row_id,
     except SimpleHTTPException as err:
         # is the object removed?
         if "Not Found" in str(err):
-            log.error("Object not found and schedule will be removed for rule '%s'", rule_id)
+            log.error("Object not found and schedule will be removed for rule/playbook '%s'", rule_id)
             scheduler.remove_job(scheduler_label)
         else:
-            log.error("An error occurred for rule '%s'", rule_id)
-        (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+            log.error("An error occurred for rule/playbook '%s': %s", rule_id, str(err))
+        (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule/playbook '{}': {}".format(scheduler_label, str(err)))
         return
 
     if rule_type:
