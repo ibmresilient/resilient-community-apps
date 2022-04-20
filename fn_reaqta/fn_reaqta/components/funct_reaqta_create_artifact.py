@@ -55,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
             rest_client = self.rest_client()
             soar_common = SOARCommon(rest_client)
             results = {}
-            if not err_msg:
+            if not err_msg and file_contents:
                 if soar_common.is_workflow_active(self.get_fn_msg()):
                     # collect the file name
                     file_name = ntpath.basename(fn_inputs.reaqta_program_path)
