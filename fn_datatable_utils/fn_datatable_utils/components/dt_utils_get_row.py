@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(workflow_instance_id)
 
-            # If the dt_utils_row_id given is 0 the validate will fail
+            # If the dt_utils_row_id given is 0 and row_id does not exist the validate will fail
             if inputs["dt_utils_row_id"] == 0:
                 if not row_id:
                     raise ValueError("Run the workflow from a datatable to get the current row_id.")
