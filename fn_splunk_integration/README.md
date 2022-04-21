@@ -399,7 +399,7 @@ Define a Splunk query string with parameters. Map parameters from inputs, and pe
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `splunk_label` | `text` | No | `-` | Label given to each splunk server in the app.config |
-| `splunk_max_return` | `number` | No | `-` | Max number of events to return (used in head max) |
+| `splunk_max_return` | `number` | No | `-` | Max number of events to return (if empty, up to 100 are returned) |
 | `splunk_query` | `textarea` | No | `-` | - |
 | `splunk_query_param1` | `text` | No | `-` | - |
 | `splunk_query_param2` | `text` | No | `-` | - |
