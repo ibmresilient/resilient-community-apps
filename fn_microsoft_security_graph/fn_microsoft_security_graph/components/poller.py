@@ -126,7 +126,7 @@ def ds_to_millis(val):
     if not val:
         return val
     try:
-        dt = datetime.strptime(val[:-1], "%Y-%m-%dT%H:%M:%S.%f")
+        dt = datetime.strptime(val[:23].replace('Z',''), "%Y-%m-%dT%H:%M:%S.%f")
         return timegm(dt.utctimetuple()) * 1000
     except Exception as e:
         LOG.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
