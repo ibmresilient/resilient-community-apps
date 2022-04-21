@@ -118,7 +118,11 @@ class SplunkClient(object):
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
             raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
 
-        reader = splunk_results.ResultsReader(splunk_job.results())
+        results_args = {}
+        if self.max_return:
+            results_args["count"] = self.max_return
+
+        reader = splunk_results.ResultsReader(splunk_job.results(**results_args))
         result = {"events": list([dict(row) for row in reader])}
 
         return result
