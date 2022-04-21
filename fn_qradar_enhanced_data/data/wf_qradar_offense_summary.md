@@ -33,7 +33,7 @@ incident.qr_offense_source = results.offense.offenseSource
 incident.qr_source_ip_count = link.format(results.offenseid,"",results.offense.sourceCount)
 incident.qr_destination_ip_count = link.format(results.offenseid,"",results.offense.remoteDestinationCount+results.offense.localDestinationCount)
 incident.qr_event_count = link.format(results.offenseid,"/events?page=1&pagesize=10",results.offense.eventCount)
-incident.qr_flow_count =  link.format(results.offenseid,"",results.offense.flowCount)
+incident.qr_flow_count =  link.format(results.offenseid,"/flows?page=1&pagesize=10",results.offense.flowCount)
 incident.qr_assigned = link.format("","?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B"+(results.offense.assignedTo if results.offense.assignedTo is not None else "")+"&page=1&pagesize=10",results.offense.assignedTo) if results.offense.assignedTo else "Unassigned"
 incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitude)
 incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
@@ -43,7 +43,7 @@ incident.qr_offense_status = results.offense.status
 incident.qr_offense_domain = "Default Domain"
 if results.offense.domain:
   incident.qr_offense_domain = results.offense.domain.name
-  
+
 incident.qr_offense_start_time = int(results.offense.startTime)
 incident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)
 ```
