@@ -84,7 +84,8 @@ class FunctionComponent(ResilientComponent):
                 # Perform the removeMermbersFromGroups operation
                 res = ad_add_members_to_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Ensure all user and group DNs exist")
 
             finally:

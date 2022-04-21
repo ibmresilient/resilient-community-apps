@@ -152,7 +152,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     yield StatusMessage("No entries found")
 
-            except LDAPSocketOpenError:
+            except LDAPSocketOpenError as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Invalid Search Base", input_ldap_search_base)
 
             except Exception as err:

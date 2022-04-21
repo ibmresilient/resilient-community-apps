@@ -86,7 +86,8 @@ class FunctionComponent(ResilientComponent):
                 # Perform the Modify operation
                 res = c.modify(input_ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
 
             finally:

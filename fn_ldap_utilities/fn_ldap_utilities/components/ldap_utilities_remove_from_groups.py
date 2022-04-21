@@ -91,6 +91,7 @@ class FunctionComponent(ResilientComponent):
                     users_dn = c.request["changes"][0]["attribute"]["value"]
 
             except Exception:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Ensure all group DNs exist")
 
             finally:

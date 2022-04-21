@@ -81,7 +81,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     res = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Could not change password. Check ldap_dn are valid")
 
             finally:
