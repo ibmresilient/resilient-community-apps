@@ -6,7 +6,7 @@
 
 from six import string_types
 from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields, IntegrationError, str_to_bool
 from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
@@ -125,7 +125,7 @@ def clear_table(rest_client, table_name, incident_id, global_settings):
         if global_settings:
             # If clear_datatables in app.config equals True then clear given data table
             # If clear_datatables does not exist then it defaults to True
-            if bool(global_settings.get("clear_datatables", True)) == True:
+            if str_to_bool(global_settings.get("clear_datatables", True)) == True:
                 clear(rest_client, table_name, incident_id)
         else: # If global_settings does not exist then clear given data table
             clear(rest_client, table_name, incident_id)
