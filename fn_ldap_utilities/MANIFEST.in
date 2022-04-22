@@ -1,10 +1,14 @@
 include README.md
 include Dockerfile
+include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_ldap_utilities/util *
 include fn_ldap_utilities/LICENSE
 include doc/*.md
 include doc/screenshots/*
+include icons/*.png
 recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak

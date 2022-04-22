@@ -110,7 +110,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            ldap = LDAPDomains(self.opts)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
             yield StatusMessage("Appconfig Settings OK")
 
             input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)

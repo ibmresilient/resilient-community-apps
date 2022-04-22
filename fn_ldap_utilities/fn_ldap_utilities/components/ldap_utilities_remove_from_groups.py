@@ -51,7 +51,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            ldap = LDAPDomains(self.opts)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
             yield StatusMessage("Appconfig Settings OK")
 
             if not helper.LDAP_IS_ACTIVE_DIRECTORY:
@@ -86,11 +87,13 @@ class FunctionComponent(ResilientComponent):
                 # Perform the removeMermbersFromGroups operation
                 res = ad_remove_members_from_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
-                # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
-                if res and "changes" in c.request:
-                    users_dn = c.request["changes"][0]["attribute"]["value"]
+                conn_request = c.request
 
-            except Exception:
+                # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
+                if res and "changes" in dict(conn_request):
+                    users_dn = dict(conn_request)["changes"][0]["attribute"]["value"]
+
+            except Exception as err:
                 LOG.debug("Error: {}".format(err))
                 raise ValueError("Ensure all group DNs exist")
 

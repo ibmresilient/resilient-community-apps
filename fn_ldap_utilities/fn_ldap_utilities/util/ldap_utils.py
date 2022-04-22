@@ -24,7 +24,7 @@ class LDAPDomains():
 
         return domains, domain_name_list
 
-    def ldap_domain_name_test(ldap_domain_name, domains_list):
+    def ldap_domain_name_test(self, ldap_domain_name, domains_list):
         """
         Check if the given ldap_domain_name is in the app.config
         :param ldap_domain_name: User selected domain
