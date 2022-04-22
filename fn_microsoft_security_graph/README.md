@@ -1,25 +1,29 @@
 # Microsoft Security Graph Integration for SOAR
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - Microsoft Security Graph Alert Search](#function---microsoft-security-graph-alert-search)
-- [Function - Microsoft Security Graph Get Alert Details](#function---microsoft-security-graph-get-alert-details)
-- [Function - Microsoft Security Graph Update Alert](#function---microsoft-security-graph-update-alert)
-- [Script - Convert json to rich text](#script---convert-json-to-rich-text)
-- [Custom Fields](#custom-fields)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Microsoft Security Graph Integration for SOAR](#microsoft-security-graph-integration-for-soar)
+  - [Table of Contents](#table-of-contents)
+  - [- Troubleshooting & Support](#--troubleshooting--support)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - Microsoft Security Graph Alert Search](#function---microsoft-security-graph-alert-search)
+  - [Function - Microsoft Security Graph Get Alert Details](#function---microsoft-security-graph-get-alert-details)
+  - [Function - Microsoft Security Graph Update Alert](#function---microsoft-security-graph-update-alert)
+  - [Script - Convert json to rich text](#script---convert-json-to-rich-text)
+  - [Custom Fields](#custom-fields)
+  - [Rules](#rules)
+  - [Upgrading from a version older than v1.1.0](#upgrading-from-a-version-older-than-v110)
+  - [Troubleshooting & Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -45,7 +49,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-SOAR Components for 'fn_microsoft_security_graph'
+Microsoft Security Graph Integration for SOAR
 
 ### Key Features
 * Alert Polling Integration that creates new incidents in the SOAR platform from Microsoft Graph Security API alerts.
