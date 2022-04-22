@@ -33,13 +33,6 @@ polling_filters =
 # If your ExtraHop server uses a self-signed TLS certificate, or some
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
-
-
-
-
-
-
-
 # If you don't want to use a cert you can set extrahop_cafile=false.
 #
 #extrahop_cafile=<path to cert file>|false
