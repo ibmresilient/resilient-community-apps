@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "start_time": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "integer"
+            },
+            "end_time": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "risk_score": {
+              "type": "integer"
+            },
+            "type": {
+              "type": "string"
+            },
+            "participants": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "object_type": {
+                    "type": "string"
+                  },
+                  "object_id": {
+                    "type": "integer"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "external": {
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "ticket_id": {
+              "type": "string"
+            },
+            "assignee": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "resolution": {},
+            "properties": {
+              "type": "object"
+            },
+            "mitre_tactics": {
+              "type": "array"
+            },
+            "mitre_techniques": {
+              "type": "array"
+            },
+            "appliance_id": {
+              "type": "integer"
+            },
+            "is_user_created": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "extrahop_detection_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

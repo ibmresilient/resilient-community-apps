@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mod_time": {
+                "type": "integer"
+              },
+              "node_id": {},
+              "id": {
+                "type": "integer"
+              },
+              "extrahop_id": {
+                "type": "string"
+              },
+              "discovery_id": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "description": {},
+              "user_mod_time": {
+                "type": "integer"
+              },
+              "discover_time": {
+                "type": "integer"
+              },
+              "vlanid": {
+                "type": "integer"
+              },
+              "parent_id": {},
+              "macaddr": {
+                "type": "string"
+              },
+              "vendor": {},
+              "is_l3": {
+                "type": "boolean"
+              },
+              "ipaddr4": {
+                "type": "string"
+              },
+              "ipaddr6": {},
+              "device_class": {
+                "type": "string"
+              },
+              "default_name": {
+                "type": "string"
+              },
+              "custom_name": {},
+              "cdp_name": {
+                "type": "string"
+              },
+              "dhcp_name": {
+                "type": "string"
+              },
+              "netbios_name": {
+                "type": "string"
+              },
+              "dns_name": {
+                "type": "string"
+              },
+              "custom_type": {
+                "type": "string"
+              },
+              "auto_role": {
+                "type": "string"
+              },
+              "analysis_level": {
+                "type": "integer"
+              },
+              "analysis": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "on_watchlist": {
+                "type": "boolean"
+              },
+              "last_seen_time": {
+                "type": "integer"
+              },
+              "model": {},
+              "model_override": {},
+              "custom_make": {},
+              "custom_model": {},
+              "critical": {
+                "type": "boolean"
+              },
+              "custom_criticality": {},
+              "cloud_instance_id": {},
+              "cloud_instance_type": {},
+              "cloud_instance_name": {},
+              "cloud_account": {},
+              "vpc_id": {},
+              "subnet_id": {}
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "extrahop_search_filter": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

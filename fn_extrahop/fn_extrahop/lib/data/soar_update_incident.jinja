@@ -1,0 +1,27 @@
+{
+  {# JINJA template for updating a SOAR incident from an ExtraHop detection. #}
+  "name": "ExtraHop detection - {{ title }}",
+  "description": "{{ description | replace('"', '\\"') }}",
+{% if end_time %}
+  "end_date": {{ end_time }},
+{% endif %}
+  {# if detection users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ status|string|soar_substitute('{"None": "A", "in_progress": "A", "closed": "C"}') }}",
+{% if 1.0 <= risk_score <= 30 %}
+  "severity_code": "Low",
+{% elif 31 <= risk_score <= 79 %}
+  "severity_code": "Medium",
+{% else %}
+  "severity_code": "High",
+{% endif %}
+  "properties": {
+    "extrahop_update_time": {{ update_time }},
+    "extrahop_end_time": {{ end_time }},
+    "extrahop_risk_score": {{ risk_score }},
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_detection_updated": {{ epoch_now }}
+  }
+}

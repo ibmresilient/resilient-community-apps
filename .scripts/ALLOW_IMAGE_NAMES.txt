@@ -25,6 +25,7 @@ fn_elasticsearch
 fn_email_header_validation
 fn_exchange
 fn_exchange_online
+fn_extrahop
 fn_geocoding
 fn_google_cloud_dlp
 fn_greynoise
