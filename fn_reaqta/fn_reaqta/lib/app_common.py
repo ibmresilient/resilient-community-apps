@@ -59,7 +59,7 @@ class AppCommon():
         return self.filters
 
     def authenticate(self):
-        """authenicate to ReaQta
+        """authenticate to ReaQta
 
         Args:
             api_call (bool, optional): bypass if called from the api_call function. Defaults to False.
@@ -153,7 +153,8 @@ class AppCommon():
         Returns:
             list: next entity paged result
         """
-        response = self.rc.execute("GET", next_url, headers=self.header, verify=self.verify)
+        response, err_msg = self.api_call("GET", next_url, None)
+
         return response.json()
 
     def isolate_machine(self, endpoint_id):
@@ -453,7 +454,7 @@ def callback(response):
     if response.status_code >= 300 and response.status_code < 500:
         resp = response.json()
         if response.status_code == 401 and resp.get("message") == "Authentication Error":
-            raise AutenticationError
+            raise AuthenticationError()
 
         msg = resp.get('messages') or resp.get('message')
         details = resp.get('details')
