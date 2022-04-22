@@ -20,9 +20,9 @@ The workflows in this package depend on the following
 
 ## Import
 Ensure that the above packages have been installed.
-Download the res_hibp package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
+Download the res_hibp package and unzip it. 
 In SOAR server, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
-and select the hibp.res file downloaded above.
+and select the < hibp.res > file downloaded above.
 
 ## Usage
 Once the resource file is successfully imported, the workflows included in the file are ready for use.
