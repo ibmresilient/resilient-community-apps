@@ -43,7 +43,7 @@ None
 ```python
 tag_name = rule.properties.extrahop_tag_name
 get_tags_content = workflow.properties.get_tags_result.content
-inputs.extrahop_device_ids = row.devs_id
+inputs.extrahop_device_ids = str(row.devs_id)
 if tag_name is None:
     raise ValueError("The tag name is not set")
 inputs.extrahop_tag_id = None

@@ -63,7 +63,7 @@ def main():
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAM, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items())E)
+            .format(WF_NAME, FN_NAM, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

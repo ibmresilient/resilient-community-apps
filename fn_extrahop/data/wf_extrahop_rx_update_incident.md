@@ -25,7 +25,7 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 ```python
 ##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
 #  Globals
-FN_NAME = "funct_extrahop_rx_update_incident"
+FN_NAME = "funct_extrahop_rx_get_detections"
 WF_NAME = "Example: Extrahop Reveal(x) update incident"
 CONTENT = results.content
 INPUTS = results.inputs
