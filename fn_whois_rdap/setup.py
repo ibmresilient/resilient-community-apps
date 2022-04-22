@@ -23,7 +23,6 @@ setup(
     version='1.0.5',
     license='MIT',
     author='IBM SOAR',
-    author_email='',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Retrieving registry information for IP, URL or DNS Artifacts",
     long_description="""This integration retrieves registry information (via the RDAP or legacy WHOIS protocol) for IP, URL or DNS Artifacts.
