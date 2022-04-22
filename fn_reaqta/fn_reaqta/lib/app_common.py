@@ -9,6 +9,7 @@ from urllib.parse import urljoin
 from fn_reaqta.lib.soar_common import IBM_SOAR, eval_mapping, s_to_b
 from resilient_lib import validate_fields, str_to_bool, readable_datetime, clean_html
 from cachetools import cached, LRUCache
+from retry import retry
 
 LOG = logging.getLogger(__name__)
 
@@ -27,6 +28,10 @@ ENDPOINT_GROUP_URI = "endpoint-groups"
 LINKBACK_URL = "alerts/{}"   # url to generate back to the entity (case, alert, etc.)
 
 DOWNLOAD_WAIT_SEC = 15  # number of seconds to wait between status checks for a file download
+
+class AuthenticationError(Exception):
+    """Trap authentication errors for reauthenticating"""
+    pass
 
 class AppCommon():
     def __init__(self, rc, options):
@@ -362,32 +367,42 @@ class AppCommon():
         """
         return urljoin(self.reaqta_url, linkback_url.format(entity_id))
 
+    @retry(AuthenticationError, tries=2, delay=2)
     def api_call(self, method, url, payload, refresh_authentication=False):
         if not self.token or refresh_authentication:
             err_msg = self.authenticate()
             if err_msg:
                 return {}, err_msg
 
+        # save token. Normal operation will restore it
+        #  if AuthenticationError, the token will be recreated
+        token_sv = self.token
+        self.token = None
+
         if method in ["PUT", "POST"]:
-            return self.rc.execute(method,
+            response, err_msg = self.rc.execute(method,
                                    self._get_uri(url),
                                    json=payload,
                                    headers=self.header,
                                    verify=self.verify,
                                    callback=callback)
-        if payload:
-            return self.rc.execute(method,
+        elif payload:
+            response, err_msg =  self.rc.execute(method,
                                    self._get_uri(url),
                                    params=payload,
                                    headers=self.header,
                                    verify=self.verify,
                                    callback=callback)
 
-        return self.rc.execute(method,
+        else:
+            response, err_msg = self.rc.execute(method,
                                self._get_uri(url),
                                headers=self.header,
                                verify=self.verify,
                                callback=callback)
+
+        self.token = token_sv # restore value
+        return response, err_msg
 
     def get_group_ids(self, group_name_list):
         group_id_list = []
@@ -437,6 +452,9 @@ def callback(response):
     error_msg = None
     if response.status_code >= 300 and response.status_code < 500:
         resp = response.json()
+        if response.status_code == 401 and resp.get("message") == "Authentication Error":
+            raise AutenticationError
+
         msg = resp.get('messages') or resp.get('message')
         details = resp.get('details')
         error_msg  = u"ReaQta Error: \n    status code: {0}\n    message: {1}\n    details: {2}".format(
