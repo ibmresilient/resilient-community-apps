@@ -851,7 +851,7 @@ Make sure at the time of escalation the field qradar_destination is mapped to ha
 If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
 
 ## How to configure to use multiple QRadar servers that have the QRadar-Plugin installed
-1. On the Qradar server go to the configuration for the IBM QRadar SOAR Plugin
+1. On the QRadar server go to the configuration for the IBM QRadar SOAR Plugin
 2. Copy the string given under, QRadar Destination Name
 ![screenshot: qradar-plugin-config](./doc/screenshots/qradar-plugin-config.png)
 3. On the SOAR server go to the App Settings/app.config for QRadar Enhanced Data Migration
@@ -860,7 +860,7 @@ If value not present at the time of case creation - have a rule on Incident crea
 5. Enter the correct data for the settings under the server thats label was just configured
 
 ## How to configure to use a single QRadar Server
-To use only a single server there are two way this can be configured
+To use only a single server there are two ways this can be configured
 1. Use the configuration used in QRadar Enhanced Data Migration versions prior to V1.2.0
 ![screenshot: qr-single-server](./doc/screenshots/qr-single-server.png)
 2. Either keep the label, SOAR_Plugin_Destination_Name1, or change it (The label does not matter when only one server is configured)
