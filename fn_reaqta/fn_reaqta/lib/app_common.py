@@ -153,7 +153,7 @@ class AppCommon():
         Returns:
             list: next entity paged result
         """
-        response, err_msg = self.api_call("GET", next_url, None)
+        response, err_msg = self.api_call("GET", next_url, None, refresh_authentication=True)
 
         return response.json()
 
