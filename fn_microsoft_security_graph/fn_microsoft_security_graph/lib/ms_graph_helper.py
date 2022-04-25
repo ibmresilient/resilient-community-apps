@@ -46,7 +46,9 @@ def connect_MSGraph(opts, reload=False):
     options = opts.get("fn_microsoft_security_graph", {})
 
     if reload:
-        return MSGraphHelper(options.get("tenant_id"),
+        return MSGraphHelper(options.get("microsoft_graph_token_url"),
+                             options.get("microsoft_graph_url"),
+                             options.get("tenant_id"),
                              options.get("client_id"),
                              options.get("client_secret"),
                              options.get("scope", DEFAULT_SCOPE))

@@ -49,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
             try:
                 data = literal_eval(alert_data)
             except ValueError as e:
-                raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
+                raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e)
 
             response = self.ms_graph_helper.ms_graph_session.patch(
                 "{}/security/alerts/{}".format(self.options.get("microsoft_graph_url"), alert_id),
