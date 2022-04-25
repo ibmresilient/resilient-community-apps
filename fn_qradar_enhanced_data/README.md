@@ -67,6 +67,7 @@
   - [Rules](#rules)
   - [For Customers who do not use the QRadar-Plugin](#for-customers-who-do-not-use-the-qradar-plugin)
   - [How to configure to use multiple QRadar servers that have the QRadar-Plugin installed](#how-to-configure-to-use-multiple-qradar-servers-that-have-the-qradar-plugin-installed)
+  - [How to configure to use a single QRadar Server](#how-to-configure-to-use-a-single-qradar-server)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 
@@ -854,6 +855,13 @@ If value not present at the time of case creation - have a rule on Incident crea
 4. Under File Content where it says [fn_qradar_enhanced_data:SOAR_Plugin_Destination_Name1] replace, SOAR_Plugin_Destination_Name1, with the string copied in step 2
 ![screenshot: soar-qr-config](./doc/screenshots/soar-qr-config.png)
 5. Enter the correct data for the settings under the server thats label was just configured
+
+## How to configure to use a single QRadar Server
+To use only a single server there are two way this can be configured
+1. Use the configuration used in QRadar Enhanced Data Migration versions prior to V1.2.0
+![screenshot: qr-single-server](./doc/screenshots/qr-single-server.png)
+2. Either keep the label, SOAR_Plugin_Destination_Name1, or change it (The label does not matter when only one server is configured)
+![screenshot: qr-single-label-server](./doc/screenshots/qr-single-label-server.png)
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
