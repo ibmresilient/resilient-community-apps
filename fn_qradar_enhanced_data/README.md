@@ -68,6 +68,8 @@
   - [For Customers who do not use the QRadar-Plugin](#for-customers-who-do-not-use-the-qradar-plugin)
   - [How to configure to use multiple QRadar servers that have the QRadar-Plugin installed](#how-to-configure-to-use-multiple-qradar-servers-that-have-the-qradar-plugin-installed)
   - [How to configure to use a single QRadar Server](#how-to-configure-to-use-a-single-qradar-server)
+  - [Incident fields that are required for the example automatic rule to run](#incident-fields-that-are-required-for-the-example-automatic-rule-to-run)
+  - [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 
@@ -91,6 +93,7 @@
 | 1.2.0 | 01/2022 | Allow multiple QRadar instances |
 | 1.2.1 | 03/2022 | Bug fix |
 | 1.2.2 | 04/2022 | Delete Search on time-out |
+| 1.2.3 | 04/2022 | Documentation updates and bug fix |
 
 For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 ---
@@ -862,6 +865,19 @@ To use only a single server there are two way this can be configured
 ![screenshot: qr-single-server](./doc/screenshots/qr-single-server.png)
 2. Either keep the label, SOAR_Plugin_Destination_Name1, or change it (The label does not matter when only one server is configured)
 ![screenshot: qr-single-label-server](./doc/screenshots/qr-single-label-server.png)
+
+## Incident fields that are required for the example automatic rule to run
+The incident fields, QR Offense Id and qradar_destination are required to have values in order for the example automatic rule to be run.
+
+## Creating workflows when server/servers in app.config are labeled
+The function input field qradar_label is required when server/servers in the app.config are labeled. In the example workflows pre-process scripts the
+input field qradar_label is defined the following way,
+```python
+inputs.qradar_label = incident.properties.qradar_destination
+```
+
+Example app.config server label: [fn_qradar_integration:qradar_4]
+  qradar_4 is the label in the above example
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
