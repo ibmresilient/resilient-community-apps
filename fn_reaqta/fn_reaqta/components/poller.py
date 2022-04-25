@@ -6,6 +6,7 @@
 import datetime
 import logging
 import os
+import traceback
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient_lib import validate_fields, RequestsCommon, make_payload_from_template, build_incident_url, build_resilient_url
@@ -189,6 +190,7 @@ class PollerComponent(ResilientComponent):
 
                         entity_list = app_common.get_next_page(entity_list['nextPage'])
             except Exception as err:
+                LOG.error(traceback.format_exc())
                 LOG.error("Failure in poller for hive: %s. %s", hive_label, str(err))
 
     def process_entity_list(self, entity_list, hive_label, app_common):
