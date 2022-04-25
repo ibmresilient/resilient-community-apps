@@ -17,7 +17,6 @@
 # QRadar Enhanced Offense Data Migration
 
 ## Table of Contents
-## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
