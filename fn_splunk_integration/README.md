@@ -43,7 +43,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -53,6 +53,7 @@
 | 1.0.2 | 05/2020 | Support added for App Host |
 | 1.0.3 | 09/2020 | Updated Example Rules and Workflows |
 | 1.1.0 | 03/2022 | Allow for configuration of multiple Splunk instances |
+| 1.1.1 | 04/2022 | Fix for splunk_max_count |
 
 ---
 
@@ -91,16 +92,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `42.0.7058`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=40.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -110,7 +111,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -278,7 +279,7 @@ else:
 
 ```python
 # {'status_code': 201, 'content': {'message': 'Create operation successful.', 'status': True}}
-import java.util.Date as Date 
+import java.util.Date as Date
 
 now = Date().time
 
@@ -398,7 +399,7 @@ Define a Splunk query string with parameters. Map parameters from inputs, and pe
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `splunk_label` | `text` | No | `-` | Label given to each splunk server in the app.config |
-| `splunk_max_return` | `number` | No | `-` | Max number of events to return (used in head max) |
+| `splunk_max_return` | `number` | No | `-` | Max number of events to return (if empty, up to 100 are returned) |
 | `splunk_query` | `textarea` | No | `-` | - |
 | `splunk_query_param1` | `text` | No | `-` | - |
 | `splunk_query_param2` | `text` | No | `-` | - |
@@ -537,7 +538,7 @@ else:
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
   result_row.splunk_server = rule.properties.splunk_servers
-  
+
 
 ```
 

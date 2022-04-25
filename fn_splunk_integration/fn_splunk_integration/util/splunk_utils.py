@@ -118,7 +118,11 @@ class SplunkClient(object):
         if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
             raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
 
-        reader = splunk_results.ResultsReader(splunk_job.results())
+        results_args = {}
+        if self.max_return:
+            results_args["count"] = self.max_return
+
+        reader = splunk_results.ResultsReader(splunk_job.results(**results_args))
         result = {"events": list([dict(row) for row in reader])}
 
         return result
@@ -286,6 +290,7 @@ class SplunkServers():
 
         return servers, server_name_list
 
+    @staticmethod
     def splunk_label_test(splunk_label, servers_list):
         """
         Check if the given splunk_label is in the app.config
@@ -293,11 +298,12 @@ class SplunkServers():
         :param servers_list: List of Splunk servers
         :return: Dictionary of options for choosen server
         """
-        label = PACKAGE_NAME+":"+splunk_label
-        if splunk_label and label in servers_list:
+        label = PACKAGE_NAME
+        if splunk_label:
+            label = "{}:{}".format(label, splunk_label)
+
+        if label in servers_list:
             options = servers_list[label]
-        elif len(servers_list) == 1:
-            options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
 
