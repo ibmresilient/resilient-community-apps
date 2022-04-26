@@ -45,7 +45,7 @@ def init_app(rc, options):
 
     return endpoint_class
 
-def get_entities(app_common, query_field_name, last_poller_time, refresh_authentication=False):
+def get_entities(app_common, query_info, last_poller_time, refresh_authentication=False):
     """[method call to query the endpoint solution for newly created or modified entities for
         synchronization with IBM SOAR]
 
@@ -58,13 +58,15 @@ def get_entities(app_common, query_field_name, last_poller_time, refresh_authent
         [str]: [error message or None]
     """
 
+    query_field_name, query_filters = query_info
+
     # enter the code needed to perform a query to the endpoint platform, using the last_poller_time to
     # identify entities changed since that timestamp.
     # use options to collect urls, api_keys, etc. needed for the API call.
     # use rc.execute() to call your endpoint with your query to return entities changes since the last_poller_time
     return app_common.get_entities_since_ts(query_field_name,
                                             last_poller_time,
-                                            app_common.get_filters(),
+                                            query_filters,
                                             refresh_authentication=refresh_authentication)
 
 
@@ -169,10 +171,10 @@ class PollerComponent(ResilientComponent):
             try:
                 LOG.info("%s Polling hive: %s", PACKAGE_NAME, hive_label)
                 # query for both new and closed alerts
-                for query_field_name in ["receivedAfter", "closedAfter"]:
+                for query_info in [("receivedAfter", app_common.get_filters()), ("closedAfter", None)]:
                     # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
                     entity_list, err_msg = get_entities(app_common,
-                                                        query_field_name,
+                                                        query_info,
                                                         kwargs['last_poller_time'],
                                                         refresh_authentication=refresh_authentication)
 
