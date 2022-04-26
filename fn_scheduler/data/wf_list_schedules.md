@@ -27,6 +27,9 @@ else:
 ### Post-Processing Script
 ```python
 import java.util.Date as Date
+
+TYPE_LOOKUP = {0: 'Incident', 1: "Task", 4: "Artifact", 5: "Attachment"}
+
 if not results['content']:
   row = incident.addRow("scheduler_rules")
   row['reported_on'] = str(Date())
@@ -37,11 +40,16 @@ else:
     row['schedule_label'] = job['id']
     row['schedule_type'] = job['type']
     row['incident_id'] = job['args'][0]
-    row['rule'] = job['args'][4]
     row['schedule'] = job['value']
     row['reported_on'] = str(Date())
     row['status'] = 'Active' if job['next_run_time'] else 'Paused'
-    
+    row['next_run_time'] = job['next_run_time']
+    row['rule_type'] = TYPE_LOOKUP.get(job['args'][6], "Datatable")
+    if job['args'][8]:
+      row['rule'] = "<a href='#playbooks/designer/{}'>{}</a>".format(job['args'][5], job['args'][4])
+    else:
+      row['rule'] = "<a href='#customize?tab=actions&id={}'>{}</a>".format(job['args'][5], job['args'][4])
+
 ```
 
 ---

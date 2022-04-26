@@ -39,6 +39,8 @@ inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
 ```python
 import java.util.Date as Date
 
+TYPE_LOOKUP = {0: 'Incident', 1: "Task", 4: "Artifact", 5: "Attachment"}
+
 if results.success:
   job = results.content
   row = incident.addRow("scheduler_rules")
@@ -46,9 +48,14 @@ if results.success:
   row['schedule_label'] = job['id']
   row['schedule_type'] = job['type']
   row['incident_id'] = job['args'][0]
-  row['rule'] = job['args'][4]
   row['schedule'] = job['value']
   row['status'] = 'Active'
+  row['next_run_time'] = job['next_run_time']
+  row['rule_type'] = TYPE_LOOKUP.get(job['args'][6], "Datatable")
+  if job['args'][8]:
+    row['rule'] = "<a href='#playbooks/designer/{}'>{}</a>".format(job['args'][5], job['args'][4])
+  else:
+    row['rule'] = "<a href='#customize?tab=actions&id={}'>{}</a>".format(job['args'][5], job['args'][4])
 else:
   incident.addNote("Schedule a Rule/Playbook failed: {}".format(result.reason))
 ```

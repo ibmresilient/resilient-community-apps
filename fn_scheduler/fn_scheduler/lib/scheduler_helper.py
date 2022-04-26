@@ -76,7 +76,8 @@ class ResilientScheduler:
                                   hour=split_cron[1],
                                   day=split_cron[2],
                                   month=split_cron[3],
-                                  day_of_week=split_cron[4])
+                                  day_of_week=split_cron[4],
+                                  timezone=self.timezone)
 
         elif type == "interval":
             seconds = self.get_interval(value)
