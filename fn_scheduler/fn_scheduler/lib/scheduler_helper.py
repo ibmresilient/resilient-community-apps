@@ -198,6 +198,24 @@ class ResilientScheduler:
 
         return result
 
+    def find_job_by_label(self, scheduler_label):
+        """
+        find the job by it's label
+        :param scheduler_label:
+        :return: job found or None
+        """
+        scheduler = self.get_scheduler()
+        jobs = scheduler.get_jobs()
+
+        for job in jobs:
+            if job.id.lower() == scheduler_label.lower():
+                return job
+
+        return None
+
+    def get_job_by_id(self, job_id):
+        return self.get_scheduler().get_job(job_id)
+
     @staticmethod
     def get_str_date(dt):
         """
@@ -234,3 +252,19 @@ class ResilientScheduler:
         job_json['args'] = params
 
         return job_json
+
+    @staticmethod
+    def validate_rule_parameters(rule_params):
+        """
+        should be json formatted string
+        :param rule_params: name=value;name=value
+        :return: json data
+        """
+        params = {}
+        if rule_params:
+            for items in rule_params.split(';'):
+                # improperly formatted parameters will fail with KeyError
+                k, v = items.split('=')
+                params[k.strip().lower()] = v.strip()
+
+        return params

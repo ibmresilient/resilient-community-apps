@@ -5,14 +5,14 @@
   "content": null,
   "raw": "null",
   "inputs": {
-    "scheduler_label": "rl10-4623"
+    "scheduler_label": "domain2-5640"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-scheduler",
     "package_version": "1.2.0",
-    "host": "local",
-    "execution_time_ms": 6,
-    "timestamp": "2022-04-20 16:31:31"
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 8,
+    "timestamp": "2022-04-26 09:08:20"
   }
 }

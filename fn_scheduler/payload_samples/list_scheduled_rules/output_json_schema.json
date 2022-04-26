@@ -31,6 +31,12 @@
                 {
                   "type": "object",
                   "properties": {
+                    "artifact_value": {
+                      "type": "string"
+                    },
+                    "artifact_type": {
+                      "type": "string"
+                    },
                     "timezone": {
                       "type": "string"
                     },

@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -49,7 +49,9 @@
             ]
           }
         },
-        "next_run_time": {},
+        "next_run_time": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },
@@ -58,15 +60,20 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
+        "scheduler_type_value": {
+          "type": "string"
+        },
         "scheduler_label": {
           "type": "string"
-        }
+        },
+        "scheduler_type": {
+          "type": "string"
+        },
+        "scheduler_rule_parameters": {}
       }
     },
     "metrics": {

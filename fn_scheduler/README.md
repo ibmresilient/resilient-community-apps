@@ -43,7 +43,7 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
@@ -63,7 +63,7 @@ When migrating to v1.0.2 from a previous release, add the following setting to y
 # db url if using a postgreSQL DB. Use this with AppHost
 #db_url=postgresql+psycopg2://username:password@host:port/database
 ```
-Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL. 
+Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL.
 This is necessary in an App Host environment to retain your schedules outside the app container.
 
 ---
@@ -95,8 +95,8 @@ Functions available include:
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -110,16 +110,16 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `35.2.32`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=32.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -129,7 +129,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -175,7 +175,7 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-A datatable is used to display scheduled rules and to take actions such as pause, resume and remove a rule. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change. 
+A datatable is used to display scheduled rules and to take actions such as pause, resume and remove a rule. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
 
 ---
 
@@ -196,7 +196,7 @@ Schedule a rule to run on a schedule. This rule will be executed for a given inc
 | `scheduler_rule_name` | `text` | Yes | `-` | Name of rule to schedule |
 | `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields |
 | `scheduler_type` | `select` | No | `-` | type of schedule to create. cron, interval, date or delta |
-| `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy/mm/dd hh:mm:ss) or cron value |
+| `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
 
 </p>
 </details>
@@ -228,7 +228,7 @@ results = {
     'coalesce': False,
     'version': 1,
     'kwargs': {
-      
+
     }
   },
 ```
@@ -341,7 +341,7 @@ else:
     row['schedule'] = job['value']
     row['reported_on'] = str(Date())
     row['status'] = 'Active' if job['next_run_time'] else 'Paused'
-    
+
 ```
 
 </p>
@@ -602,7 +602,7 @@ scheduler_rules
 
 ### Rules
 * Rules must be enabled to be scheduled and are again checked when the scheduled rule is triggered.
-* Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`. 
+* Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`.
 * All schedules must be in the future.
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.

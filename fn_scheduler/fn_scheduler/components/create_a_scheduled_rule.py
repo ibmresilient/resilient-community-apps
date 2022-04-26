@@ -100,7 +100,7 @@ class FunctionComponent(ResilientComponent):
 
             rule_params = None
             if scheduler_rule_parameters:
-                rule_params = self.validate_rule_parameters(scheduler_rule_parameters)
+                rule_params = self.res_scheduler.validate_rule_parameters(scheduler_rule_parameters)
 
             incident_data = [incident_id, object_id, row_id,
                              scheduler_label_prefix,
@@ -137,20 +137,6 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             yield FunctionError()
 
-    def validate_rule_parameters(self, rule_params):
-        """
-        should be json formatted string
-        :param rule_params: name=value;name=value
-        :return: json data
-        """
-        params = {}
-        if rule_params:
-            for items in rule_params.split(';'):
-                # improperly formatted parameters will fail with KeyError
-                k, v = items.split('=')
-                params[k.strip().lower()] = v.strip()
-
-        return params
 
 def triggered_job(incident_id, object_id, row_id,
                   scheduler_label,

@@ -4,19 +4,22 @@
   "reason": null,
   "content": {
     "version": 1,
-    "id": "rl10-4623",
+    "id": "domain2-5640",
     "func": "fn_scheduler.components.create_a_scheduled_rule:triggered_job",
     "trigger": null,
     "executor": "default",
     "args": [
-      4623,
+      5640,
       null,
       null,
-      "rl10-4623",
+      "domain2-5640",
       "test scheduled rule",
       212,
       0,
-      null,
+      {
+        "artifact_value": "abc.com",
+        "artifact_type": "domain"
+      },
       null,
       {
         "timezone": "America/New_York",
@@ -24,32 +27,35 @@
         "datastore_dir": "/tmp/scheduler.sqlite"
       }
     ],
-    "kwargs": {},
+    "kwargs": {
+      "artifact_value": "abc.com",
+      "artifact_type": "domain"
+    },
     "name": "triggered_job",
     "misfire_grace_time": 1,
     "coalesce": false,
     "max_instances": 1,
-    "next_run_time": "Apr 20 2022 04:35PM"
+    "next_run_time": "Apr 27 2022 05:00AM"
   },
-  "raw": "{\"version\": 1, \"id\": \"rl10-4623\", \"func\": \"fn_scheduler.components.create_a_scheduled_rule:triggered_job\", \"trigger\": null, \"executor\": \"default\", \"args\": [4623, null, null, \"rl10-4623\", \"test scheduled rule\", 212, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"kwargs\": {}, \"name\": \"triggered_job\", \"misfire_grace_time\": 1, \"coalesce\": false, \"max_instances\": 1, \"next_run_time\": \"Apr 20 2022 04:35PM\"}",
+  "raw": "{\"version\": 1, \"id\": \"domain2-5640\", \"func\": \"fn_scheduler.components.create_a_scheduled_rule:triggered_job\", \"trigger\": null, \"executor\": \"default\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"kwargs\": {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, \"name\": \"triggered_job\", \"misfire_grace_time\": 1, \"coalesce\": false, \"max_instances\": 1, \"next_run_time\": \"Apr 27 2022 05:00AM\"}",
   "inputs": {
-    "scheduler_type_value": "5m",
-    "incident_id": 4623,
+    "scheduler_type_value": "* 5 * * *",
+    "incident_id": 5640,
     "scheduler_type": {
-      "id": 2112,
-      "name": "delta"
+      "id": 2109,
+      "name": "cron"
     },
-    "scheduler_label_prefix": "rl10",
+    "scheduler_label_prefix": "domain2",
     "scheduler_rule_name": "test scheduled rule",
-    "scheduler_rule_parameters": null,
+    "scheduler_rule_parameters": "artifact_value=abc.com;artifact_type=domain",
     "scheduler_is_playbook": false
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-scheduler",
     "package_version": "1.2.0",
-    "host": "local",
-    "execution_time_ms": 9,
-    "timestamp": "2022-04-20 16:30:19"
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 21,
+    "timestamp": "2022-04-26 08:38:13"
   }
 }

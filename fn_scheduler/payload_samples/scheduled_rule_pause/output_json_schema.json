@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "number"
+      "type": "string"
     },
     "success": {
       "type": "boolean"
@@ -12,12 +12,57 @@
     "content": {
       "type": "object",
       "properties": {
-        "mock_key": {
+        "id": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": [
+                  "integer",
+                  "null",
+                  "string"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "artifact_value": {
+                    "type": "string"
+                  },
+                  "artifact_type": {
+                    "type": "string"
+                  },
+                  "timezone": {
+                    "type": "string"
+                  },
+                  "thread_max": {
+                    "type": "string"
+                  },
+                  "datastore_dir": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "next_run_time": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
           "type": "string"
         }
       }
     },
-    "raw": {},
+    "raw": {
+      "type": "string"
+    },
     "inputs": {
       "type": "object",
       "properties": {

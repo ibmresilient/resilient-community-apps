@@ -39,6 +39,12 @@
               {
                 "type": "object",
                 "properties": {
+                  "artifact_value": {
+                    "type": "string"
+                  },
+                  "artifact_type": {
+                    "type": "string"
+                  },
                   "timezone": {
                     "type": "string"
                   },
@@ -54,7 +60,15 @@
           }
         },
         "kwargs": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "artifact_value": {
+              "type": "string"
+            },
+            "artifact_type": {
+              "type": "string"
+            }
+          }
         },
         "name": {
           "type": "string"
@@ -102,7 +116,9 @@
         "scheduler_rule_name": {
           "type": "string"
         },
-        "scheduler_rule_parameters": {},
+        "scheduler_rule_parameters": {
+          "type": "string"
+        },
         "scheduler_is_playbook": {
           "type": "boolean"
         }

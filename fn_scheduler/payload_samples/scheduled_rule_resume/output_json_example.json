@@ -1,20 +1,42 @@
 {
-  "version": 2.0,
+  "version": "1.0",
   "success": true,
   "reason": null,
   "content": {
-    "mock_key": "Mock Value!"
+    "id": "domain2-5640",
+    "args": [
+      5640,
+      null,
+      null,
+      "domain2-5640",
+      "test scheduled rule",
+      212,
+      0,
+      {
+        "artifact_value": "abc.com",
+        "artifact_type": "domain"
+      },
+      null,
+      {
+        "timezone": "America/New_York",
+        "thread_max": "20",
+        "datastore_dir": "/tmp/scheduler.sqlite"
+      }
+    ],
+    "next_run_time": null,
+    "type": "date",
+    "value": "Apr 28 2022 04:05AM"
   },
-  "raw": null,
+  "raw": "{\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": null, \"type\": \"date\", \"value\": \"Apr 28 2022 04:05AM\"}",
   "inputs": {
-    "scheduler_label": "rl10-4623"
+    "scheduler_label": "domain2-5640"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-scheduler",
     "package_version": "1.2.0",
-    "host": "local",
-    "execution_time_ms": 4,
-    "timestamp": "2022-04-20 16:31:16"
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 10,
+    "timestamp": "2022-04-26 09:08:01"
   }
 }

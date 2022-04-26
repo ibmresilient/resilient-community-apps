@@ -4,16 +4,19 @@
   "reason": null,
   "content": [
     {
-      "id": "rl10-4623",
+      "id": "domain2-5640",
       "args": [
-        4623,
+        5640,
         null,
         null,
-        "rl10-4623",
+        "domain2-5640",
         "test scheduled rule",
         212,
         0,
-        null,
+        {
+          "artifact_value": "abc.com",
+          "artifact_type": "domain"
+        },
         null,
         {
           "timezone": "America/New_York",
@@ -21,56 +24,12 @@
           "datastore_dir": "/tmp/scheduler.sqlite"
         }
       ],
-      "next_run_time": "Apr 20 2022 04:35PM",
+      "next_run_time": "Apr 27 2022 05:00AM",
       "type": "date",
-      "value": "Apr 20 2022 04:35PM"
-    },
-    {
-      "id": "cron_1649946391-123",
-      "args": [
-        123,
-        null,
-        null,
-        "cron_1649946391-123",
-        "Test Rule",
-        24,
-        0,
-        null,
-        null,
-        {
-          "timezone": "America/New_York",
-          "thread_max": "20",
-          "datastore_dir": "/tmp/scheduler.sqlite"
-        }
-      ],
-      "next_run_time": "Apr 21 2022 02:00AM",
-      "type": "cron",
-      "value": "* 2 * * *"
-    },
-    {
-      "id": "cron_1649949050-123",
-      "args": [
-        123,
-        null,
-        null,
-        "cron_1649949050-123",
-        "Test Rule",
-        24,
-        0,
-        null,
-        null,
-        {
-          "timezone": "America/New_York",
-          "thread_max": "20",
-          "datastore_dir": "/tmp/scheduler.sqlite"
-        }
-      ],
-      "next_run_time": "Apr 21 2022 02:00AM",
-      "type": "cron",
-      "value": "* 2 * * *"
+      "value": "Apr 27 2022 01:02AM"
     }
   ],
-  "raw": "[{\"id\": \"rl10-4623\", \"args\": [4623, null, null, \"rl10-4623\", \"test scheduled rule\", 212, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 20 2022 04:35PM\", \"type\": \"date\", \"value\": \"Apr 20 2022 04:35PM\"}, {\"id\": \"cron_1649946391-123\", \"args\": [123, null, null, \"cron_1649946391-123\", \"Test Rule\", 24, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 21 2022 02:00AM\", \"type\": \"cron\", \"value\": \"* 2 * * *\"}, {\"id\": \"cron_1649949050-123\", \"args\": [123, null, null, \"cron_1649949050-123\", \"Test Rule\", 24, 0, null, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 21 2022 02:00AM\", \"type\": \"cron\", \"value\": \"* 2 * * *\"}]",
+  "raw": "[{\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 27 2022 05:00AM\", \"type\": \"date\", \"value\": \"Apr 27 2022 01:02AM\"}]",
   "inputs": {
     "incident_id": 0
   },
@@ -78,8 +37,8 @@
     "version": "1.0",
     "package": "fn-scheduler",
     "package_version": "1.2.0",
-    "host": "local",
-    "execution_time_ms": 1,
-    "timestamp": "2022-04-20 16:30:28"
+    "host": "Marks-MacBook-Pro.local",
+    "execution_time_ms": 5,
+    "timestamp": "2022-04-26 08:48:41"
   }
 }
