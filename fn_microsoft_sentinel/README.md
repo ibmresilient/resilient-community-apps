@@ -49,9 +49,14 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.2 | 2/2022  | Bug fix for sentinel_update_incident |
+| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
+| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
+
+### v1.0.3
+
+When upgrading from a previous version to v1.0.3, manually update your app.config file to add the `verify` parameter to your `[fn_microsoft_sentinel]` section. The documentation on it's use is in [App Configuration](#app-configuration).
 
 ---
 
@@ -95,7 +100,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `39.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=37.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -130,8 +135,8 @@ The app **does** support a proxy server.
 Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-lib
-* resilient_circuits>=30.0.0
+* resilient-lib>=37.0.0
+* resilient_circuits>=37.0.0
 * simplejson
 
 ---
@@ -178,6 +183,7 @@ The following table provides the settings you need to configure the app. These s
 | **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace * |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
+| **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
 
 For each profile:
 | Config | Required | Example | Description |
