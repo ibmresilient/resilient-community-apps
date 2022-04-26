@@ -37,7 +37,7 @@
     "version": "1.0",
     "package": "fn-scheduler",
     "package_version": "1.2.0",
-    "host": "Marks-MacBook-Pro.local",
+    "host": "local",
     "execution_time_ms": 5,
     "timestamp": "2022-04-26 08:48:41"
   }

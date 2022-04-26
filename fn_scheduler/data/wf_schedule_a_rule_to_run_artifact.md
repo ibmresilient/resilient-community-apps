@@ -37,7 +37,20 @@ inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
 
 ### Post-Processing Script
 ```python
-None
+import java.util.Date as Date
+
+if results.success:
+  job = results.content
+  row = incident.addRow("scheduler_rules")
+  row['reported_on'] = str(Date())
+  row['schedule_label'] = job['id']
+  row['schedule_type'] = job['type']
+  row['incident_id'] = job['args'][0]
+  row['rule'] = job['args'][4]
+  row['schedule'] = job['value']
+  row['status'] = 'Active'
+else:
+  incident.addNote("Schedule a Rule/Playbook failed: {}".format(result.reason))
 ```
 
 ---

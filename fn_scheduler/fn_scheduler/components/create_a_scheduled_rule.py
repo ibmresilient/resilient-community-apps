@@ -123,14 +123,10 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Rule scheduled")
 
-            # convert for results
-            job = scheduled_job.__getstate__()
-            job['next_run_time'] = self.res_scheduler.get_str_date(job['next_run_time'])
-            job['trigger'] = None
-            # clear args which contain passwords ([resilient])
-            job = ResilientScheduler.clean_password(job)
+            # get a clean copy for the results
+            created_job = self.res_scheduler.get_job_by_id(scheduler_label_prefix)
 
-            results = rc.done(True, job)
+            results = rc.done(True, ResilientScheduler.sanitize_job(created_job))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
