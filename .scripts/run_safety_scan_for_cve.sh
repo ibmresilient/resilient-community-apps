@@ -32,7 +32,7 @@ print_msg () {
 ###########
 
 if [ "$PACKAGE_NAME" == "build" ] ; then
-    print_msg "Latest commit is a modifying thee build. Not running and package's tests"
+    print_msg "Latest commit is modifying the build. Not running cve scan"
     exit 0
 fi
 
