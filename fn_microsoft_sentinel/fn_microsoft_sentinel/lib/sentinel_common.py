@@ -7,7 +7,7 @@ import datetime
 import logging
 import time
 import uuid
-from resilient_lib import RequestsCommon, IntegrationError, str_to_bool
+from resilient_lib import RequestsCommon, IntegrationError
 from simplejson.errors import JSONDecodeError
 from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
@@ -63,7 +63,7 @@ ENTITY_TYPE_LOOKUP = {
 
 # extra parameters possible in sentinel section for requests calls
 REQUEST_PARAMS = {
-    'verify': str_to_bool,
+    'verify': lambda val: False if val and val.lower() in ['false', 'no', 'off', '0'] else val,
     'cert': str
 }
 
@@ -90,6 +90,7 @@ class SentinelAPI():
         self.client_id = client_id
         self.app_secret = app_secret
         self.kwargs = self.get_requests_kwargs(REQUEST_PARAMS, options)
+        LOG.debug("kwargs: %s", self.kwargs)
 
         self.access_token = None
 
