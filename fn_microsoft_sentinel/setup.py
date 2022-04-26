@@ -25,7 +25,7 @@ def get_function_list():
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.0.2",
+    version="1.0.3",
     license="MIT",
     author="IBM Resilient",
     author_email="",

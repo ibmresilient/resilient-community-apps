@@ -49,7 +49,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.2 | 11/2021 | Support for app.config verify and cert parameters |
+| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
+| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
 
