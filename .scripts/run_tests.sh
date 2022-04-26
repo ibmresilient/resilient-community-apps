@@ -39,8 +39,8 @@ PACKAGE_NAME:\t\t$PACKAGE_NAME \n\
 PYPI_INDEX_TO_USE:\t$PYPI_INDEX_TO_USE \n\
 "
 
-if [ "$PACKAGE_NAME" == "MERGE" ] ; then
-    print_msg "Latest commit is a Merge. Not running tests"
+if [ "$PACKAGE_NAME" == "build" ] ; then
+    print_msg "Latest commit is a modifying thee build. Not running and package's tests"
     exit 0
 fi
 
