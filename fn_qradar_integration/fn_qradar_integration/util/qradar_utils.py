@@ -1,36 +1,31 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 #   Util classes for qradar
 #
 
-import fn_qradar_integration.util.qradar_constants as qradar_constants
-import base64
+from base64 import b64encode
 import logging
-import six
+from six import binary_type
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-import fn_qradar_integration.util.function_utils as function_utils
+from fn_qradar_integration.util import function_utils
 from resilient_lib import RequestsCommon
-
-from fn_qradar_integration.util.exceptions.custom_exceptions import RequestError, DeleteError
-from ..lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
-# handle python2 and 3
-try:
-    from urllib import quote as quote_func  # Python 2.X
-except ImportError:
-    from urllib.parse import quote as quote_func  # Python 3+
+import fn_qradar_integration.util.qradar_constants as qradar_constants
+from fn_qradar_integration.lib.reference_data.ReferenceTableFacade import ReferenceTableFacade
+from resilient_lib import IntegrationError
+from urllib.parse import quote as quote_func, urljoin
 
 LOG = logging.getLogger(__name__)
 FORWARD_SLASH = b'%2F'
-
+ARIEL_SEARCHES_DELETE = "ariel/searches/{}"
 
 def quote(input_v, safe=None):
     """
     To make sure that integration on Python 2 works with unicode we will wrap quote
     to always pass bytes to it.
     """
-    if not isinstance(input_v, six.binary_type):
+    if not isinstance(input_v, binary_type):
         input_v = input_v.encode('utf-8')
 
     input_v = input_v.replace(b'/', FORWARD_SLASH)
@@ -39,6 +34,57 @@ def quote(input_v, safe=None):
         return quote_func(input_v, safe)
     return quote_func(input_v)
 
+class QRadarServers():
+    def __init__(self, opts, options):
+        self.servers, self.server_name_list = self._load_servers(opts, options)
+
+    def _load_servers(self, opts, options):
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_name = u"{}".format(server)
+            server_data = opts.get(server_name)
+            if not server_data:
+                raise KeyError(u"Unable to find QRadar server: {}".format(server_name))
+
+            servers[server] = server_data
+
+        return servers, server_name_list
+
+    def qradar_label_test(qradar_label, servers_list):
+        """
+        Check if the given qradar_label is in the app.config
+        :param qradar_label: User selected server
+        :param servers_list: list of qradar servers
+        :return: dictionary of options for choosen server
+        """
+        label = qradar_constants.PACKAGE_NAME+":"+qradar_label
+        if qradar_label and label in servers_list:
+            options = servers_list[label]
+        elif (len(servers_list) == 1 and qradar_label == qradar_constants.PACKAGE_NAME) or len(servers_list) == 1:
+            options = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
+
+        return options
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of QRadar server names defined in the app.config in fn_qradar_integration.
+        :param opts: list of options
+        :return: list of servers
+        """
+        server_list = []
+        for key in opts.keys():
+            if key.startswith("{}:".format(qradar_constants.PACKAGE_NAME)):
+                server_list.append(key)
+        return server_list
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list
 
 class AuthInfo(object):
     # Singleton
@@ -74,7 +120,7 @@ class AuthInfo(object):
         """
         self.headers = {'Accept': 'application/json'}
         if username and password:
-            self.qradar_auth = base64.b64encode(
+            self.qradar_auth = b64encode(
                 (username + ':' + password).encode('ascii'))
             self.headers['Authorization'] = b"Basic " + self.qradar_auth
         elif token:
@@ -100,7 +146,6 @@ class AuthInfo(object):
                 return response
 
         return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
-
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -231,10 +276,25 @@ class ArielSearch(SearchWaitCommand):
 
         return status
 
+    def delete_search(self, search_id):
+        """
+        Deletes an AQL search in case of timeout or error
+        """
+        auth_info = AuthInfo.get_authInfo()
 
+        url = urljoin(auth_info.api_url, ARIEL_SEARCHES_DELETE.format(search_id))
+        headers = auth_info.headers.copy()
+
+        response = None
+        try:
+            response = auth_info.make_call("DELETE", url, headers=headers)
+        except Exception as e:
+            LOG.error(str(e))
+            raise SearchFailure(search_id, None)
+
+        return response.status_code in [200, 202]
 
 class QRadarClient(object):
-
     # QRadarClient has-a ReferenceTableFacade
     reference_tables = ReferenceTableFacade()
     auth_info = AuthInfo.get_authInfo()
@@ -335,36 +395,19 @@ class QRadarClient(object):
         ret = []
         try:
             response = auth_info.make_call("GET", url)
-            #
-            # Sample return:
-            """
-            [
-                {
-                    "timeout_type": "FIRST_SEEN",
-                    "number_of_elements": 0,
-                    "creation_time": 1516812810600,
-                    "name": "Watson Advisor: File Action Blocked",
-                    "element_type": "ALNIC"
-                },
-                ...
-            ]
-            """
-            #
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "get_all_ref_set call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [get_all_ref_set call failed with exception {}]".format(url, str(e)))
 
         return ret
 
     @staticmethod
     def find_all_ref_set_contains(value):
         """
-
-        :param value:
-        :param type:
-        :return:
+        Find all reference sets that contain user given value
+        :param value: Value given by user
+        :return: List of reference sets that contain the user given value
         """
         ref_sets = QRadarClient.get_all_ref_set()
         LOG.debug(u"All reference sets: {}".format(ref_sets))
@@ -397,7 +440,7 @@ class QRadarClient(object):
         ret = None
         try:
             if filter:
-                if not isinstance(filter, six.binary_type):
+                if not isinstance(filter, binary_type):
                     filter = filter.encode('utf-8')
                 parameter = quote('?value="{}"'.format(filter))
                 url = url + parameter
@@ -427,8 +470,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "search_ref_set call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [search_ref_set call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -437,7 +479,7 @@ class QRadarClient(object):
         """
         Add the value to the given ref_set
         :param ref_set: Name of reference set.
-        :param value:
+        :param value: Value given by user
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
@@ -455,8 +497,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise RequestError(
-                url, "add_ref_element call failed with exception {}".format(str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [add_ref_element call failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -469,8 +510,8 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = quote(ref_set, '')
-        value = quote(value, '')
+        ref_set_link = quote(ref_set, '').replace("%20", "%2520")
+        value = quote(value, '').replace("%20", "%2520")
         url = u"{}{}/{}/{}".format(auth_info.api_url, reference_endpoint,
                                    ref_set_link, value)
 
@@ -483,8 +524,7 @@ class QRadarClient(object):
 
         except Exception as e:
             LOG.error(str(e))
-            raise DeleteError(
-                url, "delete_ref_element failed with exception {}".format(str(e)))
+            raise IntegrationError("Delete request to url [{}] throws exception. Error [delete_ref_element failed with exception {}]".format(url, str(e)))
 
         return ret
 
@@ -518,9 +558,10 @@ class QRadarClient(object):
         """
         return cls.reference_tables.delete_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
 
-    
-
     def get_all_ref_tables(self):
+        """
+        :return: All reference tables
+        """
         return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo())
 
     @classmethod
@@ -532,4 +573,3 @@ class QRadarClient(object):
         :return:
         """
         return cls.reference_tables.add_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
-        

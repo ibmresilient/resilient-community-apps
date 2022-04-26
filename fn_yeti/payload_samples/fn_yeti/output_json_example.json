@@ -1,0 +1,40 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "context": [],
+      "created": "2022-04-04T18:52:23.699000",
+      "description": null,
+      "human_url": "http://localhost:8080/observable/624b3e67f533f89c2f700992",
+      "id": "624b3e67f533f89c2f700992",
+      "last_analyses": {},
+      "sources": [],
+      "tags": [
+        {
+          "first_seen": "2022-04-04T18:52:23.751000",
+          "fresh": true,
+          "last_seen": "2022-04-04T18:52:23.751000",
+          "name": "dridex"
+        }
+      ],
+      "type": "Path",
+      "url": "http://localhost:8080/api/observable/624b3e67f533f89c2f700992",
+      "value": "C:\\Users\\admin\\AppData\\Roaming\\Adada\\stolen.dat"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "yeti_artifact_type": "File Path",
+    "yeti_artifact_value": "C:\\Users\\admin\\AppData\\Roaming\\Adada\\stolen.dat"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-yeti",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 37,
+    "timestamp": "2022-04-04 16:50:55"
+  }
+}

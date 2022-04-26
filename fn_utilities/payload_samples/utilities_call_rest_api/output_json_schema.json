@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "ok": {
+      "type": "boolean"
+    },
+    "url": {
+      "type": "string"
+    },
+    "status_code": {
+      "type": "integer"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "cookies": {
+      "type": "object"
+    },
+    "headers": {
+      "type": "object",
+      "properties": {
+        "Date": {
+          "type": "string"
+        },
+        "Content-Type": {
+          "type": "string"
+        },
+        "Content-Length": {
+          "type": "string"
+        },
+        "Connection": {
+          "type": "string"
+        },
+        "Server": {
+          "type": "string"
+        },
+        "Access-Control-Allow-Origin": {
+          "type": "string"
+        },
+        "Access-Control-Allow-Credentials": {
+          "type": "string"
+        }
+      }
+    },
+    "elapsed": {
+      "type": "integer"
+    },
+    "apparent_encoding": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "json": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "object"
+        },
+        "data": {
+          "type": "string"
+        },
+        "files": {
+          "type": "object"
+        },
+        "form": {
+          "type": "object"
+        },
+        "headers": {
+          "type": "object",
+          "properties": {
+            "Accept": {
+              "type": "string"
+            },
+            "Accept-Encoding": {
+              "type": "string"
+            },
+            "Content-Length": {
+              "type": "string"
+            },
+            "Content-Type": {
+              "type": "string"
+            },
+            "Host": {
+              "type": "string"
+            },
+            "User-Agent": {
+              "type": "string"
+            },
+            "X-Amzn-Trace-Id": {
+              "type": "string"
+            },
+            "X-Frooble": {
+              "type": "string"
+            }
+          }
+        },
+        "json": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "links": {
+      "type": "object"
+    }
+  }
+}

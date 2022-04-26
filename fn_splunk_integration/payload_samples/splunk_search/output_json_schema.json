@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_key": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "item_key": {
+            "type": "string"
+          },
+          "threat_key": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "splunk_max_return": {
+          "type": "integer"
+        },
+        "splunk_query_param1": {
+          "type": "string"
+        },
+        "splunk_query": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        },
+        "splunk_label": {
+          "type": "string"
+        },
+        "splunk_query_param3": {
+          "type": "string"
+        },
+        "splunk_query_param2": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

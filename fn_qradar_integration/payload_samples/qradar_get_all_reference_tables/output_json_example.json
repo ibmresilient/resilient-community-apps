@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "time_to_live": "0 years 1 mons 0 days 0 hours 0 mins 0.0 secs",
+      "timeout_type": "LAST_SEEN",
+      "number_of_elements": 5,
+      "creation_time": 1637336107774,
+      "name": "Generated_Cases",
+      "namespace": "SHARED",
+      "element_type": "ALN",
+      "collection_id": 51,
+      "key_label": "offense_id"
+    },
+    {
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 2,
+      "creation_time": 1643227767230,
+      "name": "Server7",
+      "namespace": "SHARED",
+      "key_name_types": {
+        "Inner Key 1": "ALN"
+      },
+      "element_type": "ALN",
+      "collection_id": 54,
+      "key_label": "Outer Key Label"
+    },
+    {
+      "timeout_type": "UNKNOWN",
+      "number_of_elements": 6,
+      "creation_time": 1607452116847,
+      "name": "pulse_imports",
+      "namespace": "SHARED",
+      "element_type": "ALN",
+      "collection_id": 52
+    },
+    {
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 1,
+      "creation_time": 1643055699440,
+      "name": "Test reftable",
+      "namespace": "SHARED",
+      "key_name_types": {
+        "Inner Key 1": "ALN"
+      },
+      "element_type": "ALN",
+      "collection_id": 53,
+      "key_label": "Outer Key Label"
+    }
+  ],
+  "raw": "[{\"time_to_live\": \"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\", \"timeout_type\": \"LAST_SEEN\", \"number_of_elements\": 5, \"creation_time\": 1637336107774, \"name\": \"Generated_Cases\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 51, \"key_label\": \"offense_id\"}, {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 2, \"creation_time\": 1643227767230, \"name\": \"Server7\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 54, \"key_label\": \"Outer Key Label\"}, {\"timeout_type\": \"UNKNOWN\", \"number_of_elements\": 6, \"creation_time\": 1607452116847, \"name\": \"pulse_imports\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 52}, {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1643055699440, \"name\": \"Test reftable\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 53, \"key_label\": \"Outer Key Label\"}]",
+  "inputs": {
+    "qradar_label": "SOAR_Plugin_Destination_Name"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-qradar-integration",
+    "package_version": "2.2.0",
+    "execution_time_ms": 397,
+    "timestamp": "2022-01-28 13:18:23"
+  }
+}

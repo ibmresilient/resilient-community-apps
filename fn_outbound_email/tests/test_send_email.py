@@ -15,7 +15,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
 def call_send_email_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("send_email", function_params)
@@ -25,7 +24,6 @@ def call_send_email_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestSendEmail:
     """ Tests for the send_email function"""

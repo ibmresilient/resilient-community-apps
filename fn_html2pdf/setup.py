@@ -30,7 +30,7 @@ setup(
     description="Convert HTML to a PDF",
     long_description="Convert HTML data into a base64 encoded PDF documnent. Alternatively, provide a URL to a website.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=42.0.0',
         'pika',
         'weasyprint<53.0'
     ],

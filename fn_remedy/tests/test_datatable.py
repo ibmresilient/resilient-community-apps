@@ -8,11 +8,11 @@ from mocks.datatable_mocked_inputs import *
 @pytest.fixture(scope="class")
 def mocked_res_client():
     """mocked_res_client a pytest fixture which
-    uses the resilient package to get a mocked client.
+    uses the SOAR package to get a mocked client.
     Calls resilient.get_client() with mocked user values
     and also passes a custom mock module 
     which has definitions to mock certain
-    Resilient/CP4S Datatable endpoints
+    SOAR/CP4S Datatable endpoints
 
     :return: A mocked ResClient
     :rtype: SimpleClient
@@ -44,7 +44,7 @@ class TestDataTable():
 
         Afterwards verify the result with the mocked outputs
 
-        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
         :type mocked_res_client: fixture
         """
         inputs = GET_ROW_MOCKED_INPUT
@@ -69,7 +69,7 @@ class TestDataTable():
 
         Afterwards verify the result with the mocked outputs
 
-        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
         :type mocked_res_client: fixture
         """
         inputs = GET_ROWS_MOCKED_INPUT
@@ -96,7 +96,7 @@ class TestDataTable():
 
         Afterwards verify the result with the mocked outputs
 
-        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
         :type mocked_res_client: fixture
         """
         inputs = UPDATE_ROW_MOCKED_INPUT
@@ -126,7 +126,7 @@ class TestDataTable():
 
         Afterwards verify the result with the mocked outputs
 
-        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable Resilient Mock for endpoints
+        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
         :type mocked_res_client: fixture
         """
         inputs = DELETE_ROW_MOCKED_INPUT

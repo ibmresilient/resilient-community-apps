@@ -14,10 +14,9 @@ FUNCTION_NAME = "utilities_get_contact_info"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 # resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 resilient_mock = AttachmentMock
-
 
 def call_utilities_get_contact_info(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -29,9 +28,13 @@ def call_utilities_get_contact_info(circuits, function_params, timeout=10):
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
-
 class TestUtilitiesStringToAttachment:
     """ Tests for the utilities_get_contact_info function"""
+
+    def test_function_definition(self):
+        """ Test that the package provides customization_data that defines the function """
+        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
+        assert func is not None
 
     @pytest.mark.parametrize("incident_id, task_id, expected_results", [
         (2095, None, {'owner': None, 'members': []})

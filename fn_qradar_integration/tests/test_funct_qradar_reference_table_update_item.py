@@ -5,7 +5,8 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
-PACKAGE_NAME = "fn_qradar_integration"
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
+
 FUNCTION_NAME = "qradar_reference_table_update_item"
 
 # Read the default configuration-data section from the package
@@ -13,7 +14,6 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 MOCK_UPDATE_RESPONSE = {
   "time_to_live": "999 years 0 mons 0 days 0 hours 0 mins 0.00 secs",
@@ -25,6 +25,7 @@ MOCK_UPDATE_RESPONSE = {
   "element_type": "ALN",
   "collection_id": 86
 }
+
 MOCK_UPDATE_RESPONSE_UNICODE = {
   "time_to_live": "999 years 0 mons 0 days 0 hours 0 mins 0.00 secs",
   "timeout_type": "LAST_SEEN",
@@ -59,7 +60,6 @@ def call_qradar_reference_table_update_item_function(circuits, function_params, 
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
-
 class TestQradarReferenceTableUpdateItem:
     """ Tests for the qradar_reference_table_update_item function"""
 
@@ -70,14 +70,16 @@ class TestQradarReferenceTableUpdateItem:
 
     mock_inputs_1 = {
         "qradar_reference_table_name": "sample text",
-        "qradar_reference_table_item_value": "sample text"
+        "qradar_reference_table_item_value": "sample text",
+        "qradar_label": "SOAR_Plugin_Destination_Name1"
     }
 
     expected_results_1 = MOCK_UPDATE_RESPONSE
 
     mock_inputs_2 = {
         "qradar_reference_table_name": "sample text",
-        "qradar_reference_table_item_value": "sample text"
+        "qradar_reference_table_item_value": "sample text",
+        "qradar_label": "SOAR_Plugin_Destination_Name2"
     }
 
     expected_results_2 = MOCK_UPDATE_RESPONSE_UNICODE

@@ -1,0 +1,95 @@
+{
+    {%- set comma = joiner(",") -%}
+    "name": "Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
+    "description": "An incident imported using the Symantec DLP Integration",
+    {% if staticIncidentDetails.infoMap.creationDate|soar_datetimeformat > staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat %}
+      "discovered_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+      "start_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+    {% else %}
+      "discovered_date": {{ staticIncidentDetails.infoMap.detectionDate|soar_datetimeformat }},
+      "start_date": {{ staticIncidentDetails.infoMap.creationDate|soar_datetimeformat }},
+    {% endif %}
+    "incident_type_ids": [16],
+    "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
+
+    {#  Custom properties for DLP Attributes #}
+    "properties": {
+        "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
+        "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName|replace('incident.status.', '') }}",
+        "sdlp_incident_url": {"format" : "html", "content" : "<a target='blank' href='{{ sdlp_incident_url }}'>Symantec DLP Incident</a>"},
+        "sdlp_policy_name": "{{ staticIncidentDetails.infoMap.policyName }}",
+        "sdlp_policy_id": {{ staticIncidentDetails.infoMap.policyId }},
+        "sdlp_policy_group_id": {{ staticIncidentDetails.infoMap.policyGroupId }},
+        "sdlp_policy_group_name": "{{ staticIncidentDetails.infoMap.policyGroupName }}"
+    },
+    {# Artifacts which we will try to pull out of the Incident #}
+    "artifacts": [
+    {% if staticIncidentDetails.infoMap.get('discoverServer', False) %}
+      {{- comma() }}
+      {
+        "type": {"name": "System Name"},
+        "value": "{{ staticIncidentDetails.infoMap.discoverServer|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {% endif %}
+    {% if staticIncidentDetails.infoMap.get('discoverContentRootPath', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "File Path"}, 
+        "value": "{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('discoverName', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "File Name"}, 
+        "value": "{{ staticIncidentDetails.infoMap.discoverName|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('fileOwner', False) %}
+      {{- comma() }}
+      {
+        "type": { "name": "User Account"}, 
+        "value": "{{ staticIncidentDetails.infoMap.fileOwner|replace("\\", "\\\\") }}",
+        "description" : {
+            "format" : "html", 
+            "content" : "File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
+        }
+      }
+    {%- endif -%}
+    {% if staticIncidentDetails.infoMap.get('endpointMachineIpAddress', False) %}
+      {{- comma() }}
+      {
+        "type": {"name": "IP Address"},
+        "value": "{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}",
+          "properties": [{"name": "source", "value": true}]
+        }
+      }
+    {% endif %}
+    ],
+    "comments": [
+        {%- for note_text in notes -%}
+        {    
+            "text": {
+                "format": "html",
+                "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
+            }        
+        }
+        {{ "," if not loop.last else "" }}
+        {%- endfor -%}
+    ]
+}
