@@ -11,8 +11,11 @@ Exchange, but you will need to build and install them yourself.
 
 ## Developing New Apps
 
-Developing new apps is straightforward using the IBM SOAR SDK.  A good introduction can be found on the
-[IBM SOAR App Developer Guide](https://ibm.biz/soar-docs). For more advanced documentation on our APIs and available Python libraries, visit our [Python Docs](https://ibm.biz/soar-python-docs).
+Developing new apps is straightforward using the IBM SOAR SDK.
+
+* A good introduction can be found on the
+[IBM SOAR App Developer Guide](https://ibm.biz/soar-docs).
+* For more advanced documentation on our APIs and available Python libraries, visit our [Python Docs](https://ibm.biz/soar-python-docs).
 
 For questions and discussion, head over to the [IBM SOAR Community](http://ibm.biz/resilientcommunity) where you'll
 find blogs, technotes, discussion forums and other useful resources.
@@ -21,8 +24,7 @@ find blogs, technotes, discussion forums and other useful resources.
 
 ### License
 
-Unless otherwise specified, contents of this repository are published under the MIT open-source license.
-[LICENSE](LICENSE)
+Unless otherwise specified, contents of this repository are published under the MIT open-source [license](LICENSE).
 
 Files and subdirectories within this repository may contain specific licenses that apply individually to that item.
 
