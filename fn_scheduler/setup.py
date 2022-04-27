@@ -20,17 +20,17 @@ def snake_to_camel(word):
 setup(
     display_name='Scheduler',
     name='fn_scheduler',
-    version='1.2.0',
+    version='2.0.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
-    description="Functions to allow Rules to be scheduled",
-    long_description="""This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable.<br>
+    description="Functions to allow Rules/Playbooks to be scheduled",
+    long_description="""This package of functions allows an enterprise to schedule a rule or playbook to run in the future associated with a incident, task, artifact, and datatable.<br>
         Functions available include:<br>
-            1) Scheduling a rule<br>
-            2) Listing scheduled rules<br>
-            3) Pause and resume scheduled rules<br>
-            4) Removing a scheduled rule""",
+            1) Scheduling a rule/playbook<br>
+            2) Listing scheduled jobs<br>
+            3) Pause and resume scheduled job<br>
+            4) Removing a scheduled job""",
     install_requires=[
         'resilient_circuits>=42.0.0',
         'pytz',

@@ -249,7 +249,7 @@ class ResilientScheduler:
         params = list(job_json['args'])
 
         # hide settings which contain passwords
-        params[8] = None
+        params[8] = params[8] if isinstance(params[8], bool) else None
         job_json['args'] = params
 
         return job_json
