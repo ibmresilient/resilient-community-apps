@@ -1,0 +1,59 @@
+{
+  {# JINJA template for creating a new SOAR incident from a ReaQta alert. #}
+  {% set triggercondition_lookup = '''{
+    "0": "Code Injection",
+    "1": "Process Impersonated",
+    "2": "Signature Forged",
+    "3": "Incident Correlated",
+    "4": "DLL Sideloaded",
+    "5": "Suspicious Script Executed",
+    "6": "Policies Triggered",
+    "7": "Anomalous Behaviour Detected",
+    "8": "Token Stolen",
+    "9": "Ransomware Behavior Detected",
+    "10": "Privilege Escalated",
+    "11": "External Trigger",
+    "12": "Detection Strategy",
+    "13": "Antimalware Detection",
+    "DEFAULT": "Unknown"
+  }'''
+  %}
+  "name": "ReaQta Alert - {{ triggerCondition | string | soar_substitute(triggercondition_lookup) }}, Endpoint: {{ endpoint.name }}",
+  "description": "{{ title | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = happenedAt if happenedAt <= receivedAt else receivedAt %}
+  "discovered_date": {{ receivedAt|soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date|soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ closed|string|soar_substitute('{"False": "A", "True": "A"}') }}",
+  "severity_code": "{{ severity|title|soar_substitute('{"Safe": "Low"}') }}",
+  "properties": {
+    "reaqta_id": "{{ id }}",
+    "reaqta_alert_link": "<a target='blank' href='{{ alert_url }}'>ReaQta Alert</a>",
+    "reaqta_tags": "{{ tags | join(', ') }}",
+    "reaqta_endpoint_id": "{{ endpoint.id }}",
+    "reaqta_endpoint_link": "<a target='blank' href='{{ endpoint_url }}'>ReaQta Endpoint</a>",
+    "reaqta_groups": "{{ endpoint.groups | map(attribute='name') | join(', ') }}",
+    "reaqta_machine_info": "Machine Name: {{ endpoint.name }}\nOS: {{ endpoint.os }}\nDomain: {{ endpoint.domain }}\nCPU: {{ endpoint.cpuDescr }}",
+    "reaqta_trigger_condition": "{{ triggerCondition | string | soar_substitute(triggercondition_lookup)}}",
+    "reaqta_hive": "{{ hive_label }}"
+  },
+  "comments": [
+    {% if notes %}
+    {
+      "text": {
+          "format": "text",
+          "content": "Created by ReaQta:\n{{ notes|replace("\\", "\\\\") |replace('"', '\\"') }}"
+      }
+    }
+    {% else %}
+    {
+      "text": {
+          "format": "text",
+          "content": "Created by ReaQta"
+      }
+    }
+    {% endif %}
+  ]
+}

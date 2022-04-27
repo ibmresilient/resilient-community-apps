@@ -73,6 +73,7 @@ fn_qradar_advisor
 fn_qradar_enhanced_data
 fn_qradar_integration
 fn_query_tor_network
+fn_reaqta
 fn_remedy
 fn_rsa_netwitness
 fn_scheduler

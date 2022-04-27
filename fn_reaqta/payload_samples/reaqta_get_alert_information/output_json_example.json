@@ -1,0 +1,297 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "853282059173494786",
+    "localId": "853279134984443906",
+    "endpointId": "853260775773437952",
+    "triggerCondition": 7,
+    "endpoint": {
+      "id": "853260775773437952",
+      "machineId": "01531b51db1faae8e9526eee6d3b91c2c530517cc44bef9c5bb5ebfcb2f4ab39",
+      "osType": 1,
+      "cpuVendor": 1,
+      "arch": 2,
+      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "name": "DESKTOP-MITCH",
+      "state": 1,
+      "registrationTime": "2022-04-15T14:33:41.773Z",
+      "agentVersion": "3.6.1",
+      "componentsVersions": [
+        {
+          "name": "keeper",
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
+        },
+        {
+          "name": "probos",
+          "version": "3.5.0",
+          "build": "3.5.0"
+        },
+        {
+          "name": "rqtsentry",
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
+        },
+        {
+          "name": "rqtnetsentry",
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.6.1",
+          "build": ""
+        }
+      ],
+      "isVirtualMachine": false,
+      "isDomainController": false,
+      "isServer": false,
+      "sessionStart": "2022-04-15T14:33:43.044Z",
+      "sessionEnd": "2022-04-15T16:03:24.293Z",
+      "lastSeenAt": "2022-04-15T15:58:24.293Z",
+      "disconnectionReason": 0,
+      "localAddr": "10.0.0.119",
+      "hvStatus": 0,
+      "macs": [
+        "00:50:56:13:a4:c6"
+      ],
+      "isolated": false,
+      "connected": true,
+      "tags": [],
+      "groups": [
+        {
+          "id": "847194699834851335",
+          "name": "Digital Sales",
+          "description": "Digital Sales Group"
+        }
+      ],
+      "avInstalled": false
+    },
+    "triggerEvents": [
+      {
+        "id": "853282022443974657",
+        "category": "hive",
+        "localId": "853279044794320897",
+        "endpointId": "853260775773437952",
+        "receivedAt": "2022-04-15T15:58:07.364Z",
+        "happenedAt": "2022-04-15T15:46:17.437Z",
+        "relevance": 0,
+        "severity": "none",
+        "trigger": true,
+        "manuallyAdded": false,
+        "process": {
+          "id": "853260775773437952:7576:1650037576457",
+          "parentId": "853260775773437952:4568:1650037572779",
+          "endpointId": "853260775773437952",
+          "program": {
+            "path": "c:\\users\\admin\\appdata\\local\\temp\\tryme.exe",
+            "filename": "tryme.exe",
+            "md5": "a3ce5c07dc7b7d58740b4407a7d3f9d2",
+            "sha1": "9fa6c5f1cff4ca41c441e428a847a924627210cc",
+            "sha256": "cf8c1b234ad4d72dd6a455b82bf48ff16cd794aaefb682729b0151f0e1c374dd",
+            "size": 84992,
+            "arch": "x64",
+            "fsName": "tryme.exe"
+          },
+          "user": "DESKTOP-MITCH\\Admin",
+          "pid": 7576,
+          "startTime": "2022-04-15T15:46:16.457Z",
+          "ppid": 4568,
+          "pstartTime": "2022-04-15T15:46:12.779Z",
+          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x91fa6"
+        },
+        "eventType": 2,
+        "data": {
+          "cmdLine": "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe",
+          "cmdLineArgs": [
+            "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe"
+          ],
+          "_t": "l"
+        },
+        "happenedAt_ts": 1650037577000
+      },
+      {
+        "id": "853282056220704769",
+        "category": "hive",
+        "localId": "853279134984439809",
+        "endpointId": "853260775773437952",
+        "receivedAt": "2022-04-15T15:58:15.417Z",
+        "happenedAt": "2022-04-15T15:46:38.940Z",
+        "relevance": 83,
+        "severity": "medium",
+        "trigger": true,
+        "manuallyAdded": false,
+        "process": {
+          "id": "853260775773437952:4568:1650037572779",
+          "parentId": "853260775773437952:3960:1650033309123",
+          "endpointId": "853260775773437952",
+          "program": {
+            "path": "c:\\program files\\microsoft office\\root\\office16\\winword.exe",
+            "filename": "winword.exe",
+            "md5": "eb9b2b5179e1fd9c3e0d11c8191f1963",
+            "sha1": "c08b8a54593258f62f16e7a1045d4c40e39fb423",
+            "sha256": "7092f1ab2c59297fa1f6f70cf7c4de570c6e3babc2085fa69e1e5b9872792daf",
+            "certInfo": {
+              "signer": "Microsoft Corporation",
+              "issuer": "Microsoft Code Signing PCA 2011",
+              "trusted": true,
+              "expired": false
+            },
+            "size": 1639800,
+            "arch": "x64",
+            "fsName": "winword.exe"
+          },
+          "user": "DESKTOP-MITCH\\Admin",
+          "pid": 4568,
+          "startTime": "2022-04-15T15:46:12.779Z",
+          "ppid": 3960,
+          "pstartTime": "2022-04-15T14:35:09.123Z",
+          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x91fa6"
+        },
+        "eventType": 31,
+        "data": {
+          "behaviourType": 1,
+          "_t": "l"
+        },
+        "happenedAt_ts": 1650037598000
+      }
+    ],
+    "totalEventCount": 166,
+    "byTypeEventCount": [
+      {
+        "type": 21,
+        "count": 59
+      },
+      {
+        "type": 65,
+        "count": 24
+      },
+      {
+        "type": 8,
+        "count": 23
+      },
+      {
+        "type": 11,
+        "count": 23
+      },
+      {
+        "type": 10,
+        "count": 16
+      },
+      {
+        "type": 57,
+        "count": 6
+      },
+      {
+        "type": 37,
+        "count": 5
+      },
+      {
+        "type": 38,
+        "count": 4
+      },
+      {
+        "type": 2,
+        "count": 2
+      },
+      {
+        "type": 3,
+        "count": 1
+      },
+      {
+        "type": 5,
+        "count": 1
+      },
+      {
+        "type": 31,
+        "count": 1
+      },
+      {
+        "type": 62,
+        "count": 1
+      }
+    ],
+    "impact": 83,
+    "severity": "medium",
+    "closed": false,
+    "activityState": "active",
+    "receivedAt": "2022-04-15T15:58:16.121Z",
+    "happenedAt": "2022-04-15T15:46:38.940Z",
+    "tags": [],
+    "endpointState": {
+      "osType": 1,
+      "cpuVendor": 1,
+      "arch": 2,
+      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "hvStatus": 0,
+      "name": "DESKTOP-MITCH",
+      "isolated": false,
+      "localAddr": "10.0.0.119",
+      "macs": [
+        "00:50:56:13:a4:c6"
+      ],
+      "componentsVersions": [
+        {
+          "name": "keeper",
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
+        },
+        {
+          "name": "probos",
+          "version": "3.5.0",
+          "build": "3.5.0"
+        },
+        {
+          "name": "rqtsentry",
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
+        },
+        {
+          "name": "rqtnetsentry",
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.6.1",
+          "build": ""
+        }
+      ],
+      "endpointVersion": "3.6.1",
+      "tags": [],
+      "groups": [
+        {
+          "id": "847194699834851335",
+          "name": "Digital Sales",
+          "description": "Digital Sales Group"
+        }
+      ]
+    },
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/853282059173494786"
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_alert_id": "853282059173494786",
+    "reaqta_hive": "rhiveam"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 8138,
+    "timestamp": "2022-04-15 11:59:06"
+  }
+}
