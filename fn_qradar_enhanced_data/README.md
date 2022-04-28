@@ -109,7 +109,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Layouts | Read , Edit |
+  | Layouts | Read, Edit |
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -183,7 +183,6 @@ All screenshots are examples of using the app with Cloud Pak.
 
 ## Function - QRadar Offense Summary
 Fetch QRadar offense Details.
-
 
 <details><summary>Inputs:</summary>
 <p>
