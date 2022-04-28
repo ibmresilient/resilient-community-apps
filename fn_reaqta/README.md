@@ -151,7 +151,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-|ReaQta Hive | 1.0 | rqt-api/1/ | 1 |
+|ReaQta Hive | 3.7 | rqt-api/1/ | 1 |
 
 #### Configuration
 In order to make API calls to ReaQta, create an API Application, prodiving the endpoint group restrictions as appropiate. The API ID and secret will be copied into your app.config file
@@ -2027,4 +2027,4 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is an IBM supported App. Open support cases at [ibm.com/mysupport](https://ibm.com/mysupport). Additional support can be found by searching the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
