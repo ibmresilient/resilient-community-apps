@@ -67,7 +67,7 @@
 | 1.1.0 | 07/2021 | Support for Flows and QRoc |
 | 1.0.0 | 12/2020 | Initial Release |
 
-For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
+* For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.2.0 Changes](#1.2.0-changes)
 ---
 
 ## Overview
@@ -75,18 +75,16 @@ For customers upgrading from a pervious release, the app.config file must be man
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**QRadar Enhanced Offense Data Migration**
 
-
-This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.
+The QRadar Enhanced Offense Data Migration (EDM) app fetches a more complete view of data associated with a QRadar offense and provides live links within the SOAR case back to QRadar, thereby simplifying case management.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Offense data available in a SOAR "QR Offense Details" tab as part of the Case to simplify reviewing information in one central/consistent location.
-* Access to detailed Offense information by following the hotlink from the SOAR UI to QRadar Analyst Workflow.
-* Centralize QRadar Offense IoC's associated with Security Events under Artifacts in order to use SOAR enabled integrations to enrich and remediate cases and provide visibility to the response team.
+* Offense data available in a SOAR incident or case "QR Offense Details" tab to simplify reviewing information in one central and consistent location.
+* Access to detailed offense information by links in SOAR to the QRadar Analyst Workflow.
+* Centralize QRadar Offense IoC's associated with Security Events in the SOAR Artifacts tab, where SOAR enabled integrations can enrich and remediate cases and provide visibility to the response team.
 ---
 
 ## Requirements
@@ -144,7 +142,7 @@ The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workf
 
 ### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
-* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation .
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
@@ -167,7 +165,7 @@ For other configurations, `qradar_instance_label` can represent any label helpfu
 
 ### MSSP Configuration
 
-For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs .
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 <!--
@@ -175,16 +173,16 @@ For this app, Circuits needs to be run on the config org so that the tab is crea
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
- Upon installation, this app adds a tab comprising of the custom fields and data tables to the Case management, if the Case has an associated Offense ID. Each of the fields and data tables have information associated with the Offense and a few have live links to QRadar Analyst Workflow. The data here is populated during the initial escalation of an Offense to a case.
+Upon installation, this app adds a tab to those incidents or cases which are associated with a QRadar offense. The tab consists of custom fields and data tables with information associated with the offense. A few have links back to QRadar's Analyst Workflow. The data is populated during the initial escalation of an offense through this app.
 
- All screenshots are examples of using the app with Cloud Pak.
+All screenshots are examples of using the app with Cloud Pak.
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
 
 ## Function - QRadar Offense Summary
-Fetch QRadar Offense Details.
+Fetch QRadar offense Details.
 
 
 <details><summary>Inputs:</summary>
@@ -325,7 +323,7 @@ for event in results.rules_data:
 
 ---
 ## Function - QRadar Top Events
-Search QRadar Top events for the given Offense ID.
+Search QRadar Top events for the given offense ID.
 
 
 <details><summary>Inputs:</summary>
@@ -645,7 +643,7 @@ for type in artifact_types:
 
 ---
 ## Data Table - QR Destination IPs (First 10)
-The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the Offense.
+The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the offense.
 
  ![screenshot: dt-qr-destination-ips-first-10-events](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
 
@@ -662,7 +660,7 @@ qr_top_destination_ips
 
 ---
 ## Data Table - QR Triggered Rules
-The following is an example of QRadar Triggered Rules data table populated with the information related to Contributing Rules for the Offense.
+The following is an example of QRadar Triggered Rules data table populated with the information related to Contributing Rules for the offense.
 
  ![screenshot: dt-qr-triggered-rules](./doc/screenshots/dt-qr-triggered-rules.png)
 
@@ -682,7 +680,7 @@ qr_triggered_rules
 
 ---
 ## Data Table - QR Categories
-The following is an example of QRadar Categories data table populated with the information related to Categories associated with the Offense.
+The following is an example of QRadar Categories data table populated with the information related to Categories associated with the offense.
 
  ![screenshot: dt-qr-categories](./doc/screenshots/dt-qr-categories.png)
 
@@ -703,7 +701,7 @@ qr_categories
 
 ---
 ## Data Table - QR Assets
-The following is an example of QRadar Assets data table populated with the Assets information related to the Offense.
+The following is an example of QRadar Assets data table populated with the Assets information related to the offense.
 
  ![screenshot: dt-qr-assets](./doc/screenshots/dt-qr-assets.png)
 
@@ -724,7 +722,7 @@ qr_assets
 
 ---
 ## Data Table - QR Source IPs (First 10 )
-The following is an example of QRadar Source IP data table populated with the information related to Source IPs associated with the Offense.
+The following is an example of QRadar Source IP data table populated with the information related to Source IPs associated with the offense.
 
  ![screenshot: dt-qr-source-ips-first-10-events](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
 
@@ -746,7 +744,7 @@ qr_top_source_ips
 
 ---
 ## Data Table - QR Events (First 10 Events)
-The following is an example of QRadar Events data table populated with the information related to first 10 events associated with the Offense.
+The following is an example of QRadar Events data table populated with the information related to first 10 events associated with the offense.
 
  ![screenshot: dt-qr-events-first-10-events](./doc/screenshots/dt-qr-events-first-10-events.png)
 
@@ -768,7 +766,7 @@ qr_offense_top_events
 
 ---
 ## Data Table - QR Flows
-The following is an example of QRadar Flows data table populated with the information related to flows associated with the Offense.
+The following is an example of QRadar Flows data table populated with the information related to flows associated with the offense.
 
  ![screenshot: dt-qr-flows](./doc/screenshots/dt-qr-flows.png)
 
@@ -794,18 +792,18 @@ qr_flows
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
+| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar offense is assigned to. |
 | QR Credibility | `qr_credibility` | `textarea` | `properties` | - | Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source. |
-| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
-| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
-| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
+| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar offense |
+| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar offense |
+| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar offense |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
-| QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
-| QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
-| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar offense is indexed |
+| QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar offense is indexed |
+| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar offense |
 | QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
-| QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
+| QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar offense |
 | qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
 | QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
 
@@ -820,7 +818,7 @@ qr_flows
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
 
-The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
+The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
 
@@ -829,13 +827,13 @@ Make sure at the time of escalation the field qradar_destination is mapped to ha
 If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
 
 ## How to configure to use multiple QRadar servers that have the QRadar-Plugin installed
-1. On the QRadar server go to the configuration for the IBM QRadar SOAR Plugin
-2. Copy the string given under, QRadar Destination Name
+1. On the QRadar server, go to the configuration for the IBM QRadar SOAR Plugin.
+2. Copy the string from QRadar Destination Name.
 ![screenshot: qradar-plugin-config](./doc/screenshots/qradar-plugin-config.png)
-3. On the SOAR server go to the App Settings/app.config for QRadar Enhanced Data Migration
-4. Under File Content where it says [fn_qradar_enhanced_data:SOAR_Plugin_Destination_Name1] replace, SOAR_Plugin_Destination_Name1, with the string copied in step 2
+3. On SOAR, locate QRadar Enhanced Data Migration in the Apps tab and go to its app.config file in App Settings.
+4. Locate [fn_qradar_enhanced_data:SOAR_Plugin_Destination_Name1] under File Content then replace `SOAR_Plugin_Destination_Name1` with the string copied in step 2.
 ![screenshot: soar-qr-config](./doc/screenshots/soar-qr-config.png)
-5. Enter the correct data for the settings under the server thats label was just configured
+5. Update the host, username, and other settings in this section with the correct data.
 
 ## How to configure to use a single QRadar Server
 To use only a single server there are two ways this can be configured
@@ -861,4 +859,4 @@ Example app.config server label: [fn_qradar_integration:qradar_4]
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM supported App. For assistance - https://ibm.com/mysupport.
+This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.
