@@ -27,11 +27,26 @@ if results.success:
   if results.content:
     hit = []
     resp_data = results.content
+    resp_dict = resp_data["Breaches"]
+    dict_string = ""
+    for breach in resp_dict:
+        for dict_key, dict_value in breach.items():
+          temp = ""
+          aKey = str(dict_key)
+          aValue = str(dict_value)
+          temp = u"{}: {}".format(aKey, aValue)
+          dict_string += temp
+          dict_string += " || "
     hit = [
       {
-        "name": "Breached Sites", 
+        "name": "Number of Breached Sites", 
         "type": "number",
-        "value": "{}".format(resp_data)
+        "value": "{}".format(len(resp_data))
+      },
+      {
+        "name": "Breached Sites", 
+        "type": "string",
+        "value": dict_string
       }
     ]
     artifact.addHit("HIBP Function hits added", hit)
@@ -64,16 +79,26 @@ if results.success:
   if results.content:
     hit = []
     resp_data = results.content
+    resp_dict = resp_data["Pastes"]
+    dict_string = ""
+    for paste in resp_dict:
+      for dict_key, dict_value in paste.items():
+        temp = ""
+        aKey = str(dict_key)
+        aValue = str(dict_value)
+        temp = u"{}: {} ; ".format(aKey, aValue)
+        dict_string += temp
+      dict_string += " || "
     hit = [
       {
         "name": "Pastes", 
-        "type": "number",
-        "value": "{}".format(resp_data)
+        "type": "string",
+        "value": dict_string,
       }
     ]
     artifact.addHit("HIBP Function hits added", hit)
 else:
-  incident.addNote("Have I Been Pwned has failed: {}".format(results.reason))
+  incident.addNote(u"Have I Been Pwned has failed: {}".format(results.reason))
 
     
 ```
