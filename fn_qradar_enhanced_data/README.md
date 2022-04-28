@@ -52,20 +52,20 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 12/2020 | Initial Release |
-| 1.1.0 | 07/2021 | Support for Flows and QRoc |
-| 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
-| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
-| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
-| 1.2.0 | 01/2022 | Allow multiple QRadar instances |
-| 1.2.1 | 03/2022 | Bug fix |
-| 1.2.2 | 04/2022 | Delete Search on time-out |
 | 1.2.3 | 04/2022 | Documentation updates and bug fix |
+| 1.2.2 | 04/2022 | Delete search on time-out |
+| 1.2.1 | 03/2022 | Bug fix |
+| 1.2.0 | 01/2022 | Allow multiple QRadar instances |
+| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
+| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
+| 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
+| 1.1.0 | 07/2021 | Support for Flows and QRoc |
+| 1.0.0 | 12/2020 | Initial Release |
 
 For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 ---
@@ -91,7 +91,7 @@ This app fetches the data associated with the QRadar Offense and provides live l
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -99,34 +99,34 @@ This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.7058`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.7058`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=41.1.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
   | Layouts | Read , Edit |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.5.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -158,6 +158,13 @@ The following table provides the settings you need to configure the app. These s
 | **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
 
+#### 1.2.0 Changes
+Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
+
+For enterprises with more than one QRadar instance, each instance will have it's own section header, such as `[fn_qradar_integration:qradar_instance_label]` where `qradar_instance_label` represents the message destination when QRadar Enhanced Data Migration (EDM) is paired with our QRadar Plugin for offense escalation. For instance the section header `[fn_qradar_integration:qradar_9_21_118_173_1110]` references the message destination `qradar_9_21_118_173_1110` created when the QRadar Plugin is configured for your IBM SOAR platform.
+
+For other configurations, `qradar_instance_label` can represent any label helpful to define you QRadar environment. Be aware that modifications to the EDM workflows may be needed to correctly pass this label through the `qradar_label` function input field.
+
 ### MSSP Configuration
 
 For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs .
@@ -174,7 +181,6 @@ For this app, Circuits needs to be run on the config org so that the tab is crea
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
-
 ---
 
 ## Function - QRadar Offense Summary
@@ -186,7 +192,7 @@ Fetch QRadar Offense Details.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `qradar_query_type` | `text` | No | `-` | - |
 
@@ -327,8 +333,8 @@ Search QRadar Top events for the given Offense ID.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
-| `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
 | `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
@@ -423,7 +429,7 @@ for event in results.events:
   qradar_event.event_time =  event.eventtime
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
   qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
-  
+
 ```
 
 </p>
@@ -460,7 +466,7 @@ for type in artifact_types:
     artifact_description = "QRadar Offense {0}".format(type)
     if type=="Destination IP":
       incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
-    
+
 
 
 ```
@@ -839,17 +845,17 @@ To use only a single server there are two ways this can be configured
 ![screenshot: qr-single-label-server](./doc/screenshots/qr-single-label-server.png)
 
 ## Incident fields that are required for the example automatic rule to run
-The incident fields, QR Offense Id and qradar_destination are required to have values in order for the example automatic rule to be run.
+The incident fields, qradar_id and qradar_destination are required to have values in order for the example automatic rule to be run.
 
 ## Creating workflows when server/servers in app.config are labeled
-The function input field qradar_label is required when server/servers in the app.config are labeled. In the example workflows pre-process scripts the
-input field qradar_label is defined the following way,
+The function input field `qradar_label` is required when QRadar server/servers in the app.config are labeled. In the example workflows pre-process scripts the
+input field `qradar_label` is defined the following way,
 ```python
 inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 Example app.config server label: [fn_qradar_integration:qradar_4]
-  qradar_4 is the label in the above example
+  `qradar_4` is the label in the above example
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
