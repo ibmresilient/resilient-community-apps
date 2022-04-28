@@ -3,8 +3,8 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
-from fn_scheduler.components import SECTION_SCHEDULER as PACKAGE_NAME
+from resilient_lib import validate_fields
+from fn_scheduler.components import SECTION_RESILIENT, SECTION_SCHEDULER as PACKAGE_NAME
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 
 FN_NAME = "scheduled_rule_modify"
@@ -18,10 +18,12 @@ class FunctionComponent(AppFunctionComponent):
 
         self.options = opts.get(PACKAGE_NAME, {})
 
-        self.res_scheduler = ResilientScheduler(self.options.get("db_url"),
-                                                self.options.get("datastore_dir"),
-                                                self.options.get("thread_max"),
-                                                self.options.get("timezone"))
+        resilient_connection = opts.get(SECTION_RESILIENT, {})
+        self.res_scheduler = ResilientScheduler.get_scheduler(self.options.get("db_url"),
+                                                              self.options.get("datastore_dir"),
+                                                              self.options.get("thread_max"),
+                                                              self.options.get("timezone"),
+                                                              resilient_connection)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):

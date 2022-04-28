@@ -5,7 +5,7 @@
    test with: resilient-circuits selftest -l fn_scheduler
 """
 import logging
-from fn_scheduler.components import SECTION_SCHEDULER
+from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 
 log = logging.getLogger(__name__)
@@ -18,17 +18,19 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get(SECTION_SCHEDULER, {})
+    resilient_connection = opts.get(SECTION_RESILIENT, {})
 
-    scheduler = None
+    res_scheduler = None
     state = None
     reason = None
     try:
-        scheduler = ResilientScheduler(options.get("db_url"),
-                                       options.get("datastore_dir"),
-                                       options.get("thread_max"),
-                                       options.get("timezone"))
+        res_scheduler = ResilientScheduler.get_scheduler(options.get("db_url"),
+                                                         options.get("datastore_dir"),
+                                                         options.get("thread_max"),
+                                                         options.get("timezone"),
+                                                         resilient_connection)
 
-        job = scheduler.get_scheduler().add_job(myfunc, 'interval', minutes=2)
+        job = res_scheduler.scheduler.add_job(myfunc, 'interval', minutes=2)
         job.remove()
 
         state = "success"
@@ -36,8 +38,8 @@ def selftest_function(opts):
         state = "failure"
         reason = str(e)
     finally:
-        if scheduler:
-            scheduler.get_scheduler().shutdown()
+        if res_scheduler.scheduler:
+            res_scheduler.scheduler.shutdown()
 
     return {
         "state": state,

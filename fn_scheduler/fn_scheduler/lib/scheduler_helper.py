@@ -18,47 +18,65 @@ SECONDS_IN_HOUR = SECONDS_IN_MINUTE*60
 SECONDS_IN_DAY = SECONDS_IN_HOUR*24
 SECONDS_IN_WEEK = SECONDS_IN_DAY*7
 
-_scheduler_ = None
-
 class ResilientScheduler:
     """
     This class builds a singleton instance of the scheduler.
     It also contains helper functions for building and managing scheduler jobs
     """
+    _singleton = None
+    lock = threading.Lock()
 
-    def __init__(self, db_url, datastore_dir, threat_max, timezone):
-        global _scheduler_
+    @staticmethod
+    def get_scheduler(db_url, datastore_dir, threat_max, timezone, resilient_connection):
+        """
+        This method creates a singleton.
+        :param opts: opts from configuration file needed to generate the singleton object
+        :param config_data_selection: config_data_selection needed to generate the singleton object
+        :return:
+        """
+        if ResilientScheduler._singleton is None:
+            with ResilientScheduler.lock:
+                # code here will be single threaded
+                if ResilientScheduler._singleton is None:  # We check for the second time if singleton is set
+                    # in case of multiple threads entering line 49 at the same time (during start up).
+                    # The first thread will generate a token, the subsequent will not.
+                    ResilientScheduler._singleton = ResilientScheduler(db_url, datastore_dir, threat_max, timezone, resilient_connection)
 
+        return ResilientScheduler._singleton
+
+    def __init__(self, db_url, datastore_dir, threat_max, timezone, resilient_connection):
         self.timezone = timezone
+        self._resilient_connection = resilient_connection
 
         url = db_url if db_url else 'sqlite:///{}/scheduler.sqlite'.format(datastore_dir)
 
-        lock = threading.Lock()
-        with lock:
-            if not _scheduler_:
-                jobstores = {
-                    'default': SQLAlchemyJobStore(url=url),
-                }
-                executors = {
-                    'default': ThreadPoolExecutor(threat_max),
-                }
-                job_defaults = {
-                    'coalesce': False,
-                    'max_instances': 1
-                }
-                _scheduler_ = BackgroundScheduler(
-                    jobstores=jobstores, executors=executors,
-                    job_defaults=job_defaults, timezone=timezone
-                )
-                _scheduler_.start()
+        jobstores = {
+            'default': SQLAlchemyJobStore(url=url),
+        }
+        executors = {
+            'default': ThreadPoolExecutor(threat_max),
+        }
+        job_defaults = {
+            'coalesce': False,
+            'max_instances': 1
+        }
+        self._scheduler = BackgroundScheduler(
+            jobstores=jobstores, executors=executors,
+            job_defaults=job_defaults, timezone=timezone
+        )
+        self._scheduler.start()
 
-    @staticmethod
-    def get_scheduler():
+    @property
+    def scheduler(self):
         """
         return the instance of the scheduler
         :return:
         """
-        return _scheduler_
+        return self._scheduler
+
+    @property
+    def resilient_connection(self):
+        return self._resilient_connection
 
     def build_trigger(self, type, value):
         """
@@ -205,8 +223,7 @@ class ResilientScheduler:
         :param scheduler_label:
         :return: job found or None
         """
-        scheduler = self.get_scheduler()
-        jobs = scheduler.get_jobs()
+        jobs = self.scheduler.get_jobs()
 
         for job in jobs:
             if job.id.lower() == scheduler_label.lower():
@@ -215,7 +232,7 @@ class ResilientScheduler:
         return None
 
     def get_job_by_id(self, job_id):
-        return self.get_scheduler().get_job(job_id)
+        return self.scheduler.get_job(job_id)
 
     @staticmethod
     def get_str_date(dt):

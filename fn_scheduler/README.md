@@ -48,6 +48,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.0   | May  2022 | Support for Playbooks |
 | 1.1.2   | Feb. 2022 | Use ``APScheduler < 3.9`` if ``Python Version < 3.6`` |
 | 1.1.1   | Aug. 2021 | remove SOAR credentials from saved rules in db |
 | 1.1.0   | Apr. 2021 | app.config setting for optional note creation |
@@ -77,10 +78,10 @@ This is necessary in an App Host environment to retain your schedules outside th
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Times to run can be specified in the following ways:
 
-1) cron (ex. * 0 * * * for every night at midnight)
-2) interval (ex. 5h for every 5 hours)
-3) date (ex. 2019/10/23 12:00:00)
-4) delta (ex. 1h for one hour in the future)
+1) cron (ex. * 0 * * * for every night at midnight). For more information about cron entry syntax, see [Wikipedia](https://en.wikipedia.org/wiki/Cron)
+2) interval (ex. `30s` for every 30 seconds, `10m` for every 10 minutes, `5h` for every 5 hours, `1d` for once daily)
+3) date (ex. 2022/4/23 12:00:00 or 2022-4-23 12:00:00)
+4) delta (ex. `30s` for 30 seconds in the future, `10m` for 10 minutes in the future, etc.)
 
 Schedule rules using `cron` and `interval` are reocurring whereas `date` and `delta` are single event schedules. Scheduled rules are persisted so that restarts of resilient-circuits will resume already scheduled rules.
 

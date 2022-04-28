@@ -7,7 +7,7 @@ import logging
 from apscheduler.jobstores.base import JobLookupError
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient_lib import validate_fields, ResultPayload
-from fn_scheduler.components import SECTION_SCHEDULER
+from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 from fn_scheduler.lib.resilient_helper import validate_app_config
 
@@ -24,10 +24,12 @@ class FunctionComponent(ResilientComponent):
 
         validate_app_config(options)
 
-        self.res_scheduler = ResilientScheduler(options.get("db_url"),
-                                                options.get("datastore_dir"),
-                                                options.get("thread_max"),
-                                                options.get("timezone"))
+        resilient_connection = opts.get(SECTION_RESILIENT, {})
+        self.res_scheduler = ResilientScheduler.get_scheduler(options.get("db_url"),
+                                                              options.get("datastore_dir"),
+                                                              options.get("thread_max"),
+                                                              options.get("timezone"),
+                                                              resilient_connection)
 
     @function("remove_a_scheduled_rule")
     def _remove_a_scheduled_job(self, event, *args, **kwargs):
@@ -38,7 +40,7 @@ class FunctionComponent(ResilientComponent):
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
-            scheduler = ResilientScheduler.get_scheduler()
+            scheduler = self.res_scheduler.scheduler
 
             try:
                 scheduler.remove_job(scheduler_label)

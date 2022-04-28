@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_scheduler.components import SECTION_SCHEDULER
+from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 
 class FunctionComponent(ResilientComponent):
@@ -16,6 +16,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(SECTION_SCHEDULER, {})
+
+        resilient_connection = opts.get(SECTION_RESILIENT, {})
+        self.res_scheduler = ResilientScheduler.get_scheduler(self.options.get("db_url"),
+                                                              self.options.get("datastore_dir"),
+                                                              self.options.get("thread_max"),
+                                                              self.options.get("timezone"),
+                                                              resilient_connection)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -81,7 +88,7 @@ class FunctionComponent(ResilientComponent):
         :param scheduler_label:
         :return: job found or None
         """
-        scheduler = ResilientScheduler.get_scheduler()
+        scheduler = self.res_scheduler.scheduler
         jobs = scheduler.get_jobs()
 
         for job in jobs:

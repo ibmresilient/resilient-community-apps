@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient_lib import ResultPayload
-from fn_scheduler.components import SECTION_SCHEDULER
+from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 from fn_scheduler.lib.resilient_helper import validate_app_config
 
@@ -22,10 +22,12 @@ class FunctionComponent(ResilientComponent):
 
         validate_app_config(options)
 
-        self.res_scheduler = ResilientScheduler(options.get("db_url"),
-                                                options.get("datastore_dir"),
-                                                options.get("thread_max"),
-                                                options.get("timezone"))
+        resilient_connection = opts.get(SECTION_RESILIENT, {})
+        self.res_scheduler = ResilientScheduler.get_scheduler(options.get("db_url"),
+                                                              options.get("datastore_dir"),
+                                                              options.get("thread_max"),
+                                                              options.get("timezone"),
+                                                              resilient_connection)
 
     @function("list_scheduled_rules")
     def _create_a_schedule_function(self, event, *args, **kwargs):
@@ -36,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
             # Produce a FunctionResult with the results
-            scheduler = ResilientScheduler.get_scheduler()
+            scheduler = self.res_scheduler.scheduler
             jobs = scheduler.get_jobs()
 
             list_jobs = []
