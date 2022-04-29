@@ -33,8 +33,8 @@ print_msg () {
 ## Start ##
 ###########
 
-if [ "$PACKAGE_NAME" == "MERGE" ] ; then
-    print_msg "Latest commit is a Merge. Not running bandit scan"
+if [ "$PACKAGE_NAME" == "build" ] ; then
+    print_msg "Latest commit is modifying the build. Not running bandit scan"
     exit 0
 fi
 

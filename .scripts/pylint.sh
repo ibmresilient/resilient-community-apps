@@ -35,8 +35,8 @@ print_msg () {
 ## Start ##
 ###########
 
-if [ "$PACKAGE_NAME" == "MERGE" ] ; then
-    print_msg "Latest commit is a Merge. Not running pylint"
+if [ "$PACKAGE_NAME" == "build" ] ; then
+    print_msg "Latest commit is modifying the build. Not running pylint"
     exit 0
 fi
 
