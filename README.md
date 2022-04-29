@@ -5,8 +5,8 @@
 This repository contains the source-code for packaged IBM SOAR Apps.
 
 Many of these apps are available for download from [IBM Security App Exchange](https://exchange.xforce.ibmcloud.com/hub/?br=Resilient).
-This source code repository may include unpublished versions, and additional apps that are not published to App
-Exchange, but you will need to build and install them yourself.
+This source code repository may include unpublished versions and additional apps that are not published to App
+Exchange. In that scenario you will need to build and install them yourself.
 
 
 ## Developing New Apps
@@ -14,7 +14,7 @@ Exchange, but you will need to build and install them yourself.
 Developing new apps is straightforward using the IBM SOAR SDK.
 
 * A good introduction can be found on the
-[IBM SOAR App Developer Guide](https://ibm.biz/soar-docs).
+[IBM SOAR App Developer Guide](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the App Developer’s Guide by expanding **Apps** in the Table of Contents pane.
 * For more advanced documentation on our APIs and available Python libraries, visit our [Python Docs](https://ibm.biz/soar-python-docs).
 
 For questions and discussion, head over to the [IBM SOAR Community](http://ibm.biz/resilientcommunity) where you'll
