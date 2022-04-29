@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "qrhost": {
+      "type": "string"
+    },
+    "offenseid": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array"
+    }
+  }
+}

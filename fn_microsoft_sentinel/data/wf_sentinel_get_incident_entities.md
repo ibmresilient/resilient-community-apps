@@ -43,7 +43,8 @@ if results.success:
         desc = ["created from Sentinel entity: {}".format(entity['name'])]
         if entity['properties'].get('azureID'):
           desc.append(entity['properties']['azureID'])
-        incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
+        if entity['resilient_artifact_type']:
+            incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
 
 ```
 

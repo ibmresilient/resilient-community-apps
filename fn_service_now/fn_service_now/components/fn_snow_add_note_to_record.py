@@ -1,14 +1,19 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import json
+import logging
+
 from bs4 import BeautifulSoup
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_service_now.util.resilient_helper import ResilientHelper
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -46,6 +51,8 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # Get the function inputs:
             inputs = {
@@ -93,7 +100,7 @@ class FunctionComponent(ResilientComponent):
                 # Generate the request_data
                 request_data = {
                     "sn_ref_id": sn_ref_id,
-                    "sn_table_name": res_helper.SN_TABLE_NAME,
+                    "sn_table_name": res_helper.get_table_name(sn_ref_id),
                     "type": "comment",
                     "sn_note_text": payload.inputs["sn_note_text"],
                     "sn_note_type": payload.inputs["sn_note_type"]
@@ -102,16 +109,18 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Adding Note to ServiceNow Record {0}".format(sn_ref_id))
 
                 # Call POST and get response
-                add_in_sn_response = res_helper.sn_api_request("POST", "/add", data=json.dumps(request_data))
+                add_in_sn_response = res_helper.sn_api_request(rc, "POST", "/add", data=json.dumps(request_data))
                 payload.res_id = res_id
                 payload.sn_ref_id = add_in_sn_response["sn_ref_id"]
 
             results = payload.as_dict()
-            log.debug("RESULTS: %s", results)
+            rp_results = rp.done(results.get("success"), results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
+            log.debug("RESULTS: %s", rp_results)
             log.info("Complete")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            # Produce a FunctionResult with the rp_results
+            yield FunctionResult(rp_results)
         except Exception:
             yield FunctionError()

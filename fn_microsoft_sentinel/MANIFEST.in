@@ -1,6 +1,7 @@
 include README.md
 include Dockerfile
 include entrypoint.sh
+include api_permissions.txt
 recursive-include fn_microsoft_sentinel/util *
 recursive-include fn_microsoft_sentinel/lib *
 include fn_microsoft_sentinel/LICENSE

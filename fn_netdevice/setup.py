@@ -3,15 +3,41 @@
 
 from setuptools import setup, find_packages
 
+import glob
+import ntpath
+
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
+
+
 setup(
     name='fn_netdevice',
-    version='1.0.0',
+    display_name="netMiko for SOAR",
+    version='1.1.0',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='https://ibm.biz/resilientcommunity',
+    author='IBM SOAR',
+    author_email='',
+    url='https://ibm.biz/soarcommunity',
     description="Resilient Circuits Components for 'fn_netdevice'",
-    long_description="Resilient Circuits Components for 'fn_netdevice'",
+    long_description="""This implementation utilizes all the functionality of netMiko including:
+        <br>
+        * Multiple host execution
+        <br>
+        * Configuration setting execution with commits
+        <br>
+        * Result parsing using TextFSM templates
+    """,
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib',
@@ -25,7 +51,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "NetworkDeviceFunctionComponent = fn_netdevice.components.network_device:FunctionComponent"
+            "{}FunctionComponent = fn_netdevice.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_netdevice/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_netdevice.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_netdevice.util.customize:customization_data"],

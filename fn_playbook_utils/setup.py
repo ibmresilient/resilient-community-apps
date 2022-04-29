@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_playbook_utils",
     display_name="Playbook Utils",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",

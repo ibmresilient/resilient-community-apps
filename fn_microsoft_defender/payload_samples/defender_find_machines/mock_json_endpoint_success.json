@@ -1,0 +1,11 @@
+{
+    "@odata.context": "https://graph.microsoft.com/testwdatppreview/$metadata#Machines",
+    "value": [
+        {
+            "id": "04c99d46599f078f1c3da3783cf5b95f01ac61bb",
+            "computerDnsName": "myComputerName",
+            "firstSeen": "2017-07-06T01:25:04.9480498Z",
+            "osPlatform": "Windows10"
+        }
+    ]
+}

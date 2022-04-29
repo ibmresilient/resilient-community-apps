@@ -128,6 +128,8 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         docker_build_pass=0
 
         package_path="$TRAVIS_BUILD_DIR/$image_name"
+        # Make available externally
+        export PACKAGE_PATH=$package_path
         path_current_requirements="$package_path/current_requirements.txt"
         path_new_requirements="$package_path/new_requirements.txt"
         path_dockerfile="$package_path/Dockerfile"

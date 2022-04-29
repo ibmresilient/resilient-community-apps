@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "Endpoint offline",
+    "details": {
+      "endpointId": "820358261151629312",
+      "lastSeenAt": "2022-02-15T18:05:09.113Z"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_endpoint_id": "820358261151629312"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 498,
+    "timestamp": "2022-02-18 14:04:55"
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "integer"
+          },
+          "value": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "attachment": {},
+          "parent_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "creator": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "locked": {
+                "type": "boolean"
+              },
+              "password_changed": {
+                "type": "boolean"
+              },
+              "is_external": {
+                "type": "boolean"
+              },
+              "ui_theme": {
+                "type": "string"
+              }
+            }
+          },
+          "inc_id": {
+            "type": "integer"
+          },
+          "inc_name": {
+            "type": "string"
+          },
+          "inc_owner": {
+            "type": "integer"
+          },
+          "hits": {
+            "type": "array"
+          },
+          "created": {
+            "type": "integer"
+          },
+          "last_modified_time": {
+            "type": "integer"
+          },
+          "last_modified_by": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              }
+            }
+          },
+          "pending_sources": {
+            "type": "array"
+          },
+          "perms": {},
+          "properties": {},
+          "actions": {
+            "type": "array"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "relating": {
+            "type": "boolean"
+          },
+          "creator_principal": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              }
+            }
+          },
+          "related_incident_count": {},
+          "pending_scan_result": {
+            "type": "boolean"
+          },
+          "ip": {
+            "type": "object",
+            "properties": {
+              "source": {},
+              "destination": {}
+            }
+          },
+          "global_artifact": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "reaqta_artifact_type": {
+          "type": "string"
+        },
+        "reaqta_hive": {
+          "type": "string"
+        },
+        "reaqta_program_path": {
+          "type": "string"
+        },
+        "reaqta_endpoint_id": {
+          "type": "string"
+        },
+        "reaqta_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

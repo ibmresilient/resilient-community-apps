@@ -21,7 +21,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [SOAR platform](#resilient-platform)
+  - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [QRadar Requirements](#qradar-requirements)
@@ -60,7 +60,13 @@
 | 1.0.0 | 12/2020 | Initial Release |
 | 1.1.0 | 07/2021 | Support for Flows and QRoc |
 | 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
+| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
+| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
+| 1.2.0 | 01/2022 | Allow multiple QRadar instances |
+| 1.2.1 | 03/2022 | Bug fix |
+| 1.2.2 | 04/2022 | Delete Search on time-out |
 
+For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration
 ---
 
 ## Overview
@@ -92,13 +98,13 @@ This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `37.0.5832`.
+* SOAR platform >= `40.0.6554`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `37.0.5832`.
+* SOAR platform >= `40.0.6554`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=41.1.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -111,7 +117,7 @@ The following SOAR platform guides provide additional information:
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -136,7 +142,7 @@ The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workf
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation .
 
 ### App Configuration
@@ -179,7 +185,8 @@ Fetch QRadar Offense Details.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_offense_id` | `text` | No | `-` | - |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
+| `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `qradar_query_type` | `text` | No | `-` | - |
 
 </p>
@@ -282,6 +289,7 @@ results = {
 ```python
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 </p>
@@ -300,8 +308,8 @@ for event in results.rules_data:
   qradar_event.rule_type = event.type
   qradar_event.enabled = "True" if event.enabled else "False"
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
-  qradar_event.date_created = event.creationDate
-  qradar_event.last_modified = event.modificationDate
+  qradar_event.date_created = int(event.creationDate)
+  qradar_event.last_modified = int(event.modificationDate)
 
 ```
 
@@ -318,14 +326,15 @@ Search QRadar Top events for the given Offense ID.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
 | `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
-| `qradar_query_param1` | `text` | No | `-` | - |
-| `qradar_query_param2` | `text` | No | `-` | - |
-| `qradar_query_param3` | `text` | No | `-` | - |
-| `qradar_query_param4` | `text` | No | `-` | - |
-| `qradar_query_param5` | `text` | No | `-` | - |
-| `qradar_query_param6` | `text` | No | `-` | - |
 | `qradar_query_type` | `text` | No | `-` | - |
+| `qradar_search_param1` | `text` | No | `-` | - |
+| `qradar_search_param2` | `text` | No | `-` | - |
+| `qradar_search_param3` | `text` | No | `-` | - |
+| `qradar_search_param4` | `text` | No | `-` | - |
+| `qradar_search_param5` | `text` | No | `-` | - |
+| `qradar_search_param6` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -391,8 +400,9 @@ results = {
 <p>
 
 ```python
-inputs.qradar_query_param3 = incident.properties.qradar_id
+inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
+inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 </p>
@@ -431,7 +441,7 @@ Create artifact from Destination IP information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -469,7 +479,7 @@ Create artifact from Source IP information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -507,7 +517,7 @@ Create artifact from the Events information of the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -550,7 +560,7 @@ Create artifact from Assets information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -591,7 +601,7 @@ Create artifact from the Flows info of the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# Resilient default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If you have custom artifacts, and would like
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -641,6 +651,7 @@ qr_top_destination_ips
 | Category Count | `category_count` | `textarea` | - |
 | Destination IP | `destination_ip` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
+| Flow Count | `flow_count` | `textarea` | - |
 
 ---
 ## Data Table - QR Triggered Rules
@@ -678,6 +689,8 @@ qr_categories
 | Destination IP | `destinationip_count` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
 | Event Time | `event_time` | `datetimepicker` | - |
+| Flow Count | `flow_count` | `textarea` | - |
+| Last Packet Time | `last_packet_time` | `datetimepicker` | - |
 | Magnitude | `magnitude` | `textarea` | - |
 | Source IP | `sourceip_count` | `textarea` | - |
 
@@ -717,6 +730,7 @@ qr_top_source_ips
 | Category Count | `category_count` | `textarea` | - |
 | Domain | `domain` | `text` | - |
 | Event Count | `event_count` | `textarea` | - |
+| Flow Count | `flow_count` | `textarea` | - |
 | MAC | `mac` | `text` | - |
 | Network | `network` | `text` | - |
 | Source IP | `source_ip` | `textarea` | - |
@@ -758,36 +772,37 @@ qr_flows
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Application | `application` | `textarea` | - |
-| Source IP | `source_ip` | `textarea` | - |
-| Source Port | `source_port` | `textarea` | - |
-| Destination IP | `destination_ip` | `textarea` | - |
-| Protocol | `protocol` | `textarea` | - |
-| First Packet Time | `first_packet_time` | `textarea` | - |
-| Source Bytes | `source_bytes` | `number` | - |
-| Source Packets | `source_packets` | `number` | - |
 | Destination Bytes | `destination_bytes` | `number` | - |
+| Destination IP | `destination_ip` | `textarea` | - |
 | Destination Packets | `destination_packets` | `number` | - |
+| Destination Port | `destination_port` | `textarea` | - |
+| First Packet Time | `first_packet_time` | `datetimepicker` | - |
+| Protocol | `protocol` | `textarea` | - |
+| Source Bytes | `source_bytes` | `number` | - |
+| Source IP | `source_ip` | `textarea` | - |
+| Source Packets | `source_packets` | `number` | - |
+| Source Port | `source_port` | `textarea` | - |
 
 ---
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
+| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
 | QR Credibility | `qr_credibility` | `textarea` | `properties` | - | Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source. |
-| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
+| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
+| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
+| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
 | QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
-| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
-| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
-| QR Flow Count | `qr_event_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
-| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
 | QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
-| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
+| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
 | QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
+| qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
+| QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
 
 ---
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
@@ -798,10 +813,13 @@ qr_flows
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
 
-The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
-
+The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
+
+## For Customers who do not use the QRadar-Plugin
+Make sure at the time of escalation the field qradar_destination is mapped to have the appropriate value ( same as label in app.config).
+If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

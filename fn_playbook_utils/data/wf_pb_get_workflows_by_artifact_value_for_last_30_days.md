@@ -18,13 +18,13 @@
 
 ### Pre-Processing Script
 ```python
-import time
+import java.util.Date as Date
 
 THIRTY_DAYS = 60*60*24*30*1000
 
 inputs.pb_min_incident_id = None
 inputs.pb_max_incident_id = None
-inputs.pb_min_incident_date = int(time.time()*1000) - THIRTY_DAYS
+inputs.pb_min_incident_date = Date().getTime() - THIRTY_DAYS
 inputs.pb_max_incident_date = None
 
 inputs.pb_object_name = artifact.value
@@ -51,13 +51,13 @@ None
 
 ### Pre-Processing Script
 ```python
-import time
+import java.util.Date() as Date
 
 THIRTY_DAYS = 60*60*24*30*1000
 
 inputs.pb_min_incident_id = None
 inputs.pb_max_incident_id = None
-inputs.pb_min_incident_date = int(time.time()*1000) - THIRTY_DAYS
+inputs.pb_min_incident_date = Date().getTime() - THIRTY_DAYS
 inputs.pb_max_incident_date = None
 
 inputs.pb_object_name = artifact.value

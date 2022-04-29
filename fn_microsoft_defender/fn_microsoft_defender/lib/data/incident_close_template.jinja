@@ -1,0 +1,11 @@
+{
+  {# JINJA template for closing a new Resilient incident from a Defender alert. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": "Closed from Defender: {{ investigationState }}",
+  "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "defender_classification": "{{ classification|replace('"', '\\"') }}",
+    "defender_determination": "{{ determination|replace('"', '\\"') }}"
+  }
+}

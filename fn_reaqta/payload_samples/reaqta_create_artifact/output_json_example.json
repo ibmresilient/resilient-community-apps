@@ -1,0 +1,297 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 11474,
+      "type": 12,
+      "value": "bittorrent.exe",
+      "description": "Extracted from ReaQta",
+      "attachment": {
+        "type": "artifact",
+        "id": 348,
+        "uuid": "a956c76a-4ef1-4cce-bfb5-8269c7fa995c",
+        "name": "bittorrent.exe",
+        "content_type": "application/x-msdownload",
+        "created": 1650038452814,
+        "creator_id": 3,
+        "size": 9544369,
+        "actions": [
+          {
+            "id": 15,
+            "name": "Example: Attachment Hash",
+            "enabled": true
+          },
+          {
+            "id": 16,
+            "name": "Example: Attachment to Base64",
+            "enabled": true
+          },
+          {
+            "id": 20,
+            "name": "Example: Email Parsing (Attachment)",
+            "enabled": true
+          },
+          {
+            "id": 26,
+            "name": "Example: PDFiD",
+            "enabled": true
+          },
+          {
+            "id": 27,
+            "name": "Example: Resilient Search",
+            "enabled": true
+          },
+          {
+            "id": 32,
+            "name": "Example: Use Excel Data",
+            "enabled": false
+          },
+          {
+            "id": 35,
+            "name": "Example: Zip List",
+            "enabled": false
+          },
+          {
+            "id": 34,
+            "name": "Example: Zip Extract",
+            "enabled": false
+          },
+          {
+            "id": 55,
+            "name": "PB: Get workflows/playbooks by attachment name",
+            "enabled": true
+          },
+          {
+            "id": 90,
+            "name": "Example: Virus Total for Attachments",
+            "enabled": true
+          }
+        ],
+        "task_id": null,
+        "task_name": null,
+        "task_custom": null,
+        "task_members": null,
+        "task_at_id": null,
+        "vers": 4,
+        "inc_id": 4488,
+        "inc_name": "ReaQta Alert - Policies Triggered, Endpoint: DESKTOP-MITCH",
+        "inc_owner": 3
+      },
+      "parent_id": null,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 4488,
+      "inc_name": "ReaQta Alert - Policies Triggered, Endpoint: DESKTOP-MITCH",
+      "inc_owner": 3,
+      "hits": [],
+      "created": 1650038451608,
+      "last_modified_time": 1650038452833,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "9fa50d9ae76b56e9e0ec5a986ad9c7c4d79c23f9e0b77da3009f095289d13aee",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 11475,
+      "type": 13,
+      "value": "ca8311e7b84f19c675301f028d610a0e",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 11474,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 4488,
+      "inc_name": "ReaQta Alert - Policies Triggered, Endpoint: DESKTOP-MITCH",
+      "inc_owner": 3,
+      "hits": [],
+      "created": 1650038451752,
+      "last_modified_time": 1650038451757,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "1304b1c67ed70347f69e277da7c42277f75d094b93b63b957483fadedb5dfa5f",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 11476,
+      "type": 14,
+      "value": "40456d20b5b161f11f4d86e6c8a1a9914308c0f9",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 11474,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 4488,
+      "inc_name": "ReaQta Alert - Policies Triggered, Endpoint: DESKTOP-MITCH",
+      "inc_owner": 3,
+      "hits": [],
+      "created": 1650038451774,
+      "last_modified_time": 1650038451779,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "622beccabb4d823b56218c35e5b375634478d413205ecf4bf03331be3c7c9564",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    },
+    {
+      "id": 11477,
+      "type": 38,
+      "value": "049b49a64f4b283225762a1f726904bb57904ca3c58077cc9f56d2f5bba4027c",
+      "description": "Extracted from ReaQta",
+      "attachment": null,
+      "parent_id": 11474,
+      "creator": {
+        "id": 3,
+        "fname": "Resilient",
+        "lname": "Sysadmin",
+        "display_name": "Resilient Sysadmin",
+        "status": "A",
+        "email": "a@example.com",
+        "locked": false,
+        "password_changed": false,
+        "is_external": false,
+        "ui_theme": "verydarkmode"
+      },
+      "inc_id": 4488,
+      "inc_name": "ReaQta Alert - Policies Triggered, Endpoint: DESKTOP-MITCH",
+      "inc_owner": 3,
+      "hits": [],
+      "created": 1650038451795,
+      "last_modified_time": 1650038452816,
+      "last_modified_by": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "pending_sources": [],
+      "perms": null,
+      "properties": null,
+      "actions": [],
+      "hash": "3c5dea6f306f3f64019de2ece1d674746b348a86e4d11680ad71d7f07a79458f",
+      "relating": true,
+      "creator_principal": {
+        "id": 3,
+        "type": "user",
+        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin"
+      },
+      "related_incident_count": null,
+      "pending_scan_result": false,
+      "ip": {
+        "source": null,
+        "destination": null
+      },
+      "global_artifact": []
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "reaqta_artifact_type": "Malware Sample",
+    "reaqta_hive": "rhiveam",
+    "reaqta_program_path": "c:\\users\\admin\\downloads\\bittorrent.exe",
+    "reaqta_endpoint_id": "853260775773437952",
+    "reaqta_incident_id": 4488
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 156952,
+    "timestamp": "2022-04-15 12:00:52"
+  }
+}

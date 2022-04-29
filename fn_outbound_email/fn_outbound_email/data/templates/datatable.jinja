@@ -1,0 +1,22 @@
+<tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">{{ table_name }}</h3>
+        <hr size="1" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+<tr>
+    {% for header in headers %}
+        <th style="border: 1px black solid; padding: 10px; text-align: left; background-color: rgb(155, 151, 151); color: rgb(31, 73, 125); font-family: sans-serif; font-weight: bold;">{{ header.text }}</th>
+    {% endfor %}
+</tr>
+{% for rowNum in range(rows | length) %}
+    <tr>
+        {% for row in table %}
+            {% if '<div' in table[row][rowNum] %}
+                <td style="border: 1px black solid; padding: 2px; font-family: sans-serif; color: rgb(31, 73, 125);">{{table[row][rowNum]|safe}}</td>
+            {% else %}
+                <td style="border: 1px black solid; padding: 2px; font-family: sans-serif; color: rgb(31, 73, 125);">{{ table[row][rowNum] }}</td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+{% endfor %}

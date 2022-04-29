@@ -12,9 +12,8 @@ FUNCTION_NAME = "utilities_call_rest_api"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_call_rest_api_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -25,7 +24,6 @@ def call_call_rest_api_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestCallRestApi:
     """ Tests for the call_rest_api function"""
@@ -42,7 +40,7 @@ class TestCallRestApi:
     ])
     def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "rest_method": rest_method,
             "rest_url": rest_url,
             "rest_headers": {'content': rest_headers},

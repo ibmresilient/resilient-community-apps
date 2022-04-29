@@ -28,7 +28,7 @@
       ],
       "enabled": true,
       "export_key": "Sentinel Comment Sync",
-      "id": 130,
+      "id": 14,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Sentinel Comment Sync",
@@ -60,12 +60,17 @@
       ],
       "enabled": true,
       "export_key": "Sentinel Get Incident Alerts",
-      "id": 168,
+      "id": 15,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Sentinel Get Incident Alerts",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_sentinel",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "3a3ca131-3665-442d-8b92-d04870889991",
@@ -87,7 +92,7 @@
       ],
       "enabled": true,
       "export_key": "Sentinel Get Incident Comments",
-      "id": 131,
+      "id": 16,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Sentinel Get Incident Comments",
@@ -119,7 +124,7 @@
       ],
       "enabled": true,
       "export_key": "Sentinel Get Incident Entities",
-      "id": 132,
+      "id": 17,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Sentinel Get Incident Entities",
@@ -158,7 +163,7 @@
       ],
       "enabled": true,
       "export_key": "Sentinel Incident Sync",
-      "id": 133,
+      "id": 18,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Sentinel Incident Sync",
@@ -227,7 +232,7 @@
       "custom_condition": "6 AND (1 OR 2 OR 3 OR 4 OR 5)",
       "enabled": true,
       "export_key": "Sentinel Update Incident",
-      "id": 134,
+      "id": 19,
       "logic_type": "advanced",
       "message_destinations": [
         "fn_microsoft_sentinel"
@@ -249,7 +254,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1631813921337,
+  "export_date": 1635521376344,
   "export_format_version": 2,
   "fields": [
     {
@@ -262,7 +267,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_incident_id",
       "hide_notification": false,
-      "id": 716,
+      "id": 243,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -296,7 +301,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_incident_comment",
       "hide_notification": false,
-      "id": 717,
+      "id": 244,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -331,7 +336,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_profile",
       "hide_notification": false,
-      "id": 718,
+      "id": 245,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -366,7 +371,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 230,
+      "id": 246,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -380,26 +385,6 @@
       "tags": [
         {
           "tag_handle": "fn_microsoft_sentinel",
-          "value": null
-        },
-        {
-          "tag_handle": "fn_remedy",
-          "value": null
-        },
-        {
-          "tag_handle": "fn_scheduler",
-          "value": null
-        },
-        {
-          "tag_handle": "fn_urlscanio",
-          "value": null
-        },
-        {
-          "tag_handle": "fn_utilities",
-          "value": null
-        },
-        {
-          "tag_handle": "fn_virustotal",
           "value": null
         }
       ],
@@ -420,7 +405,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_classification_comment",
       "hide_notification": false,
-      "id": 699,
+      "id": 212,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -454,7 +439,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_assigned_to",
       "hide_notification": false,
-      "id": 700,
+      "id": 213,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -488,7 +473,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_classification",
       "hide_notification": false,
-      "id": 701,
+      "id": 214,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -522,7 +507,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_status",
       "hide_notification": false,
-      "id": 702,
+      "id": 215,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -556,7 +541,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_classification_reason",
       "hide_notification": false,
-      "id": 703,
+      "id": 216,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -590,7 +575,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_number",
       "hide_notification": false,
-      "id": 720,
+      "id": 217,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -624,7 +609,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_id",
       "hide_notification": false,
-      "id": 704,
+      "id": 218,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -658,7 +643,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_tactics",
       "hide_notification": false,
-      "id": 705,
+      "id": 219,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -692,7 +677,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_profile",
       "hide_notification": false,
-      "id": 706,
+      "id": 220,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -726,7 +711,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_url",
       "hide_notification": false,
-      "id": 707,
+      "id": 221,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -760,7 +745,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_labels",
       "hide_notification": false,
-      "id": 708,
+      "id": 222,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -811,14 +796,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Add Incident Comment",
       "export_key": "sentinel_add_incident_comment",
-      "id": 95,
+      "id": 1,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 3,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1628254059483,
+      "last_modified_time": 1632776000318,
       "name": "sentinel_add_incident_comment",
       "tags": [
         {
@@ -868,7 +853,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 121
+          "workflow_id": 5
         }
       ]
     },
@@ -886,18 +871,23 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Alerts",
       "export_key": "sentinel_get_incident_alerts",
-      "id": 125,
+      "id": 2,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 3,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1629303337399,
+      "last_modified_time": 1632776000318,
       "name": "sentinel_get_incident_alerts",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_sentinel",
+          "value": null
+        }
+      ],
       "uuid": "3cc8ebb2-b61f-449a-a7fb-efc3350f755c",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "c25bfde8-219e-4ceb-ae63-4926ced321fc",
@@ -923,9 +913,14 @@
           "name": "Sentinel Get Incident Alerts",
           "object_type": "incident",
           "programmatic_name": "sentinel_get_incident_alerts",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_microsoft_sentinel",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 154
+          "workflow_id": 1
         }
       ]
     },
@@ -943,14 +938,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Comments",
       "export_key": "sentinel_get_incident_comments",
-      "id": 96,
+      "id": 3,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 3,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1630431025978,
+      "last_modified_time": 1632776000318,
       "name": "sentinel_get_incident_comments",
       "tags": [
         {
@@ -959,7 +954,7 @@
         }
       ],
       "uuid": "5753fe01-6c13-404b-9df2-e1308c3a1f04",
-      "version": 5,
+      "version": 2,
       "view_items": [
         {
           "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
@@ -1000,7 +995,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 123
+          "workflow_id": 2
         }
       ]
     },
@@ -1018,14 +1013,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Entities",
       "export_key": "sentinel_get_incident_entities",
-      "id": 97,
+      "id": 4,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 3,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1628254059483,
+      "last_modified_time": 1632776000318,
       "name": "sentinel_get_incident_entities",
       "tags": [
         {
@@ -1067,7 +1062,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 120
+          "workflow_id": 4
         }
       ]
     },
@@ -1085,14 +1080,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Update Incident",
       "export_key": "sentinel_update_incident",
-      "id": 98,
+      "id": 5,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 3,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1630431025978,
+      "last_modified_time": 1632776000318,
       "name": "sentinel_update_incident",
       "tags": [
         {
@@ -1101,7 +1096,7 @@
         }
       ],
       "uuid": "e41efc23-c78d-4215-8a77-dfb68eca0548",
-      "version": 5,
+      "version": 2,
       "view_items": [
         {
           "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
@@ -1142,19 +1137,19 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 122
+          "workflow_id": 3
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 134,
+  "id": 57,
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1631813920653,
+      "create_date": 1635521375762,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1163,7 +1158,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1631813920653,
+      "update_date": 1635521375762,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1173,7 +1168,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "deb9f4fb-1cdd-4b87-a267-8ec480cf9b12"
+        "071867b2-84c5-482f-bcc5-660d1ebc0a17"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1223,14 +1218,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_compromised_entity",
           "hide_notification": false,
-          "id": 865,
+          "id": 224,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_compromised_entity",
           "operation_perms": {},
           "operations": [],
-          "order": 10,
+          "order": 9,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1239,7 +1234,7 @@
           "templates": [],
           "text": "Compromised Entity",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "439e7e66-4cda-4d8d-a585-e3e1a62a0f29",
           "values": [],
           "width": 106
@@ -1254,14 +1249,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_confidence_level",
           "hide_notification": false,
-          "id": 866,
+          "id": 225,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_confidence_level",
           "operation_perms": {},
           "operations": [],
-          "order": 8,
+          "order": 7,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1270,7 +1265,7 @@
           "templates": [],
           "text": "Confidence Level",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "400c4dd4-5bb9-41cc-ad1e-30767a3c0c7b",
           "values": [],
           "width": 87
@@ -1285,14 +1280,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_date",
           "hide_notification": false,
-          "id": 982,
+          "id": 226,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
           "name": "alert_date",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1301,7 +1296,7 @@
           "templates": [],
           "text": "Alert Date",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "59fb8f55-544a-4a66-b448-126a2b0ee61a",
           "values": [],
           "width": 38
@@ -1316,7 +1311,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_description",
           "hide_notification": false,
-          "id": 868,
+          "id": 227,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1332,7 +1327,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "846df39a-3406-4ddd-b106-85d08eb13226",
           "values": [],
           "width": 88
@@ -1347,14 +1342,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_id",
           "hide_notification": false,
-          "id": 952,
+          "id": 228,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_id",
           "operation_perms": {},
           "operations": [],
-          "order": 2,
+          "order": 11,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1363,7 +1358,7 @@
           "templates": [],
           "text": "Alert Id",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "9aa30762-4043-4e63-8929-a280a9136137",
           "values": [],
           "width": 38
@@ -1378,7 +1373,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_name",
           "hide_notification": false,
-          "id": 869,
+          "id": 229,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1394,7 +1389,7 @@
           "templates": [],
           "text": "Alert Name",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "b02bf41d-799e-4ef7-81a4-14c7b5a21f48",
           "values": [],
           "width": 45
@@ -1409,14 +1404,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_remediation_steps",
           "hide_notification": false,
-          "id": 870,
+          "id": 230,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
           "name": "alert_remediation_steps",
           "operation_perms": {},
           "operations": [],
-          "order": 11,
+          "order": 10,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1425,7 +1420,7 @@
           "templates": [],
           "text": "Remediation Steps",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "8653751a-79a7-4962-8110-f19b3e9f6e03",
           "values": [],
           "width": 97
@@ -1440,14 +1435,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_severity",
           "hide_notification": false,
-          "id": 871,
+          "id": 231,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_severity",
           "operation_perms": {},
           "operations": [],
-          "order": 7,
+          "order": 6,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1456,7 +1451,7 @@
           "templates": [],
           "text": "Severity",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "d7ec7809-6a88-45f1-968a-a4c4ece571eb",
           "values": [],
           "width": 63
@@ -1471,14 +1466,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_status",
           "hide_notification": false,
-          "id": 872,
+          "id": 232,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_status",
           "operation_perms": {},
           "operations": [],
-          "order": 6,
+          "order": 5,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1487,7 +1482,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "b96fdad7-88cd-43ac-941d-e65a2aa56bde",
           "values": [],
           "width": 50
@@ -1502,14 +1497,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_tactics",
           "hide_notification": false,
-          "id": 873,
+          "id": 233,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_tactics",
           "operation_perms": {},
           "operations": [],
-          "order": 9,
+          "order": 8,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1518,7 +1513,7 @@
           "templates": [],
           "text": "Tactics",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "de82c523-d240-4987-abcb-3c58b165b5fe",
           "values": [],
           "width": 54
@@ -1533,14 +1528,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_type",
           "hide_notification": false,
-          "id": 874,
+          "id": 234,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_type",
           "operation_perms": {},
           "operations": [],
-          "order": 5,
+          "order": 12,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1549,7 +1544,7 @@
           "templates": [],
           "text": "Alert Type",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "0d8fbe15-0a74-4066-98c2-e902deaddf0d",
           "values": [],
           "width": 38
@@ -1564,14 +1559,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_url",
           "hide_notification": false,
-          "id": 875,
+          "id": 235,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
           "name": "alert_url",
           "operation_perms": {},
           "operations": [],
-          "order": 12,
+          "order": 1,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1580,7 +1575,7 @@
           "templates": [],
           "text": "Link",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "50e9c795-1e4d-42ca-afd3-5eb4e9e05563",
           "values": [],
           "width": 33
@@ -1595,7 +1590,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/report_date",
           "hide_notification": false,
-          "id": 953,
+          "id": 236,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1611,7 +1606,7 @@
           "templates": [],
           "text": "Report Date",
           "tooltip": "",
-          "type_id": 1019,
+          "type_id": 1000,
           "uuid": "558def38-fcb9-4ea1-8c7f-6552f60c2644",
           "values": [],
           "width": 52
@@ -1631,7 +1626,12 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_sentinel",
+          "value": null
+        }
+      ],
       "type_id": 8,
       "type_name": "sentinel_incident_alerts",
       "uuid": "97b04e40-2763-49ed-8e83-e67f2f563897"
@@ -1651,14 +1651,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/alert_id",
           "hide_notification": false,
-          "id": 711,
+          "id": 237,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "alert_id",
           "operation_perms": {},
           "operations": [],
-          "order": 1,
+          "order": 4,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1667,7 +1667,7 @@
           "templates": [],
           "text": "Alert ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "48ce4eff-adb6-437a-8600-97c0bfb813c2",
           "values": [],
           "width": 152
@@ -1682,14 +1682,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_id",
           "hide_notification": false,
-          "id": 712,
+          "id": 238,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "entity_id",
           "operation_perms": {},
           "operations": [],
-          "order": 2,
+          "order": 5,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1698,7 +1698,7 @@
           "templates": [],
           "text": "Entity ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "83778103-f43b-4ae7-b4cf-e02733da6275",
           "values": [],
           "width": 152
@@ -1713,14 +1713,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_properties",
           "hide_notification": false,
-          "id": 713,
+          "id": 239,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
           "name": "entity_properties",
           "operation_perms": {},
           "operations": [],
-          "order": 5,
+          "order": 3,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1729,7 +1729,7 @@
           "templates": [],
           "text": "Entity Properties",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "3ad6a9d8-06a3-44e2-bfbe-ed058a833255",
           "values": [],
           "width": 213
@@ -1744,14 +1744,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_type",
           "hide_notification": false,
-          "id": 714,
+          "id": 240,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "entity_type",
           "operation_perms": {},
           "operations": [],
-          "order": 3,
+          "order": 1,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1760,7 +1760,7 @@
           "templates": [],
           "text": "Entity Type",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "ec3260a0-7665-455e-858a-85f93662d30a",
           "values": [],
           "width": 86
@@ -1775,14 +1775,14 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_value",
           "hide_notification": false,
-          "id": 715,
+          "id": 241,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
           "name": "entity_value",
           "operation_perms": {},
           "operations": [],
-          "order": 4,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -1791,7 +1791,7 @@
           "templates": [],
           "text": "Entity Value",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "41ba7c3c-d987-439e-910a-bc53341d5f75",
           "values": [],
           "width": 80
@@ -1806,7 +1806,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/report_date",
           "hide_notification": false,
-          "id": 954,
+          "id": 242,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1822,7 +1822,7 @@
           "templates": [],
           "text": "Report Date",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1001,
           "uuid": "5b8fd925-5236-4782-911f-a11e3067a898",
           "values": [],
           "width": 52
@@ -1857,36 +1857,16 @@
     {
       "actions": [],
       "content": {
-        "version": 38,
-        "workflow_id": "sentinel_get_incident_alerts",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_get_incident_alerts\" isExecutable=\"true\" name=\"Sentinel Get Incident Alerts\"\u003e\u003cdocumentation\u003eGet alerts for a Sentinel Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14idxaz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpmvkd\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results[\u0027success\u0027]:\\n  for alert in results[\u0027content\u0027][\u0027value\u0027]:\\n    properties = alert.get(\u0027properties\u0027, {})\\n    row = incident.addRow(\\\"sentinel_incident_alerts\\\")\\n    row[\u0027report_date\u0027] = current_dt \\n    row[\u0027alert_date\u0027] = properties[\u0027timeGenerated_ms\u0027]\\n    row[\u0027alert_name\u0027] = properties.get(\u0027alertDisplayName\u0027)\\n    row[\u0027alert_description\u0027] = properties.get(\u0027description\u0027)\\n    row[\u0027alert_type\u0027] = properties.get(\u0027alertType\u0027)\\n    row[\u0027alert_status\u0027] = properties.get(\u0027status\u0027)\\n    row[\u0027alert_severity\u0027] = properties.get(\u0027severity\u0027)\\n    row[\u0027alert_confidence_level\u0027] = properties.get(\u0027confidenceLevel\u0027)\\n    row[\u0027alert_tactics\u0027] = \\\",\\\".join(properties.get(\u0027tactics\u0027, []))\\n    row[\u0027alert_compromised_entity\u0027] = properties.get(\u0027compromisedEntity\u0027)\\n    row[\u0027alert_remediation_steps\u0027] = helper.createPlainText(\u0027\\\\n\u0027.join(properties.get(\u0027remediationSteps\u0027, [])))\\n    row[\u0027alert_id\u0027] = properties.get(\u0027systemAlertId\u0027)\\n    if properties.get(\u0027alertLink\u0027):\\n        row[\u0027alert_url\u0027] = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;Alert Link\u0026lt;/a\u0026gt;\\\".format(properties[\u0027alertLink\u0027]))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14idxaz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dz6vk0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14idxaz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpmvkd\"/\u003e\u003cendEvent id=\"EndEvent_028huo5\"\u003e\u003cincoming\u003eSequenceFlow_0dz6vk0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dz6vk0\" sourceRef=\"ServiceTask_0zpmvkd\" targetRef=\"EndEvent_028huo5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ql3kd1\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Sentinel Incident Alerts datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nxdcch\" sourceRef=\"ServiceTask_0zpmvkd\" targetRef=\"TextAnnotation_1ql3kd1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpmvkd\" id=\"ServiceTask_0zpmvkd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"281\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14idxaz\" id=\"SequenceFlow_14idxaz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"239.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_028huo5\" id=\"EndEvent_028huo5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"467\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"485\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dz6vk0\" id=\"SequenceFlow_0dz6vk0_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"424\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ql3kd1\" id=\"TextAnnotation_1ql3kd1_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"200\" x=\"366\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nxdcch\" id=\"Association_1nxdcch_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 38,
-      "creator_id": "a@example.com",
-      "description": "Get alerts for a Sentinel Incident",
-      "export_key": "sentinel_get_incident_alerts",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1631290583069,
-      "name": "Sentinel Get Incident Alerts",
-      "object_type": "incident",
-      "programmatic_name": "sentinel_get_incident_alerts",
-      "tags": [],
-      "uuid": "e83697ed-0144-405c-b461-7762e3459ef5",
-      "workflow_id": 154
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
+        "version": 2,
         "workflow_id": "sentinel_get_incident_comments",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_get_incident_comments\" isExecutable=\"true\" name=\"Sentinel Get Incident Comments\"\u003e\u003cdocumentation\u003eGet Sentinel Comments\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0acb8n3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0w5kb54\" name=\"Sentinel Get Incident Comments\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5753fe01-6c13-404b-9df2-e1308c3a1f04\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  for comment in results.content[\u0027value\u0027]:\\n    incident.addNote(helper.createRichText(comment[\u0027properties\u0027][\u0027message\u0027]))\\n      \\n    # remember the comment in our datatable\\n    row = incident.addRow(\u0027sentinel_comment_ids\u0027)\\n    row[\u0027comment_id\u0027] = comment[\u0027name\u0027]\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.incident_id = incident.id\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0acb8n3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t8hmr9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0acb8n3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0w5kb54\"/\u003e\u003cendEvent id=\"EndEvent_1l54jpr\"\u003e\u003cincoming\u003eSequenceFlow_1t8hmr9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1t8hmr9\" sourceRef=\"ServiceTask_0w5kb54\" targetRef=\"EndEvent_1l54jpr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_17ye6n7\"\u003e\u003ctext\u003e\u003c![CDATA[Results added as Resilient Incident comments\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0s3eo5g\" sourceRef=\"ServiceTask_0w5kb54\" targetRef=\"TextAnnotation_17ye6n7\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0w5kb54\" id=\"ServiceTask_0w5kb54_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0acb8n3\" id=\"SequenceFlow_0acb8n3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1l54jpr\" id=\"EndEvent_1l54jpr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"422\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"440\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t8hmr9\" id=\"SequenceFlow_1t8hmr9_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_17ye6n7\" id=\"TextAnnotation_17ye6n7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"246\" x=\"345\" y=\"74\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0s3eo5g\" id=\"Association_0s3eo5g_di\"\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"443\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 2,
       "creator_id": "a@example.com",
       "description": "Get Sentinel Comments",
       "export_key": "sentinel_get_incident_comments",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1630617503562,
+      "last_modified_time": 1632776000626,
       "name": "Sentinel Get Incident Comments",
       "object_type": "incident",
       "programmatic_name": "sentinel_get_incident_comments",
@@ -1897,46 +1877,46 @@
         }
       ],
       "uuid": "1e1bce64-8186-448b-9a2f-72ca11a1188b",
-      "workflow_id": 123
+      "workflow_id": 2
     },
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "sentinel_update_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_update_incident\" isExecutable=\"true\" name=\"Sentinel Update Incident\"\u003e\u003cdocumentation\u003eUpdate a Sentinel Incident based on changes to the IBM SOAR incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hrpkgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1qps3wt\" name=\"Sentinel Update Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e41efc23-c78d-4215-8a77-dfb68eca0548\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hrpkgu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13rk7po\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hrpkgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qps3wt\"/\u003e\u003cendEvent id=\"EndEvent_13jer8x\"\u003e\u003cincoming\u003eSequenceFlow_13rk7po\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13rk7po\" sourceRef=\"ServiceTask_1qps3wt\" targetRef=\"EndEvent_13jer8x\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qps3wt\" id=\"ServiceTask_1qps3wt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hrpkgu\" id=\"SequenceFlow_0hrpkgu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13jer8x\" id=\"EndEvent_13jer8x_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13rk7po\" id=\"SequenceFlow_13rk7po_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 3,
+        "workflow_id": "sentinel_get_incident_alerts",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_get_incident_alerts\" isExecutable=\"true\" name=\"Sentinel Get Incident Alerts\"\u003e\u003cdocumentation\u003eGet alerts for a Sentinel Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14idxaz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpmvkd\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results[\u0027success\u0027]:\\n  for alert in results[\u0027content\u0027][\u0027value\u0027]:\\n    properties = alert.get(\u0027properties\u0027, {})\\n    row = incident.addRow(\\\"sentinel_incident_alerts\\\")\\n    row[\u0027report_date\u0027] = current_dt \\n    row[\u0027alert_date\u0027] = properties[\u0027timeGenerated_ms\u0027]\\n    row[\u0027alert_name\u0027] = properties.get(\u0027alertDisplayName\u0027)\\n    row[\u0027alert_description\u0027] = properties.get(\u0027description\u0027)\\n    row[\u0027alert_type\u0027] = properties.get(\u0027alertType\u0027)\\n    row[\u0027alert_status\u0027] = properties.get(\u0027status\u0027)\\n    row[\u0027alert_severity\u0027] = properties.get(\u0027severity\u0027)\\n    row[\u0027alert_confidence_level\u0027] = properties.get(\u0027confidenceLevel\u0027)\\n    row[\u0027alert_tactics\u0027] = \\\",\\\".join(properties.get(\u0027tactics\u0027, []))\\n    row[\u0027alert_compromised_entity\u0027] = properties.get(\u0027compromisedEntity\u0027)\\n    row[\u0027alert_remediation_steps\u0027] = helper.createPlainText(\u0027\\\\n\u0027.join(properties.get(\u0027remediationSteps\u0027, [])))\\n    row[\u0027alert_id\u0027] = properties.get(\u0027systemAlertId\u0027)\\n    if properties.get(\u0027alertLink\u0027):\\n        row[\u0027alert_url\u0027] = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027{}\u0027\u0026gt;Alert Link\u0026lt;/a\u0026gt;\\\".format(properties[\u0027alertLink\u0027]))\\n    else:\\n        row[\u0027alert_url\u0027] = helper.createRichText(\\\"\u0026lt;a target=\u0027blank\u0027 href=\u0027https://security.microsoft.com/alerts/{}\u0027\u0026gt;Alert Link\u0026lt;/a\u0026gt;\\\".format(properties.get(\u0027systemAlertId\u0027)))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14idxaz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dz6vk0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14idxaz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpmvkd\"/\u003e\u003cendEvent id=\"EndEvent_028huo5\"\u003e\u003cincoming\u003eSequenceFlow_0dz6vk0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dz6vk0\" sourceRef=\"ServiceTask_0zpmvkd\" targetRef=\"EndEvent_028huo5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ql3kd1\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in the Sentinel Incident Alerts datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nxdcch\" sourceRef=\"ServiceTask_0zpmvkd\" targetRef=\"TextAnnotation_1ql3kd1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpmvkd\" id=\"ServiceTask_0zpmvkd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"281\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14idxaz\" id=\"SequenceFlow_14idxaz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"239.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_028huo5\" id=\"EndEvent_028huo5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"467\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"485\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dz6vk0\" id=\"SequenceFlow_0dz6vk0_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"424\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ql3kd1\" id=\"TextAnnotation_1ql3kd1_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"200\" x=\"366\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nxdcch\" id=\"Association_1nxdcch_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
+      "content_version": 3,
       "creator_id": "a@example.com",
-      "description": "Update a Sentinel Incident based on changes to the IBM SOAR incident.",
-      "export_key": "sentinel_update_incident",
+      "description": "Get alerts for a Sentinel Incident",
+      "export_key": "sentinel_get_incident_alerts",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1630617519969,
-      "name": "Sentinel Update Incident",
+      "last_modified_time": 1635429417585,
+      "name": "Sentinel Get Incident Alerts",
       "object_type": "incident",
-      "programmatic_name": "sentinel_update_incident",
+      "programmatic_name": "sentinel_get_incident_alerts",
       "tags": [
         {
           "tag_handle": "fn_microsoft_sentinel",
           "value": null
         }
       ],
-      "uuid": "929f3854-b594-48f4-897d-44a51ce3c1f1",
-      "workflow_id": 122
+      "uuid": "e83697ed-0144-405c-b461-7762e3459ef5",
+      "workflow_id": 1
     },
     {
       "actions": [],
       "content": {
-        "version": 10,
+        "version": 4,
         "workflow_id": "sentinel_get_incident_entities",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_get_incident_entities\" isExecutable=\"true\" name=\"Sentinel Get Incident Entities\"\u003e\u003cdocumentation\u003eGet Entities for a Sentinel Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_02y6lci\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04q3ibt\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  for alert in results.content.keys():\\n      for entity in results.content[alert]:\\n        row = incident.addRow(\\\"sentinel_incident_entities\\\")\\n        row[\u0027report_date\u0027] = current_dt\\n        row[\u0027alert_id\u0027] = alert\\n        row[\u0027entity_id\u0027] = entity[\u0027name\u0027]\\n        row[\u0027entity_type\u0027] = entity[\u0027kind\u0027]\\n        row[\u0027entity_value\u0027] = entity[\u0027properties\u0027][\u0027friendlyName\u0027]\\n        row[\u0027entity_properties\u0027] = \\\"\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v) for k, v in entity[\u0027properties\u0027].items()])\\n        \\n        # create an artifact\\n        desc = [\\\"created from Sentinel entity: {}\\\".format(entity[\u0027name\u0027])]\\n        if entity[\u0027properties\u0027].get(\u0027azureID\u0027):\\n          desc.append(entity[\u0027properties\u0027][\u0027azureID\u0027])\\n        incident.addArtifact(entity[\u0027resilient_artifact_type\u0027], entity[\u0027resilient_artifact_value\u0027], \\\"\\\\n\\\".join(desc))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_02y6lci\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1bmb984\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_02y6lci\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04q3ibt\"/\u003e\u003cendEvent id=\"EndEvent_0lx8a8o\"\u003e\u003cincoming\u003eSequenceFlow_1bmb984\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bmb984\" sourceRef=\"ServiceTask_04q3ibt\" targetRef=\"EndEvent_0lx8a8o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0b0fvdh\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as new artifacts and in the \u0027Sentinel Incident Entities\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_10wxryp\" sourceRef=\"ServiceTask_04q3ibt\" targetRef=\"TextAnnotation_0b0fvdh\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04q3ibt\" id=\"ServiceTask_04q3ibt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"265\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02y6lci\" id=\"SequenceFlow_02y6lci_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"265\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"231.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lx8a8o\" id=\"EndEvent_0lx8a8o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"425\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bmb984\" id=\"SequenceFlow_1bmb984_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0b0fvdh\" id=\"TextAnnotation_0b0fvdh_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"172\" x=\"350\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_10wxryp\" id=\"Association_10wxryp_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_get_incident_entities\" isExecutable=\"true\" name=\"Sentinel Get Incident Entities\"\u003e\u003cdocumentation\u003eGet Entities for a Sentinel Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_02y6lci\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04q3ibt\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncurrent_dt = Date().getTime()\\n\\nif results.success:\\n  for alert in results.content.keys():\\n      for entity in results.content[alert]:\\n        row = incident.addRow(\\\"sentinel_incident_entities\\\")\\n        row[\u0027report_date\u0027] = current_dt\\n        row[\u0027alert_id\u0027] = alert\\n        row[\u0027entity_id\u0027] = entity[\u0027name\u0027]\\n        row[\u0027entity_type\u0027] = entity[\u0027kind\u0027]\\n        row[\u0027entity_value\u0027] = entity[\u0027properties\u0027][\u0027friendlyName\u0027]\\n        row[\u0027entity_properties\u0027] = \\\"\u0026lt;br\u0026gt;\\\".join([\\\"\u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;: {}\\\".format(k, v) for k, v in entity[\u0027properties\u0027].items()])\\n        \\n        # create an artifact\\n        desc = [\\\"created from Sentinel entity: {}\\\".format(entity[\u0027name\u0027])]\\n        if entity[\u0027properties\u0027].get(\u0027azureID\u0027):\\n          desc.append(entity[\u0027properties\u0027][\u0027azureID\u0027])\\n        if entity[\u0027resilient_artifact_type\u0027]:\\n            incident.addArtifact(entity[\u0027resilient_artifact_type\u0027], entity[\u0027resilient_artifact_value\u0027], \\\"\\\\n\\\".join(desc))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_02y6lci\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1bmb984\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_02y6lci\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04q3ibt\"/\u003e\u003cendEvent id=\"EndEvent_0lx8a8o\"\u003e\u003cincoming\u003eSequenceFlow_1bmb984\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bmb984\" sourceRef=\"ServiceTask_04q3ibt\" targetRef=\"EndEvent_0lx8a8o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0b0fvdh\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned as new artifacts and in the \u0027Sentinel Incident Entities\u0027 datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_10wxryp\" sourceRef=\"ServiceTask_04q3ibt\" targetRef=\"TextAnnotation_0b0fvdh\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04q3ibt\" id=\"ServiceTask_04q3ibt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"265\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02y6lci\" id=\"SequenceFlow_02y6lci_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"265\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"231.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lx8a8o\" id=\"EndEvent_0lx8a8o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"425\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bmb984\" id=\"SequenceFlow_1bmb984_di\"\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0b0fvdh\" id=\"TextAnnotation_0b0fvdh_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"172\" x=\"350\" y=\"76\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_10wxryp\" id=\"Association_10wxryp_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 10,
+      "content_version": 4,
       "creator_id": "a@example.com",
       "description": "Get Entities for a Sentinel Incident",
       "export_key": "sentinel_get_incident_entities",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1631298721245,
+      "last_modified_time": 1635429089940,
       "name": "Sentinel Get Incident Entities",
       "object_type": "incident",
       "programmatic_name": "sentinel_get_incident_entities",
@@ -1947,21 +1927,46 @@
         }
       ],
       "uuid": "b4ab56ea-7bac-42d9-b469-c1351107dcd2",
-      "workflow_id": 120
+      "workflow_id": 4
     },
     {
       "actions": [],
       "content": {
-        "version": 8,
+        "version": 2,
+        "workflow_id": "sentinel_update_incident",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_update_incident\" isExecutable=\"true\" name=\"Sentinel Update Incident\"\u003e\u003cdocumentation\u003eUpdate a Sentinel Incident based on changes to the IBM SOAR incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0hrpkgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1qps3wt\" name=\"Sentinel Update Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e41efc23-c78d-4215-8a77-dfb68eca0548\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0hrpkgu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13rk7po\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0hrpkgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qps3wt\"/\u003e\u003cendEvent id=\"EndEvent_13jer8x\"\u003e\u003cincoming\u003eSequenceFlow_13rk7po\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13rk7po\" sourceRef=\"ServiceTask_1qps3wt\" targetRef=\"EndEvent_13jer8x\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qps3wt\" id=\"ServiceTask_1qps3wt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hrpkgu\" id=\"SequenceFlow_0hrpkgu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13jer8x\" id=\"EndEvent_13jer8x_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13rk7po\" id=\"SequenceFlow_13rk7po_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "creator_id": "a@example.com",
+      "description": "Update a Sentinel Incident based on changes to the IBM SOAR incident.",
+      "export_key": "sentinel_update_incident",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1632776000730,
+      "name": "Sentinel Update Incident",
+      "object_type": "incident",
+      "programmatic_name": "sentinel_update_incident",
+      "tags": [
+        {
+          "tag_handle": "fn_microsoft_sentinel",
+          "value": null
+        }
+      ],
+      "uuid": "929f3854-b594-48f4-897d-44a51ce3c1f1",
+      "workflow_id": 3
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
         "workflow_id": "sentinel_comment_sync",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"sentinel_comment_sync\" isExecutable=\"true\" name=\"Sentinel Comment Sync\"\u003e\u003cdocumentation\u003eSync an Incident note to a Sentinel Incident comment\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ul3s6y\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1md7yld\" name=\"Sentinel Add Incident Comment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1c88215e-970d-49bc-97ce-e914ffa63b3f\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Import Date\\nfrom java.util import Date\\n\\nif results.success:\\n  # Get the current time\\n  dt_now = Date()\\n  note.text = u\\\"\u0026lt;b\u0026gt;Sent to Sentinel at {0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;{1}\\\".format(dt_now, unicode(note.text.content))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sentinel_incident_comment = note.text.content\\ninputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.sentinel_profile = incident.properties.sentinel_profile\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ul3s6y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1805exs\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ul3s6y\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1md7yld\"/\u003e\u003cendEvent id=\"EndEvent_0osq6is\"\u003e\u003cincoming\u003eSequenceFlow_1805exs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1805exs\" sourceRef=\"ServiceTask_1md7yld\" targetRef=\"EndEvent_0osq6is\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1md7yld\" id=\"ServiceTask_1md7yld_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"291\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ul3s6y\" id=\"SequenceFlow_0ul3s6y_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"291\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0osq6is\" id=\"EndEvent_0osq6is_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"481\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"499\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1805exs\" id=\"SequenceFlow_1805exs_di\"\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"481\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"436\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 8,
+      "content_version": 2,
       "creator_id": "a@example.com",
       "description": "Sync an Incident note to a Sentinel Incident comment",
       "export_key": "sentinel_comment_sync",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1630689736736,
+      "last_modified_time": 1632776000892,
       "name": "Sentinel Comment Sync",
       "object_type": "note",
       "programmatic_name": "sentinel_comment_sync",
@@ -1972,7 +1977,7 @@
         }
       ],
       "uuid": "6113cb51-2705-4b92-bf41-b8fa5582ddf0",
-      "workflow_id": 121
+      "workflow_id": 5
     }
   ],
   "workspaces": []

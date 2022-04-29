@@ -49,7 +49,14 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
+| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
+| 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
+
+### v1.0.3
+
+When upgrading from a previous version to v1.0.3, manually update your app.config file to add the `verify` parameter to your `[fn_microsoft_sentinel]` section. The documentation on it's use is in [App Configuration](#app-configuration).
 
 ---
 
@@ -93,7 +100,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `39.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=37.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -128,8 +135,8 @@ The app **does** support a proxy server.
 Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-lib
-* resilient_circuits>=30.0.0
+* resilient-lib>=37.0.0
+* resilient_circuits>=37.0.0
 * simplejson
 
 ---
@@ -139,21 +146,18 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 
 1. Define an App under `App registration`,  for Sentinel access. The Application (client) ID will be used as the app.config `client_id`.
 
-    a. Configure API Permissions as the diagram below.
-
-    b. Specify a client secret. This will be used in the app.config file as `api_secret`.
+    a. Specify a client secret. This will be used in the app.config file as `api_secret`.
 
  ![screenshot: app client_id](./doc/screenshots/app_client_id.png)
- ![screenshot: app permissions](./doc/screenshots/app_permissions.png)
  ![screenshot: app secret](./doc/screenshots/app_secret.png)
 
-2. For your subscription, specify the app with the Sentinel Responder role.
-
-![screenshot: subscription role](./doc/screenshots/subscription_role.png)
-
-3. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
+2. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
 
 ![screenshot: subscription role](./doc/screenshots/workspace_resource_group.png)
+
+3. For your resource group, specify the app with the Sentinel Responder role.
+
+![screenshot: subscription role](./doc/screenshots/subscription_role.png)
 
 4. Add your tenant_id (Under `Tenant properties`) and subscription_id to the app.config file.
 
@@ -179,6 +183,7 @@ The following table provides the settings you need to configure the app. These s
 | **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace * |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
+| **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
 
 For each profile:
 | Config | Required | Example | Description |
@@ -188,14 +193,26 @@ For each profile:
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
 | **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to Resilient SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
 | **max_alerts** | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
-| **create_incident_template** | /user/path/to/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **update_incident_template** | /user/path/to/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **close_incident_template** | /user/path/to/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
-| **sentinel_update_incident_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
-| **sentinel_close_incident_template** | /user/path/to/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the Resilient SOAR incident is closed |
+| **create_incident_template** | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
+| **update_incident_template** | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
+| **close_incident_template** | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **sentinel_update_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
+| **sentinel_close_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the Resilient SOAR incident is closed |
 
 See the section below for examples of the templates.
 
+### Automatic Rules
+Several rules are configurated to automatically synchronize a SOAR incident with the Sentinel incident. Those automatic rules are:
+
+| Rule Name | Object | Behavior |
+| --------- | ------ | ------------------ |
+| Sentinel Comment Sync | note | Synchronize SOAR notes with Sentinel incidents |
+| Sentinel Incident Sync | incident | Get Sentinel incident alerts and entities when the SOAR incident is created |
+| Sentinel Update Incident | incident | Synchronize SOAR incident changes (changes in status, severity, etc) with Sentinel |
+
+These rules are disabled when the app is first installed. If you wish to use this app to automatically synchronize with Sentinel, enable each rule using the Enable slider found on the Rules tab in Customization Settings.
+
+![screenshot: subscription role](./doc/screenshots/automatic_rules.png)
 ### Custom Layouts
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
@@ -208,17 +225,9 @@ See the section below for examples of the templates.
 
   The Sentinel fields are used to capture information specific on a Sentinel Incident, including close incident information (Classification). The datatable, Sentintel Entities, is used to capture specific entity information. Another datatable, Sentinel Comment IDs, is used for tracking purposes and need not be added to a layout.
 
-#### Sentinel Comment Sync
-
-A Rule exists to automatically link Resilient SOAR comments with Sentinel: `Sentinel Comment Sync`.
-This rule needs to be modified to reference the user account or API Key used for app communication.
-The screenshot below shows an added condition for the comment's `user` set to be `not equal to` the app account used. `Please make this manual change.`
-
-![screenshot: Sentinel Comment Sync ](./doc/screenshots/sync_comment.png)
-
 ---
 
- ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/function_list.png)
+ ![screenshot: function-list ](./doc/screenshots/function_list.png)
 
 ## Function - Sentinel Get Incident Entities
 Get the Entities associated with a Sentinel Incident
@@ -505,8 +514,6 @@ if results.success:
 ## Function - Sentinel Update Incident
 Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident
 
- ![screenshot: fn-sentinel-update-incident ](./doc/screenshots/fn-sentinel-update-incident.png)
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -553,21 +560,6 @@ None
 
 </p>
 </details>
-
-## Data Table - Sentinel Comment IDs
-This is a reference table of synchronized Sentinel Comment ids. It is an internal table to
-ensure comments are not synchronized more than once. This table does not need to be added to a layout.
-
- ![screenshot: dt-sentinel-comment-ids](./doc/screenshots/dt-sentinel-comment-ids.png)
-
-#### API Name:
-sentinel_comment_ids
-
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| sentinel_comment_id | `comment_id` | `text` | - |
-| resilient_comment_id | `resilient_comment_id` | `text` | - |
 
 ---
 ## Data Table - Sentinel Incident Entities
@@ -640,21 +632,20 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ```
 {
   {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|replace('"', '\"') }}",
+  "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
-  "start_date": {{ properties.firstActivityTimeUtc|resilient_datetimeformat }},
+  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
   "description": {
     "format": "text",
-    "content": "{{ properties.description|replace('"', '\"') }}"
+    "content": "{{ properties.description|replace('"', '\\"') }}"
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
-    "sentinel_incident_number": {{ properties.incidentNumber }},
-    "sentinel_incident_id": "{{ name|e }}",
+    "sentinel_incident_number": "{{ name|e }}",
+    "sentinel_incident_id": "{{ properties.incidentNumber }}",
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_url": "<a target='blank' href='{{ properties.incidentUrl }}'>Sentinel Incident</a>",
     "sentinel_incident_classification": "{{ properties.classification }}",
@@ -677,14 +668,12 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ```
 {
   {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
-  "name": "Sentinel Incident - {{ properties.title|replace('Sentinel Incident - ', '')|replace('"', '\"') }}",
   "description": {
     "format": "text",
-    "content": "{{ properties.description|replace('"', '\"') }}"
+    "content": "{{ properties.description|replace('"', '\\"') }}"
   },
   {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "owner_id": "{{ properties.owner.assignedTo }}",
   "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
@@ -705,7 +694,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
   {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
   "plan_status": "C",
   "resolution_id": "Resolved",
-  "resolution_summary": "Closed from Sentinel",
+  "resolution_summary": "Closed by Sentinel",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
@@ -723,13 +712,13 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
     "properties": {
+        "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "Closed",
-        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
-        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive"}') }}",
+        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
-        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity"}') }}"
+        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
     }
 }
 ```
@@ -739,9 +728,9 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for updating a new Sentinel incident from a Resilient incident. #}
     "properties": {
+        "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}",
-        "title": "{{ name|replace('Sentinel Incident - ', '')|safe }}",
         "classification": "{{ properties.sentinel_incident_classification }}",
         "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",
         "classificationReason": "{{ properties.sentinel_incident_classification_reason }}",

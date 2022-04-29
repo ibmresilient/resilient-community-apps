@@ -15,9 +15,8 @@ FUNCTION_NAME = "utilities_base64_to_artifact"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = ArtifactMock
-
 
 def call_base64_to_artifact_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -28,7 +27,6 @@ def call_base64_to_artifact_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestBase64ToArtifact:
     """ Tests for the base64_to_artifact function"""
@@ -43,7 +41,7 @@ class TestBase64ToArtifact:
     ])
     def test_success(self, circuits_app, base64content, incident_id, artifact_file_type, file_name, content_type, description, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "base64content": b_to_s(base64content),
             "incident_id": incident_id,
             "artifact_file_type": artifact_file_type,
