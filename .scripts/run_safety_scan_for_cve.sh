@@ -31,8 +31,8 @@ print_msg () {
 ## Start ##
 ###########
 
-if [ "$PACKAGE_NAME" == "MERGE" ] ; then
-    print_msg "Latest commit is a Merge. Not running CVE scan"
+if [ "$PACKAGE_NAME" == "build" ] ; then
+    print_msg "Latest commit is modifying the build. Not running cve scan"
     exit 0
 fi
 
