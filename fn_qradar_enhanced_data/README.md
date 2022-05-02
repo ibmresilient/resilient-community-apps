@@ -163,6 +163,8 @@ For enterprises with more than one QRadar instance, each instance will have it's
 
 For other configurations, `qradar_instance_label` can represent any label helpful to define you QRadar environment. Be aware that modifications to the EDM workflows may be needed to correctly pass this label through the `qradar_label` function input field.
 
+If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `qradar_label` function input field.
+
 ### MSSP Configuration
 
 Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. Afterwards, have your system administrator push the app to the appropriate child orgs.
@@ -189,7 +191,7 @@ Fetch QRadar offense Details.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `qradar_query_type` | `text` | No | `-` | - |
 
@@ -330,7 +332,7 @@ Search QRadar Top events for the given offense ID.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
 | `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
@@ -852,7 +854,7 @@ inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 Example app.config server label: [fn_qradar_integration:qradar_4]
-  `qradar_4` is the label in the above example
+  `qradar_4` will be set to `inputs.qradar_label` in the above example.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
