@@ -12,9 +12,6 @@
     "content": {
       "type": "object",
       "properties": {
-        "mock_key": {
-          "type": "string"
-        }
       }
     },
     "raw": {},

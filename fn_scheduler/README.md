@@ -195,9 +195,10 @@ Schedule a rule to run on a schedule. This rule will be executed for a given inc
 | `row_id` | `number` | No | `-` | row information for datatable rules |
 | `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule. The incident id is appended to the name for uniqueness |
 | `scheduler_rule_name` | `text` | Yes | `-` | Name of rule to schedule |
-| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields |
-| `scheduler_type` | `select` | No | `-` | type of schedule to create. cron, interval, date or delta |
+| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
+| `scheduler_type` | `select` | Yes | `-` | type of schedule to create. cron, interval, date or delta |
 | `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
+| `scheduler_is_playbook` | boolean | Yes | Yes | Yes if scheduling a playbook, No for a rule |
 
 </p>
 </details>
@@ -359,7 +360,7 @@ Pause a scheduled rule
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -441,7 +442,7 @@ Stop a schedule
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -493,7 +494,7 @@ Resume a scheduled job
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -565,6 +566,72 @@ else:
 
 ---
 
+## Function - Run Scheduled Job Now
+Run a scheduled job immediately
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+  },
+  "raw": null,
+  "inputs": {
+    "scheduler_label": "rulex1-5713"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-scheduler",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 1609,
+    "timestamp": "2022-04-28 17:39:27"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row['schedule_label']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if not results.success:
+  incident.addNote("Run Scheduled Job Now failed for job {}: {}".format(row['schedule_label'], results.reason))
+else:
+  msg = "Run Scheduled Job Now suceeeded for job: {}, Rule/Playbook: {}".format(row['schedule_label'], row['rule'].content)
+  incident.addNote(helper.createRichText(msg))
+```
+
+</p>
+</details>
+
+---
 
 ## Data Table - Scheduler Rules
 
@@ -574,12 +641,14 @@ scheduler_rules
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Incident Id | `incident_id` | `text` | - |
 | Reported Date | `reported_on` | `text` | - |
-| Rule | `rule` | `text` | - |
-| Schedule | `schedule` | `text` | - |
 | Schedule Label | `schedule_label` | `text` | - |
+| Incident Id | `incident_id` | `text` | - |
+| Rule/Playbook Type | `rule_type` | `text` | - |
+| Rule/Playbook | `rule` | `text` | - |
 | Schedule Type | `schedule_type` | `text` | - |
+| Schedule | `schedule` | `text` | - |
+| Next Run Time | `next_run_time` | `text` |
 | Status | `status` | `text` | - |
 
 ---
@@ -596,6 +665,7 @@ scheduler_rules
 | Schedule a Rule to Run | incident | `schedule_rule_to_run` |
 | Schedule a Rule to Run - Artifact | artifact | `schedule_a_rule_to_run_artifact` |
 | Schedule a Rule to Run - Task | task | `schedule_a_rule_to_run__task` |
+| Run Scheduled Job Now | scheduler_rules | `run_scheduled_job_now` |
 
 ---
 
