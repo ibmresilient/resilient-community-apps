@@ -43,6 +43,13 @@
           "method": "has_a_value",
           "type": null,
           "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "scheduler_rules.status",
+          "method": "not_contains",
+          "type": null,
+          "value": "Deleted"
         }
       ],
       "enabled": true,
@@ -58,7 +65,7 @@
       "uuid": "ffe8e980-04ed-4c94-aa80-899d898ac184",
       "view_items": [
         {
-          "content": "d5741a0f-b6ce-43a4-a158-a19989559cfe",
+          "content": "ed50ff7e-c00f-426f-a05c-d5322ae41d78",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -66,7 +73,7 @@
           "step_label": null
         },
         {
-          "content": "db501928-ffbb-4e2d-8e46-a3dab6eba44c",
+          "content": "1773619f-c839-49db-9782-1dc5f740a2e4",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -184,13 +191,28 @@
     },
     {
       "automations": [],
-      "conditions": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "scheduler_rules.schedule_label",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "scheduler_rules.status",
+          "method": "not_contains",
+          "type": null,
+          "value": "Deleted"
+        }
+      ],
       "enabled": true,
-      "export_key": "Run a Scheduled Job Now",
+      "export_key": "Run Scheduled Job Now",
       "id": 221,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Run a Scheduled Job Now",
+      "name": "Run Scheduled Job Now",
       "object_type": "scheduler_rules",
       "tags": [],
       "timeout_seconds": 86400,
@@ -423,7 +445,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1651173790711,
+  "export_date": 1651531571183,
   "export_format_version": 2,
   "fields": [
     {
@@ -537,6 +559,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/modify_scheduler_type_value",
+      "hide_notification": false,
+      "id": 1621,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "modify_scheduler_type_value",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "interval, date (yyyy/mm/dd hh:mm:ss) or cron value",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "modify_scheduler_type_value",
+      "tooltip": "interval, date (yyyy/mm/dd hh:mm:ss) or cron value",
+      "type_id": 11,
+      "uuid": "b5ca3be1-0c84-4898-b1f6-2015eb753e1c",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/scheduler_rule_name",
       "hide_notification": false,
       "id": 1579,
@@ -563,6 +614,72 @@
       "type_id": 11,
       "uuid": "bfacefb1-5b39-4e7f-919c-84ccc54442f0",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/modify_scheduler_type",
+      "hide_notification": false,
+      "id": 1620,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "modify_scheduler_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "modify_scheduler_type",
+      "tooltip": "interval, date (yyyy/mm/dd hh:mm:ss) or cron value",
+      "type_id": 11,
+      "uuid": "0aeb9039-7eae-49d6-81d8-369ebb401019",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "cron",
+          "properties": null,
+          "uuid": "bee7db2c-6675-4d5d-8ff8-ce2ddfae603b",
+          "value": 2406
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "date",
+          "properties": null,
+          "uuid": "6d59cc69-8499-423e-90bf-5e482e7464a1",
+          "value": 2407
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "delta",
+          "properties": null,
+          "uuid": "3540303a-bf3f-4d73-842b-eb9f6ed183e2",
+          "value": 2408
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "interval",
+          "properties": null,
+          "uuid": "a9a054e3-9e75-4761-ad57-3258ae46102a",
+          "value": 2409
+        }
+      ]
     },
     {
       "allow_default_value": false,
@@ -956,15 +1073,6 @@
       "uuid": "d5741a0f-b6ce-43a4-a158-a19989559cfe",
       "values": [
         {
-          "default": false,
-          "enabled": false,
-          "hidden": false,
-          "label": "deltax",
-          "properties": null,
-          "uuid": "5a12bad2-5a03-4dd1-ba66-3b22891aa08a",
-          "value": 2102
-        },
-        {
           "default": true,
           "enabled": true,
           "hidden": false,
@@ -972,15 +1080,6 @@
           "properties": null,
           "uuid": "4dc8293e-0937-4130-b1cf-b501bb0d7afe",
           "value": 2103
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "interval",
-          "properties": null,
-          "uuid": "29774e73-d19c-4c24-b41b-8ebcf27f2c53",
-          "value": 2104
         },
         {
           "default": false,
@@ -999,6 +1098,15 @@
           "properties": null,
           "uuid": "19dbfc0f-ce1d-49ea-a11b-c0de3fec5e5f",
           "value": 2106
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "interval",
+          "properties": null,
+          "uuid": "29774e73-d19c-4c24-b41b-8ebcf27f2c53",
+          "value": 2104
         }
       ]
     },
@@ -1039,6 +1147,72 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/modify_schedule_type",
+      "hide_notification": false,
+      "id": 1618,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "modify_schedule_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Schedule Type",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "ed50ff7e-c00f-426f-a05c-d5322ae41d78",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "cron",
+          "properties": null,
+          "uuid": "7815a1cd-57de-4db9-a933-aacaf4270c33",
+          "value": 2402
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "date",
+          "properties": null,
+          "uuid": "0411052b-0a17-4eb2-a611-3a262e9fbc78",
+          "value": 2403
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "delta",
+          "properties": null,
+          "uuid": "44cb090b-6edc-4f3d-bcc2-e6df42b4c3eb",
+          "value": 2404
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "interval",
+          "properties": null,
+          "uuid": "3305bb0a-d67d-4de9-a847-a0f7b9892d2c",
+          "value": 2405
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
@@ -1070,6 +1244,35 @@
       "tooltip": "name of schedule for future reference",
       "type_id": 6,
       "uuid": "f020bbc2-e230-4dbc-b5ef-1fd6577aba51",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/modify_schedule_type_value",
+      "hide_notification": false,
+      "id": 1619,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "modify_schedule_type_value",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "cron (* 5 * * *); date (yyyy-mm-dd hh:mm:ss) ; interval (10m)",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Schedule Type Value",
+      "tooltip": "cron (* 5 * * *); date (yyyy-mm-dd hh:mm:ss) ; interval (10m)",
+      "type_id": 6,
+      "uuid": "1773619f-c839-49db-9782-1dc5f740a2e4",
       "values": []
     },
     {
@@ -1485,11 +1688,11 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1650907622244,
+      "last_modified_time": 1651525969640,
       "name": "scheduled_rule_modify",
       "tags": [],
       "uuid": "a2014c98-26b7-4016-917a-147509a88775",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "a8315456-7803-4a4d-a482-aeec5ca91c4e",
@@ -1500,7 +1703,7 @@
           "step_label": null
         },
         {
-          "content": "0e1330b2-0b91-462b-acf2-2772a02299f8",
+          "content": "0aeb9039-7eae-49d6-81d8-369ebb401019",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1508,7 +1711,7 @@
           "step_label": null
         },
         {
-          "content": "6742aa35-eb76-4fa4-85f8-a86015cf888a",
+          "content": "b5ca3be1-0c84-4898-b1f6-2015eb753e1c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1660,13 +1863,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 77,
+  "id": 79,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1651173789566,
+      "create_date": 1651531570033,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1675,7 +1878,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1651173789566,
+      "update_date": 1651531570033,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2034,136 +2237,16 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "resume_a_scheduled_job",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"resume_a_scheduled_job\" isExecutable=\"true\" name=\"Resume a Scheduled Job\"\u003e\u003cdocumentation\u003eResume a Scheduled Job\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lgsip6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1z0kxqu\" name=\"Scheduled Rule Resume\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"37083e99-ca31-41fb-85b5-d0ac4ed1f60b\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  row[\u0027status\u0027] = \u0027Active\u0027\\nelse:\\n  row[\u0027status\u0027] = row[\u0027status\u0027] + \\\" (Error)\\\"\",\"pre_processing_script\":\"inputs.scheduler_label = row.schedule_label\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lgsip6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0su016m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lgsip6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1z0kxqu\"/\u003e\u003cendEvent id=\"EndEvent_1157mca\"\u003e\u003cincoming\u003eSequenceFlow_0su016m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0su016m\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"EndEvent_1157mca\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0eggn77\"\u003e\u003ctext\u003eActs on a datatable row of scheduled rules\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_15nfoj0\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"TextAnnotation_0eggn77\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_139h4an\"\u003e\u003ctext\u003eRow is updated to indicate that the scheduled rule is now active\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1k45r8j\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"TextAnnotation_139h4an\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1z0kxqu\" id=\"ServiceTask_1z0kxqu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lgsip6\" id=\"SequenceFlow_1lgsip6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1157mca\" id=\"EndEvent_1157mca_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"474\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0su016m\" id=\"SequenceFlow_0su016m_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"474\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"431.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0eggn77\" id=\"TextAnnotation_0eggn77_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"139\" x=\"163\" y=\"86\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_15nfoj0\" id=\"Association_15nfoj0_di\"\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_139h4an\" id=\"TextAnnotation_139h4an_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"187\" x=\"396\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1k45r8j\" id=\"Association_1k45r8j_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Resume a Scheduled Job",
-      "export_key": "resume_a_scheduled_job",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1650484104671,
-      "name": "Resume a Scheduled Job",
-      "object_type": "scheduler_rules",
-      "programmatic_name": "resume_a_scheduled_job",
-      "tags": [
-        {
-          "tag_handle": "fn_scheduler",
-          "value": null
-        }
-      ],
-      "uuid": "f9ebf3f3-acd2-4450-a0c3-b12de9213e44",
-      "workflow_id": 173
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "schedule_a_rule_to_run__task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"schedule_a_rule_to_run__task\" isExecutable=\"true\" name=\"Schedule a Rule/Playbook to Run - Task\"\u003e\u003cdocumentation\u003eSchedule a rule/playbook to run in the future for a given task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tgjqn3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kdk3qk\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif results.success:\\n  job = results.content\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n  row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n  row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n  row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n  row[\u0027status\u0027] = \u0027Active\u0027\\n  row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n  row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n  if job[\u0027args\u0027][8]:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n  else:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\nelse:\\n  incident.addNote(\\\"Schedule a Rule/Playbook failed: {}\\\".format(result.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_type = rule.properties.schedule_type\\nif rule.properties.schedule_type == \u0027date\u0027:\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value\\n\\ninputs.scheduler_rule_name = rule.properties.schedule_rule_name\\ninputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters\\n\\ninputs.scheduler_label_prefix = rule.properties.schedule_label_prefix\\ninputs.incident_id = incident.id\\ninputs.object_id = task.id\\ninputs.scheduler_is_playbook = rule.properties.schedule_is_playbook\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tgjqn3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0tvzby6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tgjqn3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kdk3qk\"/\u003e\u003cendEvent id=\"EndEvent_0r70nx4\"\u003e\u003cincoming\u003eSequenceFlow_0tvzby6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0tvzby6\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"EndEvent_0r70nx4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0umoxay\"\u003e\u003ctext\u003eRule Activity Fields are used for parameter capture\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06cxn04\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"TextAnnotation_0umoxay\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10gv7bg\"\u003e\u003ctext\u003eSee Action Status for status on job creation\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1bt608b\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"TextAnnotation_10gv7bg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kdk3qk\" id=\"ServiceTask_0kdk3qk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tgjqn3\" id=\"SequenceFlow_1tgjqn3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0r70nx4\" id=\"EndEvent_0r70nx4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"433\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"451\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0tvzby6\" id=\"SequenceFlow_0tvzby6_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0umoxay\" id=\"TextAnnotation_0umoxay_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"187\" x=\"107\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06cxn04\" id=\"Association_06cxn04_di\"\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10gv7bg\" id=\"TextAnnotation_10gv7bg_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"212\" x=\"390\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1bt608b\" id=\"Association_1bt608b_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"462\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "a@example.com",
-      "description": "Schedule a rule/playbook to run in the future for a given task",
-      "export_key": "schedule_a_rule_to_run__task",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1651007138987,
-      "name": "Schedule a Rule/Playbook to Run - Task",
-      "object_type": "task",
-      "programmatic_name": "schedule_a_rule_to_run__task",
-      "tags": [
-        {
-          "tag_handle": "fn_scheduler",
-          "value": null
-        }
-      ],
-      "uuid": "fdcd87e5-d89c-44e7-bf0c-19d44168439b",
-      "workflow_id": 172
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
-        "workflow_id": "list_schedules",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"list_schedules\" isExecutable=\"true\" name=\"List Schedules\"\u003e\u003cdocumentation\u003eList the active schedules\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_028h8nr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vybqlf\" name=\"Scheduled Rule List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8972a0b8-7a13-4dee-b6c1-e9ebc389b3d3\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif not results[\u0027content\u0027]:\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = \\\"-- no scheduled rules --\\\"\\nelse:\\n  for job in results[\u0027content\u0027]:\\n    row = incident.addRow(\\\"scheduler_rules\\\")\\n    row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n    row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n    row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n    row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n    row[\u0027reported_on\u0027] = str(Date())\\n    row[\u0027status\u0027] = \u0027Active\u0027 if job[\u0027next_run_time\u0027] else \u0027Paused\u0027\\n    row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n    row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n    if job[\u0027args\u0027][8]:\\n      row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n    else:\\n      row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if rule.properties.incidents_returned == \\\"All\\\":\\n  inputs.incident_id = 0\\nelse:\\n  inputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_028h8nr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gkodi4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_028h8nr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vybqlf\"/\u003e\u003cendEvent id=\"EndEvent_02uosbe\"\u003e\u003cincoming\u003eSequenceFlow_1gkodi4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gkodi4\" sourceRef=\"ServiceTask_0vybqlf\" targetRef=\"EndEvent_02uosbe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_13pcegt\"\u003e\u003ctext\u003eDatatable display of active schedules created\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vykydc\" sourceRef=\"ServiceTask_0vybqlf\" targetRef=\"TextAnnotation_13pcegt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vybqlf\" id=\"ServiceTask_0vybqlf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"291\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028h8nr\" id=\"SequenceFlow_028h8nr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"291\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02uosbe\" id=\"EndEvent_02uosbe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gkodi4\" id=\"SequenceFlow_1gkodi4_di\"\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"424.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_13pcegt\" id=\"TextAnnotation_13pcegt_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"209\" x=\"364\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vykydc\" id=\"Association_1vykydc_di\"\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "creator_id": "a@example.com",
-      "description": "List the active schedules",
-      "export_key": "list_schedules",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1651007302186,
-      "name": "List Schedules",
-      "object_type": "incident",
-      "programmatic_name": "list_schedules",
-      "tags": [
-        {
-          "tag_handle": "fn_scheduler",
-          "value": null
-        }
-      ],
-      "uuid": "b4252787-8b81-4059-b9b6-24eff399813a",
-      "workflow_id": 171
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 8,
-        "workflow_id": "schedule_a_rule_to_run_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"schedule_a_rule_to_run_artifact\" isExecutable=\"true\" name=\"Schedule a Rule/Playbook to Run - Artifact\"\u003e\u003cdocumentation\u003eSchedule a rule/playbook to run in the future for a given artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p0reen\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zz4wks\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif results.success:\\n  job = results.content\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n  row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n  row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n  row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n  row[\u0027status\u0027] = \u0027Active\u0027\\n  row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n  row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n  if job[\u0027args\u0027][8]:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n  else:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\nelse:\\n  incident.addNote(\\\"Schedule a Rule/Playbook failed: {}\\\".format(result.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_type = rule.properties.schedule_type\\nif rule.properties.schedule_type == \u0027date\u0027:\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value\\ninputs.scheduler_rule_name = rule.properties.schedule_rule_name\\nif rule.properties.schedule_rule_parameters:\\n  inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters + u\\\";artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\nelse:\\n  inputs.scheduler_rule_parameters = u\\\"artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\ninputs.scheduler_label_prefix = rule.properties.schedule_label_prefix\\ninputs.incident_id = incident.id\\ninputs.object_id = artifact.id\\ninputs.scheduler_is_playbook = rule.properties.schedule_is_playbook\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p0reen\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1yevgyi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p0reen\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zz4wks\"/\u003e\u003cendEvent id=\"EndEvent_0ed1ueg\"\u003e\u003cincoming\u003eSequenceFlow_1yevgyi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1yevgyi\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"EndEvent_0ed1ueg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02uz1py\"\u003e\u003ctext\u003eRule Activity Fields are used for parameter capture\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0tb4n3w\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"TextAnnotation_02uz1py\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11c1lus\"\u003e\u003ctext\u003eSee Action Status for job creation\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0m0ni5z\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"TextAnnotation_11c1lus\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zz4wks\" id=\"ServiceTask_0zz4wks_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p0reen\" id=\"SequenceFlow_0p0reen_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ed1ueg\" id=\"EndEvent_0ed1ueg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"448\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1yevgyi\" id=\"SequenceFlow_1yevgyi_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02uz1py\" id=\"TextAnnotation_02uz1py_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"148\" x=\"166\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0tb4n3w\" id=\"Association_0tb4n3w_di\"\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11c1lus\" id=\"TextAnnotation_11c1lus_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"175\" x=\"376\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0m0ni5z\" id=\"Association_0m0ni5z_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 8,
-      "creator_id": "a@example.com",
-      "description": "Schedule a rule/playbook to run in the future for a given artifact",
-      "export_key": "schedule_a_rule_to_run_artifact",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1651007327460,
-      "name": "Schedule a Rule/Playbook to Run - Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "schedule_a_rule_to_run_artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_scheduler",
-          "value": null
-        }
-      ],
-      "uuid": "7b1758d4-56d2-491e-99c3-15629da18640",
-      "workflow_id": 177
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "run_a_scheduled_job_now",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"run_a_scheduled_job_now\" isExecutable=\"true\" name=\"Run a Scheduled Job Now\"\u003e\u003cdocumentation\u003eRun a scheduled job immediately\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0g2ztm4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ezfgmb\" name=\"Run Schedule Job Now\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d35f9fe8-d19b-41fc-adb2-d80bc7b4e68b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027scheduler_label\u0027]\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0g2ztm4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0x22jsz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0g2ztm4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ezfgmb\"/\u003e\u003cendEvent id=\"EndEvent_1ljp1tu\"\u003e\u003cincoming\u003eSequenceFlow_0x22jsz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0x22jsz\" sourceRef=\"ServiceTask_1ezfgmb\" targetRef=\"EndEvent_1ljp1tu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0h9rnup\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jdcbld\" sourceRef=\"ServiceTask_1ezfgmb\" targetRef=\"TextAnnotation_0h9rnup\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ezfgmb\" id=\"ServiceTask_1ezfgmb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0g2ztm4\" id=\"SequenceFlow_0g2ztm4_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ljp1tu\" id=\"EndEvent_1ljp1tu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"425\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x22jsz\" id=\"SequenceFlow_0x22jsz_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0h9rnup\" id=\"TextAnnotation_0h9rnup_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"191\" x=\"340\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jdcbld\" id=\"Association_0jdcbld_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"103\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "a@example.com",
-      "description": "Run a scheduled job immediately",
-      "export_key": "run_a_scheduled_job_now",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1651173664274,
-      "name": "Run a Scheduled Job Now",
-      "object_type": "scheduler_rules",
-      "programmatic_name": "run_a_scheduled_job_now",
-      "tags": [],
-      "uuid": "7724fc6b-8467-43af-b794-1218cf2499d8",
-      "workflow_id": 185
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
+        "version": 12,
         "workflow_id": "modify_a_scheduled_rule",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"modify_a_scheduled_rule\" isExecutable=\"true\" name=\"Modify a Scheduled Job\"\u003e\u003cdocumentation\u003eChange an existing scheduled job\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0yairkf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0f7ufct\" name=\"Scheduled Rule Modify\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a2014c98-26b7-4016-917a-147509a88775\"\u003e{\"inputs\":{\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif not results.success:\\n  incident.addNote(\\\"Modify Scheduled Rule/Playbook failed: {}\\\".format(results.reason))\\nelse:\\n  job = results.content\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_type\u0027] = job.get(\u0027type\u0027)\\n  row[\u0027schedule\u0027] = job.get(\u0027value\u0027)\\n  incident.addNote(\\\"Modify Scheduled Rule/Playbook succeeded for: {}\\\".format(job.get(\u0027id\u0027)))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\\ninputs.scheduler_type = rule.properties.schedule_type\\ninputs.scheduler_type_value = rule.properties.schedule_type_value\\ninputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0yairkf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vncz5s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0yairkf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0f7ufct\"/\u003e\u003cendEvent id=\"EndEvent_0pg7gk3\"\u003e\u003cincoming\u003eSequenceFlow_0vncz5s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vncz5s\" sourceRef=\"ServiceTask_0f7ufct\" targetRef=\"EndEvent_0pg7gk3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19fb2ij\"\u003e\u003ctext\u003e\u003c![CDATA[A note is created with the current datatable row updated\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_100pgym\" sourceRef=\"ServiceTask_0f7ufct\" targetRef=\"TextAnnotation_19fb2ij\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0f7ufct\" id=\"ServiceTask_0f7ufct_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271.8091674462114\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yairkf\" id=\"SequenceFlow_0yairkf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0pg7gk3\" id=\"EndEvent_0pg7gk3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448.8091674462114\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466.8091674462114\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vncz5s\" id=\"SequenceFlow_0vncz5s_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19fb2ij\" id=\"TextAnnotation_19fb2ij_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"177\" x=\"369\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_100pgym\" id=\"Association_100pgym_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"modify_a_scheduled_rule\" isExecutable=\"true\" name=\"Modify a Scheduled Job\"\u003e\u003cdocumentation\u003eChange an existing scheduled job\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0yairkf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0f7ufct\" name=\"Scheduled Rule Modify\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a2014c98-26b7-4016-917a-147509a88775\"\u003e{\"inputs\":{\"0aeb9039-7eae-49d6-81d8-369ebb401019\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"bee7db2c-6675-4d5d-8ff8-ce2ddfae603b\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nif not results.success:\\n  incident.addNote(\\\"Modify Scheduled Rule/Playbook failed: {}\\\".format(results.reason))\\nelse:\\n  job = results.content\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_type\u0027] = job.get(\u0027type\u0027)\\n  row[\u0027schedule\u0027] = job.get(\u0027value\u0027)\\n  incident.addNote(\\\"Modify Scheduled Rule/Playbook succeeded for: {}\\\".format(job.get(\u0027id\u0027)))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\\ninputs.modify_scheduler_type = rule.properties.modify_schedule_type\\ninputs.modify_scheduler_type_value = rule.properties.modify_schedule_type_value\\ninputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0yairkf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vncz5s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0yairkf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0f7ufct\"/\u003e\u003cendEvent id=\"EndEvent_0pg7gk3\"\u003e\u003cincoming\u003eSequenceFlow_0vncz5s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vncz5s\" sourceRef=\"ServiceTask_0f7ufct\" targetRef=\"EndEvent_0pg7gk3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19fb2ij\"\u003e\u003ctext\u003e\u003c![CDATA[A note is created with the current datatable row updated\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_100pgym\" sourceRef=\"ServiceTask_0f7ufct\" targetRef=\"TextAnnotation_19fb2ij\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0f7ufct\" id=\"ServiceTask_0f7ufct_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271.8091674462114\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yairkf\" id=\"SequenceFlow_0yairkf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0pg7gk3\" id=\"EndEvent_0pg7gk3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448.8091674462114\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466.8091674462114\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vncz5s\" id=\"SequenceFlow_0vncz5s_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19fb2ij\" id=\"TextAnnotation_19fb2ij_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"177\" x=\"369\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_100pgym\" id=\"Association_100pgym_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 9,
+      "content_version": 12,
       "creator_id": "a@example.com",
       "description": "Change an existing scheduled job",
       "export_key": "modify_a_scheduled_rule",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1650977578716,
+      "last_modified_time": 1651526122884,
       "name": "Modify a Scheduled Job",
       "object_type": "scheduler_rules",
       "programmatic_name": "modify_a_scheduled_rule",
@@ -2245,6 +2328,126 @@
       ],
       "uuid": "88f6f518-2218-482a-a232-2e755acd5e13",
       "workflow_id": 174
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "schedule_a_rule_to_run_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"schedule_a_rule_to_run_artifact\" isExecutable=\"true\" name=\"Schedule a Rule/Playbook to Run - Artifact\"\u003e\u003cdocumentation\u003eSchedule a rule/playbook to run in the future for a given artifact\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p0reen\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zz4wks\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif results.success:\\n  job = results.content\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n  row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n  row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n  row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n  row[\u0027status\u0027] = \u0027Active\u0027\\n  row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n  row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n  if job[\u0027args\u0027][8]:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n  else:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\nelse:\\n  incident.addNote(\\\"Schedule a Rule/Playbook failed: {}\\\".format(result.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_type = rule.properties.schedule_type\\nif rule.properties.schedule_type == \u0027date\u0027:\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value\\ninputs.scheduler_rule_name = rule.properties.schedule_rule_name\\nif rule.properties.schedule_rule_parameters:\\n  inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters + u\\\";artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\nelse:\\n  inputs.scheduler_rule_parameters = u\\\"artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\ninputs.scheduler_label_prefix = rule.properties.schedule_label_prefix\\ninputs.incident_id = incident.id\\ninputs.object_id = artifact.id\\ninputs.scheduler_is_playbook = rule.properties.schedule_is_playbook\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p0reen\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1yevgyi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p0reen\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zz4wks\"/\u003e\u003cendEvent id=\"EndEvent_0ed1ueg\"\u003e\u003cincoming\u003eSequenceFlow_1yevgyi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1yevgyi\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"EndEvent_0ed1ueg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02uz1py\"\u003e\u003ctext\u003eRule Activity Fields are used for parameter capture\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0tb4n3w\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"TextAnnotation_02uz1py\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11c1lus\"\u003e\u003ctext\u003eSee Action Status for job creation\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0m0ni5z\" sourceRef=\"ServiceTask_0zz4wks\" targetRef=\"TextAnnotation_11c1lus\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zz4wks\" id=\"ServiceTask_0zz4wks_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p0reen\" id=\"SequenceFlow_0p0reen_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ed1ueg\" id=\"EndEvent_0ed1ueg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"448\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1yevgyi\" id=\"SequenceFlow_1yevgyi_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02uz1py\" id=\"TextAnnotation_02uz1py_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"148\" x=\"166\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0tb4n3w\" id=\"Association_0tb4n3w_di\"\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11c1lus\" id=\"TextAnnotation_11c1lus_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"175\" x=\"376\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0m0ni5z\" id=\"Association_0m0ni5z_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "creator_id": "a@example.com",
+      "description": "Schedule a rule/playbook to run in the future for a given artifact",
+      "export_key": "schedule_a_rule_to_run_artifact",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1651007327460,
+      "name": "Schedule a Rule/Playbook to Run - Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "schedule_a_rule_to_run_artifact",
+      "tags": [
+        {
+          "tag_handle": "fn_scheduler",
+          "value": null
+        }
+      ],
+      "uuid": "7b1758d4-56d2-491e-99c3-15629da18640",
+      "workflow_id": 177
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "resume_a_scheduled_job",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"resume_a_scheduled_job\" isExecutable=\"true\" name=\"Resume a Scheduled Job\"\u003e\u003cdocumentation\u003eResume a Scheduled Job\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lgsip6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1z0kxqu\" name=\"Scheduled Rule Resume\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"37083e99-ca31-41fb-85b5-d0ac4ed1f60b\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  row[\u0027status\u0027] = \u0027Active\u0027\\nelse:\\n  row[\u0027status\u0027] = row[\u0027status\u0027] + \\\" (Error)\\\"\",\"pre_processing_script\":\"inputs.scheduler_label = row.schedule_label\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lgsip6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0su016m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lgsip6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1z0kxqu\"/\u003e\u003cendEvent id=\"EndEvent_1157mca\"\u003e\u003cincoming\u003eSequenceFlow_0su016m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0su016m\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"EndEvent_1157mca\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0eggn77\"\u003e\u003ctext\u003eActs on a datatable row of scheduled rules\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_15nfoj0\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"TextAnnotation_0eggn77\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_139h4an\"\u003e\u003ctext\u003eRow is updated to indicate that the scheduled rule is now active\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1k45r8j\" sourceRef=\"ServiceTask_1z0kxqu\" targetRef=\"TextAnnotation_139h4an\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1z0kxqu\" id=\"ServiceTask_1z0kxqu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lgsip6\" id=\"SequenceFlow_1lgsip6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1157mca\" id=\"EndEvent_1157mca_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"474\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"492\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0su016m\" id=\"SequenceFlow_0su016m_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"474\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"431.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0eggn77\" id=\"TextAnnotation_0eggn77_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"139\" x=\"163\" y=\"86\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_15nfoj0\" id=\"Association_15nfoj0_di\"\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_139h4an\" id=\"TextAnnotation_139h4an_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"187\" x=\"396\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1k45r8j\" id=\"Association_1k45r8j_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"451\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@example.com",
+      "description": "Resume a Scheduled Job",
+      "export_key": "resume_a_scheduled_job",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1650484104671,
+      "name": "Resume a Scheduled Job",
+      "object_type": "scheduler_rules",
+      "programmatic_name": "resume_a_scheduled_job",
+      "tags": [
+        {
+          "tag_handle": "fn_scheduler",
+          "value": null
+        }
+      ],
+      "uuid": "f9ebf3f3-acd2-4450-a0c3-b12de9213e44",
+      "workflow_id": 173
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "run_a_scheduled_job_now",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"run_a_scheduled_job_now\" isExecutable=\"true\" name=\"Run a Scheduled Job Now\"\u003e\u003cdocumentation\u003eRun a scheduled job immediately\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0g2ztm4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ezfgmb\" name=\"Run Schedule Job Now\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d35f9fe8-d19b-41fc-adb2-d80bc7b4e68b\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.success:\\n  incident.addNote(\\\"Run Scheduled Job Now failed for job {}: {}\\\".format(row[\u0027schedule_label\u0027], results.reason))\\nelse:\\n  msg = \\\"Run Scheduled Job Now suceeeded for job: {}, Rule/Playbook: {}\\\".format(row[\u0027schedule_label\u0027], row[\u0027rule\u0027].content)\\n  incident.addNote(helper.createRichText(msg))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0g2ztm4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0x22jsz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0g2ztm4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ezfgmb\"/\u003e\u003cendEvent id=\"EndEvent_1ljp1tu\"\u003e\u003cincoming\u003eSequenceFlow_0x22jsz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0x22jsz\" sourceRef=\"ServiceTask_1ezfgmb\" targetRef=\"EndEvent_1ljp1tu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0h9rnup\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jdcbld\" sourceRef=\"ServiceTask_1ezfgmb\" targetRef=\"TextAnnotation_0h9rnup\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ezfgmb\" id=\"ServiceTask_1ezfgmb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0g2ztm4\" id=\"SequenceFlow_0g2ztm4_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ljp1tu\" id=\"EndEvent_1ljp1tu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"425\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x22jsz\" id=\"SequenceFlow_0x22jsz_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0h9rnup\" id=\"TextAnnotation_0h9rnup_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"191\" x=\"340\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jdcbld\" id=\"Association_0jdcbld_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"416\" xsi:type=\"omgdc:Point\" y=\"103\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "a@example.com",
+      "description": "Run a scheduled job immediately",
+      "export_key": "run_a_scheduled_job_now",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1651181955418,
+      "name": "Run a Scheduled Job Now",
+      "object_type": "scheduler_rules",
+      "programmatic_name": "run_a_scheduled_job_now",
+      "tags": [],
+      "uuid": "7724fc6b-8467-43af-b794-1218cf2499d8",
+      "workflow_id": 185
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "list_schedules",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"list_schedules\" isExecutable=\"true\" name=\"List Schedules\"\u003e\u003cdocumentation\u003eList the active schedules\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_028h8nr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vybqlf\" name=\"Scheduled Rule List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8972a0b8-7a13-4dee-b6c1-e9ebc389b3d3\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif not results[\u0027content\u0027]:\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = \\\"-- no scheduled rules --\\\"\\nelse:\\n  for job in results[\u0027content\u0027]:\\n    row = incident.addRow(\\\"scheduler_rules\\\")\\n    row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n    row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n    row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n    row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n    row[\u0027reported_on\u0027] = str(Date())\\n    row[\u0027status\u0027] = \u0027Active\u0027 if job[\u0027next_run_time\u0027] else \u0027Paused\u0027\\n    row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n    row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n    if job[\u0027args\u0027][8]:\\n      row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n    else:\\n      row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if rule.properties.incidents_returned == \\\"All\\\":\\n  inputs.incident_id = 0\\nelse:\\n  inputs.incident_id = incident.id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_028h8nr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1gkodi4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_028h8nr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vybqlf\"/\u003e\u003cendEvent id=\"EndEvent_02uosbe\"\u003e\u003cincoming\u003eSequenceFlow_1gkodi4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1gkodi4\" sourceRef=\"ServiceTask_0vybqlf\" targetRef=\"EndEvent_02uosbe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_13pcegt\"\u003e\u003ctext\u003eDatatable display of active schedules created\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vykydc\" sourceRef=\"ServiceTask_0vybqlf\" targetRef=\"TextAnnotation_13pcegt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vybqlf\" id=\"ServiceTask_0vybqlf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"291\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028h8nr\" id=\"SequenceFlow_028h8nr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"291\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"244.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02uosbe\" id=\"EndEvent_02uosbe_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"458\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"476\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gkodi4\" id=\"SequenceFlow_1gkodi4_di\"\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"424.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_13pcegt\" id=\"TextAnnotation_13pcegt_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"209\" x=\"364\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vykydc\" id=\"Association_1vykydc_di\"\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "a@example.com",
+      "description": "List the active schedules",
+      "export_key": "list_schedules",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1651007302186,
+      "name": "List Schedules",
+      "object_type": "incident",
+      "programmatic_name": "list_schedules",
+      "tags": [
+        {
+          "tag_handle": "fn_scheduler",
+          "value": null
+        }
+      ],
+      "uuid": "b4252787-8b81-4059-b9b6-24eff399813a",
+      "workflow_id": 171
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "schedule_a_rule_to_run__task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"schedule_a_rule_to_run__task\" isExecutable=\"true\" name=\"Schedule a Rule/Playbook to Run - Task\"\u003e\u003cdocumentation\u003eSchedule a rule/playbook to run in the future for a given task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1tgjqn3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kdk3qk\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}}},\"post_processing_script\":\"import java.util.Date as Date\\n\\nTYPE_LOOKUP = {0: \u0027Incident\u0027, 1: \\\"Task\\\", 4: \\\"Artifact\\\", 5: \\\"Attachment\\\"}\\n\\nif results.success:\\n  job = results.content\\n  row = incident.addRow(\\\"scheduler_rules\\\")\\n  row[\u0027reported_on\u0027] = str(Date())\\n  row[\u0027schedule_label\u0027] = job[\u0027id\u0027]\\n  row[\u0027schedule_type\u0027] = job[\u0027type\u0027]\\n  row[\u0027incident_id\u0027] = job[\u0027args\u0027][0]\\n  row[\u0027schedule\u0027] = job[\u0027value\u0027]\\n  row[\u0027status\u0027] = \u0027Active\u0027\\n  row[\u0027next_run_time\u0027] = job[\u0027next_run_time\u0027]\\n  row[\u0027rule_type\u0027] = TYPE_LOOKUP.get(job[\u0027args\u0027][6], \\\"Datatable\\\")\\n  if job[\u0027args\u0027][8]:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#playbooks/designer/{}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\n  else:\\n    row[\u0027rule\u0027] = \\\"\u0026lt;a href=\u0027#customize?tab=actions\u0026amp;id={}\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(job[\u0027args\u0027][5], job[\u0027args\u0027][4])\\nelse:\\n  incident.addNote(\\\"Schedule a Rule/Playbook failed: {}\\\".format(result.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.scheduler_type = rule.properties.schedule_type\\nif rule.properties.schedule_type == \u0027date\u0027:\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = rule.properties.schedule_type_value\\n\\ninputs.scheduler_rule_name = rule.properties.schedule_rule_name\\ninputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters\\n\\ninputs.scheduler_label_prefix = rule.properties.schedule_label_prefix\\ninputs.incident_id = incident.id\\ninputs.object_id = task.id\\ninputs.scheduler_is_playbook = rule.properties.schedule_is_playbook\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tgjqn3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0tvzby6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tgjqn3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kdk3qk\"/\u003e\u003cendEvent id=\"EndEvent_0r70nx4\"\u003e\u003cincoming\u003eSequenceFlow_0tvzby6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0tvzby6\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"EndEvent_0r70nx4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0umoxay\"\u003e\u003ctext\u003eRule Activity Fields are used for parameter capture\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06cxn04\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"TextAnnotation_0umoxay\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10gv7bg\"\u003e\u003ctext\u003eSee Action Status for status on job creation\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1bt608b\" sourceRef=\"ServiceTask_0kdk3qk\" targetRef=\"TextAnnotation_10gv7bg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kdk3qk\" id=\"ServiceTask_0kdk3qk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tgjqn3\" id=\"SequenceFlow_1tgjqn3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0r70nx4\" id=\"EndEvent_0r70nx4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"433\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"451\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0tvzby6\" id=\"SequenceFlow_0tvzby6_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0umoxay\" id=\"TextAnnotation_0umoxay_di\"\u003e\u003comgdc:Bounds height=\"51\" width=\"187\" x=\"107\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06cxn04\" id=\"Association_06cxn04_di\"\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10gv7bg\" id=\"TextAnnotation_10gv7bg_di\"\u003e\u003comgdc:Bounds height=\"41\" width=\"212\" x=\"390\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1bt608b\" id=\"Association_1bt608b_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003comgdi:waypoint x=\"462\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "creator_id": "a@example.com",
+      "description": "Schedule a rule/playbook to run in the future for a given task",
+      "export_key": "schedule_a_rule_to_run__task",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1651007138987,
+      "name": "Schedule a Rule/Playbook to Run - Task",
+      "object_type": "task",
+      "programmatic_name": "schedule_a_rule_to_run__task",
+      "tags": [
+        {
+          "tag_handle": "fn_scheduler",
+          "value": null
+        }
+      ],
+      "uuid": "fdcd87e5-d89c-44e7-bf0c-19d44168439b",
+      "workflow_id": 172
     }
   ],
   "workspaces": []

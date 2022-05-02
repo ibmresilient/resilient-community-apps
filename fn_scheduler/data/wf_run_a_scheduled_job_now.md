@@ -18,12 +18,16 @@
 
 ### Pre-Processing Script
 ```python
-inputs.scheduler_label = row['scheduler_label']
+inputs.scheduler_label = row['schedule_label']
 ```
 
 ### Post-Processing Script
 ```python
-None
+if not results.success:
+  incident.addNote("Run Scheduled Job Now failed for job {}: {}".format(row['schedule_label'], results.reason))
+else:
+  msg = "Run Scheduled Job Now suceeeded for job: {}, Rule/Playbook: {}".format(row['schedule_label'], row['rule'].content)
+  incident.addNote(helper.createRichText(msg))
 ```
 
 ---

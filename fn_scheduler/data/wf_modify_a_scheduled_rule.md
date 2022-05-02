@@ -19,8 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.scheduler_label = row['schedule_label']
-inputs.scheduler_type = rule.properties.schedule_type
-inputs.scheduler_type_value = rule.properties.schedule_type_value
+inputs.modify_scheduler_type = rule.properties.modify_schedule_type
+inputs.modify_scheduler_type_value = rule.properties.modify_schedule_type_value
 inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
 ```
 

@@ -32,10 +32,12 @@
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
 - [Function - Scheduled Rule Create](#function---scheduled-rule-create)
+- [Function - Modify Scheduled Job](#function---scheduled-rule-modify)
 - [Function - Scheduled Rule List](#function---scheduled-rule-list)
 - [Function - Scheduled Rule Pause](#function---scheduled-rule-pause)
 - [Function - Scheduled Rule Remove](#function---scheduled-rule-remove)
 - [Function - Scheduled Rule Resume](#function---scheduled-rule-resume)
+- [Function - Run Scheduled Job Now](#function---run-scheduled-job-now)
 - [Data Table - Scheduler Rules](#data-table---scheduler-rules)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -66,6 +68,14 @@ When migrating to v1.0.2 from a previous release, add the following setting to y
 ```
 Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL.
 This is necessary in an App Host environment to retain your schedules outside the app container.
+
+### Notes regarding v2.0.0 Support for Playbooks
+Playbooks have been rolling out across several releases of the SOAR product. Depending on the version of SOAR you are running, different capabilities are exposed. V43.0 represents the minimum version to schedule playbooks. V45.0 represents the mimimum version to schedule playbooks with dynamic input fields values.
+
+| SOAR Version | Capability |
+| ------------ | ---------- |
+| V43.0 | Manual activation type for Playbooks introduced |
+| V45.0 | Activation form for Input fields for Playbooks introduced |
 
 ---
 
@@ -176,14 +186,14 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-A datatable is used to display scheduled rules and to take actions such as pause, resume and remove a rule. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
+A datatable is used to display scheduled rules/playbook and to take actions such as pause, resume and remove a scheduled job. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
 
 ---
 
 ## Function - Scheduled Rule Create
-Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc.
+Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.
 
- ![screenshot: fn-scheduled-rule-create ](./doc/screenshots/combined_worflow_activity_fields.png)
+ ![screenshot: fn-scheduled-rule-create ](./doc/screenshots/create_scheduled_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -194,9 +204,9 @@ Schedule a rule to run on a schedule. This rule will be executed for a given inc
 | `object_id` | `number` | No | `-` | ID for task, artifact, attachment, etc. |
 | `row_id` | `number` | No | `-` | row information for datatable rules |
 | `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule. The incident id is appended to the name for uniqueness |
-| `scheduler_rule_name` | `text` | Yes | `-` | Name of rule to schedule |
-| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
-| `scheduler_type` | `select` | Yes | `-` | type of schedule to create. cron, interval, date or delta |
+| `scheduler_rule_name` | `text` | Yes | `-` | Name of rule/playbook to schedule |
+| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule/playbook in field=value format separated by semicolons. These fields should match the api name for the rule's activity or playbook's activation input fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
+| `scheduler_type` | `select` | Yes | `-` | type of schedule to create. cron, date, delta, or interval |
 | `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
 | `scheduler_is_playbook` | boolean | Yes | Yes | Yes if scheduling a playbook, No for a rule |
 
@@ -252,6 +262,7 @@ inputs.scheduler_rule_name = rule.properties.schedule_rule_name
 inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
 inputs.scheduler_label_prefix = rule.properties.schedule_label_prefix
 inputs.incident_id = incident.id
+inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
 ```
 
 </p>
@@ -261,7 +272,114 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-None
+import java.util.Date as Date
+
+TYPE_LOOKUP = {0: 'Incident', 1: "Task", 4: "Artifact", 5: "Attachment"}
+
+if results.success:
+  job = results.content
+  row = incident.addRow("scheduler_rules")
+  row['reported_on'] = str(Date())
+  row['schedule_label'] = job['id']
+  row['schedule_type'] = job['type']
+  row['incident_id'] = job['args'][0]
+  row['schedule'] = job['value']
+  row['status'] = 'Active'
+  row['next_run_time'] = job['next_run_time']
+  row['rule_type'] = TYPE_LOOKUP.get(job['args'][6], "Datatable")
+  if job['args'][8]:
+    row['rule'] = "<a href='#playbooks/designer/{}'>{}</a>".format(job['args'][5], job['args'][4])
+  else:
+    row['rule'] = "<a href='#customize?tab=actions&id={}'>{}</a>".format(job['args'][5], job['args'][4])
+else:
+  incident.addNote("Schedule a Rule/Playbook failed: {}".format(result.reason))
+```
+
+</p>
+</details>
+
+---
+## Function - Scheduled Rule Modify
+Modify a Scheduled job associated with a rule or playbook. Settings which can be modified include the trigger criteria (cron, delta, date or interval) and the parameters passed to the rule or playbook.
+
+ ![screenshot: modify_scheduled_job ](./doc/screenshots/modify_scheduled_job.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule.  |
+| `modify_scheduler_type` | `select` | No | `-` | type of schedule to create. cron, date, delta, or interval |
+| `modify_scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
+| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule/playbook in field=value format separated by semicolons. These fields should match the api name for the rule activity or playbook's activation input fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'success': True,
+  'content': {
+    'args': (2219, # incident_id
+    None, # object_id
+    None, # row_id
+    u'rule3', # Rule to execute
+    u'Delete rule3', # Scheduled rule Label
+    49, # rule_id
+    0, # object_type_id
+    None,
+    None),
+    'executor': 'default',
+    'max_instances': 1,
+    'func': 'fn_scheduler.components.create_a_scheduled_rule:triggered_job',
+    'id': u'rule3',
+    'next_run_time': 'Oct 03 2019 12:35PM',
+    'name': 'triggered_job',
+    'misfire_grace_time': 1,
+    'trigger': None,
+    'coalesce': False,
+    'version': 1,
+    'kwargs': {
+
+    }
+  },
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row['schedule_label']
+inputs.modify_scheduler_type = rule.properties.modify_schedule_type
+inputs.modify_scheduler_type_value = rule.properties.modify_schedule_type_value
+inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import java.util.Date as Date
+
+if not results.success:
+  incident.addNote("Modify Scheduled Rule/Playbook failed: {}".format(results.reason))
+else:
+  job = results.content
+  row['reported_on'] = str(Date())
+  row['schedule_type'] = job.get('type')
+  row['schedule'] = job.get('value')
+  incident.addNote("Modify Scheduled Rule/Playbook succeeded for: {}".format(job.get('id')))
 ```
 
 </p>
@@ -353,7 +471,7 @@ else:
 ## Function - Scheduled Rule Pause
 Pause a scheduled rule
 
- ![screenshot: fn-scheduled-rule-pause ](./doc/screenshots/pause_a_scheduled_rule.png)
+ ![screenshot: fn-scheduled-rule-pause ](./doc/screenshots/scheduled_job_actions.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -433,9 +551,8 @@ else:
 
 ---
 ## Function - Scheduled Rule Remove
-Stop a schedule
+Stop and remove a scheduled job
 
- ![screenshot: fn-scheduled-rule-remove ](./doc/screenshots/remove_a_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -487,7 +604,6 @@ else:
 ## Function - Scheduled Rule Resume
 Resume a scheduled job
 
- ![screenshot: fn-scheduled-rule-resume ](./doc/screenshots/resume_a_scheduled_rule.png)
 
 <details><summary>Inputs:</summary>
 <p>

@@ -54,7 +54,7 @@ def triggered_job(incident_id, object_id, row_id,
 
     if not resp or resp['end_date'] is not None:
         LOG.warning(u"Incident %s is not found or closed. Removing scheduled rule: %s", incident_id, rule_name)
-        scheduler.remove_job(scheduler_label)
+        scheduler.scheduler.remove_job(scheduler_label)
         return
 
     # make sure the rule is still enabled
@@ -64,7 +64,7 @@ def triggered_job(incident_id, object_id, row_id,
         # remove rules which no longer exist
         LOG.error(u"Rule/Playbook '%s' not found and schedule will be removed.", rule_name)
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
-        scheduler.remove_job(scheduler_label)
+        scheduler.scheduler.remove_job(scheduler_label)
         return
 
     # build url for invoking a rule
@@ -103,7 +103,7 @@ def triggered_job(incident_id, object_id, row_id,
         # is the object removed?
         if "Not Found" in str(err):
             LOG.error("Object not found and schedule will be removed for rule/playbook '%s'", rule_id)
-            scheduler.remove_job(scheduler_label)
+            scheduler.scheduler.remove_job(scheduler_label)
         else:
             LOG.error("An error occurred for rule/playbook '%s': %s", rule_id, str(err))
         (not disable_notes) and add_comment(rest_client, incident_id, u"Error running rule/playbook '{}': {}".format(scheduler_label, str(err)))

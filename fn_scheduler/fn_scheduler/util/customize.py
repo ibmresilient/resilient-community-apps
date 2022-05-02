@@ -67,7 +67,7 @@ def customization_data(client=None):
         - Pause a Scheduled Job
         - Remove a Scheduled Job
         - Resume a Scheduled Job
-        - Run a Scheduled Job Now
+        - Run Scheduled Job Now
         - Schedule a Rule/Playbook to Run
         - Schedule a Rule/Playbook to Run - Artifact
         - Schedule a Rule/Playbook to Run - Task
