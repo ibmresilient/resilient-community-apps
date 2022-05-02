@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -51,9 +53,9 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.debug(job_state)
         changes = {}
         # changes to scheduler_type and value?
-        if inputs.get("scheduler_type") and inputs.get("scheduler_type_value"):
+        if inputs.get("modify_scheduler_type") and inputs.get("modify_scheduler_type_value"):
             # validate the type and type_value
-            changes['trigger'] = self.res_scheduler.build_trigger(inputs.get("scheduler_type"), inputs.get("scheduler_type_value"))
+            changes['trigger'] = self.res_scheduler.build_trigger(inputs.get("modify_scheduler_type"), inputs.get("modify_scheduler_type_value"))
 
         if inputs.get("scheduler_rule_parameters"):
             rule_params = self.res_scheduler.validate_rule_parameters(inputs.get("scheduler_rule_parameters"))
@@ -62,7 +64,7 @@ class FunctionComponent(AppFunctionComponent):
             incident_data = list(job_state.get('args', ()))
             incident_data[7] = rule_params
             changes['args'] = incident_data
-            changes['kwargs'] = incident_data # values repeated here
+            changes['kwargs'] = rule_params # values repeated here
 
         self.LOG.debug(changes)
         job.modify(**changes)
