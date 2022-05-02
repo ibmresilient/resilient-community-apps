@@ -22,8 +22,10 @@ setup(
     name='fn_ldap_utilities',
     version='1.2.0',
     license='MIT',
+    display_name='SOAR LDAP Utilities',
     author='IBM SOAR',
     description="SOAR LDAP Utilities'",
+    url='https://github.com/ibmresilient/resilient-community-apps',
     long_description="SOAR components to allow reading and manipulation of your LDAP Server'",
     install_requires=[
         'resilient_circuits>=42.0.0',
@@ -31,7 +33,7 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    python_requires='>=3',
+    python_requires='>=3.6',
     platforms='any',
     classifiers=[
         'Programming Language :: Python',

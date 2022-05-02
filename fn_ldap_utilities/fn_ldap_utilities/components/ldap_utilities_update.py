@@ -52,13 +52,15 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            ldap = LDAPDomains(self.opts)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
             yield StatusMessage("Appconfig Settings OK")
 
             try:
                 # Try converting input to an array
                 input_ldap_attribute_values = literal_eval(input_ldap_attribute_values_asString)
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError(
                     """input_ldap_attribute_values must be a string repersenation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
 
@@ -79,7 +81,8 @@ class FunctionComponent(ResilientComponent):
                 # Perform the Modify operation
                 res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, input_ldap_attribute_values)]})
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
 
             finally:

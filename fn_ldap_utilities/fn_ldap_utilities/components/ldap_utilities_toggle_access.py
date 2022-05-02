@@ -49,7 +49,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            ldap = LDAPDomains(self.opts)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
             yield StatusMessage("Appconfig Settings OK")
 
             if not helper.LDAP_IS_ACTIVE_DIRECTORY:
@@ -86,7 +87,8 @@ class FunctionComponent(ResilientComponent):
                 # Perform the Modify operation
                 res = c.modify(input_ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
 
             finally:

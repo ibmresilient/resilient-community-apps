@@ -54,7 +54,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Function Inputs OK")
 
             # Instansiate helper (which gets appconfigs from file)
-            helper = LDAPUtilitiesHelper(LDAPDomains.ldap_domain_name_test(ldap_domain_name, self.domains_list))
+            ldap = LDAPDomains(self.opts)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
             yield StatusMessage("Appconfig Settings OK")
 
             # Instansiate LDAP Server and Connection
@@ -81,7 +82,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     res = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
 
-            except Exception:
+            except Exception as err:
+                LOG.debug("Error: {}".format(err))
                 raise ValueError("Could not change password. Check ldap_dn are valid")
 
             finally:
