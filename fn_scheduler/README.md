@@ -114,11 +114,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `35.2.32`.
+* SOAR platform >= `41.2`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `35.2.32`.
+* SOAR platform >= `41.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=32.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -136,7 +136,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.5.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -156,8 +156,8 @@ Additional package dependencies may exist for each of these packages:
 * APScheduler >= 3.9;python_version >= '3.6'
 * python-dateutil>=2.8.1
 * pytz
-* resilient_circuits>=32.0.0
-* resilient_lib>=33.0.189
+* resilient_circuits>=42.0
+* resilient_lib>=42.0
 * SQLAlchemy>=1.3.8
 
 ---
