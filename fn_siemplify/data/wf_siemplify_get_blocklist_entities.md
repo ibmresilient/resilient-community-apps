@@ -41,6 +41,7 @@ if results.success:
     row['entity'] = entity['entityIdentifier']
     row['entity_type'] = entity['entityType']
     row['environments'] = ", ".join(entity['environments'])
+    row['entity_id'] = entity['id']
 else:
   incident.addNote("Siemplify Get Blocklist Entities failed: {}".format(results.reason))
 

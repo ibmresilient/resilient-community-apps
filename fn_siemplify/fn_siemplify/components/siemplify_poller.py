@@ -228,7 +228,7 @@ class SiemplifyPollerComponent(ResilientComponent):
                                                 )
 
                     # SYNC Comments
-                    new_comments = self.soar_common.filter_resilient_comments(soar_inc_id, case.get('insights', []))
+                    new_comments = self.soar_common.filter_soar_comments(soar_inc_id, case.get('insights', []))
                     LOG.info(new_comments)
                     for comment in new_comments:
                         self.soar_common.create_incident_comment(soar_inc_id, comment['title'], comment['content'])

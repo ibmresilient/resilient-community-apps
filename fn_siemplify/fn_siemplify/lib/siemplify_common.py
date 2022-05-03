@@ -22,9 +22,11 @@ API_VERSION = "api/external/v1"
 All_BLOCKLIST_URL = "settings/GetAllModelBlackRecords"
 FILTERED_BLOCKLIST_URL = "settings/GetBlackListDetails"
 ADDUPDATE_BLOCKLIST_URL = "settings/AddOrUpdateModelBlackRecords"
+REMOVE_BLOCKLIST_URL = "settings/RemoveModelBlackRecords"
 ALL_CUSTOMLIST_URL = "settings/GetTrackingListRecords"
 FILTERED_CUSTOMLIST_URL = "settings/GetTrackingListRecordsFiltered"
 ADDUPDATE_CUSTOMLIST_URL = "settings/AddOrUpdateTrackingListRecords"
+REMOVE_CUSTOMLIST_URL = "settings/RemoveTrackingListRecords"
 GET_VERSION_URL = "settings/GetSystemVersion"
 
 CREATE_CASE_URL = "cases/CreateManualCase"
@@ -378,6 +380,26 @@ class SiemplifyCommon():
         # "alertGroupIdentifier":"Manual Case_ff8ec6bc-1ba4-4ae7-a114-333c3a7e34a4",
 
         return self._make_call("POST", ATTACH_PLAYBOOK_URL, payload)
+
+    def remove_list_entity(self, inputs):
+        """remove an entity from either the Blocklist or Custom Lists
+
+        Args:
+            inputs (dict): fields "siemplify_entity_id" and "siemplify_entity_list"
+
+        Returns:
+            dict, str: results, err_msg
+        """
+
+        payload = {
+            "id": str(inputs.get("siemplify_entity_id"))
+        }
+        LOG.debug(payload)
+
+        if inputs.get("siemplify_entity_list") == "Block List":
+            return self._make_call("POST", REMOVE_BLOCKLIST_URL, payload)
+        else:
+            return self._make_call("POST", REMOVE_CUSTOMLIST_URL, payload)
 
     def get_version(self):
         # Get the version of the Siemplify platform. Used in Selftest

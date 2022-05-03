@@ -9,6 +9,7 @@
     "siemplify_assignee": "{{ assignedUserName }}",
     "siemplify_stage": "{{ stage }}",
     "siemplify_is_important": {{ isImportant|tojson }},
-    "siemplify_priority": {{ priority }}
+    "siemplify_environment": "{{ environment }}",
+    "siemplify_priority": "{{ priority | string | resilient_substitute('{"25": "Low", "50":"Medium", "80":"High", "100":"Critical", "DEFAULT": "Medium"}') }}"
   }
 }

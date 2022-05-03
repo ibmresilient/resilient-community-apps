@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "mock_key": "Mock Value!"
+  },
+  "raw": null,
+  "inputs": {
+    "siemplify_entity_id": 12,
+    "siemplify_entity_list": "Custom List"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-siemplify",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 351,
+    "timestamp": "2022-05-03 17:22:37"
+  }
+}

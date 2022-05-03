@@ -42,6 +42,7 @@ if results.success:
     row['entity'] = entity['entityIdentifier']
     row['entity_type'] = entity['category']
     row['environments'] = ", ".join(entity['environments'])
+    row['entity_id'] = entity['id']
 else:
   incident.addNote("Siemplify Get Custom List Entities failed: {}".format(results.reason))
 ```

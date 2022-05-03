@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_siemplify",
         "message_destinations": [u"fn_siemplify"],
-        "functions": [u"siemplify_add_playbook", u"siemplify_addupdate_entity_to_blocklist", u"siemplify_addupdate_entity_to_customlist", u"siemplify_close_case", u"siemplify_get_blocklist_entities", u"siemplify_get_customlist_entities", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
-        "workflows": [u"siemplify_add_playbook", u"siemplify_addupdate_entity_to_blocklist", u"siemplify_addupdate_entity_to_customlist", u"siemplify_close_case", u"siemplify_get_blocklist_entities", u"siemplify_get_customlist_entities", u"siemplify_m_sync_case", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
-        "actions": [u"Siemplify Add Playbook", u"Siemplify Auto Close Case", u"Siemplify Auto Sync Artifact", u"Siemplify Auto Sync Attachment", u"Siemplify Auto Sync Case", u"Siemplify Auto Sync Comment", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment", u"Siemplify Sync Task", u"Siemplify: Add/Update Entity to Blocklist", u"Siemplify: Add/Update Entity to Custom List", u"Siemplify: Get Blocklist Entities", u"Siemplify: Get Custom List Entities"],
+        "functions": [u"siemplify_add_playbook", u"siemplify_addupdate_entity_to_blocklist", u"siemplify_addupdate_entity_to_customlist", u"siemplify_close_case", u"siemplify_get_blocklist_entities", u"siemplify_get_customlist_entities", u"siemplify_remove_list_entry", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
+        "workflows": [u"siemplify_add_playbook", u"siemplify_addupdate_entity_to_blocklist", u"siemplify_addupdate_entity_to_customlist", u"siemplify_close_case", u"siemplify_get_blocklist_entities", u"siemplify_get_customlist_entities", u"siemplify_m_sync_case", u"siemplify_remove_list_entry", u"siemplify_sync_artifact", u"siemplify_sync_attachment", u"siemplify_sync_case", u"siemplify_sync_comment", u"siemplify_sync_task"],
+        "actions": [u"Siemplify Add Playbook", u"Siemplify Auto Close Case", u"Siemplify Auto Sync Artifact", u"Siemplify Auto Sync Attachment", u"Siemplify Auto Sync Case", u"Siemplify Auto Sync Comment", u"Siemplify Remove Blocklist/Custom List Entity", u"Siemplify Sync Artifact", u"Siemplify Sync Case", u"Siemplify Sync Comment", u"Siemplify Sync Task", u"Siemplify: Add/Update Entity to Blocklist", u"Siemplify: Add/Update Entity to Custom List", u"Siemplify: Get Blocklist Entities", u"Siemplify: Get Custom List Entities"],
         "incident_fields": [u"siemplify_alert_id", u"siemplify_assignee", u"siemplify_case_id", u"siemplify_case_link", u"siemplify_environment", u"siemplify_is_important", u"siemplify_priority", u"siemplify_stage", u"siemplify_tags"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -50,6 +50,7 @@ def customization_data(client=None):
         - siemplify_close_case
         - siemplify_get_blocklist_entities
         - siemplify_get_customlist_entities
+        - siemplify_remove_list_entry
         - siemplify_sync_artifact
         - siemplify_sync_attachment
         - siemplify_sync_case
@@ -63,6 +64,7 @@ def customization_data(client=None):
         - siemplify_get_blocklist_entities
         - siemplify_get_customlist_entities
         - siemplify_m_sync_case
+        - siemplify_remove_list_entry
         - siemplify_sync_artifact
         - siemplify_sync_attachment
         - siemplify_sync_case
@@ -75,6 +77,7 @@ def customization_data(client=None):
         - Siemplify Auto Sync Attachment
         - Siemplify Auto Sync Case
         - Siemplify Auto Sync Comment
+        - Siemplify Remove Blocklist/Custom List Entity
         - Siemplify Sync Artifact
         - Siemplify Sync Case
         - Siemplify Sync Comment
