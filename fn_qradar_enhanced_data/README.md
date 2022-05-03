@@ -110,6 +110,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Org Data | Read |
   | Function | Read |
   | Layouts | Read, Edit |
+  | Incident | Edit |
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
