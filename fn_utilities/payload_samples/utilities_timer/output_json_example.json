@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "success": false,
+  "reason": null,
+  "content": {
+    "instance_id": 124,
+    "status": "running",
+    "start_date": 1648133974233,
+    "end_date": null,
+    "reason": null,
+    "is_terminated": false
+  },
+  "raw": "{\"instance_id\": 124, \"status\": \"running\", \"start_date\": 1648133974233, \"end_date\": null, \"reason\": null, \"is_terminated\": false}",
+  "inputs": {
+    "utilities_time": "1m"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-utilities",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 60921,
+    "timestamp": "2022-03-24 11:15:53"
+  }
+}

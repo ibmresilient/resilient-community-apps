@@ -81,45 +81,44 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 12/2020 | Initial Release |
-| 1.1.0 | 07/2021 | Support for Flows and QRoc |
-| 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
-| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
-| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
-| 1.2.0 | 01/2022 | Allow multiple QRadar instances |
-| 1.2.1 | 03/2022 | Bug fix |
-| 1.2.2 | 04/2022 | Delete Search on time-out |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
+| 1.2.2 | 04/2022 | Delete search on time-out |
+| 1.2.1 | 03/2022 | Bug fix |
+| 1.2.0 | 01/2022 | Allow multiple QRadar instances |
+| 1.1.3 | 01/2022 | Support for latest Analyst Workflow versions |
+| 1.1.2 | 10/2021 | Update to use latest resilient-circuits |
+| 1.1.1 | 07/2021 | Fixed selftest failing when using cafile |
+| 1.1.0 | 07/2021 | Support for Flows and QRoc |
+| 1.0.0 | 12/2020 | Initial Release |
 
-For customers upgrading from a pervious release, the app.config file must be manually edited to add labels to each server configuration.
+* For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.2.0 Changes](#1.2.0-changes)
+---
 
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**QRadar Enhanced Offense Data Migration**
 
-
-This app fetches the data associated with the QRadar Offense and provides live links back to QRadar, thereby simplifying case management.
+The QRadar Enhanced Offense Data Migration (EDM) app fetches a more complete view of data associated with a QRadar offense and provides live links within the SOAR case back to QRadar, thereby simplifying case management.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Offense data available in a SOAR "QR Offense Details" tab as part of the Case to simplify reviewing information in one central/consistent location.
-* Access to detailed Offense information by following the hotlink from the SOAR UI to QRadar Analyst Workflow.
-* Centralize QRadar Offense IoC's associated with Security Events under Artifacts in order to use SOAR enabled integrations to enrich and remediate cases and provide visibility to the response team.
+* Offense data available in a SOAR incident or case "QR Offense Details" tab to simplify reviewing information in one central and consistent location.
+* Access to detailed offense information by links in SOAR to the QRadar Analyst Workflow.
+* Centralize QRadar Offense IoC's associated with Security Events in the SOAR Artifacts tab, where SOAR enabled integrations can enrich and remediate cases and provide visibility to the response team.
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -127,34 +126,35 @@ This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.7058`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.7058`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=41.1.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Layouts | Read , Edit |
+  | Layouts | Read, Edit |
+  | Incident | Edit |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.5.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -172,7 +172,7 @@ The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workf
 
 ### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
-* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation .
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
@@ -189,9 +189,18 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | No | `60` | ** |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 
+#### 1.2.0 Changes
+Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
+
+For enterprises with more than one QRadar instance, each instance will have it's own section header, such as `[fn_qradar_integration:qradar_instance_label]` where `qradar_instance_label` represents the message destination when QRadar Enhanced Data Migration (EDM) is paired with our QRadar Plugin for offense escalation. For instance the section header `[fn_qradar_integration:qradar_9_21_118_173_1110]` references the message destination `qradar_9_21_118_173_1110` created when the QRadar Plugin is configured for your IBM SOAR platform.
+
+For other configurations, `qradar_instance_label` can represent any label helpful to define you QRadar environment. Be aware that modifications to the EDM workflows may be needed to correctly pass this label through the `qradar_label` function input field.
+
+If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `qradar_label` function input field.
+
 ### MSSP Configuration
 
-For this app, Circuits needs to be run on the config org so that the tab is created in the config org via an API call and then afterwards, the config push is run to push to the child orgs .
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 <!--
@@ -199,25 +208,23 @@ For this app, Circuits needs to be run on the config org so that the tab is crea
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
- Upon installation, this app adds a tab comprising of the custom fields and data tables to the Case management, if the Case has an associated Offense ID. Each of the fields and data tables have information associated with the Offense and a few have live links to QRadar Analyst Workflow. The data here is populated during the initial escalation of an Offense to a case.
+Upon installation, this app adds a tab to those incidents or cases which are associated with a QRadar offense. The tab consists of custom fields and data tables with information associated with the offense. A few have links back to QRadar's Analyst Workflow. The data is populated during the initial escalation of an offense through this app.
 
- All screenshots are examples of using the app with Cloud Pak.
+All screenshots are examples of using the app with Cloud Pak.
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
+![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
 
 ## Function - QRadar Offense Summary
-Fetch QRadar Offense Details.
-
+Fetch QRadar offense Details.
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `qradar_query_type` | `text` | No | `-` | - |
 
@@ -352,7 +359,7 @@ for event in results.rules_data:
 
 ---
 ## Function - QRadar Top Events
-Search QRadar Top events for the given Offense ID.
+Search QRadar Top events for the given offense ID.
 
 
 <details><summary>Inputs:</summary>
@@ -360,7 +367,7 @@ Search QRadar Top events for the given Offense ID.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config |
+| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
 | `qradar_query_type` | `text` | No | `-` | - |
 | `qradar_search_param1` | `text` | No | `-` | - |
@@ -443,7 +450,7 @@ inputs.soar_incident_id = incident.id
 
 # QRadar graphql search look back time default is 5 days
 inputs.qradar_search_param7 = "5 days"
-# If the poller is running and the qr_last_updated_time is changed the 
+# If the poller is running and the qr_last_updated_time is changed the
 # the QRadar graphql look back time will change to 2 days
 if incident.properties.qr_last_updated_time != incident.create_date:
   inputs.qradar_search_param7 = "2 days"
@@ -464,12 +471,12 @@ link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/events?filt
 
 for event in results.events:
   qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = event.categoryname
-  qradar_event.flow_count = event.flowcount
-  qradar_event.last_packet_time = int(event.lastpackettime)
-  qradar_event.sourceip_count = event.sourceipcount
-  qradar_event.destinationip_count = event.destinationipcount
-  qradar_event.reported_time = results.current_time
+  qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
+  qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
+  qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
+  qradar_event.event_time =  event.eventtime
+  qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
+  qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
 ```
 
 </p>
@@ -697,7 +704,7 @@ for type in artifact_types:
 
 ---
 ## Data Table - QR Destination IPs (First 10)
-The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the Offense.
+The following is an example of QRadar Destination IP data table populated with the information related to Destination IPs associated with the offense.
 
  ![screenshot: dt-qr-destination-ips-first-10-events](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
 
@@ -715,7 +722,7 @@ qr_top_destination_ips
 
 ---
 ## Data Table - QR Triggered Rules
-The following is an example of QRadar Triggered Rules data table populated with the information related to Contributing Rules for the Offense.
+The following is an example of QRadar Triggered Rules data table populated with the information related to Contributing Rules for the offense.
 
  ![screenshot: dt-qr-triggered-rules](./doc/screenshots/dt-qr-triggered-rules.png)
 
@@ -736,7 +743,7 @@ qr_triggered_rules
 
 ---
 ## Data Table - QR Categories
-The following is an example of QRadar Categories data table populated with the information related to Categories associated with the Offense.
+The following is an example of QRadar Categories data table populated with the information related to Categories associated with the offense.
 
  ![screenshot: dt-qr-categories](./doc/screenshots/dt-qr-categories.png)
 
@@ -758,7 +765,7 @@ qr_categories
 
 ---
 ## Data Table - QR Assets
-The following is an example of QRadar Assets data table populated with the Assets information related to the Offense.
+The following is an example of QRadar Assets data table populated with the Assets information related to the offense.
 
  ![screenshot: dt-qr-assets](./doc/screenshots/dt-qr-assets.png)
 
@@ -780,7 +787,7 @@ qr_assets
 
 ---
 ## Data Table - QR Source IPs (First 10 )
-The following is an example of QRadar Source IP data table populated with the information related to Source IPs associated with the Offense.
+The following is an example of QRadar Source IP data table populated with the information related to Source IPs associated with the offense.
 
  ![screenshot: dt-qr-source-ips-first-10-events](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
 
@@ -803,7 +810,7 @@ qr_top_source_ips
 
 ---
 ## Data Table - QR Events (First 10 Events)
-The following is an example of QRadar Events data table populated with the information related to first 10 events associated with the Offense.
+The following is an example of QRadar Events data table populated with the information related to first 10 events associated with the offense.
 
  ![screenshot: dt-qr-events-first-10-events](./doc/screenshots/dt-qr-events-first-10-events.png)
 
@@ -826,7 +833,7 @@ qr_offense_top_events
 
 ---
 ## Data Table - QR Flows
-The following is an example of QRadar Flows data table populated with the information related to flows associated with the Offense.
+The following is an example of QRadar Flows data table populated with the information related to flows associated with the offense.
 
  ![screenshot: dt-qr-flows](./doc/screenshots/dt-qr-flows.png)
 
@@ -853,7 +860,7 @@ qr_flows
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar Offense is assigned to. |
+| QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar offense is assigned to. |
 | QR Credibility | `qr_credibility` | `textarea` | `properties` | - | Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source. |
 | QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
 | QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
@@ -885,7 +892,7 @@ qr_flows
 | QRadar Enhanced Data Poller | incident | `qradar_triggered_rules` |
 | QRadar Enhanced Data Refresh | incident | `qradar_triggered_rules` |
 
-The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the Offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
+The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
 ## Version 1.2.0 Changes
@@ -895,7 +902,7 @@ When the manual refresh rule is run the search will look back 2 days unless the 
 When the poller is running it will default to search back 2 days.
 
 ### QRadar Enhanced Data Refresh Manual Rule
-When this manual rule is run it will run all of the workflows to update the incident. This will also set the case field, QR Incident Last Updated Time, 
+When this manual rule is run it will run all of the workflows to update the incident. This will also set the case field, QR Incident Last Updated Time,
 to the time this rule was run. If this rule is run while the poller is being used this will cause the poller to run all of the workflows. It is advised to either using the poller for automatic case refresh or use the manual refresh capability, but not both.
 
 ### Configuring Real time update to Offenses
@@ -907,6 +914,35 @@ The value of the polling_interval setting should be an integer of the amount of 
 Make sure at the time of escalation the field qradar_destination is mapped to have the appropriate value ( same as label in app.config).
 If value not present at the time of case creation - have a rule on Incident creation that runs a script to populate the qradar_destination value.
 
+## How to configure to use multiple QRadar servers that have the QRadar-Plugin installed
+1. On the QRadar server, go to the configuration for the IBM QRadar SOAR Plugin.
+2. Copy the string from QRadar Destination Name.
+![screenshot: qradar-plugin-config](./doc/screenshots/qradar-plugin-config.png)
+3. On SOAR, locate QRadar Enhanced Data Migration in the Apps tab and go to its app.config file in App Settings.
+4. Locate [fn_qradar_enhanced_data:SOAR_Plugin_Destination_Name1] under File Content then replace `SOAR_Plugin_Destination_Name1` with the string copied in step 2.
+![screenshot: soar-qr-config](./doc/screenshots/soar-qr-config.png)
+5. Update the host, username, and other settings in this section with the correct data.
+
+## How to configure to use a single QRadar Server
+To use only a single server there are two ways this can be configured
+1. Use the configuration used in QRadar Enhanced Data Migration versions prior to V1.2.0
+![screenshot: qr-single-server](./doc/screenshots/qr-single-server.png)
+2. Either keep the label, SOAR_Plugin_Destination_Name1, or change it (The label does not matter when only one server is configured)
+![screenshot: qr-single-label-server](./doc/screenshots/qr-single-label-server.png)
+
+## Incident fields that are required for the example automatic rule to run
+The incident fields, qradar_id and qradar_destination are required to have values in order for the example automatic rule to be run.
+
+## Creating workflows when server/servers in app.config are labeled
+The function input field `qradar_label` is required when QRadar server/servers in the app.config are labeled. In the example workflows pre-process scripts the
+input field `qradar_label` is defined the following way,
+```python
+inputs.qradar_label = incident.properties.qradar_destination
+```
+
+Example app.config server label: [fn_qradar_integration:qradar_4]
+  `qradar_4` will be set to `inputs.qradar_label` in the above example.
+
 ## For Customers that are having performance issues related to the poller
 To resolve some performance issues that relate to the poller, it is advised to increase the num_workers setting for the [resilient] section in the app.config file from the default value of 10.
 The max value of num_workers is 500.
@@ -915,4 +951,4 @@ The max value of num_workers is 500.
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM supported App. For assistance - https://ibm.com/mysupport.
+This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.

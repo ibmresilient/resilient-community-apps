@@ -1,10 +1,16 @@
 include README.md
 include Dockerfile
 include entrypoint.sh
-include fn_jira/util/*
+recursive-include fn_jira/util *
 include fn_jira/lib/*
 include fn_jira/LICENSE
 include doc/*
 include doc/screenshots/*
+include apikey_permissions.txt
+include icons/*.png
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+recursive-include payload_samples/*/ *.json
+
+global-exclude *.bak

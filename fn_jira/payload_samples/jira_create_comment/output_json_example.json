@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "self": "https://myjira.com/rest/api/2/issue/1160121/comment/353008",
+    "id": "353008",
+    "author": {
+      "self": "https://myjira.com/rest/api/2/user?username=user%40example.com",
+      "name": "user@example.com",
+      "key": "JIRAUSER75501",
+      "emailAddress": "user@example.com",
+      "avatarUrls": {
+        "48x48": "https://myjira.com/secure/useravatar?avatarId=10122",
+        "24x24": "https://myjira.com/secure/useravatar?size=small&avatarId=10122",
+        "16x16": "https://myjira.com/secure/useravatar?size=xsmall&avatarId=10122",
+        "32x32": "https://myjira.com/secure/useravatar?size=medium&avatarId=10122"
+      },
+      "displayName": "User",
+      "active": true,
+      "timeZone": "America/Chicago"
+    },
+    "body": "An example comment",
+    "updateAuthor": {
+      "self": "https://myjira.com/rest/api/2/user?username=user%40example.com",
+      "name": "user@example.com",
+      "key": "JIRAUSER75501",
+      "emailAddress": "user@example.com",
+      "avatarUrls": {
+        "48x48": "https://myjira.com/secure/useravatar?avatarId=10122",
+        "24x24": "https://myjira.com/secure/useravatar?size=small&avatarId=10122",
+        "16x16": "https://myjira.com/secure/useravatar?size=xsmall&avatarId=10122",
+        "32x32": "https://myjira.com/secure/useravatar?size=medium&avatarId=10122"
+      },
+      "displayName": "User",
+      "active": true,
+      "timeZone": "America/Chicago"
+    },
+    "created": "2022-03-21T10:38:23.567-0500",
+    "updated": "2022-03-21T10:38:23.567-0500"
+  },
+  "raw": "{\"self\": \"https://myjira.com/rest/api/2/issue/1160121/comment/353008\", \"id\": \"353008\", \"author\": {\"self\": \"https://myjira.com/rest/api/2/user?username=user%40example.com\", \"name\": \"user@example.com\", \"key\": \"JIRAUSER75501\", \"emailAddress\": \"user@example.com\", \"avatarUrls\": {\"48x48\": \"https://myjira.com/secure/useravatar?avatarId=10122\", \"24x24\": \"https://myjira.com/secure/useravatar?size=small&avatarId=10122\", \"16x16\": \"https://myjira.com/secure/useravatar?size=xsmall&avatarId=10122\", \"32x32\": \"https://myjira.com/secure/useravatar?size=medium&avatarId=10122\"}, \"displayName\": \"User\", \"active\": true, \"timeZone\": \"America/Chicago\"}, \"body\": \"An example comment\", \"updateAuthor\": {\"self\": \"https://myjira.com/rest/api/2/user?username=user%40example.com\", \"name\": \"user@example.com\", \"key\": \"JIRAUSER75501\", \"emailAddress\": \"user@example.com\", \"avatarUrls\": {\"48x48\": \"https://myjira.com/secure/useravatar?avatarId=10122\", \"24x24\": \"https://myjira.com/secure/useravatar?size=small&avatarId=10122\", \"16x16\": \"https://myjira.com/secure/useravatar?size=xsmall&avatarId=10122\", \"32x32\": \"https://myjira.com/secure/useravatar?size=medium&avatarId=10122\"}, \"displayName\": \"User\", \"active\": true, \"timeZone\": \"America/Chicago\"}, \"created\": \"2022-03-21T10:38:23.567-0500\", \"updated\": \"2022-03-21T10:38:23.567-0500\"}",
+  "inputs": {
+    "jira_issue_id": "HYD-8",
+    "jira_comment": "<div class=\"rte\"><div>An example comment</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-jira",
+    "package_version": "2.1.0",
+    "host": "myhost",
+    "execution_time_ms": 33211,
+    "timestamp": "2022-03-21 11:38:24"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "match_highlights": [
+        {
+          "match_field_name": "Name",
+          "match_field_value": "<ResilientHighlight>A</ResilientHighlight> <ResilientHighlight>Test</ResilientHighlight> <ResilientHighlight>Attachment</ResilientHighlight> <ResilientHighlight>Name.txt</ResilientHighlight>"
+        }
+      ],
+      "score": 3.0498474,
+      "result": {
+        "actions": [],
+        "content_type": "text/plain",
+        "created": 1648133884254,
+        "creator_id": {
+          "display_name": "Admin User",
+          "id": 1,
+          "name": "admin@example.com",
+          "type": "user"
+        },
+        "id": 18,
+        "inc_id": 2102,
+        "inc_name": "Incident generated from email \"Fwd: Malware test\" via mailbox fn.outbound.email",
+        "inc_owner": {
+          "display_name": "Admin User",
+          "id": 1,
+          "name": "admin@example.com",
+          "type": "user"
+        },
+        "name": "A Test Attachment Name.txt",
+        "size": 9,
+        "task_at_id": null,
+        "task_custom": null,
+        "task_id": null,
+        "task_members": null,
+        "task_name": null,
+        "type": "incident",
+        "uuid": "17306d5c-53af-405c-9cc4-4c5f383d96f9",
+        "vers": 5
+      },
+      "type_id": "attachment",
+      "org_id": 201,
+      "obj_id": 18,
+      "obj_name": "A Test Attachment Name.txt",
+      "obj_creator_id": 1,
+      "obj_create_date": 1648133884254,
+      "inc_id": 2102,
+      "inc_name": "Incident generated from email \"Fwd: Malware test\" via mailbox fn.outbound.email",
+      "inc_owner_id": 1,
+      "task_id": null,
+      "task_name": null,
+      "match_field_name": "Name",
+      "match_field_value": "<ResilientHighlight>A</ResilientHighlight> <ResilientHighlight>Test</ResilientHighlight> <ResilientHighlight>Attachment</ResilientHighlight> <ResilientHighlight>Name.txt</ResilientHighlight>"
+    }
+  ]
+}
