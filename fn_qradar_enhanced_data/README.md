@@ -17,33 +17,62 @@
 # QRadar Enhanced Offense Data Migration
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [QRadar Requirements](#qradar-requirements)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [MSSP Configuration](#mssp-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - QRadar Offense Summary](#function---qradar-offense-summary)
-- [Function - QRadar Top Events](#function---qradar-top-events)
-- [Script - Create Artifact from Destination IP info](#script---create-artifact-from-destination-ip-info)
-- [Script - Create Artifact from Source IP info](#script---create-artifact-from-source-ip-info)
-- [Script - Create Artifact from Events info](#script---create-artifact-from-events-info)
-- [Script - Create Artifact from Assets info](#script---create-artifact-from-assets-info)
-- [Script - Create Artifact from Flows info](#script---create-artifact-from-flows-info)
-- [Data Table - QR Destination IPs (First 10 Events)](#data-table---qr-destination-ips-first-10-events)
-- [Data Table - QR Triggered Rules](#data-table---qr-triggered-rules)
-- [Data Table - QR Categories](#data-table---qr-categories)
-- [Data Table - QR Assets](#data-table---qr-assets)
-- [Data Table - QR Source IPs (First 10 Events)](#data-table---qr-source-ips-first-10-events)
-- [Data Table - QR Events (First 10 Events)](#data-table---qr-events-first-10-events)
-- [Data Table - QR Flows](#data-table---qr-flows)
+- [QRadar Enhanced Offense Data Migration](#qradar-enhanced-offense-data-migration)
+  - [Table of Contents](#table-of-contents)
+  - [- Troubleshooting & Support](#--troubleshooting--support)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [* Centralize QRadar Offense IoC's associated with Security Events under Artifacts in order to use SOAR enabled integrations to enrich and remediate cases and provide visibility to the response team.](#-centralize-qradar-offense-iocs-associated-with-security-events-under-artifacts-in-order-to-use-soar-enabled-integrations-to-enrich-and-remediate-cases-and-provide-visibility-to-the-response-team)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [QRadar Requirements](#qradar-requirements)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+    - [MSSP Configuration](#mssp-configuration)
+    - [Custom Layouts](#custom-layouts)
+  - [Function - QRadar Offense Summary](#function---qradar-offense-summary)
+  - [Function - QRadar Top Events](#function---qradar-top-events)
+  - [Script - Create Artifact from Destination IP info](#script---create-artifact-from-destination-ip-info)
+  - [Script - Create Artifact from Source IP info](#script---create-artifact-from-source-ip-info)
+  - [Script - Create Artifact from Events info](#script---create-artifact-from-events-info)
+  - [Script - Create Artifact from Assets info](#script---create-artifact-from-assets-info)
+  - [Script - Set Last Updated Time](#script---set-last-updated-time)
+  - [Script - Create Artifact from Flows info](#script---create-artifact-from-flows-info)
+  - [Data Table - QR Destination IPs (First 10)](#data-table---qr-destination-ips-first-10)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Data Table - QR Triggered Rules](#data-table---qr-triggered-rules)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
+  - [Data Table - QR Categories](#data-table---qr-categories)
+      - [API Name:](#api-name-2)
+      - [Columns:](#columns-2)
+  - [Data Table - QR Assets](#data-table---qr-assets)
+      - [API Name:](#api-name-3)
+      - [Columns:](#columns-3)
+  - [Data Table - QR Source IPs (First 10 )](#data-table---qr-source-ips-first-10-)
+      - [API Name:](#api-name-4)
+      - [Columns:](#columns-4)
+  - [Data Table - QR Events (First 10 Events)](#data-table---qr-events-first-10-events)
+      - [API Name:](#api-name-5)
+      - [Columns:](#columns-5)
+  - [Data Table - QR Flows](#data-table---qr-flows)
+      - [API Name:](#api-name-6)
+      - [Columns:](#columns-6)
+  - [Custom Fields](#custom-fields)
+  - [Rules](#rules)
+  - [Version 1.2.0 Changes](#version-120-changes)
+    - [QRadar API Searches](#qradar-api-searches)
+    - [QRadar Enhanced Data Refresh Manual Rule](#qradar-enhanced-data-refresh-manual-rule)
+    - [Configuring Real time update to Offenses](#configuring-real-time-update-to-offenses)
+  - [For Customers who do not use the QRadar-Plugin](#for-customers-who-do-not-use-the-qradar-plugin)
+  - [For Customers that are having performance issues related to the poller](#for-customers-that-are-having-performance-issues-related-to-the-poller)
+  - [Troubleshooting & Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
@@ -57,7 +86,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.3 | 04/2022 | Documentation updates and bug fix |
+| 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 | 1.2.2 | 04/2022 | Delete search on time-out |
 | 1.2.1 | 03/2022 | Bug fix |
 | 1.2.0 | 01/2022 | Allow multiple QRadar instances |
@@ -156,6 +185,9 @@ The following table provides the settings you need to configure the app. These s
 | **qradartoken** | Yes | `cb971c75-b2f9-4445-aaae-xxxxxxxxxxxx` | *SEC Token generated in QRadar* |
 | **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
+| **polling_interval** | No | `600` | *Time in seconds to wait between each poller run* |
+| **polling_lookback** | No | `60` | ** |
+| **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
@@ -297,6 +329,8 @@ results = {
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_triggered_rules"
+inputs.soar_incident_id = incident.id
 ```
 
 </p>
@@ -317,7 +351,7 @@ for event in results.rules_data:
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
   qradar_event.date_created = int(event.creationDate)
   qradar_event.last_modified = int(event.modificationDate)
-
+  qradar_event.reported_time = results.current_time
 ```
 
 </p>
@@ -342,6 +376,7 @@ Search QRadar Top events for the given offense ID.
 | `qradar_search_param4` | `text` | No | `-` | - |
 | `qradar_search_param5` | `text` | No | `-` | - |
 | `qradar_search_param6` | `text` | No | `-` | - |
+| `qradar_search_param7` | `text` | No | `-` | Used for time to look back for graphql search |
 
 </p>
 </details>
@@ -410,6 +445,19 @@ results = {
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_categories"
+inputs.soar_incident_id = incident.id
+
+# QRadar graphql search look back time default is 5 days
+inputs.qradar_search_param7 = "5 days"
+# If the poller is running and the qr_last_updated_time is changed the
+# the QRadar graphql look back time will change to 2 days
+if incident.properties.qr_last_updated_time != incident.create_date:
+  inputs.qradar_search_param7 = "2 days"
+# If manual QRadar Update rule is run set the number if days to search to the
+# user entered number
+if rule.properties.number_of_days_to_search:
+  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+" days"
 ```
 
 </p>
@@ -429,7 +477,6 @@ for event in results.events:
   qradar_event.event_time =  event.eventtime
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
   qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
-
 ```
 
 </p>
@@ -447,8 +494,8 @@ Create artifact from Destination IP information for the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -458,7 +505,6 @@ type_mapping = {
 
 import re
 
-
 artifact_types = rule.properties.select_to_create_artifact_from_destip
 
 for type in artifact_types:
@@ -466,8 +512,6 @@ for type in artifact_types:
     artifact_description = "QRadar Offense {0}".format(type)
     if type=="Destination IP":
       incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
-
-
 
 ```
 
@@ -485,8 +529,8 @@ Create artifact from Source IP information for the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -523,8 +567,8 @@ Create artifact from the Events information of the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -535,7 +579,6 @@ type_mapping = {
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact
 
@@ -548,7 +591,6 @@ for type in artifact_types:
       incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
     elif type=="Username":
       incident.addArtifact(type_mapping[type], row.username, artifact_description)
-
 
 ```
 
@@ -567,18 +609,16 @@ Create artifact from Assets information for the selected row.
 ```python
 #
 # We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
 type_mapping = {
     "IP Address": "IP Address",
     "Name": "String",
-
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact_from_asset_info
 
@@ -590,7 +630,29 @@ for type in artifact_types:
     elif type=="Name":
        incident.addArtifact(type_mapping[type], row.asset_name["content"], artifact_description)
 
+```
 
+</p>
+</details>
+
+---
+## Script - Set Last Updated Time
+qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.
+
+**Object:** Incident
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+import java.util.Date as Date
+
+# If qr_last_updated_time is empty (This will be true on incident creation)
+if not incident.properties.qr_last_updated_time:
+  incident.properties.qr_last_updated_time = incident.create_date
+# If qr_last_updated_time is not empty (This will be true when Manual refresh rule is run)
+else:
+  incident.properties.qr_last_updated_time = Date()
 ```
 
 </p>
@@ -607,8 +669,8 @@ Create artifact from the Flows info of the selected row.
 
 ```python
 #
-# We create artifacts according to how they can be mapped to
-# SOAR default artifacts. If you have custom artifacts, and would like
+# We create artifacts for those observables according to how they can be mapped to
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 
@@ -617,11 +679,9 @@ type_mapping = {
     "Destination IP": "IP Address",
     "Source Port": "Port",
     "Destination Port": "Port"
-
 }
 
 import re
-
 
 artifact_types = rule.properties.select_to_create_artifact_from_flows_info
 
@@ -636,7 +696,6 @@ for type in artifact_types:
       incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
     elif type=="Destination Port":
       incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
-
 
 ```
 
@@ -659,6 +718,7 @@ qr_top_destination_ips
 | Destination IP | `destination_ip` | `textarea` | - |
 | Event Count | `event_count` | `textarea` | - |
 | Flow Count | `flow_count` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 
 ---
 ## Data Table - QR Triggered Rules
@@ -675,6 +735,7 @@ qr_triggered_rules
 | Date Created | `date_created` | `datetimepicker` | - |
 | Enabled | `enabled` | `text` | - |
 | Last Modified | `last_modified` | `datetimepicker` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Response | `response` | `text` | - |
 | Rule Group | `rule_group` | `text` | - |
 | Rule Name | `rule_name` | `textarea` | - |
@@ -699,6 +760,7 @@ qr_categories
 | Flow Count | `flow_count` | `textarea` | - |
 | Last Packet Time | `last_packet_time` | `datetimepicker` | - |
 | Magnitude | `magnitude` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `sourceip_count` | `textarea` | - |
 
 ---
@@ -715,11 +777,12 @@ qr_assets
 | ----------- | --------------- | ---- | ------- |
 | Aggregated CVSS | `aggregated_cvss` | `textarea` | - |
 | ID | `asset_id` | `textarea` | - |
-| Name | `asset_name` | `textarea` | - |
 | IP Address | `ip_address` | `textarea` | - |
 | Last User | `last_user` | `textarea` | - |
 | Last User Seen | `last_user_seen` | `datetimepicker` | - |
+| Name | `asset_name` | `textarea` | - |
 | OS ID | `operating_system` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Vulnerabilities | `vulnerabilities` | `textarea` | - |
 
 ---
@@ -740,6 +803,7 @@ qr_top_source_ips
 | Flow Count | `flow_count` | `textarea` | - |
 | MAC | `mac` | `text` | - |
 | Network | `network` | `text` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Usernames | `usernames` | `textarea` | - |
 | Vulnerability Count | `vulnerability_count` | `number` | - |
@@ -763,6 +827,7 @@ qr_offense_top_events
 | Event Time | `event_time` | `datetimepicker` | - |
 | Log Source | `log_source` | `textarea` | - |
 | Magnitude | `magnitude` | `text` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Username | `username` | `text` | - |
 
@@ -785,6 +850,7 @@ qr_flows
 | Destination Port | `destination_port` | `textarea` | - |
 | First Packet Time | `first_packet_time` | `datetimepicker` | - |
 | Protocol | `protocol` | `textarea` | - |
+| Reported Time | `reported_time` | `datetimepicker` | - |
 | Source Bytes | `source_bytes` | `number` | - |
 | Source IP | `source_ip` | `textarea` | - |
 | Source Packets | `source_packets` | `number` | - |
@@ -796,17 +862,18 @@ qr_flows
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | QR Assigned | `qr_assigned` | `textarea` | `properties` | - | The analyst to whom the QRadar offense is assigned to. |
 | QR Credibility | `qr_credibility` | `textarea` | `properties` | - | Indicates the integrity of the offense as determined by the credibility rating that is configured in the log source. |
-| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar offense |
-| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar offense |
-| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar offense |
+| QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
+| QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
+| QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
+| QR Incident Last Updated Time | `qr_last_updated_time` | `datetimepicker` | `properties` | - | - |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
-| QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar offense is indexed |
-| QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar offense is indexed |
-| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar offense |
-| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination.  QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
+| QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
+| QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
+| QR Offense Source  | `qr_offense_source` | `text` | `properties` | - | The source for the QRadar Offense |
+| QR Relevance | `qr_relevance` | `textarea` | `properties` | - | Indicates the importance of the destination. QRadar determines the relevance by the weight that the administrator assigned to the networks and assets. |
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
-| QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar offense |
-| qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
+| QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
+| QRadar Destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
 | QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
 
 ---
@@ -814,15 +881,34 @@ qr_flows
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Create artifact from Source IP info | qr_top_source_ips | `-` |
-| QRadar Enhanced Data | incident | `qradar_offense_summary, qradar_triggered_rules, qradar_destination_ips, qradar_source_ips, qradar_categories, qradar_assets_information,example_of_searching_qradar_top_events_using_offense_id ` |
-| Create Artifact from Events info | qr_offense_top_events | `-` |
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
 | Create Artifact from Assets info | qr_assets | `-` |
 | Create artifact from Destination IP info | qr_top_destination_ips | `-` |
+| Create Artifact from Events info | qr_offense_top_events | `-` |
+| Create artifact from Source IP info | qr_top_source_ips | `-` |
+| Create Artifacts from Flows Info  | qr_flows | `-` |
+| QRadar Enhanced Data | incident | `qradar_triggered_rules` |
+| QRadar Enhanced Data Poller | incident | `qradar_triggered_rules` |
+| QRadar Enhanced Data Refresh | incident | `qradar_triggered_rules` |
 
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
+## Version 1.2.0 Changes
+### QRadar API Searches
+When a case is first created the search will be set by default to look back 5 days.
+When the manual refresh rule is run the search will look back 2 days unless the activity field, Number of Days to Search, is given a different number.
+When the poller is running it will default to search back 2 days.
+
+### QRadar Enhanced Data Refresh Manual Rule
+When this manual rule is run it will run all of the workflows to update the incident. This will also set the case field, QR Incident Last Updated Time,
+to the time this rule was run. If this rule is run while the poller is being used this will cause the poller to run all of the workflows. It is advised to either using the poller for automatic case refresh or use the manual refresh capability, but not both.
+
+### Configuring Real time update to Offenses
+Real time updates to offenses is disabled by default.
+To enable this feature edit the polling_interval setting under [fn_qradar_integration:edm_global_settings] in the app.config for this package.
+The value of the polling_interval setting should be an integer of the amount of time in seconds to wait between checking for updates to offenses.
 
 ## For Customers who do not use the QRadar-Plugin
 Make sure at the time of escalation the field qradar_destination is mapped to have the appropriate value ( same as label in app.config).
@@ -856,6 +942,10 @@ inputs.qradar_label = incident.properties.qradar_destination
 
 Example app.config server label: [fn_qradar_integration:qradar_4]
   `qradar_4` will be set to `inputs.qradar_label` in the above example.
+
+## For Customers that are having performance issues related to the poller
+To resolve some performance issues that relate to the poller, it is advised to increase the num_workers setting for the [resilient] section in the app.config file from the default value of 10.
+The max value of num_workers is 500.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

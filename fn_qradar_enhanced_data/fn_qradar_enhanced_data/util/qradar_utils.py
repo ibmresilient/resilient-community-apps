@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 #   Util classes for qradar
 
-from base64 import b64encode
 from json import dumps
-import logging
-import requests
 from six import binary_type
-import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-import fn_qradar_enhanced_data.util.function_utils as function_utils
-import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
-from resilient_lib import RequestsCommon, IntegrationError
-from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
+from base64 import b64encode
+from logging import getLogger
+from requests import get, post
 from urllib.parse import quote as quote_func
+from resilient_lib import RequestsCommon, IntegrationError
+from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
+import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
+from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_SYSTEMDATE
+from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 def quote(input_v, safe=None):
     """
@@ -56,14 +56,14 @@ class AuthInfo(object):
                opts=None, function_opts=None):
         """
         Create headers used for REST Api calls
-        :param host: qradar host
-        :param username: qradar user login
-        :param password: qradar password
+        :param host: QRadar host
+        :param username: QRadar user login
+        :param password: QRadar password
         :param token: Use token or username/password to auth
-        :param cafile:
+        :param cafile: Boolean or path to cafile
         :param opts: app.config options
-        :param function_opts: function parameters from app.config
-        :return:
+        :param function_opts: Function parameters from app.config
+        :return: None
         """
         self.headers = {'Accept': 'application/json'}
         if username and password:
@@ -112,7 +112,7 @@ class ArielSearch(SearchWaitCommand):
         """
         Set range start for ariel search
         :param start: int for range start
-        :return:
+        :return: None
         """
         self.range_start = start
 
@@ -120,30 +120,30 @@ class ArielSearch(SearchWaitCommand):
         """
         Set range end for ariel search
         :param end: int for range end
-        :return:
+        :return: None
         """
         self.range_end = end
 
     def set_timeout(self, timeout):
         """
         Set timeout
-        :param timeout:
-        :return:
+        :param timeout: Length to timeout in seconds
+        :return: None
         """
         self.search_timeout = timeout
 
     def set_query_all(self, query_all):
         """
         Set bool to determine if range header is necessary
-        :param query_all:
-        :return:
+        :param query_all: (boolean)
+        :return: None
         """
         self.query_all = query_all
 
     def get_search_id(self, query):
         """
         Get the search if associated with the search using query
-        :param query: input query string
+        :param query: Input query string
         :return: search_id returned from QRadar
         """
         auth_info = AuthInfo.get_authInfo()
@@ -170,7 +170,6 @@ class ArielSearch(SearchWaitCommand):
 
         return search_id
 
-
     def delete_search(self, search_id):
         """
         Deletes an AQL search in case of timeout or error
@@ -194,15 +193,15 @@ class ArielSearch(SearchWaitCommand):
     def get_search_result(self, search_id):
         """
         Get search result associated with search_id
-        :param search_id:
-        :return: dict with events
+        :param search_id: ID
+        :return: Dict with events
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
+        url = auth_info.api_url + "ariel/searches/{}/results".format(search_id)
 
         headers = auth_info.headers.copy()
-        # if the # of returned items is big, this call will take a long time!
+        # If the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the # if query_all is False.
         # If query_all is True, the Range will not be used and all the results will be returned from the query.
         if not self.query_all:
@@ -222,7 +221,7 @@ class ArielSearch(SearchWaitCommand):
         if response.status_code == 200:
             res = response.json()
             events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            events = function_utils.fix_dict_value(events)
+            events = fix_dict_value(events)
             ret = {"events": events}
 
         return ret
@@ -230,8 +229,8 @@ class ArielSearch(SearchWaitCommand):
     def check_status(self, search_id):
         """
         Check the search status associated with search_id
-        :param search_id:
-        :return: search status
+        :param search_id: ID
+        :return: Search status
         """
         auth_info = AuthInfo.get_authInfo()
         url = "{}{}/{}".format(auth_info.api_url, qradar_constants.ARIEL_SEARCHES, search_id)
@@ -244,8 +243,8 @@ class ArielSearch(SearchWaitCommand):
                 if json_dict["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
                     status = SearchWaitCommand.SEARCH_STATUS_COMPLETED
                 elif json_dict["status"] == qradar_constants.SEARCH_STATUS_WAIT \
-                    or json_dict["status"] == qradar_constants.SEARCH_STATUS_SORTING \
-                        or json_dict["status"] == qradar_constants.SEARCH_STATUS_EXECUTE:
+                    or json_dict["status"] == "SORTING" \
+                        or json_dict["status"] == "EXECUTE":
                     status = SearchWaitCommand.SEARCH_STATUS_WAITING
 
         except Exception as e:
@@ -260,13 +259,14 @@ class QRadarClient(object):
                  opts=None, function_opts=None):
         """
         Init
-        :param host:  QRadar host
+        :param host: QRadar host
         :param username: QRadar user name
         :param password: QRadar password
         :param token: QRadar token
-        :param cafile: verify cert or not
+        :param cafile: Verify cert or not
         :param opts: app.config options dictionary
-        :param function_opts: function parameters from app.config
+        :param function_opts: Function parameters from app.config
+        :return: None
         """
         auth_info = AuthInfo.get_authInfo()
         auth_info.create(host, username, password, token, cafile, opts, function_opts)
@@ -274,11 +274,11 @@ class QRadarClient(object):
     def get_versions(self):
         """
         Util function used to test connectivity to QRadar
-        :return:
+        :return: 
         """
         auth_info = AuthInfo.get_authInfo()
 
-        url = auth_info.api_url + qradar_constants.HELP_VERSIONS
+        url = auth_info.api_url + "help/versions"
         response = auth_info.make_call("GET", url)
 
         return response
@@ -287,12 +287,12 @@ class QRadarClient(object):
                              range_end=None, timeout=None):
         """
         Perform an Ariel search
-        :param query_all: bool used to decide if Range header is included in query
-        :param query: query string
-        :param range_start:
-        :param range_end:
-        :param timeout: timeout for search
-        :return: dict with events
+        :param query_all: Bool used to decide if Range header is included in query
+        :param query: Query string
+        :param range_start: Range start for ariel search
+        :param range_end: Range end for ariel search
+        :param timeout: Timeout for search
+        :return: Dict with events
         """
         ariel_search = ArielSearch(graphql=True)
         if range_start is not None:
@@ -306,8 +306,8 @@ class QRadarClient(object):
 
         ariel_search.set_query_all(query_all)
 
-        response = ariel_search.perform_search(temp_query,False)  # Execute the query on a temp table
-        response = ariel_search.perform_search(search_query, True)  # Get the actual query results from temp table
+        response = ariel_search.perform_search(temp_query,False) # Execute the query on a temp table
+        response = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
 
         return response
 
@@ -338,12 +338,16 @@ class QRadarClient(object):
 
     @staticmethod
     def verify_graphql_connect():
+        """
+        Verify if a connection to graphql on the given QRadar server can be made
+        :return: (boolean) True if response.status_code equals 200 and False if it does not
+        """
         auth_info = AuthInfo.get_authInfo()
         url = u"{}{}".format(auth_info.api_url.replace("api/", ""), qradar_constants.GRAPHQL_URL)
         headers = auth_info.headers.copy()
         headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
         headers["Content-Type"] = "application/json"
-        data = {"operationName":"getSystemDate","variables":{},"query":qradar_graphql_queries.GRAPHQL_SYSTEMDATE}
+        data = {"operationName":"getSystemDate","variables":{},"query":GRAPHQL_SYSTEMDATE}
 
         try:
             response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
@@ -353,143 +357,40 @@ class QRadarClient(object):
         return response.status_code == 200
 
     @staticmethod
-    def get_offense_summary_data(offenseid):
+    def graphql_query(variables, query_name, add_content_source=None):
         """
-        Get Offense summary for the given Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
+        Query graphql and return data
+        :param variables: Dictionary of variables
+        :param query_name: Name of the query from qradar_graphql_queries.py
+        :param add_content_source: Additional location to content in ret variable
+        :return: Data received from running graphql query
         """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
         headers["Content-Type"] = "application/json"
         headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
+
+        query_name = query_name.replace("  ", "")
+        operationName = query_name[query_name.index(" ")+1:query_name.index("(")]
+        query_call = query_name[query_name.index("\n")+1:query_name.index("(", query_name.index("\n")+2)]
 
         url = u"{}{}".format(auth_info.api_url.replace("api/",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"offenseQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_OFFENSEQUERY}
+        data = {"operationName":operationName,"variables":variables,"query":query_name}
         ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
 
-            ret = {"status_code": response.status_code,
-                   "content": response.json()["data"]["getOffense"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_summary_data call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def get_rules_data(offenseid):
-        """
-        Get the contributing rules for the Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("/api",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"ruleQuery","variables":{"id":offenseid},"query":qradar_graphql_queries.GRAPHQL_RULESQUERY}
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
-            res = response.json()
-
-            ret = {"status_code": response.status_code,
-                   "content": res["data"]["getOffense"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_rules_data call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def get_sourceip_data(event):
-        """
-        Get Source IP for the Offense
-        :param event: Id of the QRadar event
-        :return: Data of source ip
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("/api",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"assetQuery","variables":{"domainId":event["domainid"],"ipAddress":event["sourceip"]},"query":qradar_graphql_queries.GRAPHQL_SOURCEIP}
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
-            res = response.json()
-
-            ret = {"status_code": response.status_code,
-                   "content": res["data"]["getAsset"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_sourceip_data call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def get_offense_source(offenseid):
-        """
-        Get source addresses the Offense
-        :param offenseid: Id of the QRadar Offense
-        :return:
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("/api",""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName":"offenseSourceQuery","variables":{"id":offenseid}, "query":qradar_graphql_queries.GRAPHQL_OFFENSESOURCE}
-        ret = {}
-        try:
-            response = auth_info.make_call("POST", url,data=dumps(data),headers=headers)
-            res = response.json()
-
-            ret = {"status_code": response.status_code,
-                   "content": res["data"]["getOffense"]["sourceAddresses"]}
-
-        except Exception as e:
-            LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_source call failed with exception {}]".format(url, str(e)))
-
-        return ret
-
-    @staticmethod
-    def get_offense_asset_data(asset):
-        """
-        Get assests data for the Offense
-        :param asset: dict of sourceip and domainid
-        :return:
-        """
-        auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-        headers["Content-Type"] = "application/json"
-        headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
-
-        url = u"{}{}".format(auth_info.api_url.replace("/api", ""), qradar_constants.GRAPHQL_URL)
-        data = {"operationName": "assetQuery",
-                "variables": {"domainId": asset["domainId"], "ipAddress":  asset["sourceIp"]},
-                "query": qradar_graphql_queries.GRAPHQL_OFFENSEASSETS}
-        ret = {}
         try:
             response = auth_info.make_call("POST", url, data=dumps(data), headers=headers)
-            res = response.json()
 
-            ret = {"status_code": response.status_code,
-                   "content": res["data"]["getAsset"]}
+            ret["status_code"] = response.status_code
+
+            if add_content_source:
+                ret["content"] = response.json()["data"][query_call.strip()][add_content_source]
+            else:
+                ret["content"] = response.json()["data"][query_call.strip()]
 
         except Exception as e:
             LOG.error(str(e))
-            raise IntegrationError("Request to url [{}] throws exception. Error [get_offense_asset_data call failed with exception {}]".format(url, str(e)))
+            raise IntegrationError("Request to url [{}] throws exception. Error [{} call failed with exception {}]".format(url, query_call.strip(), str(e)))
 
         return ret
 
@@ -497,7 +398,8 @@ class QRadarClient(object):
     def get_qr_sessionid(host):
         """
         Get QRadar Session Id
-        :return:
+        :param host: QRadar address (IP/URL)
+        :return: QRadar session ID
         """
         cookies = {}
 
@@ -507,10 +409,10 @@ class QRadarClient(object):
             if not auth_info.username and not auth_info.password:
                 cookies = {"SEC":auth_info.qradar_token}
             else:
-                res = requests.get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
+                res = get("{0}console/logon.jsp".format(host), verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
 
-                res = requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"j_username":auth_info.username,"j_password":auth_info.password,"LoginCSRF":requests.post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"get_csrf": ""}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile).text}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile)
+                res = post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"j_username":auth_info.username,"j_password":auth_info.password,"LoginCSRF":post("{0}{1}".format(host, qradar_constants.GRAPHQL_BASICAUTH), data={"get_csrf": ""}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile).text}, headers={"Cookie": "JSESSIONID="+cookies["JSESSIONID"]}, verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
         except Exception as e:
             LOG.error(str(e))
@@ -538,8 +440,8 @@ class QRadarServers():
         """
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server
-        :param servers_list: list of qradar servers
-        :return: dictionary of options for choosen server
+        :param servers_list: List of QRadar servers
+        :return: Dictionary of options for choosen server
         """
         # If label not given and using previous versions app.config [fn_qradar_integration]
         if not qradar_label and servers_list.get(qradar_constants.PACKAGE_NAME):
@@ -550,7 +452,7 @@ class QRadarServers():
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
         if qradar_label and label in servers_list:
             options = servers_list[label]
-        elif (len(servers_list) == 1 and qradar_label == qradar_constants.PACKAGE_NAME) or len(servers_list) == 1:
+        elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(qradar_label))
@@ -560,8 +462,8 @@ class QRadarServers():
     def _get_server_name_list(self, opts):
         """
         Return the list of QRadar server names defined in the app.config in fn_qradar_integration.
-        :param opts: list of options
-        :return: list of servers
+        :param opts: List of options
+        :return: List of servers
         """
         server_list = []
         for key in opts.keys():

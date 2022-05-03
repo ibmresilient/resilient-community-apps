@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # Template Method Design Pattern for a search-and-wait-for-result command
 #
 # This file can be reused for composite commands.
 #
 from time import time, sleep
-import logging
-LOG = logging.getLogger(__name__)
+from logging import getLogger
+LOG = getLogger(__name__)
 
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
@@ -18,7 +18,7 @@ class SearchTimeout(Exception):
         self.search_status = search_status
 
 class SearchJobFailure(Exception):
-    """ Search job creation failure"""
+    """ Search job creation failure """
     def __init__(self, query):
         fail_msg = "Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
@@ -40,7 +40,7 @@ class SearchWaitCommand(object):
     def __init__(self, timeout=600, period=5):
         """
         :param timeout: Time out in secs
-        :param polling: polling period in secs
+        :param polling: Polling period in secs
         """
         self.search_timeout = timeout
         self.polling_period = period
@@ -48,16 +48,16 @@ class SearchWaitCommand(object):
     def get_search_id(self, query):
         """
         Subclass shall overrides this to implement the search to get a search/job id
-        :param query:
-        :return: return None if failed
+        :param query: Query string
+        :return: None if failed
         """
         return ""
 
     def check_status(self, search_id):
         """
         Override this to provide status of the search job
-        :param search_id:
-        :return: return one of the search status
+        :param search_id: ID of search
+        :return: One of the search status
         """
         return self.SEARCH_STATUS_ERROR_STOP
 
@@ -72,21 +72,22 @@ class SearchWaitCommand(object):
     def get_search_result(self, search_id):
         """
         Override this to get the search result
-        :param search_id:
-        :return:
+        :param search_id: ID of search
+        :return: None if failed
         """
         return {}
 
-    def perform_search(self, query,return_result=True):
+    def perform_search(self, query, return_result=True):
         """
         This is the skeleton for search and wait command
-        :param query: query string to perform search
-        :return:
+        :param query: Query string to perform search
+        :param return_results: (boolean)
+        :return: Search results
         """
         search_id = self.get_search_id(query)
 
         if search_id:
-            # store the start time
+            # Store the start time
             start_time = time()
             done = False
 

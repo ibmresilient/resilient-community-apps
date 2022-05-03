@@ -11,7 +11,7 @@
 `qradar_top_events`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_enhanced_data`
@@ -21,6 +21,19 @@
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_categories"
+inputs.soar_incident_id = incident.id
+
+# QRadar graphql search look back time default is 5 days
+inputs.qradar_search_param7 = "5 days"
+# If the poller is running and the qr_last_updated_time is changed the 
+# the QRadar graphql look back time will change to 2 days
+if incident.properties.qr_last_updated_time != incident.create_date:
+  inputs.qradar_search_param7 = "2 days"
+# If manual QRadar Update rule is run set the number if days to search to the
+# user entered number
+if rule.properties.number_of_days_to_search:
+  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+" days"
 ```
 
 ### Post-Processing Script
@@ -32,10 +45,10 @@ for event in results.events:
   qradar_event.category_name = link.format(results.offenseid,"category_name",event.categoryname,event.categoryname)
   qradar_event.magnitude = link.format(results.offenseid,"category_name",event.categoryname,event.magnitude)
   qradar_event.event_count = link.format(results.offenseid,"category_name",event.categoryname,event.eventcount)
-  qradar_event.event_time =  int(event.eventtime)
+  qradar_event.event_time = int(event.eventtime)
   qradar_event.sourceip_count = link.format(results.offenseid,"category_name",event.categoryname,event.sourceipcount)
-  qradar_event.destinationip_count =  link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
-  
+  qradar_event.destinationip_count = link.format(results.offenseid,"category_name",event.categoryname,event.destinationipcount)
+  qradar_event.reported_time = results.current_time
 ```
 
 ---
@@ -56,6 +69,19 @@ for event in results.events:
 inputs.qradar_search_param3 = incident.properties.qradar_id
 inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_categories"
+inputs.soar_incident_id = incident.id
+
+# QRadar graphql search look back time default is 5 days
+inputs.qradar_search_param7 = "5 days"
+# If the poller is running and the qr_last_updated_time is changed the 
+# the QRadar graphql look back time will change to 2 days
+if incident.properties.qr_last_updated_time != incident.create_date:
+  inputs.qradar_search_param7 = "2 days"
+# If manual QRadar Update rule is run set the number if days to search to the
+# user entered number
+if rule.properties.number_of_days_to_search:
+  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+" days"
 ```
 
 ### Post-Processing Script
@@ -66,10 +92,10 @@ for event in results.events:
   qradar_event = incident.addRow("qr_categories")
   qradar_event.category_name = event.categoryname
   qradar_event.flow_count = event.flowcount
-  qradar_event.last_packet_time =  int(event.lastpackettime)
+  qradar_event.last_packet_time = int(event.lastpackettime)
   qradar_event.sourceip_count = event.sourceipcount
-  qradar_event.destinationip_count =  event.destinationipcount
-  
+  qradar_event.destinationip_count = event.destinationipcount
+  qradar_event.reported_time = results.current_time
 ```
 
 ---

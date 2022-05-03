@@ -11,7 +11,7 @@
 `qradar_offense_summary`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_qradar_enhanced_data`
@@ -21,6 +21,8 @@
 inputs.qradar_offense_id= incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
+inputs.soar_table_name = "qr_triggered_rules"
+inputs.soar_incident_id = incident.id
 ```
 
 ### Post-Processing Script
@@ -36,7 +38,7 @@ for event in results.rules_data:
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
   qradar_event.date_created = int(event.creationDate)
   qradar_event.last_modified = int(event.modificationDate)
-
+  qradar_event.reported_time = results.current_time
 ```
 
 ---
