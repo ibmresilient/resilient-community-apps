@@ -425,7 +425,7 @@ class RxClient():
 
         params["from"] = active_from if active_from else 0
         params["until"] = active_until if active_until else 0
-        params["limit_search_duration:"] = int(limit_search_duration) if limit_search_duration else 0
+        params["limit_search_duration"] = int(limit_search_duration) if limit_search_duration else 0
         params["always_return_body"] = "{}".format(always_return_body).lower()
         if output:
             params["output"] = output

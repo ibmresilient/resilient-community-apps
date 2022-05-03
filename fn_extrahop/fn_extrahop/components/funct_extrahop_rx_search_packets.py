@@ -55,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
         response = rx_cli.search_packets(**params)
         filename = None
         if response.status_code == 204:
-            result = {"status": "No search matches found."}
+            result = {"status": "No search matches found"}
         elif response.status_code == 200:
             cd_headers = response.headers.get("Content-Disposition")
             if cd_headers:
@@ -64,7 +64,7 @@ class FunctionComponent(AppFunctionComponent):
                 datastream = BytesIO(response.content)
                 write_file_attachment(self.rest_client(), filename, datastream, fn_inputs.incident_id,
                                       task_id=None, content_type=None)
-                result = {"attachment": filename}
+                result = {"attachment": "<b>{0}</b>".format(filename)}
             else:
                 self.LOG.error("File name not found in 'Content-Disposition' response headers.")
 
