@@ -99,7 +99,7 @@ if source_is_quay $SOURCE $DEST; then
 elif source_is_icr $SOURCE $DEST; then
     # Make array of image names on icr.io to rebuild
     print_msg "Getting list of IMAGE_NAMES from IBM Container Registry in namespace '$REGISTRY_NAMESPACE'"
-    IMAGE_NAMES=( $(ibmcloud cr images --restrict ibmresilient -q) )
+    IMAGE_NAMES=( $(ibmcloud cr images --restrict $REGISTRY_NAMESPACE -q) )
     SOURCE_URL="$ICR_URL"
     DEST_URL="$QUAY_URL"
 else
