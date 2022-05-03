@@ -188,30 +188,17 @@ if results.success:
     hit = []
     resp_data = results.content
     resp_dict = resp_data["Breaches"]
-    dict_string = ""
-    for breach in resp_dict:
-        for dict_key, dict_value in breach.items():
-          temp = ""
-          aKey = str(dict_key)
-          aValue = str(dict_value)
-          temp = u"{}: {}".format(aKey, aValue)
-          dict_string += temp
-          dict_string += " || "
     hit = [
       {
         "name": "Number of Breached Sites", 
         "type": "number",
-        "value": "{}".format(len(resp_data))
-      },
-      {
-        "name": "Breached Sites", 
-        "type": "string",
-        "value": dict_string
+        "value": "{}".format(len(resp_dict))
       }
     ]
     artifact.addHit("HIBP Function hits added", hit)
 else:
   incident.addNote("Have I Been Pwned has failed: {}".format(results.reason))
+
 
 ```
 
@@ -313,25 +300,18 @@ if results.success:
     hit = []
     resp_data = results.content
     resp_dict = resp_data["Pastes"]
-    dict_string = ""
-    for paste in resp_dict:
-      for dict_key, dict_value in paste.items():
-        temp = ""
-        aKey = str(dict_key)
-        aValue = str(dict_value)
-        temp = u"{}: {} ; ".format(aKey, aValue)
-        dict_string += temp
-      dict_string += " || "
+    
     hit = [
       {
         "name": "Pastes", 
-        "type": "string",
-        "value": dict_string,
+        "type": "number",
+        "value": len(resp_dict),
       }
     ]
     artifact.addHit("HIBP Function hits added", hit)
 else:
   incident.addNote(u"Have I Been Pwned has failed: {}".format(results.reason))
+
 
     
 ```
@@ -352,7 +332,3 @@ Manually delete the followings:
 - "Have I Been Pwned Hits"
 2. Workflows
 - Have I Been Pwned Hits
-
-
-
-
