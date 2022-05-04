@@ -114,6 +114,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Org Data | Read |
   | Function | Read |
   | Incident | Read all, edit fields, edit status |
+  | Incident | Create |
 
 
 The following SOAR platform guides provide additional information:

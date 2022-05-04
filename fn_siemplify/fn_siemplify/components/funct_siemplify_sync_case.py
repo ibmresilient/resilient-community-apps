@@ -49,6 +49,17 @@ class FunctionComponent(AppFunctionComponent):
             ],
             app_settings)
 
+        siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
+        # existing case?
+        if inputs['siemplify_case_id']:
+            results, error_msg = siemplify_env.get_case(inputs['siemplify_case_id'])
+        else:
+            results, error_msg = self.sync_soar_case(siemplify_env, inputs, app_settings)
+
+        yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
+        yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)
+
+    def sync_soar_case(self, siemplify_env, inputs, app_settings):
         # set the default if the default isn't set
         inputs['siemplify_environment'] = inputs['siemplify_environment'] if inputs.get('siemplify_environment') else self.app_configs.default_environment
 
@@ -68,10 +79,9 @@ class FunctionComponent(AppFunctionComponent):
                                                                    eval_mapping(app_settings.get('playbook_mappings'), wrapper="{{ {} }}"),
                                                                    soar_env.get_incident_types())
 
-        incident_info['soar_linkback_url'] = make_case_linkback_url(self.opts.get('resilient'), fn_inputs.siemplify_incident_id)
+        incident_info['soar_linkback_url'] = make_case_linkback_url(self.opts.get('resilient'), inputs.get("siemplify_incident_id"))
         self.LOG.debug(incident_info)
 
-        siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
         results, error_msg = siemplify_env.sync_case(incident_info)
 
         # get the results based on the data returned
@@ -95,19 +105,18 @@ class FunctionComponent(AppFunctionComponent):
 
                 # S Y N C   A L L   O T H E R S
                 # collect the incident comments
-                if fn_inputs.siemplify_sync_comments:
+                if inputs.get('siemplify_sync_comments'):
                     self.sync_comments(soar_env, siemplify_env, inputs)
 
                 # collect the incident artifacts
-                if fn_inputs.siemplify_sync_artifacts:
+                if inputs.get('siemplify_sync_artifacts'):
                     self.sync_artifacts(soar_env, siemplify_env, inputs)
 
                 # collect the incident attachments
-                if fn_inputs.siemplify_sync_attachments:
+                if inputs.get('siemplify_sync_attachments'):
                     self.sync_attachments(soar_env, siemplify_env, inputs)
 
-                yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)
+        return results, error_msg
 
 
     def _map_playbooks(self, incident_type_ids, playbook_mapping, incident_type_mapping):

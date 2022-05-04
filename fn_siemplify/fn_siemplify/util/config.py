@@ -21,7 +21,7 @@ polling_interval=120
 # polling_lookback in minutes to look back first time poller starts
 polling_lookback=120
 # polling_filters specifies key/value pairs to escalate new Siemplify cases to SOAR
-#  ex. polling_filters="startTime":"","tags":["tagA"],"priorities":[40,50],"importance":[],environments":["Default Enviornment"]
+#  ex. polling_filters="startTime":"","tags":["tagA"],"priorities":[40,50],"importance":[],environments":["Default Environment"]
 polling_filters=
 # poller timezone to match Siemplify configuration
 poller_timezone=Etc/GMT

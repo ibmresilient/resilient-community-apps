@@ -27,13 +27,15 @@ inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
 
 ### Post-Processing Script
 ```python
+PRIORITY_LOOKUP = {"25": "Low", "50":"Medium", "80":"High", "100":"Critical", "DEFAULT": "Medium"}
+
 if results.success:
   incident.properties.siemplify_case_id = results.content.get('id')
   incident.properties.siemplify_case_link = helper.createRichText("<a target='blank' href='{}'>{}</a>".format(results.content.get('siemplify_case_url'), results.content.get('title')))
   incident.properties.siemplify_is_important = results.content.get('isImportant')
   incident.properties.siemplify_stage = results.content.get('stage')
   incident.properties.siemplify_assignee = results.content.get('assignedUserName')
-  incident.properties.siemplify_priority = results.content.get('priority')
+  incident.properties.siemplify_priority = PRIORITY_LOOKUP.get(str(results.content.get('priority')), PRIORITY_LOOKUP.get('DEFAULT'))
   incident.properties.siemplify_tags = ", ".join([tag['tag'] for tag in results.content.get('tags')])
   
   if results.content.get('alerts'):
