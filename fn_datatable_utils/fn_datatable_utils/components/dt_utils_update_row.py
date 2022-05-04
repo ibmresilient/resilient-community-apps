@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from logging import getLogger
-import json
+from json import loads
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, get_function_input
+from fn_datatable_utils.util.helper import RESDatatable
 from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_update_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_update_row' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_row_id", "dt_utils_cells_to_update"], kwargs)
 
@@ -58,9 +58,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info(inputs)
 
             try:
-                inputs["dt_utils_cells_to_update"] = json.loads(inputs["dt_utils_cells_to_update"])
+                inputs["dt_utils_cells_to_update"] = loads(inputs["dt_utils_cells_to_update"])
             except Exception:
-                raise ValueError("Failed to parse JSON string: {0}".format(inputs["dt_utils_cells_to_update"]))
+                raise ValueError("Failed to parse JSON string: {}".format(inputs["dt_utils_cells_to_update"]))
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
@@ -86,19 +86,19 @@ class FunctionComponent(ResilientComponent):
             updated_row = datatable.update_row(payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_cells_to_update"])
 
             if "error" in updated_row:
-                yield StatusMessage("Row in {1} NOT updated.".format(datatable.api_name))
+                yield StatusMessage("Row in {} NOT updated.".format(datatable.api_name))
                 payload.success = False
                 raise ValueError(updated_row["error"])
 
             else:
-                yield StatusMessage("Row {0} in {1} updated.".format(updated_row["id"], datatable.api_name))
+                yield StatusMessage("Row {} in {} updated.".format(updated_row["id"], datatable.api_name))
                 payload.row = updated_row
                 payload.success = True
 
             results = payload.as_dict()
 
             LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_update_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_update_row' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

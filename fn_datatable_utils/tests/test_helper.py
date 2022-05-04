@@ -1,8 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-import requests_mock
-import json
-import six
+from requests_mock import create_response
+from json import dumps
+from six import b
 
 class DTResilientMock(BasicResilientMock):
     mock_data_table_rows = [
@@ -59,18 +59,20 @@ class DTResilientMock(BasicResilientMock):
         return_rows = []
         for row in rows:
             row_id += 1
-            return_rows.append(DTResilientMock.format_datatable_row(row, row_id))
+            return_rows.append(
+                DTResilientMock.format_datatable_row(row, row_id))
         return return_rows
 
     @resilient_endpoint("GET", r"/incidents/[0-9]+/table_data/mock_data_table\?handle_format=names$")
     def mock_datatable_get(self, request):
         """ Handle GET request for mock_data_table """
 
-        data = {"rows": DTResilientMock.get_datatable_rows(self.mock_data_table_rows)}
+        data = {"rows": DTResilientMock.get_datatable_rows(
+            self.mock_data_table_rows)}
 
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=six.b(json.dumps(data)))
+        return create_response(request,
+                               status_code=200,
+                               content=b(dumps(data)))
 
     @resilient_endpoint("DELETE", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/[0-9]\?handle_format=names$")
     def mock_datatable_delete_row(self, request):
@@ -78,20 +80,20 @@ class DTResilientMock(BasicResilientMock):
 
         data = self.mock_success_delete
 
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=six.b(json.dumps(data)))
+        return create_response(request,
+                               status_code=200,
+                               content=b(dumps(data)))
 
     @resilient_endpoint("PUT", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/2\?handle_format=names$")
     def mock_datatable_put(self, request):
         """ Handle PUT request for mock_data_table """
 
-        data = DTResilientMock.get_datatable_rows(self.mock_data_table_updated_rows)[0]
+        data = DTResilientMock.get_datatable_rows(
+            self.mock_data_table_updated_rows)[0]
 
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=six.b(json.dumps(data)))
-
+        return create_response(request,
+                               status_code=200,
+                               content=b(dumps(data)))
 
 # This function is used in the update function pre-process script to help define the inputs
 def dict_to_json_str(d):
@@ -100,15 +102,15 @@ def dict_to_json_str(d):
        Does not support lists.
        If the value is None, it sets it to False."""
 
-    json_entry = '"{0}":{1}'
-    json_entry_str = '"{0}":"{1}"'
+    json_entry = '"{}":{}'
+    json_entry_str = '"{}":"{}"'
     entries = []
 
     for entry in d:
         key = entry
         value = d[entry]
 
-        if value is None:
+        if not value:
             value = False
 
         if isinstance(value, list):
@@ -124,7 +126,7 @@ def dict_to_json_str(d):
             entries.append(json_entry_str.format(key, value))
 
         elif isinstance(value, bool):
-            value = 'true' if value == True else 'false'
+            value = 'true' if value else 'false'
             entries.append(json_entry.format(key, value))
 
         elif isinstance(value, dict):
@@ -133,4 +135,4 @@ def dict_to_json_str(d):
         else:
             entries.append(json_entry.format(key, value))
 
-    return '{0} {1} {2}'.format('{', ','.join(entries), '}')
+    return '{} {} {}'.format('{', ','.join(entries), '}')

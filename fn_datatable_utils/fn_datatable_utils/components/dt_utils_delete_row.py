@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_delete_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_delete_row' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["dt_utils_datatable_api_name", "incident_id"], kwargs)
 
@@ -79,23 +79,23 @@ class FunctionComponent(ResilientComponent):
                 dt_utils_row_id = row_id
 
             if row_id == int(dt_utils_row_id):
-                yield StatusMessage("Queuing row {0} for delete".format(dt_utils_row_id))
+                yield StatusMessage("Queuing row {} for delete".format(dt_utils_row_id))
                 deleted_row = datatable.queue_delete(wf_instance_id, dt_utils_row_id)
             else:
                 deleted_row = datatable.delete_row(dt_utils_row_id)
 
             if "error" in deleted_row:
-                yield StatusMessage(u"Row {0} in {1} not deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
+                yield StatusMessage(u"Row {} in {} not deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
                 payload.success = False
                 raise ValueError(deleted_row["error"])
 
-            yield StatusMessage("Row {0} in {1} deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
+            yield StatusMessage("Row {} in {} deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
             payload.row = deleted_row
             payload.success = True
 
             results = payload.as_dict()
 
-            yield StatusMessage("Finished 'dt_utils_delete_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_delete_row' that was running in workflow '{}'".format(wf_instance_id))
             LOG.info("Complete")
 
             # Produce a FunctionResult with the results

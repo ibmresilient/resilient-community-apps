@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_create_csv_table' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_create_csv_table' that was running in workflow '{}'".format(wf_instance_id))
 
             # Validate required fields
             validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], kwargs)
@@ -137,7 +137,7 @@ class FunctionComponent(ResilientComponent):
             }
             results = rp.done(True, row_data)
 
-            yield StatusMessage("Finished 'dt_utils_create_csv_table' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_create_csv_table' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

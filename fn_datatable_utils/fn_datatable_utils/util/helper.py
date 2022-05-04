@@ -2,10 +2,10 @@
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a SOAR Data Table """
 
-import json
+from json import loads
 from logging import getLogger
-import threading
-import time
+from threading import Thread
+from time import sleep
 from cachetools import cached, LRUCache
 from resilient_lib import get_workflow_status
 
@@ -18,19 +18,17 @@ class RESDatatable(object):
         self.res_client = res_client
         self.incident_id = incident_id
         self.api_name = dt_api_name
-        self.data = None
         self.rows = None
 
     def get_data(self):
         """ Function that gets all the data and rows of a Data Table using the SOAR API """
 
-        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
+        uri = "/incidents/{}/table_data/{}?handle_format=names".format(self.incident_id, self.api_name)
 
         try:
-            self.data = self.res_client.get(uri)
-            self.rows = self.data["rows"]
+            self.rows = self.res_client.get(uri)["rows"]
         except Exception:
-            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {} Datatable".format(self.api_name))
 
     def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
         """ Searches and returns rows based on a search/sort criteria, else None """
@@ -46,7 +44,7 @@ class RESDatatable(object):
                 for row in self.rows:
                     cells = row["cells"]
                     if search_column not in cells:
-                        raise ValueError(u"{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
+                        raise ValueError(u"{} is not a valid column api name for the data table: {}".format(search_column, self.api_name))
                     column = cells.get(search_column, {})
                     value = column.get("value", None)
                     if value and value == search_value:
@@ -55,7 +53,7 @@ class RESDatatable(object):
             if sort_by:
                 if sort_by not in cells:
                     raise ValueError(
-                        u"{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
+                        u"{} is not a valid column api name for the data table: {}".format(sort_by, self.api_name))
                 rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                         reverse=is_reverse)
             if max_rows:
@@ -78,7 +76,7 @@ class RESDatatable(object):
                 cells = row["cells"]
 
                 if search_column not in cells:
-                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{} is not a valid column api name in for the data table {}".format(search_column, self.api_name))
                 column = cells.get(search_column)
                 value = column.get("value", None)
                 if value and value == search_value:
@@ -91,7 +89,7 @@ class RESDatatable(object):
         err_msg, return_value = None, None
         current_cells, formatted_cells = [], {}
 
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
+        uri = "/incidents/{}/table_data/{}/row_data/{}?handle_format=names".format(self.incident_id, self.api_name, row_id)
 
         def get_cell_value(cell_name, cells_to_update):
             """Function to get the new/old cell value"""
@@ -107,7 +105,7 @@ class RESDatatable(object):
         row = self.get_row(row_id)
 
         if not row:
-            raise ValueError("Could not find row to update for row_id: '{0}'".format(row_id))
+            raise ValueError("Could not find row to update for row_id: '{}'".format(row_id))
 
         for entry in row["cells"]:
             current_cells.append((entry, get_cell_value(entry, cells_to_update)))
@@ -121,23 +119,23 @@ class RESDatatable(object):
         try:
             return_value = self.res_client.put(uri, formatted_cells)
         except Exception as err:
-            if err.message:
-                err_msg = err.message
+            if err:
+                err_msg = str(err)
 
                 if u"not found" in err_msg.lower():
-                    err_msg = "Data Table {0} could not be found".format(self.api_name)
+                    err_msg = "Data Table {} could not be found".format(self.api_name)
 
                 return_value = {"error": err_msg}
 
             else:
-                raise ValueError(u"Could not update row in {0}. Unknown Error".format(self.api_name))
+                raise ValueError(u"Could not update row in {}. Unknown Error".format(self.api_name))
 
         return return_value
 
     def delete_row(self, row_id):
         """ Deletes the row. Returns the response from SOAR API or dict with the entry 'error'. """
 
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
+        uri = "/incidents/{}/table_data/{}/row_data/{}?handle_format=names".format(self.incident_id, self.api_name, row_id)
 
         try:
             return self.res_client.delete(uri)
@@ -157,7 +155,7 @@ class RESDatatable(object):
         # Search by rows_ids if defined
         elif rows_ids:
             # Convert input str to a list of rows ids
-            rows_ids_input = json.loads(rows_ids)
+            rows_ids_input = loads(rows_ids)
 
             # For each row returned from the datatable, compare row_ids with our list to delete
             for row in self.rows:
@@ -174,7 +172,7 @@ class RESDatatable(object):
             for row in self.rows:
                 cells = row["cells"]
                 if search_column not in cells:
-                    raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
+                    raise ValueError(u"{} is not a valid column api name in for the data table {}".format(search_column, self.api_name))
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
                     if row["id"] == row_id:
                         LOG.info("Queuing delete of current row: %s", row_id)
@@ -222,17 +220,16 @@ class RESDatatable(object):
 
     def get_dt_headers(self):
         """ Function that gets all the data and rows of a Data Table using the SOAR API """
-        uri = "/types/{0}?handle_format=names".format(self.api_name)
+        uri = "/types/{}?handle_format=names".format(self.api_name)
 
         try:
-            self.data = self.res_client.get(uri)
-            return self.data["fields"]
+            return self.res_client.get(uri)["fields"]
         except Exception:
-            raise ValueError(u"Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(u"Failed to get {} Datatable".format(self.api_name))
 
     def dt_add_rows(self, rows):
         """ Adds rows to datatable from uploaded CSV data """
-        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
+        uri = "/incidents/{}/table_data/{}/row_data?handle_format=names".format(self.incident_id, self.api_name)
 
         formatted_cells = { "cells": rows }
         try:
@@ -268,7 +265,7 @@ class RESDatatable(object):
         Returns:
             [json]: Similar API json for a delete action
         """
-        t = threading.Thread(target=threaded_delete, args=[self, workflow_id, row_id])
+        t = Thread(target=threaded_delete, args=[self, workflow_id, row_id])
         t.daemon = True
         t.start()
 
@@ -285,7 +282,7 @@ def get_function_input(inputs, input_name, optional=False, default=None):
     the_input = inputs.get(input_name, default)
 
     if the_input is None and optional is False:
-        err = "'{0}' is a mandatory function input".format(input_name)
+        err = "'{}' is a mandatory function input".format(input_name)
         raise ValueError(err)
     else:
         return the_input
@@ -348,7 +345,7 @@ def threaded_delete(datatable, workflow_id, row_id):
     wf = get_workflow_status(datatable.res_client, workflow_id)
     ndx = 0
     while wf.status == 'running' and ndx < MAX_LOOP:
-        time.sleep(sleep_time)
+        sleep(sleep_time)
         sleep_time += sleep_time
         sleep_time = min(sleep_time, MAX_SLEEP_UNTIL_WF_COMPLETES)
         wf = get_workflow_status(datatable.res_client, workflow_id)

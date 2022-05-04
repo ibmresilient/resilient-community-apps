@@ -5,7 +5,7 @@
 
 from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import *
+from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable
 from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_get_rows' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_get_rows' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
             results = payload.as_dict()
 
             LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_get_rows' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_get_rows' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

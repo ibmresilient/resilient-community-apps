@@ -28,10 +28,10 @@
 ## Release Notes
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v1.3.0  | 03/2022 | Function dt_utils_get_row can now get a row from menu of a datatable row |
-| v1.2.0  | 02/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
-| v1.1.0  | 11/2020    | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
-| v1.0.0  | 2/2019     | Initial Release |
+| v1.3.0  | 5/2022 | Function dt_utils_get_row can now get a row from menu of a datatable row |
+| v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
+| v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
+| v1.0.0  | 2/2019 | Initial Release |
 
 ---
 

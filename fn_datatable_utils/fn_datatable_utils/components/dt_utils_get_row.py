@@ -4,7 +4,7 @@
 """Function implementation"""
 
 from logging import getLogger
-from fn_datatable_utils.util.helper import *
+from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 
@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_get_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_get_row' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
@@ -91,12 +91,12 @@ class FunctionComponent(ResilientComponent):
 
             # If no row found, create a log and set success to False
             if not row:
-                yield StatusMessage(u"No row found in {0} for: search_column: {1}, search_value: {2}".format(
+                yield StatusMessage(u"No row found in {} for: search_column: {}, search_value: {}".format(
                     datatable.api_name, payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = False
             # Else, set the row in the payload
             else:
-                yield StatusMessage(u"Row found in {0}. row_id: {1}, search_column: {2}, search_value: {3}".format(
+                yield StatusMessage(u"Row found in {}. row_id: {}, search_column: {}, search_value: {}".format(
                     datatable.api_name, row["id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = True
                 payload.row = row
@@ -104,7 +104,7 @@ class FunctionComponent(ResilientComponent):
             results = payload.as_dict()
 
             LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_get_row' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_get_row' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

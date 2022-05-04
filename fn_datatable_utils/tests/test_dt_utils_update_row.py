@@ -6,8 +6,8 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.test_helper import *
-import json
+from tests.test_helper import DTResilientMock, dict_to_json_str
+from json import loads
 from copy import deepcopy
 
 PACKAGE_NAME = "fn_datatable_utils"
@@ -23,7 +23,8 @@ def call_dt_utils_update_row_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("dt_utils_update_row", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("dt_utils_update_row_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait(
+        "dt_utils_update_row_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -35,7 +36,7 @@ class TestDtUtilsUpdateRow:
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+        assert func
 
     inputs = {
         "incident_id": 1001,
@@ -59,7 +60,8 @@ class TestDtUtilsUpdateRow:
             }
         }
     }
-    output["inputs"]["dt_utils_cells_to_update"] = json.loads(output["inputs"]["dt_utils_cells_to_update"])
+    output["inputs"]["dt_utils_cells_to_update"] = loads(
+        output["inputs"]["dt_utils_cells_to_update"])
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     @pytest.mark.livetest
@@ -67,4 +69,4 @@ class TestDtUtilsUpdateRow:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_update_row_function(circuits_app, inputs)
-        assert(expected_results == results)
+        assert (expected_results == results)

@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_delete_rows' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_delete_rows' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
@@ -57,12 +57,12 @@ class FunctionComponent(ResilientComponent):
                 "dt_utils_delete_all_rows": bool(kwargs.get("dt_utils_delete_all_rows", False)), # bool (optional)
             }
 
-            LOG.info("incident_id: {0}".format(inputs["incident_id"]))
-            LOG.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
-            LOG.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
-            LOG.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
-            LOG.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
-            LOG.info(u"dt_utils_delete_all_rows: {0}".format(inputs["dt_utils_delete_all_rows"]))
+            LOG.info("incident_id: {}".format(inputs["incident_id"]))
+            LOG.info("dt_utils_datatable_api_name: {}".format(inputs["dt_utils_datatable_api_name"]))
+            LOG.info("dt_utils_rows_ids: {}".format(inputs["dt_utils_rows_ids"]))
+            LOG.info("dt_utils_search_column: {}".format(inputs["dt_utils_search_column"]))
+            LOG.info(u"dt_utils_search_value: {}".format(inputs["dt_utils_search_value"]))
+            LOG.info(u"dt_utils_delete_all_rows: {}".format(inputs["dt_utils_delete_all_rows"]))
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
@@ -99,18 +99,18 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("No row(s) found.")
 
             elif "error" in deleted_rows:
-                yield StatusMessage(u"Row(s) not deleted. Error: {0}".format(deleted_rows["error"]))
+                yield StatusMessage(u"Row(s) not deleted. Error: {}".format(deleted_rows.get("error")))
                 raise FunctionError("Failed to delete a row.")
 
             else:
-                yield StatusMessage("Row(s) {0} in {1} deleted.".format(deleted_rows, datatable.api_name))
+                yield StatusMessage("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
                 payload.rows_ids = deleted_rows
                 payload.success = True
 
             results = payload.as_dict()
 
             LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_delete_rows' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_delete_rows' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
