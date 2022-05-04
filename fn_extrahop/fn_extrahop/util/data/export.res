@@ -33,7 +33,12 @@
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) add artifact",
       "object_type": "extrahop_devices",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "21d3a3ea-cbd4-4301-bdfb-0e8976121887",
@@ -48,7 +53,7 @@
         }
       ],
       "workflows": [
-        "wf_extrahop_revealx_add_artifact"
+        "wf_extrahop_rx_add_artifact"
       ]
     },
     {
@@ -64,7 +69,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) assign tag",
-      "id": 84,
+      "id": 97,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) assign tag",
@@ -97,7 +102,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) create tag",
-      "id": 85,
+      "id": 98,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) create tag",
@@ -130,7 +135,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) get activitymaps",
-      "id": 86,
+      "id": 99,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) get activitymaps",
@@ -154,7 +159,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) get devices",
-      "id": 87,
+      "id": 100,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) get devices",
@@ -235,7 +240,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) get tags",
-      "id": 88,
+      "id": 101,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) get tags",
@@ -259,7 +264,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) get watchlist",
-      "id": 89,
+      "id": 102,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) get watchlist",
@@ -283,7 +288,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) search detections",
-      "id": 90,
+      "id": 103,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) search detections",
@@ -396,7 +401,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) search devices",
-      "id": 91,
+      "id": 104,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) search devices",
@@ -477,6 +482,120 @@
       "conditions": [
         {
           "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "equals",
+          "type": null,
+          "value": "DNS Name"
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "equals",
+          "type": null,
+          "value": "IP Address"
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "artifact.type",
+          "method": "equals",
+          "type": null,
+          "value": "MAC Address"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Example: Extrahop Reveal(x) search packets",
+      "id": 108,
+      "logic_type": "any",
+      "message_destinations": [],
+      "name": "Example: Extrahop Reveal(x) search packets",
+      "object_type": "artifact",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "384f2f6d-4679-4017-b1ab-db26f09d59d3",
+      "view_items": [
+        {
+          "content": "472c0398-165f-4543-a42e-e689031485a0",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "8230c857-e727-4b1d-825b-0a17fc5cc69a",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "12902179-0671-4cd1-ae3d-299f0aa41a86",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1d9d2ede-fabe-48d3-9f7f-33b0bd13a426",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f53ed073-19f7-4e0a-8059-2d5d10c4fb58",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "31bfb391-2463-4b8a-9865-c2b27431387e",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "b1f1135a-d790-4ff2-ade3-064b8d4e4b54",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "fb989c53-33df-4efb-a363-4fa6b070cd3d",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "b3d7cb90-2673-4733-97ae-ee3e837f43c9",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "wf_extrahop_rx_search_packets"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
           "field_name": "incident.plan_status",
           "method": "changed_to",
           "type": null,
@@ -485,7 +604,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) update detection",
-      "id": 92,
+      "id": 105,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) update detection",
@@ -532,7 +651,7 @@
       "custom_condition": "(1 AND 2) OR (1 AND 3)",
       "enabled": true,
       "export_key": "Example: Extrahop Reveal(x) update incident",
-      "id": 93,
+      "id": 106,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) update incident",
@@ -569,7 +688,12 @@
       "message_destinations": [],
       "name": "Example: Extrahop Reveal(x) update watchlist",
       "object_type": "extrahop_devices",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "7f295522-9fbf-49bb-8cc0-0d27e00f1299",
@@ -590,7 +714,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1650636615896,
+  "export_date": 1651593663157,
   "export_format_version": 2,
   "fields": [
     {
@@ -603,7 +727,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_owner_id",
       "hide_notification": false,
-      "id": 845,
+      "id": 888,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -637,7 +761,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_tag_name",
       "hide_notification": false,
-      "id": 846,
+      "id": 889,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -671,7 +795,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_always_return_body",
       "hide_notification": false,
-      "id": 847,
+      "id": 890,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -807,7 +931,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_update_time",
       "hide_notification": false,
-      "id": 848,
+      "id": 891,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -841,7 +965,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_port2",
       "hide_notification": false,
-      "id": 849,
+      "id": 892,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -909,7 +1033,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_resolution_id",
       "hide_notification": false,
-      "id": 850,
+      "id": 893,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -943,7 +1067,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_limit_search_duration",
       "hide_notification": false,
-      "id": 851,
+      "id": 894,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -977,7 +1101,7 @@
       "deprecated": false,
       "export_key": "__function/soar_inc_plan_status",
       "hide_notification": false,
-      "id": 852,
+      "id": 895,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1011,7 +1135,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_limit_bytes",
       "hide_notification": false,
-      "id": 853,
+      "id": 896,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1045,7 +1169,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_activitymap_id",
       "hide_notification": false,
-      "id": 854,
+      "id": 897,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1079,7 +1203,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_device_ids",
       "hide_notification": false,
-      "id": 855,
+      "id": 898,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1113,7 +1237,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_ip1",
       "hide_notification": false,
-      "id": 856,
+      "id": 899,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1147,7 +1271,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_sort",
       "hide_notification": false,
-      "id": 857,
+      "id": 900,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1181,7 +1305,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_search_filter",
       "hide_notification": false,
-      "id": 858,
+      "id": 901,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1215,7 +1339,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_participants",
       "hide_notification": false,
-      "id": 859,
+      "id": 902,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1249,7 +1373,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_bpf",
       "hide_notification": false,
-      "id": 860,
+      "id": 903,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1283,7 +1407,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_detection_id",
       "hide_notification": false,
-      "id": 861,
+      "id": 904,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1351,7 +1475,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 862,
+      "id": 905,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1386,7 +1510,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_ip2",
       "hide_notification": false,
-      "id": 863,
+      "id": 906,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1454,7 +1578,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_tag_id",
       "hide_notification": false,
-      "id": 864,
+      "id": 907,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1556,7 +1680,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_port1",
       "hide_notification": false,
-      "id": 865,
+      "id": 908,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1590,7 +1714,7 @@
       "deprecated": false,
       "export_key": "__function/extrahop_output",
       "hide_notification": false,
-      "id": 866,
+      "id": 909,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1658,7 +1782,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_active_until",
       "hide_notification": false,
-      "id": 827,
+      "id": 870,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1692,7 +1816,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_assignee",
       "hide_notification": false,
-      "id": 828,
+      "id": 871,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -1722,7 +1846,7 @@
           "label": ".none",
           "properties": null,
           "uuid": "a93a621d-62e0-43a7-bb56-a71e6707d1f5",
-          "value": 2057
+          "value": 2157
         },
         {
           "default": false,
@@ -1731,7 +1855,7 @@
           "label": ".me",
           "properties": null,
           "uuid": "8e0aa174-400f-4e12-8abc-ab236d17c7e3",
-          "value": 2058
+          "value": 2158
         },
         {
           "default": false,
@@ -1740,7 +1864,7 @@
           "label": "\u003cAdd user here\u003e",
           "properties": null,
           "uuid": "23ebf1ae-2fd5-4ec3-b535-9f47305bc63a",
-          "value": 2059
+          "value": 2159
         }
       ]
     },
@@ -1754,7 +1878,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_tag_name",
       "hide_notification": false,
-      "id": 829,
+      "id": 872,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1788,7 +1912,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_risk_score_min",
       "hide_notification": false,
-      "id": 830,
+      "id": 873,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1822,7 +1946,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_limit",
       "hide_notification": false,
-      "id": 831,
+      "id": 874,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1854,9 +1978,67 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/extrahop_port1",
+      "hide_notification": false,
+      "id": 931,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_port1",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Port1",
+      "tooltip": "(Optional) Return packets sent from or received on the specified port.",
+      "type_id": 6,
+      "uuid": "b1f1135a-d790-4ff2-ade3-064b8d4e4b54",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_port2",
+      "hide_notification": false,
+      "id": 932,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_port2",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Port2",
+      "tooltip": "(Optional)  Return packets sent from or received on the specified port.",
+      "type_id": 6,
+      "uuid": "b3d7cb90-2673-4733-97ae-ee3e837f43c9",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/extrahop_offset",
       "hide_notification": false,
-      "id": 832,
+      "id": 875,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1890,7 +2072,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_resolution",
       "hide_notification": false,
-      "id": 833,
+      "id": 876,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -1920,7 +2102,7 @@
           "label": ".none",
           "properties": null,
           "uuid": "2802166b-39b1-4828-a527-48ae376a40a0",
-          "value": 2060
+          "value": 2160
         },
         {
           "default": false,
@@ -1929,7 +2111,7 @@
           "label": "action_taken",
           "properties": null,
           "uuid": "8ce7fe8e-400f-4ea0-ac17-8213eff39f28",
-          "value": 2061
+          "value": 2161
         },
         {
           "default": false,
@@ -1938,7 +2120,7 @@
           "label": "no_action_taken",
           "properties": null,
           "uuid": "4abc9b23-db57-436b-9bf8-b5dd23c084de",
-          "value": 2062
+          "value": 2162
         }
       ]
     },
@@ -1952,7 +2134,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_search_value",
       "hide_notification": false,
-      "id": 834,
+      "id": 877,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1986,7 +2168,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_update_time",
       "hide_notification": false,
-      "id": 835,
+      "id": 878,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -2020,7 +2202,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_category",
       "hide_notification": false,
-      "id": 836,
+      "id": 879,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2050,7 +2232,7 @@
           "label": "sec",
           "properties": null,
           "uuid": "293158dc-be19-4eec-9302-86b26e23f518",
-          "value": 2063
+          "value": 2163
         },
         {
           "default": false,
@@ -2059,7 +2241,7 @@
           "label": "sec.action",
           "properties": null,
           "uuid": "9243383d-0f2a-4a65-b479-1540069ad322",
-          "value": 2064
+          "value": 2164
         },
         {
           "default": false,
@@ -2068,7 +2250,7 @@
           "label": "sec.botnet",
           "properties": null,
           "uuid": "21264bf3-fa85-4b68-86d9-a28b32e75e74",
-          "value": 2065
+          "value": 2165
         },
         {
           "default": false,
@@ -2077,7 +2259,7 @@
           "label": "sec.caution",
           "properties": null,
           "uuid": "c2f7759a-a59b-4255-942a-dc419ac9164d",
-          "value": 2066
+          "value": 2166
         },
         {
           "default": false,
@@ -2086,7 +2268,7 @@
           "label": "sec.command",
           "properties": null,
           "uuid": "12de344f-1530-4281-8c04-156eb7a96e69",
-          "value": 2067
+          "value": 2167
         },
         {
           "default": false,
@@ -2095,7 +2277,7 @@
           "label": "sec.cryptomining",
           "properties": null,
           "uuid": "eafc1a6a-8b4a-4da2-a38c-226d693264b9",
-          "value": 2068
+          "value": 2168
         },
         {
           "default": false,
@@ -2104,7 +2286,7 @@
           "label": "sec.dos",
           "properties": null,
           "uuid": "0aa4d5e2-a6f8-4370-a722-a2fa2f1fca06",
-          "value": 2069
+          "value": 2169
         },
         {
           "default": false,
@@ -2113,7 +2295,7 @@
           "label": "sec.exploit",
           "properties": null,
           "uuid": "24a1fac1-ae61-4d65-bd9e-8f441c1d3eaa",
-          "value": 2070
+          "value": 2170
         },
         {
           "default": false,
@@ -2122,7 +2304,7 @@
           "label": "sec.exfil",
           "properties": null,
           "uuid": "c0084e0a-b26b-4b73-9d92-679089b17fc8",
-          "value": 2071
+          "value": 2171
         },
         {
           "default": false,
@@ -2131,7 +2313,7 @@
           "label": "sec.lateral",
           "properties": null,
           "uuid": "14042b10-eb38-48f0-adfa-c3e81556849d",
-          "value": 2072
+          "value": 2172
         },
         {
           "default": false,
@@ -2140,7 +2322,7 @@
           "label": "sec.ransomware",
           "properties": null,
           "uuid": "24f6b5e4-3abd-4f75-8adc-46a4c6130ec4",
-          "value": 2073
+          "value": 2173
         },
         {
           "default": false,
@@ -2149,7 +2331,7 @@
           "label": "sec.recon",
           "properties": null,
           "uuid": "32589123-52f9-4cb9-8b2d-1845b74bf5e4",
-          "value": 2074
+          "value": 2174
         }
       ]
     },
@@ -2163,7 +2345,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_ticket_id",
       "hide_notification": false,
-      "id": 837,
+      "id": 880,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -2193,7 +2375,7 @@
           "label": ".none",
           "properties": null,
           "uuid": "89968a23-0b83-4a17-b3cf-8817e7e1143e",
-          "value": 2075
+          "value": 2175
         },
         {
           "default": false,
@@ -2202,7 +2384,64 @@
           "label": "\u003cAdd SOAR incident ID here\u003e",
           "properties": null,
           "uuid": "e36c1cb9-e23d-4b86-b121-e13f6848f39b",
-          "value": 2076
+          "value": 2176
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_output",
+      "hide_notification": false,
+      "id": 910,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_output",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Output",
+      "tooltip": "(Optional) The output format. * `pcap` - .pcap file * `keylog_txt` - A keylog.txt file that can be loaded in wireshark to decode ssl packets. * `zip` - A zip file containing both a packets.pcap and keylog.txt.",
+      "type_id": 6,
+      "uuid": "f53ed073-19f7-4e0a-8059-2d5d10c4fb58",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "pcap",
+          "properties": null,
+          "uuid": "43f9c667-6491-40a2-a0eb-5033a421c450",
+          "value": 2234
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "keylog_txt",
+          "properties": null,
+          "uuid": "848b5822-d325-43d0-9132-569b99f0132f",
+          "value": 2235
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "zip",
+          "properties": null,
+          "uuid": "b56d5860-0000-4d6c-80ac-1f6936a8b108",
+          "value": 2236
         }
       ]
     },
@@ -2261,6 +2500,35 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_ip2",
+      "hide_notification": false,
+      "id": 934,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_ip2",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Ip2",
+      "tooltip": "(Optional) Return packets sent to or received by the specified IP address.",
+      "type_id": 6,
+      "uuid": "fb989c53-33df-4efb-a363-4fa6b070cd3d",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
       "blank_option": true,
       "calculated": false,
       "changeable": true,
@@ -2269,7 +2537,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_search_type",
       "hide_notification": false,
-      "id": 838,
+      "id": 881,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2299,7 +2567,7 @@
           "label": "any",
           "properties": null,
           "uuid": "8276c5a2-f8d0-4361-988f-0227fa8262b6",
-          "value": 2077
+          "value": 2177
         },
         {
           "default": false,
@@ -2308,7 +2576,7 @@
           "label": "name",
           "properties": null,
           "uuid": "05685c68-2b4e-456e-bad0-6bb6339acb1f",
-          "value": 2078
+          "value": 2178
         },
         {
           "default": false,
@@ -2317,7 +2585,7 @@
           "label": "discovery_id",
           "properties": null,
           "uuid": "cbfd6cf3-5d01-4bc4-8d1b-a7b0cd0b04be",
-          "value": 2079
+          "value": 2179
         },
         {
           "default": false,
@@ -2326,7 +2594,7 @@
           "label": "ip address",
           "properties": null,
           "uuid": "ec95787b-a0f8-409e-ab14-5a77e453cb9d",
-          "value": 2080
+          "value": 2180
         },
         {
           "default": false,
@@ -2335,7 +2603,7 @@
           "label": "mac address",
           "properties": null,
           "uuid": "7c13af45-60e3-48f0-afc6-b28e486c8c36",
-          "value": 2081
+          "value": 2181
         },
         {
           "default": false,
@@ -2344,7 +2612,7 @@
           "label": "vendor",
           "properties": null,
           "uuid": "a5a8c59b-fa8a-41b0-b6ad-e40e8cd08823",
-          "value": 2082
+          "value": 2182
         },
         {
           "default": false,
@@ -2353,7 +2621,7 @@
           "label": "type",
           "properties": null,
           "uuid": "d1fd9de4-0499-4374-a7dc-e9307ea795f7",
-          "value": 2083
+          "value": 2183
         },
         {
           "default": false,
@@ -2362,7 +2630,7 @@
           "label": "tag",
           "properties": null,
           "uuid": "0772e646-8fee-4df1-91e8-90cdd464f358",
-          "value": 2084
+          "value": 2184
         },
         {
           "default": false,
@@ -2371,7 +2639,7 @@
           "label": "activity",
           "properties": null,
           "uuid": "7670eeb0-792d-498b-92f2-6386038dbd82",
-          "value": 2085
+          "value": 2185
         },
         {
           "default": false,
@@ -2380,7 +2648,7 @@
           "label": "node",
           "properties": null,
           "uuid": "84ce8788-aafa-475e-9a0b-74eb59f6a8d2",
-          "value": 2086
+          "value": 2186
         },
         {
           "default": false,
@@ -2389,7 +2657,7 @@
           "label": "vlan",
           "properties": null,
           "uuid": "6e2316fd-dc8c-48aa-911d-8313a3d37ac6",
-          "value": 2087
+          "value": 2187
         },
         {
           "default": false,
@@ -2398,7 +2666,7 @@
           "label": "discover time",
           "properties": null,
           "uuid": "8081cae6-138d-4e7e-a6d2-dd5325abeb8c",
-          "value": 2088
+          "value": 2188
         }
       ]
     },
@@ -2412,7 +2680,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_device_field",
       "hide_notification": false,
-      "id": 839,
+      "id": 882,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2442,7 +2710,7 @@
           "label": "discovery_id",
           "properties": null,
           "uuid": "2730f40e-b05b-4d84-9c42-ef6131b64c72",
-          "value": 2089
+          "value": 2189
         },
         {
           "default": false,
@@ -2451,7 +2719,7 @@
           "label": "ipaddr",
           "properties": null,
           "uuid": "0f5c90a2-50e2-42d9-9f76-09fe1f9e2363",
-          "value": 2090
+          "value": 2190
         },
         {
           "default": false,
@@ -2460,7 +2728,7 @@
           "label": "macaddr",
           "properties": null,
           "uuid": "4190648b-c34e-4e38-af86-c2b161ed1bc9",
-          "value": 2091
+          "value": 2191
         },
         {
           "default": false,
@@ -2469,7 +2737,7 @@
           "label": "vendor",
           "properties": null,
           "uuid": "a16c1db3-43bc-4aea-afec-d1ecf031cbd3",
-          "value": 2092
+          "value": 2192
         },
         {
           "default": false,
@@ -2478,7 +2746,7 @@
           "label": "tag",
           "properties": null,
           "uuid": "8f7d8ec9-ae78-46f6-b81d-91a6c44b9590",
-          "value": 2093
+          "value": 2193
         },
         {
           "default": false,
@@ -2487,7 +2755,7 @@
           "label": "activity",
           "properties": null,
           "uuid": "dd2b7013-2202-4b01-8d88-cd8f7460f1c4",
-          "value": 2094
+          "value": 2194
         },
         {
           "default": false,
@@ -2496,7 +2764,7 @@
           "label": "node",
           "properties": null,
           "uuid": "4f1aa3df-8531-4e42-a778-f7c1a22de1c8",
-          "value": 2095
+          "value": 2195
         },
         {
           "default": false,
@@ -2505,7 +2773,7 @@
           "label": "vlan",
           "properties": null,
           "uuid": "6c13996a-49a1-4a7a-9940-40bf0fcafeec",
-          "value": 2096
+          "value": 2196
         },
         {
           "default": false,
@@ -2514,7 +2782,7 @@
           "label": "discover_time",
           "properties": null,
           "uuid": "0d1f23e5-5346-4e43-80e4-efd7cbfb6f37",
-          "value": 2097
+          "value": 2197
         },
         {
           "default": false,
@@ -2523,7 +2791,7 @@
           "label": "role",
           "properties": null,
           "uuid": "6044bc54-440e-4469-8b7e-6dd6870ec0c0",
-          "value": 2098
+          "value": 2198
         },
         {
           "default": false,
@@ -2532,7 +2800,7 @@
           "label": "dns_name",
           "properties": null,
           "uuid": "61b1b210-3a30-4eaa-a89e-ec5375e22931",
-          "value": 2099
+          "value": 2199
         },
         {
           "default": false,
@@ -2541,7 +2809,7 @@
           "label": "dhcp_name",
           "properties": null,
           "uuid": "097e0c85-1044-439e-9f77-306643eb9fcb",
-          "value": 2100
+          "value": 2200
         },
         {
           "default": false,
@@ -2550,7 +2818,7 @@
           "label": "netbios_name",
           "properties": null,
           "uuid": "a9ae1a7d-009a-4660-b12b-27424bd52ca7",
-          "value": 2101
+          "value": 2201
         },
         {
           "default": false,
@@ -2559,7 +2827,7 @@
           "label": "cdp_name",
           "properties": null,
           "uuid": "6a567a0d-64a4-41cc-a81b-ecf291f239a2",
-          "value": 2102
+          "value": 2202
         },
         {
           "default": false,
@@ -2568,7 +2836,7 @@
           "label": "custom_name",
           "properties": null,
           "uuid": "ef474d05-0503-4db5-ae0e-443df1f68971",
-          "value": 2103
+          "value": 2203
         },
         {
           "default": false,
@@ -2577,7 +2845,7 @@
           "label": "software",
           "properties": null,
           "uuid": "c450d794-c786-42e5-9d98-d6d3c45aec58",
-          "value": 2104
+          "value": 2204
         },
         {
           "default": false,
@@ -2586,7 +2854,7 @@
           "label": "model",
           "properties": null,
           "uuid": "101aae35-0531-438d-a023-83d66de357dc",
-          "value": 2105
+          "value": 2205
         },
         {
           "default": false,
@@ -2595,7 +2863,7 @@
           "label": "is_critical",
           "properties": null,
           "uuid": "177a48cc-4b20-438f-ba55-aa11961616ed",
-          "value": 2106
+          "value": 2206
         },
         {
           "default": false,
@@ -2604,7 +2872,7 @@
           "label": "instance_id",
           "properties": null,
           "uuid": "5cb4370e-dd3b-4781-b31b-70e25c6b2bd0",
-          "value": 2107
+          "value": 2207
         },
         {
           "default": false,
@@ -2613,7 +2881,7 @@
           "label": "instance_name",
           "properties": null,
           "uuid": "0938494c-92d3-4d3f-bbbf-d646bab57ad1",
-          "value": 2108
+          "value": 2208
         },
         {
           "default": false,
@@ -2622,7 +2890,7 @@
           "label": "instance_type",
           "properties": null,
           "uuid": "10afbf66-8cd9-4d51-94f3-44648237a858",
-          "value": 2109
+          "value": 2209
         },
         {
           "default": false,
@@ -2631,7 +2899,7 @@
           "label": "cloud_account",
           "properties": null,
           "uuid": "cfa4d607-67ba-4194-9184-bc71286f9056",
-          "value": 2110
+          "value": 2210
         },
         {
           "default": false,
@@ -2640,7 +2908,7 @@
           "label": "vpc_id",
           "properties": null,
           "uuid": "03f945a4-4a9a-4cbe-82f9-b1d8a5615f21",
-          "value": 2111
+          "value": 2211
         },
         {
           "default": false,
@@ -2649,7 +2917,7 @@
           "label": "subnet_id",
           "properties": null,
           "uuid": "7a0a016c-744e-478a-a111-c20dbb97e42a",
-          "value": 2112
+          "value": 2212
         },
         {
           "default": false,
@@ -2658,7 +2926,7 @@
           "label": "is_active",
           "properties": null,
           "uuid": "1f119129-1f37-4c14-bf43-f2ec6ba0d6d5",
-          "value": 2113
+          "value": 2213
         }
       ]
     },
@@ -2672,7 +2940,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_device_id",
       "hide_notification": false,
-      "id": 840,
+      "id": 883,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -2698,6 +2966,64 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_limit_search_duration",
+      "hide_notification": false,
+      "id": 911,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_limit_search_duration",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Limit search duration",
+      "tooltip": "The maximum amount of time to run the packet search.The default unit is milliseconds, but other units can be specified with a unit suffix. ",
+      "type_id": 6,
+      "uuid": "12902179-0671-4cd1-ae3d-299f0aa41a86",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/extrahop_limit_bytes",
+      "hide_notification": false,
+      "id": 912,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_limit_bytes",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Limit bytes",
+      "tooltip": "The maximum number of bytes to return.",
+      "type_id": 6,
+      "uuid": "1d9d2ede-fabe-48d3-9f7f-33b0bd13a426",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
       "blank_option": true,
       "calculated": false,
       "changeable": true,
@@ -2717,7 +3043,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Artifact type",
       "tooltip": "SOAR artifact type.",
@@ -2761,9 +3092,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/extrahop_ip1",
+      "hide_notification": false,
+      "id": 933,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "extrahop_ip1",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Ip1",
+      "tooltip": "(Optional) Return packets sent to or received by the specified IP address.",
+      "type_id": 6,
+      "uuid": "31bfb391-2463-4b8a-9865-c2b27431387e",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/extrahop_active_from",
       "hide_notification": false,
-      "id": 841,
+      "id": 884,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -2797,7 +3157,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_device_operand",
       "hide_notification": false,
-      "id": 842,
+      "id": 885,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2831,7 +3191,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_detection_status",
       "hide_notification": false,
-      "id": 843,
+      "id": 886,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -2861,7 +3221,7 @@
           "label": "in_prog",
           "properties": null,
           "uuid": "87555e4f-33cd-4feb-a3ed-08ab0af48d61",
-          "value": 2114
+          "value": 2214
         },
         {
           "default": false,
@@ -2870,7 +3230,7 @@
           "label": ".none",
           "properties": null,
           "uuid": "eb27e6c5-591f-4079-a13d-ece052da2454",
-          "value": 2115
+          "value": 2215
         },
         {
           "default": false,
@@ -2879,7 +3239,7 @@
           "label": "new",
           "properties": null,
           "uuid": "dccce03e-a76d-435e-a5bf-b92c995ecd24",
-          "value": 2116
+          "value": 2216
         },
         {
           "default": false,
@@ -2888,7 +3248,7 @@
           "label": "in_progress",
           "properties": null,
           "uuid": "94693fd9-c2cd-4023-a484-0dba4786dc7a",
-          "value": 2117
+          "value": 2217
         },
         {
           "default": false,
@@ -2897,7 +3257,7 @@
           "label": "closed",
           "properties": null,
           "uuid": "fc0515ab-6db1-40fd-85d2-c8712c2e7d1e",
-          "value": 2118
+          "value": 2218
         },
         {
           "default": false,
@@ -2906,7 +3266,7 @@
           "label": "acknowledged",
           "properties": null,
           "uuid": "eb135393-3563-4892-a374-0ac05a960f1c",
-          "value": 2119
+          "value": 2219
         }
       ]
     },
@@ -2920,7 +3280,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/extrahop_device_operator",
       "hide_notification": false,
-      "id": 844,
+      "id": 887,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2950,7 +3310,7 @@
           "label": "\u003e",
           "properties": null,
           "uuid": "8a139075-72c8-4943-9201-a4e5a05ecb07",
-          "value": 2120
+          "value": 2220
         },
         {
           "default": false,
@@ -2959,7 +3319,7 @@
           "label": "\u003c",
           "properties": null,
           "uuid": "a2aa575a-482b-4d48-a37d-77a243b15acd",
-          "value": 2121
+          "value": 2221
         },
         {
           "default": false,
@@ -2968,7 +3328,7 @@
           "label": "\u003c=",
           "properties": null,
           "uuid": "3646ac86-6567-46e6-9373-4c6bb4b28e48",
-          "value": 2122
+          "value": 2222
         },
         {
           "default": false,
@@ -2977,7 +3337,7 @@
           "label": "\u003e=",
           "properties": null,
           "uuid": "f3d656d2-b9ba-45ef-bbc0-02c32c5d8a2b",
-          "value": 2123
+          "value": 2223
         },
         {
           "default": false,
@@ -2986,7 +3346,7 @@
           "label": "=",
           "properties": null,
           "uuid": "2075cd22-340a-47da-859c-efa5089cb62c",
-          "value": 2124
+          "value": 2224
         },
         {
           "default": false,
@@ -2995,7 +3355,7 @@
           "label": "!=",
           "properties": null,
           "uuid": "0628d67d-53d3-47bc-8762-e87b53553a6a",
-          "value": 2125
+          "value": 2225
         },
         {
           "default": false,
@@ -3004,7 +3364,7 @@
           "label": "startswith",
           "properties": null,
           "uuid": "4ea81c01-fbd9-41be-a867-5c1d80ae2077",
-          "value": 2126
+          "value": 2226
         },
         {
           "default": false,
@@ -3013,7 +3373,7 @@
           "label": "and",
           "properties": null,
           "uuid": "da76852e-9b7f-4d7f-bfaa-2eb84ae87ecf",
-          "value": 2127
+          "value": 2227
         },
         {
           "default": false,
@@ -3022,7 +3382,7 @@
           "label": "or",
           "properties": null,
           "uuid": "25d76027-4435-490b-a80f-cd1d16f59e1c",
-          "value": 2128
+          "value": 2228
         },
         {
           "default": false,
@@ -3031,7 +3391,7 @@
           "label": "not",
           "properties": null,
           "uuid": "05ba4f6a-a4c9-48ad-83f5-fe237ffc0c54",
-          "value": 2129
+          "value": 2229
         },
         {
           "default": false,
@@ -3040,7 +3400,7 @@
           "label": "exists",
           "properties": null,
           "uuid": "24995edf-8e15-49b2-939a-c8e15b38a078",
-          "value": 2130
+          "value": 2230
         },
         {
           "default": false,
@@ -3049,7 +3409,7 @@
           "label": "not_exists",
           "properties": null,
           "uuid": "32e77a93-9ae1-435f-b3ca-adb3cc112043",
-          "value": 2131
+          "value": 2231
         },
         {
           "default": false,
@@ -3058,7 +3418,7 @@
           "label": "~",
           "properties": null,
           "uuid": "e510fb35-0655-41e5-a327-6b2d04ca656e",
-          "value": 2132
+          "value": 2232
         },
         {
           "default": false,
@@ -3067,7 +3427,7 @@
           "label": "!~",
           "properties": null,
           "uuid": "311e239d-a020-4721-88f0-7c8e10317090",
-          "value": 2133
+          "value": 2233
         }
       ]
     },
@@ -3391,7 +3751,7 @@
   ],
   "functions": [
     {
-      "created_date": 1650038602123,
+      "created_date": 1651162998409,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3405,14 +3765,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) assign tag",
       "export_key": "funct_extrahop_rx_assign_tag",
-      "id": 58,
+      "id": 68,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650540111230,
+      "last_modified_time": 1651162998568,
       "name": "funct_extrahop_rx_assign_tag",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_device_ids\": \"3\", \"extrahop_tag_id\": 5}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 810, \"timestamp\": \"2022-04-13 17:19:42\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_device_ids\": {\"type\": \"string\"}, \"extrahop_tag_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3423,7 +3783,7 @@
         }
       ],
       "uuid": "f0d2fc8c-20ab-440c-b4f5-46776a0b561e",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "5da7da21-5ae6-424a-9b37-c2d6eb0fc501",
@@ -3456,12 +3816,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 66
+          "workflow_id": 83
         }
       ]
     },
     {
-      "created_date": 1650038602233,
+      "created_date": 1651162998652,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3475,14 +3835,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) create tag",
       "export_key": "funct_extrahop_rx_create_tag",
-      "id": 59,
+      "id": 69,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650540250794,
+      "last_modified_time": 1651162998804,
       "name": "funct_extrahop_rx_create_tag",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"extrahop_tag_name\": \"TEST_TAG_1\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 798, \"timestamp\": \"2022-04-13 17:22:37\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_tag_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3493,7 +3853,7 @@
         }
       ],
       "uuid": "d566e4b3-6692-4599-a351-7530cdb4874e",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "9274ccb1-cebb-4be8-b7f1-f768f0eabbcf",
@@ -3518,12 +3878,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 70
+          "workflow_id": 77
         }
       ]
     },
     {
-      "created_date": 1650038602321,
+      "created_date": 1651162998871,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3537,14 +3897,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get activitymaps",
       "export_key": "funct_extrahop_rx_get_activitymaps",
-      "id": 60,
+      "id": 70,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650546887487,
+      "last_modified_time": 1651162999071,
       "name": "funct_extrahop_rx_get_activitymaps",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"id\": 1, \"name\": \"Test_activity_map_1\", \"short_code\": \"wGCGL\", \"description\": \"Test map 1\", \"weighting\": \"bytes\", \"owner\": \"setup\", \"mode\": \"2dforce\", \"mod_time\": 1644514002331, \"show_alert_status\": false, \"walks\": [{\"origins\": [{\"object_type\": \"device\", \"object_id\": 6}], \"steps\": [{\"relationships\": [{\"protocol\": \"any\", \"role\": \"any\"}]}]}], \"rights\": [\"delete\", \"edit\", \"share\", \"transfer\", \"view\"]}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 1063, \"timestamp\": \"2022-04-13 16:50:16\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"short_code\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"weighting\": {\"type\": \"string\"}, \"owner\": {\"type\": \"string\"}, \"mode\": {\"type\": \"string\"}, \"mod_time\": {\"type\": \"integer\"}, \"show_alert_status\": {\"type\": \"boolean\"}, \"walks\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"origins\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"object_type\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}}}}, \"steps\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"relationships\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"protocol\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}}}}}}}}}}, \"rights\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3555,7 +3915,7 @@
         }
       ],
       "uuid": "18aa0964-745b-4329-a04b-a92f5f3fab40",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "f1d0366d-e216-4071-8070-c67fe27f834b",
@@ -3580,12 +3940,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 64
+          "workflow_id": 81
         }
       ]
     },
     {
-      "created_date": 1650038602453,
+      "created_date": 1651162999154,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3599,14 +3959,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get detections",
       "export_key": "funct_extrahop_rx_get_detections",
-      "id": 61,
+      "id": 71,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650547230376,
+      "last_modified_time": 1651162999308,
       "name": "funct_extrahop_rx_get_detections",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": {\"id\": 71, \"start_time\": 1646559540000, \"update_time\": 1647656040000, \"end_time\": 1647051270000, \"title\": \"Weekly Summary: Weak Cipher Suites\", \"description\": \"Over the past week, servers negotiated SSL/TLS sessions with a cipher suite that includes an encryption algorithm that is known to be vulnerable. Cipher suites that contain weak encryption algorithms such as CBC, 3DES, RC4, null, anonymous, and export should be removed from servers and replaced with stronger cipher suites.\", \"categories\": [\"sec\", \"sec.caution\"], \"risk_score\": 61, \"type\": \"weak_cipher\", \"participants\": [{\"object_type\": \"device\", \"object_id\": 3, \"role\": \"offender\", \"external\": false, \"id\": 175}, {\"object_type\": \"device\", \"object_id\": 6, \"role\": \"offender\", \"external\": false, \"id\": 179}], \"ticket_id\": \"3055\", \"assignee\": \"a@a.com\", \"status\": \"in_progress\", \"resolution\": null, \"properties\": {}, \"mitre_tactics\": [], \"mitre_techniques\": [], \"appliance_id\": 0, \"is_user_created\": false}}, \"raw\": null, \"inputs\": {\"extrahop_detection_id\": 71}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 1373, \"timestamp\": \"2022-04-13 17:01:56\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"start_time\": {\"type\": \"integer\"}, \"update_time\": {\"type\": \"integer\"}, \"end_time\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"risk_score\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"participants\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"object_type\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}, \"role\": {\"type\": \"string\"}, \"external\": {\"type\": \"boolean\"}, \"id\": {\"type\": \"integer\"}}}}, \"ticket_id\": {\"type\": \"string\"}, \"assignee\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"resolution\": {}, \"properties\": {\"type\": \"object\"}, \"mitre_tactics\": {\"type\": \"array\"}, \"mitre_techniques\": {\"type\": \"array\"}, \"appliance_id\": {\"type\": \"integer\"}, \"is_user_created\": {\"type\": \"boolean\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_detection_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3617,7 +3977,7 @@
         }
       ],
       "uuid": "fc71fc68-991e-4825-bc07-2191e58745f3",
-      "version": 3,
+      "version": 1,
       "view_items": [
         {
           "content": "2cd40098-aebb-4efd-8b30-eca7edfb8438",
@@ -3650,7 +4010,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 72
+          "workflow_id": 79
         }
       ]
     },
@@ -3760,7 +4120,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 67
+          "workflow_id": 75
         },
         {
           "actions": [],
@@ -3775,7 +4135,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 72
+          "workflow_id": 79
         },
         {
           "actions": [],
@@ -3783,14 +4143,19 @@
           "name": "Example: Extrahop Reveal(x) update watchlist",
           "object_type": "extrahop_devices",
           "programmatic_name": "wf_extrahop_rx_update_watchlist",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_extrahop",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 74
         }
       ]
     },
     {
-      "created_date": 1650038602705,
+      "created_date": 1651162999469,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3804,14 +4169,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get tags",
       "export_key": "funct_extrahop_rx_get_tags",
-      "id": 62,
+      "id": 72,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650548526611,
+      "last_modified_time": 1651162999621,
       "name": "funct_extrahop_rx_get_tags",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1646045416014, \"id\": 1, \"name\": \"TEST_TAG_1\"}, {\"mod_time\": 1646064909025, \"id\": 2, \"name\": \"TEST_TAG_2\"}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 969, \"timestamp\": \"2022-04-13 17:19:40\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3822,7 +4187,7 @@
         }
       ],
       "uuid": "55ced5bd-cd23-4212-b661-956fed40722b",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "5da7da21-5ae6-424a-9b37-c2d6eb0fc501",
@@ -3847,7 +4212,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 66
+          "workflow_id": 83
         },
         {
           "actions": [],
@@ -3862,12 +4227,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 62
+          "workflow_id": 84
         }
       ]
     },
     {
-      "created_date": 1650038602903,
+      "created_date": 1651162999698,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3881,14 +4246,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) get watchlist",
       "export_key": "funct_extrahop_rx_get_watchlist",
-      "id": 63,
+      "id": 73,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650038602974,
+      "last_modified_time": 1651162999906,
       "name": "funct_extrahop_rx_get_watchlist",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1647052291076, \"node_id\": null, \"id\": 6, \"extrahop_id\": \"027437b63df40000\", \"discovery_id\": \"027437b63df40000\", \"display_name\": \"Device 027437b63df40000\", \"description\": null, \"user_mod_time\": 1646046972271, \"discover_time\": 1644418590000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"02:74:37:B6:3D:F4\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"192.168.1.2\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 027437b63df40000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"http_server\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"http_server\", \"on_watchlist\": true, \"last_seen_time\": 1647052260000, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 739, \"timestamp\": \"2022-04-13 16:50:11\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"node_id\": {}, \"id\": {\"type\": \"integer\"}, \"extrahop_id\": {\"type\": \"string\"}, \"discovery_id\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}, \"description\": {}, \"user_mod_time\": {\"type\": \"integer\"}, \"discover_time\": {\"type\": \"integer\"}, \"vlanid\": {\"type\": \"integer\"}, \"parent_id\": {}, \"macaddr\": {\"type\": \"string\"}, \"vendor\": {}, \"is_l3\": {\"type\": \"boolean\"}, \"ipaddr4\": {\"type\": \"string\"}, \"ipaddr6\": {}, \"device_class\": {\"type\": \"string\"}, \"default_name\": {\"type\": \"string\"}, \"custom_name\": {}, \"cdp_name\": {\"type\": \"string\"}, \"dhcp_name\": {\"type\": \"string\"}, \"netbios_name\": {\"type\": \"string\"}, \"dns_name\": {\"type\": \"string\"}, \"custom_type\": {\"type\": \"string\"}, \"auto_role\": {\"type\": \"string\"}, \"analysis_level\": {\"type\": \"integer\"}, \"analysis\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}, \"on_watchlist\": {\"type\": \"boolean\"}, \"last_seen_time\": {\"type\": \"integer\"}, \"model\": {}, \"model_override\": {}, \"custom_make\": {}, \"custom_model\": {}, \"critical\": {\"type\": \"boolean\"}, \"custom_criticality\": {}, \"cloud_instance_id\": {}, \"cloud_instance_type\": {}, \"cloud_instance_name\": {}, \"cloud_account\": {}, \"vpc_id\": {}, \"subnet_id\": {}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3915,12 +4280,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 63
+          "workflow_id": 80
         }
       ]
     },
     {
-      "created_date": 1650038603020,
+      "created_date": 1651162999999,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -3934,14 +4299,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search detections",
       "export_key": "funct_extrahop_rx_search_detections",
-      "id": 64,
+      "id": 74,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650552663315,
+      "last_modified_time": 1651163000156,
       "name": "funct_extrahop_rx_search_detections",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"id\": 3, \"start_time\": 1644540480000, \"update_time\": 1644642690000, \"end_time\": 1644556530000, \"title\": \"Daily Summary: Inbound Suspicious Connections\", \"description\": \"Over the past day, servers received connections from devices with suspicious IP addresses. These IP addresses are considered suspicious based on threat intelligence found in your Reveal(x) system. Investigate to determine if the IP addresses are from malicious endpoints.\\n\\nSuspicious IP addresses linked to this detection:\\n* 109.237.103.9\\n* 45.83.65.214\\n* 45.83.67.186\\n* 185.220.101.63\\n* 185.220.101.191\\n* 130.211.54.158\\n* 192.241.212.103\", \"categories\": [\"sec\", \"sec.caution\"], \"risk_score\": 60, \"type\": \"ti_tcp_incoming\", \"participants\": [{\"object_type\": \"device\", \"object_id\": 2, \"role\": \"victim\", \"external\": false, \"id\": 8}, {\"object_type\": \"device\", \"object_id\": 6, \"role\": \"victim\", \"external\": false, \"id\": 11}], \"ticket_id\": null, \"assignee\": null, \"status\": \"in_progress\", \"resolution\": null, \"properties\": {\"suspicious_ipaddr\": {\"type\": \"ipaddr\", \"value\": [\"192.168.1.9\", \"192.168.1.214\", \"192.168.1.186\", \"192.168.1.63\", \"192.168.1.191\", \"192.168.1.158\", \"192.168.2.103\"]}}, \"mitre_tactics\": [], \"mitre_techniques\": [], \"appliance_id\": 0, \"is_user_created\": false}, {\"id\": 79, \"start_time\": 1646741073962, \"update_time\": 1646741073962, \"end_time\": 1646741073962, \"title\": \"CVE-2019-0708 RDP Exploit Attempt\", \"description\": \"[Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1646741073\u0026interval_type=DT\u0026until=1646741073) received a Remote Desktop Protocol (RDP) connection request that is consistent with a known vulnerability, also known as BlueKeep, in older versions of Microsoft Windows. This vulnerability allows an unauthenticated attacker to remotely run arbitrary code on an RDP server. The attacker can then tamper with data or install malware that could propagate to other Windows devices across the network. Investigate to determine if [Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1646741073\u0026interval_type=DT\u0026until=1646741073) is hosting a version affected by CVE-2019-0708: Windows 7, Windows XP, Windows Vista, Windows Server 2003, and Windows Server 2008.\", \"categories\": [\"sec\", \"sec.exploit\"], \"risk_score\": 98, \"type\": \"cve_2019_0708\", \"participants\": [{\"object_type\": \"device\", \"object_id\": 2, \"role\": \"victim\", \"external\": false, \"id\": 194}, {\"object_type\": \"ipaddr\", \"object_value\": \"216.218.206.66\", \"role\": \"offender\", \"external\": true, \"id\": 195}], \"ticket_id\": \"2529\", \"assignee\": \"a@a.com\", \"status\": \"in_progress\", \"resolution\": null, \"properties\": {\"client_port\": 45214, \"server_port\": 3389}, \"mitre_tactics\": [{\"id\": \"TA0008\", \"name\": \"Lateral Movement\", \"url\": \"https://attack.mitre.org/tactics/TA0008\"}], \"mitre_techniques\": [{\"id\": \"T1210\", \"name\": \"Exploitation of Remote Services\", \"url\": \"https://attack.mitre.org/techniques/T1210\", \"legacy_ids\": [\"T1210\"]}], \"appliance_id\": 0, \"is_user_created\": false}]}, \"raw\": null, \"inputs\": {\"extrahop_search_filter\": \"{\\\"filter\\\": {\\\"status\\\": [\\\"in_progress\\\"]}}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 948, \"timestamp\": \"2022-04-13 17:53:38\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"start_time\": {\"type\": \"integer\"}, \"update_time\": {\"type\": \"integer\"}, \"end_time\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"risk_score\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"participants\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"object_type\": {\"type\": \"string\"}, \"object_id\": {\"type\": \"integer\"}, \"role\": {\"type\": \"string\"}, \"external\": {\"type\": \"boolean\"}, \"id\": {\"type\": \"integer\"}, \"object_value\": {\"type\": \"string\"}}}}, \"ticket_id\": {\"type\": [\"null\", \"string\"]}, \"assignee\": {\"type\": [\"null\", \"string\"]}, \"status\": {\"type\": [\"null\", \"string\"]}, \"resolution\": {}, \"properties\": {\"type\": \"object\", \"properties\": {\"client_port\": {\"type\": \"integer\"}, \"server_port\": {\"type\": \"integer\"}, \"jndi_strings\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}, \"mitre_tactics\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}}, \"mitre_techniques\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"legacy_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}}, \"appliance_id\": {\"type\": \"integer\"}, \"is_user_created\": {\"type\": \"boolean\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_search_filter\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -3952,7 +4317,7 @@
         }
       ],
       "uuid": "b70037a5-fcaf-4e78-a1e2-6acdc4dff239",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -4025,12 +4390,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 68
+          "workflow_id": 85
         }
       ]
     },
     {
-      "created_date": 1650038603131,
+      "created_date": 1651163000215,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -4044,14 +4409,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search devices",
       "export_key": "funct_extrahop_rx_search_devices",
-      "id": 65,
+      "id": 75,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650559923909,
+      "last_modified_time": 1651163000364,
       "name": "funct_extrahop_rx_search_devices",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": [{\"mod_time\": 1649866540057, \"node_id\": null, \"id\": 3, \"extrahop_id\": \"02f6b87341f00000\", \"discovery_id\": \"02f6b87341f00000\", \"display_name\": \"Device 02f6b87341f00000\", \"description\": null, \"user_mod_time\": 1644418537403, \"discover_time\": 1644418320000, \"vlanid\": 0, \"parent_id\": null, \"macaddr\": \"02:F6:B8:73:41:F0\", \"vendor\": null, \"is_l3\": false, \"ipaddr4\": \"192.168.1.159\", \"ipaddr6\": null, \"device_class\": \"node\", \"default_name\": \"Device 02f6b87341f00000\", \"custom_name\": null, \"cdp_name\": \"\", \"dhcp_name\": \"\", \"netbios_name\": \"\", \"dns_name\": \"\", \"custom_type\": \"\", \"auto_role\": \"other\", \"analysis_level\": 2, \"analysis\": \"advanced\", \"role\": \"other\", \"on_watchlist\": true, \"last_seen_time\": 1647052200000, \"model\": null, \"model_override\": null, \"custom_make\": null, \"custom_model\": null, \"critical\": false, \"custom_criticality\": null, \"cloud_instance_id\": null, \"cloud_instance_type\": null, \"cloud_instance_name\": null, \"cloud_account\": null, \"vpc_id\": null, \"subnet_id\": null}]}, \"raw\": null, \"inputs\": {\"extrahop_search_filter\": \"{\\\"filter\\\": {\\\"operator\\\": \\\"=\\\", \\\"field\\\": \\\"ipaddr\\\", \\\"operand\\\": \\\"192.168.1.159\\\"}}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 965, \"timestamp\": \"2022-04-13 17:17:19\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"mod_time\": {\"type\": \"integer\"}, \"node_id\": {}, \"id\": {\"type\": \"integer\"}, \"extrahop_id\": {\"type\": \"string\"}, \"discovery_id\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}, \"description\": {}, \"user_mod_time\": {\"type\": \"integer\"}, \"discover_time\": {\"type\": \"integer\"}, \"vlanid\": {\"type\": \"integer\"}, \"parent_id\": {}, \"macaddr\": {\"type\": \"string\"}, \"vendor\": {}, \"is_l3\": {\"type\": \"boolean\"}, \"ipaddr4\": {\"type\": \"string\"}, \"ipaddr6\": {}, \"device_class\": {\"type\": \"string\"}, \"default_name\": {\"type\": \"string\"}, \"custom_name\": {}, \"cdp_name\": {\"type\": \"string\"}, \"dhcp_name\": {\"type\": \"string\"}, \"netbios_name\": {\"type\": \"string\"}, \"dns_name\": {\"type\": \"string\"}, \"custom_type\": {\"type\": \"string\"}, \"auto_role\": {\"type\": \"string\"}, \"analysis_level\": {\"type\": \"integer\"}, \"analysis\": {\"type\": \"string\"}, \"role\": {\"type\": \"string\"}, \"on_watchlist\": {\"type\": \"boolean\"}, \"last_seen_time\": {\"type\": \"integer\"}, \"model\": {}, \"model_override\": {}, \"custom_make\": {}, \"custom_model\": {}, \"critical\": {\"type\": \"boolean\"}, \"custom_criticality\": {}, \"cloud_instance_id\": {}, \"cloud_instance_type\": {}, \"cloud_instance_name\": {}, \"cloud_account\": {}, \"vpc_id\": {}, \"subnet_id\": {}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"extrahop_search_filter\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -4062,7 +4427,7 @@
         }
       ],
       "uuid": "e7384abd-0046-4b46-97af-d34d8cc9c711",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "0c8318d9-cc79-4f1b-b500-ea84d2b40371",
@@ -4119,12 +4484,12 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 65
+          "workflow_id": 76
         }
       ]
     },
     {
-      "created_date": 1650038603218,
+      "created_date": 1651163000421,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -4138,14 +4503,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) search packets",
       "export_key": "funct_extrahop_rx_search_packets",
-      "id": 66,
+      "id": 76,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650038603279,
+      "last_modified_time": 1651163000560,
       "name": "funct_extrahop_rx_search_packets",
       "tags": [
         {
@@ -4253,10 +4618,21 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: Extrahop Reveal(x) search packets",
+          "object_type": "artifact",
+          "programmatic_name": "wf_extrahop_rx_search_packets",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 92
+        }
+      ]
     },
     {
-      "created_date": 1650038603301,
+      "created_date": 1651163000622,
       "creator": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
@@ -4270,14 +4646,14 @@
       "destination_handle": "fn_extrahop",
       "display_name": "Extrahop Reveal(x) update detection",
       "export_key": "funct_extrahop_rx_update_detection",
-      "id": 67,
+      "id": 77,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 4,
         "name": "a@a.com",
         "type": "user"
       },
-      "last_modified_time": 1650038603370,
+      "last_modified_time": 1651163000802,
       "name": "funct_extrahop_rx_update_detection",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"result\": \"success\"}, \"raw\": null, \"inputs\": {\"incident_id\": 3235, \"soar_inc_owner_id\": \"a@a.com\", \"soar_inc_resolution_id\": \"Resolved\", \"extrahop_detection_id\": 71, \"soar_inc_plan_status\": \"C\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-extrahop\", \"package_version\": \"1.0.0\", \"host\": \"myhost.ibm.com\", \"execution_time_ms\": 1084, \"timestamp\": \"2022-04-13 17:21:32\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"result\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"soar_inc_owner_id\": {\"type\": \"string\"}, \"soar_inc_resolution_id\": {\"type\": \"string\"}, \"extrahop_detection_id\": {\"type\": \"integer\"}, \"soar_inc_plan_status\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -4353,7 +4729,7 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 69
+          "workflow_id": 82
         }
       ]
     },
@@ -4416,7 +4792,12 @@
           "name": "Example: Extrahop Reveal(x) update watchlist",
           "object_type": "extrahop_devices",
           "programmatic_name": "wf_extrahop_rx_update_watchlist",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_extrahop",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 74
         }
@@ -4425,13 +4806,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 11,
+  "id": 14,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1650636605776,
+      "create_date": 1651593633216,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -4440,7 +4821,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1650636605776,
+      "update_date": 1651593633216,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -4450,7 +4831,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "79fa5762-2c80-4486-95b2-13afc5b6dbb5"
+        "a0ece8a1-8c47-4e39-99af-1658e358df1f"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -4485,13 +4866,18 @@
       "id": 3,
       "language": "python",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1650636505109,
+      "last_modified_time": 1651162993919,
       "name": "scr_extrahop_rx_add_artifact_from_device",
       "object_type": "incident",
       "playbook_handle": null,
       "programmatic_name": "scr_sep_add_artifact_from_scan_results",
       "script_text": "# Create a Resilient artifact based on a dropdown which selects the corresponding data-table field.\nARTIFACT_TYPE = rule.properties.extrahop_artifact_type\n\nPARAMS = {\n    \"IP Address\": row.ipaddr4,\n    \"DNS Name\": row.dns_name,\n    \"MAC Address\": row.macaddr\n}\n\n\ndef addArtifact(artifact_type, artifact_value, description):\n    \"\"\"This method adds new artifacts to the incident derived from matches of the the regular expression\n\n    :param artifact_type: The type of the artifact.\n    :param artifact_value: - The value of the artifact.\n    :param description: - the description of the artifact.\n    \"\"\"\n    incident.addArtifact(artifact_type, artifact_value, description)\n\n\ndef validate_fields(fields, params):\n    \"\"\"\n    Ensure required fields are present. Throw ValueError if not\n    :param fields: Required fields.\n    :param params: Data-table fields as parameters.\n    :return: no return\n    \"\"\"\n    for f in fields:\n        if f not in params or not params.get(f) or params.get(f) == \u0027\u0027:\n            raise ValueError(str(\u0027Required data-table field is missing or empty for artifact type: \u0027 + f))\n\n\ndef main():\n    desc = \u0027\u0027\n\n    validate_fields([ARTIFACT_TYPE], PARAMS)\n\n    desc = \"Artifact Detected in ExtraHop environment.\"\n    addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)\n\n\n# Script execution starts here\nif __name__ == \"__main__\":\n    main()",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
       "uuid": "b22a440f-5bd8-4d14-a34e-9fe51dad99fb"
     }
   ],
@@ -6552,160 +6938,15 @@
       "actions": [],
       "content": {
         "version": 5,
-        "workflow_id": "wf_extrahop_rx_get_devices",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_devices\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get devices\"\u003e\u003cdocumentation\u003eGet devices information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lf3pjh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16ic9ye\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get devices\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\n# Processing\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            if isinstance(devs, list):\\n                for dev in devs:\\n                    process_devs(dev)\\n            else:\\n                process_devs(devs)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if rule.properties.extrahop_device_id:\\n    inputs.extrahop_device_id = rule.properties.extrahop_device_id\\nelse:\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n    if rule.properties.extrahop_search_type and not rule.properties.extrahop_search_value:\\n        raise ValueError(\\\"The search type is set but the search value is empty.\\\")\\n    if rule.properties.extrahop_search_value and not rule.properties.extrahop_search_type:\\n        raise ValueError(\\\"A search value is set but the search type is not set.\\\")\\n    inputs.extrahop_search_type = rule.properties.extrahop_search_type\\n    inputs.extrahop_value = rule.properties.extrahop_search_value\\n\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lf3pjh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10jo0yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lf3pjh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16ic9ye\"/\u003e\u003cendEvent id=\"EndEvent_1tnn5yc\"\u003e\u003cincoming\u003eSequenceFlow_10jo0yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10jo0yc\" sourceRef=\"ServiceTask_16ic9ye\" targetRef=\"EndEvent_1tnn5yc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16ic9ye\" id=\"ServiceTask_16ic9ye_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lf3pjh\" id=\"SequenceFlow_1lf3pjh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tnn5yc\" id=\"EndEvent_1tnn5yc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"445\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10jo0yc\" id=\"SequenceFlow_10jo0yc_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@a.com",
-      "description": "Get devices information from Extrahop Reveal(x) .",
-      "export_key": "wf_extrahop_rx_get_devices",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650365419866,
-      "name": "Example: Extrahop Reveal(x) get devices",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_get_devices",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "c0ea7fdb-37a1-4f70-92a1-2c427ea93232",
-      "workflow_id": 67
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "wf_extrahop_rx_search_devices",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_devices\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) search devices\"\u003e\u003cdocumentation\u003eSearch for devices information from Extrahop Reveal(x) using a filter.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0m2u56o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10yatj6\" name=\"Extrahop Reveal(x) search devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e7384abd-0046-4b46-97af-d34d8cc9c711\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_search_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) search devices\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\n# Processing\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            for dev in devs:\\n                process_devs(dev)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to search devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\ndef main():\\n    filter = {}\\n    filter_props = {\\n        \\\"field\\\": get_prop(rule.properties.extrahop_device_field),\\n        \\\"operand\\\": get_prop(rule.properties.extrahop_device_operand),\\n        \\\"operator\\\": get_prop(rule.properties.extrahop_device_operator)\\n    }\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if not filter:\\n        raise ValueError(\\\"The search filter is empty.\\\")\\n    else:\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n    \\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n            \\nmain()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0m2u56o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_081bn3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0m2u56o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10yatj6\"/\u003e\u003cendEvent id=\"EndEvent_0t2xr17\"\u003e\u003cincoming\u003eSequenceFlow_081bn3v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_081bn3v\" sourceRef=\"ServiceTask_10yatj6\" targetRef=\"EndEvent_0t2xr17\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10yatj6\" id=\"ServiceTask_10yatj6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m2u56o\" id=\"SequenceFlow_0m2u56o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0t2xr17\" id=\"EndEvent_0t2xr17_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"375\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_081bn3v\" id=\"SequenceFlow_081bn3v_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"355\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "a@a.com",
-      "description": "Search for devices information from Extrahop Reveal(x) using a filter.",
-      "export_key": "wf_extrahop_rx_search_devices",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650365710770,
-      "name": "Example: Extrahop Reveal(x) search devices",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_search_devices",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "7d82fa2a-339c-4306-9a2c-ab4886101e2e",
-      "workflow_id": 65
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_extrahop_rx_create_tag",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_create_tag\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) create tag\"\u003e\u003cdocumentation\u003eCreate a new tag for  Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dto6o1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1km27wt\" name=\"Extrahop Reveal(x) create tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d566e4b3-6692-4599-a351-7530cdb4874e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_create_tag\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) create tag\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n    if CONTENT:\\n        result = CONTENT.result\\n        if result == \\\"success\\\":\\n            tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully created tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n            newrow = incident.addRow(\\\"extrahop_tags\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.tag = tag\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Tags\\\")\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to create tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Create tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to create a tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; .\\\"\\\\\\n            .format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_tag_name = rule.properties.extrahop_tag_name\\nif inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dto6o1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lqhvgt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dto6o1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1km27wt\"/\u003e\u003cendEvent id=\"EndEvent_1fv39zp\"\u003e\u003cincoming\u003eSequenceFlow_0lqhvgt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0lqhvgt\" sourceRef=\"ServiceTask_1km27wt\" targetRef=\"EndEvent_1fv39zp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1km27wt\" id=\"ServiceTask_1km27wt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dto6o1\" id=\"SequenceFlow_0dto6o1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1fv39zp\" id=\"EndEvent_1fv39zp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lqhvgt\" id=\"SequenceFlow_0lqhvgt_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"377.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Create a new tag for  Extrahop Reveal(x).",
-      "export_key": "wf_extrahop_rx_create_tag",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650038607738,
-      "name": "Example: Extrahop Reveal(x) create tag",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_create_tag",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "ceb2ade6-72f4-490d-bae2-7824953d3c91",
-      "workflow_id": 70
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_extrahop_revealx_add_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_revealx_add_artifact\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) add artifact\"\u003e\u003cdocumentation\u003eCreate a SOAR incident artifact from ExtraHop device property. Valid types are IP Address, DNS Name or MAC Address.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_11yot7j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_135kcb0\" name=\"scr_extrahop_rx_add_artifact_from...\"\u003e\u003cextensionElements\u003e\u003cresilient:script programmaticName=\"scr_sep_add_artifact_from_scan_results\" uuid=\"b22a440f-5bd8-4d14-a34e-9fe51dad99fb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_11yot7j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1pyfiv1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_11yot7j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_135kcb0\"/\u003e\u003cendEvent id=\"EndEvent_16sm46n\"\u003e\u003cincoming\u003eSequenceFlow_1pyfiv1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1pyfiv1\" sourceRef=\"ScriptTask_135kcb0\" targetRef=\"EndEvent_16sm46n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_135kcb0\" id=\"ScriptTask_135kcb0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"233\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11yot7j\" id=\"SequenceFlow_11yot7j_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"233\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"215.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_16sm46n\" id=\"EndEvent_16sm46n_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pyfiv1\" id=\"SequenceFlow_1pyfiv1_di\"\u003e\u003comgdi:waypoint x=\"333\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"349.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "a@a.com",
-      "description": "Create a SOAR incident artifact from ExtraHop device property. Valid types are IP Address, DNS Name or MAC Address.",
-      "export_key": "wf_extrahop_revealx_add_artifact",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650635529735,
-      "name": "Example: Extrahop Reveal(x) add artifact",
-      "object_type": "extrahop_devices",
-      "programmatic_name": "wf_extrahop_revealx_add_artifact",
-      "tags": [],
-      "uuid": "6861297c-117b-4fe4-9272-f403d98f019d",
-      "workflow_id": 78
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "wf_extrahop_rx_update_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_incident\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update incident\"\u003e\u003cdocumentation\u003eUpdate SOAR incident with detection information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1x2vrjw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xe2t7x\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_detections\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update incident\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TABLE = \\\"extrahop_detections\\\"\\nDATA_TBL_FIELDS = [\\\"appliance_id\\\", \\\"assignee\\\", \\\"categories\\\", \\\"det_description\\\", \\\"end_time\\\", \\\"det_id\\\", \\\"is_user_created\\\",\\n                   \\\"mitre_tactics\\\", \\\"mitre_techniques\\\", \\\"participants\\\", \\\"properties\\\", \\\"resolution\\\", \\\"risk_score\\\",\\n                   \\\"start_time\\\", \\\"status\\\", \\\"ticket_id\\\", \\\"ticket_url\\\", \\\"title\\\", \\\"type\\\", \\\"update_time\\\"]\\n\\ndef addArtifact(artifact_type, artifact_value, description):\\n    \\\"\\\"\\\"Add new artifacts to the incident.\\n\\n    :param artifact_type: The type of the artifact.\\n    :param artifact_value: - The value of the artifact.\\n    :param description: - the description of the artifact.\\n    \\\"\\\"\\\"\\n    incident.addArtifact(artifact_type, artifact_value, description)\\n\\n# Processing\\ndef main():\\n    detection_id = INPUTS[\\\"extrahop_detection_id\\\"]\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        det = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A Detection was successfully returned for \\\" \\\\\\n                    u\\\"detection ID \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, detection_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if det:\\n            newrow = incident.addRow(DATA_TABLE)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f1 in DATA_TBL_FIELDS:\\n                f2 = f1\\n                if f1.startswith(\\\"det_\\\"):\\n                    f2 = f1.split(\u0027_\u0027, 1)[1]\\n\\n                if det[f2] is None or isinstance(det[f2], long):\\n                    newrow[f1] = det[f2]\\n                elif isinstance(det[f1], list):\\n                    if f1 in [\\\"participants\\\", \\\"mitre_tactics\\\", \\\"mitre_techniques\\\"]:\\n                        if f1 == \\\"participants\\\":\\n                            for p in det[f2]:\\n                                if p[\\\"object_type\\\"] == \\\"ipaddr\\\":\\n                                    artifact_type = \\\"IP Address\\\"\\n                                    addArtifact(artifact_type, p[\\\"object_value\\\"],\\n                                                \\\"Participant IP address in ExtraHop detection \u0027{0}\u0027, role: \u0027{1}\u0027.\\\"\\n                                                .format(det[\\\"id\\\"], p[\\\"role\\\"]))\\n                        obj_cnt = 0\\n                        tbl = u\u0027\u0027\\n                        for i in det[f2]:\\n                            if not obj_cnt:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;hr class=\\\"solid\\\"\u0026gt;\u0026lt;/div\u0026gt;\u0027\\n                            for k, v in i.items():\\n                                if k == \\\"legacy_ids\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, \u0027,\u0027.join(v))\\n                                elif k == \\\"url\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;a target=\\\"blank\\\" href=\\\"{1}\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\u0026lt;/div\u0026gt;\u0027 \\\\\\n                                        .format(k, v, i[\\\"id\\\"])\\n                                else:\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, v)\\n                            tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;hr class=\\\"solid\\\"\u0026gt;\u0026lt;/div\u0026gt;\u0027\\n                            obj_cnt += 1\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(det[f2]))\\n                elif isinstance(det[f2], (bool, dict)):\\n                    if f1 in [\\\"properties\\\"]:\\n                        tbl = u\u0027\u0027\\n                        for i, j in det[f2].items():\\n                            if i == \\\"suspicious_ipaddr\\\":\\n                                artifact_type = \\\"IP Address\\\"\\n                                type = \\\"Suspicious IP Addresses\\\"\\n                                value = j[\\\"value\\\"]\\n                                for ip in value:\\n                                    addArtifact(artifact_type, ip, \\\"Suspicious IP address found by ExtraHop.\\\")\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0027.format(type)\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}\u0027.format(\\\", \\\".join(\\\"{}\\\".format(i) for i in value))\\n                            else:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(i, j)\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = str(det[f2])\\n                else:\\n                    newrow[f1] = \\\"{}\\\".format(det[f2])\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get detections for detection ID \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; .\\\" \\\\\\n                     u\\\" with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, detection_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1x2vrjw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tuc6op\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1x2vrjw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xe2t7x\"/\u003e\u003cendEvent id=\"EndEvent_1y7yknm\"\u003e\u003cincoming\u003eSequenceFlow_1vgg24b\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1v7g0lj\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update incident\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\n\\ndef get_dev_ids():\\n    # Get participant dev ids    \\n    dev_ids = []\\n    get_devices_content = workflow.properties.get_detections_result.content\\n    devs = get_devices_content[\\\"result\\\"]\\n    participants = devs[\\\"participants\\\"]\\n    for p in participants:\\n        if p[\\\"object_type\\\"] == \\\"device\\\":\\n            dev_ids.append(p[\\\"object_id\\\"])\\n    return dev_ids\\n\\n\\n# Processing\\ndef main():\\n    participant_dev_ids = get_dev_ids()\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = [d for d in CONTENT.result if d[\\\"id\\\"] in participant_dev_ids]\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\n            \\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            if isinstance(devs, list):\\n                for dev in devs:\\n                    process_devs(dev)\\n            else:\\n                process_devs(devs)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tuc6op\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vgg24b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tuc6op\" sourceRef=\"ServiceTask_0xe2t7x\" targetRef=\"ServiceTask_1v7g0lj\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1vgg24b\" sourceRef=\"ServiceTask_1v7g0lj\" targetRef=\"EndEvent_1y7yknm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xe2t7x\" id=\"ServiceTask_0xe2t7x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"228\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1x2vrjw\" id=\"SequenceFlow_1x2vrjw_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1y7yknm\" id=\"EndEvent_1y7yknm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"598\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1v7g0lj\" id=\"ServiceTask_1v7g0lj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"440\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tuc6op\" id=\"SequenceFlow_1tuc6op_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"339\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vgg24b\" id=\"SequenceFlow_1vgg24b_di\"\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"537.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "creator_id": "a@a.com",
-      "description": "Update SOAR incident with detection information from Extrahop Reveal(x) .",
-      "export_key": "wf_extrahop_rx_update_incident",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650542257585,
-      "name": "Example: Extrahop Reveal(x) update incident",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_update_incident",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "b0a2acd5-a6ac-431f-b4c4-e467ff4b3f85",
-      "workflow_id": 72
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_extrahop_rx_get_watchlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_watchlist\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get watchlist\"\u003e\u003cdocumentation\u003eRetrieve all devices that are in the watchlist from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j0orct\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03t8ciq\" name=\"Extrahop Reveal(x) get watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d5690ce-998c-4fbb-bf25-765800aaa246\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_watchlist\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_watchlist\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\", \\\"extrahop_id\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; devices returned in the Watchlist\\\" \\\\\\n                    u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            for dev in devs:\\n                newrow = incident.addRow(\\\"extrahop_watchlist\\\")\\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                for f1 in DATA_TBL_FIELDS:\\n                  f2 = f1\\n                  if dev[f1] is None:\\n                      newrow[f1] = dev[f2]\\n                  if isinstance(dev[f1], list):\\n                      newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n                  elif isinstance(dev[f1], bool):\\n                      newrow[f1] = str(dev[f2])\\n                  else:\\n                      newrow[f1] = \\\"{}\\\".format(dev[f2])\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get the watchlist for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j0orct\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0u8wmby\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j0orct\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03t8ciq\"/\u003e\u003cendEvent id=\"EndEvent_1nup12z\"\u003e\u003cincoming\u003eSequenceFlow_0u8wmby\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0u8wmby\" sourceRef=\"ServiceTask_03t8ciq\" targetRef=\"EndEvent_1nup12z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03t8ciq\" id=\"ServiceTask_03t8ciq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j0orct\" id=\"SequenceFlow_0j0orct_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"217\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nup12z\" id=\"EndEvent_1nup12z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"391\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u8wmby\" id=\"SequenceFlow_0u8wmby_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"363.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Retrieve all devices that are in the watchlist from Extrahop Reveal(x) .",
-      "export_key": "wf_extrahop_rx_get_watchlist",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650038604430,
-      "name": "Example: Extrahop Reveal(x) get watchlist",
-      "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_get_watchlist",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "1a397ec4-4b9c-41fc-a4c3-a302ac7de149",
-      "workflow_id": 63
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
         "workflow_id": "wf_extrahop_rx_get_activitymaps",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_activitymaps\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get activitymaps\"\u003e\u003cdocumentation\u003eGet activitymaps information from Extrahop Reveal(x)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_104u30s\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03b8xn3\" name=\"Extrahop Reveal(x) get activityma...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"18aa0964-745b-4329-a04b-a92f5f3fab40\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_activitymaps post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_activitymaps\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get activitymaps\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TABLE = \\\"extrahop_activitymaps\\\"\\nDATA_TBL_FIELDS = [\\\"ams_description\\\", \\\"ams_id\\\", \\\"mod_time\\\", \\\"mode\\\", \\\"ams_name\\\", \\\"owner\\\", \\\"rights\\\", \\\"short_code\\\",\\n                   \\\"show_alert_status\\\", \\\"walks\\\", \\\"weighting\\\"]\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        ams = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Activitymaps returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(ams), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if ams:\\n            for am in ams:\\n                newrow = incident.addRow(DATA_TABLE)\\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                for f1 in DATA_TBL_FIELDS:\\n                    f2 = f1\\n                    if f1.startswith(\\\"ams_\\\"):\\n                        f2 = f1.split(\u0027_\u0027, 1)[1]\\n                    if am[f2] is None:\\n                        newrow[f1] = am[f2]\\n                    if isinstance(am[f2], list):\\n                      if f1 in [\\\"walks\\\",\\\"steps\\\"]:\\n                          newrow[f1] = \\\"{}\\\".format(am[f2])\\n                      else:\\n                          newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(am[f2]))\\n                    elif isinstance(am[f2], (bool, dict)):\\n                        newrow[f1] = str(am[f2])\\n                    else:\\n                        newrow[f1] = \\\"{}\\\".format(am[f2])\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Activitymaps\\\")\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get activitymaps for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAM, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_104u30s\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17yb9c4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_104u30s\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03b8xn3\"/\u003e\u003cendEvent id=\"EndEvent_03rpj82\"\u003e\u003cincoming\u003eSequenceFlow_17yb9c4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17yb9c4\" sourceRef=\"ServiceTask_03b8xn3\" targetRef=\"EndEvent_03rpj82\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03b8xn3\" id=\"ServiceTask_03b8xn3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_104u30s\" id=\"SequenceFlow_104u30s_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_03rpj82\" id=\"EndEvent_03rpj82_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"399\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17yb9c4\" id=\"SequenceFlow_17yb9c4_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"376.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 5,
       "creator_id": "a@a.com",
       "description": "Get activitymaps information from Extrahop Reveal(x)",
       "export_key": "wf_extrahop_rx_get_activitymaps",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1650541327863,
+      "last_modified_time": 1651163010170,
       "name": "Example: Extrahop Reveal(x) get activitymaps",
       "object_type": "incident",
       "programmatic_name": "wf_extrahop_rx_get_activitymaps",
@@ -6716,116 +6957,161 @@
         }
       ],
       "uuid": "37240452-0a4d-478b-83c4-2b8965d9fcb4",
-      "workflow_id": 64
+      "workflow_id": 81
     },
     {
       "actions": [],
       "content": {
-        "version": 7,
-        "workflow_id": "wf_extrahop_rx_update_watchlist",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_watchlist\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update watchlist\"\u003e\u003cdocumentation\u003eAdd or remove an ExtraHop device to or from the watchlist.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1aj2xl3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1xzsmrv\" name=\"Extrahop Reveal(x) update watchli...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d33930-3417-436e-82a1-267a5dc9fa91\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_watchlist post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_update_watchlist\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        result = CONTENT[\\\"result\\\"]\\n        if result == \\\"success\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully updated the watchlist for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to update the watchlist for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Update watchlist failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to update the watchlist \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"dev_id = row.devs_id\\naction = rule.properties.extrahop_watchlist_action\\nif action == \\\"add\\\":\\n    inputs.extrahop_assign = str(dev_id)\\nelif action == \\\"remove\\\":\\n    inputs.extrahop_unassign = str(dev_id)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1aj2xl3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0sca6mx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1aj2xl3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1xzsmrv\"/\u003e\u003cserviceTask id=\"ServiceTask_03ldzqe\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_\u00e1get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\ndef process_devs(dev):\\n    # Process a device result.\\n    row.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            row[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            row[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            row[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            row[f1] = long(dev[f2])\\n        else:\\n           row[f1] = \\\"{}\\\".format(dev[f2])\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        dev = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was a Device returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\n            \\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if dev:\\n            process_devs(dev)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_device_id = row.devs_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0sca6mx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1clpsis\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0sca6mx\" sourceRef=\"ServiceTask_1xzsmrv\" targetRef=\"ServiceTask_03ldzqe\"/\u003e\u003cendEvent id=\"EndEvent_0hqfkxo\"\u003e\u003cincoming\u003eSequenceFlow_1clpsis\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1clpsis\" sourceRef=\"ServiceTask_03ldzqe\" targetRef=\"EndEvent_0hqfkxo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1xzsmrv\" id=\"ServiceTask_1xzsmrv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"287\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1aj2xl3\" id=\"SequenceFlow_1aj2xl3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03ldzqe\" id=\"ServiceTask_03ldzqe_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"433\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0sca6mx\" id=\"SequenceFlow_0sca6mx_di\"\u003e\u003comgdi:waypoint x=\"387\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0hqfkxo\" id=\"EndEvent_0hqfkxo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"570\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"588\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1clpsis\" id=\"SequenceFlow_1clpsis_di\"\u003e\u003comgdi:waypoint x=\"533\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"551.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 4,
+        "workflow_id": "wf_extrahop_rx_create_tag",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_create_tag\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) create tag\"\u003e\u003cdocumentation\u003eCreate a new tag for  Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dto6o1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1km27wt\" name=\"Extrahop Reveal(x) create tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d566e4b3-6692-4599-a351-7530cdb4874e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_create_tag\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) create tag\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n    if CONTENT:\\n        result = CONTENT.result\\n        if result == \\\"success\\\":\\n            tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully created tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n            newrow = incident.addRow(\\\"extrahop_tags\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.tag = tag\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Tags\\\")\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to create tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Create tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to create a tag \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; .\\\"\\\\\\n            .format(WF_NAME, tag, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_tag_name = rule.properties.extrahop_tag_name\\nif inputs.extrahop_tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dto6o1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lqhvgt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dto6o1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1km27wt\"/\u003e\u003cendEvent id=\"EndEvent_1fv39zp\"\u003e\u003cincoming\u003eSequenceFlow_0lqhvgt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0lqhvgt\" sourceRef=\"ServiceTask_1km27wt\" targetRef=\"EndEvent_1fv39zp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1km27wt\" id=\"ServiceTask_1km27wt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dto6o1\" id=\"SequenceFlow_0dto6o1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1fv39zp\" id=\"EndEvent_1fv39zp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lqhvgt\" id=\"SequenceFlow_0lqhvgt_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"377.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
+      "content_version": 4,
       "creator_id": "a@a.com",
-      "description": "Add or remove an ExtraHop device to or from the watchlist.",
-      "export_key": "wf_extrahop_rx_update_watchlist",
+      "description": "Create a new tag for  Extrahop Reveal(x).",
+      "export_key": "wf_extrahop_rx_create_tag",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1650363520188,
-      "name": "Example: Extrahop Reveal(x) update watchlist",
-      "object_type": "extrahop_devices",
-      "programmatic_name": "wf_extrahop_rx_update_watchlist",
-      "tags": [],
-      "uuid": "d1ac6f70-c4d9-4bee-adac-dcdea587c38c",
-      "workflow_id": 74
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_extrahop_rx_update_detection",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_detection\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update detection\"\u003e\u003cdocumentation\u003eUpdate ExtraHop detection if the status is changed on the associated  SOAR incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bom7fb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_089q2t9\" name=\"Extrahop Reveal(x) update detecti...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8ee5a0dc-d7d9-4d02-85a3-55d340a43aa0\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_setection post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_update_detection\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update detection\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        result = CONTENT[\\\"result\\\"]\\n        if result == \\\"success\\\":\\n            tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully updated the detection status for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to update the detection status for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Update detection status failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to update the detection status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\ninputs.incident_id = incident.id\\ninputs.soar_inc_owner_id = incident.owner_id\\ninputs.soar_inc_plan_status = incident.plan_status\\ninputs.soar_inc_resolution_id = incident.resolution_id\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bom7fb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ddvogk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bom7fb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_089q2t9\"/\u003e\u003cendEvent id=\"EndEvent_11v3pbd\"\u003e\u003cincoming\u003eSequenceFlow_0ddvogk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ddvogk\" sourceRef=\"ServiceTask_089q2t9\" targetRef=\"EndEvent_11v3pbd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_089q2t9\" id=\"ServiceTask_089q2t9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bom7fb\" id=\"SequenceFlow_1bom7fb_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_11v3pbd\" id=\"EndEvent_11v3pbd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ddvogk\" id=\"SequenceFlow_0ddvogk_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"344.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Update ExtraHop detection if the status is changed on the associated  SOAR incident.",
-      "export_key": "wf_extrahop_rx_update_detection",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650038607385,
-      "name": "Example: Extrahop Reveal(x) update detection",
+      "last_modified_time": 1651163004568,
+      "name": "Example: Extrahop Reveal(x) create tag",
       "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_update_detection",
+      "programmatic_name": "wf_extrahop_rx_create_tag",
       "tags": [
         {
           "tag_handle": "fn_extrahop",
           "value": null
         }
       ],
-      "uuid": "a2732fde-597d-420c-8749-cf9c198c8fc5",
-      "workflow_id": 69
+      "uuid": "ceb2ade6-72f4-490d-bae2-7824953d3c91",
+      "workflow_id": 77
     },
     {
       "actions": [],
       "content": {
         "version": 6,
-        "workflow_id": "wf_extrahop_rx_assign_tag",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_assign_tag\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) assign tag\"\u003e\u003cdocumentation\u003eAssign a tag to a list of devices ids for Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0l449vv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04jmpas\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\",\"result_name\":\"get_tags_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0l449vv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_073ebus\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0l449vv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04jmpas\"/\u003e\u003cserviceTask id=\"ServiceTask_1hdcy5r\" name=\"Extrahop Reveal(x) assign tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f0d2fc8c-20ab-440c-b4f5-46776a0b561e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_assign_tag\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) assign tag\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n    if CONTENT:\\n        result = CONTENT.result\\n        if result == \\\"success\\\":\\n            device_id = INPUTS.get(\\\"extrahop_device_ids\\\")\\n            tag_id = INPUTS.get(\\\"extrahop_tag_id\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully assigned tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to assign tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Assign tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to assign a tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"tag_name = rule.properties.extrahop_tag_name\\nget_tags_content = workflow.properties.get_tags_result.content\\ninputs.extrahop_device_ids = str(row.devs_id)\\nif tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\ninputs.extrahop_tag_id = None\\nfor tag in get_tags_content[\\\"result\\\"]:\\n    if tag_name == tag[\\\"name\\\"]:\\n        inputs.extrahop_tag_id = tag[\\\"id\\\"]\\n        break\\nif not inputs.extrahop_tag_id:\\n    raise ValueError(\\\"Tag {} not found.\\\".format(tag_name))\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_073ebus\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1db2q7n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_073ebus\" sourceRef=\"ServiceTask_04jmpas\" targetRef=\"ServiceTask_1hdcy5r\"/\u003e\u003cendEvent id=\"EndEvent_0bh06jd\"\u003e\u003cincoming\u003eSequenceFlow_1db2q7n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1db2q7n\" sourceRef=\"ServiceTask_1hdcy5r\" targetRef=\"EndEvent_0bh06jd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04jmpas\" id=\"ServiceTask_04jmpas_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"239\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l449vv\" id=\"SequenceFlow_0l449vv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hdcy5r\" id=\"ServiceTask_1hdcy5r_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"399\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_073ebus\" id=\"SequenceFlow_073ebus_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0bh06jd\" id=\"EndEvent_0bh06jd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"544\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"562\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1db2q7n\" id=\"SequenceFlow_1db2q7n_di\"\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"544\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"521.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "wf_extrahop_rx_search_devices",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_devices\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) search devices\"\u003e\u003cdocumentation\u003eSearch for devices information from Extrahop Reveal(x) using a filter.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0m2u56o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10yatj6\" name=\"Extrahop Reveal(x) search devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e7384abd-0046-4b46-97af-d34d8cc9c711\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_search_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) search devices\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\n# Processing\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            for dev in devs:\\n                process_devs(dev)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to search devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\ndef main():\\n    filter = {}\\n    filter_props = {\\n        \\\"field\\\": get_prop(rule.properties.extrahop_device_field),\\n        \\\"operand\\\": get_prop(rule.properties.extrahop_device_operand),\\n        \\\"operator\\\": get_prop(rule.properties.extrahop_device_operator)\\n    }\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if not filter:\\n        raise ValueError(\\\"The search filter is empty.\\\")\\n    else:\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n    \\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n            \\nmain()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0m2u56o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_081bn3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0m2u56o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10yatj6\"/\u003e\u003cendEvent id=\"EndEvent_0t2xr17\"\u003e\u003cincoming\u003eSequenceFlow_081bn3v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_081bn3v\" sourceRef=\"ServiceTask_10yatj6\" targetRef=\"EndEvent_0t2xr17\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10yatj6\" id=\"ServiceTask_10yatj6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0m2u56o\" id=\"SequenceFlow_0m2u56o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0t2xr17\" id=\"EndEvent_0t2xr17_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"375\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_081bn3v\" id=\"SequenceFlow_081bn3v_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"355\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 6,
       "creator_id": "a@a.com",
-      "description": "Assign a tag to a list of devices ids for Extrahop Reveal(x).",
-      "export_key": "wf_extrahop_rx_assign_tag",
+      "description": "Search for devices information from Extrahop Reveal(x) using a filter.",
+      "export_key": "wf_extrahop_rx_search_devices",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1650540299774,
-      "name": "Example: Extrahop Reveal(x) assign tag",
-      "object_type": "extrahop_devices",
-      "programmatic_name": "wf_extrahop_rx_assign_tag",
-      "tags": [
-        {
-          "tag_handle": "fn_extrahop",
-          "value": null
-        }
-      ],
-      "uuid": "6ab655c4-a62d-43bc-b896-a198871aef15",
-      "workflow_id": 66
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "wf_extrahop_rx_get_tags",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_tags\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get tags\"\u003e\u003cdocumentation\u003eGet tags information from Extrahop Reveal(x)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1dns9ig\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_189ulsl\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_tags\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get tags\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TBL_FIELDS = [\\\"am_description\\\", \\\"am_id\\\", \\\"mod_time\\\", \\\"mode\\\", \\\"name\\\", \\\"owner\\\", \\\"rights\\\", \\\"short_code\\\", \\\"show_alert_status\\\", \\\"walks\\\", \\\"weighting\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        tags = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Tags returned for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\"\\\\\\n                     u\\\"with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, len(tags), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if tags:\\n            for tag in tags:\\n                newrow = incident.addRow(\\\"extrahop_tags\\\")\\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                newrow.tag = tag.name\\n                newrow.mod_time = tag.mod_time\\n                newrow.tag_id = tag.id\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Tags\\\")\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get tags for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1dns9ig\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vd5haa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dns9ig\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_189ulsl\"/\u003e\u003cendEvent id=\"EndEvent_0y9myii\"\u003e\u003cincoming\u003eSequenceFlow_0vd5haa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vd5haa\" sourceRef=\"ServiceTask_189ulsl\" targetRef=\"EndEvent_0y9myii\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_189ulsl\" id=\"ServiceTask_189ulsl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dns9ig\" id=\"SequenceFlow_1dns9ig_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y9myii\" id=\"EndEvent_0y9myii_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"388\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vd5haa\" id=\"SequenceFlow_0vd5haa_di\"\u003e\u003comgdi:waypoint x=\"344\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"388\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "a@a.com",
-      "description": "Get tags information from Extrahop Reveal(x)",
-      "export_key": "wf_extrahop_rx_get_tags",
-      "last_modified_by": "a@a.com",
-      "last_modified_time": 1650038604101,
-      "name": "Example: Extrahop Reveal(x) get tags",
+      "last_modified_time": 1651163003648,
+      "name": "Example: Extrahop Reveal(x) search devices",
       "object_type": "incident",
-      "programmatic_name": "wf_extrahop_rx_get_tags",
+      "programmatic_name": "wf_extrahop_rx_search_devices",
       "tags": [
         {
           "tag_handle": "fn_extrahop",
           "value": null
         }
       ],
-      "uuid": "3385d752-805c-4275-9092-4af1c3e9abe4",
-      "workflow_id": 62
+      "uuid": "7d82fa2a-339c-4306-9a2c-ab4886101e2e",
+      "workflow_id": 76
     },
     {
       "actions": [],
       "content": {
-        "version": 3,
-        "workflow_id": "wf_extrahop_rx_search_detections",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_detections\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) search detections\"\u003e\u003cdocumentation\u003eSearch for detections information from Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v0udss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1bnujpl\" name=\"Extrahop Reveal(x) search detecti...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_search_detections\\\"\\nWF_NAME = \\\"Example: Extrahop revealx search detections\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TABLE = \\\"extrahop_detections\\\"\\nDATA_TBL_FIELDS = [\\\"appliance_id\\\", \\\"assignee\\\", \\\"categories\\\", \\\"det_description\\\", \\\"end_time\\\", \\\"det_id\\\", \\\"is_user_created\\\",\\n                   \\\"mitre_tactics\\\", \\\"mitre_techniques\\\", \\\"participants\\\", \\\"properties\\\", \\\"resolution\\\", \\\"risk_score\\\",\\n                   \\\"start_time\\\", \\\"status\\\", \\\"ticket_id\\\", \\\"ticket_url\\\", \\\"title\\\", \\\"type\\\", \\\"update_time\\\"]\\n# Processing\\n\\nnote_text = u\u0027\u0027\\n\\nif CONTENT:\\n    dets = CONTENT.result\\n    note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Detections returned for SOAR \\\" \\\\\\n                u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(dets), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    if dets:\\n        for det in dets:\\n            newrow = incident.addRow(DATA_TABLE)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f1 in DATA_TBL_FIELDS:\\n                f2 = f1\\n                if f1.startswith(\\\"det_\\\"):\\n                  f2 = f1.split(\u0027_\u0027, 1)[1]\\n                if det[f2] is None or isinstance(det[f2], long):\\n                    newrow[f1] = det[f2]\\n                elif isinstance(det[f1], list):\\n                    if f1 in [\\\"participants\\\", \\\"mitre_tactics\\\", \\\"mitre_techniques\\\"]:\\n                        obj_cnt = 0\\n                        tbl = u\u0027\u0027\\n                        for i in det[f2]:\\n                            if not obj_cnt:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;hr class=\\\"solid\\\"\u0026gt;\u0026lt;/div\u0026gt;\u0027\\n                            for k, v in i.items():\\n                                if k == \\\"legacy_ids\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, \u0027,\u0027.join(v))\\n                                elif k == \\\"url\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;a target=\\\"blank\\\" href=\\\"{1}\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\u0026lt;/div\u0026gt;\u0027\\\\\\n                                        .format(k, v, i[\\\"id\\\"])\\n                                else:\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, v)\\n                            tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;hr class=\\\"solid\\\"\u0026gt;\u0026lt;/div\u0026gt;\u0027\\n                            obj_cnt += 1\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(det[f2]))\\n                elif isinstance(det[f2], (bool, dict)):\\n                    if f1 in [\\\"properties\\\"]:\\n                        suspect_ip = False\\n                        tbl = u\u0027\u0027\\n                        for i, j in det[f2].items():\\n                            if i == \\\"suspicious_ipaddr\\\":\\n                                artifact_type = \\\"IP Address\\\"\\n                                type = \\\"Suspicious IP Addresses\\\"\\n                                value = j[\\\"value\\\"]\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0027.format(type)\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}\u0027.format(\\\", \\\".join(\\\"{}\\\".format(i) for i in value))\\n                            else:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(i, j)\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = str(det[f2])\\n                else:\\n                    newrow[f1] = \\\"{}\\\".format(det[f2])\\n        note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n\\nelse:\\n    note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                 u\\\"to search detections for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n        .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\nincident.addNote(helper.createRichText(note_text))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n#raise ValueError(\\\"{}\\\".format(rule.properties.extrahop_detection_status))\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        if isinstance(prop, int):\\n            return prop\\n        elif isinstance(prop, list):\\n            return [\u0027{}\u0027.format(i) for i in prop]\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\ndef main():\\n    filter = {}\\n    filter_props = {\\n        \\\"risk_score_min\\\": get_prop(rule.properties.extrahop_detection_risk_score_min),\\n        \\\"types\\\": get_prop(rule.properties.extrahop_detection_types),\\n        \\\"category\\\": get_prop(rule.properties.extrahop_detection_category),\\n        \\\"assignee\\\": get_prop(rule.properties.extrahop_detection_assignee),\\n        \\\"ticket_id\\\": get_prop(rule.properties.extrahop_detection_ticket_id),\\n        \\\"status\\\": get_prop(rule.properties.extrahop_detection_status),\\n        \\\"resolution\\\": get_prop(rule.properties.extrahop_detection_resolution)\\n    }\\n\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if not filter:\\n        raise ValueError(\\\"The search filter is empty.\\\")\\n    else:\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n    \\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n    if rule.properties.extrahop_update_time:\\n      inputs.extrahop_update_time = rule.properties.extrahop_update_time\\n            \\nmain()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v0udss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ve9fh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v0udss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1bnujpl\"/\u003e\u003cendEvent id=\"EndEvent_0jhirff\"\u003e\u003cincoming\u003eSequenceFlow_17ve9fh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17ve9fh\" sourceRef=\"ServiceTask_1bnujpl\" targetRef=\"EndEvent_0jhirff\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bnujpl\" id=\"ServiceTask_1bnujpl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0udss\" id=\"SequenceFlow_0v0udss_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0jhirff\" id=\"EndEvent_0jhirff_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"378\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"396\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ve9fh\" id=\"SequenceFlow_17ve9fh_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 4,
+        "workflow_id": "wf_extrahop_rx_search_packets",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_packets\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) search packets\"\u003e\u003cdocumentation\u003eSearch for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_08zi9sc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1bqqxcs\" name=\"Extrahop Reveal(x) search packets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f551a853-62d0-468d-9e36-df5904c5bf96\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_packets post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_search_packets\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) search packets\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        result = CONTENT.result\\n        if result.get(\\\"attachment\\\"):\\n            note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully searched for packets for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n            note_text += u\\\"\u0026lt;br\u0026gt;Attachment \u0026lt;b\u0026gt;{}\u0026lt;b\u0026gt; added.\\\".format(result.get(\\\"attachment\\\"))\\n        elif result.get(\\\"status\\\"):\\n            note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Search for packets returned no results for SOAR \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n            note_text += u\\\"\u0026lt;br\u0026gt;Status \u0026lt;b\u0026gt;{}\u0026lt;b\u0026gt;.\\\".format(result.get(\\\"status\\\"))\\n        elif result.get(\\\"error\\\"):\\n            note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Search for packets failed for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n            note_text += u\\\"\u0026lt;br\u0026gt;Error \u0026lt;b\u0026gt;{}\u0026lt;b\u0026gt;.\\\".format(result.get(\\\"error\\\"))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to search packets for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.extrahop_bpf = \\\"host {}\\\".format(artifact.value)\\ninputs.extrahop_active_from = rule.properties.extrahop_active_from\\ninputs.extrahop_active_until = rule.properties.extrahop_active_until\\ninputs.extrahop_output = rule.properties.extrahop_output\\ninputs.extrahop_limit_search_duration = rule.properties.extrahop_limit_search_duration\\ninputs.extrahop_limit_bytes = rule.properties.extrahop_limit_bytes\\ninputs.extrahop_ip1 = rule.properties.extrahop_ip1\\ninputs.extrahop_port1 = rule.properties.extrahop_port1\\ninputs.extrahop_ip2 = rule.properties.extrahop_ip2\\ninputs.extrahop_port2 = rule.properties.extrahop_port2\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_08zi9sc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0t8ri2v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_08zi9sc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1bqqxcs\"/\u003e\u003cendEvent id=\"EndEvent_1hexrht\"\u003e\u003cincoming\u003eSequenceFlow_0t8ri2v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0t8ri2v\" sourceRef=\"ServiceTask_1bqqxcs\" targetRef=\"EndEvent_1hexrht\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bqqxcs\" id=\"ServiceTask_1bqqxcs_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"227\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08zi9sc\" id=\"SequenceFlow_08zi9sc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"227\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"212.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hexrht\" id=\"EndEvent_1hexrht_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"373\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t8ri2v\" id=\"SequenceFlow_0t8ri2v_di\"\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"350\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 3,
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.",
+      "export_key": "wf_extrahop_rx_search_packets",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651574822888,
+      "name": "Example: Extrahop Reveal(x) search packets",
+      "object_type": "artifact",
+      "programmatic_name": "wf_extrahop_rx_search_packets",
+      "tags": [],
+      "uuid": "d81106fc-ce08-464f-b4f2-af78b94d6846",
+      "workflow_id": 92
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_extrahop_rx_get_watchlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_watchlist\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get watchlist\"\u003e\u003cdocumentation\u003eRetrieve all devices that are in the watchlist from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j0orct\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03t8ciq\" name=\"Extrahop Reveal(x) get watchlist\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4d5690ce-998c-4fbb-bf25-765800aaa246\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_watchlist\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_watchlist\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\", \\\"extrahop_id\\\"]\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; devices returned in the Watchlist\\\" \\\\\\n                    u\\\" for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            for dev in devs:\\n                newrow = incident.addRow(\\\"extrahop_watchlist\\\")\\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                for f1 in DATA_TBL_FIELDS:\\n                  f2 = f1\\n                  if dev[f1] is None:\\n                      newrow[f1] = dev[f2]\\n                  if isinstance(dev[f1], list):\\n                      newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n                  elif isinstance(dev[f1], bool):\\n                      newrow[f1] = str(dev[f2])\\n                  else:\\n                      newrow[f1] = \\\"{}\\\".format(dev[f2])\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get the watchlist for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j0orct\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0u8wmby\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j0orct\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03t8ciq\"/\u003e\u003cendEvent id=\"EndEvent_1nup12z\"\u003e\u003cincoming\u003eSequenceFlow_0u8wmby\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0u8wmby\" sourceRef=\"ServiceTask_03t8ciq\" targetRef=\"EndEvent_1nup12z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03t8ciq\" id=\"ServiceTask_03t8ciq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j0orct\" id=\"SequenceFlow_0j0orct_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"217\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nup12z\" id=\"EndEvent_1nup12z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"391\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u8wmby\" id=\"SequenceFlow_0u8wmby_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"363.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Retrieve all devices that are in the watchlist from Extrahop Reveal(x) .",
+      "export_key": "wf_extrahop_rx_get_watchlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163008221,
+      "name": "Example: Extrahop Reveal(x) get watchlist",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_get_watchlist",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "1a397ec4-4b9c-41fc-a4c3-a302ac7de149",
+      "workflow_id": 80
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 10,
+        "workflow_id": "wf_extrahop_rx_update_incident",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_incident\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update incident\"\u003e\u003cdocumentation\u003eUpdate SOAR incident with detection information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1x2vrjw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xe2t7x\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_detections\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update incident\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TABLE = \\\"extrahop_detections\\\"\\nDATA_TBL_FIELDS = [\\\"appliance_id\\\", \\\"assignee\\\", \\\"categories\\\", \\\"det_description\\\", \\\"end_time\\\", \\\"det_id\\\", \\\"is_user_created\\\",\\n                   \\\"mitre_tactics\\\", \\\"mitre_techniques\\\", \\\"participants\\\", \\\"properties\\\", \\\"resolution\\\", \\\"risk_score\\\",\\n                   \\\"start_time\\\", \\\"status\\\", \\\"ticket_id\\\", \\\"ticket_url\\\", \\\"title\\\", \\\"type\\\", \\\"update_time\\\"]\\n\\ndef addArtifact(artifact_type, artifact_value, description):\\n    \\\"\\\"\\\"Add new artifacts to the incident.\\n\\n    :param artifact_type: The type of the artifact.\\n    :param artifact_value: - The value of the artifact.\\n    :param description: - the description of the artifact.\\n    \\\"\\\"\\\"\\n    incident.addArtifact(artifact_type, artifact_value, description)\\n\\n# Processing\\ndef main():\\n    detection_id = INPUTS[\\\"extrahop_detection_id\\\"]\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        det = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: A Detection was successfully returned for \\\" \\\\\\n                    u\\\"detection ID \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, detection_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if det:\\n            newrow = incident.addRow(DATA_TABLE)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f1 in DATA_TBL_FIELDS:\\n                f2 = f1\\n                if f1.startswith(\\\"det_\\\"):\\n                    f2 = f1.split(\u0027_\u0027, 1)[1]\\n\\n                if det[f2] is None or isinstance(det[f2], long):\\n                    newrow[f1] = det[f2]\\n                elif isinstance(det[f1], list):\\n                    if f1 in [\\\"participants\\\", \\\"mitre_tactics\\\", \\\"mitre_techniques\\\"]:\\n                        if f1 == \\\"participants\\\":\\n                            for p in det[f2]:\\n                                if p[\\\"object_type\\\"] == \\\"ipaddr\\\":\\n                                    artifact_type = \\\"IP Address\\\"\\n                                    addArtifact(artifact_type, p[\\\"object_value\\\"],\\n                                                \\\"Participant IP address in ExtraHop detection \u0027{0}\u0027, role: \u0027{1}\u0027.\\\"\\n                                                .format(det[\\\"id\\\"], p[\\\"role\\\"]))\\n                        obj_cnt = 0\\n                        tbl = u\u0027\u0027\\n                        for i in det[f2]:\\n                            for k, v in i.items():\\n                                if k == \\\"legacy_ids\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, \u0027,\u0027.join(v))\\n                                elif k == \\\"url\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;a target=\\\"blank\\\" href=\\\"{1}\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\u0026lt;/div\u0026gt;\u0027 \\\\\\n                                        .format(k, v, i[\\\"id\\\"])\\n                                else:\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, v)\\n                            tbl += u\\\"\u0026lt;br\u0026gt;\\\"\\n                            obj_cnt += 1\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(det[f2]))\\n                elif isinstance(det[f2], (bool, dict)):\\n                    if f1 in [\\\"properties\\\"]:\\n                        tbl = u\u0027\u0027\\n                        for i, j in det[f2].items():\\n                            if i == \\\"suspicious_ipaddr\\\":\\n                                artifact_type = \\\"IP Address\\\"\\n                                type = \\\"Suspicious IP Addresses\\\"\\n                                value = j[\\\"value\\\"]\\n                                for ip in value:\\n                                    addArtifact(artifact_type, ip, \\\"Suspicious IP address found by ExtraHop.\\\")\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0027.format(type)\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}\u0027.format(\\\", \\\".join(\\\"{}\\\".format(i) for i in value))\\n                            else:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(i, j)\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = str(det[f2])\\n                else:\\n                    newrow[f1] = \\\"{}\\\".format(det[f2])\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get detections for detection ID \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; .\\\" \\\\\\n                     u\\\" with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, detection_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1x2vrjw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tuc6op\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1x2vrjw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xe2t7x\"/\u003e\u003cendEvent id=\"EndEvent_1y7yknm\"\u003e\u003cincoming\u003eSequenceFlow_1vgg24b\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1v7g0lj\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update incident\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\n\\ndef get_dev_ids():\\n    # Get participant dev ids    \\n    dev_ids = []\\n    get_devices_content = workflow.properties.get_detections_result.content\\n    devs = get_devices_content[\\\"result\\\"]\\n    participants = devs[\\\"participants\\\"]\\n    for p in participants:\\n        if p[\\\"object_type\\\"] == \\\"device\\\":\\n            dev_ids.append(p[\\\"object_id\\\"])\\n    return dev_ids\\n\\n\\n# Processing\\ndef main():\\n    participant_dev_ids = get_dev_ids()\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = [d for d in CONTENT.result if d[\\\"id\\\"] in participant_dev_ids]\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\n            \\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            if isinstance(devs, list):\\n                for dev in devs:\\n                    process_devs(dev)\\n            else:\\n                process_devs(devs)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1tuc6op\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vgg24b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1tuc6op\" sourceRef=\"ServiceTask_0xe2t7x\" targetRef=\"ServiceTask_1v7g0lj\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1vgg24b\" sourceRef=\"ServiceTask_1v7g0lj\" targetRef=\"EndEvent_1y7yknm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xe2t7x\" id=\"ServiceTask_0xe2t7x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"228\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1x2vrjw\" id=\"SequenceFlow_1x2vrjw_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"228\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"213\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1y7yknm\" id=\"EndEvent_1y7yknm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"598\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1v7g0lj\" id=\"ServiceTask_1v7g0lj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"440\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tuc6op\" id=\"SequenceFlow_1tuc6op_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"440\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"339\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vgg24b\" id=\"SequenceFlow_1vgg24b_di\"\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"537.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 10,
+      "creator_id": "a@a.com",
+      "description": "Update SOAR incident with detection information from Extrahop Reveal(x) .",
+      "export_key": "wf_extrahop_rx_update_incident",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651593340442,
+      "name": "Example: Extrahop Reveal(x) update incident",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_update_incident",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "b0a2acd5-a6ac-431f-b4c4-e467ff4b3f85",
+      "workflow_id": 79
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_extrahop_rx_add_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_add_artifact\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) add artifact\"\u003e\u003cdocumentation\u003eCreate a SOAR incident artifact from ExtraHop device property. Valid types are IP Address, DNS Name or MAC Address.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0p2jx04\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_06obwkv\" name=\"scr_extrahop_rx_add_artifact_from...\"\u003e\u003cextensionElements\u003e\u003cresilient:script programmaticName=\"scr_sep_add_artifact_from_scan_results\" uuid=\"b22a440f-5bd8-4d14-a34e-9fe51dad99fb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0p2jx04\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0chyplu\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_0p2jx04\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_06obwkv\"/\u003e\u003cendEvent id=\"EndEvent_070d7ng\"\u003e\u003cincoming\u003eSequenceFlow_0chyplu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0chyplu\" sourceRef=\"ScriptTask_06obwkv\" targetRef=\"EndEvent_070d7ng\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_06obwkv\" id=\"ScriptTask_06obwkv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"241\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0p2jx04\" id=\"SequenceFlow_0p2jx04_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_070d7ng\" id=\"EndEvent_070d7ng_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"372\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0chyplu\" id=\"SequenceFlow_0chyplu_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"356.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "creator_id": "a@a.com",
+      "description": "Create a SOAR incident artifact from ExtraHop device property. Valid types are IP Address, DNS Name or MAC Address.",
+      "export_key": "wf_extrahop_rx_add_artifact",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651574968977,
+      "name": "Example: Extrahop Reveal(x) add artifact",
+      "object_type": "extrahop_devices",
+      "programmatic_name": "wf_extrahop_rx_add_artifact",
+      "tags": [],
+      "uuid": "9b17bae7-271d-4683-a58b-825cdaeb09bc",
+      "workflow_id": 93
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "wf_extrahop_rx_search_detections",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_search_detections\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) search detections\"\u003e\u003cdocumentation\u003eSearch for detections information from Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0v0udss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1bnujpl\" name=\"Extrahop Reveal(x) search detecti...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_search_detections\\\"\\nWF_NAME = \\\"Example: Extrahop revealx search detections\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TABLE = \\\"extrahop_detections\\\"\\nDATA_TBL_FIELDS = [\\\"appliance_id\\\", \\\"assignee\\\", \\\"categories\\\", \\\"det_description\\\", \\\"end_time\\\", \\\"det_id\\\", \\\"is_user_created\\\",\\n                   \\\"mitre_tactics\\\", \\\"mitre_techniques\\\", \\\"participants\\\", \\\"properties\\\", \\\"resolution\\\", \\\"risk_score\\\",\\n                   \\\"start_time\\\", \\\"status\\\", \\\"ticket_id\\\", \\\"ticket_url\\\", \\\"title\\\", \\\"type\\\", \\\"update_time\\\"]\\n# Processing\\n\\nnote_text = u\u0027\u0027\\n\\nif CONTENT:\\n    dets = CONTENT.result\\n    note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Detections returned for SOAR \\\" \\\\\\n                u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(dets), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    if dets:\\n        for det in dets:\\n            newrow = incident.addRow(DATA_TABLE)\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f1 in DATA_TBL_FIELDS:\\n                f2 = f1\\n                if f1.startswith(\\\"det_\\\"):\\n                  f2 = f1.split(\u0027_\u0027, 1)[1]\\n                if det[f2] is None or isinstance(det[f2], long):\\n                    newrow[f1] = det[f2]\\n                elif isinstance(det[f1], list):\\n                    if f1 in [\\\"participants\\\", \\\"mitre_tactics\\\", \\\"mitre_techniques\\\"]:\\n                        obj_cnt = 0\\n                        tbl = u\u0027\u0027\\n                        for i in det[f2]:\\n                            for k, v in i.items():\\n                                if k == \\\"legacy_ids\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, \u0027,\u0027.join(v))\\n                                elif k == \\\"url\\\":\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;a target=\\\"blank\\\" href=\\\"{1}\\\"\u0026gt;{2}\u0026lt;/a\u0026gt;\u0026lt;/div\u0026gt;\u0027\\\\\\n                                        .format(k, v, i[\\\"id\\\"])\\n                                else:\\n                                    tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(k, v)\\n                            tbl += u\\\"\u0026lt;br\u0026gt;\\\"\\n                            obj_cnt += 1\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(det[f2]))\\n                elif isinstance(det[f2], (bool, dict)):\\n                    if f1 in [\\\"properties\\\"]:\\n                        suspect_ip = False\\n                        tbl = u\u0027\u0027\\n                        for i, j in det[f2].items():\\n                            if i == \\\"suspicious_ipaddr\\\":\\n                                artifact_type = \\\"IP Address\\\"\\n                                type = \\\"Suspicious IP Addresses\\\"\\n                                value = j[\\\"value\\\"]\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0027.format(type)\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}\u0027.format(\\\", \\\".join(\\\"{}\\\".format(i) for i in value))\\n                            else:\\n                                tbl += u\u0027\u0026lt;div\u0026gt;\u0026lt;b\u0026gt;{0}:\u0026lt;/b\u0026gt;{1}\u0026lt;/div\u0026gt;\u0027.format(i, j)\\n                        newrow[f1] = tbl\\n                    else:\\n                        newrow[f1] = str(det[f2])\\n                else:\\n                    newrow[f1] = \\\"{}\\\".format(det[f2])\\n        note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Detections\\\")\\n\\nelse:\\n    note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                 u\\\"to search detections for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n        .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\nincident.addNote(helper.createRichText(note_text))\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n#raise ValueError(\\\"{}\\\".format(rule.properties.extrahop_detection_status))\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        if isinstance(prop, int):\\n            return prop\\n        elif isinstance(prop, list):\\n            return [\u0027{}\u0027.format(i) for i in prop]\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\ndef main():\\n    filter = {}\\n    filter_props = {\\n        \\\"risk_score_min\\\": get_prop(rule.properties.extrahop_detection_risk_score_min),\\n        \\\"types\\\": get_prop(rule.properties.extrahop_detection_types),\\n        \\\"category\\\": get_prop(rule.properties.extrahop_detection_category),\\n        \\\"assignee\\\": get_prop(rule.properties.extrahop_detection_assignee),\\n        \\\"ticket_id\\\": get_prop(rule.properties.extrahop_detection_ticket_id),\\n        \\\"status\\\": get_prop(rule.properties.extrahop_detection_status),\\n        \\\"resolution\\\": get_prop(rule.properties.extrahop_detection_resolution)\\n    }\\n\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if not filter:\\n        raise ValueError(\\\"The search filter is empty.\\\")\\n    else:\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n    \\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n    if rule.properties.extrahop_update_time:\\n      inputs.extrahop_update_time = rule.properties.extrahop_update_time\\n            \\nmain()\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v0udss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ve9fh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0v0udss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1bnujpl\"/\u003e\u003cendEvent id=\"EndEvent_0jhirff\"\u003e\u003cincoming\u003eSequenceFlow_17ve9fh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17ve9fh\" sourceRef=\"ServiceTask_1bnujpl\" targetRef=\"EndEvent_0jhirff\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bnujpl\" id=\"ServiceTask_1bnujpl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0udss\" id=\"SequenceFlow_0v0udss_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0jhirff\" id=\"EndEvent_0jhirff_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"378\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"396\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ve9fh\" id=\"SequenceFlow_17ve9fh_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"378\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
       "creator_id": "a@a.com",
       "description": "Search for detections information from Extrahop Reveal(x).",
       "export_key": "wf_extrahop_rx_search_detections",
       "last_modified_by": "a@a.com",
-      "last_modified_time": 1650038606928,
+      "last_modified_time": 1651593575500,
       "name": "Example: Extrahop Reveal(x) search detections",
       "object_type": "incident",
       "programmatic_name": "wf_extrahop_rx_search_detections",
@@ -6836,7 +7122,132 @@
         }
       ],
       "uuid": "7e68a246-23c6-40bd-8f0a-77217f69a01c",
-      "workflow_id": 68
+      "workflow_id": 85
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_extrahop_rx_get_tags",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_tags\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get tags\"\u003e\u003cdocumentation\u003eGet tags information from Extrahop Reveal(x)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1dns9ig\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_189ulsl\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_tags\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get tags\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDATA_TBL_FIELDS = [\\\"am_description\\\", \\\"am_id\\\", \\\"mod_time\\\", \\\"mode\\\", \\\"name\\\", \\\"owner\\\", \\\"rights\\\", \\\"short_code\\\", \\\"show_alert_status\\\", \\\"walks\\\", \\\"weighting\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        tags = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Tags returned for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\"\\\\\\n                     u\\\"with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n        .format(WF_NAME, len(tags), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if tags:\\n            for tag in tags:\\n                newrow = incident.addRow(\\\"extrahop_tags\\\")\\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\\n                newrow.tag = tag.name\\n                newrow.mod_time = tag.mod_time\\n                newrow.tag_id = tag.id\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(\\\"Extrahop Tags\\\")\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get tags for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1dns9ig\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vd5haa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dns9ig\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_189ulsl\"/\u003e\u003cendEvent id=\"EndEvent_0y9myii\"\u003e\u003cincoming\u003eSequenceFlow_0vd5haa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vd5haa\" sourceRef=\"ServiceTask_189ulsl\" targetRef=\"EndEvent_0y9myii\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_189ulsl\" id=\"ServiceTask_189ulsl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dns9ig\" id=\"SequenceFlow_1dns9ig_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y9myii\" id=\"EndEvent_0y9myii_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"388\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vd5haa\" id=\"SequenceFlow_0vd5haa_di\"\u003e\u003comgdi:waypoint x=\"344\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"388\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Get tags information from Extrahop Reveal(x)",
+      "export_key": "wf_extrahop_rx_get_tags",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163015955,
+      "name": "Example: Extrahop Reveal(x) get tags",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_get_tags",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "3385d752-805c-4275-9092-4af1c3e9abe4",
+      "workflow_id": 84
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "wf_extrahop_rx_update_detection",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_detection\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update detection\"\u003e\u003cdocumentation\u003eUpdate ExtraHop detection if the status is changed on the associated  SOAR incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bom7fb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_089q2t9\" name=\"Extrahop Reveal(x) update detecti...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8ee5a0dc-d7d9-4d02-85a3-55d340a43aa0\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_setection post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_update_detection\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update detection\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        result = CONTENT[\\\"result\\\"]\\n        if result == \\\"success\\\":\\n            tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully updated the detection status for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to update the detection status for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Update detection status failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to update the detection status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\\ninputs.incident_id = incident.id\\ninputs.soar_inc_owner_id = incident.owner_id\\ninputs.soar_inc_plan_status = incident.plan_status\\ninputs.soar_inc_resolution_id = incident.resolution_id\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bom7fb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ddvogk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bom7fb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_089q2t9\"/\u003e\u003cendEvent id=\"EndEvent_11v3pbd\"\u003e\u003cincoming\u003eSequenceFlow_0ddvogk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ddvogk\" sourceRef=\"ServiceTask_089q2t9\" targetRef=\"EndEvent_11v3pbd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_089q2t9\" id=\"ServiceTask_089q2t9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bom7fb\" id=\"SequenceFlow_1bom7fb_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_11v3pbd\" id=\"EndEvent_11v3pbd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ddvogk\" id=\"SequenceFlow_0ddvogk_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"344.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "a@a.com",
+      "description": "Update ExtraHop detection if the status is changed on the associated  SOAR incident.",
+      "export_key": "wf_extrahop_rx_update_detection",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163013469,
+      "name": "Example: Extrahop Reveal(x) update detection",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_update_detection",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "a2732fde-597d-420c-8749-cf9c198c8fc5",
+      "workflow_id": 82
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "wf_extrahop_rx_get_devices",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_get_devices\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) get devices\"\u003e\u003cdocumentation\u003eGet devices information from Extrahop Reveal(x) .\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lf3pjh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16ic9ye\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) get devices\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\n# Processing\\ndef process_devs(dev):\\n    # Process a device result.\\n    newrow = incident.addRow(DATA_TABLE)\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            newrow[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            newrow[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            newrow[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            newrow[f1] = long(dev[f2])\\n        else:\\n            newrow[f1] = \\\"{}\\\".format(dev[f2])\\n\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        devs = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; Devices returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, len(devs), FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if devs:\\n            if isinstance(devs, list):\\n                for dev in devs:\\n                    process_devs(dev)\\n            else:\\n                process_devs(devs)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if rule.properties.extrahop_device_id:\\n    inputs.extrahop_device_id = rule.properties.extrahop_device_id\\nelse:\\n    if rule.properties.extrahop_active_from:\\n      inputs.extrahop_active_from = rule.properties.extrahop_active_from\\n    if rule.properties.extrahop_active_until:\\n      inputs.extrahop_active_until = rule.properties.extrahop_active_until\\n    if rule.properties.extrahop_limit:\\n      inputs.extrahop_limit = rule.properties.extrahop_limit\\n    if rule.properties.extrahop_offset:\\n      inputs.extrahop_offset = rule.properties.extrahop_offset\\n    if rule.properties.extrahop_search_type and not rule.properties.extrahop_search_value:\\n        raise ValueError(\\\"The search type is set but the search value is empty.\\\")\\n    if rule.properties.extrahop_search_value and not rule.properties.extrahop_search_type:\\n        raise ValueError(\\\"A search value is set but the search type is not set.\\\")\\n    inputs.extrahop_search_type = rule.properties.extrahop_search_type\\n    inputs.extrahop_value = rule.properties.extrahop_search_value\\n\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lf3pjh\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_10jo0yc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lf3pjh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16ic9ye\"/\u003e\u003cendEvent id=\"EndEvent_1tnn5yc\"\u003e\u003cincoming\u003eSequenceFlow_10jo0yc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10jo0yc\" sourceRef=\"ServiceTask_16ic9ye\" targetRef=\"EndEvent_1tnn5yc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16ic9ye\" id=\"ServiceTask_16ic9ye_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"255\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lf3pjh\" id=\"SequenceFlow_1lf3pjh_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"255\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tnn5yc\" id=\"EndEvent_1tnn5yc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"445\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10jo0yc\" id=\"SequenceFlow_10jo0yc_di\"\u003e\u003comgdi:waypoint x=\"355\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"391\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "creator_id": "a@a.com",
+      "description": "Get devices information from Extrahop Reveal(x) .",
+      "export_key": "wf_extrahop_rx_get_devices",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163002773,
+      "name": "Example: Extrahop Reveal(x) get devices",
+      "object_type": "incident",
+      "programmatic_name": "wf_extrahop_rx_get_devices",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "c0ea7fdb-37a1-4f70-92a1-2c427ea93232",
+      "workflow_id": 75
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "wf_extrahop_rx_update_watchlist",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_update_watchlist\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) update watchlist\"\u003e\u003cdocumentation\u003eAdd or remove an ExtraHop device to or from the watchlist.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1aj2xl3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1xzsmrv\" name=\"Extrahop Reveal(x) update watchli...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d33930-3417-436e-82a1-267a5dc9fa91\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_update_watchlist post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_update_watchlist\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        result = CONTENT[\\\"result\\\"]\\n        if result == \\\"success\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully updated the watchlist for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to update the watchlist for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Update watchlist failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n                .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to update the watchlist \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"dev_id = row.devs_id\\naction = rule.properties.extrahop_watchlist_action\\nif action == \\\"add\\\":\\n    inputs.extrahop_assign = str(dev_id)\\nelif action == \\\"remove\\\":\\n    inputs.extrahop_unassign = str(dev_id)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1aj2xl3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0sca6mx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1aj2xl3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1xzsmrv\"/\u003e\u003cserviceTask id=\"ServiceTask_03ldzqe\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_\u00e1get_devices\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) update watchlist\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Display subset of fields\\nDATA_TABLE = \\\"extrahop_devices\\\"\\nDATA_TBL_FIELDS = [\\\"display_name\\\", \\\"devs_description\\\", \\\"default_name\\\", \\\"dns_name\\\", \\\"ipaddr4\\\", \\\"ipaddr6\\\", \\\"macaddr\\\",\\n                   \\\"role\\\", \\\"vendor\\\", \\\"devs_id\\\", \\\"extrahop_id\\\", \\\"activity\\\", \\\"on_watchlist\\\", \\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\n                   \\\"last_seen_time\\\"]\\n\\ndef process_devs(dev):\\n    # Process a device result.\\n    row.query_execution_date = QUERY_EXECUTION_DATE\\n    for f1 in DATA_TBL_FIELDS:\\n        f2 = f1\\n        if f1.startswith(\\\"devs_\\\"):\\n            f2 = f1.split(\u0027_\u0027, 1)[1]\\n        if dev[f1] is None:\\n            row[f1] = dev[f2]\\n        elif isinstance(dev[f2], list):\\n            row[f1] = \\\"{}\\\".format(\\\", \\\".join(dev[f2]))\\n        elif isinstance(dev[f2], bool):\\n            row[f1] = str(dev[f2])\\n        elif f1 in [\\\"mod_time\\\", \\\"user_mod_time\\\", \\\"discover_time\\\", \\\"last_seen_time\\\"]:\\n            row[f1] = long(dev[f2])\\n        else:\\n           row[f1] = \\\"{}\\\".format(dev[f2])\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    if CONTENT:\\n        dev = CONTENT.result\\n        note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was a Device returned for SOAR \\\" \\\\\\n                    u\\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, FN_NAME, \\\", \\\".join(\\n            \\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        if dev:\\n            process_devs(dev)\\n            note_text += u\\\"\u0026lt;br\u0026gt;The data table \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; has been updated\\\".format(DATA_TABLE)\\n\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to get devices for SOAR function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.extrahop_device_id = row.devs_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0sca6mx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1clpsis\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0sca6mx\" sourceRef=\"ServiceTask_1xzsmrv\" targetRef=\"ServiceTask_03ldzqe\"/\u003e\u003cendEvent id=\"EndEvent_0hqfkxo\"\u003e\u003cincoming\u003eSequenceFlow_1clpsis\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1clpsis\" sourceRef=\"ServiceTask_03ldzqe\" targetRef=\"EndEvent_0hqfkxo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1xzsmrv\" id=\"ServiceTask_1xzsmrv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"287\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1aj2xl3\" id=\"SequenceFlow_1aj2xl3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03ldzqe\" id=\"ServiceTask_03ldzqe_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"433\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0sca6mx\" id=\"SequenceFlow_0sca6mx_di\"\u003e\u003comgdi:waypoint x=\"387\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0hqfkxo\" id=\"EndEvent_0hqfkxo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"570\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"588\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1clpsis\" id=\"SequenceFlow_1clpsis_di\"\u003e\u003comgdi:waypoint x=\"533\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"551.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "creator_id": "a@a.com",
+      "description": "Add or remove an ExtraHop device to or from the watchlist.",
+      "export_key": "wf_extrahop_rx_update_watchlist",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163011968,
+      "name": "Example: Extrahop Reveal(x) update watchlist",
+      "object_type": "extrahop_devices",
+      "programmatic_name": "wf_extrahop_rx_update_watchlist",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "d1ac6f70-c4d9-4bee-adac-dcdea587c38c",
+      "workflow_id": 74
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "wf_extrahop_rx_assign_tag",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_extrahop_rx_assign_tag\" isExecutable=\"true\" name=\"Example: Extrahop Reveal(x) assign tag\"\u003e\u003cdocumentation\u003eAssign a tag to a list of devices ids for Extrahop Reveal(x).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0l449vv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_04jmpas\" name=\"Extrahop Reveal(x) get tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"55ced5bd-cd23-4212-b661-956fed40722b\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\",\"result_name\":\"get_tags_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0l449vv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_073ebus\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0l449vv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_04jmpas\"/\u003e\u003cserviceTask id=\"ServiceTask_1hdcy5r\" name=\"Extrahop Reveal(x) assign tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f0d2fc8c-20ab-440c-b4f5-46776a0b561e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##\\n#  Globals\\nFN_NAME = \\\"funct_extrahop_rx_assign_tag\\\"\\nWF_NAME = \\\"Example: Extrahop Reveal(x) assign tag\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\ndef main():\\n    note_text = u\u0027\u0027\\n    tag = INPUTS.get(\\\"extrahop_tag_name\\\")\\n    if CONTENT:\\n        result = CONTENT.result\\n        if result == \\\"success\\\":\\n            device_id = INPUTS.get(\\\"extrahop_device_ids\\\")\\n            tag_id = INPUTS.get(\\\"extrahop_tag_id\\\")\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully assigned tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR \\\" \\\\\\n                        u\\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n        elif result == \\\"failed\\\":\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Failed to assign tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for \\\" \\\\\\n                        u\\\"SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n        else:\\n            note_text = u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Assign tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; failed with unexpected \\\" \\\\\\n                        u\\\"response for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\".format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n    else:\\n        note_text += u\\\"ExtraHop Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned while attempting \\\" \\\\\\n                     u\\\"to assign a tag id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to device id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for SOAR function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; with parameters \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, tag_id, device_id, FN_NAME, \\\", \\\".join(\\\"{}:{}\\\".format(k, v) for k, v in INPUTS.items()))\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nmain()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"tag_name = rule.properties.extrahop_tag_name\\nget_tags_content = workflow.properties.get_tags_result.content\\ninputs.extrahop_device_ids = str(row.devs_id)\\nif tag_name is None:\\n    raise ValueError(\\\"The tag name is not set\\\")\\ninputs.extrahop_tag_id = None\\nfor tag in get_tags_content[\\\"result\\\"]:\\n    if tag_name == tag[\\\"name\\\"]:\\n        inputs.extrahop_tag_id = tag[\\\"id\\\"]\\n        break\\nif not inputs.extrahop_tag_id:\\n    raise ValueError(\\\"Tag {} not found.\\\".format(tag_name))\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_073ebus\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1db2q7n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_073ebus\" sourceRef=\"ServiceTask_04jmpas\" targetRef=\"ServiceTask_1hdcy5r\"/\u003e\u003cendEvent id=\"EndEvent_0bh06jd\"\u003e\u003cincoming\u003eSequenceFlow_1db2q7n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1db2q7n\" sourceRef=\"ServiceTask_1hdcy5r\" targetRef=\"EndEvent_0bh06jd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_04jmpas\" id=\"ServiceTask_04jmpas_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"239\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l449vv\" id=\"SequenceFlow_0l449vv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hdcy5r\" id=\"ServiceTask_1hdcy5r_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"399\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_073ebus\" id=\"SequenceFlow_073ebus_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0bh06jd\" id=\"EndEvent_0bh06jd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"544\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"562\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1db2q7n\" id=\"SequenceFlow_1db2q7n_di\"\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"544\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"521.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "a@a.com",
+      "description": "Assign a tag to a list of devices ids for Extrahop Reveal(x).",
+      "export_key": "wf_extrahop_rx_assign_tag",
+      "last_modified_by": "a@a.com",
+      "last_modified_time": 1651163015273,
+      "name": "Example: Extrahop Reveal(x) assign tag",
+      "object_type": "extrahop_devices",
+      "programmatic_name": "wf_extrahop_rx_assign_tag",
+      "tags": [
+        {
+          "tag_handle": "fn_extrahop",
+          "value": null
+        }
+      ],
+      "uuid": "6ab655c4-a62d-43bc-b896-a198871aef15",
+      "workflow_id": 83
     }
   ],
   "workspaces": []

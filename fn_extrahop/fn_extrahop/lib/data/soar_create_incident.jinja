@@ -18,7 +18,9 @@
   "properties": {
     "extrahop_detection_id": {{ id }},
     "extrahop_update_time": {{ update_time }},
-    "extrahop_end_time": {{ end_time }},
+     {% if end_time %}
+        "extrahop_end_time": {{ end_time }},
+     {% endif %}
     "extrahop_risk_score": {{ risk_score }},
     "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",

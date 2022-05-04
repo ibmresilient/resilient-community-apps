@@ -54,51 +54,51 @@ class TestFunctExtrahopRxSearchPackets:
         assert func is not None
 
     mock_inputs_1 = {
-        "extrahop_bpf": "sample text",
+        "extrahop_bpf": None,
         "extrahop_output": "zip",
-        "extrahop_limit_bytes": "sample text",
-        "extrahop_limit_search_duration": "sample text",
+        "extrahop_limit_bytes": None,
+        "extrahop_limit_search_duration": None,
         "extrahop_active_until": 123,
         "extrahop_always_return_body": True,
-        "extrahop_port1": "sample text",
+        "extrahop_port1": None,
         "extrahop_active_from": 123,
-        "extrahop_port2": "sample text",
-        "extrahop_ip1": "sample text",
-        "extrahop_ip2": "sample text",
+        "extrahop_port2": None,
+        "extrahop_ip1": None,
+        "extrahop_ip2": None,
         "incident_id": 123
     }
 
-    expected_results_1 = {"result": {"status": "No search matches found."}}
+    expected_results_1 = {"result": {"status": "No search matches found"}}
 
     mock_inputs_2 = {
         "extrahop_bpf": "sample text",
         "extrahop_output": "pcap",
-        "extrahop_limit_bytes": "sample text",
-        "extrahop_limit_search_duration": "sample text",
+        "extrahop_limit_bytes": None,
+        "extrahop_limit_search_duration": None,
         "extrahop_active_until": 123,
         "extrahop_always_return_body": True,
-        "extrahop_port1": "sample text",
+        "extrahop_port1": None,
         "extrahop_active_from": 123,
-        "extrahop_port2": "sample text",
-        "extrahop_ip1": "sample text",
-        "extrahop_ip2": "sample text",
+        "extrahop_port2": None,
+        "extrahop_ip1": None,
+        "extrahop_ip2": None,
         "incident_id": 123
     }
 
-    expected_results_2 = {"result": {"attachment": "example.pcap"}}
+    expected_results_2 = {"result": {"attachment": "<b>example.pcap</b>"}}
 
     mock_inputs_3 = {
-        "extrahop_bpf": "sample text",
+        "extrahop_bpf": "host 192.168.1.2",
         "extrahop_output": "keylog_txt",
-        "extrahop_limit_bytes": "sample text",
-        "extrahop_limit_search_duration": "sample text",
+        "extrahop_limit_bytes": None,
+        "extrahop_limit_search_duration": None,
         "extrahop_active_until": 123,
-        "extrahop_always_return_body": True,
-        "extrahop_port1": "sample text",
+        "extrahop_always_return_body": None,
+        "extrahop_port1": None,
         "extrahop_active_from": 123,
-        "extrahop_port2": "sample text",
+        "extrahop_port2": None,
         "extrahop_ip1": "sample text",
-        "extrahop_ip2": "sample text",
+        "extrahop_ip2": None,
         "incident_id": 123
     }
 

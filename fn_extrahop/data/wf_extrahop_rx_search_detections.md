@@ -103,8 +103,6 @@ if CONTENT:
                         obj_cnt = 0
                         tbl = u''
                         for i in det[f2]:
-                            if not obj_cnt:
-                                tbl += u'<div><hr class="solid"></div>'
                             for k, v in i.items():
                                 if k == "legacy_ids":
                                     tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
@@ -113,7 +111,7 @@ if CONTENT:
                                         .format(k, v, i["id"])
                                 else:
                                     tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            tbl += u'<div><hr class="solid"></div>'
+                            tbl += u"<br>"
                             obj_cnt += 1
                         newrow[f1] = tbl
                     else:

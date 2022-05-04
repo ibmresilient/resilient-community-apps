@@ -21,7 +21,8 @@ extrahop_rx_key_secret = <EXTRAHOP_RX_API_KEY_SECRET>
 # Authentication setting for ExtraHop standalone sensor is a single api key
 extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
 # Interval to poll ExtraHop for detections (in seconds).
-# To turn the poller off use value 0
+# To turn the poller off use value 0.
+# Set value to 0 when running selftest/Test Configuration.
 polling_interval = <POLLING_INTERVAL>
 # Optional - Filter detection results returned to SOAR using key/value pairs. Filter keys/values are all optional.
 # Example: polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
