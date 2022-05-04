@@ -23,8 +23,11 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Remove a Blocklist or Custom List entry
         Inputs:
-            -   fn_inputs.siemplify_entity_list
-            -   fn_inputs.siemplify_entity_id
+            - fn_inputs.siemplify_entity_id
+            - fn_inputs.siemplify_entity_list
+            - fn_inputs.siemplify_entity_type
+            - fn_inputs.siemplify_entity_value
+            - fn_inputs.siemplify_environments
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))

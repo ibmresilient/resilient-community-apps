@@ -39,10 +39,11 @@
 - [Function - Siemplify Sync Comment](#function---siemplify-sync-comment)
 - [Function - Siemplify Close Case](#function---siemplify-close-case)
 - [Function - Siemplify Add Playbook](#function---siemplify-add-playbook)
-- [Function - Siemplify Add/Update Entity to Blocklist](#function---siemplify-addupdate-entity-to-blocklist)
-- [Function - Siemplify Add/Update Entity to Custom List](#function---siemplify-addupdate-entity-to-customlist)
 - [Function - Siemplify Get Block List Entities](#function---siemplify-get-blocklist-entities)
 - [Function - Siemplify Get Custom List Entities](#function---siemplify-get-custom-list-entities)
+- [Function - Siemplify Add/Update Entity to Blocklist](#function---siemplify-addupdate-entity-to-blocklist)
+- [Function - Siemplify Add/Update Entity to Custom List](#function---siemplify-addupdate-entity-to-custom-list)
+- [Function - Siemplify Remove List Entry](#function---siemplify-remove-list-entry)
 - [Data Table - Siemplify List Entries](#data-table---siemplify-list-entries)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
@@ -1443,6 +1444,84 @@ else:
 </details>
 
 ---
+## Function - Siemplify: Remove List Entry
+Remove a Blocklist or Custom List entry
+
+ ![screenshot: fn-siemplify-get-blocklist-entities ](./doc/screenshots/fn_siemplify_remove_entity.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `siemplify_entity_id` | `number` | Yes | `2` | ID within the list |
+| `siemplify_entity_list` | `text` | Yes | `Block List` | Name of blocklist or custom list  |
+| `siemplify_entity_type` | `text` | Yes | `IPSEC` | Type of the entity |
+| `siemplify_entity_value` | `text` | Yes | `192.168.1.19` | Value of the entity |
+| `siemplify_environments` | `text` | Yes | `Default Environment, Environment2` | Environments |
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': '',
+  'raw': None,
+  'inputs': {
+    'siemplify_entity_id': 9,
+    'siemplify_entity_list': "Block List",
+    'siemplify_entity_type': "IPSEC",
+    'siemplify_entity_value': "192.168.1.19",
+    'siemplifu_environments': "Default Environment, Environment2"
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-siemplify',
+    'package_version': '1.0.0',
+    'host': 'localhost',
+    'execution_time_ms': 240,
+    'timestamp': '2022-01-07 11:23:21'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.siemplify_entity_id = row['entity_id']
+inputs.siemplify_entity_list  = row['list_name']
+inputs.siemplify_entity_value = row['entity']
+inputs.siemplify_entity_type = row['entity_type']
+inputs.siemplify_environments = row['environments']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  incident.addNote("Siemplify Remove {} Entity '{}' successful".format(row['list_name'], row['entity']))
+  row['entity'] = "{} (deleted)".format(row['entity'])
+else:
+  incident.addNote("Siemplify Remove {} Entity '{}' failed: {}".format(row['list_name'], row['entity'], results.reason))
+```
+
+</p>
+</details>
+
+---
 
 ## Data Table - Siemplify List Entries
 
@@ -1510,7 +1589,7 @@ Used in the `siemplify_create_case_template` app.config parameter.
   "title": "IBM SOAR - {{ name|e }}",
   "assignedUser": {% if siemplify_assigned_user %} "{{ siemplify_assigned_user }}" {% else %} null {% endif %},
   "reason": "IBM SOAR Incident {{ id }}",
-  "priority": {{ severity | string | resilient_substitute('{"4": 25, "5": 50, "6": 75, "DEFAULT": 50}') }},
+  "priority": "{{ priority | string | resilient_substitute('{"25": "Low", "50":"Medium", "80":"High", "100":"Critical", "DEFAULT": "Medium"}') }}",
   "environment": "{{ siemplify_environment if siemplify_environment else 'Default Environment'}}",
   "isImportant": {{ confirmed | tojson }},
   "alertName": "IBM SOAR Alert {{ id }}",
@@ -1546,7 +1625,7 @@ Used in the `soar_update_case_template` app.config parameter.
     "siemplify_assignee": "{{ assignedUserName }}",
     "siemplify_stage": "{{ stage }}",
     "siemplify_is_important": {{ isImportant|tojson }},
-    "siemplify_priority": {{ priority }}
+    "siemplify_priority": "{{ priority | string | resilient_substitute('{"25": "Low", "50":"Medium", "80":"High", "100":"Critical", "DEFAULT": "Medium"}') }}"
   }
 }
 ```

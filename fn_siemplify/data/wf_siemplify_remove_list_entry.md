@@ -20,6 +20,9 @@
 ```python
 inputs.siemplify_entity_id = row['entity_id']
 inputs.siemplify_entity_list  = row['list_name']
+inputs.siemplify_entity_value = row['entity']
+inputs.siemplify_entity_type = row['entity_type']
+inputs.siemplify_environments = row['environments']
 ```
 
 ### Post-Processing Script

@@ -1,21 +1,22 @@
 {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
-  "content": {
-    "mock_key": "Mock Value!"
+  "version":2.0,
+  "success":true,
+  "reason":"None",
+  "content":"",
+  "raw":"None",
+  "inputs":{
+     "siemplify_entity_id":14,
+     "siemplify_environments":"Default Environment",
+     "siemplify_entity_list":"Block List",
+     "siemplify_entity_type":"IPSET",
+     "siemplify_entity_value":"194.34.44.53"
   },
-  "raw": null,
-  "inputs": {
-    "siemplify_entity_id": 12,
-    "siemplify_entity_list": "Custom List"
-  },
-  "metrics": {
-    "version": "1.0",
-    "package": "fn-siemplify",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 351,
-    "timestamp": "2022-05-03 17:22:37"
+  "metrics":{
+     "version":"1.0",
+     "package":"fn-siemplify",
+     "package_version":"1.0.0",
+     "host":"local",
+     "execution_time_ms":279,
+     "timestamp":"2022-05-03 21:22:42"
   }
 }

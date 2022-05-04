@@ -390,9 +390,21 @@ class SiemplifyCommon():
         Returns:
             dict, str: results, err_msg
         """
+        """
+        {
+            "id":3,
+            "entityIdentifier":"5.6.7.8",
+            "entityType":"IPSET",
+            "elementType":0,
+            "scope":2,
+            "environments":["Default Environment"]}
+        """
 
         payload = {
-            "id": str(inputs.get("siemplify_entity_id"))
+            "id": inputs.get("siemplify_entity_id"),
+            "entityIdentifier": inputs.get("siemplify_entity_value"),
+            "entityType": inputs.get("siemplify_entity_type"),
+            "environments": [env.strip() for env in inputs.get("siemplify_environments", "").split(",")]
         }
         LOG.debug(payload)
 
