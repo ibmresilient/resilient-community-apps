@@ -389,7 +389,7 @@ Update an alert in the Microsoft Security Graph.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `microsoft_security_graph_alert_data` | `textarea` | Yes | `-` | JSON string of data to update an alert with. |
+| `microsoft_security_graph_alert_data` | `textarea` | Yes | `{"vendorInformation": {"provider": "String","vendor": "String"}}` | JSON string of data to update an alert with. |
 | `microsoft_security_graph_alert_id` | `text` | Yes | `-` | ID of an alert. |
 
 </p>
