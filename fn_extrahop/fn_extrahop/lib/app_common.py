@@ -8,6 +8,9 @@ from urllib.parse import urljoin
 from fn_extrahop.lib.rx_client import RxClient
 
 LOG = logging.getLogger(__name__)
+
+PACKAGE_NAME = "fn_extrahop"
+
 # URL fragment to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 # List of fields to check to determine if an update is required.
