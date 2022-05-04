@@ -7,6 +7,7 @@ from logging import getLogger
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, get_function_input
+from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
 
@@ -43,11 +44,13 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
             workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
+            validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_row_id", "dt_utils_cells_to_update"], kwargs)
+
             inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id"),  # number (required)
-                "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update")  # text (required)
+                "incident_id": kwargs.get("incident_id"),  # number (required)
+                "dt_utils_datatable_api_name": kwargs.get("dt_utils_datatable_api_name"),  # text (required)
+                "dt_utils_row_id": kwargs.get("dt_utils_row_id"),  # number (required)
+                "dt_utils_cells_to_update": kwargs.get("dt_utils_cells_to_update")  # text (required)
             }
             LOG.info(inputs)
 

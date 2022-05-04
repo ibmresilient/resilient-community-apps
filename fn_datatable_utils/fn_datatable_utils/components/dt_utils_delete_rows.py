@@ -5,7 +5,8 @@
 
 from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, get_function_input, validate_search_inputs
+from fn_datatable_utils.util.helper import RESDatatable, validate_search_inputs
+from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
 
@@ -42,13 +43,15 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
             workflow_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
+
             inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_rows_ids": get_function_input(kwargs, "dt_utils_rows_ids", optional=True),  # text (optional)
-                "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
-                "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True), # text (optional)
-                "dt_utils_delete_all_rows": bool(get_function_input(kwargs, "dt_utils_delete_all_rows", optional=True, default=False)), # bool (optional)
+                "incident_id": kwargs.get("incident_id"),  # number (required)
+                "dt_utils_datatable_api_name": kwargs.get("dt_utils_datatable_api_name"),  # text (required)
+                "dt_utils_rows_ids": kwargs.get("dt_utils_rows_ids"),  # text (optional)
+                "dt_utils_search_column": kwargs.get("dt_utils_search_column"),  # text (optional)
+                "dt_utils_search_value": kwargs.get("dt_utils_search_value"), # text (optional)
+                "dt_utils_delete_all_rows": bool(kwargs.get("dt_utils_delete_all_rows", False)), # bool (optional)
             }
 
             LOG.info("incident_id: {0}".format(inputs["incident_id"]))
@@ -88,13 +91,12 @@ class FunctionComponent(ResilientComponent):
                                                  row_id,
                                                  workflow_id)
 
+            payload.success = False
             if not deleted_rows:
                 yield StatusMessage("No row(s) found.")
-                payload.success = False
 
             elif "error" in deleted_rows:
                 yield StatusMessage(u"Row(s) not deleted. Error: {0}".format(deleted_rows["error"]))
-                payload.success = False
                 raise FunctionError("Failed to delete a row.")
 
             else:

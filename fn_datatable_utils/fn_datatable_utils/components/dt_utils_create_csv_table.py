@@ -9,16 +9,11 @@ import csv
 import re
 import sys
 import time
-if sys.version_info.major < 3:
-    from StringIO import StringIO
-    from io import BytesIO
-else:
-    from io import StringIO, BytesIO
+from io import StringIO
 from collections import OrderedDict
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
-                               FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, get_function_input
-from resilient_lib import ResultPayload, get_file_attachment, get_file_attachment_name
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_datatable_utils.util.helper import RESDatatable
+from resilient_lib import ResultPayload, get_file_attachment, get_file_attachment_name, validate_fields
 
 PACKAGE_NAME = "fn_datatable_utils"
 LOG = getLogger(__name__)
@@ -57,33 +52,36 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instantiate new SOAR API object
             res_client = self.rest_client()
+            # Validate required fields
+            validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], kwargs)
 
             inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id", optional=False),  # number (required)
-                "attachment_id": get_function_input(kwargs, "attachment_id", optional=True),  # number (optional)
-                "has_headers": get_function_input(kwargs, "dt_has_headers", optional=False),  # boolean (optional)
-                "csv_data": get_function_input(kwargs, "dt_csv_data", optional=True),  # text (optional)
-                "datable_name": get_function_input(kwargs, "dt_datable_name", optional=False),  # text (required)
-                "mapping_table": get_function_input(kwargs, "dt_mapping_table", optional=False),  # text (optional)
-                "date_time_format": get_function_input(kwargs, "dt_date_time_format", optional=True),  # text (optional)
-                "start_row": get_function_input(kwargs, "dt_start_row", optional=True),  # number (optional)
-                "max_rows": get_function_input(kwargs, "dt_max_rows", optional=True),  # number (optional)
+                "incident_id": kwargs.get("incident_id"),  # number (required)
+                "attachment_id": kwargs.get("attachment_id"),  # number (optional)
+                "has_headers": kwargs.get("dt_has_headers"),  # boolean (required)
+                "csv_data": kwargs.get("dt_csv_data"),  # text (optional)
+                "datable_name": kwargs.get("dt_datable_name"),  # text (required)
+                "mapping_table": kwargs.get("dt_mapping_table"),  # text (required)
+                "date_time_format": kwargs.get("dt_date_time_format"),  # text (optional)
+                "start_row": kwargs.get("dt_start_row"),  # number (optional)
+                "max_rows": kwargs.get("dt_max_rows"),  # number (optional)
             }
 
             LOG.info(inputs)
 
             yield StatusMessage("Starting ...")
-            mapping_table = convert_json(inputs['mapping_table'])
-            if not mapping_table:
+            try:
+                mapping_table = json.loads(inputs['mapping_table'])
+            except Exception:
                 raise ValueError(u"Unable to convert mapping_table to json: %s", inputs['mapping_table'])
 
             # Create payload dict with inputs
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            if (inputs["attachment_id"] and inputs["csv_data"]) or \
-               not (inputs["attachment_id"] or inputs["csv_data"]):
+            if (inputs["attachment_id"] and inputs["csv_data"]) or not (inputs["attachment_id"] or inputs["csv_data"]):
                 raise ValueError("Specify either attachment_id or csv_data")
 
+            attachment_name = None
             # Either an attachment ID or CSV Data is needed to be able to add rows
             if inputs["attachment_id"]:
                 attachment_name = get_file_attachment_name(res_client, inputs['incident_id'],
@@ -91,17 +89,10 @@ class FunctionComponent(ResilientComponent):
                 b_csv_data = get_file_attachment(res_client, inputs['incident_id'],
                                                attachment_id=inputs["attachment_id"])
                 csv_data = b_csv_data.decode("utf-8")
-                if sys.version_info.major < 3:
-                    inline_data = BytesIO(b_csv_data)
-                else:
-                    inline_data = StringIO(csv_data)
             else:
-                attachment_name = None
                 csv_data = inputs["csv_data"]
-                if sys.version_info.major < 3:
-                    inline_data = StringIO(csv_data.encode("utf-8"))
-                else:
-                    inline_data = StringIO(csv_data)
+
+            inline_data = StringIO(csv_data)
 
             datatable = RESDatatable(res_client, inputs["incident_id"], inputs["datable_name"])
 
@@ -114,12 +105,6 @@ class FunctionComponent(ResilientComponent):
 
             # Different readers if we have headers or not
             dialect = csv.Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
-            # py2 needs changes to dialect to avoid unicode attributes
-            if sys.version_info.major < 3:
-                for attr in dir(dialect):
-                    a = getattr(dialect, attr)
-                    if type(a) == unicode:
-                        setattr(dialect, attr, bytes(a))
             LOG.debug(dialect.__dict__)
 
             if inputs["has_headers"]:
@@ -276,15 +261,16 @@ def build_row(csv_row, matching_table, dt_column_names, date_format):
             else:
                 LOG.debug(u"Unable to find mapping entry for csv column: %s", csv_column_encoded)
 
-            converted_value = convert_field(csv_value, dt_column_names[dt_col_name], date_format)
+            if csv_value:
+                converted_value = convert_field(csv_value, dt_column_names[dt_col_name], date_format)
 
-            if dt_col_name in row:
-                LOG.warning("Replacing value: '%s' with '%s' for column: '%s'",
-                            row.get(dt_col_name),
-                            converted_value,
-                            dt_col_name)
+                if dt_col_name in row:
+                    LOG.warning("Replacing value: '%s' with '%s' for column: '%s'",
+                                row.get(dt_col_name),
+                                converted_value,
+                                dt_col_name)
 
-            row[dt_col_name] = {"value": converted_value}
+                row[dt_col_name] = {"value": converted_value}
         except Exception as err:
             LOG.error(u"%s, indx: %s, column: %s, mapping_table: %s",
                       err, indx, csv_column, matching_table)
@@ -292,18 +278,6 @@ def build_row(csv_row, matching_table, dt_column_names, date_format):
         indx += 1
 
     return row
-
-def convert_json(str_json):
-    """Convert string-encoded json
-    Args:
-        str_json (string)
-
-    Returns: [dict]: Converted json or None if an error occurred
-    """
-    try:
-        return json.loads(str_json)
-    except:
-        return None
 
 def convert_field(value, column_type, date_format):
     """Convert values based on the datatable column type
@@ -318,7 +292,7 @@ def convert_field(value, column_type, date_format):
         multiple: Converted value, if needed or None if a conversion error occurred
     """
     if not value:
-        return None
+        return
 
     if column_type in ["text", "textarea"]:
         return str(value)
@@ -331,7 +305,7 @@ def convert_field(value, column_type, date_format):
             return int(value)
         except:
             LOG.error(u"Unable to convert value to int: %s", value)
-            return None
+            return
 
     if column_type == "boolean" and not isinstance(value, (bool, int)):
         return value.lower() in ['true', '1', 'yes', 'y']
@@ -357,24 +331,23 @@ def date_to_timestamp(date_value, date_format):
         tm = time.gmtime(new_date_value)
         # If in milliseconds, year will be huge
         return new_date_value if tm.tm_year > 3000 else new_date_value*1000
-    except ValueError as err:
+    except ValueError:
         pass
 
     # Try now to convert using date_format pattern
     if not date_format:
-        return None
+        return
 
     try:
         return int(time.mktime(time.strptime(date_value, date_format)))*1000
-    except Exception as err:
+    except Exception:
         # python 2 can't do timezone information, strip out if present
         if sys.version_info.major < 3 and TZ_FORMAT.search(date_format):
             new_date_format = TZ_FORMAT.sub("", date_format)
             new_date_value = TZ_VALUE.sub("", date_value)
             try:
                 return int(time.mktime(time.strptime(new_date_value, new_date_format)))*1000
-            except Exception as err1:
-                LOG.error(str(err1))
+            except Exception as err:
+                LOG.error(str(err))
 
     LOG.error(u"Unable to convert date to timestamp: '%s' with format '%s'", date_value, date_format)
-    return None

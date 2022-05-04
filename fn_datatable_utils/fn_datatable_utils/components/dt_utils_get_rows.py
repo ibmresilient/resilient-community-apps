@@ -6,6 +6,7 @@
 from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import *
+from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
 
@@ -41,14 +42,16 @@ class FunctionComponent(ResilientComponent):
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
+
             inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_sort_by": get_function_input(kwargs, "dt_utils_sort_by", optional=True),  # text (optional)
-                "dt_utils_sort_direction": get_function_input(kwargs, "dt_utils_sort_direction", optional=True)["name"],  # select, values: "ASC", "DESC" (optional)
-                "dt_utils_max_rows": get_function_input(kwargs, "dt_utils_max_rows", optional=True),  # number (optional)
-                "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
-                "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True),  # text (optional)
+                "incident_id": kwargs.get("incident_id"),  # number (required)
+                "dt_utils_datatable_api_name": kwargs.get("dt_utils_datatable_api_name"),  # text (required)
+                "dt_utils_sort_by": kwargs.get("dt_utils_sort_by"),  # text (optional)
+                "dt_utils_sort_direction": kwargs.get("dt_utils_sort_direction")["name"],  # select, values: "ASC", "DESC" (optional)
+                "dt_utils_max_rows": kwargs.get("dt_utils_max_rows"),  # number (optional)
+                "dt_utils_search_column": kwargs.get("dt_utils_search_column"),  # text (optional)
+                "dt_utils_search_value": kwargs.get("dt_utils_search_value"),  # text (optional)
             }
 
             # Ensure correct search inputs are defined correctly

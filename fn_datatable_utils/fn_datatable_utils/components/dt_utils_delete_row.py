@@ -4,8 +4,9 @@
 """Function implementation"""
 
 from logging import getLogger
+from resilient_lib import validate_fields
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, get_function_input
+from fn_datatable_utils.util.helper import RESDatatable
 
 LOG = getLogger(__name__)
 
@@ -42,11 +43,13 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
             workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
 
-            dt_utils_row_id = get_function_input(kwargs, "dt_utils_row_id", optional=True)# number (optional)
-            dt_utils_datatable_api_name = get_function_input(kwargs, "dt_utils_datatable_api_name") # text (required)
+            validate_fields(["dt_utils_datatable_api_name", "incident_id"], kwargs)
+
+            dt_utils_row_id = kwargs.get("dt_utils_row_id") # number (optional)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name") # text (required)
 
             inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
+                "incident_id": kwargs.get("incident_id"), # number (required)
                 "dt_utils_datatable_api_name": dt_utils_datatable_api_name,
                 "dt_utils_row_id": dt_utils_row_id
             }

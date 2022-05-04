@@ -31,6 +31,7 @@ setup(
         'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
+    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[

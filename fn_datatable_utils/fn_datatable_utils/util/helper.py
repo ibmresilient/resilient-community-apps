@@ -49,9 +49,8 @@ class RESDatatable(object):
                         raise ValueError(u"{0} is not a valid column api name for the data table: {1}".format(search_column, self.api_name))
                     column = cells.get(search_column, {})
                     value = column.get("value", None)
-                    if value is not None:
-                        if value == search_value:
-                            rows_to_return.append(row)
+                    if value and value == search_value:
+                        rows_to_return.append(row)
 
             if sort_by:
                 if sort_by not in cells:
@@ -59,12 +58,10 @@ class RESDatatable(object):
                         u"{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
                 rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                         reverse=is_reverse)
-            if max_rows != 0:
+            if max_rows:
                 rows_to_return = rows_to_return[:max_rows]
 
             return rows_to_return
-        else:
-            return None
 
     def get_row(self, row_id=None, search_column=None, search_value=None):
         """ Searches and returns row if row found, else None """
@@ -84,11 +81,8 @@ class RESDatatable(object):
                     raise ValueError(u"{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 column = cells.get(search_column)
                 value = column.get("value", None)
-                if value is not None:
-                    if value == search_value:
-                        return row
-
-        return None
+                if value and value == search_value:
+                    return row
 
     def update_row(self, row_id, cells_to_update):
         """ Updates the row with given updates in cells_to_update.
@@ -105,31 +99,27 @@ class RESDatatable(object):
                 return cells_to_update[cell_name]
 
             if "value" not in row["cells"][cell_name]:
-                return None
+                return
 
             return row["cells"][cell_name].get("value", None)
 
         # Get the row we want to update
         row = self.get_row(row_id)
 
-        if row is None:
+        if not row:
             raise ValueError("Could not find row to update for row_id: '{0}'".format(row_id))
 
         for entry in row["cells"]:
-            cell_name = entry
-            current_cells.append((cell_name, get_cell_value(cell_name, cells_to_update)))
+            current_cells.append((entry, get_cell_value(entry, cells_to_update)))
 
         # Format the cells
         for cell in current_cells:
             formatted_cells[cell[0]] = {"value": cell[1]}
 
-        formatted_cells = {
-            "cells": formatted_cells
-        }
+        formatted_cells = { "cells": formatted_cells }
 
         try:
             return_value = self.res_client.put(uri, formatted_cells)
-
         except Exception as err:
             if err.message:
                 err_msg = err.message
@@ -147,23 +137,17 @@ class RESDatatable(object):
     def delete_row(self, row_id):
         """ Deletes the row. Returns the response from SOAR API or dict with the entry 'error'. """
 
-        return_value = None
-
         uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
 
         try:
-            return_value = self.res_client.delete(uri)
-
+            return self.res_client.delete(uri)
         except Exception as err:
-            return_value = {"error": str(err)}
-
-        return return_value
+            return {"error": str(err)}
 
     def delete_rows(self, rows_ids=None, search_column=None, search_value=None,
                     delete_all_rows=False, row_id=None, workflow_id=None):
         """ Deletes rows. Returns the response from SOAR API or dict with the entry 'error'. """
 
-        return_value = None
         rows_ids_list = []
         queued_row_id = None
 
@@ -236,8 +220,6 @@ class RESDatatable(object):
         except Exception as err:
             LOG.error("Error with url: %s %s", uri, str(err))
 
-        return None
-
     def get_dt_headers(self):
         """ Function that gets all the data and rows of a Data Table using the SOAR API """
         uri = "/types/{0}?handle_format=names".format(self.api_name)
@@ -252,9 +234,7 @@ class RESDatatable(object):
         """ Adds rows to datatable from uploaded CSV data """
         uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
 
-        formatted_cells = {
-            "cells": rows
-        }
+        formatted_cells = { "cells": rows }
         try:
             return_value = self.res_client.post(uri, formatted_cells)
         except Exception as err:
