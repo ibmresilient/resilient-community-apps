@@ -2,11 +2,13 @@
 
 # param $1: (required) version of Python Libraries to use in format x.x.x
 # param $2: (required) name of package that is in ALLOW_IMAGE_NAMES.txt to rebuild or ALL for all images in ALLOW_IMAGE_NAMES.txt
-# param $3: (required) repo name to push to. Accepted values are: ARTIFACTORY, QUAY or BOTH.
+# param $3: (required) repo name to push to. Accepted values are: ARTIFACTORY, QUAY, ICR or ALL.
 
 # Dependencies on:
 # sudo apt-get install jq
 # pip install resilient-sdk
+# curl -fsSL https://clis.cloud.ibm.com/install/linux | sh 
+# ibmcloud plugin install container-registry -r 'IBM Cloud'
 
 ###############
 ## Variables ##
@@ -14,11 +16,11 @@
 PYTHON_LIBRARIES_VERSION=$1
 IMAGE_TO_REBUILD=$2
 REPO_TO_PUSH=$3
-QUAY_API_URL="$QUAY_URL/api/v1"
 PACKAGES_TO_CHANGE="[{\"name\":\"resilient\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-circuits\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"},{\"name\":\"resilient-lib\",\"version\":\"$PYTHON_LIBRARIES_VERSION\"}]"
 DOCKERFILE_KEYWORD="registry.access.redhat.com"
 DOCKERFILE_WORDS_TO_INSERT="[\"\\n\", \"RUN pip install --upgrade pip\\n\", \"COPY ./new_requirements.txt /tmp/new_requirements.txt\\n\", \"RUN pip install -r /tmp/new_requirements.txt\\n\"]"
 quay_io_tags=()
+icr_io_tags=()
 artifactory_tags=()
 skipped_packages=()
 
@@ -36,7 +38,7 @@ if [ -z "$2" ] ; then
 fi
 
 if [ -z "$3" ] ; then
-    echo "Must provide repo name as third parameter: ARTIFACTORY, QUAY or BOTH"
+    echo "Must provide repo name as third parameter: ARTIFACTORY, ICR, QUAY or ALL"
     exit 1
 fi
 
@@ -53,6 +55,14 @@ repo_login () {
     echo "$3" | docker login --password-stdin --username "$2" https://${1}/
 }
 
+# logs in to ICR repo using $IBMCLOUD_API_KEY env variable
+# Args: none
+icr_login () {
+    ibmcloud login --no-region -a https://$IBMCLOUD_URL
+    ibmcloud cr region-set global
+    ibmcloud cr login
+}
+
 ###########
 ## Start ##
 ###########
@@ -63,6 +73,8 @@ REPO_TO_PUSH:\t\t\t$REPO_TO_PUSH \n\
 QUAY_URL:\t\t\t$QUAY_URL \n\
 QUAY_API_URL:\t\t\t$QUAY_API_URL \n\
 QUAY_USERNAME:\t\t\t$QUAY_USERNAME \n\
+ICR_URL:\t\t\t$ICR_URL \n\
+REGISTRY_NAMESPACE:\t\t$REGISTRY_NAMESPACE \n\
 ARTIFACTORY_URL:\t\t$ARTIFACTORY_URL \n\
 ARTIFACTORY_DOCKER_REPO:\t\t$ARTIFACTORY_DOCKER_REPO \n\
 ARTIFACTORY_USERNAME:\t\t$ARTIFACTORY_USERNAME \n\
@@ -74,8 +86,8 @@ DOCKERFILE_WORDS_TO_INSERT:\t$DOCKERFILE_WORDS_TO_INSERT \n\
 
 if [ "$IMAGE_TO_REBUILD" == "ALL" ] ; then
     # Make array of image names public on quay.io to rebuild
-    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true'"
-    IMAGE_NAMES=( $(curl "https://$QUAY_API_URL/repository?namespace=$QUAY_USERNAME&public=true" | jq -r ".repositories[].name") )
+    print_msg "Getting list of IMAGE_NAMES at 'https://$QUAY_IMAGES_API_URL'"
+    IMAGE_NAMES=( $(curl "https://$QUAY_IMAGES_API_URL" | jq -r ".repositories[].name") )
 
 else
     IMAGE_NAMES=$IMAGE_TO_REBUILD
@@ -87,13 +99,19 @@ ALLOW_IMAGE_NAMES=( $(<$PATH_ALLOW_IMAGE_NAMES) )
 print_msg "ALLOW_IMAGE_NAMES:\n${ALLOW_IMAGE_NAMES[*]}"
 
 # Login to quay.io
-if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
     print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
     repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
 fi
 
+# Login to icr.io
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "ICR" ] ; then
+    print_msg "Logging into $ICR_URL using API key"
+    icr_login
+fi
+
 # Login to artifactory
-if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
     print_msg "Logging into artifactory as $ARTIFACTORY_USERNAME"
     repo_login $ARTIFACTORY_DOCKER_REPO $ARTIFACTORY_USERNAME $ARTIFACTORY_PASSWORD
 fi
@@ -173,8 +191,14 @@ for image_name in "${IMAGE_NAMES[@]}"; do
                 docker tag $docker_tag $quay_io_tag
                 quay_io_tags+=($quay_io_tag)
 
+                # tag the image for icr.io
+                icr_io_tag="$ICR_URL/$REGISTRY_NAMESPACE/$image_name:$int_version"
+                print_msg "$image_name:: Tagging $image_name for $ICR_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
+                docker tag $docker_tag $icr_io_tag
+                icr_io_tags+=($icr_io_tag)
+
                 # tag the image for artifactory
-                artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$image_name:$int_version"
+                artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$REGISTRY_NAMESPACE/$image_name:$int_version"
                 print_msg "$image_name:: Tagging $image_name for artifactory with: $artifactory_tag"
                 docker tag $docker_tag $artifactory_tag
                 artifactory_tags+=($artifactory_tag)
@@ -198,15 +222,23 @@ done
 print_msg "List of all docker images:\n$(docker images)"
 
 # Push images to quay.io
-if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "QUAY" ] ; then
     for t in "${quay_io_tags[@]}"; do
         print_msg "Pushing $t to quay.io"
         docker push $t
     done
 fi
 
+# Push images to icr.io
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "ICR" ] ; then
+    for t in "${icr_io_tags[@]}"; do
+        print_msg "Pushing $t to icr.io"
+        docker push $t
+    done
+fi
+
 # Push images to artifactory
-if [ "$REPO_TO_PUSH" == "BOTH" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
+if [ "$REPO_TO_PUSH" == "ALL" ] || [ "$REPO_TO_PUSH" == "ARTIFACTORY" ] ; then
     for t in "${artifactory_tags[@]}"; do
         print_msg "Pushing $t to artifactory"
         docker push $t

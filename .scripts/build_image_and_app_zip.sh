@@ -6,6 +6,9 @@
 
 # Dependencies on:
 # pip install resilient-sdk
+# curl -fsSL https://clis.cloud.ibm.com/install/linux | sh 
+# ibmcloud plugin install container-registry -r 'IBM Cloud'
+
 
 ###############
 ## Variables ##
@@ -48,6 +51,14 @@ repo_login () {
     echo "$3" | docker login --password-stdin --username "$2" https://${1}/
 }
 
+# logs in to ICR repo using $IBMCLOUD_API_KEY env variable
+# Args: none
+icr_login () {
+    ibmcloud login --no-region -a https://$IBMCLOUD_URL
+    ibmcloud cr region-set global
+    ibmcloud cr login
+}
+
 ###########
 ## Start ##
 ###########
@@ -68,10 +79,13 @@ if [[ ! " ${ALLOW_IMAGE_NAMES[@]} " =~ " ${PACKAGE_NAME} " ]]; then
     exit 1
 fi
 
-# Login to quay.io
+# Login to quay.io and icr.io; currently we push to both simultaneously
 if [ "$BUILD_TYPE" == "MAIN" ] ; then
     print_msg "Logging into $QUAY_URL as $QUAY_USERNAME"
     repo_login $QUAY_URL $QUAY_USERNAME $QUAY_PASSWORD
+
+    print_msg "Logging into $ICR_URL using \$IBMCLOUD_API_KEY"
+    icr_login
 fi
 
 # Login to artifactory
@@ -128,18 +142,26 @@ quay_io_tag="$QUAY_URL/$QUAY_USERNAME/$PACKAGE_NAME:$version_to_use"
 print_msg "Tagging $PACKAGE_NAME for $QUAY_URL/$QUAY_USERNAME with: $quay_io_tag"
 docker tag $docker_tag $quay_io_tag
 
+# tag the image for icr.io
+icr_io_tag="$ICR_URL/$REGISTRY_NAMESPACE/$PACKAGE_NAME:$version_to_use"
+print_msg "Tagging $PACKAGE_NAME for $ICR_URL/$REGISTRY_NAMESPACE with: $icr_io_tag"
+docker tag $docker_tag $icr_io_tag
+
 # tag the image for artifactory
-artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$QUAY_USERNAME/$PACKAGE_NAME:$version_to_use"
+artifactory_tag="$ARTIFACTORY_DOCKER_REPO/$REGISTRY_NAMESPACE/$PACKAGE_NAME:$version_to_use"
 print_msg "Tagging $PACKAGE_NAME for artifactory with: $artifactory_tag"
 docker tag $docker_tag $artifactory_tag
 
 print_msg "Done building: $PACKAGE_NAME"
 
 if [ "$BUILD_TYPE" == "MAIN" ] ; then
-    print_msg "Push to quay.io for $BUILD_TYPE"
+    print_msg "Push to quay.io and icr.io for $BUILD_TYPE"
 
     print_msg "Pushing $quay_io_tag to quay.io"
     docker push $quay_io_tag
+
+    print_msg "Pushing $icr_io_tag to icr.io"
+    docker push $icr_io_tag
 
     full_file_name=$(basename -- $app_zip_path)
     file_name="${full_file_name%.*}-$TRAVIS_BUILD_NUMBER.zip"
