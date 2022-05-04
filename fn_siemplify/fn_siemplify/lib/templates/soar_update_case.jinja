@@ -1,6 +1,6 @@
 {
   {% if description %}
-    "description": "{{ description }}",
+    "description": "{{ description | replace('"', '\\"') }}",
   {% endif %}
   "properties": {
     {% if tags %}
