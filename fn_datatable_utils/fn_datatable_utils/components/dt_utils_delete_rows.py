@@ -41,7 +41,10 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
-            workflow_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
+
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'dt_utils_delete_rows' that was running in workflow '{0}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
@@ -78,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                                      payload.inputs["dt_utils_datatable_api_name"])
 
             # Get datatable row_id if function used on a datatable
-            row_id = datatable.get_row_id_from_workflow(workflow_id)
+            row_id = datatable.get_row_id_from_workflow(wf_instance_id)
             row_id and LOG.debug("Current row_id: %s", row_id)
 
             # Get the data table data
@@ -89,7 +92,7 @@ class FunctionComponent(ResilientComponent):
                                                  payload.inputs["dt_utils_search_value"],
                                                  payload.inputs["dt_utils_delete_all_rows"],
                                                  row_id,
-                                                 workflow_id)
+                                                 wf_instance_id)
 
             payload.success = False
             if not deleted_rows:
@@ -107,6 +110,7 @@ class FunctionComponent(ResilientComponent):
             results = payload.as_dict()
 
             LOG.info("Complete")
+            yield StatusMessage("Finished 'dt_utils_delete_rows' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

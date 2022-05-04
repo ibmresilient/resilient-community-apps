@@ -41,7 +41,10 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
-            workflow_instance_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
+            
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'dt_utils_delete_row' that was running in workflow '{0}'".format(wf_instance_id))
 
             validate_fields(["dt_utils_datatable_api_name", "incident_id"], kwargs)
 
@@ -64,7 +67,7 @@ class FunctionComponent(ResilientComponent):
             datatable = RESDatatable(res_client, payload.inputs["incident_id"], dt_utils_datatable_api_name)
 
             # Get datatable row_id if function used on a datatable
-            row_id = datatable.get_row_id_from_workflow(workflow_instance_id)
+            row_id = datatable.get_row_id_from_workflow(wf_instance_id)
             row_id and LOG.debug("Current row_id: %s", row_id)
 
             # If dt_utils_row_id == 0, use row_id
@@ -77,7 +80,7 @@ class FunctionComponent(ResilientComponent):
 
             if row_id == int(dt_utils_row_id):
                 yield StatusMessage("Queuing row {0} for delete".format(dt_utils_row_id))
-                deleted_row = datatable.queue_delete(workflow_instance_id, dt_utils_row_id)
+                deleted_row = datatable.queue_delete(wf_instance_id, dt_utils_row_id)
             else:
                 deleted_row = datatable.delete_row(dt_utils_row_id)
 
@@ -92,6 +95,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
+            yield StatusMessage("Finished 'dt_utils_delete_row' that was running in workflow '{0}'".format(wf_instance_id))
             LOG.info("Complete")
 
             # Produce a FunctionResult with the results

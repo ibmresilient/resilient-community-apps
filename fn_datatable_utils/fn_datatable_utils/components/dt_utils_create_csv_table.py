@@ -4,11 +4,12 @@
 """Function implementation"""
 
 from logging import getLogger
-import json
-import csv
-import re
-import sys
-import time
+from json import loads
+from csv import Sniffer, DictReader
+from csv import reader as read
+from re import compile
+from sys import version_info
+from time import gmtime, mktime, strptime
 from io import StringIO
 from collections import OrderedDict
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -18,8 +19,8 @@ from resilient_lib import ResultPayload, get_file_attachment, get_file_attachmen
 PACKAGE_NAME = "fn_datatable_utils"
 LOG = getLogger(__name__)
 
-TZ_FORMAT = re.compile(r"%[zZ]")
-TZ_VALUE = re.compile(r"[-+]\d{4}")
+TZ_FORMAT = compile(r"%[zZ]")
+TZ_VALUE = compile(r"[-+]\d{4}")
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -52,6 +53,11 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instantiate new SOAR API object
             res_client = self.rest_client()
+
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'dt_utils_create_csv_table' that was running in workflow '{0}'".format(wf_instance_id))
+
             # Validate required fields
             validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], kwargs)
 
@@ -69,9 +75,8 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info(inputs)
 
-            yield StatusMessage("Starting ...")
             try:
-                mapping_table = json.loads(inputs['mapping_table'])
+                mapping_table = loads(inputs['mapping_table'])
             except Exception:
                 raise ValueError(u"Unable to convert mapping_table to json: %s", inputs['mapping_table'])
 
@@ -82,6 +87,7 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Specify either attachment_id or csv_data")
 
             attachment_name = None
+            csv_data = inputs["csv_data"]
             # Either an attachment ID or CSV Data is needed to be able to add rows
             if inputs["attachment_id"]:
                 attachment_name = get_file_attachment_name(res_client, inputs['incident_id'],
@@ -89,8 +95,6 @@ class FunctionComponent(ResilientComponent):
                 b_csv_data = get_file_attachment(res_client, inputs['incident_id'],
                                                attachment_id=inputs["attachment_id"])
                 csv_data = b_csv_data.decode("utf-8")
-            else:
-                csv_data = inputs["csv_data"]
 
             inline_data = StringIO(csv_data)
 
@@ -104,15 +108,15 @@ class FunctionComponent(ResilientComponent):
             dt_column_names = OrderedDict([dt_ordered_columns[field] for field in sorted (dt_ordered_columns.keys())])
 
             # Different readers if we have headers or not
-            dialect = csv.Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
+            dialect = Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
             LOG.debug(dialect.__dict__)
 
+            csv_headers = []
             if inputs["has_headers"]:
-                reader = csv.DictReader(inline_data, dialect=dialect)  # Each row is a dictionary keyed by the column name
+                reader = DictReader(inline_data, dialect=dialect)  # Each row is a dictionary keyed by the column name
                 csv_headers = reader.fieldnames # Just the headers
             else:
-                reader = csv.reader(inline_data, dialect=dialect)  # Each row is a list of values
-                csv_headers = []
+                reader = read(inline_data, dialect=dialect)  # Each row is a list of values
 
             mapping_table = build_mapping_table(mapping_table, csv_headers, dt_column_names)
             LOG.debug("csv headers to datatable columns: %s", mapping_table)
@@ -133,7 +137,7 @@ class FunctionComponent(ResilientComponent):
             }
             results = rp.done(True, row_data)
 
-            yield StatusMessage("Ending ...")
+            yield StatusMessage("Finished 'dt_utils_create_csv_table' that was running in workflow '{0}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -156,8 +160,7 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [int, int]: number_of_added_rows, number_of_rows_with_errors
         """
-        number_of_added_rows = 0
-        number_of_rows_with_errors = 0
+        number_of_added_rows, number_of_rows_with_errors = 0, 0
 
         indx = 1
         for row in reader:
@@ -176,7 +179,7 @@ class FunctionComponent(ResilientComponent):
                 if max_rows and number_of_added_rows >= max_rows:
                     break
 
-            indx += 1
+            indx +=1
 
         return number_of_added_rows, number_of_rows_with_errors
 
@@ -196,8 +199,8 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
 
     # Convert list of fields for csv data without a header
     if isinstance(input_mapping_table, list):
-        indx = 0
         for col_name in input_mapping_table:
+            indx = input_mapping_table.index(col_name)
             if col_name in dt_column_names:
                 if csv_headers:
                     if indx < len(csv_headers):
@@ -208,7 +211,6 @@ def build_mapping_table(input_mapping_table, csv_headers, dt_column_names):
                     mapping_table[indx] = col_name
             else:
                 LOG.warning("Skipping datatable column not found. Entry: %s, column name: %s", indx, col_name)
-            indx += 1
     else:
         # Only use columns which match the column names in our datatable
         mapping_table = input_mapping_table.copy()
@@ -328,7 +330,7 @@ def date_to_timestamp(date_value, date_format):
     try:
         # Try to see if this is an epoch value
         new_date_value = int(date_value)
-        tm = time.gmtime(new_date_value)
+        tm = gmtime(new_date_value)
         # If in milliseconds, year will be huge
         return new_date_value if tm.tm_year > 3000 else new_date_value*1000
     except ValueError:
@@ -339,14 +341,14 @@ def date_to_timestamp(date_value, date_format):
         return
 
     try:
-        return int(time.mktime(time.strptime(date_value, date_format)))*1000
+        return int(mktime(strptime(date_value, date_format)))*1000
     except Exception:
         # python 2 can't do timezone information, strip out if present
-        if sys.version_info.major < 3 and TZ_FORMAT.search(date_format):
+        if version_info.major < 3 and TZ_FORMAT.search(date_format):
             new_date_format = TZ_FORMAT.sub("", date_format)
             new_date_value = TZ_VALUE.sub("", date_value)
             try:
-                return int(time.mktime(time.strptime(new_date_value, new_date_format)))*1000
+                return int(mktime(strptime(new_date_value, new_date_format)))*1000
             except Exception as err:
                 LOG.error(str(err))
 
