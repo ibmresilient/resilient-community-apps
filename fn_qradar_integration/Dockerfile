@@ -1,4 +1,4 @@
-# docker build -t ibmresilient/fn_qradar_integration:2.2.0 -t ibmresilient/fn_qradar_integration:latest .
+# docker build -t ibmresilient/fn_qradar_integration:2.2.2 -t ibmresilient/fn_qradar_integration:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
