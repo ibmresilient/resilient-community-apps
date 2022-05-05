@@ -11,7 +11,11 @@ def config_section_data():
     for fn_extrahop when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_extrahop]
+# The ExtraHop rest api url.
 extrahop_rx_host_url = <EXTRAHOP_RX_HOST_URL>
+# Cloud service console url used to create linkbacks when executing against the
+# ExtraHop cloud-based service. Not required if connecting to a standalone sensor.
+extrahop_rx_cloud_console = <EXTRAHOP_RX_CLOUD_CONSOLE>
 extrahop_rx_api_version = v1
 # The ExtraHop functions can be executed against the ExtraHop cloud-based service
 # or against an ExtraHop standalone sensor.
