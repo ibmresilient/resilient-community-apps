@@ -1,5 +1,5 @@
 {
-    "success": True,
-    "user_dn": "cn=user2,dc=example,dc=com",
-    "user_status": "Disabled"
+  "success": true,
+  "user_dn": "CN=e,CN=Users,dc=example,DC=com",
+  "user_status": "Enabled"
 }

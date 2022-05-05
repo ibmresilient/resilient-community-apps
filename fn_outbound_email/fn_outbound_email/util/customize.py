@@ -22,10 +22,11 @@ def codegen_reload_data():
         "package": u"fn_outbound_email",
         "message_destinations": [u"email_outbound"],
         "functions": [u"send_email"],
-        "workflows": [u"example_send_task_email_html", u"example_send_incident_email_html", u"example_send_incident_email_text"],
-        "actions": [u"Example: Send Task Email HTML", u"Example: Send Incident Email HTML", u"Example: Send Incident Email Text"],
+        "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_text", u"example_send_task_email_html"],
+        "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email Text", u"Example: Send Task Email HTML"],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": []
@@ -37,7 +38,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.0.6554
+    IBM Resilient Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:
@@ -45,13 +46,13 @@ def customization_data(client=None):
     - Functions:
         - send_email
     - Workflows:
-        - example_send_task_email_html
         - example_send_incident_email_html
         - example_send_incident_email_text
+        - example_send_task_email_html
     - Rules:
-        - Example: Send Task Email HTML
         - Example: Send Incident Email HTML
         - Example: Send Incident Email Text
+        - Example: Send Task Email HTML
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

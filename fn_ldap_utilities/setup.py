@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
@@ -18,29 +18,22 @@ def snake_to_camel(word):
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
-
 setup(
     name='fn_ldap_utilities',
     version='1.2.0',
     license='MIT',
+    display_name='SOAR LDAP Utilities',
     author='IBM SOAR',
-    author_email='',
+    description="SOAR LDAP Utilities'",
     url='https://github.com/ibmresilient/resilient-community-apps',
-    display_name="LDAP Utilities",
-    description="LDAP Utilities for IBM SOAR",
-    long_description="""Perform several operations on LDAP Server including
-* Change user password
-* Change user group (add or remove group)
-* Set user attributes
-* Toggle access
-* LDAP search
-* Add users, groups, OUs, etc.""",
+    long_description="SOAR components to allow reading and manipulation of your LDAP Server'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=42.0.0',
         'ldap3>=2.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
+    python_requires='>=3.6',
     platforms='any',
     classifiers=[
         'Programming Language :: Python',

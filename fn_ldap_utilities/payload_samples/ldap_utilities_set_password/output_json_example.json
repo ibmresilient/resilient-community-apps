@@ -1,4 +1,4 @@
 {
   "success": true,
-  "user_dn": "cn=user1,ou=people,dc=example,dc=com"
+  "user_dn": "CN=fiona saml1,CN=Users,dc=example,DC=com"
 }

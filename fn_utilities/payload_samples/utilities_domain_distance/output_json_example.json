@@ -1,0 +1,13 @@
+{
+  "domain_name": "@fds$gfe^",
+  "distances": {
+    "ibm.com": 9,
+    "resilientsystems.com": 20,
+    "ibmcloud.com": 14,
+    "bluemix.com": 13
+  },
+  "closest": {
+    "name": "ibm.com",
+    "distance": 9
+  }
+}

@@ -10,7 +10,7 @@
 #   * Save the query string (in this example "search index = _internal source=*splunkd* AND clientip=127.0.0.1") into a file
 #   * Run this file. Example:
 #       sys_test_splunk_client.py -s your_splunk_hostname:port_number -u username -p password -f file_name_of_the_above_file
-#   * Result will be print to the command line window. This is the result we return to Resilient
+#   * Result will be print to the command line window. This is the result we return to SOAR
 #
 #
 # Usage as system/compatibility tests:

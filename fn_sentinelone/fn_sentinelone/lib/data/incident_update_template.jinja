@@ -1,0 +1,11 @@
+{
+  {# JINJA template for updating a SOAR incident from a SentinelOne threat. #}
+  "properties": {
+    "sentinelone_confidence_level": "{{ threatInfo.confidenceLevel }}",
+    "sentinelone_classification": "{{ threatInfo.classification }}",
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
+  }
+}

@@ -1,56 +1,50 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, line-too-long
-
-"""
-Function implementation test.
-Usage:
-    resilient-circuits selftest -l fn-ldap-utilities
-    resilient-circuits selftest --print-env -l fn-ldap-utilities
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
 
 import logging
+from .helper import LDAPUtilitiesHelper, PACKAGE_NAME, get_domains_list
+from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
-
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Selftest function will try to connect to the LDAP instance.
+    Fail if any exceptions are raised.
     """
-    app_configs = opts.get("fn_ldap_utilities", {})
 
-    helper = LDAPUtilitiesHelper(app_configs)
+    domains_list = get_domains_list(opts)
+    ldap = LDAPDomains(opts)
 
-    status = "success"
-    reason = None
-    try:
-        c = helper.get_ldap_connection()
-        # Bind to the connection
-        c.bind()
-    except Exception as err:
-        status = "failure"
-        reason = str(err)
-    finally:
-        # Unbind connection
-        c.unbind()
+    state = "success"
+    reason = "N/A"
+    domain = "N/A"
+    for domain_name in domains_list:
+        try:
+            # Instansiate helper (which gets appconfigs from file)
+            helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(domain_name, domains_list))
+
+            # Instansiate LDAP Server and Connection
+            conn = helper.get_ldap_connection()
+
+            # Bind to the connection
+            conn.bind()
+        except Exception as err:
+            domain = domain_name
+            state = "failure"
+            reason = err
+            break
+
+        finally:
+            # Unbind connection
+            conn.unbind()
+
+    if state == "success":
+        return {"state": state}
 
     return {
-        "state": status,
-        "reason": reason
+        "state": state,
+        "reason": reason,
+        "domain": domain
     }

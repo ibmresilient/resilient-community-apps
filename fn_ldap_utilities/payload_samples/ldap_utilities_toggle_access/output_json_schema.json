@@ -1,20 +1,15 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "success": {
-        "type": "boolean"
-      },
-      "user_dn": {
-        "type": "string"
-      },
-      "user_status": {
-        "type": "string"
-      }
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
     },
-    "required": [
-      "success",
-      "user_dn",
-      "user_status"
-    ]
+    "user_dn": {
+      "type": "string"
+    },
+    "user_status": {
+      "type": "string"
+    }
   }
+}

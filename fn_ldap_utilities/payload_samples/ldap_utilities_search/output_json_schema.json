@@ -14,40 +14,19 @@
             "type": "string"
           },
           "cn": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "description": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "mail": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "objectClass": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sn": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           },
-          "userPassword": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "telephoneNumber": {
+            "type": "array"
+          },
+          "uid": {
+            "type": "array"
           }
         }
       }

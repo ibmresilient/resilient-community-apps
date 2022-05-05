@@ -15,9 +15,8 @@ FUNCTION_NAME = "utilities_extract_ssl_cert_from_url"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_utilities_extract_ssl_cert_from_url_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -28,7 +27,6 @@ def call_utilities_extract_ssl_cert_from_url_function(circuits, function_params,
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesExtractSslCertFromUrl:
     """ Tests for the utilities_extract_ssl_cert_from_url function"""
@@ -57,16 +55,15 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011/", {"successful": True})
-
     ])
+
     def test_validate_cert(self, circuits_app, https_url, expected_results):
         """ Test the functions return type 'Certificate'
             When the function is successful in parsing the URL
             It should return a value we can parse into a certificate
-
             OpenSSL.crypto.load_certificate should be able to get a valid certificate
-
             When the function isint successful -- None"""
+
         function_params = {
             "https_url": https_url
         }
@@ -74,9 +71,7 @@ class TestUtilitiesExtractSslCertFromUrl:
         if expected_results['successful'] == False:
             with pytest.raises(Exception):
                 call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
-
         else:
-
             results = call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
             if results['successful']:
                 assert (isinstance(
@@ -104,15 +99,15 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011", {"successful": True})
-
     ])
+
     def test_validate_json_result(self, circuits_app, https_url, expected_results):
         """ Test the functions return type 'Certificate'
             When the function is successful in parsing the URL
             It should return a valid JSON string
             The JSON string is validated using JSON.loads
-
             When the function isint successful -- None"""
+
         function_params = {
             "https_url": https_url
         }
@@ -120,12 +115,11 @@ class TestUtilitiesExtractSslCertFromUrl:
         if expected_results['successful'] == False:
             with pytest.raises(Exception):
                 call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
-
         else:
             results = call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
             if results['successful']:
                 assert (self.is_json(results['certificate']))
-            else:  # IF the success flag is false; there should be a result
+            else:  # If the success flag is false; there should be a result
                 assert (isinstance(results['certificate'], type(None)))
 
     @pytest.mark.livetest
@@ -147,21 +141,19 @@ class TestUtilitiesExtractSslCertFromUrl:
         ("https://tls-v1-0.badssl.com:1010/", {"successful": True}),
         ("https://tls-v1-1.badssl.com:1011/", {"successful": True}),
         ("www.tls-v1-1.badssl.com:1011", {"successful": True})
-
     ])
+
     def test_success(self, circuits_app, https_url, expected_results):
         """ Test calling with sample values for the parameters
-
             Some sample values are not valid URLs and they should be unsuccessful
-
             Some invalid URLs should return success -- e.g www.google.com is technically invalid but should return"""
+
         function_params = {
             "https_url": https_url
         }
         if expected_results['successful'] == False:
             with pytest.raises(Exception):
                 call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
-
         else:
             results = call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
             assert (results['successful'] == expected_results['successful'])  # Assert we actually have some results
