@@ -4,7 +4,7 @@
 
 | SDK Version       | Generation Time          | Command Line Arguments Provided |
 | :---------------- | ------------------------ | ------------------------------- |
-| 44.1.2953 | 2022/05/04 14:27:39 | `cmd`: validate, `package`: . |
+| 44.1.2953 | 2022/05/05 08:42:27 | `cmd`: validate, `package`: . |
 
 ## App Details
 | Attribute | Value |
@@ -128,9 +128,9 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
  
 
 ## tox tests
-<span style="color:teal">INFO</span>: `tox` is not installed in your Python environment
+<span style="color:teal">INFO</span>: 36 tests passed!
 
-(OPTIONAL) If you want to verify any tests you have written, install `tox` by running ```pip install -U tox```
+
 
 
 
