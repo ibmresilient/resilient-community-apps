@@ -11,7 +11,7 @@
 `ldap_utilities_add`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_ldap_utilities`
@@ -21,6 +21,7 @@
 inputs.ldap_dn = rule.properties.ldap_user_info
 inputs.ldap_multiple_group_dn = rule.properties.ldap_groups if rule.properties.ldap_groups else '[]'
 inputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values
+inputs.ldap_domain_name = "Domain1"
 ```
 
 ### Post-Processing Script
