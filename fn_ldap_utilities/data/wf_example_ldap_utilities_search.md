@@ -19,6 +19,7 @@
 ### Pre-Processing Script
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
+inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_search_base = "dc=example,dc=com"
 inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
 inputs.ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"
@@ -38,8 +39,8 @@ inputs.ldap_search_param = artifact.value
 
 # Example of expected results - ActiveDirectory
 """
-'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com', 
-              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton', 
+'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com',
+              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton',
               u'mail': u'einstein@resilient.ibm.com', u'sn': u'Newton'}]
 """
 
@@ -54,36 +55,27 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if(results.success):
-  for entry in results["entries"]:
-    
-    if entry is None:
+  for entry in results.content:
+    if not entry:
       break
-    
-    else:
-      # Add Row
-      row = incident.addRow("ldap_query_results")
-      
-      for k in ENTRY_TO_DATATABLE_MAP:
-
-        if entry[k] is None:
-          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-
-        else:
-          try:
-            # if 'entry[k]' is empty
-            if len(entry[k]) == 0:
-              row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-            
-            # Handle for Active Directory
-            elif isinstance(entry[k], unicode):
-              row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
-            
-            # Handle for OpenLdap
-            else:
-              row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
-          
-          except IndexError:
+    # Add Row
+    row = incident.addRow("ldap_query_results")
+    for k in ENTRY_TO_DATATABLE_MAP:
+      if not entry[k]:
+        row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+      else:
+        try:
+          # If 'entry[k]' is empty
+          if not len(entry[k]):
             row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+          # Handle for Active Directory
+          elif isinstance(entry[k], unicode):
+            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
+          # Handle for OpenLdap
+          else:
+            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
+        except IndexError:
+          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
 ```
 
 ---

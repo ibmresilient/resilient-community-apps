@@ -21,7 +21,7 @@
 # Set the ldap_search_base and ldap_search_filter
 # using the ldap_param wildcard then get the email
 # address the user you want to toggle access for from the artifact's value
-
+inputs.ldap_domain_name = 'Domain1'
 inputs.ldap_search_base = "dc=example,dc=com"
 inputs.ldap_search_filter = "(&(mail=%ldap_param%))"
 inputs.ldap_search_param =  artifact.value
@@ -49,9 +49,8 @@ inputs.ldap_search_param =  artifact.value
 ```python
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
-
-if workflow.properties.search_output.get("entries"):
-  inputs.ldap_dn = workflow.properties.search_output["entries"][0]["dn"]
+inputs.ldap_domain_name = 'Domain1'
+inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
 ```
 
 ### Post-Processing Script
@@ -60,19 +59,15 @@ if workflow.properties.search_output.get("entries"):
 # a note is added to the incident
 
 if (results.success):
-  
   color = "#45bc27" #green
-  
-  if (results.user_status == "Disabled"):
+  if (results.inputs.ldap_toggle_access.get("name") == "Disabled"):
     color = "#ff402b" #red
-  
-  noteText = """<br><i style="color: #979ca3">LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
-                    <b>Email:</b> <u style="color: #7fb0ff">{0}</u>
-                    <b>Status:</b> <b style="color: {1}">{2}</b>
-                    <b>DN:</b> '{3}'""".format(artifact.value, color, results.user_status, results.user_dn)
-  
-  incident.addNote(helper.createRichText(noteText))
+  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
+                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
+                    <b>Status:</b> <b style="color: {}">{}</b>
+                    <b>DN:</b> '{}'""".format(artifact.value, color, results.inputs.ldap_toggle_access.name, results.inputs.ldap_dn)
 
+  incident.addNote(helper.createRichText(noteText))
 ```
 
 ---

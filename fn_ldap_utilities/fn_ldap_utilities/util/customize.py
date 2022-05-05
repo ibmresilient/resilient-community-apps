@@ -29,7 +29,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"ldap_query_results"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -38,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.2.41
+    IBM SOAR Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:
