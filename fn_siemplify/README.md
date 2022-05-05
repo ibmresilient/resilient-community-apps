@@ -707,18 +707,28 @@ inputs.siemplify_alert_id = incident.properties.siemplify_alert_id
 <p>
 
 ```python
-if results.success:
-  incident.properties.siemplify_case_id = results.content.get('id')
-  incident.properties.siemplify_case_link = helper.createRichText("<a target='blank' href='{}'>{}</a>".format(results.content.get('siemplify_case_url'), results.content.get('title')))
-  incident.properties.siemplify_is_important = results.content.get('isImportant')
-  incident.properties.siemplify_stage = results.content.get('stage')
-  incident.properties.siemplify_assignee = results.content.get('assignedUserName')
-  incident.properties.siemplify_priority = results.content.get('priority')
-  incident.properties.siemplify_tags = ", ".join([tag['tag'] for tag in results.content.get('tags')])
+PRIORITY_LOOKUP = {-1: "Informational", 40: "Low", 50:"Medium", 60:"Medium", 80:"High", 100:"Critical", "DEFAULT": "Medium"}
 
-  if results.content.get('alerts'):
-    incident.properties.siemplify_alert_id = results.content['alerts'][0]['identifier']
-  incident.addNote("Siemplify Sync Case {} created".format(results.content.get('id')))
+if results.success:
+  case = results.content
+  if not incident.properties.siemplify_case_id:
+    incident.addNote("Siemplify Sync Case {} created".format(case.get('id')))
+    incident.properties.siemplify_case_id = case.get('id')
+    incident.properties.siemplify_case_link = helper.createRichText("<a target='blank' href='{}'>{}</a>".format(case.get('siemplify_case_url'), case.get('title')))
+
+    if case.get('alerts'):
+      incident.properties.siemplify_alert_id = case['alerts'][0]['identifier']
+  else:
+    incident.addNote("Siemplify Sync Case {} synchronized".format(case.get('id')))
+
+  # always update these fields
+  incident.properties.siemplify_assignee = case.get('assignedUserName')
+  incident.properties.siemplify_environment = case.get('environment')
+  incident.properties.siemplify_is_important = case.get('isImportant')
+  incident.properties.siemplify_priority = PRIORITY_LOOKUP.get(case.get("priority", "DEFAULT"), str(case.get("priority")))
+  incident.properties.siemplify_stage = case.get('stage')
+  incident.properties.siemplify_tags = ", ".join( [tag.get('tag') for tag in case.get('tags', [])] )
+
 else:
   incident.addNote("Siemplify Sync Case failed: {}".format(str(results.content)))
 ```
