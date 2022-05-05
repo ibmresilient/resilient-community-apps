@@ -10,6 +10,6 @@
     "siemplify_stage": "{{ stage }}",
     "siemplify_is_important": {{ isImportant|tojson }},
     "siemplify_environment": "{{ environment }}",
-    "siemplify_priority": "{{ priority | string | resilient_substitute('{"25": "Low", "50":"Medium", "80":"High", "100":"Critical", "DEFAULT": "Medium"}') }}"
+    "siemplify_priority": "{{ priority | string | resilient_substitute('{"-1": "Informational", "40": "Low", "50":"Medium", "60":"Medium", "80":"High", "100":"Critical", "DEFAULT":"Medium"}') }}"
   }
 }

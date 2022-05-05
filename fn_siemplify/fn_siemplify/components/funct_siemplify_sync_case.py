@@ -10,7 +10,6 @@ from fn_siemplify.lib.siemplify_common import SiemplifyCommon, PACKAGE_NAME, IBM
             build_siemplify_case_url
 
 FN_NAME = "siemplify_sync_case"
-SIEMPLIFY_CASE_URL = "{}/#/main/cases/classic-view/{}"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'siemplify_sync_case'"""
