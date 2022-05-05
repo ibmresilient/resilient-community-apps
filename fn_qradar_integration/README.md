@@ -55,6 +55,7 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.2 | May. 2022 | Add more documentation and bug fix |
 | 2.2.1 | March 2022 | Cancel QRadar queries which have timed out |
 | 2.2.0 | March 2022 | Allow multiple QRadar instances |
 | 2.1.1 | July 2021 | Fixed selftest failing when using cafile |
