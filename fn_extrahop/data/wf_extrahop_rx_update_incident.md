@@ -153,6 +153,19 @@ DATA_TABLE = "extrahop_devices"
 DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
                    "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time", 
                    "last_seen_time"]
+LINKBACK_URL = "/extrahop/#/metrics/devices/{}.{}"
+
+
+def make_linkback_url(dev_id):
+    """Create a url to link back to the endpoint alert, case, etc.
+
+    Args:
+        dev_id (str/int): id representing the device etc.
+
+    Returns:
+        str: completed url for linkback
+    """
+    return incident.properties.extrahop_console_url + LINKBACK_URL.format(incident.properties.extrahop_site_uuid, dev_id)
 
 def process_devs(dev):
     # Process a device result.
@@ -172,7 +185,10 @@ def process_devs(dev):
             newrow[f1] = long(dev[f2])
         else:
             newrow[f1] = "{}".format(dev[f2])
-
+    device_url = make_linkback_url(dev["extrahop_id"])
+    device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
+              .format("url", device_url, dev["extrahop_id"])
+    newrow.device_url = device_url_html
 
 def get_dev_ids():
     # Get participant dev ids    
