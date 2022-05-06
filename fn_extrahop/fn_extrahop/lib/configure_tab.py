@@ -34,6 +34,8 @@ class ExtraHopTab(Tab):
         Header("ExtraHop Properties"),
         Field("extrahop_detection_id"),
         Field("extrahop_detection_link"),
+        Field("extrahop_site_name"),
+        Field("extrahop_site_uuid"),
         Field("extrahop_risk_score"),
         Field("extrahop_update_time"),
         Field("extrahop_end_time"),
