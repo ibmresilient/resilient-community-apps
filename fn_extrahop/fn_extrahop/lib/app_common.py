@@ -8,6 +8,9 @@ from urllib.parse import urljoin
 from fn_extrahop.lib.rx_client import RxClient
 
 LOG = logging.getLogger(__name__)
+
+PACKAGE_NAME = "fn_extrahop"
+
 # URL fragment to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 # List of fields to check to determine if an update is required.
@@ -29,7 +32,10 @@ class AppCommon():
             opts (dict): app.config settings for the integration
             options (dict): app.config settings for the app
         """
-        self.endpoint_url = options['extrahop_rx_host_url']
+        self.endpoint_url = options["extrahop_rx_host_url"]
+        # Url if we are connecting to the cloud instance.
+        self.cloud_console = options.get("extrahop_rx_cloud_console")
+
         self.rx_cli = RxClient(opts, options)
         self.entity_count = 0
 
@@ -73,12 +79,15 @@ class AppCommon():
         """Create a url to link back to the endpoint alert, case, etc.
 
         Args:
-            template (str): portion of url to join with base url
-            entity_id (str/int): id representing the alert, case, etc.
+            entity_id (str/int): id representing the detection etc.
+            linkback_url (str): Over-ride for the default linkback url
 
         Returns:
             str: completed url for linkback
         """
+        if self.cloud_console:
+            return urljoin(self.cloud_console, linkback_url.format(entity_id))
+
         return urljoin(self.endpoint_url, linkback_url.format(entity_id))
 
     def filter_by_property(self, result, prop, filters):

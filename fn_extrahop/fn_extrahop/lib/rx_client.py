@@ -31,9 +31,9 @@ class RxClient():
             raise ValueError("The 'fn_opts' parameter is not set correctly.")
         validate_settings(fn_opts)
         self.host_url = fn_opts.get("extrahop_rx_host_url")
+        self.cloud_console = fn_opts.get("extrahop_rx_cloud_console")
         self.api_version = fn_opts.get("extrahop_rx_api_version")
         self.key_id = fn_opts.get("extrahop_rx_key_id")
-        self.key_secret = fn_opts.get("extrahop_rx_key_secret")
         self.key_secret = fn_opts.get("extrahop_rx_key_secret")
         self.api_key = fn_opts.get("extrahop_rx_api_key")
         # Allow explicit setting "do not verify certificates"
@@ -459,6 +459,7 @@ def validate_settings(fn_opts):
 
     if fn_opts.get("extrahop_rx_key_id"):
         validate_fields([
+            {"name": "extrahop_rx_cloud_console", "placeholder": "<EXTRAHOP_RX_CLOUD_CONSOLE>"},
             {"name": "extrahop_rx_key_id", "placeholder": "<EXTRAHOP_RX_API_KEY_ID>"},
             {"name": "extrahop_rx_key_secret", "placeholder": "<EXTRAHOP_RX_API_KEY_SECRET>"}],
             fn_opts)

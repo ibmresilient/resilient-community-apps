@@ -12,6 +12,7 @@ from fn_extrahop.lib.poller_common import SOARCommon, poller, get_template_dir, 
 from fn_extrahop.lib.app_common import AppCommon
 from fn_extrahop.lib.rx_client import validate_settings
 from fn_extrahop.lib.templates_common import make_payload_from_template
+from fn_extrahop.lib.configure_tab import init_extrahop_tab
 
 PACKAGE_NAME = "fn_extrahop"
 ENTITY_ID = "id"
@@ -40,6 +41,9 @@ def init_app(opts, options):
     """
     # Initialize the class for making API calls to your endpoint
     endpoint_class = AppCommon(opts, options)
+
+    # Create the incident tab for ExtraHop custom fields and datatables
+    init_extrahop_tab()
 
     return endpoint_class
 
