@@ -27,8 +27,8 @@ setup(
     description="Functions manipulate data in a Datatable",
     long_description="This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
-        'resilient_circuits>=33.0.0',
-        'resilient-lib>=32.0.140'
+        'resilient_circuits>=41.0.0',
+        'resilient-lib>=41.0.0'
     ],
     packages=find_packages(),
     python_requires='>=3.6',
