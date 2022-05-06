@@ -31,6 +31,12 @@ class LDAPDomains():
         :param domains_list: list of ldap domains
         :return: dictionary of options for choosen domain
         """
+        # If label not given and using previous versions app.config [fn_qradar_integration]
+        if not ldap_domain_name and domains_list.get(helper.PACKAGE_NAME):
+            return domains_list[helper.PACKAGE_NAME]
+        elif not ldap_domain_name:
+            raise IntegrationError("No domain was given and is required if servers are labeled in the app.config")
+
         domain_name = helper.PACKAGE_NAME+":"+ldap_domain_name
         if ldap_domain_name and domain_name in domains_list:
             return domains_list[domain_name]

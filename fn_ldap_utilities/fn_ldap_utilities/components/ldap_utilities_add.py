@@ -48,9 +48,9 @@ class FunctionComponent(ResilientComponent):
             try:
                 # Try converting input to an dictionary
                 attribute_list = literal_eval("{{ {} }}".format(attribute_list))\
-                    if attribute_list else {'objectClass': ["person", "organizationalPerson", "top", "user"]}
+                    if attribute_list else {'objectClass': 'user'}
             except Exception:
-                raise IntegrationError('ldap_attribute_name_values incorrectly specified e.g. "attribute1": "value1", "attribute2": "value2"')
+                raise IntegrationError('ldap_attribute_name_values incorrectly specified e.g. "attribute1": "value1", "attribute2": "value2", "objectClass": "Users"')
 
             try:
                 group_list = literal_eval(group_list) if group_list else []
@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                 LOG.debug('Error: {}'.format(err))
                 # User already exists
                 if 'objectClass attribute is mandatory' in str(err):
-                    raise ValueError("objectClass is needed in attribute input, EX: 'objectClass': ['person', 'organizationalPerson', 'top', 'user']")
+                    raise ValueError("objectClass is needed in attribute input, EX: 'objectClass': 'user'")
                 elif 'entryAlreadyExists' in str(err):
                     raise ValueError("User already exists")
                 else:
