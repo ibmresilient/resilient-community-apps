@@ -25,7 +25,7 @@ RESULT1 = {
   "title": "IBM SOAR - test incident",
   "assignedUser": "a@example.com",
   "reason": "IBM SOAR Incident 2009",
-  "priority": 25,
+  "priority": 60,
   "environment": "Default Environment",
   "isImportant": True,
   "alertName": "IBM SOAR Alert 2009",
