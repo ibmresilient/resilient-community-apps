@@ -18,10 +18,16 @@
 
 ### Pre-Processing Script
 ```python
+# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
+if incident.properties.ldap_domain_name:
+  inputs.ldap_domain_name = incident.properties.ldap_domain_name
+# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
+if rule.properties.ldap_domain_name:
+  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+
 inputs.ldap_dn = rule.properties.ldap_user_info
 inputs.ldap_multiple_group_dn = rule.properties.ldap_groups if rule.properties.ldap_groups else '[]'
 inputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values
-inputs.ldap_domain_name = "Domain1"
 ```
 
 ### Post-Processing Script

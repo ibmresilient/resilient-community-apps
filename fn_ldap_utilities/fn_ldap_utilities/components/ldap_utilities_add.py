@@ -9,6 +9,7 @@ from resilient_circuits import ResilientComponent, function, FunctionResult, Sta
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from resilient_lib import IntegrationError, validate_fields, ResultPayload
 from ldap3.extend.microsoft.addMembersToGroups import ad_add_members_to_groups
+from ldap3.core.exceptions import LDAPObjectClassError, LDAPEntryAlreadyExistsResult
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
@@ -89,15 +90,13 @@ class FunctionComponent(ResilientComponent):
                         ad_add_members_to_groups(conn, [ldap_dn], group_list, True)
                 except Exception as err:
                     raise IntegrationError("Unable to add: {} to group(s): {}".format(ldap_dn, group_list))
+            except LDAPObjectClassError:
+                raise ValueError("objectClass is needed in attribute input, EX: 'objectClass': 'user'")
+            except LDAPEntryAlreadyExistsResult:
+                raise ValueError("User already exists")
             except Exception as err:
                 LOG.debug('Error: {}'.format(err))
-                # User already exists
-                if 'objectClass attribute is mandatory' in str(err):
-                    raise ValueError("objectClass is needed in attribute input, EX: 'objectClass': 'user'")
-                elif 'entryAlreadyExists' in str(err):
-                    raise ValueError("User already exists")
-                else:
-                    raise ValueError("Ensure dn is correct")
+                raise ValueError("Ensure dn is correct")
             finally:
                 # Unbind connection
                 if conn:
