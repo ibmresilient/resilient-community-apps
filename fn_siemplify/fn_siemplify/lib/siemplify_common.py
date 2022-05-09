@@ -204,7 +204,7 @@ class SiemplifyCommon():
         """
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
-            "entityType": self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY),
+            "entityType": self.SOAR_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY),
             "scope": 2,
             "environments": inputs['siemplify_environment']
         }
@@ -239,7 +239,7 @@ class SiemplifyCommon():
             [dict]: [Results of the API call]
         """
         category = inputs.get('siemplify_category') if inputs.get('siemplify_category') else \
-            self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY)
+            self.SOAR_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'), GENERICENTITY)
 
         payload = {
             "entityIdentifier": inputs['siemplify_artifact_value'],
@@ -296,7 +296,7 @@ class SiemplifyCommon():
         Returns:
             [dict]: [Results of API call]
         """
-        inputs['siemplify_entity_type'] = self.SIEMPLIFY_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'))
+        inputs['siemplify_entity_type'] = self.SOAR_ARTIFACT_TYPE_LOOKUPS.get(inputs.get('siemplify_artifact_type'))
         if not inputs['siemplify_entity_type']:
             err_msg = "No matching entity type for Artifact type: {}, value: {}".format(
                         inputs['siemplify_artifact_type'],
