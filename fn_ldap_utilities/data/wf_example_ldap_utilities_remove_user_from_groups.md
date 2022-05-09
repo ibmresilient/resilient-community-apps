@@ -24,29 +24,16 @@
 # inputs.ldap_multiple_user_dn = "['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']"
 # inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
 
-## Note: You can use this handy function below, then not need to worry about the inputs formatting
-
-def into_string_list_format(entries):
-  """Function that converts a list or single string into a 'string repersentation of a list'"""
-  string_list_to_return = "[{}]"
-
-  # If its a string, assume its one DN, one entry
-  if isinstance(entries, basestring):
-    return string_list_to_return.format('"{}"'.format(entries))
-
-  # Else assume its a List, so multiple DNs, multiple entries
-  else:
-    entries_to_add = ""
-    for e in entries:
-      entries_to_add += '"{}",'.format(e)
-    return string_list_to_return.format(entries_to_add)
-
-list_of_users_dn = ['cn=Breda User11,cn=Users,dc=example,dc=com', 'cn=Breda User10,cn=Users,dc=example,dc=com']
-
-inputs.ldap_domain_name = "Domain1"
 # Both inputs must be a string representation of a List
-inputs.ldap_multiple_user_dn = into_string_list_format(list_of_users_dn)
-inputs.ldap_multiple_group_dn = into_string_list_format('cn=GroupA,cn=Users,dc=example,dc=com')
+inputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn
+inputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn
+
+# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
+if incident.properties.ldap_domain_name:
+  inputs.ldap_domain_name = incident.properties.ldap_domain_name
+# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
+if rule.properties.ldap_domain_name:
+  inputs.ldap_domain_name = rule.properties.ldap_domain_name
 ```
 
 ### Post-Processing Script

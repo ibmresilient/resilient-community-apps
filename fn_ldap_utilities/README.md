@@ -29,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 04/2022 | Add ability to have multiple LDAP Domains |
+| 1.2.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
 | 1.1.0 | 03/2019 | <ul><li>Handle Unicode in Post-Process Scripts</li><li>Handle NTLM Authentication to Active Directory</li><li>Add functionality to allow for LDAP Wildcard queries with *</li></ul> |
 | 1.0.0 | 07/2018 | Initial Release |

@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_ldap_utilities",
         "message_destinations": [u"fn_ldap_utilities"],
-        "functions": [u"ldap_utilities_add_to_groups", u"ldap_utilities_remove_from_groups", u"ldap_utilities_search", u"ldap_utilities_set_password", u"ldap_utilities_toggle_access", u"ldap_utilities_update"],
-        "workflows": [u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_user_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"],
-        "actions": [u"Example: LDAP Utilities: Add User(s) to Group(s)", u"Example: LDAP Utilities: Remove User(s) from Group(s)", u"Example: LDAP Utilities: Search", u"Example: LDAP Utilities: Set Password", u"Example: LDAP Utilities: Toggle Access", u"Example: LDAP Utilities: Update"],
+        "functions": [u"ldap_utilities_add", u"ldap_utilities_add_to_groups", u"ldap_utilities_remove_from_groups", u"ldap_utilities_search", u"ldap_utilities_set_password", u"ldap_utilities_toggle_access", u"ldap_utilities_update"],
+        "workflows": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_user_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"],
+        "actions": [u"Example: LDAP Utilities: Add", u"Example: LDAP Utilities: Add User(s) to Group(s)", u"Example: LDAP Utilities: Remove User(s) from Group(s)", u"Example: LDAP Utilities: Search", u"Example: LDAP Utilities: Set Password", u"Example: LDAP Utilities: Toggle Access", u"Example: LDAP Utilities: Update"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -39,12 +39,13 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 42.0.7058
 
     Contents:
     - Message Destinations:
         - fn_ldap_utilities
     - Functions:
+        - ldap_utilities_add
         - ldap_utilities_add_to_groups
         - ldap_utilities_remove_from_groups
         - ldap_utilities_search
@@ -52,6 +53,7 @@ def customization_data(client=None):
         - ldap_utilities_toggle_access
         - ldap_utilities_update
     - Workflows:
+        - example_ldap_utilities_add
         - example_ldap_utilities_add_users_to_groups
         - example_ldap_utilities_remove_user_from_groups
         - example_ldap_utilities_search
@@ -59,6 +61,7 @@ def customization_data(client=None):
         - example_ldap_utilities_toggle_access
         - example_ldap_utilities_update
     - Rules:
+        - Example: LDAP Utilities: Add
         - Example: LDAP Utilities: Add User(s) to Group(s)
         - Example: LDAP Utilities: Remove User(s) from Group(s)
         - Example: LDAP Utilities: Search

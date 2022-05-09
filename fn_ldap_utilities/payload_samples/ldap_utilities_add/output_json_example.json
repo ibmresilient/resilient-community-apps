@@ -1,0 +1,27 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": 0,
+    "description": "success",
+    "dn": "",
+    "message": "",
+    "referrals": null,
+    "type": "addResponse"
+  },
+  "raw": null,
+  "inputs": {
+    "ldap_dn": "cn=mygroup,dc=example,dc=com",
+    "ldap_multiple_group_dn": "[]",
+    "ldap_attribute_name_values": "'objectclass': 'groupOfNames'"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "1.2.0",
+    "host": "9e05ac7d-259a-4f2f-963c-c6b198aa446f-7bc9574887-rh6vw",
+    "execution_time_ms": 131,
+    "timestamp": "2022-03-07 16:37:55"
+  }
+}

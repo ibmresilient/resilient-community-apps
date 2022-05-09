@@ -19,11 +19,22 @@
 ### Pre-Processing Script
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
-inputs.ldap_domain_name = 'Domain1'
-inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
-inputs.ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"
+inputs.ldap_search_filter = rule.properties.ldap_search_filter
+inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
 inputs.ldap_search_param = artifact.value
+# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value
+if incident.properties.ldap_base_dn:
+  inputs.ldap_search_base = incident.properties.ldap_base_dn
+# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value
+if rule.properties.ldap_search_base:
+  inputs.ldap_search_base = rule.properties.ldap_search_base
+
+# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
+if incident.properties.ldap_domain_name:
+  inputs.ldap_domain_name = incident.properties.ldap_domain_name
+# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
+if rule.properties.ldap_domain_name:
+  inputs.ldap_domain_name = rule.properties.ldap_domain_name
 ```
 
 ### Post-Processing Script
@@ -55,7 +66,7 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if(results.success):
-  for entry in results.content:
+  for entry in results.entries:
     if not entry:
       break
     # Add Row

@@ -10,7 +10,7 @@ from re import search, sub
 from resilient_lib import validate_fields, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ldap3 import ALL_ATTRIBUTES
-from ldap3.core.exceptions import LDAPSocketOpenError
+from ldap3.core.exceptions import LDAPSocketOpenError, LDAPInvalidFilterError
 from ldap3.utils.conv import escape_filter_chars
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
@@ -156,7 +156,9 @@ class FunctionComponent(ResilientComponent):
             except LDAPSocketOpenError as err:
                 LOG.debug("Error: {}".format(err))
                 raise ValueError("Invalid Search Base", input_ldap_search_base)
-
+            except LDAPInvalidFilterError as err:
+                LOG.debug("Error: {}".format(err))
+                raise ValueError("Invalid search filter", input_ldap_search_filter)
             except Exception as err:
                 raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
 
