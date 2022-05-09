@@ -7,7 +7,7 @@ import json
 import os
 import time
 from json.decoder import JSONDecodeError
-from resilient_circuits.template_functions import render_json, render, environment
+from resilient_circuits.template_functions import render, environment
 from resilient_lib import readable_datetime
 
 LOG = logging.getLogger(__name__)
