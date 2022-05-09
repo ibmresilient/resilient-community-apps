@@ -57,6 +57,7 @@ class RxClient():
             "watchlist":         "/".join([self.api_base_url, "watchlist/devices"]),
             "activitymaps":      "/".join([self.api_base_url, "activitymaps/{}"]),
             "search_packets":    "/".join([self.api_base_url, "packets/search"]),
+            "networks":          "/".join([self.api_base_url, "networks"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
         if fn_opts.get("extrahop_rx_key_id"):
@@ -445,6 +446,21 @@ class RxClient():
         r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
 
         return r
+
+    def get_networks(self):
+        """Get network information from the ExtraHop environment.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :return Result request response.
+
+        """
+        # Set default uri
+        uri = self._endpoints["networks"]
+
+        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
+
+        return r.json()
 
 def validate_settings(fn_opts):
     """Validate app config settings.

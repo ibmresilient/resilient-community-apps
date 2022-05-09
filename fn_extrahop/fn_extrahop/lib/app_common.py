@@ -35,8 +35,8 @@ class AppCommon():
         self.endpoint_url = options["extrahop_rx_host_url"]
         # Url if we are connecting to the cloud instance.
         self.cloud_console = options.get("extrahop_rx_cloud_console")
-
         self.rx_cli = RxClient(opts, options)
+        self.networks = self.rx_cli.get_networks()
         self.entity_count = 0
 
     def get_entities_since_ts(self, timestamp, search_filter, limit=None, offset=None):
@@ -85,10 +85,7 @@ class AppCommon():
         Returns:
             str: completed url for linkback
         """
-        if self.cloud_console:
-            return urljoin(self.cloud_console, linkback_url.format(entity_id))
-
-        return urljoin(self.endpoint_url, linkback_url.format(entity_id))
+        return urljoin(self.get_console_url(), linkback_url.format(entity_id))
 
     def filter_by_property(self, result, prop, filters):
         """Filter result based on a a property list .
@@ -131,6 +128,14 @@ class AppCommon():
             LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
 
         return bool(modified_fields)
+
+    def get_console_url(self):
+        """Get the console base url """
+        if self.cloud_console:
+            # Connected to Cloud instance
+            return self.cloud_console
+
+        return self.endpoint_url
 
 def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
     """[Setup params dict form fn_input named tuple].

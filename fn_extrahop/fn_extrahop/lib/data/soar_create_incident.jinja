@@ -25,7 +25,10 @@
     "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
     "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
-    "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection</a>"
+    "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection</a>",
+    "extrahop_console_url": "{{ console_url }}",
+    "extrahop_site_name": "{{ network.name }}",
+    "extrahop_site_uuid": "{{ network.appliance_uuid }}"
   },
   "comments": [
     {

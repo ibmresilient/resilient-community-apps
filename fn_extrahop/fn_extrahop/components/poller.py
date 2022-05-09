@@ -191,6 +191,9 @@ class PollerComponent(ResilientComponent):
             for entity in entity_list:
                 entity_id = get_entity_id(entity)
 
+                # Create console url
+                entity['console_url'] = self.app_common.get_console_url()
+
                 # create linkback url
                 entity['detection_url'] = self.app_common.make_linkback_url(entity_id)
 
@@ -201,6 +204,25 @@ class PollerComponent(ResilientComponent):
 
                 if not soar_case:
                     if not is_entity_closed(entity):
+                        network = None
+                        if entity["appliance_id"] == 0:
+                            # Connected to a Standalone sensor
+                            network = entity["network"] = self.app_common.networks.pop()
+                        else:
+                            # Connected to the Cloud instance
+                            network = next((nw for nw in self.app_common.networks if nw["node_id"]
+                                            == entity["appliance_id"]), None)
+                        if network:
+                            entity["network"] = network
+                        else:
+                            LOG.error("Network information not found for detection id %s and appliance id %s",
+                                      entity_id, entity["appliance_id"])
+                            # Add empty values for jinja processing.
+                            entity["network"] = {
+                                "name": None,
+                                "appliance_uuid": None
+                            }
+
                         # create the SOAR case
                         soar_create_payload = make_payload_from_template(
                                                             self.soar_create_case_template,
