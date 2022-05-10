@@ -65,8 +65,6 @@ class FunctionComponent(ResilientComponent):
             options = get_server_settings(self.opts, qradar_label)
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
-            # Clear specified data table in SOAR based on app.config settings
-            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             timeout = 600 # Default timeout to 10 minutes
             # Check if search_timeout setting is configured in edm_global_settings
@@ -135,6 +133,9 @@ class FunctionComponent(ResilientComponent):
                 "events": result["events"],
                 "current_time": int(time())*1000
             }
+
+            # Clear specified data table in SOAR based on app.config settings
+            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             yield StatusMessage("Finished 'qradar_top_events' that was running in workflow '{0}'".format(wf_instance_id))
             yield FunctionResult(results)

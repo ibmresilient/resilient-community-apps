@@ -56,8 +56,6 @@ class FunctionComponent(ResilientComponent):
             options = get_server_settings(self.opts, qradar_label)
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
-            # Clear specified data table in SOAR based on app.config settings
-            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             results = {
                 "qrhost": options.get("host"),
@@ -107,6 +105,9 @@ class FunctionComponent(ResilientComponent):
                         results["assets"].append(offense_assets)
 
             yield StatusMessage("Finished 'qradar_offense_summary' that was running in workflow '{0}'".format(wf_instance_id))
+
+            # Clear specified data table in SOAR based on app.config settings
+            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
