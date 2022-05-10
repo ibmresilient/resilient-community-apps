@@ -37,12 +37,13 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 01/2021 | App Host Support | 
+| 1.1.1 | 05/2022 | Submission fix |
+| 1.1.0 | 01/2021 | App Host Support |
 | 1.0.0 | 12/2018 | Initial Release |
 
 ---
@@ -70,7 +71,7 @@ This package contains one function that enriches your leads (name, email address
 
 ## Requirements
 <!--
-  List any Requirements 
+  List any Requirements
 -->
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -85,16 +86,16 @@ If deploying to a Resilient platform with an integration server, the requirement
 * Resilient platform >= `37.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following Resilient platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -104,7 +105,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -165,7 +166,7 @@ Function enriches your leads (name, email address, phone number, or social media
 <p>
 
 ```python
-results = 
+results =
 {
     "version": "1.0",
     "success": true,
@@ -854,70 +855,70 @@ if results.success:
   # Create a datatable from pipl response
   possible_person_counter = 0
   for person in results.person_list:
-    
+
     # generate result_id and timestamp
     possible_person_counter += 1
     now = Date()
-    
+
     # 0-1. The level of confidence we have that this is the person you’re looking for.
     match = str(person.get("@match", ""))
-    
-    # Whether this person is made up solely from data inferred by statistical analysis from your search query. 
+
+    # Whether this person is made up solely from data inferred by statistical analysis from your search query.
     # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.
     inferred = str(person.get("@inferred", ""))
-    
+
     # Person data
     names = person.get("names", [])
     for name in names:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "name", name.get("display", ""), match, inferred)
-    
+
     emails = person.get("emails", [])
     for email in emails:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "email address", email.get("address", ""), match, inferred)
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address_md5", email.get("address_md5", ""), match, inferred)
-    
+
     usernames = person.get("usernames", [])
     for usrname in usernames:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "username", usrname.get("content", ""), match, inferred)
-      
+
     phones = person.get("phones", [])
     for phone in phones:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "phone", phone.get("display_international", ""), match, inferred)
-      
+
     gender = person.get("gender")
     if gender:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "gender", gender.get("content", ""), match, inferred)
-    
+
     dob = person.get("dob")
     if dob:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "dob", dob.get("display", ""), match, inferred)
-    
+
     addresses = person.get("addresses", [])
     for address in addresses:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address", address.get("display", ""), match, inferred)
-      
+
     jobs = person.get("jobs", [])
     for job in jobs:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "job", job.get("display", ""), match, inferred)
-    
+
     educations = person.get("educations", [])
     for edu in educations:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "education", edu.get("display", ""), match, inferred)
-      
+
     user_ids = person.get("user_ids", [])
     for usr_id in user_ids:
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "user_id", usr_id.get("content", ""), match, inferred)
-      
+
     images = person.get("images", [])
     for image in images:
       image_url = """<a href='{0}'>{0}</a>""".format(image.get("url", "")) if image.get("url", "") else ""
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "image", image_url, match, inferred)
-      
+
     urls = person.get("urls", [])
     for url in urls:
       url_url = """<a href='{0}'>{0}</a>""".format(url.get("url", "")) if url.get("url", "") else ""
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "url", url_url, match, inferred)
-      
+
   # Save the json result as an Note
   raw_data = results.raw_data if results.raw_data else ""
   counter = possible_person_counter if possible_person_counter > 0 else ""
@@ -948,7 +949,7 @@ artifact_description = u"""Created by Pipl Data results generated for artifact_v
 artifact_type = rule.properties.pipl_artifact_type
 
 # artifact value
-# pipl_value column in Pip possible person data is in this format {u'format': u'html', u'content': u'your api data'} 
+# pipl_value column in Pip possible person data is in this format {u'format': u'html', u'content': u'your api data'}
 rich_text_pipl_value = row.pipl_value
 artifact_value = rich_text_pipl_value.get("content")
 
