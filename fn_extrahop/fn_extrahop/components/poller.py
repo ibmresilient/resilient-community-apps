@@ -207,7 +207,7 @@ class PollerComponent(ResilientComponent):
                         network = None
                         if entity["appliance_id"] == 0:
                             # Connected to a Standalone sensor
-                            network = entity["network"] = self.app_common.networks.pop()
+                            network = entity["network"] = self.app_common.networks[0]
                         else:
                             # Connected to the Cloud instance
                             network = next((nw for nw in self.app_common.networks if nw["node_id"]
