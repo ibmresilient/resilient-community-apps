@@ -47,7 +47,8 @@ setup(
         * A function to get activitymaps.
     """,
     install_requires=[
-        "resilient-circuits>=42.0.0"
+        "resilient-circuits>=42.0.0",
+        "retry2 ~= 0.9"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
