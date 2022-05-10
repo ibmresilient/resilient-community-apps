@@ -4,14 +4,14 @@
 
 | SDK Version       | Generation Time          | Command Line Arguments Provided |
 | :---------------- | ------------------------ | ------------------------------- |
-| 44.1.2953 | 2022/04/22 10:50:05 | `cmd`: validate, `package`: . |
+| 44.1.2953 | 2022/05/10 08:25:52 | `cmd`: validate, `package`: . |
 
 ## App Details
 | Attribute | Value |
 | --------- | ----- |
 | `display_name` | SOAR LDAP Utilities |
 | `name` | fn_ldap_utilities |
-| `version` | 1.2.0 |
+| `version` | 2.0.0 |
 | `author` | IBM SOAR |
 | `install_requires` | ['resilient_circuits>=42.0.0', 'ldap3>=2.0.0'] |
 | `description` | SOAR LDAP Utilities' |
@@ -19,7 +19,7 @@
 | `url` | https://github.com/ibmresilient/resilient-community-apps |
 | `entry_points` | {'resilient.circuits.configsection': '/Users/richardswierk/dev/resilient-community-apps/fn_ldap_utilities/fn_ldap_utilities/util/config.py',<br> 'resilient.circuits.customize': '/Users/richardswierk/dev/resilient-community-apps/fn_ldap_utilities/fn_ldap_utilities/util/customize.py',<br> 'resilient.circuits.selftest': '/Users/richardswierk/dev/resilient-community-apps/fn_ldap_utilities/fn_ldap_utilities/util/selftest.py'} |
 | `python_requires` | >=3.6 |
-| `SOAR version` | 41.0.6783 |
+| `SOAR version` | 42.0.7058 |
 | `Proxy support` | Proxies supported if running on AppHost>=1.6 |
 
 ---
@@ -88,6 +88,10 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
 
 ## Payload samples validation
 
+### `payload_samples/ldap_utilities_add`
+<span style="color:green">Pass</span>
+
+
 ### `payload_samples/ldap_utilities_add_to_groups`
 <span style="color:green">Pass</span>
 
@@ -124,7 +128,7 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
  
 
 ## tox tests
-<span style="color:teal">INFO</span>: 15 tests passed!
+<span style="color:teal">INFO</span>: 17 tests passed!
 
 
 
