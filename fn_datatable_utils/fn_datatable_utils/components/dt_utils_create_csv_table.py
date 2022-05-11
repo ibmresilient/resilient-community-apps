@@ -13,25 +13,13 @@ from time import gmtime, mktime, strptime
 from io import StringIO
 from collections import OrderedDict
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 from resilient_lib import ResultPayload, get_file_attachment, get_file_attachment_name, validate_fields
 
-PACKAGE_NAME = "fn_datatable_utils"
 LOG = getLogger(__name__)
 
 TZ_FORMAT = compile(r"%[zZ]")
 TZ_VALUE = compile(r"[-+]\d{4}")
-
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.rows = None
-
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'dt_utils_create_csv_table''"""
@@ -61,44 +49,44 @@ class FunctionComponent(ResilientComponent):
             # Validate required fields
             validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], kwargs)
 
-            inputs = {
-                "incident_id": kwargs.get("incident_id"),  # number (required)
-                "attachment_id": kwargs.get("attachment_id"),  # number (optional)
-                "has_headers": kwargs.get("dt_has_headers"),  # boolean (required)
-                "csv_data": kwargs.get("dt_csv_data"),  # text (optional)
-                "datable_name": kwargs.get("dt_datable_name"),  # text (required)
-                "mapping_table": kwargs.get("dt_mapping_table"),  # text (required)
-                "date_time_format": kwargs.get("dt_date_time_format"),  # text (optional)
-                "start_row": kwargs.get("dt_start_row"),  # number (optional)
-                "max_rows": kwargs.get("dt_max_rows"),  # number (optional)
-            }
+            incident_id = kwargs.get("incident_id"),  # number (required)
+            attachment_id = kwargs.get("attachment_id"),  # number (optional)
+            has_headers = kwargs.get("dt_has_headers"),  # boolean (required)
+            csv_data = kwargs.get("dt_csv_data"),  # text (optional)
+            datable_name = kwargs.get("dt_datable_name"),  # text (required)
+            mapping_table = kwargs.get("dt_mapping_table"),  # dictionary (required)
+            date_time_format = kwargs.get("dt_date_time_format"),  # text (optional)
+            start_row = kwargs.get("dt_start_row"),  # number (optional)
+            max_rows = kwargs.get("dt_max_rows"),  # number (optional)
 
-            LOG.info(inputs)
-
-            try:
-                mapping_table = loads(inputs['mapping_table'])
-            except Exception:
-                raise ValueError(u"Unable to convert mapping_table to json: %s", inputs['mapping_table'])
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("attachment_id: %s", attachment_id)
+            LOG.info("dt_has_headers: %s", has_headers)
+            LOG.info("dt_csv_data: %s", csv_data)
+            LOG.info("dt_datable_name: %s", datable_name)
+            LOG.info("dt_mapping_table: %s", mapping_table)
+            LOG.info("dt_date_time_format: %s", date_time_format)
+            LOG.info("dt_start_row: %s", start_row)
+            LOG.info("dt_max_rows: %s", max_rows)
 
             # Create payload dict with inputs
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            if (inputs["attachment_id"] and inputs["csv_data"]) or not (inputs["attachment_id"] or inputs["csv_data"]):
+            if (attachment_id and csv_data) or not (attachment_id or csv_data):
                 raise ValueError("Specify either attachment_id or csv_data")
 
             attachment_name = None
-            csv_data = inputs["csv_data"]
             # Either an attachment ID or CSV Data is needed to be able to add rows
-            if inputs["attachment_id"]:
-                attachment_name = get_file_attachment_name(res_client, inputs['incident_id'],
-                                                           attachment_id=inputs["attachment_id"])
-                b_csv_data = get_file_attachment(res_client, inputs['incident_id'],
-                                               attachment_id=inputs["attachment_id"])
+            if attachment_id:
+                attachment_name = get_file_attachment_name(res_client, incident_id,
+                                                           attachment_id=attachment_id)
+                b_csv_data = get_file_attachment(res_client, incident_id,
+                                               attachment_id=attachment_id)
                 csv_data = b_csv_data.decode("utf-8")
 
             inline_data = StringIO(csv_data)
 
-            datatable = RESDatatable(res_client, inputs["incident_id"], inputs["datable_name"])
+            datatable = RESDatatable(res_client, incident_id, datable_name)
 
             # Retrieve the column names for the datatable, and their data_types,
             # to compare against what the user provides, and attempt data conversion, if necessary
@@ -112,7 +100,7 @@ class FunctionComponent(ResilientComponent):
             LOG.debug(dialect.__dict__)
 
             csv_headers = []
-            if inputs["has_headers"]:
+            if has_headers:
                 reader = DictReader(inline_data, dialect=dialect)  # Each row is a dictionary keyed by the column name
                 csv_headers = reader.fieldnames # Just the headers
             else:
@@ -124,9 +112,9 @@ class FunctionComponent(ResilientComponent):
             # Perform the api calls to the datatable
             number_of_added_rows, number_of_rows_with_errors = self.add_to_datatable(reader, datatable,
                                                                                      mapping_table, dt_column_names,
-                                                                                     inputs['date_time_format'],
-                                                                                     inputs['start_row'],
-                                                                                     inputs['max_rows'])
+                                                                                     date_time_format,
+                                                                                     start_row,
+                                                                                     max_rows)
             LOG.info("Number of rows added: %s ", number_of_added_rows)
             LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
 

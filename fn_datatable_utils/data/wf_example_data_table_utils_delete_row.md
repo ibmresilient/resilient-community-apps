@@ -79,7 +79,6 @@ inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
 
 ### Post-Processing Script
 ```python
-# {'success': True, 'inputs': {'incident_id': 2150, 'dt_utils_datatable_api_name': 'dt_utils_test_data_table', 'dt_utils_row_id': 821}, 'row': {'success': True, 'title': None, 'message': None, 'hints': []}}
 if results.success:
   note = u"Row id: {} removed from datatable: {} for artifact: {}".format(results.inputs['dt_utils_row_id'], results.inputs['dt_utils_datatable_api_name'], artifact.value)
 else:

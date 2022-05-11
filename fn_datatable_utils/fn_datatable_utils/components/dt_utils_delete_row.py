@@ -4,22 +4,11 @@
 """Function implementation"""
 
 from logging import getLogger
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 
 LOG = getLogger(__name__)
-
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.row = None
-
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'dt_utils_delete_row"""
@@ -50,21 +39,19 @@ class FunctionComponent(ResilientComponent):
 
             dt_utils_row_id = kwargs.get("dt_utils_row_id") # number (optional)
             dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name") # text (required)
+            incident_id = kwargs.get("incident_id"), # number (required)
 
-            inputs = {
-                "incident_id": kwargs.get("incident_id"), # number (required)
-                "dt_utils_datatable_api_name": dt_utils_datatable_api_name,
-                "dt_utils_row_id": dt_utils_row_id
-            }
-            LOG.debug(inputs)
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+            LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
 
             # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             yield StatusMessage("Function Inputs OK")
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"], dt_utils_datatable_api_name)
+            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(wf_instance_id)
@@ -86,14 +73,12 @@ class FunctionComponent(ResilientComponent):
 
             if "error" in deleted_row:
                 yield StatusMessage(u"Row {} in {} not deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
-                payload.success = False
+                results = rp.done(False, None)
                 raise ValueError(deleted_row["error"])
 
             yield StatusMessage("Row {} in {} deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
-            payload.row = deleted_row
-            payload.success = True
-
-            results = payload.as_dict()
+            results = rp.done(True, None)
+            results['row'] = deleted_row
 
             yield StatusMessage("Finished 'dt_utils_delete_row' that was running in workflow '{}'".format(wf_instance_id))
             LOG.info("Complete")

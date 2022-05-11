@@ -11,7 +11,7 @@
 `dt_utils_delete_rows`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_datatable_utils`
@@ -19,13 +19,12 @@
 ### Pre-Processing Script
 ```python
 if not row.dt_col_name:
-    helper.fail("name field must contain a value")
+  helper.fail("The data table column 'name' must contain a value")
 
 inputs.incident_id = incident.id
 inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 inputs.dt_utils_search_column = "dt_col_name"
 inputs.dt_utils_search_value = row.dt_col_name
-
 ```
 
 ### Post-Processing Script

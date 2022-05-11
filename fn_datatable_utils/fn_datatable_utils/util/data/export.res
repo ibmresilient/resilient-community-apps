@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Delete Current Row",
-      "id": 14,
+      "id": 38,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Delete Current Row",
@@ -25,7 +25,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Delete Data Table Row",
-      "id": 15,
+      "id": 39,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Delete Data Table Row",
@@ -44,7 +44,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Delete Data Table Rows",
-      "id": 16,
+      "id": 40,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Delete Data Table Rows",
@@ -63,7 +63,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Delete Rows by Name",
-      "id": 17,
+      "id": 41,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Delete Rows by Name",
@@ -82,7 +82,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Create CSV Datatable",
-      "id": 18,
+      "id": 42,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Create CSV Datatable",
@@ -101,7 +101,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Get Current Row",
-      "id": 23,
+      "id": 43,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Get Current Row",
@@ -120,7 +120,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Get Data Table Row",
-      "id": 19,
+      "id": 44,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Get Data Table Row",
@@ -139,7 +139,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Get Data Table Rows",
-      "id": 20,
+      "id": 45,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Get Data Table Rows",
@@ -183,7 +183,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Update Current Row",
-      "id": 21,
+      "id": 46,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Update Current Row",
@@ -202,7 +202,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Update Data Table Row",
-      "id": 22,
+      "id": 47,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Update Data Table Row",
@@ -219,7 +219,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1648652697528,
+  "export_date": 1652276568395,
   "export_format_version": 2,
   "fields": [
     {
@@ -232,7 +232,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 266,
+      "id": 328,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -262,7 +262,7 @@
       "deprecated": false,
       "export_key": "__function/dt_mapping_table",
       "hide_notification": false,
-      "id": 267,
+      "id": 329,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -292,7 +292,7 @@
       "deprecated": false,
       "export_key": "__function/dt_start_row",
       "hide_notification": false,
-      "id": 269,
+      "id": 330,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -321,7 +321,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_cells_to_update",
       "hide_notification": false,
-      "id": 277,
+      "id": 331,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -351,7 +351,7 @@
       "deprecated": false,
       "export_key": "__function/dt_csv_data",
       "hide_notification": false,
-      "id": 276,
+      "id": 332,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -380,7 +380,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_rows_ids",
       "hide_notification": false,
-      "id": 275,
+      "id": 333,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -409,7 +409,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_max_rows",
       "hide_notification": false,
-      "id": 271,
+      "id": 334,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -438,7 +438,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_delete_all_rows",
       "hide_notification": false,
-      "id": 274,
+      "id": 335,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -467,7 +467,7 @@
       "deprecated": false,
       "export_key": "__function/dt_date_time_format",
       "hide_notification": false,
-      "id": 264,
+      "id": 336,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -496,7 +496,7 @@
       "deprecated": false,
       "export_key": "__function/dt_has_headers",
       "hide_notification": false,
-      "id": 265,
+      "id": 337,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -525,7 +525,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_datatable_api_name",
       "hide_notification": false,
-      "id": 278,
+      "id": 338,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -555,7 +555,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_search_value",
       "hide_notification": false,
-      "id": 272,
+      "id": 339,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -584,7 +584,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_sort_by",
       "hide_notification": false,
-      "id": 260,
+      "id": 340,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -613,7 +613,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 261,
+      "id": 341,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -642,7 +642,7 @@
       "deprecated": false,
       "export_key": "__function/dt_datable_name",
       "hide_notification": false,
-      "id": 270,
+      "id": 342,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -672,7 +672,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_row_id",
       "hide_notification": false,
-      "id": 262,
+      "id": 343,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -701,7 +701,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_search_column",
       "hide_notification": false,
-      "id": 268,
+      "id": 344,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -730,7 +730,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_sort_direction",
       "hide_notification": false,
-      "id": 263,
+      "id": 345,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -755,7 +755,7 @@
           "label": "ASC",
           "properties": null,
           "uuid": "61729b10-cdab-48eb-bc8b-9f30af3afec5",
-          "value": 74
+          "value": 132
         },
         {
           "default": false,
@@ -764,7 +764,7 @@
           "label": "DESC",
           "properties": null,
           "uuid": "4c223e4f-b70c-4957-9c7f-86761015b24c",
-          "value": 75
+          "value": 133
         }
       ]
     },
@@ -778,7 +778,7 @@
       "deprecated": false,
       "export_key": "__function/dt_max_rows",
       "hide_notification": false,
-      "id": 273,
+      "id": 346,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -917,7 +917,7 @@
   ],
   "functions": [
     {
-      "created_date": 1648575847866,
+      "created_date": 1650543783788,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -931,14 +931,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Create CSV Datatable",
       "export_key": "dt_utils_create_csv_table",
-      "id": 1,
+      "id": 19,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575847905,
+      "last_modified_time": 1650543783828,
       "name": "dt_utils_create_csv_table",
       "tags": [],
       "uuid": "6edc80c4-e5ae-4c33-b1f1-f0c101918d7a",
@@ -1026,12 +1026,12 @@
           "programmatic_name": "example_create_csv_datatable",
           "tags": [],
           "uuid": null,
-          "workflow_id": 5
+          "workflow_id": 33
         }
       ]
     },
     {
-      "created_date": 1648575847929,
+      "created_date": 1650543783855,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1045,14 +1045,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Delete Row",
       "export_key": "dt_utils_delete_row",
-      "id": 2,
+      "id": 20,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575847965,
+      "last_modified_time": 1650543783894,
       "name": "dt_utils_delete_row",
       "tags": [],
       "uuid": "50cf405e-aac1-43e7-961e-3894d38688ad",
@@ -1092,7 +1092,7 @@
           "programmatic_name": "example_data_table_utils_delete_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 8
+          "workflow_id": 29
         },
         {
           "actions": [],
@@ -1102,12 +1102,12 @@
           "programmatic_name": "example_data_table_utils_delete_row_from_datatable",
           "tags": [],
           "uuid": null,
-          "workflow_id": 9
+          "workflow_id": 26
         }
       ]
     },
     {
-      "created_date": 1648575847987,
+      "created_date": 1650543783918,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1121,14 +1121,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Delete Rows",
       "export_key": "dt_utils_delete_rows",
-      "id": 3,
+      "id": 21,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575848019,
+      "last_modified_time": 1650543783956,
       "name": "dt_utils_delete_rows",
       "tags": [],
       "uuid": "ef4ef5c0-5de2-4fbc-90c9-f7568451da95",
@@ -1192,7 +1192,7 @@
           "programmatic_name": "example_data_table_utils_delete_rows",
           "tags": [],
           "uuid": null,
-          "workflow_id": 3
+          "workflow_id": 30
         },
         {
           "actions": [],
@@ -1202,12 +1202,12 @@
           "programmatic_name": "example_data_table_utils_delete_rows_from_datatable",
           "tags": [],
           "uuid": null,
-          "workflow_id": 2
+          "workflow_id": 31
         }
       ]
     },
     {
-      "created_date": 1648575848043,
+      "created_date": 1650543783982,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1221,14 +1221,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Get Row",
       "export_key": "dt_utils_get_row",
-      "id": 4,
+      "id": 22,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575848083,
+      "last_modified_time": 1650543784027,
       "name": "dt_utils_get_row",
       "tags": [],
       "uuid": "77e98bdb-2843-4cd6-8294-5a9dbef6a08e",
@@ -1284,7 +1284,7 @@
           "programmatic_name": "example_data_table_utils_delete_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 8
+          "workflow_id": 29
         },
         {
           "actions": [],
@@ -1294,7 +1294,7 @@
           "programmatic_name": "example_data_table_utils_get_current_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 10
+          "workflow_id": 34
         },
         {
           "actions": [],
@@ -1304,7 +1304,7 @@
           "programmatic_name": "example_data_table_utils_get_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 6
+          "workflow_id": 28
         },
         {
           "actions": [],
@@ -1314,12 +1314,12 @@
           "programmatic_name": "example_data_table_utils_update_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 27
         }
       ]
     },
     {
-      "created_date": 1648575848113,
+      "created_date": 1650543784054,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1333,14 +1333,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Get Rows",
       "export_key": "dt_utils_get_rows",
-      "id": 5,
+      "id": 23,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575848156,
+      "last_modified_time": 1650543784102,
       "name": "dt_utils_get_rows",
       "tags": [],
       "uuid": "9f9d8570-c33f-4f30-ab32-9448c3ff8d67",
@@ -1412,7 +1412,7 @@
           "programmatic_name": "example_data_table_utils_delete_rows",
           "tags": [],
           "uuid": null,
-          "workflow_id": 3
+          "workflow_id": 30
         },
         {
           "actions": [],
@@ -1422,12 +1422,12 @@
           "programmatic_name": "example_data_table_utils_get_rows",
           "tags": [],
           "uuid": null,
-          "workflow_id": 7
+          "workflow_id": 32
         }
       ]
     },
     {
-      "created_date": 1648575848182,
+      "created_date": 1650543784137,
       "creator": {
         "display_name": "Admin User",
         "id": 1,
@@ -1441,14 +1441,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Update Row",
       "export_key": "dt_utils_update_row",
-      "id": 6,
+      "id": 24,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1648575848220,
+      "last_modified_time": 1650543784191,
       "name": "dt_utils_update_row",
       "tags": [],
       "uuid": "77b8451e-3137-4362-840a-ac724b674b73",
@@ -1496,7 +1496,7 @@
           "programmatic_name": "update_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 4
+          "workflow_id": 25
         },
         {
           "actions": [],
@@ -1506,20 +1506,20 @@
           "programmatic_name": "example_data_table_utils_update_row",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 27
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 28,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1648652695644,
+      "create_date": 1652276566819,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1528,7 +1528,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1648652695644,
+      "update_date": 1652276566819,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1581,7 +1581,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/boolean",
           "hide_notification": false,
-          "id": 250,
+          "id": 321,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -1597,7 +1597,7 @@
           "templates": [],
           "text": "boolean",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "8fe94e4d-e591-41e9-af15-18fc2cf96a96",
           "values": [],
           "width": 87
@@ -1612,7 +1612,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/datetime",
           "hide_notification": false,
-          "id": 251,
+          "id": 322,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1628,7 +1628,7 @@
           "templates": [],
           "text": "datetime",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "bf9e6153-abe6-40e7-bcb0-f45024804eef",
           "values": [],
           "width": 225
@@ -1643,7 +1643,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/dt_col_name",
           "hide_notification": false,
-          "id": 252,
+          "id": 323,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1659,7 +1659,7 @@
           "templates": [],
           "text": "name",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "b167a766-24fc-4c68-a865-b44f19b53b97",
           "values": [],
           "width": 68
@@ -1674,7 +1674,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/multi_select",
           "hide_notification": false,
-          "id": 253,
+          "id": 324,
           "input_type": "multiselect",
           "internal": false,
           "is_tracked": false,
@@ -1690,7 +1690,7 @@
           "templates": [],
           "text": "multi_select",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "5686792a-79b8-4756-b0f2-f1ec085bc37a",
           "values": [
             {
@@ -1700,7 +1700,7 @@
               "label": "a",
               "properties": null,
               "uuid": "587c135e-2d39-4140-822e-7829b03d4a21",
-              "value": 52
+              "value": 112
             },
             {
               "default": false,
@@ -1709,7 +1709,7 @@
               "label": "b",
               "properties": null,
               "uuid": "b5514bda-e2f8-41d1-bf39-a2d09f37214a",
-              "value": 53
+              "value": 113
             },
             {
               "default": false,
@@ -1718,7 +1718,7 @@
               "label": "c",
               "properties": null,
               "uuid": "6282c55c-af54-4c98-b5d1-12db87a4c76a",
-              "value": 54
+              "value": 114
             },
             {
               "default": false,
@@ -1727,7 +1727,7 @@
               "label": "d",
               "properties": null,
               "uuid": "29eaf525-205a-46a5-b591-e023157053b4",
-              "value": 55
+              "value": 115
             },
             {
               "default": false,
@@ -1736,7 +1736,7 @@
               "label": "e",
               "properties": null,
               "uuid": "48f95069-25a8-4919-9004-7066543dbcd5",
-              "value": 56
+              "value": 116
             },
             {
               "default": false,
@@ -1745,7 +1745,7 @@
               "label": "f",
               "properties": null,
               "uuid": "e11c6dc8-70cc-4448-917a-93ab16c864e0",
-              "value": 57
+              "value": 117
             },
             {
               "default": false,
@@ -1754,7 +1754,7 @@
               "label": "g",
               "properties": null,
               "uuid": "ebcbf31c-f5b2-4d3a-b1fe-334ce7cdaa9b",
-              "value": 58
+              "value": 118
             },
             {
               "default": false,
@@ -1763,7 +1763,7 @@
               "label": "h",
               "properties": null,
               "uuid": "3f2963b6-8e1b-44b5-ba59-32cfbe7bdf5b",
-              "value": 59
+              "value": 119
             },
             {
               "default": false,
@@ -1772,7 +1772,7 @@
               "label": "I",
               "properties": null,
               "uuid": "484dc992-3526-4e06-a392-fe8647373913",
-              "value": 60
+              "value": 120
             },
             {
               "default": false,
@@ -1781,7 +1781,7 @@
               "label": "j",
               "properties": null,
               "uuid": "28c16106-f096-4565-b601-3a03da496559",
-              "value": 61
+              "value": 121
             },
             {
               "default": false,
@@ -1790,7 +1790,7 @@
               "label": "k",
               "properties": null,
               "uuid": "260a964d-63e7-483d-b4f8-6822206830d0",
-              "value": 62
+              "value": 122
             }
           ],
           "width": 64
@@ -1805,7 +1805,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/number",
           "hide_notification": false,
-          "id": 254,
+          "id": 325,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -1821,7 +1821,7 @@
           "templates": [],
           "text": "number",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "97a819fd-cbcf-4eda-a245-c1d50ce27ae6",
           "values": [],
           "width": 84
@@ -1836,7 +1836,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/select",
           "hide_notification": false,
-          "id": 255,
+          "id": 326,
           "input_type": "select",
           "internal": false,
           "is_tracked": false,
@@ -1852,7 +1852,7 @@
           "templates": [],
           "text": "select",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "e2239bee-9516-4c7f-852a-2a884bcbaf0f",
           "values": [
             {
@@ -1862,7 +1862,7 @@
               "label": "1",
               "properties": null,
               "uuid": "6559ac56-25a2-4015-a681-9e89328da0a3",
-              "value": 63
+              "value": 123
             },
             {
               "default": false,
@@ -1871,7 +1871,7 @@
               "label": "2",
               "properties": null,
               "uuid": "bd341de4-c08e-4ba2-9179-04a28a32e22e",
-              "value": 64
+              "value": 124
             },
             {
               "default": false,
@@ -1880,7 +1880,7 @@
               "label": "3",
               "properties": null,
               "uuid": "9d7a37be-a50a-4bdf-8478-63e4be6ec4bc",
-              "value": 65
+              "value": 125
             },
             {
               "default": false,
@@ -1889,7 +1889,7 @@
               "label": "4",
               "properties": null,
               "uuid": "8ecdf624-0e32-46f7-8d8a-f183c8559032",
-              "value": 66
+              "value": 126
             },
             {
               "default": false,
@@ -1898,7 +1898,7 @@
               "label": "5",
               "properties": null,
               "uuid": "653d3e8e-00c9-41f4-85f2-10addde4b1ba",
-              "value": 67
+              "value": 127
             },
             {
               "default": false,
@@ -1907,7 +1907,7 @@
               "label": "6",
               "properties": null,
               "uuid": "b5746a1b-9404-4b9c-bb20-924682a3ad97",
-              "value": 68
+              "value": 128
             },
             {
               "default": false,
@@ -1916,7 +1916,7 @@
               "label": "7",
               "properties": null,
               "uuid": "b3f95da8-12fb-44f0-9f89-9b1ee269762b",
-              "value": 69
+              "value": 129
             },
             {
               "default": false,
@@ -1925,7 +1925,7 @@
               "label": "8",
               "properties": null,
               "uuid": "d6d40d79-d0c4-4122-b982-91114e4b801b",
-              "value": 70
+              "value": 130
             },
             {
               "default": false,
@@ -1934,7 +1934,7 @@
               "label": "9",
               "properties": null,
               "uuid": "ec4b97d4-b313-4ded-bb0d-eda35b6dc172",
-              "value": 71
+              "value": 131
             }
           ],
           "width": 32
@@ -1949,7 +1949,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/text",
           "hide_notification": false,
-          "id": 256,
+          "id": 327,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1965,7 +1965,7 @@
           "templates": [],
           "text": "text",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1002,
           "uuid": "3be7be3d-9931-4386-a845-a62bfe26f017",
           "values": [],
           "width": 123
@@ -1996,46 +1996,6 @@
       "actions": [],
       "content": {
         "version": 2,
-        "workflow_id": "update_row",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"update_row\" isExecutable=\"true\" name=\"Example Data Utils: Update Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_00npig6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1acobvs\" name=\"Data Table Utils: Update Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77b8451e-3137-4362-840a-ac724b674b73\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Data Table Utils: Example: Update Row\\nimport java.util.Date as Date\\n\\n#######################################\\n### Define pre-processing functions ###\\n#######################################\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = [] \\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if value is None:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(key, value))\\n    \\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value == True else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      entries.append(json_entry.format(key, value))\\n\\n  return \u0027{0} {1} {2}\u0027.format(\u0027{\u0027, \u0027,\u0027.join(entries), \u0027}\u0027)\\n\\n# S T A R T\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# Refer to the existing row (value: 0)\\ninputs.dt_utils_row_id = 0\\n\\n# The column api names and the value to update the cell to\\ninputs.dt_utils_cells_to_update = dict_to_json_str({\\n  \\\"datetime\\\": Date().getTime(),\\n  \\\"text\\\": \\\"Done\\\"\\n})\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_00npig6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16wasgm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_00npig6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1acobvs\"/\u003e\u003cendEvent id=\"EndEvent_09dndei\"\u003e\u003cincoming\u003eSequenceFlow_16wasgm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16wasgm\" sourceRef=\"ServiceTask_1acobvs\" targetRef=\"EndEvent_09dndei\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1acobvs\" id=\"ServiceTask_1acobvs_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00npig6\" id=\"SequenceFlow_00npig6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09dndei\" id=\"EndEvent_09dndei_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16wasgm\" id=\"SequenceFlow_16wasgm_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"420.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "admin@example.com",
-      "description": "An example Workflow showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values.",
-      "export_key": "update_row",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646311857,
-      "name": "Example Data Utils: Update Row",
-      "object_type": "dt_utils_test_data_table",
-      "programmatic_name": "update_row",
-      "tags": [],
-      "uuid": "a078edb6-1b2f-43ad-81e6-f809689ae1e1",
-      "workflow_id": 4
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "example_data_table_utils_delete_row_from_datatable",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_row_from_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Row from Datatable\"\u003e\u003cdocumentation\u003eDelete a row from a datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ja63g4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05odd5l\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ja63g4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0kz2way\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ja63g4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05odd5l\"/\u003e\u003cendEvent id=\"EndEvent_0g2neqr\"\u003e\u003cincoming\u003eSequenceFlow_1jyypre\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0kz2way\" sourceRef=\"ServiceTask_05odd5l\" targetRef=\"UserTask_073qi83\"/\u003e\u003cuserTask id=\"UserTask_073qi83\" name=\"Interview key individuals\"\u003e\u003cextensionElements\u003e\u003cresilient:automaticTask programmaticName=\"interview_key_individuals\" uuid=\"2e05bff9-8d15-4424-91c1-9e50d2c78bae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kz2way\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1jyypre\u003c/outgoing\u003e\u003c/userTask\u003e\u003csequenceFlow id=\"SequenceFlow_1jyypre\" sourceRef=\"UserTask_073qi83\" targetRef=\"EndEvent_0g2neqr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05odd5l\" id=\"ServiceTask_05odd5l_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ja63g4\" id=\"SequenceFlow_1ja63g4_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0g2neqr\" id=\"EndEvent_0g2neqr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"497\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kz2way\" id=\"SequenceFlow_0kz2way_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"311\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"UserTask_073qi83\" id=\"UserTask_073qi83_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jyypre\" id=\"SequenceFlow_1jyypre_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"497\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"481\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "creator_id": "admin@example.com",
-      "description": "Delete a row from a datatable",
-      "export_key": "example_data_table_utils_delete_row_from_datatable",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648648603637,
-      "name": "Example: Data Table Utils: Delete Row from Datatable",
-      "object_type": "dt_utils_test_data_table",
-      "programmatic_name": "example_data_table_utils_delete_row_from_datatable",
-      "tags": [],
-      "uuid": "6dd89604-21a4-4456-b07a-9258f55baedb",
-      "workflow_id": 9
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
         "workflow_id": "example_data_table_utils_update_row",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_update_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Update Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Update Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then updates that row with the given values.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1godxss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1o82xsx\" name=\"Data Table Utils: Update Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77b8451e-3137-4362-840a-ac724b674b73\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Data Table Utils: Example: Update Row\\nimport java.util.Date as Date\\n\\n#######################################\\n### Define pre-processing functions ###\\n#######################################\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = [] \\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if value is None:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(key, value))\\n    \\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value == True else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      entries.append(json_entry.format(key, value))\\n\\n  return \u0027{0} {1} {2}\u0027.format(\u0027{\u0027, \u0027,\u0027.join(entries), \u0027}\u0027)\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = workflow.properties.row_to_update.inputs.dt_utils_datatable_api_name\\n\\n# The ID of the row to update [again, taken from previous Get Row Function]\\ninputs.dt_utils_row_id = workflow.properties.row_to_update.row[\\\"id\\\"]\\n\\n# The column api names and the value to update the cell to\\ninputs.dt_utils_cells_to_update = dict_to_json_str({\\n  \\\"datetime\\\": Date().getTime(),\\n  \\\"text\\\": \\\"Done\\\"\\n})\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ap5bmy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0qwi15e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_090gk4x\"\u003e\u003cincoming\u003eSequenceFlow_0qwi15e\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_129h6sa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0qwi15e\" sourceRef=\"ServiceTask_1o82xsx\" targetRef=\"EndEvent_090gk4x\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1godxss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yllp7s\"/\u003e\u003cserviceTask id=\"ServiceTask_1yllp7s\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Data Table Utils: Example: Get Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\\n\",\"result_name\":\"row_to_update\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1godxss\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zfsi47\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zfsi47\" sourceRef=\"ServiceTask_1yllp7s\" targetRef=\"ExclusiveGateway_0j87ouk\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0j87ouk\"\u003e\u003cincoming\u003eSequenceFlow_0zfsi47\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ap5bmy\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_129h6sa\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ap5bmy\" name=\"success\" sourceRef=\"ExclusiveGateway_0j87ouk\" targetRef=\"ServiceTask_1o82xsx\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"\",\"final_expression_text\":\"workflow.properties.row_to_update.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_129h6sa\" name=\"fail\" sourceRef=\"ExclusiveGateway_0j87ouk\" targetRef=\"EndEvent_090gk4x\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"not workflow.properties.row_to_update.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_0pp938a\"\u003e\u003ctext\u003eInputs: data_table_api_name, search_column, search_value\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1lvlnky\" sourceRef=\"ServiceTask_1yllp7s\" targetRef=\"TextAnnotation_0pp938a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qb3o9g\"\u003e\u003ctext\u003eOutput: the data table row that contains its ID and Cells\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_115ahxc\" sourceRef=\"ServiceTask_1yllp7s\" targetRef=\"TextAnnotation_0qb3o9g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1jqrzhf\"\u003e\u003ctext\u003eIf we find a row, continue, else end\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1spz4lt\" sourceRef=\"ExclusiveGateway_0j87ouk\" targetRef=\"TextAnnotation_1jqrzhf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_04qvwbx\"\u003e\u003ctext\u003eInputs: data_table_api_name, row_id, cells_to_update\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rilri5\" sourceRef=\"ServiceTask_1o82xsx\" targetRef=\"TextAnnotation_04qvwbx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0vbm79s\"\u003e\u003ctext\u003eOutput: the updated row\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1t8i02h\" sourceRef=\"ServiceTask_1o82xsx\" targetRef=\"TextAnnotation_0vbm79s\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"122\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"117\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1o82xsx\" id=\"ServiceTask_1o82xsx_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"545\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_090gk4x\" id=\"EndEvent_090gk4x_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"725\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"743\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qwi15e\" id=\"SequenceFlow_0qwi15e_di\"\u003e\u003comgdi:waypoint x=\"645\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"725\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"640\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1godxss\" id=\"SequenceFlow_1godxss_di\"\u003e\u003comgdi:waypoint x=\"158\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"236\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"152\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yllp7s\" id=\"ServiceTask_1yllp7s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"236\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zfsi47\" id=\"SequenceFlow_0zfsi47_di\"\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"402\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"324\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0j87ouk\" id=\"ExclusiveGateway_0j87ouk_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"402\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"427\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ap5bmy\" id=\"SequenceFlow_0ap5bmy_di\"\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"545\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"41\" x=\"479\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_129h6sa\" id=\"SequenceFlow_129h6sa_di\"\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003comgdi:waypoint x=\"743\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003comgdi:waypoint x=\"743\" xsi:type=\"omgdc:Point\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"16\" x=\"577\" y=\"106\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0pp938a\" id=\"TextAnnotation_0pp938a_di\"\u003e\u003comgdc:Bounds height=\"65\" width=\"138\" x=\"129\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1lvlnky\" id=\"Association_1lvlnky_di\"\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qb3o9g\" id=\"TextAnnotation_0qb3o9g_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"135\" x=\"348\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_115ahxc\" id=\"Association_115ahxc_di\"\u003e\u003comgdi:waypoint x=\"329\" xsi:type=\"omgdc:Point\" y=\"169\"/\u003e\u003comgdi:waypoint x=\"384\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1jqrzhf\" id=\"TextAnnotation_1jqrzhf_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"120\" x=\"367\" y=\"249\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1spz4lt\" id=\"Association_1spz4lt_di\"\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"249\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_04qvwbx\" id=\"TextAnnotation_04qvwbx_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"140\" x=\"416\" y=\"334\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rilri5\" id=\"Association_0rilri5_di\"\u003e\u003comgdi:waypoint x=\"567\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"506\" xsi:type=\"omgdc:Point\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0vbm79s\" id=\"TextAnnotation_0vbm79s_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"152\" x=\"629\" y=\"335\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1t8i02h\" id=\"Association_1t8i02h_di\"\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"690\" xsi:type=\"omgdc:Point\" y=\"335\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -2044,53 +2004,13 @@
       "description": "An example Workflow showing how to use the Data Table Utils: Update Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then updates that row with the given values.",
       "export_key": "example_data_table_utils_update_row",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646311395,
+      "last_modified_time": 1651756815421,
       "name": "Example: Data Table Utils: Update Row",
       "object_type": "artifact",
       "programmatic_name": "example_data_table_utils_update_row",
       "tags": [],
       "uuid": "22f49b83-8334-4e99-88cb-f80a934b529b",
-      "workflow_id": 1
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
-        "workflow_id": "example_data_table_utils_get_row",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_get_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Get Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1s0htur\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ofe1w4\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"post_processing_script\":\"search_value = results.inputs[\\\"dt_utils_search_value\\\"]\\nnote_text = u\\\"\u0026lt;b\u0026gt;Result from Example: Data Table Utils: Get Row\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt; search value: {0}\\\".format(search_value) \\nif results.success:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;{1}\\\".format(note_text, str(results[\\\"row\\\"]))\\nelse:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;No row found.\\\".format(note_text)\\n\\nincident.addNote(helper.createRichText(note_text))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Data Table Utils: Example: Get Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\\n\",\"result_name\":\"curtinoutput\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1s0htur\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1trskjl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1hda6wv\"\u003e\u003cincoming\u003eSequenceFlow_1trskjl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1trskjl\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"EndEvent_1hda6wv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1s0htur\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ofe1w4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1mjy1cb\"\u003e\u003ctext\u003eInputs: data_table_api_name, search_column, search_value\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06hw6vm\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"TextAnnotation_1mjy1cb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0jvzp3u\"\u003e\u003ctext\u003eOutput: the data table row that contains its ID and Cells\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1fgbieg\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"TextAnnotation_0jvzp3u\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"115\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"110\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ofe1w4\" id=\"ServiceTask_1ofe1w4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hda6wv\" id=\"EndEvent_1hda6wv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"460\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"478\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1trskjl\" id=\"SequenceFlow_1trskjl_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"460\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0htur\" id=\"SequenceFlow_1s0htur_di\"\u003e\u003comgdi:waypoint x=\"151\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"168.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1mjy1cb\" id=\"TextAnnotation_1mjy1cb_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"143\" x=\"116\" y=\"93\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06hw6vm\" id=\"Association_06hw6vm_di\"\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"154\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0jvzp3u\" id=\"TextAnnotation_0jvzp3u_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"149\" x=\"459\" y=\"91\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1fgbieg\" id=\"Association_1fgbieg_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"150\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 9,
-      "creator_id": "admin@example.com",
-      "description": "An example Workflow showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table.",
-      "export_key": "example_data_table_utils_get_row",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648648644602,
-      "name": "Example: Data Table Utils: Get Row",
-      "object_type": "artifact",
-      "programmatic_name": "example_data_table_utils_get_row",
-      "tags": [],
-      "uuid": "e6404900-768c-49e3-b5d1-b172d35a2113",
-      "workflow_id": 6
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "example_data_table_utils_delete_row",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pptje3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0oj7gk8\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Data Table Utils: Example: Get Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\\n\",\"result_name\":\"row_to_delete\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pptje3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08hc529\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_18o72ll\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027success\u0027: True, \u0027inputs\u0027: {\u0027incident_id\u0027: 2150, \u0027dt_utils_datatable_api_name\u0027: \u0027dt_utils_test_data_table\u0027, \u0027dt_utils_row_id\u0027: 821}, \u0027row\u0027: {\u0027success\u0027: True, \u0027title\u0027: None, \u0027message\u0027: None, \u0027hints\u0027: []}}\\nif results.success:\\n  note = u\\\"Row id: {} removed from datatable: {} for artifact: {}\\\".format(results.inputs[\u0027dt_utils_row_id\u0027], results.inputs[\u0027dt_utils_datatable_api_name\u0027], artifact.value)\\nelse:\\n  note = u\\\"Artifact: {} not found in datatable: {}\\\".format(artifact.value, results.inputs[\u0027dt_utils_datatable_api_name\u0027])\\n  \\nincident.addNote(note)\",\"pre_processing_script\":\"# Data Table Utils: Example: Delete Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = workflow.properties.row_to_delete.inputs.dt_utils_datatable_api_name\\n\\n# The ID of the row to delete [again, taken from previous Get Row Function]\\ninputs.dt_utils_row_id = workflow.properties.row_to_delete.row[\\\"id\\\"]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1r9312q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_135ais0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_13jtock\"\u003e\u003cincoming\u003eSequenceFlow_135ais0\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0uv7luk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_135ais0\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"EndEvent_13jtock\"/\u003e\u003csequenceFlow id=\"SequenceFlow_08hc529\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"ExclusiveGateway_177w6e8\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1pptje3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0oj7gk8\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_177w6e8\"\u003e\u003cincoming\u003eSequenceFlow_08hc529\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1r9312q\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0uv7luk\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1r9312q\" name=\"success\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"ServiceTask_18o72ll\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"\",\"final_expression_text\":\"workflow.properties.row_to_delete.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0uv7luk\" name=\"fail\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"EndEvent_13jtock\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"\",\"final_expression_text\":\"not workflow.properties.row_to_delete.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_053uwhv\"\u003e\u003ctext\u003eInputs: data_table_api_name, search_column, search_value\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o1dkfq\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"TextAnnotation_053uwhv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12gmms9\"\u003e\u003ctext\u003eOutput: the data table row that contains its ID and Cells\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o7jw8z\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"TextAnnotation_12gmms9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_178wajp\"\u003e\u003ctext\u003eIf we find a row, continue, else end\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0n41ldu\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"TextAnnotation_178wajp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1oyy5lt\"\u003e\u003ctext\u003eInputs: data_table_api_name, row_id\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0f4r6h7\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"TextAnnotation_1oyy5lt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_197xlxy\"\u003e\u003ctext\u003eOutput: a success flag if row deleted\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wid1dq\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"TextAnnotation_197xlxy\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0oj7gk8\" id=\"ServiceTask_0oj7gk8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"297\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18o72ll\" id=\"ServiceTask_18o72ll_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"621\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13jtock\" id=\"EndEvent_13jtock_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"797\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"770\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_135ais0\" id=\"SequenceFlow_135ais0_di\"\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"797\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"714\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08hc529\" id=\"SequenceFlow_08hc529_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"394.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pptje3\" id=\"SequenceFlow_1pptje3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"247.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_177w6e8\" id=\"ExclusiveGateway_177w6e8_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"482\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"507\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1r9312q\" id=\"SequenceFlow_1r9312q_di\"\u003e\u003comgdi:waypoint x=\"532\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"41\" x=\"557\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uv7luk\" id=\"SequenceFlow_0uv7luk_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003comgdi:waypoint x=\"815\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003comgdi:waypoint x=\"815\" xsi:type=\"omgdc:Point\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"16\" x=\"653\" y=\"88\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_053uwhv\" id=\"TextAnnotation_053uwhv_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"151\" x=\"182\" y=\"51\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o1dkfq\" id=\"Association_0o1dkfq_di\"\u003e\u003comgdi:waypoint x=\"318\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"280\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12gmms9\" id=\"TextAnnotation_12gmms9_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"125\" x=\"378\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o7jw8z\" id=\"Association_0o7jw8z_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_178wajp\" id=\"TextAnnotation_178wajp_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"115\" x=\"449\" y=\"275\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0n41ldu\" id=\"Association_0n41ldu_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"275\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1oyy5lt\" id=\"TextAnnotation_1oyy5lt_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"104\" x=\"555\" y=\"332\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0f4r6h7\" id=\"Association_0f4r6h7_di\"\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"332\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_197xlxy\" id=\"TextAnnotation_197xlxy_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"147\" x=\"714\" y=\"341\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wid1dq\" id=\"Association_1wid1dq_di\"\u003e\u003comgdi:waypoint x=\"700\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"770\" xsi:type=\"omgdc:Point\" y=\"341\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "admin@example.com",
-      "description": "An example Workflow showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table.",
-      "export_key": "example_data_table_utils_delete_row",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646312457,
-      "name": "Example: Data Table Utils: Delete Row",
-      "object_type": "artifact",
-      "programmatic_name": "example_data_table_utils_delete_row",
-      "tags": [],
-      "uuid": "686db112-6f44-40bb-8d9a-f789b4fb5be9",
-      "workflow_id": 8
+      "workflow_id": 27
     },
     {
       "actions": [],
@@ -2104,33 +2024,153 @@
       "description": "An example Workflow showing how to use the Data Table Utils: Delete Rows Function. It uses an Artifact value to search the Data Table and find rows containing that value and then deletes those rows from the Data Table. The results will be written in an Incident note.",
       "export_key": "example_data_table_utils_delete_rows",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646311720,
+      "last_modified_time": 1651756815696,
       "name": "Example: Data Table Utils: Delete Rows",
       "object_type": "artifact",
       "programmatic_name": "example_data_table_utils_delete_rows",
       "tags": [],
       "uuid": "fa5793d9-3e18-428b-859e-3c4d517755f5",
-      "workflow_id": 3
+      "workflow_id": 30
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "example_data_table_utils_delete_rows_from_datatable",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_rows_from_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Rows from Datatable\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ckvg8u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1d15de4\" name=\"Data Table Utils: Delete Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ef4ef5c0-5de2-4fbc-90c9-f7568451da95\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if not row.dt_col_name:\\n    helper.fail(\\\"name field must contain a value\\\")\\n\\ninputs.incident_id = incident.id\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\ninputs.dt_utils_search_value = row.dt_col_name\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ckvg8u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_03gm5d9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ckvg8u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1d15de4\"/\u003e\u003cendEvent id=\"EndEvent_1t18ug2\"\u003e\u003cincoming\u003eSequenceFlow_03gm5d9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_03gm5d9\" sourceRef=\"ServiceTask_1d15de4\" targetRef=\"EndEvent_1t18ug2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1d15de4\" id=\"ServiceTask_1d15de4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"269\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ckvg8u\" id=\"SequenceFlow_1ckvg8u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1t18ug2\" id=\"EndEvent_1t18ug2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434.9815817984832\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"452.9815817984832\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03gm5d9\" id=\"SequenceFlow_03gm5d9_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"435\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 8,
+        "workflow_id": "example_data_table_utils_delete_row_from_datatable",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_row_from_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Row from Datatable\"\u003e\u003cdocumentation\u003eDelete a row from a datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ja63g4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_05odd5l\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ja63g4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0kz2way\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ja63g4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_05odd5l\"/\u003e\u003cendEvent id=\"EndEvent_0g2neqr\"\u003e\u003cincoming\u003eSequenceFlow_1jyypre\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0kz2way\" sourceRef=\"ServiceTask_05odd5l\" targetRef=\"UserTask_073qi83\"/\u003e\u003cuserTask id=\"UserTask_073qi83\" name=\"Interview key individuals\"\u003e\u003cextensionElements\u003e\u003cresilient:automaticTask programmaticName=\"interview_key_individuals\" uuid=\"2e05bff9-8d15-4424-91c1-9e50d2c78bae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kz2way\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1jyypre\u003c/outgoing\u003e\u003c/userTask\u003e\u003csequenceFlow id=\"SequenceFlow_1jyypre\" sourceRef=\"UserTask_073qi83\" targetRef=\"EndEvent_0g2neqr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_05odd5l\" id=\"ServiceTask_05odd5l_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ja63g4\" id=\"SequenceFlow_1ja63g4_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0g2neqr\" id=\"EndEvent_0g2neqr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"497\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kz2way\" id=\"SequenceFlow_0kz2way_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"365\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"311\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"UserTask_073qi83\" id=\"UserTask_073qi83_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"365\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jyypre\" id=\"SequenceFlow_1jyypre_di\"\u003e\u003comgdi:waypoint x=\"465\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"497\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"481\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 8,
+      "creator_id": "admin@example.com",
+      "description": "Delete a row from a datatable",
+      "export_key": "example_data_table_utils_delete_row_from_datatable",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652276232615,
+      "name": "Example: Data Table Utils: Delete Row from Datatable",
+      "object_type": "dt_utils_test_data_table",
+      "programmatic_name": "example_data_table_utils_delete_row_from_datatable",
+      "tags": [],
+      "uuid": "6dd89604-21a4-4456-b07a-9258f55baedb",
+      "workflow_id": 26
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "update_row",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"update_row\" isExecutable=\"true\" name=\"Example Data Utils: Update Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_00npig6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1acobvs\" name=\"Data Table Utils: Update Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77b8451e-3137-4362-840a-ac724b674b73\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Data Table Utils: Example: Update Row\\nimport java.util.Date as Date\\n\\n#######################################\\n### Define pre-processing functions ###\\n#######################################\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = [] \\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if value is None:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(key, value))\\n    \\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value == True else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      entries.append(json_entry.format(key, value))\\n\\n  return \u0027{0} {1} {2}\u0027.format(\u0027{\u0027, \u0027,\u0027.join(entries), \u0027}\u0027)\\n\\n# S T A R T\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# Refer to the existing row (value: 0)\\ninputs.dt_utils_row_id = 0\\n\\n# The column api names and the value to update the cell to\\ninputs.dt_utils_cells_to_update = dict_to_json_str({\\n  \\\"datetime\\\": Date().getTime(),\\n  \\\"text\\\": \\\"Done\\\"\\n})\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_00npig6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16wasgm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_00npig6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1acobvs\"/\u003e\u003cendEvent id=\"EndEvent_09dndei\"\u003e\u003cincoming\u003eSequenceFlow_16wasgm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16wasgm\" sourceRef=\"ServiceTask_1acobvs\" targetRef=\"EndEvent_09dndei\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1acobvs\" id=\"ServiceTask_1acobvs_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"289\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00npig6\" id=\"SequenceFlow_00npig6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09dndei\" id=\"EndEvent_09dndei_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"452\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"470\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16wasgm\" id=\"SequenceFlow_16wasgm_di\"\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"420.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "creator_id": "admin@example.com",
+      "description": "An example Workflow showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values.",
+      "export_key": "update_row",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652270692499,
+      "name": "Example Data Utils: Update Row",
+      "object_type": "dt_utils_test_data_table",
+      "programmatic_name": "update_row",
+      "tags": [],
+      "uuid": "a078edb6-1b2f-43ad-81e6-f809689ae1e1",
+      "workflow_id": 25
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "example_data_table_utils_delete_row",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pptje3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0oj7gk8\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Data Table Utils: Example: Get Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\\n\",\"pre_processing_script_language\":\"python\",\"result_name\":\"row_to_delete\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pptje3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_08hc529\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_18o72ll\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  note = u\\\"Row id: {} removed from datatable: {} for artifact: {}\\\".format(results.inputs[\u0027dt_utils_row_id\u0027], results.inputs[\u0027dt_utils_datatable_api_name\u0027], artifact.value)\\nelse:\\n  note = u\\\"Artifact: {} not found in datatable: {}\\\".format(artifact.value, results.inputs[\u0027dt_utils_datatable_api_name\u0027])\\n  \\nincident.addNote(note)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Data Table Utils: Example: Delete Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = workflow.properties.row_to_delete.inputs.dt_utils_datatable_api_name\\n\\n# The ID of the row to delete [again, taken from previous Get Row Function]\\ninputs.dt_utils_row_id = workflow.properties.row_to_delete.row[\\\"id\\\"]\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1r9312q\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_135ais0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_13jtock\"\u003e\u003cincoming\u003eSequenceFlow_135ais0\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0uv7luk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_135ais0\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"EndEvent_13jtock\"/\u003e\u003csequenceFlow id=\"SequenceFlow_08hc529\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"ExclusiveGateway_177w6e8\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1pptje3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0oj7gk8\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_177w6e8\"\u003e\u003cincoming\u003eSequenceFlow_08hc529\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1r9312q\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0uv7luk\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1r9312q\" name=\"success\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"ServiceTask_18o72ll\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"\",\"final_expression_text\":\"workflow.properties.row_to_delete.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0uv7luk\" name=\"fail\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"EndEvent_13jtock\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"\",\"final_expression_text\":\"not workflow.properties.row_to_delete.success\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_053uwhv\"\u003e\u003ctext\u003eInputs: data_table_api_name, search_column, search_value\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o1dkfq\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"TextAnnotation_053uwhv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12gmms9\"\u003e\u003ctext\u003eOutput: the data table row that contains its ID and Cells\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o7jw8z\" sourceRef=\"ServiceTask_0oj7gk8\" targetRef=\"TextAnnotation_12gmms9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_178wajp\"\u003e\u003ctext\u003eIf we find a row, continue, else end\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0n41ldu\" sourceRef=\"ExclusiveGateway_177w6e8\" targetRef=\"TextAnnotation_178wajp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1oyy5lt\"\u003e\u003ctext\u003eInputs: data_table_api_name, row_id\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0f4r6h7\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"TextAnnotation_1oyy5lt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_197xlxy\"\u003e\u003ctext\u003eOutput: a success flag if row deleted\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wid1dq\" sourceRef=\"ServiceTask_18o72ll\" targetRef=\"TextAnnotation_197xlxy\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0oj7gk8\" id=\"ServiceTask_0oj7gk8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"297\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18o72ll\" id=\"ServiceTask_18o72ll_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"621\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13jtock\" id=\"EndEvent_13jtock_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"797\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"770\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_135ais0\" id=\"SequenceFlow_135ais0_di\"\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"797\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"714\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_08hc529\" id=\"SequenceFlow_08hc529_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"394.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pptje3\" id=\"SequenceFlow_1pptje3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"247.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_177w6e8\" id=\"ExclusiveGateway_177w6e8_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"482\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"507\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1r9312q\" id=\"SequenceFlow_1r9312q_di\"\u003e\u003comgdi:waypoint x=\"532\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"41\" x=\"557\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uv7luk\" id=\"SequenceFlow_0uv7luk_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003comgdi:waypoint x=\"815\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003comgdi:waypoint x=\"815\" xsi:type=\"omgdc:Point\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"16\" x=\"653\" y=\"88\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_053uwhv\" id=\"TextAnnotation_053uwhv_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"151\" x=\"182\" y=\"51\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o1dkfq\" id=\"Association_0o1dkfq_di\"\u003e\u003comgdi:waypoint x=\"318\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"280\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12gmms9\" id=\"TextAnnotation_12gmms9_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"125\" x=\"378\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o7jw8z\" id=\"Association_0o7jw8z_di\"\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"420\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_178wajp\" id=\"TextAnnotation_178wajp_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"115\" x=\"449\" y=\"275\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0n41ldu\" id=\"Association_0n41ldu_di\"\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"507\" xsi:type=\"omgdc:Point\" y=\"275\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1oyy5lt\" id=\"TextAnnotation_1oyy5lt_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"104\" x=\"555\" y=\"332\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0f4r6h7\" id=\"Association_0f4r6h7_di\"\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"332\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_197xlxy\" id=\"TextAnnotation_197xlxy_di\"\u003e\u003comgdc:Bounds height=\"50\" width=\"147\" x=\"714\" y=\"341\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wid1dq\" id=\"Association_1wid1dq_di\"\u003e\u003comgdi:waypoint x=\"700\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"770\" xsi:type=\"omgdc:Point\" y=\"341\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "admin@example.com",
+      "description": "An example Workflow showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table.",
+      "export_key": "example_data_table_utils_delete_row",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652271360164,
+      "name": "Example: Data Table Utils: Delete Row",
+      "object_type": "artifact",
+      "programmatic_name": "example_data_table_utils_delete_row",
+      "tags": [],
+      "uuid": "686db112-6f44-40bb-8d9a-f789b4fb5be9",
+      "workflow_id": 29
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "example_data_table_utils_get_row",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_get_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Get Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1s0htur\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ofe1w4\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"post_processing_script\":\"search_value = results.inputs[\\\"dt_utils_search_value\\\"]\\nnote_text = u\\\"\u0026lt;b\u0026gt;Result from Example: Data Table Utils: Get Row\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt; search value: {0}\\\".format(search_value) \\nif results.success:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;{1}\\\".format(note_text, str(results[\\\"row\\\"]))\\nelse:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;No row found.\\\".format(note_text)\\n\\nincident.addNote(helper.createRichText(note_text))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Data Table Utils: Example: Get Row\\n\\n#####################\\n### Define Inputs ###\\n#####################\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\\n\",\"result_name\":\"curtinoutput\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1s0htur\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1trskjl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1hda6wv\"\u003e\u003cincoming\u003eSequenceFlow_1trskjl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1trskjl\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"EndEvent_1hda6wv\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1s0htur\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ofe1w4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1mjy1cb\"\u003e\u003ctext\u003eInputs: data_table_api_name, search_column, search_value\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_06hw6vm\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"TextAnnotation_1mjy1cb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0jvzp3u\"\u003e\u003ctext\u003eOutput: the data table row that contains its ID and Cells\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1fgbieg\" sourceRef=\"ServiceTask_1ofe1w4\" targetRef=\"TextAnnotation_0jvzp3u\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"115\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"110\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ofe1w4\" id=\"ServiceTask_1ofe1w4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"276\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1hda6wv\" id=\"EndEvent_1hda6wv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"460\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"478\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1trskjl\" id=\"SequenceFlow_1trskjl_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"460\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s0htur\" id=\"SequenceFlow_1s0htur_di\"\u003e\u003comgdi:waypoint x=\"151\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"168.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1mjy1cb\" id=\"TextAnnotation_1mjy1cb_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"143\" x=\"116\" y=\"93\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_06hw6vm\" id=\"Association_06hw6vm_di\"\u003e\u003comgdi:waypoint x=\"276\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"239\" xsi:type=\"omgdc:Point\" y=\"154\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0jvzp3u\" id=\"TextAnnotation_0jvzp3u_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"149\" x=\"459\" y=\"91\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1fgbieg\" id=\"Association_1fgbieg_di\"\u003e\u003comgdi:waypoint x=\"376\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"150\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "creator_id": "admin@example.com",
+      "description": "An example Workflow showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table.",
+      "export_key": "example_data_table_utils_get_row",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652270692801,
+      "name": "Example: Data Table Utils: Get Row",
+      "object_type": "artifact",
+      "programmatic_name": "example_data_table_utils_get_row",
+      "tags": [],
+      "uuid": "e6404900-768c-49e3-b5d1-b172d35a2113",
+      "workflow_id": 28
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "example_data_table_utils_delete_rows_from_datatable",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_delete_rows_from_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Delete Rows from Datatable\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ckvg8u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1d15de4\" name=\"Data Table Utils: Delete Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ef4ef5c0-5de2-4fbc-90c9-f7568451da95\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if not row.dt_col_name:\\n  helper.fail(\\\"The data table column \u0027name\u0027 must contain a value\\\")\\n\\ninputs.incident_id = incident.id\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\ninputs.dt_utils_search_value = row.dt_col_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ckvg8u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_03gm5d9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ckvg8u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1d15de4\"/\u003e\u003cendEvent id=\"EndEvent_1t18ug2\"\u003e\u003cincoming\u003eSequenceFlow_03gm5d9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_03gm5d9\" sourceRef=\"ServiceTask_1d15de4\" targetRef=\"EndEvent_1t18ug2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1d15de4\" id=\"ServiceTask_1d15de4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"269\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ckvg8u\" id=\"SequenceFlow_1ckvg8u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"269\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1t18ug2\" id=\"EndEvent_1t18ug2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434.9815817984832\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"452.9815817984832\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_03gm5d9\" id=\"SequenceFlow_03gm5d9_di\"\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"435\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
       "creator_id": "admin@example.com",
       "description": "",
       "export_key": "example_data_table_utils_delete_rows_from_datatable",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646311576,
+      "last_modified_time": 1652271687977,
       "name": "Example: Data Table Utils: Delete Rows from Datatable",
       "object_type": "dt_utils_test_data_table",
       "programmatic_name": "example_data_table_utils_delete_rows_from_datatable",
       "tags": [],
       "uuid": "6539208d-0878-4e0e-a4d4-0da7e680ce19",
-      "workflow_id": 2
+      "workflow_id": 31
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_data_table_utils_get_current_row",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_get_current_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Get Current Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0xlivfe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ln9onu\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"post_processing_script\":\"search_value = results.inputs[\\\"dt_utils_search_value\\\"]\\nnote_text = u\\\"\u0026lt;b\u0026gt;Result from Example: Data Table Utils: Get Row\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt; search value: {0}\\\".format(search_value) \\nif results.success:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;{1}\\\".format(note_text, str(results[\\\"row\\\"]))\\nelse:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;No row found.\\\".format(note_text)\\n\\nincident.addNote(helper.createRichText(note_text))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0xlivfe\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0l8inf3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xlivfe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ln9onu\"/\u003e\u003cendEvent id=\"EndEvent_0blnyk1\"\u003e\u003cincoming\u003eSequenceFlow_0l8inf3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0l8inf3\" sourceRef=\"ServiceTask_1ln9onu\" targetRef=\"EndEvent_0blnyk1\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ln9onu\" id=\"ServiceTask_1ln9onu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xlivfe\" id=\"SequenceFlow_0xlivfe_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0blnyk1\" id=\"EndEvent_0blnyk1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"403\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"421\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l8inf3\" id=\"SequenceFlow_0l8inf3_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"375\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "creator_id": "admin@example.com",
+      "description": "An example Workflow showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable",
+      "export_key": "example_data_table_utils_get_current_row",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652270693344,
+      "name": "Example: Data Table Utils: Get Current Row",
+      "object_type": "dt_utils_test_data_table",
+      "programmatic_name": "example_data_table_utils_get_current_row",
+      "tags": [],
+      "uuid": "c2871c5a-1e0f-421e-b2af-02bc4a00c42e",
+      "workflow_id": 34
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 12,
+        "workflow_id": "example_create_csv_datatable",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_csv_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Create CSV Datatable\"\u003e\u003cdocumentation\u003eTake CVS data and add the results to a named datatable. Results of the function are written to an incident note.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_0pa0hsb\"\u003e\u003coutgoing\u003eSequenceFlow_0lumpz7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1glg38k\" name=\"Data Table Utils: Create CSV Data...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6edc80c4-e5ae-4c33-b1f1-f0c101918d7a\"\u003e{\"inputs\":{\"ea2dc835-7451-4386-abae-73634223d991\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  note_text = u\\\"\\\"\\\"Results from Data Table Utils: Create CSV Datatable\\\\nData Source: {0}\\\\nRows added: {1}\\\\nRows not added: {2}\\\"\\\"\\\".format( results.content.data_source, results.content.rows_added, results.content.rows_with_errors )\\n  incident.addNote(note_text)\\nelse:\\n  incident.addNote(u\\\"Error: Failed to add rows\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Data Table Utils: Example: CSV Table\\n#####################\\n### Define Inputs ###\\n#####################\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n# The api name of the Data Table to update\\ninputs.dt_datable_name = \\\"dt_utils_test_data_table\\\"\\n# uncomment attachment_id when reading csv data from an attachmennt\\ninputs.attachment_id = attachment.id\\n\\n# The CSV data. Use either dt_csv_data or attachment_id\\n# data = u\\\"\\\"\\\"hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra \\n# 18023,\\\"summary \u4e2d\u56fd\u4eba\\\",yes,6/6/20 8:12,3,\\\"a, b\\\",\u4e2d\\\"\\\"\\\"\\n# data_no_headers = u\\\"\\\"\\\"18023,\\\"summary \u4e2d\u56fd\u4eba\\\",yes,6/6/20 8:12,3,\\\"a, b\\\",\u4e2d,x,y,z\\\"\\\"\\\"\\n# inputs.dt_csv_data = data\\n# A boolean to determine if CSV headers are present\\ninputs.dt_has_headers = True\\n\\n## The mapping format should be \\\"cvs_header\\\":\\\"dt_column_name\\\"\\nmapping = {\\n  \\\"hdr_number\\\": \\\"number\\\",\\n  \\\"hdr_text\\\": \\\"text\\\",\\n  \\\"hdr_boolean\\\": \\\"boolean\\\",\\n  \\\"hdr_datetime\\\": \\\"datetime\\\",\\n  \\\"hdr_select\\\": \\\"select\\\",\\n  \\\"hdr_multiselect\\\": \\\"multi_select\\\"\\n}\\n# mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column\\nmapping_no_headers = [\\\"number\\\",\\\"text\\\",\\\"boolean\\\",\\\"datetime\\\",\\\"select\\\",\\\"multi_select\\\",\\\"x\\\",\\\"y\\\",\\\"z\\\"]\\ninputs.dt_mapping_table = mapping\\n# year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z\u0027\\ninputs.dt_date_time_format = \\\"%m/%d/%y %H:%M\\\"\\n# optional start row csv data. The first data row = 1\\n##inputs.dt_start_row = 0\\n# optional max number of csv rows to add relative to dt_start_row\\n##inputs.dt_max_rows = 5\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lumpz7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13wtfwl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lumpz7\" sourceRef=\"StartEvent_0pa0hsb\" targetRef=\"ServiceTask_1glg38k\"/\u003e\u003cendEvent id=\"EndEvent_0214dvu\"\u003e\u003cincoming\u003eSequenceFlow_13wtfwl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13wtfwl\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"EndEvent_0214dvu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_057c9ze\"\u003e\u003ctext\u003e\u003c![CDATA[Input:\ncvs file with mapping information\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02h3xuq\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"TextAnnotation_057c9ze\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0c1wjn8\"\u003e\u003ctext\u003e\u003c![CDATA[\nOutput:\nDatatable row is created\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ultasz\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"TextAnnotation_0c1wjn8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_0pa0hsb\" id=\"StartEvent_0pa0hsb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"406\" y=\"127\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"379\" y=\"166\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1glg38k\" id=\"ServiceTask_1glg38k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"535\" y=\"105\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lumpz7\" id=\"SequenceFlow_0lumpz7_di\"\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003comgdi:waypoint x=\"535\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"443.5\" y=\"123.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0214dvu\" id=\"EndEvent_0214dvu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"127\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"699\" y=\"166\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13wtfwl\" id=\"SequenceFlow_13wtfwl_di\"\u003e\u003comgdi:waypoint x=\"635\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003comgdi:waypoint x=\"726\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635.5\" y=\"123.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_057c9ze\" id=\"TextAnnotation_057c9ze_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"156\" x=\"391\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02h3xuq\" id=\"Association_02h3xuq_di\"\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"105\"/\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"61\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0c1wjn8\" id=\"TextAnnotation_0c1wjn8_di\"\u003e\u003comgdc:Bounds height=\"75\" width=\"152\" x=\"668\" y=\"-13\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ultasz\" id=\"Association_1ultasz_di\"\u003e\u003comgdi:waypoint x=\"630\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"62\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 12,
+      "creator_id": "admin@example.com",
+      "description": "Take CVS data and add the results to a named datatable. Results of the function are written to an incident note.",
+      "export_key": "example_create_csv_datatable",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1652276547422,
+      "name": "Example: Data Table Utils: Create CSV Datatable",
+      "object_type": "attachment",
+      "programmatic_name": "example_create_csv_datatable",
+      "tags": [],
+      "uuid": "6564ccbf-868a-40c5-826c-422962be394f",
+      "workflow_id": 33
     },
     {
       "actions": [],
@@ -2144,53 +2184,13 @@
       "description": "An example Workflow showing how to use the Data Table Utils: Get Rows Function. It uses an Artifact value to search the Data Table and find rows containing that value and then deletes those rows from the Data Table. The results will be written in an Incident note.",
       "export_key": "example_data_table_utils_get_rows",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648647023977,
+      "last_modified_time": 1652270693093,
       "name": "Example: Data Table Utils: Get Rows",
       "object_type": "artifact",
       "programmatic_name": "example_data_table_utils_get_rows",
       "tags": [],
       "uuid": "6d10d2f4-78c8-4f66-a0fe-516467d75eb2",
-      "workflow_id": 7
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "example_create_csv_datatable",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_csv_datatable\" isExecutable=\"true\" name=\"Example: Data Table Utils: Create CSV Datatable\"\u003e\u003cdocumentation\u003eTake CVS data and add the results to a named datatable. Results of the function are written to an incident note.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_0pa0hsb\"\u003e\u003coutgoing\u003eSequenceFlow_0lumpz7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1glg38k\" name=\"Data Table Utils: Create CSV Data...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6edc80c4-e5ae-4c33-b1f1-f0c101918d7a\"\u003e{\"inputs\":{\"ea2dc835-7451-4386-abae-73634223d991\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"if results.success:\\n  note_text = u\\\"\\\"\\\"Results from Data Table Utils: Create CSV Datatable\\\\nData Source: {0}\\\\nRows added: {1}\\\\nRows not added: {2}\\\"\\\"\\\".format( results.content.data_source, results.content.rows_added, results.content.rows_with_errors )\\n  incident.addNote(note_text)\\nelse:\\n  incident.addNote(u\\\"Error: Failed to add rows\\\")\",\"pre_processing_script\":\"# Data Table Utils: Example: CSV Table\\n#####################\\n### Define Inputs ###\\n#####################\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n# The api name of the Data Table to update\\ninputs.dt_datable_name = \\\"dt_utils_test_data_table\\\"\\n# uncomment attachment_id when reading csv data from an attachmennt\\n##inputs.attachment_id = attachment.id\\n\\n# The CSV data. Use either dt_csv_data or attachment_id\\ndata = u\\\"\\\"\\\"hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra \\n18023,\\\"summary \u4e2d\u56fd\u4eba\\\",yes,6/6/20 8:12,3,\\\"a, b\\\",\u4e2d\\\"\\\"\\\"\\ndata_no_headers = u\\\"\\\"\\\"18023,\\\"summary \u4e2d\u56fd\u4eba\\\",yes,6/6/20 8:12,3,\\\"a, b\\\",\u4e2d,x,y,z\\\"\\\"\\\"\\ninputs.dt_csv_data = data\\n# A boolean to determine if CSV headers are present\\ninputs.dt_has_headers = True\\n\\n## The mapping format should be \\\"cvs_header\\\":\\\"dt_column_name\\\"\\nmapping = \u0027\u0027\u0027{\\n  \\\"hdr_number\\\": \\\"number\\\",\\n  \\\"hdr_text\\\": \\\"text\\\",\\n  \\\"hdr_boolean\\\": \\\"boolean\\\",\\n  \\\"hdr_datetime\\\": \\\"datetime\\\",\\n  \\\"hdr_select\\\": \\\"select\\\",\\n  \\\"hdr_multiselect\\\": \\\"multi_select\\\"\\n}\u0027\u0027\u0027\\n# mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column\\nmapping_no_headers = \u0027\u0027\u0027[\\\"number\\\",\\\"text\\\",\\\"boolean\\\",\\\"datetime\\\",\\\"select\\\",\\\"multi_select\\\",\\\"x\\\",\\\"y\\\",\\\"z\\\"]\u0027\u0027\u0027\\ninputs.dt_mapping_table = mapping\\n# year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z\u0027\\ninputs.dt_date_time_format = \\\"%m/%d/%y %H:%M\\\"\\n# optional start row csv data. The first data row = 1\\n##inputs.dt_start_row = 0\\n# optional max number of csv rows to add relative to dt_start_row\\n##inputs.dt_max_rows = 5\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lumpz7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13wtfwl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lumpz7\" sourceRef=\"StartEvent_0pa0hsb\" targetRef=\"ServiceTask_1glg38k\"/\u003e\u003cendEvent id=\"EndEvent_0214dvu\"\u003e\u003cincoming\u003eSequenceFlow_13wtfwl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13wtfwl\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"EndEvent_0214dvu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_057c9ze\"\u003e\u003ctext\u003e\u003c![CDATA[Input:\ncvs file with mapping information\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02h3xuq\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"TextAnnotation_057c9ze\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0c1wjn8\"\u003e\u003ctext\u003e\u003c![CDATA[\nOutput:\nDatatable row is created\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ultasz\" sourceRef=\"ServiceTask_1glg38k\" targetRef=\"TextAnnotation_0c1wjn8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_0pa0hsb\" id=\"StartEvent_0pa0hsb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"406\" y=\"127\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"379\" y=\"166\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1glg38k\" id=\"ServiceTask_1glg38k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"535\" y=\"105\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lumpz7\" id=\"SequenceFlow_0lumpz7_di\"\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003comgdi:waypoint x=\"535\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"443.5\" y=\"123.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0214dvu\" id=\"EndEvent_0214dvu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"127\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"699\" y=\"166\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13wtfwl\" id=\"SequenceFlow_13wtfwl_di\"\u003e\u003comgdi:waypoint x=\"635\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003comgdi:waypoint x=\"726\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635.5\" y=\"123.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_057c9ze\" id=\"TextAnnotation_057c9ze_di\"\u003e\u003comgdc:Bounds height=\"73\" width=\"156\" x=\"391\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02h3xuq\" id=\"Association_02h3xuq_di\"\u003e\u003comgdi:waypoint x=\"547\" xsi:type=\"omgdc:Point\" y=\"105\"/\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"61\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0c1wjn8\" id=\"TextAnnotation_0c1wjn8_di\"\u003e\u003comgdc:Bounds height=\"75\" width=\"152\" x=\"668\" y=\"-13\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ultasz\" id=\"Association_1ultasz_di\"\u003e\u003comgdi:waypoint x=\"630\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"62\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "creator_id": "admin@example.com",
-      "description": "Take CVS data and add the results to a named datatable. Results of the function are written to an incident note.",
-      "export_key": "example_create_csv_datatable",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648646312003,
-      "name": "Example: Data Table Utils: Create CSV Datatable",
-      "object_type": "attachment",
-      "programmatic_name": "example_create_csv_datatable",
-      "tags": [],
-      "uuid": "6564ccbf-868a-40c5-826c-422962be394f",
-      "workflow_id": 5
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 5,
-        "workflow_id": "example_data_table_utils_get_current_row",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_data_table_utils_get_current_row\" isExecutable=\"true\" name=\"Example: Data Table Utils: Get Current Row\"\u003e\u003cdocumentation\u003eAn example Workflow showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0xlivfe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ln9onu\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"post_processing_script\":\"search_value = results.inputs[\\\"dt_utils_search_value\\\"]\\nnote_text = u\\\"\u0026lt;b\u0026gt;Result from Example: Data Table Utils: Get Row\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt; search value: {0}\\\".format(search_value) \\nif results.success:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;{1}\\\".format(note_text, str(results[\\\"row\\\"]))\\nelse:\\n  note_text = u\\\"{0} \u0026lt;br\u0026gt;No row found.\\\".format(note_text)\\n\\nincident.addNote(helper.createRichText(note_text))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0xlivfe\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0l8inf3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xlivfe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ln9onu\"/\u003e\u003cendEvent id=\"EndEvent_0blnyk1\"\u003e\u003cincoming\u003eSequenceFlow_0l8inf3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0l8inf3\" sourceRef=\"ServiceTask_1ln9onu\" targetRef=\"EndEvent_0blnyk1\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ln9onu\" id=\"ServiceTask_1ln9onu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xlivfe\" id=\"SequenceFlow_0xlivfe_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0blnyk1\" id=\"EndEvent_0blnyk1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"403\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"421\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l8inf3\" id=\"SequenceFlow_0l8inf3_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"403\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"375\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 5,
-      "creator_id": "admin@example.com",
-      "description": "An example Workflow showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable",
-      "export_key": "example_data_table_utils_get_current_row",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1648648660586,
-      "name": "Example: Data Table Utils: Get Current Row",
-      "object_type": "dt_utils_test_data_table",
-      "programmatic_name": "example_data_table_utils_get_current_row",
-      "tags": [],
-      "uuid": "c2871c5a-1e0f-421e-b2af-02bc4a00c42e",
-      "workflow_id": 10
+      "workflow_id": 32
     }
   ],
   "workspaces": []

@@ -5,21 +5,10 @@
 
 from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, validate_search_inputs
-from resilient_lib import validate_fields
+from fn_datatable_utils.util.helper import RESDatatable, validate_search_inputs, PACKAGE_NAME
+from resilient_lib import validate_fields, ResultPayload
 
 LOG = getLogger(__name__)
-
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.rows_ids = None
-
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'dt_utils_delete_rows''"""
@@ -48,37 +37,34 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
-            inputs = {
-                "incident_id": kwargs.get("incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": kwargs.get("dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_rows_ids": kwargs.get("dt_utils_rows_ids"),  # text (optional)
-                "dt_utils_search_column": kwargs.get("dt_utils_search_column"),  # text (optional)
-                "dt_utils_search_value": kwargs.get("dt_utils_search_value"), # text (optional)
-                "dt_utils_delete_all_rows": bool(kwargs.get("dt_utils_delete_all_rows", False)), # bool (optional)
-            }
+            incident_id = kwargs.get("incident_id"),  # number (required)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name"),  # text (required)
+            dt_utils_rows_ids = kwargs.get("dt_utils_rows_ids"),  # text (optional)
+            dt_utils_search_column = kwargs.get("dt_utils_search_column"),  # text (optional)
+            dt_utils_search_value = kwargs.get("dt_utils_search_value"), # text (optional)
+            dt_utils_delete_all_rows = bool(kwargs.get("dt_utils_delete_all_rows", False)), # bool (optional)
 
-            LOG.info("incident_id: {}".format(inputs["incident_id"]))
-            LOG.info("dt_utils_datatable_api_name: {}".format(inputs["dt_utils_datatable_api_name"]))
-            LOG.info("dt_utils_rows_ids: {}".format(inputs["dt_utils_rows_ids"]))
-            LOG.info("dt_utils_search_column: {}".format(inputs["dt_utils_search_column"]))
-            LOG.info(u"dt_utils_search_value: {}".format(inputs["dt_utils_search_value"]))
-            LOG.info(u"dt_utils_delete_all_rows: {}".format(inputs["dt_utils_delete_all_rows"]))
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+            LOG.info("dt_utils_rows_ids: %s", dt_utils_rows_ids)
+            LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+            LOG.info(u"dt_utils_search_value: %s", dt_utils_search_value)
+            LOG.info(u"dt_utils_delete_all_rows: %s", dt_utils_delete_all_rows)
 
             # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
-                                                         search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"],
+            valid_search_inputs = validate_search_inputs(rows_ids=dt_utils_rows_ids,
+                                                         search_column=dt_utils_search_column,
+                                                         search_value=dt_utils_search_value,
                                                          search_criteria_required=False)
 
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
 
             # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"],
-                                     payload.inputs["dt_utils_datatable_api_name"])
+            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(wf_instance_id)
@@ -87,15 +73,15 @@ class FunctionComponent(ResilientComponent):
             # Get the data table data
             datatable.get_data()
 
-            deleted_rows = datatable.delete_rows(payload.inputs["dt_utils_rows_ids"],
-                                                 payload.inputs["dt_utils_search_column"],
-                                                 payload.inputs["dt_utils_search_value"],
-                                                 payload.inputs["dt_utils_delete_all_rows"],
+            deleted_rows = datatable.delete_rows(dt_utils_rows_ids,
+                                                 dt_utils_search_column,
+                                                 dt_utils_search_value,
+                                                 dt_utils_delete_all_rows,
                                                  row_id,
                                                  wf_instance_id)
 
-            payload.success = False
             if not deleted_rows:
+                results = rp.done(False, None)
                 yield StatusMessage("No row(s) found.")
 
             elif "error" in deleted_rows:
@@ -104,10 +90,8 @@ class FunctionComponent(ResilientComponent):
 
             else:
                 yield StatusMessage("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
-                payload.rows_ids = deleted_rows
-                payload.success = True
-
-            results = payload.as_dict()
+                results = rp.done(True, None)
+                results["rows_ids"] = deleted_rows
 
             LOG.info("Complete")
             yield StatusMessage("Finished 'dt_utils_delete_rows' that was running in workflow '{}'".format(wf_instance_id))

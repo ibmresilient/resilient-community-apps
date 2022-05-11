@@ -11,7 +11,7 @@
 `dt_utils_delete_row`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_datatable_utils`

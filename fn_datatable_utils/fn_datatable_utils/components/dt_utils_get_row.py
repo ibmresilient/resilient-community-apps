@@ -4,22 +4,11 @@
 """Function implementation"""
 
 from logging import getLogger
-from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable
+from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable, PACKAGE_NAME
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload
 
 LOG = getLogger(__name__)
-
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.row = None
-
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'dt_utils_get_row"""
@@ -48,35 +37,39 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
-            inputs = {
-                "incident_id": kwargs.get("incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": kwargs.get("dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": kwargs.get("dt_utils_row_id"),  # number (optional)
-                "dt_utils_search_column": kwargs.get("dt_utils_search_column"),  # text (optional)
-                "dt_utils_search_value": kwargs.get("dt_utils_search_value"),  # text (optional)
-            }
+            incident_id = kwargs.get("incident_id"),  # number (required)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name"),  # text (required)
+            dt_utils_row_id = kwargs.get("dt_utils_row_id"),  # number (optional)
+            dt_utils_search_column = kwargs.get("dt_utils_search_column"),  # text (optional)
+            dt_utils_search_value = kwargs.get("dt_utils_search_value"),  # text (optional)
+
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+            LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
+            LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+            LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
 
             # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+            rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
+            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(wf_instance_id)
 
             # If the dt_utils_row_id given is 0 and row_id does not exist the validate will fail
-            if inputs["dt_utils_row_id"] == 0:
+            if dt_utils_row_id == 0:
                 if not row_id:
                     raise ValueError("Run the workflow from a datatable to get the current row_id.")
 
                 LOG.info("Using current row_id: %s", row_id)
                 # dt_utils_row_id will equal the datatable row_id the function was used on
-                inputs["dt_utils_row_id"] = row_id
+                dt_utils_row_id = row_id
 
             # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(row_id=inputs["dt_utils_row_id"],
-                                                         search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"])
+            valid_search_inputs = validate_search_inputs(row_id=dt_utils_row_id,
+                                                         search_column=dt_utils_search_column,
+                                                         search_value=dt_utils_search_value)
 
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
@@ -87,21 +80,19 @@ class FunctionComponent(ResilientComponent):
             datatable.get_data()
 
             # Get the row
-            row = datatable.get_row(payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"])
+            row = datatable.get_row(dt_utils_row_id, dt_utils_search_column, dt_utils_search_value)
 
             # If no row found, create a log and set success to False
             if not row:
                 yield StatusMessage(u"No row found in {} for: search_column: {}, search_value: {}".format(
-                    datatable.api_name, payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
-                payload.success = False
+                    datatable.api_name, dt_utils_search_column, dt_utils_search_value))
+                results = rp.done(False, None)
             # Else, set the row in the payload
             else:
                 yield StatusMessage(u"Row found in {}. row_id: {}, search_column: {}, search_value: {}".format(
-                    datatable.api_name, row["id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
-                payload.success = True
-                payload.row = row
-
-            results = payload.as_dict()
+                    datatable.api_name, row["id"], dt_utils_search_column, dt_utils_search_value))
+                results = rp.done(True, None)
+                results["row"] = row
 
             LOG.info("Complete")
             yield StatusMessage("Finished 'dt_utils_get_row' that was running in workflow '{}'".format(wf_instance_id))

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the SOAR customizations required for fn_datatable_utils"""
+"""Generate the Resilient customizations required for fn_datatable_utils"""
 
 import base64
 import os

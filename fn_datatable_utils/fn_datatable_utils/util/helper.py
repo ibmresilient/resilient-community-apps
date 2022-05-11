@@ -9,6 +9,7 @@ from time import sleep
 from cachetools import cached, LRUCache
 from resilient_lib import get_workflow_status
 
+PACKAGE_NAME = "fn_datatable_utils"
 DATATABLE_TYPE = 8
 LOG = getLogger(__name__)
 
