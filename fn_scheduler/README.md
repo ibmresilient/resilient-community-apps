@@ -31,6 +31,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+  - [Supported Scheduled Rules/Playbooks](#supported-scheduled-rulesplaybooks)
 - [Function - Scheduled Rule Create](#function---scheduled-rule-create)
 - [Function - Modify Scheduled Job](#function---scheduled-rule-modify)
 - [Function - Scheduled Rule List](#function---scheduled-rule-list)
@@ -50,7 +51,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0   | May  2022 | Support for Playbooks |
+| 2.0.0   | May  2022 | Support for Playbooks. Added support for Datatables |
 | 1.1.2   | Feb. 2022 | Use ``APScheduler < 3.9`` if ``Python Version < 3.6`` |
 | 1.1.1   | Aug. 2021 | remove SOAR credentials from saved rules in db |
 | 1.1.0   | Apr. 2021 | app.config setting for optional note creation |
@@ -189,6 +190,35 @@ The following table provides the settings you need to configure the app. These s
 A datatable is used to display scheduled rules/playbook and to take actions such as pause, resume and remove a scheduled job. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
 
 ---
+
+### Supported Scheduled Rules/Playbooks
+Scheduled rules/playbooks are possible for:
+* incidents
+* artifacts
+* tasks
+* attachments (not pre-packaged)
+* datatables (not pre_packaged)
+
+When creating a rule to schedule for an attachment, set the following field in the pre-processing script:
+```
+inputs.object_id = attachment.id
+```
+
+When creating a fule to schedule for a given datatable, the pre-processing script will look like this (assuming you're using rule activity fields)
+
+```
+inputs.scheduler_type = rule.properties.schedule_type
+if rule.properties.schedule_type == 'date':
+  # date format converted to use dashes
+  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace("/", "-")
+else:
+  inputs.scheduler_type_value = rule.properties.schedule_type_value
+inputs.scheduler_rule_name = rule.properties.schedule_rule_name
+inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
+inputs.scheduler_label_prefix = rule.properties.schedule_label_prefix
+inputs.incident_id = incident.id
+inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
+```
 
 ## Function - Scheduled Rule Create
 Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.

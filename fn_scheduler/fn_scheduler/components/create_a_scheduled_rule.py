@@ -51,11 +51,16 @@ class FunctionComponent(ResilientComponent):
             # A future change to resilient is needed to allow this natively. Presently, supplying this information manually is needed
             row_id = kwargs.get("row_id") # number
 
-            if row_id:
-                object_id = event.message["workflow"]["object_type"]['id']
+            # get the rule id
+            rest_client = self.rest_client()
 
-            object_type_id = event.message["workflow"]["object_type"]['id']
-            object_type_name = event.message["workflow"]["object_type"]['name']
+            object_type_id = event.message["workflow"]["object_type"]["id"]
+            object_type_name = event.message["workflow"]["object_type"]["name"]
+
+            # datatable?
+            if object_type_id >= 1000:
+                object_id = object_type_id
+                row_id = get_row_id_from_workflow(rest_client, event.message["workflow_instance"]["workflow_instance_id"])
 
             scheduler_label_prefix = "{}-{}".format(scheduler_label_prefix, incident_id)
 
@@ -69,9 +74,8 @@ class FunctionComponent(ResilientComponent):
             LOG.info("incident_id: %s", incident_id)
             LOG.info("object_id: %s", object_id)
             LOG.info("row_id: %s", row_id)
-
-            # get the rule id
-            rest_client = self.rest_client()
+            LOG.info("object_type_id: %s", object_id)
+            LOG.info("object_type_name: %s", object_type_name)
 
             # make sure incident isn't closed
             resp = get_incident(rest_client, incident_id)
@@ -90,6 +94,11 @@ class FunctionComponent(ResilientComponent):
 
             if object_type_id != rule_object_type_id:
                 raise ValueError(u"Rule/Playbook does not match the action object: %s", object_type_name)
+
+            # validate that the rule is enabled for the object (incident, artifact, etc.)
+            if not validate_actions(rest_client, incident_id, object_id,
+                                    object_type_name, row_id, scheduler_rule_name):
+                raise ValueError("Rule/Playbook '%s' for this %s not found or not enabled", scheduler_rule_name, object_type_name)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
@@ -127,3 +136,69 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+def get_row_id_from_workflow(rest_client, workflow_instance_id):
+    """
+    Get row information from the workflow instance
+
+    Args:
+        workflow_instance_id (int):
+
+    Returns:
+        int: row_id or None if error or datatype is not a datatable
+    """
+    uri = "/workflow_instances/{}".format(workflow_instance_id)
+    try:
+        response = rest_client.get(uri)
+
+        # determine if we have a custom object type and it's a datatable
+        if response['object']['type_id'] >= 1000:
+            return response['object']['object_id']
+
+    except Exception as err:
+        LOG.error("Error with url: %s %s", uri, str(err))
+
+    return None
+
+def validate_actions(rest_client, incident_id, object_id, \
+                     object_type_name, row_id, scheduler_rule_name):
+    """read the object and make sure the rule/playbook is active for it
+
+    Args:
+        rest_client (obj): make api calls back to SOAR
+        incident_id (int): incident id
+        object_id (int): object id, such as an artifact_id
+        object_type_name (str): name of object for the rule/playbook: incident, artifact, task, etc.
+        row_id (int): if the object is a datatable, then row_id will point to the row
+        scheduler_rule_name (str): name of rule/playbook
+    """
+    if object_type_name == "incident":
+        url = "/incidents/{}".format(incident_id)
+    elif object_type_name == "artifact":
+        url = "/incidents/{}/artifacts/{}".format(incident_id, object_id)
+    elif object_type_name == "task":
+        url = "/tasks/{}".format(object_id)
+    elif object_type_name == "attachment":
+        url = "/incidents/{}/attachments/{}".format(incident_id, object_id)
+    elif object_id >= 1000:
+        url = "/incidents/{}/table_data/{}".format(incident_id, object_id)
+    else:
+        raise ValueError("This type of rule/playbook is not yet supported: {}", object_type_name)
+
+    results = rest_client.get(url)
+
+    # find the actions for a given row
+    actions = []
+    if row_id:
+        for row in results['rows']:
+            if row['id'] == row_id:
+                actions = row.get('actions', [])
+    else:
+        actions = results.get('actions', [])
+
+    LOG.debug(results)
+    for action in actions:
+        if action['name'] == scheduler_rule_name and action['enabled']:
+            return True
+
+    return False
