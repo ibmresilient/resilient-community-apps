@@ -7,12 +7,17 @@ import logging
 import base64
 import re
 import requests
+from retry import retry
 
 from resilient_lib import RequestsCommon
 from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
+
+class AuthenticationError(Exception):
+    """Trap authentication errors for reauthenticating"""
+    pass
 
 class RxClient():
     """ Class to support Extrahop Reveal(x) api.
@@ -60,6 +65,7 @@ class RxClient():
             "networks":          "/".join([self.api_base_url, "networks"])
         }
         self.rc = RequestsCommon(opts=opts, function_opts=fn_opts)
+        self.refresh_header = True
         if fn_opts.get("extrahop_rx_key_id"):
             # Connection to Cloud-based service.
             self._headers = {"Authorization": "Bearer " + self.get_token()}
@@ -82,8 +88,9 @@ class RxClient():
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        r = self.rc.execute_call_v2("post", uri, headers=headers, data="grant_type=client_credentials",
-                                    verify=self.verify)
+        self.refresh_header = False
+
+        r = self.api_call("post", uri, headers=headers, data="grant_type=client_credentials")
 
         return r.json()["access_token"]
 
@@ -117,7 +124,7 @@ class RxClient():
             params["search_type"] = search_type if offset else "any"
             params["value"] = value
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers, params=params)
 
         return r
 
@@ -148,7 +155,7 @@ class RxClient():
         data["limit"] = int(limit) if limit else None
         data["offset"] = int(offset) if offset else None
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -170,7 +177,7 @@ class RxClient():
         if detection_id is not None:
             uri = uri + "/{}".format(detection_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers, params=params)
 
         return r
 
@@ -227,7 +234,7 @@ class RxClient():
         if update_time:
             data["update_time"] = int(update_time)
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -274,7 +281,7 @@ class RxClient():
         if plan_status == 'C':
             data["resolution"] = resolution_map[resolution_id]
 
-        r = self.rc.execute_call_v2("patch", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("patch", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -293,7 +300,7 @@ class RxClient():
         if tag_id is not None:
             uri = self._endpoints["tags"].format(tag_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers)
 
         return r
 
@@ -313,7 +320,7 @@ class RxClient():
 
         data = {"name": tag_name}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -340,7 +347,7 @@ class RxClient():
 
         data = {"assign": device_ids}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -353,7 +360,7 @@ class RxClient():
         """
         uri = self._endpoints["watchlist"]
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers)
 
         return r
 
@@ -377,7 +384,7 @@ class RxClient():
             unassign_ids = [int(v) for v in list(filter(None, re.split(r"\s+|,|\n", unassign)))]
             data = {"unassign": unassign_ids}
 
-        r = self.rc.execute_call_v2("post", uri, headers=self._headers, data=json.dumps(data), verify=self.verify)
+        r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 
@@ -395,7 +402,7 @@ class RxClient():
         if activitymap_id is not None:
             uri = self._endpoints["activitymaps"].format(activitymap_id)
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers)
 
         return r
 
@@ -443,7 +450,7 @@ class RxClient():
         if port2:
             params["port2"] = port2
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, params=params, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers, params=params)
 
         return r
 
@@ -458,9 +465,54 @@ class RxClient():
         # Set default uri
         uri = self._endpoints["networks"]
 
-        r = self.rc.execute_call_v2("get", uri, headers=self._headers, verify=self.verify)
+        r = self.api_call("get", uri, headers=self._headers)
 
         return r.json()
+
+    def callback(self, response):
+        """ Callback needed for certain REST API call errors.
+
+        :param response:
+        :return: response or raise error for selected error codes
+        """
+        if response.status_code == 401:
+            self.refresh_header = True
+            # Return status dict for selected codes.
+            return {
+                "error_code": 401,
+                "text": response.json()
+            }
+
+        response.raise_for_status()
+
+        return response
+
+    @retry(AuthenticationError, tries=2, delay=2)
+    def api_call(self, method, uri, **kwargs):
+        """Handle requests to ExtraHop endpoints .
+
+        :param method: Request method such as "get","post", "put"
+        :param uri: The uri of the request.
+        :param kwargs: Can include request parameter dicts such as headers, data etc.
+        :return res: Response
+        """
+        res = None
+
+        if self.refresh_header and self.rc.function_opts.get("extrahop_rx_key_id"):
+            if not uri.endswith("token"):
+                # If not a token request refresh token in header for Cloud-based access.
+                self._headers = {"Authorization": "Bearer " + self.get_token()}
+                kwargs.update({"headers": self._headers})
+
+        res = self.rc.execute_call_v2(method, uri, verify=self.verify, callback=self.callback, **kwargs)
+
+        if isinstance(res, dict):
+            # A 401 error was detected.
+            error_code = res.get("error_code", None)
+            if error_code:
+                if error_code == 401:
+                    raise AuthenticationError(res)
+        return res
 
 def validate_settings(fn_opts):
     """Validate app config settings.
