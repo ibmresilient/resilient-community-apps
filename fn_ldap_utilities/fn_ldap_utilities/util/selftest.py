@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from .helper import LDAPUtilitiesHelper, get_domains_list
+from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 log = logging.getLogger(__name__)
@@ -23,6 +23,12 @@ def selftest_function(opts):
 
     for domain_name in domains_list:
         try:
+            """
+            If labels are given to the servers in the app.config `domain_name` will start with 'fn_ldap_utilities:' else if
+            labels are not given then `domain_name` will equal 'fn_ldap_utilites'.
+            If `domain_name` contains ':' then a labels have been given to the servers and `domain` will be set to the label given to the server else
+            if `domain_name` does not contain ':' then servers have not been labled and `domain` will be set to `domain_name` which will equal 'fn_ldap_utilities'.
+            """
             domain = domain_name[domain_name.index(":")+1:] if ":" in domain_name else domain_name
 
             # Instansiate helper (which gets appconfigs from file)
