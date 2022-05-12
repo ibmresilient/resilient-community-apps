@@ -217,6 +217,7 @@ class SiemplifyCommon():
             "environments": inputs['siemplify_environment']
         }
 
+        LOG.debug(payload)
         result, error_msg = self._make_call("POST", ADDUPDATE_BLOCKLIST_URL, payload) # return blank if successful
         return payload if not error_msg else result, error_msg
 
@@ -255,6 +256,7 @@ class SiemplifyCommon():
             "environments": inputs['siemplify_environment']
         }
 
+        LOG.debug(payload)
         result, error_msg = self._make_call("POST", ADDUPDATE_CUSTOMLIST_URL, payload) # return blank if successful
         return payload if not error_msg else result, error_msg
 
