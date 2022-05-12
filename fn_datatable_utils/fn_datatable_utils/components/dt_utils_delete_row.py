@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
 
             dt_utils_row_id = kwargs.get("dt_utils_row_id") # number (optional)
             dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name") # text (required)
-            incident_id = kwargs.get("incident_id"), # number (required)
+            incident_id = kwargs.get("incident_id") # number (required)
 
             LOG.info("incident_id: %s", incident_id)
             LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
