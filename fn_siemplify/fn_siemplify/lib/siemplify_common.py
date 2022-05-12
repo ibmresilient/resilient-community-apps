@@ -6,6 +6,7 @@ import logging
 import json
 import os
 from datetime import datetime
+from retry import retry
 from .jinja_common import JinjaEnvironment
 from resilient_lib import clean_html, IntegrationError
 from simplejson.errors import JSONDecodeError
@@ -497,6 +498,7 @@ class SiemplifyCommon():
 
         return results, err_msg
 
+    @retry(IntegrationError, tries=2, delay=2)
     def _make_call(self, method, uri, payload=None, ):
         # perform a Siemplify API call, returning the results of that call
         url = "/".join([self.base_url, API_VERSION, uri])
@@ -513,6 +515,11 @@ class SiemplifyCommon():
                                                   headers=self.headers,
                                                   verify=self.verify,
                                                   callback=callback)
+
+        # execute retry logic when we get a 500 error
+        if response.status_code == 500:
+            LOG.warning("retrying: %s", error_msg)
+            raise IntegrationError(error_msg)
 
         try:
             return response.json(), error_msg
