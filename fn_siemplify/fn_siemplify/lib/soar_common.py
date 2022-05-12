@@ -202,18 +202,9 @@ class SOARCommon():
     def get_incident(self, incident_id):
         # get an SOAR incident based on the incident id
         incident = self._get_incident_info(incident_id, None)
-        incident['incident_types'] = self.convert_incident_types(incident['incident_type_ids'])
+        incident['incident_types'] = [type['name'] for type in incident['incident_type_ids']]
         return incident
 
-    def convert_incident_types(self, incident_type_ids):
-        # Convert a SOAR incident type to a Siemplify
-        if not incident_type_ids:
-            return incident_type_ids
-
-        incident_type_lookup = self.get_incident_types()
-
-        return [incident_type_lookup[incident_type] for incident_type in incident_type_ids \
-            if incident_type in incident_type_lookup]
 
     def get_incident_attachment(self, incident_id, artifact_id=None, task_id=None, attachment_id=None, return_base64=True):
         # get contents of a file attachment
@@ -317,7 +308,7 @@ class SOARCommon():
     def _get_incident_info(self, incident_id, child_uri):
         # API call for a given incident and it's child objects: tasks, notes, attachments, etc.
         try:
-            uri = u'/incidents/{0}'.format(incident_id)
+            uri = u'/incidents/{0}?handle_format=names'.format(incident_id)
             if child_uri:
                 uri = "/".join([uri, child_uri])
 

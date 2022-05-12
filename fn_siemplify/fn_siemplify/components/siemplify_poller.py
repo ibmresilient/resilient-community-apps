@@ -140,7 +140,7 @@ class SiemplifyPollerComponent(ResilientComponent):
                 LOG.error("Error retrieving new cases from Siemplify: %s", str(err_msg))
             else:
                 LOG.debug(new_case_list)
-                for search_case in new_case_list.get("results", []):
+                for search_case in new_case_list:
                     # confirm if case already exists in soar
                     soar_case = self.soar_common.find_incident(search_case.get("id"))
                     if soar_case:
@@ -191,7 +191,7 @@ class SiemplifyPollerComponent(ResilientComponent):
         siemplify_case_list, _error_msg = self.siemplify_env.get_cases([ str(key) for key in soar_incident_list.keys() ])
         LOG.debug("get_open_siemplify_incidents: %s", siemplify_case_list)
 
-        for case in siemplify_case_list['results']:
+        for case in siemplify_case_list:
             case_id = case['id']
 
             soar_inc_id = soar_incident_list[case_id]
@@ -247,4 +247,4 @@ class SiemplifyPollerComponent(ResilientComponent):
 
 
     def _get_timestamp(self):
-        return datetime.datetime.now().astimezone(self.timezone)
+        return datetime.datetime.now() #.astimezone(self.timezone)

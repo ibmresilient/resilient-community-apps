@@ -136,9 +136,8 @@ class SiemplifyCommon():
             "requestedPage": 0,
             "timeRangeFilter": 0
         }
-        LOG.debug("get_cases payload: %s", payload)
 
-        return self._make_call("POST", SEARCH_CASE_URL, payload)
+        return self._get_paged(SEARCH_CASE_URL, payload)
 
     def get_new_cases(self, last_poller_time, filters):
         payload = {
@@ -151,9 +150,7 @@ class SiemplifyCommon():
             for filter in filters.keys():
                 payload[filter] = filters[filter]
 
-        LOG.debug("get_new_cases payload: %s", payload)
-
-        return self._make_call("POST", SEARCH_CASE_URL, payload)
+        return self._get_paged(SEARCH_CASE_URL, payload)
 
     def close_case(self, inputs):
         # API call to close the Siemplify case
@@ -181,10 +178,10 @@ class SiemplifyCommon():
         if inputs.get("siemplify_search"):
             payload = {
                 "searchTerm": inputs.get("siemplify_search"),
-                "requestedPage": 0,
                 "pageSize": str(inputs.get("siemplify_limit", 1000))
             }
-            results, err_msg = self._make_call("POST", FILTERED_BLOCKLIST_URL, payload)
+            results, err_msg = self._get_blocklist_paged(FILTERED_BLOCKLIST_URL, payload)
+
 
         results, err_msg = self._make_call("GET", All_BLOCKLIST_URL)
 
@@ -435,6 +432,60 @@ class SiemplifyCommon():
 
         result, err_msg = self._make_call("POST", CASES_MODIFIED_URL, payload)
         return result if not err_msg else False
+
+    def _get_paged(self, url, payload):
+        """return results of a query which can span more than one API call
+
+        Args:
+            url (str): url for the API call
+            payload (dict): query parameters
+
+        Returns:
+            list, str: return results list and any error which occurred
+        """
+
+        payload['requestedPage'] = 0
+        results = []
+        LOG.debug("get_paged payload: %s", payload)
+        response, err_msg = self._make_call("POST", url, payload)
+
+        results.extend(response['results'])
+        while not err_msg and len(response['results']) == response['pageSize'] and \
+                response['totalCount'] > response['pageSize']:
+            payload['requestedPage'] = payload['requestedPage']+1
+
+            LOG.debug("get_paged payload: %s", payload)
+            response, err_msg = self._make_call("POST", url, payload)
+            results.extend(response['results'])
+
+        return results, err_msg
+
+    def _get_blocklist_paged(self, url, payload):
+        """return results of a query which can span more than one API call
+
+        Args:
+            url (str): url for the API call
+            payload (dict): query parameters
+
+        Returns:
+            list, str: return results list and any error which occurred
+        """
+
+        payload['requestedPage'] = 0
+        results = []
+        LOG.debug("get_blocklist_paged payload: %s", payload)
+        response, err_msg = self._make_call("POST", url, payload)
+
+        results.extend(response['objectsList'])
+        while not err_msg and len(response['objectsList']) == response['metadata']['pageSize'] and \
+                response['metadata']['totalRecordsCount'] > response['metadata']['pageSize']:
+            payload['requestedPage'] = payload['requestedPage']+1
+
+            LOG.debug("get_blocklist_paged payload: %s", payload)
+            response, err_msg = self._make_call("POST", url, payload)
+            results.extend(response['objectsList'])
+
+        return results, err_msg
 
     def _make_call(self, method, uri, payload=None, ):
         # perform a Siemplify API call, returning the results of that call
