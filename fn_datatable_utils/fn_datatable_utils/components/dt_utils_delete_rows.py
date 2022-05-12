@@ -37,12 +37,12 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
-            incident_id = kwargs.get("incident_id"),  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name"),  # text (required)
-            dt_utils_rows_ids = kwargs.get("dt_utils_rows_ids"),  # text (optional)
-            dt_utils_search_column = kwargs.get("dt_utils_search_column"),  # text (optional)
-            dt_utils_search_value = kwargs.get("dt_utils_search_value"), # text (optional)
-            dt_utils_delete_all_rows = bool(kwargs.get("dt_utils_delete_all_rows", False)), # bool (optional)
+            incident_id = kwargs.get("incident_id")  # number (required)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
+            dt_utils_rows_ids = kwargs.get("dt_utils_rows_ids")  # text (optional)
+            dt_utils_search_column = kwargs.get("dt_utils_search_column")  # text (optional)
+            dt_utils_search_value = kwargs.get("dt_utils_search_value") # text (optional)
+            dt_utils_delete_all_rows = bool(kwargs.get("dt_utils_delete_all_rows", False)) # bool (optional)
 
             LOG.info("incident_id: %s", incident_id)
             LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)

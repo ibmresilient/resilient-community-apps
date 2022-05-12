@@ -37,13 +37,13 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
-            incident_id = kwargs.get("incident_id"),  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name"),  # text (required)
-            dt_utils_sort_by = kwargs.get("dt_utils_sort_by"),  # text (optional)
-            dt_utils_sort_direction = kwargs.get("dt_utils_sort_direction")["name"],  # select, values: "ASC", "DESC" (optional)
-            dt_utils_max_rows = kwargs.get("dt_utils_max_rows"),  # number (optional)
-            dt_utils_search_column = kwargs.get("dt_utils_search_column"),  # text (optional)
-            dt_utils_search_value = kwargs.get("dt_utils_search_value"),  # text (optional)
+            incident_id = kwargs.get("incident_id")  # number (required)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
+            dt_utils_sort_by = kwargs.get("dt_utils_sort_by")  # text (optional)
+            dt_utils_sort_direction = kwargs.get("dt_utils_sort_direction")["name"]  # select, values: "ASC", "DESC" (optional)
+            dt_utils_max_rows = kwargs.get("dt_utils_max_rows")  # number (optional)
+            dt_utils_search_column = kwargs.get("dt_utils_search_column")  # text (optional)
+            dt_utils_search_value = kwargs.get("dt_utils_search_value")  # text (optional)
 
             LOG.info("incident_id: %s", incident_id)
             LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)

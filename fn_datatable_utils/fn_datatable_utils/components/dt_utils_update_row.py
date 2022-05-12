@@ -38,9 +38,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_row_id", "dt_utils_cells_to_update"], kwargs)
 
-            incident_id = kwargs.get("incident_id"),  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name"),  # text (required)
-            dt_utils_row_id = kwargs.get("dt_utils_row_id"),  # number (required)
+            incident_id = kwargs.get("incident_id")  # number (required)
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
+            dt_utils_row_id = kwargs.get("dt_utils_row_id")  # number (required)
             dt_utils_cells_to_update = kwargs.get("dt_utils_cells_to_update")  # text (required)
 
             LOG.info("incident_id: %s", incident_id)
