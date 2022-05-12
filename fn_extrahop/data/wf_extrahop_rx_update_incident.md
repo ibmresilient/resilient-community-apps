@@ -72,6 +72,11 @@ def main():
                                     addArtifact(artifact_type, p["object_value"],
                                                 "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
                                                 .format(det["id"], p["role"]))
+                                    if p["hostname"]:
+                                        artifact_type = "DNS Name"
+                                        addArtifact(artifact_type, p["hostname"],
+                                                    "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
+                                                    .format(det["id"], p["role"]))
                         obj_cnt = 0
                         tbl = u''
                         for i in det[f2]:
