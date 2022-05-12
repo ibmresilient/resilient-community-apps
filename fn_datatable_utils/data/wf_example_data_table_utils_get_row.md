@@ -38,7 +38,6 @@ inputs.dt_utils_search_value = artifact.value
 
 ## Alternatively you can get the row by its ID by defining this input:
 # inputs.dt_utils_row_id = 3
-
 ```
 
 ### Post-Processing Script
