@@ -42,15 +42,12 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields([
                 {"name": "siemplify_artifact_type"},
-                {"name": "siemplify_artifact_value"}
+                {"name": "siemplify_artifact_value"},
+                {"name": "siemplify_environment"}
             ],
             fn_inputs_dict)
 
-        # use the default environment if none set in the function inputs
-        if not fn_inputs_dict.get('siemplify_environment'):
-            fn_inputs_dict['siemplify_environment'] = [self.app_configs.default_environment]
-        else:
-            fn_inputs_dict['siemplify_environment'] = [env.strip() for env in fn_inputs_dict['siemplify_environment'].split(",")]
+        fn_inputs_dict['siemplify_environment'] = [env.strip() for env in fn_inputs_dict['siemplify_environment'].split(",")]
 
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
         results, error_msg = siemplify_env.add_update_customlist(fn_inputs_dict) # returns blank when complete

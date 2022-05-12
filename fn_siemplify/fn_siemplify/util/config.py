@@ -26,7 +26,7 @@ polling_filters=
 # poller timezone to match Siemplify configuration
 poller_timezone=Etc/GMT
 # specify the environment for creating cases and entities
-default_case_environment=Default Environment
+default_environment=Default Environment
 # use playbook_mapping to define key/value mappings between soar incident types and playbooks when creating a Siemplify cases
 # If necessary, use DEFAULT to specify playbook(s) when no mapping matches
 #   playbook_mapping='<SOAR Incident Type>': 'playbook1,playbook2','Malware':'playbook3','DEFAULT':'playbook4'

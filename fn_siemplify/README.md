@@ -179,7 +179,7 @@ The following table provides the settings you need to configure the app. These s
 | **polling_interval** | No | `120` | *Seconds to wait between polling intervals. 0 disables poller. This will disable the ability to close an IBM SOAR incient when the Siempify Case closes.*  |
 | **polling_lookback** | No | `120` | *Minutes to look back for cased cases the first time poller runs* |
 | **poller_timezone** | No | `Etc/GMT` | *Timezone adjustment for Siemplify timestamp comparison*  |
-| **default_case_environment** | No | `Default Environment` | *Siemplify environment to use when creating cases does not specify an environment* |
+| **default_environment** | No | `Default Environment` | *Siemplify environment to use when creating cases and entities if none specifically referenced* |
 | **siemplify_create_case_template** | No | `/path/to/siemplify_create_case.jinja` | *Use when overriding the default template*  |
 | **soar_close_case_template** | No | `/path/to/soar_close_case.jinja` | *Use when overriding the default template*  |
 | **soar_update_case_template** | No | `/path/to/soar_update_case_case.jinja` | *Use when overriding the default template*  |
