@@ -9,7 +9,10 @@ INCIDENT1 = {
     "id": 2009,
     "name": "test incident",
     "description": "my description",
-    "severity": 4,
+    "severity_code": {
+      'id': 4,
+      'name': "Low"
+    },
     "confirmed": True,
     "discovered_date":  1638989883000,
     "siemplify_assigned_user": "a@example.com",
@@ -25,7 +28,7 @@ RESULT1 = {
   "title": "IBM SOAR - test incident",
   "assignedUser": "a@example.com",
   "reason": "IBM SOAR Incident 2009",
-  "priority": 60,
+  "priority": 40,
   "environment": "Default Environment",
   "isImportant": True,
   "alertName": "IBM SOAR Alert 2009",
