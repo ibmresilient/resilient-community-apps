@@ -4,7 +4,6 @@
 """AppFunction implementation"""
 
 from logging import getLogger
-from json import loads
 from resilient_circuits import AppFunctionComponent, function, FunctionResult, handler
 from resilient_lib import validate_fields, ResultPayload
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
@@ -68,4 +67,4 @@ class FunctionComponent(AppFunctionComponent):
 
             yield FunctionResult(results)
         except Exception as err:
-            yield FunctionResult({}, success=False, reason="Bad call")
+            yield FunctionResult({}, success=False, reason=str(err))
