@@ -31,6 +31,7 @@ class ExtraHopTab(Tab):
 
     UUID = "67eac993-042c-446a-9981-22bf30768a63"
     CONTAINS = [
+        Field("extrahop_update_notification"),
         Header("ExtraHop Properties"),
         Field("extrahop_detection_id"),
         Field("extrahop_detection_link"),
