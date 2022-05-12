@@ -7,7 +7,7 @@ import json
 import os
 from datetime import datetime
 from .jinja_common import JinjaEnvironment
-from resilient_lib import clean_html, IntegrationError, readable_datetime
+from resilient_lib import clean_html, IntegrationError
 from simplejson.errors import JSONDecodeError
 
 LOG = logging.getLogger(__name__)
@@ -139,10 +139,20 @@ class SiemplifyCommon():
 
         return self._get_paged(SEARCH_CASE_URL, payload)
 
-    def get_new_cases(self, last_poller_time, filters):
+    def get_new_cases(self, last_poller_time, tz, filters):
+        """get siemplify cases based on a timezone entry
+
+        Args:
+            last_poller_time (datetime): timestamp when last poller ran
+            tz (tzinfo): timezone to capture data
+            filters (dict): filters to apply to search
+
+        Returns:
+            list: returned cases
+        """
         payload = {
-            "startTime": readable_datetime(last_poller_time),
-            "endTime": readable_datetime(datetime.now().timestamp()*1000),
+            "startTime": readable_datetime(last_poller_time, tz),
+            "endTime": readable_datetime(datetime.now().timestamp()*1000, tz),
             "timeRangeFilter": 0,
             "isCaseClosed": "false"
         }
@@ -552,3 +562,25 @@ def callback(response):
     error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
 
     return response, error_msg
+
+def readable_datetime(timestamp, tz, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ'):
+    """
+    Convert an epoch timestamp to a string using a format
+
+    :param timestamp: ts of object sent from Resilient Server i.e. ``incident.create_date``
+    :type timestamp: int
+    :param tz: timezone for the value
+    :type tz: tzinfo
+    :param milliseconds: Set to ``True`` if ts in milliseconds
+    :type milliseconds: bool
+    :param rtn_format: Format of resultant string. See https://docs.python.org/3.6/library/datetime.html#strftime-and-strptime-behavior for options
+    :type rtn_format: str
+    :return: string representation of timestamp
+    :rtype: str
+    """
+    if milliseconds:
+        ts = int(timestamp / 1000)
+    else:
+        ts = timestamp
+
+    return datetime.fromtimestamp(ts, tz=tz).strftime(rtn_format)

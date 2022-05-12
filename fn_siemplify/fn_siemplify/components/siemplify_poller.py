@@ -46,7 +46,7 @@ def poller(named_poller_interval, named_last_poller_time):
             while not exit_event.is_set():
                 try:
                     LOG.info(u"%s polling start.", PACKAGE_NAME)
-                    poller_start = datetime.datetime.now()
+                    poller_start = self._get_timestamp()
                     # function execution with the last poller time in ms
                     func(self, *args, last_poller_time=int(last_poller_time.timestamp()*1000))
 
@@ -135,6 +135,7 @@ class SiemplifyPollerComponent(ResilientComponent):
         if self.sync_cases in ["siemplify", "both"]:
             # get new siemplify cases to escalate
             new_case_list, err_msg = self.siemplify_env.get_new_cases(kwargs.get("last_poller_time"),
+                                                                      self.timezone,
                                                                       self.polling_filters)
             if err_msg:
                 LOG.error("Error retrieving new cases from Siemplify: %s", str(err_msg))
@@ -247,4 +248,4 @@ class SiemplifyPollerComponent(ResilientComponent):
 
 
     def _get_timestamp(self):
-        return datetime.datetime.now() #.astimezone(self.timezone)
+        return datetime.datetime.now().astimezone(self.timezone)
