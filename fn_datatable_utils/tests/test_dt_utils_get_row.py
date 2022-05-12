@@ -45,16 +45,12 @@ class TestDtUtilsGetRow:
     }
 
     output = {
-        "success": True,
-        "inputs": inputs,
-        "row": {
-            u'id': 1,
-            u'cells': {
-                u'dt_col_email': {u'id': u'dt_col_email', u'row_id': 1, u'value': u'joe@example.com'},
-                u'dt_col_id': {u'id': u'dt_col_id', u'row_id': 1, u'value': 3001},
-                u'dt_col_name': {u'id': u'dt_col_name', u'row_id': 1, u'value': u'Joe Blogs'},
-                u'dt_col_status': {u'id': u'dt_col_status', u'row_id': 1, u'value': u'In Progress'}
-            }
+        u'id': 1,
+        u'cells': {
+            u'dt_col_email': {u'id': u'dt_col_email', u'row_id': 1, u'value': u'joe@example.com'},
+            u'dt_col_id': {u'id': u'dt_col_id', u'row_id': 1, u'value': 3001},
+            u'dt_col_name': {u'id': u'dt_col_name', u'row_id': 1, u'value': u'Joe Blogs'},
+            u'dt_col_status': {u'id': u'dt_col_status', u'row_id': 1, u'value': u'In Progress'}
         }
     }
 
@@ -63,4 +59,4 @@ class TestDtUtilsGetRow:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_get_row_function(circuits_app, inputs)
-        assert(expected_results == results)
+        assert(expected_results == results["row"])

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
+from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from tests.test_helper import DTResilientMock
 
 PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_get_all_data_table_rows"
@@ -12,19 +14,20 @@ FUNCTION_NAME = "dt_utils_get_all_data_table_rows"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
+resilient_mock = DTResilientMock
 
 def call_dt_utils_get_all_data_table_rows_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("dt_utils_get_all_data_table_rows", function_params)
+    evt = SubmitTestFunction(
+        "dt_utils_get_all_data_table_rows", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
 
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    exception_event = circuits.watcher.wait(
+        "exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
         exception = exception_event.args[1]
@@ -32,7 +35,8 @@ def call_dt_utils_get_all_data_table_rows_function(circuits, function_params, ti
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("dt_utils_get_all_data_table_rows_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(
+            "dt_utils_get_all_data_table_rows_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
@@ -48,25 +52,94 @@ class TestDtUtilsGetAllDataTableRows:
         assert func is not None
 
     mock_inputs_1 = {
-        "dt_utils_datatable_api_name": "sample text",
-        "incident_id": 123
+        "dt_utils_datatable_api_name": "mock_data_table",
+        "incident_id": 1001
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "dt_utils_datatable_api_name": "sample text",
-        "incident_id": 123
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = [
+            {
+                'id': 1,
+                'cells': {
+                    'dt_col_id': {
+                        'row_id': 1,
+                        'id': 'dt_col_id',
+                        'value': 3001
+                    },
+                    'dt_col_name': {
+                        'row_id': 1,
+                        'id': 'dt_col_name',
+                        'value': 'Joe Blogs'
+                    },
+                    'dt_col_email': {
+                        'row_id': 1,
+                        'id': 'dt_col_email',
+                        'value': 'joe@example.com'
+                    },
+                    'dt_col_status': {
+                        'row_id': 1,
+                        'id': 'dt_col_status',
+                        'value': 'In Progress'
+                    }
+                }
+            },
+            {
+                'id': 2,
+                'cells': {
+                    'dt_col_id': {
+                        'row_id': 2,
+                        'id': 'dt_col_id',
+                        'value': 3002
+                    },
+                    'dt_col_name': {
+                        'row_id': 2,
+                        'id': 'dt_col_name',
+                        'value': 'Mary Blogs'
+                    },
+                    'dt_col_email': {
+                        'row_id': 2,
+                        'id': 'dt_col_email',
+                        'value': 'mary@example.com'
+                    },
+                    'dt_col_status': {
+                        'row_id': 2,
+                        'id': 'dt_col_status',
+                        'value': 'In Progress'
+                    }
+                }
+            },
+            {
+                'id': 3,
+                'cells': {
+                    'dt_col_id': {
+                        'row_id': 3,
+                        'id': 'dt_col_id',
+                        'value': 3003
+                    },
+                    'dt_col_name': {
+                        'row_id': 3,
+                        'id': 'dt_col_name',
+                        'value': 'Mary Blogs'
+                    },
+                    'dt_col_email': {
+                        'row_id': 3,
+                        'id': 'dt_col_email',
+                        'value': 'mary@example.com'
+                    },
+                    'dt_col_status': {
+                        'row_id': 3,
+                        'id': 'dt_col_status',
+                        'value': 'Active'
+                    }
+                }
+            }
+        ]
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_dt_utils_get_all_data_table_rows_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        results = call_dt_utils_get_all_data_table_rows_function(
+            circuits_app, mock_inputs)
+        assert(expected_results == results["rows"])
