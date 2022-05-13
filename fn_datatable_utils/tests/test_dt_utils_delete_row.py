@@ -43,9 +43,7 @@ class TestDtUtilsDeleteRow:
     }
 
     output = {
-        "success": True,
-        "inputs": inputs,
-        "row": {'hints': [], 'message': None, 'success': True, 'title': None}
+        'hints': [], 'message': None, 'success': True, 'title': None
     }
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
@@ -53,4 +51,4 @@ class TestDtUtilsDeleteRow:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_delete_row_function(circuits_app, inputs)
-        assert(expected_results == results)
+        assert(expected_results == results["row"])

@@ -48,9 +48,6 @@ class TestDtUtilsUpdateRow:
     }
 
     output = {
-        "success": True,
-        "inputs": deepcopy(inputs),
-        "row": {
             u'id': 1,
             u'cells': {
                 u'dt_col_email': {u'id': u'dt_col_email', u'row_id': 1, u'value': u'mary@example.com'},
@@ -59,9 +56,6 @@ class TestDtUtilsUpdateRow:
                 u'dt_col_status': {u'id': u'dt_col_status', u'row_id': 1, u'value': u'Complete'}
             }
         }
-    }
-    output["inputs"]["dt_utils_cells_to_update"] = loads(
-        output["inputs"]["dt_utils_cells_to_update"])
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     @pytest.mark.livetest
@@ -69,4 +63,4 @@ class TestDtUtilsUpdateRow:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_update_row_function(circuits_app, inputs)
-        assert (expected_results == results)
+        assert (expected_results == results["row"])

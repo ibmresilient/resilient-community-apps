@@ -19,7 +19,6 @@ resilient_mock = DTResilientMock
 def call_dt_utils_get_rows_function(circuits, function_params, timeout=10):
     # Create the submitTestFunction event
     evt = SubmitTestFunction("dt_utils_get_rows", function_params)
-
     # Fire a message to the function
     circuits.manager.fire(evt)
     event = circuits.watcher.wait(
@@ -54,18 +53,7 @@ class TestDtUtilsGetRows:
         'dt_utils_sort_direction': {'name': 'ASC'}
     }
 
-    output = {
-        'inputs': {
-            'dt_utils_datatable_api_name': 'mock_data_table',
-            'dt_utils_sort_by': 'dt_col_status',
-            'dt_utils_search_column': 'dt_col_name',
-            'dt_utils_sort_direction': 'ASC',
-            'dt_utils_max_rows': 1,
-            'incident_id': 1001,
-            'dt_utils_search_value': 'Mary Blogs'
-        },
-        'success': True,
-        'rows': [
+    output = [
             {
                 u'id': 3,
                 u'cells': {
@@ -92,20 +80,8 @@ class TestDtUtilsGetRows:
                 }
             }
         ]
-    }
 
-    get_all_rows_output = {
-        'success': True,
-        'inputs': {
-            'incident_id': 1001,
-            'dt_utils_datatable_api_name': 'mock_data_table',
-            'dt_utils_sort_by': 'dt_col_status',
-            'dt_utils_sort_direction': 'ASC',
-            'dt_utils_max_rows': None,
-            'dt_utils_search_column': None,
-            'dt_utils_search_value': None
-        },
-        'rows': [
+    get_all_rows_output = [
             {
                 'id': 3,
                 'cells': {
@@ -182,7 +158,6 @@ class TestDtUtilsGetRows:
                 }
             }
         ]
-    }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (inputs, output),
@@ -192,4 +167,4 @@ class TestDtUtilsGetRows:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_get_rows_function(circuits_app, mock_inputs)
-        assert (expected_results == results)
+        assert (expected_results == results["rows"])

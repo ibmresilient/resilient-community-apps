@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client,incident_id,dt_utils_datatable_api_name)
+            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
             # Get the data table data
             datatable.get_data()

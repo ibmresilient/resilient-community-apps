@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_datatable_utils',
-    version='1.3.0',
+    version='2.0.0',
     display_name="Datatable Utilities",
     license='MIT',
     author='IBM SOAR',
