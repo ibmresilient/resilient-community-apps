@@ -163,11 +163,11 @@ for image_name in "${IMAGE_NAMES[@]}"; do
         docker container rm $docker_container
 
         print_msg "$image_name:: Writing new requirements file"
-        python $SCRIPTS_DIR/modify_requirements_file.py $path_current_requirements $path_new_requirements $PACKAGES_TO_CHANGE
+        python $PATH_SCRIPTS_DIR/modify_requirements_file.py $path_current_requirements $path_new_requirements $PACKAGES_TO_CHANGE
         print_msg "$image_name:: New requirements:\n$(cat $path_new_requirements)"
 
         print_msg "$image_name:: Overwriting Dockerfile"
-        python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
+        python $PATH_SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 
         print_msg "$image_name:: Packaging $image_name with resilient-sdk"
         resilient-sdk package -p $package_path || resilient_sdk_package_pass=$?
