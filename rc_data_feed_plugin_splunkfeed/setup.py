@@ -8,12 +8,12 @@ setup(
     display_name='Data Feeder for Splunk',
     version='1.1.0',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM QRadar SOAR',
     author_email='',
-    url="http://ibm.biz/resilientcommunity",
+    url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="""This package contains the SplunkFeed Plugin to the Data Feed extension.
-    This Data Feed extension allows one to maintain 'replica' data for Resilient incidents, artifacts, tasks, notes, etc.
+    This Data Feed extension allows one to maintain 'replica' data for SOAR incidents, artifacts, tasks, notes, etc.
     The updates are performed in near real-time.
     This plugin allows this replica data to be maintained in Splunk.
     Refer to the documentation on the Data Feed extension for uses cases support and configuration options.
@@ -21,7 +21,7 @@ setup(
     install_requires=[
         'rc_data_feed',
         'resilient',
-        'resilient-lib>=34.0.0'
+        'resilient-lib>=44.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
