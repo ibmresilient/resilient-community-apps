@@ -1,6 +1,11 @@
 language: python
 python: 3.9
 os: linux
+dist: xenial
+
+git:
+  depth: false
+
 env:
   global:
     - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
@@ -46,27 +51,14 @@ stages:
     if: tag IS blank AND branch = master AND type = cron
   - name: run package tests
     if: type != cron
-  # Every commit not on master performs static analysis
-  - name: static analysis
-    if: tag IS blank AND type != cron
   - name: build image and app zip
     if: tag IS blank AND type = push
-  # Rebuild all images
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
-  # Sync all images
   - name: sync all images
     if: tag =~ ^sync/.+
 
 matrix:
-
-  # Specification of jobs which may fail but should not fail the build
-  # TODO: Review
-  allow_failures:
-    # The safety checker job is likely to fail often in its initial usage
-    # Rather than explicity setting it to always pass
-    # Allow failures of the job to still gather the useful info
-    - name: Safety Checker
 
   fast_finish: true
 
@@ -180,47 +172,6 @@ matrix:
       script:
         - echo "Starting Python 3.9 Unit Tests - Package"
         - $SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
-
-    # Jobs that perform static analysis; code quality, security scans etc
-    - stage: static analysis
-      name: Py2.7 Bandit Security Scan
-      python: 2.7
-      env:
-        - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
-      install:
-        - pip install bandit==1.6.2
-      script:
-        - $SCRIPTS_DIR/run_bandit_scan.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Py3.9 Bandit Security Scan
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="Py3.9 Bandit Security Scan"
-      install:
-        - pip install bandit
-      script:
-        - $SCRIPTS_DIR/run_bandit_scan.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Pylint
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="Pylint"
-      install:
-        - pip install pylint
-      script:
-        - $SCRIPTS_DIR/pylint.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Safety Checker
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="CVE Search against dependancies"
-      install:
-        - pip install safety
-      script:
-        - $SCRIPTS_DIR/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
 
     - stage: build image and app zip
       name: Build Image and App zip
