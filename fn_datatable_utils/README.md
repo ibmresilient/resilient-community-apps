@@ -1,19 +1,18 @@
+# **User Guide:** fn_datatable_utils_v2.0.0
 # Datatable Utils
 
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
-  - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
+- [Setup](#setup)
 - [Function - Data Table Utils: Create CSV Datatable](#function---data-table-utils-create-csv-datatable)
 - [Function - Data Table Utils: Delete Row](#function---data-table-utils-delete-row)
 - [Function - Data Table Utils: Delete Rows](#function---data-table-utils-delete-rows)
@@ -57,12 +56,15 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `41.0.6783`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=33.0.0`.
+* Integration server is running `resilient_circuits>=41.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incidents | Read |
+  | Incidents Fields | Edit |
+  | Data | Edit |
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -87,10 +89,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does notsupport a proxy server.
 
 ### Python Environment
-Python 3.6 are supported.
+Python 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib>=41.0.0
-* resilient_circuits>=40.0.0
+* resilient_circuits>=41.0.0
 
 
 ---
@@ -212,27 +214,27 @@ inputs.incident_id = incident.id
 # The api name of the Data Table to update
 inputs.dt_datable_name = "dt_utils_test_data_table"
 # uncomment attachment_id when reading csv data from an attachmennt
-##inputs.attachment_id = attachment.id
+inputs.attachment_id = attachment.id
 
 # The CSV data. Use either dt_csv_data or attachment_id
-data = u"""hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra 
-18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中"""
-data_no_headers = u"""18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中,x,y,z"""
-inputs.dt_csv_data = data
+# data = u"""hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra 
+# 18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中"""
+# data_no_headers = u"""18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中,x,y,z"""
+# inputs.dt_csv_data = data
 # A boolean to determine if CSV headers are present
 inputs.dt_has_headers = True
 
 ## The mapping format should be "cvs_header":"dt_column_name"
-mapping = '''{
+mapping = {
   "hdr_number": "number",
   "hdr_text": "text",
   "hdr_boolean": "boolean",
   "hdr_datetime": "datetime",
   "hdr_select": "select",
   "hdr_multiselect": "multi_select"
-}'''
+}
 # mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column
-mapping_no_headers = '''["number","text","boolean","datetime","select","multi_select","x","y","z"]'''
+mapping_no_headers = ["number","text","boolean","datetime","select","multi_select","x","y","z"]
 inputs.dt_mapping_table = mapping
 # year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z'
 inputs.dt_date_time_format = "%m/%d/%y %H:%M"
