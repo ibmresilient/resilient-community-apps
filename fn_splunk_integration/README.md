@@ -683,7 +683,7 @@ username=admin
 splunkpassword=changeme
 verify_cert=false|/path/to/cert
 ```
-2. Either keep the label, splunk_label1, or change it (The label does not matter when only one server is configured)
+2. Specify a splunk system label meaningful to our environment. The label has no other significance.
 ```
 [fn_splunk_integration:splunk_label1]
 host=localhost
