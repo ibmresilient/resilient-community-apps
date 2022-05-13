@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "dt_utils_datatable_api_name": {
+          "type": "string"
+        },
+        "dt_utils_rows_ids": {
+          "type": "string"
+        },
+        "dt_utils_search_column": {},
+        "dt_utils_search_value": {},
+        "dt_utils_delete_all_rows": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rows_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

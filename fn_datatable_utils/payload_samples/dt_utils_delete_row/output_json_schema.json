@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "dt_utils_datatable_api_name": {
+          "type": "string"
+        },
+        "dt_utils_row_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "row": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "title": {},
+        "message": {},
+        "hints": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}

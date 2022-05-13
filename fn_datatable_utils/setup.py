@@ -19,18 +19,19 @@ def snake_to_camel(word):
 
 setup(
     name='fn_datatable_utils',
-    version='1.2.0',
+    version='2.0.0',
+    display_name="Datatable Utilities",
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
+    author='IBM SOAR',
+    url='http://ibm.biz/soarcommunity',
     description="Functions manipulate data in a Datatable",
-    long_description="This package contains 6 functions that help you manipulate IBM Resilient Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
+    long_description="This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
-        'resilient_circuits>=33.0.0',
-        'resilient-lib>=32.0.140'
+        'resilient_circuits>=41.0.0',
+        'resilient-lib>=41.0.0'
     ],
     packages=find_packages(),
+    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[
