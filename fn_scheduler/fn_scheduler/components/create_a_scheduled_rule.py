@@ -189,18 +189,16 @@ def validate_actions(rest_client, inc, incident_id, object_id, \
 
         results = rest_client.get(url)
 
-    # find the actions for a given row
-    actions = []
+    # find the rules/playbooks for a given row
+    rule_playbook_list = []
     if row_id:
         for row in results['rows']:
             if row['id'] == row_id:
-                actions = row.get('actions', [])
+                rule_playbook_list = [action['name'] for action in row.get('actions', []) if action['enabled']]
+                rule_playbook_list.extend([playbk['display_name'] for playbk in row.get('playbooks', []) ])
     else:
-        actions = results.get('actions', [])
+        rule_playbook_list = [action['name'] for action in results.get('actions', []) if action['enabled']]
+        rule_playbook_list.extend([playbk['display_name'] for playbk in results.get('playbooks', []) ])
 
     LOG.debug(results)
-    for action in actions:
-        if action['name'] == scheduler_rule_name and action['enabled']:
-            return True
-
-    return False
+    return bool(scheduler_rule_name in rule_playbook_list)
