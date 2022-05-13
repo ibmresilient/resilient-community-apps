@@ -5,7 +5,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_splunkfeed',
-    version='1.0.3',
+    display_name='Data Feeder for Splunk',
+    version='1.1.0',
     license='MIT',
     author='IBM Resilient',
     author_email='',

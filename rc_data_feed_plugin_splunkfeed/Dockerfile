@@ -2,10 +2,10 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
 #FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM quay.io/ibmresilient/rc_data_feed:2.0.0
+FROM quay.io/ibmresilient/rc_data_feed:2.1.0
 
 ARG APPLICATION=rc_data_feed_plugin_splunkfeed
-ARG RES_CIRCUITS_VERSION=37.0
+ARG RES_CIRCUITS_VERSION=44.0
 
 # update to latest packages, user 0 for root privilege
 USER 0
@@ -56,4 +56,3 @@ COPY entrypoint.sh /opt/rescircuits/entrypoint.sh
 # Generally a good practice.
 USER 1001
 ENTRYPOINT [ "sh", "/opt/rescircuits/entrypoint.sh" ]
-
