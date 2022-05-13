@@ -52,10 +52,11 @@ class FunctionComponent(AppFunctionComponent):
 
             rows = datatable.get_rows()
 
-            # If no rows found, create a log and set success to False
+            # If no rows found, create a log
             if not rows:
                 yield self.status_message("No rows found")
-                results = rp.done(False, None)
+                results = rp.done(True, None)
+                results["rows"] = None
 
             # Else, set rows in the payload
             else:
