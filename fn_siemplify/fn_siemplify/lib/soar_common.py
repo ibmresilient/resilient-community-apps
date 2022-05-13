@@ -201,8 +201,7 @@ class SOARCommon():
 
     def get_incident(self, incident_id):
         # get an SOAR incident based on the incident id
-        incident = self._get_incident_info(incident_id, None)
-        incident['incident_types'] = [type['name'] for type in incident['incident_type_ids']]
+        incident = self._get_incident_info(incident_id, None, handle_format=True)
         return incident
 
 
@@ -305,10 +304,12 @@ class SOARCommon():
         uri = "/".join([TYPES_URI, res_type])
         return self.rest_client.get(uri)
 
-    def _get_incident_info(self, incident_id, child_uri):
+    def _get_incident_info(self, incident_id, child_uri, handle_format=None):
         # API call for a given incident and it's child objects: tasks, notes, attachments, etc.
         try:
-            uri = u'/incidents/{0}?handle_format=names'.format(incident_id)
+            uri = u'/incidents/{0}'.format(incident_id)
+            if handle_format:
+                uri = "{}?handle_format=names".format(uri)
             if child_uri:
                 uri = "/".join([uri, child_uri])
 
