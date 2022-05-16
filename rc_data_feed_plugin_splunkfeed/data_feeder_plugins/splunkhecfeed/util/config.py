@@ -34,8 +34,18 @@ def apphost_config_section_data():
 # comma separated section names. ex. sqlserver_feed,file_feed
 feed_names=splunk_hec_feed
 reload=False
-# set to true if ElasticSearch errors occur during reload=True
-reload_query_api_method=False
+# use reload_types to limit the types of objects when reload=true.
+# Ex: incident,task,note,artifact,attachment,<data_table_api_name>
+reload_types=
+# set to true if ElasticSearch errors occur during reload=true
+reload_query_api_method=false
+
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+
+# set to true if attachment data should be part of payload send to plugins
+include_attachment_data=false
+# if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
+# ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
+workspaces=
 """

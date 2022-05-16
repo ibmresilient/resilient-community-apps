@@ -10,17 +10,18 @@
 
 __author__ = "george@georgestarcher.com (George Starcher)"
 
+import base64
+import logging
+import json
 import requests
+import socket
+import sys
+import threading
+import time
+import uuid
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-import logging
-import json
-import time
-import socket
-import threading
-import uuid
-import sys
 
 is_py2 = sys.version[0] == '2'
 if is_py2:
@@ -137,30 +138,27 @@ class http_event_collector:
         return (server_uri)
 
 
-    def sendEvent(self,payload, source_type=None, eventtime=""):
+    def sendEvent(self, payload, source_type=None, eventtime=""):
         """Method to immediately send an event to the http event collector"""
 
         if self.input_type == 'json':
             # If eventtime in epoch not passed as optional argument and not in payload, use current system time in epoch
             if not eventtime and 'time' not in payload:
                 eventtime = str(round(time.time(),3))
-                payload.update({'time':eventtime})
+                payload.update({'time': eventtime})
 
             # Fill in local hostname if not manually populated
             if 'host' not in payload:
-                payload.update({"host":self.host})
+                payload.update({"host": self.host})
             if 'sourcetype' not in payload:
-                payload.update({"sourcetype":source_type if source_type else self.sourcetype})
+                payload.update({"sourcetype": source_type if source_type else self.sourcetype})
             if 'source' not in payload and self.source:
                 payload.update({"source": self.source})
 
         # send event to http event collector
         event = []
         if self.input_type == 'json':
-            if self.popNullFields:
-                payloadEvent = payload.get('event')
-                payloadEvent = {k:payloadEvent.get(k) for k,v in payloadEvent.items() if v}
-                payload.update({"event":payloadEvent})
+            payload.update({"event": build_event_payload(payload.get('event'), self.popNullFields)})
             event.append(json.dumps(payload))
         else:
             event.append(str(payload))
@@ -254,6 +252,32 @@ class http_event_collector:
         self.batchEvents = []
         self.currentByteLength = 0
         self._waitUntilDone()
+
+def build_event_payload(raw_payload, skip_nulls):
+    """format data for use within splunk, removing null values and encoding byte arrays
+
+    Args:
+        raw_payload (dict): soar data
+        skip_nulls (bool): bypass nulls if set
+
+    Returns:
+        (dict): converted data
+    """
+    results = {}
+    for k,v in raw_payload.items():
+        if not skip_nulls or (v and skip_nulls):
+            if isinstance(v, (bytes, bytearray)):
+                results[k] = b_to_s(base64.b64encode(v))
+            else:
+                results[k] = v
+    return results
+
+def b_to_s(value):
+    """[binary to string]"""
+    try:
+        return value.decode()
+    except:
+        return value
 
 def main():
 
