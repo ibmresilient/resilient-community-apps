@@ -35,6 +35,7 @@ def get_test_pcap():
         data = mockzip.read()
     return data
 
+
 def mocked_rx_client(*args, **kwargs):
     class MockSession:
         """Class will be used by the mock to replace ZIA in circuits tests"""
@@ -99,6 +100,16 @@ def mocked_rx_client(*args, **kwargs):
                            port2=None):
 
             return MockGetResponse(output, 200)
+
+        def get_detection_note(self, detection_id=None, note=None, update_time=None):
+            note = "\nIBM SOAR 16/05/2022 15:13:37\n[SOAR Case - 4305](https://127.0.0.1:1443/#incidents/4305)"
+            return MockGetResponse(note, 200)
+
+        def add_detection_note(self, detection_id=None, note=None, update_time=None):
+            if int(detection_id) == 2:
+                return MockGetResponse({}, 207)
+
+            return MockGetResponse({}, 200)
 
     return MockSession(*args, **kwargs)
 
