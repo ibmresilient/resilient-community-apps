@@ -9,43 +9,18 @@
       "type": "boolean"
     },
     "reason": {},
-    "content": {
-      "type": "object",
-      "properties": {
-        "data_source": {
-          "type": "string"
-        },
-        "rows_added": {
-          "type": "integer"
-        },
-        "rows_with_errors": {
-          "type": "integer"
-        }
-      }
-    },
+    "content": {},
     "raw": {
       "type": "string"
     },
     "inputs": {
       "type": "object",
       "properties": {
-        "dt_date_time_format": {
-          "type": "string"
-        },
-        "dt_mapping_table": {
-          "type": "string"
-        },
         "incident_id": {
           "type": "integer"
         },
-        "attachment_id": {
-          "type": "integer"
-        },
-        "dt_datable_name": {
+        "dt_utils_datatable_api_name": {
           "type": "string"
-        },
-        "dt_has_headers": {
-          "type": "boolean"
         }
       }
     },

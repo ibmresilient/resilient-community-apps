@@ -133,6 +133,14 @@ class RESDatatable(object):
 
         return return_value
 
+    def clear_datatable(self):
+        try:
+            pass
+            self.res_client.delete("/incidents/{}/table_data/{}/row_data/?handle_format=names".format(self.incident_id, self.api_name))
+        except Exception as err:
+            LOG.debug(str(err))
+            raise ValueError("Error while clearing table: {}".format(self.api_name))
+
     def delete_row(self, row_id):
         """ Deletes the row. Returns the response from SOAR API or dict with the entry 'error'. """
 

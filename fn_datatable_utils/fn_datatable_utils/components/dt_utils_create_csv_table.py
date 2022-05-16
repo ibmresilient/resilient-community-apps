@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
             has_headers = kwargs.get("dt_has_headers")  # boolean (required)
             csv_data = kwargs.get("dt_csv_data")  # text (optional)
             datable_name = kwargs.get("dt_datable_name")  # text (required)
-            mapping_table = kwargs.get("dt_mapping_table")  # dictionary (required)
+            mapping_table = kwargs.get("dt_mapping_table")  # text (required)
             date_time_format = kwargs.get("dt_date_time_format")  # text (optional)
             start_row = kwargs.get("dt_start_row")  # number (optional)
             max_rows = kwargs.get("dt_max_rows")  # number (optional)
@@ -68,6 +68,11 @@ class FunctionComponent(ResilientComponent):
             LOG.info("dt_date_time_format: %s", date_time_format)
             LOG.info("dt_start_row: %s", start_row)
             LOG.info("dt_max_rows: %s", max_rows)
+
+            try:
+                mapping_table = loads(mapping_table)
+            except Exception:
+                raise ValueError(u"Unable to convert mapping_table to json: %s", mapping_table)
 
             # Create payload dict with inputs
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
