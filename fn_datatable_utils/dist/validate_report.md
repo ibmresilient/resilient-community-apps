@@ -1,19 +1,19 @@
 
 
-# Validation Report for Datatable Utils
+# Validation Report for Datatable Utilities
 
 | SDK Version       | Generation Time          | Command Line Arguments Provided |
 | :---------------- | ------------------------ | ------------------------------- |
-| 44.1.2953 | 2022/05/05 08:42:27 | `cmd`: validate, `package`: . |
+| 44.1.2953 | 2022/05/13 11:49:27 | `cmd`: validate, `package`: . |
 
 ## App Details
 | Attribute | Value |
 | --------- | ----- |
-| `display_name` | Datatable Utils |
+| `display_name` | Datatable Utilities |
 | `name` | fn_datatable_utils |
-| `version` | 1.3.0 |
+| `version` | 2.0.0 |
 | `author` | IBM SOAR |
-| `install_requires` | ['resilient_circuits>=33.0.0', 'resilient-lib>=32.0.140'] |
+| `install_requires` | ['resilient_circuits>=41.0.0', 'resilient-lib>=41.0.0'] |
 | `description` | Functions manipulate data in a Datatable |
 | `long_description` | This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable. |
 | `url` | http://ibm.biz/soarcommunity |
@@ -104,6 +104,10 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
 <span style="color:green">Pass</span>
 
 
+### `payload_samples/dt_utils_get_all_data_table_rows`
+<span style="color:green">Pass</span>
+
+
 ### `payload_samples/dt_utils_get_row`
 <span style="color:green">Pass</span>
 
@@ -128,7 +132,7 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
  
 
 ## tox tests
-<span style="color:teal">INFO</span>: 36 tests passed!
+<span style="color:teal">INFO</span>: 38 tests passed!
 
 
 

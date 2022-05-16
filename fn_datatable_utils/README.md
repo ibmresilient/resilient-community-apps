@@ -16,6 +16,7 @@
 - [Function - Data Table Utils: Create CSV Datatable](#function---data-table-utils-create-csv-datatable)
 - [Function - Data Table Utils: Delete Row](#function---data-table-utils-delete-row)
 - [Function - Data Table Utils: Delete Rows](#function---data-table-utils-delete-rows)
+- [Function - Data Table Utils: Get All Data Table Rows](#function---data-table-utils-get-all-data-table-rows)
 - [Function - Data Table Utils: Get Row](#function---data-table-utils-get-row)
 - [Function - Data Table Utils: Get Rows](#function---data-table-utils-get-rows)
 - [Function - Data Table Utils: Update Row](#function---data-table-utils-update-row)
@@ -27,7 +28,7 @@
 ## Release Notes
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0  | 5/2022 | Function dt_utils_get_row can now get a row from menu of a datatable row |
+| v2.0.0  | 5/2022 | Function dt_utils_get_row can now get a row from menu of a datatable row, Add function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
@@ -439,6 +440,309 @@ incident.addNote(helper.createRichText(note))
 if results.success:
   note = u"Row id: {} removed from datatable: {} for artifact: {}".format(results.inputs['dt_utils_row_id'], results.inputs['dt_utils_datatable_api_name'], artifact.value])
 """
+```
+
+</p>
+</details>
+
+---
+## Function - Data Table Utils: Get All Data Table Rows
+Function that returns the information for all the rows in a data table.
+
+An example Rule and Workflow exist for using this function on the example datatable from an artifact value.
+
+ ![screenshot: fn-data-table-utils-get-row ](./doc/screenshots/dt_get_all_data_table_rows.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `dt_utils_datatable_api_name` | `text` | Yes | `-` | The API name of the Data Table |
+| `incident_id` | `number` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "incident_id": 2258
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 156,
+    "timestamp": "2022-05-12 10:51:51"
+  },
+  "rows": [
+    {
+      "id": 119,
+      "cells": {
+        "boolean": {
+          "id": "boolean",
+          "row_id": 119
+        },
+        "datetime": {
+          "id": "datetime",
+          "row_id": 119,
+          "value": 1578245400000
+        },
+        "dt_col_name": {
+          "id": "dt_col_name",
+          "row_id": 119
+        },
+        "multi_select": {
+          "id": "multi_select",
+          "row_id": 119,
+          "value": [
+            "b",
+            "c",
+            "a",
+            "d"
+          ]
+        },
+        "number": {
+          "id": "number",
+          "row_id": 119,
+          "value": 126
+        },
+        "select": {
+          "id": "select",
+          "row_id": 119,
+          "value": "4"
+        },
+        "text": {
+          "id": "text",
+          "row_id": 119,
+          "value": "abc"
+        }
+      },
+      "actions": [
+        {
+          "id": 43,
+          "name": "Get Current Row",
+          "enabled": true
+        },
+        {
+          "id": 56,
+          "name": "Get All Rows",
+          "enabled": true
+        },
+        {
+          "id": 38,
+          "name": "Delete Current Row",
+          "enabled": true
+        },
+        {
+          "id": 41,
+          "name": "Delete Rows by Name",
+          "enabled": true
+        },
+        {
+          "id": 46,
+          "name": "Update Current Row",
+          "enabled": true
+        }
+      ],
+      "type_id": 1002,
+      "table_name": "Example CSV Datatable",
+      "inc_id": 2258,
+      "inc_name": "Test for datatables",
+      "inc_owner": "admin@example.com",
+      "version": 1
+    },
+    {
+      "id": 120,
+      "cells": {
+        "boolean": {
+          "id": "boolean",
+          "row_id": 120,
+          "value": true
+        },
+        "datetime": {
+          "id": "datetime",
+          "row_id": 120,
+          "value": 1578331800000
+        },
+        "dt_col_name": {
+          "id": "dt_col_name",
+          "row_id": 120
+        },
+        "multi_select": {
+          "id": "multi_select",
+          "row_id": 120,
+          "value": [
+            "d",
+            "a",
+            "e",
+            "c",
+            "b"
+          ]
+        },
+        "number": {
+          "id": "number",
+          "row_id": 120,
+          "value": 127
+        },
+        "select": {
+          "id": "select",
+          "row_id": 120
+        },
+        "text": {
+          "id": "text",
+          "row_id": 120,
+          "value": "abcd"
+        }
+      },
+      "actions": [
+        {
+          "id": 43,
+          "name": "Get Current Row",
+          "enabled": true
+        },
+        {
+          "id": 56,
+          "name": "Get All Rows",
+          "enabled": true
+        },
+        {
+          "id": 38,
+          "name": "Delete Current Row",
+          "enabled": true
+        },
+        {
+          "id": 41,
+          "name": "Delete Rows by Name",
+          "enabled": true
+        },
+        {
+          "id": 46,
+          "name": "Update Current Row",
+          "enabled": true
+        }
+      ],
+      "type_id": 1002,
+      "table_name": "Example CSV Datatable",
+      "inc_id": 2258,
+      "inc_name": "Test for datatables",
+      "inc_owner": "admin@example.com",
+      "version": 1
+    },
+    {
+      "id": 121,
+      "cells": {
+        "boolean": {
+          "id": "boolean",
+          "row_id": 121,
+          "value": false
+        },
+        "datetime": {
+          "id": "datetime",
+          "row_id": 121,
+          "value": 1578418200000
+        },
+        "dt_col_name": {
+          "id": "dt_col_name",
+          "row_id": 121
+        },
+        "multi_select": {
+          "id": "multi_select",
+          "row_id": 121,
+          "value": []
+        },
+        "number": {
+          "id": "number",
+          "row_id": 121,
+          "value": 128
+        },
+        "select": {
+          "id": "select",
+          "row_id": 121,
+          "value": "1"
+        },
+        "text": {
+          "id": "text",
+          "row_id": 121,
+          "value": "abcde"
+        }
+      },
+      "actions": [
+        {
+          "id": 43,
+          "name": "Get Current Row",
+          "enabled": true
+        },
+        {
+          "id": 56,
+          "name": "Get All Rows",
+          "enabled": true
+        },
+        {
+          "id": 38,
+          "name": "Delete Current Row",
+          "enabled": true
+        },
+        {
+          "id": 41,
+          "name": "Delete Rows by Name",
+          "enabled": true
+        },
+        {
+          "id": 46,
+          "name": "Update Current Row",
+          "enabled": true
+        }
+      ],
+      "type_id": 1002,
+      "table_name": "Example CSV Datatable",
+      "inc_id": 2258,
+      "inc_name": "Test for datatables",
+      "inc_owner": "admin@example.com",
+      "version": 1
+    }
+  ]
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+inputs.incident_id = incident.id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+note_text = u"<b>Result from Example: Data Table Utils: Get All Data Table Rows</b><br>"
+if results.success:
+  note_text = u"{0} <br>{1}".format(note_text, str(results.rows))
+else:
+  note_text = u"{0} <br>No rows found.".format(note_text)
+
+incident.addNote(helper.createRichText(note_text))
 ```
 
 </p>
