@@ -28,7 +28,7 @@
 ## Release Notes
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0  | 5/2022 | <ul><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Add function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li>Update example workflows<li></li></ul> |
+| v2.0.0  | 5/2022 | <ul><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
@@ -41,7 +41,7 @@
 
  ![screenshot](./doc/screenshots/dt_functions.png)
 
-This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
+This package contains 7 functions that help you manipulate IBM SOAR Data Tables: Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
 
 ## Requirements
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
