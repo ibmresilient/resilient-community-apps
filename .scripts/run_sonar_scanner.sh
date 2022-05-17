@@ -1,7 +1,15 @@
 #!/bin/bash -e
 
-# param $1: (required) CSV string of source files to include in the Sonar scan.
-#           It is the value of `sonar.sources` in the sonar-project.properties file
+# param $1: (required)  CSV string of source files to include in the Sonar scan.
+#                       It is the value of `sonar.sources` in the sonar-project.properties file
+# param $2: (optional)  0 if we want coverage downloaded from artifactory and included in the sonar scan
+#                       1 if we do not want any test coverage included
+
+###############
+## Variables ##
+###############
+SOURCE_FILES=$1
+DOWNLOAD_COV_FILES=$2
 
 ##################
 ## Check params ##
@@ -11,21 +19,42 @@ if [ -z "$1" ] ; then
     exit 1
 fi
 
+if [ -z "$2" ] ; then
+    echo "WARNING: not specified if we need coverage - so we are setting it to 1 by default"
+    DOWNLOAD_COV_FILES=1
+fi
+
+###############
+## Functions ##
+###############
+print_msg () {
+    printf "\n--------------------\n$1\n--------------------\n"
+}
+
 # Download common scripts
 $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
 
-# Download coverage files
-# python $PATH_COMMON_SCRIPTS_DIR/manage_artifactory.py "DOWNLOAD" "$ARTIFACTORY_COV_LOCATION" --save-location "$TRAVIS_BUILD_DIR/$PATH_COV_SAVE_LOC"
+if [ $DOWNLOAD_COV_FILES -eq 0 ]
+then
+    # Download coverage files
+    python $PATH_COMMON_SCRIPTS_DIR/manage_artifactory.py "DOWNLOAD" "$ARTIFACTORY_COV_LOCATION" --save-location "$TRAVIS_BUILD_DIR/$PATH_COV_SAVE_LOC"
+fi
+
+print_msg "Updating '$PATH_SONAR_PROPERTIES' file"
 
 # Update the sonar-project.properties file
 sed -e "s|{{SONAR_QUBE_BRANCH}}|$TRAVIS_BRANCH|" \
 -e "s|{{SONAR_QUBE_PROJ_KEY}}|$SONAR_QUBE_PROJ_KEY|" \
 -e "s|{{PATH_COV_SAVE_LOC}}|$PATH_COV_SAVE_LOC|" \
--e "s|{{SONAR_QUBE_FILES_FOR_SCAN}}|$1|" \
+-e "s|{{SONAR_QUBE_FILES_FOR_SCAN}}|$SOURCE_FILES|" \
 $PATH_SONAR_PROPERTIES > $PATH_SONAR_PROPERTIES.tmp && mv $PATH_SONAR_PROPERTIES.tmp $PATH_SONAR_PROPERTIES
+
+print_msg "Running sonar-scanner on: '$SOURCE_FILES'"
 
 # Run the sonar-scanner
 /tmp/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner -Dsonar.host.url=$SONAR_QUBE_URL -Dsonar.login=$SONAR_QUBE_TOKEN
+
+print_msg "Waiting for '$SONAR_QUBE_SEC_TO_WAIT_FOR_ANALYSIS' seconds for SonarQube Analysis report to be generated"
 
 # Sleep here to ensure there is sufficient time for analysis report
 # to be generated. This is a Travis env var and can be adjusted

@@ -7,7 +7,7 @@ git:
   depth: false
 
 stages:
-  - name: run all tests
+  - name: run tests and sonar scan on all packages
     if: tag IS blank AND branch = master AND type = cron
   - name: run package tests
     if: type != cron
@@ -75,7 +75,7 @@ matrix:
 
   include:
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests - Main - PyPi
       python: 2.7
       env:
@@ -87,7 +87,7 @@ matrix:
         - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.6 Unit Tests - Main - PyPi
       python: 3.6
       env:
@@ -99,7 +99,7 @@ matrix:
         - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.9 Unit Tests - Main - PyPi
       python: 3.9
       env:
@@ -111,7 +111,7 @@ matrix:
         - echo "Starting Python 3.9 Unit Tests - Main - PyPi"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests - Main - Artifactory
       python: 2.7
       env:
@@ -123,7 +123,7 @@ matrix:
         - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.6 Unit Tests - Main - Artifactory
       python: 3.6
       env:
@@ -135,7 +135,7 @@ matrix:
         - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.9 Unit Tests - Main - Artifactory
       python: 3.9
       env:
@@ -146,6 +146,19 @@ matrix:
       script:
         - echo "Starting Python 3.9 Unit Tests - Main - Artifactory"
         - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+
+    - stage: run tests and sonar scan on all packages
+      name: SonarQube Scan on All Packages
+      language: java
+      env: RUN_TYPE=sonarqube
+      before_install:
+        - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
+        - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
+        - pip install requests retry2
+      script:
+        - echo "Installing and running SonarQube scan"
+        - ALL_ALLOWED_IMAGES=`python $PATH_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
+        - $PATH_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES"
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -194,8 +207,7 @@ matrix:
         - pip install requests retry2
       script:
         - echo "Installing and running SonarQube scan"
-        - ALL_ALLOWED_IMAGES=`python $PATH_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
-        - $PATH_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES"
+        - $PATH_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME"
 
     - stage: build image and app zip
       name: Build Image and App zip
