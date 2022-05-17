@@ -2,14 +2,23 @@
 
 # param $1: (required)  CSV string of source files to include in the Sonar scan.
 #                       It is the value of `sonar.sources` in the sonar-project.properties file
-# param $2: (optional)  0 if we want coverage downloaded from artifactory and included in the sonar scan
+# param $2: (required)  Path to the location of the downloaded common scripts
+# param $3: (optional)  0 if we want coverage downloaded from artifactory and included in the sonar scan
 #                       1 if we do not want any test coverage included
+#
+# Usage:
+#   $ run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1
+#
+#   In Travis:
+#       - ALL_ALLOWED_IMAGES=`python $PATH_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
+#       - $PATH_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1
 
 ###############
 ## Variables ##
 ###############
 SOURCE_FILES=$1
-DOWNLOAD_COV_FILES=$2
+PATH_COMMON_SCRIPTS_DIR=$2
+DOWNLOAD_COV_FILES=$3
 
 ##################
 ## Check params ##
@@ -20,6 +29,11 @@ if [ -z "$1" ] ; then
 fi
 
 if [ -z "$2" ] ; then
+    echo "ERROR: Path to the location of the downloaded common scripts must be set as second parameter"
+    exit 1
+fi
+
+if [ -z "$3" ] ; then
     echo "WARNING: not specified if we need coverage - so we are setting it to 1 by default"
     DOWNLOAD_COV_FILES=1
 fi
@@ -30,9 +44,6 @@ fi
 print_msg () {
     printf "\n--------------------\n$1\n--------------------\n"
 }
-
-# Download common scripts
-$PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
 
 if [ $DOWNLOAD_COV_FILES -eq 0 ]
 then
