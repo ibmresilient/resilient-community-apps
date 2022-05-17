@@ -56,6 +56,7 @@ class FunctionComponent(AppFunctionComponent):
             if deleted['success']:
                 yield self.status_message("Datatable {} cleared.".format(dt_api_name))
                 results = rp.done(True, None)
+                results['deleted_rows'] = datatable.get_rows()
             else:
                 results = rp.done(False, None)
                 results['reason'] = deleted['message']

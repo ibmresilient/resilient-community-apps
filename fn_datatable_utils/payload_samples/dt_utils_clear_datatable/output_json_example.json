@@ -13,7 +13,90 @@
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
     "host": "local",
-    "execution_time_ms": 779,
-    "timestamp": "2022-05-17 09:22:05"
-  }
+    "execution_time_ms": 493,
+    "timestamp": "2022-05-17 12:59:08"
+  },
+  "deleted_rows": [
+    {
+      "id": 274,
+      "cells": {
+        "boolean": {
+          "id": "boolean",
+          "row_id": 274,
+          "value": true
+        },
+        "datetime": {
+          "id": "datetime",
+          "row_id": 274,
+          "value": 1653239935000
+        },
+        "dt_col_name": {
+          "id": "dt_col_name",
+          "row_id": 274,
+          "value": "row one"
+        },
+        "multi_select": {
+          "id": "multi_select",
+          "row_id": 274,
+          "value": [
+            "f",
+            "k"
+          ]
+        },
+        "number": {
+          "id": "number",
+          "row_id": 274,
+          "value": 62
+        },
+        "select": {
+          "id": "select",
+          "row_id": 274,
+          "value": "7"
+        },
+        "text": {
+          "id": "text",
+          "row_id": 274,
+          "value": "something"
+        }
+      },
+      "actions": [
+        {
+          "id": 43,
+          "name": "Get Current Row",
+          "enabled": true
+        },
+        {
+          "id": 56,
+          "name": "Get All Rows",
+          "enabled": true
+        },
+        {
+          "id": 57,
+          "name": "Clear Datatable",
+          "enabled": true
+        },
+        {
+          "id": 38,
+          "name": "Delete Current Row",
+          "enabled": true
+        },
+        {
+          "id": 41,
+          "name": "Delete Rows by Name",
+          "enabled": true
+        },
+        {
+          "id": 46,
+          "name": "Update Current Row",
+          "enabled": true
+        }
+      ],
+      "type_id": 1002,
+      "table_name": "Example CSV Datatable",
+      "inc_id": 2258,
+      "inc_name": "Test for datatables",
+      "inc_owner": "admin@example.com",
+      "version": 1
+    }
+  ]
 }
