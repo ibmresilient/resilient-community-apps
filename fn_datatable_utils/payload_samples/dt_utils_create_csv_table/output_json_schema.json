@@ -38,10 +38,10 @@
         "incident_id": {
           "type": "integer"
         },
-        "dt_datable_name": {
-          "type": "string"
+        "attachment_id": {
+          "type": "integer"
         },
-        "dt_csv_data": {
+        "dt_datable_name": {
           "type": "string"
         },
         "dt_has_headers": {

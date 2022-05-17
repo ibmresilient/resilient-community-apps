@@ -13,6 +13,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Setup](#setup)
+- [Function - Data Table Utils: Clear Datatable](#function---data-table-utils-clear-datatable)
 - [Function - Data Table Utils: Create CSV Datatable](#function---data-table-utils-create-csv-datatable)
 - [Function - Data Table Utils: Delete Row](#function---data-table-utils-delete-row)
 - [Function - Data Table Utils: Delete Rows](#function---data-table-utils-delete-rows)
@@ -28,7 +29,7 @@
 ## Release Notes
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0  | 5/2022 | <ul><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li></ul> |
+| v2.0.0  | 5/2022 | <ul><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
@@ -41,7 +42,7 @@
 
  ![screenshot](./doc/screenshots/dt_functions.png)
 
-This package contains 7 functions that help you manipulate IBM SOAR Data Tables: Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
+This package contains 8 functions that help you manipulate IBM SOAR Data Tables: Clear Datatable, Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
 
 ## Requirements
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -116,7 +117,158 @@ To reference the example datatable, create a new incident tab and drag the `Exam
 ![screenshot](./doc/screenshots/dt_3.png)
 
 ---
+## Function - Data Table Utils: Clear Datatable
+Delete all the contents of a datatable
 
+ ![screenshot: fn-data-table-utils-clear-datatable ](./doc/screenshots/dt_clear_dt.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `dt_utils_datatable_api_name` | `text` | Yes | `-` | The API name of the Data Table |
+| `incident_id` | `number` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "incident_id": 2258,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 493,
+    "timestamp": "2022-05-17 12:59:08"
+  },
+  "deleted_rows": [
+    {
+      "id": 274,
+      "cells": {
+        "boolean": {
+          "id": "boolean",
+          "row_id": 274,
+          "value": true
+        },
+        "datetime": {
+          "id": "datetime",
+          "row_id": 274,
+          "value": 1653239935000
+        },
+        "dt_col_name": {
+          "id": "dt_col_name",
+          "row_id": 274,
+          "value": "row one"
+        },
+        "multi_select": {
+          "id": "multi_select",
+          "row_id": 274,
+          "value": [
+            "f",
+            "k"
+          ]
+        },
+        "number": {
+          "id": "number",
+          "row_id": 274,
+          "value": 62
+        },
+        "select": {
+          "id": "select",
+          "row_id": 274,
+          "value": "7"
+        },
+        "text": {
+          "id": "text",
+          "row_id": 274,
+          "value": "something"
+        }
+      },
+      "actions": [
+        {
+          "id": 43,
+          "name": "Get Current Row",
+          "enabled": true
+        },
+        {
+          "id": 56,
+          "name": "Get All Rows",
+          "enabled": true
+        },
+        {
+          "id": 57,
+          "name": "Clear Datatable",
+          "enabled": true
+        },
+        {
+          "id": 38,
+          "name": "Delete Current Row",
+          "enabled": true
+        },
+        {
+          "id": 41,
+          "name": "Delete Rows by Name",
+          "enabled": true
+        },
+        {
+          "id": 46,
+          "name": "Update Current Row",
+          "enabled": true
+        }
+      ],
+      "type_id": 1002,
+      "table_name": "Example CSV Datatable",
+      "inc_id": 2258,
+      "inc_name": "Test for datatables",
+      "inc_owner": "admin@example.com",
+      "version": 1
+    }
+  ]
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table to update
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+```
+
+</p>
+</details>
+
+---
 ## Function - Data Table Utils: Create CSV Datatable
 Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data.
 
