@@ -56,6 +56,7 @@ class RxClient():
             "search_devices":    "/".join([self.api_base_url, "devices/search"]),
             "detections":        "/".join([self.api_base_url, "detections"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
+            "detection_note":    "/".join([self.api_base_url, "detections/{}/notes"]),
             "tags":              "/".join([self.api_base_url, "tags"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
@@ -282,6 +283,39 @@ class RxClient():
             data["resolution"] = resolution_map[resolution_id]
 
         r = self.api_call("patch", uri, headers=self._headers, data=json.dumps(data))
+
+        return r
+
+    def get_detection_note(self, detection_id=None, note=None, update_time=None):
+        """Get the note from a detection.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param detection_id: Detection id (str)
+        """
+        uri = self._endpoints["detection_note"].format(detection_id)
+
+        r = self.api_call("get", uri, headers=self._headers)
+
+        return r
+
+    def add_detection_note(self, detection_id=None, note=None, update_time=None):
+        """Add a note to a detection.
+
+        For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
+
+        :param detection_id: Detection id (str)
+        :param author: The user who updates the note (str)
+        :param note: Text to add to note (str).
+        :param update_time: (Optional) Time when note was added (in millisecs). Default 0 (int)
+        """
+        uri = self._endpoints["detection_note"].format(detection_id)
+        data = {}
+
+        data["note"] = note
+        data["update_time"] = int(update_time) if update_time else 0
+
+        r = self.api_call("put", uri, headers=self._headers, data=json.dumps(data))
 
         return r
 

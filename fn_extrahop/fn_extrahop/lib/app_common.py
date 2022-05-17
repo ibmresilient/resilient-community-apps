@@ -2,10 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Poller support functionality for interaction with the 3rd party endpoints"""
-
 import logging
+from datetime import datetime
 from urllib.parse import urljoin
+from resilient_lib import clean_html
 from fn_extrahop.lib.rx_client import RxClient
+from fn_extrahop.lib.poller_common import IBM_SOAR
 
 LOG = logging.getLogger(__name__)
 
@@ -137,6 +139,27 @@ class AppCommon():
 
         return self.endpoint_url
 
+    def create_note(self, detection_id, note, header=IBM_SOAR):
+        """ Create and add a comment as a note to an ExtraHop detection.
+
+        Args:
+            detection_id [string]: ExtraHop detection ID.
+            note [string]: New note to add.
+            header [string]: New note header.
+
+        """
+        existing_note = None
+
+        res_get_note = self.rx_cli.get_detection_note(detection_id=detection_id)
+        # Get the existing note so we can append the new content
+        if res_get_note:
+            existing_note = res_get_note.json()["note"]
+
+        notes = make_comment(existing_note, note, header=header)
+
+        self.rx_cli.add_detection_note(detection_id=detection_id, note=notes)
+
+
 def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
     """[Setup params dict form fn_input named tuple].
     Make any necessary transformation for api call.
@@ -162,3 +185,21 @@ def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
         params.update({k.split('_', index)[index]: v})
 
     return params
+
+def make_comment(existing_note, note, header=IBM_SOAR):
+    """ Create a comment to add as a note to an ExtraHop detection.
+
+    Args:
+        existing_note [string]: Existing note retrieved via api.
+        note [string]: New note to add
+        header [string]: New note header
+
+    Returns:
+        [string]: Concatenated and formatted comment to be used as a new note.
+    """
+    now = datetime.now()
+    ts = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    return '\n'.join([existing_note if existing_note else "",
+                        "{} {}".format(header, ts),
+                        clean_html(note)])

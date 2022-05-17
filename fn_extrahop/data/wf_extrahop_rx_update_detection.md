@@ -63,3 +63,129 @@ main()
 
 ---
 
+## Function - Extrahop Reveal(x) get detection note
+
+### API Name
+`funct_extrahop_rx_get_detection_note`
+
+### Output Name
+`get_detection_note_result`
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_detection_note"
+WF_NAME = "Example: Extrahop Reveal(x) update detection"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    if not CONTENT:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
+```
+
+---
+
+## Function - Extrahop Reveal(x) add detection note
+
+### API Name
+`funct_extrahop_rx_add_detection_note`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_get_devices pre processing script ##
+import re
+
+inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
+SUMMARY = re.sub('<[^<]+?>', '', incident.resolution_summary.content)
+SUMMARY_NOTE = "[SOAR case - '{}'](Closed with resolution summary: '{}')" \
+    .format(incident.id, SUMMARY)
+
+
+def get_note():
+    # Get old note
+    note = u''
+    get_detection_note_content = workflow.properties.get_detection_note_result.content
+    note_obj = get_detection_note_content["result"]
+    if not note_obj:
+        raise ValueError("Existing ExtraHop detection note not found.")
+    note = note_obj["note"]
+    return note
+
+
+# Processing
+def main():
+    detection_note = get_note()
+
+    inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", SUMMARY_NOTE])
+    inputs.extrahop_update_time = 0
+main()
+
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_add_detection_note"
+WF_NAME = "Example: Extrahop Reveal(x) update detection"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    tag = INPUTS.get("extrahop_tag_name")
+    if CONTENT:
+        result = CONTENT.result
+        if result == "success":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully added closure resolution note to " \
+                        u"ExtraHop detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+        elif result == "failed":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        u"detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        else:
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        u"detection  with unexpected response for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to add closure resolution note to ExtraHop detection for SOAR function <b>{1}</b> with parameters" \
+                     u" <b>{2}</b> ."\
+            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
+```
+
+---
+
