@@ -13,6 +13,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Setup](#setup)
+- [Function - Data Table Utils: Clear Datatable](#function---data-table-utils-clear-datatable)
 - [Function - Data Table Utils: Create CSV Datatable](#function---data-table-utils-create-csv-datatable)
 - [Function - Data Table Utils: Delete Row](#function---data-table-utils-delete-row)
 - [Function - Data Table Utils: Delete Rows](#function---data-table-utils-delete-rows)
@@ -116,7 +117,76 @@ To reference the example datatable, create a new incident tab and drag the `Exam
 ![screenshot](./doc/screenshots/dt_3.png)
 
 ---
+## Function - Data Table Utils: Clear Datatable
+Delete all the contents of a datatable
 
+ ![screenshot: fn-data-table-utils-clear-datatable ](./doc/screenshots/dt_clear_dt.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `dt_utils_datatable_api_name` | `text` | Yes | `-` | The API name of the Data Table |
+| `incident_id` | `number` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "incident_id": 2258,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 779,
+    "timestamp": "2022-05-17 09:22:05"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table to update
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+```
+
+</p>
+</details>
+
+---
 ## Function - Data Table Utils: Create CSV Datatable
 Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data.
 

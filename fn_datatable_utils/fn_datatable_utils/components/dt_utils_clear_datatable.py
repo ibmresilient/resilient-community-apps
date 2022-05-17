@@ -5,7 +5,7 @@
 
 from logging import getLogger
 from resilient_circuits import AppFunctionComponent, function, FunctionResult, handler
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields, ResultPayload, IntegrationError
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 
 FN_NAME = "dt_utils_clear_datatable"
@@ -31,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
             validate_fields(['incident_id', 'dt_utils_datatable_api_name'], kwargs)
 
@@ -51,12 +51,17 @@ class FunctionComponent(AppFunctionComponent):
             datatable.get_data()
 
             # Delete all rows in the givem datatable
-            datatable.clear_datatable()
+            deleted = datatable.clear_datatable()
 
-            yield self.status_message("Datatable {} cleared.".format(dt_api_name))
-            results = rp.done(True, None)
+            if deleted['success']:
+                yield self.status_message("Datatable {} cleared.".format(dt_api_name))
+                results = rp.done(True, None)
+            else:
+                results = rp.done(False, None)
+                results['reason'] = deleted['message']
+                raise IntegrationError("Datatable {} not cleared.".format(dt_api_name))
 
-            yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

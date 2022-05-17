@@ -19,7 +19,7 @@ resilient_mock = DTResilientMock
 
 def call_dt_utils_clear_datatable_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("dt_utils_clear_datatable", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
     event = circuits.watcher.wait(
         "dt_utils_clear_datatable_result", parent=evt, timeout=timeout)
@@ -41,13 +41,9 @@ class TestDtUtilsClearDatatable:
         "incident_id": 1001
     }
 
-    expected_results_1 = {}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    @pytest.mark.parametrize("mock_inputs", [(mock_inputs_1)])
+    def test_success(self, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_clear_datatable_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert results['success']
