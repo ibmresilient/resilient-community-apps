@@ -35,10 +35,14 @@ extrahop_cafile=<path to cert file>|false
 # Set value to 0 when running selftest/Test Configuration.
 polling_interval = <POLLING_INTERVAL>
 # Optional - Filter detection results returned to SOAR using key/value pairs. Filter keys/values are all optional.
-# Example: polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
-#                          "resolution": [".none", "action_taken", "no_action_taken"], 
+# Example: polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "types": ["interactive_traffic_ssh", 
+# "interactive_traffic_shell"], "status": [".none", "new", "in_progress", "acknowledged", "closed"], 
+# "resolution": [".none", "action_taken", "no_action_taken"]
 # The security categories include the following: sec, sec.action, sec.botnet, sec.caution, sec.command, sec.cryptomining,
 # sec.dos, sec.exploit, sec.exfil, sec.lateral, sec.ransomware, sec.recon
+# The detection types includes some of the following: cve_2019_0708, interactive_traffic_ssh, interactive_traffic_shell
+# rdp_brute_force, ssh_brute_force.
+# To get a full list of types  c.f. ExtraHop console/'Systems Settings'/'Detections'/'Detection Catalog'.
 # Risk score ranges: red (80-99), orange (31-79), or yellow (1-30).
 polling_filters =
 #http_proxy=http://proxy:80
