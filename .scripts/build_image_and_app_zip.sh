@@ -114,12 +114,12 @@ version_to_use=$current_version
 if [ "$BUILD_TYPE" == "DEV" ] ; then
     version_to_use=$lib_version.$TRAVIS_BUILD_NUMBER
     print_msg "Updating $path_setup_py_file to version '$version_to_use'"
-    python $SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
+    python $PATH_SCRIPTS_DIR/modify_attribute_in_setup_py_file.py "$package_path/setup.py" "version" "version=\"$version_to_use\","
 fi
 
 if [[ "$DEV_DEPS" -eq 1 ]]; then
     print_msg "Overwriting $path_dockerfile with Artifactory PyPi index for resilient-circuits"
-    python $SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
+    python $PATH_SCRIPTS_DIR/insert_into_Dockerfile.py $path_dockerfile "$DOCKERFILE_KEYWORD" "$DOCKERFILE_WORDS_TO_INSERT"
 fi
 
 docker_tag="$PACKAGE_NAME:$version_to_use"
