@@ -39,8 +39,6 @@ env:
 
     - PYPI_INDEX="https://pypi.org/simple"
 
-    - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
-
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
     - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
     - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
@@ -56,6 +54,8 @@ env:
 # Install package deps
 before_install:
   - pip install -U pip setuptools requests retry2
+  - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+  - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
 
 # Exclude these branches from having jobs ran.
 branches:
@@ -207,6 +207,7 @@ matrix:
         - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
         - pip install requests retry2
         - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+        - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
       script:
         - echo "Installing and running SonarQube scan"
         - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1
@@ -223,11 +224,13 @@ matrix:
         - $PATH_SCRIPTS_DIR/install_ibmcli.sh
       deploy:
         - provider: script
+          skip_cleanup: true
           script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
           on:
             all_branches: true
             condition: "$BUILD_DEV_APP = 1"
         - provider: script
+          skip_cleanup: true
           script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
           on:
             branch: master
