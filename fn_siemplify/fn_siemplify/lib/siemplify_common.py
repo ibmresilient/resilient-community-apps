@@ -62,6 +62,8 @@ HASH_LOOKUP = {
     64: "Malware SHA-256 Hash"
 }
 
+# endtime looks forward 1 hour. Found our instance was displaying GMT incorrectly for DST
+TZ_ADJUST = 1*60*60*1000
 # lookup table between SOAR artifact types and Siemplify entity types
 ARTIFACT_TYPE_LOOKUPS_FILE = "artifact_type_lookup.json"
 
@@ -132,7 +134,6 @@ class SiemplifyCommon():
     def get_cases(self, case_list):
         # API call get all Siemplify cases associated with a list of SOAR incidents
         payload = {
-            "tags": IBMSOAR_TAGS,
             "title": "Caseids:{}".format(",".join(case_list)),
             "requestedPage": 0,
             "timeRangeFilter": 0
@@ -153,7 +154,7 @@ class SiemplifyCommon():
         """
         payload = {
             "startTime": readable_datetime(last_poller_time, tz),
-            "endTime": readable_datetime(datetime.now().timestamp()*1000, tz),
+            "endTime": readable_datetime(datetime.now().timestamp()*1000+TZ_ADJUST, tz),
             "timeRangeFilter": 0,
             "isCaseClosed": "false"
         }
