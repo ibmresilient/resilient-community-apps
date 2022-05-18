@@ -81,7 +81,7 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detection_note"
 WF_NAME = "Example: Extrahop Reveal(x) update detection"
@@ -117,7 +117,7 @@ main()
 
 ### Pre-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_devices pre processing script ##
+##  ExtraHop - wf_extrahop_rx_update_detection pre processing script ##
 import re
 
 inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
@@ -149,7 +149,7 @@ main()
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
+##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_add_detection_note"
 WF_NAME = "Example: Extrahop Reveal(x) update detection"
