@@ -3,11 +3,11 @@
 
 from __future__ import print_function
 import pytest
+from fn_datatable_utils.util.helper import PACKAGE_NAME
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from tests.test_helper import DTResilientMock
 
-PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_delete_rows"
 
 # Read the default configuration-data section from the package
@@ -18,7 +18,7 @@ resilient_mock = DTResilientMock
 
 def call_dt_utils_delete_rows_function(circuits, function_params, timeout=10):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("dt_utils_delete_rows", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)

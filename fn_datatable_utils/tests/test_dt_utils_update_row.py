@@ -4,13 +4,11 @@
 
 from __future__ import print_function
 import pytest
+from fn_datatable_utils.util.helper import PACKAGE_NAME
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from tests.test_helper import DTResilientMock, dict_to_json_str
-from json import loads
-from copy import deepcopy
 
-PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_update_row"
 
 # Read the default configuration-data section from the package
@@ -21,7 +19,7 @@ resilient_mock = DTResilientMock
 
 def call_dt_utils_update_row_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("dt_utils_update_row", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
     event = circuits.watcher.wait(
         "dt_utils_update_row_result", parent=evt, timeout=timeout)
