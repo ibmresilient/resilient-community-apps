@@ -159,7 +159,7 @@ matrix:
       script:
         - echo "Installing and running SonarQube scan"
         - ALL_ALLOWED_IMAGES=`python $PATH_COMMON_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
-        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -209,7 +209,7 @@ matrix:
         - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
       script:
         - echo "Installing and running SonarQube scan"
-        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: build image and app zip
       name: Build Image and App zip
