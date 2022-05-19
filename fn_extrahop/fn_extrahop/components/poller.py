@@ -262,8 +262,12 @@ class PollerComponent(ResilientComponent):
                                                             soar_case_id,
                                                             soar_close_payload
                                                         )
-
                             cases_closed += 1
+                            # Add a Close note.
+                            note = "Closed by ExtraHop from a detection."
+                            comment_header = "ExtraHop"
+                            _close_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
+                                                                                     comment_header, note)
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                     else:
                         # check if the case has been modified
@@ -277,7 +281,7 @@ class PollerComponent(ResilientComponent):
                                                             UPDATE_INCIDENT_TEMPLATE,
                                                             entity
                                                         )
-                            # Update description, tags, priority, assignee, stage, important
+                            # Update SOAR incident properties including: extrahop_update_notification, extrahop_status
                             _update_soar_case = self.soar_common.update_soar_case(
                                                             soar_case_id,
                                                             soar_update_payload
