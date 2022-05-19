@@ -245,6 +245,5 @@ class SiemplifyPollerComponent(ResilientComponent):
         """
         return self._get_timestamp() - datetime.timedelta(minutes=polling_lookback)
 
-
     def _get_timestamp(self):
         return datetime.datetime.now()
