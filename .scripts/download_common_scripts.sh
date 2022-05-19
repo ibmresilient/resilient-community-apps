@@ -36,4 +36,4 @@ wget --header 'Authorization: token '$GITHUB_AUTH_TOKEN \
     $PATH_COMMON_SCRIPTS_REPO
 
 python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common" $PATH_COMMON_SCIPTS_SAVE_LOC
-python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common-app-build-scripts" $PATH_SCRIPTS_DIR -b "add/scripts_from_community_apps"
+python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common-app-build-scripts" $PATH_SCRIPTS_DIR
