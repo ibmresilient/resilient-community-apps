@@ -93,8 +93,8 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
 
 # Read CATEGORY_MAP and TYPE_MAP from workflow property.
-CATEGORY_MAP = workflow.properties
-TYPE_MAP = workflow.properties
+CATEGORY_MAP = workflow.properties.category_map
+TYPE_MAP = workflow.properties.type_map
 
 # Processing
 def main():
@@ -152,8 +152,7 @@ def main():
                             newrow[f1] = str(det[f2])
                     else:
                         if f1 == "type":
-                           TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-                           pass
+                            newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
                         else:
                             newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
