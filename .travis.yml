@@ -158,7 +158,7 @@ matrix:
         - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
       script:
         - echo "Installing and running SonarQube scan"
-        - ALL_ALLOWED_IMAGES=`python $PATH_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
+        - ALL_ALLOWED_IMAGES=`python $PATH_COMMON_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
         - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1
 
     - stage: run package tests
