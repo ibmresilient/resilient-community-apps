@@ -141,20 +141,19 @@ class SiemplifyCommon():
 
         return self._get_paged(SEARCH_CASE_URL, payload)
 
-    def get_new_cases(self, last_poller_time, tz, filters):
+    def get_new_cases(self, last_poller_time, filters):
         """get siemplify cases based on a timezone entry
 
         Args:
             last_poller_time (datetime): timestamp when last poller ran
-            tz (tzinfo): timezone to capture data
             filters (dict): filters to apply to search
 
         Returns:
             list: returned cases
         """
         payload = {
-            "startTime": readable_datetime(last_poller_time, tz),
-            "endTime": readable_datetime(datetime.now().timestamp()*1000+TZ_ADJUST, tz),
+            "startTime": readable_datetime(last_poller_time),
+            "endTime": readable_datetime(datetime.now().timestamp()*1000+TZ_ADJUST),
             "timeRangeFilter": 0,
             "isCaseClosed": "false"
         }
@@ -573,14 +572,12 @@ def callback(response):
 
     return response, error_msg
 
-def readable_datetime(timestamp, tz, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ'):
+def readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ'):
     """
     Convert an epoch timestamp to a string using a format
 
     :param timestamp: ts of object sent from Resilient Server i.e. ``incident.create_date``
     :type timestamp: int
-    :param tz: timezone for the value
-    :type tz: tzinfo
     :param milliseconds: Set to ``True`` if ts in milliseconds
     :type milliseconds: bool
     :param rtn_format: Format of resultant string. See https://docs.python.org/3.6/library/datetime.html#strftime-and-strptime-behavior for options
@@ -593,4 +590,4 @@ def readable_datetime(timestamp, tz, milliseconds=True, rtn_format='%Y-%m-%dT%H:
     else:
         ts = timestamp
 
-    return datetime.fromtimestamp(ts, tz=tz).strftime(rtn_format)
+    return datetime.fromtimestamp(ts).strftime(rtn_format)

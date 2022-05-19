@@ -101,7 +101,7 @@ class SiemplifyPollerComponent(ResilientComponent):
             return False
 
         LOG.info(u"Siemplify poller initiated, polling interval %s", self.polling_interval)
-        self.timezone = pytz.timezone(options.get("polling_timezone", GMT))
+
         polling_lookback = int(options.get('polling_lookback', 0))
         LOG.info("Polling lookback: %s", polling_lookback)
         self.last_poller_time = self._get_last_poller_date(polling_lookback)
@@ -135,7 +135,6 @@ class SiemplifyPollerComponent(ResilientComponent):
         if self.sync_cases in ["siemplify", "both"]:
             # get new siemplify cases to escalate
             new_case_list, err_msg = self.siemplify_env.get_new_cases(kwargs.get("last_poller_time"),
-                                                                      self.timezone,
                                                                       self.polling_filters)
             if err_msg:
                 LOG.error("Error retrieving new cases from Siemplify: %s", str(err_msg))
@@ -248,4 +247,4 @@ class SiemplifyPollerComponent(ResilientComponent):
 
 
     def _get_timestamp(self):
-        return datetime.datetime.now().astimezone(self.timezone)
+        return datetime.datetime.now()
