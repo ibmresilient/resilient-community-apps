@@ -22,13 +22,12 @@ import java.util.Date as Date
 
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool, int and nested dicts.
-     Does not support lists.
+     Supports types: basestring, bool, int, nested dicts and lists.
      If the value is None, it sets it to False."""
 
-  json_entry = '"{}":{}'
-  json_entry_str = '"{}":"{}"'
-  entries = []
+  json_entry = '"{0}":{1}'
+  json_entry_str = '"{0}":"{1}"'
+  entries = [] 
 
   for entry in d:
     key = entry
@@ -37,13 +36,10 @@ def dict_to_json_str(d):
     if not value:
       value = False
 
-    if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
-
-    if isinstance(value, basestring):
+    elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-
+    
     elif isinstance(value, bool):
       value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
@@ -54,7 +50,7 @@ def dict_to_json_str(d):
     else:
       entries.append(json_entry.format(key, value))
 
-  return '{} {} {}'.format('{', ','.join(entries), '}')
+  return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
 # The ID of this incident
 inputs.incident_id = incident.id
@@ -63,8 +59,8 @@ inputs.incident_id = incident.id
 inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 
 # The column api names and the value to update the cell to
-# Example: {"name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
-inputs.dt_utils_cells_to_update = dict_to_json_str({"name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
+# Example: {"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
+inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
 ```
 
 ### Post-Processing Script

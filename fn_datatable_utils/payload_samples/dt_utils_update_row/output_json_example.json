@@ -1,77 +1,102 @@
 {
+  "version": "1.0",
   "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
   "inputs": {
-    "incident_id": 2096,
+    "incident_id": 2258,
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_row_id": 5,
-    "dt_utils_cells_to_update": {
-      "datetime": 1648646740137,
-      "text": "Done"
-    }
+    "dt_utils_cells_to_update": "{ \"number\":1,\"multi_select\":['a', 'b'],\"boolean\":true,\"name\":\"example\" }",
+    "dt_utils_row_id": 0
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 1162,
+    "timestamp": "2022-05-20 13:21:38"
   },
   "row": {
-    "id": 5,
+    "id": 297,
     "cells": {
+      "boolean": {
+        "id": "boolean",
+        "row_id": 297,
+        "value": true
+      },
       "datetime": {
         "id": "datetime",
-        "row_id": 5,
-        "value": 1648646740137
+        "row_id": 297
       },
       "dt_col_name": {
         "id": "dt_col_name",
-        "row_id": 5,
-        "value": "something"
+        "row_id": 297
       },
       "multi_select": {
         "id": "multi_select",
-        "row_id": 5,
+        "row_id": 297,
         "value": [
-          "j",
-          "g"
+          "b",
+          "a"
         ]
       },
       "number": {
         "id": "number",
-        "row_id": 5,
-        "value": 56
+        "row_id": 297,
+        "value": 1
       },
       "select": {
         "id": "select",
-        "row_id": 5,
-        "value": "2"
+        "row_id": 297
       },
       "text": {
         "id": "text",
-        "row_id": 5,
-        "value": "Done"
-      },
-      "boolean": {
-        "id": "boolean",
-        "row_id": 5,
-        "value": false
+        "row_id": 297
       }
     },
     "actions": [
       {
-        "id": 14,
+        "id": 43,
+        "name": "Get Current Row",
+        "enabled": true
+      },
+      {
+        "id": 56,
+        "name": "Get All Rows",
+        "enabled": true
+      },
+      {
+        "id": 57,
+        "name": "Clear Datatable",
+        "enabled": true
+      },
+      {
+        "id": 38,
         "name": "Delete Current Row",
         "enabled": true
       },
       {
-        "id": 17,
+        "id": 41,
         "name": "Delete Rows by Name",
         "enabled": true
       },
       {
-        "id": 21,
+        "id": 46,
         "name": "Update Current Row",
+        "enabled": true
+      },
+      {
+        "id": 58,
+        "name": "Add Row",
         "enabled": true
       }
     ],
-    "type_id": 1000,
+    "type_id": 1002,
     "table_name": "Example CSV Datatable",
-    "inc_id": 2096,
-    "inc_name": "A",
+    "inc_id": 2258,
+    "inc_name": "Test for datatables",
     "inc_owner": "admin@example.com",
     "version": 2
   }

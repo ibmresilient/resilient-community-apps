@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import IntegrationError, validate_fields, ResultPayload
+from resilient_lib import validate_fields, ResultPayload
 from json import loads
 
 FN_NAME = "dt_utils_add_row"
@@ -38,14 +38,22 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info(str(fn_inputs))
 
             dt_utils_cells_to_update = fn_inputs.dt_utils_cells_to_update
+            inputs_dict = fn_inputs._asdict()
 
             try:
-                dt_utils_cells_to_update = loads(fn_inputs.dt_utils_cells_to_update)
+                # The fixes the format of lists
+                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("\'",'"'))
+                inputs_dict["dt_utils_cells_to_update"] = dt_utils_cells_to_update
             except Exception as err:
-                raise ValueError("Failed to parse JSON string: {}".format(fn_inputs.dt_utils_cells_to_update))
+                raise ValueError("Failed to parse JSON string: {} with error: {}".format(inputs_dict.dt_utils_cells_to_update, str(err)))
+
+            row_to_add = {}
+            for key in dt_utils_cells_to_update:
+                value = dt_utils_cells_to_update[key]
+                row_to_add[key] = {"value": value}
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **fn_inputs)
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
@@ -53,7 +61,7 @@ class FunctionComponent(AppFunctionComponent):
             # Get the data table data
             datatable.get_data()
 
-            add_row = datatable.dt_add_rows(dt_utils_cells_to_update)
+            add_row = datatable.dt_add_rows(row_to_add)
 
             if "error" in add_row:
                 yield self.status_message("Row in {} NOT added.".format(datatable.api_name))

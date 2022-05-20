@@ -2,8 +2,16 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
     "success": {
       "type": "boolean"
+    },
+    "reason": {},
+    "content": {},
+    "raw": {
+      "type": "string"
     },
     "inputs": {
       "type": "object",
@@ -14,19 +22,34 @@
         "dt_utils_datatable_api_name": {
           "type": "string"
         },
+        "dt_utils_cells_to_update": {
+          "type": "string"
+        },
         "dt_utils_row_id": {
           "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
         },
-        "dt_utils_cells_to_update": {
-          "type": "object",
-          "properties": {
-            "datetime": {
-              "type": "integer"
-            },
-            "text": {
-              "type": "string"
-            }
-          }
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     },
@@ -39,7 +62,7 @@
         "cells": {
           "type": "object",
           "properties": {
-            "datetime": {
+            "boolean": {
               "type": "object",
               "properties": {
                 "id": {
@@ -49,6 +72,17 @@
                   "type": "integer"
                 },
                 "value": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "datetime": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "row_id": {
                   "type": "integer"
                 }
               }
@@ -61,9 +95,6 @@
                 },
                 "row_id": {
                   "type": "integer"
-                },
-                "value": {
-                  "type": "string"
                 }
               }
             },
@@ -106,9 +137,6 @@
                 },
                 "row_id": {
                   "type": "integer"
-                },
-                "value": {
-                  "type": "string"
                 }
               }
             },
@@ -120,23 +148,6 @@
                 },
                 "row_id": {
                   "type": "integer"
-                },
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "boolean": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "row_id": {
-                  "type": "integer"
-                },
-                "value": {
-                  "type": "boolean"
                 }
               }
             }

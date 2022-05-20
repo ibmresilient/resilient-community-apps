@@ -5,6 +5,7 @@
 
 from logging import getLogger
 from json import loads
+from ast import literal_eval
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 from resilient_lib import validate_fields, ResultPayload
@@ -49,7 +50,8 @@ class FunctionComponent(ResilientComponent):
             LOG.info("dt_utils_cells_to_update: %s", dt_utils_cells_to_update)
 
             try:
-                dt_utils_cells_to_update = loads(dt_utils_cells_to_update)
+                # The fixes the format of lists
+                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("\'",'"'))
             except Exception:
                 raise ValueError("Failed to parse JSON string: {}".format(dt_utils_cells_to_update))
 
