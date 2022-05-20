@@ -1,6 +1,6 @@
 {
   {% if description %}
-    "description": "{{ description | json | replace('"', '\\"') }}",
+    "description": {{ description | replace('"', '\\"') | json }},
   {% endif %}
   "severity_code": "{{ priority | string | resilient_substitute('{"-1": "Low", "40": "Low", "50":"Medium", "60":"Medium", "80":"High", "100":"High", "DEFAULT":"Medium"}') }}",
   "properties": {

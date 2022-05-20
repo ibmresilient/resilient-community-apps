@@ -330,11 +330,11 @@ class SiemplifyCommon():
         Returns:
             [dict]: [Results of Siemplify API call]
         """
-        filetype = None
+        filetype = ".txt"
         file_info = os.path.splitext(filename)
-        if file_info[1]:
-            filetype = file_info[1]
-            filename = file_info[0]
+        filename = file_info[0]
+        if len(file_info) == 2:
+            filetype = file_info[1] if file_info[1] != "" else ".txt"
 
         #  "AlertIdentifier": alert_id,
         payload = {
@@ -342,10 +342,10 @@ class SiemplifyCommon():
             "base64Blob": b64content,
             "name": filename,
             "description": CREATED_BY_SOAR,
-            "isImportant": isImportant
+            "isImportant": isImportant,
+            "type": filetype
         }
-        if filetype:
-            payload['type'] = filetype
+        LOG.debug(payload)
 
         return self._make_call("POST", CREATE_ATTACHMENT_URL, payload)
 
