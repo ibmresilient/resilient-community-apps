@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
+import re
 
 import pytest
 from mock import patch, MagicMock
@@ -116,5 +117,10 @@ class TestFunctExtrahopRxSearchPackets:
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
         results = call_funct_extrahop_rx_search_packets_function(circuits_app, mock_inputs)
         assert_keys_in(results, *keys)
-        assert(expected_results == results["content"])
+        if results["content"].get("result", {}).get("attachment", {}):
+            attachment =  results["content"]["result"]["attachment"]
+            attachment_regex = re.compile(r'^<b>example_[0-9]+.pcap</b>$')
+            assert attachment_regex.match(attachment)
+        else:
+            assert(expected_results == results["content"])
 

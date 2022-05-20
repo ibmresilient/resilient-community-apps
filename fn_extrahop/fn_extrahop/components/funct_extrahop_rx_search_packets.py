@@ -4,7 +4,9 @@
 
 """AppFunction implementation"""
 import re
+import os
 from io import BytesIO
+from datetime import datetime
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import write_file_attachment
@@ -61,6 +63,10 @@ class FunctionComponent(AppFunctionComponent):
             if cd_headers:
                 filename = re.findall("filename=(.+)", cd_headers)[0].strip('"')
             if filename:
+                # Split filename to remove extension
+                fn, ext = os.path.splitext(filename)
+                # Reassemble filename to include date and time to make it more unique.
+                filename = "{0}_{1}{2}".format(fn, datetime.now().strftime("%Y%m%d%H%M%S"), ext)
                 datastream = BytesIO(response.content)
                 write_file_attachment(self.rest_client(), filename, datastream, fn_inputs.incident_id,
                                       task_id=None, content_type=None)

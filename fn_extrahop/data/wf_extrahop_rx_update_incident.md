@@ -34,6 +34,9 @@ DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+# Read CATEGORY_MAP and TYPE_MAP dicts from workflow property.
+CATEGORY_MAP = workflow.properties.category_map
+TYPE_MAP = workflow.properties.type_map
 
 def addArtifact(artifact_type, artifact_value, description):
     """Add new artifacts to the incident.
@@ -60,11 +63,12 @@ def main():
                 f2 = f1
                 if f1.startswith("det_"):
                     f2 = f1.split('_', 1)[1]
-
                 if det[f2] is None or isinstance(det[f2], long):
                     newrow[f1] = det[f2]
                 elif isinstance(det[f1], list):
-                    if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                    if f1 == "categories":
+                        newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
+                    elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
                         if f1 == "participants":
                             for p in det[f2]:
                                 if p["object_type"] == "ipaddr":
@@ -111,7 +115,10 @@ def main():
                     else:
                         newrow[f1] = str(det[f2])
                 else:
-                    newrow[f1] = "{}".format(det[f2])
+                    if f1 == "type":
+                        newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
+                    else:
+                        newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \

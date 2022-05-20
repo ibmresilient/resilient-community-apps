@@ -19,7 +19,10 @@
 ### Pre-Processing Script
 ```python
 ##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
-#raise ValueError("{}".format(rule.properties.extrahop_detection_status))
+# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. 
+# Reverse the dict keys and values
+CATEGORY_MAP = {v: k for k, v in workflow.properties.category_map.items()}
+TYPE_MAP = {v: k for k, v in workflow.properties.type_map.items()}
 
 def get_prop(prop, type=None):
     if prop:
@@ -31,40 +34,48 @@ def get_prop(prop, type=None):
     else:
         return None
 
-def main():
-    filter = {}
-    filter_props = {
-        "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
-        "types": get_prop(rule.properties.extrahop_detection_types),
-        "category": get_prop(rule.properties.extrahop_detection_category),
-        "assignee": get_prop(rule.properties.extrahop_detection_assignee),
-        "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id),
-        "status": get_prop(rule.properties.extrahop_detection_status),
-        "resolution": get_prop(rule.properties.extrahop_detection_resolution)
+
+
+filter = {}
+category = None
+detection_types = None
+if rule.properties.extrahop_detection_category:
+    category = CATEGORY_MAP[rule.properties.extrahop_detection_category]
+if rule.properties.extrahop_detection_types:
+    detection_types = [TYPE_MAP[d] for d in rule.properties.extrahop_detection_types]
+
+    
+filter_props = {
+    "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
+    "types": get_prop(detection_types),
+    "category": get_prop(category),
+    "assignee": get_prop(rule.properties.extrahop_detection_assignee),
+    "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id),
+    "status": get_prop(rule.properties.extrahop_detection_status),
+    "resolution": get_prop(rule.properties.extrahop_detection_resolution)
+}
+
+filter = {k: v for k, v in filter_props.items() if v}
+
+if not filter:
+    raise ValueError("The search filter is empty.")
+else:
+    search_filter = {
+        "filter": filter
     }
 
-    filter = {k: v for k, v in filter_props.items() if v}
+inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
+if rule.properties.extrahop_active_from:
+    inputs.extrahop_active_from = rule.properties.extrahop_active_from
+if rule.properties.extrahop_active_until:
+    inputs.extrahop_active_until = rule.properties.extrahop_active_until
+if rule.properties.extrahop_limit:
+    inputs.extrahop_limit = rule.properties.extrahop_limit
+if rule.properties.extrahop_offset:
+    inputs.extrahop_offset = rule.properties.extrahop_offset
+if rule.properties.extrahop_update_time:
+    inputs.extrahop_update_time = rule.properties.extrahop_update_time
 
-    if not filter:
-        raise ValueError("The search filter is empty.")
-    else:
-        search_filter = {
-            "filter": filter
-        }
-    
-    inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
-    if rule.properties.extrahop_active_from:
-      inputs.extrahop_active_from = rule.properties.extrahop_active_from
-    if rule.properties.extrahop_active_until:
-      inputs.extrahop_active_until = rule.properties.extrahop_active_until
-    if rule.properties.extrahop_limit:
-      inputs.extrahop_limit = rule.properties.extrahop_limit
-    if rule.properties.extrahop_offset:
-      inputs.extrahop_offset = rule.properties.extrahop_offset
-    if rule.properties.extrahop_update_time:
-      inputs.extrahop_update_time = rule.properties.extrahop_update_time
-            
-main()
 ```
 
 ### Post-Processing Script
@@ -80,69 +91,81 @@ DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
                    "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+
+# Read CATEGORY_MAP and TYPE_MAP from workflow property.
+CATEGORY_MAP = workflow.properties.category_map
+TYPE_MAP = workflow.properties.type_map
+
 # Processing
+def main():
+    note_text = u''
 
-note_text = u''
-
-if CONTENT:
-    dets = CONTENT.result
-    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-    if dets:
-        for det in dets:
-            newrow = incident.addRow(DATA_TABLE)
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            for f1 in DATA_TBL_FIELDS:
-                f2 = f1
-                if f1.startswith("det_"):
-                  f2 = f1.split('_', 1)[1]
-                if det[f2] is None or isinstance(det[f2], long):
-                    newrow[f1] = det[f2]
-                elif isinstance(det[f1], list):
-                    if f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                        obj_cnt = 0
-                        tbl = u''
-                        for i in det[f2]:
-                            for k, v in i.items():
-                                if k == "legacy_ids":
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                                elif k == "url":
-                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
-                                        .format(k, v, i["id"])
+    if CONTENT:
+        dets = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        if dets:
+            for det in dets:
+                newrow = incident.addRow(DATA_TABLE)
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                for f1 in DATA_TBL_FIELDS:
+                    f2 = f1
+                    if f1.startswith("det_"):
+                      f2 = f1.split('_', 1)[1]
+                    if det[f2] is None or isinstance(det[f2], long):
+                        newrow[f1] = det[f2]
+                    elif isinstance(det[f1], list):
+                        if f1 == "categories":
+                            newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
+                        elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
+                            obj_cnt = 0
+                            tbl = u''
+                            for i in det[f2]:
+                                for k, v in i.items():
+                                    if k == "legacy_ids":
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
+                                    elif k == "url":
+                                        tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>'\
+                                            .format(k, v, i["id"])
+                                    else:
+                                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
+                                tbl += u"<br>"
+                                obj_cnt += 1
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = "{}".format(", ".join(det[f2]))
+                    elif isinstance(det[f2], (bool, dict)):
+                        if f1 in ["properties"]:
+                            suspect_ip = False
+                            tbl = u''
+                            for i, j in det[f2].items():
+                                if i == "suspicious_ipaddr":
+                                    artifact_type = "IP Address"
+                                    type = "Suspicious IP Addresses"
+                                    value = j["value"]
+                                    tbl += u'<div><b>{0}:'.format(type)
+                                    tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
                                 else:
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            tbl += u"<br>"
-                            obj_cnt += 1
-                        newrow[f1] = tbl
+                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = str(det[f2])
                     else:
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                elif isinstance(det[f2], (bool, dict)):
-                    if f1 in ["properties"]:
-                        suspect_ip = False
-                        tbl = u''
-                        for i, j in det[f2].items():
-                            if i == "suspicious_ipaddr":
-                                artifact_type = "IP Address"
-                                type = "Suspicious IP Addresses"
-                                value = j["value"]
-                                tbl += u'<div><b>{0}:'.format(type)
-                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                            else:
-                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = str(det[f2])
-                else:
-                    newrow[f1] = "{}".format(det[f2])
-        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+                        if f1 == "type":
+                            newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
+                        else:
+                            newrow[f1] = "{}".format(det[f2])
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
-else:
-    note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                 u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-        .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-incident.addNote(helper.createRichText(note_text))
-
+    incident.addNote(helper.createRichText(note_text))
+    
+# Start execution
+main()
 ```
 
 ---
