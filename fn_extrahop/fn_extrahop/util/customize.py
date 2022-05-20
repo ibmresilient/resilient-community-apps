@@ -29,7 +29,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"extrahop_activitymaps", u"extrahop_detections", u"extrahop_devices", u"extrahop_tags", u"extrahop_watchlist"],
         "automatic_tasks": [],
-        "scripts": [u"scr_extrahop_rx_add_artifact_from_device"],
+        "scripts": [u"scr_extrahop_detection_property_helper", u"scr_extrahop_rx_add_artifact_from_device"],
         "playbooks": []
     }
 
@@ -110,6 +110,7 @@ def customization_data(client=None):
         - extrahop_tags
         - extrahop_watchlist
     - Scripts:
+        - scr_extrahop_detection_property_helper
         - scr_extrahop_rx_add_artifact_from_device
     """
 
