@@ -39,6 +39,9 @@ class FunctionComponent(AppFunctionComponent):
         siemplify_env = SiemplifyCommon(self.rc, self.app_configs)
         results, error_msg = siemplify_env.get_customlist(inputs)
 
+        if not error_msg and inputs.get('siemplify_limit'):
+            results = results[:inputs.get('siemplify_limit')]
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results, success=isinstance(error_msg, type(None)), reason=error_msg)

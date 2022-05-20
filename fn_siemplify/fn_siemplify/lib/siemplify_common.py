@@ -189,15 +189,12 @@ class SiemplifyCommon():
         if inputs.get("siemplify_search"):
             payload = {
                 "searchTerm": inputs.get("siemplify_search"),
-                "pageSize": str(inputs.get("siemplify_limit", 1000))
+                "pageSize": str(inputs.get("siemplify_limit", 5000))
             }
             results, err_msg = self._get_blocklist_paged(FILTERED_BLOCKLIST_URL, payload)
 
 
         results, err_msg = self._make_call("GET", All_BLOCKLIST_URL)
-
-        if not err_msg and inputs.get("siemplify_limit"):
-            results = results[:int(inputs.get("siemplify_limit"))]
 
         return results, err_msg
 
@@ -563,13 +560,15 @@ def callback(response):
     :return: response, error_msg
     """
     error_msg = None
-    if response.status_code < 300 or response.status_code == 2000:
+    if response.status_code < 300:
         return response, None
 
     resp = response.json()
     msg = resp.get('ErrorMessage', '')
-    error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(response.status_code, msg)
-
+    err_code = resp.get('ErrorCode')
+    error_msg  = u"Siemplify Error: \n    status code: {0}\n    failure: {1}".format(err_code, msg)
+    if err_code and err_code == 2000:
+        response.status_code = 2000
     return response, error_msg
 
 def readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ'):
