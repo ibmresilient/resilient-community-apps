@@ -1,5 +1,5 @@
 {
-  "version": 2.0,
+  "version": "1.0",
   "success": true,
   "reason": null,
   "content": {
@@ -10,18 +10,19 @@
     "referrals": null,
     "type": "addResponse"
   },
-  "raw": null,
+  "raw": "{\"result\": 0, \"description\": \"success\", \"dn\": \"\", \"message\": \"\", \"referrals\": null, \"type\": \"addResponse\"}",
   "inputs": {
-    "ldap_dn": "cn=mygroup,dc=example,dc=com",
-    "ldap_multiple_group_dn": "[]",
-    "ldap_attribute_name_values": "'objectclass': 'groupOfNames'"
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "cn=gerry,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com']",
+    "ldap_attribute_name_values": "\"objectClass\": \"user\", \"uid\": \"gerry\", \"telephoneNumber\": \"7812993827\", \"name\": \"gerry\", \"mail\": \"gerry@mail.com\", \"sn\": \"richards\""
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "1.2.0",
-    "host": "9e05ac7d-259a-4f2f-963c-c6b198aa446f-7bc9574887-rh6vw",
-    "execution_time_ms": 131,
-    "timestamp": "2022-03-07 16:37:55"
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 15:16:50"
   }
 }

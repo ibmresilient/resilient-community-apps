@@ -19,8 +19,21 @@
 ### Pre-Processing Script
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
-inputs.ldap_search_filter = rule.properties.ldap_search_filter
-inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
+
+# If search filters are given
+if rule.properties.ldap_search_filter:
+  inputs.ldap_search_filter = rule.properties.ldap_search_filter
+# If filters not given then set them to example filters
+else:
+  inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
+
+# If search attributes are given
+if rule.properties.ldap_search_attributes:
+  inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
+# If search attributes not given then set them to example attributes
+else:
+  inputs.ldap_search_attributes = "*"
+
 inputs.ldap_search_param = artifact.value
 # If the incident field ldap_base_dn contains a value then set ldap_search_base to that value
 if incident.properties.ldap_base_dn:

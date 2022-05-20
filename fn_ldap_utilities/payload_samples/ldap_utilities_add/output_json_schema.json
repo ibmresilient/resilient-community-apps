@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "number"
+      "type": "string"
     },
     "success": {
       "type": "boolean"
@@ -30,10 +30,15 @@
         }
       }
     },
-    "raw": {},
+    "raw": {
+      "type": "string"
+    },
     "inputs": {
       "type": "object",
       "properties": {
+        "ldap_domain_name": {
+          "type": "string"
+        },
         "ldap_dn": {
           "type": "string"
         },

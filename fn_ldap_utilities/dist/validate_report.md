@@ -4,7 +4,7 @@
 
 | SDK Version       | Generation Time          | Command Line Arguments Provided |
 | :---------------- | ------------------------ | ------------------------------- |
-| 44.1.2953 | 2022/05/10 08:25:52 | `cmd`: validate, `package`: . |
+| 44.1.2953 | 2022/05/20 11:01:53 | `cmd`: validate, `package`: . |
 
 ## App Details
 | Attribute | Value |

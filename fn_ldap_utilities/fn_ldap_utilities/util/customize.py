@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"ldap_utilities_add", u"ldap_utilities_add_to_groups", u"ldap_utilities_remove_from_groups", u"ldap_utilities_search", u"ldap_utilities_set_password", u"ldap_utilities_toggle_access", u"ldap_utilities_update"],
         "workflows": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_user_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"],
         "actions": [u"Example: LDAP Utilities: Add", u"Example: LDAP Utilities: Add User(s) to Group(s)", u"Example: LDAP Utilities: Remove User(s) from Group(s)", u"Example: LDAP Utilities: Search", u"Example: LDAP Utilities: Set Password", u"Example: LDAP Utilities: Toggle Access", u"Example: LDAP Utilities: Update"],
-        "incident_fields": [],
+        "incident_fields": [u"ldap_base_dn", u"ldap_domain_name"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"ldap_query_results"],
@@ -68,6 +68,9 @@ def customization_data(client=None):
         - Example: LDAP Utilities: Set Password
         - Example: LDAP Utilities: Toggle Access
         - Example: LDAP Utilities: Update
+    - Incident Fields:
+        - ldap_base_dn
+        - ldap_domain_name
     - Data Tables:
         - ldap_query_results
     """

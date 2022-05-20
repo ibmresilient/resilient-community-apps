@@ -152,10 +152,10 @@ Add users, groups, organizational units to LDAP
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_attribute_name_values` | `text` | No | `"attribute1": "value1", "attribute2": "value2"` | comma separated name value pairs |
-| `ldap_dn` | `text` | Yes | `-` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
-| `ldap_multiple_group_dn` | `text` | Yes | `"['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"` | List (represented as a string) of each DN of the related groups |
+| `ldap_attribute_name_values` | `text` | No | `"attribute1": "value1", "attribute2": "value2"` | comma separated name value pairs, each key and value must be surrounded by quotation marks like the example |
+| `ldap_dn` | `text` | Yes | `cn=user1,ou=test-ou,dc=example,dc=com` | Distinguished Name of entry you want to access |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
+| `ldap_multiple_group_dn` | `text` | Yes | `['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
 
 </p>
 </details>
@@ -167,31 +167,32 @@ Add users, groups, organizational units to LDAP
 
 ```python
 results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
   "content": {
+    "result": 0,
     "description": "success",
     "dn": "",
     "message": "",
     "referrals": null,
-    "result": 0,
     "type": "addResponse"
   },
+  "raw": "{\"result\": 0, \"description\": \"success\", \"dn\": \"\", \"message\": \"\", \"referrals\": null, \"type\": \"addResponse\"}",
   "inputs": {
-    "ldap_attribute_name_values": "\u0027objectclass\u0027: \u0027groupOfNames\u0027",
-    "ldap_dn": "cn=mygroup,dc=example,dc=com",
-    "ldap_multiple_group_dn": "[]"
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "cn=gerry,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com']",
+    "ldap_attribute_name_values": "\"objectClass\": \"user\", \"uid\": \"gerry\", \"telephoneNumber\": \"7812993827\", \"name\": \"gerry\", \"mail\": \"gerry@mail.com\", \"sn\": \"richards\""
   },
   "metrics": {
-    "execution_time_ms": 131,
-    "host": "9e05ac7d-259a-4f2f-963c-c6b198aa446f-7bc9574887-rh6vw",
+    "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "1.2.0",
-    "timestamp": "2022-03-07 16:37:55",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 15:16:50"
+  }
 }
 ```
 
@@ -241,9 +242,9 @@ A function that allows adding multiple users to multiple groups
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
-| `ldap_multiple_group_dn` | `text` | Yes | `"['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"` | List (represented as a string) of each DN of the related groups |
-| `ldap_multiple_user_dn` | `text` | Yes | `"['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']"` | List (represented as a string) of each DN of the users |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
+| `ldap_multiple_group_dn` | `text` | Yes | `['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
+| `ldap_multiple_user_dn` | `text` | Yes | `['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']` | List (represented as a string) of each DN of the users, each value in the list must have quotes around it like the example |
 
 </p>
 </details>
@@ -255,13 +256,31 @@ A function that allows adding multiple users to multiple groups
 
 ```python
 results = {
-  "groups_dn": [
-    "cn=GroupA,cn=Users,dc=example,dc=com"
-  ],
+  "version": "1.0",
   "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com']",
+    "ldap_multiple_user_dn": "['CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com']"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 15:22:53"
+  },
   "users_dn": [
-    "cn=Breda User11,cn=Users,dc=example,dc=com",
-    "cn=Breda User10,cn=Users,dc=example,dc=com"
+    [
+      "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ]
+  ],
+  "groups_dn": [
+    "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
   ]
 }
 ```
@@ -323,9 +342,9 @@ A function that allows you to remove multiple from multiple groups
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
-| `ldap_multiple_group_dn` | `text` | Yes | `"['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"` | List (represented as a string) of each DN of the related groups |
-| `ldap_multiple_user_dn` | `text` | Yes | `"['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']"` | List (represented as a string) of each DN of the users |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
+| `ldap_multiple_group_dn` | `text` | Yes | `['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']` | List (represented as a string) of each DN of the related groups, each value in the list must have quotes around it like the example |
+| `ldap_multiple_user_dn` | `text` | Yes | `['dn=tom smith,dc=example,dc=com', 'dn=ted smith,dc=example,dc=com']` | List (represented as a string) of each DN of the users, each value in the list must have quotes around it like the example |
 
 </p>
 </details>
@@ -337,13 +356,31 @@ A function that allows you to remove multiple from multiple groups
 
 ```python
 results = {
-  "groups_dn": [
-    "cn=GroupA,cn=Users,dc=example,dc=com"
-  ],
+  "version": "1.0",
   "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com']",
+    "ldap_multiple_user_dn": "['CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com']"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 15:22:53"
+  },
   "users_dn": [
-    "cn=Breda User11,cn=Users,dc=example,dc=com",
-    "cn=Breda User10,cn=Users,dc=example,dc=com"
+    [
+      "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ]
+  ],
+  "groups_dn": [
+    "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
   ]
 }
 ```
@@ -409,11 +446,11 @@ SOAR Function to do a search or query against an LDAP server.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
-| `ldap_search_attributes` | `text` | No | `-` | A single attribute or a list of attributes to be returned by the LDAP search  |
-| `ldap_search_base` | `text` | Yes | `-` | The base of the LDAP search request. |
-| `ldap_search_filter` | `textarea` | Yes | `-` | The filter of the LDAP search request |
-| `ldap_search_param` | `text` | No | `-` | Parameter used in search filter |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
+| `ldap_search_attributes` | `text` | No | `uid,cn,sn,mail,telephoneNumber or *` | A single attribute or a list of attributes to be returned by the LDAP search  |
+| `ldap_search_base` | `text` | Yes | `DC=dev,DC=example,DC=com` | The base of the LDAP search request. |
+| `ldap_search_filter` | `textarea` | Yes | `(&(objectClass=person)(mail=*%ldap_param%))` | The filter of the LDAP search request, must be in the correct filter format for LDAP |
+| `ldap_search_param` | `text` | No | `user1@example.com` | Parameter used in search filter |
 
 </p>
 </details>
@@ -425,17 +462,140 @@ SOAR Function to do a search or query against an LDAP server.
 
 ```python
 results = {
-  "entries": [
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
     {
-      "cn": "fiona saml1",
-      "dn": "CN=fiona saml1,CN=Users,dc=example,DC=com",
-      "mail": "fionasaml1@test.com",
-      "sn": "saml1",
-      "telephoneNumber": [],
-      "uid": []
+      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+      "adminCount": 1,
+      "badPasswordTime": "1601-01-01 00:00:00+00:00",
+      "badPwdCount": 0,
+      "cn": "Gary",
+      "codePage": 0,
+      "countryCode": 0,
+      "dSCorePropagationData": [
+        "2018-11-08 20:14:42+00:00",
+        "1601-01-01 00:00:00+00:00"
+      ],
+      "displayName": "Gary Crosby",
+      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "givenName": "Gary",
+      "instanceType": 4,
+      "lastLogoff": "1601-01-01 00:00:00+00:00",
+      "lastLogon": "1601-01-01 00:00:00+00:00",
+      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
+      "logonCount": 0,
+      "mail": "gary5566@mailinator.com",
+      "memberOf": [
+        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
+      ],
+      "name": "Gary",
+      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+      "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "user"
+      ],
+      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
+      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
+      "primaryGroupID": 513,
+      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
+      "sAMAccountName": "gary5566",
+      "sAMAccountType": 805306368,
+      "sn": "Crosby",
+      "telephoneNumber": "7812449347",
+      "uSNChanged": 969466,
+      "uSNCreated": 650188,
+      "uid": [
+        "gary5566"
+      ],
+      "userAccountControl": 66048,
+      "userPassword": [
+        "65zQ24h7Bx?i"
+      ],
+      "userPrincipalName": "gary5566@dev.co3sys.com",
+      "whenChanged": "2022-05-19 18:52:20+00:00",
+      "whenCreated": "2018-11-08 19:37:57+00:00"
     }
   ],
-  "success": true
+  "raw": "[{\"dn\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"accountExpires\": \"9999-12-31 23:59:59.999999+00:00\", \"adminCount\": 1, \"badPasswordTime\": \"1601-01-01 00:00:00+00:00\", \"badPwdCount\": 0, \"cn\": \"Gary\", \"codePage\": 0, \"countryCode\": 0, \"dSCorePropagationData\": [\"2018-11-08 20:14:42+00:00\", \"1601-01-01 00:00:00+00:00\"], \"displayName\": \"Gary Crosby\", \"distinguishedName\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"givenName\": \"Gary\", \"instanceType\": 4, \"lastLogoff\": \"1601-01-01 00:00:00+00:00\", \"lastLogon\": \"1601-01-01 00:00:00+00:00\", \"lastLogonTimestamp\": \"2019-11-20 20:25:20.230009+00:00\", \"logonCount\": 0, \"mail\": \"gary5566@mailinator.com\", \"memberOf\": [\"CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com\"], \"name\": \"Gary\", \"objectCategory\": \"CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com\", \"objectClass\": [\"top\", \"person\", \"organizationalPerson\", \"user\"], \"objectGUID\": \"{a75844e3-37d7-482b-ad45-3b39b51a3ca5}\", \"objectSid\": \"S-1-5-21-1927197486-2714598076-3523470783-1877\", \"primaryGroupID\": 513, \"pwdLastSet\": \"2018-11-08 19:37:58.004913+00:00\", \"sAMAccountName\": \"gary5566\", \"sAMAccountType\": 805306368, \"sn\": \"Crosby\", \"telephoneNumber\": \"7812449347\", \"uSNChanged\": 969466, \"uSNCreated\": 650188, \"uid\": [\"gary5566\"], \"userAccountControl\": 66048, \"userPassword\": [\"65zQ24h7Bx?i\"], \"userPrincipalName\": \"gary5566@dev.co3sys.com\", \"whenChanged\": \"2022-05-19 18:52:20+00:00\", \"whenCreated\": \"2018-11-08 19:37:57+00:00\"}]",
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_search_filter": "(&(mail=%ldap_param%))",
+    "ldap_search_param": "gary5566@mailinator.com",
+    "ldap_search_base": "DC=dev,DC=co3sys,DC=com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:53:23"
+  },
+  "entries": [
+    {
+      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+      "adminCount": 1,
+      "badPasswordTime": "1601-01-01 00:00:00+00:00",
+      "badPwdCount": 0,
+      "cn": "Gary",
+      "codePage": 0,
+      "countryCode": 0,
+      "dSCorePropagationData": [
+        "2018-11-08 20:14:42+00:00",
+        "1601-01-01 00:00:00+00:00"
+      ],
+      "displayName": "Gary Crosby",
+      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "givenName": "Gary",
+      "instanceType": 4,
+      "lastLogoff": "1601-01-01 00:00:00+00:00",
+      "lastLogon": "1601-01-01 00:00:00+00:00",
+      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
+      "logonCount": 0,
+      "mail": "gary5566@mailinator.com",
+      "memberOf": [
+        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
+      ],
+      "name": "Gary",
+      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+      "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "user"
+      ],
+      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
+      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
+      "primaryGroupID": 513,
+      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
+      "sAMAccountName": "gary5566",
+      "sAMAccountType": 805306368,
+      "sn": "Crosby",
+      "telephoneNumber": "7812449347",
+      "uSNChanged": 969466,
+      "uSNCreated": 650188,
+      "uid": [
+        "gary5566"
+      ],
+      "userAccountControl": 66048,
+      "userPassword": [
+        "65zQ24h7Bx?i"
+      ],
+      "userPrincipalName": "gary5566@dev.co3sys.com",
+      "whenChanged": "2022-05-19 18:52:20+00:00",
+      "whenCreated": "2018-11-08 19:37:57+00:00"
+    }
+  ]
 }
 ```
 
@@ -447,8 +607,21 @@ results = {
 
 ```python
 ##  LDAP Utilities: Search - pre-processing script ##
-inputs.ldap_search_filter = rule.properties.ldap_search_filter
-inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
+
+# If search filters are given
+if rule.properties.ldap_search_filter:
+  inputs.ldap_search_filter = rule.properties.ldap_search_filter
+# If filters not given then set them to example filters
+else:
+  inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
+
+# If search attributes are given
+if rule.properties.ldap_search_attributes:
+  inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
+# If search attributes not given then set them to example attributes
+else:
+  inputs.ldap_search_attributes = "*"
+
 inputs.ldap_search_param = artifact.value
 # If the incident field ldap_base_dn contains a value then set ldap_search_base to that value
 if incident.properties.ldap_base_dn:
@@ -536,9 +709,9 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_dn` | `text` | Yes | `-` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
-| `ldap_new_auto_password_len` | `number` | No | `-` | Length of password to generate |
+| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
+| `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate |
 | `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry |
 | `ldap_return_new_password` | `boolean` | No | `-` | - |
 
@@ -552,8 +725,27 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
+  "version": "1.0",
   "success": true,
-  "user_dn": "CN=fiona saml1,CN=Users,dc=example,DC=com"
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": "65zQ24h7Bx?i",
+    "ldap_return_new_password": true,
+    "ldap_new_auto_password_len": 12
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:52:55"
+  },
+  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
 }
 ```
 
@@ -607,8 +799,8 @@ A function that allows an LDAP user, with the correct privileges to enable or di
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_dn` | `text` | Yes | `-` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
+| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
 | `ldap_toggle_access` | `select` | Yes | `-` | Either enable or disable the user |
 
 </p>
@@ -621,9 +813,29 @@ A function that allows an LDAP user, with the correct privileges to enable or di
 
 ```python
 results = {
+  "version": "1.0",
   "success": true,
-  "user_dn": "CN=e,CN=Users,dc=example,DC=com",
-  "user_status": "Enabled"
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_toggle_access": {
+      "id": 102,
+      "name": "Enable"
+    }
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:53:26"
+  },
+  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+  "user_status": "Enable"
 }
 ```
 
@@ -677,10 +889,10 @@ A function that updates the attribute of a DN with a new value
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ldap_attribute_name` | `text` | Yes | `-` | The name of the LDAP attribute |
-| `ldap_attribute_values` | `text` | Yes | `"['value1', 'value2', 'value3']"` | List (as a string representation) of the new attribute values |
-| `ldap_dn` | `text` | Yes | `-` | Distinguished Name of entry you want to access |
-| `ldap_domain_name` | `text` | No | `Domain1` | - |
+| `ldap_attribute_name` | `text` | Yes | `homePhone` | The name of the LDAP attribute |
+| `ldap_attribute_values` | `text` | Yes | `['value1', 'value2', 'value3']` | List (as a string representation) of the new attribute values, each value in the list must have quotes around it like the example |
+| `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
+| `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
 
 </p>
 </details>
@@ -692,12 +904,30 @@ A function that updates the attribute of a DN with a new value
 
 ```python
 results = {
-  "attribute_name": "homePhone",
-  "attribute_values": [
-    "081111111"
-  ],
+  "version": "1.0",
   "success": true,
-  "user_dn": "CN=fiona saml1,CN=Users,dc=example,DC=com"
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_attribute_values": "['gary5566']",
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_attribute_name": "uid"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:52:00"
+  },
+  "attribute_name": "uid",
+  "attribute_values": [
+    "gary5566"
+  ],
+  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
 }
 ```
 
