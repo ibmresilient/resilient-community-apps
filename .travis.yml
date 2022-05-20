@@ -238,7 +238,7 @@ matrix:
         - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
         - FILE_NAME=$(basename $PATH_APP_ZIP);
-        - $PATH_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
 
     - stage: rebuild all images
       python: 3.9
