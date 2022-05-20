@@ -196,6 +196,7 @@ def validate_actions(rest_client, inc, incident_id, object_id, \
             if row['id'] == row_id:
                 rule_playbook_list = [action['name'] for action in row.get('actions', []) if action['enabled']]
                 rule_playbook_list.extend([playbk['display_name'] for playbk in row.get('playbooks', []) ])
+                break
     else:
         rule_playbook_list = [action['name'] for action in results.get('actions', []) if action['enabled']]
         rule_playbook_list.extend([playbk['display_name'] for playbk in results.get('playbooks', []) ])
