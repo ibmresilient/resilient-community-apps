@@ -83,6 +83,7 @@ fn_sep
 fn_service_now
 fn_shadowserver
 fn_shodan
+fn_siemplify
 fn_slack
 fn_splunk_integration
 fn_spamhaus_query
