@@ -120,18 +120,15 @@ def dict_to_json_str(d):
         key = entry
         value = d[entry]
 
-        if not value:
-            value = False
-
-        if isinstance(value, list):
-            raise ValueError('dict_to_json_str does not support Python Lists')
-
         try:
             basestring
         except NameError:
             basestring = str
 
-        if isinstance(value, basestring):
+        if not value:
+            value = False
+
+        elif isinstance(value, basestring):
             value = value.replace(u'"', u'\\"')
             entries.append(json_entry_str.format(key, value))
 

@@ -6,7 +6,7 @@ import pytest
 from fn_datatable_utils.util.helper import PACKAGE_NAME
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.test_helper import DTResilientMock
+from tests.test_helper import DTResilientMock, dict_to_json_str
 
 FUNCTION_NAME = "dt_utils_add_row"
 
@@ -48,27 +48,19 @@ class TestDtUtilsAddRow:
         assert func
 
     mock_inputs_1 = {
-        "dt_utils_cells_to_update": "sample text",
+        "dt_utils_cells_to_update": dict_to_json_str({"dt_col_name": "Test Name","dt_col_email": "test@example.com","dt_col_status": "In Progress"}),
         "dt_utils_datatable_api_name": "mock_data_table",
         "incident_id": 1001
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "dt_utils_cells_to_update": "sample text",
-        "dt_utils_datatable_api_name": "mock_data_table",
-        "incident_id": 1001
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = {'dt_col_name': 'Test Name', 'dt_col_email': 'test@example.com', 'dt_col_status': 'In Progress'}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_add_row_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        assert results["content"]
+        assert(expected_results == results['content']['row'])
