@@ -13,6 +13,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Setup](#setup)
+- [Function - Data Table Utils: Add Row](#function---data-table-utils-add-row)
 - [Function - Data Table Utils: Clear Datatable](#function---data-table-utils-clear-datatable)
 - [Function - Data Table Utils: Create CSV Datatable](#function---data-table-utils-create-csv-datatable)
 - [Function - Data Table Utils: Delete Row](#function---data-table-utils-delete-row)
@@ -40,7 +41,7 @@
 
 **Functions manipulate data in a Datatable**
 
- ![screenshot](./doc/screenshots/dt_functions.png)
+ ![screenshot](./doc/screenshots/main.png)
 
 This package contains 8 functions that help you manipulate IBM SOAR Data Tables: Clear Datatable, Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
 
@@ -115,6 +116,159 @@ To reference the example datatable, create a new incident tab and drag the `Exam
 
 ![screenshot](./doc/screenshots/dt_1.png)
 ![screenshot](./doc/screenshots/dt_3.png)
+
+---
+## Function - Data Table Utils: Add Row
+Add a row to a given datatable
+
+ ![screenshot: fn-data-table-utils-add-row ](./doc/screenshots/dt_add_row.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `dt_utils_cells_to_update` | `text` | Yes | `-` | A JSON String containing the column names and cell values to update |
+| `dt_utils_datatable_api_name` | `text` | Yes | `-` | The API name of the Data Table |
+| `incident_id` | `number` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "content": null,
+    "inputs": {
+      "dt_utils_cells_to_update": {
+        "boolean": true,
+        "datetime": 1653070992555,
+        "dt_col_name": "example",
+        "multi_select": [
+          "a",
+          "b"
+        ],
+        "number": 1,
+        "select": "1",
+        "text": "example"
+      },
+      "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+      "incident_id": 2258
+    },
+    "metrics": {
+      "execution_time_ms": 523,
+      "host": "local",
+      "package": "fn-datatable-utils",
+      "package_version": "2.0.0",
+      "timestamp": "2022-05-20 14:23:49",
+      "version": "1.0"
+    },
+    "raw": "null",
+    "reason": null,
+    "row": {
+      "boolean": true,
+      "datetime": 1653070992555,
+      "dt_col_name": "example",
+      "multi_select": [
+        "a",
+        "b"
+      ],
+      "number": 1,
+      "select": "1",
+      "text": "example"
+    },
+    "success": true,
+    "version": "1.0"
+  },
+  "inputs": {
+    "dt_utils_cells_to_update": "{ \"select\":\"1\",\"number\":1,\"datetime\":1653070992555,\"boolean\":true,\"multi_select\":[\u0027a\u0027, \u0027b\u0027],\"dt_col_name\":\"example\",\"text\":\"example\" }",
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "incident_id": 2258
+  },
+  "metrics": {
+    "execution_time_ms": 528,
+    "host": "local",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "timestamp": "2022-05-20 14:23:49",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+import java.util.Date as Date
+
+def dict_to_json_str(d):
+  """Function that converts a dictionary into a JSON string.
+     Supports types: basestring, bool, int, nested dicts and lists.
+     If the value is None, it sets it to False."""
+
+  json_entry = '"{0}":{1}'
+  json_entry_str = '"{0}":"{1}"'
+  entries = [] 
+
+  for entry in d:
+    key = entry
+    value = d[entry]
+
+    if not value:
+      value = False
+
+    elif isinstance(value, basestring):
+      value = value.replace(u'"', u'\\"')
+      entries.append(json_entry_str.format(key, value))
+    
+    elif isinstance(value, bool):
+      value = 'true' if value else 'false'
+      entries.append(json_entry.format(key, value))
+
+    elif isinstance(value, dict):
+      entries.append(json_entry.format(key, dict_to_json_str(value)))
+
+    else:
+      entries.append(json_entry.format(key, value))
+
+  return '{0} {1} {2}'.format('{', ','.join(entries), '}')
+
+# The ID of this incident
+inputs.incident_id = incident.id
+
+# The api name of the Data Table to update
+inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+
+# The column api names and the value to update the cell to
+# Example: {"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
+inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
 
 ---
 ## Function - Data Table Utils: Clear Datatable
@@ -263,6 +417,7 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 <p>
 
 ```python
+None
 ```
 
 </p>
@@ -323,27 +478,27 @@ Attempts are made to match the field type of the datatable. CSV data matched to 
 ```python
 results = {
   "content": {
-    "data_source": "CSV data",
-    "rows_added": 1,
+    "data_source": "test_types_utf-8.csv",
+    "rows_added": 12,
     "rows_with_errors": 0
   },
   "inputs": {
-    "dt_csv_data": "hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra \n18023,\"summary \u4e2d\u56fd\u4eba\",yes,6/6/20 8:12,3,\"a, b\",\u4e2d",
+    "attachment_id": 4,
     "dt_datable_name": "dt_utils_test_data_table",
     "dt_date_time_format": "%m/%d/%y %H:%M",
     "dt_has_headers": true,
     "dt_mapping_table": "{\n  \"hdr_number\": \"number\",\n  \"hdr_text\": \"text\",\n  \"hdr_boolean\": \"boolean\",\n  \"hdr_datetime\": \"datetime\",\n  \"hdr_select\": \"select\",\n  \"hdr_multiselect\": \"multi_select\"\n}",
-    "incident_id": 2096
+    "incident_id": 2258
   },
   "metrics": {
-    "execution_time_ms": 9472,
+    "execution_time_ms": 4530,
     "host": "local",
     "package": "fn-datatable-utils",
-    "package_version": "1.3.0",
-    "timestamp": "2022-03-30 09:35:48",
+    "package_version": "2.0.0",
+    "timestamp": "2022-05-20 14:00:54",
     "version": "1.0"
   },
-  "raw": "{\"data_source\": \"CSV data\", \"rows_added\": 1, \"rows_with_errors\": 0}",
+  "raw": "{\"data_source\": \"test_types_utf-8.csv\", \"rows_added\": 12, \"rows_with_errors\": 0}",
   "reason": null,
   "success": true,
   "version": "1.0"
@@ -368,25 +523,20 @@ inputs.dt_datable_name = "dt_utils_test_data_table"
 # uncomment attachment_id when reading csv data from an attachmennt
 inputs.attachment_id = attachment.id
 
-# The CSV data. Use either dt_csv_data or attachment_id
-# data = u"""hdr_number,hdr_text,hdr_boolean,hdr_datetime,hdr_select,hdr_multiselect,hdr_extra 
-# 18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中"""
-# data_no_headers = u"""18023,"summary 中国人",yes,6/6/20 8:12,3,"a, b",中,x,y,z"""
-# inputs.dt_csv_data = data
 # A boolean to determine if CSV headers are present
 inputs.dt_has_headers = True
 
-## The mapping format should be "cvs_header":"dt_column_name"
-mapping = {
+## The mapping format should be "csv_header":"dt_column_name"
+mapping = '''{
   "hdr_number": "number",
   "hdr_text": "text",
   "hdr_boolean": "boolean",
   "hdr_datetime": "datetime",
   "hdr_select": "select",
   "hdr_multiselect": "multi_select"
-}
+}'''
 # mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column
-mapping_no_headers = ["number","text","boolean","datetime","select","multi_select","x","y","z"]
+mapping_no_headers = '''["number","text","boolean","datetime","select","multi_select","x","y","z"]'''
 inputs.dt_mapping_table = mapping
 # year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z'
 inputs.dt_date_time_format = "%m/%d/%y %H:%M"
@@ -487,7 +637,6 @@ inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
 <p>
 
 ```python
-# {'success': True, 'inputs': {'incident_id': 2150, 'dt_utils_datatable_api_name': 'dt_utils_test_data_table', 'dt_utils_row_id': 821}, 'row': {'success': True, 'title': None, 'message': None, 'hints': []}}
 if results.success:
   note = u"Row id: {} removed from datatable: {} for artifact: {}".format(results.inputs['dt_utils_row_id'], results.inputs['dt_utils_datatable_api_name'], artifact.value)
 else:
@@ -623,26 +772,50 @@ An example Rule and Workflow exist for using this function on the example datata
 
 ```python
 results = {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
   "content": null,
-  "raw": "null",
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
     "incident_id": 2258
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 156,
+    "host": "local",
     "package": "fn-datatable-utils",
     "package_version": "1.3.0",
-    "host": "local",
-    "execution_time_ms": 156,
-    "timestamp": "2022-05-12 10:51:51"
+    "timestamp": "2022-05-12 10:51:51",
+    "version": "1.0"
   },
+  "raw": "null",
+  "reason": null,
   "rows": [
     {
-      "id": 119,
+      "actions": [
+        {
+          "enabled": true,
+          "id": 43,
+          "name": "Get Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 56,
+          "name": "Get All Rows"
+        },
+        {
+          "enabled": true,
+          "id": 38,
+          "name": "Delete Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 41,
+          "name": "Delete Rows by Name"
+        },
+        {
+          "enabled": true,
+          "id": 46,
+          "name": "Update Current Row"
+        }
+      ],
       "cells": {
         "boolean": {
           "id": "boolean",
@@ -683,42 +856,42 @@ results = {
           "value": "abc"
         }
       },
-      "actions": [
-        {
-          "id": 43,
-          "name": "Get Current Row",
-          "enabled": true
-        },
-        {
-          "id": 56,
-          "name": "Get All Rows",
-          "enabled": true
-        },
-        {
-          "id": 38,
-          "name": "Delete Current Row",
-          "enabled": true
-        },
-        {
-          "id": 41,
-          "name": "Delete Rows by Name",
-          "enabled": true
-        },
-        {
-          "id": 46,
-          "name": "Update Current Row",
-          "enabled": true
-        }
-      ],
-      "type_id": 1002,
-      "table_name": "Example CSV Datatable",
+      "id": 119,
       "inc_id": 2258,
       "inc_name": "Test for datatables",
       "inc_owner": "admin@example.com",
+      "table_name": "Example CSV Datatable",
+      "type_id": 1002,
       "version": 1
     },
     {
-      "id": 120,
+      "actions": [
+        {
+          "enabled": true,
+          "id": 43,
+          "name": "Get Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 56,
+          "name": "Get All Rows"
+        },
+        {
+          "enabled": true,
+          "id": 38,
+          "name": "Delete Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 41,
+          "name": "Delete Rows by Name"
+        },
+        {
+          "enabled": true,
+          "id": 46,
+          "name": "Update Current Row"
+        }
+      ],
       "cells": {
         "boolean": {
           "id": "boolean",
@@ -760,42 +933,42 @@ results = {
           "value": "abcd"
         }
       },
-      "actions": [
-        {
-          "id": 43,
-          "name": "Get Current Row",
-          "enabled": true
-        },
-        {
-          "id": 56,
-          "name": "Get All Rows",
-          "enabled": true
-        },
-        {
-          "id": 38,
-          "name": "Delete Current Row",
-          "enabled": true
-        },
-        {
-          "id": 41,
-          "name": "Delete Rows by Name",
-          "enabled": true
-        },
-        {
-          "id": 46,
-          "name": "Update Current Row",
-          "enabled": true
-        }
-      ],
-      "type_id": 1002,
-      "table_name": "Example CSV Datatable",
+      "id": 120,
       "inc_id": 2258,
       "inc_name": "Test for datatables",
       "inc_owner": "admin@example.com",
+      "table_name": "Example CSV Datatable",
+      "type_id": 1002,
       "version": 1
     },
     {
-      "id": 121,
+      "actions": [
+        {
+          "enabled": true,
+          "id": 43,
+          "name": "Get Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 56,
+          "name": "Get All Rows"
+        },
+        {
+          "enabled": true,
+          "id": 38,
+          "name": "Delete Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 41,
+          "name": "Delete Rows by Name"
+        },
+        {
+          "enabled": true,
+          "id": 46,
+          "name": "Update Current Row"
+        }
+      ],
       "cells": {
         "boolean": {
           "id": "boolean",
@@ -832,41 +1005,17 @@ results = {
           "value": "abcde"
         }
       },
-      "actions": [
-        {
-          "id": 43,
-          "name": "Get Current Row",
-          "enabled": true
-        },
-        {
-          "id": 56,
-          "name": "Get All Rows",
-          "enabled": true
-        },
-        {
-          "id": 38,
-          "name": "Delete Current Row",
-          "enabled": true
-        },
-        {
-          "id": 41,
-          "name": "Delete Rows by Name",
-          "enabled": true
-        },
-        {
-          "id": 46,
-          "name": "Update Current Row",
-          "enabled": true
-        }
-      ],
-      "type_id": 1002,
-      "table_name": "Example CSV Datatable",
+      "id": 121,
       "inc_id": 2258,
       "inc_name": "Test for datatables",
       "inc_owner": "admin@example.com",
+      "table_name": "Example CSV Datatable",
+      "type_id": 1002,
       "version": 1
     }
-  ]
+  ],
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -931,18 +1080,13 @@ An example Rule and Workflow exist for using this function on the example datata
 results = {
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_row_id": null,
-    "dt_utils_search_column": "dt_col_name",
-    "dt_utils_search_value": "something",
+    "dt_utils_row_id": 2,
+    "dt_utils_search_column": null,
+    "dt_utils_search_value": null,
     "incident_id": 2096
   },
   "row": {
     "actions": [
-      {
-        "enabled": true,
-        "id": 14,
-        "name": "Delete Current Row"
-      },
       {
         "enabled": true,
         "id": 17,
@@ -952,49 +1096,61 @@ results = {
         "enabled": true,
         "id": 21,
         "name": "Update Current Row"
+      },
+      {
+        "enabled": true,
+        "id": 14,
+        "name": "Delete Current Row"
+      },
+      {
+        "enabled": true,
+        "id": 23,
+        "name": "Get Current Row"
       }
     ],
     "cells": {
       "boolean": {
         "id": "boolean",
-        "row_id": 5,
+        "row_id": 2,
         "value": false
       },
       "datetime": {
         "id": "datetime",
-        "row_id": 5,
-        "value": 1647446419000
+        "row_id": 2,
+        "value": 1646432160000
       },
       "dt_col_name": {
         "id": "dt_col_name",
-        "row_id": 5,
-        "value": "something"
+        "row_id": 2,
+        "value": "jim"
       },
       "multi_select": {
         "id": "multi_select",
-        "row_id": 5,
+        "row_id": 2,
         "value": [
           "j",
-          "g"
+          "c",
+          "I",
+          "e"
         ]
       },
       "number": {
         "id": "number",
-        "row_id": 5,
-        "value": 56
+        "row_id": 2,
+        "value": 25
       },
       "select": {
         "id": "select",
-        "row_id": 5,
-        "value": "2"
+        "row_id": 2,
+        "value": "9"
       },
       "text": {
         "id": "text",
-        "row_id": 5,
-        "value": "fng"
+        "row_id": 2,
+        "value": "things"
       }
     },
-    "id": 5,
+    "id": 2,
     "inc_id": 2096,
     "inc_name": "A",
     "inc_owner": "admin@example.com",
@@ -1057,7 +1213,8 @@ incident.addNote(helper.createRichText(note_text))
 </details>
 
 ---
-Function that returns the full list of rows in a datatable based on the search value. List sorting is possible using the sort_by and sort_direction input fields.
+## Function - Data Table Utils: Get Rows
+Function that returns the full unsorted list of JSON objects which contain all information regarding each row found, if no searching/sorting criteria were provided.
 
 An example Rule and Workflow exist for searching the example datatable based on an artifact value.
 
@@ -1291,7 +1448,7 @@ if not results.success:
 
 ---
 ## Function - Data Table Utils: Update Row
-Function that takes a string-encoded JSON String of 'search_column and search_value' pairs to update a Data Table row.
+Function that takes a JSON String of 'search_column and search_value' pairs to update a Data Table row.
 
 When used on a datatable, specify dt_utils_row_id = 0 to refer to the currently referenced datatable row.
 
@@ -1319,82 +1476,107 @@ Two sets example Rule and Workflow are available for changing the example datata
 
 ```python
 results = {
+  "content": null,
   "inputs": {
-    "dt_utils_cells_to_update": {
-      "datetime": 1648646740137,
-      "text": "Done"
-    },
+    "dt_utils_cells_to_update": "{ \"number\":1,\"multi_select\":[\u0027a\u0027, \u0027b\u0027],\"boolean\":true,\"name\":\"example\" }",
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_row_id": 5,
-    "incident_id": 2096
+    "dt_utils_row_id": 0,
+    "incident_id": 2258
   },
+  "metrics": {
+    "execution_time_ms": 1162,
+    "host": "local",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "timestamp": "2022-05-20 13:21:38",
+    "version": "1.0"
+  },
+  "raw": "null",
+  "reason": null,
   "row": {
     "actions": [
       {
         "enabled": true,
-        "id": 14,
+        "id": 43,
+        "name": "Get Current Row"
+      },
+      {
+        "enabled": true,
+        "id": 56,
+        "name": "Get All Rows"
+      },
+      {
+        "enabled": true,
+        "id": 57,
+        "name": "Clear Datatable"
+      },
+      {
+        "enabled": true,
+        "id": 38,
         "name": "Delete Current Row"
       },
       {
         "enabled": true,
-        "id": 17,
+        "id": 41,
         "name": "Delete Rows by Name"
       },
       {
         "enabled": true,
-        "id": 21,
+        "id": 46,
         "name": "Update Current Row"
+      },
+      {
+        "enabled": true,
+        "id": 58,
+        "name": "Add Row"
       }
     ],
     "cells": {
       "boolean": {
         "id": "boolean",
-        "row_id": 5,
-        "value": false
+        "row_id": 297,
+        "value": true
       },
       "datetime": {
         "id": "datetime",
-        "row_id": 5,
-        "value": 1648646740137
+        "row_id": 297
       },
       "dt_col_name": {
         "id": "dt_col_name",
-        "row_id": 5,
-        "value": "something"
+        "row_id": 297
       },
       "multi_select": {
         "id": "multi_select",
-        "row_id": 5,
+        "row_id": 297,
         "value": [
-          "j",
-          "g"
+          "b",
+          "a"
         ]
       },
       "number": {
         "id": "number",
-        "row_id": 5,
-        "value": 56
+        "row_id": 297,
+        "value": 1
       },
       "select": {
         "id": "select",
-        "row_id": 5,
-        "value": "2"
+        "row_id": 297
       },
       "text": {
         "id": "text",
-        "row_id": 5,
-        "value": "Done"
+        "row_id": 297
       }
     },
-    "id": 5,
-    "inc_id": 2096,
-    "inc_name": "A",
+    "id": 297,
+    "inc_id": 2258,
+    "inc_name": "Test for datatables",
     "inc_owner": "admin@example.com",
     "table_name": "Example CSV Datatable",
-    "type_id": 1000,
+    "type_id": 1002,
     "version": 2
   },
-  "success": true
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -1413,8 +1595,7 @@ import java.util.Date as Date
 #######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool, int and nested dicts.
-     Does not support lists.
+     Supports types: basestring, bool, int, nested dicts and lists.
      If the value is None, it sets it to False."""
 
   json_entry = '"{0}":{1}'
@@ -1425,18 +1606,15 @@ def dict_to_json_str(d):
     key = entry
     value = d[entry]
 
-    if value is None:
+    if not value:
       value = False
 
-    if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
-
-    if isinstance(value, basestring):
+    elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
     
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
+      value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, dict):
@@ -1460,8 +1638,10 @@ inputs.dt_utils_row_id = 0
 
 # The column api names and the value to update the cell to
 inputs.dt_utils_cells_to_update = dict_to_json_str({
-  "datetime": Date().getTime(),
-  "text": "Done"
+  "name": "example",
+  "number": 1,
+  "multi_select": ["a", "b"],
+  "boolean": True
 })
 
 ```
@@ -1508,11 +1688,16 @@ dt_utils_test_data_table
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
+| Add Row | dt_utils_test_data_table | `example_data_table_utils_add_row` |
+| Add Row to Datatable | artifact | `example_data_table_utils_add_row_to_datatable` |
+| Clear Datatable | dt_utils_test_data_table | `example_data_table_utils_clear_datatable` |
 | Delete Current Row | dt_utils_test_data_table | `example_data_table_utils_delete_row_from_datatable` |
 | Delete Data Table Row | artifact | `example_data_table_utils_delete_row` |
 | Delete Data Table Rows | artifact | `example_data_table_utils_delete_rows` |
 | Delete Rows by Name | dt_utils_test_data_table | `example_data_table_utils_delete_rows_from_datatable` |
 | Example: Create CSV Datatable | attachment | `example_create_csv_datatable` |
+| Get All Rows | dt_utils_test_data_table | `example_data_table_utils_get_all_data_table_rows` |
+| Get Current Row | dt_utils_test_data_table | `example_data_table_utils_get_current_row` |
 | Get Data Table Row | artifact | `example_data_table_utils_get_row` |
 | Get Data Table Rows | artifact | `example_data_table_utils_get_rows` |
 | Update Current Row | dt_utils_test_data_table | `update_row` |
