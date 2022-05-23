@@ -38,7 +38,6 @@ if results.success:
   incident.properties.siemplify_assignee = case.get('assignedUserName')
   incident.properties.siemplify_priority = PRIORITY_LOOKUP.get(case.get('priority'), str(case.get('priority')))
   incident.properties.siemplify_tags = ", ".join([tag['tag'] for tag in case.get('tags')])
-  incident.properties.siemplify_environment = case.get('environment')
   
   if results.content.get('alerts'):
     incident.properties.siemplify_alert_id = case['alerts'][0]['identifier']
