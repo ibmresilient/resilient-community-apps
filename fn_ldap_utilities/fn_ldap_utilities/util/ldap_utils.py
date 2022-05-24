@@ -37,7 +37,7 @@ class LDAPDomains():
         elif not ldap_domain_name:
             raise IntegrationError("No domain was given and is required if servers are labeled in the app.config")
 
-        domain_name = helper.PACKAGE_NAME+":"+ldap_domain_name
+        domain_name = "{}:{}".format(helper.PACKAGE_NAME, ldap_domain_name)
         if ldap_domain_name and domain_name in domains_list:
             return domains_list[domain_name]
         elif ldap_domain_name == helper.PACKAGE_NAME or len(domains_list) == 1:

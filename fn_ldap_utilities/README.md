@@ -133,7 +133,7 @@ Starting in version 2.0.0, more than one LDAP instance can be configured for SOA
 
 For enterprises with more than one LDAP instance, each instance will have it;s own section header, such as `[fn_ldap_utilites:Domain1]` where `Domain1` represents any label helpful to define your LDAP environment.
 
-Be aware that modifications to  custom workflows will be needed to correctly pass this label through the `ldap_domain_name` function input field if the LDAP server/servers in the app.config have labels.
+Be aware that modifications to custom workflows will be needed to correctly pass this label through the `ldap_domain_name` function input field if the LDAP server/servers in the app.config have labels.
 
 If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information abiout changing them to reference the `ldap_domain_name` function input field.
 
@@ -142,7 +142,7 @@ Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If t
 
 ---
 
-## Function - LDAP Utilities: Add
+## Function - LDAP Utilities: Add (new to v2.0.0)
 Add users, groups, organizational units to LDAP
 
  ![screenshot: fn-ldap-utilities-add ](./doc/screenshots/add.png)
@@ -447,7 +447,7 @@ SOAR Function to do a search or query against an LDAP server.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
-| `ldap_search_attributes` | `text` | No | `uid,cn,sn,mail,telephoneNumber or *` | A single attribute or a list of attributes to be returned by the LDAP search  |
+| `ldap_search_attributes` | `text` | No | `uid,cn,sn,mail,telephoneNumber or *` | A single attribute or a list of attributes to be returned by the LDAP search |
 | `ldap_search_base` | `text` | Yes | `DC=dev,DC=example,DC=com` | The base of the LDAP search request. |
 | `ldap_search_filter` | `textarea` | Yes | `(&(objectClass=person)(mail=*%ldap_param%))` | The filter of the LDAP search request, must be in the correct filter format for LDAP |
 | `ldap_search_param` | `text` | No | `user1@example.com` | Parameter used in search filter |

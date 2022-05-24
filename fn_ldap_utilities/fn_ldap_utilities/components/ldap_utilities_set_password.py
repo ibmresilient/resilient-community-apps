@@ -13,6 +13,7 @@ from string import ascii_letters, digits
 from random import sample
 
 LOG = getLogger(__name__)
+DEFAULT_MAX_PASSWORD_LEN = 12
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'ldap_utilities_set_password'"""
@@ -44,7 +45,7 @@ class FunctionComponent(ResilientComponent):
             ldap_domain_name = kwargs.get("ldap_domain_name", "") # text
             ldap_dn = kwargs.get("ldap_dn") # text (required)
             ldap_new_password = kwargs.get("ldap_new_password") # text
-            ldap_new_auto_password_len = kwargs.get("ldap_new_auto_password_len", 12)  # int Default length is 12
+            ldap_new_auto_password_len = kwargs.get("ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN)  # int Default length is 12
             ldap_return_new_password = kwargs.get("ldap_return_new_password")  # boolean
 
             LOG.info("LDAP Domain Name: %s", ldap_domain_name)

@@ -82,7 +82,7 @@ class LDAPUtilitiesHelper:
         elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES[2]: # "NTLM"
             if not self.LDAP_USER_NTLM or not self.LDAP_PASSWORD:
                 raise ValueError(
-                    "'ldap_user_ntlm' and 'ldap_password' must be defined in the app.config file if using NTLM  authentication to your LDAP Server")
+                    "'ldap_user_ntlm' and 'ldap_password' must be defined in the app.config file if using NTLM authentication to your LDAP Server")
 
         elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES[0]: # "ANONYMOUS"
             if self.LDAP_USER_DN or self.LDAP_USER_NTLM or self.LDAP_PASSWORD:
