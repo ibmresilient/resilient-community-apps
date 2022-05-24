@@ -7,6 +7,7 @@ import resilient
 from bs4 import BeautifulSoup
 from six import string_types
 from .errors import IntegrationError
+from resilient_circuits.rest_helper import get_resilient_client as get_client
 try:
     import HTMLParser as htmlparser
 except:
@@ -115,5 +116,5 @@ def get_input_entity(client, incident_id, attachment_id, artifact_id):
 
 def get_resilient_client(opts):
     """Get a connected instance of SimpleClient for Resilient REST API"""
-    resilient_client = resilient.get_client(opts)
+    resilient_client = get_client(opts)
     return resilient_client
