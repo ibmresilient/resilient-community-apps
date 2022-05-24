@@ -11,7 +11,7 @@
 `funct_extrahop_rx_update_detection`
 
 ### Output Name
-`None`
+`update_detection_note_result`
 
 ### Message Destination
 `fn_extrahop`
@@ -119,14 +119,13 @@ main()
 ```python
 ##  ExtraHop - wf_extrahop_rx_update_detection pre processing script ##
 import re
-
 inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
+
+UPD_DET_DATETIME = workflow.properties.update_detection_note_result.metrics["timestamp"]
 SUMMARY = re.sub('<[^<]+?>', '', incident.resolution_summary.content)
-SUMMARY_NOTE = "[SOAR case - '{}'](Closed with resolution summary: '{}')" \
-    .format(incident.id, SUMMARY)
 
 
-def get_note():
+def get_current_note():
     # Get old note
     note = u''
     get_detection_note_content = workflow.properties.get_detection_note_result.content
@@ -137,11 +136,18 @@ def get_note():
     return note
 
 
+def make_summary_note():
+    # Make a  note.
+    summary_note = "IBM SOAR {}\n".format(UPD_DET_DATETIME)
+    summary_note += "[SOAR case - '{}'](Closed with resolution summary: '{}')" \
+    .format(incident.id, SUMMARY)
+    return summary_note
+
 # Processing
 def main():
-    detection_note = get_note()
+    detection_note = get_current_note()
 
-    inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", SUMMARY_NOTE])
+    inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", make_summary_note()])
     inputs.extrahop_update_time = 0
 main()
 
