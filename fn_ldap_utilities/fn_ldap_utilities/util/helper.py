@@ -2,6 +2,7 @@
 
 from logging import getLogger
 from ldap3 import Server, Connection, ALL, NTLM
+from enum import Enum
 import fn_ldap_utilities.util.ldap_utils as ldap_utils 
 
 PACKAGE_NAME = "fn_ldap_utilities"
@@ -49,7 +50,11 @@ class LDAPUtilitiesHelper:
                 "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
 
     def __init__(self, app_configs):
-        SUPPORTED_LDAP_AUTH_TYPE_TYPES = ["ANONYMOUS", "SIMPLE", "NTLM"]
+
+        class SUPPORTED_LDAP_AUTH_TYPE_TYPES(Enum):
+            ANONYMOUS = "ANONYMOUS"
+            SIMPLE = "SIMPLE"
+            NTLM = "NTLM"
 
         self.LDAP_SERVER = self.__get_config_option(
             app_configs=app_configs, option_name="ldap_server", placeholder="xxx.xxx.xxx.xxx")
@@ -70,21 +75,21 @@ class LDAPUtilitiesHelper:
         self.LDAP_CONNECT_TIMEOUT = int(self.__get_config_option(
             app_configs=app_configs, option_name="ldap_connect_timeout"))
 
-        if self.LDAP_AUTH_TYPE not in SUPPORTED_LDAP_AUTH_TYPE_TYPES:
-            raise ValueError("Invalid value for 'ldap_auth'. '{}' is not a supported authentication method. Support methods are: {}".format(
-                self.LDAP_AUTH_TYPE, SUPPORTED_LDAP_AUTH_TYPE_TYPES))
+        if self.LDAP_AUTH_TYPE not in [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]:
+            raise ValueError("Invalid value for 'ldap_auth'. '{}' is not a supported authentication method. Support methods are: {}}".format(
+                self.LDAP_AUTH_TYPE, [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]))
 
-        if self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES[1]: # "SIMPLE"
+        if self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES.SIMPLE.value: # "SIMPLE"
             if not self.LDAP_USER_DN or not self.LDAP_PASSWORD:
                 raise ValueError(
                     "'ldap_user_dn' and 'ldap_password' must be defined in the app.config file if using SIMPLE authentication to your LDAP Server")
 
-        elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES[2]: # "NTLM"
+        elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES.NTLM.value: # "NTLM"
             if not self.LDAP_USER_NTLM or not self.LDAP_PASSWORD:
                 raise ValueError(
                     "'ldap_user_ntlm' and 'ldap_password' must be defined in the app.config file if using NTLM authentication to your LDAP Server")
 
-        elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES[0]: # "ANONYMOUS"
+        elif self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES.ANONYMOUS.value: # "ANONYMOUS"
             if self.LDAP_USER_DN or self.LDAP_USER_NTLM or self.LDAP_PASSWORD:
                 raise ValueError(
                     "'ldap_user_dn', 'ldap_user_ntlm' and 'ldap_password' must be left blank in the app.config file if using ANONYMOUS authentication to your LDAP Server")
