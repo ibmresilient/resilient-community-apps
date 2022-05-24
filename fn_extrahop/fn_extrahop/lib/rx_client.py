@@ -516,6 +516,8 @@ class RxClient():
                 "error_code": 401,
                 "text": response.json()
             }
+        if response.status_code == 409:
+            return response
 
         response.raise_for_status()
 
