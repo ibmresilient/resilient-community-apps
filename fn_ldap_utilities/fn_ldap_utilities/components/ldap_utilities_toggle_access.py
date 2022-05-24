@@ -11,6 +11,9 @@ from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 from ldap3 import MODIFY_REPLACE
 
 LOG = getLogger(__name__)
+ldap_user_account_control_enabled = 512
+ldap_user_account_control_disabled = 514
+
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'ldap_utilities_toggle_access"""
 
@@ -61,10 +64,10 @@ class FunctionComponent(ResilientComponent):
             ldap_user_account_control_attribute = "userAccountControl"
 
             if (input_ldap_toggle_access.lower() == 'enable'):
-                ldap_user_accout_control_value = 512
+                ldap_user_accout_control_value = ldap_user_account_control_enabled
 
             elif (input_ldap_toggle_access.lower() == 'disable'):
-                ldap_user_accout_control_value = 514
+                ldap_user_accout_control_value = ldap_user_account_control_disabled
 
             else:
                 raise ValueError("ldap_toggle_access function input must be 'Enable' or 'Disable'")
