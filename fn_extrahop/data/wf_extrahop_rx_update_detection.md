@@ -95,8 +95,8 @@ def main():
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
             .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-
-    incident.addNote(helper.createRichText(note_text))
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
 
 main()
 
@@ -191,6 +191,63 @@ def main():
 
 main()
 
+```
+
+---
+
+## Function - Extrahop Reveal(x) get detections
+
+### API Name
+`funct_extrahop_rx_get_detections`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_detections"
+WF_NAME = "Example: Extrahop Reveal(x) update detection"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TABLE = "extrahop_detections"
+DATA_TBL_FIELDS = ["assignee",  "status", "ticket_id"]
+
+
+# Processing
+def main():
+    detection_id = INPUTS["extrahop_detection_id"]
+    note_text = u''
+    if CONTENT:
+        det = CONTENT.result
+        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
+                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += u"<br>Updated ExtraHop properties for SOAR incident."
+        incident.properties.extrahop_status = det["status"]
+        incident.properties.extrahop_ticket_id = det["ticket_id"]
+        incident.properties.extrahop_assignee = det["assignee"]
+        incident.properties.extrahop_update_notification = "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the action: Example: Extrahop Reveal(x) refresh incident.<div/>"
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     u" with parameters <b>{3}</b>." \
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
+
+
+main()
 ```
 
 ---
