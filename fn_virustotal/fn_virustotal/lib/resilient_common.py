@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import re
-import resilient
 from bs4 import BeautifulSoup
 from six import string_types
 from .errors import IntegrationError
