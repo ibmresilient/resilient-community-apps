@@ -42,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
 
             try:
                 # The fixes the format of lists
-                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("\'",'"'))
+                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("u\'",'"').replace("\'", '"'))
                 inputs_dict["dt_utils_cells_to_update"] = dt_utils_cells_to_update
             except Exception as err:
                 raise ValueError("Failed to parse JSON string: {} with error: {}".format(inputs_dict.dt_utils_cells_to_update, str(err)))

@@ -30,7 +30,7 @@
 ## Release Notes
 | Release | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0  | 5/2022 | <ul><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
+| v2.0.0  | 5/2022 | <ul><li>Added function dt_utils_add_row that adds a row to a datatable</li><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
@@ -43,7 +43,7 @@
 
  ![screenshot](./doc/screenshots/main.png)
 
-This package contains 8 functions that help you manipulate IBM SOAR Data Tables: Clear Datatable, Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
+This package contains 8 functions that help you manipulate IBM SOAR Data Tables: Add Row, Clear Datatable, Get Row, Get All Data Table Rows, Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.
 
 ## Requirements
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -142,66 +142,62 @@ Add a row to a given datatable
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
+    "version": "1.0",
+    "success": true,
+    "reason": null,
     "content": null,
+    "raw": "null",
     "inputs": {
-      "dt_utils_cells_to_update": {
-        "boolean": true,
-        "datetime": 1653070992555,
-        "dt_col_name": "example",
-        "multi_select": [
-          "a",
-          "b"
-        ],
-        "number": 1,
-        "select": "1",
-        "text": "example"
-      },
+      "incident_id": 2258,
       "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-      "incident_id": 2258
+      "dt_utils_cells_to_update": {
+        "select": "3",
+        "number": 45682,
+        "datetime": 1652174896000,
+        "multi_select": [
+          "h"
+        ],
+        "dt_col_name": "adgh",
+        "text": "ekstyh"
+      }
     },
     "metrics": {
-      "execution_time_ms": 523,
-      "host": "local",
+      "version": "1.0",
       "package": "fn-datatable-utils",
       "package_version": "2.0.0",
-      "timestamp": "2022-05-20 14:23:49",
-      "version": "1.0"
+      "host": "local",
+      "execution_time_ms": 480,
+      "timestamp": "2022-05-25 08:04:52"
     },
-    "raw": "null",
-    "reason": null,
     "row": {
-      "boolean": true,
-      "datetime": 1653070992555,
-      "dt_col_name": "example",
+      "select": "3",
+      "number": 45682,
+      "datetime": 1652174896000,
       "multi_select": [
-        "a",
-        "b"
+        "h"
       ],
-      "number": 1,
-      "select": "1",
-      "text": "example"
-    },
-    "success": true,
-    "version": "1.0"
-  },
-  "inputs": {
-    "dt_utils_cells_to_update": "{ \"select\":\"1\",\"number\":1,\"datetime\":1653070992555,\"boolean\":true,\"multi_select\":[\u0027a\u0027, \u0027b\u0027],\"dt_col_name\":\"example\",\"text\":\"example\" }",
-    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "incident_id": 2258
-  },
-  "metrics": {
-    "execution_time_ms": 528,
-    "host": "local",
-    "package": "fn-datatable-utils",
-    "package_version": "2.0.0",
-    "timestamp": "2022-05-20 14:23:49",
-    "version": "1.0"
+      "dt_col_name": "adgh",
+      "text": "ekstyh"
+    }
   },
   "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+  "inputs": {
+    "incident_id": 2258,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "dt_utils_cells_to_update": "{ \"select\":\"3\",\"number\":45682,\"datetime\":1652174896000,\"multi_select\":[u'h'],\"dt_col_name\":\"adgh\",\"text\":\"ekstyh\" }"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 11623,
+    "timestamp": "2022-05-25 08:04:52"
+  }
 }
 ```
 
@@ -254,7 +250,7 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 
 # The column api names and the value to update the cell to
 # Example: {"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
-inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
+inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": rule.properties.dt_name_field, "number": rule.properties.dt_number_field, "text": rule.properties.dt_text_field, "datetime": rule.properties.dt_datetime_field, "boolean": rule.properties.dt_boolean_field, "select": rule.properties.dt_select_field, "multi_select": rule.properties.dt_multi_select_field})
 ```
 
 </p>

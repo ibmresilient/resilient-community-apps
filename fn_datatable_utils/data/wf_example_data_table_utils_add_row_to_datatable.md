@@ -60,7 +60,7 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 
 # The column api names and the value to update the cell to
 # Example: {"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
-inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
+inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": "example", "number": 1, "text": str(artifact.value), "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]})
 ```
 
 ### Post-Processing Script

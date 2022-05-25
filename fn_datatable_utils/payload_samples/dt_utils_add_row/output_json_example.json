@@ -12,16 +12,14 @@
       "incident_id": 2258,
       "dt_utils_datatable_api_name": "dt_utils_test_data_table",
       "dt_utils_cells_to_update": {
-        "select": "1",
-        "number": 1,
-        "datetime": 1653070992555,
-        "boolean": true,
+        "select": "3",
+        "number": 45682,
+        "datetime": 1652174896000,
         "multi_select": [
-          "a",
-          "b"
+          "h"
         ],
-        "dt_col_name": "example",
-        "text": "example"
+        "dt_col_name": "adgh",
+        "text": "ekstyh"
       }
     },
     "metrics": {
@@ -29,34 +27,32 @@
       "package": "fn-datatable-utils",
       "package_version": "2.0.0",
       "host": "local",
-      "execution_time_ms": 523,
-      "timestamp": "2022-05-20 14:23:49"
+      "execution_time_ms": 480,
+      "timestamp": "2022-05-25 08:04:52"
     },
     "row": {
-      "select": "1",
-      "number": 1,
-      "datetime": 1653070992555,
-      "boolean": true,
+      "select": "3",
+      "number": 45682,
+      "datetime": 1652174896000,
       "multi_select": [
-        "a",
-        "b"
+        "h"
       ],
-      "dt_col_name": "example",
-      "text": "example"
+      "dt_col_name": "adgh",
+      "text": "ekstyh"
     }
   },
   "raw": null,
   "inputs": {
     "incident_id": 2258,
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_cells_to_update": "{ \"select\":\"1\",\"number\":1,\"datetime\":1653070992555,\"boolean\":true,\"multi_select\":['a', 'b'],\"dt_col_name\":\"example\",\"text\":\"example\" }"
+    "dt_utils_cells_to_update": "{ \"select\":\"3\",\"number\":45682,\"datetime\":1652174896000,\"multi_select\":[u'h'],\"dt_col_name\":\"adgh\",\"text\":\"ekstyh\" }"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
     "host": "local",
-    "execution_time_ms": 528,
-    "timestamp": "2022-05-20 14:23:49"
+    "execution_time_ms": 11623,
+    "timestamp": "2022-05-25 08:04:52"
   }
 }

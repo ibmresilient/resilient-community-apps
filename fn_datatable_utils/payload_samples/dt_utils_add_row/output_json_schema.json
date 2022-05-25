@@ -44,9 +44,6 @@
                 "datetime": {
                   "type": "integer"
                 },
-                "boolean": {
-                  "type": "boolean"
-                },
                 "multi_select": {
                   "type": "array",
                   "items": {
@@ -97,9 +94,6 @@
             },
             "datetime": {
               "type": "integer"
-            },
-            "boolean": {
-              "type": "boolean"
             },
             "multi_select": {
               "type": "array",
