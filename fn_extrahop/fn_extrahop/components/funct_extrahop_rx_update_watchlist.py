@@ -50,6 +50,9 @@ class FunctionComponent(AppFunctionComponent):
         if response.status_code in [200, 201, 204]:
             # Action succeeded with empty response message
             result = "success"
+        elif response.status_code == 409:
+            result = "conflict"
+            success = False
         else:
             result = "failed"
             success = False

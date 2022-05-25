@@ -41,21 +41,27 @@ def main():
     if CONTENT:
         result = CONTENT["result"]
         if result == "success":
+            workflow.addProperty("watchlist_updated", {})
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the watchlist for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the watchlist for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
                 .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        elif result == "conflict":
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 409 (conflict) error was thrown while attempting  " \
+                        u"to update the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
+            note_text += u"<br>Check if the sensor is being managed from the cloud-based service."
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update watchlist failed with unexpected " \
-                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to update the watchlist <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     u"to update the watchlist <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -85,7 +91,7 @@ inputs.extrahop_device_id = row.devs_id
 ```python
 ##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
 #  Globals
-FN_NAME = "funct_extrahop_rx_áget_devices"
+FN_NAME = "funct_extrahop_rx_get_devices"
 WF_NAME = "Example: Extrahop Reveal(x) update watchlist"
 CONTENT = results.content
 INPUTS = results.inputs
