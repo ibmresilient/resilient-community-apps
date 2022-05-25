@@ -1,19 +1,21 @@
+
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""AppFunction implementation"""
+"""Function implementation"""
 
 from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
+from resilient_lib import validate_fields, ResultPayload
 
 LOG = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements function 'dt_utils_clear_datatable'"""
+    """Component that implements function 'dt_utils_clear_datatable_content'"""
 
     def __init__(self, opts):
+        """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(PACKAGE_NAME, {})
 
@@ -22,8 +24,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @function("dt_utils_clear_datatable")
-    def _dt_utils_clear_datatable_function(self, event, *args, **kwargs):
+    @function("dt_utils_clear_datatable_content")
+    def _dt_utils_clear_datatable_content_function(self, event, *args, **kwargs):
         """Function: Delete all of the contents of a datatable"""
 
         try:
@@ -32,7 +34,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_clear_datatable' that was running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage("Starting 'dt_utils_clear_datatable_content' that was running in workflow '{}'".format(wf_instance_id))
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
@@ -52,19 +54,22 @@ class FunctionComponent(ResilientComponent):
             datatable.get_data()
 
             # Delete all rows in the given datatable on SOAR
-            # deleted = datatable.clear_datatable()
-            deleted_rows = datatable.delete_rows(delete_all_rows=True)
+            deleted_rows = datatable.clear_datatable()
 
-            if "error" in deleted_rows:
-                yield StatusMessage("Datatable {} not cleared.".format(datatable.api_name))
+            if not deleted_rows:
                 results = rp.done(False, None)
-                results["reason"] = deleted_rows["error"]
+                yield StatusMessage("No row(s) found.")
+
+            elif "error" in deleted_rows:
+                yield StatusMessage("Datatable '{}' not cleared. Error: {}".format(datatable.api_name, deleted_rows.get("error")))
+                raise FunctionError("Datatable '{}' not cleared.".format(datatable.api_name))
+
             else:
-                yield StatusMessage("Datatable {} cleared.".format(datatable.api_name))
+                yield StatusMessage("Datatable '{}' cleared.".format(datatable.api_name))
                 results = rp.done(True, None)
                 results["deleted_rows"] = deleted_rows
 
-            yield StatusMessage("Finished 'dt_utils_clear_datatable' that was running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage("Finished 'dt_utils_clear_datatable_content' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
