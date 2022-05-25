@@ -20,6 +20,8 @@
 - [Function - Splunk Update Notable Event](#function---splunk-update-notable-event)
 - [Data Table - Splunk Intel Results](#data-table---splunk-intel-results)
 - [Rules](#rules)
+- [How to configure to use a single Splunk Server](#how-to-configure-to-use-a-single-splunk-server)
+- [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-server/servers-in-app.config-are-labeled)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 

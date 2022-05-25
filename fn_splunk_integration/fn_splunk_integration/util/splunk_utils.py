@@ -307,7 +307,7 @@ class SplunkServers():
         label = PACKAGE_NAME+":"+splunk_label
         if splunk_label and label in servers_list:
             options = servers_list[label]
-        elif (len(servers_list) == 1 and splunk_label == PACKAGE_NAME) or len(servers_list) == 1:
+        elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
