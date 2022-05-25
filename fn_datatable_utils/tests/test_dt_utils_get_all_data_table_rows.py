@@ -3,23 +3,22 @@
 
 from __future__ import print_function
 import pytest
+from fn_datatable_utils.util.helper import PACKAGE_NAME
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from tests.test_helper import DTResilientMock
 
-PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_get_all_data_table_rows"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = DTResilientMock
 
 def call_dt_utils_get_all_data_table_rows_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction(
-        "dt_utils_get_all_data_table_rows", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -29,7 +28,7 @@ def call_dt_utils_get_all_data_table_rows_function(circuits, function_params, ti
     exception_event = circuits.watcher.wait(
         "exception", parent=None, timeout=timeout)
 
-    if exception_event is not False:
+    if exception_event:
         exception = exception_event.args[1]
         raise exception
 
@@ -49,7 +48,7 @@ class TestDtUtilsGetAllDataTableRows:
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+        assert func
 
     mock_inputs_1 = {
         "dt_utils_datatable_api_name": "mock_data_table",

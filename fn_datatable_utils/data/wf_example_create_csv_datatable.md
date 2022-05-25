@@ -32,7 +32,7 @@ inputs.attachment_id = attachment.id
 # A boolean to determine if CSV headers are present
 inputs.dt_has_headers = True
 
-## The mapping format should be "cvs_header":"dt_column_name"
+## The mapping format should be "csv_header":"dt_column_name"
 mapping = '''{
   "hdr_number": "number",
   "hdr_text": "text",

@@ -94,9 +94,6 @@
                   },
                   "row_id": {
                     "type": "integer"
-                  },
-                  "value": {
-                    "type": "string"
                   }
                 }
               },

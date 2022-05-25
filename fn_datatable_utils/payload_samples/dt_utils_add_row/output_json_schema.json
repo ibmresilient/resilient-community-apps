@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "content": {},
+        "raw": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "dt_utils_datatable_api_name": {
+              "type": "string"
+            },
+            "dt_utils_cells_to_update": {
+              "type": "object",
+              "properties": {
+                "select": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "integer"
+                },
+                "datetime": {
+                  "type": "integer"
+                },
+                "multi_select": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "dt_col_name": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "package": {
+              "type": "string"
+            },
+            "package_version": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "execution_time_ms": {
+              "type": "integer"
+            },
+            "timestamp": {
+              "type": "string"
+            }
+          }
+        },
+        "row": {
+          "type": "object",
+          "properties": {
+            "select": {
+              "type": "string"
+            },
+            "number": {
+              "type": "integer"
+            },
+            "datetime": {
+              "type": "integer"
+            },
+            "multi_select": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "dt_col_name": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "dt_utils_datatable_api_name": {
+          "type": "string"
+        },
+        "dt_utils_cells_to_update": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

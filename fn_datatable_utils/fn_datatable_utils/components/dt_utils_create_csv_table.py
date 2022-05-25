@@ -254,6 +254,7 @@ def build_row(csv_row, matching_table, dt_column_names, date_format):
                 dt_col_name = matching_table[indx]
                 csv_value = csv_column
             else:
+                csv_value = None
                 LOG.debug(u"Unable to find mapping entry for csv column: %s", csv_column_encoded)
 
             if csv_value:

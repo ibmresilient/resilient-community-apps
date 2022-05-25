@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_datatable_utils",
         "message_destinations": [u"fn_datatable_utils"],
-        "functions": [u"dt_utils_clear_datatable", u"dt_utils_create_csv_table", u"dt_utils_delete_row", u"dt_utils_delete_rows", u"dt_utils_get_all_data_table_rows", u"dt_utils_get_row", u"dt_utils_get_rows", u"dt_utils_update_row"],
-        "workflows": [u"example_create_csv_datatable", u"example_data_table_utils_clear_datatable", u"example_data_table_utils_delete_row", u"example_data_table_utils_delete_row_from_datatable", u"example_data_table_utils_delete_rows", u"example_data_table_utils_delete_rows_from_datatable", u"example_data_table_utils_get_all_data_table_rows", u"example_data_table_utils_get_current_row", u"example_data_table_utils_get_row", u"example_data_table_utils_get_rows", u"example_data_table_utils_update_row", u"update_row"],
-        "actions": [u"Clear Datatable", u"Delete Current Row", u"Delete Data Table Row", u"Delete Data Table Rows", u"Delete Rows by Name", u"Example: Create CSV Datatable", u"Get All Rows", u"Get Current Row", u"Get Data Table Row", u"Get Data Table Rows", u"Update Current Row", u"Update Data Table Row"],
+        "functions": [u"dt_utils_add_row", u"dt_utils_clear_datatable", u"dt_utils_create_csv_table", u"dt_utils_delete_row", u"dt_utils_delete_rows", u"dt_utils_get_all_data_table_rows", u"dt_utils_get_row", u"dt_utils_get_rows", u"dt_utils_update_row"],
+        "workflows": [u"example_create_csv_datatable", u"example_data_table_utils_add_row", u"example_data_table_utils_add_row_to_datatable", u"example_data_table_utils_clear_datatable", u"example_data_table_utils_delete_row", u"example_data_table_utils_delete_row_from_datatable", u"example_data_table_utils_delete_rows", u"example_data_table_utils_delete_rows_from_datatable", u"example_data_table_utils_get_all_data_table_rows", u"example_data_table_utils_get_current_row", u"example_data_table_utils_get_row", u"example_data_table_utils_get_rows", u"example_data_table_utils_update_row", u"update_row"],
+        "actions": [u"Add Row", u"Add Row to Datatable", u"Clear Datatable", u"Delete Current Row", u"Delete Data Table Row", u"Delete Data Table Rows", u"Delete Rows by Name", u"Example: Create CSV Datatable", u"Get All Rows", u"Get Current Row", u"Get Data Table Row", u"Get Data Table Rows", u"Update Current Row", u"Update Data Table Row"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -45,6 +45,7 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_datatable_utils
     - Functions:
+        - dt_utils_add_row
         - dt_utils_clear_datatable
         - dt_utils_create_csv_table
         - dt_utils_delete_row
@@ -55,6 +56,8 @@ def customization_data(client=None):
         - dt_utils_update_row
     - Workflows:
         - example_create_csv_datatable
+        - example_data_table_utils_add_row
+        - example_data_table_utils_add_row_to_datatable
         - example_data_table_utils_clear_datatable
         - example_data_table_utils_delete_row
         - example_data_table_utils_delete_row_from_datatable
@@ -67,6 +70,8 @@ def customization_data(client=None):
         - example_data_table_utils_update_row
         - update_row
     - Rules:
+        - Add Row
+        - Add Row to Datatable
         - Clear Datatable
         - Delete Current Row
         - Delete Data Table Row
