@@ -48,6 +48,10 @@ class FunctionComponent(AppFunctionComponent):
         if response.status_code == 201:
             # Action succeeded with empty response message
             result = "success"
+        elif response.status_code == 422:
+            # Tag name exists
+            result = "exists"
+            success = False
         else:
             result = "failed"
             success = False
