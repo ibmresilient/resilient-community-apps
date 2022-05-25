@@ -135,7 +135,10 @@ class RESDatatable(object):
 
     def clear_datatable(self):
         """ Delete all of the contents of a data table on SOAR """
-        return self.res_client.delete("/incidents/{}/table_data/{}/row_data/?handle_format=names".format(self.incident_id, self.api_name))
+        try:
+            return self.res_client.delete("/incidents/{}/table_data/{}/row_data/?handle_format=names".format(self.incident_id, self.api_name))
+        except Exception as err:
+            return {"error": str(err)}
 
     def delete_row(self, row_id):
         """ Deletes the row. Returns the response from SOAR API or dict with the entry 'error'. """

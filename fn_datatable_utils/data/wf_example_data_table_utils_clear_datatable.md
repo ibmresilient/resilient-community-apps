@@ -11,7 +11,7 @@
 `dt_utils_clear_datatable`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_datatable_utils`
@@ -27,7 +27,8 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 
 ### Post-Processing Script
 ```python
-None
+if results["success"] == True:
+  incident.addNote("Datatable {} cleared.".format(results.inputs["dt_utils_datatable_api_name"]))
 ```
 
 ---

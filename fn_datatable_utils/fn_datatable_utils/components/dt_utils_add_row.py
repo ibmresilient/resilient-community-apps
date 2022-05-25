@@ -61,6 +61,7 @@ class FunctionComponent(AppFunctionComponent):
             # Get the data table data
             datatable.get_data()
 
+            # Add row to the given datatable on SOAR
             add_row = datatable.dt_add_rows(row_to_add)
 
             if "error" in add_row:
@@ -74,6 +75,7 @@ class FunctionComponent(AppFunctionComponent):
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
+            # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

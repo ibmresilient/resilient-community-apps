@@ -16,12 +16,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_datatable_utils", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @function("dt_utils_delete_row")
     def _dt_utils_delete_row_function(self, event, *args, **kwargs):

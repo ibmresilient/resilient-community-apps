@@ -4,18 +4,17 @@
 """AppFunction implementation"""
 
 from logging import getLogger
-from resilient_circuits import AppFunctionComponent, function, FunctionResult, handler
-from resilient_lib import validate_fields, ResultPayload, IntegrationError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, ResultPayload
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 
-FN_NAME = "dt_utils_clear_datatable"
 LOG = getLogger(__name__)
 
-class FunctionComponent(AppFunctionComponent):
+class FunctionComponent(ResilientComponent):
     """Component that implements function 'dt_utils_clear_datatable'"""
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(PACKAGE_NAME, {})
 
     @handler("reload")
@@ -23,7 +22,7 @@ class FunctionComponent(AppFunctionComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @function(FN_NAME)
+    @function("dt_utils_clear_datatable")
     def _dt_utils_clear_datatable_function(self, event, *args, **kwargs):
         """Function: Delete all of the contents of a datatable"""
 
@@ -31,40 +30,43 @@ class FunctionComponent(AppFunctionComponent):
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+            yield StatusMessage("Starting 'dt_utils_clear_datatable' that was running in workflow '{}'".format(wf_instance_id))
 
-            validate_fields(['incident_id', 'dt_utils_datatable_api_name'], kwargs)
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
 
-            incident_id = kwargs.get("incident_id") # text (required)
-            dt_api_name = kwargs.get("dt_utils_datatable_api_name") # text (required)
+            incident_id = kwargs.get("incident_id")
+            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")
 
             LOG.info("incident_id: %s", incident_id)
-            LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
+            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
 
             # Create payload dict with inputs
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, incident_id, dt_api_name)
+            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
             # Get the data table data
             datatable.get_data()
 
-            # Delete all rows in the givem datatable
-            deleted = datatable.clear_datatable()
+            # Delete all rows in the given datatable on SOAR
+            # deleted = datatable.clear_datatable()
+            deleted_rows = datatable.delete_rows(delete_all_rows=True)
 
-            if deleted['success']:
-                yield self.status_message("Datatable {} cleared.".format(dt_api_name))
-                results = rp.done(True, None)
-                results['deleted_rows'] = datatable.get_rows()
-            else:
+            if "error" in deleted_rows:
+                yield StatusMessage("Datatable {} not cleared.".format(datatable.api_name))
                 results = rp.done(False, None)
-                results['reason'] = deleted['message']
-                raise IntegrationError("Datatable {} not cleared.".format(dt_api_name))
+                results["reason"] = deleted_rows["error"]
+            else:
+                yield StatusMessage("Datatable {} cleared.".format(datatable.api_name))
+                results = rp.done(True, None)
+                results["deleted_rows"] = deleted_rows
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+            yield StatusMessage("Finished 'dt_utils_clear_datatable' that was running in workflow '{}'".format(wf_instance_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        except Exception:
+            yield FunctionError()
