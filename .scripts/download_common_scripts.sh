@@ -8,6 +8,7 @@
 
 # Dependencies on:
 #   the environmental variable GITHUB_AUTH_TOKEN is set and has read permissions of the repo to download from
+#   the environmental variable PATH_SCRIPTS_DIR is set
 
 
 ###############
@@ -35,3 +36,4 @@ wget --header 'Authorization: token '$GITHUB_AUTH_TOKEN \
     $PATH_COMMON_SCRIPTS_REPO
 
 python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common" $PATH_COMMON_SCIPTS_SAVE_LOC
+python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common-app-build-scripts" $PATH_SCRIPTS_DIR
