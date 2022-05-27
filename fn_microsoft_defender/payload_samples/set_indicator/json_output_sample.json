@@ -1,0 +1,64 @@
+{
+    'version': '1.0',
+    'success': True,
+    'reason': None,
+    'content': {
+      '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Indicators/$entity',
+      'id': '1',
+      'indicatorValue': '198.51.100.0',
+      'indicatorType': 'IpAddress',
+      'action': 'AlertAndBlock',
+      'createdBy': '211596a5-5a56-43f6-8347-97937364677b',
+      'severity': 'Informational',
+      'category': None,
+      'application': None,
+      'educateUrl': None,
+      'bypassDurationHours': None,
+      'title': 'something',
+      'description': 'description',
+      'recommendedActions': None,
+      'creationTimeDateTimeUtc': '2021-01-06T00:59:41.3766788Z',
+      'expirationTime': None,
+      'lastUpdateTime': '2021-01-06T00:59:41.3841474Z',
+      'lastUpdatedBy': None,
+      'rbacGroupNames': [
+        
+      ],
+      'rbacGroupIds': [
+        
+      ],
+      'notificationId': None,
+      'notificationBody': None,
+      'version': None,
+      'mitreTechniques': [
+        
+      ],
+      'historicalDetection': False,
+      'lookBackPeriod': None,
+      'generateAlert': False,
+      'additionalInfo': None,
+      'createdByDisplayName': 'defender',
+      'externalId': None,
+      'createdBySource': 'PublicApi',
+      'certificateInfo': None
+    },
+    'raw': '{"@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Indicators/$entity", "id": "1", "indicatorValue": "198.51.100.0", "indicatorType": "IpAddress", "action": "AlertAndBlock", "createdBy": "211596a5-5a56-43f6-8347-97937364677b", "severity": "Informational", "category": null, "application": null, "educateUrl": null, "bypassDurationHours": null, "title": "something", "description": "description", "recommendedActions": null, "creationTimeDateTimeUtc": "2021-01-06T00:59:41.3766788Z", "expirationTime": null, "lastUpdateTime": "2021-01-06T00:59:41.3841474Z", "lastUpdatedBy": null, "rbacGroupNames": [], "rbacGroupIds": [], "notificationId": null, "notificationBody": null, "version": null, "mitreTechniques": [], "historicalDetection": false, "lookBackPeriod": null, "generateAlert": false, "additionalInfo": null, "createdByDisplayName": "defender", "externalId": null, "createdBySource": "PublicApi", "certificateInfo": null}',
+    'inputs': {
+      'defender_indicator_type': 'IP Address',
+      'defender_title': 'something',
+      'defender_description': 'description',
+      'defender_indicator_action': {
+        'id': 158,
+        'name': 'AlertAndBlock'
+      },
+      'defender_indicator_value': '198.51.100.0'
+    },
+    'metrics': {
+      'version': '1.0',
+      'package': 'fn-ms-defender',
+      'package_version': '1.0.0',
+      'host': 'Marks-MacBook-Pro.local',
+      'execution_time_ms': 1142,
+      'timestamp': '2021-01-05 19:59:41'
+    }
+  }
