@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "scan": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer"
+        },
+        "undetected_urls": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "string"
+              ]
+            }
+          }
+        },
+        "undetected_downloaded_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "detected_downloaded_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "response_code": {
+          "type": "integer"
+        },
+        "as_owner": {
+          "type": "string"
+        },
+        "detected_referrer_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "verbose_msg": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "undetected_referrer_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "detected_urls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "scan_date": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "detected_communicating_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "undetected_communicating_samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "positives": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "last_resolved": {
+                "type": "string"
+              },
+              "hostname": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@
 HELP_VERSIONS = "help/versions"
 ARIEL_SEARCHES = "ariel/searches"
 ARIEL_SEARCHES_RESULT = "ariel/searches/{}/results"
+ARIEL_SEARCHES_DELETE = "ariel/searches/{}"
 GRAPHQL_ARIEL_SEARCHES = "console/graphql/api/ariel/searches"
 GRAPHQL_ARIEL_SEARCHES_RESULT = "console/graphql/api/ariel/searches/{}/results"
 REFERENCE_SET_URL = "reference_data/sets"

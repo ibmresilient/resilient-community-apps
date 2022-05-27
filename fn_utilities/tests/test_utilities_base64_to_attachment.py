@@ -14,9 +14,8 @@ FUNCTION_NAME = "utilities_base64_to_attachment"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
-
 
 def call_base64_to_attachment_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -27,7 +26,6 @@ def call_base64_to_attachment_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestBase64ToAttachment:
     """ Tests for the base64_to_attachment function"""
@@ -43,7 +41,7 @@ class TestBase64ToAttachment:
     ])
     def test_success(self, circuits_app, base64content, incident_id, task_id, file_name, content_type, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "base64content": base64content,
             "incident_id": incident_id,
             "task_id": task_id,

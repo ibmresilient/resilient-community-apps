@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -8,11 +8,11 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_get_contact_info'.
+    """Component that implements SOAR function 'fn_get_contact_info'.
         Returns contact info for an incident or task owner, and incident or task members.
         Ex:
-        {'owner': {'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
-        {'owner': None, 'members': [{'fname': 'Resilient', 'lname': 'Sysadmin', 'title': '', 'display_name': 'Resilient Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
+        {'owner': {'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}, 'members': []}
+        {'owner': None, 'members': [{'fname': 'SOAR', 'lname': 'Sysadmin', 'title': '', 'display_name': 'SOAR Sysadmin', 'email': 'b@a.com', 'phone': '781 838 4848', 'cell': '978 373 2839'}]}
     """
 
     def __init__(self, opts):

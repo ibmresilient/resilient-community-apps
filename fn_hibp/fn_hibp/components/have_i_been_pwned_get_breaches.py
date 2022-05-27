@@ -10,7 +10,7 @@ from fn_hibp.lib.common import HAVE_I_BEEN_PWNED_BREACH_URL, Hibp
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, IntegrationError
 
-
+FULL_RESPONSE = "truncateResponse=false"
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'have_i_been_pwned_get_breaches"""
 
@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 raise ValueError("email_address is required to run this function")
 
-            breach_url = "{0}/{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, email_address)
+            breach_url = "{0}/{1}?{2}".format(HAVE_I_BEEN_PWNED_BREACH_URL, email_address, FULL_RESPONSE)
             try:
                 breach_results = self.hibp.execute_call(breach_url)
             except IntegrationError as err:

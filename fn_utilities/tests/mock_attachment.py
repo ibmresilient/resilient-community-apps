@@ -2,39 +2,37 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import os
-import io
-import base64
-import requests_mock
+from os.path import join, dirname
+from base64 import b64encode
+from requests_mock import create_response
 from fn_utilities.util.utils_common import b_to_s
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-
 
 class AttachmentMock(BasicResilientMock):
 
     @staticmethod
     def test_data(filename):
         """Read a test data file"""
-        template_file_path = os.path.join(os.path.dirname(__file__), "data", filename)
-        with io.open(template_file_path, 'rb') as template_file:
+        template_file_path = join(dirname(__file__), "data", filename)
+        with open(template_file_path, 'rb') as template_file:
             return template_file.read()
 
     @staticmethod
     def test_data_by_id(id):
         """Read a test data file"""
-        template_file_path = os.path.join(os.path.dirname(__file__), "data", AttachmentMock.attachments.get(str(id), {}).get("name"))
-        with io.open(template_file_path, 'rb') as template_file:
+        template_file_path = join(dirname(__file__), "data", AttachmentMock.attachments.get(str(id), {}).get("name"))
+        with open(template_file_path, 'rb') as template_file:
             return template_file.read()
 
     @staticmethod
     def test_data_b64(filename):
         """Read a test data file, return its contents as base64"""
-        return b_to_s(base64.b64encode(AttachmentMock.test_data(filename)))
+        return b_to_s(b64encode(AttachmentMock.test_data(filename)))
 
     @staticmethod
     def test_data_b64_by_id(id):
         """Read a test data file, return its contents as base64"""
-        return b_to_s(base64.b64encode(AttachmentMock.test_data_by_id(id)))
+        return b_to_s(b64encode(AttachmentMock.test_data_by_id(id)))
 
     attachments = {
         "1": {
@@ -86,57 +84,44 @@ class AttachmentMock(BasicResilientMock):
     def attachments_get(self, request):
         """ GET the list of attachments """
         data = [value for id, value in self.attachments.items()]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("POST", "/tasks/[0-9]+/attachments$")
     @resilient_endpoint("POST", "/incidents/[0-9]+/attachments$")
     def attachments_post(self, request):
         """ POST an attachment """
-
         data = {}
         incident_id = request.url.split("/")[-2]
 
         if incident_id == "202":
           data = self.attachments["2021"]
 
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
     def attachments_one_incident_get(self, request):
         """ GET an attachment """
         attachment_id = request.url.split("/")[-1]
         data = self.attachments[attachment_id]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+$")
     def attachments_one_task_get(self, request):
         """ GET an attachment """
         attachment_id = request.url.split("/")[-1]
         data = self.attachments[attachment_id]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+/contents$")
     def attachments_contents_incident_get(self, request):
         """ GET the file contents of an attachment """
         attachment_id = request.url.split("/")[-2]
         data = self.test_data(self.attachments[attachment_id]["name"])
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=data)
+        return create_response(request, status_code=200, content=data)
 
     @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+/contents$")
     def attachments_contents_task_get(self, request):
         """ GET the file contents of an attachment """
         attachment_id = request.url.split("/")[-2]
         data = self.test_data(self.attachments[attachment_id]["name"])
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=data)
+        return create_response(request, status_code=200, content=data)

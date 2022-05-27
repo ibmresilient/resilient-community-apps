@@ -5,7 +5,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_hibp',
-    version='2.0.2',
+    version='2.0.3',
+    display_name= 'Have I Been Pwned',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',

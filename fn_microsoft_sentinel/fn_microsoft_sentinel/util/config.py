@@ -22,6 +22,8 @@ polling_lookback=120
 polling_interval=60
 # comma separated list of profiles to poll for incidents: profile_a[,profile_b]
 sentinel_profiles=profile_a
+# verify= false | /path/to/client_certificate.pem
+verify=
 # add proxy settings as needed
 #https_proxy=
 #http_proxy=

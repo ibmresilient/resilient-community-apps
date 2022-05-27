@@ -1,0 +1,170 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "issue_url": "https://myjira.com/browse/PROJ-1",
+    "issue_url_internal": "https:///myjira.com/rest/api/2/issue/1",
+    "issue_key": "PROJ-8",
+    "issue": {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "1",
+      "self": "https:///myjira.com/rest/api/2/issue/1",
+      "key": "PROJ-8",
+      "fields": {
+        "fixVersions": [],
+        "resolution": null,
+        "lastViewed": null,
+        "priority": {
+          "self": "https:///myjira.com/rest/api/2/priority/4",
+          "iconUrl": "https:///myjira.com/images/icons/priorities/low.svg",
+          "name": "Low",
+          "id": "4"
+        },
+        "labels": [],
+        "aggregatetimeoriginalestimate": null,
+        "timeestimate": null,
+        "versions": [],
+        "issuelinks": [],
+        "assignee": null,
+        "status": {
+          "self": "https:///myjira.com/rest/api/2/status/10000",
+          "description": "",
+          "iconUrl": "https:///myjira.com/",
+          "name": "To Do",
+          "id": "10000",
+          "statusCategory": {
+            "self": "https:///myjira.com/rest/api/2/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "To Do"
+          }
+        },
+        "components": [],
+        "archiveddate": null,
+        "aggregatetimeestimate": null,
+        "creator": {
+          "self": "https:///myjira.com/rest/api/2/user?username=user%40example.com",
+          "name": "user@example.com",
+          "key": "JIRAUSER75501",
+          "emailAddress": "user@example.com",
+          "avatarUrls": {
+            "48x48": "https:///myjira.com/secure/useravatar?avatarId=10122",
+            "24x24": "https:///myjira.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https:///myjira.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https:///myjira.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "User",
+          "active": true,
+          "timeZone": "America/Chicago"
+        },
+        "subtasks": [],
+        "reporter": {
+          "self": "https:///myjira.com/rest/api/2/user?username=user%40example.com",
+          "name": "user@example.com",
+          "key": "JIRAUSER75501",
+          "emailAddress": "user@example.com",
+          "avatarUrls": {
+            "48x48": "https:///myjira.com/secure/useravatar?avatarId=10122",
+            "24x24": "https:///myjira.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https:///myjira.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https:///myjira.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "User",
+          "active": true,
+          "timeZone": "America/Chicago"
+        },
+        "aggregateprogress": {
+          "progress": 0,
+          "total": 0
+        },
+        "progress": {
+          "progress": 0,
+          "total": 0
+        },
+        "votes": {
+          "self": "https:///myjira.com/rest/api/2/issue/PROJ-8/votes",
+          "votes": 0,
+          "hasVoted": false
+        },
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": 0,
+          "worklogs": []
+        },
+        "archivedby": null,
+        "issuetype": {
+          "self": "https:///myjira.com/rest/api/2/issuetype/10102",
+          "id": "10102",
+          "description": "A problem which impairs or prevents the functions of the product.",
+          "iconUrl": "https:///myjira.com/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+          "name": "Bug",
+          "subtask": false,
+          "avatarId": 10303
+        },
+        
+        "timespent": null,
+        "project": {
+          "self": "https:///myjira.com/rest/api/2/project/55200",
+          "id": "55200",
+          "key": "PROJ",
+          "name": "SOAR Test",
+          "projectTypeKey": "software",
+          "avatarUrls": {
+            "48x48": "https:///myjira.com/secure/projectavatar?avatarId=10324",
+            "24x24": "https:///myjira.com/secure/projectavatar?size=small&avatarId=10324",
+            "16x16": "https:///myjira.com/secure/projectavatar?size=xsmall&avatarId=10324",
+            "32x32": "https:///myjira.com/secure/projectavatar?size=medium&avatarId=10324"
+          },
+          "projectCategory": {
+            "self": "https:///myjira.com/rest/api/2/projectCategory/10102",
+            "id": "10102",
+            "description": "All projects created using agile templates.",
+            "name": "Team Project"
+          }
+        },
+        
+        
+        "aggregatetimespent": null,
+        "resolutiondate": null,
+        "workratio": -1,
+        "watches": {
+          "self": "https:///myjira.com/rest/api/2/issue/PROJ-8/watchers",
+          "watchCount": 1,
+          "isWatching": true
+        },
+        "created": "2022-03-21T10:37:38.296-0500",
+        "updated": "2022-03-21T10:37:38.296-0500",
+        "timeoriginalestimate": null,
+        "description": "IBM SOAR Link: https://9.30.43.12:443/#incidents/2103\n\nCreated in IBM SOAR",
+        "timetracking": {},
+        "attachment": [],
+        "summary": "IBM SOAR: jira test 2",
+        "environment": null,
+        "duedate": null,
+        "comment": {
+          "comments": [],
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        }
+      }
+    },
+    "jira_dt_name": "jira_task_references"
+  },
+  "raw": "{\"issue_url\": \"https:///myjira.com/browse/PROJ-8\", \"issue_url_internal\": \"https:///myjira.com/rest/api/2/issue/1\", \"issue_key\": \"PROJ-8\", \"issue\": {\"expand\": \"renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations\", \"id\": \"1\", \"self\": \"https:///myjira.com/rest/api/2/issue/1\", \"key\": \"PROJ-8\", \"fields\": {\"fixVersions\": [], \"resolution\": null, \"customfield_10105\": \"0|i56ey0:\", \"lastViewed\": null, \"priority\": {\"self\": \"https:///myjira.com/rest/api/2/priority/4\", \"iconUrl\": \"https:///myjira.com/images/icons/priorities/low.svg\", \"name\": \"Low\", \"id\": \"4\"}, \"labels\": [], \"aggregatetimeoriginalestimate\": null, \"timeestimate\": null, \"versions\": [], \"issuelinks\": [], \"assignee\": null, \"status\": {\"self\": \"https:///myjira.com/rest/api/2/status/10000\", \"description\": \"\", \"iconUrl\": \"https:///myjira.com/\", \"name\": \"To Do\", \"id\": \"10000\", \"statusCategory\": {\"self\": \"https:///myjira.com/rest/api/2/statuscategory/2\", \"id\": 2, \"key\": \"new\", \"colorName\": \"blue-gray\", \"name\": \"To Do\"}}, \"components\": [], \"archiveddate\": null, \"aggregatetimeestimate\": null, \"creator\": {\"self\": \"https:///myjira.com/rest/api/2/user?username=user%40example.com\", \"name\": \"user@example.com\", \"key\": \"JIRAUSER75501\", \"emailAddress\": \"user@example.com\", \"avatarUrls\": {\"48x48\": \"https:///myjira.com/secure/useravatar?avatarId=10122\", \"24x24\": \"https:///myjira.com/secure/useravatar?size=small&avatarId=10122\", \"16x16\": \"https:///myjira.com/secure/useravatar?size=xsmall&avatarId=10122\", \"32x32\": \"https:///myjira.com/secure/useravatar?size=medium&avatarId=10122\"}, \"displayName\": \"User\", \"active\": true, \"timeZone\": \"America/Chicago\"}, \"subtasks\": [], \"reporter\": {\"self\": \"https:///myjira.com/rest/api/2/user?username=user%40example.com\", \"name\": \"user@example.com\", \"key\": \"JIRAUSER75501\", \"emailAddress\": \"user@example.com\", \"avatarUrls\": {\"48x48\": \"https:///myjira.com/secure/useravatar?avatarId=10122\", \"24x24\": \"https:///myjira.com/secure/useravatar?size=small&avatarId=10122\", \"16x16\": \"https:///myjira.com/secure/useravatar?size=xsmall&avatarId=10122\", \"32x32\": \"https:///myjira.com/secure/useravatar?size=medium&avatarId=10122\"}, \"displayName\": \"User\", \"active\": true, \"timeZone\": \"America/Chicago\"}, \"aggregateprogress\": {\"progress\": 0, \"total\": 0}, \"progress\": {\"progress\": 0, \"total\": 0}, \"votes\": {\"self\": \"https:///myjira.com/rest/api/2/issue/PROJ-8/votes\", \"votes\": 0, \"hasVoted\": false}, \"worklog\": {\"startAt\": 0, \"maxResults\": 20, \"total\": 0, \"worklogs\": []}, \"archivedby\": null, \"issuetype\": {\"self\": \"https:///myjira.com/rest/api/2/issuetype/10102\", \"id\": \"10102\", \"description\": \"A problem which impairs or prevents the functions of the product.\", \"iconUrl\": \"https:///myjira.com/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype\", \"name\": \"Bug\", \"subtask\": false, \"avatarId\": 10303}, \"timespent\": null, \"project\": {\"self\": \"https:///myjira.com/rest/api/2/project/55200\", \"id\": \"55200\", \"key\": \"PROJ\", \"name\": \"SOAR Test\", \"projectTypeKey\": \"software\", \"avatarUrls\": {\"48x48\": \"https:///myjira.com/secure/projectavatar?avatarId=10324\", \"24x24\": \"https:///myjira.com/secure/projectavatar?size=small&avatarId=10324\", \"16x16\": \"https:///myjira.com/secure/projectavatar?size=xsmall&avatarId=10324\", \"32x32\": \"https:///myjira.com/secure/projectavatar?size=medium&avatarId=10324\"}, \"projectCategory\": {\"self\": \"https:///myjira.com/rest/api/2/projectCategory/10102\", \"id\": \"10102\", \"description\": \"All projects created using agile templates.\", \"name\": \"Team Project\"}}, \"aggregatetimespent\": null, \"resolutiondate\": null, \"workratio\": -1, \"watches\": {\"self\": \"https:///myjira.com/rest/api/2/issue/PROJ-8/watchers\", \"watchCount\": 1, \"isWatching\": true}, \"created\": \"2022-03-21T10:37:38.296-0500\", \"updated\": \"2022-03-21T10:37:38.296-0500\", \"timeoriginalestimate\": null, \"description\": \"IBM SOAR Link: https://9.30.43.12:443/#incidents/2103\\n\\nCreated in IBM SOAR\", \"timetracking\": {}, \"attachment\": [], \"summary\": \"IBM SOAR: jira test 2\", \"environment\": null, \"duedate\": null, \"comment\": {\"comments\": [], \"maxResults\": 0, \"total\": 0, \"startAt\": 0}}}}",
+  "inputs": {
+    "incident_id": 2103,
+    "jira_fields": "{ \"summary\":\"IBM SOAR: jira test 2\",\"issuetype\":\"Bug\",\"project\":\"PROJ\",\"description\":\"Created in IBM SOAR\",\"priority\":{ \"name\":\"Low\" } }"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-jira",
+    "package_version": "2.1.0",
+    "host": "myhost",
+    "execution_time_ms": 4459,
+    "timestamp": "2022-03-21 11:37:39"
+  }
+}
