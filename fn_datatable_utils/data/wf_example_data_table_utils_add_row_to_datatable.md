@@ -27,7 +27,7 @@ def dict_to_json_str(d):
 
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
@@ -39,7 +39,7 @@ def dict_to_json_str(d):
     elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-    
+
     elif isinstance(value, bool):
       value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))

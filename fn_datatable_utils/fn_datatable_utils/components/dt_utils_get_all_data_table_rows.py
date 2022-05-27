@@ -3,46 +3,42 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from logging import getLogger
-from resilient_circuits import AppFunctionComponent, function, FunctionResult, handler
-from resilient_lib import validate_fields, ResultPayload
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
+from resilient_lib import validate_fields, ResultPayload
 
 FN_NAME = "dt_utils_get_all_data_table_rows"
-LOG = getLogger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'dt_utils_get_all_data_table_rows'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.options = opts.get("fn_datatable_utils", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
-
-    @function(FN_NAME)
-    def _dt_utils_get_all_data_table_rows_function(self, event, *args, **kwargs):
-        """Function: Return all of the rows from a data table in SOAR"""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Return all of the rows from a data table in SOAR
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name"""
 
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(['incident_id', 'dt_utils_datatable_api_name'], kwargs)
+            validate_fields(['incident_id', 'dt_utils_datatable_api_name'], fn_inputs)
 
-            incident_id = kwargs.get("incident_id") # text (required)
-            dt_api_name = kwargs.get("dt_utils_datatable_api_name") # text (required)
+            incident_id = fn_inputs.incident_id  # text (required)
+            dt_api_name = fn_inputs.dt_utils_datatable_api_name # text (required)
 
-            LOG.info("incident_id: %s", incident_id)
-            LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
+            self.LOG.info("incident_id: %s", incident_id)
+            self.LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            inputs_dict = fn_inputs._asdict()
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_api_name)
@@ -60,11 +56,11 @@ class FunctionComponent(AppFunctionComponent):
 
             # Else, set rows in the payload
             else:
-                yield self.status_message("{0} row/s found".format(len(rows)))
+                yield self.status_message("{} row/s found".format(len(rows)))
                 results = rp.done(True, None)
                 results["rows"] = rows
 
-            yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             yield FunctionResult(results)
         except Exception as err:

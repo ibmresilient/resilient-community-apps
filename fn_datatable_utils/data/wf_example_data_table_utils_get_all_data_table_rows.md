@@ -29,7 +29,7 @@ if results.success:
   note_text = u"{0} <br>{1}".format(note_text, str(results.rows))
 else:
   note_text = u"{0} <br>No rows found.".format(note_text)
-  
+
 incident.addNote(helper.createRichText(note_text))
 ```
 

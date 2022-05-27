@@ -18,12 +18,6 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Get Rows
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -35,7 +29,7 @@ if rule.properties.dt_utils_max_rows:
   inputs.dt_utils_max_rows = rule.properties.dt_utils_max_rows
 else:
   inputs.dt_utils_max_rows = 0
-  
+
 # The direction of the sort
 if rule.properties.dt_utils_sort_direction:
   inputs.dt_utils_sort_direction = rule.properties.dt_utils_sort_direction
@@ -47,7 +41,7 @@ if rule.properties.dt_utils_sort_by:
   inputs.dt_utils_sort_by = rule.properties.dt_utils_sort_by
 else:
   inputs.dt_utils_sort_by = None
-  
+
 # The column api name to search for
 inputs.dt_utils_search_column = "dt_col_name"
 
@@ -76,12 +70,6 @@ if not results.success:
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Delete Row
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -94,7 +82,6 @@ if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.row
   for row in workflow.properties.rows_to_delete.rows:
     rows_ids.append(row["id"])
   inputs.dt_utils_rows_ids = str(rows_ids)
-
 ```
 
 ### Post-Processing Script
@@ -103,14 +90,8 @@ if results.success:
   note = u"<b>Result from Example: Data Table Utils: Artifact: {} Delete Rows</b><br> {}".format(artifact.value, str(results["rows_ids"]))
 else:
   note = u"<b>Result from Example: Data Table Utils: Artifact: {} not found in datatable: {}".format(artifact.value, results.inputs['dt_utils_datatable_api_name'])
-  
-incident.addNote(helper.createRichText(note))
 
-"""
-# {'success': True, 'inputs': {'incident_id': 2150, 'dt_utils_datatable_api_name': 'dt_utils_test_data_table', 'dt_utils_row_id': 821}, 'row': {'success': True, 'title': None, 'message': None, 'hints': []}}
-if results.success:
-  note = u"Row id: {} removed from datatable: {} for artifact: {}".format(results.inputs['dt_utils_row_id'], results.inputs['dt_utils_datatable_api_name'], artifact.value])
-"""
+incident.addNote(helper.createRichText(note))
 ```
 
 ---

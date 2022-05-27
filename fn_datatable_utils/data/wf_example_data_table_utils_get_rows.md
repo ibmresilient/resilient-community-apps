@@ -18,12 +18,6 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Get Rows
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -35,7 +29,7 @@ if rule.properties.dt_utils_max_rows:
   inputs.dt_utils_max_rows = rule.properties.dt_utils_max_rows
 else:
   inputs.dt_utils_max_rows = 0
-  
+
 # The direction of the sort
 inputs.dt_utils_sort_direction = rule.properties.dt_utils_sort_direction
 
@@ -44,7 +38,7 @@ if rule.properties.dt_utils_sort_by:
   inputs.dt_utils_sort_by = rule.properties.dt_utils_sort_by
 else:
   inputs.dt_utils_sort_by = None
-  
+
 # The column api name to search for
 inputs.dt_utils_search_column = "dt_col_name"
 
@@ -55,7 +49,7 @@ inputs.dt_utils_search_value = artifact.value
 ### Post-Processing Script
 ```python
 search_value = results.inputs["dt_utils_search_value"]
-note_text = u"<b>Result from Example: Data Table Utils: Get Rows</b><br> search value: {0}".format(search_value) 
+note_text = u"<b>Result from Example: Data Table Utils: Get Rows</b><br> search value: {0}".format(search_value)
 if results.success:
   note_text = u"{0} <br>{1}".format(note_text, str(results["rows"]))
 else:

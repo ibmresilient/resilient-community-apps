@@ -1,59 +1,60 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-from logging import getLogger
-from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable, PACKAGE_NAME
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
 from resilient_lib import validate_fields, ResultPayload
 
-LOG = getLogger(__name__)
+FN_NAME = "dt_utils_get_row"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'dt_utils_get_row"""
 
     def __init__(self, opts):
-        """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_datatable_utils", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
-
-    @function("dt_utils_get_row")
-    def _dt_utils_get_row_function(self, event, *args, **kwargs):
-        """Function: Function that searches for a row using a 'column name/cell value' pair or the row id and returns the cells of the row found"""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Function that searches for a row using a 'column name/cell value' pair or the row id and returns the cells of the row found
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name
+            -   fn_inputs.dt_utils_row_id
+            -   fn_inputs.dt_utils_search_column
+            -   fn_inputs.dt_utils_search_value"""
 
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
-            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_get_row' that was running in workflow '{}'".format(wf_instance_id))
+            wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            incident_id = kwargs.get("incident_id")  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
-            dt_utils_row_id = kwargs.get("dt_utils_row_id")  # number (optional)
-            dt_utils_search_column = kwargs.get("dt_utils_search_column")  # text (optional)
-            dt_utils_search_value = kwargs.get("dt_utils_search_value")  # text (optional)
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            LOG.info("incident_id: %s", incident_id)
-            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
-            LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
-            LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
-            LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
+            dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
+            incident_id = fn_inputs.incident_id  # number (required)
+            dt_utils_row_id = fn_inputs.dt_utils_row_id if hasattr(fn_inputs, "dt_utils_row_id") else None  # number (optional)
+            dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
+            dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
+
+            self.LOG.info("incident_id: %s", incident_id)
+            self.LOG.info("dt_utils_datatable_api_name: %s",dt_utils_datatable_api_name)
+            self.LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
+            self.LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+            self.LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            inputs_dict = fn_inputs._asdict()
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
+            datatable = RESDatatable(
+                res_client, incident_id, dt_utils_datatable_api_name)
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(wf_instance_id)
 
@@ -62,7 +63,7 @@ class FunctionComponent(ResilientComponent):
                 if not row_id:
                     raise ValueError("Run the workflow from a datatable to get the current row_id.")
 
-                LOG.info("Using current row_id: %s", row_id)
+                self.LOG.info("Using current row_id: %s", row_id)
                 # dt_utils_row_id will equal the datatable row_id the function was used on
                 dt_utils_row_id = row_id
 
@@ -74,30 +75,30 @@ class FunctionComponent(ResilientComponent):
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
 
-            yield StatusMessage("Function Inputs OK")
-
             # Get the data table data
             datatable.get_data()
 
             # Get the row
-            row = datatable.get_row(dt_utils_row_id, dt_utils_search_column, dt_utils_search_value)
+            row = datatable.get_row(
+                dt_utils_row_id, dt_utils_search_column, dt_utils_search_value)
 
             # If no row found, create a log and set success to False
             if not row:
-                yield StatusMessage(u"No row found in {} for: search_column: {}, search_value: {}".format(
+                yield self.status_message(u"No row found in {} for: search_column: {}, search_value: {}".format(
                     datatable.api_name, dt_utils_search_column, dt_utils_search_value))
                 results = rp.done(False, None)
+                results["reason"] = "No row found in {} for: search_column: {}, search_value: {}".format(
+                    datatable.api_name, dt_utils_search_column, dt_utils_search_value)
             # Else, set the row in the payload
             else:
-                yield StatusMessage(u"Row found in {}. row_id: {}, search_column: {}, search_value: {}".format(
+                yield self.status_message(u"Row found in {}. row_id: {}, search_column: {}, search_value: {}".format(
                     datatable.api_name, row["id"], dt_utils_search_column, dt_utils_search_value))
                 results = rp.done(True, None)
                 results["row"] = row
 
-            LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_get_row' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

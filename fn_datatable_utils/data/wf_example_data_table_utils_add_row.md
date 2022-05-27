@@ -27,7 +27,7 @@ def dict_to_json_str(d):
 
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
@@ -39,7 +39,7 @@ def dict_to_json_str(d):
     elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-    
+
     elif isinstance(value, bool):
       value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
@@ -61,7 +61,6 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 # The column api names and the value to update the cell to
 # Example: {"dt_col_name": "example", "number": 1, "text": "example", "datetime": Date().getTime(), "boolean": True, "select": "1", "multi_select": ["a", "b"]}
 inputs.dt_utils_cells_to_update = dict_to_json_str({"dt_col_name": rule.properties.dt_name_field, "number": rule.properties.dt_number_field, "text": rule.properties.dt_text_field, "datetime": rule.properties.dt_datetime_field, "boolean": rule.properties.dt_boolean_field, "select": rule.properties.dt_select_field, "multi_select": rule.properties.dt_multi_select_field})
-
 ```
 
 ### Post-Processing Script

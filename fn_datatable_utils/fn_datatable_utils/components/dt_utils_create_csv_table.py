@@ -12,62 +12,57 @@ from sys import version_info
 from time import gmtime, mktime, strptime
 from io import StringIO
 from collections import OrderedDict
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
 from resilient_lib import ResultPayload, get_file_attachment, get_file_attachment_name, validate_fields
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 LOG = getLogger(__name__)
 
 TZ_FORMAT = compile(r"%[zZ]")
 TZ_VALUE = compile(r"[-+]\d{4}")
 
-class FunctionComponent(ResilientComponent):
+FN_NAME = "dt_utils_create_csv_table"
+
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'dt_utils_create_csv_table''"""
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(PACKAGE_NAME, {})
-
-    @function("dt_utils_create_csv_table")
-    def _dt_utils_create_csv_table_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Create a utility function to take csv data and add the results to a named datatable."""
 
         try:
             # Instantiate new SOAR API object
             res_client = self.rest_client()
 
-            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
-            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_create_csv_table' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
             # Validate required fields
-            validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], kwargs)
+            validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], fn_inputs)
 
-            incident_id = kwargs.get("incident_id")  # number (required)
-            attachment_id = kwargs.get("attachment_id")  # number (optional)
-            has_headers = kwargs.get("dt_has_headers")  # boolean (required)
-            csv_data = kwargs.get("dt_csv_data")  # text (optional)
-            datable_name = kwargs.get("dt_datable_name")  # text (required)
-            mapping_table = kwargs.get("dt_mapping_table")  # text (required)
-            date_time_format = kwargs.get("dt_date_time_format")  # text (optional)
-            start_row = kwargs.get("dt_start_row")  # number (optional)
-            max_rows = kwargs.get("dt_max_rows")  # number (optional)
+            incident_id = fn_inputs.incident_id  # number (required)
+            attachment_id = fn_inputs.attachment_id if hasattr(fn_inputs, "attachment_id") else None  # number (optional)
+            has_headers = fn_inputs.dt_has_headers  # boolean (required)
+            csv_data = fn_inputs.dt_csv_data if hasattr(fn_inputs, "dt_csv_data") else None  # text (optional)
+            datable_name = fn_inputs.dt_datable_name  # text (required)
+            mapping_table = fn_inputs.dt_mapping_table  # text (required)
+            date_time_format = fn_inputs.dt_date_time_format if hasattr(fn_inputs, "dt_date_time_format") else None  # text (optional)
+            start_row = fn_inputs.dt_start_row if hasattr(fn_inputs, "dt_start_row") else None  # number (optional)
+            max_rows = fn_inputs.dt_max_rows if hasattr(fn_inputs, "dt_max_rows") else None  # number (optional)
 
-            LOG.info("incident_id: %s", incident_id)
-            LOG.info("attachment_id: %s", attachment_id)
-            LOG.info("dt_has_headers: %s", has_headers)
-            LOG.info("dt_csv_data: %s", csv_data)
-            LOG.info("dt_datable_name: %s", datable_name)
-            LOG.info("dt_mapping_table: %s", mapping_table)
-            LOG.info("dt_date_time_format: %s", date_time_format)
-            LOG.info("dt_start_row: %s", start_row)
-            LOG.info("dt_max_rows: %s", max_rows)
+            self.LOG.info("incident_id: %s", incident_id)
+            self.LOG.info("attachment_id: %s", attachment_id)
+            self.LOG.info("dt_has_headers: %s", has_headers)
+            self.LOG.info("dt_csv_data: %s", csv_data)
+            self.LOG.info("dt_datable_name: %s", datable_name)
+            self.LOG.info("dt_mapping_table: %s", mapping_table)
+            self.LOG.info("dt_date_time_format: %s", date_time_format)
+            self.LOG.info("dt_start_row: %s", start_row)
+            self.LOG.info("dt_max_rows: %s", max_rows)
 
             try:
                 mapping_table = loads(mapping_table)
@@ -75,7 +70,8 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError(u"Unable to convert mapping_table to json: %s", mapping_table)
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            inputs_dict = fn_inputs._asdict()
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             if (attachment_id and csv_data) or not (attachment_id or csv_data):
                 raise ValueError("Specify either attachment_id or csv_data")
@@ -102,7 +98,7 @@ class FunctionComponent(ResilientComponent):
 
             # Different readers if we have headers or not
             dialect = Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
-            LOG.debug(dialect.__dict__)
+            self.LOG.debug(dialect.__dict__)
 
             csv_headers = []
             if has_headers:
@@ -112,7 +108,7 @@ class FunctionComponent(ResilientComponent):
                 reader = read(inline_data, dialect=dialect)  # Each row is a list of values
 
             mapping_table = build_mapping_table(mapping_table, csv_headers, dt_column_names)
-            LOG.debug("csv headers to datatable columns: %s", mapping_table)
+            self.LOG.debug("csv headers to datatable columns: %s", mapping_table)
 
             # Perform the api calls to the datatable
             number_of_added_rows, number_of_rows_with_errors = self.add_to_datatable(reader, datatable,
@@ -120,8 +116,8 @@ class FunctionComponent(ResilientComponent):
                                                                                      date_time_format,
                                                                                      start_row,
                                                                                      max_rows)
-            LOG.info("Number of rows added: %s ", number_of_added_rows)
-            LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
+            self.LOG.info("Number of rows added: %s ", number_of_added_rows)
+            self.LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
 
             row_data = {
                 "data_source": attachment_name if attachment_name else "CSV data",
@@ -130,12 +126,12 @@ class FunctionComponent(ResilientComponent):
             }
             results = rp.done(True, row_data)
 
-            yield StatusMessage("Finished 'dt_utils_create_csv_table' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionResult({}, success=False, reason=str(err))
 
     def add_to_datatable(self, reader, datatable, mapping_table, dt_column_names, date_format,
                          start_row, max_rows):
@@ -157,10 +153,10 @@ class FunctionComponent(ResilientComponent):
 
         indx = 1
         for row in reader:
-            LOG.debug("%s: %s",indx, row)
+            self.LOG.debug("%s: %s",indx, row)
             if not start_row or (start_row and indx >= start_row):
                 cells_data = build_row(row, mapping_table, dt_column_names, date_format)
-                LOG.debug("cells: %s", cells_data)
+                self.LOG.debug("cells: %s", cells_data)
 
                 new_row = datatable.dt_add_rows(cells_data)
 

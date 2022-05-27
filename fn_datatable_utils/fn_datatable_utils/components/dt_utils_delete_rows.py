@@ -1,55 +1,55 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-from logging import getLogger
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, validate_search_inputs, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
 from resilient_lib import validate_fields, ResultPayload
 
-LOG = getLogger(__name__)
+FN_NAME = "dt_utils_delete_rows"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'dt_utils_delete_rows''"""
 
     def __init__(self, opts):
-        """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(PACKAGE_NAME, {})
-
-    @function("dt_utils_delete_rows")
-    def _dt_utils_delete_rows_function(self, event, *args, **kwargs):
-        """Function: Function that deletes rows from a Data Table"""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Function that deletes rows from a Data Table
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name
+            -   fn_inputs.dt_utils_rows_ids
+            -   fn_inputs.dt_utils_search_column
+            -   fn_inputs.dt_utils_search_value
+            -   fn_inputs.dt_utils_delete_all_rows"""
 
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
-            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_delete_rows' that was running in workflow '{}'".format(wf_instance_id))
+            wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            incident_id = kwargs.get("incident_id")  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
-            dt_utils_rows_ids = kwargs.get("dt_utils_rows_ids")  # text (optional)
-            dt_utils_search_column = kwargs.get("dt_utils_search_column")  # text (optional)
-            dt_utils_search_value = kwargs.get("dt_utils_search_value") # text (optional)
-            dt_utils_delete_all_rows = bool(kwargs.get("dt_utils_delete_all_rows", False)) # bool (optional)
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            LOG.info("incident_id: %s", incident_id)
-            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
-            LOG.info("dt_utils_rows_ids: %s", dt_utils_rows_ids)
-            LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
-            LOG.info(u"dt_utils_search_value: %s", dt_utils_search_value)
-            LOG.info(u"dt_utils_delete_all_rows: %s", dt_utils_delete_all_rows)
+            dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name # text (required)
+            incident_id = fn_inputs.incident_id # number (required)
+            dt_utils_rows_ids = fn_inputs.dt_utils_rows_ids if hasattr(fn_inputs, "dt_utils_rows_ids") else None  # text (optional)
+            dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
+            dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
+            dt_utils_delete_all_rows = bool(fn_inputs.dt_utils_delete_all_rows if hasattr(fn_inputs, "dt_utils_delete_all_rows") else False) # bool (optional)
+
+            self.LOG.info("incident_id: %s", incident_id)
+            self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+            self.LOG.info("dt_utils_rows_ids: %s", dt_utils_rows_ids)
+            self.LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+            self.LOG.info(u"dt_utils_search_value: %s", dt_utils_search_value)
+            self.LOG.info(u"dt_utils_delete_all_rows: %s", dt_utils_delete_all_rows)
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(rows_ids=dt_utils_rows_ids,
@@ -61,14 +61,15 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError(valid_search_inputs["msg"])
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            inputs_dict = fn_inputs._asdict()
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
             # Get datatable row_id if function used on a datatable
             row_id = datatable.get_row_id_from_workflow(wf_instance_id)
-            row_id and LOG.debug("Current row_id: %s", row_id)
+            row_id and self.LOG.debug("Current row_id: %s", row_id)
 
             # Get the data table data
             datatable.get_data()
@@ -81,22 +82,23 @@ class FunctionComponent(ResilientComponent):
                                                  wf_instance_id)
 
             if not deleted_rows:
-                results = rp.done(False, None)
-                yield StatusMessage("No row(s) found.")
+                results = rp.done(True, None)
+                yield self.status_message("No row(s) found.")
 
             elif "error" in deleted_rows:
-                yield StatusMessage(u"Row(s) not deleted. Error: {}".format(deleted_rows.get("error")))
-                raise FunctionError("Failed to delete a row.")
+                yield self.status_message(u"Row(s) not deleted. Error: {}".format(deleted_rows.get("error")))
+                results = rp.done(False, None)
+                results["reason"] = str(deleted_rows.get("error"))
+                raise ValueError("Failed to delete a row.")
 
             else:
-                yield StatusMessage("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
+                yield self.status_message("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
                 results = rp.done(True, None)
                 results["rows_ids"] = deleted_rows
 
-            LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_delete_rows' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

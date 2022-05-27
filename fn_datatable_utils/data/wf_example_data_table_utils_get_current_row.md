@@ -26,7 +26,7 @@ inputs.dt_utils_row_id = 0 # 0 represents current row
 ### Post-Processing Script
 ```python
 search_value = results.inputs["dt_utils_search_value"]
-note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br> search value: {0}".format(search_value) 
+note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br> search value: {0}".format(search_value)
 if results.success:
   note_text = u"{0} <br>{1}".format(note_text, str(results["row"]))
 else:

@@ -31,7 +31,7 @@ def dict_to_json_str(d):
 
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
@@ -43,7 +43,7 @@ def dict_to_json_str(d):
     elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-    
+
     elif isinstance(value, bool):
       value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
@@ -56,8 +56,6 @@ def dict_to_json_str(d):
 
   return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
-# S T A R T
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -68,13 +66,7 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 inputs.dt_utils_row_id = 0
 
 # The column api names and the value to update the cell to
-inputs.dt_utils_cells_to_update = dict_to_json_str({
-  "name": "example",
-  "number": 1,
-  "multi_select": ["a", "b"],
-  "boolean": True
-})
-
+inputs.dt_utils_cells_to_update = dict_to_json_str({"name": "example", "number": 1, "multi_select": ["a", "b"], "boolean": True})
 ```
 
 ### Post-Processing Script

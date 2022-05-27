@@ -1,57 +1,55 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-from logging import getLogger
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import validate_search_inputs, RESDatatable, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
 from resilient_lib import validate_fields, ResultPayload
 
-LOG = getLogger(__name__)
+FN_NAME = "dt_utils_get_rows"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'dt_utils_get_rows''"""
 
     def __init__(self, opts):
-        """Constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_datatable_utils", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
-
-    @function("dt_utils_get_rows")
-    def _dt_utils_get_rows_function(self, event, *args, **kwargs):
-        """Function: Function that returns rows found based on searching/sorting criteria."""
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Function that returns rows found based on searching/sorting criteria.
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name
+            -   fn_inputs.dt_utils_sort_by
+            -   fn_inputs.dt_utils_sort_direction
+            -   fn_inputs.dt_utils_max_rows
+            -   fn_inputs.dt_utils_search_column
+            -   fn_inputs.dt_utils_search_value"""
 
         try:
             # Instansiate new SOAR API object
             res_client = self.rest_client()
 
-            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
-            wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'dt_utils_get_rows' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name"], kwargs)
+            validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            incident_id = kwargs.get("incident_id")  # number (required)
-            dt_utils_datatable_api_name = kwargs.get("dt_utils_datatable_api_name")  # text (required)
-            dt_utils_sort_by = kwargs.get("dt_utils_sort_by")  # text (optional)
-            dt_utils_sort_direction = kwargs.get("dt_utils_sort_direction")["name"]  # select, values: "ASC", "DESC" (optional)
-            dt_utils_max_rows = kwargs.get("dt_utils_max_rows")  # number (optional)
-            dt_utils_search_column = kwargs.get("dt_utils_search_column")  # text (optional)
-            dt_utils_search_value = kwargs.get("dt_utils_search_value")  # text (optional)
+            dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
+            incident_id = fn_inputs.incident_id  # number (required)
+            dt_utils_sort_by = fn_inputs.dt_utils_sort_by if hasattr(fn_inputs, "dt_utils_sort_by") else None  # text (optional)
+            dt_utils_sort_direction = fn_inputs.dt_utils_sort_direction if hasattr(fn_inputs, "dt_utils_sort_direction")["name"] else None  # select, values: "ASC", "DESC" (optional)
+            dt_utils_max_rows = fn_inputs.dt_utils_max_rows if hasattr(fn_inputs, "dt_utils_max_rows") else None  # number (optional)
+            dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
+            dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
 
-            LOG.info("incident_id: %s", incident_id)
-            LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
-            LOG.info("dt_utils_sort_by: %s", dt_utils_sort_by)
-            LOG.info("dt_utils_sort_direction: %s", dt_utils_sort_direction)
-            LOG.info("dt_utils_max_rows: %s", dt_utils_max_rows)
-            LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
-            LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
+            self.LOG.info("incident_id: %s", incident_id)
+            self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+            self.LOG.info("dt_utils_sort_by: %s", dt_utils_sort_by)
+            self.LOG.info("dt_utils_sort_direction: %s", dt_utils_sort_direction)
+            self.LOG.info("dt_utils_max_rows: %s", dt_utils_max_rows)
+            self.LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+            self.LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
 
             # Ensure correct search inputs are defined correctly
             valid_search_inputs = validate_search_inputs(sort_by=dt_utils_sort_by,
@@ -64,7 +62,8 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError(valid_search_inputs["msg"])
 
             # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+            inputs_dict = fn_inputs._asdict()
+            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
@@ -79,19 +78,19 @@ class FunctionComponent(ResilientComponent):
 
             # If no rows found, create a log and set success to False
             if not rows:
-                yield StatusMessage("No rows found")
+                yield self.status_message("No rows found")
                 results = rp.done(False, None)
+                results["reason"] = "No rows found"
 
             # Else, set rows in the payload
             else:
-                yield StatusMessage("{0} row/s found".format(len(rows)))
+                yield self.status_message("{0} row/s found".format(len(rows)))
                 results = rp.done(True, None)
                 results["rows"] = rows
 
-            LOG.info("Complete")
-            yield StatusMessage("Finished 'dt_utils_get_rows' that was running in workflow '{}'".format(wf_instance_id))
+            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

@@ -37,23 +37,26 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info("incident_id: %s", fn_inputs.incident_id)
             self.LOG.info("dt_utils_datatable_api_name: %s", fn_inputs.dt_utils_datatable_api_name)
 
+            wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+
             # Create payload dict with inputs
             rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
 
-            # Get the data table data
+            # # Get the data table data
             datatable.get_data()
 
             # Delete all rows in the given datatable on SOAR
             deleted_rows = datatable.clear_datatable()
 
             if "error" in deleted_rows:
-                yield self.status_message("Datatable '{}' not cleared. Error: {}".format(datatable.api_name, deleted_rows.get("error")))
+                yield self.status_message("Datatable '{}' not cleared. Error: {}".format(fn_inputs.dt_utils_datatable_api_name, deleted_rows.get("error")))
+                results = rp.done(False, None)
                 raise ValueError(deleted_rows["error"])
             else:
-                yield self.status_message("Datatable '{}' cleared.".format(datatable.api_name))
+                yield self.status_message("Datatable '{}' cleared.".format(fn_inputs.dt_utils_datatable_api_name))
                 results = rp.done(True, deleted_rows)
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))

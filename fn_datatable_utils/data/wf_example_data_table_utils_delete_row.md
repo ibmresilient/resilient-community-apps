@@ -18,12 +18,6 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Get Row
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -38,7 +32,6 @@ inputs.dt_utils_search_value = artifact.value
 
 ## Alternatively you can get the row by its ID by defining this input:
 # inputs.dt_utils_row_id = 3
-
 ```
 
 ### Post-Processing Script
@@ -61,12 +54,6 @@ None
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Delete Row
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -83,7 +70,7 @@ if results.success:
   note = u"Row id: {} removed from datatable: {} for artifact: {}".format(results.inputs['dt_utils_row_id'], results.inputs['dt_utils_datatable_api_name'], artifact.value)
 else:
   note = u"Artifact: {} not found in datatable: {}".format(artifact.value, results.inputs['dt_utils_datatable_api_name'])
-  
+
 incident.addNote(note)
 ```
 

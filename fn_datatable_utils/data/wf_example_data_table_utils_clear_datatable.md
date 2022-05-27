@@ -18,13 +18,21 @@
 
 ### Pre-Processing Script
 ```python
+# The ID of this incident
 inputs.incident_id = incident.id
-inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+
+# The api name of the Data Table to update
+if rule.properties.datatable_api_name:
+  inputs.dt_utils_datatable_api_name = datatable_api_name
+else:
+  # Defaults to example data table
+  inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 ```
 
 ### Post-Processing Script
 ```python
-None
+if results["success"]:
+  incident.addNote("Data table: {} content has been removed.".format(results["inputs"]["dt_utils_datatable_api_name"]))
 ```
 
 ---

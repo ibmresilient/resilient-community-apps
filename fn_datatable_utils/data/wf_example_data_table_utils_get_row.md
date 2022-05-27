@@ -18,12 +18,6 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Get Row
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -43,7 +37,7 @@ inputs.dt_utils_search_value = artifact.value
 ### Post-Processing Script
 ```python
 search_value = results.inputs["dt_utils_search_value"]
-note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br> search value: {0}".format(search_value) 
+note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br> search value: {0}".format(search_value)
 if results.success:
   note_text = u"{0} <br>{1}".format(note_text, str(results["row"]))
 else:

@@ -268,7 +268,9 @@ None
 
 ---
 ## Function - Data Table Utils: Clear Datatable
-Delete all the contents of a datatable
+Delete all the contents of a datatable.
+
+> **NOTE:** This function can not be used with Rule object type Data Table
 
  ![screenshot: fn-data-table-utils-clear-datatable ](./doc/screenshots/dt_clear_dt.png)
 
@@ -403,7 +405,11 @@ results = {
 inputs.incident_id = incident.id
 
 # The api name of the Data Table to update
-inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
+if rule.properties.datatable_api_name:
+  inputs.dt_utils_datatable_api_name = datatable_api_name
+else:
+  # Defaults to example data table
+  inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 ```
 
 </p>
@@ -413,7 +419,8 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 <p>
 
 ```python
-None
+if results["success"]:
+  incident.addNote("Data table: {} content has been removed.".format(results["inputs"]["dt_utils_datatable_api_name"]))
 ```
 
 </p>
