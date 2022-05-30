@@ -509,13 +509,18 @@ class RxClient():
         :param response:
         :return: response or raise error for selected error codes
         """
-        if response.status_code == 401:
+        if response.status_code in [400, 401]:
             self.refresh_header = True
+            if response.status_code == 400:
+                 r_text = response.text
+            else:
+                r_text = response.json()
             # Return status dict for selected codes.
             return {
-                "error_code": 401,
-                "text": response.json()
+                "error_code": response.status_code,
+                "text": r_text
             }
+
         if response.status_code in [409, 422]:
             return response
 
@@ -543,10 +548,10 @@ class RxClient():
         res = self.rc.execute_call_v2(method, uri, verify=self.verify, callback=self.callback, **kwargs)
 
         if isinstance(res, dict):
-            # A 401 error was detected.
             error_code = res.get("error_code", None)
             if error_code:
-                if error_code == 401:
+                if error_code in [400, 401]:
+                    # If a 400 or 401 error throw authentication error.
                     raise AuthenticationError(res)
         return res
 
