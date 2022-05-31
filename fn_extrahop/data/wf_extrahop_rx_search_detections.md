@@ -96,6 +96,20 @@ DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", 
 CATEGORY_MAP = workflow.properties.category_map
 TYPE_MAP = workflow.properties.type_map
 
+LINKBACK_URL = "/extrahop/#/detections/detail/{}"
+
+# Processing
+def make_linkback_url(det_id):
+    """Create a url to link back to the detection.
+
+    Args:
+        det_id (str/int): id representing the detection.
+
+    Returns:
+        str: completed url for linkback
+    """
+    return incident.properties.extrahop_console_url + LINKBACK_URL.format(det_id)
+
 # Processing
 def main():
     note_text = u''
@@ -106,8 +120,12 @@ def main():
                     u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if dets:
             for det in dets:
+                detection_url = make_linkback_url(det["id"])
+                detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
+                             .format(detection_url, det["id"])
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
+                newrow.detection_url = detection_url_html
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
                     if f1.startswith("det_"):
