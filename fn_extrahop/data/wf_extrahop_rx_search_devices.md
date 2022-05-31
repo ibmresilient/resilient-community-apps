@@ -11,7 +11,7 @@
 `funct_extrahop_rx_search_devices`
 
 ### Output Name
-`None`
+`search_devices_result`
 
 ### Message Destination
 `fn_extrahop`
@@ -35,11 +35,20 @@ def main():
     }
     filter = {k: v for k, v in filter_props.items() if v}
 
-    if not filter:
-        raise ValueError("The search filter is empty.")
-    else:
+    if filter and rule.properties.extrahop_device_id:
+        raise ValueError("The device ID and search filter shouldn't be set at the same time.")
+    
+    if filter:
         search_filter = {
             "filter": filter
+        }
+    if rule.properties.extrahop_device_id:
+        search_filter = {
+            "filter": {
+                "field": "discovery_id",
+                "operator": "=",
+                "operand": str(rule.properties.extrahop_device_id)
+            }
         }
     
     inputs.extrahop_search_filter = str(search_filter).replace("'", '"')

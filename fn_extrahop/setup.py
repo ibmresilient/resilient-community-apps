@@ -48,6 +48,8 @@ setup(
     """,
     install_requires=[
         "resilient-circuits>=42.0.0",
+        "resilient-lib",
+        "jinja2",
         "retry2 ~= 0.9"
     ],
     python_requires='>=3.6',
