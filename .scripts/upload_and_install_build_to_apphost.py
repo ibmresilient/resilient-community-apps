@@ -217,14 +217,14 @@ def upload_all_apps(res_client, app_path):
         extracted_name = ""
 
     if extracted_name in installed_app_names:
-        print(f'The app {extracted_name} is already uploaded!')
+        print(f'Begin upgrade: {app_path}')
+    else:
+        print(f'Begin upload: {app_path}')
 
-    print(f'Begin upload: {app_path}')
-
-    try:
-        app = res_client.post_attachment(uri="/apps", filepath=app_path)
-    except resilient.co3.SimpleHTTPException as exception:
-        print(exception)
+        try:
+            app = res_client.post_attachment(uri="/apps", filepath=app_path)
+        except resilient.co3.SimpleHTTPException as exception:
+            print(exception)
 
 def install_all_apps(res_client):
     """installs pending uploaded app to apphost"""
