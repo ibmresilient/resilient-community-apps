@@ -18,12 +18,48 @@
 
 ### Pre-Processing Script
 ```python
-None
+if rule.properties.extrahop_tag_name is None:
+    raise ValueError("The tag name is not set")
+
 ```
 
 ### Post-Processing Script
 ```python
-None
+##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_tags"
+WF_NAME = "Example: Extrahop Reveal(x) assign tag"
+CONTENT = results.content
+INPUTS = results.inputs
+
+# Processing
+def main():
+    note_text = u''
+    tag_name = rule.properties.extrahop_tag_name
+    tag_id = None
+    
+    if CONTENT:
+        tags = CONTENT.result
+        if tags:
+            for tag in tags:
+                if tag_name == tag["name"]:
+                    tag_id = tag["id"]
+                    workflow.addProperty("tag_exists", {})
+                    break
+            if not tag_id:
+                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b>not returned for SOAR function <b>{2}</b> "\
+                            u"with parameters <b>{3}</b>."\
+                    .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
+
+main()
+
 ```
 
 ---
@@ -34,7 +70,7 @@ None
 `funct_extrahop_rx_assign_tag`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_extrahop`
@@ -68,25 +104,26 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
+    tag_name = rule.properties.extrahop_tag_name
     tag = INPUTS.get("extrahop_tag_name")
     if CONTENT:
         result = CONTENT.result
         if result == "success":
             device_id = INPUTS.get("extrahop_device_ids")
             tag_id = INPUTS.get("extrahop_tag_id")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully assigned tag id <b>{1}</b> to device id <b>{2}</b> for SOAR " \
-                        u"function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully assigned tag <b>'{1}'</b> with id <b>{2}</b> to device id <b>{3}</b> for SOAR " \
+                        u"function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to assign tag id <b>{1}</b> to device id <b>{2}</b> for " \
-                        u"SOAR function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> for " \
+                        u"SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Assign tag id <b>{1}</b> to device id <b>{2}</b> failed with unexpected " \
-                        u"response for SOAR function <b>{3}</b> with parameters <b>{4}</b>.".format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> failed with unexpected " \
+                        u"response for SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to assign a tag id <b>{1}</b> to device id <b>{2}</b> for SOAR function <b>{3}</b> with parameters <b>{4}</b>."\
-            .format(WF_NAME, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     u"to assign tag <b>{1}</b> with id  <b>{2}</b> to device id <b>{3}</b> for SOAR function <b>{4}</b> with parameters <b>{5}</b>."\
+            .format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
