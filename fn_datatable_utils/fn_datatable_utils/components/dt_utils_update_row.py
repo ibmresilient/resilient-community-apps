@@ -6,7 +6,7 @@
 from json import loads
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_update_row"
 
@@ -52,10 +52,6 @@ class FunctionComponent(AppFunctionComponent):
             except Exception:
                 raise ValueError("Failed to parse JSON string: {}".format(dt_utils_cells_to_update))
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
@@ -76,18 +72,14 @@ class FunctionComponent(AppFunctionComponent):
 
             if "error" in updated_row:
                 yield self.status_message("Row in {} NOT updated.".format(datatable.api_name))
-                results = rp.done(False, None)
-                results["reason"] = updated_row["error"]
                 raise ValueError(updated_row["error"])
 
             else:
                 yield self.status_message("Row {} in {} updated.".format(updated_row["id"], datatable.api_name))
-                results = rp.done(True, None)
-                results["row"] = updated_row
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"row": updated_row})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

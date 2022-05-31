@@ -74,16 +74,6 @@ class DTResilientMock(BasicResilientMock):
                                status_code=200,
                                content=b(dumps(data)))
 
-    @resilient_endpoint("DELETE", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/\?handle_format=names$")
-    def mock_datatable_clear_datatable(self, request):
-        """ Handle DELETE request for mock_data_table """
-
-        data = self.mock_success_delete
-
-        return create_response(request,
-                               status_code=200,
-                               content=b(dumps(data)))
-
     @resilient_endpoint("DELETE", r"/incidents/[0-9]+/table_data/mock_data_table/row_data/[0-9]\?handle_format=names$")
     def mock_datatable_delete_row(self, request):
         """ Handle DELETE request for mock_data_table """

@@ -63,4 +63,4 @@ class TestDtUtilsDeleteRows:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_delete_rows_function(circuits_app, mock_inputs)
-        assert (expected_results == results["rows_ids"])
+        assert (expected_results == results["content"]["rows_ids"])

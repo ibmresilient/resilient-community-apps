@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_delete_rows"
 
@@ -60,10 +60,6 @@ class FunctionComponent(AppFunctionComponent):
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
@@ -82,23 +78,18 @@ class FunctionComponent(AppFunctionComponent):
                                                  wf_instance_id)
 
             if not deleted_rows:
-                results = rp.done(True, None)
                 yield self.status_message("No row(s) found.")
 
             elif "error" in deleted_rows:
                 yield self.status_message(u"Row(s) not deleted. Error: {}".format(deleted_rows.get("error")))
-                results = rp.done(False, None)
-                results["reason"] = str(deleted_rows.get("error"))
                 raise ValueError("Failed to delete a row.")
 
             else:
                 yield self.status_message("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
-                results = rp.done(True, None)
-                results["rows_ids"] = deleted_rows
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"rows_ids": deleted_rows})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

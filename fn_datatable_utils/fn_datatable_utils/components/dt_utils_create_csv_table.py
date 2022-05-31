@@ -13,7 +13,7 @@ from time import gmtime, mktime, strptime
 from io import StringIO
 from collections import OrderedDict
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import ResultPayload, get_file_attachment, get_file_attachment_name, validate_fields
+from resilient_lib import get_file_attachment, get_file_attachment_name, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 LOG = getLogger(__name__)
@@ -69,10 +69,6 @@ class FunctionComponent(AppFunctionComponent):
             except Exception:
                 raise ValueError(u"Unable to convert mapping_table to json: %s", mapping_table)
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             if (attachment_id and csv_data) or not (attachment_id or csv_data):
                 raise ValueError("Specify either attachment_id or csv_data")
 
@@ -124,12 +120,11 @@ class FunctionComponent(AppFunctionComponent):
                 "rows_added": number_of_added_rows,
                 "rows_with_errors": number_of_rows_with_errors
             }
-            results = rp.done(True, row_data)
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(row_data)
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))
 

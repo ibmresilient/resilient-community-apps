@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -63,4 +64,4 @@ class TestDtUtilsAddRow:
 
         results = call_dt_utils_add_row_function(circuits_app, mock_inputs)
         assert results["content"]
-        assert(expected_results == results['content']['row'])
+        assert(expected_results == results["content"]['row'])

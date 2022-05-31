@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_get_rows"
 
@@ -38,8 +38,8 @@ class FunctionComponent(AppFunctionComponent):
             dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
             incident_id = fn_inputs.incident_id  # number (required)
             dt_utils_sort_by = fn_inputs.dt_utils_sort_by if hasattr(fn_inputs, "dt_utils_sort_by") else None  # text (optional)
-            dt_utils_sort_direction = fn_inputs.dt_utils_sort_direction if hasattr(fn_inputs, "dt_utils_sort_direction")["name"] else None  # select, values: "ASC", "DESC" (optional)
-            dt_utils_max_rows = fn_inputs.dt_utils_max_rows if hasattr(fn_inputs, "dt_utils_max_rows") else None  # number (optional)
+            dt_utils_sort_direction = fn_inputs.dt_utils_sort_direction if hasattr(fn_inputs, "dt_utils_sort_direction") else None  # select, values: "ASC", "DESC" (optional)
+            dt_utils_max_rows = fn_inputs.dt_utils_max_rows if hasattr(fn_inputs, "dt_utils_max_rows") else 0  # number (optional)
             dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
             dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
 
@@ -61,10 +61,6 @@ class FunctionComponent(AppFunctionComponent):
             if not valid_search_inputs["valid"]:
                 raise ValueError(valid_search_inputs["msg"])
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
@@ -79,18 +75,14 @@ class FunctionComponent(AppFunctionComponent):
             # If no rows found, create a log and set success to False
             if not rows:
                 yield self.status_message("No rows found")
-                results = rp.done(False, None)
-                results["reason"] = "No rows found"
 
             # Else, set rows in the payload
             else:
                 yield self.status_message("{0} row/s found".format(len(rows)))
-                results = rp.done(True, None)
-                results["rows"] = rows
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"rows": rows})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

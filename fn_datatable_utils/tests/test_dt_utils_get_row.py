@@ -59,4 +59,4 @@ class TestDtUtilsGetRow:
         """ Test calling with sample values for the parameters """
 
         results = call_dt_utils_get_row_function(circuits_app, inputs)
-        assert(expected_results == results["row"])
+        assert(expected_results == results["content"]["row"])

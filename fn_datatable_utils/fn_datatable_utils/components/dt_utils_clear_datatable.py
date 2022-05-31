@@ -6,7 +6,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_clear_datatable"
 
@@ -32,15 +32,8 @@ class FunctionComponent(AppFunctionComponent):
 
             validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            inputs_dict = fn_inputs._asdict()
-
             self.LOG.info("incident_id: %s", fn_inputs.incident_id)
             self.LOG.info("dt_utils_datatable_api_name: %s", fn_inputs.dt_utils_datatable_api_name)
-
-            wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-
-            # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
 
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
@@ -53,15 +46,13 @@ class FunctionComponent(AppFunctionComponent):
 
             if "error" in deleted_rows:
                 yield self.status_message("Datatable '{}' not cleared. Error: {}".format(fn_inputs.dt_utils_datatable_api_name, deleted_rows.get("error")))
-                results = rp.done(False, None)
                 raise ValueError(deleted_rows["error"])
             else:
                 yield self.status_message("Datatable '{}' cleared.".format(fn_inputs.dt_utils_datatable_api_name))
-                results = rp.done(True, deleted_rows)
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(deleted_rows)
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

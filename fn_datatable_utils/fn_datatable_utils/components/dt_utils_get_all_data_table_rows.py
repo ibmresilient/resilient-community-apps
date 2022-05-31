@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_get_all_data_table_rows"
 
@@ -36,10 +36,6 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info("incident_id: %s", incident_id)
             self.LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_api_name)
 
@@ -51,17 +47,13 @@ class FunctionComponent(AppFunctionComponent):
             # If no rows found, create a log
             if not rows:
                 yield self.status_message("No rows found")
-                results = rp.done(True, None)
-                results["rows"] = None
 
             # Else, set rows in the payload
             else:
                 yield self.status_message("{} row/s found".format(len(rows)))
-                results = rp.done(True, None)
-                results["rows"] = rows
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            yield FunctionResult(results)
+            yield FunctionResult({"rows": rows})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

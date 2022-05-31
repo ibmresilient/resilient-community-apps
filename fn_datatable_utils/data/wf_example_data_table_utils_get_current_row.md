@@ -25,12 +25,11 @@ inputs.dt_utils_row_id = 0 # 0 represents current row
 
 ### Post-Processing Script
 ```python
-search_value = results.inputs["dt_utils_search_value"]
-note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br> search value: {0}".format(search_value)
+note_text = u"<b>Result from Example: Data Table Utils: Get Row</b><br>"
 if results.success:
-  note_text = u"{0} <br>{1}".format(note_text, str(results["row"]))
+  note_text = u"{} <br>{}".format(note_text, str(results.content["row"]))
 else:
-  note_text = u"{0} <br>No row found.".format(note_text)
+  note_text = u"{} <br>No row found.".format(note_text)
 
 incident.addNote(helper.createRichText(note_text))
 ```

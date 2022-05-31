@@ -77,9 +77,9 @@ inputs.incident_id = incident.id
 inputs.dt_utils_datatable_api_name = workflow.properties.rows_to_delete.inputs.dt_utils_datatable_api_name
 
 # The internal IDs of the rows that will be deleted [again, taken from previous Get Rows Function]
-if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.rows:
+if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.content.rows:
   rows_ids = []
-  for row in workflow.properties.rows_to_delete.rows:
+  for row in workflow.properties.rows_to_delete.content.rows:
     rows_ids.append(row["id"])
   inputs.dt_utils_rows_ids = str(rows_ids)
 ```
@@ -87,7 +87,7 @@ if workflow.properties.rows_to_delete and workflow.properties.rows_to_delete.row
 ### Post-Processing Script
 ```python
 if results.success:
-  note = u"<b>Result from Example: Data Table Utils: Artifact: {} Delete Rows</b><br> {}".format(artifact.value, str(results["rows_ids"]))
+  note = u"<b>Result from Example: Data Table Utils: Artifact: {} Delete Rows</b><br> {}".format(artifact.value, str(results.content["rows_ids"]))
 else:
   note = u"<b>Result from Example: Data Table Utils: Artifact: {} not found in datatable: {}".format(artifact.value, results.inputs['dt_utils_datatable_api_name'])
 

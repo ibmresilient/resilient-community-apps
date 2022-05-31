@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 
 FN_NAME = "dt_utils_delete_row"
 
@@ -43,10 +43,6 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
             self.LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
 
-            # Create payload dict with inputs
-            inputs_dict = fn_inputs._asdict()
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
@@ -70,16 +66,12 @@ class FunctionComponent(AppFunctionComponent):
 
             if "error" in deleted_row:
                 yield self.status_message(u"Row {} in {} not deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
-                results = rp.done(False, None)
                 raise ValueError(deleted_row["error"])
 
             yield self.status_message("Row {} in {} deleted.".format(dt_utils_row_id, dt_utils_datatable_api_name))
-            results = rp.done(True, None)
-            results['row'] = deleted_row
-
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"row": deleted_row})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

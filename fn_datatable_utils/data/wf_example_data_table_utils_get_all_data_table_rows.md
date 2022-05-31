@@ -26,7 +26,7 @@ inputs.incident_id = incident.id
 ```python
 note_text = u"<b>Result from Example: Data Table Utils: Get All Data Table Rows</b><br>"
 if results.success:
-  note_text = u"{0} <br>{1}".format(note_text, str(results.rows))
+  note_text = u"{0} <br>{1}".format(note_text, str(results.content.rows))
 else:
   note_text = u"{0} <br>No rows found.".format(note_text)
 

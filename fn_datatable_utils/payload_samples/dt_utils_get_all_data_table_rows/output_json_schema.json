@@ -3,16 +3,170 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
     },
     "reason": {},
-    "content": {},
-    "raw": {
-      "type": "string"
+    "content": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "cells": {
+                "type": "object",
+                "properties": {
+                  "boolean": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "datetime": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "dt_col_name": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "multi_select": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "number": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "select": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "text": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "row_id": {
+                        "type": "integer"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "actions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "type_id": {
+                "type": "integer"
+              },
+              "table_name": {
+                "type": "string"
+              },
+              "inc_id": {
+                "type": "integer"
+              },
+              "inc_name": {
+                "type": "string"
+              },
+              "inc_owner": {
+                "type": "string"
+              },
+              "version": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
     },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -44,155 +198,6 @@
         },
         "timestamp": {
           "type": "string"
-        }
-      }
-    },
-    "rows": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "cells": {
-            "type": "object",
-            "properties": {
-              "boolean": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "datetime": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "integer"
-                  }
-                }
-              },
-              "dt_col_name": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  }
-                }
-              },
-              "multi_select": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "number": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "integer"
-                  }
-                }
-              },
-              "select": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              },
-              "text": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "row_id": {
-                    "type": "integer"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "enabled": {
-                  "type": "boolean"
-                }
-              }
-            }
-          },
-          "type_id": {
-            "type": "integer"
-          },
-          "table_name": {
-            "type": "string"
-          },
-          "inc_id": {
-            "type": "integer"
-          },
-          "inc_name": {
-            "type": "string"
-          },
-          "inc_owner": {
-            "type": "string"
-          },
-          "version": {
-            "type": "integer"
-          }
         }
       }
     }

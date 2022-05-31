@@ -18,38 +18,30 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Update Row
 import java.util.Date as Date
 
-#######################################
-### Define pre-processing functions ###
-#######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool, int and nested dicts.
-     Does not support lists.
+     Supports types: basestring, bool, int, nested dicts and lists.
      If the value is None, it sets it to False."""
 
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
     value = d[entry]
 
-    if value is None:
+    if not value:
       value = False
 
-    if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
-
-    if isinstance(value, basestring):
+    elif isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
-    
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
+      value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, dict):
@@ -60,10 +52,6 @@ def dict_to_json_str(d):
 
   return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 
@@ -71,14 +59,10 @@ inputs.incident_id = incident.id
 inputs.dt_utils_datatable_api_name = workflow.properties.row_to_update.inputs.dt_utils_datatable_api_name
 
 # The ID of the row to update [again, taken from previous Get Row Function]
-inputs.dt_utils_row_id = workflow.properties.row_to_update.row["id"]
+inputs.dt_utils_row_id = workflow.properties.row_to_update.content.row["id"]
 
 # The column api names and the value to update the cell to
-inputs.dt_utils_cells_to_update = dict_to_json_str({
-  "datetime": Date().getTime(),
-  "text": "Done"
-})
-
+inputs.dt_utils_cells_to_update = dict_to_json_str({"datetime": Date().getTime(),"text": "Updated from Artifact"})
 ```
 
 ### Post-Processing Script
@@ -101,12 +85,6 @@ None
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Get Row
-
-#####################
-### Define Inputs ###
-#####################
-
 # The ID of this incident
 inputs.incident_id = incident.id
 

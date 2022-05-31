@@ -4,7 +4,7 @@
 
 | SDK Version       | Generation Time          | Command Line Arguments Provided |
 | :---------------- | ------------------------ | ------------------------------- |
-| 44.1.2953 | 2022/05/13 11:49:27 | `cmd`: validate, `package`: . |
+| 44.1.2953 | 2022/05/31 14:09:06 | `cmd`: validate, `package`: . |
 
 ## App Details
 | Attribute | Value |
@@ -91,6 +91,14 @@ It is recommended to manually validate the license. Suggested formats: MIT, Apac
  
 
 ## Payload samples validation
+
+### `payload_samples/dt_utils_add_row`
+<span style="color:green">Pass</span>
+
+
+### `payload_samples/dt_utils_clear_datatable`
+<span style="color:green">Pass</span>
+
 
 ### `payload_samples/dt_utils_create_csv_table`
 <span style="color:green">Pass</span>

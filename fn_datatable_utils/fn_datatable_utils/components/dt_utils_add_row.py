@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME
-from resilient_lib import validate_fields, ResultPayload
+from resilient_lib import validate_fields
 from json import loads
 
 FN_NAME = "dt_utils_add_row"
@@ -52,9 +52,6 @@ class FunctionComponent(AppFunctionComponent):
                 value = dt_utils_cells_to_update[key]
                 row_to_add[key] = {"value": value}
 
-            # Create payload dict with inputs
-            rp = ResultPayload(PACKAGE_NAME, **inputs_dict)
-
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
 
@@ -66,16 +63,13 @@ class FunctionComponent(AppFunctionComponent):
 
             if "error" in add_row:
                 yield self.status_message("Row in {} NOT added.".format(datatable.api_name))
-                results = rp.done(False, None)
                 raise ValueError(add_row["error"])
             else:
                 yield self.status_message("Row in {} added.".format(datatable.api_name))
-                results = rp.done(True, None)
-                results["row"] = dt_utils_cells_to_update
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"row": dt_utils_cells_to_update})
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

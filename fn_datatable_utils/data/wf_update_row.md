@@ -18,12 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-# Data Table Utils: Example: Update Row
 import java.util.Date as Date
 
-#######################################
-### Define pre-processing functions ###
-#######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
      Supports types: basestring, bool, int, nested dicts and lists.
@@ -66,7 +62,7 @@ inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
 inputs.dt_utils_row_id = 0
 
 # The column api names and the value to update the cell to
-inputs.dt_utils_cells_to_update = dict_to_json_str({"name": "example", "number": 1, "multi_select": ["a", "b"], "boolean": True})
+inputs.dt_utils_cells_to_update = dict_to_json_str({"name": "Updated Example", "text": "Update from datatable", "number": 4598, "multi_select": ["b", "e", "g"], "boolean": True})
 ```
 
 ### Post-Processing Script

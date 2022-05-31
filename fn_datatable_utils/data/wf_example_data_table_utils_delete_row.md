@@ -61,7 +61,7 @@ inputs.incident_id = incident.id
 inputs.dt_utils_datatable_api_name = workflow.properties.row_to_delete.inputs.dt_utils_datatable_api_name
 
 # The ID of the row to delete [again, taken from previous Get Row Function]
-inputs.dt_utils_row_id = workflow.properties.row_to_delete.row["id"]
+inputs.dt_utils_row_id = workflow.properties.row_to_delete.content.row["id"]
 ```
 
 ### Post-Processing Script

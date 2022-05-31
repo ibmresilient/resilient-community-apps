@@ -141,4 +141,4 @@ class TestDtUtilsGetAllDataTableRows:
 
         results = call_dt_utils_get_all_data_table_rows_function(
             circuits_app, mock_inputs)
-        assert(expected_results == results["rows"])
+        assert(expected_results == results["content"]["rows"])

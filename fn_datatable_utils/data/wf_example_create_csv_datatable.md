@@ -11,7 +11,7 @@
 `dt_utils_create_csv_table`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_datatable_utils`
@@ -51,7 +51,7 @@ inputs.dt_date_time_format = "%m/%d/%y %H:%M"
 ### Post-Processing Script
 ```python
 if results.success:
-  note_text = u"""Results from Data Table Utils: Create CSV Datatable\nData Source: {0}\nRows added: {1}\nRows not added: {2}""".format( results.content.data_source, results.content.rows_added, results.content.rows_with_errors)
+  note_text = u"""Results from Data Table Utils: Create CSV Datatable\nData Source: {}\nRows added: {}\nRows not added: {}""".format(results.content["data_source"], results.content["rows_added"], results.content["rows_with_errors"])
   incident.addNote(note_text)
 else:
   incident.addNote(u"Error: Failed to add rows")
