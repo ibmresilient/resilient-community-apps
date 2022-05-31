@@ -11,7 +11,7 @@
 `funct_extrahop_rx_create_tag`
 
 ### Output Name
-`None`
+`create_tag_result`
 
 ### Message Destination
 `fn_extrahop`
@@ -41,26 +41,91 @@ def main():
     if CONTENT:
         result = CONTENT.result
         if result == "success":
+            workflow.addProperty("tag_exists", {})
             tag = INPUTS.get("extrahop_tag_name")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>{1}</b> for SOAR " \
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
                         u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
-            newrow = incident.addRow("extrahop_tags")
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.tag = tag
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>{1}</b> for " \
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
                         u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
         elif result == "exists":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>{1}</b> for " \
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
                         u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>{1}</b> failed with unexpected " \
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
                         u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to create a tag <b>{1}</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
+                     u"to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
             .format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
+
+main()
+
+```
+
+---
+
+## Function - Extrahop Reveal(x) get tags
+
+### API Name
+`funct_extrahop_rx_get_tags`
+
+### Output Name
+``
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+None
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_tags"
+WF_NAME = "Example: Extrahop Reveal(x) create tag"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner", "rights", "short_code", "show_alert_status", "walks", "weighting"]
+
+
+# Processing
+def main():
+    note_text = u''
+    tag_exists = False
+    tag_name = rule.properties.extrahop_tag_name
+    if CONTENT:
+        tags = CONTENT.result
+        if tags:
+            for tag in tags:
+                if tag_name == tag["name"]:
+                    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>:  Tag <b>'{1}'</b> returned for returned " \
+                                u"for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                        .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+                    tag_exists = True
+                    newrow = incident.addRow("extrahop_tags")
+                    newrow.query_execution_date = QUERY_EXECUTION_DATE
+                    newrow.tag = tag.name
+                    newrow.mod_time = tag.mod_time
+                    newrow.tag_id = tag.id
+                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
+                    break
+            if not tag_exists:
+                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b>not returned for SOAR function " \
+                            u"<b>{2}</b> with parameters <b>{3}</b>."\
+                    .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get  Tag <b>'{1}'</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+            .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
