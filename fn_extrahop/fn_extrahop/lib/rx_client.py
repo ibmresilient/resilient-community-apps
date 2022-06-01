@@ -512,7 +512,11 @@ class RxClient():
         if response.status_code in [400, 401]:
             self.refresh_header = True
             if response.status_code == 400:
-                 r_text = response.text
+                if "invalid\n" in response.text.lower():
+                    # Invalid response can occur because of authentication error
+                    r_text = response.text
+                else:
+                    response.raise_for_status()
             else:
                 r_text = response.json()
             # Return status dict for selected codes.
