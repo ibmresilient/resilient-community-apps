@@ -39,8 +39,8 @@ setup(
     <br>* Sync comments to and from Sentinel Incidents
     <br>* Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=37.0.0",
-        "resilient-lib>=37.0.0",
+        "resilient_circuits>=43.0.0",
+        "resilient-lib>=43.0.0",
         "jinja2",
         "simplejson"
     ],
