@@ -133,13 +133,17 @@ def process_devs(dev):
 def main():
     note_text = u''
     if CONTENT:
-        devs = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if devs:
-            for dev in devs:
-                process_devs(dev)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+        if CONTENT.get("error", None):
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Search devices failed with error <b>'{1}'</b> for " \
+                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, CONTENT["error"], FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+        else:
+            devs = CONTENT.result
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
+                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            if devs:
+                for dev in devs:
+                    process_devs(dev)
+                note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
