@@ -19,7 +19,10 @@
 ### Pre-Processing Script
 ```python
 inputs.incident_id = incident.id
-inputs.extrahop_bpf = "host {}".format(artifact.value)
+if artifact.type == "IP Address" or artifact.type == "DNS Name":
+    inputs.extrahop_bpf = "host {}".format(artifact.value)
+elif artifact.type == "MAC Address":
+    inputs.extrahop_bpf = "ether host {}".format(artifact.value)
 inputs.extrahop_active_from = rule.properties.extrahop_active_from
 inputs.extrahop_active_until = rule.properties.extrahop_active_until
 inputs.extrahop_output = rule.properties.extrahop_output
