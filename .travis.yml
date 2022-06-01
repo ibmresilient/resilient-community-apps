@@ -250,8 +250,8 @@ matrix:
         - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
         - FILE_NAME=$(basename $PATH_APP_ZIP);
-        # - if [[ $UPLOAD_APP_TO_APPHOST != 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success"; fi
-        # - if [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n [$PACKAGE_NAME] can be found at <https://${FYRE_CLUSTER_DOMAIN}/#admin?tab=apps| ${FYRE_CLUSTER_DOMAIN}> if successfully deployed." "success"; fi
+        - if [[ $UPLOAD_APP_TO_APPHOST != 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success"; fi
+        - if [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n [$PACKAGE_NAME] can be found at <https://${FYRE_CLUSTER_DOMAIN}/#admin?tab=apps| ${FYRE_CLUSTER_DOMAIN}> if successfully deployed." "success"; fi
 
     - stage: rebuild all images
       python: 3.9
