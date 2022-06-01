@@ -345,10 +345,12 @@ def track_deployment(res_client, deployment_list):
     start_time = time.time()
     while len(deployment_list) > 0:
         for name in deployment_list:
-
-            res = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
-
-            deployment_status[name] = res["deployment"]["status"]
+            try:
+                res = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
+                deployment_status[name] = res["deployment"]["status"]
+                print("******************* SUCCESS! The app was deployed! *******************")
+            except:
+                print("******************* FAILURE! App is most likely already installed *******************")
 
             if deployment_status[name] == "ready":
                 deployment_list.remove(name)
@@ -363,8 +365,6 @@ def track_deployment(res_client, deployment_list):
     print(f'This operation was running for {time.time()-start_time:.2f} seconds.')
     if len(deployment_list) > 0:
         print("The deployment of the following apps was not completed in time:", deployment_list)
-    else:
-        print("******************* SUCCESS! The app was deployed! *******************")
 
 ########################################
 ### set config files for apps
