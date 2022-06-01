@@ -54,7 +54,7 @@ class FunctionComponent(AppFunctionComponent):
             defender_incident['defender_incident_status'] = 'Resolved'
 
         update_payload = self.jinja_env.make_payload_from_template(
-                                                        self.options.get("update_defender_alert_template"),
+                                                        self._app_configs_as_dict.get("update_defender_alert_template"),
                                                         DEFAULT_DEFENDER_UPDATE_INCIDENT_TEMPLATE,
                                                         defender_incident)
 

@@ -1,4 +1,0 @@
-include README.md
-include rc_data-feed_plugin-elasticfeed/*
-include rc_data-feed_plugin-elasticfeed/LICENSE
-exclude drivers

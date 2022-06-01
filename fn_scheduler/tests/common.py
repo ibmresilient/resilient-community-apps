@@ -147,6 +147,11 @@ def setup_mock_incident(mock_inc, end_date=None, success=True):
             "inc_last_modified_date": 1571253181521,
             "comments": None,
             "actions": [
+                {
+                    "id": 24,
+                    "name": "Test Rule",
+                    "enabled": True
+                }
             ],
             "admin_id": None,
             "creator_id": 3,

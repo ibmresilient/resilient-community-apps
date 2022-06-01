@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation
-   test with: resilient-circuits selftest -l fn_jira
+   test with: resilient-circuits selftest -l fn-jira
 """
 import logging
 from resilient_lib import RequestsCommon, str_to_bool

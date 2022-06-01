@@ -2,13 +2,13 @@
     "raw": {
         "altServer": [],
         "configurationNamingContext": [
-            "CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=Configuration,dc=example,DC=com"
         ],
         "currentTime": [
             "20180724132133.0Z"
         ],
         "defaultNamingContext": [
-            "DC=dev,DC=co3sys,DC=com"
+            "dc=example,DC=com"
         ],
         "dnsHostName": [
             "win2012-1.dev.co3sys.com"
@@ -20,7 +20,7 @@
             "5"
         ],
         "dsServiceName": [
-            "CN=NTDS Settings,CN=WIN2012-1,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=NTDS Settings,CN=WIN2012-1,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,dc=example,DC=com"
         ],
         "forestFunctionality": [
             "5"
@@ -38,23 +38,23 @@
             "dev.co3sys.com:win2012-1$@DEV.CO3SYS.COM"
         ],
         "namingContexts": [
-            "DC=dev,DC=co3sys,DC=com",
-            "CN=Configuration,DC=dev,DC=co3sys,DC=com",
-            "CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
-            "DC=DomainDnsZones,DC=dev,DC=co3sys,DC=com",
-            "DC=ForestDnsZones,DC=dev,DC=co3sys,DC=com"
+            "dc=example,DC=com",
+            "CN=Configuration,dc=example,DC=com",
+            "CN=Schema,CN=Configuration,dc=example,DC=com",
+            "DC=DomainDnsZones,dc=example,DC=com",
+            "DC=ForestDnsZones,dc=example,DC=com"
         ],
         "rootDomainNamingContext": [
-            "DC=dev,DC=co3sys,DC=com"
+            "dc=example,DC=com"
         ],
         "schemaNamingContext": [
-            "CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=Schema,CN=Configuration,dc=example,DC=com"
         ],
         "serverName": [
-            "CN=WIN2012-1,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=WIN2012-1,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,dc=example,DC=com"
         ],
         "subschemaSubentry": [
-            "CN=Aggregate,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+            "CN=Aggregate,CN=Schema,CN=Configuration,dc=example,DC=com"
         ],
         "supportedCapabilities": [
             "1.2.840.113556.1.4.800",

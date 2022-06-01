@@ -8,9 +8,7 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "null"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
@@ -28,9 +26,7 @@
                   "accountName": {
                     "type": "string"
                   },
-                  "agentDetectionState": {
-                    "type": "null"
-                  },
+                  "agentDetectionState": {},
                   "agentDomain": {
                     "type": "string"
                   },
@@ -76,27 +72,7 @@
                   "siteName": {
                     "type": "string"
                   }
-                },
-                "required": [
-                  "accountId",
-                  "accountName",
-                  "agentDetectionState",
-                  "agentDomain",
-                  "agentIpV4",
-                  "agentIpV6",
-                  "agentLastLoggedInUserName",
-                  "agentMitigationMode",
-                  "agentOsName",
-                  "agentOsRevision",
-                  "agentRegisteredAt",
-                  "agentUuid",
-                  "agentVersion",
-                  "externalIp",
-                  "groupId",
-                  "groupName",
-                  "siteId",
-                  "siteName"
-                ]
+                }
               },
               "agentRealtimeInfo": {
                 "type": "object",
@@ -113,9 +89,7 @@
                   "agentComputerName": {
                     "type": "string"
                   },
-                  "agentDecommissionedAt": {
-                    "type": "null"
-                  },
+                  "agentDecommissionedAt": {},
                   "agentDomain": {
                     "type": "string"
                   },
@@ -184,14 +158,7 @@
                         "physical": {
                           "type": "string"
                         }
-                      },
-                      "required": [
-                        "id",
-                        "inet",
-                        "inet6",
-                        "name",
-                        "physical"
-                      ]
+                      }
                     }
                   },
                   "operationalState": {
@@ -218,73 +185,21 @@
                   "siteName": {
                     "type": "string"
                   },
-                  "storageName": {
-                    "type": "null"
-                  },
-                  "storageType": {
-                    "type": "null"
-                  },
+                  "storageName": {},
+                  "storageType": {},
                   "userActionsNeeded": {
                     "type": "array"
                   }
-                },
-                "required": [
-                  "accountId",
-                  "accountName",
-                  "activeThreats",
-                  "agentComputerName",
-                  "agentDecommissionedAt",
-                  "agentDomain",
-                  "agentId",
-                  "agentInfected",
-                  "agentIsActive",
-                  "agentIsDecommissioned",
-                  "agentMachineType",
-                  "agentMitigationMode",
-                  "agentNetworkStatus",
-                  "agentOsName",
-                  "agentOsRevision",
-                  "agentOsType",
-                  "agentUuid",
-                  "agentVersion",
-                  "groupId",
-                  "groupName",
-                  "networkInterfaces",
-                  "operationalState",
-                  "rebootRequired",
-                  "scanAbortedAt",
-                  "scanFinishedAt",
-                  "scanStartedAt",
-                  "scanStatus",
-                  "siteId",
-                  "siteName",
-                  "storageName",
-                  "storageType",
-                  "userActionsNeeded"
-                ]
+                }
               },
               "containerInfo": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "null"
-                  },
-                  "image": {
-                    "type": "null"
-                  },
-                  "labels": {
-                    "type": "null"
-                  },
-                  "name": {
-                    "type": "null"
-                  }
-                },
-                "required": [
-                  "id",
-                  "image",
-                  "labels",
-                  "name"
-                ]
+                  "id": {},
+                  "image": {},
+                  "labels": {},
+                  "name": {}
+                }
               },
               "id": {
                 "type": "string"
@@ -328,72 +243,28 @@
                                 "name": {
                                   "type": "string"
                                 }
-                              },
-                              "required": [
-                                "link",
-                                "name"
-                              ]
+                              }
                             }
                           }
-                        },
-                        "required": [
-                          "name",
-                          "source",
-                          "techniques"
-                        ]
+                        }
                       }
                     }
-                  },
-                  "required": [
-                    "category",
-                    "description",
-                    "ids",
-                    "tactics"
-                  ]
+                  }
                 }
               },
               "kubernetesInfo": {
                 "type": "object",
                 "properties": {
-                  "cluster": {
-                    "type": "null"
-                  },
-                  "controllerKind": {
-                    "type": "null"
-                  },
-                  "controllerLabels": {
-                    "type": "null"
-                  },
-                  "controllerName": {
-                    "type": "null"
-                  },
-                  "namespace": {
-                    "type": "null"
-                  },
-                  "namespaceLabels": {
-                    "type": "null"
-                  },
-                  "node": {
-                    "type": "null"
-                  },
-                  "pod": {
-                    "type": "null"
-                  },
-                  "podLabels": {
-                    "type": "null"
-                  }
-                },
-                "required": [
-                  "cluster",
-                  "controllerKind",
-                  "controllerLabels",
-                  "controllerName",
-                  "namespace",
-                  "namespaceLabels",
-                  "node",
-                  "pod",
-                  "podLabels"
-                ]
+                  "cluster": {},
+                  "controllerKind": {},
+                  "controllerLabels": {},
+                  "controllerName": {},
+                  "namespace": {},
+                  "namespaceLabels": {},
+                  "node": {},
+                  "pod": {},
+                  "podLabels": {}
+                }
               },
               "mitigationStatus": {
                 "type": "array"
@@ -410,12 +281,8 @@
                   "automaticallyResolved": {
                     "type": "boolean"
                   },
-                  "browserType": {
-                    "type": "null"
-                  },
-                  "certificateId": {
-                    "type": "null"
-                  },
+                  "browserType": {},
+                  "certificateId": {},
                   "classification": {
                     "type": "string"
                   },
@@ -445,11 +312,7 @@
                         "title": {
                           "type": "string"
                         }
-                      },
-                      "required": [
-                        "key",
-                        "title"
-                      ]
+                      }
                     }
                   },
                   "detectionType": {
@@ -464,27 +327,19 @@
                   "externalTicketExists": {
                     "type": "boolean"
                   },
-                  "externalTicketId": {
-                    "type": "null"
-                  },
+                  "externalTicketId": {},
                   "failedActions": {
                     "type": "boolean"
                   },
-                  "fileExtension": {
-                    "type": "null"
-                  },
-                  "fileExtensionType": {
-                    "type": "null"
-                  },
+                  "fileExtension": {},
+                  "fileExtensionType": {},
                   "filePath": {
                     "type": "string"
                   },
                   "fileSize": {
                     "type": "integer"
                   },
-                  "fileVerificationType": {
-                    "type": "null"
-                  },
+                  "fileVerificationType": {},
                   "identifiedAt": {
                     "type": "string"
                   },
@@ -500,24 +355,16 @@
                   "initiatedByDescription": {
                     "type": "string"
                   },
-                  "initiatingUserId": {
-                    "type": "null"
-                  },
-                  "initiatingUsername": {
-                    "type": "null"
-                  },
+                  "initiatingUserId": {},
+                  "initiatingUsername": {},
                   "isFileless": {
                     "type": "boolean"
                   },
-                  "isValidCertificate": {
-                    "type": "null"
-                  },
+                  "isValidCertificate": {},
                   "maliciousProcessArguments": {
                     "type": "string"
                   },
-                  "md5": {
-                    "type": "null"
-                  },
+                  "md5": {},
                   "mitigatedPreemptively": {
                     "type": "boolean"
                   },
@@ -536,21 +383,15 @@
                   "processUser": {
                     "type": "string"
                   },
-                  "publisherName": {
-                    "type": "null"
-                  },
-                  "reachedEventsLimit": {
-                    "type": "null"
-                  },
+                  "publisherName": {},
+                  "reachedEventsLimit": {},
                   "rebootRequired": {
                     "type": "boolean"
                   },
                   "sha1": {
                     "type": "string"
                   },
-                  "sha256": {
-                    "type": "null"
-                  },
+                  "sha256": {},
                   "storyline": {
                     "type": "string"
                   },
@@ -563,57 +404,7 @@
                   "updatedAt": {
                     "type": "string"
                   }
-                },
-                "required": [
-                  "analystVerdict",
-                  "analystVerdictDescription",
-                  "automaticallyResolved",
-                  "browserType",
-                  "certificateId",
-                  "classification",
-                  "classificationSource",
-                  "cloudFilesHashVerdict",
-                  "collectionId",
-                  "confidenceLevel",
-                  "createdAt",
-                  "detectionEngines",
-                  "detectionType",
-                  "engines",
-                  "externalTicketExists",
-                  "externalTicketId",
-                  "failedActions",
-                  "fileExtension",
-                  "fileExtensionType",
-                  "filePath",
-                  "fileSize",
-                  "fileVerificationType",
-                  "identifiedAt",
-                  "incidentStatus",
-                  "incidentStatusDescription",
-                  "initiatedBy",
-                  "initiatedByDescription",
-                  "initiatingUserId",
-                  "initiatingUsername",
-                  "isFileless",
-                  "isValidCertificate",
-                  "maliciousProcessArguments",
-                  "md5",
-                  "mitigatedPreemptively",
-                  "mitigationStatus",
-                  "mitigationStatusDescription",
-                  "originatorProcess",
-                  "pendingActions",
-                  "processUser",
-                  "publisherName",
-                  "reachedEventsLimit",
-                  "rebootRequired",
-                  "sha1",
-                  "sha256",
-                  "storyline",
-                  "threatId",
-                  "threatName",
-                  "updatedAt"
-                ]
+                }
               },
               "whiteningOptions": {
                 "type": "array",
@@ -621,54 +412,28 @@
                   "type": "string"
                 }
               }
-            },
-            "required": [
-              "agentDetectionInfo",
-              "agentRealtimeInfo",
-              "containerInfo",
-              "id",
-              "indicators",
-              "kubernetesInfo",
-              "mitigationStatus",
-              "threatInfo",
-              "whiteningOptions"
-            ]
+            }
           }
         },
         "pagination": {
           "type": "object",
           "properties": {
-            "nextCursor": {
-              "type": "null"
-            },
+            "nextCursor": {},
             "totalItems": {
               "type": "integer"
             }
-          },
-          "required": [
-            "nextCursor",
-            "totalItems"
-          ]
+          }
         }
-      },
-      "required": [
-        "data",
-        "pagination"
-      ]
+      }
     },
-    "raw": {
-      "type": "null"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "sentinelone_threat_id": {
           "type": "string"
         }
-      },
-      "required": [
-        "sentinelone_threat_id"
-      ]
+      }
     },
     "metrics": {
       "type": "object",
@@ -691,24 +456,7 @@
         "timestamp": {
           "type": "string"
         }
-      },
-      "required": [
-        "execution_time_ms",
-        "host",
-        "package",
-        "package_version",
-        "timestamp",
-        "version"
-      ]
+      }
     }
-  },
-  "required": [
-    "content",
-    "inputs",
-    "metrics",
-    "raw",
-    "reason",
-    "success",
-    "version"
-  ]
+  }
 }

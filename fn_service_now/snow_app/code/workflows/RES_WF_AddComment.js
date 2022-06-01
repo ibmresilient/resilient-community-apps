@@ -6,8 +6,8 @@
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
 	
-		//Get resilient_reference_id
-		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
+		//Get resilient_reference_id depending on what Table the record is in
+		res_reference_id = resHelper.getResilientReferenceId(current);
 		
 		//Set noteText to last additional comment added
 		noteText = current.comments.getJournalEntry(1);
@@ -16,7 +16,7 @@
 		resHelper.addNote(res_reference_id, noteText);
 	}
 	catch (errMsg){
-		current.work_notes = "Failed to add a note in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to add a note in IBM SOAR.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "Breaches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Title": {
+                "type": "string"
+              },
+              "Domain": {
+                "type": "string"
+              },
+              "BreachDate": {
+                "type": "string"
+              },
+              "AddedDate": {
+                "type": "string"
+              },
+              "ModifiedDate": {
+                "type": "string"
+              },
+              "PwnCount": {
+                "type": "integer"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "LogoPath": {
+                "type": "string"
+              },
+              "DataClasses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "IsVerified": {
+                "type": "boolean"
+              },
+              "IsFabricated": {
+                "type": "boolean"
+              },
+              "IsSensitive": {
+                "type": "boolean"
+              },
+              "IsRetired": {
+                "type": "boolean"
+              },
+              "IsSpamList": {
+                "type": "boolean"
+              },
+              "IsMalware": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "email_address": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Util functions
 import six
+from resilient_lib import validate_fields
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME
+from fn_qradar_enhanced_data.util import qradar_utils
 
 def make_query_string(query, params):
     """
@@ -23,7 +26,6 @@ def make_query_string(query, params):
 
     return query_string
 
-
 def fix_dict_value(events):
     """
     When the returned data from QRadar is used to update a datatable, we need to
@@ -39,3 +41,27 @@ def fix_dict_value(events):
                     event[key] = u"{}".format(event[key])
 
     return events
+
+def get_servers_list(opts):
+    """
+    Used for initilizing or reloading the options variable
+    :param opts: list of options
+    :return: list of qradar servers
+    """
+    servers_list = {}
+
+    options = opts.get(PACKAGE_NAME, {})
+
+    if options: # If no labels given [fn_qradar_integration]
+        server_list = {PACKAGE_NAME}
+    else: # If labels given [fn_qradar_integration:label]
+        servers = qradar_utils.QRadarServers(opts, options)
+        server_list = servers.get_server_name_list()
+
+    # Creates a dictionary that is filled with the QRadar servers
+    # and there configurations
+    for server_name in server_list:
+        servers_list[server_name] = opts.get(server_name, {})
+        validate_fields(["host", "verify_cert"], servers_list[server_name])
+
+    return servers_list

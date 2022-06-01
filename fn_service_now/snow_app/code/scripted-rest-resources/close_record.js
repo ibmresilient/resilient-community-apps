@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 // Script that runs for the following endpoint:: 
 // https://service-now-host.com/api/x_ibmrt_resilient/api/close_record
@@ -40,9 +40,16 @@
 		if(params.sn_record_state != record.state){
 			
 			//Set the attributes required to close a record
-			record.close_notes = params.sn_close_notes;
-			record.close_code = params.sn_close_code;
 			record.state = params.sn_record_state;
+
+			//Close_notes and close_code are optional — only used when moving the status to CLOSED
+			//Will be ignored when moving to any other states
+			if (params.sn_close_notes != null && params.sn_close_code != "") {
+				record.close_notes = params.sn_close_notes;
+			}
+			if (record.close_code != null) {
+				record.close_code = params.sn_close_code;
+			}
 
 			//If a close work_note is defined, add it
 			if(params.sn_close_work_note != null){

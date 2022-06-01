@@ -32,7 +32,7 @@ def selftest_function(opts):
     try:
         # make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify)
         resp = make_rest_call(opts, opts.get("fn_utilities", {}),
-                              "POST", "/".join((TEST_IP, "post")), headers, None, payload, False)
+                              "POST", "/".join((TEST_IP, "post")), headers, None, payload, False, 600)
 
         state = "success"
     except Exception as e:
