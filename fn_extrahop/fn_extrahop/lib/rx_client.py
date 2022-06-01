@@ -515,6 +515,8 @@ class RxClient():
                 if "invalid\n" in response.text.lower():
                     # Invalid response can occur because of authentication error
                     r_text = response.text
+                elif response.url.endswith("devices/search"):
+                    return response
                 else:
                     response.raise_for_status()
             else:
