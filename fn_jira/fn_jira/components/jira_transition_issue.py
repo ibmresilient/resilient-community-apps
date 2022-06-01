@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-"""Transition a Jira issue from IBM Resilient"""
+"""Transition a Jira issue from IBM SOAR"""
 
 import logging
 import json
@@ -14,7 +14,7 @@ PACKAGE_NAME = CONFIG_DATA_SECTION
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'jira_transition_issue"""
+    """Component that implements SOAR function 'jira_transition_issue"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

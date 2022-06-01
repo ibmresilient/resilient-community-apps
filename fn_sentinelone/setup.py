@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_sentinelone",
     display_name="SentinelOne",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM Resilient",
     author_email="",

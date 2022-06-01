@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# fn-elasticsearch for IBM Resilient
+# ElasticSearch Functions for IBM SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -32,9 +32,14 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.8
+
+* Pinned dependency ``elasticsearch~=7.17``
+
 ### v1.0.7
 
 * Add support for AppHost
+
 ### v1.0.6
 
 * Add resilient-lib dependency to setup.py
@@ -60,11 +65,11 @@
 ---
 
 ## Overview
-**Resilient Circuits Components for 'fn_elasticsearch'**
+**Functions to query Elasticsearch with incident or artifact data**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Allows users of the Resilient Platform to connect to and query an ElasticSearch Database. Users can specify the location of a remote ElasticSearch instance and query this instance for data through the Resilient Platform 
+Allows users of the SOAR Platform to connect to and query an ElasticSearch Database. Users can specify the location of a remote ElasticSearch instance and query this instance for data through the SOAR Platform 
 
 Queries provided to the function must be properly formed to work.
 Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query.
@@ -91,7 +96,7 @@ HTTPS connection with username:password authentication
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v36.0.0`
+* SOAR platform >= `v36.0.0`
 * An App Host or an Integration Server:
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=31.0.0` (if using an Integration Server)
@@ -112,7 +117,7 @@ HTTPS connection with username:password authentication
 ---
 
 ### App Configuration
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table describes the settings you need to configure in the app.config file. If using App Host, see the SOAR System Administrator Guide. If using the integration server, see the Integration Server Guide.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -228,9 +233,9 @@ if results.matched_records:
 ---
 
 ## Troubleshooting & Support
-If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
+If using the app with an App Host, see the SOAR System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the SOAR platform you are using.
 
 If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
 
 ### For Support
-This is a IBM Community Provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM Community Provided App. Please search the Community https://ibm.biz/soarcommunity for assistance.

@@ -1,0 +1,1231 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "png_base64content": {
+      "type": "string"
+    },
+    "png_url": {
+      "type": "string"
+    },
+    "report_url": {
+      "type": "string"
+    },
+    "report": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "requests": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "request": {
+                    "type": "object",
+                    "properties": {
+                      "requestId": {
+                        "type": "string"
+                      },
+                      "loaderId": {
+                        "type": "string"
+                      },
+                      "documentURL": {
+                        "type": "string"
+                      },
+                      "request": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "method": {
+                            "type": "string"
+                          },
+                          "headers": {
+                            "type": "object",
+                            "properties": {
+                              "Upgrade-Insecure-Requests": {
+                                "type": "string"
+                              },
+                              "User-Agent": {
+                                "type": "string"
+                              },
+                              "accept-language": {
+                                "type": "string"
+                              },
+                              "Referer": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "mixedContentType": {
+                            "type": "string"
+                          },
+                          "initialPriority": {
+                            "type": "string"
+                          },
+                          "referrerPolicy": {
+                            "type": "string"
+                          },
+                          "isSameSite": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "timestamp": {
+                        "type": "number"
+                      },
+                      "wallTime": {
+                        "type": "number"
+                      },
+                      "initiator": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "lineNumber": {
+                            "type": "integer"
+                          },
+                          "columnNumber": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "redirectHasExtraInfo": {
+                        "type": "boolean"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "frameId": {
+                        "type": "string"
+                      },
+                      "hasUserGesture": {
+                        "type": "boolean"
+                      },
+                      "primaryRequest": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "response": {
+                    "type": "object",
+                    "properties": {
+                      "encodedDataLength": {
+                        "type": "integer"
+                      },
+                      "dataLength": {
+                        "type": "integer"
+                      },
+                      "requestId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "integer"
+                          },
+                          "statusText": {
+                            "type": "string"
+                          },
+                          "headers": {
+                            "type": "object",
+                            "properties": {
+                              "age": {
+                                "type": "string"
+                              },
+                              "alt-svc": {
+                                "type": "string"
+                              },
+                              "cache-control": {
+                                "type": "string"
+                              },
+                              "content-encoding": {
+                                "type": "string"
+                              },
+                              "content-length": {
+                                "type": "string"
+                              },
+                              "content-type": {
+                                "type": "string"
+                              },
+                              "date": {
+                                "type": "string"
+                              },
+                              "etag": {
+                                "type": "string"
+                              },
+                              "expires": {
+                                "type": "string"
+                              },
+                              "server": {
+                                "type": "string"
+                              },
+                              "x-cloud-trace-context": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "mimeType": {
+                            "type": "string"
+                          },
+                          "remoteIPAddress": {
+                            "type": "string"
+                          },
+                          "remotePort": {
+                            "type": "integer"
+                          },
+                          "encodedDataLength": {
+                            "type": "integer"
+                          },
+                          "timing": {
+                            "type": "object",
+                            "properties": {
+                              "requestTime": {
+                                "type": "number"
+                              },
+                              "proxyStart": {
+                                "type": "integer"
+                              },
+                              "proxyEnd": {
+                                "type": "integer"
+                              },
+                              "dnsStart": {
+                                "type": "number"
+                              },
+                              "dnsEnd": {
+                                "type": "number"
+                              },
+                              "connectStart": {
+                                "type": "number"
+                              },
+                              "connectEnd": {
+                                "type": "number"
+                              },
+                              "sslStart": {
+                                "type": "number"
+                              },
+                              "sslEnd": {
+                                "type": "number"
+                              },
+                              "workerStart": {
+                                "type": "integer"
+                              },
+                              "workerReady": {
+                                "type": "integer"
+                              },
+                              "workerFetchStart": {
+                                "type": "integer"
+                              },
+                              "workerRespondWithSettled": {
+                                "type": "integer"
+                              },
+                              "sendStart": {
+                                "type": "number"
+                              },
+                              "sendEnd": {
+                                "type": "number"
+                              },
+                              "pushStart": {
+                                "type": "integer"
+                              },
+                              "pushEnd": {
+                                "type": "integer"
+                              },
+                              "receiveHeadersEnd": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "responseTime": {
+                            "type": "number"
+                          },
+                          "protocol": {
+                            "type": "string"
+                          },
+                          "securityState": {
+                            "type": "string"
+                          },
+                          "securityDetails": {
+                            "type": "object",
+                            "properties": {
+                              "protocol": {
+                                "type": "string"
+                              },
+                              "keyExchange": {
+                                "type": "string"
+                              },
+                              "keyExchangeGroup": {
+                                "type": "string"
+                              },
+                              "cipher": {
+                                "type": "string"
+                              },
+                              "certificateId": {
+                                "type": "integer"
+                              },
+                              "subjectName": {
+                                "type": "string"
+                              },
+                              "sanList": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "issuer": {
+                                "type": "string"
+                              },
+                              "validFrom": {
+                                "type": "integer"
+                              },
+                              "validTo": {
+                                "type": "integer"
+                              },
+                              "signedCertificateTimestampList": {
+                                "type": "array"
+                              },
+                              "certificateTransparencyCompliance": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "hasExtraInfo": {
+                        "type": "boolean"
+                      },
+                      "hash": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer"
+                      },
+                      "asn": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string"
+                          },
+                          "asn": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "registrar": {
+                            "type": "string"
+                          },
+                          "date": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "route": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "geoip": {
+                        "type": "object",
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "region": {
+                            "type": "string"
+                          },
+                          "timezone": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "ll": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "country_name": {
+                            "type": "string"
+                          },
+                          "metro": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "initiatorInfo": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "host": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "cookies": {
+              "type": "array"
+            },
+            "console": {
+              "type": "array"
+            },
+            "links": {
+              "type": "array"
+            },
+            "timing": {
+              "type": "object",
+              "properties": {
+                "beginNavigation": {
+                  "type": "string"
+                },
+                "frameStartedLoading": {
+                  "type": "string"
+                },
+                "frameNavigated": {
+                  "type": "string"
+                },
+                "domContentEventFired": {
+                  "type": "string"
+                },
+                "frameStoppedLoading": {
+                  "type": "string"
+                }
+              }
+            },
+            "globals": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "prop": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "resourceStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "latency": {
+                    "type": "integer"
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "compression": {
+                    "type": "string"
+                  },
+                  "percentage": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "protocolStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "securityState": {
+                    "type": "object"
+                  },
+                  "protocol": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "tlsStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "protocols": {
+                    "type": "object",
+                    "properties": {
+                      "TLS 1.3 /  / AES_128_GCM": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "securityState": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "serverStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "server": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "domainStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "domain": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "index": {
+                    "type": "integer"
+                  },
+                  "initiators": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "redirects": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "regDomainStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "regDomain": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "countries": {
+                    "type": "array"
+                  },
+                  "index": {
+                    "type": "integer"
+                  },
+                  "subDomains": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "domain": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "redirects": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "secureRequests": {
+              "type": "integer"
+            },
+            "securePercentage": {
+              "type": "integer"
+            },
+            "IPv6Percentage": {
+              "type": "integer"
+            },
+            "uniqCountries": {
+              "type": "integer"
+            },
+            "totalLinks": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            },
+            "adBlocked": {
+              "type": "integer"
+            },
+            "ipStats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "requests": {
+                    "type": "integer"
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "ip": {
+                    "type": "string"
+                  },
+                  "asn": {
+                    "type": "object",
+                    "properties": {
+                      "ip": {
+                        "type": "string"
+                      },
+                      "asn": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "registrar": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "route": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "dns": {
+                    "type": "object"
+                  },
+                  "geoip": {
+                    "type": "object",
+                    "properties": {
+                      "country": {
+                        "type": "string"
+                      },
+                      "region": {
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "ll": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "country_name": {
+                        "type": "string"
+                      },
+                      "metro": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "encodedSize": {
+                    "type": "integer"
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "index": {
+                    "type": "integer"
+                  },
+                  "ipv6": {
+                    "type": "boolean"
+                  },
+                  "redirects": {
+                    "type": "integer"
+                  },
+                  "count": {}
+                }
+              }
+            }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "processors": {
+              "type": "object",
+              "properties": {
+                "umbrella": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "hostname": {
+                            "type": "string"
+                          },
+                          "rank": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "geoip": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string"
+                          },
+                          "geoip": {
+                            "type": "object",
+                            "properties": {
+                              "country": {
+                                "type": "string"
+                              },
+                              "region": {
+                                "type": "string"
+                              },
+                              "timezone": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "ll": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "country_name": {
+                                "type": "string"
+                              },
+                              "metro": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "rdns": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "asn": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string"
+                          },
+                          "asn": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "registrar": {
+                            "type": "string"
+                          },
+                          "date": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "route": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wappa": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "task": {
+          "type": "object",
+          "properties": {
+            "uuid": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "visibility": {
+              "type": "string"
+            },
+            "method": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "array"
+            },
+            "reportURL": {
+              "type": "string"
+            },
+            "screenshotURL": {
+              "type": "string"
+            },
+            "domURL": {
+              "type": "string"
+            }
+          }
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "server": {
+              "type": "string"
+            },
+            "ip": {
+              "type": "string"
+            },
+            "asn": {
+              "type": "string"
+            },
+            "asnname": {
+              "type": "string"
+            }
+          }
+        },
+        "lists": {
+          "type": "object",
+          "properties": {
+            "ips": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "countries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "asns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "domains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "servers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "linkDomains": {
+              "type": "array"
+            },
+            "certificates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "subjectName": {
+                    "type": "string"
+                  },
+                  "issuer": {
+                    "type": "string"
+                  },
+                  "validFrom": {
+                    "type": "integer"
+                  },
+                  "validTo": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "hashes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "verdicts": {
+          "type": "object",
+          "properties": {
+            "overall": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "malicious": {
+                  "type": "boolean"
+                },
+                "hasVerdicts": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "urlscan": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "vertical": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "malicious": {
+                  "type": "boolean"
+                },
+                "hasVerdicts": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "engines": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer"
+                },
+                "categories": {
+                  "type": "array"
+                },
+                "enginesTotal": {
+                  "type": "integer"
+                },
+                "maliciousTotal": {
+                  "type": "integer"
+                },
+                "benignTotal": {
+                  "type": "integer"
+                },
+                "maliciousVerdicts": {
+                  "type": "array"
+                },
+                "benignVerdicts": {
+                  "type": "array"
+                },
+                "malicious": {
+                  "type": "boolean"
+                },
+                "hasVerdicts": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "community": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer"
+                },
+                "categories": {
+                  "type": "array"
+                },
+                "brands": {
+                  "type": "array"
+                },
+                "votesTotal": {
+                  "type": "integer"
+                },
+                "votesMalicious": {
+                  "type": "integer"
+                },
+                "votesBenign": {
+                  "type": "integer"
+                },
+                "malicious": {
+                  "type": "boolean"
+                },
+                "hasVerdicts": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "submitter": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

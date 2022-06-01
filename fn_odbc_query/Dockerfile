@@ -104,6 +104,9 @@ RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
 COPY entrypoint.sh /opt/${PATH_RESILIENT_CIRCUITS}/entrypoint.sh
 
+# remove temporary python files and temporary driver files
+RUN rm -rf /tmp/packages /tmp/lib
+
 # arbitrary user, support running as non-root. Required on OpenShift. Generally a good practice.
 USER 1001
 ENTRYPOINT [ "sh", "/opt/rescircuits/entrypoint.sh" ]
