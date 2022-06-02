@@ -47,7 +47,7 @@ def main():
                     workflow.addProperty("tag_exists", {})
                     break
             if not tag_id:
-                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b>not returned for SOAR function <b>{2}</b> "\
+                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b> not returned for SOAR function <b>{2}</b> "\
                             u"with parameters <b>{3}</b>."\
                     .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
