@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"splunk_add_intel_item", u"splunk_delete_threat_intel_item", u"splunk_search", u"splunk_update_notable"],
         "workflows": [u"example_of_deleting_an_intel_entry_in_splunk_es", u"search_splunk_ip_intel", u"splunk_add_new_ip_intel", u"splunk_update_notable"],
         "actions": [u"Add artifact to Splunk ES", u"Delete an intel entry in Splunk ES", u"Search Splunk ES for an artifact", u"Update Splunk ES notable event"],
-        "incident_fields": [],
+        "incident_fields": ["splunk_notable_event_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"splunk_intel_results"],
@@ -61,6 +61,8 @@ def customization_data(client=None):
         - Update Splunk ES notable event
     - Data Tables:
         - splunk_intel_results
+    - Incident Fields:
+        - splunk_notable_event_id
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
