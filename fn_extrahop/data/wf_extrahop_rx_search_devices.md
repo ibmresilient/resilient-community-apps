@@ -158,3 +158,109 @@ main()
 
 ---
 
+## Function - Extrahop Reveal(x) get devices
+
+### API Name
+`funct_extrahop_rx_get_devices`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_extrahop`
+
+### Pre-Processing Script
+```python
+search_filters =  [ 
+    rule.properties.extrahop_device_field,
+    rule.properties.extrahop_device_operand,
+    rule.properties.extrahop_device_operator
+]
+for p in search_filters:
+    if p:
+        raise ValueError("A search filter and Device ID are not allowed at the same time.")
+
+inputs.extrahop_device_id = rule.properties.extrahop_device_id
+```
+
+### Post-Processing Script
+```python
+##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
+#  Globals
+FN_NAME = "funct_extrahop_rx_get_devices"
+WF_NAME = "Example: Extrahop Reveal(x) search devices"
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+# Display subset of fields
+DATA_TABLE = "extrahop_devices"
+DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
+                   "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time",
+                   "last_seen_time"]
+LINKBACK_URL = "/extrahop/#/metrics/devices/{}.{}"
+
+
+def make_linkback_url(dev_id):
+    """Create a url to link back to the endpoint alert, case, etc.
+
+    Args:
+        dev_id (str/int): id representing the device etc.
+
+    Returns:
+        str: completed url for linkback
+    """
+    return incident.properties.extrahop_console_url + LINKBACK_URL.format(incident.properties.extrahop_site_uuid,
+                                                                          dev_id)
+
+
+def process_devs(dev):
+    # Process a device result.
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    for f1 in DATA_TBL_FIELDS:
+        f2 = f1
+        if f1.startswith("devs_"):
+            f2 = f1.split('_', 1)[1]
+        if dev[f1] is None:
+            newrow[f1] = dev[f2]
+        elif isinstance(dev[f2], list):
+            newrow[f1] = "{}".format(", ".join(dev[f2]))
+        elif isinstance(dev[f2], bool):
+            newrow[f1] = str(dev[f2])
+        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
+            newrow[f1] = long(dev[f2])
+        else:
+            newrow[f1] = "{}".format(dev[f2])
+    device_url = make_linkback_url(dev["extrahop_id"])
+    device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
+        .format("url", device_url, dev["extrahop_id"])
+    newrow.device_url = device_url_html
+
+# Processing
+def main():
+    device_id = INPUTS["extrahop_device_id"]
+    note_text = u''
+    if CONTENT:
+        dev = CONTENT.result
+        if dev:
+            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Device was successfully returned for " \
+                        u"device ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+                .format(WF_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            process_devs(dev)
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+
+    else:
+        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     u"to get device for device ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     u" with parameters <b>{3}</b>." \
+            .format(WF_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
+
+
+main()
+
+```
+
+---
+
