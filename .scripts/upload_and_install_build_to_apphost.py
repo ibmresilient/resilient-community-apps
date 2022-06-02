@@ -224,7 +224,7 @@ def upload_all_apps(res_client, app_path):
         try:
             app = res_client.post_attachment(uri="/apps", filepath=app_path)
         except resilient.co3.SimpleHTTPException as exception:
-            print(exception)
+            raise exception
 
 def install_all_apps(res_client):
     """installs pending uploaded app to apphost"""

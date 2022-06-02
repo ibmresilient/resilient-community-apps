@@ -238,8 +238,7 @@ matrix:
           script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
           on:
             all_branches: true
-            condition: "$BUILD_DEV_APP = 1"
-            condition: "$UPLOAD_APP_TO_APPHOST != 1"
+            condition: "$BUILD_DEV_APP = 1" && "$UPLOAD_APP_TO_APPHOST != 1" 
         - provider: script
           skip_cleanup: true
           script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
