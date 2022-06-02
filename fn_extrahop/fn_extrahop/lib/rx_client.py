@@ -201,7 +201,7 @@ class RxClient():
         :return Result in json format.`
         """
         uri = self._endpoints["search_detections"]
-        data = {"filter": {}}
+        data = {}
         filter_data = {}
 
         if search_filter:
@@ -213,11 +213,11 @@ class RxClient():
                 except ValueError:
                     raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
 
-        if filter_data:
-            if filter_data.get("filter"):
-                data["filter"] = filter_data.get("filter")
-            else:
-                data["filter"] = filter_data
+            if filter_data:
+                if filter_data.get("filter"):
+                    data["filter"] = filter_data.get("filter")
+                else:
+                    data["filter"] = filter_data
 
         if sort:
             try:
