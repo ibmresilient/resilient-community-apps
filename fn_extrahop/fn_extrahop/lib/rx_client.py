@@ -267,10 +267,18 @@ class RxClient():
         }
         data = {
             "detection_id": detection_id,
-            "ticket_id": str(incident_id),
-            "assignee": owner_id
         }
-        data["status"] = status_map[plan_status]
+        if incident_id is not None:
+            data["ticket_id"] = str(incident_id)
+
+        if owner_id:
+            data["assignee"] = owner_id
+
+        if plan_status:
+            data["status"] = status_map[plan_status]
+
+            if plan_status == 'C':
+                data["resolution"] = resolution_map[resolution_id]
 
         if participants:
             try:
@@ -279,9 +287,6 @@ class RxClient():
                 raise ValueError("The participants parameter is not valid json content: '{}'".format(participants))
             if p_data.get("participants"):
                 data["participants"] = p_data.get("participants")
-
-        if plan_status == 'C':
-            data["resolution"] = resolution_map[resolution_id]
 
         r = self.api_call("patch", uri, headers=self._headers, data=json.dumps(data))
 
