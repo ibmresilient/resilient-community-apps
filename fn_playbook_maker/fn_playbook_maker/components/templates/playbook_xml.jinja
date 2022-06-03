@@ -1,0 +1,72 @@
+{% set start_event = "StartEvent_{}".format(make_short_uuid(None)) -%}
+{% set function_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+{% set script_event_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+{% set end_event_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+	xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+	xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+	xmlns:resilient="http://resilient.ibm.com/bpmn"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test">
+	<process id="{{ playbook_uuid }}" isExecutable="true" name="{{ playbook_uuid }}">
+		<documentation/>
+		<startEvent id="{{ start_event }}">
+			<outgoing>{{ function_flow }}</outgoing>
+		</startEvent>
+		<serviceTask id="ServiceTask_1" name="{{ function_display_name }}" resilient:type="function">
+			<extensionElements>
+				<resilient:function uuid="{{ function_uuid }}">{{ preprocessor_script | json }}</resilient:function>
+			</extensionElements>
+			<incoming>{{ function_flow }}</incoming>
+			<outgoing>{{ script_event_flow }}</outgoing>
+		</serviceTask>
+		<scriptTask id="ScriptTask_2" name="test results">
+			<extensionElements>
+				<resilient:script uuid="{{ script_uuid }}"/>
+			</extensionElements>
+			<incoming>{{ script_event_flow }}</incoming>
+			<outgoing>{{ end_event_flow }}</outgoing>
+			<script>script</script>
+		</scriptTask>
+		<endEvent id="EndPoint_3" resilient:documentation="End point">
+			<incoming>{{ end_event_flow }}</incoming>
+		</endEvent>
+		<sequenceFlow id="{{ function_flow }}" sourceRef="{{ start_event }}" targetRef="ServiceTask_1"/>
+		<sequenceFlow id="{{ script_event_flow }}" sourceRef="ServiceTask_1" targetRef="ScriptTask_2"/>
+		<sequenceFlow id="{{ end_event_flow }}" sourceRef="ScriptTask_2" targetRef="EndPoint_3"/>
+	</process>
+	<bpmndi:BPMNDiagram id="BPMNDiagram_1">
+		<bpmndi:BPMNPlane bpmnElement="{{ playbook_uuid }}" id="BPMNPlane_1">
+			<bpmndi:BPMNEdge bpmnElement="{{ function_flow }}" id="{{ function_flow }}_di">
+				<omgdi:waypoint x="721" y="117"/>
+				<omgdi:waypoint x="721" y="148"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="{{ end_event_flow }}" id="{{ end_event_flow }}_di">
+				<omgdi:waypoint x="721" y="362"/>
+				<omgdi:waypoint x="721" y="404"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="{{ script_event_flow }}" id="{{ script_event_flow }}_di">
+				<omgdi:waypoint x="721" y="232"/>
+				<omgdi:waypoint x="721" y="278"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="{{ start_event }}" id="{{ start_event }}_di">
+				<omgdc:Bounds height="52" width="187.083" x="627" y="65"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="0" width="90" x="616" y="100"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="ServiceTask_1" id="ServiceTask_1_di">
+				<omgdc:Bounds height="84" width="196" x="623" y="148"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="ScriptTask_2" id="ScriptTask_2_di">
+				<omgdc:Bounds height="84" width="196" x="623" y="278"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="EndPoint_3" id="EndPoint_3_di">
+				<omgdc:Bounds height="52" width="132.15" x="655" y="404"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>

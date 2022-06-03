@@ -1,0 +1,6 @@
+{
+    "inputs":{},
+    "pre_processing_script_language":"python3",
+    "result_name":"{{ function_name }}",
+    "pre_processing_script":"{% for field in fields %}\n# ({{ field.input_type }}) Required: {% if 'required' in field %}Yes{% else %}No{% endif %} {{ field.tooltip }} {% if field['values'] %}Values: {{ field['values'] | map(attribute='label') | join(', ') }}{% endif %}\ninputs.{{ field.name }}= {% if pbm_activation_fields %}playbook.inputs.{{ field.name }}{% endif %}\n{% endfor %}"
+}
