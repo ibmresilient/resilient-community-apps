@@ -142,15 +142,16 @@ class RxClient():
         :return Result in json format.`
         """
         uri = self._endpoints["search_devices"]
-        data = {"filter": {}}
+        data = {}
 
         if search_filter:
             try:
                 filter_data = json.loads(search_filter)
             except ValueError:
                 raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
-        if filter_data.get("filter"):
-            data["filter"] = filter_data.get("filter")
+            if filter_data.get("filter"):
+                data["filter"] = filter_data.get("filter")
+
         data["active_from"] = active_from
         data["active_until"] = active_until
         data["limit"] = int(limit) if limit else None
@@ -200,7 +201,7 @@ class RxClient():
         :return Result in json format.`
         """
         uri = self._endpoints["search_detections"]
-        data = {"filter": {}}
+        data = {}
         filter_data = {}
 
         if search_filter:
@@ -212,11 +213,11 @@ class RxClient():
                 except ValueError:
                     raise ValueError("The search filter is not valid json content: '{}'".format(search_filter))
 
-        if filter_data:
-            if filter_data.get("filter"):
-                data["filter"] = filter_data.get("filter")
-            else:
-                data["filter"] = filter_data
+            if filter_data:
+                if filter_data.get("filter"):
+                    data["filter"] = filter_data.get("filter")
+                else:
+                    data["filter"] = filter_data
 
         if sort:
             try:

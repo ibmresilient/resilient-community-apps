@@ -29,17 +29,16 @@ def get_prop(prop, type=None):
 
 def main():
     filter = {}
+    search_filter = {}
     filter_props = {
         "field": get_prop(rule.properties.extrahop_device_field),
         "operand": get_prop(rule.properties.extrahop_device_operand),
         "operator": get_prop(rule.properties.extrahop_device_operator)
     }
     filter = {k: v for k, v in filter_props.items() if v}
-    
+
     if filter and rule.properties.extrahop_device_id:
         raise ValueError("The device ID and search filter shouldn't be set at the same time.")
-
-
 
     if filter:
         missing_props = []
@@ -48,7 +47,7 @@ def main():
                 missing_props.append(f)
         if missing_props:
             raise ValueError("The filter is missing properties: '{}'.".format(", ".join(missing_props)))
-            
+
         search_filter = {
             "filter": filter
         }
@@ -61,8 +60,8 @@ def main():
                 "operand": str(rule.properties.extrahop_device_id)
             }
         }
-
-    inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
+    if search_filter:
+        inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
     if rule.properties.extrahop_active_from:
         inputs.extrahop_active_from = rule.properties.extrahop_active_from
     if rule.properties.extrahop_active_until:
@@ -179,8 +178,19 @@ search_filters =  [
 for p in search_filters:
     if p:
         raise ValueError("A search filter and Device ID are not allowed at the same time.")
+        
+if rule.properties.extrahop_device_id:
+    inputs.extrahop_device_id = rule.properties.extrahop_device_id
+    
+if rule.properties.extrahop_active_from:
+    inputs.extrahop_active_from = rule.properties.extrahop_active_from
+if rule.properties.extrahop_active_until:
+    inputs.extrahop_active_until = rule.properties.extrahop_active_until
+if rule.properties.extrahop_limit:
+    inputs.extrahop_limit = rule.properties.extrahop_limit
+if rule.properties.extrahop_offset:
+    inputs.extrahop_offset = rule.properties.extrahop_offset
 
-inputs.extrahop_device_id = rule.properties.extrahop_device_id
 ```
 
 ### Post-Processing Script
