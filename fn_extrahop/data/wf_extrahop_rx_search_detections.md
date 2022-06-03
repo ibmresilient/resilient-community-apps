@@ -18,21 +18,33 @@
 
 ### Pre-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+'##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
 # Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. 
 # Reverse the dict keys and values
 CATEGORY_MAP = {v: k for k, v in workflow.properties.category_map.items()}
 TYPE_MAP = {v: k for k, v in workflow.properties.type_map.items()}
+DOT_PARAMS = [
+    "me",
+    "none"
+]
+
 
 def get_prop(prop, type=None):
     if prop:
         if isinstance(prop, int):
             return prop
         elif isinstance(prop, list):
-            return ['{}'.format(i) for i in prop]
-        return '{}'.format(prop)
+            return ['{}'.format('.' + i if i in DOT_PARAMS else i) for i in prop]
+        else:
+            result = '{}'.format('.' + prop if prop in DOT_PARAMS else prop)
+        if type == "list":
+            return [result]
+
+        return result
+
     else:
         return None
+
 
 filter = {}
 search_filter = {}
@@ -43,13 +55,12 @@ if rule.properties.extrahop_detection_category:
 if rule.properties.extrahop_detection_types:
     detection_types = [TYPE_MAP[d] for d in rule.properties.extrahop_detection_types]
 
-    
 filter_props = {
     "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
     "types": get_prop(detection_types),
     "category": get_prop(category),
-    "assignee": get_prop(rule.properties.extrahop_detection_assignee),
-    "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id),
+    "assignee": get_prop(rule.properties.extrahop_detection_assignee, "list"),
+    "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id, "list"),
     "status": get_prop(rule.properties.extrahop_detection_status),
     "resolution": get_prop(rule.properties.extrahop_detection_resolution)
 }
@@ -59,7 +70,7 @@ filter = {k: v for k, v in filter_props.items() if v}
 if filter:
     if rule.properties.extrahop_detection_id:
         raise ValueError("The search filter and Detecion ID are not allowed at the same time.")
-    
+
     search_filter = {
         "filter": filter
     }

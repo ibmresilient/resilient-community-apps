@@ -159,6 +159,21 @@ class AppCommon():
 
         self.rx_cli.add_detection_note(detection_id=detection_id, note=notes)
 
+    def link_case_to_ticketid(self, detection_id, case_id):
+        """ Update the Ticket ID of ExtraHop detection to the SOAR case ID.
+
+        Args:
+            detection_id [string]: ExtraHop detection ID.
+            case_id [string]: SOAR case ID.
+
+        """
+        params = {
+            "incident_id": case_id,
+            "detection_id": detection_id
+        }
+
+        self.rx_cli.update_detection(**params)
+
 
 def set_params(fn_inputs, params=None, f_prefix=None, split_index=None):
     """[Setup params dict form fn_input named tuple].

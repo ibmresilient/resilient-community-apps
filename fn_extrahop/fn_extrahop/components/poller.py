@@ -238,8 +238,11 @@ class PollerComponent(ResilientComponent):
 
                         cases_insert += 1
                         LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, entity_id)
-                        # build a url to the SOAR incident and update ReaQta with the note
 
+                        # Link the case to the ExtraHop ticket.
+                        self.app_common.link_case_to_ticketid(entity["id"], soar_case_id)
+
+                        # build a url to the SOAR incident and update ExtraHop with the note
                         soar_link = build_incident_url(
                             build_resilient_url(self.opts.get('host'), self.opts.get("port", 443)),
                             soar_case_id)
