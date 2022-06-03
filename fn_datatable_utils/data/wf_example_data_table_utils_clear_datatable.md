@@ -23,7 +23,7 @@ inputs.incident_id = incident.id
 
 # The api name of the Data Table to update
 if rule.properties.datatable_api_name:
-  inputs.dt_utils_datatable_api_name = datatable_api_name
+  inputs.dt_utils_datatable_api_name = rule.properties.datatable_api_name
 else:
   # Defaults to example data table
   inputs.dt_utils_datatable_api_name = "dt_utils_test_data_table"
