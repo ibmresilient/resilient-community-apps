@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+##  ExtraHop - wf_extrahop_rx_search_devices pre processing script ##
 
 def get_prop(prop, type=None):
     if prop:
