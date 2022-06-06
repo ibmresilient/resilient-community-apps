@@ -9,6 +9,7 @@
         3: PACKAGE_NAME
 """
 
+from http import server
 import json
 import os
 import sys
@@ -302,6 +303,9 @@ def deploy_all_apps(res_client, controller_id=None):
 
     apps = res_client.get("/apps")
 
+    server_info = res_client.get("/const/", is_uri_absolute=True)
+    soar_version_dict = server_info.get("server_version")
+
     # we gather the list of apps that will be deployed, so we can keep track of their status
     deployment_list = []
 
@@ -313,14 +317,16 @@ def deploy_all_apps(res_client, controller_id=None):
 
         if "deployment" not in app_information:
             deploy_body = app_information
-
             deployment = {
                 "controller_id" : controller_id,
-                "status" : "deploying"
+                "status" : "deploying",
             }
 
-            deploy_body["deployment"] = deployment
+            soar_version = soar_version_dict["major"]
+            if int(soar_version) > 42:
+                deployment["modified"] = deploy_body["modified"] 
 
+            deploy_body["deployment"] = deployment
             deployment_list.append(name)
 
             print(f'Deployement started: {name}')
@@ -348,7 +354,6 @@ def track_deployment(res_client, deployment_list):
             try:
                 res = base_get(res_client, f'/services_proxy/manager/tenants/{res_client.tenant_id}/apps/{name}')
                 deployment_status[name] = res["deployment"]["status"]
-                print("******************* SUCCESS! The app was deployed! *******************")
             except:
                 print("******************* FAILURE! App is most likely already installed *******************")
 
@@ -365,6 +370,9 @@ def track_deployment(res_client, deployment_list):
     print(f'This operation was running for {time.time()-start_time:.2f} seconds.')
     if len(deployment_list) > 0:
         print("The deployment of the following apps was not completed in time:", deployment_list)
+    else:
+        print("******************* SUCCESS! The app is deployed! *******************")
+
 
 ########################################
 ### set config files for apps
