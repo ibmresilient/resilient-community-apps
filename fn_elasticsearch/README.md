@@ -124,9 +124,10 @@ The following table describes the settings you need to configure in the app.conf
 | **es_datastore_url** | Yes | `localhost` | *The location of the elasticsearch instance.* |
 | **es_datastore_scheme** | Yes | `https` | *If HTTPS is provided an SSL Context is setup for the connection.* |
 | **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Username of the Elastic User for the query.* |
-| **es_use_http** | Yes | `False` | *f true, connection to elasticsearch will be made over HTTP.* |
+| **es_use_http** | Yes | `False` | *If true, connection to elasticsearch will be made over HTTP.* |
 | **es_auth_password** | Yes | `supersecret` | *Password for the elasticsearch user.* |
 | **es_cafile** | No | `path/to/certfile>` | *Location of the certificate file if using https.* |
+| **es_verify_certs** | No | `False` | *If false, SSL certificate will not be verified.* |
 
 ---
 
