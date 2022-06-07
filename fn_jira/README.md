@@ -38,6 +38,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.1.1
+* Updated version for pyjwt dependency
+
 ### v2.1.0
 * Added support for authentication with OAuth
   * Includes new configs: `access_token`, `access_token_secret`, `consumer_key_name`, `private_rsa_key_file_path`
