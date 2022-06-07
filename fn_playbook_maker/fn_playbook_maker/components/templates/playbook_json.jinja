@@ -22,39 +22,42 @@
             "export_key": "{{ playbook_info.playbook_uuid }}",
             "fields": {
                 {% if inputs.get('pbm_activation_fields') and inputs.get('pbm_activation_type') == 'Manual' -%}
-                    {% for field in current_function.fields -%}
-                    "{{ field.name }}" : {
-                        "allow_default_value" : false,
-                        "blank_option" : {{ field.blank_option | json }},
-                        "calculated" : false,
-                        "changeable" : true,
-                        "chosen" : false,
-                        "default_chosen_by_server" : false,
-                        "deprecated" : false,
-                        "export_key" : "{{ playbook_info.playbook_uuid }}/{{ field.name }}",
-                        "hide_notification" : false,
-                        "input_type" : "{{ field.input_type }}",
-                        "internal" : false,
-                        {% if field['required'] %}
-                            "required": "{{ field['required'] }}",
-                        {% endif %}
-                        "is_tracked" : false,
-                        "name" : "{{ field.name }}",
-                        "operation_perms" : { },
-                        "operations" : [ ],
-                        "placeholder" : "",
-                        "prefix" : null,
-                        "read_only" : false,
-                        "rich_text" : {{ field.rich_text | json }},
-                        "tags" : [ ],
-                        "templates" : [ ],
-                        "text" : "{{ field.text }}",
-                        "tooltip" : "{{ field.tooltip }}",
-                        "type_id" : 7309,
-                        {% set uuid_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
-                        "uuid" : "{{ uuid_field | make_uuid }}",
-                        "values" : {{ field['values'] | json }}
-                    }
+                    {% for current_funct in functions -%}
+                        {% for field in current_funct.fields -%}
+                        "{{ field.name }}" : {
+                            "allow_default_value" : false,
+                            "blank_option" : {{ field.blank_option | json }},
+                            "calculated" : false,
+                            "changeable" : true,
+                            "chosen" : false,
+                            "default_chosen_by_server" : false,
+                            "deprecated" : false,
+                            "export_key" : "{{ playbook_info.playbook_uuid }}/{{ field.name }}",
+                            "hide_notification" : false,
+                            "input_type" : "{{ field.input_type }}",
+                            "internal" : false,
+                            {% if field['required'] %}
+                                "required": "{{ field['required'] }}",
+                            {% endif %}
+                            "is_tracked" : false,
+                            "name" : "{{ field.name }}",
+                            "operation_perms" : { },
+                            "operations" : [ ],
+                            "placeholder" : "",
+                            "prefix" : null,
+                            "read_only" : false,
+                            "rich_text" : {{ field.rich_text | json }},
+                            "tags" : [ ],
+                            "templates" : [ ],
+                            "text" : "{{ field.text }}",
+                            "tooltip" : "{{ field.tooltip }}",
+                            "type_id" : 7309,
+                            {% set uuid_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
+                            "uuid" : "{{ uuid_field | make_uuid }}",
+                            "values" : {{ field['values'] | json }}
+                        }
+                        {% if not loop.last %},{% endif -%}
+                        {% endfor -%}
                     {% if not loop.last %},{% endif -%}
                     {% endfor -%}
                 {% endif -%}
@@ -84,22 +87,25 @@
         },
         "last_modified_time": 1652961625333,
         "local_scripts": [
-            {
-                "actions": [],
-                "created_date": 1652961380454,
-                "creator_id": "ibmsoar@ibm.com",
-                "description": "",
-                "enabled": false,
-                "export_key": "parse results for {{ current_function.function_name }}",
-                "language": "python3",
-                "name": "parse results for {{ current_function.function_name }}",
-                "object_type": "{{ inputs.pbm_playbook_type }}",
-                "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
-                "programmatic_name": "{{ playbook_info.playbook_name_api_name }}_parse_results",
-                "script_text": "results = playbook.functions.results.{{ current_function.function_name }}\nif results.success:\n  # change to include your parsing logic\n  pass\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
-                "tags": [],
-                "uuid": "{{ current_function.script_uuid }}"
-            }
+            {% for current_funct in functions -%}
+                {
+                    "actions": [],
+                    "created_date": 1652961380454,
+                    "creator_id": "ibmsoar@ibm.com",
+                    "description": "",
+                    "enabled": false,
+                    "export_key": "parse results for {{ current_funct.function_name }}",
+                    "language": "python3",
+                    "name": "parse results for {{ current_funct.function_name }}",
+                    "object_type": "{{ inputs.pbm_playbook_type }}",
+                    "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
+                    "programmatic_name": "{{ playbook_info.playbook_name_api_name }}_parse_results_for_{{ current_funct.function_name }}",
+                    "script_text": "results = playbook.functions.results.{{ current_funct.function_name }}\nif results.success:\n  # change to include your parsing logic\n  pass\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
+                    "tags": [],
+                    "uuid": "{{ current_funct.script_uuid }}"
+                }
+            {% if not loop.last %},{% endif -%}
+            {% endfor -%}
         ],
         "manual_settings": {
             "activation_conditions": {
@@ -108,16 +114,19 @@
             },
             "view_items" : [
                 {% if inputs.get('pbm_activation_fields') and inputs.get('pbm_activation_type') == 'Manual' -%}
-                    {% for field in current_function.fields -%}
-                        {
-                            {% set content_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
-                            "content" : "{{ content_field | make_uuid }}",
-                            "element" : "field_uuid",
-                            "field_type" : "{{ playbook_info.playbook_uuid }}",
-                            "show_if" : null,
-                            "show_link_header" : false,
-                            "step_label" : null
-                        }
+                    {% for current_funct in functions -%}
+                        {% for field in current_funct.fields -%}
+                            {
+                                {% set content_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
+                                "content" : "{{ content_field | make_uuid }}",
+                                "element" : "field_uuid",
+                                "field_type" : "{{ playbook_info.playbook_uuid }}",
+                                "show_if" : null,
+                                "show_link_header" : false,
+                                "step_label" : null
+                            }
+                        {% if not loop.last %},{% endif -%}
+                        {% endfor -%}
                     {% if not loop.last %},{% endif -%}
                     {% endfor -%}
                 {% endif -%}

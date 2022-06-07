@@ -68,6 +68,24 @@ class FunctionComponent(AppFunctionComponent):
 
             if inputs.get('pbm_add_to_same_playbook'):
                 playbook_payload = self.make_playbook_info(inputs, function_input_list)
+                # build the preprocessor script and XML data
+                for funct_info in playbook_payload['functions']:
+                    playbook_payload['current_function'] = funct_info
+                    # get fields for preprocessing script
+                    funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
+
+                # build the xml compoment for the playbook (all functions)
+                playbook_json = {
+                    'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
+                }
+                export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
+
+                # add in the playbook xml content
+                export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
+
+                self.LOG.debug(export_res)
+                # import the export_res file
+                soar_common.import_res(export_res)
             else:
                 for funct_info in function_input_list:
                     try:
