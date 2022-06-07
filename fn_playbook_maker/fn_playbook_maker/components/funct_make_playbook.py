@@ -7,6 +7,7 @@
 import hashlib
 import random
 import string
+import traceback
 import uuid
 from os import path
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -48,57 +49,84 @@ class FunctionComponent(AppFunctionComponent):
         inputs = fn_inputs._asdict()
         soar_common = SOARCommon(self.rest_client())
 
-        funct_list = []
+        function_input_list = []
         results = None
         if inputs.get("pbm_app_name"):
-            funct_list = soar_common.get_function_info_by_app(inputs.get("pbm_app_name").strip())
+            function_input_list = soar_common.get_function_info_by_app(inputs.get("pbm_app_name").strip())
 
         elif inputs.get("pbm_function_names"):
             for function in inputs.get("pbm_function_names").split(","):
                 funct = soar_common.get_function_info(function.strip())
-                funct_list.append(funct)
+                function_input_list.append(funct)
 
         else:
             results = FunctionResult({}, success=False,
                                     reason="either pbm_app_name or pbm_function_names required")
 
-        if not results and funct_list:
-            self.LOG.debug(funct_list)
-            for funct_info in funct_list:
-                try:
-                    funct_info.update(inputs)  # add function inputs which will be used in templates
-                    # generate the playbook xml uuids used throughout
-                    funct_info['uuid_uuid'] = make_uuid(None)
-                    funct_info["playbook_display_name"] = "Playbook_{}".format(funct_info['uuid_uuid'])
-                    funct_info["playbook_uuid"] = "playbook_{}".format(funct_info['uuid_uuid']).replace("-", "_")
-                    funct_info["script_uuid"] = make_uuid(None)
-                    funct_info["playbook_name"] = "{} for {}".format(inputs.get('pbm_playbook_name'), funct_info["function_name"])
-                    funct_info["playbook_name_api_name"] = funct_info["playbook_name"].replace(" ", "_")
+        if not results and function_input_list:
+            self.LOG.debug(function_input_list)
 
-                    # get fields for preprocessing script
-                    funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, funct_info, return_json=True)
+            if inputs.get('pbm_add_to_same_playbook'):
+                playbook_payload = self.make_playbook_info(inputs, function_input_list)
+            else:
+                for funct_info in function_input_list:
+                    try:
+                        playbook_payload = self.make_playbook_info(inputs, [funct_info])
+                        playbook_payload['current_function'] = playbook_payload['functions'][0]
+                        self.LOG.debug(playbook_payload)
 
-                    # build the xml compoment of the playbook
-                    funct_info['playbook_xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, funct_info, return_json=False)
-                    # build the json structure for the .res file and this function
-                    funct_info['playbook_json'] = make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, funct_info, return_json=True)
-                    export_res = make_payload_from_template(None, EXPORT_TEMPLATE, funct_info, return_json=True)
+                        # get fields for preprocessing script
+                        funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
 
-                    # add in the playbook xml content
-                    export_res['playbooks'][0]['content']['xml'] = funct_info['playbook_xml']
+                        # build the xml compoment of the playbook
+                        funct_info['playbook_xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
+                        # build the json structure for the .res file and this function
+                        funct_info['playbook_json'] = make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
+                        export_res = make_payload_from_template(None, EXPORT_TEMPLATE, funct_info, return_json=True)
 
-                    self.LOG.debug(export_res)
-                    # import the export_res file
-                    soar_common.import_res(export_res)
-                except Exception as err:
-                    self.LOG.error(str(err))
-                    export_res = {}
+                        # add in the playbook xml content
+                        export_res['playbooks'][0]['content']['xml'] = funct_info['playbook_xml']
+
+                        self.LOG.debug(export_res)
+                        # import the export_res file
+                        soar_common.import_res(export_res)
+                    except Exception as err:
+                        self.LOG.error(str(err))
+                        self.LOG.debug(traceback.format_exc())
+                        export_res = {}
 
             results = FunctionResult(export_res)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield results
+
+    def make_playbook_info(self, inputs, funct_info_list):
+        playbook_info = {
+
+        }
+        playbook_payload = {
+            "inputs": inputs,
+            "functions": funct_info_list,
+            "playbook_info": playbook_info
+        }
+        # generate the playbook xml uuids used throughout
+        if inputs.get('pbm_add_to_same_playbook'):
+            playbook_info["playbook_name"] = inputs.get('pbm_playbook_name')
+        else:
+            playbook_info["playbook_name"] = "{} for {}".format(inputs.get('pbm_playbook_name'), funct_info_list[0]["function_name"])
+        playbook_info["playbook_name_api_name"] = playbook_info["playbook_name"].replace(" ", "_").replace("-", "_")
+
+        # function based uuid's
+        playbook_info['uuid_uuid'] = make_uuid(None)
+        playbook_info["playbook_display_name"] = "Playbook_{}".format(playbook_info['uuid_uuid'])
+        playbook_info["playbook_uuid"] = "playbook_{}".format(playbook_info['uuid_uuid']).replace("-", "_")
+
+        # initialize per function
+        for funct in funct_info_list:
+            funct["script_uuid"] = make_uuid(None)
+
+        return playbook_payload
 
     def init_jinja(self):
         jinja_env = global_jinja_env()

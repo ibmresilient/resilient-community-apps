@@ -1,136 +1,138 @@
-{
-    "activation_type": "{{ pbm_activation_type }}",
-    "content": {
-        "content_version": 3,
-        "xml": ""
-    },
-    "create_date": 1652961296202,
-    "creator_principal": {
-    },
-    "deployment_id" : "{{ playbook_uuid }}",
-    "description": {
-        "format": "text",
-        "content": "function, script and playbook inputs"
-    },
-    "display_name": "{{ pbm_playbook_name }} for {{ function_name }}",
-    "export_key": "{{ playbook_name_api_name }}",
-    "field_type_handle": "{{ playbook_uuid }}",
-    "fields_type": {
-        "actions": [],
-        "display_name": "{{ pbm_playbook_name }} for {{ function_name }}",
-        "export_key": "{{ playbook_uuid }}",
-        "fields": {
-            {% if pbm_activation_fields %}
-                {% for field in fields %}
-                "{{ field.name }}" : {
-                    "allow_default_value" : false,
-                    "blank_option" : {{ field.blank_option | json }},
-                    "calculated" : false,
-                    "changeable" : true,
-                    "chosen" : false,
-                    "default_chosen_by_server" : false,
-                    "deprecated" : false,
-                    "export_key" : "{{ playbook_uuid }}/{{ field.name }}",
-                    "hide_notification" : false,
-                    "input_type" : "{{ field.input_type }}",
-                    "internal" : false,
-                    {% if field['required'] %}
-                        "required": "{{ field['required'] }}",
-                    {% endif %}
-                    "is_tracked" : false,
-                    "name" : "{{ field.name }}",
-                    "operation_perms" : { },
-                    "operations" : [ ],
-                    "placeholder" : "",
-                    "prefix" : null,
-                    "read_only" : false,
-                    "rich_text" : {{ field.rich_text | json }},
-                    "tags" : [ ],
-                    "templates" : [ ],
-                    "text" : "{{ field.text }}",
-                    "tooltip" : "{{ field.tooltip }}",
-                    "type_id" : 7309,
-                    {% set uuid_field = "{}/{}".format(playbook_uuid, field.get("name")) -%}
-                    "uuid" : "{{ uuid_field | make_uuid }}",
-                    "values" : {{ field['values'] | json }}
-                }
-                {% if not loop.last %},{% endif -%}
-                {% endfor -%}
-            {% endif -%}
+[
+    {
+        "activation_type": "{{ inputs.pbm_activation_type }}",
+        "content": {
+            "content_version": 3,
+            "xml": ""
         },
-        "for_actions": false,
-        "for_custom_fields": false,
-        "for_notifications": false,
-        "for_workflows": false,
-        "id": null,
-        "parent_types": [
-            "__playbook"
-        ],
-        "properties": {
-            "can_create": false,
-            "can_destroy": false,
-            "for_who": []
+        "create_date": 1652961296202,
+        "creator_principal": {
         },
-        "scripts": [],
-        "tags": [],
-        "type_id": 28,
-        "type_name": "{{ playbook_uuid }}",
-        "uuid": "{{ ""|make_uuid }}"
-    },
-    "is_deleted": false,
-    "is_locked": false,
-    "last_modified_principal": {
-    },
-    "last_modified_time": 1652961625333,
-    "local_scripts": [
-        {
+        "deployment_id" : "{{ playbook_info.playbook_uuid }}",
+        "description": {
+            "format": "text",
+            "content": "function, script and playbook inputs"
+        },
+        "display_name": "{{ playbook_info.playbook_name }}",
+        "export_key": "{{ playbook_info.playbook_name_api_name }}",
+        "field_type_handle": "{{ playbook_info.playbook_uuid }}",
+        "fields_type": {
             "actions": [],
-            "created_date": 1652961380454,
-            "creator_id": "ibmsoar@ibm.com",
-            "description": "",
-            "enabled": false,
-            "export_key": "parse results for {{ function_name }}",
-            "language": "python3",
-            "name": "parse results for {{ function_name }}",
-            "object_type": "{{ pbm_playbook_type }}",
-            "playbook_handle": "{{ playbook_name_api_name }}",
-            "programmatic_name": "{{ playbook_name_api_name }}_parse_results",
-            "script_text": "results = playbook.functions.results.{{ function_name }}\nif results.success:\n  # change to include your parsing logic\n  pass\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
-            "tags": [],
-            "uuid": "{{ script_uuid }}"
-        }
-    ],
-    "manual_settings": {
-        "activation_conditions": {
-            "conditions": [],
-            "logic_type": "all"
-        },
-        "view_items" : [
-            {% if pbm_activation_fields and pbm_activation_type == 'Manual' -%}
-                {% for field in fields -%}
-                    {
-                        {% set content_field = "{}/{}".format(playbook_uuid, field.get("name")) -%}
-                        "content" : "{{ content_field | make_uuid }}",
-                        "element" : "field_uuid",
-                        "field_type" : "{{ playbook_uuid }}",
-                        "show_if" : null,
-                        "show_link_header" : false,
-                        "step_label" : null
+            "display_name": "{{ playbook_info.playbook_name }}",
+            "export_key": "{{ playbook_info.playbook_uuid }}",
+            "fields": {
+                {% if inputs.get('pbm_activation_fields') and inputs.get('pbm_activation_type') == 'Manual' -%}
+                    {% for field in current_function.fields -%}
+                    "{{ field.name }}" : {
+                        "allow_default_value" : false,
+                        "blank_option" : {{ field.blank_option | json }},
+                        "calculated" : false,
+                        "changeable" : true,
+                        "chosen" : false,
+                        "default_chosen_by_server" : false,
+                        "deprecated" : false,
+                        "export_key" : "{{ playbook_info.playbook_uuid }}/{{ field.name }}",
+                        "hide_notification" : false,
+                        "input_type" : "{{ field.input_type }}",
+                        "internal" : false,
+                        {% if field['required'] %}
+                            "required": "{{ field['required'] }}",
+                        {% endif %}
+                        "is_tracked" : false,
+                        "name" : "{{ field.name }}",
+                        "operation_perms" : { },
+                        "operations" : [ ],
+                        "placeholder" : "",
+                        "prefix" : null,
+                        "read_only" : false,
+                        "rich_text" : {{ field.rich_text | json }},
+                        "tags" : [ ],
+                        "templates" : [ ],
+                        "text" : "{{ field.text }}",
+                        "tooltip" : "{{ field.tooltip }}",
+                        "type_id" : 7309,
+                        {% set uuid_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
+                        "uuid" : "{{ uuid_field | make_uuid }}",
+                        "values" : {{ field['values'] | json }}
                     }
-                {% if not loop.last %},{% endif -%}
-                {% endfor -%}
-            {% endif -%}
-        ]
-    },
-    "name": "{{ playbook_name_api_name }}",
-    "object_type": "{{ pbm_playbook_type }}",
-    "status": "draft",
-    "tag": {
-      "display_name" : "{{ playbook_display_name }}",
-      "name" : "{{ playbook_uuid }}",
-      "type" : "playbook",
-      "uuid" : "{{ pbm_playbook_name | make_uuid }}"
-    },
-    "uuid": "{{ uuid_uuid }}",
-    "version": 5
-}
+                    {% if not loop.last %},{% endif -%}
+                    {% endfor -%}
+                {% endif -%}
+            },
+            "for_actions": false,
+            "for_custom_fields": false,
+            "for_notifications": false,
+            "for_workflows": false,
+            "id": null,
+            "parent_types": [
+                "__playbook"
+            ],
+            "properties": {
+                "can_create": false,
+                "can_destroy": false,
+                "for_who": []
+            },
+            "scripts": [],
+            "tags": [],
+            "type_id": 28,
+            "type_name": "{{ playbook_info.playbook_uuid }}",
+            "uuid": "{{ ""|make_uuid }}"
+        },
+        "is_deleted": false,
+        "is_locked": false,
+        "last_modified_principal": {
+        },
+        "last_modified_time": 1652961625333,
+        "local_scripts": [
+            {
+                "actions": [],
+                "created_date": 1652961380454,
+                "creator_id": "ibmsoar@ibm.com",
+                "description": "",
+                "enabled": false,
+                "export_key": "parse results for {{ current_function.function_name }}",
+                "language": "python3",
+                "name": "parse results for {{ current_function.function_name }}",
+                "object_type": "{{ inputs.pbm_playbook_type }}",
+                "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
+                "programmatic_name": "{{ playbook_info.playbook_name_api_name }}_parse_results",
+                "script_text": "results = playbook.functions.results.{{ current_function.function_name }}\nif results.success:\n  # change to include your parsing logic\n  pass\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
+                "tags": [],
+                "uuid": "{{ current_function.script_uuid }}"
+            }
+        ],
+        "manual_settings": {
+            "activation_conditions": {
+                "conditions": [],
+                "logic_type": "all"
+            },
+            "view_items" : [
+                {% if inputs.get('pbm_activation_fields') and inputs.get('pbm_activation_type') == 'Manual' -%}
+                    {% for field in current_function.fields -%}
+                        {
+                            {% set content_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
+                            "content" : "{{ content_field | make_uuid }}",
+                            "element" : "field_uuid",
+                            "field_type" : "{{ playbook_info.playbook_uuid }}",
+                            "show_if" : null,
+                            "show_link_header" : false,
+                            "step_label" : null
+                        }
+                    {% if not loop.last %},{% endif -%}
+                    {% endfor -%}
+                {% endif -%}
+            ]
+        },
+        "name": "{{ playbook_info.playbook_name_api_name }}",
+        "object_type": "{{ inputs.pbm_playbook_type }}",
+        "status": "draft",
+        "tag": {
+        "display_name" : "{{ playbook_info.playbook_display_name }}",
+        "name" : "{{ playbook_info.playbook_uuid }}",
+        "type" : "playbook",
+        "uuid" : "{{ inputs.pbm_playbook_name | make_uuid }}"
+        },
+        "uuid": "{{ playbook_info.uuid_uuid }}",
+        "version": 5
+    }
+]

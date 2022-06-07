@@ -28,8 +28,8 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="https://github.com/ibmresilient/resilient-community-apps",
-    description="Resilient Circuits Components for 'fn_playbook_maker'",
-    long_description="""Resilient Circuits Components for 'fn_playbook_maker'""",
+    description="Generate playbooks from function definitions",
+    long_description="""Specify an app to include all it's functions or name the functions individually to create playbooks as a starting point for playbook creation.""",
     install_requires=[
         "resilient-circuits>=44.0.0"
     ],
