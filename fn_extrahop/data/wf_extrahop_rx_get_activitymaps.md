@@ -51,10 +51,36 @@ def main():
                     if am[f2] is None:
                         newrow[f1] = am[f2]
                     if isinstance(am[f2], list):
-                      if f1 in ["walks","steps"]:
-                          newrow[f1] = "{}".format(am[f2])
-                      else:
-                          newrow[f1] = "{}".format(", ".join(am[f2]))
+                        if f1 in ["walks"]:
+                            obj_cnt = 0
+                            tbl = u''
+                            for w in am[f2]:
+                                for kw, vw in w.items():
+                                    if kw == "origins":
+                                        tbl += u"<div><b>origins:</b></div>"
+                                        for o in vw:
+                                            for k, v in o.items():
+                                                tbl += u"<div><b>&emsp;{0}:</b>{1}</div>".format(k, v)
+                                        tbl += u"<br>"
+                                    elif kw == "steps":
+                                        tbl += u"<div><b>steps:</b></div>"
+                                        for s in vw:
+                                            relationships = s.get("relationships")
+                                            if relationships:
+                                                tbl += u"<div><b>&emsp;relationships:</b></div>"
+                                                for r in relationships:
+                                                    for k, v in r.items():
+                                                        tbl += u"<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
+                                                tbl += u"<br>"
+                                        tbl += u"<br>"
+                                    else:
+                                        tbl += u"<div><b>{}:</b></div>".format(kw)
+                                        tbl += u"<div><b>&emsp{}</b></div>".format(vw)
+                            tbl += u"<br>"
+                            obj_cnt += 1
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = "{}".format(", ".join(am[f2]))
                     elif isinstance(am[f2], (bool, dict)):
                         newrow[f1] = str(am[f2])
                     else:
@@ -63,11 +89,12 @@ def main():
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAM, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 ```
 
 ---
