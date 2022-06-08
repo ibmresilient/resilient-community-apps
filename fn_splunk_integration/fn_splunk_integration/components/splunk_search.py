@@ -33,22 +33,24 @@ class FunctionComponent(AppFunctionComponent):
 
             options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, self.servers_list)
 
+            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
+
             # Log all the info
             self.LOG.info(str(fn_inputs))
 
-            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
-
+            # Build query string with params
             query_string = make_query_string(fn_inputs.splunk_query, splunk_query_param)
 
             self.LOG.info("Splunk query to be executed: %s" % query_string)
             self.LOG.info("Splunk host: %s, port: %s, username: %s",
                      options.get("host"), options.get("port"), options.get("username"))
 
-            splunk_client = SplunkClient(options.get("host"),
+            splunk_client = SplunkClient(host=options.get("host"),
                                          port=options.get("port"),
                                          username=options.get("username"),
                                          password=options.get("splunkpassword"),
                                          verify=splunk_verify_cert)
+
             if fn_inputs.splunk_max_return:
                 splunk_client.set_max_return(fn_inputs.splunk_max_return)
 
