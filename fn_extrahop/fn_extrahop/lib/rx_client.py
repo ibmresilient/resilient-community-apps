@@ -57,7 +57,7 @@ class RxClient():
             "detections":        "/".join([self.api_base_url, "detections"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
             "detection_note":    "/".join([self.api_base_url, "detections/{}/notes"]),
-            "tags":              "/".join([self.api_base_url, "tags"]),
+            "tags":              "/".join([self.api_base_url, "tags/{}"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
             "watchlist":         "/".join([self.api_base_url, "watchlist/devices"]),
