@@ -356,7 +356,7 @@ class RxClient():
         if tag_name is None:
             raise ValueError("Missing 'tag_name' parameter")
 
-        uri = self._endpoints["create_tag"].format(tag_name)
+        uri = self._endpoints["create_tag"]
 
         data = {"name": tag_name}
 
