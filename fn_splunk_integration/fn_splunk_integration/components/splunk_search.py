@@ -29,7 +29,9 @@ class FunctionComponent(AppFunctionComponent):
             splunk_query_param = []
             for input in fn_inputs._asdict():
                 if QUERY_PARAM in input:
-                    splunk_query_param.append(fn_inputs._asdict().get(input))
+                    num = int(input.replace(QUERY_PARAM,''))-1
+                    # Add the param in the correct position in the list based on param number
+                    splunk_query_param.insert(num, fn_inputs._asdict().get(input))
 
             options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, self.servers_list)
 
