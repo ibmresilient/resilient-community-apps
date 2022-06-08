@@ -292,7 +292,7 @@ class RxClient():
 
         return r
 
-    def get_detection_note(self, detection_id=None, note=None, update_time=None):
+    def get_detection_note(self, detection_id=None):
         """Get the note from a detection.
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
