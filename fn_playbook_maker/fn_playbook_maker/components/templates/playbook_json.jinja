@@ -139,7 +139,7 @@
         "display_name" : "{{ playbook_info.playbook_display_name }}",
         "name" : "{{ playbook_info.playbook_uuid }}",
         "type" : "playbook",
-        "uuid" : "{{ inputs.pbm_playbook_name | make_uuid }}"
+        "uuid" : "{{ playbook_info.playbook_display_name | make_uuid }}"
         },
         "uuid": "{{ playbook_info.uuid_uuid }}",
         "version": 5

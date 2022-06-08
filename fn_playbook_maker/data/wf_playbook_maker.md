@@ -23,8 +23,8 @@ inputs.pbm_playbook_name = rule.properties.pbm_name_prefix
 inputs.pbm_app_name = rule.properties.pbm_app_name
 inputs.pbm_function_names = rule.properties.pbm_function_names
 inputs.pbm_activation_type = rule.properties.pbm_activation_type
-inputs.pbm_activation_fields = rule.properties.pbm_activation_fields
-inputs.pbm_add_to_same_playbook = rule.properties.pbm_add_to_same_playbook
+inputs.pbm_activation_fields = rule.properties.pbm_activation_fields if rule.properties.pbm_activation_fields else False
+inputs.pbm_add_to_same_playbook = rule.properties.pbm_add_to_same_playbook if rule.properties.pbm_add_to_same_playbook else False
 
 ```
 

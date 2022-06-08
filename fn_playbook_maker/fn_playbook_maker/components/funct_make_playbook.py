@@ -90,7 +90,7 @@ class FunctionComponent(AppFunctionComponent):
                 for funct_info in function_input_list:
                     try:
                         playbook_payload = self.make_playbook_info(inputs, [funct_info])
-                        playbook_payload['current_function'] = playbook_payload['functions'][0]
+                        playbook_payload['current_function'] = funct_info
                         self.LOG.debug(playbook_payload)
 
                         # get fields for preprocessing script
