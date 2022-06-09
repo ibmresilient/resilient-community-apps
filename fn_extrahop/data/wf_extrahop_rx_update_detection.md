@@ -41,7 +41,7 @@ def main():
     if CONTENT:
         result = CONTENT["result"]
         if result == "success":
-            tag = INPUTS.get("extrahop_tag_name")
+            workflow.addProperty("update_detection_ok", {})
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the detection status for SOAR " \
                         u"function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
