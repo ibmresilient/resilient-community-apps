@@ -23,9 +23,8 @@ env:
     - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
-    - USE_ARTIFACTORY_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
-    - PYPI_INDEX_TO_USE=`if [ $USE_ARTIFACTORY_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
-    - DEV_DEPS=`[[ ( -z $TRAVIS_TAG && "$LATEST_COMMIT_MSG" =~ "$DEV_DEPS_KEYWORD" ) || "$TAG_MSG" =~ "$DEV_DEPS_KEYWORD" ]]; echo $?`
+    - DEV_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
+    - PYPI_INDEX_TO_USE=`if [ $DEV_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
 
 # Exclude these branches from having jobs ran.
 branches:

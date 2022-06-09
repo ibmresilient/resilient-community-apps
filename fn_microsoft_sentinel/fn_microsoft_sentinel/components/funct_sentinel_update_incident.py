@@ -6,9 +6,8 @@
 import logging
 import traceback
 from resilient_circuits import ResilientComponent, ActionMessage, handler
-from resilient_lib import validate_fields
 from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles, DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE, \
-  DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
+    DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
@@ -52,7 +51,10 @@ class FunctionComponent(ResilientComponent):
         # get the incident data
         resilient_incident = event.message['incident']
 
-        validate_fields(["sentinel_profile", SENTINEL_INCIDENT_NUMBER], resilient_incident['properties'])
+        # confirm that we have custom fields
+        for confirm_field in ["sentinel_profile", SENTINEL_INCIDENT_NUMBER]:
+            if not resilient_incident['properties'].get(confirm_field):
+                raise ValueError("Custom field: %s and/or value not found", confirm_field)
 
         # Get the function parameters:
         sentinel_profile = resilient_incident['properties'].get("sentinel_profile")  # text
@@ -71,11 +73,11 @@ class FunctionComponent(ResilientComponent):
 
         # is this SOAR incident active or closed?
         if resilient_incident["plan_status"] == "A":
-          template = profile_data.get("sentinel_update_incident_template")
-          default_template = DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE
+            template = profile_data.get("sentinel_update_incident_template")
+            default_template = DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE
         else:
-          template = profile_data.get("sentinel_close_incident_template")
-          default_template = DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
+            template = profile_data.get("sentinel_close_incident_template")
+            default_template = DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
 
 
         incident_payload = self.jinja_env.make_payload_from_template(

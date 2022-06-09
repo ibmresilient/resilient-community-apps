@@ -6,11 +6,8 @@
 #   100% coverage
 #
 from fn_qradar_integration.util import SearchWaitCommand
-import time
-from mock import Mock
+from time import time
 from mock import patch
-import mock
-
 from fn_qradar_integration.util.qradar_utils import ArielSearch
 
 @patch("fn_qradar_integration.util.qradar_utils.ArielSearch.get_search_result")
@@ -75,7 +72,7 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
         assert False
 
     # 4. Test timeout
-    start_time = time.time()
+    start_time = time()
     mocked_get_search_id.return_value = search_id
     mocked_check_status.return_value = SearchWaitCommand.SearchWaitCommand.SEARCH_STATUS_WAITING
     try:
@@ -83,13 +80,13 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
         # It should stop here
         assert False
     except SearchWaitCommand.SearchTimeout as e:
-        print("Times out after {} sec.".format(str(time.time()-start_time)))
+        print("Times out after {} sec.".format(str(time()-start_time)))
         assert True
     except Exception:
         assert False
 
     # 5. Same effect for unknown and continue
-    start_time = time.time()
+    start_time = time()
     mocked_get_search_id.return_value = search_id
     mocked_check_status.return_value = SearchWaitCommand.SearchWaitCommand.SEARCH_STATUS_UNKNOWN_CONTINUE
     try:
@@ -97,7 +94,7 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
         # It should stop here
         assert False
     except SearchWaitCommand.SearchTimeout as e:
-        print("Times out after {} sec.".format(str(time.time() - start_time)))
+        print("Times out after {} sec.".format(str(time() - start_time)))
         assert True
     except Exception:
         assert False

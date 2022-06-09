@@ -42,7 +42,10 @@ python $PACKAGE_NAME/setup.py -q install
 
 echo "Running CVE security scan for $PACKAGE_NAME"
 # Perform a safety check printing all info to job logs
-safety check --full-report
+# NOTE: as of Dec 14 2021 Travis pulls in a version of pipenv
+# that is not compliant with safety check. since we don't use that
+# in our apps, we ignore that cve here (ID = 38334)
+safety check --full-report --ignore 38334
 # Get the exit code of the safety scan
 last_status=$?;
 

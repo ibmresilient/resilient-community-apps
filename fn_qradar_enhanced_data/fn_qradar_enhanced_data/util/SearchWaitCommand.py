@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 #
 # Template Method Design Pattern for a search-and-wait-for-result command
 #
 # This file can be reused for composite commands.
 #
-import time
+from time import time, sleep
 import logging
 LOG = logging.getLogger(__name__)
-
 
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
@@ -18,13 +17,11 @@ class SearchTimeout(Exception):
         super(SearchTimeout, self).__init__(fail_msg)
         self.search_status = search_status
 
-
 class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
         fail_msg = "Failed to create search job for query [{}] ".format(query)
         super(SearchJobFailure, self).__init__(fail_msg)
-
 
 class SearchFailure(Exception):
     """ Search failed to execute """
@@ -32,7 +29,6 @@ class SearchFailure(Exception):
         fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
         super(SearchFailure, self).__init__(fail_msg)
         self.search_status = search_status
-
 
 class SearchWaitCommand(object):
     # Constants
@@ -43,7 +39,6 @@ class SearchWaitCommand(object):
 
     def __init__(self, timeout=600, period=5):
         """
-
         :param timeout: Time out in secs
         :param polling: polling period in secs
         """
@@ -84,7 +79,7 @@ class SearchWaitCommand(object):
 
         if search_id:
             # store the start time
-            start_time = time.time()
+            start_time = time()
             done = False
 
             while not done:
@@ -103,10 +98,10 @@ class SearchWaitCommand(object):
                     # time_out is default to 10 minutes. If customer overrides it to 0, it
                     # will never timeout
                     if self.search_timeout != 0:
-                        if time.time() - start_time > self.search_timeout:
+                        if time() - start_time > self.search_timeout:
                             raise SearchTimeout(search_id, status)
                     # polling_interval is defaulted to 5 sec
-                    time.sleep(self.polling_period)
+                    sleep(self.polling_period)
         else:
             LOG.error("search_id is None")
             raise SearchJobFailure(query)
@@ -117,4 +112,3 @@ class SearchWaitCommand(object):
             result=None
 
         return result
-

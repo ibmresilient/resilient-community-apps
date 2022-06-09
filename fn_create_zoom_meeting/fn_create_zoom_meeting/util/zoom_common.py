@@ -3,7 +3,7 @@
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-import requests
+from resilient_lib import RequestsCommon
 import json
 import jwt
 import time
@@ -22,32 +22,36 @@ PWD_IN_URL = "pwd"
 
 class ZoomCommon:
 
-    def __init__(self, api_url, key, secret):
-        self.key = key
-        self.secret = secret
-        self.access_token = ""
-        self.api_url = api_url
+    def __init__(self, opts, options):
+        self.opts = opts
+        self.options = options
+        self.key = options.get("zoom_api_key")
+        self.secret = options.get("zoom_api_secret")
+        self.api_url = options.get("zoom_api_url")
 
     @staticmethod
     def generate_auth_token(key, secret):
         """Generates authentication token used to authenticate with Zoom API"""
         return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
                           secret,  # secret key
-                          algorithm='HS256').decode('utf-8')
+                          algorithm='HS256')
 
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
         url = self.api_url + path
-        if '?' in path:
-            url += "&access_token=" + str(self.access_token)
-        else:
-            url += "?access_token=" + str(self.access_token)
+        
+        access_token = self.generate_auth_token(self.key, self.secret)
+        headers = {'authorization': 'Bearer %s' % access_token,
+               'content-type': 'application/json'}
+        
+        
+        req_common = RequestsCommon(self.opts, self.options)
 
         response = None
         if method == "GET":
-            response = requests.get(url)
+            response = req_common.execute('get', url, headers=headers, params= {'access_token': access_token}, verify=False)
         elif method == "POST":
-            response = requests.post(url, json=query, verify=True, headers=headers)
+            response = req_common.execute('post', url, json=query, verify=True, headers=headers)
 
         if response is None:
             raise FunctionError("Invalid METHOD passed to zoom_request! Method: {}".format(method))
@@ -56,7 +60,7 @@ class ZoomCommon:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
         elif response.status_code == 401:
             # access token probably expired
-            self.access_token = self.generate_auth_token(self.key, self.secret)
+            access_token = self.generate_auth_token(self.key, self.secret)
             return self.zoom_request(path, method, query, headers)
 
         return response
@@ -121,7 +125,7 @@ class ZoomCommon:
 
     def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password, timezone):
         """Creates a Zoom Meeting"""
-        self.access_token = self.generate_auth_token(self.key, self.secret)
+        access_token = self.generate_auth_token(self.key, self.secret)
 
         meeting_time = datetime.datetime.now()  # type: datetime
         post_time_format = meeting_time.strftime('yyyy-MM-dd\'T\'HH:mm:ss%Z')

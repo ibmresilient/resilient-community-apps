@@ -5,14 +5,10 @@
 #
 #   100% coverage
 #
-from fn_qradar_enhanced_data.util import SearchWaitCommand
-import time
-from mock import Mock
 from mock import patch
-import mock
-
-
+import time
 from fn_qradar_enhanced_data.util.qradar_utils import ArielSearch
+import fn_qradar_enhanced_data.util.SearchWaitCommand as SearchWaitCommand
 
 @patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.get_search_result")
 @patch("fn_qradar_enhanced_data.util.qradar_utils.ArielSearch.check_status")

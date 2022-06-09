@@ -40,6 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1 | 04/2022 | Pinned `grpcio==1.44.0` and `grpcio-tools==1.44.0` |
 | 1.1.0 | 09/2021 | Add app host support; add configuration options for channel and function definition |
 | 1.0.0 | 04/2019 | Initial Release |
 

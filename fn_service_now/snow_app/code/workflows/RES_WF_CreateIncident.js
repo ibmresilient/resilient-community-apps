@@ -1,8 +1,8 @@
 (function RES_WF_CreateIncident(){
 	
-	var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit = null;
+	var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit, severityMapped = null;
 	
-	try{
+	try {
 		//Instantiate new ResilientHelper
 		resHelper = new ResilientHelper();
 		
@@ -20,19 +20,21 @@
 			"3": "Low"
 		};
 
+		severityMapped = resSeverityMap[record.getValue("severity").toString()];
+
 		//Initialize options
 		options = {
-			initSnNote: "Incident created in IBM Resilient",
+			initSnNote: "Incident created in IBM SOAR",
 			optionalFields: {
 				"description": record.getValue("description"),
-				"severity_code": resSeverityMap[record.getValue("severity").toString()]
+				"severity_code": severityMapped
 			}
 		};
 
 		// Call helper to create the Incident in Resilient
 		res = resHelper.create(record, snRecordId, caseName, options);
 
-		if (res){
+		if (res) {
 			// Create the initial RES Note
 			noteText = "<br>This " + res.res_reference_type + " has been sent from <b>ServiceNow</b>";
 			noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
@@ -54,8 +56,8 @@
 			}
 		}
 	}
-	catch (errMsg){
-		current.work_notes = "Failed to create an Incident in IBM Resilient.\nReason: " + errMsg;
+	catch (errMsg) {
+		current.work_notes = "Failed to create an Incident in IBM SOAR.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

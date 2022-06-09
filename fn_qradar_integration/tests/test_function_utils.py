@@ -7,7 +7,6 @@ from fn_qradar_integration.util import function_utils
 def test_query_string():
     """
     test the make_query_string function and verify that the substitution works fine
-    :return:
     """
     # One test with real data
     input_string = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES"
@@ -35,8 +34,7 @@ def test_query_string():
 
 def test_fix_dict():
     """
-
-    :return:
+    Test fix_dict_value function
     """
     input_dict = {"key1": 10,
                   "key2": "string",
