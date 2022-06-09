@@ -30,7 +30,17 @@ inputs.pbm_add_to_same_playbook = rule.properties.pbm_add_to_same_playbook if ru
 
 ### Post-Processing Script
 ```python
-None
+if not results.success:
+  incident.addNote("Playbook Maker failed: {} for playbook name prefix: {}".format(results.reason, rule.properties.pbm_name_prefix))
+else:
+  msg_list = []
+  for pbk in results.content:
+    msg = "{}: {}".format(pbk.get('playbook_name'), "Success" if pbk.get('success', False) else "Failure")
+    if pbk.get('success', False):
+      msg = "{} <a target='blank' href='#playbooks/designer/{}'>Playbook link</a>".format(msg, pbk.get('id'))
+    msg_list.append(msg)
+      
+  incident.addNote(helper.createRichText("Playbook Maker results:<br>{}".format("<br>".join(msg_list))))
 ```
 
 ---

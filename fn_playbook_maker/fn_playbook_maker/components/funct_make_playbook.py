@@ -10,6 +10,7 @@ import string
 import traceback
 import uuid
 from os import path
+from xml.dom import NotFoundErr
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields, global_jinja_env, make_payload_from_template
 from fn_playbook_maker.lib.soar_common import SOARCommon
@@ -57,35 +58,60 @@ class FunctionComponent(AppFunctionComponent):
         elif inputs.get("pbm_function_names"):
             for function in inputs.get("pbm_function_names").split(","):
                 funct = soar_common.get_function_info(function.strip())
-                function_input_list.append(funct)
+                if funct:
+                    function_input_list.append(funct)
+                else:
+                    results = FunctionResult({}, success=False,
+                                             reason="Function not found: {}".format(function))
+                    break
 
         else:
             results = FunctionResult({}, success=False,
-                                    reason="either pbm_app_name or pbm_function_names required")
+                                     reason="Either pbm_app_name or pbm_function_names required")
 
         if not results and function_input_list:
             self.LOG.debug(function_input_list)
 
+            result_list = []
             if inputs.get('pbm_add_to_same_playbook'):
-                playbook_payload = self.make_playbook_info(inputs, function_input_list)
-                # build the preprocessor script and XML data
-                for funct_info in playbook_payload['functions']:
-                    playbook_payload['current_function'] = funct_info
-                    # get fields for preprocessing script
-                    funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
+                try:
+                    playbook_payload = self.make_playbook_info(inputs, function_input_list)
+                    # build the preprocessor script and XML data
+                    for funct_info in playbook_payload['functions']:
+                        playbook_payload['current_function'] = funct_info
+                        # get fields for preprocessing script
+                        funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
 
-                # build the xml compoment for the playbook (all functions)
-                playbook_json = {
-                    'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
-                }
-                export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
+                    # build the xml compoment for the playbook (all functions)
+                    playbook_json = {
+                        'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
+                    }
+                    export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
 
-                # add in the playbook xml content
-                export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
+                    # add in the playbook xml content
+                    export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
 
-                self.LOG.debug(export_res)
-                # import the export_res file
-                soar_common.import_res(export_res)
+                    self.LOG.debug(export_res)
+                    # import the export_res file
+                    result_bool = soar_common.import_res(export_res)
+
+                    # get the playbook id
+                    playbook_id = None
+                    if result_bool:
+                        playbook_id = self.get_playbook_id(soar_common, playbook_payload)
+
+                except Exception as err:
+                    self.LOG.error(str(err))
+                    self.LOG.debug(traceback.format_exc())
+                    export_res = {}
+                    result_bool = False
+                    playbook_id: None
+
+                result_list.append({
+                    "playbook_name": playbook_payload.get('playbook_info', {}).get('playbook_name'),
+                    "success": result_bool,
+                    "id": playbook_id
+                })
             else:
                 for funct_info in function_input_list:
                     try:
@@ -107,17 +133,40 @@ class FunctionComponent(AppFunctionComponent):
 
                         self.LOG.debug(export_res)
                         # import the export_res file
-                        soar_common.import_res(export_res)
+                        result_bool = soar_common.import_res(export_res)
+
+                        # get the playbook id
+                        playbook_id = None
+                        if result_bool:
+                            playbook_id = self.get_playbook_id(soar_common, playbook_payload)
                     except Exception as err:
                         self.LOG.error(str(err))
                         self.LOG.debug(traceback.format_exc())
                         export_res = {}
+                        result_bool = False
+                        playbook_id = None
 
-            results = FunctionResult(export_res)
+                    result_list.append({
+                        "playbook_name": playbook_payload.get('playbook_info', {}).get('playbook_name'),
+                        "success": result_bool,
+                        "id": playbook_id
+                    })
+
+            results = FunctionResult(result_list)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield results
+
+    def get_playbook_id(self, soar_common, playbook_payload):
+        try:
+            playbook_info = soar_common.get_playbook_by_api_name(playbook_payload.get('playbook_info', {}).get('playbook_name_api_name'))
+            if playbook_info:
+                return playbook_info.get('id')
+        except Exception:
+            pass
+
+        return None
 
     def make_playbook_info(self, inputs, funct_info_list):
         playbook_info = {

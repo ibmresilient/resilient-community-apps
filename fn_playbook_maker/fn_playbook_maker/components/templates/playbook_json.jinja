@@ -49,7 +49,7 @@
                             "rich_text" : {{ field.rich_text | json }},
                             "tags" : [ ],
                             "templates" : [ ],
-                            "text" : "{{ field.text }}",
+                            "text" : "{{ field.text | replace('_', ' ') | title }}",
                             "tooltip" : "{{ field.tooltip }}",
                             "type_id" : 7309,
                             {% set uuid_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}

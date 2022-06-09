@@ -14,6 +14,7 @@ APPS_URI = "/apps/"
 FUNCTIONS_URI = "/functions/"
 TYPES_URI = "/types/"
 IMPORTS_URI = "/configurations/imports"
+PLAYBOOKS_URI = "/playbooks/"
 
 class SOARCommon():
     """ common methods for accessing IBM SOAR apps and functions, etc. """
@@ -31,6 +32,10 @@ class SOARCommon():
             return True
         else:
             return False
+
+    def get_playbook_by_api_name(self, playbook_api_name):
+        url = urljoin(PLAYBOOKS_URI, playbook_api_name)
+        return self.rest_client.get(url)
 
     def get_function_info_by_app(self, app_name):
         app = self._get_app(app_name)
@@ -65,7 +70,7 @@ class SOARCommon():
     def get_function_info(self, function_name):
         function_info = self._get_function(function_name)
 
-        result = {}
+        result = None
         if function_info:
             # get all the fields for this function. This list does not contain api_names
             field_uuids = [field['content'] for field in function_info['view_items'] if field['field_type'] == '__function']
