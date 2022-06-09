@@ -533,7 +533,7 @@ class RxClient():
                 "text": r_text
             }
 
-        if response.status_code in [409, 422]:
+        if response.status_code in [409, 422, 500]:
             return response
 
         response.raise_for_status()

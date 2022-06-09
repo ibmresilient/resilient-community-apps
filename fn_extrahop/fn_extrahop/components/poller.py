@@ -249,7 +249,10 @@ class PollerComponent(ResilientComponent):
 
                         soar_link_markdown = "[SOAR Case - {}]({})".format(soar_case_id, soar_link)
 
-                        self.app_common.create_note(entity_id, soar_link_markdown)
+                        _create_note = self.app_common.create_note(entity_id, soar_link_markdown)
+                        if isinstance(_create_note, dict) and _create_note.get("error_code"):
+                            LOG.error("Create ExtraHop note failed, error code: %s, error:  %s.",
+                                      _create_note.get("error_code"), _create_note.get("text"))
                 else:
                     soar_case_id = soar_case['id']
 

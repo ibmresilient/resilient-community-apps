@@ -91,7 +91,17 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    if not CONTENT:
+    if CONTENT:
+        if CONTENT.get("result"):
+            result = CONTENT.result
+            if result.get("note"):
+                workflow.addProperty("get_note_ok", {})
+        elif CONTENT.get("error"):
+            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Get detection note failed for " \
+                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(CONTENT.get("error"), CONTENT.get("text"))
+    else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
             .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
@@ -110,7 +120,7 @@ main()
 `funct_extrahop_rx_add_detection_note`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_extrahop`
@@ -146,7 +156,6 @@ def make_summary_note():
 # Processing
 def main():
     detection_note = get_current_note()
-
     inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", make_summary_note()])
     inputs.extrahop_update_time = 0
 main()
@@ -165,27 +174,31 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    tag = INPUTS.get("extrahop_tag_name")
+    detection_id = INPUTS["extrahop_detection_id"]
     if CONTENT:
         result = CONTENT.result
         if result == "success":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully added closure resolution note to " \
-                        u"ExtraHop detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-
+                        u"ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        elif result.get("error"):
+            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection  with unexpected response for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add closure resolution note to ExtraHop detection for SOAR function <b>{1}</b> with parameters" \
-                     u" <b>{2}</b> ."\
-            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     u"to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
+                     u" <b>{3}</b> ."\
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

@@ -43,7 +43,19 @@ class FunctionComponent(AppFunctionComponent):
         response = rx_cli.get_detection_note(**params)
 
         # Response can be a list, returned result needs to be a dict
-        results = {"result": response.json()}
+        if response.status_code in [422, 500]:
+            error_code = response.status_code
+            if response.status_code == 422:
+                text = response.json()["detail"]
+            else:
+                text = response.reason
+
+            results = {
+                "error": error_code,
+                "text": text
+            }
+        else:
+            results = {"result": response.json()}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
