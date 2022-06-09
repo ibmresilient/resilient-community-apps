@@ -34,7 +34,7 @@
 #fn_grpc_interface
 #fn_hibp
 #fn_html2pdf
-##fn_icdx-skipping-tests
+fn_icdx
 #fn_incident_utils
 #fn_ioc_parser_v2
 #fn_ipinfo
@@ -104,7 +104,7 @@
 #fn_whois_rdap
 #fn_wiki
 #fn_xforce
-fn_yeti
+#fn_yeti
 #fn_zia
 
 #Not_Rebuilt
