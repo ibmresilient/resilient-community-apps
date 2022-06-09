@@ -19,8 +19,8 @@ def snake_to_camel(word):
 
 setup(
     name='fn_qradar_integration',
-    display_name="IBM QRadar SOAR Compnents for 'fn_qradar_integration'",
-    version='2.2.0',
+    display_name="QRadar Integration",
+    version='2.2.1',
     license='MIT License',
     author='IBM SOAR',
     author_email='support@resilientsystems.com',

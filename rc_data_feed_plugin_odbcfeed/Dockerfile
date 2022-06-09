@@ -90,6 +90,10 @@ ENV APP_LOG_DIR /var/log/rescircuits
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 # RUN mkdir /opt/rescircuits
 COPY entrypoint.sh /opt/rescircuits/entrypoint.sh
+
+# remove temporary files
+RUN rm -rf /tmp/packages /tmp/lib
+
 # arbitrary user, support running as non-root.  Required on OpenShift.
 # Generally a good practice.
 USER 1001

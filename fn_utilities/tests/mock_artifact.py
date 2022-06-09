@@ -2,26 +2,24 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import io
-import os
-import base64
-import requests_mock
+from os.path import dirname, join
+from base64 import b64encode
+from requests_mock import create_response
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-
 
 class ArtifactMock(BasicResilientMock):
 
     @staticmethod
     def test_data(filename):
         """Read a test data file"""
-        template_file_path = os.path.join(os.path.dirname(__file__), "data", filename)
-        with io.open(template_file_path, 'rb') as template_file:
+        template_file_path = join(dirname(__file__), "data", filename)
+        with open(template_file_path, 'rb') as template_file:
             return template_file.read()
 
     @staticmethod
     def test_data_b64(filename):
         """Read a test data file, return its contents as base64"""
-        return base64.b64encode(ArtifactMock.test_data(filename))
+        return b64encode(ArtifactMock.test_data(filename))
 
     email_artifacts = {
         "1": {
@@ -53,6 +51,20 @@ class ArtifactMock(BasicResilientMock):
             "value": "ssl_certs/ssl_expired.cert",
             "type": "X509 Certificate File",
             "id": 7
+        },
+        "8": {
+            "description": None,
+            "value": "email_sample_1.eml",
+            "type": "RFC 822 Email Message File",
+            "id": 8,
+            "attachment": {
+                "type": "artifact",
+                "id": 16,
+                "name": "email_sample_1.eml",
+                "created": 1519264285530,
+                "content_type": "text/plain",
+                "size": 984,
+            }
         }
     }
 
@@ -60,9 +72,7 @@ class ArtifactMock(BasicResilientMock):
     def artifacts_get(self, request):
         """ GET the list of artifacts """
         data = [value for id, value in self.artifacts.items()]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts$")
     def artifacts_post(self, request):
@@ -75,10 +85,7 @@ class ArtifactMock(BasicResilientMock):
                 "description": None
             }
         ]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
-
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts/files$")
     def artifacts_files_post(self, request):
@@ -91,9 +98,7 @@ class ArtifactMock(BasicResilientMock):
                 "description": None
             }
         ]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/types/artifact/fields/type$")
     def artifacts_type_get(self, request):
@@ -115,25 +120,18 @@ class ArtifactMock(BasicResilientMock):
                     }
             ]
         }
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/artifacts/[0-9]+$")
     def artifacts_one_get(self, request):
         """ GET an artifact """
         artifact_id = request.url.split("/")[-1]
         data = self.email_artifacts[artifact_id]
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=data)
+        return create_response(request, status_code=200, json=data)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/artifacts/[0-9]+/contents$")
     def artifacts_contents_get(self, request):
         """ GET the file contents of an artifact """
         artifact_id = request.url.split("/")[-2]
         data = self.test_data(self.email_artifacts[artifact_id]["value"])
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             content=data)
-
+        return create_response(request, status_code=200, content=data)

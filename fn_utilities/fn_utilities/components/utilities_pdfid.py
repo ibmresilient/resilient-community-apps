@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -14,7 +14,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'pdfid"""
+    """Component that implements SOAR function 'pdfid"""
 
     @function("utilities_pdfid")
     def _pdfid_function(self, event, *args, **kwargs):

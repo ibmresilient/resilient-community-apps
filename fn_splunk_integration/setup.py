@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_splunk_integration',
     display_name='Splunk Integration for SOAR',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT License',
     author='IBM SOAR',
     description="Add, Search and Delete artifacts to Splunk ES",
@@ -17,7 +17,7 @@ setup(
         'resilient_lib',
         'splunk-sdk'
     ],
-    python_requires='>=3',
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

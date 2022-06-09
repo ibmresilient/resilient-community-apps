@@ -8,6 +8,7 @@
 #
 from time import time, sleep
 import logging
+
 LOG = logging.getLogger(__name__)
 
 class SearchTimeout(Exception):
@@ -96,10 +97,12 @@ class SearchWaitCommand(object):
 
                 if not done:
                     # time_out is default to 10 minutes. If customer overrides it to 0, it
-                    # will never timeout
-                    if self.search_timeout != 0:
-                        if time() - start_time > self.search_timeout:
-                            raise SearchTimeout(search_id, status)
+                    #   will never timeout
+                    if self.search_timeout != 0 and time() - start_time > self.search_timeout:
+                        # delete the query
+                        LOG.error("Canceling QRadar query due to timeout: %s", query)
+                        self.delete_search(search_id)
+                        raise SearchTimeout(search_id, status)
                     # polling_interval is defaulted to 5 sec
                     sleep(self.polling_period)
         else:
@@ -109,3 +112,11 @@ class SearchWaitCommand(object):
         result = self.get_search_result(search_id)
 
         return result
+
+    def delete_search(self, search_id):
+        """
+        Deletes an AQL search in case of timeout or error
+        Args:
+           search_id (str): id referencing the running query
+        """
+        raise NotImplementedError()

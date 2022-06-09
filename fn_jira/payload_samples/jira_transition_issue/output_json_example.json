@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": "Done",
+  "raw": "\"Done\"",
+  "inputs": {
+    "jira_issue_id": "HYD-8",
+    "jira_transition_id": "Ready for Development",
+    "jira_fields": "{  }",
+    "jira_comment": "Closed in IBM SOAR\n\nResolution: Resolved\n<div class=\"rte\"><div>Resolved</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-jira",
+    "package_version": "2.1.0",
+    "host": "myhost",
+    "execution_time_ms": 23377,
+    "timestamp": "2022-03-21 11:44:57"
+  }
+}
