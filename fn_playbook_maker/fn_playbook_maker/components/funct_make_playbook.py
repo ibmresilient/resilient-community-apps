@@ -73,45 +73,24 @@ class FunctionComponent(AppFunctionComponent):
 
             result_list = []
             if inputs.get('pbm_add_to_same_playbook'):
-                result_list.append(self.make_playbook(inputs, function_input_list))
+                playbook_payload, export_res, err_msg = make_export_res(inputs, function_input_list)
+                if err_msg:
+                    self.LOG.error(err_msg)
+                else:
+                    result_list.append(self.import_playbook(playbook_payload, export_res))
             else:
                 for funct_info in function_input_list:
-                    result_list.append(self.make_playbook(inputs, [funct_info]))
+                    playbook_payload, export_res, err_msg = make_export_res(inputs, [funct_info])
+                    if err_msg:
+                        self.LOG.error(err_msg)
+                    else:
+                        result_list.append(self.import_playbook(playbook_payload, export_res))
 
             results = FunctionResult(result_list)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield results
-
-    def make_playbook(self, inputs, function_input_list):
-        try:
-            playbook_payload = make_playbook_info(inputs, function_input_list)
-            # build the preprocessor script and XML data
-            for funct_info in playbook_payload['functions']:
-                playbook_payload['current_function'] = funct_info
-                # get fields for preprocessing script
-                funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
-
-            # build the xml compoment for the playbook (all functions)
-            playbook_json = {
-                'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
-            }
-            export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
-
-            # add in the playbook xml content
-            export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
-
-            return self.import_playbook(playbook_payload, export_res)
-
-        except Exception as err:
-            self.LOG.error(str(err))
-            self.LOG.debug(traceback.format_exc())
-            return {
-                    "playbook_name": playbook_payload.get('playbook_info', {}).get('playbook_name'),
-                    "success": False,
-                    "id": None
-                }
 
     def import_playbook(self, playbook_payload, export_res):
         self.LOG.debug(export_res)
@@ -145,6 +124,7 @@ class FunctionComponent(AppFunctionComponent):
 
         return None
 
+
 def make_playbook_info(inputs, funct_info_list):
     playbook_info = {
 
@@ -171,6 +151,28 @@ def make_playbook_info(inputs, funct_info_list):
         funct["script_uuid"] = make_uuid(None)
 
     return playbook_payload
+
+def make_export_res(inputs, function_input_list):
+    try:
+        playbook_payload = make_playbook_info(inputs, function_input_list)
+        # build the preprocessor script and XML data
+        for funct_info in playbook_payload['functions']:
+            playbook_payload['current_function'] = funct_info
+            # get fields for preprocessing script
+            funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
+
+        # build the xml compoment for the playbook (all functions)
+        playbook_json = {
+            'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
+        }
+        export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
+
+        # add in the playbook xml content
+        export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
+        return playbook_payload, export_res, None
+
+    except Exception as err:
+        return None, None, "{}\n{}".format(str(err), traceback.format_exc())
 
 def init_jinja():
     jinja_env = global_jinja_env()

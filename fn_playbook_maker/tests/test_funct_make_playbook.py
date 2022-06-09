@@ -3,6 +3,7 @@
 
 import pytest
 import time
+from fn_playbook_maker.components.funct_make_playbook import make_playbook_info
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -48,6 +49,32 @@ class TestMakePlaybook:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    def test_make_payload_info(self):
+        inputs = {
+            'pbm_playbook_name': 'test name',
+            'pbm_app_name': None,
+            'pbm_activation_type': 'Manual',
+            'pbm_playbook_type': 'incident',
+            'pbm_function_names': 'funct_1',
+            'pdm_activation_fields': True,
+            'pbm_add_to_same_playbook': None
+        }
+        function_info = {"function_name": 'funct_1'}
+        payload_info = make_playbook_info(inputs, [function_info])
+
+        assert(payload_info.get('inputs'))
+        assert(payload_info.get('playbook_info'))
+        assert(payload_info.get('functions'))
+
+        assert(payload_info['inputs'].get('pbm_playbook_name') == inputs['pbm_playbook_name'])
+
+        assert(payload_info['functions'][0].get('function_name') == function_info['function_name'])
+        assert(payload_info['functions'][0].get('script_uuid'))
+
+        assert(payload_info['playbook_info'].get('playbook_name').startswith(inputs['pbm_playbook_name']))
+        assert(payload_info['playbook_info'].get('playbook_name_api_name') and ' ' not in payload_info['playbook_info'].get('playbook_name_api_name'))
+        assert(str(payload_info['playbook_info'].get('uuid_uuid')) in payload_info['playbook_info'].get('playbook_display_name'))
+
     mock_inputs_1 = {
         "pbm_app_name": "fn_scheduler",
         "pbm_function_names": None,
@@ -70,6 +97,7 @@ class TestMakePlaybook:
 
     expected_results_2 = {"value": "xyz"}
 
+    @pytest.mark.skip
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_2, expected_results_2)
     ])
