@@ -57,7 +57,7 @@ class RxClient():
             "detections":        "/".join([self.api_base_url, "detections"]),
             "search_detections": "/".join([self.api_base_url, "detections/search"]),
             "detection_note":    "/".join([self.api_base_url, "detections/{}/notes"]),
-            "tags":              "/".join([self.api_base_url, "tags"]),
+            "tags":              "/".join([self.api_base_url, "tags/{}"]),
             "create_tag":        "/".join([self.api_base_url, "tags"]),
             "assign_tag":        "/".join([self.api_base_url, "tags/{}/devices"]),
             "watchlist":         "/".join([self.api_base_url, "watchlist/devices"]),
@@ -292,7 +292,7 @@ class RxClient():
 
         return r
 
-    def get_detection_note(self, detection_id=None, note=None, update_time=None):
+    def get_detection_note(self, detection_id=None):
         """Get the note from a detection.
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
@@ -356,7 +356,7 @@ class RxClient():
         if tag_name is None:
             raise ValueError("Missing 'tag_name' parameter")
 
-        uri = self._endpoints["create_tag"].format(tag_name)
+        uri = self._endpoints["create_tag"]
 
         data = {"name": tag_name}
 
@@ -533,7 +533,7 @@ class RxClient():
                 "text": r_text
             }
 
-        if response.status_code in [409, 422]:
+        if response.status_code in [409, 422, 500]:
             return response
 
         response.raise_for_status()

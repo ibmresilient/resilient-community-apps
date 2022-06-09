@@ -48,6 +48,17 @@ class FunctionComponent(AppFunctionComponent):
         if response.status_code == 200:
             # Action succeeded with empty response message
             result = "success"
+        elif response.status_code in [422, 500]:
+            error_code = response.status_code
+            if response.status_code == 422:
+                text = response.json()["detail"]
+            else:
+                text = response.reason
+
+            result =  {
+                "error": error_code,
+                "text": text
+            }
         else:
             result = "failed"
             success = False

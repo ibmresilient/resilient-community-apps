@@ -89,19 +89,22 @@ class AppCommon():
         """
         return urljoin(self.get_console_url(), linkback_url.format(entity_id))
 
-    def filter_by_property(self, result, prop, filters):
+    def filter_by_property(self, result, prop, polling_filters):
         """Filter result based on a a property list .
            Used for filters not fully supported inb api or don't support a property lists
 
         Args:
             prop (string): Property to filer by.
-            filters (list): List of values to filter by.
+            polling_filters (list): List of values to filter by.
             result (dict): Result returned from ExtraHop
 
         Returns:
             filtered_result: Result filtered by risk score threshold
         """
-        filtered_result = [r for r in result if any(i in r[prop] for i in filters)]
+        if not isinstance(polling_filters, list):
+            LOG.error("The polling result filter '%s' which should be a list, has value '%s'.",
+                      "polling_filters", polling_filters)
+        filtered_result = [r for r in result if any(i in r[prop] for i in polling_filters)]
         LOG.info("Original List: %s. Filtered List: %s", len(result), len(filtered_result))
 
         return filtered_result
@@ -151,13 +154,40 @@ class AppCommon():
         existing_note = None
 
         res_get_note = self.rx_cli.get_detection_note(detection_id=detection_id)
+        # Check for errors
+        if res_get_note.status_code in [422, 500]:
+            error_code = res_get_note.status_code
+            if res_get_note.status_code == 422:
+                text = res_get_note.json()["detail"]
+            else:
+                text = res_get_note.reason
+
+            return {
+                "error_code": error_code,
+                "text": text
+            }
         # Get the existing note so we can append the new content
-        if res_get_note:
+        if res_get_note.ok:
             existing_note = res_get_note.json()["note"]
 
         notes = make_comment(existing_note, note, header=header)
 
-        self.rx_cli.add_detection_note(detection_id=detection_id, note=notes)
+        create_note =  self.rx_cli.add_detection_note(detection_id=detection_id, note=notes)
+
+        # Check for errors
+        if create_note.status_code in [422, 500]:
+            error_code = create_note.status_code
+            if create_note.status_code == 422:
+                text = create_note.json()["detail"]
+            else:
+                text = create_note.reason
+
+            return {
+                "error_code": error_code,
+                "text": text
+            }
+
+        return create_note
 
     def link_case_to_ticketid(self, detection_id, case_id):
         """ Update the Ticket ID of ExtraHop detection to the SOAR case ID.

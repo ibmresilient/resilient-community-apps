@@ -134,6 +134,8 @@ def main():
                 else:
                     if f1 == "type":
                         newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
+                    elif f1 == "ticket_url":
+                        newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
                     else:
                         newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
