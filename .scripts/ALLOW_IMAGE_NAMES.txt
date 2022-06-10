@@ -25,7 +25,7 @@ fn_aws_guardduty
 #fn_datatable_utils
 #fn_elasticsearch
 #fn_email_header_validation
-##fn_exchange-skipping-tests-next
+#fn_exchange-INT-4878
 #fn_exchange_online
 #fn_geocoding
 ##fn_google_cloud_dlp-INT-4876
