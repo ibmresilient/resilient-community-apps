@@ -2,13 +2,15 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty poller class. """
+import sys
 from threading import Thread
 
-from mock import patch, MagicMock
-import pytest
-from pytest_resilient_circuits.mocks import BasicResilientMock
-from fn_aws_guardduty.lib.aws_gd_poller import *
 import fn_aws_guardduty.util.config as config
+import pytest
+from fn_aws_guardduty.lib.aws_gd_poller import *
+from mock import MagicMock, patch
+from pytest_resilient_circuits.mocks import BasicResilientMock
+
 from .mock_artifacts import *
 
 LOG = logging.getLogger(__name__)
@@ -48,10 +50,21 @@ class TestAwsGdPoller:
         thread.start()
         config.STOP_THREAD = False
         time.sleep(1)
-        assert thread.isAlive()
+
+        if sys.version_info >= (3, 9):
+            assert thread.is_alive()
+
+        else:
+            assert thread.isAlive()
+
         config.STOP_THREAD = True
         time.sleep(1)
-        assert not thread.isAlive()
+        
+        if sys.version_info >= (3, 9):
+            assert not thread.is_alive()
+
+        else:
+            assert not thread.isAlive()
 
     @pytest.mark.parametrize("aws_gd_severity_threshold, aws_gd_lookback_interval, last_update, expected_results", [
         (None, None, None, {'Criterion': {'service.archived': {'Eq': ['false']}}}),
