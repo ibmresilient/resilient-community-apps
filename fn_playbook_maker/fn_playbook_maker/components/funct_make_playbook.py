@@ -6,6 +6,7 @@
 
 import hashlib
 import random
+import re
 import string
 import traceback
 import uuid
@@ -13,6 +14,8 @@ from os import path
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import global_jinja_env, make_payload_from_template
 from fn_playbook_maker.lib.soar_common import SOARCommon
+
+REMOVE_SPECIAL = re.compile(r'(?:[^a-zA-Z0-9_])', re.IGNORECASE)
 
 PACKAGE_NAME = "fn_playbook_maker"
 FN_NAME = "make_playbook"
@@ -133,12 +136,14 @@ def make_playbook_info(inputs, funct_info_list):
         "functions": funct_info_list,
         "playbook_info": playbook_info
     }
+
+    clean_playbook_name = inputs.get('pbm_playbook_name').replace('"', '\\"')
     # generate the playbook xml uuids used throughout
     if inputs.get('pbm_add_to_same_playbook'):
-        playbook_info["playbook_name"] = inputs.get('pbm_playbook_name')
+        playbook_info["playbook_name"] = clean_playbook_name
     else:
-        playbook_info["playbook_name"] = "{} for {}".format(inputs.get('pbm_playbook_name'), funct_info_list[0]["function_name"])
-    playbook_info["playbook_name_api_name"] = playbook_info["playbook_name"].replace(" ", "_").replace("-", "_")
+        playbook_info["playbook_name"] = "{} for {}".format(clean_playbook_name, funct_info_list[0]["function_name"])
+    playbook_info["playbook_name_api_name"] = REMOVE_SPECIAL.sub('', inputs.get('pbm_playbook_name').replace(' ', '_').lower())
 
     # function based uuid's
     playbook_info['uuid_uuid'] = make_uuid(None)

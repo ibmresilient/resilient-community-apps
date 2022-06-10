@@ -49,8 +49,8 @@
                             "rich_text" : {{ field.rich_text | json }},
                             "tags" : [ ],
                             "templates" : [ ],
-                            "text" : "{{ field.text | replace('_', ' ') | title }}",
-                            "tooltip" : "{{ field.tooltip }}",
+                            "text" : "{{ field.text | replace('"', '\\"') | replace('_', ' ') | title }}",
+                            "tooltip" : "{{ field.tooltip | replace('"', '\\"') }}",
                             "type_id" : 7309,
                             {% set uuid_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
                             "uuid" : "{{ uuid_field | make_uuid }}",

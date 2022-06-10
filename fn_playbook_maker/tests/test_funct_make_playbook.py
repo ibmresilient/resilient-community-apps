@@ -46,7 +46,7 @@ test_inputs_function_info = [
 ]
 
 test_inputs_multiple_functions = {
-            'pbm_playbook_name': 'test name',
+            'pbm_playbook_name': 'test name with quote \"',
             'pbm_app_name': None,
             'pbm_activation_type': 'Manual',
             'pbm_playbook_type': 'incident',
@@ -63,8 +63,8 @@ test_inputs_multiple_functions_function_info = [
                 "name": "input_field",
                 "input_type": "text",
                 "required": True,
-                "text": "Input Field",
-                "tooltip": "some tip",
+                "text": "Input Field quote \"",
+                "tooltip": "some tip with quote \"",
                 "rich_text": False,
                 "values": []
             }
