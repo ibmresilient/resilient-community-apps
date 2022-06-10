@@ -151,12 +151,12 @@ class exchange_utils:
         # filter by date
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            tz = EWSTimeZone.timezone('Etc/GMT')
+            tz = EWSTimeZone('Etc/GMT')
             start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            tz = EWSTimeZone.timezone('Etc/GMT')
+            tz = EWSTimeZone('Etc/GMT')
             end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
@@ -199,7 +199,7 @@ class exchange_utils:
         if optional_attendees:
             optional_attendees = [oa.strip() for oa in optional_attendees.split(',')]
 
-        tz = EWSTimeZone.timezone('Etc/GMT')
+        tz = EWSTimeZone('Etc/GMT')
 
         meeting = CalendarItem(
             account=account,

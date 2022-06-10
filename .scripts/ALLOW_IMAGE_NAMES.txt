@@ -7,7 +7,7 @@
 #fn_ansible
 #fn_ansible_tower
 #fn_api_void
-fn_aws_guardduty
+#fn_aws_guardduty
 #fn_aws_iam
 #fn_aws_utilities
 #fn_bigfix
@@ -25,7 +25,7 @@ fn_aws_guardduty
 #fn_datatable_utils
 #fn_elasticsearch
 #fn_email_header_validation
-##fn_exchange-skipping-tests-next
+fn_exchange
 #fn_exchange_online
 #fn_geocoding
 ##fn_google_cloud_dlp-INT-4876

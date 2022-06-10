@@ -14,7 +14,7 @@ from fn_exchange.util.exchange_utils import exchange_utils, FolderError
 from exchangelib.folders import RootOfHierarchy
 
 DELEGATE = 'delegate'
-TEST_TZ = EWSTimeZone.timezone('Etc/GMT')
+TEST_TZ = EWSTimeZone('Etc/GMT')
 # Function opts
 MOCK_OPTS = {
     'verify_cert': 'false',
