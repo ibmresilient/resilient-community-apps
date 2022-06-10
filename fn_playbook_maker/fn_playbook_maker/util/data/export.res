@@ -1082,10 +1082,10 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7899,
-    "major": 45,
+    "build_number": 0,
+    "major": 43,
     "minor": 0,
-    "version": "45.0.7899"
+    "version": "43.0.0"
   },
   "tags": [],
   "task_order": [],
