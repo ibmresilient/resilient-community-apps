@@ -32,7 +32,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Poller - ExtraHop: Escalate Detections](#poller---extrahop-revealx-escalate-detections)
+- [Poller - ExtraHop Escalate Detections](#poller---extrahop-escalate-detections)
 - [Function - Extrahop Reveal(x) add detection note](#function---extrahop-revealx-add-detection-note)
 - [Function - Extrahop Reveal(x) assign tag](#function---extrahop-revealx-assign-tag)
 - [Function - Extrahop Reveal(x) create tag](#function---extrahop-revealx-create-tag)
@@ -47,9 +47,9 @@
 - [Function - Extrahop Reveal(x) search packets](#function---extrahop-revealx-search-packets)
 - [Function - Extrahop Reveal(x) update detection](#function---extrahop-revealx-update-detection)
 - [Function - Extrahop Reveal(x) update watchlist](#function---extrahop-revealx-update-watchlist)
-- [Script - scr_extrahop_detection_property_helper](#script---scr_extrahop_detection_property_helper)
-- [Script - scr_extrahop_device_property_helper](#script---scr_extrahop_device_property_helper)
-- [Script - scr_extrahop_rx_add_artifact_from_device](#script---scr_extrahop_rx_add_artifact_from_device)
+- [Script - ExtraHop script: add artifact from device](#script---extrahop-script-add-artifact-from-device)
+- [Script - ExtraHop script: detection property helper](#script---extrahop-script-detection-property-helper)
+- [Script - ExtraHop script: device property helper](#script---extrahop-script-device-property-helper)
 - [Data Table - ExtraHop Activitymaps](#data-table---extrahop-activitymaps)
 - [Data Table - Extrahop Detections](#data-table---extrahop-detections)
 - [Data Table - ExtraHop Devices](#data-table---extrahop-devices)
@@ -96,12 +96,13 @@ The ExtraHop App provides the following functionality:
 * Functions to get, create and assign tags.
 * Functions get and set the watchlist.
 * A function to get activitymaps.
+
 ---
 
 ## Requirements
 <!--
   List any Requirements 
--
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -120,7 +121,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | incident | create |
+  | incident | Create |
   | all_incidents | Read |
   | all_incidents_fields | Edit |
   | layouts | Read, Edit|
@@ -160,13 +161,25 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| ExtraHop RevealX 360 | https://ibm-partner.api.cloud.extrahop.com or https://<sensor_hostname_or_ip> |  | v1 |
+| ExtraHop RevealX 360 | 8.8.31785 | https://ibm-partner.api.cloud.extrahop.com or https://<sensor_hostname_or_ip> | v1 |
 
 #### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* The app user must have a user account on the ExtraHop system with REST API access enabled.
+* An ExtraHop discover appliance/sensor must be deployed in the users environment.
+* The app user must have a user account on the ExtraHop standalone discover appliance or Cloud Services instance with REST API access enabled.
+* If the user wants to use the `Function - Extrahop Reveal(x) search packets` function a trace appliance must be deployed in the users environment.
+* ExtraHop detection tracking enables a user to connect ExtraHop detections back to SOAR incidents.
+
+For deployments see: [ExtraHop Deployment](https://docs.extrahop.com/current/deploy/#revealx-systems)
+
+For ticket tracking See: [Ticket Tracking](https://docs.extrahop.com/current/detections-configure-ticket-tracking/)
+
+**_NOTE:_** If the user environment is in AWS, a Reveal(x) Ultra sensor can be deployed which is a combination of a discover appliance and a trace appliance.
+
+**_NOTE:_** If detection tracking is enabled on ExtraHop the app functions to get and add detection notes will not complete.
+
 
 #### Configuration
 <!--
@@ -235,48 +248,50 @@ Create a new ExtraHop incident tab in Layouts as follows:
   
  The following screenshot shows the ExtraHop properties and data tables added to the ExtraHop tab:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
 
-## Poller - ExtraHop: Escalate Detections
+## Poller - ExtraHop Escalate Detections
 The ExtraHop integration poller starts querying ExtraHop for detections as soon as the app begins running.
 
 The poller provides the following functionality.
 
 * For any new detections discovered, creates a  matching incident in the SOAR platform.
-* Enhances the incidents by adding artifacts and data tables.
+* The workflow `Example: Extrahop Reveal(x) update incident` is triggered by an automatic rule.
+* Enhances the incidents by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
 * Can be configured to filter the detections which are escalated to the SOAR incidents.  
 * Closes SOAR incidents if the corresponding ExtraHop detections are closed.
-* Closes ExtraHop detections if the corresponding Resilient incidents are closed.
+* Closes ExtraHop detections if the corresponding SOAR incidents are closed.
 * Updates  a notification property in the ExtraHop custom tab if information for a SOAR incident if the corresponding ExtraHop detection is updated.
-* Add a note to an ExtraHop deteion when a matching SOAR incident is created.
-
-The following screenshot shows examples of Resilient incidents created by the poller from ExtraHop detections:
+* Add a note to an ExtraHop detection when a matching SOAR incident is created.
+* The workflow Example: Extrahop Reveal(x) update incident will be triggered by an automation rule  
+The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 
   ![screenshot: fn-extrahop-revealx-incidents](./doc/screenshots/fn-extrahop-revealx-incidents.png)
     
-The following screenshot shows an example of a Resilient incident Details tab created by the poller:
+The following screenshot shows an example of a SOAR incident Details tab created by the poller:
 
   ![screenshot: fn-extrahop-revealx-incident-details](./doc/screenshots/fn-extrahop-revealx-incident-details.png)
   
-The following screenshot shows an example of custom properties in the ExtraHop tab of a Resilient incident created by the poller:
+The following screenshot shows an example of custom properties in the ExtraHop tab of a SOAR incident created by the poller:
 
    ![screenshot: fn-extrahop-revealx-incident-properties](./doc/screenshots/fn-extrahop-revealx-incident-properties.png)
 
-The following screenshot shows an example of an ExtraHop detection update notification in the ExtraHop tab of a Resilient incident created by the poller:
+The following screenshot shows an example of an ExtraHop detection update notification in the ExtraHop tab of a SOAR incident created by the poller:
 
    ![screenshot: fn-extrahop-revealx-incident-notification](./doc/screenshots/fn-extrahop-revealx-incident-notification.png)
 
-The following screenshot shows examples of artifacts added to a Resilient incident created by the poller:
+The following screenshot shows examples of artifacts added to a SOAR incident created by the poller:
 
    ![screenshot: fn-extrahop-revealx-incident-artifacts](./doc/screenshots/fn-extrahop-revealx-incident-artifacts.png)
 
-The following screenshot shows an example of a note added to a Resilient incident created by the poller:
+The following screenshot shows an example of a note added to a SOAR incident created by the poller:
 
    ![screenshot: fn-extrahop-revealx-incident-note](./doc/screenshots/fn-extrahop-revealx-incident-note.png)
 
-Note: See the data tables section for examples of data tables added by the poller.
+
+**_NOTE:_** See the data tables section for examples of data tables added by the poller.
 
 ---
 
@@ -288,13 +303,17 @@ Add a note to an ExtraHop detection. Parameters detection_id, note. (Optional) u
 The function provides the following functionality.
 
 * Adds a note to a detection in the ExtraHop environment. The original note will be overwritten.
-Note: The original note will be overwritten.
-  
+
+**_NOTE:_** The original note will be overwritten.
+
+**_NOTE:_** Add detection note will fail if `Detection Tracking` is enabled on ExtraHop.
+
 An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update detection`.
 
 * A note is added to the ExtraHop detection when a matching SOAR incident is closed. 
   
-The workflow is initiated by the automatic datatable rule `Example: Extrahop Reveal(x) update detection` whern a SOAR incident is closed
+The workflow is initiated by the automatic datatable rule `Example: Extrahop Reveal(x) update detection` when a SOAR incident is closed
+
 The following screenshot shows an example of a note added to an ExtraHop detection:
 
    ![screenshot: fn-extrahop-revealx-add-detection-note-note](./doc/screenshots/fn-extrahop-revealx-add-detection-note-note.png)
@@ -377,7 +396,6 @@ def make_summary_note():
 # Processing
 def main():
     detection_note = get_current_note()
-
     inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", make_summary_note()])
     inputs.extrahop_update_time = 0
 main()
@@ -401,27 +419,31 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    tag = INPUTS.get("extrahop_tag_name")
+    detection_id = INPUTS["extrahop_detection_id"]
     if CONTENT:
         result = CONTENT.result
         if result == "success":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully added closure resolution note to " \
-                        u"ExtraHop detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-
+                        u"ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        elif result.get("error"):
+            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection  with unexpected response for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                        u"detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add closure resolution note to ExtraHop detection for SOAR function <b>{1}</b> with parameters" \
-                     u" <b>{2}</b> ."\
-            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     u"to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
+                     u" <b>{3}</b> ."\
+            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -709,9 +731,9 @@ The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-action](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-action.png)
 
-The following screenshot shows an example of the data table updated by the function:
+The following screenshot shows an example of the data table updated by the function.
 
-   ![screenshot: fn-extrahop-revealx-get-activitymaps-datatable](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-datatable.png)
+   ![screenshot: fn-extrahop-revealx-get-activitymaps-datatable](./doc/screenshots/dt-extrahop-activitymaps.png)
 
 The following screenshot shows an example of a note added to an IBM SOAR incident:
 
@@ -837,10 +859,36 @@ def main():
                     if am[f2] is None:
                         newrow[f1] = am[f2]
                     if isinstance(am[f2], list):
-                      if f1 in ["walks","steps"]:
-                          newrow[f1] = "{}".format(am[f2])
-                      else:
-                          newrow[f1] = "{}".format(", ".join(am[f2]))
+                        if f1 in ["walks"]:
+                            obj_cnt = 0
+                            tbl = u''
+                            for w in am[f2]:
+                                for kw, vw in w.items():
+                                    if kw == "origins":
+                                        tbl += u"<div><b>origins:</b></div>"
+                                        for o in vw:
+                                            for k, v in o.items():
+                                                tbl += u"<div><b>&emsp;{0}:</b>{1}</div>".format(k, v)
+                                        tbl += u"<br>"
+                                    elif kw == "steps":
+                                        tbl += u"<div><b>steps:</b></div>"
+                                        for s in vw:
+                                            relationships = s.get("relationships")
+                                            if relationships:
+                                                tbl += u"<div><b>&emsp;relationships:</b></div>"
+                                                for r in relationships:
+                                                    for k, v in r.items():
+                                                        tbl += u"<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
+                                                tbl += u"<br>"
+                                        tbl += u"<br>"
+                                    else:
+                                        tbl += u"<div><b>{}:</b></div>".format(kw)
+                                        tbl += u"<div><b>&emsp{}</b></div>".format(vw)
+                            tbl += u"<br>"
+                            obj_cnt += 1
+                            newrow[f1] = tbl
+                        else:
+                            newrow[f1] = "{}".format(", ".join(am[f2]))
                     elif isinstance(am[f2], (bool, dict)):
                         newrow[f1] = str(am[f2])
                     else:
@@ -849,11 +897,12 @@ def main():
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAM, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 ```
 
 </p>
@@ -869,6 +918,8 @@ The function provides the following functionality.
 
 * Gets the current note from a detection in the ExtraHop environment.
   
+**_NOTE:_** Get detection note will fail if `Detection Tracking` is enabled on ExtraHop.
+
 An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update detection`.
 
 * The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
@@ -944,7 +995,17 @@ INPUTS = results.inputs
 # Processing
 def main():
     note_text = u''
-    if not CONTENT:
+    if CONTENT:
+        if CONTENT.get("result"):
+            result = CONTENT.result
+            if result.get("note"):
+                workflow.addProperty("get_note_ok", {})
+        elif CONTENT.get("error"):
+            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Get detection note failed for " \
+                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(CONTENT.get("error"), CONTENT.get("text"))
+    else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
             .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
@@ -960,7 +1021,7 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) get detections
-Get detections information from Extrahop Reveal(x) . Optional parameter extrahop_detection_id.
+Get detections information from Extrahop Reveal(x). Optional parameter extrahop_detection_id.
 
    ![screenshot: fn-extrahop-revealx-get-detections ](./doc/screenshots/fn-extrahop-revealx-get-detections.png)
 
@@ -1189,6 +1250,8 @@ def main():
                 else:
                     if f1 == "type":
                         newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
+                    elif f1 == "ticket_url":
+                        newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
                     else:
                         newrow[f1] = "{}".format(det[f2])
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
@@ -1209,20 +1272,20 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) get devices
-Get devices information from Extrahop Reveal(x) . Optional parameters  device_id, active_from, active_util, limit and offset.
+Get devices information from Extrahop Reveal(x). Optional parameters  device_id, active_from, active_util, limit and offset.
 
- ![screenshot: fn-extrahop-revealx-get-devices ](doc/screenshots/fn-extrahop-revealx-search-devices.png)
+ ![screenshot: fn-extrahop-revealx-get-devices ](doc/screenshots/fn-extrahop-revealx-get-devices.png)
 
 The function provides the following functionality.
 
 * Retrieves information on devices in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) get devices`.
+An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search devices`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Devices` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) get devices`.
+The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search devices`.
    
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
@@ -1458,7 +1521,7 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) get tags
-Get tags information from Extrahop Reveal(x) . Optional parameter tag_id.
+Get tags information from Extrahop Reveal(x). Optional parameter tag_id.
 
    ![screenshot: fn-extrahop-revealx-get-tags](./doc/screenshots/fn-extrahop-revealx-get-tags.png)
 
@@ -1591,9 +1654,9 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) get watchlist
-Retrieve all devices that are in the watchlist from Extrahop Reveal(x) .
+Retrieve all devices that are in the watchlist from Extrahop Reveal(x).
 
- ![screenshot: fn-extrahop-revealx-get-watchlist ](./doc/screenshots/fn-extrahop-revealx-get-watchlist.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-extrahop-revealx-get-watchlist ](./doc/screenshots/fn-extrahop-revealx-get-watchlist.png)
 
 The function provides the following functionality.
 
@@ -1763,7 +1826,7 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) search detections
-Search for detections information from Extrahop Reveal(x). Optional parameters search_filter, active_from, active_util, limit , offset, update_time and sort.
+Search for detections information from Extrahop Reveal(x). Optional parameters search_filter, active_from, active_util, limit, offset, update_time and sort.
 
  ![screenshot: fn-extrahop-revealx-search-detections ](./doc/screenshots/fn-extrahop-revealx-search-detections.png)
 
@@ -2105,6 +2168,8 @@ def process_dets(det):
         else:
             if f1 == "type":
                 newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
+            elif f1 == "ticket_url":
+                newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
             else:
                 newrow[f1] = "{}".format(det[f2])
 
@@ -2176,7 +2241,7 @@ The following screenshot shows an example of the data table updated by the funct
 
    ![screenshot: fn-extrahop-revealx-search-devices-datatable](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable.png)
    
-   ![screenshot: fn-extrahop-revealx-search-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable_2.png
+   ![screenshot: fn-extrahop-revealx-search-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable_2.png)
 
 The following screenshot shows an example of a note added to an IBM SOAR incident:
 
@@ -2433,7 +2498,7 @@ The function provides the following functionality.
 * Does a packet search and download from an ExtraHop environment
 * The packet data can be downloaded in pcap, zip and keylog_txt output format.
 
-Note: Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
+**_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
 
 An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search packets`.
 
@@ -2450,7 +2515,7 @@ The following screenshot shows an example of the action inputs for the workflow 
 
 The following screenshot shows an example of the attachments added by the function:
 
-   ![screenshot: fn-extrahop-revealx-search-packets-attachment](./doc/screenshots/fn-extrahop-revealx-search-packets-attachment.png
+   ![screenshot: fn-extrahop-revealx-search-packets-attachment](./doc/screenshots/fn-extrahop-revealx-search-packets-attachment.png)
 
 The following screenshot shows an example of notes added to an IBM SOAR incident:
 
@@ -2472,7 +2537,7 @@ The following screenshot shows an example of notes added to an IBM SOAR incident
 | `extrahop_output` | `text` | No | `-` | The output format. Valid values pcap , keylog_txt  and zip |
 | `extrahop_port1` | `text` | No | `-` | Return packets sent from or received on the specified port. |
 | `extrahop_port2` | `text` | No | `-` |  Return packets sent from or received on the specified port. |
-| `incident_id` | `number` | Yes | `-` | The ID for the incident in Resilient |
+| `incident_id` | `number` | Yes | `-` | The ID for the incident in SOAR |
 
 </p>
 </details>
@@ -2602,7 +2667,9 @@ An example workflow that uses this IBM SOAR function is `Example: Extrahop Revea
 * Closes an ExtraHop detection if the equivalent SOAR incident is closed.
 * A note is added to the SOAR incident with the status of the action.
 * A note is added to the ExtraHop detection.
- 
+
+**_NOTE:_** Get or add ExtraHop detection note will fail if `Detection Tracking` is enabled on ExtraHop but the workflow should still complete.
+
 The workflow is initiated by an automatic incident rule `Example: Extrahop Reveal(x) update detection`
 
 The following screenshot shows an example of a note added to an IBM SOAR incident:
@@ -2616,7 +2683,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 | ---- | :--: | :------: | ------- | ------- |
 | `extrahop_detection_id` | `number` | No | `-` | Extrahop detection ID |
 | `extrahop_participants` | `text` | No | `{ "id": 0, "usernames": [], "origins": [] }` | A list of devices and applications associated with a detection.  |
-| `incident_id` | `number` | Yes | `-` | The ID for the incident in Resilient |
+| `incident_id` | `number` | Yes | `-` | The ID for the incident in SOAR |
 | `soar_inc_owner_id` | `text` | No | `-` | - |
 | `soar_inc_plan_status` | `text` | No | `-` | SOAR incident status |
 | `soar_inc_resolution_id` | `text` | No | `-` | SOAR incident resolution |
@@ -2691,7 +2758,7 @@ def main():
     if CONTENT:
         result = CONTENT["result"]
         if result == "success":
-            tag = INPUTS.get("extrahop_tag_name")
+            workflow.addProperty("update_detection_ok", {})
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the detection status for SOAR " \
                         u"function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
@@ -2854,7 +2921,67 @@ main()
 
 ---
 
-## Script - scr_extrahop_detection_property_helper
+## Script - ExtraHop script: add artifact from device
+Add Devices data table field as a SOAR artifact.
+
+**Object:** incident
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+# Create a SOAR artifact based on a dropdown which selects the corresponding data-table field.
+ARTIFACT_TYPE = rule.properties.extrahop_artifact_type.replace(" (v4)" ,"").replace(" (v6)" ,"")
+
+PARAMS = {
+    "IP Address": row.ipaddr4,
+    "DNS Name": row.dns_name,
+    "MAC Address": row.macaddr
+}
+# Both IP address V4 or V6 will be added as type "IP Address".
+if "v6" in rule.properties.extrahop_artifact_type:
+    PARAMS.update({"IP Address": row.ipaddr6})
+
+def addArtifact(artifact_type, artifact_value, description):
+    """This method adds new artifacts to the incident derived from matches of the the regular expression
+
+    :param artifact_type: The type of the artifact.
+    :param artifact_value: - The value of the artifact.
+    :param description: - the description of the artifact.
+    """
+    incident.addArtifact(artifact_type, artifact_value, description)
+
+def validate_fields(fields, params):
+    """
+    Ensure required fields are present. Throw ValueError if not
+    :param fields: Required fields.
+    :param params: Data-table fields as parameters.
+    :return: no return
+    """
+    for f in fields:
+        if f not in params or not params.get(f) or params.get(f) == '':
+            raise ValueError(str('Required data-table field is missing or empty for artifact type: ' + f))
+
+
+def main():
+    desc = ''
+
+    validate_fields([ARTIFACT_TYPE], PARAMS)
+
+    desc = "Artifact from Device detected in the ExtraHop environment. Device name '{}', Device ID '{}'.".format(row.default_name, row.devs_id)
+    addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)
+
+
+# Script execution starts here
+if __name__ == "__main__":
+    main()
+```
+
+</p>
+</details>
+
+---
+## Script - ExtraHop script: detection property helper
 Set ExtraHop detection properties as workflow property dicts.
 
 **Object:** incident
@@ -3336,7 +3463,7 @@ if rule.properties.extrahop_detection_id:
 </details>
 
 ---
-## Script - scr_extrahop_device_property_helper
+## Script - ExtraHop script: device property helper
 Set ExtraHop device properties as workflow property dicts.
 
 **Object:** incident
@@ -3349,66 +3476,6 @@ Set ExtraHop device properties as workflow property dicts.
 # Used to share data with other workflows.
 if rule.properties.extrahop_device_id:
     workflow.addProperty("dev_id_set", {})
-```
-
-</p>
-</details>
-
----
-## Script - scr_extrahop_rx_add_artifact_from_device
-Add Devices data table field as a SOAR artifact.
-
-**Object:** incident
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-# Create a Resilient artifact based on a dropdown which selects the corresponding data-table field.
-ARTIFACT_TYPE = rule.properties.extrahop_artifact_type.replace(" (v4)" ,"").replace(" (v6)" ,"")
-
-PARAMS = {
-    "IP Address": row.ipaddr4,
-    "DNS Name": row.dns_name,
-    "MAC Address": row.macaddr
-}
-# Both IP address V4 or V6 will be added as type "IP Address".
-if "v6" in rule.properties.extrahop_artifact_type:
-    PARAMS.update({"IP Address": row.ipaddr6})
-
-def addArtifact(artifact_type, artifact_value, description):
-    """This method adds new artifacts to the incident derived from matches of the the regular expression
-
-    :param artifact_type: The type of the artifact.
-    :param artifact_value: - The value of the artifact.
-    :param description: - the description of the artifact.
-    """
-    incident.addArtifact(artifact_type, artifact_value, description)
-
-def validate_fields(fields, params):
-    """
-    Ensure required fields are present. Throw ValueError if not
-    :param fields: Required fields.
-    :param params: Data-table fields as parameters.
-    :return: no return
-    """
-    for f in fields:
-        if f not in params or not params.get(f) or params.get(f) == '':
-            raise ValueError(str('Required data-table field is missing or empty for artifact type: ' + f))
-
-
-def main():
-    desc = ''
-
-    validate_fields([ARTIFACT_TYPE], PARAMS)
-
-    desc = "Artifact from Device detected in the ExtraHop environment. Device name '{}', Device ID '{}'.".format(row.default_name, row.devs_id)
-    addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)
-
-
-# Script execution starts here
-if __name__ == "__main__":
-    main()
 ```
 
 </p>
@@ -3436,7 +3503,7 @@ extrahop_activitymaps
 | Rights | `rights` | `text` | - |
 | Short code | `short_code` | `text` | - |
 | Show alert status | `show_alert_status` | `text` | - |
-| Walks | `walks` | `text` | - |
+| Walks | `walks` | `textarea` | - |
 | Weighting | `weighting` | `text` | - |
 
 ---
@@ -3470,7 +3537,7 @@ extrahop_detections
 | Start time | `start_time` | `datetimepicker` | - |
 | Status | `status` | `text` | - |
 | Ticket ID | `ticket_id` | `text` | - |
-| Ticket URL | `ticket_url` | `text` | - |
+| Ticket URL | `ticket_url` | `textarea` | - |
 | Title | `title` | `text` | - |
 | Type | `type` | `text` | - |
 | Update time | `update_time` | `datetimepicker` | - |
@@ -3511,6 +3578,7 @@ extrahop_devices
 ## Data Table - Extrahop Tags
 
  ![screenshot: dt-extrahop-tags](./doc/screenshots/dt-extrahop-tags.png)
+
 
 #### API Name:
 extrahop_tags
