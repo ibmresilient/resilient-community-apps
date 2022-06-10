@@ -13,7 +13,7 @@
 #fn_bigfix
 #fn_calendar_invite
 #fn_cisco_amp4ep
-#fn_cisco_asa
+#fn_cisco_asa-did-not-package
 #fn_cisco_enforcement
 #fn_cisco_umbrella_inv
 #fn_clamav
@@ -25,7 +25,7 @@
 #fn_datatable_utils
 #fn_elasticsearch
 #fn_email_header_validation
-##fn_exchange-skipping-tests
+##fn_exchange-skipping-tests-next
 #fn_exchange_online
 #fn_geocoding
 #fn_google_cloud_dlp
@@ -104,7 +104,7 @@
 #fn_whois_rdap
 #fn_wiki
 #fn_xforce
-fn_yeti
+#fn_yeti
 #fn_zia
 
 #Not_Rebuilt
