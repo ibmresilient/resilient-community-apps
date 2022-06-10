@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_odbc_query'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'pyodbc'
+        'pyodbc~=4.0'
     ],
     packages=find_packages(),
     include_package_data=True,

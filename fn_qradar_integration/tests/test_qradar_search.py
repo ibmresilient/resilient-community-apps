@@ -1,18 +1,14 @@
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
+from resilient_circuits import SubmitTestFunction, FunctionResult
+from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
 from circuits import Event
-import json
-import os
 import pytest
-
-PACKAGE_NAME = "fn_qradar_integration"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_qradar_function(circuits, function_params, func_name, timeout=10):
     # Fire a message to the function
@@ -40,7 +36,6 @@ def call_qradar_function(circuits, function_params, func_name, timeout=10):
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
-
 
 class TestQRadarFunction:
     """ Tests for the utilities_excel_query function"""

@@ -2,9 +2,8 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import requests_mock
+from requests_mock import create_response
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-
 
 class SearchMock(BasicResilientMock):
 
@@ -50,5 +49,4 @@ class SearchMock(BasicResilientMock):
                 "match_field_name": "Value",
                 "inc_id": 2114
             }]}
-        return requests_mock.create_response(request, status_code=200, json=search_data)
-
+        return create_response(request, status_code=200, json=search_data)

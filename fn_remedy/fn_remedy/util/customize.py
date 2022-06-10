@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_remedy"""
+"""Generate the SOAR customizations required for fn_remedy"""
 
 import base64
 import os
@@ -37,7 +37,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 39.0.6328
 
     Contents:
     - Message Destinations:

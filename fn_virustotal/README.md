@@ -34,6 +34,7 @@
 ### History
 | Version| Comment |
 | ------- | ------ |
+| 1.0.7 | Add Support for Custom Headers |
 | 1.0.6 | Enhanced Rules and Workflows |
 | 1.0.5 | Bugfixes and Documentation updates |
 | 1.0.4 | No longer requires proxies field in configuration settings. Added unicode support for attachment scan |

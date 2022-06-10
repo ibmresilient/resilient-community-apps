@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """
     Function utilities_excel_query receives attachment information and two additional fields -
@@ -21,7 +21,7 @@ import json
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_excel_query"""
+    """Component that implements SOAR function 'utilities_excel_query"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -149,7 +149,7 @@ class WorksheetData(object):
             serialized field
         """
         if isinstance(obj, datetime.datetime):
-            # the standard of Resilient is in microseconds
+            # the standard of SOAR is in microseconds
             return (obj - datetime.datetime(1970, 1, 1)).total_seconds()*1000
         return str(obj)
 

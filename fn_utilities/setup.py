@@ -22,32 +22,29 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='2.0.6',
+    display_name='Utility Functions for SOAR',
+    version='2.1.1',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url="http://ibm.biz/resilientcommunity",
-    description="Useful workflow functions for common automation and integration activities in the Resilient platform.",
-    long_description="""Resilient functions simplify development of integrations by wrapping each external activity
-    into an individual workflow component. These components can be easily installed, then used and combined in Resilient
-    workflows. The Resilient platform sends data to the function component that performs an activity then returns the results
+    author='IBM SOAR',
+    url="http://ibm.biz/soarcommunity",
+    description="Useful workflow functions for common automation and integration activities in the SOAR platform.",
+    long_description="""SOAR functions simplify development of integrations by wrapping each external activity
+    into an individual workflow component. These components can be easily installed, then used and combined in SOAR
+    workflows. The SOAR platform sends data to the function component that performs an activity then returns the results
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
-    setup_requires=['six==1.14.0'],
     install_requires=[
-        'six==1.14.0',
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=34.0.0',
-        'openpyxl>=2.5.3',
-        'pyOpenSSL>=18.0.0',
-        'cryptography>=2.3',
-        'pywinrm>=0.3.0',
-        'json2html',
-        'lxml',
-        'mail-parser>=3.9.3',
-        'paramiko',
-        'defusedxml>=0.7.1',
-        'pdfid>=1.0.4',
+        'resilient_circuits>=41.0.0',
+        'openpyxl~=3.0',
+        'pyOpenSSL~=22.0',
+        'cryptography~=36.0',
+        'pywinrm~=0.4',
+        'json2html~=1.3',
+        'lxml~=4.8',
+        'mail-parser~=3.15',
+        'paramiko~=2.10',
+        'defusedxml~=0.7.1',
+        'pdfid~=1.1',
         'chardet==4.0.0'
     ],
     packages=find_packages(),

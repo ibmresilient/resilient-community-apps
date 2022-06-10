@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 // Script that runs for the following endpoint:: 
 // https://service-now-host.com/api/x_ibmrt_resilient/api/update
@@ -51,7 +51,7 @@
 				record.setValue(field.name, field.value);
 			}
 			else{
-				gs.warning(field.name + " is not a valid field in the " + tableName + " table!");
+				gs.warn(field.name + " is not a valid field in the " + tableName + " table!");
 			}
 		}
 

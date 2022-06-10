@@ -1,22 +1,21 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pylint: disable=R0913,C0103,E1101,W0707,W0703
 """ DataTable.py exposes a helper module for GET, UPDATE and DELETE
-    Functions for a Resilient / CP4S Data Table """
+    Functions for a SOAR / CP4S Data Table """
 
-import json
-import logging
+from json import loads
+from logging import getLogger
 import threading
-import time
+from time import sleep
 from cachetools import cached, LRUCache
 from resilient_lib import get_workflow_status
 
 # Constants
 DATATABLE_TYPE = 8
-LOG = logging.getLogger(__name__)
-
+LOG = getLogger(__name__)
 
 class Datatable(object):
-    """ A helper class which provides a facade to interface with a Resilient / CP4S Data Table
+    """ A helper class which provides a facade to interface with a SOAR / CP4S Data Table
     Example:
     .. code-block:: python
 
@@ -41,7 +40,7 @@ class Datatable(object):
 
     def get_data(self):
         """get_data Function that gets all the data and rows of a Data Table
-            using the Resilient API
+            using the SOAR API
 
         :raises ValueError: If the datatable api call fails or the result contains no rows, raise an Exception
         """
@@ -99,11 +98,8 @@ class Datatable(object):
 
             return rows_to_return
 
-        return None
-
     def get_row(self, row_id=None, search_column=None, search_value=None):
         """get_row Searches and returns row if row found, else None
-
 
         :param row_id: ID number of the row to get, defaults to None
         :type row_id: int, optional
@@ -136,8 +132,6 @@ class Datatable(object):
                     if value == search_value:
                         return row
 
-        return None
-
     def update_row(self, row_id, cells_to_update):
         """update_row Updates the row with given updates in cells_to_update.
             Returns the updated row or dict with the entry 'error'.
@@ -162,10 +156,8 @@ class Datatable(object):
             if cell_name in cells_to_update:
                 return cells_to_update[cell_name]
 
-            if "value" not in row["cells"][cell_name]:
-                return None
-
-            return row["cells"][cell_name].get("value", None)
+            if "value" in row["cells"][cell_name]:
+                return row["cells"][cell_name].get("value", None)
 
         # Get the row we want to update
         row = self.get_row(row_id)
@@ -208,7 +200,7 @@ class Datatable(object):
 
     def delete_row(self, row_id):
         """delete_row Deletes the row.
-            Returns the response from Resilient API
+            Returns the response from SOAR API
             or dict with the entry 'error'.
 
         :param row_id: The ID of the row to delete
@@ -238,7 +230,7 @@ class Datatable(object):
     def delete_rows(self, rows_ids=None, search_column=None, search_value=None,
                     row_id=None, workflow_id=None):
         """delete_rows Deletes rows.
-            Returns the response from Resilient API
+            Returns the response from SOAR API
             or dict with the entry 'error'.
 
         :param rows_ids: ID numbers of the rows to be deleted, defaults to None
@@ -254,16 +246,15 @@ class Datatable(object):
         :raises ValueError: If a search_column is provided but not found in the cells of the gathered row, a ValueError is raised
         """
 
-        return_value = None
         rows_ids_list = []
         queued_row_id = None
 
         # Search by rows_ids if defined
         if rows_ids:
             # Convert input str to a list of rows ids
-            rows_ids_input = json.loads(rows_ids)
+            rows_ids_input = loads(rows_ids)
 
-            # for each row returned from the datatable, compare row_ids with our list to delete
+            # For each row returned from the datatable, compare row_ids with our list to delete
             for row in self.rows:
                 if row["id"] in rows_ids_input:
                     if row["id"] == row_id:
@@ -315,9 +306,9 @@ class Datatable(object):
         try:
             response = self.res_client.get(uri)
 
-            # determine if we have a custom object type and it's a datatable
+            # Determine if we have a custom object type and it's a datatable
             if response['object']['type_id'] >= 1000:
-                # confirm this is a data table
+                # Confirm this is a data table
                 type_info = self.get_object_type(response['object']['type_id'])
                 if type_info['type_id'] == DATATABLE_TYPE:
                     return response['object']['object_id']
@@ -325,11 +316,9 @@ class Datatable(object):
         except Exception as err:
             LOG.error("Error with url: %s %s", uri, str(err))
 
-        return None
-
     def get_dt_headers(self):
         """get_dt_headers Function that gets all the data and rows of a Data Table
-            using the Resilient API
+            using the SOAR API
 
         :raises ValueError: Any exception that is raised during the API call raises a ValueError
         :return: The fields for a datatable
@@ -363,7 +352,7 @@ class Datatable(object):
 
     @cached(cache=LRUCache(maxsize=100))
     def get_object_type(self, obj_id):
-        """get_object_type Get information about a Resilient object. This call is cached for multiple calls
+        """get_object_type Get information about a SOAR object. This call is cached for multiple calls
 
         :param obj_id: The ID of the object type to get
         :type obj_id: int
@@ -376,11 +365,11 @@ class Datatable(object):
         return self.res_client.get(uri)
 
     def queue_delete(self, workflow_id, row_id):
-        """queue_delete queue the delete action for when the workflow completes
+        """queue_delete Queue the delete action for when the workflow completes
 
-        :param workflow_id: workflow id to ensure the workflow is complete before performing a deletion
+        :param workflow_id: Workflow id to ensure the workflow is complete before performing a deletion
         :type workflow_id: int
-        :param row_id: the row to queue for deletion
+        :param row_id: The row to queue for deletion
         :type row_id: int
         :return: A json structure with the response of the delete action
         :rtype: dict
@@ -391,14 +380,13 @@ class Datatable(object):
         t.daemon = True
         t.start()
 
-        # return a json result similar to the delete API json
+        # Return a json result similar to the delete API json
         return {
             'success': True,
             'title': None,
             'message': None,
             'hints': [row_id]
         }
-
 
 def get_function_input(inputs, input_name, optional=False):
     """get_function_input Given input_name, checks if it defined. Raises ValueError if a mandatory input is None
@@ -418,9 +406,8 @@ def get_function_input(inputs, input_name, optional=False):
     if the_input is None and optional is False:
         err = "'{0}' is a mandatory function input".format(input_name)
         raise ValueError(err)
-    
-    return the_input
 
+    return the_input
 
 def validate_search_inputs(**options):
     """validate_search_inputs Function that determines if row_id, search_column and search_value are defined correctly
@@ -467,32 +454,31 @@ def validate_search_inputs(**options):
 
     return return_value
 
-
 def threaded_delete(datatable, workflow_id, row_id):
-    """threaded_delete wait for the workflow to complete before performing the delete row action
+    """threaded_delete Wait for the workflow to complete before performing the delete row action
 
     :param datatable: The datatable helper object
     :type datatable: object
-    :param workflow_id: workflow id to ensure it's complete before deleting row
+    :param workflow_id: Workflow id to ensure it's complete before deleting row
     :type workflow_id: int
-    :param row_id: row to queue for delete
+    :param row_id: Row to queue for delete
     :type row_id: int
     """
-    MAX_SLEEP_UNTIL_WF_COMPLETES = 60  # no sleep time should exceed 60s
-    MAX_LOOP = 60  # roughly an hour of waiting
+    MAX_SLEEP_UNTIL_WF_COMPLETES = 60  # No sleep time should exceed 60s
+    MAX_LOOP = 60  # Roughly an hour of waiting
     sleep_time = 10
-    # check that the workflow is still active, sleep if still active
+    # Check that the workflow is still active, sleep if still active
     wf = get_workflow_status(datatable.res_client, workflow_id)
     ndx = 0
     while wf.status == 'running' and ndx < MAX_LOOP:
-        time.sleep(sleep_time)
+        sleep(sleep_time)
         sleep_time += sleep_time
         sleep_time = min(sleep_time, MAX_SLEEP_UNTIL_WF_COMPLETES)
         wf = get_workflow_status(datatable.res_client, workflow_id)
         ndx += 1
 
     if wf.status != 'running':
-        # perform the delete rows()
+        # Perform the delete rows()
         result = datatable.delete_row(row_id)
         if 'error' in result:
             LOG.error("Queued delete failed for row_id: %s. Error: %s",

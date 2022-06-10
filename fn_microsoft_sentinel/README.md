@@ -49,7 +49,14 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
+| 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
+| 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
 | 1.0.0 | 08/2021 | Initial Release |
+
+### v1.0.3
+
+When upgrading from a previous version to v1.0.3, manually update your app.config file to add the `verify` parameter to your `[fn_microsoft_sentinel]` section. The documentation on it's use is in [App Configuration](#app-configuration).
 
 ---
 
@@ -93,7 +100,7 @@ If deploying to a Resilient platform with an App Host, the requirements are:
 If deploying to a Resilient platform with an integration server, the requirements are:
 * Resilient platform >= `39.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=37.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -128,8 +135,8 @@ The app **does** support a proxy server.
 Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-lib
-* resilient_circuits>=30.0.0
+* resilient-lib>=37.0.0
+* resilient_circuits>=37.0.0
 * simplejson
 
 ---
@@ -139,21 +146,18 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 
 1. Define an App under `App registration`,  for Sentinel access. The Application (client) ID will be used as the app.config `client_id`.
 
-    a. Configure API Permissions as the diagram below.
-
-    b. Specify a client secret. This will be used in the app.config file as `api_secret`.
+    a. Specify a client secret. This will be used in the app.config file as `api_secret`.
 
  ![screenshot: app client_id](./doc/screenshots/app_client_id.png)
- ![screenshot: app permissions](./doc/screenshots/app_permissions.png)
  ![screenshot: app secret](./doc/screenshots/app_secret.png)
 
-2. For your subscription, specify the app with the Sentinel Responder role.
-
-![screenshot: subscription role](./doc/screenshots/subscription_role.png)
-
-3. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
+2. Define a workspace and resource group for the subscription. These names will be defined in the app.config file as `workspace_name` and `resource_groupname`.
 
 ![screenshot: subscription role](./doc/screenshots/workspace_resource_group.png)
+
+3. For your resource group, specify the app with the Sentinel Responder role.
+
+![screenshot: subscription role](./doc/screenshots/subscription_role.png)
 
 4. Add your tenant_id (Under `Tenant properties`) and subscription_id to the app.config file.
 
@@ -179,6 +183,7 @@ The following table provides the settings you need to configure the app. These s
 | **sentinel_profiles** | Yes | `profile_a` | *Comma separated list of profile(s) to access based on subscription id, resource group name and workspace * |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
+| **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
 
 For each profile:
 | Config | Required | Example | Description |

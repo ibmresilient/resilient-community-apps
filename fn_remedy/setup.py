@@ -5,13 +5,11 @@ from setuptools import setup, find_packages
 import glob
 import ntpath
 
-
 def get_module_name(module_path):
     """
     Return the module name of the module path
     """
     return ntpath.split(module_path)[1].split(".")[0]
-
 
 def snake_to_camel(word):
     """
@@ -19,19 +17,18 @@ def snake_to_camel(word):
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
-
 setup(
     name="fn_remedy",
-    display_name="fn_remedy",
-    version="1.0.0",
+    display_name="Remedy",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
-    description="Resilient Circuits Components for 'fn_remedy'",
-    long_description="Resilient Circuits Components for 'fn_remedy.' "
+    description="Remedy for IBM SOAR",
+    long_description="Remedy for IBM SOAR "
                     "This integration provides the capability to create "
-                    "new incidents in Remedy from Resilient tasks via the "
+                    "new incidents in Remedy from SOAR tasks via the "
                     "HPD:IncidentInterface_Create form over the REST API. "
                     "Once the task is complete, this integration also provides "
                     "the capability to close existing Remedy Incidents.",

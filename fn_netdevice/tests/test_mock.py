@@ -94,4 +94,4 @@ class TestNetMiko:
         assert (results['success'] == True)
         assert (results['content']['ansible-linux']['status'] == 'success')
         assert (results['content']['ansible-linux']['send_command'] == netdevice_send_cmd)
-        assert (results['content']['ansible-linux']['send_result'][0:30] == expected_results[0:30])
+        assert (results['content']['ansible-linux']['send_result'][0:10] == expected_results[0:10])

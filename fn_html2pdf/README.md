@@ -116,12 +116,15 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=30.0.0
 * weasyprint<53.0
 
+_Note: see the [Install](#install) section below if you are installing on an integration server as more os packages are required._
+
 ---
 
 ## Installation
 
 ### Install
 * To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+  * Further OS packages are required for installation of this app on a local integration server. You must install `pango` with your system's package installer.
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration

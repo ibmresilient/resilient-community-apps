@@ -1,6 +1,7 @@
 #ALPHABETICAL-List-of-allowed-image-names
 
 #IBM_SOAR_Apps
+fn_abuseipdb
 fn_alienvault_otx
 fn_anomali_staxx
 fn_ansible
@@ -19,6 +20,7 @@ fn_clamav
 fn_cloud_foundry
 fn_components
 fn_create_webex_meeting
+fn_create_zoom_meeting
 fn_cve_search
 fn_datatable_utils
 fn_elasticsearch
@@ -28,6 +30,7 @@ fn_exchange_online
 fn_extrahop
 fn_geocoding
 fn_google_cloud_dlp
+fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
 fn_hibp
@@ -47,6 +50,7 @@ fn_mcafee_epo
 fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
+fn_microsoft_defender
 fn_microsoft_security_graph
 fn_microsoft_sentinel
 fn_misp
@@ -57,6 +61,7 @@ fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
 fn_pagerduty
+fn_passivetotal
 fn_pastebin
 fn_phish_ai
 fn_phish_tank
@@ -69,16 +74,21 @@ fn_qradar_advisor
 fn_qradar_enhanced_data
 fn_qradar_integration
 fn_query_tor_network
+fn_reaqta
 fn_remedy
 fn_rsa_netwitness
 fn_scheduler
 fn_secureworks_ctp
+fn_sentinelone
 fn_sep
 fn_service_now
+fn_shadowserver
 fn_shodan
+fn_siemplify
 fn_slack
 fn_splunk_integration
 fn_spamhaus_query
+fn_symantec_dlp
 fn_task_utils
 fn_teams
 fn_threatminer
@@ -95,14 +105,15 @@ fn_wiki
 fn_whois
 fn_whois_rdap
 fn_xforce
+fn_yeti
 fn_zia
 
 #Not_Rebuilt
 #fn_crowdstrike_falcon-still-root-group
-#rc-data-feed
+rc_data_feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
-#rc-data-feed-plugin-odbcfeed
+rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
 #rc-data-feed-plugin-splunkfeed
 rc-cts-abuseipdb
@@ -115,7 +126,6 @@ rc-cts-urlscanio
 #No_Related_image
 #fn_apility
 #fn_cb_protection
-#fn_create_zoom_meeting
 #fn_digital_shadows_search
 #fn_docker
 #fn_floss

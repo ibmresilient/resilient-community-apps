@@ -1,4 +1,4 @@
-<!-- (c) Copyright IBM Corp. 2019. All Rights Reserved. -->
+<!-- (c) Copyright IBM Corp. 2022. All Rights Reserved. -->
 
 <!-- HTML -->
 <?xml version="1.0" encoding="utf-8" ?>
@@ -7,8 +7,8 @@
 		.res-container {
 			margin: auto;
 			width: 500px;
-			height: 175px;
-			border: 2px solid #82bc00;
+			height: 230px;
+			border: 2px solid #6ea6ff;
 			padding: 10px;
 			-webkit-box-shadow: 10px 10px 5px -1px rgba(237,237,237,1);
 			-moz-box-shadow: 10px 10px 5px -1px rgba(237,237,237,1);
@@ -19,7 +19,8 @@
 			display: block;
 			margin-left: auto;
 			margin-right: auto;
-			width: 50%;
+			height: auto;
+			width: 60%;
 		}
 		
 		.res-container h3 {
@@ -28,8 +29,8 @@
 		}
 		
 		.res-container .btn-primary{
-			background-color: #82bc00;
-			border-color: #639001;
+			background-color: #0f62fe;
+			border-color: #171717;
 			display: block;
 			margin-left: auto;
 			margin-right: auto;
@@ -43,13 +44,13 @@
 
 	</style>
 	<div class="res-container">
-		<img class="res-logo" alt="ibm_resilient_logo" src="ibm_resilient_logo.png"/>
+		<img class="res-logo" alt="ibm_soar_logo" src="ibm_soar_logo.png"/>
 		<g:ui_form>
-			<h3>Test IBM Resilient Connection</h3>
+			<h3>Test IBM Security QRadar SOAR Platform Connection</h3>
 			<button class="btn btn-primary" type="submit" onclick="doTestConnection()">Test Connection</button>
 		</g:ui_form>
-		<a target="_blank" rel="noopener noreferrer nofollow" href="system_properties_ui.do?sysparm_title=IBM Resilient Properties$[AMP]sysparm_category=Resilient Properties"> 
-			<p>Click here to update IBM Resilient Properties</p>
+		<a target="_blank" rel="noopener noreferrer nofollow" href="system_properties_ui.do?sysparm_title=IBM Security QRadar SOAR Properties$[AMP]sysparm_category=IBM Security QRadar SOAR Properties"> 
+			<p>Click here to update IBM SOAR Properties</p>
 		</a>
 	</div>
 </j:jelly>
@@ -72,7 +73,7 @@
 	var snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
 
 	if(snowHelper.isValidSnUsername(snUsername) == false){
-		throw snUsername + " is not a valid ServiceNow user. Please check your IBM Resilient Properties.";
+		throw snUsername + " is not a valid ServiceNow user. Please check your IBM SOAR Properties.";
 	}
 	
 	//Check all allowed ServiceNow tables are valid. Will throw an error if not

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2018, 2021. All Rights Reserved.
 
 """Tests using pytest_resilient_circuits"""
 
@@ -9,6 +9,7 @@ try:
 except:
     from mock import patch
 from fn_create_zoom_meeting.util.zoom_common import ZoomCommon
+import pytest
 
 partial_response = {"meetings": True, "page_number": True}
 
@@ -52,20 +53,26 @@ def mocked_requests_post(*args, **kwargs):
 
     return MockResponse(None, 404)
 
-
 def run_zoom_common_create_meeting():
     zoom_api_url = "https://api.zoom.us/v2"
     zoom_api_key = ""  # Fill with zoom api key
     zoom_api_secret = ""  # Fill with zoom api secret
 
-    zoom_host_email = "x"
+    zoom_host_email = "" # Add associated email
     zoom_agenda = "test"
     zoom_record_meeting = False
     zoom_topic = "test"
     zoom_password = ""
     zoom_timezone = "America/New_York"
 
-    common = ZoomCommon(zoom_api_url, zoom_api_key, zoom_api_secret)
+    opts = {}
+    options = {
+        "zoom_api_key": zoom_api_key, 
+        "zoom_api_secret": zoom_api_secret, 
+        "zoom_api_url": zoom_api_url
+        }
+
+    common = ZoomCommon(opts, options)
 
     result = common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password, zoom_timezone)
 
@@ -75,6 +82,7 @@ def run_zoom_common_create_meeting():
 class TestFnCreateZoomMeeting:
     """ Tests for the fn_create_zoom_meeting function"""
 
+    @pytest.mark.livetest
     @patch('requests.get', side_effect=mocked_requests_get)
     @patch('requests.post', side_effect=mocked_requests_post)
     def test_success(self, get, post):
@@ -82,6 +90,7 @@ class TestFnCreateZoomMeeting:
         result = run_zoom_common_create_meeting()
         assert result["host_url"] is not None
 
+    @pytest.mark.livetest
     @patch('requests.get', side_effect=mocked_requests_get)
     @patch('requests.post', side_effect=mocked_requests_post)
     def test_partial(self, get, post):

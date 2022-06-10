@@ -1,12 +1,17 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_service_now.util.resilient_helper import ResilientHelper
+import logging
+
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -43,6 +48,8 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # Get the function inputs:
             inputs = {
@@ -60,7 +67,7 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs.get("sn_table_name"), payload.inputs.get("sn_query_field"), payload.inputs.get("sn_query_value")))
 
             # Call custom endpoint '/get_sys_id' with 3 params
-            get_sys_id_response = res_helper.sn_api_request("GET", "/get_sys_id", params=payload.inputs)
+            get_sys_id_response = res_helper.sn_api_request(rc, "GET", "/get_sys_id", params=payload.inputs)
 
             # Get response text
             response_result = get_sys_id_response.text
@@ -87,11 +94,13 @@ class FunctionComponent(ResilientComponent):
 
             # Set results to the payload
             results = payload.as_dict()
+            rp_results = rp.done(results.get("success"), results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
-            log.debug("RESULTS: %s", results)
+            log.debug("RESULTS: %s", rp_results)
             log.info("Complete")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            # Produce a FunctionResult with the rp_results
+            yield FunctionResult(rp_results)
         except Exception:
             yield FunctionError()

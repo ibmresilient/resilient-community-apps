@@ -1,2 +1,2 @@
 #
-build DEV INT-4856 version of fn_extrahop
+build fn_virustotal

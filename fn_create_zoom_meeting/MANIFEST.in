@@ -1,4 +1,10 @@
 include README.md
-include fn_create_zoom_meeting/util/*
+include Dockerfile
+include apikey_permissions
+include entrypoint.sh
+recursive-include fn_create_zoom_meeting/util *
+include data/*
 include fn_create_zoom_meeting/LICENSE
+include tests/data/*
+include icons/*
 include fn_create_zoom_meeting/doc/*
