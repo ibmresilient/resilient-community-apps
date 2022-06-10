@@ -29,7 +29,6 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.soar_common = SOARCommon(self.rest_client())
-        init_jinja()
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -153,37 +152,87 @@ def make_playbook_info(inputs, funct_info_list):
     return playbook_payload
 
 def make_export_res(inputs, function_input_list):
+    templates = MakeTemplates()
     try:
         playbook_payload = make_playbook_info(inputs, function_input_list)
         # build the preprocessor script and XML data
         for funct_info in playbook_payload['functions']:
             playbook_payload['current_function'] = funct_info
             # get fields for preprocessing script
-            funct_info['preprocessor_script'] = make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
+            funct_info['preprocessor_script'] = templates.make_function_post_script(playbook_payload)
 
-        # build the xml compoment for the playbook (all functions)
-        playbook_json = {
-            'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
-        }
-        export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
+        # build the xml component for the playbook (all functions)
+        playbook_json = templates.make_playbook_json(playbook_payload)
+        playbook_xml = templates.make_playbook_xml(playbook_payload)
+        export_res = templates.make_initial_export_res(playbook_json, playbook_xml)
 
-        # add in the playbook xml content
-        export_res['playbooks'][0]['content']['xml'] = make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
         return playbook_payload, export_res, None
 
     except Exception as err:
         return None, None, "{}\n{}".format(str(err), traceback.format_exc())
 
-def init_jinja():
-    jinja_env = global_jinja_env()
+class MakeTemplates():
+    def __init__(self):
+        jinja_env = global_jinja_env()
 
-    new_filters = {
-        "make_uuid": make_uuid,
-        "make_short_uuid": make_short_uuid
-    }
+        new_filters = {
+            "make_uuid": make_uuid,
+            "make_short_uuid": make_short_uuid
+        }
 
-    jinja_env.globals.update(new_filters)
-    jinja_env.filters.update(new_filters)
+        jinja_env.globals.update(new_filters)
+        jinja_env.filters.update(new_filters)
+
+    def make_function_post_script(self, playbook_payload):
+        """build the post processing script for a given function
+
+        Args:
+            playbook_payload (dict): entire playbook data needed for creating an export.res file
+
+        Returns:
+            dict: data structure which represents a post-processing script in a playbook
+        """
+        return make_payload_from_template(None, PREPROCESSOR_SCRIPT_TEMPLATE, playbook_payload, return_json=True)
+
+    def make_playbook_json(self, playbook_payload):
+        """build the definition of a playbook
+
+        Args:
+            playbook_payload (dict): entire playbook data needed for creating an export.res file
+
+        Returns:
+            dict: data structure which represents playbook
+        """
+        return  {
+                    'playbook_json': make_payload_from_template(None, PLAYBOOK_JSON_TEMPLATE, playbook_payload, return_json=True)
+                }
+
+    def make_playbook_xml(self, playbook_payload):
+        """build the definition of a playbook call structure in XML
+
+        Args:
+            playbook_payload (dict): entire playbook data needed for creating an export.res file
+
+        Returns:
+            str: data structure of a playbook for the BPMN engine
+        """
+        return make_payload_from_template(None, PLAYBOOK_XML_TEMPLATE, playbook_payload, return_json=False)
+
+    def make_initial_export_res(self, playbook_json, playbook_xml):
+        """build the initial export.res file with most the of parts are in place
+
+        Args:
+            playbook_json (dict): see make_playbook_json
+
+        Returns:
+            dict: data structure of a playbook for the BPMN engine
+        """
+        export_res = make_payload_from_template(None, EXPORT_TEMPLATE, playbook_json, return_json=True)
+        # add in the playbook xml content
+        if playbook_xml:
+            export_res['playbooks'][0]['content']['xml'] = playbook_xml
+        return export_res
+
 
 ## J I N J A   F I L T E R S
 def make_uuid(value, pattern="{}-{}-{}-{}-{}"):
