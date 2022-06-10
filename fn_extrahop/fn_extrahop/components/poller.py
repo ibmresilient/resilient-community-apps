@@ -29,6 +29,7 @@ LOG = logging.getLogger(__name__)
 CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_incident.jinja")
 UPDATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_update_incident.jinja")
 CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.jinja")
+TICKETID_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_ticketid_incident.jinja")
 
 def init_app(opts, options):
     """ Intialize settings used for your app
@@ -138,6 +139,7 @@ class PollerComponent(ResilientComponent):
         self.soar_create_case_template = options.get("soar_create_case_template")
         self.soar_update_case_template = options.get("soar_update_case_template")
         self.soar_close_case_template = options.get("soar_close_case_template")
+        self.soar_ticketid_case_template = options.get("soar_ticketid_case_template")
 
         # get the polling filters
         self.polling_filters = {}
@@ -241,7 +243,19 @@ class PollerComponent(ResilientComponent):
 
                         # Link the case to the ExtraHop ticket.
                         self.app_common.link_case_to_ticketid(entity["id"], soar_case_id)
-
+                        # Update extrahop_ticketid property for incident to prevent unnecessary
+                        # update notifications.
+                        entity["ticket_id"] = soar_case_id
+                        soar_ticketid_payload = make_payload_from_template(
+                            self.soar_ticketid_case_template,
+                            TICKETID_INCIDENT_TEMPLATE,
+                            entity
+                        )
+                        # Update SOAR incident property: extrahop_ticketid
+                        _update_soar_case_ticketid = self.soar_common.update_soar_case(
+                            soar_case_id,
+                            soar_ticketid_payload
+                        )
                         # build a url to the SOAR incident and update ExtraHop with the note
                         soar_link = build_incident_url(
                             build_resilient_url(self.opts.get('host'), self.opts.get("port", 443)),
