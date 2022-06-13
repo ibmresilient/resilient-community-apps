@@ -32,10 +32,10 @@ setup(
     long_description="""Resilient Circuits Components for 'fn_ocr'""",
     install_requires=[
         "resilient-circuits>=45.0.0",
-        "pytesseract==0.3.8",
-        "numpy==1.22.4", 
-        "opencv-python-headless==4.5.5.64",
-        "pandas==1.4.2"
+        "pytesseract~=0.3.8",
+        "numpy~=1.19", 
+        "opencv-python-headless~=4.5.5.64",
+        "pandas~=1.1.5"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
