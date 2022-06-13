@@ -72,6 +72,7 @@ class TestFnOcr:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
+
         assert True
         # results = call_fn_ocr_function(circuits_app, mock_inputs)
         # assert(expected_results == results)
