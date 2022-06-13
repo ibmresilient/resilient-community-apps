@@ -70,10 +70,12 @@ class FunctionComponent(AppFunctionComponent):
             results = FunctionResult({}, success=False,
                                      reason="Either pbm_app_name or pbm_function_names required")
 
+        # no errors and functions found?
         if not results and function_input_list:
             self.LOG.debug(function_input_list)
 
             result_list = []
+            # add to same playbook?
             if inputs.get('pbm_add_to_same_playbook'):
                 playbook_payload, export_res, err_msg = make_export_res(inputs, function_input_list)
                 if err_msg:
@@ -81,8 +83,12 @@ class FunctionComponent(AppFunctionComponent):
                 else:
                     result_list.append(self.import_playbook(playbook_payload, export_res))
             else:
+                # separate playbooks
                 for funct_info in function_input_list:
                     playbook_payload, export_res, err_msg = make_export_res(inputs, [funct_info])
+                    self.LOG.info("Creating playbook '%s' for function '%s'",
+                        playbook_payload['playbook_info']['playbook_name'],
+                        funct_info.get('function_name'))
                     if err_msg:
                         self.LOG.error(err_msg)
                     else:
@@ -143,7 +149,7 @@ def make_playbook_info(inputs, funct_info_list):
         playbook_info["playbook_name"] = clean_playbook_name
     else:
         playbook_info["playbook_name"] = "{} for {}".format(clean_playbook_name, funct_info_list[0]["function_name"])
-    playbook_info["playbook_name_api_name"] = REMOVE_SPECIAL.sub('', inputs.get('pbm_playbook_name').replace(' ', '_').lower())
+    playbook_info["playbook_name_api_name"] = REMOVE_SPECIAL.sub('', playbook_info["playbook_name"].replace(' ', '_').lower())
 
     # function based uuid's
     playbook_info['uuid_uuid'] = make_uuid(None)
@@ -164,7 +170,7 @@ def make_export_res(inputs, function_input_list):
         for funct_info in playbook_payload['functions']:
             playbook_payload['current_function'] = funct_info
             # get fields for preprocessing script
-            funct_info['preprocessor_script'] = templates.make_function_post_script(playbook_payload)
+            funct_info['preprocessor_script'] = templates.make_function_preprocessing_script(playbook_payload)
 
         # build the xml component for the playbook (all functions)
         playbook_json = templates.make_playbook_json(playbook_payload)
@@ -188,7 +194,7 @@ class MakeTemplates():
         jinja_env.globals.update(new_filters)
         jinja_env.filters.update(new_filters)
 
-    def make_function_post_script(self, playbook_payload):
+    def make_function_preprocessing_script(self, playbook_payload):
         """build the post processing script for a given function
 
         Args:

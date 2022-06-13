@@ -54,7 +54,7 @@ class SOARCommon():
 
             # match up the function inputs fields with each function
             for funct in funct_api_names:
-                funct["fields"] = self._get_function_fields(funct['function_name'], app)
+                funct["fields"] = self._get_function_fields(funct['function_name'])
 
         LOG.debug(funct_api_names)
         return funct_api_names
@@ -95,17 +95,19 @@ class SOARCommon():
             LOG.warning(str(err))
             return None
 
-    def _get_function_fields(self, function_name, app_info):
+    def _get_function_fields(self, function_name):
         function_info = self._get_function(function_name)
+
         # the function should be found, but need to check
         function_fields = []
         if function_info:
             # get all the fields for this function. This list does not contain api_names
             field_uuids = [field['content'] for field in function_info['view_items'] if field['field_type'] == '__function']
             # now get the api name from these uuids
-            function_fields = [field['display_name'] \
-                                for field in app_info['current_installation']['items'] \
-                                    if field['customization_type'] == 'function_field' and field['uuid'] in field_uuids]
+            function_input_fields = self._get_type_info_indexed("__function", "uuid")
+            function_fields = [field_info \
+                                for field_uuid, field_info in function_input_fields.items() \
+                                    if field_uuid in field_uuids]
 
         return function_fields
 
