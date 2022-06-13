@@ -78,7 +78,7 @@ COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
-RUN pip install pytesseract=0.3.9 numpy=1.22.4 opencv-python-headless=4.5.5.64 
+# RUN pip install pytesseract=0.3.9 numpy=1.22.4 opencv-python-headless=4.5.5.64 
 
 # uncomment and replicate if additional local packages are needed
 #COPY /path/to/extra_package /tmp/packages/.
