@@ -76,13 +76,13 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_extrahop'**
+**IBM Security SOAR app for ExtraHop**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
 ExtraHop is a cybersecurity cloud-native solution that provides AI-based network intelligence to help enterprises detect and respond to advanced threats.
 
-The ExtraHop App for SOAR escalates ExtraHop detections into IBM Security SOAR as an incident/case and facilitates manual enrichment and remediation actions against an ExtraHop RevealX 360 environment in the IBM SOAR Platform.
+The ExtraHop App for IBM SOAR escalates ExtraHop detections into IBM Security SOAR as an incident/case and facilitates manual enrichment and remediation actions against an ExtraHop RevealX 360 environment in the IBM SOAR Platform.
 
 ### Key Features
 <!--
@@ -161,7 +161,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| ExtraHop RevealX 360 | 8.8.31785 | https://ibm-partner.api.cloud.extrahop.com or https://<sensor_hostname_or_ip> | v1 |
+| ExtraHop RevealX 360 | 8.8.31785 | https://<extrahop_cloud_api_url> or https://<sensor_hostname_or_ip> | v1 |
 
 #### Prerequisites
 <!--
@@ -189,11 +189,11 @@ List any steps that are needed to configure the endpoint to use this app.
 * The ExtraHop system must be configured to allow API key generation for the user.
 * A valid API key must be generated for the ExtraHop app user.
 
-See: [Cloud Service api setup](https://docs.extrahop.com/current/rx360-rest-api/)
-
 ##### ExtraHop Cloud Services
 * REST API access must be enabled for the user.
-* Create REST API credentials (key id and key secret token) for the ExtraHop app user.
+* Create REST API credentials (key ID and key secret token) for the ExtraHop app user.
+
+See: [Cloud Service api setup](https://docs.extrahop.com/current/rx360-rest-api/)
 
 #### Permission
 <!--
@@ -214,27 +214,31 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **extrahop_rx_host_url** | Yes | `https://<extrahop-hostname-or-IP-api-address>` | *Cloud api service or sensor url.* |
+| **extrahop_rx_host_url** | Yes | `https://<extrahop-hostname-or-IP-api-address>` | *Cloud api service url or sensor url.* |
 | **extrahop_rx_api_version** | Yes | `v1` | *Version of (API) access to ExtraHop.* |
 | **extrahop_rx_cloud_console_url** | *Yes | ``https://<extrahop-hostname-or-IP-console-address>`` | *Cloud service console url for cloud-based ExtraHop instance.* |
-| **extrahop_rx_key_id** | *Yes | `1ab2ef34gh56ijklm012n3abc4` | *Key id setting if ExtraHop cloud instance used by the integration.* |
+| **extrahop_rx_key_id** | *Yes | `1ab2ef34gh56ijklm012n3abc4` | *Key ID setting if ExtraHop cloud instance used by the integration.* |
 | **extrahop_rx_key_secret** | *Yes | `ab2ef34gh56ijklm012n3abc41ab2ef34gh56ijklm012n3abc4` | *Key secret setting if ExtraHop cloud instance used by the integration.* |
-| **extrahop_rx_api_key** | *Yes | `ab2ef34GH56ijkLM012n3abc41ab2ef34GH56ijklm4` | *Api key setting if standalone sensor used by the integration.* |
+| **extrahop_rx_api_key** | *Yes | `ab2ef34GH56ijkLM012n3abc41ab2ef34GH56ijklm4` | *API key setting if standalone sensor used by the integration.* |
 | **polling_interval** | Yes | `60` | *Interval to wait between polls of ExtraHop for detections.* |
-| **polling_filters** | No | `polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "types": ["interactive_traffic_ssh",  "status": [".none", "new", "in_progress", "acknowledged"], "resolution": [".none" ]` | *Filter detection results returned to SOAR using key/value pairs.*  |
+| **polling_filters** | No | `polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "types": ["interactive_traffic_ssh", "interactive_traffic_shell"],  "status": [".none", "new", "in_progress", "acknowledged"], "resolution": [".none" ]` | *Filter detection results returned to SOAR using key/value pairs.*  |
 | **extrahop_cafile** | No | `<path to cert file>` or `false` | *TLS certificate setting. Can be a path to a CA bundle or 'false'*  |
 | **https_proxy** | No | `https://proxy:443` or `proxy:443` | *Optional setting for an https proxy if required.* |
-*Note: The integration can use either the ExtraHop Cloud Service or an ExtraHop standalone sensor.
+**_NOTE:_** The integration can use either the ExtraHop Cloud Service or an ExtraHop standalone sensor.
 
-### Custom Layouts
+**_NOTE:_** If connecting to an ExtraHop cloud instance, the setting `extrahop_rx_api_key` should be set to a blank value or alteratively commented out.
+
+**_NOTE:_** If connecting to a standalone sensor, the settings `extrahop_rx_key_id` and `extrahop_rx_key_secret` should be set to a blank value or alternatively commented out.
+
+### Custom Layout
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-When the poller starts running a new incident tab will be created as shown below. If the poller is not configured to run,  the custom layout can be configured manually.
+When the poller starts running, a new incident tab is created as shown below. If the poller is not configured to run, the custom layout can be configured manually.
 * Import the Data Tables and Custom Fields like the screenshot below:
-Create a new ExtraHop incident tab in Layouts as follows:
+* Create a new ExtraHop incident tab in Layouts as follows:
   
 1. Navigate to the ‘Customization Settings’ and select the Layouts tab.
 2. Click on ‘Incident Tabs’.
@@ -258,14 +262,15 @@ The ExtraHop integration poller starts querying ExtraHop for detections as soon 
 The poller provides the following functionality.
 
 * For any new detections discovered, creates a  matching incident in the SOAR platform.
+* The ExtraHop detections Ticket ID is assigned the SOAR case value.
 * The workflow `Example: Extrahop Reveal(x) update incident` is triggered by an automatic rule.
-* Enhances the incidents by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
+* The automatic rule Enhances the incidents by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
 * Can be configured to filter the detections which are escalated to the SOAR incidents.  
 * Closes SOAR incidents if the corresponding ExtraHop detections are closed.
 * Closes ExtraHop detections if the corresponding SOAR incidents are closed.
 * Updates  a notification property in the ExtraHop custom tab if information for a SOAR incident if the corresponding ExtraHop detection is updated.
-* Add a note to an ExtraHop detection when a matching SOAR incident is created.
-* The workflow Example: Extrahop Reveal(x) update incident will be triggered by an automation rule  
+* Adds a note to an ExtraHop detection when a matching SOAR incident is created.
+
 The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 
   ![screenshot: fn-extrahop-revealx-incidents](./doc/screenshots/fn-extrahop-revealx-incidents.png)
@@ -302,17 +307,17 @@ Add a note to an ExtraHop detection. Parameters detection_id, note. (Optional) u
 
 The function provides the following functionality.
 
-* Adds a note to a detection in the ExtraHop environment. The original note will be overwritten.
+* Adds a note to a detection in the ExtraHop environment. The original note is overwritten.
 
-**_NOTE:_** The original note will be overwritten.
+**_NOTE:_** The original note is overwritten.
 
 **_NOTE:_** Add detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
 
 * A note is added to the ExtraHop detection when a matching SOAR incident is closed. 
   
-The workflow is initiated by the automatic datatable rule `Example: Extrahop Reveal(x) update detection` when a SOAR incident is closed
+The workflow is initiated by the automatic data table rule `Example: Extrahop Reveal(x) update detection` when a SOAR incident is closed.
 
 The following screenshot shows an example of a note added to an ExtraHop detection:
 
@@ -464,17 +469,17 @@ The function provides the following functionality.
 
 * Assigns a tag to a list of device ids discovered in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) assign tag`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) assign tag`.
 
 * A note is added to the SOAR incident with the status of the action. 
   
-The workflow is initiated by the manual datatable rule `Example: Extrahop Reveal(x) assign tag` for data table `Example: Extrahop Reveal(x) assign tag`.
+The workflow is initiated by the manual data table rule `Example: Extrahop Reveal(x) assign tag` for data table `Example: Extrahop Reveal(x) assign tag`.
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action](./doc/screenshots/fn-extrahop-revealx-assign-tag-action.png)
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action_2](./doc/screenshots/fn-extrahop-revealx-assign-tag-action_2.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-assign-tag-note](./doc/screenshots/fn-extrahop-revealx-assign-tag-note.png)
 
@@ -597,7 +602,7 @@ The function provides the following functionality.
 
 * Creates a new tag in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) create tag`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) create tag`.
 
 * A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Tags` is updated.
@@ -608,7 +613,7 @@ The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(
   
    ![screenshot: fn-extrahop-revealx-create-tag-action_2](./doc/screenshots/fn-extrahop-revealx-create-tag-action_2.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-create-tag-note](./doc/screenshots/fn-extrahop-revealx-create-tag-note.png)
 
@@ -714,7 +719,7 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) get activitymaps
-Get activitymap information from Extrahop Reveal(x) . Optional parameter activitymap_id.
+Get activitymap information from Extrahop Reveal(x). Optional parameter activitymap_id.
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps](./doc/screenshots/fn-extrahop-revealx-get-activitymaps.png)
 
@@ -722,7 +727,7 @@ The function provides the following functionality.
 
 * Retrieves information on activitymaps in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) get activitymaps`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get activitymaps`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Activitymaps` is updated.
@@ -735,7 +740,7 @@ The following screenshot shows an example of the data table updated by the funct
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-datatable](./doc/screenshots/dt-extrahop-activitymaps.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-note](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-note.png)
 
@@ -920,11 +925,11 @@ The function provides the following functionality.
   
 **_NOTE:_** Get detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
 
 * The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
   
-The workflow is initiated by the automatic datatable rule `Example: Extrahop Reveal(x) update detection` whern a SOAR incident is closed
+The workflow is initiated by the automatic data table rule `Example: Extrahop Reveal(x) update detection` whern a SOAR incident is closed
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1029,7 +1034,7 @@ The function provides the following functionality.
 
 * Retrieves information on detections in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update incident`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update incident`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Detections` is updated.
@@ -1041,7 +1046,7 @@ The following screenshots show an example of the data table updated by the funct
    ![screenshot: fn-extrahop-revealx-get-detections-datatable_2](./doc/screenshots/fn-extrahop-revealx-get-detections-datatable_2.png)
    ![screenshot: fn-extrahop-revealx-get-detections-datatable_3](./doc/screenshots/fn-extrahop-revealx-get-detections-datatable_3.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-get-detections-note](./doc/screenshots/fn-extrahop-revealx-get-detections-note.png)
 
@@ -1160,7 +1165,7 @@ def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
     Args:
-        det_id (str/int): id representing the detection.
+        det_id (str/int): representing the detection.
 
     Returns:
         str: completed url for linkback
@@ -1278,9 +1283,9 @@ Get devices information from Extrahop Reveal(x). Optional parameters  device_id,
 
 The function provides the following functionality.
 
-* Retrieves information on devices in the ExtraHop environment.
+* Retrieves information for devices in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search devices`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search devices`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Devices` is updated.
@@ -1297,7 +1302,7 @@ The following screenshots show an example of the data table updated by the funct
    
    ![screenshot: fn-extrahop-revealx-get-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-get-devices-datatable_2.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-get-devices-note](./doc/screenshots/fn-extrahop-revealx-get-devices-note.png)
 
@@ -1444,7 +1449,7 @@ def make_linkback_url(dev_id):
     """Create a url to link back to the endpoint alert, case, etc.
 
     Args:
-        dev_id (str/int): id representing the device etc.
+        dev_id (str/int): representing the device etc.
 
     Returns:
         str: completed url for linkback
@@ -1475,7 +1480,7 @@ def process_devs(dev):
     newrow.device_url = device_url_html
 
 def get_dev_ids():
-    # Get participant dev ids    
+    # Get participant devs    
     dev_ids = []
     get_devices_content = workflow.properties.get_detections_result.content
     devs = get_devices_content["result"]
@@ -1529,7 +1534,7 @@ The function provides the following functionality.
 
 * Retrieves a list of tags discovered in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) get tags`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get tags`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Tags` is updated.
@@ -1542,7 +1547,7 @@ The following screenshot shows an example of the data table updated by the funct
 
    ![screenshot: fn-extrahop-revealx-get-tags-datatable](./doc/screenshots/fn-extrahop-revealx-get-tags-datatable.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-get-tags-note](./doc/screenshots/fn-extrahop-revealx-get-tags-note.png)
 
@@ -1551,7 +1556,7 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `extrahop_tag_id` | `number` | No | `-` | The unique identifier for the tag. |
+| `extrahop_tag_id` | `number` | No | `-` | The uniqueentifier for the tag. |
 
 </p>
 </details>
@@ -1662,7 +1667,7 @@ The function provides the following functionality.
 
 * Retrieves a list of devices on the watchlist in the ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) get watchlist`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get watchlist`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Watchlist` is updated.
@@ -1675,7 +1680,7 @@ The following screenshot shows an example of the data table updated by the funct
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-datatable](./doc/screenshots/fn-extrahop-revealx-get-watchlist-datatable.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-note](./doc/screenshots/fn-extrahop-revealx-get-watchlist-note.png)
 
@@ -1833,16 +1838,16 @@ Search for detections information from Extrahop Reveal(x). Optional parameters s
 The function provides the following functionality.
 
 * Retrieves a list of detections in the ExtraHop environment based on the provided parameters.
-* A filter in json is used to target the information retrieved.
+* A filter in JSON is used to target the information retrieved.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search detections`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search detections`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Detections` is updated.
  
 The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search detections`.
 
-The following screenshot shows an example of the action inputs for the workflow :
+The following screenshot shows an example of the action inputs for the workflow:
 
    ![screenshot: fn-extrahop-revealx-search-detections-action](./doc/screenshots/fn-extrahop-revealx-search-detections-action.png)
 
@@ -1854,7 +1859,7 @@ The following screenshot shows an example of the data table updated by the funct
    ![screenshot: fn-extrahop-revealx-search-detections-datatable_2](./doc/screenshots/fn-extrahop-revealx-search-detections-datatable_2.png)
    ![screenshot: fn-extrahop-revealx-search-detections-datatable_3](./doc/screenshots/fn-extrahop-revealx-search-detections-datatable_3.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-search-detections-note](./doc/screenshots/fn-extrahop-revealx-search-detections-note.png)
 
@@ -2178,7 +2183,7 @@ def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
     Args:
-        det_id (str/int): id representing the detection.
+        det_id (str/int): representing the detection.
 
     Returns:
         str: completed url for linkback
@@ -2222,16 +2227,16 @@ Search for devices information from Extrahop Reveal(x). Optional parameters sear
 The function provides the following functionality.
 
 * Retrieves a list of devices on the in the ExtraHop environment based on the parameters provided.
-* A filter in json is used to target the information retrieved.
+* A filter in JSON is used to target the information retrieved.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search devices`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search devices`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Devices` is updated.
  
 The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search devices`.
 
-The following screenshot shows an example of the action inputs for the workflow :
+The following screenshot shows an example of the action inputs for the workflow:
 
    ![screenshot: fn-extrahop-revealx-search-devices-action](./doc/screenshots/fn-extrahop-revealx-search-devices-action.png)
 
@@ -2243,7 +2248,7 @@ The following screenshot shows an example of the data table updated by the funct
    
    ![screenshot: fn-extrahop-revealx-search-devices-datatable_2](./doc/screenshots/fn-extrahop-revealx-search-devices-datatable_2.png)
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-search-devices-note](./doc/screenshots/fn-extrahop-revealx-search-devices-note.png)
 
@@ -2427,7 +2432,7 @@ def make_linkback_url(dev_id):
     """Create a url to link back to the endpoint alert, case, etc.
 
     Args:
-        dev_id (str/int): id representing the device etc.
+        dev_id (str/int): representing the device etc.
 
     Returns:
         str: completed url for linkback
@@ -2495,19 +2500,18 @@ Valid output types are: pcap, keylog_txt or zip.
 
 The function provides the following functionality.
 
-* Does a packet search and download from an ExtraHop environment
-* The packet data can be downloaded in pcap, zip and keylog_txt output format.
+* Does a packet search and download from an ExtraHop environment. The packet data can be downloaded in pcap, zip and keylog_txt output format.
 
 **_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) search packets`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search packets`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * An attachment in the select output format is added to the SOAR incident.
 
 The workflow is initiated by the manual incident artifact rule `Example: Extrahop Reveal(x) search packets`.
 
-The following screenshot shows an example of the action inputs for the workflow :
+The following screenshot shows an example of the action inputs for the workflow:
 
    ![screenshot: fn-extrahop-revealx-search-packets-action](./doc/screenshots/fn-extrahop-revealx-search-packets-action.png)
 
@@ -2517,7 +2521,7 @@ The following screenshot shows an example of the attachments added by the functi
 
    ![screenshot: fn-extrahop-revealx-search-packets-attachment](./doc/screenshots/fn-extrahop-revealx-search-packets-attachment.png)
 
-The following screenshot shows an example of notes added to an IBM SOAR incident:
+The following screenshot shows an example of notes added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-search-packets-note](./doc/screenshots/fn-extrahop-revealx-search-packets-note.png)
 
@@ -2662,7 +2666,7 @@ The function provides the following functionality.
 
 * Updates the status, resolution, ticket ID, assignee and optionally participants of an ExtraHop detection.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
 
 * Closes an ExtraHop detection if the equivalent SOAR incident is closed.
 * A note is added to the SOAR incident with the status of the action.
@@ -2672,7 +2676,7 @@ An example workflow that uses this IBM SOAR function is `Example: Extrahop Revea
 
 The workflow is initiated by an automatic incident rule `Example: Extrahop Reveal(x) update detection`
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-update-detection-note](./doc/screenshots/fn-extrahop-revealx-update-detection-note.png)
 
@@ -2791,15 +2795,15 @@ The function provides the following functionality.
 
 * Adds or removes devices to or from the ExtraHop watchlist of the target ExtraHop environment.
 
-An example workflow that uses this IBM SOAR function is `Example: Extrahop Reveal(x) update watchlist`.
+An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update watchlist`.
 
 * Adds a device or list ExtraHop devices to the watchlist of the target ExtraHop environment.
 * Refreshes the associated row of the data table  `ExtraHop Devices`.
 * A note is added to the SOAR incident with the status of the action.
  
-The workflow is initiated by the manual datatable rule `Example: Extrahop Reveal(x) assign tag`.
+The workflow is initiated by the manual data table rule `Example: Extrahop Reveal(x) assign tag`.
 
-The following screenshot shows an example of the action inputs for the workflow :
+The following screenshot shows an example of the action inputs for the workflow:
 
    ![screenshot: fn-extrahop-revealx-update-watchlist-action](./doc/screenshots/fn-extrahop-revealx-update-watchlist-action.png)
 
@@ -2810,7 +2814,7 @@ The following screenshot shows an example of the data table updated by the funct
    ![screenshot: fn-extrahop-revealx-update-watchlist-datatable](./doc/screenshots/fn-extrahop-revealx-update-watchlist-datatable.png)
 
 
-The following screenshot shows an example of a note added to an IBM SOAR incident:
+The following screenshot shows an example of a note added to a SOAR incident:
 
    ![screenshot: fn-extrahop-revealx-update-watchlist-note](./doc/screenshots/fn-extrahop-revealx-update-watchlist-note.png)
 
@@ -2819,8 +2823,8 @@ The following screenshot shows an example of a note added to an IBM SOAR inciden
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `extrahop_assign` | `text` | No | `-` | Comma or newline seperated list of device ids to assign to a watchlist. |
-| `extrahop_unassign` | `text` | No | `-` | Comma or newline seperated list of device ids to unassign from a watchlist. |
+| `extrahop_assign` | `text` | No | `-` | Comma or newline seperated list of devices to assign to a watchlist. |
+| `extrahop_unassign` | `text` | No | `-` | Comma or newline seperated list of devices to unassign from a watchlist. |
 
 </p>
 </details>
@@ -3519,7 +3523,7 @@ extrahop_detections
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Appliance id | `appliance_id` | `text` | - |
+| Appliance ID | `appliance_id` | `text` | - |
 | Assignee | `assignee` | `text` | - |
 | Categories | `categories` | `text` | - |
 | Description | `det_description` | `text` | - |
