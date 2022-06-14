@@ -1556,7 +1556,7 @@ The following screenshot shows an example of a note added to a SOAR incident:
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `extrahop_tag_id` | `number` | No | `-` | The uniqueentifier for the tag. |
+| `extrahop_tag_id` | `number` | No | `-` | The unique identifier for the tag. |
 
 </p>
 </details>
