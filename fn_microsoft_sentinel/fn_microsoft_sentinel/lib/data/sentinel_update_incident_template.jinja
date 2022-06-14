@@ -13,7 +13,7 @@
         {% for label in label_list %}
             {% if label %}
             {
-                "labelName": {{ label | json }},
+                "labelName": {{ label | trim | json }},
                 "labelType": "User"
             }
             {% endif %}

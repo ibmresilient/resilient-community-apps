@@ -7,6 +7,18 @@
         "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
-        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
+        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}",
+        {% set label_list = properties.sentinel_incident_labels.split(',') -%}
+        "labels": [
+        {% for label in label_list %}
+            {% if label %}
+            {
+                "labelName": {{ label | trim | json }},
+                "labelType": "User"
+            }
+            {% endif %}
+        {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
     }
 }
