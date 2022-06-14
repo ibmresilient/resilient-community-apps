@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1654709174546,
+  "export_date": 1655228599353,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -73,40 +73,6 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "a7af2d6e-a239-44ea-91a3-040eb470a24a",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "__function/ocr_language",
-      "hide_notification": false,
-      "id": 563,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "ocr_language",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
-          "value": "Playbook Tag"
-        }
-      ],
-      "templates": [],
-      "text": "ocr_language",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "a98055ee-883f-4b39-a428-38c539984679",
       "values": []
     },
     {
@@ -195,7 +161,7 @@
       "name": "ocr_confidence_threshold",
       "operation_perms": {},
       "operations": [],
-      "placeholder": "",
+      "placeholder": "49",
       "prefix": null,
       "read_only": false,
       "rich_text": false,
@@ -211,6 +177,96 @@
       "type_id": 11,
       "uuid": "bf7f1348-7b26-4a68-89ac-a2f966017913",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/ocr_language",
+      "hide_notification": false,
+      "id": 564,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "ocr_language",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [
+        {
+          "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
+          "value": "Playbook Tag"
+        }
+      ],
+      "templates": [],
+      "text": "ocr_language",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "263c4d0a-c7d7-4254-84e7-49139fe2a6e4",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "eng",
+          "properties": null,
+          "uuid": "54170b2a-2a9f-49d5-af78-15b1c32bbb9f",
+          "value": 131
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ara",
+          "properties": null,
+          "uuid": "6ee9fbcf-0b60-4df2-8a5d-33a82b49ad24",
+          "value": 132
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "chi_sim",
+          "properties": null,
+          "uuid": "87174883-0484-4536-9396-7954bd052046",
+          "value": 133
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "chi_tra",
+          "properties": null,
+          "uuid": "e2b278b0-48f6-4634-ad0b-279b2c5986a8",
+          "value": 134
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "rus",
+          "properties": null,
+          "uuid": "8abc51ba-c7b1-4f86-b410-f925c22ccb9e",
+          "value": 135
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "spa",
+          "properties": null,
+          "uuid": "e0955f08-832b-48f3-b105-e3db2e985122",
+          "value": 136
+        }
+      ]
     },
     {
       "export_key": "incident/internal_customizations_field",
@@ -241,7 +297,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1654702634983,
+      "last_modified_time": 1655228550145,
       "name": "fn_ocr",
       "tags": [
         {
@@ -250,7 +306,7 @@
         }
       ],
       "uuid": "7f05f3a0-1788-4634-b092-43ae4fe8b197",
-      "version": 12,
+      "version": 17,
       "view_items": [
         {
           "content": "aa71a32f-5495-4e65-8169-c1be988196d5",
@@ -261,7 +317,7 @@
           "step_label": null
         },
         {
-          "content": "b1a0ef93-a52e-4c50-a521-dd8da24bbff7",
+          "content": "263c4d0a-c7d7-4254-84e7-49139fe2a6e4",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -269,7 +325,7 @@
           "step_label": null
         },
         {
-          "content": "a98055ee-883f-4b39-a428-38c539984679",
+          "content": "b1a0ef93-a52e-4c50-a521-dd8da24bbff7",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -306,13 +362,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1654709173110,
+      "create_date": 1655228597563,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -321,7 +377,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1654709173110,
+      "update_date": 1655228597563,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -355,7 +411,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 10,
+        "content_version": 20,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" isExecutable=\"true\" name=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_06msd89\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7f05f3a0-1788-4634-b092-43ae4fe8b197\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\ninputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = playbook.inputs.ocr_confidence_threshold\\ninputs.ocr_language = playbook.inputs.ocr_language\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06msd89\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l276jy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_06msd89\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ocr_results_to_note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1d9740c6-4267-4cd1-8089-cc5f935387b7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0l276jy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kd23ca\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0l276jy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kd23ca\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1kd23ca\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kd23ca\" id=\"Flow_1kd23ca_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l276jy\" id=\"Flow_0l276jy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06msd89\" id=\"Flow_06msd89_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1654544182141,
@@ -398,6 +454,7 @@
             "placeholder": "49",
             "prefix": null,
             "read_only": false,
+            "required": "always",
             "rich_text": false,
             "tags": [],
             "templates": [],
@@ -417,24 +474,80 @@
             "deprecated": false,
             "export_key": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e/ocr_language",
             "hide_notification": false,
-            "id": 562,
-            "input_type": "text",
+            "id": 565,
+            "input_type": "select",
             "internal": false,
             "is_tracked": false,
             "name": "ocr_language",
             "operation_perms": {},
             "operations": [],
-            "placeholder": "en",
+            "placeholder": "",
             "prefix": null,
             "read_only": false,
+            "required": "always",
             "rich_text": false,
             "tags": [],
             "templates": [],
             "text": "OCR Language",
-            "tooltip": "The language to detect. Defaults to \u0027en\u0027 (English), check Tesseract 5.0.1 documentation for a full list of languages and scripts.",
+            "tooltip": "Choose the language you want to detect",
             "type_id": 1005,
-            "uuid": "8353a029-9d48-41c0-bdb4-f07f6c122124",
-            "values": []
+            "uuid": "75258569-29c3-4e19-bb96-2fa78e7dbb7a",
+            "values": [
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "eng",
+                "properties": null,
+                "uuid": "b5dafc26-3c2c-4ab8-aa1c-184db9df7343",
+                "value": 137
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "ara",
+                "properties": null,
+                "uuid": "c1106908-bcd3-4dd6-b304-884b23b0ffb1",
+                "value": 138
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "chi_sim",
+                "properties": null,
+                "uuid": "7cbfd98e-531a-4756-8245-5b40c134ae35",
+                "value": 139
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "chi_tra",
+                "properties": null,
+                "uuid": "f5ef99c6-a79f-4ec5-aa6a-3cb97bd247d8",
+                "value": 140
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "rus",
+                "properties": null,
+                "uuid": "a3cd567b-159d-44cb-8534-1f8e3e79405f",
+                "value": 141
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "spa",
+                "properties": null,
+                "uuid": "bf8a9026-3df0-4580-97af-cd03cc624437",
+                "value": 142
+              }
+            ]
           }
         },
         "for_actions": false,
@@ -466,7 +579,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1654702644747,
+      "last_modified_time": 1654803259861,
       "local_scripts": [
         {
           "actions": [],
@@ -477,12 +590,12 @@
           "id": 11,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1654548540648,
+          "last_modified_time": 1654800575539,
           "name": "ocr_results_to_note",
           "object_type": "artifact",
           "playbook_handle": "parse_image",
           "programmatic_name": "parse_image_ocr_results_to_note",
-          "script_text": "content = playbook.functions.results.ocr_results[\"content\"]\nif content is not None:\n  # note_text = u\"File {0} converted to base64 format: {1}\".format(attachment.name, content[\"content\"])\n  # Make this parse when we know what the output will be\n  incident.addNote(content[\"text\"])",
+          "script_text": "content = playbook.functions.results.ocr_results[\"content\"]\n\nif content is not None:\n  output_text = \"Below are the lines detected by OCR, as well as their confidence scores\\n\\n\"\n  for line in content:\n    output_text += \u0027\"\u0027 + line[\"text\"] + f\u0027\" \\t\\t Confidence Score: {round(line[\"confidence\"],2)}%\\n\\n\u0027\n  \n  \n  \n  incident.addNote(output_text)",
           "tags": [],
           "uuid": "1d9740c6-4267-4cd1-8089-cc5f935387b7"
         }
@@ -510,7 +623,7 @@
             "step_label": null
           },
           {
-            "content": "8353a029-9d48-41c0-bdb4-f07f6c122124",
+            "content": "75258569-29c3-4e19-bb96-2fa78e7dbb7a",
             "element": "field_uuid",
             "field_type": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
             "show_if": null,
@@ -532,7 +645,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b1eac7ff-fc16-4084-9045-b753d316a26e",
-      "version": 14
+      "version": 25
     }
   ],
   "regulators": null,
