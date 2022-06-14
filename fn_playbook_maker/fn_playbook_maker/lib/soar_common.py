@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import logging
+from retry import retry
 from urllib.parse import urljoin
 from resilient import SimpleHTTPException
 from resilient_lib import IntegrationError
@@ -33,6 +34,7 @@ class SOARCommon():
         else:
             return False
 
+    @retry(SimpleHTTPException, tries=3, delay=2, backoff=20)
     def get_playbook_by_api_name(self, playbook_api_name):
         url = urljoin(PLAYBOOKS_URI, playbook_api_name)
         return self.rest_client.get(url)

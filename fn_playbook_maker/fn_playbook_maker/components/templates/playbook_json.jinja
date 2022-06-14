@@ -92,7 +92,7 @@
                     "actions": [],
                     "created_date": 1652961380454,
                     "creator_id": "ibmsoar@ibm.com",
-                    "description": "",
+                    "description": "Skeleton script for parsing function results.",
                     "enabled": false,
                     "export_key": "parse results for {{ current_funct.function_name }}",
                     "language": "python3",
@@ -100,7 +100,7 @@
                     "object_type": "{{ inputs.pbm_playbook_type }}",
                     "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
                     "programmatic_name": "{{ playbook_info.playbook_name_api_name }}_parse_results_for_{{ current_funct.function_name }}",
-                    "script_text": "results = playbook.functions.results.{{ current_funct.function_name }}\nif results.success:\n  # change to include your parsing logic\n  pass\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
+                    "script_text": "results = playbook.functions.results.{{ current_funct.function_name }}\nif results.success:\n  # change to include your parsing logic\n  <CHANGE>\nelse:\n  incident.addNote(\"Failed: {}\".format(results.reason))",
                     "tags": [],
                     "uuid": "{{ current_funct.script_uuid }}"
                 }

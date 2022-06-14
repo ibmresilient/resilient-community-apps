@@ -86,12 +86,12 @@ class FunctionComponent(AppFunctionComponent):
                 # separate playbooks
                 for funct_info in function_input_list:
                     playbook_payload, export_res, err_msg = make_export_res(inputs, [funct_info])
-                    self.LOG.info("Creating playbook '%s' for function '%s'",
-                        playbook_payload['playbook_info']['playbook_name'],
-                        funct_info.get('function_name'))
                     if err_msg:
                         self.LOG.error(err_msg)
                     else:
+                        self.LOG.info("Creating playbook '%s' for function '%s'",
+                                        playbook_payload['playbook_info']['playbook_name'],
+                                        funct_info.get('function_name'))
                         result_list.append(self.import_playbook(playbook_payload, export_res))
 
             results = FunctionResult(result_list)

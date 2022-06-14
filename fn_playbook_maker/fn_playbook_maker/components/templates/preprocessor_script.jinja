@@ -2,5 +2,5 @@
     "inputs":{},
     "pre_processing_script_language":"python3",
     "result_name":"{{ current_function.function_name }}",
-    "pre_processing_script":"{% for field in current_function.fields %}\n# ({{ field.input_type }}) Required: {% if 'required' in field %}Yes{% else %}No{% endif %} {{ field.tooltip | replace('<', '&lt;') | replace('>', '&gt;') }} {% if field['values'] %}Values: {{ field['values'] | map(attribute='label') | join(', ') }}{% endif %}\ninputs.{{ field.name }}= {% if inputs.pbm_activation_fields %}playbook.inputs.{{ field.name }}{% else %}&lt;CHANGE&gt;{% endif %}\n{% endfor %}"
+    "pre_processing_script":"{% for field in current_function.fields %}\n# ({{ field.input_type }}) Required: {% if 'required' in field %}Yes{% else %}No{% endif %} {{ field.tooltip | replace('"', '\\"') | replace('<', '&lt;') | replace('>', '&gt;') }} {% if field['values'] %}Values: {{ field['values'] | map(attribute='label') | join(', ') }}{% endif %}\ninputs.{{ field.name }}= {% if inputs.pbm_activation_fields %}playbook.inputs.{{ field.name }}{% else %}&lt;CHANGE&gt;{% endif %}\n{% endfor %}"
 }

@@ -31,7 +31,8 @@ setup(
     description="Generate playbooks from function definitions",
     long_description="""Specify an app to include all it's functions or name the functions individually to create playbooks as a starting point for playbook creation.""",
     install_requires=[
-        "resilient-circuits>=44.0.0"
+        "resilient-circuits>=44.0.0",
+        "retry2"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
