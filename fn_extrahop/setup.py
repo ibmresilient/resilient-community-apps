@@ -38,6 +38,8 @@ setup(
         <br>
         * Functions to get, search and update detections.
         <br>
+        * Functions to get and update detection notes.
+        <br>
         * Functions to get and search devices.
         <br>
         * Functions to get, create and assign tags.
