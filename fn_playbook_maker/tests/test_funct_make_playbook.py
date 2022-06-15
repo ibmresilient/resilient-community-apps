@@ -37,7 +37,7 @@ test_inputs_function_info = [
                 "input_type": "text",
                 "required": True,
                 "text": "Input Field",
-                "tooltip": "some tip",
+                "tooltip": "some tip. special \" & <something>",
                 "rich_text": False,
                 "values": []
             }
