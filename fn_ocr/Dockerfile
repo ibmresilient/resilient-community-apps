@@ -24,22 +24,48 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
 # install tools required to build tesseract and leptonica
-RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make libjpeg-devel libpng-devel libtiff-devel zlib-devel wget 
+RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel zlib-devel wget 
 # install image shared libraries
 RUN yum -y install libpng libjpeg libtiff zlib 
 # make a temp dir we can delete after building and installing
 RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
 
+RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz & \ 
+wget https://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz & \
+wget http://download.osgeo.org/libtiff/tiff-4.0.10.tar.gz & \ 
+wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz &\
+wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz & wait
+
+RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf jpegsrc.v6b.tar.gz & tar -xvzf tiff-4.0.10.tar.gz & tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & wait
+
+# download and build libpng
+# RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz; tar -xvzf libpng-1.6.37.tar.gz
+WORKDIR $HOME/temp_installers/libpng-1.6.37
+RUN ./configure && make -j5 && make install
+# WORKDIR $HOME/temp_installer
+
+# download and build libjpeg
+# RUN wget https://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz; tar -xvzf jpegsrc.v6b.tar.gz
+WORKDIR $HOME/temp_installers/jpeg-6b
+RUN mkdir -p /usr/local/man/man1
+RUN ./configure && make -j5 && make install
+# WORKDIR $HOME/temp_installers
+
+# download and build libtiff
+# RUN wget http://download.osgeo.org/libtiff/tiff-4.0.10.tar.gz; tar -xvzf tiff-4.0.10.tar.gz
+# WORKDIR $HOME/temp_installers/tiff-4.0.10
+# RUN ./configure && make -j5 && make install
+# WORKDIR $HOME/temp_installers
+
 # download and build leptonica
-RUN wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz; tar -xvzf leptonica-1.82.0.tar.gz
-# RUN tar -xvzf leptonica-1.82.0.tar.gz
+# RUN wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz; tar -xvzf leptonica-1.82.0.tar.gz
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
 RUN ./autogen.sh && ./configure && make -j5 && make install
 
-WORKDIR $HOME/temp_installers
+# WORKDIR $HOME/temp_installers
 # download and build tesseract
-RUN wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz; tar -xvzf 5.0.1.tar.gz
+# RUN wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz; tar -xvzf 5.0.1.tar.gz
 
 WORKDIR $HOME/temp_installers/tesseract-5.0.1
 RUN ./autogen.sh
@@ -59,7 +85,7 @@ wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.train
 # move language files to the shared library
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
-# RUN rm -rf $HOME/temp_installers
+RUN rm -rf $HOME/temp_installers
 # remove build tools + wget because they pose security risk
 RUN yum -y remove gcc gcc-c++ make wget automake autoconf pkg-config 
 
