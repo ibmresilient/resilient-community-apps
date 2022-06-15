@@ -1,10 +1,10 @@
-# docker build -t ibmresilient/fn_service_now:1.0.4 -t ibmresilient/fn_service_now:latest .
+# docker build -t ibmresilient/fn_service_now:2.0.0 -t ibmresilient/fn_service_now:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_service_now
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=43.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container

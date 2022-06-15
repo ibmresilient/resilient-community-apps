@@ -1,11 +1,15 @@
-# docker build -t resilient/fn_outbound_email:1.0.0 -t resilient/fn_outbound_email:latest .
+# docker build -t ibmresilient/fn_outbound_email:1.3.1 -t ibmresilient/fn_outbound_email:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-36:latest
 
 ARG APPLICATION=fn_outbound_email
-ARG RESILIENT_CIRCUITS_VERSION=36.2
+ARG RESILIENT_CIRCUITS_VERSION=43.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
+
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
 # Update to latest packages, user 0 for root privilege
 USER 0
@@ -14,7 +18,7 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed

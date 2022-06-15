@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -11,7 +11,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import write_file_attachment
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_string_to_attachment"""
+    """Component that implements SOAR function 'utilities_string_to_attachment"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 datastream = BytesIO(string_to_convert_to_attachment.encode("utf-8"))
 
-            #  Access Resilient API
+            #  Access SOAR API
             client = self.rest_client()
 
             # POST the new attachment

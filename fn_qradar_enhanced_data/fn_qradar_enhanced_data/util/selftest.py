@@ -5,13 +5,12 @@
 """
 
 import logging
-from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient
-
+from fn_qradar_enhanced_data.util.qradar_utils import QRadarClient, QRadarServers
+from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
 
 def selftest_function(opts):
     """
@@ -20,43 +19,45 @@ def selftest_function(opts):
     """
     try:
 
-        options = opts.get("fn_qradar_integration", {})
-        res_options = opts.get("resilient", {})
+        options = opts.get(PACKAGE_NAME, {})
 
-        log.info("Verifying app.config values for fn_qradar_integration config section")
-
-        if res_options["cafile"].lower() == "false":
-            qradar_client = QRadarClient(host=options["host"],
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=False,
-                                         opts=opts,
-                                         function_opts=options)
+        if not options:
+            servers = QRadarServers(opts, options)
+            server_list = servers.get_server_name_list()
         else:
-            qradar_client = QRadarClient(host=options["host"],
-                                         username=options.get("username", None),
-                                         password=options.get("qradarpassword", None),
-                                         token=options.get("qradartoken", None),
-                                         cafile=res_options["cafile"],
-                                         opts=opts,
-                                         function_opts=options)
+            server_list = {PACKAGE_NAME}
+        
+        if GLOBAL_SETTINGS in server_list:
+            server_list.remove(GLOBAL_SETTINGS)
 
-        log.info("Verifying QRadar connection...")
+        for server_name in server_list:
+            server = opts.get(server_name, {})
 
-        connected = qradar_client.verify_connect()
+            log.info("Verifying app.config values for {} config section".format(str(server.get("host"))))
 
-        if connected:
-            log.info("Verifying QRadar GraphQL connection...")
+            cafile = False if server.get("verify_cert", "false").lower() == "false" else server.get("verify_cert")
+            qradar_client = QRadarClient(host=server.get("host"),
+                                        username=server.get("username", None),
+                                        password=server.get("qradarpassword", None),
+                                        token=server.get("qradartoken", None),
+                                        cafile=cafile,
+                                        opts=opts,
+                                        function_opts=server)
 
-            graphql_installed = qradar_client.verify_graphql_connect()
+            log.info("Verifying QRadar connection...")
 
-            if not graphql_installed:
-                log.warning("QRadar GraphQL connection check failed. This is needed for qradar_enhanced data. "
-                            "Check for QRadar Analyst workflow installation ")
-            else:
-                log.info("Test was successful")
+            connected = qradar_client.verify_connect()
 
+            if connected:
+                log.info("Verifying QRadar GraphQL connection...")
+
+                graphql_installed = qradar_client.verify_graphql_connect()
+
+                if not graphql_installed:
+                    log.warning("QRadar GraphQL connection check failed. This is needed for qradar_enhanced_data. "
+                                "Check for QRadar Analyst workflow installation\n")
+                else:
+                    log.info("Test was successful\n")
 
         return {
             "state": "success"
@@ -69,14 +70,16 @@ def selftest_function(opts):
             Current Configs in app.config file::
             ---------
             host: {1}
-            username: {2}
-            qradarpassword: {3}
-            qradartoken: {4}\n""".format(
+            verify_cert: {2}
+            username: {3}
+            qradarpassword: {4}
+            qradartoken: {5}\n""".format(
             err,
-            options["host"],
-            options["username"],
-            options["qradarpassword"],
-            options["qradartoken"])
+            server.get("host"),
+            server.get("verify_cert"),
+            server.get("username"),
+            server.get("qradarpassword"),
+            server.get("qradartoken"))
 
         log.error(err_reason_msg)
 

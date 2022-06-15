@@ -4,9 +4,13 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool
-from fn_rsa_netwitness.util.helper import remove_dir, create_tmp_file, get_headers, convert_to_nw_time
+import sys
+from io import StringIO, BytesIO
+from resilient_circuits import ResilientComponent, function, handler,\
+    StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon,\
+    str_to_bool, write_file_attachment
+from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
 
@@ -20,9 +24,11 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user",\
+            "nw_packet_server_password"], self.options)
 
-        self.options["nw_packet_server_verify"] = str_to_bool(self.options.get("nw_packet_server_verify"))
+        self.options["nw_packet_server_verify"] =\
+            str_to_bool(self.options.get("nw_packet_server_verify"))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -33,7 +39,6 @@ class FunctionComponent(ResilientComponent):
     def _netwitness_retrieve_pcap_data(self, event, *args, **kwargs):
         """Function: Returns back either a pcap file from Netwitness,
         and attaches it to an incident."""
-        temp_d = None
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
@@ -43,15 +48,15 @@ class FunctionComponent(ResilientComponent):
             incident_id = str(kwargs.get("incident_id"))  # number
 
             # Initialize resilient_lib objects (handles the select input)
-            rp = ResultPayload("fn_rsa_netwitness", **{"nw_event_session_ids": nw_event_session_ids,
-                                                                      "incident_id": incident_id})
+            results_payload = ResultPayload("fn_rsa_netwitness", **{"nw_event_session_ids":\
+                nw_event_session_ids, "incident_id": incident_id})
             req_common = RequestsCommon(self.opts)
 
             # Verify inputs are set correctly
             if nw_event_session_ids is None:
                 if nw_start_time is None or nw_end_time is None:
-                    raise FunctionError("Either nw_event_session_ids or nw_start_time and nw_end_time must be set for "
-                                        "this function to run correctly.")
+                    raise FunctionError("Either nw_event_session_ids or nw_start_time and "\
+                        "nw_end_time must be set for this function to run correctly.")
 
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_start_time: %s", nw_start_time)
@@ -66,47 +71,49 @@ class FunctionComponent(ResilientComponent):
 
             # User session id if avaiable
             if nw_event_session_ids:
-                pcap_file = get_nw_session_pcap_file(url, username, password, nw_verify, nw_event_session_ids,
-                                                     req_common)
+                pcap_file = get_nw_session_pcap_file(url, username, password, nw_verify,\
+                    nw_event_session_ids, req_common)
                 file_name = "PCAP file for session IDs: {}.pcap".format(nw_event_session_ids)
             else:
                 nw_start = convert_to_nw_time(nw_start_time)
                 nw_end = convert_to_nw_time(nw_end_time)
 
-                pcap_file = get_nw_session_pcap_file_time(url, username, password, nw_verify, nw_start, nw_end,
-                                                          req_common)
+                pcap_file = get_nw_session_pcap_file_time(url, username, password, nw_verify,\
+                    nw_start, nw_end, req_common)
                 file_name = "PCAP file between {} and {}.pcap".format(nw_start, nw_end)
 
-            temp_d, temp_f = create_tmp_file(pcap_file)
-            log.debug("pcap_file: {}".format(pcap_file))
+            rest_client = self.rest_client()
 
-            resilient_client = self.rest_client()
-            resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                             temp_f, filename=file_name)
-            yield StatusMessage("PCAP file added as attachment to Incident {}".format(str(incident_id)))
+            results = results_payload.done(True, {})
 
-            results = rp.done(True, {})
+            if sys.version_info.major < 3:
+                datastream = StringIO(pcap_file)
+            else:
+                datastream = BytesIO(pcap_file)
+            log.debug("pcap_file: %s", pcap_file[1000:])
+
+            write_file_attachment(rest_client, file_name, datastream, incident_id, None)
+            yield StatusMessage("PCAP file added as attachment to Incident {}"\
+                .format(str(incident_id)))
+
             yield StatusMessage("Done...")
             log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
-        finally:
-            if temp_d:
-                remove_dir(temp_d)
+        except Exception as error:
+            yield FunctionError(error)
 
 
-def get_nw_session_pcap_file(url, user, pw, cafile, event_session_id, req_common):
-    headers = get_headers(user, pw)
+def get_nw_session_pcap_file(url, user, passw, cafile, event_session_id, req_common):
+    headers = get_headers(user, passw)
     request_url = "{}/sdk/packets?sessions={}&render=pcap".format(url, event_session_id)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type='bytes')
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content
 
 
-def get_nw_session_pcap_file_time(url, user, pw, cafile, start_time, end_time, req_common):
-    headers = get_headers(user, pw)
+def get_nw_session_pcap_file_time(url, user, passw, cafile, start_time, end_time, req_common):
+    headers = get_headers(user, passw)
     request_url = "{}/sdk/packets?time1={}&time2={}&render=pcap".format(url, start_time, end_time)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type="bytes")
+    return req_common.execute_call_v2("GET", request_url, verify=cafile, headers=headers).content

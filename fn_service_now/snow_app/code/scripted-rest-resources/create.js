@@ -1,4 +1,4 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
@@ -34,9 +34,18 @@
 	//Function to set all common table column fields
 	function setRecordRequiredFields(record, params, type, short_description, description){
 		//Set custom table column fields
-		record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", params.id);
-		record.setValue("x_ibmrt_resilient_ibm_resilient_type", type);
-		record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", params.link);
+		//Depending on the type of table we're dealing with, different field names are used
+		//The first set is for INC tables. The rest are for any other allowed table
+		//with Resilient properties
+		if (record.isValidField("x_ibmrt_resilient_ibm_resilient_reference_id")) {
+			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", params.id);
+			record.setValue("x_ibmrt_resilient_ibm_resilient_type", type);
+			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", params.link);
+		} else {
+			record.setValue("x_ibmrt_resilient_ibm_soar_reference_id", params.id);
+			record.setValue("x_ibmrt_resilient_ibm_soar_type", type);
+			record.setValue("x_ibmrt_resilient_ibm_soar_reference_link", params.link);
+		}
 		
 		//Set system table column fields
 		record.short_description = short_description;
@@ -59,7 +68,7 @@
 				record.setValue(field.name, field.value);
 			}
 			else{
-				gs.warning(field.name + " is not a valid field in the " + tableName + " table!");
+				gs.warn(field.name + " is not a valid field in the " + tableName + " table!");
 			}
 		}
 	}

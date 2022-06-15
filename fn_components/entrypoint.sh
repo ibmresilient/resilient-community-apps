@@ -8,7 +8,7 @@ resilient-circuits run & CIRCUITS_PID=`echo $!`
 while true
 do
   echo -n "`date +'%F %T,%N INFO '`"
-  if ! echo $APP_CONFIG_SHA | sha256sum --check
+  if ! echo $APP_CONFIG_SHA | sha256sum --check --quiet
   then
     kill -9 $CIRCUITS_PID
     break

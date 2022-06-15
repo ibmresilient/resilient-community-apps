@@ -71,3 +71,4 @@ read_all_incidents
 #edit_workflow
 #read_all_action_invocations
 edit_data
+read_playbook

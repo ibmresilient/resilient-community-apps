@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import threading
 from datetime import datetime
@@ -18,47 +18,65 @@ SECONDS_IN_HOUR = SECONDS_IN_MINUTE*60
 SECONDS_IN_DAY = SECONDS_IN_HOUR*24
 SECONDS_IN_WEEK = SECONDS_IN_DAY*7
 
-_scheduler_ = None
-
 class ResilientScheduler:
     """
     This class builds a singleton instance of the scheduler.
     It also contains helper functions for building and managing scheduler jobs
     """
+    _singleton = None
+    lock = threading.Lock()
 
-    def __init__(self, db_url, datastore_dir, threat_max, timezone):
-        global _scheduler_
+    @staticmethod
+    def get_scheduler(db_url, datastore_dir, threat_max, timezone, resilient_connection):
+        """
+        This method creates a singleton.
+        :param opts: opts from configuration file needed to generate the singleton object
+        :param config_data_selection: config_data_selection needed to generate the singleton object
+        :return:
+        """
+        if ResilientScheduler._singleton is None:
+            with ResilientScheduler.lock:
+                # code here will be single threaded
+                if ResilientScheduler._singleton is None:  # We check for the second time if singleton is set
+                    # in case of multiple threads entering line 49 at the same time (during start up).
+                    # The first thread will generate a token, the subsequent will not.
+                    ResilientScheduler._singleton = ResilientScheduler(db_url, datastore_dir, threat_max, timezone, resilient_connection)
 
+        return ResilientScheduler._singleton
+
+    def __init__(self, db_url, datastore_dir, threat_max, timezone, resilient_connection):
         self.timezone = timezone
+        self._resilient_connection = resilient_connection
 
         url = db_url if db_url else 'sqlite:///{}/scheduler.sqlite'.format(datastore_dir)
 
-        lock = threading.Lock()
-        with lock:
-            if not _scheduler_:
-                jobstores = {
-                    'default': SQLAlchemyJobStore(url=url),
-                }
-                executors = {
-                    'default': ThreadPoolExecutor(threat_max),
-                }
-                job_defaults = {
-                    'coalesce': False,
-                    'max_instances': 1
-                }
-                _scheduler_ = BackgroundScheduler(
-                    jobstores=jobstores, executors=executors,
-                    job_defaults=job_defaults, timezone=timezone
-                )
-                _scheduler_.start()
+        jobstores = {
+            'default': SQLAlchemyJobStore(url=url),
+        }
+        executors = {
+            'default': ThreadPoolExecutor(threat_max),
+        }
+        job_defaults = {
+            'coalesce': False,
+            'max_instances': 1
+        }
+        self._scheduler = BackgroundScheduler(
+            jobstores=jobstores, executors=executors,
+            job_defaults=job_defaults, timezone=timezone
+        )
+        self._scheduler.start()
 
-    @staticmethod
-    def get_scheduler():
+    @property
+    def scheduler(self):
         """
         return the instance of the scheduler
         :return:
         """
-        return _scheduler_
+        return self._scheduler
+
+    @property
+    def resilient_connection(self):
+        return self._resilient_connection
 
     def build_trigger(self, type, value):
         """
@@ -76,7 +94,8 @@ class ResilientScheduler:
                                   hour=split_cron[1],
                                   day=split_cron[2],
                                   month=split_cron[3],
-                                  day_of_week=split_cron[4])
+                                  day_of_week=split_cron[4],
+                                  timezone=self.timezone)
 
         elif type == "interval":
             seconds = self.get_interval(value)
@@ -198,6 +217,23 @@ class ResilientScheduler:
 
         return result
 
+    def find_job_by_label(self, scheduler_label):
+        """
+        find the job by it's label
+        :param scheduler_label:
+        :return: job found or None
+        """
+        jobs = self.scheduler.get_jobs()
+
+        for job in jobs:
+            if job.id.lower() == scheduler_label.lower():
+                return job
+
+        return None
+
+    def get_job_by_id(self, job_id):
+        return self.scheduler.get_job(job_id)
+
     @staticmethod
     def get_str_date(dt):
         """
@@ -230,7 +266,23 @@ class ResilientScheduler:
         params = list(job_json['args'])
 
         # hide settings which contain passwords
-        params[8] = None
-        job_json['args'] = tuple(params)
+        params[8] = params[8] if isinstance(params[8], bool) else None
+        job_json['args'] = params
 
         return job_json
+
+    @staticmethod
+    def validate_rule_parameters(rule_params):
+        """
+        should be json formatted string
+        :param rule_params: name=value;name=value
+        :return: json data
+        """
+        params = {}
+        if rule_params:
+            for items in rule_params.split(';'):
+                # improperly formatted parameters will fail with KeyError
+                k, v = items.split('=')
+                params[k.strip().lower()] = v.strip()
+
+        return params

@@ -1,6 +1,55 @@
-// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+// (c) Copyright IBM Corp. 2022. All Rights Reserved.
 
 var JSON_PARSER = new global.JSON();
+var INC_RES_ID = "x_ibmrt_resilient_ibm_resilient_reference_id";
+var INC_RES_LINK = "x_ibmrt_resilient_ibm_resilient_reference_link";
+var INC_RES_TYPE = "x_ibmrt_resilient_ibm_resilient_type";
+var SIR_RES_ID = "x_ibmrt_resilient_ibm_soar_reference_id";
+var SIR_RES_LINK = "x_ibmrt_resilient_ibm_soar_reference_link";
+var SIR_RES_TYPE = "x_ibmrt_resilient_ibm_soar_type";
+
+function getAllowedAssignmentGroups(){
+	//Gets ResilientAssignmentGroupNames CSV defined in properties
+	//and returns then as a list (all lowercase and whitespace trimmed)
+
+	var assignGroupsCSV, assignGroupsArray, i, errMsg = null;
+	
+	// Get the ResilientAssignmentGroupNames system property
+	try{
+		assignGroupsCSV = gs.getProperty("x_ibmrt_resilient.ResilientAssignmentGroupNames");
+	}
+	catch (e){
+		errMsg = "Failed getting x_ibmrt_resilient.ResilientAssignmentGroupNames Property.\n" + e;
+		throw errMsg;
+	}
+	
+	if (!assignGroupsCSV) {
+		return [];
+	}
+
+	try{
+		// Split them on comma
+		assignGroupsArray = assignGroupsCSV.split(",");
+
+		// Trim whitespace off each table name
+		for(i = 0; i < assignGroupsArray.length; i++){
+			assignGroupsArray[i] = assignGroupsArray[i].trim().toLowerCase();
+		}
+	}
+	catch (e){
+		errMsg = "Error parsing x_ibmrt_resilient.ResilientAssignmentGroupNames. Ensure correct CSV format.\n" + e;
+		throw errMsg;
+	}
+
+	return assignGroupsArray;
+}
+
+function hasIncFields(record) {
+	//Helper method to check if a record is a INC record,
+	//which has the x_ibmrt_resilient_ibm_resilient_reference_id column.
+	//Other records that inherit from Task (i.e. sn_si_incident) don't have that column
+	return record.isValidField(INC_RES_ID);
+}
 
 var ResilientHelper = Class.create();
 ResilientHelper.prototype = {
@@ -142,13 +191,20 @@ ResilientHelper.prototype = {
 			var record_name = record.getValue("short_description");
 
 			//Set required values on SN record
-			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", res_reference_id);
-			record.setValue("x_ibmrt_resilient_ibm_resilient_type", res_reference_type);
-			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", res_reference_link);
+			//Check whether we're dealing with an INC record or not
+			if (hasIncFields(record)) {
+				record.setValue(INC_RES_ID, res_reference_id);
+				record.setValue(INC_RES_TYPE, res_reference_type);
+				record.setValue(INC_RES_LINK, res_reference_link);
+			} else {
+				record.setValue(SIR_RES_ID, res_reference_id);
+				record.setValue(SIR_RES_TYPE, res_reference_type);
+				record.setValue(SIR_RES_LINK, res_reference_link);
+			}
 
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
-				record.work_notes = initSnNote;
+				record.work_notes = initSnNote + " [code]<a href='" + res_reference_link + "' target='_blank'>SOAR Link</a>[/code]";
 			}
 
 			//Add a new row to the Resilient Data Table
@@ -172,10 +228,10 @@ ResilientHelper.prototype = {
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
 
-				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>';
+				var links = '<a target="_blank" href="'+res_link+'">SOAR</a> &nbsp;&nbsp; <a href="'+sn_link+'">SN</a>';
 
 				var resTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Active</div>';
-				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to Resilient</div>';
+				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to SOAR</div>';
 
 				var cells = [
 					["sn_records_dt_time", now],
@@ -262,6 +318,11 @@ ResilientHelper.prototype = {
 	},
 	
 	addNote: function(res_reference_id, noteText, noteFormat){
+
+		//ServiceNow notes can have "[code]" sections which include HTML plain text within them
+		//This link is unecessary on SOAR so filter out the "[code]" tags
+		noteText = noteText.replace(/\[code\].*\[\/code\]/g, "");
+
 		try{
 			if(!noteFormat){
 				noteFormat = "text";
@@ -274,6 +335,51 @@ ResilientHelper.prototype = {
 			var errMsg = "Failed to send note to IBM Resilient";
 			gs.error(errMsg);
 			throw e;
+		}
+	},
+
+	assignGroupIsAllowed: function(assignmentGroup){
+
+		var allowedGroups, i, assignmentGroupLower = null;
+
+		//First convert the incoming value to lowercase and trim
+		//for uniformity with values returned from getAllowedAssignmentGroups()
+		assignmentGroupLower = assignmentGroup.trim().toLowerCase();
+
+		allowedGroups = getAllowedAssignmentGroups();
+
+		for (i = 0; i < allowedGroups.length; i++){
+			if(allowedGroups[i] == assignmentGroupLower){
+				return true;
+			}
+		}
+
+		gs.debug("'" + assignmentGroup + "' is not in the ResilientAssignmentGroupNames CSV list");
+
+		return false;
+	},
+
+	getResilientReferenceId: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue(INC_RES_ID);
+		} else {
+			return record.getValue(SIR_RES_ID);
+		}
+	},
+
+	getResilientReferenceLink: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue(INC_RES_LINK);
+		} else {
+			return record.getValue(SIR_RES_LINK);
+		}
+	},
+
+	getResilientType: function(record){
+		if (hasIncFields(record)) {
+			return record.getValue(INC_RES_TYPE);
+		} else {
+			return record.getValue(SIR_RES_TYPE);
 		}
 	}
 };

@@ -39,6 +39,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1 | 8/2021 | Rebuild app.zip |
 | 1.1.0 | 2/2021 | App Host Support|
 | 1.0.0 | 8/2018 | Initial Release |
 

@@ -37,7 +37,6 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
         super(ShadowServerThreatFeedSearcher, self).__init__(opts)
 
         self.options = opts.get("shadow_server_url", {})
-        LOG.debug(opts)
         self.allowed_artifacts = {
             "hash.md5": "md5",
             "hash.sha1": "sha1"

@@ -30,7 +30,6 @@ class UrlScanIoSearcher(BaseComponent):
 
     def __init__(self, opts):
         super(UrlScanIoSearcher, self).__init__(opts)
-        LOG.debug(opts)
         self.options = opts.get(self.CONFIG_SECTION, {})
 
     # Register this as an async searcher for the URL /<root>/example
@@ -133,9 +132,11 @@ class UrlScanIoSearcher(BaseComponent):
 
             stats = result_content.get('stats', None)
             if stats:
-                malicious_flag = stats.get('malicious', None)
+                verdicts = result_content.get('verdicts', None)
+                urlscan = verdicts.get('urlscan', None)
+                malicious_flag = urlscan.get('malicious', None)
 
-                if malicious_flag == 1:
+                if malicious_flag:
 
                     # Some malicious scans show as failed, do not include those
                     if self._verify_for_scan_failed_flag(result_content):
@@ -148,7 +149,7 @@ class UrlScanIoSearcher(BaseComponent):
                     scan_time = task.get('time', None) if task else None
                     report_url = task.get('reportURL', None) if task else None
                     uniq_countries_int = stats.get('uniqCountries', None)
-                    city_country_list = self._prepare_city_contry(page.get('city', None),
+                    city_country_list = self._prepare_city_country(page.get('city', None),
                                                                   page.get('country', None)) if page else None
                     city_country = ",".join(city_country_list) if city_country_list else None
                     server = page.get('server', None) if page else None
@@ -191,7 +192,7 @@ class UrlScanIoSearcher(BaseComponent):
         return False
 
     @staticmethod
-    def _prepare_city_contry(*argv):
+    def _prepare_city_country(*argv):
         """
         Prepare a list of non None value or blank "Falsy" parameters.
         :param *argv - city, country

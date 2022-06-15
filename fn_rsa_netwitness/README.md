@@ -5,6 +5,20 @@ Resilient Functions simplify development of integrations by wrapping each activi
 
 The RSA NetWitness functions query for metadata and return pcap and log files for specific times and sessions.
 
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### Release History
+
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.1.1 | 6/2021 | Bug fix for json logs output, updated execute_call to execute_call_v2, fix for convert_to_nw_time, removed create_tmp_file, fixed workflow scripts |
+| 1.1.0 | 3/2020 | Initial commit |
+
+---
+ 
 ### Contents:
 #### Message Destinations: 
   * RSA NetWitness Message Destination

@@ -93,7 +93,8 @@ def project_pattern_match(results, project_pattern):
         # convert wildcard "*" to regex format ".*"
         pattern = project_pattern.replace("*", ".*")
         compiled = re.compile(pattern)
-        return [project for project in results if compiled.match(project['summary_fields']['project']['name'])]
+        return [project for project in results if project.get("summary_fields", {}).get("project", {}).get("name", None) \
+            and compiled.match(project['summary_fields']['project']['name'])]
 
     return results
 

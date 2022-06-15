@@ -23,7 +23,7 @@ class PyTest(TestCommand):
 
 setup(
     name='rc-cts-haveibeenpwned',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',

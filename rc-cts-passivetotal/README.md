@@ -11,21 +11,15 @@ rc-webserver
 rc-cts
 ```
 
-## Environment
-
-To install in "development mode"
-    `pip install -e ./rc-cts-passivetotal/`
-or 
-    `python setup.py install`.
-
-To configure the PassiveTotal, run `resilient-circuits config [-u | -c]`. 
-
-Then edit the `[passivetotal]` template with the API URLs and define the tags you classify as "hits" to ensure you get the correct hits. An example is included.
-
-Run with: `resilient-circuits run`.
-
-To register this custom threat service with Resilient:
+## Installation
+1. Unzip rc-cts-passivetotal-x.x.x.tar.gz.zip
+2. Install this tar.gz package with `pip`.
+3. Use the following commands to register this custom threat service with Resilient and test it:
 ```
     sudo resutil threatserviceedit -name "RiskIQ PassiveTotal" -resturl http://<resilient_circuits_url>:9000/cts/pst
+
     sudo resutil threatservicetest -name "RiskIQ PassiveTotal"
 ```
+
+4. Run `resilient-circuits config -u` to install the app.config settings and then edit the `[passivetotal]` section with your configuration data.
+5. Run with: `resilient-circuits run`.

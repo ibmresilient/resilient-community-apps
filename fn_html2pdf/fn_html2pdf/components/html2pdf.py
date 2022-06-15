@@ -42,11 +42,11 @@ class FunctionComponent(ResilientComponent):
             if not (html2pdf_data):
                 raise ValueError("Specify html2pdf_data")
 
-            yield StatusMessage("starting...")
+            yield StatusMessage("starting PDF render...")
 
             result_pdf = self.render_pdf(html2pdf_data, html2pdf_data_type, html2pdf_stylesheet)
 
-            #  yield StatusMessage("done...")
+            yield StatusMessage("PDF render done...")
             log.debug("pdf size {}".format(len(result_pdf)))
 
             results = {

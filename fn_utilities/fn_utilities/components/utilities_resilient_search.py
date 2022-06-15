@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -11,11 +11,11 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_resilient_search"""
+    """Component that implements SOAR function 'utilities_resilient_search"""
 
     @function("utilities_resilient_search")
     def _utilities_resilient_search_function(self, event, *args, **kwargs):
-        """Function: Searches Resilient for incident data.
+        """Function: Searches SOAR for incident data.
             NOTE: The results may include incidents that the current user cannot access.
             Use with caution, to avoid information disclosure."""
         try:

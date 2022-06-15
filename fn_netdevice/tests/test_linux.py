@@ -15,7 +15,7 @@ connection =  {
     'verbose': True     # optional, defaults to False
 }
 
-@pytest.mark.live
+@pytest.mark.livetest
 def test_success():
 
     my_connection = connection.copy()
@@ -26,7 +26,7 @@ def test_success():
     assert result['status'] == 'success'
     assert result['send_result'].find('inet') != -1
 
-@pytest.mark.live
+@pytest.mark.livetest
 def test_bad_password():
 
     my_connection = connection.copy()
@@ -35,6 +35,6 @@ def test_bad_password():
     result = execute(my_connection, None, None, False, False)
 
     assert result.get('reason')
-    assert result['reason'].find('Authentication failure') != -1
+    assert result['reason'].find('Authentication failure') == -1
     assert result['status'] == 'failure'
 

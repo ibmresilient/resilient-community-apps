@@ -1,4 +1,8 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
 include README.md
-include fn_clamav/util/*
+recursive-include fn_clamav/util *
 include fn_clamav/LICENSE
 include fn_clamav/doc/*
+include fn_create_webex_meeting/icons/*

@@ -2,18 +2,36 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_watson_translate',
-    version='1.0.1',
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author_email='',
+    url='http://ibm.biz/soarcommunity',
     description="Resilient Circuits Components for 'fn_watson_translate'",
-    long_description="Resilient Circuits Components for 'fn_watson_translate'",
+    long_description="""This function integrates with IBM Watson Translator to provide translation services for text based content.
+Machine learning is incorporated to understand the source language for translation.""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'watson_developer_cloud>=2.3.0',
+        'resilient_circuits>=39.0.0',
+        'resilient_lib>=39.0.0',
+        'ibm-watson',
+        'ibm_cloud_sdk_core',
         'bs4'
     ],
     packages=find_packages(),
@@ -24,7 +42,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnWatsonTranslateFunctionComponent = fn_watson_translate.components.fn_watson_translate:FunctionComponent"
+            "{}FunctionComponent = fn_watson_translate.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_watson_translate/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_watson_translate.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_watson_translate.util.customize:customization_data"],

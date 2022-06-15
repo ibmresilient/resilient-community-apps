@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2021. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 import logging
 import os
 import tempfile
-import xml.dom.minidom
+import defusedxml.minidom
 import zipfile
 from six import string_types
 
@@ -109,12 +109,12 @@ class GCPHelper:
             elif '.docx' in attachment_name:
                 LOG.debug("Dealing with a docx")
                 attachment_input = cls.extract_text_from_docx(attachment_input)
-
+            return cls.attempt_to_parse_as_utf8(attachment_input), attachment_name
         else:
             # We are not dealing with an attachment
             LOG.debug("Working with an artifact")
+            return cls.attempt_to_parse_as_utf8(gcp_artifact_input), artifact_id
 
-        return cls.attempt_to_parse_as_utf8(attachment_input), attachment_name
 
     @classmethod
     def extract_text_from_docx(cls, attachment_input):
@@ -149,7 +149,7 @@ class GCPHelper:
             temp_pdf_file.close()  # Close the file so we can access it using Zipfile
             m_odf = zipfile.ZipFile(temp_pdf_file.name)  # Parse the ODT as a Zipfile
             ostr = m_odf.read(ODT_CONTENT_FILE)  # content.xml has what we want
-            doc = xml.dom.minidom.parseString(ostr)  # Parse the XML tree for text elements
+            doc = defusedxml.minidom.parseString(ostr)  # Parse the XML tree for text elements
             paras = doc.getElementsByTagName('text:p')  # Get a list of text tags to parse
             odt_paragraphs = []
             for p in paras:

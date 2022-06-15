@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
 from __future__ import print_function
 
 import logging
-import os
-import tempfile
+from os import path
+from tempfile import mkdtemp
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
-
 
 LOG = logging.getLogger(__name__)
 
@@ -32,10 +31,26 @@ class FunctionComponent(ResilientComponent):
 
         self.template_file_path = self.smtp_config_section.get('template_file')
         self.smtp_user = self.smtp_config_section.get("smtp_user")
+        self.from_email_address = self.smtp_config_section.get("from_email_address", self.smtp_user)
 
-        if self.template_file_path and not os.path.exists(self.template_file_path):
-            LOG.error(u"Template file '%s' not found.", self.template_file_path)
-            self.template_file_path = None
+        if "@" not in self.from_email_address:
+            if "@" not in self.smtp_user:
+                raise IntegrationError("No sender address specified")
+            else:
+                self.from_email_address = self.smtp_user
+
+        if self.template_file_path: #If a template file path is given in app.config
+
+            #Create path to local template file
+            cpath = path.dirname(__file__)
+            local_template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], self.template_file_path)
+
+            #If template_file in app.config does not have a path
+            if not path.exists(self.template_file_path) and not path.exists(local_template_file_path):
+                LOG.error(u"Template file '%s' not found.", self.template_file_path)
+                self.template_file_path = None
+            elif path.exists(local_template_file_path):
+                self.template_file_path = local_template_file_path
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -47,27 +62,23 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP and self.smtp_user is not None:
-                mail_from = self.smtp_user
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP:
+                mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
 
-            mail_body_html = None
+            mail_body_html = kwargs.get("mail_body_html", None)
             jinja = False
-            if kwargs.get("mail_body_html"):
-                mail_body_html = kwargs.get("mail_body_html")
-                jinja = False
-            elif self.template_file_path and not mail_body_text:
-                with open(self.template_file_path, "r") as definition:
-                    mail_body_html = definition.read()
-                    LOG.info("Using custom jinja template instead of default, path: %s", self.template_file_path)
-                    if definition.name.find("example_send_email.jinja") == -1:
-                        jinja = False
-                    else:
-                        jinja = True
 
-            if self.smtp_user and not kwargs.get("mail_to"):
-                mail_to = self.smtp_user
+            if mail_body_html:
+                if self.template_file_path:
+                    with open(self.template_file_path, "r") as template:
+                        jinja = True
+                        mail_body_html = template.read()
+                        LOG.info("Using jinja template instead of pre-processing script, path: %s", self.template_file_path)
+
+            if self.from_email_address and not kwargs.get("mail_to"):
+                mail_to = self.from_email_address
             else:
                 mail_to = kwargs.get("mail_to")
             email_message = None
@@ -176,7 +187,7 @@ class FunctionComponent(ResilientComponent):
         """
         remaining_attachment_list = requested_attachments[:]
         attachment_path = []
-        tempdir = tempfile.mkdtemp()
+        tempdir = mkdtemp()
 
         for incident_attachment in incident_attachment_list:
             file_name = incident_attachment["name"]
@@ -184,14 +195,13 @@ class FunctionComponent(ResilientComponent):
                 remaining_attachment_list.remove(file_name)
 
                 if incident_attachment['type'] == 'incident':
-                    file_contents = self.rest_client().get_content("/incidents/{inc_id}/attachments/{attach_id}/contents".
-                                                                  format(inc_id=inc_id,
-                                                                         attach_id=incident_attachment["id"]))
+                    file_contents = self.rest_client().get_content("/incidents/{}/attachments/{}/contents".
+                                                                  format(inc_id, incident_attachment["id"]))
                 else:
-                    file_contents = self.rest_client().get_content("/tasks/{task_id}/attachments/{attach_id}/contents".
-                                                                  format(task_id=incident_attachment["task_id"],
-                                                                         attach_id=incident_attachment["id"]))
-                file_path = os.path.join(tempdir, file_name)
+                    file_contents = self.rest_client().get_content("/tasks/{}/attachments/{}/contents".
+                                                                  format(incident_attachment["task_id"],
+                                                                         incident_attachment["id"]))
+                file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
                 attachment_path.append(file_path)
@@ -212,8 +222,8 @@ class FunctionComponent(ResilientComponent):
         Returns:
             [set]: [file paths for attachments]
         """
-        incident_attachment_result = self.rest_client().post("/incidents/{inc_id}/attachments/query?include_tasks=true".
-                                                             format(inc_id=inc_id), None)
+        incident_attachment_result = self.rest_client().post("/incidents/{}/attachments/query?include_tasks=true".
+                                                             format(inc_id), None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":
@@ -227,7 +237,6 @@ class FunctionComponent(ResilientComponent):
         all_attach and LOG.debug(u"Attachments to include: %s", u",".join(all_attach))
 
         return all_attach
-
 
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""

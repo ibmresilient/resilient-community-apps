@@ -61,8 +61,12 @@ class TestGoogleCloudDlpDeidentifyContent:
 
     @pytest.mark.livetest
     @pytest.mark.parametrize("artifact_id, attachment_id, incident_id, task_id, gcp_artifact_input, gcp_dlp_info_types, expected_results", [
-        (123, 123, 123, 123, "My name is John", ['FIRST_NAME', 'PERSON_NAME', 'US_INDIVIDUAL_TAXPAYER_IDENTIFICATION_NUMBER'], {"value": "xyz"}),
-        (123, 123, 123, 123, "My email is johnsmith@gmail.com", ['EMAIL_ADDRESS', 'US_BANK_ROUTING_MICR'], {"value": "xyz"})
+            (123, None, 123, None, "My name is John",
+             ['FIRST_NAME'], {"value": "xyz"}),
+            (None, 123, 123, None, "My name is John",
+             ['FIRST_NAME'], {"value": "xyz"}),
+            (None, 123, 123, 123, "My email is johnsmith@gmail.com", ['EMAIL_ADDRESS'],
+             {"value": "xyz"})
     ])
     def test_success(self, circuits_app, artifact_id, attachment_id, incident_id, task_id, gcp_artifact_input, gcp_dlp_info_types, expected_results):
         """ Test calling with sample values for the parameters """
@@ -80,11 +84,12 @@ class TestGoogleCloudDlpDeidentifyContent:
         assert(not any(item in results["content"]["de_identified_text"] for item in ['John', 'johnsmith@gmail.com']))
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize(
-        "artifact_id, attachment_id, incident_id, task_id, gcp_artifact_input, gcp_dlp_info_types, expected_results", [
-            (123, 123, 123, 123, "My name is John",
+    @pytest.mark.parametrize("artifact_id, attachment_id, incident_id, task_id, gcp_artifact_input, gcp_dlp_info_types, expected_results", [
+            (123, None, 123, None, "My name is John",
              ['US_INDIVIDUAL_TAXPAYER_IDENTIFICATION_NUMBER'], {"value": "xyz"}),
-            (123, 123, 123, 123, "My email is johnsmith@gmail.com", ['US_BANK_ROUTING_MICR'],
+            (None, 123, 123, None, "My email is johnsmith@gmail.com",
+             ['US_INDIVIDUAL_TAXPAYER_IDENTIFICATION_NUMBER'], {"value": "xyz"}),
+            (None, 123, 123, 123, "My email is johnsmith@gmail.com", ['US_BANK_ROUTING_MICR'],
              {"value": "xyz"})
         ])
     def test_non_removal(self, circuits_app, artifact_id, attachment_id, incident_id, task_id, gcp_artifact_input,

@@ -37,6 +37,7 @@ class TestResilientService:
         None
     ])
     def test_setup(self, mock_res, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc =  ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
 
@@ -46,6 +47,7 @@ class TestResilientService:
         (get_cli_raw_responses("get_findings")["Findings"][0], "us-west-1", ["Id", "DetectorId"], None),
     ])
     def test_find_resilient_incident_for_req(self, mock_res, finding, region, f_fields, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.find_resilient_incident_for_req(finding, region, f_fields)
@@ -57,6 +59,7 @@ class TestResilientService:
         (get_function_params("data"), None)
     ])
     def test_create_incident(self, mock_res, data, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.create_incident(data)
@@ -68,6 +71,7 @@ class TestResilientService:
         (2000, get_function_params("tables"), None)
     ])
     def test_add_datatables(self, mock_res, incident_id, tables, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.add_datatables(incident_id, tables)
@@ -78,6 +82,7 @@ class TestResilientService:
         (2000, get_function_params("tables"), None)
     ])
     def test_add_datatables(self, mock_res, incident_id, tables, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.find_resilient_artifacts_for_incident(incident_id)
@@ -89,6 +94,7 @@ class TestResilientService:
         (2000, get_function_params("tables"), None,  None)
     ])
     def test_add_comment(self, mock_res, incident_id, note, tables, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.add_comment(incident_id, note)
@@ -100,6 +106,7 @@ class TestResilientService:
         ("us-west-2", ["Id", "DetectorId"], None)
     ])
     def test_page_incidents(self, mock_res, region, f_fields, expected_results):
+        mock_res.names = ("MagicMock",)
         res_svc = ResSvc(get_opt(), get_config())
         assert isinstance(res_svc, (ResSvc, ResilientComponent))
         result = res_svc.page_incidents(region=region, f_fields=f_fields)
