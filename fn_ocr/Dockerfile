@@ -24,7 +24,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
 # install tools required to build tesseract and leptonica
-RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel zlib-devel wget 
+RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel libtiff zlib-devel wget 
 # install image shared libraries
 RUN yum -y install libpng libjpeg libtiff zlib 
 # make a temp dir we can delete after building and installing
@@ -33,40 +33,35 @@ WORKDIR $HOME/temp_installers
 
 RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz & \ 
 wget https://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz & \
-wget http://download.osgeo.org/libtiff/tiff-4.0.10.tar.gz & \ 
+wget http://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz & \ 
+wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.2.tar.gz & \
 wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz &\
 wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz & wait
 
-RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf jpegsrc.v6b.tar.gz & tar -xvzf tiff-4.0.10.tar.gz & tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & wait
-
+RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf jpegsrc.v6b.tar.gz & tar -xvzf tiff-4.4.0.tar.gz &\
+ tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & tar -xvzf libwebp-1.2.2.tar.gz & wait
 # download and build libpng
-# RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz; tar -xvzf libpng-1.6.37.tar.gz
 WORKDIR $HOME/temp_installers/libpng-1.6.37
 RUN ./configure && make -j5 && make install
-# WORKDIR $HOME/temp_installer
 
 # download and build libjpeg
-# RUN wget https://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz; tar -xvzf jpegsrc.v6b.tar.gz
 WORKDIR $HOME/temp_installers/jpeg-6b
 RUN mkdir -p /usr/local/man/man1
-RUN ./configure && make -j5 && make install
-# WORKDIR $HOME/temp_installers
+RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 
 # download and build libtiff
-# RUN wget http://download.osgeo.org/libtiff/tiff-4.0.10.tar.gz; tar -xvzf tiff-4.0.10.tar.gz
-# WORKDIR $HOME/temp_installers/tiff-4.0.10
-# RUN ./configure && make -j5 && make install
-# WORKDIR $HOME/temp_installers
+# WORKDIR $HOME/temp_installers/tiff-4.4.0
+# RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
+
+# build webp
+WORKDIR $HOME/temp_installers/libwebp-1.2.2
+RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 
 # download and build leptonica
-# RUN wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz; tar -xvzf leptonica-1.82.0.tar.gz
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
 RUN ./autogen.sh && ./configure && make -j5 && make install
 
-# WORKDIR $HOME/temp_installers
 # download and build tesseract
-# RUN wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz; tar -xvzf 5.0.1.tar.gz
-
 WORKDIR $HOME/temp_installers/tesseract-5.0.1
 RUN ./autogen.sh
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib
