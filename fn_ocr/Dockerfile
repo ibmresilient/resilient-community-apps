@@ -59,7 +59,7 @@ wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.train
 # move language files to the shared library
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
-RUN rm -rf $HOME/temp_installers
+# RUN rm -rf $HOME/temp_installers
 # remove build tools + wget because they pose security risk
 RUN yum -y remove gcc gcc-c++ make wget automake autoconf pkg-config 
 
