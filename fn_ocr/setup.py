@@ -22,14 +22,14 @@ def snake_to_camel(word):
 
 setup(
     name="fn_ocr",
-    display_name="<<display name of your app here>>",
-    version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
+    display_name="Image OCR",
+    version="1.0.1",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_ocr'",
-    long_description="""Resilient Circuits Components for 'fn_ocr'""",
+    long_description="""An App that introduces OCR functionality, which can parse text from images""",
     install_requires=[
         "resilient-circuits>=45.0.0",
         "pytesseract==0.3.8; python_version=='3.6'",
