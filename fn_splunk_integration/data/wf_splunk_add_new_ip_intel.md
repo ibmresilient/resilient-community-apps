@@ -66,19 +66,17 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_label = rule.properties.splunk_servers
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
-
 ```
 
 ### Post-Processing Script
 ```python
-# {'status_code': 201, 'content': {'message': 'Create operation successful.', 'status': True}}
 import java.util.Date as Date 
 
 now = Date().time
 
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Add Status</b>: {}<br>
-<b>Message</b>: {}""".format(artifact.value, 
+<b>Message</b>: {}""".format(artifact.value,
                              "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
                              results.get("content", {}).get("message", "None"))
 
@@ -91,7 +89,6 @@ if results.get("content", {}).get("status", False):
   result_row.intel_field = results.inputs['splunk_query_param1']
   result_row.intel_value = results.inputs['splunk_query_param2']
   result_row.splunk_server = rule.properties.splunk_servers
-
 ```
 
 ---

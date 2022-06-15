@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-#
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
 #   Util classes for Splunk
-#
+
 import requests
 from json import dumps
 from time import time, sleep
@@ -25,18 +23,19 @@ class SplunkClient(object):
     polling_interval = 5
     max_return = 0
 
-    def __init__(self, host, port, username, password, verify=True):
+    def __init__(self, host, port, username=None, password=None, token=None, verify=True):
         """Init splunk_service"""
-        self.splunk_service = self.connect(host, port, username, password, verify)
+        self.splunk_service = self.connect(host, port, username, password, token, verify)
 
     @staticmethod
-    def connect(host, port, username, password, verify):
+    def connect(host, port, username, password, token, verify):
         """
         Connect to Splunk
         :param host: Hostname for splunk
         :param port: Port for splunk
         :param username: Username to login
         :param password: Password to login
+        :param token: Token string
         :param verify: True to validate the SSL cert
         :return: Connection to splunk
         """
@@ -45,6 +44,7 @@ class SplunkClient(object):
                                      port=port,
                                      username=username,
                                      password=password,
+                                     token=token,
                                      verify=verify)
 
     def set_timeout(self, timeout):
@@ -131,15 +131,19 @@ class SplunkUtils(object):
     """ Use python requests to call Splunk REST API"""
 
     # Member variables
+    header = ""
     session_key = ""
     base_url = ""
     SUPPORTED_THREAT_TYPE = ["ip_intel", "file_intel", "user_intel", "http_intel",
                              "email_intel", "service_intel", "process_intel",
                              "registry_intel", "certificate_intel"]
 
-    def __init__(self, host, port, username, password, verify):
+    def __init__(self, host, port, username, password, token, verify):
         self.base_url = "https://{}:{}".format(host, port)
-        self.get_session_key(username, password, verify)
+        if username and password:
+            self.get_session_key(username, password, verify)
+        elif token:
+            self.header = {"Authorization": "Bearer {}".format(token)}
 
     def get_session_key(self, username, password, verify):
         """
@@ -151,20 +155,21 @@ class SplunkUtils(object):
         """
 
         headers = {"Accept": "application/html"}
-        url = self.base_url + "/services/auth/login"
+        url = "{}/services/auth/login".format(self.base_url)
         try:
             resp = requests.post(url,
-                                 headers=headers,
-                                 data=urlparse.urlencode({"username": username,
-                                                          "password": password}),
-                                 verify=verify)
+                                    headers=headers,
+                                    data=urlparse.urlencode({"username": username,
+                                                            "password": password}),
+                                    verify=verify)
             # This one we only allows 200. Otherwise login failed
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
                 session_key = str(resp.content)
                 self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
+                self.header = {"Authorization": "Splunk {}".format(session_key)}
             else:
-                error_msg = "Splunk login failed for user {} with status {}".format(username, resp.status_code)
+                error_msg = "Splunk login failed with status {}".format(resp.status_code)
                 raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, error_msg))
         except Exception as e:
             raise e
@@ -179,16 +184,14 @@ class SplunkUtils(object):
         :return: Response in json
         """
 
-        headers = {"Authorization": "Splunk {}".format(self.session_key)}
-
         args = {"comment": comment,
                 "status": status,
                 "ruleUIDs": [event_id]}
 
-        url = self.base_url + "/services/notable_update"
+        url = "{}/services/notable_update".format(self.base_url )
 
         try:
-            resp = requests.post(url, headers=headers, data=args, verify=cafile)
+            resp = requests.post(url, headers=self.header, data=args, verify=cafile)
             # We shall just return the response in json and let the post process
             # to make decision.
             ret = {"status_code": resp.status_code,
@@ -217,14 +220,13 @@ class SplunkUtils(object):
         :return: Response in json
         """
 
-        headers = {"Authorization": "Splunk {}".format(self.session_key)}
-        url = "{0}/services/data/threat_intel/item/{1}/{2}".format(self.base_url, threat_type, item_key)
+        url = "{}/services/data/threat_intel/item/{}/{}".format(self.base_url, threat_type, item_key)
 
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
             raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
 
         try:
-            resp = requests.delete(url, headers=headers, verify=cafile)
+            resp = requests.delete(url, headers=self.header, verify=cafile)
             # We shall just return the response in json and let the post process
             # to make decision.
             ret = {"status_code": resp.status_code,
@@ -244,9 +246,8 @@ class SplunkUtils(object):
         :param cafile: CA cert or False to skip cert verification
         :return: Response in json
         """
-        headers = {"Authorization": "Splunk {}".format(self.session_key)}
 
-        url = self.base_url + "/services/data/threat_intel/item/" + threat_type
+        url = "{}/services/data/threat_intel/item/{}".format(self.base_url, threat_type)
 
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
             raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
@@ -254,7 +255,7 @@ class SplunkUtils(object):
         item = {"item": dumps(threat_dict)}
 
         try:
-            resp = requests.post(url, headers=headers, data=item, verify=cafile)
+            resp = requests.post(url, headers=self.header, data=item, verify=cafile)
             # We shall just return the response in json and let the post process
             # to make decision.
             ret = {"status_code": resp.status_code,

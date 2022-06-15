@@ -4,7 +4,7 @@
 #
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError
-from fn_splunk_integration.util.splunk_utils import SplunkServers
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
 from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
 
 LOG = getLogger(__name__)
@@ -71,7 +71,15 @@ def get_servers_list(opts):
     # and there configurations 
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        validate_fields(["host", "port", "username", "splunkpassword"], servers_list[server_name])
+        validate_fields(["host", "port"], servers_list[server_name])
+        user = servers_list[server_name].get("username", None)
+        splnukPass = servers_list[server_name].get("splunkpassword", None)
+        token = servers_list[server_name].get("token", None)
+        if not ((user and splnukPass) or token):
+            raise ValueError("Either username/splunkpassword or token need to be given")
+        elif token:
+            servers_list[server_name]["username"] = None
+            servers_list[server_name]["splunkpassword"] = None
 
     return servers_list
 
@@ -116,3 +124,32 @@ def update_splunk_servers_select_list(servers_list, res_rest_client, field_name)
     except Exception as err_msg:
         LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))
         raise IntegrationError("Error while updating action field: {}".format(field_name))
+
+def function_basics(fn_inputs, servers_list, utils=True):
+    # Make that calls that all of the functions use
+    options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, servers_list)
+
+    splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
+
+    # Log all the info
+    LOG.info(str(fn_inputs))
+
+    # Log the splunk server we are using
+    LOG.info("Splunk host: %s, port: %s", options.get("host"), options.get("port"))
+
+    if utils:
+        splunk = SplunkUtils(host=options.get("host"),
+                             port=options.get("port"),
+                             username=options.get("username", None),
+                             password=options.get("splunkpassword", None),
+                             token=options.get("token", None),
+                             verify=splunk_verify_cert)
+    else:
+        splunk = SplunkClient(host=options.get("host"),
+                              port=options.get("port"),
+                              username=options.get("username", None),
+                              password=options.get("splunkpassword", None),
+                              token=options.get("token", None),
+                              verify=splunk_verify_cert)
+
+    return splunk, splunk_verify_cert

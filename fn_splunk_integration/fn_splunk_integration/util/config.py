@@ -9,11 +9,13 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u'''
+# If token given than username/password will be disregarded
 [fn_splunk_integration:splunk_label1]
 host=localhost
 port=8089
 username=admin
 splunkpassword=changeme
+#token=
 verify_cert=false|/path/to/cert
 
 [fn_splunk_integration:splunk_label2]
@@ -21,5 +23,6 @@ host=localhost
 port=8089
 username=admin
 splunkpassword=changeme
+#token=
 verify_cert=false|/path/to/cert
 '''

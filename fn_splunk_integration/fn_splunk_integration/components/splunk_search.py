@@ -3,9 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkClient
 from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
-from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list
+from fn_splunk_integration.util.function_utils import make_query_string, get_servers_list, function_basics
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -33,30 +32,17 @@ class FunctionComponent(AppFunctionComponent):
                     # Add the param in the correct position in the list based on param number
                     splunk_query_param.insert(num, fn_inputs._asdict().get(input))
 
-            options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, self.servers_list)
-
-            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
-
-            # Log all the info
-            self.LOG.info(str(fn_inputs))
-
             # Build query string with params
             query_string = make_query_string(fn_inputs.splunk_query, splunk_query_param)
 
             self.LOG.info("Splunk query to be executed: %s" % query_string)
-            self.LOG.info("Splunk host: %s, port: %s, username: %s",
-                     options.get("host"), options.get("port"), options.get("username"))
 
-            splunk_client = SplunkClient(host=options.get("host"),
-                                         port=options.get("port"),
-                                         username=options.get("username"),
-                                         password=options.get("splunkpassword"),
-                                         verify=splunk_verify_cert)
+            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
 
             if fn_inputs.splunk_max_return:
-                splunk_client.set_max_return(fn_inputs.splunk_max_return)
+                splunk.set_max_return(fn_inputs.splunk_max_return)
 
-            splunk_result = splunk_client.execute_query(query_string)
+            splunk_result = splunk.execute_query(query_string)
             self.LOG.debug(splunk_result)
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))

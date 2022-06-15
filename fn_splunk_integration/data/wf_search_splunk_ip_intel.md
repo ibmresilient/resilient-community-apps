@@ -70,8 +70,6 @@ else:
 
 ### Post-Processing Script
 ```python
-# {'events': [OrderedDict([('_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('threat_key', 'restapi'), ('time', '1598296740.6724114')]), OrderedDict([('_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('threat_key', 'restapi'), ('time', '1598296660.9374135')])]}
-
 if results.get("content", None):
   for event in results.content:
     result_row = incident.addRow("splunk_intel_results")
@@ -92,8 +90,6 @@ else:
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
   result_row.splunk_server = rule.properties.splunk_servers
-  
-
 ```
 
 ---

@@ -3,8 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_splunk_integration.util import function_utils
-from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
+from fn_splunk_integration.util.function_utils import get_servers_list, \
+    update_splunk_servers_select_list, make_item_dict, function_basics
 from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
@@ -16,8 +16,8 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.servers_list = function_utils.get_servers_list(opts)
-        function_utils.update_splunk_servers_select_list(self.servers_list, self.rest_client(), "splunk_servers")
+        self.servers_list = get_servers_list(opts)
+        update_splunk_servers_select_list(self.servers_list, self.rest_client(), "splunk_servers")
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -38,27 +38,16 @@ class FunctionComponent(AppFunctionComponent):
                 if QUERY_PARAM in input:
                     params_list.append(fn_inputs._asdict().get(input))
 
-            options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, self.servers_list)
-
-            splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
-
-            # Log all the info
-            self.LOG.info(str(fn_inputs))
-
             # Build the dict used to add threat intel item
-            item_dict = function_utils.make_item_dict(params_list)
+            item_dict = make_item_dict(params_list)
             # Log it for debug
             self.LOG.debug("item dict: {}".format(str(item_dict)))
 
-            splnk_utils = SplunkUtils(host=options.get("host"),
-                                      port=options.get("port"),
-                                      username=options.get("username"),
-                                      password=options.get("splunkpassword"),
-                                      verify=splunk_verify_cert)
+            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
-            splunk_result = splnk_utils.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                              threat_dict=item_dict,
-                                                              cafile=splunk_verify_cert)
+            splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
+                                                         threat_dict=item_dict,
+                                                         cafile=splunk_verify_cert)
 
             yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 

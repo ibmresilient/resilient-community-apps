@@ -79,8 +79,9 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
-  | Org Data | Read |
+  | Org Data | Read, Edit |
   | Function | Read |
+  | Action Invocations | Read |
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -126,8 +127,9 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **host** | Yes | `localhost` | Splunk host |
 | **port** | Yes | `8089` | Splunk port for restapi |
-| **splunkpassword** | Yes | `changeme` | Splunk password |
-| **username** | Yes | `admin` | Splunk login username |
+| **splunkpassword** | No | `changeme` | Splunk password |
+| **username** | No | `admin` | Splunk login username |
+| **token** | No | `` | Splunk authentication token |
 | **verify_cert** | Yes | `false|/path/to/cert` | Verify https certtificate or not |
 
 #### 1.1.0 Changes
@@ -181,28 +183,28 @@ Add a new Splunk ES threat intelligence item to a given collection. splunk_threa
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
     "message": "Create operation successful.",
     "status": true
   },
+  "raw": null,
   "inputs": {
+    "splunk_query_param1": "ip",
+    "splunk_threat_intel_type": "ip_intel",
     "splunk_label": "splunk_76",
-    "splunk_query_param1": "domain",
-    "splunk_query_param2": "www.hgj.com",
-    "splunk_threat_intel_type": "ip_intel"
+    "splunk_query_param2": "63.154.93.76"
   },
   "metrics": {
-    "execution_time_ms": 2824,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.1.0",
-    "timestamp": "2022-03-17 10:44:17",
-    "version": "1.0"
-  },
-  "raw": "{\"message\": \"Create operation successful.\", \"status\": true}",
-  "reason": null,
-  "success": true,
-  "version": "1.0"
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 1120,
+    "timestamp": "2022-06-14 14:14:02"
+  }
 }
 ```
 
@@ -261,7 +263,6 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_label = rule.properties.splunk_servers
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
-
 ```
 
 </p>
@@ -271,14 +272,13 @@ else:
 <p>
 
 ```python
-# {'status_code': 201, 'content': {'message': 'Create operation successful.', 'status': True}}
 import java.util.Date as Date 
 
 now = Date().time
 
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Add Status</b>: {}<br>
-<b>Message</b>: {}""".format(artifact.value, 
+<b>Message</b>: {}""".format(artifact.value,
                              "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
                              results.get("content", {}).get("message", "None"))
 
@@ -291,7 +291,6 @@ if results.get("content", {}).get("status", False):
   result_row.intel_field = results.inputs['splunk_query_param1']
   result_row.intel_value = results.inputs['splunk_query_param2']
   result_row.splunk_server = rule.properties.splunk_servers
-
 ```
 
 </p>
@@ -322,27 +321,27 @@ Delete a threat intelligence item from a given collection. splunk_threat_intel_t
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
     "message": "Delete operation successful.",
     "status": true
   },
+  "raw": null,
   "inputs": {
-    "splunk_label": "splunk_76",
-    "splunk_threat_intel_key": "cabf173ee8c5421c9290cb019ad8acc4",
-    "splunk_threat_intel_type": "ip_intel"
+    "splunk_threat_intel_key": "6634567c18814616a7fa28cce1862738",
+    "splunk_threat_intel_type": "ip_intel",
+    "splunk_label": "splunk_76"
   },
   "metrics": {
-    "execution_time_ms": 1282,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.1.0",
-    "timestamp": "2022-03-17 10:45:13",
-    "version": "1.0"
-  },
-  "raw": "{\"message\": \"Delete operation successful.\", \"status\": true}",
-  "reason": null,
-  "success": true,
-  "version": "1.0"
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 1416,
+    "timestamp": "2022-06-14 14:15:16"
+  }
 }
 ```
 
@@ -365,8 +364,6 @@ inputs.splunk_label = row.splunk_server
 <p>
 
 ```python
-# {'status_code': 201, 'content': {'message': 'Delete operation successful.', 'status': True}}
-
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Delete Status</b>: {}<br>
 <b>Message</b>: {}""".format(row.intel_value,
@@ -410,38 +407,38 @@ Define a Splunk query string with parameters. Map parameters from inputs, and pe
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": [
     {
-      "_key": "cabf173ee8c5421c9290cb019ad8acc4",
-      "domain": "www.hgj.com",
-      "item_key": "cabf173ee8c5421c9290cb019ad8acc4",
+      "_key": "6634567c18814616a7fa28cce1862738",
+      "disabled": "0",
+      "ip": "63.154.93.76",
+      "item_key": "6634567c18814616a7fa28cce1862738",
+      "threat_collection": "ip_intel",
       "threat_key": "restapi",
-      "time": "1647528256"
+      "time": "1655230442",
+      "updated": "0"
     }
   ],
+  "raw": null,
   "inputs": {
-    "splunk_label": "splunk_76",
     "splunk_max_return": 10,
-    "splunk_query": {
-      "content": "inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key",
-      "format": "text"
-    },
     "splunk_query_param1": "ip_intel",
-    "splunk_query_param2": "domain",
-    "splunk_query_param3": "www.hgj.com"
+    "splunk_query": "| `%param1%` | eval item_key=_key | search %param2%=%param3%",
+    "splunk_label": "splunk_76",
+    "splunk_query_param3": "63.154.93.76",
+    "splunk_query_param2": "ip"
   },
   "metrics": {
-    "execution_time_ms": 3772,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.1.0",
-    "timestamp": "2022-03-17 10:44:40",
-    "version": "1.0"
-  },
-  "raw": "[{\"_key\": \"cabf173ee8c5421c9290cb019ad8acc4\", \"domain\": \"www.hgj.com\", \"item_key\": \"cabf173ee8c5421c9290cb019ad8acc4\", \"threat_key\": \"restapi\", \"time\": \"1647528256\"}]",
-  "reason": null,
-  "success": true,
-  "version": "1.0"
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 2404,
+    "timestamp": "2022-06-14 14:14:34"
+  }
 }
 ```
 
@@ -509,8 +506,6 @@ else:
 <p>
 
 ```python
-# {'events': [OrderedDict([('_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('threat_key', 'restapi'), ('time', '1598296740.6724114')]), OrderedDict([('_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('threat_key', 'restapi'), ('time', '1598296660.9374135')])]}
-
 if results.get("content", None):
   for event in results.content:
     result_row = incident.addRow("splunk_intel_results")
@@ -565,32 +560,32 @@ Update notable events according to the status of the corresponding incident. Par
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
     "details": {},
-    "failure_count": 0,
-    "message": "1 event updated successfully",
-    "success": true,
     "success_count": 1,
-    "warnings": []
+    "failure_count": 0,
+    "warnings": [],
+    "success": true,
+    "message": "1 event updated successfully"
   },
+  "raw": null,
   "inputs": {
-    "comment": "SOAR incident is active",
-    "event_id": "7D8101AA-B8DB-44FF-94A2-E06831523B77@@_internal@@8bb2bdb9cfa9795e6fb4beef77440e59",
+    "event_id": "7D8101AA-B8DB-44FF-94A2-E06831523B77@@notable@@4cac62644c673525583605a6cb16de15",
     "notable_event_status": 2,
+    "comment": "SOAR incident is active",
     "splunk_label": "splunk_76"
   },
   "metrics": {
-    "execution_time_ms": 5794,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-splunk-integration",
-    "package_version": "1.1.0",
-    "timestamp": "2022-03-17 10:55:55",
-    "version": "1.0"
-  },
-  "raw": "{\"details\": {}, \"success_count\": 1, \"failure_count\": 0, \"warnings\": [], \"success\": true, \"message\": \"1 event updated successfully\"}",
-  "reason": null,
-  "success": true,
-  "version": "1.0"
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 6396,
+    "timestamp": "2022-06-14 14:14:59"
+  }
 }
 ```
 
@@ -621,8 +616,6 @@ else:
 <p>
 
 ```python
-# {'status_code': 200, 'content': {'details': {}, 'success_count': 1, 'failure_count': 0, 'warnings': [], 'success': True, 'message': '1 event updated successfully'}}
-
 result_note = u"<b>Splunk Update notable event</b>:<br><br>"
 if isinstance(results.get("content"), dict):
   result_note = result_note + u"""<b>Splunk Update Status</b>: {}<br>
