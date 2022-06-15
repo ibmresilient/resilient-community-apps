@@ -23,9 +23,10 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
-RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make libjpeg-devel libpng-devel libtiff-devel zlib-devel wget
-# install wget to download the tars to install
-# RUN yum -y install wget
+# install tools required to build tesseract and leptonica
+RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make libjpeg-devel libpng-devel libtiff-devel zlib-devel wget 
+# install image shared libraries
+RUN yum -y install libpng libjpeg libtiff zlib 
 # make a temp dir we can delete after building and installing
 RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
@@ -34,39 +35,19 @@ WORKDIR $HOME/temp_installers
 RUN wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz; tar -xvzf leptonica-1.82.0.tar.gz
 # RUN tar -xvzf leptonica-1.82.0.tar.gz
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
-RUN ./autogen.sh && ./configure && make -j4 && make install
-# RUN ./configure
-# RUN make
-# RUN make install
+RUN ./autogen.sh && ./configure && make -j5 && make install
 
 WORKDIR $HOME/temp_installers
 # download and build tesseract
 RUN wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz; tar -xvzf 5.0.1.tar.gz
-# RUN tar -xvzf 5.0.1.tar.gz
+
 WORKDIR $HOME/temp_installers/tesseract-5.0.1
 RUN ./autogen.sh
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib
-RUN LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make -j4 && make install && ldconfig
-# RUN make install
-# RUN ldconfig
+RUN LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make -j5 && make install && ldconfig
 
+# download langauge files
 WORKDIR $HOME/temp_installers
-# download language files, then move them
-# arabic
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/ara.traineddata
-# # english
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/eng.traineddata
-# # russian
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/rus.traineddata
-# # spanish
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/spa.traineddata
-# # Chinese Simplified, both normal and vertical
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim.traineddata
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim_vert.traineddata
-# # Chinese Traditional, both normal and vertical
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra.traineddata
-# RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.traineddata
-
 RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/ara.traineddata;\
 wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/eng.traineddata;\
 wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/rus.traineddata;\
@@ -75,9 +56,11 @@ wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim.traineddat
 wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim_vert.traineddata;\
 wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra.traineddata;\
 wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.traineddata;
+# move language files to the shared library
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
 RUN rm -rf $HOME/temp_installers
+# remove build tools + wget because they pose security risk
 RUN yum -y remove gcc gcc-c++ make wget automake autoconf pkg-config 
 
 
