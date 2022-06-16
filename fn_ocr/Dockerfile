@@ -24,7 +24,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 # uncomment and replicate if additional os libraries are needed
 RUN yum -y update && yum clean all
 # install tools required to build tesseract and leptonica
-RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel libtiff zlib-devel wget 
+RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel libtiff zlib-devel wget libarchive 
 # install image shared libraries
 RUN yum -y install libpng libjpeg libtiff zlib 
 # make a temp dir we can delete after building and installing
@@ -32,22 +32,24 @@ RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
 
 RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz & \ 
-wget https://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz & \
+wget https://sourceforge.net/projects/libjpeg-turbo/files/2.1.3/libjpeg-turbo-2.1.3.tar.gz & \
 wget http://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz & \ 
 wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.2.tar.gz & \
 wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz &\
 wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz & wait
 
-RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf jpegsrc.v6b.tar.gz & tar -xvzf tiff-4.4.0.tar.gz &\
+RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf libjpeg-turbo-2.1.3.tar.gz & tar -xvzf tiff-4.4.0.tar.gz &\
  tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & tar -xvzf libwebp-1.2.2.tar.gz & wait
 # download and build libpng
 WORKDIR $HOME/temp_installers/libpng-1.6.37
 RUN ./configure && make -j5 && make install
 
 # download and build libjpeg
-WORKDIR $HOME/temp_installers/jpeg-6b
-RUN mkdir -p /usr/local/man/man1
-RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
+# RUN mkdir -p /usr/local/man/man1
+RUN mkdir $HOME/temp_installers/libjpeg-turbo-2.1.3/build
+WORKDIR $HOME/temp_installers/libjpeg-turbo-2.1.3/build
+# RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
+RUN cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make -j5 && make install
 
 # download and build libtiff
 # WORKDIR $HOME/temp_installers/tiff-4.4.0
