@@ -68,35 +68,43 @@ DATA_TBL_FIELDS = ["cat_id", "configuredName", "url"]
 def main():
     note_text = u''
     url_filter = INPUTS.get("zia_url_filter")
+    name_filter = INPUTS.get("zia_name_filter")
     if CONTENT:
-        categories = CONTENT.get("categories")
-        cat_counts = CONTENT.get("category_counts")
-        name_filter = INPUTS.get("zia_name_filter")
-        note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Custom lists out of a total of "\
-                     u"<b>{2}</b> using category name filter <b>{3}</b> and URL filter <b>{4}</b> returned for SOAR "\
-                     u"function <b>{5}</b>."\
-        .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, url_filter, FN_NAME)
-        for cat in categories:
-            url_counts = cat.get("url_counts")
-            cat_id = cat.get("id")
-            configured_name = cat.get("configuredName")
-            customlist_urls = cat.get("urls")
-            note_text += u"<br>There were <b>{0}</b> URLS(s) out of a total of <b>{1}</b> returned using URL filter <b>{2}</b> "\
-                         u"for Custom list <b>{4}</b> "\
-            .format(url_counts["filtered"], url_counts["total"], url_filter, cat_id, configured_name)
-            if customlist_urls:
-                if url_counts["filtered"] <= 50:
-                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Custom lists")
-                    for url in customlist_urls:
-                        newrow = incident.addRow("zia_customlists")
-                        newrow.query_execution_date = QUERY_EXECUTION_DATE
-                        newrow.cat_id = cat_id
-                        newrow.configuredName = configured_name
-                        newrow.url = url
-                        newrow.url_filter = url_filter
-                        newrow.name_filter = name_filter
-                else:
-                    note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
+        if "error_code" not in CONTENT:
+            categories = CONTENT.get("categories")
+            cat_counts = CONTENT.get("category_counts")
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Custom lists out of a total of "\
+                         u"<b>{2}</b> using category name filter <b>{3}</b> and URL filter <b>{4}</b> returned for SOAR "\
+                         u"function <b>{5}</b>."\
+            .format(WF_NAME, cat_counts["filtered"], cat_counts["total"], name_filter, url_filter, FN_NAME)
+            for cat in categories:
+                url_counts = cat.get("url_counts")
+                cat_id = cat.get("id")
+                configured_name = cat.get("configuredName")
+                customlist_urls = cat.get("urls")
+                note_text += u"<br>There were <b>{0}</b> URLS(s) out of a total of <b>{1}</b> returned using URL filter <b>{2}</b> "\
+                             u"for Custom list <b>{4}</b> "\
+                .format(url_counts["filtered"], url_counts["total"], url_filter, cat_id, configured_name)
+                if customlist_urls:
+                    if url_counts["filtered"] <= 50:
+                        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Zscaler Internet Access - Custom lists")
+                        for url in customlist_urls:
+                            newrow = incident.addRow("zia_customlists")
+                            newrow.query_execution_date = QUERY_EXECUTION_DATE
+                            newrow.cat_id = cat_id
+                            newrow.configuredName = configured_name
+                            newrow.url = url
+                            newrow.url_filter = url_filter
+                            newrow.name_filter = name_filter
+                    else:
+                        note_text += "<br>Custom list URLS for Category ID <b>{0}</b> and configured name <b>{1}</b> : <b>{2}</b>".format(", ".join(customlist_urls))
+        else:
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned using configured name filter <b>{1}</b> "\
+                         u"and URL filter <b>{2}</b> for SOAR function <b>{3}</b>."\
+                .format(WF_NAME, url_filter, name_filter, url_filter, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(CONTENT["error_code"], CONTENT["status"], CONTENT["text"] )
+          
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned using configured name filter <b>{1}</b> "\
                      u"and URL filter <b>{2}</b> for SOAR function <b>{3}</b>."\
