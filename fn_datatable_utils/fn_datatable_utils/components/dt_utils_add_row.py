@@ -27,49 +27,43 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.dt_utils_datatable_api_name
         """
 
-        try:
-            # Instansiate new SOAR API object
-            res_client = self.rest_client()
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_cells_to_update"], fn_inputs)
+        validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_cells_to_update"], fn_inputs)
 
-            self.LOG.info(str(fn_inputs))
+        self.LOG.info(str(fn_inputs))
 
-            dt_utils_cells_to_update = fn_inputs.dt_utils_cells_to_update
-            inputs_dict = fn_inputs._asdict()
+        dt_utils_cells_to_update = fn_inputs.dt_utils_cells_to_update
+        inputs_dict = fn_inputs._asdict()
 
-            try:
-                # The fixes the format of lists
-                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("u\'",'"').replace("\'", '"'))
-                inputs_dict["dt_utils_cells_to_update"] = dt_utils_cells_to_update
-            except Exception as err:
-                raise ValueError("Failed to parse JSON string: {} with error: {}".format(inputs_dict.dt_utils_cells_to_update, str(err)))
+        # The fixes the format of lists
+        dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("u\'",'"').replace("\'", '"'))
+        inputs_dict["dt_utils_cells_to_update"] = dt_utils_cells_to_update
 
-            row_to_add = {}
-            for key in dt_utils_cells_to_update:
-                value = dt_utils_cells_to_update[key]
-                row_to_add[key] = {"value": value}
+        row_to_add = {}
+        for key in dt_utils_cells_to_update:
+            value = dt_utils_cells_to_update[key]
+            row_to_add[key] = {"value": value}
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
 
-            # Get the data table data
-            datatable.get_data()
+        # Get the data table data
+        datatable.get_data()
 
-            # Add row to the given datatable on SOAR
-            add_row = datatable.dt_add_rows(row_to_add)
+        # Add row to the given datatable on SOAR
+        add_row = datatable.dt_add_rows(row_to_add)
 
-            if "error" in add_row:
-                yield self.status_message("Row in {} NOT added.".format(datatable.api_name))
-                raise ValueError(add_row["error"])
-            else:
-                yield self.status_message("Row in {} added.".format(datatable.api_name))
+        if "error" in add_row:
+            yield self.status_message("Row in {} NOT added.".format(datatable.api_name))
+            raise ValueError(add_row["error"])
+        else:
+            yield self.status_message("Row in {} added.".format(datatable.api_name))
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult({"row": dt_utils_cells_to_update})
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        # Produce a FunctionResult with the results
+        yield FunctionResult({"row": dt_utils_cells_to_update})

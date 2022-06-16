@@ -22,38 +22,35 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.incident_id
             -   fn_inputs.dt_utils_datatable_api_name"""
 
-        try:
-            # Instansiate new SOAR API object
-            res_client = self.rest_client()
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(['incident_id', 'dt_utils_datatable_api_name'], fn_inputs)
+        validate_fields(['incident_id', 'dt_utils_datatable_api_name'], fn_inputs)
 
-            incident_id = fn_inputs.incident_id  # text (required)
-            dt_api_name = fn_inputs.dt_utils_datatable_api_name # text (required)
+        incident_id = fn_inputs.incident_id  # text (required)
+        dt_api_name = fn_inputs.dt_utils_datatable_api_name # text (required)
 
-            self.LOG.info("incident_id: %s", incident_id)
-            self.LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
+        self.LOG.info("incident_id: %s", incident_id)
+        self.LOG.info("dt_utils_datatable_api_name: %s", dt_api_name)
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, incident_id, dt_api_name)
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, incident_id, dt_api_name)
 
-            # Get the data table data
-            datatable.get_data()
+        # Get the data table data
+        datatable.get_data()
 
-            rows = datatable.get_rows()
+        rows = datatable.get_rows()
 
-            # If no rows found, create a log
-            if not rows:
-                yield self.status_message("No rows found")
+        # If no rows found, create a log
+        if not rows:
+            yield self.status_message("No rows found")
 
-            # Else, set rows in the payload
-            else:
-                yield self.status_message("{} row/s found".format(len(rows)))
+        # Else, set rows in the payload
+        else:
+            yield self.status_message("{} row/s found".format(len(rows)))
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            yield FunctionResult({"rows": rows})
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        yield FunctionResult({"rows": rows})

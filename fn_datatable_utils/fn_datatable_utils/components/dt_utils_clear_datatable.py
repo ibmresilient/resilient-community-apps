@@ -24,35 +24,32 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.dt_utils_datatable_api_name
         """
 
-        try:
-            # Instansiate new SOAR API object
-            res_client = self.rest_client()
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
+        validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            self.LOG.info("incident_id: %s", fn_inputs.incident_id)
-            self.LOG.info("dt_utils_datatable_api_name: %s", fn_inputs.dt_utils_datatable_api_name)
+        self.LOG.info("incident_id: %s", fn_inputs.incident_id)
+        self.LOG.info("dt_utils_datatable_api_name: %s", fn_inputs.dt_utils_datatable_api_name)
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, fn_inputs.incident_id, fn_inputs.dt_utils_datatable_api_name)
 
-            # # Get the data table data
-            datatable.get_data()
+        # # Get the data table data
+        datatable.get_data()
 
-            # Delete all rows in the given datatable on SOAR
-            deleted_rows = datatable.clear_datatable()
+        # Delete all rows in the given datatable on SOAR
+        deleted_rows = datatable.clear_datatable()
 
-            if "error" in deleted_rows:
-                yield self.status_message("Datatable '{}' not cleared. Error: {}".format(fn_inputs.dt_utils_datatable_api_name, deleted_rows.get("error")))
-                raise ValueError(deleted_rows["error"])
-            else:
-                yield self.status_message("Datatable '{}' cleared.".format(fn_inputs.dt_utils_datatable_api_name))
+        if "error" in deleted_rows:
+            yield self.status_message("Datatable '{}' not cleared. Error: {}".format(fn_inputs.dt_utils_datatable_api_name, deleted_rows.get("error")))
+            raise ValueError(deleted_rows["error"])
+        else:
+            yield self.status_message("Datatable '{}' cleared.".format(fn_inputs.dt_utils_datatable_api_name))
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(deleted_rows)
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        # Produce a FunctionResult with the results
+        yield FunctionResult(deleted_rows)

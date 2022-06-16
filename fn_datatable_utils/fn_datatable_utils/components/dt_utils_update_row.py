@@ -25,61 +25,55 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.dt_utils_row_id
             -   fn_inputs.dt_utils_cells_to_update"""
 
-        try:
-            # Instansiate new SOAR API object
-            res_client = self.rest_client()
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-            # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
-            wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
+        # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+        wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_row_id", "dt_utils_cells_to_update"], fn_inputs)
+        validate_fields(["incident_id", "dt_utils_datatable_api_name", "dt_utils_row_id", "dt_utils_cells_to_update"], fn_inputs)
 
-            dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
-            incident_id = fn_inputs.incident_id  # number (required)
-            dt_utils_row_id = fn_inputs.dt_utils_row_id  # number (required)
-            dt_utils_cells_to_update = fn_inputs.dt_utils_cells_to_update  # text (required)
+        dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
+        incident_id = fn_inputs.incident_id  # number (required)
+        dt_utils_row_id = fn_inputs.dt_utils_row_id  # number (required)
+        dt_utils_cells_to_update = fn_inputs.dt_utils_cells_to_update  # text (required)
 
-            self.LOG.info("incident_id: %s", incident_id)
-            self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
-            self.LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
-            self.LOG.info("dt_utils_cells_to_update: %s", dt_utils_cells_to_update)
+        self.LOG.info("incident_id: %s", incident_id)
+        self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+        self.LOG.info("dt_utils_row_id: %s", dt_utils_row_id)
+        self.LOG.info("dt_utils_cells_to_update: %s", dt_utils_cells_to_update)
 
-            try:
-                # The fixes the format of lists
-                dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("\'",'"'))
-            except Exception:
-                raise ValueError("Failed to parse JSON string: {}".format(dt_utils_cells_to_update))
+        # The fixes the format of lists
+        dt_utils_cells_to_update = loads(dt_utils_cells_to_update.replace("\'",'"'))
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
-            # Get the data table data
-            datatable.get_data()
+        # Get the data table data
+        datatable.get_data()
 
-            # Use the current row_id if dt_utils_row_id = 0
-            if not dt_utils_row_id or not int(dt_utils_row_id):
-                row_id = datatable.get_row_id_from_workflow(wf_instance_id)
-                if not row_id:
-                    raise ValueError("Run the workflow from a datatable to get the current row_id.")
+        # Use the current row_id if dt_utils_row_id = 0
+        if not dt_utils_row_id or not int(dt_utils_row_id):
+            row_id = datatable.get_row_id_from_workflow(wf_instance_id)
+            if not row_id:
+                raise ValueError("Run the workflow from a datatable to get the current row_id.")
 
-                self.LOG.info("Using current row_id: %s", row_id)
-                dt_utils_row_id = row_id
+            self.LOG.info("Using current row_id: %s", row_id)
+            dt_utils_row_id = row_id
 
-            # Update the row
-            updated_row = datatable.update_row(dt_utils_row_id, dt_utils_cells_to_update)
+        # Update the row
+        updated_row = datatable.update_row(dt_utils_row_id, dt_utils_cells_to_update)
 
-            if "error" in updated_row:
-                yield self.status_message("Row in {} NOT updated.".format(datatable.api_name))
-                raise ValueError(updated_row["error"])
+        if "error" in updated_row:
+            yield self.status_message("Row in {} NOT updated.".format(datatable.api_name))
+            raise ValueError(updated_row["error"])
 
-            else:
-                yield self.status_message("Row {} in {} updated.".format(updated_row["id"], datatable.api_name))
+        else:
+            yield self.status_message("Row {} in {} updated.".format(updated_row["id"], datatable.api_name))
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult({"row": updated_row})
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        # Produce a FunctionResult with the results
+        yield FunctionResult({"row": updated_row})

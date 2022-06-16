@@ -35,98 +35,95 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """Function: Create a utility function to take csv data and add the results to a named datatable."""
 
+        # Instantiate new SOAR API object
+        res_client = self.rest_client()
+
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+
+        # Validate required fields
+        validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], fn_inputs)
+
+        incident_id = fn_inputs.incident_id  # number (required)
+        attachment_id = fn_inputs.attachment_id if hasattr(fn_inputs, "attachment_id") else None  # number (optional)
+        has_headers = fn_inputs.dt_has_headers  # boolean (required)
+        csv_data = fn_inputs.dt_csv_data if hasattr(fn_inputs, "dt_csv_data") else None  # text (optional)
+        datable_name = fn_inputs.dt_datable_name  # text (required)
+        mapping_table = fn_inputs.dt_mapping_table  # text (required)
+        date_time_format = fn_inputs.dt_date_time_format if hasattr(fn_inputs, "dt_date_time_format") else None  # text (optional)
+        start_row = fn_inputs.dt_start_row if hasattr(fn_inputs, "dt_start_row") else None  # number (optional)
+        max_rows = fn_inputs.dt_max_rows if hasattr(fn_inputs, "dt_max_rows") else None  # number (optional)
+
+        self.LOG.info("incident_id: %s", incident_id)
+        self.LOG.info("attachment_id: %s", attachment_id)
+        self.LOG.info("dt_has_headers: %s", has_headers)
+        self.LOG.info("dt_csv_data: %s", csv_data)
+        self.LOG.info("dt_datable_name: %s", datable_name)
+        self.LOG.info("dt_mapping_table: %s", mapping_table)
+        self.LOG.info("dt_date_time_format: %s", date_time_format)
+        self.LOG.info("dt_start_row: %s", start_row)
+        self.LOG.info("dt_max_rows: %s", max_rows)
+
         try:
-            # Instantiate new SOAR API object
-            res_client = self.rest_client()
+            mapping_table = loads(mapping_table)
+        except Exception:
+            raise ValueError(u"Unable to convert mapping_table to json: %s", mapping_table)
 
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        if (attachment_id and csv_data) or not (attachment_id or csv_data):
+            raise ValueError("Specify either attachment_id or csv_data")
 
-            # Validate required fields
-            validate_fields(['incident_id', 'dt_has_headers', 'dt_datable_name', 'dt_mapping_table'], fn_inputs)
+        attachment_name = None
+        # Either an attachment ID or CSV Data is needed to be able to add rows
+        if attachment_id:
+            attachment_name = get_file_attachment_name(res_client, incident_id,
+                                                        attachment_id=attachment_id)
+            b_csv_data = get_file_attachment(res_client, incident_id,
+                                            attachment_id=attachment_id)
+            csv_data = b_csv_data.decode("utf-8")
 
-            incident_id = fn_inputs.incident_id  # number (required)
-            attachment_id = fn_inputs.attachment_id if hasattr(fn_inputs, "attachment_id") else None  # number (optional)
-            has_headers = fn_inputs.dt_has_headers  # boolean (required)
-            csv_data = fn_inputs.dt_csv_data if hasattr(fn_inputs, "dt_csv_data") else None  # text (optional)
-            datable_name = fn_inputs.dt_datable_name  # text (required)
-            mapping_table = fn_inputs.dt_mapping_table  # text (required)
-            date_time_format = fn_inputs.dt_date_time_format if hasattr(fn_inputs, "dt_date_time_format") else None  # text (optional)
-            start_row = fn_inputs.dt_start_row if hasattr(fn_inputs, "dt_start_row") else None  # number (optional)
-            max_rows = fn_inputs.dt_max_rows if hasattr(fn_inputs, "dt_max_rows") else None  # number (optional)
+        inline_data = StringIO(csv_data)
 
-            self.LOG.info("incident_id: %s", incident_id)
-            self.LOG.info("attachment_id: %s", attachment_id)
-            self.LOG.info("dt_has_headers: %s", has_headers)
-            self.LOG.info("dt_csv_data: %s", csv_data)
-            self.LOG.info("dt_datable_name: %s", datable_name)
-            self.LOG.info("dt_mapping_table: %s", mapping_table)
-            self.LOG.info("dt_date_time_format: %s", date_time_format)
-            self.LOG.info("dt_start_row: %s", start_row)
-            self.LOG.info("dt_max_rows: %s", max_rows)
+        datatable = RESDatatable(res_client, incident_id, datable_name)
 
-            try:
-                mapping_table = loads(mapping_table)
-            except Exception:
-                raise ValueError(u"Unable to convert mapping_table to json: %s", mapping_table)
+        # Retrieve the column names for the datatable, and their data_types,
+        # to compare against what the user provides, and attempt data conversion, if necessary
+        fields = datatable.get_dt_headers()
+        dt_ordered_columns = {fields[field]['order']: (fields[field]['name'],fields[field]['input_type']) for field in fields}
+        # Ordered column names if we need to assign the headers to the columns in column order
+        dt_column_names = OrderedDict([dt_ordered_columns[field] for field in sorted (dt_ordered_columns.keys())])
 
-            if (attachment_id and csv_data) or not (attachment_id or csv_data):
-                raise ValueError("Specify either attachment_id or csv_data")
+        # Different readers if we have headers or not
+        dialect = Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
+        self.LOG.debug(dialect.__dict__)
 
-            attachment_name = None
-            # Either an attachment ID or CSV Data is needed to be able to add rows
-            if attachment_id:
-                attachment_name = get_file_attachment_name(res_client, incident_id,
-                                                           attachment_id=attachment_id)
-                b_csv_data = get_file_attachment(res_client, incident_id,
-                                               attachment_id=attachment_id)
-                csv_data = b_csv_data.decode("utf-8")
+        csv_headers = []
+        if has_headers:
+            reader = DictReader(inline_data, dialect=dialect)  # Each row is a dictionary keyed by the column name
+            csv_headers = reader.fieldnames # Just the headers
+        else:
+            reader = read(inline_data, dialect=dialect)  # Each row is a list of values
 
-            inline_data = StringIO(csv_data)
+        mapping_table = build_mapping_table(mapping_table, csv_headers, dt_column_names)
+        self.LOG.debug("csv headers to datatable columns: %s", mapping_table)
 
-            datatable = RESDatatable(res_client, incident_id, datable_name)
+        # Perform the api calls to the datatable
+        number_of_added_rows, number_of_rows_with_errors = self.add_to_datatable(reader, datatable,
+                                                                                    mapping_table, dt_column_names,
+                                                                                    date_time_format,
+                                                                                    start_row,
+                                                                                    max_rows)
+        self.LOG.info("Number of rows added: %s ", number_of_added_rows)
+        self.LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
 
-            # Retrieve the column names for the datatable, and their data_types,
-            # to compare against what the user provides, and attempt data conversion, if necessary
-            fields = datatable.get_dt_headers()
-            dt_ordered_columns = {fields[field]['order']: (fields[field]['name'],fields[field]['input_type']) for field in fields}
-            # Ordered column names if we need to assign the headers to the columns in column order
-            dt_column_names = OrderedDict([dt_ordered_columns[field] for field in sorted (dt_ordered_columns.keys())])
+        row_data = {
+            "data_source": attachment_name if attachment_name else "CSV data",
+            "rows_added": number_of_added_rows,
+            "rows_with_errors": number_of_rows_with_errors
+        }
 
-            # Different readers if we have headers or not
-            dialect = Sniffer().sniff(csv_data[0:csv_data.find('\n')]) # Limit analysis to first row
-            self.LOG.debug(dialect.__dict__)
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            csv_headers = []
-            if has_headers:
-                reader = DictReader(inline_data, dialect=dialect)  # Each row is a dictionary keyed by the column name
-                csv_headers = reader.fieldnames # Just the headers
-            else:
-                reader = read(inline_data, dialect=dialect)  # Each row is a list of values
-
-            mapping_table = build_mapping_table(mapping_table, csv_headers, dt_column_names)
-            self.LOG.debug("csv headers to datatable columns: %s", mapping_table)
-
-            # Perform the api calls to the datatable
-            number_of_added_rows, number_of_rows_with_errors = self.add_to_datatable(reader, datatable,
-                                                                                     mapping_table, dt_column_names,
-                                                                                     date_time_format,
-                                                                                     start_row,
-                                                                                     max_rows)
-            self.LOG.info("Number of rows added: %s ", number_of_added_rows)
-            self.LOG.info("Number of rows that could not be added: %s", number_of_rows_with_errors)
-
-            row_data = {
-                "data_source": attachment_name if attachment_name else "CSV data",
-                "rows_added": number_of_added_rows,
-                "rows_with_errors": number_of_rows_with_errors
-            }
-
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(row_data)
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        # Produce a FunctionResult with the results
+        yield FunctionResult(row_data)
 
     def add_to_datatable(self, reader, datatable, mapping_table, dt_column_names, date_format,
                          start_row, max_rows):
