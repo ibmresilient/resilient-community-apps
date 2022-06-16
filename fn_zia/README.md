@@ -58,7 +58,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 06/2021 | Initial Release |
-
+| 1.0.1 | 06/2022 | Rate limiting support, function retry support, improved request error handling, container image refreshed to python 3.9 |
 ---
 
 ## Overview
@@ -138,6 +138,42 @@ Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=41.0.0
 * resilient-lib>=41.0.0
+
+### Endpoint Developed With
+
+This app has been implemented using:
+| Product Name | Product Version | API URL | API Version |
+| ------------ | --------------- | ------- | ----------- |
+| Zscaler Internet Access | 6.1 | <zia_cloud_name>/api/v1 | v1 |
+
+#### Prerequisites
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+* The app user must have a ZIA API subscription.
+* The user organization's API key must be enabled.
+
+**_NOTE:_** API authentication is based on a combination of the API key and ZIA admin credentials (i.e., username and password).
+
+#### Configuration
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+* Retrieve the Base URL and API key/token.
+
+To locate the base URL and key/token:
+* Log in to the ZIA Admin Portal using the users admin credentials.
+* Go to Administration > Cloud Service API Key Management.
+
+**_NOTE:_** In order to view the Cloud Service API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
+
+See: [ZIA API getting started](https://help.zscaler.com/zia/getting-started-zia-api)
+
+#### Permissions
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+* REST API access must be enabled for the account that IBM SOAR is communicating with as specified in the App configration file.
 
 ---
 
