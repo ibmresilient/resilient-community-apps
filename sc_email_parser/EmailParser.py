@@ -2,6 +2,9 @@
 
 import re
 
+# pattern used to find and extract the email message-id
+MESSAGE_PATTERN = re.compile(r"([^<>]+)")
+
 # This is the Python 3 version of the email sample script.
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
 # Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
@@ -550,6 +553,16 @@ class EmailProcessor(object):
                 self.addUniqueArtifact(u"{0}".format(
                     subject), "Email Subject", "Suspicious email subject")
 
+    @staticmethod
+    def save_message_id(headers):
+        # extract the message ID and retain
+        msg_id = headers.get("Message-ID")
+        if msg_id:
+          # strip off any angle brackets
+          match = MESSAGE_PATTERN.findall(msg_id[0].strip())
+          if match and hasattr(incident.properties, 'email_message_id'):
+            incident.properties.email_message_id = match[0]
+
 ###
 # Mainline starts here
 ###
@@ -583,6 +596,8 @@ if len(incidents) == 0:
     # This does not need to be done for an existing incident.
     processor.addBasicInfoToIncident()
 
+    # add message-id for easy tracking
+    processor.save_message_id(emailmessage.headers)
 else:
     # A similar incident already exists. Associate the email with this preexisting incident.
     log.info(u"Associating with existing incident {0}".format(incidents[0].id))

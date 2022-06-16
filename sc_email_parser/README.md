@@ -4,12 +4,23 @@ This package consists of the **RuleAndScript.res** and **ScriptAlone.res** IBM S
 ## History
 | Version | Date | Comments |
 | ------: | ---: | -------: |
+| 2.3.0 | 6/2022 | Capture of message_id header |
 | 2.2.0 | 7/2021 | Support for Python 3 |
 | 2.0.2 | 4/2020 | Bug fixes for phishing incident type |
 | 2.0.1 | 10/2019 | Fix when email address contains unicode characters |
 | 2.0.0 | 7/2019 | Unicode bug fixes |
 | 1.0.1 | 2/2019 | Added automatic rule for script execution |
 | 1.0.0 | 1/2019 | Initial release |
+
+### Changes for v2.3.0
+Version of the 2.3.0 of the parsing script introduces the ability to capture an email's Message-ID header. This value will be used to create email conversations based on the case's incoming email.
+Version 2.0.0 of fn_outbound_email will import a custom incident field (`email_message_id`) for retention of this information, along with new functionality to create outbound email conversations.
+
+If you want to use this parsing script without the fn_outbound_email app, you can manually create the incident field `email_message_id` and add it to a case tab, such as `Email`.
+The below images show the creation of the `email_message_id` custom field and its assignment to a tab. The script will continue to execute if this field is absent.
+
+![screenshot: main](./doc/screenshots/creating_email_message_id.png)
+![screenshot: main](./doc/screenshots/layouts.png)
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:
@@ -30,14 +41,14 @@ Before installing, verify that your environment meets the following prerequisite
 8. Select **Proceed**.
 
 ### Result
-After installing from **RuleAndScript.res**, the IBM SOAR platform will have a new Python script called "Generic email script v2.2.0" and a new rule called "Process email message v2.2.0". The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
+After installing from **RuleAndScript.res**, the IBM SOAR platform will have a new Python script called "Generic email script v2.3.0" and a new rule called "Process email message v2.3.0". The rule runs the script when it is triggered by a new email message being received by the IBM SOAR platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
 
 **Note**: This new rule is disabled by default. To enable:
 
 1. Navigate to **Customization Settings**.
 2. Select the "Rules" tab.
-3. Modify the "Generic email script v2.2.0" with any custom Allowlist IP address changes
-4. Enable the rule "Process email message v2.2.0".
+3. Modify the "Generic email script v2.3.0" with any custom Allowlist IP address changes
+4. Enable the rule "Process email message v2.3.0".
 If you are using an older email script:
 5. Disable any previous email rule this new script is replacing.
 
