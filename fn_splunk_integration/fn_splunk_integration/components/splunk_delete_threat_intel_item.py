@@ -23,19 +23,17 @@ class FunctionComponent(AppFunctionComponent):
         splunk_threat_intel_type: ip_intel, email_intel....., registry_intel
         splunk_threat_intel_key: _key returned from Splunk ES for this item
         """
-        try:
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["splunk_threat_intel_type", "splunk_threat_intel_key"], fn_inputs)
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        validate_fields(["splunk_threat_intel_type", "splunk_threat_intel_key"], fn_inputs)
 
-            splunk_result = splunk.delete_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                                 item_key=fn_inputs.splunk_threat_intel_key,
-                                                                 cafile=splunk_verify_cert)
+        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        splunk_result = splunk.delete_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
+                                                                item_key=fn_inputs.splunk_threat_intel_key,
+                                                                cafile=splunk_verify_cert)
 
-            yield FunctionResult(splunk_result.get('content', {}))
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+
+        yield FunctionResult(splunk_result.get('content', {}))

@@ -20,34 +20,32 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """Function: Search"""
-        try:
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["splunk_query"], fn_inputs)
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            splunk_query_param = []
-            for input in fn_inputs._asdict():
-                if QUERY_PARAM in input:
-                    num = int(input.replace(QUERY_PARAM,''))-1
-                    # Add the param in the correct position in the list based on param number
-                    splunk_query_param.insert(num, fn_inputs._asdict().get(input))
+        validate_fields(["splunk_query"], fn_inputs)
 
-            # Build query string with params
-            query_string = make_query_string(fn_inputs.splunk_query, splunk_query_param)
+        splunk_query_param = []
+        for input in fn_inputs._asdict():
+            if QUERY_PARAM in input:
+                num = int(input.replace(QUERY_PARAM,''))-1
+                # Add the param in the correct position in the list based on param number
+                splunk_query_param.insert(num, fn_inputs._asdict().get(input))
 
-            self.LOG.info("Splunk query to be executed: %s" % query_string)
+        # Build query string with params
+        query_string = make_query_string(fn_inputs.splunk_query, splunk_query_param)
 
-            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
+        self.LOG.info("Splunk query to be executed: %s" % query_string)
 
-            if fn_inputs.splunk_max_return:
-                splunk.set_max_return(fn_inputs.splunk_max_return)
+        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
 
-            splunk_result = splunk.execute_query(query_string)
-            self.LOG.debug(splunk_result)
+        if fn_inputs.splunk_max_return:
+            splunk.set_max_return(fn_inputs.splunk_max_return)
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        splunk_result = splunk.execute_query(query_string)
+        self.LOG.debug(splunk_result)
 
-            # Produce a FunctionResult with the return value
-            yield FunctionResult(splunk_result.get('events', {}))
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+
+        # Produce a FunctionResult with the return value
+        yield FunctionResult(splunk_result.get('events', {}))

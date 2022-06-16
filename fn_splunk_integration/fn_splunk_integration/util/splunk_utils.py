@@ -167,7 +167,7 @@ class SplunkUtils(object):
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
                 session_key = str(resp.content)
                 self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
-                self.header = {"Authorization": "Splunk {}".format(session_key)}
+                self.header = {"Authorization": "Splunk {}".format(self.session_key)}
             else:
                 error_msg = "Splunk login failed with status {}".format(resp.status_code)
                 raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, error_msg))

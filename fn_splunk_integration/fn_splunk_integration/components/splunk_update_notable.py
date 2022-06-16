@@ -25,21 +25,19 @@ class FunctionComponent(AppFunctionComponent):
             comment:    add a note to the notable event
             status:     Notable event status. Integer: 2=active, 5= closed
         """
-        try:
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["event_id"], fn_inputs)
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        validate_fields(["event_id"], fn_inputs)
 
-            splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
-                                                       comment=fn_inputs.comment,
-                                                       status=fn_inputs.notable_event_status,
-                                                       cafile=splunk_verify_cert)
+        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
+                                                    comment=fn_inputs.comment,
+                                                    status=fn_inputs.notable_event_status,
+                                                    cafile=splunk_verify_cert)
 
-            # Produce a FunctionResult with the return value
-            yield FunctionResult(splunk_result.get('content', {}))
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+
+        # Produce a FunctionResult with the return value
+        yield FunctionResult(splunk_result.get('content', {}))

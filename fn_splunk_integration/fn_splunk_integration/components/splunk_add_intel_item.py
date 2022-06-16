@@ -28,30 +28,28 @@ class FunctionComponent(AppFunctionComponent):
         splunk_query_param3: field2 name;
         splunk_query_param4: field2 value;
         ....."""
-        try:
-            yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            validate_fields(["splunk_threat_intel_type"], fn_inputs)
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            params_list = []
-            for input in fn_inputs._asdict():
-                if QUERY_PARAM in input:
-                    params_list.append(fn_inputs._asdict().get(input))
+        validate_fields(["splunk_threat_intel_type"], fn_inputs)
 
-            # Build the dict used to add threat intel item
-            item_dict = make_item_dict(params_list)
-            # Log it for debug
-            self.LOG.debug("item dict: {}".format(str(item_dict)))
+        params_list = []
+        for input in fn_inputs._asdict():
+            if QUERY_PARAM in input:
+                params_list.append(fn_inputs._asdict().get(input))
 
-            splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        # Build the dict used to add threat intel item
+        item_dict = make_item_dict(params_list)
+        # Log it for debug
+        self.LOG.debug("item dict: {}".format(str(item_dict)))
 
-            splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                         threat_dict=item_dict,
-                                                         cafile=splunk_verify_cert)
+        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
-            yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
+                                                        threat_dict=item_dict,
+                                                        cafile=splunk_verify_cert)
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(splunk_result.get('content', {}))
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+
+        # Produce a FunctionResult with the results
+        yield FunctionResult(splunk_result.get('content', {}))
