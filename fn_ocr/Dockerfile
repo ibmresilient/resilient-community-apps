@@ -24,9 +24,9 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 # uncomment and replicate if additional os libraries are needed
 # RUN yum -y update && yum clean all
 # install tools required to build tesseract and leptonica
-RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel libtiff zlib-devel wget libarchive 
+RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake zlib-devel wget libarchive 
 # install image shared libraries
-RUN yum -y install libpng libjpeg libtiff zlib 
+# RUN yum -y install  zlib 
 # make a temp dir we can delete after building and installing
 RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
@@ -59,16 +59,17 @@ RUN cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make -j5 &&
 WORKDIR $HOME/temp_installers/libwebp-1.2.2
 RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 
+
 # download and build leptonica
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
-RUN ./autogen.sh && ./configure && make -j5 && make install
+RUN ./autogen.sh && ./configure --prefix=/usr/local/ --libdir=/usr/local/lib && make -j5 && make install
 
 # download and build tesseract
 WORKDIR $HOME/temp_installers/tesseract-5.0.1
 RUN ./autogen.sh
-RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib
+RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib --with-extra-libraries=/usr/local/lib64 
 RUN LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make -j5 && make install && ldconfig
-
+RUN ldd $(which tesseract)
 # download langauge files
 WORKDIR $HOME/temp_installers
 RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/ara.traineddata;\
@@ -83,9 +84,10 @@ wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.train
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
 RUN rm -rf $HOME/temp_installers
-# remove build tools + wget because they pose security risk
-RUN yum -y remove gcc gcc-c++ make wget automake autoconf pkg-config 
 
+# remove build tools + wget because they pose security risk
+RUN yum -y remove gcc gcc-c++ make wget
+RUN yum -y install libtiff libjpeg libpng
 
 # install the base package
 COPY ./dist /tmp/packages
