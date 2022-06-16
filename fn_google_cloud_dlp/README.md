@@ -44,6 +44,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 06/2019 | Initial Release |
 | 1.1.0 | 09/2021 | Added App Host Support |
+| 1.2.0 | 06/2022 | Dropped Python v2 Support |
 
 ---
 
@@ -124,7 +125,7 @@ When configuring the app after installing, you must create a new file in the "Co
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * defusedxml
 * google-cloud-dlp>=0.10.0,<2.0.0
