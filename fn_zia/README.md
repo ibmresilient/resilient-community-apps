@@ -135,7 +135,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 is supported.
+Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=41.0.0
 * resilient-lib>=41.0.0
