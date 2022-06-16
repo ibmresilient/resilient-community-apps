@@ -22,7 +22,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-RUN yum -y update && yum clean all
+# RUN yum -y update && yum clean all
 # install tools required to build tesseract and leptonica
 RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake libjpeg-devel libpng-devel libtiff-devel libtiff zlib-devel wget libarchive 
 # install image shared libraries
