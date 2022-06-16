@@ -307,8 +307,7 @@ class GCPHelper:
 
         # Call the API
         response = cls.dlp_client.deidentify_content(
-            parent, inspect_config=inspect_config,
-            deidentify_config=deidentify_config, item=item)
+            request = {'parent': parent, 'deidentify_config': inspect_config, 'inspect_config': deidentify_config, 'item': item})
 
         return response, response.item.value
 
@@ -372,7 +371,7 @@ class GCPHelper:
         parent = cls.dlp_client.project_path(cls.project)
 
         # Call the API.
-        response = cls.dlp_client.inspect_content(parent, inspect_config, item)
+        response = cls.dlp_client.inspect_content(request = {'parent': parent, 'inspect_config': inspect_config, 'item': item})
         findings = list()
         # Print out the results.
         if response.result.findings:
