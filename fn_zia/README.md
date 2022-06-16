@@ -25,6 +25,7 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
+  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -58,7 +59,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 06/2021 | Initial Release |
-| 1.0.1 | 06/2022 | Rate limiting support, function retry support, improved request error handling, container image refreshed to python 3.9 |
+| 1.0.1 | 06/2022 | Added rate limiting support and function retry support, improved request error handling, and refreshed container image to support Python 3.9. |
 ---
 
 ## Overview
@@ -162,10 +163,10 @@ List any steps that are needed to configure the endpoint to use this app.
 * Retrieve the Base URL and API key/token.
 
 To locate the base URL and key/token:
-* Log in to the ZIA Admin Portal using the users admin credentials.
+* Log in to the ZIA Admin Portal using the user's admin credentials.
 * Go to Administration > Cloud Service API Key Management.
 
-**_NOTE:_** In order to view the Cloud Service API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
+**_NOTE:_** To view the Cloud Service API Key Management page, the administrator must be assigned an admin role that includes the Authentication Configuration functional scope.
 
 See: [ZIA API getting started](https://help.zscaler.com/zia/getting-started-zia-api)
 
