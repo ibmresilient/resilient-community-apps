@@ -56,6 +56,9 @@ class FunctionComponent(AppFunctionComponent):
         if inputs.get("pbm_app_name"):
             function_input_list = self.soar_common.get_function_info_by_app(inputs.get("pbm_app_name").strip())
 
+            if not function_input_list:
+                results = FunctionResult({}, success=False,
+                                         reason="App not found: {}".format(inputs.get("pbm_app_name")))
         elif inputs.get("pbm_function_names"):
             for function in inputs.get("pbm_function_names").split(","):
                 funct = self.soar_common.get_function_info(function.strip())
