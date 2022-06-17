@@ -210,7 +210,7 @@ matrix:
         - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
       script:
         - echo "Installing and running SonarQube scan"
-        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1 0
+        # - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: build image and app zip
       name: Build Image and App zip
