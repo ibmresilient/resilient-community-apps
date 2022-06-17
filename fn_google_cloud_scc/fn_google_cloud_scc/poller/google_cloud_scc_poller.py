@@ -36,7 +36,7 @@ CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.
 
 def init_scc_app(options):
     """
-    TODO
+    Intialize the app common code and create the tab in the platform if it doesn't already exist
     """
     app_common = GoogleSCCCommon(options)
 

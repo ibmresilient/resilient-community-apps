@@ -58,8 +58,29 @@ class GoogleSCCCommon():
 
     def get_findings(self, findings_filter=None, findings_read_time=None, compare_duration=None, order_by=None, field_mask=None):
         """
-        TODO
-        https://cloud.google.com/python/docs/reference/securitycenter/latest/google.cloud.securitycenter_v1.types
+        Get findings given request parameters. See the SCC Client docs for more details on the parameters and their types.
+
+        https://cloud.google.com/python/docs/reference/securitycenter/latest/google.cloud.securitycenter_v1.types.ListFindingsRequest
+
+        Returned type is a list of finding results converted to dictionaries for ease of use:
+        [
+            {"finding": {...}, "resource": {...}, "state_change": "<some_val>"},
+            {"finding": {...}, "resource": {...}, "state_change": "<some_val>"},
+            ...
+        ]
+
+        :param findings_filter: (Optional) Filter for findings to be found. When used with query_entities_since_ts, this filter is set to query all eventTime values greater than the last poll timestamp
+        :type findings_filter: str
+        :param findings_read_time: (Optional) Time used as a reference point when filtering findings. SCC allows for filtering findings at any point in time
+        :type findings_read_time:  google.protobuf.timestamp_pb2.Timestamp 
+        :param compare_duration: (Optional) Updates the returned objects "state_change" value to indicate if the object changed during the given duration
+        :type compare_duration: google.protobuf.duration_pb2.Duration 
+        :param order_by: (Optional) Expression that defines what fields and order to use for sorting
+        :type order_by: str
+        :param field_mask: (Optional) A field mask to specify the Finding fields to be listed in the response. An empty field mask will list all fields
+        :type field_mask: google.protobuf.field_mask_pb2.FieldMask 
+        :return: list of finding results. see above for format
+        :rtype: list[dict]
         """
 
         # if no filter was given but a default filter is defined in the
@@ -67,12 +88,8 @@ class GoogleSCCCommon():
         if not findings_filter and self.default_findings_filter:
             findings_filter = self.default_findings_filter
 
-        # The "sources/-" suffix lists findings across all sources.  You
-        # also use a specific source_name instead.
-        # TODO: is this always what we want? Maybe not — CHECK!!
+        # The "sources/-" suffix lists findings across all sources.
         all_sources = f"{self.org_name}/sources/-"
-
-        # https://cloud.google.com/security-command-center/docs/how-to-api-list-findings#filtering_findings
 
         findings_request = {
             "parent": all_sources, 
@@ -117,16 +134,22 @@ class GoogleSCCCommon():
 
         return finding_results
 
-    def add_security_mark(self, finding, msg):
+    def add_security_mark(self, finding, soar_case_id):
         """
-        TODO
+        Add security marks to a finding.
+
+        :param finding: The finding response object's finding dict
+        :type finding: dict
+        :param soar_case_id: The case id to be associated in the added mark
+        :type soar_case_id: str|int
+        :return: updated marks and the marks that were given to SCC
         """
-        msg = str(msg)
+        soar_case_id = str(soar_case_id)
 
         name = f"{finding.get('name')}/securityMarks"
 
         field_mask = FieldMask(paths=[f"marks.{SOAR_MARKS_PATH}"])
-        marks = {SOAR_MARKS_PATH: msg}
+        marks = {SOAR_MARKS_PATH: soar_case_id}
 
         marks_request = {
             "security_marks": {"name": name, "marks": marks},
@@ -139,7 +162,12 @@ class GoogleSCCCommon():
 
     def make_linkback_url(self, finding):
         """
-        TODO
+        Create a link back to the finding as that is not readily available from the API
+
+        :param finding: The finding response object's finding dict
+        :type finding: dict
+        :return: the link to the finding
+        :rtype: str
         """
         name = finding.get("name")
 
@@ -148,7 +176,13 @@ class GoogleSCCCommon():
 
     def create_initial_note(self, finding):
         """
-        TODO
+        Build the note for initial findings being polled in. Any links in the text are converted
+        to HTML anchors for easy rich text rendering.
+
+        :param finding: The finding response object's finding dict
+        :type finding: dict
+        :return: the note with description \n\n and recommendation
+        :rtype: str
         """
         description =  finding.get("description")
         recommendation = self.get_finding_source_property(finding, 'Recommendation')
@@ -158,7 +192,7 @@ class GoogleSCCCommon():
     @staticmethod
     def get_finding_id(finding, entity_id):
         """
-        TODO
+        Given a finding, get the finding ID by parsing the name and getting the ID from the end
         """
         name = finding.get("name")
 
@@ -168,7 +202,7 @@ class GoogleSCCCommon():
     @staticmethod
     def is_finding_closed(finding, finding_close_field):
         """
-        TODO
+        Given a finding, is it's state "INACTIVE"?
         """
         current_state = finding.get(finding_close_field)
         return current_state == securitycenter.Finding.State.INACTIVE.name
@@ -176,7 +210,9 @@ class GoogleSCCCommon():
     @staticmethod
     def get_finding_source_property(finding, source_prop):
         """
-        TODO
+        Helper method to get source properties which is a nested dict
+        within a finding dict that has values that can change.
+        Gives a default "not found" message if the property is not present
         """
         not_found_msg = f"'{source_prop}' not found for finding {finding.get('canonical_name')}"
 
@@ -184,6 +220,11 @@ class GoogleSCCCommon():
 
 
 def linkify(s, link_text=None):
+    """
+    Identify any links and replace them with HTML anchor tags.
+    Optional "link_text" parameter to replace the displayed text of the link.
+    If ommited, the link itself it given as the text.
+    """
     if s:
         # Replace url to link
         urls = re.compile(r"((https?):((//)|(\\\\))+[\w\d:#@%/;$()~_?\+-=\\\.&]*)(?<![.,?!-])", re.MULTILINE|re.UNICODE)

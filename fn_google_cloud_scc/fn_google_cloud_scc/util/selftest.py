@@ -36,10 +36,8 @@ def selftest_function(opts):
     """
     app_configs = opts.get(PACKAGE_NAME, {})
 
-    # TODO: verify app configs here
-
     try:
-
+        # app configs are verified in the constructor of the GoogleSCCCommon obj
         GoogleSCCCommon(app_configs)
         return {
             "state": "success",
