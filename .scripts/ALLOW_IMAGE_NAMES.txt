@@ -25,7 +25,7 @@ fn_cve_search
 fn_datatable_utils
 fn_elasticsearch
 fn_email_header_validation
-fn_exchange-INT-4878
+#fn_exchange-INT-4878
 fn_exchange_online
 fn_extrahop
 fn_geocoding
