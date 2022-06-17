@@ -13,7 +13,7 @@
 #fn_bigfix
 #fn_calendar_invite
 #fn_cisco_amp4ep
-#fn_cisco_asa-INT-4875
+fn_cisco_asa
 #fn_cisco_enforcement
 #fn_cisco_umbrella_inv
 #fn_clamav
@@ -111,7 +111,7 @@
 #rc_data_feed
 ##rc-data-feed-plugin-elasticfeed
 ##rc-data-feed-plugin-kafkafeed
-rc_data_feed_plugin_odbcfeed
+#rc_data_feed_plugin_odbcfeed
 ##rc-data-feed-plugin-resilientfeed
 ##rc-data-feed-plugin-splunkfeed
 
