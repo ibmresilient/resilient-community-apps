@@ -72,14 +72,14 @@ RUN LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make -j5 && make in
 RUN ldd $(which tesseract)
 # download langauge files
 WORKDIR $HOME/temp_installers
-RUN wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/ara.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/eng.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/rus.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/spa.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_sim_vert.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra.traineddata;\
-wget https://github.com/tesseract-ocr/tessdata_fast/blob/main/chi_tra_vert.traineddata;
+RUN wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/ara.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/rus.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/spa.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_sim.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_sim_vert.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_tra.traineddata;\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_tra_vert.traineddata;
 # move language files to the shared library
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
