@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, HTMLBody, CalendarItem, IMPERSONATION
-from exchangelib.folders import FolderCollection
+
+import base64
+import re
+import sys
+import time
+
+from exchangelib import (DELEGATE, IMPERSONATION, Account, CalendarItem,
+                         Configuration, Credentials, EWSDateTime, EWSTimeZone,
+                         HTMLBody, Message)
 from exchangelib.attachments import FileAttachment
+# Errors
+from exchangelib.errors import (ErrorFolderNotFound,
+                                ErrorImpersonateUserDenied,
+                                ErrorNonExistentMailbox, UnauthorizedError)
+from exchangelib.folders import FolderCollection
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 from exchangelib.restriction import Q
-import time, base64
-import datetime
-import re
-from  requests.adapters import HTTPAdapter
-# Errors
-from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
+from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
 from resilient_lib import RequestsCommon
 
@@ -60,6 +67,16 @@ class exchange_utils:
         self.password = get_config_option(opts, 'password')
         self.default_folder_path = get_config_option(opts, 'default_folder_path')
         self.proxies = RequestsCommon(integration_opts, opts).get_proxies()
+
+    @staticmethod
+    def _get_tz(format="Etc/GMT"):
+
+        if sys.version_info.major <= 2:
+            # Support PY 2
+            return EWSTimeZone.timezone(format)
+        else:
+            # Support PY 3
+            return EWSTimeZone(format)
 
     def connect_to_account(self, primary_smtp_address, impersonation=False):
         """Connect to specified account and return it"""
@@ -151,12 +168,11 @@ class exchange_utils:
         # filter by date
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            tz = EWSTimeZone('Etc/GMT')
+            tz = self._get_tz()
             start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
         if end_date:
-            # get YYYY/MM/DD from epoch time in milliseconds
-            tz = EWSTimeZone('Etc/GMT')
+            tz = self._get_tz()
             end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
@@ -199,7 +215,7 @@ class exchange_utils:
         if optional_attendees:
             optional_attendees = [oa.strip() for oa in optional_attendees.split(',')]
 
-        tz = EWSTimeZone('Etc/GMT')
+        tz = self._get_tz()
 
         meeting = CalendarItem(
             account=account,
