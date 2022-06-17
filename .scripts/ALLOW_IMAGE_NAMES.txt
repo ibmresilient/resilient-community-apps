@@ -7,7 +7,7 @@
 #fn_ansible
 #fn_ansible_tower
 #fn_api_void
-fn_aws_guardduty
+#fn_aws_guardduty
 #fn_aws_iam
 #fn_aws_utilities
 #fn_bigfix
@@ -107,20 +107,24 @@ fn_aws_guardduty
 #fn_yeti
 #fn_zia
 
-#Not_Rebuilt
-#fn_crowdstrike_falcon-still-root-group
-#rc_data_feed
+#Data_Feeder
+rc_data_feed
 ##rc-data-feed-plugin-elasticfeed
 ##rc-data-feed-plugin-kafkafeed
 #rc_data_feed_plugin_odbcfeed
 ##rc-data-feed-plugin-resilientfeed
 ##rc-data-feed-plugin-splunkfeed
+
+#Custom_Threat_Services
 #rc-cts-abuseipdb
 #rc-cts-haveibeenpwned
 #rc-cts-mcafeetie
 #rc-cts-passivetotal
 #rc-cts-shadowserver
 #rc-cts-urlscanio
+
+#Not_Rebuilt
+#fn_crowdstrike_falcon-still-root-group
 
 #No_Related_image
 #fn_apility
@@ -134,6 +138,4 @@ fn_aws_guardduty
 #fn_log_capture
 #fn_machine_learning
 #fn_machine_learning_nlp
-#fn_rsa_netwitness
-#fn_symantec_dlp
 #fn_thug
