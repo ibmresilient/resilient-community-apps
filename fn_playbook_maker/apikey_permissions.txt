@@ -74,3 +74,4 @@ read_function
 edit_data
 create_playbook
 read_playbook
+manage_apps
