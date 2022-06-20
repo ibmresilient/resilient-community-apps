@@ -5,10 +5,10 @@ from fn_google_cloud_scc.util.scc_common import GoogleSCCCommon
 config_data = {
     "google_application_credentials_path":"fake/path",
     "google_cloud_organization_id":123456789,
+    "google_cloud_base_url": "https://console.cloud.google.com",
     "findings_filter":None,
     "polling_interval":10,
     "polling_lookback":120,
-    "cafile":False,
 }
 
 

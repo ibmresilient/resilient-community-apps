@@ -17,10 +17,10 @@ FUNCTION_NAME = "google_scc_get_findings"
 config_data = """[fn_google_cloud_scc]
 google_application_credentials_path="fake/path"
 google_cloud_organization_id=123456789
+google_cloud_base_url=https://console.cloud.google.com
 findings_filter=
 polling_interval=10
 polling_lookback=120
-cafile=False
 """
 
 
