@@ -1,6 +1,7 @@
 include README.md
 recursive-include fn_outbound_email/util *
 recursive-include fn_outbound_email/lib *
+recursive-include fn_outbound_email/bin *
 include fn_outbound_email/LICENSE
 include fn_outbound_email/doc/*
 include fn_outbound_email/data/*
