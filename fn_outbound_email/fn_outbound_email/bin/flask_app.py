@@ -10,7 +10,7 @@ from flask import Flask, request, render_template, session
 from werkzeug.serving import make_server
 
 # Global variables
-APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_PATH = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(APP_PATH, 'templates/')
 
 class FlaskThread(Thread):

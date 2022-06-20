@@ -16,7 +16,7 @@ else:
 from resilient import get_config_file
 from resilient_circuits import helpers
 from fn_outbound_email.lib.oauth2 import OAuth2
-from fn_outbound_email.lib.flask_app import FlaskApp
+from fn_outbound_email.bin.flask_app import FlaskApp
 
 # Global variables
 FN_NAME = "fn_outbound_email"
