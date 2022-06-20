@@ -1,9 +1,14 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
+from email.message import EmailMessage
 import re
 
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
+
+# HEADERS to track
+MESSAGE_ID = "Message-ID"
+IN_REPLY_TO = "In-Reply-To"
 
 # This is the Python 3 version of the email sample script.
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
@@ -17,6 +22,10 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
 # Change this value to reflect who will be the owner of the incident before running the script.
 newIncidentOwner = ""
+
+# if use_in_reply_to = True, a match for an existing incident will first occur by incident name
+#   and then by the message In-Reply-To message id.
+use_in_reply_to = False
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -556,7 +565,7 @@ class EmailProcessor(object):
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain
-        msg_id = headers.get("Message-ID")
+        msg_id = headers.get(MESSAGE_ID)
         if msg_id:
           # strip off any angle brackets
           match = MESSAGE_PATTERN.findall(msg_id[0].strip())
@@ -584,6 +593,18 @@ query_builder.equals(fields.incident.name, newIncidentTitle)
 query_builder.equals(fields.incident.plan_status, "Active")
 query = query_builder.build()
 incidents = helper.findIncidents(query)
+
+if len(incidents) == 0:
+    # check to see if this is a reply to an existing message
+    if use_in_reply_to and emailmessage.headers.get(IN_REPLY_TO) and hasattr(incident.properties, 'email_message_id'):
+        in_reply_to = emailmessage.headers.get(IN_REPLY_TO)
+        match = MESSAGE_PATTERN.findall(in_reply_to[0].strip())
+        # build the query for incidents which have this header
+        query_builder.reset()
+        query_builder.equals(fields.incident.email_message_id, match[0])
+        query_builder.equals(fields.incident.plan_status, "Active")
+        query = query_builder.build()
+        incidents = helper.findIncidents(query)
 
 if len(incidents) == 0:
     # A similar incident does not already exist. Create a new incident and associate the email with it.
