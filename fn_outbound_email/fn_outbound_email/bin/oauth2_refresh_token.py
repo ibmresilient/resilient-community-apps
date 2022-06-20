@@ -80,7 +80,7 @@ def main():
     if script_args.browser:
         print("Running with flask and web browser.")
     else:
-        print("Running with from command line.")
+        print("Running from command line.")
     # Get the app.config section for the app.
     opts = helpers.get_configs(path_config_file=get_config_file(script_args.config_file),
                                      ALLOW_UNRECOGNIZED=True)
@@ -109,4 +109,6 @@ def main():
             flask_app.stop()
         sys.exit(0)
 
-main()
+if __name__ == "__main__":
+    main()
+
