@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Utility to retrieve OAuth2 refresh token in order to configure the Outbound email app"""
 import os
