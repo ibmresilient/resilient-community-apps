@@ -10,6 +10,8 @@ def config_section_data():
     """
 
     config_data = u"""[fn_google_cloud_scc]
+# base url to the google cloud console
+google_cloud_base_url=https://console.cloud.google.com
 # path to google application credentials JSON file
 google_application_credentials_path=
 # organization id of your google cloud organization (found in the cloud console UI)
@@ -26,6 +28,10 @@ google_cloud_organization_id=
 polling_interval=60
 # Number of minutes to lookback for queries the first time the poller runs.
 polling_lookback=120
-cafile=/path/to/cafile.crt or false
+
+# For an integration server, specify the proxy settings here.
+# For AppHost, use the manageAppHost proxy capability.
+#http_proxy=
+#https_proxy=
 """
     return config_data

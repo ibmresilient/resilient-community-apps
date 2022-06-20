@@ -13,7 +13,7 @@ from resilient_lib import readable_datetime, validate_fields
 FindingResult = securitycenter.ListFindingsResponse.ListFindingsResult
 
 PACKAGE_NAME = "fn_google_cloud_scc"
-CLOUD_CONSOLE_BASE_URL = "https://console.cloud.google.com/security/command-center/findings"
+FINDINGS_BASE_URL = "/security/command-center/findings"
 ORG_NAME_FRAGMENT = "organizations"
 SOAR_MARKS_PATH="IBM_SOAR_ID"
 
@@ -23,8 +23,11 @@ class GoogleSCCCommon():
 
         validate_fields([
             "google_application_credentials_path", 
-            "google_cloud_organization_id"
+            "google_cloud_organization_id",
+            "google_cloud_base_url"
         ], options)
+
+        self.console_base_url = options.get("google_cloud_base_url")
 
         cred_file = options.get("google_application_credentials_path")
         self.client = securitycenter.SecurityCenterClient.from_service_account_file(cred_file)
@@ -172,7 +175,7 @@ class GoogleSCCCommon():
         name = finding.get("name")
 
         query = urlencode(query={ "organizationId": self.org_id, "resourceId": name })
-        return f"{CLOUD_CONSOLE_BASE_URL}?{query}"
+        return f"{self.console_base_url}{FINDINGS_BASE_URL}?{query}"
 
     def create_initial_note(self, finding):
         """
