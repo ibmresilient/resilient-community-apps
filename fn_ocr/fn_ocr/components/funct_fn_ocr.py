@@ -69,7 +69,7 @@ class FunctionComponent(AppFunctionComponent):
             metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
         except: # should find out what error the above throws, if any
             yield self.status_message("> No artifact id found, converting base64 to buffer...")
-            data = base64.decodebytes(base64_string)
+            data = base64.b64decode(base64_string)
             yield self.status_message("> Base64 string decoded into buffer")
         
         arr_from_string = np.frombuffer(data, np.uint8) # data comes as a bytestring, need to read it into an array
