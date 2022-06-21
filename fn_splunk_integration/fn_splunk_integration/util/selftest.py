@@ -8,6 +8,7 @@
 import logging
 from fn_splunk_integration.util.function_utils import get_servers_list
 from fn_splunk_integration.util.splunk_utils import SplunkClient
+from resilient_lib import str_to_bool
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
@@ -25,7 +26,7 @@ def selftest_function(opts):
         for server_name in servers_list:
             server = opts.get(server_name, {})
 
-            splunk_verify_cert = False if server.get("verify_cert", "").lower() != "true" else True
+            splunk_verify_cert = str_to_bool(server.get("verify_cert", ""))
 
             LOG.info("Trying to connect to %s", server.get("host"))
 

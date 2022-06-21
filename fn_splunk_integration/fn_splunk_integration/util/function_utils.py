@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields, IntegrationError, str_to_bool
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
 from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
 
@@ -73,9 +73,9 @@ def get_servers_list(opts):
         servers_list[server_name] = opts.get(server_name, {})
         validate_fields(["host", "port"], servers_list[server_name])
         user = servers_list[server_name].get("username", None)
-        splnukPass = servers_list[server_name].get("splunkpassword", None)
+        splunkPass = servers_list[server_name].get("splunkpassword", None)
         token = servers_list[server_name].get("token", None)
-        if not ((user and splnukPass) or token):
+        if not ((user and splunkPass) or token):
             raise ValueError("Either username/splunkpassword or token need to be given")
         elif token:
             servers_list[server_name]["username"] = None
@@ -129,7 +129,7 @@ def function_basics(fn_inputs, servers_list, utils=True):
     # Make that calls that all of the functions use
     options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, servers_list)
 
-    splunk_verify_cert = False if options.get("verify_cert", "").lower() != "true" else True
+    splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
 
     # Log all the info
     LOG.info(str(fn_inputs))
