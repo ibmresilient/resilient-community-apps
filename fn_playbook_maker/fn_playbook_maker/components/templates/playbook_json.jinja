@@ -88,6 +88,8 @@
         "last_modified_time": 1652961625333,
         "local_scripts": [
             {% for current_funct in functions -%}
+                {# global scripts have 'id' whereas local scripts will not #}
+                {% if not current_funct.script_info.id -%}
                 {
                     "actions": [],
                     "created_date": 1652961380454,
@@ -99,12 +101,13 @@
                     "name": "parse results for {{ current_funct.function_name }}",
                     "object_type": "{{ inputs.pbm_playbook_type }}",
                     "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
-                    "programmatic_name": "{{ playbook_info.playbook_name_api_name }}_parse_results_for_{{ current_funct.function_name }}",
+                    "programmatic_name": "{{ current_funct.script_info.programmatic_name }}",
                     "script_text": "content = playbook.functions.results.{{ current_funct.function_name }}\nif content.success:\n  # change to include your parsing logic\n  <CHANGE>\nelse:\n  incident.addNote(\"Failed: {}\".format(content.reason))",
                     "tags": [],
-                    "uuid": "{{ current_funct.script_uuid }}"
+                    "uuid": "{{ current_funct.script_info.uuid }}"
                 }
-            {% if not loop.last %},{% endif -%}
+                {% if not loop.last %},{% endif -%}
+                {% endif -%}
             {% endfor -%}
         ],
         "manual_settings": {

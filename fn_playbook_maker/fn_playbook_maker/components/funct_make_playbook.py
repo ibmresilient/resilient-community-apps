@@ -43,6 +43,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.pbm_activation_type
             -   fn_inputs.pbm_playbook_type
             -   fn_inputs.pbm_function_names
+            -   fn_inputs.pbm_script_names
             -   fn_inputs.pdm_activation_fields
             -   fn_inputs.pbm_add_to_same_playbook
         """
@@ -51,8 +52,10 @@ class FunctionComponent(AppFunctionComponent):
 
         inputs = fn_inputs._asdict()
 
+        script_list = []
         function_input_list = []
         results = None
+
         if inputs.get("pbm_app_name"):
             function_input_list = self.soar_common.get_function_info_by_app(inputs.get("pbm_app_name").strip())
 
@@ -60,8 +63,8 @@ class FunctionComponent(AppFunctionComponent):
                 results = FunctionResult({}, success=False,
                                          reason="App not found: {}".format(inputs.get("pbm_app_name")))
         elif inputs.get("pbm_function_names"):
-            for function in inputs.get("pbm_function_names").split(","):
-                funct = self.soar_common.get_function_info(function.strip())
+            for function in [funct.strip() for funct in inputs.get("pbm_function_names").split(",")]:
+                funct = self.soar_common.get_function_info(function)
                 if funct:
                     function_input_list.append(funct)
                 else:
@@ -77,17 +80,21 @@ class FunctionComponent(AppFunctionComponent):
         if not results and function_input_list:
             self.LOG.debug(function_input_list)
 
+            # create tuple of functions and scripts
+            paired_function_script_list = self.pair_function_script_lists(function_input_list,
+                                                                          inputs.get("pbm_script_names"))
+
             result_list = []
             # add to same playbook?
             if inputs.get('pbm_add_to_same_playbook'):
-                playbook_payload, export_res, err_msg = make_export_res(inputs, function_input_list)
+                playbook_payload, export_res, err_msg = make_export_res(inputs, paired_function_script_list)
                 if err_msg:
                     self.LOG.error(err_msg)
                 else:
                     result_list.append(self.import_playbook(playbook_payload, export_res))
             else:
                 # separate playbooks
-                for funct_info in function_input_list:
+                for funct_info in paired_function_script_list:
                     playbook_payload, export_res, err_msg = make_export_res(inputs, [funct_info])
                     if err_msg:
                         self.LOG.error(err_msg)
@@ -135,14 +142,35 @@ class FunctionComponent(AppFunctionComponent):
 
         return None
 
+    def pair_function_script_lists(self, function_list, script_list):
+        # get scripts if present
+        if script_list:
+            complete_script_list = self.soar_common.get_script_info(script_list)
+            # if the lists are of unequal lengths, padd out the scripts list to be the same
+            diff_len = len(function_list) - len(complete_script_list)
+            if diff_len > 0:
+                # add the last script multiple times if uneven
+                for _x in range(0, diff_len):
+                    complete_script_list.append(complete_script_list[-1])
+        else:
+            # build place holders for the number of functions
+            complete_script_list = [{} for _x in range(0, len(function_list))]
 
-def make_playbook_info(inputs, funct_info_list):
+        # embed the script list incide the function
+        for x in range(0, len(function_list)):
+            funct_info = function_list[x]
+            funct_info["script_info"] = complete_script_list[x]
+
+        return function_list
+
+def make_playbook_info(inputs, paired_function_script_list):
+    # grab just the function info
     playbook_info = {
 
     }
     playbook_payload = {
         "inputs": inputs,
-        "functions": funct_info_list,
+        "functions": paired_function_script_list,
         "playbook_info": playbook_info
     }
 
@@ -151,24 +179,34 @@ def make_playbook_info(inputs, funct_info_list):
     if inputs.get('pbm_add_to_same_playbook'):
         playbook_info["playbook_name"] = clean_playbook_name
     else:
-        playbook_info["playbook_name"] = "{} for {}".format(clean_playbook_name, funct_info_list[0]["function_name"])
+        playbook_info["playbook_name"] = "{} for {}"\
+            .format(clean_playbook_name, paired_function_script_list[0]["function_name"])
     playbook_info["playbook_name_api_name"] = REMOVE_SPECIAL.sub('', playbook_info["playbook_name"].replace(' ', '_').lower())
 
     # function based uuid's
-    playbook_info['uuid_uuid'] = make_uuid(None)
+    playbook_info["uuid_uuid"] = make_uuid(None)
     playbook_info["playbook_display_name"] = "Playbook_{}".format(playbook_info['uuid_uuid'])
     playbook_info["playbook_uuid"] = "playbook_{}".format(playbook_info['uuid_uuid']).replace("-", "_")
 
-    # initialize per function
-    for funct in funct_info_list:
-        funct["script_uuid"] = make_uuid(None)
+    # initialize the local script info per function if global scripts are not used
+    for funct_info in paired_function_script_list:
+        # if no script, create a local script
+        if not funct_info["script_info"]:
+            # create a local script
+            funct_info["script_info"] = {
+                "uuid": make_uuid(None),
+                "name": "parse results for {}".format(funct_info['function_display_name']),
+                "programmatic_name": "{}_parse_results_for_{}"\
+                                                    .format(playbook_info['playbook_name_api_name'],
+                                                            funct_info['function_name'])
+            }
 
     return playbook_payload
 
-def make_export_res(inputs, function_input_list):
+def make_export_res(inputs, paired_function_script_list):
     templates = MakeTemplates()
     try:
-        playbook_payload = make_playbook_info(inputs, function_input_list)
+        playbook_payload = make_playbook_info(inputs, paired_function_script_list)
         # build the preprocessor script and XML data
         for funct_info in playbook_payload['functions']:
             playbook_payload['current_function'] = funct_info

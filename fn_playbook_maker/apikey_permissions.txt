@@ -60,7 +60,7 @@ read_function
 #edit_function
 #delete_function
 #create_script
-#read_script
+read_script
 #edit_script
 #delete_script
 #create_workflow

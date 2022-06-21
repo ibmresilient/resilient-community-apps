@@ -37,11 +37,11 @@
 				<incoming>{{ ns.function_flow }}</incoming>
 				<outgoing>{{ ns.script_event_flow }}</outgoing>
 			</serviceTask>
-			<scriptTask id="ScriptTask_{{ ns.script_seq }}" name="parse results for {{ current_funct.function_display_name }}">
+			<scriptTask id="ScriptTask_{{ ns.script_seq }}" name="{{ current_funct.script_info.name }}">
 				<extensionElements>
-					<resilient:script uuid="{{ current_funct.script_uuid }}"/>
+					<resilient:script uuid="{{ current_funct.script_info.uuid }}"/>
 				</extensionElements>
-				<incoming>{{  ns.script_event_flow }}</incoming>
+				<incoming>{{ ns.script_event_flow }}</incoming>
 				<outgoing>{{ end_event_flow }}</outgoing>
 				<script>script</script>
 			</scriptTask>

@@ -16,6 +16,7 @@ FUNCTIONS_URI = "/functions/"
 TYPES_URI = "/types/"
 IMPORTS_URI = "/configurations/imports"
 PLAYBOOKS_URI = "/playbooks/"
+SCRIPT_URI = "/scripts"
 
 class SOARCommon():
     """ common methods for accessing IBM SOAR apps and functions, etc. """
@@ -88,6 +89,24 @@ class SOARCommon():
                      }
 
         return result
+
+    def get_script_info(self, script_names):
+        script_name_list = [script.strip() for script in script_names.split(',')]
+        found_scripts = []
+
+        all_scripts = self.rest_client.get(SCRIPT_URI)
+        # convert list into a named dictionary
+        global_scripts = {script['name']: script for script in all_scripts.get('entities', [])}
+        for script_name in script_name_list:
+            # place holder for a local script
+            if script_name.lower() == "local":
+                found_scripts.append({})        # this will be replaced with a local script
+            elif script_name in global_scripts:
+                found_scripts.append(global_scripts[script_name])
+            else:
+                raise KeyError("Script not found: {}".format(script_name))
+
+        return found_scripts
 
     def _get_function(self, function_name):
         url = urljoin(FUNCTIONS_URI, function_name)
