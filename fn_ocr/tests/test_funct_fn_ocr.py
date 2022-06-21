@@ -69,6 +69,25 @@ class TestFnOcr:
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
     ])
+
+    def test_confidence_handling(self,circuits_app, mock_inputs, expected_results):
+        pass
+
+    def test_single_input():
+        pass
+
+    def test_basic_ocr():
+        # this would be a super simple example to test that it can be accessed, nothing more
+        pass
+
+    def test_basic_ocr_rotated():
+        # this would make sure that the correct orientation scripts are loaded
+        pass
+
+    def test_basic_ocr_upside_down():
+        # same as rotation test
+        pass
+    
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
