@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_qradar_integration',
     display_name="QRadar Integration",
-    version='2.2.2',
+    version='2.2.3',
     license='MIT License',
     author='IBM SOAR',
     author_email='support@resilientsystems.com',
