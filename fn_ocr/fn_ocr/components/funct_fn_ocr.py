@@ -11,6 +11,7 @@ import cv2
 import pytesseract
 import json
 import pandas as pd
+import base64
 
 PACKAGE_NAME = "fn_ocr"
 FN_NAME = "fn_ocr"
@@ -36,9 +37,13 @@ class FunctionComponent(AppFunctionComponent):
 
         incident_id = fn_inputs.ocr_incident_id  # number
         task_id = fn_inputs.ocr_task_id  # number
-        artifact_id = fn_inputs.ocr_artifact_id  # number
+        try:
+            artifact_id = fn_inputs.ocr_artifact_id  # number
+        except:
+            yield self.status_message("No artifact id found, assuming base64 string instead")
         confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 49
         lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng'
+        base64_string = fn_inputs.ocr_base64
 
         self.LOG.info("incident_id: %s", incident_id)
         self.LOG.info("task_id: %s", task_id)
@@ -48,8 +53,10 @@ class FunctionComponent(AppFunctionComponent):
 
         if incident_id is None:
             raise FunctionError("Error: incident_id must be specified.")
-        elif artifact_id is None:
-            raise FunctionError("Error: attachment_id or artifact_id must be specified.")
+        elif artifact_id is None and base64_string is None:
+            raise FunctionError("Error: Neither Artifact ID nor a Base64 String Supplied")
+        elif artifact_id and base64_string:
+            raise FunctionError("Both Artifact ID and a Base64 string specified. If you are calling fn_ocr from an artifact, please do not supply a Base64 string")
         else:
             yield self.status_message("> Function inputs OK")
 
@@ -57,8 +64,13 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("> Reading attachment...")
 
         client = self.rest_client()
-        data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
-        metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
+        try:
+            data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
+            metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
+        except: # should find out what error the above throws, if any
+            yield self.status_message("> No artifact id found, converting base64 to buffer...")
+            data = base64.decodebytes(base64_string)
+            yield self.status_message("> Base64 string decoded into buffer")
         
         arr_from_string = np.frombuffer(data, np.uint8) # data comes as a bytestring, need to read it into an array
         img_from_arr = cv2.imdecode(arr_from_string, cv2.IMREAD_COLOR) # use cv2 to open the array as a color image

@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1655228599353,
+  "export_date": 1655839881149,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/ocr_attachment_id",
       "hide_notification": false,
-      "id": 558,
+      "id": 566,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -29,6 +29,14 @@
       "read_only": false,
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -51,7 +59,7 @@
       "deprecated": false,
       "export_key": "__function/ocr_artifact_id",
       "hide_notification": false,
-      "id": 556,
+      "id": 567,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -63,6 +71,14 @@
       "read_only": false,
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -85,7 +101,7 @@
       "deprecated": false,
       "export_key": "__function/ocr_incident_id",
       "hide_notification": false,
-      "id": 555,
+      "id": 568,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -98,6 +114,14 @@
       "required": "always",
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -120,7 +144,7 @@
       "deprecated": false,
       "export_key": "__function/ocr_task_id",
       "hide_notification": false,
-      "id": 557,
+      "id": 569,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -132,6 +156,14 @@
       "read_only": false,
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -154,7 +186,7 @@
       "deprecated": false,
       "export_key": "__function/ocr_confidence_threshold",
       "hide_notification": false,
-      "id": 560,
+      "id": 570,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -166,6 +198,14 @@
       "read_only": false,
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -186,9 +226,47 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/ocr_base64",
+      "hide_notification": false,
+      "id": 574,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "ocr_base64",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
+        {
+          "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
+          "value": "Playbook Tag"
+        }
+      ],
+      "templates": [],
+      "text": "ocr_base64",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "c7b142d0-35c0-4597-a6de-4a83482daa8f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/ocr_language",
       "hide_notification": false,
-      "id": 564,
+      "id": 571,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -201,6 +279,14 @@
       "required": "always",
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -219,7 +305,7 @@
           "label": "eng",
           "properties": null,
           "uuid": "54170b2a-2a9f-49d5-af78-15b1c32bbb9f",
-          "value": 131
+          "value": 152
         },
         {
           "default": false,
@@ -228,7 +314,7 @@
           "label": "ara",
           "properties": null,
           "uuid": "6ee9fbcf-0b60-4df2-8a5d-33a82b49ad24",
-          "value": 132
+          "value": 153
         },
         {
           "default": false,
@@ -237,7 +323,7 @@
           "label": "chi_sim",
           "properties": null,
           "uuid": "87174883-0484-4536-9396-7954bd052046",
-          "value": 133
+          "value": 154
         },
         {
           "default": false,
@@ -246,7 +332,7 @@
           "label": "chi_tra",
           "properties": null,
           "uuid": "e2b278b0-48f6-4634-ad0b-279b2c5986a8",
-          "value": 134
+          "value": 155
         },
         {
           "default": false,
@@ -255,7 +341,7 @@
           "label": "rus",
           "properties": null,
           "uuid": "8abc51ba-c7b1-4f86-b410-f925c22ccb9e",
-          "value": 135
+          "value": 156
         },
         {
           "default": false,
@@ -264,7 +350,7 @@
           "label": "spa",
           "properties": null,
           "uuid": "e0955f08-832b-48f3-b105-e3db2e985122",
-          "value": 136
+          "value": 157
         }
       ]
     },
@@ -282,7 +368,7 @@
   ],
   "functions": [
     {
-      "created_date": 1654540422196,
+      "created_date": 1655308519981,
       "description": {
         "content": "runs OCR on an image in byte string format and returns the relevant results",
         "format": "text"
@@ -290,23 +376,33 @@
       "destination_handle": "fn_ocr",
       "display_name": "Read Text From Image Bytes",
       "export_key": "fn_ocr",
-      "id": 135,
+      "id": 136,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1655228550145,
+      "last_modified_time": 1655836811628,
       "name": "fn_ocr",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
         }
       ],
       "uuid": "7f05f3a0-1788-4634-b092-43ae4fe8b197",
-      "version": 17,
+      "version": 2,
       "view_items": [
         {
           "content": "aa71a32f-5495-4e65-8169-c1be988196d5",
@@ -349,6 +445,14 @@
           "step_label": null
         },
         {
+          "content": "c7b142d0-35c0-4597-a6de-4a83482daa8f",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
           "content": "a7af2d6e-a239-44ea-91a3-040eb470a24a",
           "element": "field_uuid",
           "field_type": "__function",
@@ -362,13 +466,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 7,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1655228597563,
+      "create_date": 1655839879430,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -377,7 +481,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1655228597563,
+      "update_date": 1655839879430,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -387,7 +491,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
+        "7fdde479-1d70-4616-8b95-c585f6a09d39"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -395,6 +499,14 @@
       "name": "fn_ocr",
       "programmatic_name": "fn_ocr",
       "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        },
+        {
+          "tag_handle": "playbook_682d4a8b_a963_4239_ae00_40326149a7d7",
+          "value": "Playbook Tag"
+        },
         {
           "tag_handle": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
           "value": "Playbook Tag"
@@ -411,10 +523,10 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 20,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" isExecutable=\"true\" name=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_06msd89\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7f05f3a0-1788-4634-b092-43ae4fe8b197\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\ninputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = playbook.inputs.ocr_confidence_threshold\\ninputs.ocr_language = playbook.inputs.ocr_language\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06msd89\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l276jy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_06msd89\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ocr_results_to_note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1d9740c6-4267-4cd1-8089-cc5f935387b7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0l276jy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kd23ca\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0l276jy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kd23ca\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1kd23ca\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kd23ca\" id=\"Flow_1kd23ca_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l276jy\" id=\"Flow_0l276jy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06msd89\" id=\"Flow_06msd89_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 16,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" isExecutable=\"true\" name=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_06msd89\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7f05f3a0-1788-4634-b092-43ae4fe8b197\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\ninputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = playbook.inputs.ocr_confidence_threshold\\ninputs.ocr_language = playbook.inputs.ocr_language\\ninputs.ocr_base64 = playbook.inputs.ocr_base64\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06msd89\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l276jy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_06msd89\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ocr_results_to_note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1d9740c6-4267-4cd1-8089-cc5f935387b7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0l276jy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kd23ca\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0l276jy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1kd23ca\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1kd23ca\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b1eac7ff_fc16_4084_9045_b753d316a26e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kd23ca\" id=\"Flow_1kd23ca_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l276jy\" id=\"Flow_0l276jy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06msd89\" id=\"Flow_06msd89_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1654544182141,
+      "create_date": 1655308520268,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -434,6 +546,35 @@
         "display_name": "Parse Image",
         "export_key": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
         "fields": {
+          "ocr_base64": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e/ocr_base64",
+            "hide_notification": false,
+            "id": 575,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "ocr_base64",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "ocr_base64_stream",
+            "tooltip": "",
+            "type_id": 1006,
+            "uuid": "58716417-f625-4a62-a95a-a24e83ffd175",
+            "values": []
+          },
           "ocr_confidence_threshold": {
             "allow_default_value": false,
             "blank_option": false,
@@ -444,7 +585,7 @@
             "deprecated": false,
             "export_key": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e/ocr_confidence_threshold",
             "hide_notification": false,
-            "id": 561,
+            "id": 572,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -460,7 +601,7 @@
             "templates": [],
             "text": "Confidence Threshold",
             "tooltip": "Lines with confidence less than this number are ignored. Defaults to 49%",
-            "type_id": 1005,
+            "type_id": 1006,
             "uuid": "796a2bfc-3a2c-4c3c-b013-ee7e70ef8de8",
             "values": []
           },
@@ -474,7 +615,7 @@
             "deprecated": false,
             "export_key": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e/ocr_language",
             "hide_notification": false,
-            "id": 565,
+            "id": 573,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -490,7 +631,7 @@
             "templates": [],
             "text": "OCR Language",
             "tooltip": "Choose the language you want to detect",
-            "type_id": 1005,
+            "type_id": 1006,
             "uuid": "75258569-29c3-4e19-bb96-2fa78e7dbb7a",
             "values": [
               {
@@ -500,7 +641,7 @@
                 "label": "eng",
                 "properties": null,
                 "uuid": "b5dafc26-3c2c-4ab8-aa1c-184db9df7343",
-                "value": 137
+                "value": 158
               },
               {
                 "default": false,
@@ -509,7 +650,7 @@
                 "label": "ara",
                 "properties": null,
                 "uuid": "c1106908-bcd3-4dd6-b304-884b23b0ffb1",
-                "value": 138
+                "value": 159
               },
               {
                 "default": false,
@@ -518,7 +659,7 @@
                 "label": "chi_sim",
                 "properties": null,
                 "uuid": "7cbfd98e-531a-4756-8245-5b40c134ae35",
-                "value": 139
+                "value": 160
               },
               {
                 "default": false,
@@ -527,7 +668,7 @@
                 "label": "chi_tra",
                 "properties": null,
                 "uuid": "f5ef99c6-a79f-4ec5-aa6a-3cb97bd247d8",
-                "value": 140
+                "value": 161
               },
               {
                 "default": false,
@@ -536,7 +677,7 @@
                 "label": "rus",
                 "properties": null,
                 "uuid": "a3cd567b-159d-44cb-8534-1f8e3e79405f",
-                "value": 141
+                "value": 162
               },
               {
                 "default": false,
@@ -545,7 +686,7 @@
                 "label": "spa",
                 "properties": null,
                 "uuid": "bf8a9026-3df0-4580-97af-cd03cc624437",
-                "value": 142
+                "value": 163
               }
             ]
           }
@@ -570,7 +711,7 @@
         "uuid": "b7616e9c-0c43-4e5a-88ea-2e5303d58c37"
       },
       "has_logical_errors": false,
-      "id": 6,
+      "id": 7,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -579,18 +720,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1654803259861,
+      "last_modified_time": 1655836843817,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1654544433068,
+          "created_date": 1655308520420,
           "description": "converts the results from OCR function into a note",
           "enabled": false,
           "export_key": "ocr_results_to_note",
-          "id": 11,
+          "id": 12,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1654800575539,
+          "last_modified_time": 1655308520437,
           "name": "ocr_results_to_note",
           "object_type": "artifact",
           "playbook_handle": "parse_image",
@@ -629,6 +770,14 @@
             "show_if": null,
             "show_link_header": false,
             "step_label": null
+          },
+          {
+            "content": "58716417-f625-4a62-a95a-a24e83ffd175",
+            "element": "field_uuid",
+            "field_type": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
           }
         ]
       },
@@ -637,7 +786,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b1eac7ff-fc16-4084-9045-b753d316a26e",
-        "id": 8,
+        "id": 13,
         "name": "playbook_b1eac7ff_fc16_4084_9045_b753d316a26e",
         "type": "playbook",
         "uuid": "63e9eaba-9654-436c-a8dc-3e090b93f43c"
@@ -645,7 +794,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b1eac7ff-fc16-4084-9045-b753d316a26e",
-      "version": 25
+      "version": 18
     }
   ],
   "regulators": null,
