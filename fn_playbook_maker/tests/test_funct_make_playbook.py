@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
+import logging
 import pytest
 import time
 from io import StringIO
@@ -12,6 +13,8 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_playbook_maker"
 FUNCTION_NAME = "make_playbook"
+
+LOG = logging.getLogger(__name__)
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -30,6 +33,7 @@ test_inputs = {
 test_inputs_function_info = [
     {
         "function_name": 'funct_1',
+        "function_display_name": "Function 2",
         "fields": [
             {
                 "blank_option": False,
@@ -41,7 +45,8 @@ test_inputs_function_info = [
                 "rich_text": False,
                 "values": []
             }
-        ]
+        ],
+        "script_info": {}
     }
 ]
 
@@ -57,6 +62,7 @@ test_inputs_multiple_functions = {
 test_inputs_multiple_functions_function_info = [
     {
         "function_name": 'funct_1',
+        "function_display_name": "Function 1",
         "fields": [
             {
                 "blank_option": False,
@@ -68,10 +74,12 @@ test_inputs_multiple_functions_function_info = [
                 "rich_text": False,
                 "values": []
             }
-        ]
+        ],
+        "script_info": {}
     },
     {
         "function_name": 'funct_2',
+        "function_display_name": "Function 2",
         "fields": [
             {
                 "blank_option": False,
@@ -83,7 +91,8 @@ test_inputs_multiple_functions_function_info = [
                 "rich_text": False,
                 "values": []
             }
-        ]
+        ],
+        "script_info": {}
     }
 ]
 
@@ -129,7 +138,7 @@ class TestMakePlaybook:
         assert(payload_info['inputs'].get('pbm_playbook_name') == test_inputs['pbm_playbook_name'])
 
         assert(payload_info['functions'][0].get('function_name') == test_inputs_function_info[0]['function_name'])
-        assert(payload_info['functions'][0].get('script_uuid'))
+        assert(payload_info['functions'][0]['script_info'].get('uuid'))
 
         assert(payload_info['playbook_info'].get('playbook_name').startswith(test_inputs['pbm_playbook_name']))
         assert(payload_info['playbook_info'].get('playbook_name_api_name') and ' ' not in payload_info['playbook_info'].get('playbook_name_api_name'))
