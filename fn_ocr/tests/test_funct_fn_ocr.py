@@ -2,6 +2,8 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
+import pytesseract
+import cv2
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
 
@@ -81,31 +83,36 @@ class TestFnOcr:
         "ocr_base64": "fakeBase64" 
     }
 
-    # @pytest.mark.parametrize("mock_inputs, expected_results", [
-    #     (mock_inputs_1, expected_results_1),
-    #     (mock_inputs_2, expected_results_2)
-    # ])
+    @pytest.mark.parametrize("mock_inputs, expected_results", [
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2)
+    ])
 
-
-    # def test_single_input(self, circuits_app):
+    # @pytest.mark.parametrize("inputs", [(mock_inputs_3)])
+    # def test_single_input(self, circuits_app,inputs):
     #     with pytest.raises(FunctionError):
-    #         results = call_fn_ocr_function(circuits_app, mock_inputs_3)
+    #         results = call_fn_ocr_function(circuits_app, inputs)
     #     assert True
 
     # def test_basic_ocr(self):
     #     # this would be a super simple example to test that it can be accessed, nothing more
-    #     assert True
-
+    #     img = cv2.imread("doc/screenshots/SO_title.png", cv2.IMREAD_COLOR) # What is the correct path?
+    #     img_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) # open-cv (cv2) defaults to BGR colors, we convert just in case
+    #     lang = 'eng'
+    #     text = pytesseract.image_to_string(img_rgb, config=f"-l {lang} --psm 1")
+    #     assert text.split("\n")[0].strip() == "Python Script to convert Image into Byte array"
+   
     # def test_basic_ocr_rotated(self):
     #     # this would make sure that the correct orientation scripts are loaded
-    #     assert True
+    #     img = cv2.imread("doc/screenshots/SO_title_rotated.png", cv2.IMREAD_COLOR) # What is the correct path?
+    #     img_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB) # open-cv (cv2) defaults to BGR colors, we convert just in case
+    #     lang = 'eng'
+    #     text = pytesseract.image_to_string(img_rgb, config=f"-l {lang} --psm 1")
+    #     assert text.split("\n")[0].strip() == "Python Script to convert Image into Byte array"
 
-    # def test_basic_ocr_upside_down(self):
-    #     # same as rotation test
-    #     assert True 
-
-    # def test_reading_from_base64(self):
-    #     pass
+    # @pytest.mark.parametrize("inputs", [(mock_inputs_2)])
+    # def test_reading_from_base64(self, circuits_app, mock_inputs):
+    #    result = call_fn_ocr_function(circuits_app, mock_inputs) 
     
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
