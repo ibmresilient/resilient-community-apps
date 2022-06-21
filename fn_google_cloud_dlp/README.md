@@ -127,12 +127,11 @@ The app does support a proxy server.
 ### Python Environment
 Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* defusedxml
-* google-cloud-dlp>=0.10.0,<2.0.0
-* PyPDF2>=1.26.0
-* python-docx>=0.8.10
-* resilient-lib>=32.0.140
-* resilient_circuits>=30.0.0
+*'resilient_circuits>=45.0.0',
+*'google-cloud-dlp~=3.7.1',
+*'PyPDF2~=2.1.0',
+*'python-docx~=0.8.11',
+*'defusedxml~=0.7.1'
 
 ---
 
@@ -147,8 +146,8 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **gcp_project** | Yes | `<YOUR_GOOGLE_PROJECT_ID>` | *Enter a description of the config here.* |
-| **gcp_dlp_masking_char** | Yes | `#` | *Enter a description of the config here.* |
+| **gcp_project** | Yes | `<YOUR_GOOGLE_PROJECT_ID>` | Found in GCP |
+| **gcp_dlp_masking_char** | Yes | `#` | -- |
 
 
 ---

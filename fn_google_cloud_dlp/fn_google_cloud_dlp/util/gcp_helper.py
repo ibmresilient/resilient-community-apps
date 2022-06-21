@@ -277,9 +277,8 @@ class GCPHelper:
         Returns:
             None; the response from the API is printed to the terminal.
         """
-
         # Convert the project id into a full resource id.
-        parent = cls.dlp_client.project_path(cls.project)
+        parent = f'projects/{cls.project}'
 
         # Construct inspect configuration dictionary
         inspect_config = {
@@ -307,7 +306,7 @@ class GCPHelper:
 
         # Call the API
         response = cls.dlp_client.deidentify_content(
-            request = {'parent': parent, 'deidentify_config': inspect_config, 'inspect_config': deidentify_config, 'item': item})
+            request = {'parent': parent, 'deidentify_config': deidentify_config, 'inspect_config': inspect_config, 'item': item})
 
         return response, response.item.value
 
@@ -368,7 +367,7 @@ class GCPHelper:
         item = {'value': content_string}
 
         # Convert the project id into a full resource id.
-        parent = cls.dlp_client.project_path(cls.project)
+        parent = f'projects/{cls.project}'
 
         # Call the API.
         response = cls.dlp_client.inspect_content(request = {'parent': parent, 'inspect_config': inspect_config, 'item': item})

@@ -10,7 +10,9 @@ PACKAGE_NAME = "fn_google_cloud_dlp"
 FUNCTION_NAME = "google_cloud_dlp_deidentify_content"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[fn_google_cloud_dlp]
+gcp_project=hardy-order-196622
+gcp_dlp_masking_char=#"""
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
