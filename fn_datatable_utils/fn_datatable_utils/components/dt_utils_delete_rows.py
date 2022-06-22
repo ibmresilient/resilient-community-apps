@@ -1,113 +1,92 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import RESDatatable, get_function_input, validate_search_inputs
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
+from resilient_lib import validate_fields
 
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.rows_ids = None
+FN_NAME = "dt_utils_delete_rows"
 
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
-
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_delete_rows''"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'dt_utils_delete_rows''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_datatable_utils", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Function that deletes rows from a Data Table
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name
+            -   fn_inputs.dt_utils_rows_ids
+            -   fn_inputs.dt_utils_search_column
+            -   fn_inputs.dt_utils_search_value
+            -   fn_inputs.dt_utils_delete_all_rows"""
 
-    @function("dt_utils_delete_rows")
-    def _dt_utils_delete_rows_function(self, event, *args, **kwargs):
-        """Function: Function that deletes rows from a Data Table"""
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-        log = logging.getLogger(__name__)
+        # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
+        wf_instance_id = self.get_fn_msg().get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
 
-        try:
-            # Instansiate new Resilient API object
-            res_client = self.rest_client()
-            workflow_id = event.message.get('workflow_instance', {}).get('workflow_instance_id')
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_rows_ids": get_function_input(kwargs, "dt_utils_rows_ids", optional=True),  # text (optional)
-                "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
-                "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True), # text (optional)
-                "dt_utils_delete_all_rows": bool(get_function_input(kwargs, "dt_utils_delete_all_rows", optional=True, default=False)), # bool (optional)
-            }
+        validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            log.info("incident_id: {0}".format(inputs["incident_id"]))
-            log.info("dt_utils_datatable_api_name: {0}".format(inputs["dt_utils_datatable_api_name"]))
-            log.info("dt_utils_rows_ids: {0}".format(inputs["dt_utils_rows_ids"]))
-            log.info("dt_utils_search_column: {0}".format(inputs["dt_utils_search_column"]))
-            log.info(u"dt_utils_search_value: {0}".format(inputs["dt_utils_search_value"]))
-            log.info(u"dt_utils_delete_all_rows: {0}".format(inputs["dt_utils_delete_all_rows"]))
+        dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name # text (required)
+        incident_id = fn_inputs.incident_id # number (required)
+        dt_utils_rows_ids = fn_inputs.dt_utils_rows_ids if hasattr(fn_inputs, "dt_utils_rows_ids") else None  # text (optional)
+        dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
+        dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
+        dt_utils_delete_all_rows = bool(fn_inputs.dt_utils_delete_all_rows if hasattr(fn_inputs, "dt_utils_delete_all_rows") else False) # bool (optional)
 
-            # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(rows_ids=inputs["dt_utils_rows_ids"],
-                                                         search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"],
-                                                         search_criteria_required=False)
+        self.LOG.info("incident_id: %s", incident_id)
+        self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+        self.LOG.info("dt_utils_rows_ids: %s", dt_utils_rows_ids)
+        self.LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+        self.LOG.info(u"dt_utils_search_value: %s", dt_utils_search_value)
+        self.LOG.info(u"dt_utils_delete_all_rows: %s", dt_utils_delete_all_rows)
 
-            if not valid_search_inputs["valid"]:
-                raise ValueError(valid_search_inputs["msg"])
+        # Ensure correct search inputs are defined correctly
+        valid_search_inputs = validate_search_inputs(rows_ids=dt_utils_rows_ids,
+                                                        search_column=dt_utils_search_column,
+                                                        search_value=dt_utils_search_value,
+                                                        search_criteria_required=False)
 
-            # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+        if not valid_search_inputs["valid"]:
+            raise ValueError(valid_search_inputs["msg"])
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"],
-                                     payload.inputs["dt_utils_datatable_api_name"])
-            
-            # get datatable row_id if function used on a datatable
-            row_id = datatable.get_row_id_from_workflow(workflow_id)
-            row_id and log.debug("Current row_id: %s", row_id)
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
-            # Get the data table data
-            datatable.get_data()
+        # Get datatable row_id if function used on a datatable
+        row_id = datatable.get_row_id_from_workflow(wf_instance_id)
+        row_id and self.LOG.debug("Current row_id: %s", row_id)
 
-            deleted_rows = datatable.delete_rows(payload.inputs["dt_utils_rows_ids"], 
-                                                 payload.inputs["dt_utils_search_column"], 
-                                                 payload.inputs["dt_utils_search_value"],
-                                                 payload.inputs["dt_utils_delete_all_rows"],
-                                                 row_id,
-                                                 workflow_id)
+        # Get the data table data
+        datatable.get_data()
 
-            if not deleted_rows:
-                yield StatusMessage("No row(s) found.")
-                payload.success = False
+        deleted_rows = datatable.delete_rows(dt_utils_rows_ids,
+                                                dt_utils_search_column,
+                                                dt_utils_search_value,
+                                                dt_utils_delete_all_rows,
+                                                row_id,
+                                                wf_instance_id)
 
-            elif "error" in deleted_rows:
-                yield StatusMessage(u"Row(s) not deleted. Error: {0}".format(deleted_rows["error"]))
-                payload.success = False
-                raise FunctionError("Failed to delete a row.")
+        if not deleted_rows:
+            yield self.status_message("No row(s) found.")
 
-            else:
-                yield StatusMessage("Row(s) {0} in {1} deleted.".format(deleted_rows, datatable.api_name))
-                payload.rows_ids = deleted_rows
-                payload.success = True
+        elif "error" in deleted_rows:
+            yield self.status_message(u"Row(s) not deleted. Error: {}".format(deleted_rows.get("error")))
+            raise ValueError("Failed to delete a row.")
 
-            results = payload.as_dict()
+        else:
+            yield self.status_message("Row(s) {} in {} deleted.".format(deleted_rows, datatable.api_name))
 
-            log.info("Complete")
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult({"rows_ids": deleted_rows})

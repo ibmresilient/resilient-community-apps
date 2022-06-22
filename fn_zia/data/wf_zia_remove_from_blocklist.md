@@ -38,16 +38,24 @@ def main():
     urls = INPUTS.get("zia_blocklisturls")
     if CONTENT:
         response = CONTENT.get("response")
-        activation = CONTENT.get("activation")
-        status = response.get("status")
-        if status == "OK":
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from blocklist " \
-                        u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
-            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+        if "error_code" not in response:
+            activation = CONTENT.get("activation")
+            status = response.get("status")
+            if status == "OK":
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from blocklist " \
+                            u"for SOAR function <b>{2}</b>.".format(WF_NAME, urls, FN_NAME)
+                note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+            else:
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Unexpected status <b>{1}</b> returned while attempting " \
+                            u"to remove URLs <b>{2}</b> from blocklist by SOAR function <b>{3}</b>."\
+                    .format(WF_NAME, status, urls, FN_NAME)
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Unexpected status <b>{1}</b> returned while attempting " \
-                        u"to remove URLs <b>{2}</b> from blocklist by SOAR function <b>{3}</b>."\
-                .format(WF_NAME, status, urls, FN_NAME)
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned while attempting " \
+                         u"to remove URLs <b>{1}</b> from blocklist for SOAR function <b>{2}</b>."\
+                .format(WF_NAME, urls, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(response["error_code"], response["status"], response["text"] )
+
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to remove URLs <b>{1}</b> from blocklist for SOAR function <b>{2}</b>."\

@@ -21,15 +21,15 @@ Supported ODBC databases:
     SQLite file/database
     """,
     install_requires=[
-        'resilient>=44.0',
+        'resilient>=45.0',
         'rc_data_feed>=2.2.1',
-        'cachetools~=2.1',
         'cx_Oracle~=8.3; python_version>="3.0"',
         'cx_Oracle~=7.3; python_version<"3.0"',
         'pyodbc~=4.0',
-        'six~=1.16',
         'sqlparams~=3.0; python_version>="3.6"',
-        'sqlparams~=1.2; python_version<"3.6"'
+        'sqlparams~=1.2; python_version<"3.6"',
+        'cachetools',
+        'six'
     ],
     packages=find_packages(),
     include_package_data=True,
