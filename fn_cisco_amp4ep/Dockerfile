@@ -1,7 +1,7 @@
 # docker build -t ibmresilient/fn_cisco_amp4ep:1.0.1 -t ibmresilient/fn_cisco_amp4ep:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_cisco_amp4ep
 ARG RESILIENT_CIRCUITS_VERSION=36.2

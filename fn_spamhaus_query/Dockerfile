@@ -1,7 +1,7 @@
 # docker build -t ibmresilient/fn_spamhaus_query:1.0.1 -t ibmresilient/fn_spamhaus_query:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_spamhaus_query
 ARG RESILIENT_CIRCUITS_VERSION=37
