@@ -31,7 +31,7 @@ else:
 If the integration was successful in operation, return a note with the now de-identified text. 
 """
 if results.success:
-  incident.addNote(u"""De-Identified using Google Cloud DLP<b>{}""".format(results.content["de_identified_text"]))
+  incident.addNote(u"""De-Identified using Google Cloud DLP<b>{}<b>""".format(results.content["de_identified_text"]))
 ```
 
 ---

@@ -11,7 +11,12 @@
       "message_destinations": [],
       "name": "Example: Google Cloud - Inspect Attachment for PII",
       "object_type": "attachment",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "35ecc5d3-b63d-44c7-b4aa-27df01a8a15c",
@@ -30,7 +35,12 @@
       "message_destinations": [],
       "name": "Example: Google Cloud - Remove PII from Attachment",
       "object_type": "attachment",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "79923e7e-deae-41d9-9080-acb3435e2a9d",
@@ -63,7 +73,12 @@
       "message_destinations": [],
       "name": "Example: Google Cloud - Remove PII from String",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "46a67a64-d12d-4bdf-8f8b-14b9a3102c3f",
@@ -75,7 +90,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1655918017155,
+  "export_date": 1655926718803,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -102,6 +117,10 @@
       "required": "always",
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        },
         {
           "tag_handle": "fn_urlscanio",
           "value": null
@@ -141,6 +160,10 @@
       "rich_text": false,
       "tags": [
         {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        },
+        {
           "tag_handle": "fn_virustotal",
           "value": null
         }
@@ -173,7 +196,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "gcp_dlp_info_types",
       "tooltip": "Which types of PII do you want to de-identify.",
@@ -1031,7 +1059,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "task_id",
       "tooltip": "",
@@ -1061,6 +1094,10 @@
       "read_only": false,
       "rich_text": false,
       "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        },
         {
           "tag_handle": "fn_virustotal",
           "value": null
@@ -1094,7 +1131,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "gcp_artifact_input",
       "tooltip": "A optional input to be used when the function is ran from an artifact and is used to capture the artifacts value.",
@@ -1132,16 +1174,23 @@
       "export_key": "google_cloud_dlp_deidentify_content",
       "id": 14,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v43",
-        "id": 6,
-        "name": "0228e00e-2c47-43e6-a736-550f104c94ea",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655912150325,
+      "last_modified_time": 1655923947711,
       "name": "google_cloud_dlp_deidentify_content",
-      "tags": [],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"de_identified_text\": \"My email is ############################\"}, \"raw\": \"{\\\"de_identified_text\\\": \\\"My email is ############################\\\"}\", \"inputs\": {\"gcp_dlp_info_types\": [{\"id\": 63, \"name\": \"CREDIT_CARD_NUMBER\"}, {\"id\": 64, \"name\": \"EMAIL_ADDRESS\"}, {\"id\": 67, \"name\": \"FIRST_NAME\"}, {\"id\": 73, \"name\": \"IBAN_CODE\"}, {\"id\": 76, \"name\": \"IP_ADDRESS\"}, {\"id\": 81, \"name\": \"LAST_NAME\"}, {\"id\": 83, \"name\": \"MAC_ADDRESS\"}, {\"id\": 89, \"name\": \"PHONE_NUMBER\"}, {\"id\": 116, \"name\": \"DATE\"}, {\"id\": 117, \"name\": \"DATE_OF_BIRTH\"}, {\"id\": 119, \"name\": \"PERSON_NAME\"}, {\"id\": 120, \"name\": \"AGE\"}, {\"id\": 131, \"name\": \"DOMAIN_NAME\"}, {\"id\": 142, \"name\": \"URL\"}], \"incident_id\": 2103, \"gcp_artifact_input\": \"My email is johnsmith@gmail.com\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-google-cloud-dlp\", \"package_version\": \"1.2.0\", \"host\": \"christohersmbp2.cambridge.ibm.com\", \"execution_time_ms\": 26887, \"timestamp\": \"2022-06-22 13:11:53\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"de_identified_text\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"gcp_dlp_info_types\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}, \"incident_id\": {\"type\": \"integer\"}, \"gcp_artifact_input\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "uuid": "1dd74d85-887d-4d5c-beda-640630d317c1",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
@@ -1199,7 +1248,12 @@
           "name": "Example: Google Cloud DLP - De-Identify Artifact",
           "object_type": "artifact",
           "programmatic_name": "gcp_dlp_deidentify_artifact",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_google_cloud_dlp",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 30
         },
@@ -1209,7 +1263,12 @@
           "name": "Example: Google Cloud DLP - De-Identify Attachment",
           "object_type": "attachment",
           "programmatic_name": "gcp_dlp_deidentify_attachment",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_google_cloud_dlp",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 29
         }
@@ -1232,16 +1291,21 @@
       "export_key": "google_cloud_dlp_inspect_content",
       "id": 15,
       "last_modified_by": {
-        "display_name": "Chris\u0027 Integration Server v43",
-        "id": 6,
-        "name": "0228e00e-2c47-43e6-a736-550f104c94ea",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655912150444,
+      "last_modified_time": 1655923947757,
       "name": "google_cloud_dlp_inspect_content",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "uuid": "eca925ca-bea4-4f76-9afd-cc4b02a2083a",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "da8b8ba4-28a3-4ad0-b35a-354b1bc59fd6",
@@ -1299,7 +1363,12 @@
           "name": "Example: Google Cloud DLP - Inspect Attachment for PII",
           "object_type": "attachment",
           "programmatic_name": "gcp_dlp_inspect_attachment",
-          "tags": [],
+          "tags": [
+            {
+              "tag_handle": "fn_google_cloud_dlp",
+              "value": null
+            }
+          ],
           "uuid": null,
           "workflow_id": 28
         }
@@ -1308,13 +1377,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 104,
+  "id": 105,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1655918015601,
+      "create_date": 1655926717232,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1323,7 +1392,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1655918015601,
+      "update_date": 1655926717232,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1333,14 +1402,20 @@
   "message_destinations": [
     {
       "api_keys": [
-        "0228e00e-2c47-43e6-a736-550f104c94ea"
+        "0228e00e-2c47-43e6-a736-550f104c94ea",
+        "23b46b1b-bd7a-4e23-9f54-21f71c97020b"
       ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_google_cloud_dlp",
       "name": "Google Cloud DLP: Message Destination",
       "programmatic_name": "fn_google_cloud_dlp",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "users": [],
       "uuid": "473e731c-c19c-4d92-ac61-809cd3a923ab"
     }
@@ -1366,62 +1441,77 @@
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "gcp_dlp_deidentify_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_artifact\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new note with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ilcc5g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpzzxc\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"\\\"\\\"\\\"\\nIf the integration was successful in operation, return a note with the now de-identified text. \\n\\\"\\\"\\\"\\nif results.success:\\n  incident.addNote(u\\\"\\\"\\\"De-Identified using Google Cloud DLP\u0026lt;b\u0026gt;{}\\\"\\\"\\\".format(results.content[\\\"de_identified_text\\\"]))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\nif artifact.type == \\\"String\\\":\\n  inputs.gcp_artifact_input = artifact.value\\nelse:\\n  inputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ilcc5g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ewcngu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ilcc5g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpzzxc\"/\u003e\u003cendEvent id=\"EndEvent_1636vpj\"\u003e\u003cincoming\u003eSequenceFlow_1ewcngu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ewcngu\" sourceRef=\"ServiceTask_0zpzzxc\" targetRef=\"EndEvent_1636vpj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpzzxc\" id=\"ServiceTask_0zpzzxc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"456\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ilcc5g\" id=\"SequenceFlow_0ilcc5g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"327\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1636vpj\" id=\"EndEvent_1636vpj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"787\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ewcngu\" id=\"SequenceFlow_1ewcngu_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"769\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"662.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 8,
+        "workflow_id": "gcp_dlp_deidentify_attachment",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_attachment\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Attachment\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new attachment with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u824h5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0k4g9bu\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"46b361b5-0852-49d2-9160-32fdb6d118eb\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.incident_id = incident.id \\n\\n# If this workflow has the task_id available, gather it incase we need it.\\nif task:\\n  inputs.task_id = task.id\\n# If this workflow has the attachment_id available, gather it incase we need it.\\nif attachment:\\n  inputs.attachment_id = attachment.id\\n\\n# If this workflow has the artifact_id available, gather it incase we need it.\\ntry: \\n  if artifact:\\n    inputs.artifact_id = artifact.id\\nexcept:\\n  pass\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u824h5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c53ji1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10gh3ua\"\u003e\u003cincoming\u003eSequenceFlow_0c53ji1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c53ji1\" sourceRef=\"ServiceTask_0k4g9bu\" targetRef=\"EndEvent_10gh3ua\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1u824h5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k4g9bu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k4g9bu\" id=\"ServiceTask_0k4g9bu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"463\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10gh3ua\" id=\"EndEvent_10gh3ua_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"781\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"799\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c53ji1\" id=\"SequenceFlow_0c53ji1_di\"\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"781\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"672\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u824h5\" id=\"SequenceFlow_1u824h5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"330.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
+      "content_version": 8,
       "creator_id": "0228e00e-2c47-43e6-a736-550f104c94ea",
-      "description": "An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new note with the PII removed.",
-      "export_key": "gcp_dlp_deidentify_artifact",
+      "description": "An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new attachment with the PII removed.",
+      "export_key": "gcp_dlp_deidentify_attachment",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1655917856274,
-      "name": "Example: Google Cloud DLP - De-Identify Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "gcp_dlp_deidentify_artifact",
-      "tags": [],
-      "uuid": "735701cc-a569-4589-afdb-7d6f6a97e0bc",
-      "workflow_id": 30
+      "last_modified_time": 1655926686533,
+      "name": "Example: Google Cloud DLP - De-Identify Attachment",
+      "object_type": "attachment",
+      "programmatic_name": "gcp_dlp_deidentify_attachment",
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
+      "uuid": "82dedecb-172c-492e-8b8e-619a5a070a5b",
+      "workflow_id": 29
     },
     {
       "actions": [],
       "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "gcp_dlp_inspect_attachment",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_inspect_attachment\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - Inspect Attachment for PII\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. Returned results include a list of findings generated from the input including the finding itself, what type of info it was matched against and the likelihood that the match is accurate.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u824h5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0k4g9bu\" name=\"Google Cloud DLP: Inspect Content\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"eca925ca-bea4-4f76-9afd-cc4b02a2083a\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"if results.success:\\n  \\\"\\\"\\\"Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note.\\\"\\\"\\\"\\n  if results.content[\u0027findings\u0027] != None:\\n    note_text = u\\\"\\\"\\\"Findings were found from attachment \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\u0026lt;br\u0026gt; Findings: \u0026lt;br\u0026gt;\\\"\\\"\\\".format(results.content[\\\"attachment_name\\\"])\\n    for finding in results.content[\u0027findings\u0027]:\\n      note_text += u\\\"\\\"\\\"Text Quote: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\\n                      \u0026lt;br\u0026gt; Information Type Suspected: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\\n                      \u0026lt;br\u0026gt; Likelihood / Confidence: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\"\\\"\\\".format(finding[\\\"quote\\\"],finding[\\\"info_type\\\"],finding[\\\"likelihood\\\"])\\n                      \\n    incident.addNote(helper.createRichText(note_text))\",\"pre_processing_script\":\"inputs.incident_id = incident.id \\n\\n# If this workflow has the task_id available, gather it incase we need it.\\nif task:\\n  inputs.task_id = task.id\\n# If this workflow has the attachment_id available, gather it incase we need it.\\nif attachment:\\n  inputs.attachment_id = attachment.id\\n\\n# If this workflow has the artifact_id available, gather it incase we need it.\\ntry: \\n  if artifact:\\n    inputs.artifact_id = artifact.id\\nexcept:\\n  pass\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u824h5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c53ji1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10gh3ua\"\u003e\u003cincoming\u003eSequenceFlow_0c53ji1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c53ji1\" sourceRef=\"ServiceTask_0k4g9bu\" targetRef=\"EndEvent_10gh3ua\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1u824h5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k4g9bu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k4g9bu\" id=\"ServiceTask_0k4g9bu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"463\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10gh3ua\" id=\"EndEvent_10gh3ua_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"781\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"799\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c53ji1\" id=\"SequenceFlow_0c53ji1_di\"\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"781\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"672\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u824h5\" id=\"SequenceFlow_1u824h5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"330.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "creator_id": "0228e00e-2c47-43e6-a736-550f104c94ea",
       "description": "An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. Returned results include a list of findings generated from the input including the finding itself, what type of info it was matched against and the likelihood that the match is accurate.",
       "export_key": "gcp_dlp_inspect_attachment",
-      "last_modified_by": "0228e00e-2c47-43e6-a736-550f104c94ea",
-      "last_modified_time": 1655912150864,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1655923948061,
       "name": "Example: Google Cloud DLP - Inspect Attachment for PII",
       "object_type": "attachment",
       "programmatic_name": "gcp_dlp_inspect_attachment",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
       "uuid": "bcc81226-69fa-457f-8853-a1961de9e8e1",
       "workflow_id": 28
     },
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "gcp_dlp_deidentify_attachment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_attachment\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Attachment\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new attachment with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1u824h5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0k4g9bu\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id \\n\\n# If this workflow has the task_id available, gather it incase we need it.\\nif task:\\n  inputs.task_id = task.id\\n# If this workflow has the attachment_id available, gather it incase we need it.\\nif attachment:\\n  inputs.attachment_id = attachment.id\\n\\n# If this workflow has the artifact_id available, gather it incase we need it.\\ntry: \\n  if artifact:\\n    inputs.artifact_id = artifact.id\\nexcept:\\n  pass\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1u824h5\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c53ji1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10gh3ua\"\u003e\u003cincoming\u003eSequenceFlow_0c53ji1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c53ji1\" sourceRef=\"ServiceTask_0k4g9bu\" targetRef=\"EndEvent_10gh3ua\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1u824h5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k4g9bu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k4g9bu\" id=\"ServiceTask_0k4g9bu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"463\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10gh3ua\" id=\"EndEvent_10gh3ua_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"781\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"799\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c53ji1\" id=\"SequenceFlow_0c53ji1_di\"\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"781\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"672\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u824h5\" id=\"SequenceFlow_1u824h5_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"330.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 7,
+        "workflow_id": "gcp_dlp_deidentify_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"gcp_dlp_deidentify_artifact\" isExecutable=\"true\" name=\"Example: Google Cloud DLP - De-Identify Artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new note with the PII removed.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ilcc5g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0zpzzxc\" name=\"Google Cloud DLP: De-Identify Con...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1dd74d85-887d-4d5c-beda-640630d317c1\"\u003e{\"inputs\":{\"dac1b61a-dc30-403e-804c-079398551459\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"e37d895d-fed3-4a7e-8f30-a33ff6903968\",\"6c6b51dc-88f0-4f1d-bae8-3c01daf4a46d\",\"00a4bbe7-c3b1-4a4d-adfe-0e0eeb9696ca\",\"9e96cde2-9496-40f5-a408-96b42199f320\",\"7cf7ad56-3469-485f-aea8-509c4679790b\",\"ebd94a3b-2a44-47cf-bec6-503424ab7a6c\",\"06a86258-ea5e-431d-ba80-b991b0e317e8\",\"473e24d1-5835-42a4-a13c-f97ba236b4e9\",\"8228a825-bdde-437b-9b62-3fce9330f235\",\"1f486b27-1b3d-42eb-aca2-56e256200a4b\",\"f0b19eee-24b0-4dff-9d5f-8f8136fba7e8\",\"c31de861-11a1-4f51-b081-8d7763921515\",\"a7dfc1b4-49eb-478d-a30f-40e2bfdc13aa\",\"0f0ba9bc-a573-4385-bcff-05e71e2b3772\"]}}},\"post_processing_script\":\"\\\"\\\"\\\"\\nIf the integration was successful in operation, return a note with the now de-identified text. \\n\\\"\\\"\\\"\\nif results.success:\\n  incident.addNote(u\\\"\\\"\\\"De-Identified using Google Cloud DLP\u0026lt;b\u0026gt;{}\u0026lt;b\u0026gt;\\\"\\\"\\\".format(results.content[\\\"de_identified_text\\\"]))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\nif artifact.type == \\\"String\\\":\\n  inputs.gcp_artifact_input = artifact.value\\nelse:\\n  inputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ilcc5g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ewcngu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ilcc5g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0zpzzxc\"/\u003e\u003cendEvent id=\"EndEvent_1636vpj\"\u003e\u003cincoming\u003eSequenceFlow_1ewcngu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ewcngu\" sourceRef=\"ServiceTask_0zpzzxc\" targetRef=\"EndEvent_1636vpj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0zpzzxc\" id=\"ServiceTask_0zpzzxc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"456\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ilcc5g\" id=\"SequenceFlow_0ilcc5g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"327\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1636vpj\" id=\"EndEvent_1636vpj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"769\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"787\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ewcngu\" id=\"SequenceFlow_1ewcngu_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"769\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"662.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 7,
       "creator_id": "0228e00e-2c47-43e6-a736-550f104c94ea",
-      "description": "An example workflow ran at an attachment level that sends the attachment data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new attachment with the PII removed.",
-      "export_key": "gcp_dlp_deidentify_attachment",
-      "last_modified_by": "0228e00e-2c47-43e6-a736-550f104c94ea",
-      "last_modified_time": 1655912151093,
-      "name": "Example: Google Cloud DLP - De-Identify Attachment",
-      "object_type": "attachment",
-      "programmatic_name": "gcp_dlp_deidentify_attachment",
-      "tags": [],
-      "uuid": "82dedecb-172c-492e-8b8e-619a5a070a5b",
-      "workflow_id": 29
+      "description": "An example workflow ran at an attachment level that sends the artifact data to Google Cloud\u0027s DLP Service and aims to de-identify the types of  personal information specified. By default 14 types are selected out of 50+ types. The return result is a new note with the PII removed.",
+      "export_key": "gcp_dlp_deidentify_artifact",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1655926234506,
+      "name": "Example: Google Cloud DLP - De-Identify Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "gcp_dlp_deidentify_artifact",
+      "tags": [
+        {
+          "tag_handle": "fn_google_cloud_dlp",
+          "value": null
+        }
+      ],
+      "uuid": "735701cc-a569-4589-afdb-7d6f6a97e0bc",
+      "workflow_id": 30
     }
   ],
   "workspaces": []
