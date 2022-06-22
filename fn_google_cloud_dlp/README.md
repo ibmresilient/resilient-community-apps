@@ -78,11 +78,11 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `43.1.49`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `40.0.6554`.
+* Resilient platform >= `43.1.49`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=30.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -175,7 +175,7 @@ None
 <details><summary>Outputs:</summary>
 <p>
 
-{'version': '1.0', 'success': True, 'reason': None, 'content': {'de_identified_text': '\ufeffSSN,gender,birthdat...##########'}, 'raw': '{"de_identified_text...########"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 22}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.1.0', 'host': [hostname], 'execution_time_ms': 2740086, 'timestamp': '2021-09-28 17:34:07'}}
+{'version': '1.0', 'success': True, 'reason': None, 'content': {'de_identified_text': '\ufeffSSN,gender,birthdat...##########'}, 'raw': '{"de_identified_text...########"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 22}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.2.0', 'host': [hostname], 'execution_time_ms': 2740086, 'timestamp': '2021-09-28 17:34:07'}}
 </p>
 </details>
 
@@ -184,7 +184,7 @@ None
 
 ```python
 inputs.incident_id = incident.id
-if artifact.type == "string":
+if artifact.type == "String":
   inputs.gcp_artifact_input = artifact.value
 else:
   inputs.artifact_id = artifact.id
@@ -231,7 +231,7 @@ None
 <details><summary>Outputs:</summary>
 <p>
 
-{'version': '1.0', 'success': True, 'reason': None, 'content': {'findings': [...], 'attachment_name': '[PII Removed]sample-...ta.csv.txt'}, 'raw': '{"findings": [], "at....csv.txt"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 38}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.1.0', 'host': [hostname], 'execution_time_ms': 11913, 'timestamp': '2021-09-28 19:03:18'}}
+{'version': '1.0', 'success': True, 'reason': None, 'content': {'findings': [...], 'attachment_name': '[PII Removed]sample-...ta.csv.txt'}, 'raw': '{"findings": [], "at....csv.txt"}', 'inputs': {'gcp_dlp_info_types': [...], 'incident_id': 2114, 'attachment_id': 38}, 'metrics': {'version': '1.0', 'package': 'fn-google-cloud-dlp', 'package_version': '1.2.0', 'host': [hostname], 'execution_time_ms': 11913, 'timestamp': '2021-09-28 19:03:18'}}
 
 </p>
 </details>
