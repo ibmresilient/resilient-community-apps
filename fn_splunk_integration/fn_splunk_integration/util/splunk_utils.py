@@ -298,12 +298,17 @@ class SplunkServers():
         :param servers_list: List of Splunk servers
         :return: Dictionary of options for choosen server
         """
-        label = PACKAGE_NAME
-        if splunk_label:
-            label = "{}:{}".format(label, splunk_label)
+        # If label not given and using previous versions app.config [fn_splunk_integration]
+        if not splunk_label and servers_list.get(PACKAGE_NAME):
+            return servers_list[PACKAGE_NAME]
+        elif not splunk_label:
+            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
 
-        if label in servers_list:
+        label = PACKAGE_NAME+":"+splunk_label
+        if splunk_label and label in servers_list:
             options = servers_list[label]
+        elif len(servers_list) == 1:
+            options = servers_list[list(servers_list.keys())[0]]
         else:
             raise IntegrationError("{} did not match labels given in the app.config".format(splunk_label))
 

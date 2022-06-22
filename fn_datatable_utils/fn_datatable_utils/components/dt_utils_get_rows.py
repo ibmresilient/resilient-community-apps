@@ -1,97 +1,85 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import *
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_datatable_utils.util.helper import RESDatatable, PACKAGE_NAME, validate_search_inputs
+from resilient_lib import validate_fields
 
-class FunctionPayload(object):
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-        self.success = True
-        self.inputs = inputs
-        self.rows = None
+FN_NAME = "dt_utils_get_rows"
 
-    def as_dict(self):
-        """Return this class as a Dictionary"""
-        return self.__dict__
-
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_get_rows''"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'dt_utils_get_rows''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_datatable_utils", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_datatable_utils", {})
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Function that returns rows found based on searching/sorting criteria.
+            -   fn_inputs.incident_id
+            -   fn_inputs.dt_utils_datatable_api_name
+            -   fn_inputs.dt_utils_sort_by
+            -   fn_inputs.dt_utils_sort_direction
+            -   fn_inputs.dt_utils_max_rows
+            -   fn_inputs.dt_utils_search_column
+            -   fn_inputs.dt_utils_search_value"""
 
-    @function("dt_utils_get_rows")
-    def _dt_utils_get_rows_function(self, event, *args, **kwargs):
-        """Function: Function that returns rows found based on searching/sorting criteria."""
+        # Instansiate new SOAR API object
+        res_client = self.rest_client()
 
-        log = logging.getLogger(__name__)
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-        try:
-            # Instansiate new Resilient API object
-            res_client = self.rest_client()
+        validate_fields(["incident_id", "dt_utils_datatable_api_name"], fn_inputs)
 
-            inputs = {
-                "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
-                "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_sort_by": get_function_input(kwargs, "dt_utils_sort_by", optional=True),  # text (optional)
-                "dt_utils_sort_direction": get_function_input(kwargs, "dt_utils_sort_direction", optional=True)["name"],  # select, values: "ASC", "DESC" (optional)
-                "dt_utils_max_rows": get_function_input(kwargs, "dt_utils_max_rows", optional=True),  # number (optional)
-                "dt_utils_search_column": get_function_input(kwargs, "dt_utils_search_column", optional=True),  # text (optional)
-                "dt_utils_search_value": get_function_input(kwargs, "dt_utils_search_value", optional=True),  # text (optional)
-            }
+        dt_utils_datatable_api_name = fn_inputs.dt_utils_datatable_api_name  # text (required)
+        incident_id = fn_inputs.incident_id  # number (required)
+        dt_utils_sort_by = fn_inputs.dt_utils_sort_by if hasattr(fn_inputs, "dt_utils_sort_by") else None  # text (optional)
+        dt_utils_sort_direction = fn_inputs.dt_utils_sort_direction if hasattr(fn_inputs, "dt_utils_sort_direction") else None  # select, values: "ASC", "DESC" (optional)
+        dt_utils_max_rows = fn_inputs.dt_utils_max_rows if hasattr(fn_inputs, "dt_utils_max_rows") else 0  # number (optional)
+        dt_utils_search_column = fn_inputs.dt_utils_search_column if hasattr(fn_inputs, "dt_utils_search_column") else None  # text (optional)
+        dt_utils_search_value = fn_inputs.dt_utils_search_value if hasattr(fn_inputs, "dt_utils_search_value") else None  # text (optional)
 
-            # Ensure correct search inputs are defined correctly
-            valid_search_inputs = validate_search_inputs(sort_by=inputs["dt_utils_sort_by"],
-                                                         sort_direction=inputs["dt_utils_sort_direction"],
-                                                         search_column=inputs["dt_utils_search_column"],
-                                                         search_value=inputs["dt_utils_search_value"],
-                                                         search_criteria_required=False)
+        self.LOG.info("incident_id: %s", incident_id)
+        self.LOG.info("dt_utils_datatable_api_name: %s", dt_utils_datatable_api_name)
+        self.LOG.info("dt_utils_sort_by: %s", dt_utils_sort_by)
+        self.LOG.info("dt_utils_sort_direction: %s", dt_utils_sort_direction)
+        self.LOG.info("dt_utils_max_rows: %s", dt_utils_max_rows)
+        self.LOG.info("dt_utils_search_column: %s", dt_utils_search_column)
+        self.LOG.info("dt_utils_search_value: %s", dt_utils_search_value)
 
-            if not valid_search_inputs["valid"]:
-                raise ValueError(valid_search_inputs["msg"])
+        # Ensure correct search inputs are defined correctly
+        valid_search_inputs = validate_search_inputs(sort_by=dt_utils_sort_by,
+                                                        sort_direction=dt_utils_sort_direction,
+                                                        search_column=dt_utils_search_column,
+                                                        search_value=dt_utils_search_value,
+                                                        search_criteria_required=False)
 
-            # Create payload dict with inputs
-            payload = FunctionPayload(inputs)
+        if not valid_search_inputs["valid"]:
+            raise ValueError(valid_search_inputs["msg"])
 
-            # Instantiate a new RESDatatable
-            datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
+        # Instantiate a new RESDatatable
+        datatable = RESDatatable(res_client, incident_id, dt_utils_datatable_api_name)
 
-            # Get the data table data
-            datatable.get_data()
+        # Get the data table data
+        datatable.get_data()
 
-            # Get rows
-            rows = datatable.get_rows(payload.inputs["dt_utils_max_rows"], payload.inputs["dt_utils_sort_by"],
-                                      payload.inputs["dt_utils_sort_direction"],
-                                      payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"])
+        # Get rows
+        rows = datatable.get_rows(dt_utils_max_rows,dt_utils_sort_by,
+                                    dt_utils_sort_direction,
+                                    dt_utils_search_column,dt_utils_search_value)
 
-            # If no rows found, create a log and set success to False
-            if not rows:
-                yield StatusMessage("No rows found")
-                payload.success = False
+        # If no rows found, create a log and set success to False
+        if not rows:
+            yield self.status_message("No rows found")
 
-            # Else, set rows in the payload
-            else:
-                yield StatusMessage("{0} row/s found".format(len(rows)))
-                payload.success = True
-                payload.rows = rows
+        # Else, set rows in the payload
+        else:
+            yield self.status_message("{0} row/s found".format(len(rows)))
 
-            results = payload.as_dict()
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            log.info("Complete")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult({"rows": rows})

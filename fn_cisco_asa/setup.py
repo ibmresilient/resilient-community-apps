@@ -31,8 +31,7 @@ setup(
     description="Resilient Circuits Components for 'fn_cisco_asa'",
     long_description="""Resilient Circuits Components for 'fn_cisco_asa'""",
     install_requires=[
-        "resilient-circuits>=31.0.0",
-        "resilient-lib>=39.0.0"
+        "resilient-circuits>=45.0.0"
     ],
     packages=find_packages(),
     include_package_data=True,

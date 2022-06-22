@@ -1,0 +1,57 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": [
+      {
+        "id": 1,
+        "name": "Test_activity_map_1",
+        "short_code": "wGCGL",
+        "description": "Test map 1",
+        "weighting": "bytes",
+        "owner": "setup",
+        "mode": "2dforce",
+        "mod_time": 1644514002331,
+        "show_alert_status": false,
+        "walks": [
+          {
+            "origins": [
+              {
+                "object_type": "device",
+                "object_id": 6
+              }
+            ],
+            "steps": [
+              {
+                "relationships": [
+                  {
+                    "protocol": "any",
+                    "role": "any"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "rights": [
+          "delete",
+          "edit",
+          "share",
+          "transfer",
+          "view"
+        ]
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 1063,
+    "timestamp": "2022-04-13 16:50:16"
+  }
+}
