@@ -29,7 +29,7 @@ fn_email_header_validation
 fn_exchange_online
 fn_extrahop
 fn_geocoding
-#fn_google_cloud_dlp-INT-4876
+fn_google_cloud_dlp
 fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
