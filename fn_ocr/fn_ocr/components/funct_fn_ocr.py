@@ -61,7 +61,8 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("> Function inputs OK")
 
 
-        yield self.status_message("> Reading attachment...")
+        if artifact_id:
+            yield self.status_message("> Reading attachment...")
 
         client = self.rest_client()
         try:
