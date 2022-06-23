@@ -28,10 +28,5 @@ google_cloud_organization_id=
 polling_interval=60
 # Number of minutes to lookback for queries the first time the poller runs.
 polling_lookback=120
-
-# For an integration server, specify the proxy settings here.
-# For AppHost, use the manageAppHost proxy capability.
-#http_proxy=
-#https_proxy=
 """
     return config_data
