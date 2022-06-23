@@ -11,15 +11,15 @@ setup(
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
     description="Integrate with Microsoft Exchange email and meeting functionality",
-    long_description="""This package provides functions that can be used to access Microsoft
-        Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
-        - Create a meeting in Microsoft Exchange and send out invites<br>
-        - Delete queried emails from a user's mailbox<br>
-        - Query emails from a user's mailbox<br>
-        - Get mailbox info for a sender<br>
-        - Move the contents of one folder to another folder and deletes the original<br>
-        - Move queried emails from one folder to another folder<br>
-        - Send email to a list of recipients""",
+    long_description="""This package provides functions that can be used to access Microsoft \
+Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
+- Create a meeting in Microsoft Exchange and send out invites<br>
+- Delete queried emails from a user's mailbox<br>
+- Query emails from a user's mailbox<br>
+- Get mailbox info for a sender<br>
+- Move the contents of one folder to another folder and deletes the original<br>
+- Move queried emails from one folder to another folder<br>
+- Send email to a list of recipients""",
     install_requires=[
         'resilient_circuits>=45.0.0',
         'exchangelib==2.2.0; python_version<"3"',
