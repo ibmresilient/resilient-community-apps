@@ -62,7 +62,7 @@
 -->
 **Integrate with Microsoft Exchange email and meeting functionality**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 This package provides functions that can be used to access Microsoft 
 Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
@@ -193,8 +193,6 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Exchange Create Meeting
 Creates a meeting and sends out invitation to required attendees and optional attendees.
 
- ![screenshot: fn-exchange-create-meeting ](./doc/screenshots/fn-exchange-create-meeting.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -280,8 +278,6 @@ incident.addNote(noteText)
 ---
 ## Function - Exchange Delete Emails
 Delete emails with the specified query parameters.
-
- ![screenshot: fn-exchange-delete-emails ](./doc/screenshots/fn-exchange-delete-emails.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -449,8 +445,6 @@ for email_id in email_ids:
 ## Function - Exchange Find Emails
 Find emails with the specified parameters.
 
- ![screenshot: fn-exchange-find-emails ](./doc/screenshots/fn-exchange-find-emails.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -615,8 +609,6 @@ for email_id in email_ids:
 ## Function - Exchange Get Mailbox Info
 Get mailbox info for specified email.
 
- ![screenshot: fn-exchange-get-mailbox-info ](./doc/screenshots/fn-exchange-get-mailbox-info.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -677,8 +669,6 @@ incident.addArtifact('Email Sender Name', results.name, 'Email sender name from 
 ---
 ## Function - Exchange Move Emails
 Move queried emails from a specified folder to another specified folder.
-
- ![screenshot: fn-exchange-move-emails ](./doc/screenshots/fn-exchange-move-emails.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -846,8 +836,6 @@ for email_id in email_ids:
 ## Function - Exchange Move Folder Contents and Delete Folder
 Move all items from this folder that satisfy the query parameters to the destination folder and then delete the original folder.
 
- ![screenshot: fn-exchange-move-folder-contents-and-delete-folder ](./doc/screenshots/fn-exchange-move-folder-contents-and-delete-folder.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -994,8 +982,6 @@ for email_id in email_ids:
 ---
 ## Function - Exchange Send Email
 Send an email to a list of recipients.
-
- ![screenshot: fn-exchange-send-email ](./doc/screenshots/fn-exchange-send-email.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
