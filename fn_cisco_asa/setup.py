@@ -22,14 +22,13 @@ def snake_to_camel(word):
 
 setup(
     name="fn_cisco_asa",
-    #display_name="Cisco ASA Functions for IBM Security SOAR",
-    version="1.0.0",
+    display_name="Cisco ASA App",
+    version="1.0.1",
     license="MIT",
-    author="Resilient Labs",
-    author_email="resil.labs@gmail.com",
-    url="https://github.com/ibmresilient/resilient-community-apps",
-    description="Resilient Circuits Components for 'fn_cisco_asa'",
-    long_description="""Resilient Circuits Components for 'fn_cisco_asa'""",
+    author="IBM SOAR",
+    url='http://ibm.biz/soarcommunity',
+    description="IBM SOAR app for 'fn_cisco_asa'",
+    long_description="""IBM SOAR integration with Cisco ASA - Adaptive Security Appliance""",
     install_requires=[
         "resilient-circuits>=45.0.0"
     ],
