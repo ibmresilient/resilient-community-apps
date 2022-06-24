@@ -1,0 +1,128 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "findings_list": [
+      {
+        "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
+        "parent": "organizations/<org_id>/sources/<source_id>",
+        "resource_name": "//container.googleapis.com/<resource_path>",
+        "state": "INACTIVE",
+        "category": "OPEN_SSH_PORT",
+        "external_uri": "https://console.cloud.google.com/<link_to_solution>",
+        "source_properties": {
+          "ResourcePath": [
+            "projects/<project_name>/",
+            "organizations/<org_id>/"
+          ],
+          "ReactivationCount": 0.0,
+          "OpenPorts": {
+            "TCP": [
+              22.0
+            ],
+            "SCTP": [
+              22.0
+            ]
+          },
+          "compliance_standards": {
+            "pci": [
+              {
+                "ids": [
+                  "1.2.1"
+                ]
+              }
+            ],
+            "nist": [
+              {
+                "ids": [
+                  "SC-7"
+                ]
+              }
+            ],
+            "cis": [
+              {
+                "ids": [
+                  "3.6"
+                ],
+                "version": "1.0"
+              },
+              {
+                "ids": [
+                  "3.6"
+                ],
+                "version": "1.1"
+              },
+              {
+                "ids": [
+                  "3.6"
+                ],
+                "version": "1.2"
+              }
+            ],
+            "iso": [
+              {
+                "ids": [
+                  "A.13.1.1"
+                ]
+              }
+            ]
+          },
+          "DeactivationReason": "The issue has been remediated.",
+          "ScannerName": "FIREWALL_SCANNER",
+          "ExceptionInstructions": "Add the security mark \"allow_open_ssh_port\" to the asset with a value of \"true\" to prevent this finding from being activated again.",
+          "Recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/<link_to_solution>",
+          "ExposedService": "SSH",
+          "Explanation": "Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers."
+        },
+        "security_marks": {
+          "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>/securityMarks",
+          "marks": {
+            "IBM_SOAR_ID": "2248",
+            "FAKE": "Security Mark"
+          },
+          "canonical_name": ""
+        },
+        "event_time": "2022-06-23T17:00:31.447393Z",
+        "create_time": "2022-06-15T14:55:13.751Z",
+        "severity": "MEDIUM",
+        "canonical_name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
+        "mute": "UNDEFINED",
+        "finding_class": "MISCONFIGURATION",
+        "description": "Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.",
+        "next_steps": "These are the next steps",
+        "external_systems": {},
+        "connections": [],
+        "mute_initiator": "",
+        "iam_bindings": [],
+        "finding_url": "https://console.cloud.google.com/security/command-center/findings?organizationId=<org_id>&resourceId=<finding_name>",
+        "linkified_description": "Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.",
+        "recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/<link_to_solution>",
+        "linkified_recommendation": "Restrict the firewall rules at: <a href=\"https://console.cloud.google.com/<link_to_solution>\" target=\"_blank\">https://console.cloud.google.com/<link_to_solution></a>",
+        "indicator": {
+          "ip_addresses": [],
+          "domains": []
+        },
+        "vulnerability": {
+          "cve": null
+        }
+      }
+    ],
+    "updated_key": "state",
+    "updated_value": "INACTIVE"
+  },
+  "raw": null,
+  "inputs": {
+    "google_scc_update_key": "state",
+    "google_scc_filter": "name = \"organizations/<org_id>/sources/<source_id>/findings/<finding_id>\"",
+    "google_scc_update_value": "INACTIVE"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-google-cloud-scc",
+    "package_version": "1.0.0",
+    "host": "myhost",
+    "execution_time_ms": 5963,
+    "timestamp": "2022-06-23 13:00:32"
+  }
+}

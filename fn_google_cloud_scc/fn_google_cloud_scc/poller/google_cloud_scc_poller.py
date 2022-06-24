@@ -2,22 +2,21 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-from curses import isendwin
-import datetime
 import logging
 import os
-import traceback
 from threading import Thread
 
+from fn_google_cloud_scc.poller.configure_tab import init_scc_tab
 from fn_google_cloud_scc.poller.soar_common import (SOARCommon,
                                                     get_last_poller_date,
                                                     get_template_dir, poller)
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon, linkify
-from fn_google_cloud_scc.poller.configure_tab import init_scc_tab
+from fn_google_cloud_scc.util.scc_common import (DT_NAME, PACKAGE_NAME,
+                                                 SOAR_ID_MARK, GoogleSCCCommon,
+                                                 linkify)
 from resilient import get_client
 from resilient_circuits import ResilientComponent
-from resilient_lib import (build_incident_url, build_resilient_url,
-                           make_payload_from_template, validate_fields)
+from resilient_lib import (make_payload_from_template, str_to_bool,
+                           validate_fields)
 
 ENTITY_ID = "finding"  # name of field in the endpoint entity (alert, case, etc) with the ID value
 ENTITY_CLOSE_FIELD = "state" # name of field in endpoint entity to reference the close state
@@ -137,6 +136,10 @@ class PollerComponent(ResilientComponent):
         self.soar_close_case_template = options.get("soar_close_case_template")
         self.soar_update_case_template = options.get("soar_update_case_template")
 
+        # check whether or not to create the security mark with the SOAR ID when
+        # findings are synced to SOAR
+        self.add_mark_on_sync = str_to_bool(options.get("add_soar_id_as_security_mark", "False"))
+
         self.soar_common = SOARCommon(get_client(opts))
 
         self.app_common = init_scc_app(options)
@@ -156,11 +159,12 @@ class PollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
 
-        LOG.info("polling!")
+        LOG.debug("Polling Google SCC")
 
         query_results = query_entities(self.app_common, kwargs['last_poller_time'])
 
-        self.process_entity_list(query_results)
+        if query_results:
+            self.process_entity_list(query_results)
 
 
     def process_entity_list(self, entity_list):
@@ -185,7 +189,7 @@ class PollerComponent(ResilientComponent):
                 if not soar_case:
 
                     # create initial finding note
-                    finding['notes'] = self.app_common.create_initial_note(finding)
+                    finding["notes"] = self.app_common.create_initial_note(finding)
 
                     # create the SOAR case
                     soar_create_payload = make_payload_from_template(
@@ -198,34 +202,36 @@ class PollerComponent(ResilientComponent):
                         soar_create_payload
                     )
 
-                    soar_case_id = create_soar_case['id'] # get newly created case_id
 
-                    self.app_common.add_security_mark(finding, soar_case_id)
+                    soar_case_id = create_soar_case.get("id") # get newly created case_id
+                    _add_source_properties_dt(finding, soar_case_id, self.soar_common, DT_NAME)
+
+                    if self.add_mark_on_sync:
+                        LOG.debug("'add_soar_id_as_security_mark' is turned on -- adding mark { %s : %s} as a security mark to SCC",
+                            SOAR_ID_MARK, soar_case_id)
+                        self.app_common.update_security_mark(finding.get("name"), SOAR_ID_MARK, soar_case_id)
+                    else:
+                        LOG.debug("'add_soar_id_as_security_mark' is turned off -- not adding SOAR ID to security marks")
 
                     cases_insert += 1
-                    LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, finding_id)
-                else:
-                    soar_case_id = soar_case["id"]
+                    LOG.info("Created SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
 
-                    if is_entity_closed(finding) and soar_case["plan_status"] == "A":
-                        # close the SOAR case
-                        soar_close_payload = make_payload_from_template(
-                            self.soar_close_case_template,
-                            CLOSE_INCIDENT_TEMPLATE,
-                            finding
-                        )
-                        _close_soar_case = self.soar_common.update_soar_case(
-                            soar_case_id,
-                            soar_close_payload
-                        )
-
+                    # check if the finding is closed and then automatically close the newly created case
+                    if is_entity_closed(finding) and create_soar_case.get("plan_status", "") == "A":
+                        LOG.debug("Finding is closed —- closing finding on SOAR")
+                        _close_case_if_finding_inactive(finding, soar_case_id, self.soar_common, self.soar_close_case_template, finding_id)
                         cases_closed += 1
-                        LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
+                else:
+                    soar_case_id = soar_case.get("id")
+
+                    if is_entity_closed(finding) and soar_case.get("plan_status", "") == "A":
+                        _close_case_if_finding_inactive(finding, soar_case_id, self.soar_common, self.soar_close_case_template, finding_id)
+                        cases_closed += 1
 
                     else:
-                        if not is_entity_closed(finding) and soar_case["plan_status"] != "A":
+                        if not is_entity_closed(finding) and soar_case.get("plan_status", "A") != "A":
                             # the SOAR case is closed, but the finding was reopened
-                            note = "Finding reopened in Google SCC. {0}".format(linkify(finding["finding_url"], "Finding link."))
+                            note = "Finding reopened in Google SCC. {0}".format(linkify(finding.get("finding_url"), "Finding link."))
                             self.soar_common.create_case_comment(soar_case_id, None, None, note)
 
                             LOG.info("Added comment to SOAR case %s from %s %s", 
@@ -253,3 +259,43 @@ class PollerComponent(ResilientComponent):
                         cases_insert, cases_closed, cases_updated)
         except Exception as err:
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+
+
+def _close_case_if_finding_inactive(finding, soar_case_id, soar_common, close_tempate_path, finding_id):
+    """
+    Helper method to close a case from the template if a given finding is inactive and the case is open
+    in SOAR
+    """
+
+    # close the SOAR case
+    soar_close_payload = make_payload_from_template(
+        close_tempate_path,
+        CLOSE_INCIDENT_TEMPLATE,
+        finding
+    )
+    close_soar_case = soar_common.update_soar_case(
+        soar_case_id,
+        soar_close_payload
+    )
+
+    LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
+
+    return close_soar_case
+
+def _add_source_properties_dt(finding, soar_case_id, soar_common, dt_name):
+    """
+    Helper method to add all source properties as rows to a datatable
+    """
+    LOG.debug("Adding source properties to datatable %s in incident %s", dt_name, soar_case_id)
+
+    source_properties = finding.get("source_properties")
+
+    for prop in source_properties:
+        val = linkify(str(source_properties.get(prop, "UNKNOWN")))
+
+        row_data = {
+            "google_scc_source_property": prop,
+            "google_scc_source_property_value": val
+        }
+
+        soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
