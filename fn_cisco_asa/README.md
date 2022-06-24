@@ -45,7 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.1 | 06/2022 | Update payload samples |
+| 1.1.0 | 06/2022 | Update payload samples |
 | 1.0.0 | 04/2021 | Initial Release |
 
 ---
@@ -73,7 +73,7 @@ Cisco ASA firewalls are historically managed through the command line, however t
   List the Key Features of the Integration
 -->
 <p>
-<b>Use Case:</b> A SOC analyst using the IBM Security SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
+<b>Use Case:</b> A SOC analyst using the IBM Security QRadar SOAR Platform and Cisco ASA firewall(s) would like the ability to block and unblock machines on the network quickly during a security event. 
 
 <p> This app provides the capability to move Cisco ASA network objects in and out of a Cisco ASA network object group. The Cisco ASA device should be pre-configured with Cisco ASA network object groups that are named BLOCKLIST_IN and BLOCKLIST_OUT or similar. The app uses the Cisco ASA REST API to add and remove the network objects from these network object groups.
 
