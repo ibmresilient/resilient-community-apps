@@ -102,7 +102,7 @@
                     "object_type": "{{ inputs.pbm_playbook_type }}",
                     "playbook_handle": "{{ playbook_info.playbook_name_api_name }}",
                     "programmatic_name": "{{ current_funct.script_info.programmatic_name }}",
-                    "script_text": "content = playbook.functions.results.{{ current_funct.function_name }}\nif content.success:\n  # change to include your parsing logic\n  <CHANGE>\nelse:\n  incident.addNote(\"Failed: {}\".format(content.reason))",
+                    "script_text": "content = playbook.functions.results.{{ current_funct.function_name }}\nif content.success:\n  # change to include your parsing logic\n  log.error('change logic to parse the function results')\nelse:\n  incident.addNote(\"Failed: {}\".format(content.reason))",
                     "tags": [],
                     "uuid": "{{ current_funct.script_info.uuid }}"
                 }
