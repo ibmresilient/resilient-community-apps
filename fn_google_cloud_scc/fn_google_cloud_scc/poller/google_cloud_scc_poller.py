@@ -156,11 +156,12 @@ class PollerComponent(ResilientComponent):
             last_poller_time ([int]): [time in milliseconds when the last poller ran]
         """
 
-        LOG.info("polling!")
+        LOG.debug("Polling Google SCC")
 
         query_results = query_entities(self.app_common, kwargs['last_poller_time'])
 
-        self.process_entity_list(query_results)
+        if query_results:
+            self.process_entity_list(query_results)
 
 
     def process_entity_list(self, entity_list):
@@ -205,9 +206,9 @@ class PollerComponent(ResilientComponent):
                     cases_insert += 1
                     LOG.info("Created SOAR case %s from %s %s", create_soar_case['id'], ENTITY_LABEL, finding_id)
                 else:
-                    soar_case_id = soar_case["id"]
+                    soar_case_id = soar_case.get("id")
 
-                    if is_entity_closed(finding) and soar_case["plan_status"] == "A":
+                    if is_entity_closed(finding) and soar_case.get("plan_status", "") == "A":
                         # close the SOAR case
                         soar_close_payload = make_payload_from_template(
                             self.soar_close_case_template,

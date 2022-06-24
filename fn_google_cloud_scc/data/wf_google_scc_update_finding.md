@@ -29,7 +29,7 @@ if finding_name:
 SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{1}</span>"
 LINK_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
 
-findings_list = results.get("content").get("findings_list")
+findings_list = results.get("content").get("findings_list", [])
 
 if results.get("success") and len(findings_list) == 1:
   finding = findings_list[0].get("finding")

@@ -31,19 +31,23 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        validate_fields(["google_scc_close_case_on_change"], fn_inputs)
+
         self.app_common = GoogleSCCCommon(self.options)
         self.soar_common = SOARCommon(self.rest_client())
 
-        # if no filter given, defaults to value from app.config if present
-        # -- ok to be None if not given and not in app.config
-        if not fn_inputs.google_scc_filter:
-            fn_inputs.google_scc_filter = self.options.get("findings_filter")
+        # this will be set to the app.config default if not given
+        findings_filter = getattr(fn_inputs, "google_scc_filter", None)
 
-        findings = self.app_common.get_findings(findings_filter=fn_inputs.google_scc_filter)
+        # check whether the case should be closed in SOAR if the finding is inactive
+        # this one is required and is validated above
+        close_case_if_inactive = fn_inputs.google_scc_close_case_on_change
+
+        findings = self.app_common.get_findings(findings_filter=findings_filter)
 
         # check if should close incident upon state change to INACTIVE
         cases_closed = []
-        if fn_inputs.google_scc_close_case_on_change and len(findings) == 1:
+        if close_case_if_inactive and len(findings) == 1:
             finding_result_obj = findings[0]
             finding = finding_result_obj.get(ENTITY_LABEL)
             finding_id = get_entity_id(finding)
@@ -51,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
 
             soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: finding_id }, open_cases=False)
 
-            if soar_case and soar_case["plan_status"] == "A":
+            if soar_case and soar_case.get("plan_status", "") == "A":
                 soar_case_id = soar_case["id"]
 
                 soar_close_payload = make_payload_from_template(
@@ -66,7 +70,7 @@ class FunctionComponent(AppFunctionComponent):
 
                 cases_closed.append(soar_case_id)
                 yield self.status_message("Closed SOAR case {0} from {1} {2}".format(soar_case_id, ENTITY_LABEL, finding_id))
-        elif fn_inputs.google_scc_close_case_on_change:
+        elif close_case_if_inactive:
             raise IntegrationError("Cannot set 'google_scc_close_case_on_change' when given filter returns more than one incident. Use filter like: 'name = \\\"<finding_name>\\\"'")
 
         results = {
