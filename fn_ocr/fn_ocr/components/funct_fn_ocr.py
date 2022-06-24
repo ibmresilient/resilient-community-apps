@@ -37,13 +37,13 @@ class FunctionComponent(AppFunctionComponent):
 
         incident_id = fn_inputs.ocr_incident_id  # number
         task_id = fn_inputs.ocr_task_id  # number
-        try:
+        try: # we won't always have an artifact id
             artifact_id = fn_inputs.ocr_artifact_id  # number
         except:
-            yield self.status_message("No artifact id found, assuming base64 string instead")
-        confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 49
-        lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng'
-        base64_string = fn_inputs.ocr_base64
+            yield self.status_message("No artifact id found")
+        confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 49 # defaults to showing antyhing with 50% confidence
+        lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng' # defaults to english
+        base64_string = fn_inputs.ocr_base64 # this is initially a string
 
         self.LOG.info("incident_id: %s", incident_id)
         self.LOG.info("task_id: %s", task_id)
@@ -65,12 +65,12 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("> Reading attachment...")
 
         client = self.rest_client()
-        try:
+        try: # in the case that we have a base64 string, we will not have a file attachment
             data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
             metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
         except: # should find out what error the above throws, if any
             yield self.status_message("> No artifact id found, converting base64 to buffer...")
-            data = base64.b64decode(base64_string)
+            data = base64.b64decode(base64_string) # this decodes the raw String object into a byte-like or buffer
             yield self.status_message("> Base64 string decoded into buffer")
         
         arr_from_string = np.frombuffer(data, np.uint8) # data comes as a bytestring, need to read it into an array
