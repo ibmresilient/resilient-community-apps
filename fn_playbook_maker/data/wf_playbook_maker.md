@@ -39,6 +39,8 @@ else:
     msg = "{}: {}".format(pbk.get('playbook_name'), "Success" if pbk.get('success', False) else "Failure")
     if pbk.get('success', False):
       msg = "{} <a target='blank' href='#playbooks/designer/{}'>Playbook link</a>".format(msg, pbk.get('id'))
+    else:
+      msg = "Creating playbook failed: {}".format(pbk.get('playbook_name'))
     msg_list.append(msg)
       
   incident.addNote(helper.createRichText("Playbook Maker results:<br>{}".format("<br>".join(msg_list))))

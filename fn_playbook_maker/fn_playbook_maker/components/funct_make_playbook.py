@@ -112,11 +112,12 @@ class FunctionComponent(AppFunctionComponent):
 
     def import_playbook(self, playbook_payload, export_res):
         self.LOG.debug(export_res)
+
+        playbook_id = None
         try:
             result_bool = self.soar_common.import_res(export_res)
 
             # get the playbook id
-            playbook_id = None
             if result_bool:
                 playbook_id = self.get_playbook_id(playbook_payload)
 
@@ -124,7 +125,7 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.error(str(err))
             self.LOG.debug(traceback.format_exc())
             result_bool = False
-            playbook_id: None
+            playbook_id = None
 
         return {
                 "playbook_name": playbook_payload.get('playbook_info', {}).get('playbook_name'),

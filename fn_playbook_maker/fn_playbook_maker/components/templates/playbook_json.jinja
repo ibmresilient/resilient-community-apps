@@ -8,7 +8,6 @@
         "create_date": 1652961296202,
         "creator_principal": {
         },
-        "deployment_id" : "{{ playbook_info.playbook_uuid }}",
         "description": {
             "format": "text",
             "content": "function, script and playbook inputs"
@@ -138,12 +137,6 @@
         "name": "{{ playbook_info.playbook_name_api_name }}",
         "object_type": "{{ inputs.pbm_playbook_type }}",
         "status": "draft",
-        "tag": {
-        "display_name" : "{{ playbook_info.playbook_display_name }}",
-        "name" : "{{ playbook_info.playbook_uuid }}",
-        "type" : "playbook",
-        "uuid" : "{{ playbook_info.playbook_display_name | make_uuid }}"
-        },
         "uuid": "{{ playbook_info.uuid_uuid }}",
         "version": 5
     }

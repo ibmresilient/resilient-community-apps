@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Playbook Maker",
-      "id": 30,
+      "id": 721,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Playbook Maker",
@@ -93,7 +93,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1655837645158,
+  "export_date": 1656101542345,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -107,7 +107,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_activation_type",
       "hide_notification": false,
-      "id": 545,
+      "id": 2220,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -123,34 +123,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -166,7 +138,7 @@
           "label": "Automatic",
           "properties": null,
           "uuid": "715cb83f-39ce-45cd-916e-4c48b5fb2bd2",
-          "value": 102
+          "value": 2809
         },
         {
           "default": true,
@@ -175,7 +147,7 @@
           "label": "Manual",
           "properties": null,
           "uuid": "54012560-39ec-4e0a-90c2-45a5479b2cc1",
-          "value": 103
+          "value": 2810
         }
       ]
     },
@@ -189,7 +161,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_playbook_type",
       "hide_notification": false,
-      "id": 546,
+      "id": 2221,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -205,34 +177,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -252,7 +196,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_function_names",
       "hide_notification": false,
-      "id": 547,
+      "id": 2222,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -267,34 +211,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -314,7 +230,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_activation_fields",
       "hide_notification": false,
-      "id": 548,
+      "id": 2223,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -330,34 +246,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -377,7 +265,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_add_to_same_playbook",
       "hide_notification": false,
-      "id": 1046,
+      "id": 2368,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -392,34 +280,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -439,7 +299,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_playbook_name",
       "hide_notification": false,
-      "id": 549,
+      "id": 2224,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -455,34 +315,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -502,7 +334,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_app_name",
       "hide_notification": false,
-      "id": 550,
+      "id": 2225,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -517,34 +349,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "templates": [],
@@ -564,7 +368,7 @@
       "deprecated": false,
       "export_key": "__function/pbm_script_names",
       "hide_notification": false,
-      "id": 1478,
+      "id": 2369,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -575,7 +379,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_maker",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "pbm_script_names",
       "tooltip": "Comma separated list of global scripts to apply",
@@ -593,7 +402,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_app_name",
       "hide_notification": false,
-      "id": 563,
+      "id": 2228,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -604,7 +413,6 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -628,7 +436,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_type",
       "hide_notification": false,
-      "id": 564,
+      "id": 2240,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -640,7 +448,6 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -660,7 +467,7 @@
           "label": "incident",
           "properties": null,
           "uuid": "d85e8ee0-a925-463d-ade7-af26c51bce9c",
-          "value": 104
+          "value": 2817
         },
         {
           "default": false,
@@ -669,7 +476,7 @@
           "label": "artifact",
           "properties": null,
           "uuid": "aff07c8f-9f33-4c90-b83a-22f23d37768b",
-          "value": 105
+          "value": 2818
         },
         {
           "default": false,
@@ -678,7 +485,7 @@
           "label": "task",
           "properties": null,
           "uuid": "44d1491d-317a-4e17-83b1-353371ea9f98",
-          "value": 106
+          "value": 2819
         },
         {
           "default": false,
@@ -687,7 +494,7 @@
           "label": "note",
           "properties": null,
           "uuid": "6d4431e5-3b04-44f5-a9e0-97e998c21465",
-          "value": 107
+          "value": 2820
         },
         {
           "default": false,
@@ -696,7 +503,7 @@
           "label": "attachment",
           "properties": null,
           "uuid": "444c8e1e-af65-4b4b-8fe6-d2fba531cd80",
-          "value": 108
+          "value": 2821
         },
         {
           "default": false,
@@ -705,7 +512,7 @@
           "label": "\u003cchange for datatables\u003e",
           "properties": null,
           "uuid": "e0ae36eb-4d1e-4c77-b3a0-fbe7e9822e86",
-          "value": 109
+          "value": 2822
         }
       ]
     },
@@ -719,7 +526,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_name_prefix",
       "hide_notification": false,
-      "id": 565,
+      "id": 2226,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -754,7 +561,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_activation_fields",
       "hide_notification": false,
-      "id": 566,
+      "id": 2231,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -765,7 +572,6 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -789,7 +595,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_add_to_same_playbook",
       "hide_notification": false,
-      "id": 778,
+      "id": 2366,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -800,7 +606,6 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -824,7 +629,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_activation_type",
       "hide_notification": false,
-      "id": 567,
+      "id": 2232,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -836,7 +641,6 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -856,7 +660,7 @@
           "label": "Automatic",
           "properties": null,
           "uuid": "58135cff-eeac-4fec-ab06-bc90269bca6c",
-          "value": 110
+          "value": 2811
         },
         {
           "default": true,
@@ -865,7 +669,7 @@
           "label": "Manual",
           "properties": null,
           "uuid": "079c3a49-5e77-44e8-9318-b1f439eb2f99",
-          "value": 111
+          "value": 2812
         }
       ]
     },
@@ -879,7 +683,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_function_names",
       "hide_notification": false,
-      "id": 568,
+      "id": 2227,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -890,7 +694,6 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "short_text": "",
       "tags": [
         {
           "tag_handle": "fn_playbook_maker",
@@ -914,7 +717,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pbm_script_names",
       "hide_notification": false,
-      "id": 1479,
+      "id": 2367,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -925,8 +728,12 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "short_text": "",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_playbook_maker",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Script Name(s)",
       "tooltip": "Comma separated global scripts to use",
@@ -948,7 +755,7 @@
   ],
   "functions": [
     {
-      "created_date": 1654182155835,
+      "created_date": 1653442620345,
       "description": {
         "content": "Create playbook(s) based on specific apps and functions",
         "format": "text"
@@ -956,14 +763,14 @@
       "destination_handle": "fn_playbook_maker",
       "display_name": "Make Playbook",
       "export_key": "make_playbook",
-      "id": 1,
+      "id": 121,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1655752255933,
+      "last_modified_time": 1656099595893,
       "name": "make_playbook",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"playbook_name\": \"make-7 for make_playbook\", \"success\": true, \"id\": 85}], \"raw\": null, \"inputs\": {\"pbm_activation_fields\": false, \"pbm_app_name\": null, \"pbm_playbook_name\": \"make-7\", \"pbm_function_names\": \"make_playbook\", \"pbm_activation_type\": \"Manual\", \"pbm_playbook_type\": \"incident\", \"pbm_add_to_same_playbook\": false}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-playbook-maker\", \"package_version\": \"1.0.0\", \"host\": \"local\", \"execution_time_ms\": 5732, \"timestamp\": \"2022-06-09 15:12:28\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"playbook_name\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"id\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"pbm_activation_fields\": {\"type\": \"boolean\"}, \"pbm_app_name\": {}, \"pbm_playbook_name\": {\"type\": \"string\"}, \"pbm_function_names\": {\"type\": \"string\"}, \"pbm_activation_type\": {\"type\": \"string\"}, \"pbm_playbook_type\": {\"type\": \"string\"}, \"pbm_add_to_same_playbook\": {\"type\": \"boolean\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -971,38 +778,10 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "uuid": "927ccb1d-a537-4291-8fc6-d35b74cdcd7d",
-      "version": 4,
+      "version": 3,
       "view_items": [
         {
           "content": "a0025552-9496-4c10-b5bb-123829dc68ef",
@@ -1083,20 +862,20 @@
             }
           ],
           "uuid": null,
-          "workflow_id": 4
+          "workflow_id": 322
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 9,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1655837643260,
+      "create_date": 1656101540518,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1105,7 +884,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1655837643260,
+      "update_date": 1656101540518,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1115,7 +894,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "99185ba4-5ba8-45a5-880d-c0bb86dc6104"
+        "2f52990c-7d97-4b23-b5d6-d7c0cdc0e004"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1126,34 +905,6 @@
         {
           "tag_handle": "fn_playbook_maker",
           "value": null
-        },
-        {
-          "tag_handle": "playbook_60b55c5a_67d8_436b_a8df_0e3af81fdccd",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_70e8b190_d3e6_4438_b8fb_a0295e4aa590",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_78d57700_79e3_4dd0_a668_a30181d55a2e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_93e4a0cb_9288_4626_b2d5_fc5c7b005035",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_cf72765f_9795_4333_a900_cf5b207ca41e",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_dac5eb22_9265_47a7_9dd5_e32f03c06d2c",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f8073fb6_24fd_4d27_8a6d_f13ce5d07ebf",
-          "value": "Playbook Tag"
         }
       ],
       "users": [
@@ -1165,15 +916,15 @@
   "notifications": null,
   "overrides": [],
   "phases": [],
-  "playbooks": [],
+  "playbooks": null,
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 0,
+    "build_number": 49,
     "major": 43,
-    "minor": 0,
-    "version": "43.0.0"
+    "minor": 1,
+    "version": "43.1.49"
   },
   "tags": [],
   "task_order": [],
@@ -1183,15 +934,15 @@
     {
       "actions": [],
       "content": {
-        "version": 15,
+        "version": 9,
         "workflow_id": "playbook_maker",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_maker\" isExecutable=\"true\" name=\"Playbook Maker\"\u003e\u003cdocumentation\u003eCreate playbook(s) based apps or functions to include.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0orag44\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00sr963\" name=\"Make Playbook\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"927ccb1d-a537-4291-8fc6-d35b74cdcd7d\"\u003e{\"inputs\":{\"8c7b3199-45bd-47c5-aba4-be39a156633d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54012560-39ec-4e0a-90c2-45a5479b2cc1\"}}},\"post_processing_script\":\"if not results.success:\\n  incident.addNote(\\\"Playbook Maker failed: {} for playbook name prefix: {}\\\".format(results.reason, rule.properties.pbm_name_prefix))\\nelse:\\n  msg_list = []\\n  for pbk in results.content:\\n    msg = \\\"{}: {}\\\".format(pbk.get(\u0027playbook_name\u0027), \\\"Success\\\" if pbk.get(\u0027success\u0027, False) else \\\"Failure\\\")\\n    if pbk.get(\u0027success\u0027, False):\\n      msg = \\\"{} \u0026lt;a target=\u0027blank\u0027 href=\u0027#playbooks/designer/{}\u0027\u0026gt;Playbook link\u0026lt;/a\u0026gt;\\\".format(msg, pbk.get(\u0027id\u0027))\\n    msg_list.append(msg)\\n      \\n  incident.addNote(helper.createRichText(\\\"Playbook Maker results:\u0026lt;br\u0026gt;{}\\\".format(\\\"\u0026lt;br\u0026gt;\\\".join(msg_list))))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.pbm_playbook_type = rule.properties.pbm_type\\ninputs.pbm_playbook_name = rule.properties.pbm_name_prefix\\ninputs.pbm_app_name = rule.properties.pbm_app_name\\ninputs.pbm_function_names = rule.properties.pbm_function_names\\ninputs.pbm_script_names = rule.properties.pbm_script_names\\ninputs.pbm_activation_type = rule.properties.pbm_activation_type\\ninputs.pbm_activation_fields = rule.properties.pbm_activation_fields if rule.properties.pbm_activation_fields else False\\ninputs.pbm_add_to_same_playbook = rule.properties.pbm_add_to_same_playbook if rule.properties.pbm_add_to_same_playbook else False\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0orag44\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0poj1sd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0orag44\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00sr963\"/\u003e\u003cendEvent id=\"EndEvent_1ha688c\"\u003e\u003cincoming\u003eSequenceFlow_0poj1sd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0poj1sd\" sourceRef=\"ServiceTask_00sr963\" targetRef=\"EndEvent_1ha688c\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18yp1yz\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0akwfox\" sourceRef=\"ServiceTask_00sr963\" targetRef=\"TextAnnotation_18yp1yz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00sr963\" id=\"ServiceTask_00sr963_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0orag44\" id=\"SequenceFlow_0orag44_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"234\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ha688c\" id=\"EndEvent_1ha688c_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"433\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"451\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0poj1sd\" id=\"SequenceFlow_0poj1sd_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18yp1yz\" id=\"TextAnnotation_18yp1yz_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"142\" x=\"359\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0akwfox\" id=\"Association_0akwfox_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_maker\" isExecutable=\"true\" name=\"Playbook Maker\"\u003e\u003cdocumentation\u003eCreate playbook(s) based apps or functions to include.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0orag44\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00sr963\" name=\"Make Playbook\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"927ccb1d-a537-4291-8fc6-d35b74cdcd7d\"\u003e{\"inputs\":{\"8c7b3199-45bd-47c5-aba4-be39a156633d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54012560-39ec-4e0a-90c2-45a5479b2cc1\"}}},\"post_processing_script\":\"if not results.success:\\n  incident.addNote(\\\"Playbook Maker failed: {} for playbook name prefix: {}\\\".format(results.reason, rule.properties.pbm_name_prefix))\\nelse:\\n  msg_list = []\\n  for pbk in results.content:\\n    msg = \\\"{}: {}\\\".format(pbk.get(\u0027playbook_name\u0027), \\\"Success\\\" if pbk.get(\u0027success\u0027, False) else \\\"Failure\\\")\\n    if pbk.get(\u0027success\u0027, False):\\n      msg = \\\"{} \u0026lt;a target=\u0027blank\u0027 href=\u0027#playbooks/designer/{}\u0027\u0026gt;Playbook link\u0026lt;/a\u0026gt;\\\".format(msg, pbk.get(\u0027id\u0027))\\n    else:\\n      msg = \\\"Creating playbook failed: {}\\\".format(pbk.get(\u0027playbook_name\u0027))\\n    msg_list.append(msg)\\n      \\n  incident.addNote(helper.createRichText(\\\"Playbook Maker results:\u0026lt;br\u0026gt;{}\\\".format(\\\"\u0026lt;br\u0026gt;\\\".join(msg_list))))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.pbm_playbook_type = rule.properties.pbm_type\\ninputs.pbm_playbook_name = rule.properties.pbm_name_prefix\\ninputs.pbm_app_name = rule.properties.pbm_app_name\\ninputs.pbm_function_names = rule.properties.pbm_function_names\\ninputs.pbm_script_names = rule.properties.pbm_script_names\\ninputs.pbm_activation_type = rule.properties.pbm_activation_type\\ninputs.pbm_activation_fields = rule.properties.pbm_activation_fields if rule.properties.pbm_activation_fields else False\\ninputs.pbm_add_to_same_playbook = rule.properties.pbm_add_to_same_playbook if rule.properties.pbm_add_to_same_playbook else False\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0orag44\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0poj1sd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0orag44\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00sr963\"/\u003e\u003cendEvent id=\"EndEvent_1ha688c\"\u003e\u003cincoming\u003eSequenceFlow_0poj1sd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0poj1sd\" sourceRef=\"ServiceTask_00sr963\" targetRef=\"EndEvent_1ha688c\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18yp1yz\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0akwfox\" sourceRef=\"ServiceTask_00sr963\" targetRef=\"TextAnnotation_18yp1yz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00sr963\" id=\"ServiceTask_00sr963_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"270\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0orag44\" id=\"SequenceFlow_0orag44_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"270\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"234\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ha688c\" id=\"EndEvent_1ha688c_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"433\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"451\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0poj1sd\" id=\"SequenceFlow_0poj1sd_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"433\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"401.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18yp1yz\" id=\"TextAnnotation_18yp1yz_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"142\" x=\"359\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0akwfox\" id=\"Association_0akwfox_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 15,
+      "content_version": 9,
       "description": "Create playbook(s) based apps or functions to include.",
       "export_key": "playbook_maker",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1655770834402,
+      "last_modified_time": 1656100100842,
       "name": "Playbook Maker",
       "object_type": "incident",
       "programmatic_name": "playbook_maker",
@@ -1202,7 +953,7 @@
         }
       ],
       "uuid": "3be3ac70-c643-48a1-95df-71606c341d4a",
-      "workflow_id": 4
+      "workflow_id": 322
     }
   ],
   "workspaces": []
