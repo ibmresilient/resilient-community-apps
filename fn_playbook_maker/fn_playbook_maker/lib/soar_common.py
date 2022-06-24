@@ -51,6 +51,7 @@ class SOARCommon():
             funct_api_names = [
                     {
                         "function_name": custom['name'],
+                        "function_display_name": custom['display_name'],
                         "function_uuid": funct_display_name.get(custom['display_name'])
                     } for custom in app['current_installation'].get('customizations', []) if custom['type'] == "function"
                 ]
