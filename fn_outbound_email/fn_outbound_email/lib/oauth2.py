@@ -12,7 +12,6 @@ else:
 from resilient_lib import validate_fields, RequestsCommon
 
 FN_NAME = "fn_outbound_email"
-DEFAULT_REDIRECT_URI = "https://localhost:8080/callback"
 
 class OAuth2Error(Exception):
     """
@@ -32,9 +31,6 @@ class OAuth2:
         :param crsf_token: Secret used in requests to make request more secure.(str)
         """
         fn_opts = opts.get(FN_NAME, {})
-        self._redirect_uri = DEFAULT_REDIRECT_URI
-
-        self._auth_url = fn_opts.get("auth_url")
         self._token_url = fn_opts.get("token_url")
         self._client_id = fn_opts.get("client_id")
         self._client_secret = fn_opts.get("client_secret")
@@ -49,58 +45,9 @@ class OAuth2:
         self.oauth2_token = None
 
         if fn_opts.get("tenant_id"):
-            self._auth_url = self._auth_url.format(tenant_id=fn_opts["tenant_id"])
             self._token_url = self._token_url.format(tenant_id=fn_opts["tenant_id"])
 
         self.rc = RequestsCommon(opts={}, function_opts=fn_opts)
-
-    def get_authorization_url(self):
-        """
-        Get the OAuth2 authorization url for 1st leg of OAuth2 authorization
-        The url which will be opened in a browser by the main thread.
-
-        :return auth_url: The URL for 1st leg of OAuth2.
-        """
-        params= {
-            "state": self._state,
-            "scope": self._scope,
-            "client_id": self._client_id,
-            "response_type": "code",
-            "response_mode": "query"
-        }
-        params.update({"redirect_uri": self._redirect_uri})
-
-        # The urlencode() function doesn't work with non-ASCII unicode characters.
-        # Encode the parameters as ASCII bytes first.
-        params = {key.encode("utf-8"):value.encode("utf-8") for (key, value) in params.items()}
-
-        auth_url = self._auth_url + '?' + urlencode(params)
-
-        return auth_url
-
-    def authenticate(self, auth_code):
-        """
-        Send token request and return the access_token and refresh_token. The access token and refresh token will be
-
-        :param auth_code: An authorization code you retrieved in the 1st leg of OAuth2. [str]
-        :return: refresh_token: The refresh token received in 2nd leg of OAuth2 response. [str]
-        """
-        data = {
-            "grant_type": "authorization_code",
-            "code": auth_code,
-            "client_id": self._client_id,
-            "client_secret": self._client_secret,
-        }
-        data.update({"redirect_uri": self._redirect_uri})
-
-        response = requests.post(self._token_url, data=data)
-
-        token_response = response.json()
-
-        if "refresh_token" not in token_response:
-            raise OAuth2Error("A refresh token was not returned")
-
-        return token_response["refresh_token"]
 
     def refresh_token(self):
         """"Refresh OAuth2 token.
@@ -158,4 +105,3 @@ class OAuth2:
             validate_fields([
                 {"name": "tenant_id"}],
                 fn_opts)
-
