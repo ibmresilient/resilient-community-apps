@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """
 Function implementation test.
 Usage: resilient-circuits selftest -l fn_mcafee_epo
@@ -12,7 +11,6 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
-
 def selftest_function(opts):
     """
     Placeholder for selftest function. An example use would be to test package api connectivity.
@@ -20,7 +18,6 @@ def selftest_function(opts):
     """
     options = opts.get("fn_mcafee_epo", {})
 
-    reason = None
     try:
         client = init_client(opts, options)
         response = client.request("epo.getVersion", None)

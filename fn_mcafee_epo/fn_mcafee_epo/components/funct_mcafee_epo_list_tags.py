@@ -1,49 +1,30 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-"""Function implementation"""
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+"""AppFunction implementation"""
 
-import logging
-from fn_mcafee_epo.lib.epo_helper import init_client
-from resilient_lib import ResultPayload
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
+from resilient_circuits import FunctionResult, AppFunctionComponent, app_function, FunctionResult
 
-PACKAGE_NAME = "fn_mcafee_epo"
+FN_NAME = "mcafee_epo_list_tags"
 
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mcafee_epo_list_tags''"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'mcafee_epo_list_tags''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
-
-    @function("mcafee_epo_list_tags")
-    def _mcafee_epo_list_tags_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: list all tags defined in ePO"""
-        try:
-            yield StatusMessage("Starting")
+        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-            log = logging.getLogger(__name__)
+        client = init_client(self.opts, self.options)
+        response = client.request("system.findTag", {})
 
-            rc = ResultPayload(PACKAGE_NAME, **kwargs)
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            client = init_client(self.opts, self.options)
-            response = client.request("system.findTag", {})
-
-            yield StatusMessage("Finished")
-
-            results = rc.done(True, response)
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(response)

@@ -11,9 +11,8 @@ FUNCTION_NAME = "mcafee_epo_list_tags"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_mcafee_epo_list_tags_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
@@ -22,22 +21,23 @@ def call_mcafee_epo_list_tags_function(circuits, function_params, timeout=5):
     # Fire a message to the function
     circuits.manager.fire(evt)
 
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    # Circuits will fire an "exception" event if an exception is raised in the FunctionComponent
+    # Return this exception if it is raised
+    exception_event = circuits.watcher.wait(
+        "exception", parent=None, timeout=timeout)
 
-    if exception_event is not False:
+    if exception_event:
         exception = exception_event.args[1].args[1]
         raise exception
 
-    # else return the FunctionComponent's results
+    # Else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("mcafee_epo_list_tags_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(
+            "mcafee_epo_list_tags_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
-
 
 class TestMcafeeEpoListTags:
     """ Tests for the mcafee_epo_list_tags function"""
@@ -45,7 +45,7 @@ class TestMcafeeEpoListTags:
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+        assert func
 
     @pytest.mark.livetest
     def test_success(self, circuits_app):
