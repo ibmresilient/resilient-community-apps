@@ -8,10 +8,15 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload, validate_fields
 import fn_zia.util.config as config
 from fn_zia.lib.zia_client import ZiaClient
+from fn_zia.lib.decorators import RateLimit as ratelimit
 
 PACKAGE_NAME = "fn_zia"
 FN_NAME = "funct_zia_add_to_allowlist"
 LOG = logging.getLogger(__name__)
+
+
+# Initialize the ratelimit decorator.
+ratelimit(init=True, method="put")
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'funct_zia_add_to_allowlist''"""
@@ -61,7 +66,9 @@ class FunctionComponent(ResilientComponent):
                 "response": ziacli.allowlist_action(allowlisturls, "ADD_TO_LIST")
             }
 
-            result["activation"] = ziacli.activate(activate)
+            if not result["response"].get("error_code", False):
+                # Only attempt activation if main request didn't return an error.
+                result["activation"] = ziacli.activate(activate)
 
             yield StatusMessage("Finished '{0}' that was running in workflow '{1}'".format(FN_NAME, wf_instance_id))
 

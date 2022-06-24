@@ -1,7 +1,7 @@
 # docker build -t ibmresilient/fn_qradar_advisor:2.0.2 -t ibmresilient/fn_qradar_advisor:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_qradar_advisor
 ARG RESILIENT_CIRCUITS_VERSION=37

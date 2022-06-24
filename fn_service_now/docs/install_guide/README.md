@@ -65,7 +65,7 @@
 
 ## Step 3: *Create an API Key on the SOAR Platform*
 > If not using API Key authentication, follow instructions in [Step 3.1](#step-31-only-if-not-using-api-key-create-a-user-on-the-soar-platform).
-* Get the SOAR Organization name you want to use this app with. In CP4S this is a UUID.
+* Get the SOAR Organization name you want to use this app with. This is the display name of the organization, except in CP4S versions `<1.10` where it is the UUID.
 * In the SOAR UI, navigate to **Administrator Settings** > **Users** > **API Keys**.
   * In CP4S, this is located under the **hamburger menu** on the left > **Application Settings** > **Case Management** > **Permissions and access** > **Users** > **API Keys**.
   * For CP4S you will also need to find the REST endpoint of your instance. This is usually `cases-rest.<cp4s_host_url>` but it can be customized.
@@ -94,7 +94,7 @@
   | Config | Required | Description |
   | ------ | :------: | ----------- |
   | SOAR Host | Yes | The Hostname or IP address of your SOAR Platform, **relative to your ServiceNow Instance**, but **if you use a MID Server, it is relative to the MID Server** *(See  Step 6 on setting up your Mid-Server).* |
-  | SOAR Organization | Yes | The Org Name you used in **Step 3.** Note that for CP4S this is a UUID |
+  | SOAR Organization | Yes | The Org Name you used in **Step 3.** Note that for CP4S `<1.10` this is a UUID |
   | API Key ID | Yes | The API Key ID you created in **Step 3.** This is required if authenticating to CP4S. Must include at least all **Incident** and **Task** permissions |
   | API Key Secret | Yes | The API Key Secret you created in **Step 3** |
   | Email Address | No | (Required if not using API Key) The Email Address you used in **Step 3.1** |

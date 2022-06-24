@@ -5,7 +5,12 @@
 import logging
 import time
 import re
+import json
 from resilient_lib import RequestsCommon
+from resilient_lib import IntegrationError
+from .decorators import retry
+from .decorators import RateLimit as ratelimit
+from .exceptions import ZiaException, ZiaRateLimitException
 
 LOG = logging.getLogger(__name__)
 MILLISEC_MULTIPLIER = 1000
@@ -53,6 +58,8 @@ class Auth():
         """ Dummy method to prevent warning from __getattr__"""
         pass
 
+    @retry(raise_on_max=True)
+    @ratelimit(method="post", ep="authenticate")
     def _set_jsession_header(self):
         """ Setup headers to allow authentication to Zia server.
 
@@ -69,12 +76,25 @@ class Auth():
             "timestamp": self._timestamp
         }
 
-        res = self._req.execute_call_v2("post", uri, headers=self._headers, proxies=self.proxies, json=payload)
+        res = self._req.execute_call_v2("post", uri, headers=self._headers, proxies=self.proxies,
+                                        callback=self._handle_response, json=payload)
+        # Check if is a dict with error status.
+        if isinstance(res, dict):
+            error_code = res.get("error_code", None)
+            if error_code:
+                if error_code in [401, 409]:
+                    raise ZiaException(res)
+                if error_code == 429:
+                    raise ZiaRateLimitException(res)
 
-        # Get JSESSIONID value .
-        self._jsession_id = self._parse_jsessionid(res.headers["Set-Cookie"])
-        # Update request headers to include JSESSIONID .
-        self._headers.update({"cookie": self._jsession_id})
+                msg = json.dumps(res)
+                LOG.error(msg)
+                raise IntegrationError(msg)
+        else:
+            # Get JSESSIONID value .
+            self._jsession_id = self._parse_jsessionid(res.headers["Set-Cookie"])
+            # Update request headers to include JSESSIONID .
+            self._headers.update({"cookie": self._jsession_id})
 
     def _obfuscate_api_key(self, timestamp=None):
         """ Obfuscate api key to be used in api requests.

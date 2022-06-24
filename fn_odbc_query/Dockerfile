@@ -1,5 +1,5 @@
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_odbc_query
 ARG RES_CIRCUITS_VERSION=37.0
