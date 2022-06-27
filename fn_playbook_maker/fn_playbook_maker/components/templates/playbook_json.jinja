@@ -59,7 +59,7 @@
                         }
                         {% if not loop.last %},{% endif -%}
                         {% endfor -%}
-                      {% if not (loop.first and inputs.get('pbm_add_to_same_playbook')) and not look.last %},{% endif -%}
+                      {% if not (loop.first and inputs.get('pbm_add_to_same_playbook')) and not loop.last %},{% endif -%}
                       {% endif -%}
                     {% endfor -%}
                 {% endif -%}
@@ -120,6 +120,8 @@
             "view_items" : [
                 {% if inputs.get('pbm_activation_fields') and inputs.get('pbm_activation_type') == 'Manual' -%}
                     {% for current_funct in functions -%}
+                      {# when multiple functions in a playbook, just prompt for input to first -#}
+                      {% if (loop.first and inputs.get('pbm_add_to_same_playbook')) or not inputs.get('pbm_add_to_same_playbook') -%}
                         {% for field in current_funct.fields -%}
                             {
                                 {% set content_field = "{}/{}".format(playbook_info.get('playbook_uuid'), field.get('name')) -%}
@@ -132,7 +134,8 @@
                             }
                         {% if not loop.last %},{% endif -%}
                         {% endfor -%}
-                    {% if not loop.last %},{% endif -%}
+                      {% if not (loop.first and inputs.get('pbm_add_to_same_playbook')) and not loop.last %},{% endif -%}
+                      {% endif -%}
                     {% endfor -%}
                 {% endif -%}
             ]

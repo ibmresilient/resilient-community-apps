@@ -123,7 +123,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not require proxy support.
 
 ### Python Environment
-Python 3.6 are supported.
+Python 3.6 is supported. Python 3.9 is suggested.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=44.0.0
 * retry2
@@ -164,6 +164,8 @@ Create playbook(s) based on specific apps and functions.
 | `pbm_activation_type` | `select` | Yes | `-` | 'Automatic' or 'Manual' |
 | `pbm_activation_fields` | `boolean` | Yes | `-` | Create activation fields for data input. This is only valid when  `pbm_activation_type` = "Manual". |
 
+
+Notes: When selecting `pbm_add_to_same_playbook=Yes` and `pbm_activation_fields=Yes`, only the first function will use activation fields. This restriction is due to overlapping activation fields which becomes confusing for the functions specified after the first.
 </p>
 </details>
 
