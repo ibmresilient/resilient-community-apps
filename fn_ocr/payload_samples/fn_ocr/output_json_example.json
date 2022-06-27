@@ -1,3 +1,28 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "text": "Description",
+      "confidence": 93.921173
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "ocr_confidence_threshold": 49,
+    "ocr_artifact_id": 23,
+    "ocr_language": "eng",
+    "ocr_task_id": null,
+    "ocr_base64": null,
+    "ocr_incident_id": 2098
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocr",
+    "package_version": "1.0.0",
+    "host": "Host",
+    "execution_time_ms": 1161,
+    "timestamp": "2022-06-27 14:08:28"
+  }
 }
