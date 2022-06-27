@@ -1,0 +1,5 @@
+include README.md
+recursive-include oauth-utils/bin *
+include oauth-utils/LICENSE
+
+
