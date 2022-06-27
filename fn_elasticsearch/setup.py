@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     display_name='ElasticSearch Functions for IBM SOAR',
     name='fn_elasticsearch',
-    version='1.0.8',
+    version='1.0.9',
     url='https://ibm.biz/soarcommunity',
     license='MIT',
     author='IBM SOAR',
