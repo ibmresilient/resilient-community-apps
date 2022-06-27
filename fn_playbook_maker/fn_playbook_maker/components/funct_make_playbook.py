@@ -208,12 +208,12 @@ def make_export_res(inputs, paired_function_script_list):
     templates = MakeTemplates()
     try:
         playbook_payload = make_playbook_info(inputs, paired_function_script_list)
-        # build the preprocessor script and XML data
-        for funct_info in playbook_payload['functions']:
-            playbook_payload['current_function'] = funct_info
-            # get fields for preprocessing script
-            funct_info['preprocessor_script'] = templates.make_function_preprocessing_script(playbook_payload)
-
+        # build the preprocessor scripts. First in loop can be special if all functions in same playbook
+        build_preprocessing_scripts(inputs, templates, playbook_payload, 
+                                    [playbook_payload['functions'][0]], True)
+        build_preprocessing_scripts(inputs, templates, playbook_payload, 
+                                    playbook_payload['functions'][1:], False)
+        
         # build the xml component for the playbook (all functions)
         playbook_json = templates.make_playbook_json(playbook_payload)
         playbook_xml = templates.make_playbook_xml(playbook_payload)
@@ -223,6 +223,15 @@ def make_export_res(inputs, paired_function_script_list):
 
     except Exception as err:
         return None, None, "{}\n{}".format(str(err), traceback.format_exc())
+
+def build_preprocessing_scripts(inputs, templates, playbook_payload, 
+                                functions, first_in_loop):
+    # build the preprocessor script and XML data
+    for funct_info in functions:
+        playbook_payload['current_function'] = funct_info
+        playbook_payload['first_in_loop'] = first_in_loop
+        # get fields for preprocessing script
+        funct_info['preprocessor_script'] = templates.make_function_preprocessing_script(playbook_payload)
 
 class MakeTemplates():
     def __init__(self):
