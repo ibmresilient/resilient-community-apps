@@ -19,6 +19,7 @@ Return examples:
 """
 
 import logging
+import pytesseract
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -32,7 +33,10 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_ocr", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    try:
+        version = pytesseract.get_tesseract_version
+    except pytesseract.pytesseract.TesseractNotFoundError:
+        return {"state": "failure", "reason": "Tesseract Not Found"}
+
+    if version:
+        return {"state": "success","reason":f"Version == {version}"}
