@@ -32,7 +32,7 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.9
+### v1.0.9 
 
 * Added support for disabling SSL Certificate verification
 
