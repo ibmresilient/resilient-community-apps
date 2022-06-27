@@ -108,6 +108,9 @@ fn_xforce
 fn_yeti
 fn_zia
 
+#Oauth utils
+oauth-utils
+
 #Data_Feeder
 rc_data_feed
 #rc-data-feed-plugin-elasticfeed
