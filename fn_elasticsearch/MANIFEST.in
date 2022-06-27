@@ -6,5 +6,11 @@ include fn_elasticsearch/LICENSE
 include fn_elasticsearch/doc/*
 include doc/*.md
 include doc/screenshots/*
-
+include apikey_permissions.txt
+recursive-include fn_elasticsearch/util *
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini 
+recursive-include tests/ *
+global-exclude *.bak
 exclude *.bak
