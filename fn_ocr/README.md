@@ -90,9 +90,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
+  | Incidents | Read |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
+  
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -114,7 +115,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Both Python 2.7 and Python 3.6 are supported.
@@ -151,13 +152,10 @@ List any steps that are needed to configure the endpoint to use this app.
 * Config B
 * Config C  -->
 
-#### Permissions
+<!-- #### Permissions
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* read_all_incidents
-
----
+--> 
 
 ## Installation
 
