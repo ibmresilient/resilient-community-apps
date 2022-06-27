@@ -70,7 +70,6 @@ read_script
 #read_stats
 #read_all_action_invocations
 #read_workspace
-#edit_data
 edit_data
 create_playbook
 read_playbook

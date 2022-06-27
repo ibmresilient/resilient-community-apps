@@ -921,10 +921,10 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 49,
-    "major": 43,
-    "minor": 1,
-    "version": "43.1.49"
+    "build_number": 0,
+    "major": 45,
+    "minor": 0,
+    "version": "45.0.0"
   },
   "tags": [],
   "task_order": [],
