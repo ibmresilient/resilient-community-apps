@@ -86,7 +86,7 @@ def get_configs(path_config_file=None, app_name=None):
     if config:
         for section in config.sections():
             if section.startswith("fn_") and a_name is None:
-                fn_name = section
+                app_name = section
                 if a_count:
                     print("\nThere is more that one SOAR app defined in the app.config file")
                     print("Please use the [-a|--app_name] option to select the SOAR app.\n")
