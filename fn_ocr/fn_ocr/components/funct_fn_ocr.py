@@ -41,9 +41,9 @@ class FunctionComponent(AppFunctionComponent):
             artifact_id = fn_inputs.ocr_artifact_id  # number
         except:
             yield self.status_message("No artifact id found")
-        confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 49 # defaults to showing antyhing with 50% confidence
+        confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 50 # defaults to showing antyhing with 50% confidence
         lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng' # defaults to english
-        base64_string = fn_inputs.ocr_base64 # this is initially a string
+        base64_string = getattr(fn_inputs,"ocr_base64", 0) # this is initially a string
 
         self.LOG.info("incident_id: %s", incident_id)
         self.LOG.info("task_id: %s", task_id)

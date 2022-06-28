@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"parse_image"]
+        "playbooks": []
     }
 
 
@@ -39,15 +39,13 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 43.1.49
 
     Contents:
     - Message Destinations:
         - fn_ocr
     - Functions:
         - fn_ocr
-    - Playbooks:
-        - parse_image
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

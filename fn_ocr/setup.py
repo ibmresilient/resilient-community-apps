@@ -31,7 +31,7 @@ setup(
     description="Resilient Circuits Components for 'fn_ocr'",
     long_description="""An App that introduces OCR functionality, which can parse text from images""",
     install_requires=[
-        "resilient-circuits>=45.0.0",
+        "resilient-circuits>=43.0.0",
         "pytesseract==0.3.8; python_version=='3.6'",
         "pytesseract==0.3.9; python_version=='3.9'",
         "numpy==1.19; python_version=='3.6'",

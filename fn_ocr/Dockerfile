@@ -21,44 +21,47 @@ RUN pip install --upgrade pip
 RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
-# uncomment and replicate if additional os libraries are needed
-# RUN yum -y update && yum clean all
+
 # install tools required to build tesseract and leptonica
 RUN yum -y install libstdc++ autoconf automake libtool autoconf-archive pkg-config gcc gcc-c++ make cmake zlib-devel wget libarchive 
-# install image shared libraries
-# RUN yum -y install  zlib 
+
 # make a temp dir we can delete after building and installing
 RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
 
+# ! Note: many lines are written in ways that that minimize layers in the docker file
+# !       most importantly, `&` is used to run download and unpack commands async
+# !       if you choose to edit this docker file, please keep that in mind
+
+# use wget to download tar.gz of libraries that are not available through yum
+# libpng, libjpeg, and libwebp are for handling those respective files
+# leptonica is required for tesseract
+
 RUN wget https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz & \ 
 wget https://sourceforge.net/projects/libjpeg-turbo/files/2.1.3/libjpeg-turbo-2.1.3.tar.gz & \
-wget http://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz & \ 
 wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.2.tar.gz & \
-wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz &\
+wget http://www.leptonica.org/source/leptonica-1.82.0.tar.gz & \
 wget https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.0.1.tar.gz & wait
 
-RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf libjpeg-turbo-2.1.3.tar.gz & tar -xvzf tiff-4.4.0.tar.gz &\
+# extract all of the source code
+RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf libjpeg-turbo-2.1.3.tar.gz &\
  tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & tar -xvzf libwebp-1.2.2.tar.gz & wait
+
+# ! Note: when building, it is crucial to use `-j5` or however many jobs your environment can handle.
+# !       running a single job is too slow - for IBM SOAR developers, it will time-out in Travis
+
 # download and build libpng
 WORKDIR $HOME/temp_installers/libpng-1.6.37
 RUN ./configure && make -j5 && make install
 
 # download and build libjpeg
-# RUN mkdir -p /usr/local/man/man1
 RUN mkdir $HOME/temp_installers/libjpeg-turbo-2.1.3/build
 WORKDIR $HOME/temp_installers/libjpeg-turbo-2.1.3/build
-# RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 RUN cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make -j5 && make install
-
-# download and build libtiff
-# WORKDIR $HOME/temp_installers/tiff-4.4.0
-# RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 
 # build webp
 WORKDIR $HOME/temp_installers/libwebp-1.2.2
 RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
-
 
 # download and build leptonica
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
@@ -70,7 +73,13 @@ RUN ./autogen.sh
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib --with-extra-libraries=/usr/local/lib64 
 RUN LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make -j5 && make install && ldconfig
 RUN ldd $(which tesseract)
-# download langauge files
+
+# ! Note: the below lines download tesseract lanuage files and places them into the right folder
+# !       these files can be got from both the main tesseract github as well as github.com/tesseract-ocr/tessdata_fast
+# !       please note that when you `wget` from github, it needs to be tessdata_fast/raw/main/{lang_file} NOT tessdata_fast/blob/main/{lang_file} 
+# !       if you would like to add your own languages, simply find the right lang code from the link below, and download it from github
+# !       https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
+
 WORKDIR $HOME/temp_installers
 RUN wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/ara.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata &\
@@ -83,25 +92,19 @@ wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_tra_vert.traine
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/oci.traineddata & \
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/ori.traineddata & \
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/osd.traineddata & wait
+
 # move language files to the shared library
 RUN mv *.traineddata /usr/local/share/tessdata
 WORKDIR $HOME
 RUN rm -rf $HOME/temp_installers
 
-# remove build tools + wget because they pose security risk
+# remove build tools + wget 
 RUN yum -y remove gcc gcc-c++ make wget
 RUN yum -y install libtiff libjpeg libpng
 
 # install the base package
 COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
-
-# uncomment and replicate if additional pypi packages are needed
-# RUN pip install pytesseract=0.3.9 numpy=1.22.4 opencv-python-headless=4.5.5.64 
-
-# uncomment and replicate if additional local packages are needed
-#COPY /path/to/extra_package /tmp/packages/.
-#RUN pip install /tmp/packages/<extra_package>*.tar.gz
 
 ## ---- end section for changes ----
 
