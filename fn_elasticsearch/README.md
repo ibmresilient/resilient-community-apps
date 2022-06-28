@@ -259,8 +259,628 @@ results = {
           "ip": "129.41.46.6"
         }
       }
+    },
+    {
+      "_id": "DJXekIEBhfwfcOFNGY18",
+      "_index": ".ds-logs-app_search.analytics-default-2022.06.23-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:21.239Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "app_search.analytics",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "action": "loco_moco_search",
+          "category": "app-search-analytics",
+          "created": "2022-06-23T14:01:21Z",
+          "dataset": "app-search-analytics",
+          "document_ids": [
+            "park_rocky-mountain"
+          ],
+          "loco_moco_search_request_id": "f7z0me0oSeGuUArcVdl9xw",
+          "query_string": "1075.6",
+          "tags": []
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 51948
+        },
+        "related": {
+          "ip": "129.41.46.6"
+        }
+      }
+    },
+    {
+      "_id": "CpXdkIEBhfwfcOFN5o2w",
+      "_index": ".ds-logs-app_search.analytics-default-2022.06.23-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:09.381Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "app_search.analytics",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "action": "loco_moco_search",
+          "category": "app-search-analytics",
+          "created": "2022-06-23T14:01:09Z",
+          "dataset": "app-search-analytics",
+          "document_ids": [],
+          "loco_moco_search_request_id": "0DzSQoi5Rz6AwUpa92pp2g",
+          "query_string": "visitors",
+          "tags": []
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 47924
+        },
+        "related": {
+          "ip": "129.41.46.6"
+        }
+      }
+    },
+    {
+      "_id": "BZXdkIEBhfwfcOFNx43x",
+      "_index": ".ds-logs-app_search.analytics-default-2022.06.23-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:00:54.697Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "app_search.analytics",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "action": "loco_moco_search",
+          "category": "app-search-analytics",
+          "created": "2022-06-23T14:00:54Z",
+          "dataset": "app-search-analytics",
+          "document_ids": [
+            "park_rocky-mountain",
+            "park_saguaro"
+          ],
+          "loco_moco_search_request_id": "ODdo8JlDToePy0C-iebv-A",
+          "query_string": "",
+          "tags": []
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 38434
+        },
+        "related": {
+          "ip": "129.41.46.6"
+        }
+      }
+    },
+    {
+      "_id": "ki_ekIEBTwR1htd9OD_f",
+      "_ignored": [
+        "http.response.body.content"
+      ],
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:30.226Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 69.342,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 746,
+              "content": "{\"query\":\"rocky\",\"result_fields\":{\"visitors\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"square_km\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"world_heritage_site\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"date_established\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"description\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"location\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"acres\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"title\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"nps_link\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"states\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"id\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}}},\"page\":{\"size\":20,\"current\":1}}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 1566,
+              "content": "{\"meta\":{\"alerts\":[],\"warnings\":[],\"precision\":2,\"engine\":{\"name\":\"mysearchengine\",\"type\":\"default\"},\"page\":{\"current\":1,\"total_pages\":1,\"total_results\":1,\"size\":20},\"request_id\":\"6sHMDt44SGG_V-p11TXUyw\"},\"results\":[{\"visitors\":{\"raw\":\"4517585\",\"snippet\":\"4517585\"},\"square_km\":{\"raw\":\"1075.6\",\"snippet\":\"1075.6\"},\"world_heritage_site\":{\"raw\":\"false\",\"snippet\":\"false\"},\"date_established\":{\"raw\":\"1915-01-26T06:00:00Z\",\"snippet\":\"1915-01-26T06:00:00Z\"},\"description\":{\"raw\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems varying from over 150 riparian lakes to montane and subalpine forests to treeless alpine tundra. Wildlife including mule deer, bighorn sheep, black bears, and cougars inhabit its igneous mountains and glacial valleys. Longs Peak, a classic Colorado fourteener, and the scenic Bear Lake are popular destinations, as well as the historic Trail Ridge Road, which reaches an elevation of more than 12,000 feet (3,700 m).\",\"snippet\":\"Bisected north to south by the Continental Divide, this portion of the \u003cem\u003eRockies\u003c/em\u003e has ecosystems\"},\"location\":{\"raw\":\"40.4,-105.58\",\"snippet\":\"40.4,-105.58\"},\"acres\":{\"raw\":\"265795.2\",\"snippet\":\"265795.2\"},\"_meta\":{\"id\":\"park_rocky-mountain\",\"engine\":\"mysearchengine\",\"score\":0.3164503},\"id\":{\"raw\":\"park_rocky-mountain\",\"snippet\":null},\"title\":{\"raw\":\"Rocky Mountain\",\"snippet\":\"\u003cem\u003eRocky\u003c/em\u003e Mountain\"},\"nps_link\":{\"raw\":\"https://www.nps.gov/romo/index.htm\",\"snippet\":\"https://www.nps.gov/romo/index.htm\"},\"states\":{\"raw\":[\"Colorado\"],\"snippet\":\"Colorado\"}}]}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 58584
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/search.json"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
+    },
+    {
+      "_id": "jy_ekIEBTwR1htd9ND_X",
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:27.808Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 54.267999999999994,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 14,
+              "content": "{\"query\":\"ro\"}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 396,
+              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"rocky\"},{\"suggestion\":\"rocky mountain\"},{\"suggestion\":\"rockies\"},{\"suggestion\":\"rockies has\"},{\"suggestion\":\"rockies has ecosystems\"},{\"suggestion\":\"rockies has ecosystems varying\"},{\"suggestion\":\"road\"},{\"suggestion\":\"road which\"},{\"suggestion\":\"road which reaches\"},{\"suggestion\":\"road which reaches an\"}]},\"meta\":{\"request_id\":\"5ixNmg-eRBOpROFbkcng1A\"}}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 55816
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
+    },
+    {
+      "_id": "kC_ekIEBTwR1htd9ND_X",
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:28.166Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 53.344,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 16,
+              "content": "{\"query\":\"rock\"}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 271,
+              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"rocky\"},{\"suggestion\":\"rocky mountain\"},{\"suggestion\":\"rockies\"},{\"suggestion\":\"rockies has\"},{\"suggestion\":\"rockies has ecosystems\"},{\"suggestion\":\"rockies has ecosystems varying\"}]},\"meta\":{\"request_id\":\"ITkIgipWQoecfVnEcUEebw\"}}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 56989
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
+    },
+    {
+      "_id": "DZXekIEBhfwfcOFNGY18",
+      "_ignored": [
+        "http.response.body.content"
+      ],
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:21.242Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 99.428,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 747,
+              "content": "{\"query\":\"1075.6\",\"result_fields\":{\"visitors\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"square_km\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"world_heritage_site\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"date_established\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"description\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"location\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"acres\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"title\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"nps_link\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"states\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"id\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}}},\"page\":{\"size\":20,\"current\":1}}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 1557,
+              "content": "{\"meta\":{\"alerts\":[],\"warnings\":[],\"precision\":2,\"engine\":{\"name\":\"mysearchengine\",\"type\":\"default\"},\"page\":{\"current\":1,\"total_pages\":1,\"total_results\":1,\"size\":20},\"request_id\":\"f7z0me0oSeGuUArcVdl9xw\"},\"results\":[{\"visitors\":{\"raw\":\"4517585\",\"snippet\":\"4517585\"},\"square_km\":{\"raw\":\"1075.6\",\"snippet\":\"\u003cem\u003e1075.6\u003c/em\u003e\"},\"world_heritage_site\":{\"raw\":\"false\",\"snippet\":\"false\"},\"date_established\":{\"raw\":\"1915-01-26T06:00:00Z\",\"snippet\":\"1915-01-26T06:00:00Z\"},\"description\":{\"raw\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems varying from over 150 riparian lakes to montane and subalpine forests to treeless alpine tundra. Wildlife including mule deer, bighorn sheep, black bears, and cougars inhabit its igneous mountains and glacial valleys. Longs Peak, a classic Colorado fourteener, and the scenic Bear Lake are popular destinations, as well as the historic Trail Ridge Road, which reaches an elevation of more than 12,000 feet (3,700 m).\",\"snippet\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems\"},\"location\":{\"raw\":\"40.4,-105.58\",\"snippet\":\"40.4,-105.58\"},\"acres\":{\"raw\":\"265795.2\",\"snippet\":\"265795.2\"},\"_meta\":{\"id\":\"park_rocky-mountain\",\"engine\":\"mysearchengine\",\"score\":0.4284949},\"id\":{\"raw\":\"park_rocky-mountain\",\"snippet\":null},\"title\":{\"raw\":\"Rocky Mountain\",\"snippet\":\"Rocky Mountain\"},\"nps_link\":{\"raw\":\"https://www.nps.gov/romo/index.htm\",\"snippet\":\"https://www.nps.gov/romo/index.htm\"},\"states\":{\"raw\":[\"Colorado\"],\"snippet\":\"Colorado\"}}]}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 52522
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/search.json"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
+    },
+    {
+      "_id": "ji_ekIEBTwR1htd9DT_L",
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:19.294Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 56.539,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 14,
+              "content": "{\"query\":\"10\"}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 98,
+              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"1075.6\"}]},\"meta\":{\"request_id\":\"w239VO6iTTmdeDtNSWUR2w\"}}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 51122
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
+    },
+    {
+      "_id": "CZXdkIEBhfwfcOFN5o2w",
+      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
+      "_score": 1.0,
+      "_source": {
+        "@timestamp": "2022-06-23T14:01:09.340Z",
+        "agent": {
+          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
+          "hostname": "9ee8fac8927c",
+          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
+          "name": "9ee8fac8927c",
+          "type": "filebeat",
+          "version": "7.15.1"
+        },
+        "data_stream": {
+          "dataset": "enterprise_search.api",
+          "namespace": "default",
+          "type": "logs"
+        },
+        "duration": 44.017,
+        "ecs": {
+          "version": "1.7.0"
+        },
+        "event": {
+          "dataset": "api"
+        },
+        "host": {
+          "name": "9ee8fac8927c"
+        },
+        "http": {
+          "request": {
+            "body": {
+              "bytes": 20,
+              "content": "{\"query\":\"visitors\"}"
+            },
+            "method": "POST"
+          },
+          "response": {
+            "body": {
+              "bytes": 75,
+              "content": "{\"results\":{\"documents\":[]},\"meta\":{\"request_id\":\"pEOgQDCxSAqxkiNEFvRUCw\"}}"
+            },
+            "status_code": 200
+          }
+        },
+        "input": {
+          "type": "log"
+        },
+        "labels": {
+          "engine_id": "62b326c9d0164ee8e257b729",
+          "env": "togo_production",
+          "index_date": "2022.06.23",
+          "lm_account_id": "62b2f277d0164e239457b719"
+        },
+        "log": {
+          "file": {
+            "path": "/app/logs/filebeat.log"
+          },
+          "offset": 47119
+        },
+        "url": {
+          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
+        },
+        "user_agent": {
+          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
+        }
+      }
     }
+  ],
+  "returned_records": 10,
+  "success": true
 }
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+if artifact.value is not None:
+  inputs.es_query = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+"""
+# An Example of the result object 
+    results = {
+        "inputs": {
+          "es_query": { "query": { "match_all": {} } },
+          "es_doc_type": logs,
+          "es_index" : my_logstore
+        },
+        "query_results": [
+          <elasticsearch-record>,
+        "success": True / False,
+        "matched_records": 1000,
+        "returned_records": 100
+    }
+    Note: The schema of elasticsearch-record; outlined above, will reflect the structure of your data in Elastic itself
+"""
 
 if results.matched_records:
   noteText = """<b>ElasticSearch Query status</b>
