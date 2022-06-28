@@ -850,18 +850,18 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-if artifact.value is not None:
-  inputs.es_query = artifact.value
-```
-
-</p>
-</details>
 
 <details><summary>Workflows</summary>
+  <details><summary>Example Pre-Process Script:</summary>
+  <p>
+
+  ```python
+  if artifact.value is not None:
+    inputs.es_query = artifact.value
+  ```
+
+  </p>
+  </details>
   <details><summary>Example Post-Process Script:</summary>
   <p>
 
@@ -896,7 +896,8 @@ if artifact.value is not None:
   </p>
   </details>
 </details>
----
+
+
 
 
 
