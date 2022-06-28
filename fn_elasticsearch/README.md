@@ -861,40 +861,41 @@ if artifact.value is not None:
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
+<details><summary>Workflows</summary>
+  <details><summary>Example Post-Process Script:</summary>
+  <p>
 
-```python
-"""
-# An Example of the result object 
-    results = {
-        "inputs": {
-          "es_query": { "query": { "match_all": {} } },
-          "es_doc_type": logs,
-          "es_index" : my_logstore
-        },
-        "query_results": [
-          <elasticsearch-record>,
-        "success": True / False,
-        "matched_records": 1000,
-        "returned_records": 100
-    }
-    Note: The schema of elasticsearch-record; outlined above, will reflect the structure of your data in Elastic itself
-"""
+  ```python
+  """
+  # An Example of the result object 
+      results = {
+          "inputs": {
+            "es_query": { "query": { "match_all": {} } },
+            "es_doc_type": logs,
+            "es_index" : my_logstore
+          },
+          "query_results": [
+            <elasticsearch-record>,
+          "success": True / False,
+          "matched_records": 1000,
+          "returned_records": 100
+      }
+      Note: The schema of elasticsearch-record; outlined above, will reflect the structure of your data in Elastic itself
+  """
 
-if results.matched_records:
-  noteText = """<b>ElasticSearch Query status</b>
-                <br> Query supplied: <b>{0}</b>
-                <br> Total matched records :<b>{1}</b>""".format(results.inputs["es_query"], results.matched_records)
-  
-  if results.returned_records != 0:
-    noteText += """<br> Total returned records : <b>{0}</b>""".format(results.returned_records)
-  incident.addNote(helper.createRichText(noteText))
-```
+  if results.matched_records:
+    noteText = """<b>ElasticSearch Query status</b>
+                  <br> Query supplied: <b>{0}</b>
+                  <br> Total matched records :<b>{1}</b>""".format(results.inputs["es_query"], results.matched_records)
+    
+    if results.returned_records != 0:
+      noteText += """<br> Total returned records : <b>{0}</b>""".format(results.returned_records)
+    incident.addNote(helper.createRichText(noteText))
+  ```
 
-</p>
+  </p>
+  </details>
 </details>
-
 ---
 
 
