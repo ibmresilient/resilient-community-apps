@@ -6,12 +6,12 @@
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 from resilient_lib import IntegrationError, validate_fields, get_file_attachment, get_file_attachment_metadata, write_file_attachment
 
-import numpy as np
-import cv2
-import pytesseract
-import json
-import pandas as pd
 import base64
+import cv2
+import json
+import numpy as np
+import pytesseract
+import pandas as pd
 
 PACKAGE_NAME = "fn_ocr"
 FN_NAME = "fn_ocr"

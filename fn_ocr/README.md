@@ -56,7 +56,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png) 
 
-An App that introduces OCR functionality, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image an image and return each line with an attached confidence metric.
+An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.
 
 ### Key Features
 <!--
@@ -120,14 +120,19 @@ The app **does** support a proxy server.
 ### Python Environment
 Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
-* numpy==1.19; python_version=='3.6'
-* numpy==1.22; python_version=='3.9'
+
 * opencv-python-headless==4.5.5.64
-* pandas==1.1.5; python_version=='3.6'
-* pandas==1.4.2; python_version=='3.9'
-* pytesseract==0.3.8; python_version=='3.6'
-* pytesseract==0.3.9; python_version=='3.9'
 * resilient-circuits>=45.0.0
+
+For Python 3.6 
+* numpy == 1.19
+* pandas == 1.1.5
+* pytesseract == 0.3.8
+
+For Python 3.9
+* numpy==1.22
+* pandas==1.4.2
+* pytesseract==0.3.9
 
 ### Endpoint Developed With
 
