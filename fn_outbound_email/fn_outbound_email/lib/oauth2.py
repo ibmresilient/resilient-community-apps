@@ -91,10 +91,10 @@ class OAuth2:
         :param fn_opts: App settings dict.
         """
         validate_fields([
-            {"name": "auth_url"},
             {"name": "token_url"},
             {"name": "client_id"},
             {"name": "token_url"},
             {"name": "client_secret"},
-            {"name": "scope"}],
+            {"name": "scope"},
+            {"name": "refresh_token"}],
         fn_opts)
