@@ -3,6 +3,7 @@
 """AppFunction implementation"""
 
 
+from email.mime import base
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 from resilient_lib import IntegrationError, validate_fields, get_file_attachment, get_file_attachment_metadata, write_file_attachment
 
@@ -31,47 +32,57 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.ocr_artifact_id
             -   fn_inputs.ocr_incident_id
             -   fn_inputs.ocr_task_id
+            -   ! Update this
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        incident_id = fn_inputs.ocr_incident_id  # number
-        task_id = fn_inputs.ocr_task_id  # number
-        try: # we won't always have an artifact id
-            artifact_id = fn_inputs.ocr_artifact_id  # number
-        except:
-            yield self.status_message("No artifact id found")
-        confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 50 # defaults to showing antyhing with 50% confidence
-        lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng' # defaults to english
-        base64_string = getattr(fn_inputs,"ocr_base64", 0) # this is initially a string
+        # incident_id = fn_inputs.ocr_incident_id  # number
+        # task_id = fn_inputs.ocr_task_id  # number
+        # artifact_id = fn_inputs.ocr_artifact_id  # number
+        # confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 50 # defaults to showing antyhing with 50% confidence
+        # lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng' # defaults to english
+        # base64_string = getattr(fn_inputs,"ocr_base64", 0) # this is initially a string
+
+        incident_id = getattr(fn_inputs,"ocr_incident_id",None)
+        attachment_id = getattr(fn_inputs,"ocr_attachment_id",None)
+        task_id = getattr(fn_inputs,"ocr_task_id", None)
+        artifact_id = getattr(fn_inputs,"ocr_artifact_id", None)
+        confidence_threshold = getattr(fn_inputs,"ocr_confidence_threshold", 50)
+        lang = getattr(fn_inputs,"ocr_language", "eng")
+        base64_string = getattr(fn_inputs,"ocr_base64", None)
 
         self.LOG.info("incident_id: %s", incident_id)
-        self.LOG.info("task_id: %s", task_id)
         self.LOG.info("artifact_id: %s", artifact_id)
+        self.LOG.info("attachment_id: %s", attachment_id) 
+        self.LOG.info("task_id: %s", task_id)
         self.LOG.info("OCR Confidence Threshold: %.2f", confidence_threshold)
         self.LOG.info("OCR Lanuage is: %s", lang)
+        self.LOG.info("OCR Base64 Input is: %s", base64_string)
 
         if incident_id is None:
             raise FunctionError("Error: incident_id must be specified.")
-        elif artifact_id is None and base64_string is None:
-            raise FunctionError("Error: Neither Artifact ID nor a Base64 String Supplied")
-        elif artifact_id and base64_string:
-            raise FunctionError("Both Artifact ID and a Base64 string specified. If you are calling fn_ocr from an artifact, please do not supply a Base64 string")
+        elif artifact_id is None and base64_string is None and attachment_id is None:
+            raise FunctionError("Error: no input to the function! Could not find artifact id, attachment id, or a base64 string")
+        elif sum(bool(x) for x in [artifact_id,base64_string,attachment_id]) > 1: # checks to see if we have more than one of our inputs
+            raise FunctionError("Too many inputs! Please choose only one of: Artifact ID, Attachment ID, Base64 String")
         else:
             yield self.status_message("> Function inputs OK")
 
 
-        if artifact_id:
-            yield self.status_message("> Reading attachment...")
-
         client = self.rest_client()
-        try: # in the case that we have a base64 string, we will not have a file attachment
-            data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
-            metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
-        except: # should find out what error the above throws, if any
-            yield self.status_message("> No artifact id found, converting base64 to buffer...")
-            data = base64.b64decode(base64_string) # this decodes the raw String object into a byte-like or buffer
-            yield self.status_message("> Base64 string decoded into buffer")
+        if base64_string:
+            data = base64.b64decode(base64_string)
+        else:
+            data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
+
+        # try: # in the case that we have a base64 string, we will not have a file attachment
+        #     data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
+        #     # metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
+        # except: # should find out what error the above throws, if any
+        #     # yield self.status_message("> No artifact id found, converting base64 to buffer...")
+        #     data = base64.b64decode(base64_string) # this decodes the raw String object into a byte-like or buffer
+        #     # yield self.status_message("> Base64 string decoded into buffer")
         
         arr_from_string = np.frombuffer(data, np.uint8) # data comes as a bytestring, need to read it into an array
         img_from_arr = cv2.imdecode(arr_from_string, cv2.IMREAD_COLOR) # use cv2 to open the array as a color image

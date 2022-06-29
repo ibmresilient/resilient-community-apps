@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1656443456609,
+  "export_date": 1656541808789,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -369,19 +369,39 @@
           "tags": [],
           "uuid": null,
           "workflow_id": 1
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Parse Image (Attachment)",
+          "object_type": "attachment",
+          "programmatic_name": "parse_image_attachment",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 2
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Parse Image (Base64)",
+          "object_type": "incident",
+          "programmatic_name": "parse_image_base64",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 3
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 6,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1656443455212,
+      "create_date": 1656541806842,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -390,7 +410,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1656443455212,
+      "update_date": 1656541806842,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
