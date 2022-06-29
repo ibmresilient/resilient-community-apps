@@ -44,6 +44,10 @@ def get_config_file(filename=None):
     else:
         config_file = env_app_config_file
 
+    if not os.path.isfile(config_file):
+        print("ERROR: The app.config file {} does not exist.".format(config_file))
+        os._exit(0)
+
     return config_file
 
 def set_configs(script_args):
