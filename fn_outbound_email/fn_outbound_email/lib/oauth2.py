@@ -44,9 +44,6 @@ class OAuth2:
         self.oauth2_string = None
         self.oauth2_token = None
 
-        if fn_opts.get("tenant_id"):
-            self._token_url = self._token_url.format(tenant_id=fn_opts["tenant_id"])
-
         self.rc = RequestsCommon(opts={}, function_opts=fn_opts)
 
     def refresh_token(self):
@@ -101,7 +98,3 @@ class OAuth2:
             {"name": "client_secret"},
             {"name": "scope"}],
         fn_opts)
-        if "{tenant_id}" in fn_opts.get("auth_url") or "{tenant_id}" in fn_opts.get("token_url"):
-            validate_fields([
-                {"name": "tenant_id"}],
-                fn_opts)

@@ -19,30 +19,31 @@ smtp_user=
 
 ## OAuth2 authentication settings
 # Leave OAuth2 settings blank or commented out if using Basic Authentication.
+client_id=
+client_secret=
+# Scopes are a way to limit the amount of access that is granted to an access token.
 # For common email services from Google amd Microsoft Outlook 365 use the following values: 
 # Gmail: scope=https://mail.google.com/
 # Outlook365: scope=offline_access https://outlook.office365.com/SMTP.Send
 scope=
-client_id=
-client_secret=
-# For common email services from Google amd Microsoft Outlook 365 use the following values: 
+# The token_url setting is used to get a new access token.
+# Common email services from Google amd Microsoft Outlook 365 use the following token_url values: 
 # Gmail: token_url=https://accounts.google.com/o/oauth2/token
-# Outlook365: token_url=https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token
-# Note that the token_url, for some applications e.g. using Microsoft, contains a placeholder 
-# {tenant_id} for the tenant ID.
-# Do not place the tenant id in the place holder as the integration will do this at run time.
-# e.g. tenant_id=1234567a-abc8-90d1-2efa3-123456789abcd
+# Outlook365: token_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
+# Microsoft Outlook 365, uses a tenant ID in the url.
+# e.g. token_url=https://login.microsoftonline.com/1234567a-abc8-90d1-2efa3-123456789abcd/oauth2/v2.0/token
 # Do not place '/' at the end of the url strings.
-#
 token_url=
-# The auth_url is used in the oauth2_token utility.
-# For common email services from Google amd Microsoft Outlook 365 use the following values: 
-# Gmail: https://accounts.google.com/o/oauth2/auth
-# Outlook365: https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize
+# The auth_url setting is used to get a new refresh token.
+# An optional setting which can be used by the generate_oauth2_refresh_token utility to generate a refresh token.
+# Common email services from Google amd Microsoft Outlook 365 use the following values: 
+# Gmail: auth_url=https://accounts.google.com/o/oauth2/auth
+# Outlook365: auth_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/authorize
+# Microsoft Outlook 365, uses a tenant ID in the url.
+# e.g. auth_url=https://login.microsoftonline.com/1234567a-abc8-90d1-2efa3-123456789abcd/oauth2/v2.0/authorize
 auth_url=
-# Optional setting: A separate value for the tenant_id parameter see {tenant_id} placeholder above.
-tenant_id=
-# Applications require a refresh_token to allow access tokens to be renewed.
+# Applications require a refresh_token to allow access tokens to be renewed. This can be generated using
+the generate_oauth2_refresh_token utility from the oauth-utils package.
 refresh_token=
 ## End of OAuth2 authentication settings
 
