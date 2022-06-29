@@ -103,6 +103,9 @@ def main():
         # Use discrete values from command-line.
         print("Using OAuth2 discrete settings from command-line arguments.")
         fn_opts = set_configs(script_args)
+        if script_args.config_file:
+            print("Arguments for an app.config file and oauth2 service settings are not allowed at the same time.")
+            os._exit(0)
     else:
         print("Reading OAuth2 settings from an app.config file.")
         # Use values from an app.config file.
