@@ -19,28 +19,30 @@
 # ElasticSearch Functions for IBM SOAR
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - ElasticSearch Utilities: Query](#function---elasticsearch-utilities-query)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [ElasticSearch Functions for IBM SOAR](#elasticsearch-functions-for-ibm-soar)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [Endpoint Information](#endpoint-information)
+  - [| Elastic Search | 8.2.3 | https://www.elastic.co/guide/en/cloud/current/index.html |  |](#-elastic-search--823--httpswwwelasticcoguideencloudcurrentindexhtml---)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* |](#-es_use_http--yes--true-or-false--if-true-connection-to-the-elastic-instance-uses-http-set-to-false-if-the-es_veryify_certs-is-true-)
+  - [Function - ElasticSearch Utilities: Query](#function---elasticsearch-utilities-query)
+  - [Rules](#rules)
+  - [| Example: ElasticSearch Query from Incident | incident | `example_elasticsearch_query_from_incident` |](#-example-elasticsearch-query-from-incident--incident--example_elasticsearch_query_from_incident-)
+  - [Troubleshooting & Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.9 | 06/2022 | Added support for disabling SSL Certificate verification |
@@ -55,13 +57,9 @@
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
 **The app queries Elasticsearch using SOAR incident or artifact data.**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 Allows users of the SOAR to connect to and query an ElasticSearch database. Users can specify the location of a remote ElasticSearch instance and query this instance for data within SOAR.
 
@@ -72,19 +70,13 @@ Queries provided to the function must be properly formed to work. Please review 
 Two options are available for connection, HTTP connection to localhost or remote HTTPS connection with username and password authentication.
 
 ### Key Features
-<!--
-  List the Key Features of the Integration
--->
 * Perform queries on an elasticsearch instance
 
 
 ---
 
 ## Requirements
-<!--
-  List any Requirements 
---> 
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -103,7 +95,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
+
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -125,7 +117,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Both Python 2.7 and Python 3.6 are supported.
@@ -134,14 +126,12 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=43.0.0
 * resilient_lib>=43.0.0
 
-### Endpoint Developed With
+###  Endpoint Information
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
 | Elastic Search | 8.2.3 | https://www.elastic.co/guide/en/cloud/current/index.html |  |
-
-
 ---
 
 ## Installation
@@ -155,21 +145,19 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Username of the elastic instance* <!-- ::CHANGE_ME:: --> |
-| **es_auth_password** | Yes | `<ELASTICSEARCH_PASSWORD>` | *Password of the elastic instance* <!-- ::CHANGE_ME:: --> |
-| **es_cafile** | No | `<CA_FILE_TO_BE_USED>` | *Location of the certificate file if using HTTPS* <!-- ::CHANGE_ME:: --> |
-| **es_verify_certs** | No | `<True OR False>` | *Enable or disable SSL certificate verification* <!-- ::CHANGE_ME:: --> |
-| **es_datastore_scheme** | Yes | `<HTTPS OR HTTP>` | *If HTTPS is provided, an SSL Context is configured for the connection* <!-- ::CHANGE_ME:: --> |
-| **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *URL of the elastic instance* <!-- ::CHANGE_ME:: --> |
-| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* <!-- ::CHANGE_ME:: --> |
-
-
+| **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Username of the elastic instance*    |
+| **es_auth_password** | Yes | `<ELASTICSEARCH_PASSWORD>` | *Password of the elastic instance*    |
+| **es_cafile** | No | `<CA_FILE_TO_BE_USED>` | *Location of the certificate file if using HTTPS* |
+| **es_verify_certs** | No | `<True OR False>` | *Enable or disable SSL certificate verification* |
+| **es_datastore_scheme** | Yes | `<HTTPS OR HTTP>` | *If HTTPS is provided, an SSL Context is configured for the connection* |
+| **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *URL of the elastic instance* |
+| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* |
 ---
 
 ## Function - ElasticSearch Utilities: Query
 A function that allows a user to query a specified ElasticSearch datastore for data.
 
- ![screenshot: fn-elasticsearch-utilities-query ](./doc/screenshots/fn-elasticsearch-utilities-query.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-elasticsearch-utilities-query ](./doc/screenshots/fn-elasticsearch-utilities-query.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -312,531 +300,6 @@ results = {
         }
       }
     },
-    {
-      "_id": "CpXdkIEBhfwfcOFN5o2w",
-      "_index": ".ds-logs-app_search.analytics-default-2022.06.23-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:09.381Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "app_search.analytics",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "action": "loco_moco_search",
-          "category": "app-search-analytics",
-          "created": "2022-06-23T14:01:09Z",
-          "dataset": "app-search-analytics",
-          "document_ids": [],
-          "loco_moco_search_request_id": "0DzSQoi5Rz6AwUpa92pp2g",
-          "query_string": "visitors",
-          "tags": []
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 47924
-        },
-        "related": {
-          "ip": "129.41.46.6"
-        }
-      }
-    },
-    {
-      "_id": "BZXdkIEBhfwfcOFNx43x",
-      "_index": ".ds-logs-app_search.analytics-default-2022.06.23-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:00:54.697Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "app_search.analytics",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "action": "loco_moco_search",
-          "category": "app-search-analytics",
-          "created": "2022-06-23T14:00:54Z",
-          "dataset": "app-search-analytics",
-          "document_ids": [
-            "park_rocky-mountain",
-            "park_saguaro"
-          ],
-          "loco_moco_search_request_id": "ODdo8JlDToePy0C-iebv-A",
-          "query_string": "",
-          "tags": []
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 38434
-        },
-        "related": {
-          "ip": "129.41.46.6"
-        }
-      }
-    },
-    {
-      "_id": "ki_ekIEBTwR1htd9OD_f",
-      "_ignored": [
-        "http.response.body.content"
-      ],
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:30.226Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 69.342,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 746,
-              "content": "{\"query\":\"rocky\",\"result_fields\":{\"visitors\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"square_km\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"world_heritage_site\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"date_established\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"description\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"location\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"acres\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"title\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"nps_link\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"states\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"id\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}}},\"page\":{\"size\":20,\"current\":1}}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 1566,
-              "content": "{\"meta\":{\"alerts\":[],\"warnings\":[],\"precision\":2,\"engine\":{\"name\":\"mysearchengine\",\"type\":\"default\"},\"page\":{\"current\":1,\"total_pages\":1,\"total_results\":1,\"size\":20},\"request_id\":\"6sHMDt44SGG_V-p11TXUyw\"},\"results\":[{\"visitors\":{\"raw\":\"4517585\",\"snippet\":\"4517585\"},\"square_km\":{\"raw\":\"1075.6\",\"snippet\":\"1075.6\"},\"world_heritage_site\":{\"raw\":\"false\",\"snippet\":\"false\"},\"date_established\":{\"raw\":\"1915-01-26T06:00:00Z\",\"snippet\":\"1915-01-26T06:00:00Z\"},\"description\":{\"raw\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems varying from over 150 riparian lakes to montane and subalpine forests to treeless alpine tundra. Wildlife including mule deer, bighorn sheep, black bears, and cougars inhabit its igneous mountains and glacial valleys. Longs Peak, a classic Colorado fourteener, and the scenic Bear Lake are popular destinations, as well as the historic Trail Ridge Road, which reaches an elevation of more than 12,000 feet (3,700 m).\",\"snippet\":\"Bisected north to south by the Continental Divide, this portion of the \u003cem\u003eRockies\u003c/em\u003e has ecosystems\"},\"location\":{\"raw\":\"40.4,-105.58\",\"snippet\":\"40.4,-105.58\"},\"acres\":{\"raw\":\"265795.2\",\"snippet\":\"265795.2\"},\"_meta\":{\"id\":\"park_rocky-mountain\",\"engine\":\"mysearchengine\",\"score\":0.3164503},\"id\":{\"raw\":\"park_rocky-mountain\",\"snippet\":null},\"title\":{\"raw\":\"Rocky Mountain\",\"snippet\":\"\u003cem\u003eRocky\u003c/em\u003e Mountain\"},\"nps_link\":{\"raw\":\"https://www.nps.gov/romo/index.htm\",\"snippet\":\"https://www.nps.gov/romo/index.htm\"},\"states\":{\"raw\":[\"Colorado\"],\"snippet\":\"Colorado\"}}]}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 58584
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/search.json"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    },
-    {
-      "_id": "jy_ekIEBTwR1htd9ND_X",
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:27.808Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 54.267999999999994,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 14,
-              "content": "{\"query\":\"ro\"}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 396,
-              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"rocky\"},{\"suggestion\":\"rocky mountain\"},{\"suggestion\":\"rockies\"},{\"suggestion\":\"rockies has\"},{\"suggestion\":\"rockies has ecosystems\"},{\"suggestion\":\"rockies has ecosystems varying\"},{\"suggestion\":\"road\"},{\"suggestion\":\"road which\"},{\"suggestion\":\"road which reaches\"},{\"suggestion\":\"road which reaches an\"}]},\"meta\":{\"request_id\":\"5ixNmg-eRBOpROFbkcng1A\"}}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 55816
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    },
-    {
-      "_id": "kC_ekIEBTwR1htd9ND_X",
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:28.166Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 53.344,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 16,
-              "content": "{\"query\":\"rock\"}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 271,
-              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"rocky\"},{\"suggestion\":\"rocky mountain\"},{\"suggestion\":\"rockies\"},{\"suggestion\":\"rockies has\"},{\"suggestion\":\"rockies has ecosystems\"},{\"suggestion\":\"rockies has ecosystems varying\"}]},\"meta\":{\"request_id\":\"ITkIgipWQoecfVnEcUEebw\"}}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 56989
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    },
-    {
-      "_id": "DZXekIEBhfwfcOFNGY18",
-      "_ignored": [
-        "http.response.body.content"
-      ],
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:21.242Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 99.428,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 747,
-              "content": "{\"query\":\"1075.6\",\"result_fields\":{\"visitors\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"square_km\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"world_heritage_site\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"date_established\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"description\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"location\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"acres\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"title\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"nps_link\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"states\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}},\"id\":{\"raw\":{},\"snippet\":{\"size\":100,\"fallback\":true}}},\"page\":{\"size\":20,\"current\":1}}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 1557,
-              "content": "{\"meta\":{\"alerts\":[],\"warnings\":[],\"precision\":2,\"engine\":{\"name\":\"mysearchengine\",\"type\":\"default\"},\"page\":{\"current\":1,\"total_pages\":1,\"total_results\":1,\"size\":20},\"request_id\":\"f7z0me0oSeGuUArcVdl9xw\"},\"results\":[{\"visitors\":{\"raw\":\"4517585\",\"snippet\":\"4517585\"},\"square_km\":{\"raw\":\"1075.6\",\"snippet\":\"\u003cem\u003e1075.6\u003c/em\u003e\"},\"world_heritage_site\":{\"raw\":\"false\",\"snippet\":\"false\"},\"date_established\":{\"raw\":\"1915-01-26T06:00:00Z\",\"snippet\":\"1915-01-26T06:00:00Z\"},\"description\":{\"raw\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems varying from over 150 riparian lakes to montane and subalpine forests to treeless alpine tundra. Wildlife including mule deer, bighorn sheep, black bears, and cougars inhabit its igneous mountains and glacial valleys. Longs Peak, a classic Colorado fourteener, and the scenic Bear Lake are popular destinations, as well as the historic Trail Ridge Road, which reaches an elevation of more than 12,000 feet (3,700 m).\",\"snippet\":\"Bisected north to south by the Continental Divide, this portion of the Rockies has ecosystems\"},\"location\":{\"raw\":\"40.4,-105.58\",\"snippet\":\"40.4,-105.58\"},\"acres\":{\"raw\":\"265795.2\",\"snippet\":\"265795.2\"},\"_meta\":{\"id\":\"park_rocky-mountain\",\"engine\":\"mysearchengine\",\"score\":0.4284949},\"id\":{\"raw\":\"park_rocky-mountain\",\"snippet\":null},\"title\":{\"raw\":\"Rocky Mountain\",\"snippet\":\"Rocky Mountain\"},\"nps_link\":{\"raw\":\"https://www.nps.gov/romo/index.htm\",\"snippet\":\"https://www.nps.gov/romo/index.htm\"},\"states\":{\"raw\":[\"Colorado\"],\"snippet\":\"Colorado\"}}]}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 52522
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/search.json"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    },
-    {
-      "_id": "ji_ekIEBTwR1htd9DT_L",
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:19.294Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 56.539,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 14,
-              "content": "{\"query\":\"10\"}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 98,
-              "content": "{\"results\":{\"documents\":[{\"suggestion\":\"1075.6\"}]},\"meta\":{\"request_id\":\"w239VO6iTTmdeDtNSWUR2w\"}}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 51122
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    },
-    {
-      "_id": "CZXdkIEBhfwfcOFN5o2w",
-      "_index": ".ds-logs-enterprise_search.api-default-2022.06.22-000001",
-      "_score": 1.0,
-      "_source": {
-        "@timestamp": "2022-06-23T14:01:09.340Z",
-        "agent": {
-          "ephemeral_id": "1ac55df2-51a2-4756-b50e-a4fa638ab155",
-          "hostname": "9ee8fac8927c",
-          "id": "19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa",
-          "name": "9ee8fac8927c",
-          "type": "filebeat",
-          "version": "7.15.1"
-        },
-        "data_stream": {
-          "dataset": "enterprise_search.api",
-          "namespace": "default",
-          "type": "logs"
-        },
-        "duration": 44.017,
-        "ecs": {
-          "version": "1.7.0"
-        },
-        "event": {
-          "dataset": "api"
-        },
-        "host": {
-          "name": "9ee8fac8927c"
-        },
-        "http": {
-          "request": {
-            "body": {
-              "bytes": 20,
-              "content": "{\"query\":\"visitors\"}"
-            },
-            "method": "POST"
-          },
-          "response": {
-            "body": {
-              "bytes": 75,
-              "content": "{\"results\":{\"documents\":[]},\"meta\":{\"request_id\":\"pEOgQDCxSAqxkiNEFvRUCw\"}}"
-            },
-            "status_code": 200
-          }
-        },
-        "input": {
-          "type": "log"
-        },
-        "labels": {
-          "engine_id": "62b326c9d0164ee8e257b729",
-          "env": "togo_production",
-          "index_date": "2022.06.23",
-          "lm_account_id": "62b2f277d0164e239457b719"
-        },
-        "log": {
-          "file": {
-            "path": "/app/logs/filebeat.log"
-          },
-          "offset": 47119
-        },
-        "url": {
-          "original": "/api/as/v1/engines/mysearchengine/query_suggestion"
-        },
-        "user_agent": {
-          "original": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:101.0) Gecko/20100101 Firefox/101.0"
-        }
-      }
-    }
   ],
   "returned_records": 10,
   "success": true
@@ -893,18 +356,11 @@ results = {
   </details>
 </details>
 
-
-
-
-
-
-
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | Example: ElasticSearch Query from Artifact | artifact | `example_elasticsearch_query_from_artifact` |
 | Example: ElasticSearch Query from Incident | incident | `example_elasticsearch_query_from_incident` |
-
 ---
 
 
