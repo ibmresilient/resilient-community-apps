@@ -59,21 +59,17 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Functions to query Elasticsearch with incident or artifact data**
+**The app queries Elasticsearch using SOAR incident or artifact data.**
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-Allows users of the SOAR Platform to connect to and query an ElasticSearch Database. Users can specify the location of a remote ElasticSearch instance and query this instance for data through the Resilient Platform 
+Allows users of the SOAR to connect to and query an ElasticSearch database. Users can specify the location of a remote ElasticSearch instance and query this instance for data within SOAR.
 
-Queries provided to the function must be properly formed to work.
-Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query.
-A number of example queries are available when setting up the function in a workflow.
+Queries provided to the function must be properly formed to work. Please review the [ElasticSearch documentation]for examples on how to form your query. A number of example queries are available when setting up the function in a workflow. (https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html)
 
-**Important caveat: Your ElasticSearch library version must match the major ElasticSearch version as breaking changes may be introduced as new releases are announced. This integration handles for recent version changes.**
+**Important caveat: Your ElasticSearch library version must match the major ElasticSearch version since changes might be introduced with each release. This app supports the recent version changes.**
 
-Two options are available for connection:
-HTTP connection to localhost or remote 
-HTTPS connection with username:password authentication
+Two options are available for connection, HTTP connection to localhost or remote HTTPS connection with username and password authentication.
 
 ### Key Features
 <!--
@@ -161,11 +157,11 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **es_auth_username** | Yes | `<ELASTICSEARCH_USERNAME>` | *Username of the elastic instance* <!-- ::CHANGE_ME:: --> |
 | **es_auth_password** | Yes | `<ELASTICSEARCH_PASSWORD>` | *Password of the elastic instance* <!-- ::CHANGE_ME:: --> |
-| **es_cafile** | No | `<CA_FILE_TO_BE_USED>` | *Location of the certificate file if using https* <!-- ::CHANGE_ME:: --> |
+| **es_cafile** | No | `<CA_FILE_TO_BE_USED>` | *Location of the certificate file if using HTTPS* <!-- ::CHANGE_ME:: --> |
 | **es_verify_certs** | No | `<True OR False>` | *Enable or disable SSL certificate verification* <!-- ::CHANGE_ME:: --> |
-| **es_datastore_scheme** | Yes | `<https OR http>` | *If HTTPS is provided an SSL Context is setup for the connection* <!-- ::CHANGE_ME:: --> |
-| **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *The URL of the elastic instance* <!-- ::CHANGE_ME:: --> |
-| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance will be made over HTTP. To be used with es_veryify_certs = False* <!-- ::CHANGE_ME:: --> |
+| **es_datastore_scheme** | Yes | `<HTTPS OR HTTP>` | *If HTTPS is provided, an SSL Context is configured for the connection* <!-- ::CHANGE_ME:: --> |
+| **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *URL of the elastic instance* <!-- ::CHANGE_ME:: --> |
+| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* <!-- ::CHANGE_ME:: --> |
 
 
 ---
@@ -180,9 +176,9 @@ A function that allows a user to query a specified ElasticSearch datastore for d
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `es_doc_type` | `text` | No | `-` | The document type that will be search. |
-| `es_index` | `text` | No | `-` | The index that will be searched for data. If left blank all indices will be searched. |
-| `es_query` | `textarea` | Yes | `-` | The query that will be submitted to ElasticSearch |
+| `es_doc_type` | `text` | No | `-` | Document type to search. |
+| `es_index` | `text` | No | `-` | Index to search for data. If left blank, all indices are searched. |
+| `es_query` | `textarea` | Yes | `-` | Query that is submitted to ElasticSearch. |
 
 </p>
 </details>
