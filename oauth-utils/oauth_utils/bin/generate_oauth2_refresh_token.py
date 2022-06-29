@@ -104,13 +104,14 @@ def main():
         print("Using OAuth2 discrete settings from command-line arguments.")
         fn_opts = set_configs(script_args)
         if script_args.config_file:
-            print("Arguments for an app.config file and oauth2 service settings are not allowed at the same time.")
+            print("Arguments for an app.config file and OAuth2 service settings are not allowed at the same time.")
             os._exit(0)
     else:
-        print("Reading OAuth2 settings from an app.config file.")
         # Use values from an app.config file.
+        path_config_file = get_config_file(script_args.config_file)
+        print("Reading OAuth2 settings from app.config file {}.".format(path_config_file))
         # Get the app.config section for the app.
-        fn_opts = get_configs(path_config_file=get_config_file(script_args.config_file), app_name=script_args.app_name)
+        fn_opts = get_configs(path_config_file=path_config_file, app_name=script_args.app_name)
 
     oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, script_args.port)
     # Validate settings
