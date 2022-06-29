@@ -23,15 +23,15 @@ class FlaskThread(Thread):
     def __init__(self, app, s_event, port=None):
         super(FlaskThread, self).__init__(args=(s_event,))
         # Run app with self-signed cert, server visible only on local host.
-        port = port if port else 8080
-        self.server = make_server("127.0.0.1", port, app, ssl_context="adhoc")
+        self.port = port if port else 8080
+        self.server = make_server("127.0.0.1", self.port, app, ssl_context="adhoc")
         self.ctx = app.app_context()
         self.ctx.push()
         self._stop_event = s_event
 
     def run(self):
         # Start Flask.
-        print("Starting callback listener")
+        print("Starting callback listener on port {}.".format(self.port))
         self.server.serve_forever()
 
     def set_stop(self):
