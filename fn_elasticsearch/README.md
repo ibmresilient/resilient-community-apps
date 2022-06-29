@@ -65,7 +65,7 @@
 
 Allows users of the SOAR to connect to and query an ElasticSearch database. Users can specify the location of a remote ElasticSearch instance and query this instance for data within SOAR.
 
-Queries provided to the function must be properly formed to work. Please review the ElasticSearch documentation for examples on how to form your query. A number of example queries are available when setting up the function in a workflow. (https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html)
+Queries provided to the function must be properly formed to work. Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query. A number of example queries are available when setting up the function in a workflow. 
 
 **Important caveat: Your ElasticSearch library version must match the major ElasticSearch version since changes might be introduced with each release. This app supports the recent version changes.**
 
