@@ -19,7 +19,7 @@ from oauth_utils.lib.oauth2flow import OAuth2Flow
 from oauth_utils.bin.flask_app import FlaskApp
 
 # Global variables
-FLASK_TIMEOUT = 30 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
+FLASK_TIMEOUT = 60 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
 # Generate csrf state token
 CSRF_TOKEN = hashlib.sha256(os.urandom(64)).hexdigest()
 
@@ -81,10 +81,11 @@ def cli_authorize(oauth2, auth_url):
     """
     Use a command-line to authorize the app and retrieve a refresh token.
     """
-    print('To authorize a token, visit this url and follow the directions:')
-    print("{}".format(auth_url))
+    print('\nTo authorize a token, copy the following URL into a browser and follow the directions then enter the '
+          'generated callback URL below:\n')
+    print("{}\n".format(auth_url))
     if sys.version_info[0] == 3:
-        auth_code = input("Enter redirected URL: ") # nosec - Will fail bandit for python2 which uses raw_input.
+        auth_code = input("Enter callback URL: ") # nosec - Will fail bandit for python2 which uses raw_input.
     else:
         auth_code = raw_input("Enter redirected URL: ")
     params = parse_qs(urlparse(auth_code).query)
