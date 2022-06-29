@@ -62,7 +62,7 @@ class TestFnOcr:
     
     mock_inputs_1 = {
         "ocr_artifact_id": 123,
-        "ocr_attachment_id": 777,
+        "ocr_attachment_id": None,
         "ocr_incident_id": 123,
         "ocr_task_id": 123,
         "ocr_confidence_threshold": 49,
@@ -81,8 +81,8 @@ class TestFnOcr:
     }
 
     mock_inputs_3 = {
-        "ocr_artifact_id": 123,
-        "ocr_attachment_id": 777,
+        "ocr_artifact_id": 111,
+        "ocr_attachment_id": 123,
         "ocr_incident_id": 123,
         "ocr_task_id": 123,
         "ocr_confidence_threshold": 49,

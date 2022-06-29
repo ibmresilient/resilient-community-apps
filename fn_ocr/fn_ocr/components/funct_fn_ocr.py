@@ -32,17 +32,13 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.ocr_artifact_id
             -   fn_inputs.ocr_incident_id
             -   fn_inputs.ocr_task_id
-            -   ! Update this
+            -   fn_inputs.ocr_attachment_id
+            -   fn_inputs.ocr_confidence_threshold
+            -   fn_inputs.ocr_language
+            -   fn_inputs.ocr_base64 
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-
-        # incident_id = fn_inputs.ocr_incident_id  # number
-        # task_id = fn_inputs.ocr_task_id  # number
-        # artifact_id = fn_inputs.ocr_artifact_id  # number
-        # confidence_threshold = fn_inputs.ocr_confidence_threshold if fn_inputs.ocr_confidence_threshold else 50 # defaults to showing antyhing with 50% confidence
-        # lang = fn_inputs.ocr_language if fn_inputs.ocr_language else 'eng' # defaults to english
-        # base64_string = getattr(fn_inputs,"ocr_base64", 0) # this is initially a string
 
         incident_id = getattr(fn_inputs,"ocr_incident_id",None)
         attachment_id = getattr(fn_inputs,"ocr_attachment_id",None)
@@ -76,14 +72,6 @@ class FunctionComponent(AppFunctionComponent):
         else:
             data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=attachment_id)
 
-        # try: # in the case that we have a base64 string, we will not have a file attachment
-        #     data = get_file_attachment(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
-        #     # metadata = get_file_attachment_metadata(client, incident_id, artifact_id=artifact_id, task_id=task_id, attachment_id=None)
-        # except: # should find out what error the above throws, if any
-        #     # yield self.status_message("> No artifact id found, converting base64 to buffer...")
-        #     data = base64.b64decode(base64_string) # this decodes the raw String object into a byte-like or buffer
-        #     # yield self.status_message("> Base64 string decoded into buffer")
-        
         arr_from_string = np.frombuffer(data, np.uint8) # data comes as a bytestring, need to read it into an array
         img_from_arr = cv2.imdecode(arr_from_string, cv2.IMREAD_COLOR) # use cv2 to open the array as a color image
         img_rgb = cv2.cvtColor(img_from_arr,cv2.COLOR_BGR2RGB) # open-cv (cv2) defaults to BGR colors, we convert just in case
@@ -100,8 +88,8 @@ class FunctionComponent(AppFunctionComponent):
         for text,conf in zip(detected_lines,line_conf):
             text = ' '.join(text).strip() # strip \n and similar characters so we can control the formatting ourselves
             
-            if text == "":self.LOG.debug("Line Empty, Skipping"); continue
-            if conf < confidence_threshold: self.LOG.debug("Confidence Low, Skipping"); continue
+            if text == "":self.LOG.debug("Line Empty, Skipping"); continue # if an empty line is found, continue 
+            if conf < confidence_threshold: self.LOG.debug("Confidence Low, Skipping"); continue # if confidence of current line is below threshold, continue
 
             line_dicts.append({"text":text,"confidence":conf})
 
