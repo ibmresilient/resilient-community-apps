@@ -8,6 +8,7 @@ import webbrowser
 import argparse
 import hashlib
 from threading import Event
+from textwrap import dedent
 import urllib3
 if sys.version_info[0] == 3:
     from urllib.parse import urlparse, parse_qs
@@ -20,16 +21,31 @@ from oauth_utils.bin.flask_app import FlaskApp
 
 # Global variables
 FLASK_TIMEOUT = 60 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
+CMD_DESCRIPTION = "A utility to generate a refresh token for an OAuth2 service to be used with an IBM SOAR app."
 # Generate csrf state token
 CSRF_TOKEN = hashlib.sha256(os.urandom(64)).hexdigest()
 
 urllib3.disable_warnings()
+
+def get_cmd_usage():
+    cmd_name, ext = os.path.splitext(os.path.basename(os.path.abspath(__file__)))
+    cmd_usage = dedent("""
+    $ {0}
+    $ {0} -b --port 4000 -t 90
+    $ {0} --app_name fn_test_app
+    $ {0} -c <path_to_config_file>/app.config
+    $ {0} -ci 1234567a-abc8-90d1-2efa3-123456789abcd -cs ABCDEF-123456789abcd123456789a_aWX4 -sc 
+    https://mail.myservice.com/ -tu https://myservice.com/o/oauth2/token -au https://myservice.com/o/oauth2/auth
+    """.format(cmd_name))
+    return cmd_usage
 
 def parse_args():
     """
     Parse the command-line arguments.
     """
     parser = argparse.ArgumentParser()
+    parser.usage = get_cmd_usage()
+    parser.description = CMD_DESCRIPTION
     parser.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
     parser.add_argument('-t', '--timeout', help="(Optional) Timeout callback listener after timeout (seconds)")
     parser.add_argument('-b', '--browser', action='store_true', help="(Optional) Use browser and listener")
