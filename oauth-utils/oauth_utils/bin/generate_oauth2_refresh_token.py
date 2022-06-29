@@ -31,13 +31,13 @@ def parse_args():
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
-    parser.add_argument('-t', '--timeout', help="(Optional) Timeout Flask after timeout (seconds)")
-    parser.add_argument('-b', '--browser', action='store_true', help="(Optional) Use browser")
+    parser.add_argument('-t', '--timeout', help="(Optional) Timeout callback listener after timeout (seconds)")
+    parser.add_argument('-b', '--browser', action='store_true', help="(Optional) Use browser and listener")
     parser.add_argument('-a', '--app_name', help="(Optional) Specify the app name")
-    parser.add_argument('-p', '--port', help="(Optional) Specify port for flask listener and callback address")
-    parser.add_argument('-sc', '--scope', help="(Optional) Specify oauth2 application scope")
+    parser.add_argument('-p', '--port', help="(Optional) Specify port for callback url and listener")
     parser.add_argument('-ci', '--client_id', help="(Optional) Specify oauth2 application client ID")
     parser.add_argument('-cs', '--client_secret', help="(Optional) Specify oauth2 application client secret")
+    parser.add_argument('-sc', '--scope', help="(Optional) Specify oauth2 application scope")
     parser.add_argument('-tu', '--token_url', help="(Optional) Specify oauth2 application token url")
     parser.add_argument('-au', '--auth_url', help="(Optional) Specify oauth2 application authorization url")
     args = parser.parse_args()
@@ -47,11 +47,11 @@ def parse_args():
     if args.app_name:
         print("Using app name {}.".format(args.app_name))
     if args.timeout:
-        print("Timeout Flask app after {} seconds.".format(args.timeout))
+        print("Timeout callback listener app after {} seconds.".format(args.timeout))
     if args.port:
         print("Using port {}.".format(args.port))
     if args.browser:
-        print("Running with flask and web browser.")
+        print("Running with callback listener and web browser.")
     else:
         print("Running from command line.")
 
@@ -71,7 +71,7 @@ def browser_authorize(script_args, flask_app, oauth2, auth_url, stop_event):
     webbrowser.open(auth_url)
     # Wait "timeout" seconds for the Flask thread to finish its work
     stop_event.wait(timeout=timeout)
-    print("Flask thread timeout limit reached.")
+    print("Listener thread timeout limit reached.")
     # Ensure app is stopped
     flask_app.stop()
     sys.exit(0)

@@ -31,7 +31,7 @@ class FlaskThread(Thread):
 
     def run(self):
         # Start Flask.
-        print("Starting Flask server.")
+        print("Starting callback listener")
         self.server.serve_forever()
 
     def set_stop(self):
@@ -68,7 +68,7 @@ class FlaskApp():
         @app.route("/callback")
         def authorize():
             if not request.args.get("state") or request.args.get("state") != self.csrf_token:
-                print("Flask ERROR: State value doesn't match, shutting down.")
+                print("Listener ERROR: State value doesn't match, shutting down.")
                 # For safety do a hard exit if the correct "state" not received in the request
                 # or doesn't match the original value.
                 os._exit(0)
@@ -79,7 +79,7 @@ class FlaskApp():
                 refresh_token = oauth2.authenticate(auth_code)
                 return render_template('refresh_token.html', refresh_token=refresh_token)
             else:
-                print("Flask ERROR: Code not received, shutting down...")
+                print("Listener ERROR: Code not received, shutting down...")
                 os._exit(0)
 
             @app.before_request
@@ -92,8 +92,8 @@ class FlaskApp():
 
     def stop(self):
         # Stop the Flask thread by setting the event.
-        print("Sending stop event to Flask thread...")
+        print("Sending stop event to listener thread...")
         self.thread.set_stop()
         if self.thread.is_alive():
-            print("Flask thread hasn't stopped, forcing shutdown...")
+            print("Listener thread hasn't stopped, forcing shutdown...")
             self.thread.shutdown()
