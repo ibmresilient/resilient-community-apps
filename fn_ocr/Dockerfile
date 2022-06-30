@@ -30,7 +30,7 @@ RUN mkdir $HOME/temp_installers
 WORKDIR $HOME/temp_installers
 
 # ! Note: many lines are written in ways that that minimize layers in the docker file
-# !       most importantly, `&` is used to run download and unpack commands async
+# !       most importantly, `&` is used to run, download, and unpack commands async
 # !       if you choose to edit this docker file, please keep that in mind
 
 # use wget to download tar.gz of libraries that are not available through yum
@@ -48,13 +48,13 @@ RUN tar -xvzf libpng-1.6.37.tar.gz & tar -xvzf libjpeg-turbo-2.1.3.tar.gz &\
  tar -xvzf leptonica-1.82.0.tar.gz & tar -xvzf 5.0.1.tar.gz & tar -xvzf libwebp-1.2.2.tar.gz & wait
 
 # ! Note: when building, it is crucial to use `-j5` or however many jobs your environment can handle.
-# !       running a single job is too slow - for IBM SOAR developers, it will time-out in Travis
+# !       running a single job is too slow - for IBM SOAR developers, it will time-out in CI/CD
 
-# download and build libpng
+#  build libpng
 WORKDIR $HOME/temp_installers/libpng-1.6.37
 RUN ./configure && make -j5 && make install
 
-# download and build libjpeg
+#  build libjpeg
 RUN mkdir $HOME/temp_installers/libjpeg-turbo-2.1.3/build
 WORKDIR $HOME/temp_installers/libjpeg-turbo-2.1.3/build
 RUN cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make -j5 && make install
@@ -63,11 +63,11 @@ RUN cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local .. && make -j5 &&
 WORKDIR $HOME/temp_installers/libwebp-1.2.2
 RUN ./configure --prefix=/usr/local --libdir=/usr/local/lib && make -j5 && make install
 
-# download and build leptonica
+#  build leptonica
 WORKDIR $HOME/temp_installers/leptonica-1.82.0
 RUN ./autogen.sh && ./configure --prefix=/usr/local/ --libdir=/usr/local/lib && make -j5 && make install
 
-# download and build tesseract
+#  build tesseract
 WORKDIR $HOME/temp_installers/tesseract-5.0.1
 RUN ./autogen.sh
 RUN PKG_CONFIG_PATH=/usr/local/lib/pkgconfig LIBLEPT_HEADERSDIR=/usr/local/include ./configure --with-extra-includes=/usr/local/include --with-extra-libraries=/usr/local/lib --with-extra-libraries=/usr/local/lib64 
@@ -76,11 +76,11 @@ RUN ldd $(which tesseract)
 
 # ! Note: the below lines download tesseract lanuage files and places them into the right folder
 # !       these files can be got from both the main tesseract github as well as github.com/tesseract-ocr/tessdata_fast
-# !       please note that when you `wget` from github, it needs to be tessdata_fast/raw/main/{lang_file} NOT tessdata_fast/blob/main/{lang_file} 
+# !       please note that when you `wget` from github, it needs to be .../raw/main/{lang_file} NOT .../blob/main/{lang_file} 
 # !       if you would like to add your own languages, simply find the right lang code from the link below, and download it from github
 # !       https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
 
-# * Notice: see the README for file -> lanuage mapping for the default languages below
+# * Notice: see the README for file -> language mapping for the default languages below
 
 # ! Note: 'osd' is not a language, but is the orientation and script detection module
 # !        this file is critical for reading rotated text and non-english scripts - DO NOT REMOVE
