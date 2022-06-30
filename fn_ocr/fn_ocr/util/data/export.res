@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1656603620073,
+  "export_date": 1656616436805,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -29,7 +29,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_incident_id",
       "tooltip": "",
@@ -58,7 +63,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_attachment_id",
       "tooltip": "",
@@ -88,7 +98,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_language",
       "tooltip": "Language that the OCR should look for. If the wrong language is selected, the app may not return the best possible prediction",
@@ -172,7 +187,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_base64",
       "tooltip": "",
@@ -201,7 +221,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_confidence_threshold",
       "tooltip": "Lowest confidence to consider when returning predictions",
@@ -230,7 +255,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_artifact_id",
       "tooltip": "",
@@ -259,7 +289,12 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "ocr_task_id",
       "tooltip": "",
@@ -296,11 +331,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1656441393048,
+      "last_modified_time": 1656615849897,
       "name": "fn_ocr",
-      "tags": [],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"text\": \"Description\", \"confidence\": 93.921173}], \"raw\": null, \"inputs\": {\"ocr_confidence_threshold\": 49, \"ocr_artifact_id\": 23, \"ocr_language\": \"eng\", \"ocr_task_id\": null, \"ocr_base64\": null, \"ocr_incident_id\": 2098}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-ocr\", \"package_version\": \"1.0.0\", \"host\": \"Host\", \"execution_time_ms\": 1161, \"timestamp\": \"2022-06-27 14:08:28\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"text\": {\"type\": \"string\"}, \"confidence\": {\"type\": \"number\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ocr_confidence_threshold\": {\"type\": \"integer\"}, \"ocr_artifact_id\": {\"type\": \"integer\"}, \"ocr_language\": {\"type\": \"string\"}, \"ocr_task_id\": {}, \"ocr_base64\": {\"type\": \"string\"}, \"ocr_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "uuid": "c690d533-585f-4b9d-a6c8-9d570f2fac5c",
-      "version": 3,
+      "version": 4,
       "view_items": [
         {
           "content": "166063ce-ba2c-44d8-b0d1-b4f23edfddec",
@@ -395,13 +437,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 7,
+  "id": 8,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1656603618600,
+      "create_date": 1656616435277,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -410,7 +452,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1656603618600,
+      "update_date": 1656616435277,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -420,6 +462,7 @@
   "message_destinations": [
     {
       "api_keys": [
+        "9824db18-6759-417e-8e70-df0cda45dc68",
         "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
       ],
       "destination_type": 0,
@@ -427,7 +470,12 @@
       "export_key": "fn_ocr",
       "name": "fn_ocr",
       "programmatic_name": "fn_ocr",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "users": [],
       "uuid": "0a542982-0f76-4624-8814-b4b0f814c3fe"
     }
