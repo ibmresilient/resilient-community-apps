@@ -32,7 +32,7 @@ setup(
     long_description="""An App that introduces OCR functionality, which can parse text from images""",
     install_requires=[
         "resilient-circuits>=45.0.0",
-        "pytesseract~=0.3.8",
+        "pytesseract>=0.3.8",
         "numpy~=1.19",
         "opencv-python-headless==4.5.5.64",
         "pandas~=1.1.5"
