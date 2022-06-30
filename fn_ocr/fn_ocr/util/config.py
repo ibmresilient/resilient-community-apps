@@ -10,7 +10,4 @@ def config_section_data():
     """
     config_data = None
 
-#    config_data = u"""[fn_ocr]
-#setting=xxx
-#"""
     return config_data

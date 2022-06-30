@@ -80,17 +80,26 @@ RUN ldd $(which tesseract)
 # !       if you would like to add your own languages, simply find the right lang code from the link below, and download it from github
 # !       https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html
 
+# * Notice: see the README for file -> lanuage mapping for the default languages below
+
+# ! Note: 'osd' is not a language, but is the orientation and script detection module
+# !        this file is critical for reading rotated text and non-english scripts - DO NOT REMOVE
+
 WORKDIR $HOME/temp_installers
 RUN wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/ara.traineddata &\
-wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata &\ 
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/rus.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/spa.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_sim.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_sim_vert.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_tra.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/chi_tra_vert.traineddata &\
-wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/oci.traineddata & \
-wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/ori.traineddata & \
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/fra.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/deu.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/kor.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/kor_vert.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/jpn.traineddata &\
+wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/jpn_vert.traineddata &\
 wget https://github.com/tesseract-ocr/tessdata_fast/raw/main/osd.traineddata & wait
 
 # move language files to the shared library
