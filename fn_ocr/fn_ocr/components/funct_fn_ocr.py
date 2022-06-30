@@ -40,6 +40,8 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        TESSERACT_EMPTY = -1 # when returning a dataframe, pytesseract returns -1 confidence for an empty line
+
         incident_id = getattr(fn_inputs,"ocr_incident_id",None)
         attachment_id = getattr(fn_inputs,"ocr_attachment_id",None)
         task_id = getattr(fn_inputs,"ocr_task_id", None)
@@ -78,7 +80,7 @@ class FunctionComponent(AppFunctionComponent):
         
         # page segmentation mode is set to --psm 1 to account for orientation 
         detected_data = pytesseract.image_to_data(img_rgb, output_type="data.frame", config=f'-l {lang} --psm 1') # runs Tesseract OCR
-        detected_text = detected_data[detected_data.conf != -1] # Drops empty entries in the dataframe
+        detected_text = detected_data[detected_data.conf != TESSERACT_EMPTY] # Drops empty entries in the dataframe
         detected_lines = detected_text.groupby('block_num')['text'].apply(list) # turn the dataframe into a list of lines
         line_conf = detected_text.groupby(['block_num'])['conf'].mean() # gets an equally long list as above, but of average confidences
 
