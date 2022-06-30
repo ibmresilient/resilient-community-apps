@@ -75,7 +75,6 @@ def customization_data(client=None):
         - google_scc_resource_display_name
         - google_scc_resource_name
         - google_scc_security_marks
-        - google_scc_source_name
         - google_scc_state
         - google_scc_type
         - google_scc_url
