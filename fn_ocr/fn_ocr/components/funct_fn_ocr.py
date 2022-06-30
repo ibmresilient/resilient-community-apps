@@ -4,7 +4,7 @@
 
 
 from email.mime import base
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, ValueError
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, BaseFunctionError 
 from resilient_lib import IntegrationError, validate_fields, get_file_attachment, get_file_attachment_metadata, write_file_attachment
 
 import base64
