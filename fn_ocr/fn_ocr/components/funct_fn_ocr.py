@@ -4,7 +4,7 @@
 
 
 from email.mime import base
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, ValueError
 from resilient_lib import IntegrationError, validate_fields, get_file_attachment, get_file_attachment_metadata, write_file_attachment
 
 import base64
@@ -57,11 +57,11 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info("OCR Base64 Input is: %s", base64_string)
 
         if incident_id is None:
-            raise FunctionError("Error: incident_id must be specified.")
+            raise ValueError("Error: incident_id must be specified.")
         elif artifact_id is None and base64_string is None and attachment_id is None:
-            raise FunctionError("Error: no input to the function! Could not find artifact id, attachment id, or a base64 string")
+            raise ValueError("Error: no input to the function! Could not find artifact id, attachment id, or a base64 string")
         elif sum(bool(x) for x in [artifact_id,base64_string,attachment_id]) > 1: # checks to see if we have more than one of our inputs
-            raise FunctionError("Too many inputs! Please choose only one of: Artifact ID, Attachment ID, Base64 String")
+            raise ValueError("Too many inputs! Please choose only one of: Artifact ID, Attachment ID, Base64 String")
         else:
             yield self.status_message("> Function inputs OK")
 
