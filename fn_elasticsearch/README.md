@@ -30,14 +30,11 @@
     - [Proxy Server](#proxy-server)
     - [Python Environment](#python-environment)
     - [Endpoint Information](#endpoint-information)
-  - [| Elastic Search | 8.2.3 | https://www.elastic.co/guide/en/cloud/current/index.html |  |](#-elastic-search--823--httpswwwelasticcoguideencloudcurrentindexhtml---)
   - [Installation](#installation)
     - [Install](#install)
     - [App Configuration](#app-configuration)
-  - [| **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* |](#-es_use_http--yes--true-or-false--if-true-connection-to-the-elastic-instance-uses-http-set-to-false-if-the-es_veryify_certs-is-true-)
   - [Function - ElasticSearch Utilities: Query](#function---elasticsearch-utilities-query)
   - [Rules](#rules)
-  - [| Example: ElasticSearch Query from Incident | incident | `example_elasticsearch_query_from_incident` |](#-example-elasticsearch-query-from-incident--incident--example_elasticsearch_query_from_incident-)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -132,6 +129,7 @@ This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
 | Elastic Search | 8.2.3 | https://www.elastic.co/guide/en/cloud/current/index.html |  |
+
 ---
 
 ## Installation
@@ -152,7 +150,7 @@ The following table provides the settings you need to configure the app. These s
 | **es_datastore_scheme** | Yes | `<HTTPS OR HTTP>` | *If HTTPS is provided, an SSL Context is configured for the connection* |
 | **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *URL of the elastic instance* |
 | **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* |
----
+
 
 ## Function - ElasticSearch Utilities: Query
 A function that allows a user to query a specified ElasticSearch datastore for data.
@@ -167,6 +165,8 @@ A function that allows a user to query a specified ElasticSearch datastore for d
 | `es_doc_type` | `text` | No | `-` | Document type to search. |
 | `es_index` | `text` | No | `-` | Index to search for data. If left blank, all indices are searched. |
 | `es_query` | `textarea` | Yes | `-` | Query that is submitted to ElasticSearch. |
+
+---
 
 </p>
 </details>
@@ -361,6 +361,7 @@ results = {
 | --------- | ------ | ------------------ |
 | Example: ElasticSearch Query from Artifact | artifact | `example_elasticsearch_query_from_artifact` |
 | Example: ElasticSearch Query from Incident | incident | `example_elasticsearch_query_from_incident` |
+
 ---
 
 
