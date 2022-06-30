@@ -216,29 +216,24 @@ class PollerComponent(ResilientComponent):
                     cases_insert += 1
                     LOG.info("Created SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
 
-                    # check if the finding is closed and then automatically close the newly created case
-                    if is_entity_closed(finding) and create_soar_case.get("plan_status", "") == "A":
-                        LOG.debug("Finding is closed —- closing finding on SOAR")
-                        _close_case_if_finding_inactive(finding, soar_case_id, self.soar_common, self.soar_close_case_template, finding_id)
-                        cases_closed += 1
+                    # check if inactive on SCC AND still active on SOAR; close if so
+                    _, close_count = _close_case_if_finding_inactive(finding, create_soar_case, self.soar_common, self.soar_close_case_template)
+                    cases_closed += close_count
                 else:
                     soar_case_id = soar_case.get("id")
 
-                    if is_entity_closed(finding) and soar_case.get("plan_status", "") == "A":
-                        _close_case_if_finding_inactive(finding, soar_case_id, self.soar_common, self.soar_close_case_template, finding_id)
-                        cases_closed += 1
+                    # check if inactive on SCC AND still active on SOAR; close if so
+                    closed_case, close_count = _close_case_if_finding_inactive(finding, soar_case, self.soar_common, self.soar_close_case_template)
+                    cases_closed += close_count
 
-                    else:
+                    if not closed_case:
                         if not is_entity_closed(finding) and soar_case.get("plan_status", "A") != "A":
                             # the SOAR case is closed, but the finding was reopened
                             note = "Finding reopened in Google SCC. {0}".format(linkify(finding.get("finding_url"), "Finding link."))
                             self.soar_common.create_case_comment(soar_case_id, None, None, note)
 
                             LOG.info("Added comment to SOAR case %s from %s %s", 
-                                soar_case_id,
-                                ENTITY_LABEL,
-                                finding_id
-                            )
+                                soar_case_id, ENTITY_LABEL, finding_id)
 
                         # perform an update operation on the existing SOAR case
                         soar_update_payload = make_payload_from_template(
@@ -261,26 +256,35 @@ class PollerComponent(ResilientComponent):
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
 
-def _close_case_if_finding_inactive(finding, soar_case_id, soar_common, close_tempate_path, finding_id):
+def _close_case_if_finding_inactive(finding, soar_case, soar_common, close_tempate_path):
     """
     Helper method to close a case from the template if a given finding is inactive and the case is open
     in SOAR
+
+    Returns the closed case and 1 if needed to be closed
+    Returns None and 0 if didn't close
     """
 
-    # close the SOAR case
-    soar_close_payload = make_payload_from_template(
-        close_tempate_path,
-        CLOSE_INCIDENT_TEMPLATE,
-        finding
-    )
-    close_soar_case = soar_common.update_soar_case(
-        soar_case_id,
-        soar_close_payload
-    )
+    finding_id = finding.get("finding_id", "")
+    soar_case_id = soar_case.get("id", "")
+    case_status = soar_case.get("plan_status", "")
 
-    LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
+    if is_entity_closed(finding) and case_status == "A":
+        # close the SOAR case
+        soar_close_payload = make_payload_from_template(
+            close_tempate_path,
+            CLOSE_INCIDENT_TEMPLATE,
+            finding
+        )
+        close_soar_case = soar_common.update_soar_case(
+            soar_case_id,
+            soar_close_payload
+        )
 
-    return close_soar_case
+        LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, finding_id)
+
+        return close_soar_case, 1
+    return None, 0
 
 def _add_source_properties_dt(finding, soar_case_id, soar_common, dt_name):
     """
