@@ -97,7 +97,11 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        results = line_dicts 
+        results = line_dicts
+
+        if results == []:
+            yield FunctionResult({}, success=False, reason="OCR could nothing in the image")
+
         self.LOG.debug(json.dumps(results, indent=2))
 
         yield FunctionResult(results)

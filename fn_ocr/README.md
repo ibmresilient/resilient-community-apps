@@ -43,15 +43,11 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 06/2022 | Initial Release | 
+| 1.0.0 | 07/2022 | Initial Release | 
 
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
 **Resilient Circuits Components for 'fn_ocr'**
 
  ![screenshot: main](./doc/screenshots/main.png) 
@@ -59,9 +55,6 @@
 An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.
 
 ### Key Features
-<!--
-  List the Key Features of the Integration
--->
 * Parse a picture and return lines with associated average confidence, allowing for automated reading of screenshots and other images
 * Accepts different languages and can filter based on a minimum confidence score per line 
 * Can parse images from artifacts (see playbook) or directly using a Base64 string 
@@ -69,9 +62,6 @@ An App that introduces OCR functionality to SOAR, which can parse text from imag
 ---
 
 ## Requirements
-<!--
-  List any Requirements 
---> 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 This app uses a custom build process on the backend which compiles tesseract and dependant libraries from source; this may lead to longer than average installation.
 Please keep in mind that this app relies on Tesseract 5.0.1, which is popular open-source OCR. Any limitations found in Tesseract 5.0.1 will similary be present in this app e.g. rotated text cannot be detected if it is shorter than 70 characters.
@@ -80,11 +70,11 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `43.1.49`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `43.1.49`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -118,21 +108,13 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 
-* opencv-python-headless==4.5.5.64
-* resilient-circuits>=45.0.0
-
-For Python 3.6 
-* numpy == 1.19
-* pandas == 1.1.5
+* opencv-python-headless == 4.5.5.64
+* resilient-circuits >= 45.0.0
+* numpy >= 1.19
+* pandas >= 1.1.5
 * pytesseract == 0.3.8
-
-For Python 3.9
-* numpy==1.22
-* pandas==1.4.2
-* pytesseract==0.3.9
 
 ### Endpoint Developed With
 
@@ -141,39 +123,11 @@ This app has been implemented using:
 | ------------ | --------------- | ------- | ----------- |
 |Tesseract OCR | 5.0.1 | None | None |
 
-<!-- #### Prerequisites
-<!--
-List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
--->
-<!-- * Prereq A
-* Prereq B
-* Prereq C  -->
-
-<!-- #### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-<!-- * Config A 
-* Config B
-* Config C  -->
-
-<!-- #### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
---> 
-
 ## Installation
 
 ### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
-
-<!-- ### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- | -->
-
 
 ---
 
@@ -187,17 +141,34 @@ runs OCR on an image in byte string format and returns the relevant results
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `ocr_incident_id` | `number` | Yes | `-` | Automatically gathered by SOAR |
 | `ocr_artifact_id` | `number` | No | `-` | Automatically gathered by SOAR |
-| `ocr_attachment_id` | `number` | No | `-` | - |
-| `ocr_base64` | `text` | No | `ZXhhbXBsZQo=` | Only used in the absence of an artifact id |
-| `ocr_confidence_threshold` | `number` | Yes | `49` | defaults to 49% |
-| `ocr_incident_id` | `number` | Yes | `-` | - |
-| `ocr_language` | `select` | Yes | `-` | - |
-| `ocr_task_id` | `number` | No | `-` | - |
+| `ocr_attachment_id` | `number` | No | `-` | Automatically gathered by SOAR |
+| `ocr_task_id` | `number` | No | `-` | Automatically gathered by SOAR |
+| `ocr_base64` | `text` | No | `ZXhhbXBsZQo=` | When running the function without an artifact or attachment, it is possible to supply an image in base64 format |
+| `ocr_confidence_threshold` | `number` | Yes | `50` | This is the minimum confidence considered before returning a line. Confidence of a line is the average confidence across all words in a line. This value defaults to 50, which means the app will return any line with an average confidence of 50% or more. We recommend a value greater than 80 for sensible results |
+| `ocr_language` | `select` | Yes | `eng` | This determines what language Tesseract will look for i.e. if the text is in arabic, we would specify 'ara'. See next toggle heading for a table of languages and their corresponding code. This can always be checked [here](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html), and the Dockerfile contains steps on how to install your own language |
+
 
 </p>
 </details>
+<details><summary>Language Codes:</summary>
+<p>
 
+| Language | Language Code | Info |
+| :----: | :----: | :----: |
+| English | `eng` | Default in SOAR |
+| Arabic | `ara` | `-`|
+| Spanish | `spa` | `-` |
+| Chinese Simplified | `chi_sim` | Can also be read vertically |
+| Chinese Traditional | `chi_tra` | Can also be read vertically |
+| French | `fra` | `-`|
+| German | `deu` | `-`|
+| Korean | `kor` | Can also be read vertically |
+| Japanese | `jpn` | Can also be read vertically |
+
+</p>
+</details>
 <details><summary>Outputs:</summary>
 <p>
 
@@ -242,11 +213,11 @@ results = {
 
 ```python
 inputs.ocr_incident_id = incident.id
-inputs.ocr_artifact_id = artifact.id if artifact.id else None
+inputs.ocr_attachment_id = attachment.id if attachment.id else None
 inputs.ocr_task_id = task.id if task and task.id else None
-inputs.ocr_confidence_threshold = playbook.inputs.ocr_confidence_threshold
-inputs.ocr_language = playbook.inputs.ocr_language
-inputs.ocr_base64 = playbook.inputs.ocr_base64
+inputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold
+inputs.ocr_language = rule.properties.ocr_language
+inputs.ocr_base64 = None
 ```
 
 </p>
@@ -256,7 +227,7 @@ inputs.ocr_base64 = playbook.inputs.ocr_base64
 <p>
 
 ```python
-content = playbook.functions.results.ocr_results["content"]
+content = workflow.properties.ocr_results["content"]
 
 if content is not None:
   output_text = "Below are the lines detected by OCR, as well as their confidence scores\n\n"
@@ -270,18 +241,6 @@ if content is not None:
 
 </p>
 </details>
-
----
-
-
-
-
-
-
-## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| Parse Image | Reads text in an image using OCR | artifact | `enabled` |
 
 ---
 
