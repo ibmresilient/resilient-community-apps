@@ -90,8 +90,8 @@ class FunctionComponent(AppFunctionComponent):
         for text,conf in zip(detected_lines,line_conf):
             text = ' '.join(text).strip() # strip \n and similar characters so we can control the formatting ourselves
             
-            if text == "":self.LOG.debug("Line Empty, Skipping"); continue # if an empty line is found, continue 
-            if conf < confidence_threshold: self.LOG.debug("Confidence Low, Skipping"); continue # if confidence of current line is below threshold, continue
+            if text == "":self.LOG.debug("Line Empty, Skipping"); continue # if an empty line is found, log to DEBUG and continue 
+            if conf < confidence_threshold: self.LOG.debug("Confidence Low, Skipping"); continue # if confidence of current line is below threshold, log to DEBUG and continue
 
             line_dicts.append({"text":text,"confidence":conf})
 
