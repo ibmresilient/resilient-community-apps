@@ -8,7 +8,7 @@ import cv2
 from mock import MagicMock, patch
 import sys
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult, BaseFunctionError
+from resilient_circuits import SubmitTestFunction, FunctionResult, BaseFunctionError, FunctionError_
 
 PACKAGE_NAME = "fn_ocr"
 FUNCTION_NAME = "fn_ocr"
@@ -104,7 +104,7 @@ class TestFnOcr:
     @pytest.mark.parametrize("mock_inputs", [(mock_inputs_3)])
     def test_double_input(self, mock_response, circuits_app,mock_inputs):
         # tests how the app handles getting both Base64 string and an artifact
-        with pytest.raises(BaseFunctionError):
+        with pytest.raises(FunctionError_):
             results = call_fn_ocr_function(circuits_app, mock_inputs)
     
     def side_effect_1(img_rbg,output_type,config):
