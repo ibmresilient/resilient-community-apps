@@ -104,7 +104,7 @@ class TestFnOcr:
     @pytest.mark.parametrize("mock_inputs", [(mock_inputs_3)])
     def test_double_input(self, mock_response, circuits_app,mock_inputs):
         # tests how the app handles getting both Base64 string and an artifact
-        with pytest.raises(ValueError):
+        with pytest.raises(BaseFunctionError):
             results = call_fn_ocr_function(circuits_app, mock_inputs)
     
     def side_effect_1(img_rbg,output_type,config):
