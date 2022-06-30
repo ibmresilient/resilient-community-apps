@@ -36,14 +36,6 @@ setup(
         "numpy~=1.19",
         "opencv-python-headless==4.5.5.64",
         "pandas~=1.1.5"
-
-        # "pytesseract==0.3.8; python_version=='3.6'",
-        # "pytesseract==0.3.9; python_version=='3.9'",
-        # "numpy==1.19; python_version=='3.6'",
-        # "numpy==1.22; python_version=='3.9'",
-        # "opencv-python-headless==4.5.5.64", 
-        # "pandas==1.1.5; python_version=='3.6'",
-        # "pandas==1.4.2; python_version=='3.9'"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
