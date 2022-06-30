@@ -54,7 +54,7 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info("task_id: %s", task_id)
         self.LOG.info("OCR Confidence Threshold: %.2f", confidence_threshold)
         self.LOG.info("OCR Language is: %s", lang)
-        # self.LOG.info("OCR Base64 Input is: %s", base64_string)
+        self.LOG.info("OCR Base64 Input is: %s", base64_string)
 
         if incident_id is None:
             raise FunctionError("Error: incident_id must be specified.")

@@ -20,7 +20,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_fn_ocr_function(circuits, function_params, timeout=5):
+def call_fn_ocr_function(circuits, function_params, timeout=10):
     # Create the submitTestFunction event
     evt = SubmitTestFunction("fn_ocr", function_params)
 
