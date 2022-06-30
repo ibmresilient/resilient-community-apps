@@ -28,7 +28,7 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="https://ibm.biz/soarcommunity",
-    description="Resilient Circuits Components for 'fn_ocr'",
+    description="IBM SOAR app for text recognition in images",
     long_description="""An App that introduces OCR functionality, which can parse text from images""",
     install_requires=[
         "resilient-circuits>=45.0.0",
