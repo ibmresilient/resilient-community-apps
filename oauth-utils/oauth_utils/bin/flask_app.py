@@ -5,7 +5,12 @@
 import os
 from threading import Thread
 from datetime import timedelta
-from flask import Flask, request, render_template, session
+try:
+    from flask import Flask, request, render_template, session
+except ModuleNotFoundError:
+    print("\nThe package flask, required for browser mode, is not installed.\n"
+          "Please install the oauth-utils package using the [browser] option.\n")
+    os._exit(0)
 from werkzeug.serving import make_server
 
 # Global variables

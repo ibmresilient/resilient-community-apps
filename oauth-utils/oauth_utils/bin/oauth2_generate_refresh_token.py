@@ -139,6 +139,8 @@ def main(args=None):
     auth_url = oauth2.get_authorization_url()
     try:
         if script_args.browser:
+            # Import flask app
+            from oauth_utils.bin.flask_app import FlaskApp
             # Create stop event object
             stop_event = Event()
             # Setup Flask object
