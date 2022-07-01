@@ -105,11 +105,7 @@ class OAuth2Flow:
             "auth_url",
             "token_url",
             "client_id",
-            "token_url",
             "client_secret",
             "scope"],
         fn_opts)
-        if "{tenant_id}" in fn_opts.get("auth_url") or "{tenant_id}" in fn_opts.get("token_url"):
-            validate_fields([
-                "tenant_id"],
-                fn_opts)
+
