@@ -33,7 +33,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "generate_oauth2_refresh_token=oauth_utils.bin.generate_oauth2_refresh_token:main"
+            "oauth-utils=oauth_utils.app:main"
         ]
     }
 )

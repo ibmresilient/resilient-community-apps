@@ -4,9 +4,9 @@
 """Utility to retrieve OAuth2 refresh token in order to configure the Outbound email app"""
 import os
 import sys
-import webbrowser
 import argparse
 import hashlib
+import webbrowser
 from threading import Event
 from textwrap import dedent
 import urllib3
@@ -17,7 +17,6 @@ else:
 
 from oauth_utils.lib.helpers import get_config_file, get_configs, set_configs
 from oauth_utils.lib.oauth2flow import OAuth2Flow
-from oauth_utils.bin.flask_app import FlaskApp
 
 # Global variables
 FLASK_TIMEOUT = 60 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
@@ -39,24 +38,25 @@ def get_cmd_usage():
     """.format(cmd_name))
     return cmd_usage
 
-def parse_args():
+def parse_args(args=None):
     """
     Parse the command-line arguments.
     """
-    parser = argparse.ArgumentParser()
-    parser.usage = get_cmd_usage()
-    parser.description = CMD_DESCRIPTION
-    parser.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
-    parser.add_argument('-t', '--timeout', help="(Optional) Timeout callback listener after timeout (seconds)")
-    parser.add_argument('-b', '--browser', action='store_true', help="(Optional) Use browser and listener")
-    parser.add_argument('-a', '--app_name', help="(Optional) Specify the app name")
-    parser.add_argument('-p', '--port', help="(Optional) Specify port for callback url and listener")
-    parser.add_argument('-ci', '--client_id', help="(Optional) Specify oauth2 application client ID")
-    parser.add_argument('-cs', '--client_secret', help="(Optional) Specify oauth2 application client secret")
-    parser.add_argument('-sc', '--scope', help="(Optional) Specify oauth2 application scope")
-    parser.add_argument('-tu', '--token_url', help="(Optional) Specify oauth2 application token url")
-    parser.add_argument('-au', '--auth_url', help="(Optional) Specify oauth2 application authorization url")
-    args = parser.parse_args()
+    if args is None:
+        parser = argparse.ArgumentParser()
+        parser.usage = get_cmd_usage()
+        parser.description = CMD_DESCRIPTION
+        parser.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
+        parser.add_argument('-t', '--timeout', help="(Optional) Timeout callback listener after timeout (seconds)")
+        parser.add_argument('-b', '--browser', action='store_true', help="(Optional) Use browser and listener")
+        parser.add_argument('-a', '--app_name', help="(Optional) Specify the app name")
+        parser.add_argument('-p', '--port', help="(Optional) Specify port for callback url and listener")
+        parser.add_argument('-ci', '--client_id', help="(Optional) Specify oauth2 application client ID")
+        parser.add_argument('-cs', '--client_secret', help="(Optional) Specify oauth2 application client secret")
+        parser.add_argument('-sc', '--scope', help="(Optional) Specify oauth2 application scope")
+        parser.add_argument('-tu', '--token_url', help="(Optional) Specify oauth2 application token url")
+        parser.add_argument('-au', '--auth_url', help="(Optional) Specify oauth2 application authorization url")
+        args = parser.parse_args()
 
     if args.config_file:
         print("Using config file {}.".format(args.config_file))
@@ -109,11 +109,12 @@ def cli_authorize(oauth2, auth_url):
     refresh_token = oauth2.authenticate(auth_code)
     print("\n\nrefresh_token=" + refresh_token + "\n")
 
-def main():
+
+def main(args=None):
     """
     The main() function is the starting entry point function for utility.
     """
-    script_args = parse_args()
+    script_args=parse_args(args)
 
     if any(a is not None for a in [script_args.scope, script_args.client_id, script_args.client_secret,
                                        script_args.token_url, script_args.auth_url]):
