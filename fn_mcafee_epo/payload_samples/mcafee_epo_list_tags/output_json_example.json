@@ -1,0 +1,87 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "tagNotes": "Default tag for systems identified as a Server",
+      "tagId": 1,
+      "tagName": "Server"
+    },
+    {
+      "tagNotes": "Default tag for systems identified as a Workstation",
+      "tagId": 2,
+      "tagName": "Workstation"
+    },
+    {
+      "tagNotes": "This will automatically be assigned to system where the users have had Local Domain Users added.",
+      "tagId": 3,
+      "tagName": "EE:ALDU"
+    },
+    {
+      "tagNotes": "DXL Broker",
+      "tagId": 4,
+      "tagName": "DXLBROKER"
+    },
+    {
+      "tagNotes": "Apply Tag to TIEServers",
+      "tagId": 5,
+      "tagName": "TIESERVER"
+    },
+    {
+      "tagNotes": "Protection Workspace tag for escalated systems",
+      "tagId": 6,
+      "tagName": "Escalated"
+    },
+    {
+      "tagNotes": "Protection Workspace tag for systems to be excluded from the compliance check",
+      "tagId": 7,
+      "tagName": "Excluded from Compliance Check"
+    },
+    {
+      "tagNotes": "Sample tag creation for partners",
+      "tagId": 8,
+      "tagName": "IBM QRadar"
+    },
+    {
+      "tagNotes": "Apply Tag to Active Response Server",
+      "tagId": 9,
+      "tagName": "MARSERVER"
+    },
+    {
+      "tagNotes": "Apply Tag to Active Response Server",
+      "tagId": 10,
+      "tagName": "MARAGG"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 11,
+      "tagName": "Shut Down"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 12,
+      "tagName": "myTag"
+    },
+    {
+      "tagNotes": "aaa",
+      "tagId": 13,
+      "tagName": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 "
+    },
+    {
+      "tagNotes": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 ",
+      "tagId": 14,
+      "tagName": "SOAR"
+    }
+  ],
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1040,
+    "timestamp": "2022-07-01 12:39:59"
+  }
+}
