@@ -21,7 +21,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_google_cloud_dlp',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -29,13 +29,13 @@ setup(
     description="Resilient Circuits Components for 'fn_google_cloud_dlp'",
     long_description="The Resilient Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.140',
-        'google-cloud-dlp>=0.10.0,<2.0.0',
-        'PyPDF2>=1.26.0',
-        'python-docx>=0.8.10',
-        'defusedxml'
+        'resilient_circuits>=45.0.0',
+        'google-cloud-dlp~=3.7.1',
+        'PyPDF2~=2.1.0',
+        'python-docx~=0.8.11',
+        'defusedxml~=0.7.1'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

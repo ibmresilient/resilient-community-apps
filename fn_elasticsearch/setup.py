@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     display_name='ElasticSearch Functions for IBM SOAR',
     name='fn_elasticsearch',
-    version='1.0.8',
+    version='1.0.9',
     url='https://ibm.biz/soarcommunity',
     license='MIT',
     author='IBM SOAR',
@@ -14,9 +14,9 @@ setup(
     description="Functions to query Elasticsearch with incident or artifact data",
     long_description="Allows users of the SOAR Platform to connect to and query an ElasticSearch Database. Users can specify the location of a remote ElasticSearch instance and query this instance for data through the Resilient Platform ",
     install_requires=[
-        'resilient_circuits>=31.0.0',
+        'resilient_circuits>=43.0.0',
         'elasticsearch~=7.17',
-        'resilient_lib>=35.0.0'
+        'resilient_lib>=43.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

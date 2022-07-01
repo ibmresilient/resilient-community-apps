@@ -1,0 +1,136 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+      "adminCount": 1,
+      "badPasswordTime": "1601-01-01 00:00:00+00:00",
+      "badPwdCount": 0,
+      "cn": "Gary",
+      "codePage": 0,
+      "countryCode": 0,
+      "dSCorePropagationData": [
+        "2018-11-08 20:14:42+00:00",
+        "1601-01-01 00:00:00+00:00"
+      ],
+      "displayName": "Gary Crosby",
+      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "givenName": "Gary",
+      "instanceType": 4,
+      "lastLogoff": "1601-01-01 00:00:00+00:00",
+      "lastLogon": "1601-01-01 00:00:00+00:00",
+      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
+      "logonCount": 0,
+      "mail": "gary5566@mailinator.com",
+      "memberOf": [
+        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
+      ],
+      "name": "Gary",
+      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+      "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "user"
+      ],
+      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
+      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
+      "primaryGroupID": 513,
+      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
+      "sAMAccountName": "gary5566",
+      "sAMAccountType": 805306368,
+      "sn": "Crosby",
+      "telephoneNumber": "7812449347",
+      "uSNChanged": 969466,
+      "uSNCreated": 650188,
+      "uid": [
+        "gary5566"
+      ],
+      "userAccountControl": 66048,
+      "userPassword": [
+        "65zQ24h7Bx?i"
+      ],
+      "userPrincipalName": "gary5566@dev.co3sys.com",
+      "whenChanged": "2022-05-19 18:52:20+00:00",
+      "whenCreated": "2018-11-08 19:37:57+00:00"
+    }
+  ],
+  "raw": "[{\"dn\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"accountExpires\": \"9999-12-31 23:59:59.999999+00:00\", \"adminCount\": 1, \"badPasswordTime\": \"1601-01-01 00:00:00+00:00\", \"badPwdCount\": 0, \"cn\": \"Gary\", \"codePage\": 0, \"countryCode\": 0, \"dSCorePropagationData\": [\"2018-11-08 20:14:42+00:00\", \"1601-01-01 00:00:00+00:00\"], \"displayName\": \"Gary Crosby\", \"distinguishedName\": \"CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com\", \"givenName\": \"Gary\", \"instanceType\": 4, \"lastLogoff\": \"1601-01-01 00:00:00+00:00\", \"lastLogon\": \"1601-01-01 00:00:00+00:00\", \"lastLogonTimestamp\": \"2019-11-20 20:25:20.230009+00:00\", \"logonCount\": 0, \"mail\": \"gary5566@mailinator.com\", \"memberOf\": [\"CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com\", \"CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com\"], \"name\": \"Gary\", \"objectCategory\": \"CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com\", \"objectClass\": [\"top\", \"person\", \"organizationalPerson\", \"user\"], \"objectGUID\": \"{a75844e3-37d7-482b-ad45-3b39b51a3ca5}\", \"objectSid\": \"S-1-5-21-1927197486-2714598076-3523470783-1877\", \"primaryGroupID\": 513, \"pwdLastSet\": \"2018-11-08 19:37:58.004913+00:00\", \"sAMAccountName\": \"gary5566\", \"sAMAccountType\": 805306368, \"sn\": \"Crosby\", \"telephoneNumber\": \"7812449347\", \"uSNChanged\": 969466, \"uSNCreated\": 650188, \"uid\": [\"gary5566\"], \"userAccountControl\": 66048, \"userPassword\": [\"65zQ24h7Bx?i\"], \"userPrincipalName\": \"gary5566@dev.co3sys.com\", \"whenChanged\": \"2022-05-19 18:52:20+00:00\", \"whenCreated\": \"2018-11-08 19:37:57+00:00\"}]",
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_search_filter": "(&(mail=%ldap_param%))",
+    "ldap_search_param": "gary5566@mailinator.com",
+    "ldap_search_base": "DC=dev,DC=co3sys,DC=com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:53:23"
+  },
+  "entries": [
+    {
+      "dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+      "adminCount": 1,
+      "badPasswordTime": "1601-01-01 00:00:00+00:00",
+      "badPwdCount": 0,
+      "cn": "Gary",
+      "codePage": 0,
+      "countryCode": 0,
+      "dSCorePropagationData": [
+        "2018-11-08 20:14:42+00:00",
+        "1601-01-01 00:00:00+00:00"
+      ],
+      "displayName": "Gary Crosby",
+      "distinguishedName": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "givenName": "Gary",
+      "instanceType": 4,
+      "lastLogoff": "1601-01-01 00:00:00+00:00",
+      "lastLogon": "1601-01-01 00:00:00+00:00",
+      "lastLogonTimestamp": "2019-11-20 20:25:20.230009+00:00",
+      "logonCount": 0,
+      "mail": "gary5566@mailinator.com",
+      "memberOf": [
+        "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "CN=B_Shift,CN=Users,DC=dev,DC=co3sys,DC=com"
+      ],
+      "name": "Gary",
+      "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+      "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "user"
+      ],
+      "objectGUID": "{a75844e3-37d7-482b-ad45-3b39b51a3ca5}",
+      "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1877",
+      "primaryGroupID": 513,
+      "pwdLastSet": "2018-11-08 19:37:58.004913+00:00",
+      "sAMAccountName": "gary5566",
+      "sAMAccountType": 805306368,
+      "sn": "Crosby",
+      "telephoneNumber": "7812449347",
+      "uSNChanged": 969466,
+      "uSNCreated": 650188,
+      "uid": [
+        "gary5566"
+      ],
+      "userAccountControl": 66048,
+      "userPassword": [
+        "65zQ24h7Bx?i"
+      ],
+      "userPrincipalName": "gary5566@dev.co3sys.com",
+      "whenChanged": "2022-05-19 18:52:20+00:00",
+      "whenCreated": "2018-11-08 19:37:57+00:00"
+    }
+  ]
+}

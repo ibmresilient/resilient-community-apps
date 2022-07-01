@@ -1,10 +1,10 @@
 # docker build -t ibmresilient/fn_pipl:1.1.0 -t ibmresilient/fn_pipl:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_pipl
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=44
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
