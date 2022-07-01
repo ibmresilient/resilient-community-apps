@@ -3,7 +3,6 @@
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Flask support classes for OAuth2 utility for the Outbound email app"""
 import os
-import hashlib
 from threading import Thread
 from datetime import timedelta
 from flask import Flask, request, render_template, session
