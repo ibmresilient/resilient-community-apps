@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Test oauth-utils helper functions"""
 import pytest
-from mock import patch
 from shutil import rmtree
 from oauth_utils.lib.helpers import *
 from argparse import Namespace
@@ -17,13 +16,15 @@ MOCK_APP_CONFIG_BLANKS = os.path.join(SHARED_MOCK_DATA_DIR, "mock_app_config_bla
 class TestOAuthUtilsHelpers:
     """Test helper functions"""
 
-    @pytest.fixture(scope='session')
+    @pytest.fixture(scope='module')
     def tmp_config_file(self, tmpdir_factory):
-        tmp_config_dir = tmpdir_factory.mktemp(".resilient")
-        tmp_config_file = os.path.expanduser(os.path.join(
-            str(tmp_config_dir), DEFAULT_CONFIG_FILENAME))
-        yield tmp_config_file
-        rmtree(str(tmp_config_dir))
+        _tmp_config_dir = tmpdir_factory.mktemp(".resilient")
+        _tmp_config_file = os.path.expanduser(os.path.join(
+            str(_tmp_config_dir), DEFAULT_CONFIG_FILENAME))
+        with open(_tmp_config_file, 'w') as fp:
+            fp.write('Hello\n')
+        yield _tmp_config_file
+        rmtree(str(_tmp_config_dir))
 
     """Test get_config_file function"""
 
@@ -32,8 +33,10 @@ class TestOAuthUtilsHelpers:
         (MOCK_APP_CONFIG)
     ])
     def test_get_config_file(self, monkeypatch, tmp_config_file, filename):
+        def mock_config_file(path=None):
+            return tmp_config_file
         if not filename:
-            monkeypatch.setenv("APP_CONFIG_FILE", tmp_config_file)
+            monkeypatch.setattr(os.path, 'expanduser', mock_config_file)
         result = get_config_file(filename=filename)
         if not filename:
             assert result == tmp_config_file
