@@ -6,9 +6,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fn_outbound_email',
+    version='2.0.0',
     display_name='Outbound Email',
-    version='1.3.1',
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
@@ -29,6 +28,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "SendEmailFunctionComponent = fn_outbound_email.components.send_email:FunctionComponent"
+        ],
+        "console_scripts": [
+            "generate_oauth2_refresh_token=fn_outbound_email.bin.generate_oauth2_refresh_token:main"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_outbound_email.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_outbound_email.util.customize:customization_data"],

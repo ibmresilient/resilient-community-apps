@@ -1,7 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
+import base64
+import ssl
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
@@ -12,7 +13,10 @@ from email.mime.text import MIMEText
 from ssl import Purpose, create_default_context
 from jinja2 import Environment, select_autoescape
 from resilient_circuits import ResilientComponent
+from resilient_lib import RequestsCommon
+from resilient_lib.components.integration_errors import IntegrationError
 from fn_outbound_email.lib.template_helper import TemplateHelper
+from fn_outbound_email.lib.oauth2 import OAuth2
 
 log = logging.getLogger(__name__)
 
@@ -41,9 +45,16 @@ class SendSMTPEmail(ResilientComponent):
             self.smtp_cafile = False
         else:
             self.smtp_cafile = self.smtp_config_section.get("smtp_ssl_cafile")
-
+        if self.smtp_config_section.get("smtp_password", None) and self.smtp_config_section.get("oauth2_client_id", None):
+            log.warning("The user and api key configuration settings are both enabled. Credentials will default to the "
+                        "api key settings.")
         self.smtp_user = self.smtp_config_section.get("smtp_user")
+        # Basic authentication property
         self.smtp_password = self.smtp_config_section.get("smtp_password")
+        # OAuth2 authentication using OAuth2 class
+        self.client_id = self.smtp_config_section.get("client_id")
+        if self.client_id:
+            self.oauth2 = OAuth2(opts)
 
         self.smtp_conn_timeout = int(self.smtp_config_section.get("smtp_conn_timeout", SMTP_DEFAULT_CONN_TIMEOUT))
         self.options = opts.get(CONFIG_DATA_SECTION, {})
@@ -51,14 +62,19 @@ class SendSMTPEmail(ResilientComponent):
         self.jinja_env = Environment(autoescape=select_autoescape(['html']),
                                      extensions=['jinja2.ext.do'])
         self.jinja_env.globals['template_helper'] = TemplateHelper(self)
+        self.rc = RequestsCommon(opts=opts, function_opts=opts.get(CONFIG_DATA_SECTION, {}))
+        if self.client_id:
+            # Using OAuth2 authentication.
+            self.oauth2.refresh_token()
+            self.oauth2.generate_oauth2_string()
 
     def send(self, body_html="", body_text=""):
         if not self.opts:
             raise SimpleSendEmailException("opts required")
         if not self.from_address:
             raise SimpleSendEmailException("from_address required")
-
         log.info("Converting params")
+
         if not self.to_address_list or not isinstance(self.to_address_list, (set, list)):
             self.to_address_list = []
         if not self.cc_address_list or not isinstance(self.cc_address_list, (set, list)):
@@ -103,6 +119,7 @@ class SendSMTPEmail(ResilientComponent):
         log.info("Starting email connection...")
         smtp_connection = None
         try:
+
             if self.smtp_config_section.get("smtp_ssl_mode") == "ssl":
                 log.info("Building SSL connection object")
                 smtp_connection = SMTP_SSL(host=self.smtp_server,
@@ -120,15 +137,20 @@ class SendSMTPEmail(ResilientComponent):
                     log.info("Starting TLS...")
                     smtp_connection.ehlo()
                     smtp_connection.starttls()
-                    smtp_connection.ehlo()
 
-            if self.smtp_user:
+            if self.smtp_user and not self.client_id:
+                # Using Basic authentication.
                 if not self.smtp_password:
                     raise SimpleSendEmailException('An SMTP user has been set; '
                                                    'the SMTP password from app.config cannot be null')
-
                 log.info("Logging in to SMTP...")
                 smtp_connection.login(user=self.smtp_user, password=self.smtp_password)
+
+            if self.client_id:
+                # Using OAuth2 authentication.
+                smtp_connection.ehlo()
+                log.info("Authenticating with SMTP server...")
+                smtp_connection.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(bytes(self.oauth2.oauth2_string, "utf-8")).decode("utf-8"))
 
             log.info("Sending mail")
             smtp_connection.sendmail(self.from_address,
