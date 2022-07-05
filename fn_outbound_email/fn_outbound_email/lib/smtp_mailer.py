@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 import base64
 import errno
-import json
 import os
 import smtplib
 import ssl
