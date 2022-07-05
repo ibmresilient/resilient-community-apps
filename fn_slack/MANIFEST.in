@@ -1,6 +1,10 @@
 include README.md
-include fn_slack/util/*
-include fn_slack/lib/*
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_slack/util *
 include fn_slack/LICENSE
 include fn_slack/doc/*
 include fn_slack/data/templates/*.jinja*
+include apikey_permisions.txt
+
+global-exclude *.bak

@@ -11,7 +11,7 @@ import tempfile
 import os
 from os.path import join, pardir
 import unicodedata
-from slackclient import SlackClient
+import slack
 import resilient_circuits.template_functions as template_functions
 from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import *
@@ -38,7 +38,8 @@ class SlackUtils(object):
     """
 
     def __init__(self, api_token, proxies=None):
-        self.slack_client = SlackClient(api_token, proxies=proxies)
+        self.slack_client = slack.WebClient(token=api_token, proxy=proxies)
+        
         self.channel = None
         self.warnings = []
 
@@ -214,15 +215,17 @@ class SlackUtils(object):
             payload = slack_text
 
         results = self.slack_client.api_call(
-            "chat.postMessage",
-            channel=self.get_channel_id(),
-            as_user=slack_as_user,
-            username=slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
-            parse="none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
-            link_names=1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
-            mrkdown=slack_markdown,
-            attachments=attachment_json,
-            text=payload
+            api_method = "chat.postMessage",
+            params = {
+                "channel" : self.get_channel_id(),
+                "as_user" : slack_as_user,
+                "username" : slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
+                "parse" : "none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
+                "link_names" : 1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
+                "mrkdown" : slack_markdown,
+                "attachments" : attachment_json,
+                "text" : payload
+            }
         )
         LOG.debug(results)
 
@@ -253,13 +256,15 @@ class SlackUtils(object):
             artifact_type = attachment_data.get("type")
 
         results = self.slack_client.api_call(
-            "files.upload",
-            channels=self.get_channel_id(),
-            file=attachment_content,
-            filename=file_name,
-            filetype=file_type,
-            title=u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
-            initial_comment=slack_text
+            api_method = "files.upload",
+            params = {
+                "channels" : self.get_channel_id(),
+                "file" : attachment_content,
+                "filename" : file_name,
+                "filetype" : file_type,
+                "title" : u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
+                "initial_comment" : slack_text
+            }
         )
         LOG.debug(results)
 
@@ -300,9 +305,11 @@ class SlackUtils(object):
         users_id = ",".join(user_id_list)
 
         results = self.slack_client.api_call(
-            "conversations.invite",
-            channel=self.get_channel_id(),
-            users=users_id
+            api_method = "conversations.invite",
+            params = {
+                "channel" : self.get_channel_id(),
+                "users" : users_id
+            }
         )
         LOG.debug(results)
 
@@ -339,11 +346,13 @@ class SlackUtils(object):
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.list",
-                exclude_archived=False,  # we need to load archived channels
-                types="public_channel,private_channel",
-                limit=SLACK_LOAD_CHANNELS_LIMIT,
-                cursor=cursor
+                api_method="conversations.list",
+                params={
+                    "exclude_archived" : False,  # we need to load archived channels
+                    "types" : "public_channel,private_channel",
+                    "limit" : SLACK_LOAD_CHANNELS_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -361,8 +370,10 @@ class SlackUtils(object):
         :return: JSON result
         """
         results = self.slack_client.api_call(
-            "users.lookupByEmail",
-            email=user_email
+            api_method = "users.lookupByEmail",
+            params = {
+                "email" : user_email
+            }
         )
         LOG.debug(results)
 
@@ -402,9 +413,11 @@ class SlackUtils(object):
         :return:
         """
         results = self.slack_client.api_call(
-            "conversations.create",
-            name=slack_channel_name,
-            is_private=is_private
+            api_method = "conversations.create",
+            params = {
+                "name" : slack_channel_name,
+                "is_private" : is_private
+            }
         )
         LOG.debug(results)
 
@@ -421,9 +434,11 @@ class SlackUtils(object):
         :return: permalink
         """
         results = self.slack_client.api_call(
-            "chat.getPermalink",
-            channel=self.get_channel_id(),
-            message_ts=thread_id
+            api_method = "chat.getPermalink",
+            params = {
+                "channel" : self.get_channel_id(),
+                "message_ts" : thread_id
+            }
         )
         LOG.debug(results)
 
@@ -473,10 +488,12 @@ class SlackUtils(object):
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.history",
-                channel=self.get_channel_id(),
-                limit=SLACK_HISTORY_MESSAGE_LIMIT,
-                cursor=cursor
+                api_method = "conversations.history",
+                params = {
+                    "channel" : self.get_channel_id(),
+                    "limit" : SLACK_HISTORY_MESSAGE_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -562,11 +579,13 @@ class SlackUtils(object):
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.replies",
-                channel=self.get_channel_id(),
-                ts=msg_ts,
-                limit=SLACK_HISTORY_REPLY_MESSAGE_LIMIT,
-                cursor=cursor
+                api_method = "conversations.replies",
+                params = {
+                    "channel" : self.get_channel_id(),
+                    "ts" : msg_ts,
+                    "limit" : SLACK_HISTORY_REPLY_MESSAGE_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -604,8 +623,10 @@ class SlackUtils(object):
         :return: user
         """
         results = self.slack_client.api_call(
-            "users.info",
-            user=user_id
+            api_method = "users.info",
+            params = {
+                "user" : user_id
+            }
         )
         LOG.debug(results)
 
@@ -765,8 +786,10 @@ class SlackUtils(object):
         :return: JSON result
         """
         results = self.slack_client.api_call(
-            "conversations.archive",
-            channel=self.get_channel_id()
+            api_method = "conversations.archive",
+            params = {
+                "channel" : self.get_channel_id()
+            }
         )
         LOG.debug(results)
 
@@ -862,7 +885,7 @@ class SlackUtils(object):
         :return: JSON result
         """
         results = self.slack_client.api_call(
-            "api.test"
+            api_method = "api.test"
         )
         LOG.debug(results)
 

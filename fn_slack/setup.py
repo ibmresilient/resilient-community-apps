@@ -2,13 +2,31 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
+
 
 setup(
     name='fn_slack',
-    version='1.0.2',
+    version='2.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM SOAR',
+    author_email='',
+    url="https://ibm.com/mysupport",
     description="Resilient Circuits Components for 'fn_slack'",
     long_description="Function creates a Slack message based on a Resilient Incident, it's Tasks, Notes, Artifacts "
                      "and Attachments, exports conversation history from Slack channel to a text file, saves the "
@@ -16,7 +34,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib',
-        'slackclient<2.0.0',
+        'slackclient>=2.0.0',
         'bs4'
     ],
     packages=find_packages(),
@@ -27,9 +45,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "SlackPostMessageFunctionComponent = fn_slack.components.slack_post_message:FunctionComponent",
-            "SlackArchiveChannelFunctionComponent = fn_slack.components.slack_archive_channel:FunctionComponent",
-            "SlackPostAttachmentFunctionComponent = fn_slack.components.slack_post_attachment:FunctionComponent"
+            "{}FunctionComponent = fn_slack.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_slack/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_slack.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_slack.util.customize:customization_data"],
