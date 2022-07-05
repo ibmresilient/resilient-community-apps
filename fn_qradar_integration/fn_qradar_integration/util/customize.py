@@ -29,7 +29,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"qradar_offense_event", u"qradar_reference_set", u"qradar_reference_table", u"qradar_reference_table_queried_rows"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -38,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 43.1.49
 
     Contents:
     - Message Destinations:

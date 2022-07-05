@@ -39,6 +39,7 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.3 | June. 2022 | Bug fix for using with MSSP |
 | 2.2.2 | May. 2022 | Add more documentation and bug fix |
 | 2.2.1 | March 2022 | Cancel QRadar queries which have timed out |
 | 2.2.0 | March 2022 | Allow multiple QRadar instances |
@@ -220,7 +221,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name  = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -302,7 +303,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -381,7 +382,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -457,7 +458,7 @@ results = {
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -552,7 +553,7 @@ inputs.qradar_reference_table_item_value = artifact.value
 inputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key
 inputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key
 inputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -775,7 +776,7 @@ results = {
 <p>
 
 ```python
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -1101,7 +1102,7 @@ results = {
 ```python
 inputs.qradar_search_param2 = incident.properties.qradar_id
 
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 
 if rule.properties.qradar_query_all_results:
   inputs.qradar_query_all_results = rule.properties.qradar_query_all_results
