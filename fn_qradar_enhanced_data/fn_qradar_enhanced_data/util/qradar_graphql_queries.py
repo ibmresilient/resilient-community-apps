@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 #   QRadar graph queries
 
 # URL from https://qradar_instance/console/graphql
 
-#  Basic offense data query to populate summmary fields.
+# Basic offense data query to populate summmary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             getOffense(id: $id) {
                                 credibility
@@ -30,11 +30,17 @@ GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                                 eventCount
                                 flowCount
                                 __typename
+                                status
+                                domain {
+                                    id
+                                    name
+                                    __typename
+                                }
+                                startTime
+                                lastUpdatedTime
                             }
                         }
-                       '''
-
-
+                        '''
 
 # Contributing rules query to populate Rules table.
 GRAPHQL_RULESQUERY = '''query ruleQuery($id: ID!) {
@@ -203,7 +209,6 @@ GRAPHQL_OFFENSEASSETS = '''query assetQuery($ipAddress: String, $domainId: Int) 
                     }
                     '''
 
-
 # Source IP data query for Source IP table.
 GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
                         getAsset(ipAddress: $ipAddress, domainId: $domainId) {
@@ -239,7 +244,6 @@ GRAPHQL_SOURCEIP='''query assetQuery($ipAddress: String, $domainId: Int) {
                         }
                     }
                     '''
-
 
 # Get System Date for GraphQL test
 GRAPHQL_SYSTEMDATE ='''query getSystemDate{

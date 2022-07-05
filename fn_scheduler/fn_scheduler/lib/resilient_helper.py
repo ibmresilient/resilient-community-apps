@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+import logging
 from resilient_lib import validate_fields
 from fn_scheduler.components import SECTION_SCHEDULER
 
+LOG = logging.getLogger(__name__)
 
 def get_incident(rest_client, incident_id):
     """
@@ -17,51 +19,101 @@ def get_incident(rest_client, incident_id):
 
     return resp
 
-def get_rule_by_name(rest_client, rule_name):
+def get_rule_by_name(rest_client, pb_name, is_playbook):
     """
     api call to get a resilient rule
-    :param rest_client:
-    :param rule_name:
-    :return: rule in json format
+    :param rest_client: object to make API calls back to SOAR
+    :param pb_name: either a rule name or playbook name (can be pb_name)
+    :param is_playbook: true if a playbook, false if a rule
+    :return: rule/playbook id
+    :return: rule/playbook object relationship
     """
     rules = get_rules(rest_client)
 
-    for rule in rules['entities']:
-        if rule['name'].lower() == rule_name.lower():
-            if not rule['enabled']:
-                raise AttributeError(u"Rule '{}' is disabled".format(rule_name))
+    # try playbooks
+    if is_playbook:
+        playbooks = get_playbooks(rest_client)
 
-            return (rule['id'], rule["object_type"])
+        for playbook in playbooks['data']:
+            if playbook['name'] == pb_name.lower() or playbook['display_name'].lower() == pb_name.lower():
+                if playbook['status'] != 'enabled':
+                    raise AttributeError(u"Playbook '{}' is disabled".format(pb_name))
+
+                return (playbook['id'], playbook["object_type"])
+    else:
+        # try rules
+        for rule in rules['entities']:
+            if rule['name'].lower() == pb_name.lower():
+                if not rule['enabled']:
+                    raise AttributeError(u"Rule '{}' is disabled".format(pb_name))
+
+                return (rule['id'], rule["object_type"])
 
     return (None, None)
 
-def get_rule_by_id(rest_client, rule_id):
+def get_rule_by_id(rest_client, pb_id, is_playbook):
     """
-    api call to get a resilient rule by id and ensure the rule is still enabled
-    :param incident_id:
-    :param rule_id:
-    :return: True if rule is enabled for an incident or AttributeError
+    api call to get a SOAR rule/playbook by id and ensure that it is still enabled
+    :param rest_client: object to make API calls back to SOAR
+    :param pb_id: rule or playbook id
+    :param is_playbook: true if playbook, false if rule
+    :return: true is id is a playbook, false if a rule.
+    :raises AttributeError if the rule/playbook disabled
+    :raises KeyError if the id is not found
     """
     rules = get_rules(rest_client)
 
-    for rule in rules['entities']:
-        if rule['id'] == rule_id:
-            if rule['enabled']:
-                return True
-            else:
-                raise AttributeError("Rule is disabled")
+    if is_playbook:
+        # try playbooks
+        playbooks = get_playbooks(rest_client)
 
-    raise KeyError("Rule id {} is not found".format(rule_id))
+        for playbook in playbooks['data']:
+            if playbook['id'] == pb_id:
+                if playbook['status'] == 'enabled':
+                    LOG.debug(playbook)
+                    return True
+                else:
+                    raise AttributeError(u"Playbook id '{}' is disabled".format(pb_id))
+    else:
+        # try rules
+        for rule in rules['entities']:
+            if rule['id'] == pb_id:
+                if rule['enabled']:
+                    LOG.debug(rule)
+                    return False
+                else:
+                    raise AttributeError("Rule id '{}' is disabled".format(pb_id))
+
+    raise KeyError("Rule/Playbook id '{}' is not found".format(pb_id))
 
 def get_rules(rest_client):
     """
-    api call to get all rules for the resilient organization
+    api call to get all rules for the SOAR organization
     :param rest_client:
     :return: json formatted rule list
     """
     url = "/actions"
 
     return rest_client.get(url)
+
+def get_playbooks(rest_client):
+    """
+    api call to get all playbooks for the SOAR organization
+    :param rest_client:
+    :return: json formatted rule list
+    """
+    url = "/playbooks/query_paged"
+
+    payload = {
+        "sorts": [
+            {
+                "field_name": "display_name",
+                "type": "asc"
+            }
+        ]
+    }
+
+    return rest_client.post(url, payload)
 
 def add_comment(rest_client, incident_id, comment):
     """

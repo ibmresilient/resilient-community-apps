@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, broad-except,pointless-string-statement
 """
     Function utilities_parse_ssl_cert receives a certificate as a parameter.
@@ -24,7 +24,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_parse_ssl_certificate"""
+    """Component that implements SOAR function 'utilities_parse_ssl_certificate"""
 
     @function("utilities_parse_ssl_certificate")
     def _utilities_parse_ssl_certificate_function(self, event, *args, **kwargs):
@@ -157,7 +157,7 @@ class FunctionComponent(ResilientComponent):
 
     Attempts to gather the binary data for an artifacts attachmentment.
 
-    Performs a HTTP to the Resilient REST API and attempts to gather the attachment.
+    Performs a HTTP to the SOAR REST API and attempts to gather the attachment.
     Returns the data in binary form which can then be written to a local file.
     """
     @staticmethod

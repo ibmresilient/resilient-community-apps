@@ -42,6 +42,7 @@ def selftest_function(opts):
                 "reason": "Failed to send test email with error:{}".format(error_msg)
             }
         else:
+
             return {
                 "state": "success",
                 "reason": "Send test email Successful"

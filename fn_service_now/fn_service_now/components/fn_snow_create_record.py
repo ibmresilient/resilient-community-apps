@@ -1,14 +1,19 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import json
+import logging
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_service_now.util.resilient_helper import ResilientHelper
+
+from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
+                                                  ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -56,6 +61,8 @@ class FunctionComponent(ResilientComponent):
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
+            rc = RequestsCommon(self.opts, self.options)
+            rp = ResultPayload(CONFIG_DATA_SECTION)
 
             # Get the function inputs:
             inputs = {
@@ -83,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_link
-            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
+            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, res_client.org_id, payload.inputs["task_id"])
 
             # Generate the request_data
             req = res_helper.generate_sn_request_data(
@@ -111,7 +118,7 @@ class FunctionComponent(ResilientComponent):
                     "Incident" if request_data.get("type") is "res_incident" else "Task", res_helper.str_to_unicode(request_data.get("incident_name")) if request_data.get("incident_name") is not None else res_helper.str_to_unicode(request_data.get("task_name"))))
 
                 # Call POST and get response
-                create_in_sn_response = res_helper.sn_api_request("POST", "/create", data=json.dumps(request_data))
+                create_in_sn_response = res_helper.sn_api_request(rc, "POST", "/create", data=json.dumps(request_data))
 
                 if create_in_sn_response is not None:
 
@@ -123,6 +130,17 @@ class FunctionComponent(ResilientComponent):
                     payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
                     payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
 
+
+                    # get datatable name if short_description was included
+                    # else set to the incident/task name
+                    dt_name = payload.inputs["sn_optional_fields"]["short_description"] if payload.inputs.get("sn_optional_fields", {}).get("short_description", None) is not None else request_data.get("incident_name") if request_data.get("incident_name", None) is not None else request_data.get("task_name")
+
+                    # adjust the name to reflect the name that will appear in the datatable and on ServiceNow
+                    if request_data.get("type") is "res_incident":
+                        res_helper.rename_incident(res_client, request_data.get("incident_id"), dt_name)
+                    else:
+                        res_helper.rename_task(res_client, request_data.get("task_id"), dt_name)
+
                     yield StatusMessage("New ServiceNow Record created {0}".format(payload.sn_ref_id))
 
                     try:
@@ -131,13 +149,13 @@ class FunctionComponent(ResilientComponent):
                         # Add row to the datatable
                         add_row_response = datatable.add_row(
                             payload.sn_time_created,
-                            request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name"),
+                            dt_name,
                             "Incident" if request_data.get("type") is "res_incident" else "Task",
                             payload.res_id,
                             payload.sn_ref_id,
                             res_helper.convert_text_to_richtext("Active"),
                             res_helper.convert_text_to_richtext("Sent to ServiceNow"),
-                            """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
+                            """<a href="{0}">SOAR</a> &nbsp;&nbsp; <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
 
                         payload.row_id = add_row_response["id"]
 
@@ -150,11 +168,13 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("The response from ServiceNow was empty")
 
             results = payload.as_dict()
+            rp_results = rp.done(results.get("success"), results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
-            log.debug("RESULTS: %s", results)
+            log.debug("RESULTS: %s", rp_results)
             log.info("Complete")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            # Produce a FunctionResult with the rp_results
+            yield FunctionResult(rp_results)
         except Exception:
             yield FunctionError()

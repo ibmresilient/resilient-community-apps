@@ -5,7 +5,6 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from resilient_circuits.action_message import FunctionException_, FunctionError_
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_json2html"
@@ -13,9 +12,8 @@ FUNCTION_NAME = "utilities_json2html"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
 
 def call_utilities_json2html_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -26,7 +24,6 @@ def call_utilities_json2html_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestUtilitiesJson2Html:
     """ Tests for the utilities_json2html function"""
@@ -44,13 +41,12 @@ class TestUtilitiesJson2Html:
     ])
     def test_success(self, circuits_app, json2html_data, json2html_keys, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "json2html_data": json2html_data,
             "json2html_keys": json2html_keys
         }
         results = call_utilities_json2html_function(circuits_app, function_params)
         assert(expected_results == results)
-
 
     @pytest.mark.parametrize("json2html_data, json2html_keys, expected_results", [
             ('{ "key10": { "key20": { "a": "a1", "b": "b1", "key30": [1, 2, 3, 4] } } }',
@@ -66,4 +62,4 @@ class TestUtilitiesJson2Html:
         with pytest.raises((AssertionError)) as err:
             results = call_utilities_json2html_function(circuits_app, function_params)
 
-        # should be able to parse err for 'key not found'
+        # Should be able to parse err for 'key not found'

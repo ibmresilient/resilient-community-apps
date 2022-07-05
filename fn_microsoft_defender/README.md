@@ -67,6 +67,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 10/2021 | Initial Release |
+| 1.0.1 | 3/2022 | Bug fix for defender_update_incident |
 
 ---
 
@@ -2889,8 +2890,7 @@ This is a IBM Supported provided App. Use the SOAR Community https://ibm.biz/soa
   "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "defender_classification": "{{ classification|replace('"', '\\"') }}",
-    "defender_determination": "{{ determination|replace('"', '\\"') }}",
-    "defender_category": "{{ category|replace('"', '\\"') }}"
+    "defender_determination": "{{ determination|replace('"', '\\"') }}"
   }
 }
 </pre>

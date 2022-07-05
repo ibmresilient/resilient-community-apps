@@ -12,6 +12,11 @@ from .mock_artifacts import mocked_requests
 """
 Suite of tests to test Zia client class
 """
+REQUEST_METHODS=["get", "post", "put"]
+
+for m in REQUEST_METHODS:
+    ratelimit(init=True, method=m)
+
 def assert_attribs_in(json_obj, *attribs):
     for attrib in attribs:
         assert hasattr(json_obj, attrib)
@@ -38,7 +43,7 @@ class TestZIAClient:
     @pytest.mark.parametrize("expected_result", [
         ("fn_zia.lib.zia_client.ZiaClient object at")
     ])
-    def test_instantiation(self, mock_post,expected_result):
+    def test_instantiation(self, mock_post, expected_result):
         expected_attribs = ["_endpoints", "_headers", "_jessions_id", "_obf_api_key", "_req",
                             "_timestamp","api_base_url", "api_key", "password", "username",
                             "proxies"]
@@ -47,8 +52,8 @@ class TestZIAClient:
         assert(expected_result in repr(zia_client))
         assert_attribs_in(zia_client, *expected_attribs)
 
-    ["payload", "finding", "data_tables"]
     """ Test zia_client._perform_method"""
+
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
     @pytest.mark.parametrize("opts, fn_opts, expected_result", [
         (None, None, "The 'opts' parameter is not set correctly."),
@@ -61,6 +66,7 @@ class TestZIAClient:
         assert str(e.value) == expected_result
 
     """ Test zia_client._perform_method"""
+
     @patch("fn_zia.lib.auth.RequestsCommon", side_effect=mocked_requests)
     @pytest.mark.parametrize("method, uri, action, expected_result", [
         ("get", "https://ziaserver/api/v1/security/advanced",
@@ -98,7 +104,7 @@ class TestZIAClient:
         ("badhost.com, 192.168.12.2", "ADD_TO_LIST", {"status": "OK"}),
         ("badhost.com, 192.168.12.2", "REMOVE_FROM_LIST", {"status": "OK"})
     ])
-    def test_blocklist_action(self, mock_post,blocklisturls, action, expected_result):
+    def test_blocklist_action(self, mock_post, blocklisturls, action, expected_result):
         opts = {}
         zia_client = ZiaClient(opts, get_fn_opts())
         result = zia_client.blocklist_action(blocklisturls, action)

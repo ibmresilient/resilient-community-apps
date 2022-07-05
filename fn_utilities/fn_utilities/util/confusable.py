@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """ Table of confusable characters """
@@ -13,7 +13,6 @@ import pkg_resources
 
 if sys.version_info[0] >= 3:
     unichr = chr
-
 
 class Confusable(object):
 
@@ -84,7 +83,6 @@ class Confusable(object):
         # Write the lookup table to disk
         with open(self.lookup_file, "w") as datafile:
             json.dump(table, datafile)
-
 
 if __name__ == "__main__":
     # Rebuild the lookup table from its source

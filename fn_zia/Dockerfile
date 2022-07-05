@@ -1,10 +1,10 @@
-# docker build -t ibmresilient/fn_zia:1.0.0 -t ibmresilient/fn_zia:latest .
+# docker build -t ibmresilient/fn_zia:1.0.1 -t ibmresilient/fn_zia:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_zia
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=44.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -36,8 +36,6 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 #COPY /path/to/extra_package /tmp/packages/.
 #RUN pip install /tmp/packages/<extra_package>*.tar.gz
 
-# uncomment to expose port only if a custom threat feed
-#EXPOSE 9000
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs

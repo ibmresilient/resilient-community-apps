@@ -25,22 +25,22 @@ def get_function_list():
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.0.1",
+    version="1.0.4",
     license="MIT",
     author="IBM Resilient",
     author_email="",
     url="https://github.com/ibmresilient/fn_microsoft_sentinel",
     description="Resilient Circuits Components for 'fn_microsoft_sentinel'",
     long_description="""This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
-    Key features:
-    * Escalate Microsoft Sentinel Incidents to IBM Resilient SOAR Cases
-    * Automatically keep Incidents and Cases synchronized
-    * Retrieve Sentinel Incident alert entities as artifacts
-    * Sync comments to and from Sentinel Incidents
-    * Support editable templates for field mapping between the two systems""",
+    <br>Key features:
+    <br>* Escalate Microsoft Sentinel Incidents to IBM Resilient SOAR Cases
+    <br>* Automatically keep Incidents and Cases synchronized
+    <br>* Retrieve Sentinel Incident alert entities as artifacts
+    <br>* Sync comments to and from Sentinel Incidents
+    <br>* Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=30.0.0",
-        "resilient-lib",
+        "resilient_circuits>=43.0.0",
+        "resilient-lib>=43.0.0",
         "jinja2",
         "simplejson"
     ],
