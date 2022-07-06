@@ -3,8 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_splunk_integration.util.function_utils import get_servers_list, \
-    update_splunk_servers_select_list, make_item_dict, function_basics
+from fn_splunk_integration.util.function_utils import get_servers_list,\
+    make_item_dict, function_basics
 from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
@@ -17,7 +17,6 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.servers_list = get_servers_list(opts)
-        update_splunk_servers_select_list(self.servers_list, self.rest_client(), "splunk_servers")
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):

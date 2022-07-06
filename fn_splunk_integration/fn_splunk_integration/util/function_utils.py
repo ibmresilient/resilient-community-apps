@@ -5,7 +5,7 @@
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError, str_to_bool
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
+from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
 
 LOG = getLogger(__name__)
 
@@ -82,48 +82,6 @@ def get_servers_list(opts):
             servers_list[server_name]["splunkpassword"] = None
 
     return servers_list
-
-def update_splunk_servers_select_list(servers_list, res_rest_client, field_name):
-    """
-    Update values in splunk_servers select field
-    :param servers_list: List of splunk servers in app.config
-    :param res_rest_client: SOAR rest client connection
-    :param field_name: Activity field name
-    :return: None
-    """
-
-    # Create list of splunk server labels
-    server_name_list = []
-    for server in servers_list:
-        if ":" in server:
-            server_name_list.append(server[server.index(":")+1:])
-        else:
-            server_name_list.append(server)
-
-    try:
-        payload = res_rest_client.get(GET_FIELD.format(field_name))
-
-        if type(payload) == list or payload.get("input_type") != "select":
-            return None
-
-        # Create payload 
-        if server_name_list:
-
-            # Put payload with no values to delete old values
-            del payload["values"]
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
-
-            # Add values to the payload
-            payload["values"] = [
-                {"label": str(value), "enabled": True, "hidden": False}
-                for value in server_name_list
-            ]
-            # Put payload with values to SOAR
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
-
-    except Exception as err_msg:
-        LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))
-        raise IntegrationError("Error while updating action field: {}".format(field_name))
 
 def function_basics(fn_inputs, servers_list, utils=True):
     # Make that calls that all of the functions use
