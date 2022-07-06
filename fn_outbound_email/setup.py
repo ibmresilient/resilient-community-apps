@@ -6,8 +6,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    version='2.0.0',
+    name='fn_outbound_email',
     display_name='Outbound Email',
+    version='2.0.0',
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
