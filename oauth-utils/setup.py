@@ -17,7 +17,8 @@ setup(
         'Jinja2>=2.9.6',
         'six',
         'urllib3',
-        'requests'
+        'requests',
+        'click'
     ],
     extras_require={
         'browser': [
