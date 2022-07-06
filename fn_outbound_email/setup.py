@@ -29,9 +29,6 @@ setup(
         "resilient.circuits.components": [
             "SendEmailFunctionComponent = fn_outbound_email.components.send_email:FunctionComponent"
         ],
-        "console_scripts": [
-            "generate_oauth2_refresh_token=fn_outbound_email.bin.generate_oauth2_refresh_token:main"
-        ],
         "resilient.circuits.configsection": ["gen_config = fn_outbound_email.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_outbound_email.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_outbound_email.util.selftest:selftest_function"]
