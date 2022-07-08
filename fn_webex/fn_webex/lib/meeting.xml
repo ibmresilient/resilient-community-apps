@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <serv:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:serv="http://www.webex.com/schemas/2002/06/service">
+       
+       
+        <header>
+            <securityContext>
+                <webExID>admin@calvinwynne-8xjq.wbx.ai</webExID>
+                <password>Q4Xr5bA0i]</password>
+                <siteName>calvinwynne-8xjq</siteName>
+            </securityContext>
+        </header>
+        
+        <body>
+            <bodyContent xsi:type="java:com.webex.service.binding.meeting.CreateMeeting">
+
+            <accessControl>
+                <meetingPassword>abc1234</meetingPassword>
+            </accessControl>
+
+            <metaData>
+                <confName>VS code test</confName>
+                <agenda>no agenda</agenda>
+            </metaData>
+
+            <schedule>
+                <startDate>07/07/2022 14:58:17</startDate>
+                <duration>45</duration>
+                <timeZoneID>19</timeZoneID>
+            </schedule></bodyContent>
+
+        </body>
+        </serv:message>
+
+
+
+        Y2ViMTg1NzctOGRiMi00Nzg4LWE0MjYtODFhN2VkNjNkNzYyZmQzNTgwYjktNjk0_P0A1_f688574e-8402-4b53-864e-e725f4468887
