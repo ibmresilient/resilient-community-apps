@@ -58,7 +58,6 @@ env:
 # Install package deps
 before_install:
   - pip install -U pip setuptools requests retry2
-  - openssl aes-256-cbc -K $encrypted_1abb9c969281_key -iv $encrypted_1abb9c969281_iv -in .environments/fn_whois/fn_whois.config.enc -out $TRAVIS_BUILD_DIR/fn_whois.config -d 
   - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
   - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
 
