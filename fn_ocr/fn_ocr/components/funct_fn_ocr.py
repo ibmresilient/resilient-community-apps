@@ -5,7 +5,7 @@
 
 from email.mime import base
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError 
-from resilient_lib import IntegrationError, validate_fields, get_file_attachment, get_file_attachment_metadata, write_file_attachment
+from resilient_lib import  get_file_attachment
 
 import base64
 import cv2
@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info("task_id: %s", task_id)
         self.LOG.info("OCR Confidence Threshold: %.2f", confidence_threshold)
         self.LOG.info("OCR Language is: %s", lang)
-        self.LOG.info("OCR Base64 Input is: %s", base64_string)
+        self.LOG.info("OCR Base64 Input is: %s", isinstance(base64_string,str)) # this can be very long, and could even cause the function to time out. Instead print if it exists
 
         if incident_id is None:
             raise FunctionError("Error: incident_id must be specified.")
@@ -100,9 +100,7 @@ class FunctionComponent(AppFunctionComponent):
         results = line_dicts
 
         if results == []:
-            yield FunctionResult({}, success=False, reason="OCR could nothing in the image")
-
-        self.LOG.debug(json.dumps(results, indent=2))
-
-        yield FunctionResult(results)
+            yield FunctionResult({}, success=False, reason="OCR could find nothing in the image")
+        else:
+            yield FunctionResult(results)
         # yield FunctionResult({}, success=False, reason="Bad call")

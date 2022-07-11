@@ -137,11 +137,11 @@ runs OCR on an image in byte string format and returns the relevant results
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ocr_incident_id` | `number` | Yes | `-` | Automatically gathered by SOAR |
-| `ocr_artifact_id` | `number` | No | `-` | Automatically gathered by SOAR |
-| `ocr_attachment_id` | `number` | No | `-` | Automatically gathered by SOAR |
-| `ocr_task_id` | `number` | No | `-` | Automatically gathered by SOAR |
-| `ocr_base64` | `text` | No | `ZXhhbXBsZQo=` | When running the function without an artifact or attachment, it is possible to supply an image in base64 format |
+| `ocr_incident_id` | `number` | Yes | `-` |  incident id, typically incident.id |
+| `ocr_artifact_id` | `number` | No | `-` | used for file-based artifacts, typically artifact.id |
+| `ocr_attachment_id` | `number` | No | `-` | attachment id, typically attachment.id |
+| `ocr_task_id` | `number` | No | `-` | used with task level attachments, typically task.id |
+| `ocr_base64` | `text` | No | `ZXhhbXBsZQo=` | When running the function without an artifact or attachment, it is possible to supply an image in base64 format, using inputs.ocr_base64 |
 | `ocr_confidence_threshold` | `number` | Yes | `50` | This is the minimum confidence considered before returning a line. Confidence of a line is the average confidence across all words in a line. This value defaults to 50, which means the app will return any line with an average confidence of 50% or more. We recommend a value greater than 80 for sensible results |
 | `ocr_language` | `select` | Yes | `eng` | This determines what language Tesseract will look for i.e. if the text is in arabic, we would specify 'ara'. See next toggle heading for a table of languages and their corresponding code. This can always be checked [here](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html), and the Dockerfile contains steps on how to install your own language |
 
