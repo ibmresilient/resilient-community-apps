@@ -43,7 +43,7 @@ token_url=
 # e.g. auth_url=https://login.microsoftonline.com/1234567a-abc8-90d1-2efa3-123456789abcd/oauth2/v2.0/authorize
 auth_url=
 # Applications require a refresh_token to allow access tokens to be renewed. This can be generated using
-the generate_oauth2_refresh_token utility from the oauth-utils package.
+# the generate_oauth2_refresh_token utility from the oauth-utils package.
 refresh_token=
 ## End of OAuth2 authentication settings
 
