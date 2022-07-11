@@ -28,7 +28,8 @@ def get_parent_parser():
     $ oauth-utils <subcommand> ...
     $ oauth-utils -v <subcommand> ...
     $ oauth-utils oauth2_generate_refresh_token
-    $ oauth-utils oauth2_generate_refresh_token -c <path_to_config_file>/app.config
+    $ oauth-utils oauth2_generate_refresh_token -b
+    $ oauth-utils oauth2_generate_refresh_token -c <path_to_config_file>/app.config -a <app_name>
     $ oauth-utils -h
     """
 
