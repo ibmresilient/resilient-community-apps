@@ -5,22 +5,25 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_exchange',
-    version='1.0.2',
+    display_name='Microsoft Exchange',
+    version='1.0.3',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM SOAR',
     url='https://ibm.com/mysupport',
-    description="Resilient Circuits Components for 'fn_exchange'",
-    long_description="""This IBM Resilient Function package provides functions that can be used to access Microsoft
-        Exchange email and meeting capabilities. The package provided has the following capabilities: Create a meeting
-        in Microsoft Exchange and send out invites, Delete queried emails from a user’s mailbox, Query emails from a
-        user’s mailbox, Get mailbox info for a sender, Move the contents of one folder to another folder and deletes
-        the original, Move queried emails from one folder to another folder, Send email to a list of recipients.""",
+    description="Integrate with Microsoft Exchange email and meeting functionality",
+    long_description="""This package provides functions that can be used to access Microsoft \
+Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
+- Create a meeting in Microsoft Exchange and send out invites<br>
+- Delete queried emails from a user's mailbox<br>
+- Query emails from a user's mailbox<br>
+- Get mailbox info for a sender<br>
+- Move the contents of one folder to another folder and deletes the original<br>
+- Move queried emails from one folder to another folder<br>
+- Send email to a list of recipients""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=45.0.0',
         'exchangelib==2.2.0; python_version<"3"',
-        'exchangelib',
-        'resilient_lib'
+        'exchangelib'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -11,7 +11,7 @@ def get_mock_config():
 aws_gd_access_key_id=<AWS_GUARDDUTY_ACCESS_KEY_ID>
 aws_gd_secret_access_key=<AWS_GUARDDUTY_SECRET_ACCESS_KEY>
 # Default or master region for the integration
-aws_gd_master_region=us-west-2
+aws_gd_master_region=us-west-1
 # Filter by GuardDuty region names. Can be a string or regular expression.
 # e.g. aws_gd_regions=^(us|eu).* to get Europe and US regions.
 aws_gd_regions=.*
