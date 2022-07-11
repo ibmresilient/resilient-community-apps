@@ -34,6 +34,7 @@ Follow the steps to add a pagerduty section to your `app.config` file by running
 api_token=<api_token>
 # bypass https certificate validation (only set to False for testing purposes)
 verifyFlag=False
+resilient_client=IBM Resilient
 ```
 
 Sample workflows have been provided. They include: 
