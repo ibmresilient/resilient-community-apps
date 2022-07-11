@@ -6,29 +6,37 @@
   is a good example. Checkout https://guides.github.com/features/mastering-markdown/
   for tips on writing with Markdown
 
+  All fields followed by "::CHANGE_ME::"" should be manually edited
+
   If you make manual edits and run docgen again, a .bak file will be created
 
   Store any screenshots in the "doc/screenshots" directory and reference them like:
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
+
+  NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn-icdx for IBM Resilient
+# Symantec ICDx
 
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
+- [Requirements](#requirements)
+  - [SOAR platform](#soar-platform)
+  - [Cloud Pak for Security](#cloud-pak-for-security)
+  - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
 - [Installation](#installation)
-  - [Requirements](#requirements)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
 - [Function - ICDx: Find Events](#function---icdx-find-events)
-- [Function - ICDx: Get Event](#function---icdx-get-event)
 - [Function - ICDx: Get Archive List](#function---icdx-get-archive-list)
+- [Function - ICDx: Get Event](#function---icdx-get-event)
 - [Data Table - ICDx Queried Events](#data-table---icdx-queried-events)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting-&-support)
+- [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
@@ -36,11 +44,11 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
-* Initial Release
-
-### v1.0.1
-* Added support for AppHost and Resilient API Keys
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.1.0 | 07/2022 | Drop support for Python 2.7 |
+| 1.0.1 | 11/2020 | Added support for AppHost and Resilient API Keys |
+| 1.0.0 | 06/2020 | Initial Release |
 
 ---
 
@@ -49,11 +57,12 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Integration with ICDX which provides access to the ICDX Search API over AMQP**
+**Integration with ICDx which provides access to the ICDx Search API over AMQP**
 
- ![screenshot: main](./doc/screenshots/main.png)
-
-The Symantec Integrated Cyber Defense Exchange (ICDX) is a central hub used to gather information from a number of different products in the Symantec Catalogue, normalising the information from these products into a schema. This establishes ICDx as an enrichment platform reporting on events gathered from other Symantec products
+The Symantec Integrated Cyber Defense Exchange (ICDx) is a central hub used 
+to gather information from a number of different products in the Symantec Catalogue, normalising the 
+information from these products into a schema. This establishes ICDx as an enrichment platform 
+reporting on events gathered from other Symantec products
 
 ### Key Features
 <!--
@@ -65,34 +74,68 @@ The Symantec Integrated Cyber Defense Exchange (ICDX) is a central hub used to g
 
 ---
 
-## Installation
-
-### Requirements
+## Requirements
 <!--
   List any Requirements 
--->
-* Resilient platform >= `v36.0.0`
-* An App Host or an Integration Server:
-  * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-* An Integration Server running `resilient_circuits>=30.0.0` (if using an Integration Server)
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-  * If using an API key account, minimum required permissions are:
-    | Name | Permissions |
-    | ---- | ----------- |
-    | Org Data | Read |
-    | Function | Read |
-* Proxy supported: No
+--> 
+This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
+
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `36.0.0`.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `36.0.0`.
+* The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
+* Integration server is running `resilient_circuits>=45.0.0`.
+* If using an API key account, make sure the account provides the following minimum permissions: 
+  | Name | Permissions |
+  | ---- | ----------- |
+  | Org Data | Read |
+  | Function | Read |
+
+The following SOAR platform guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+
+### Cloud Pak for Security
+If you are deploying to IBM Cloud Pak for Security, the requirements are:
+* IBM Cloud Pak for Security >= 1.4.
+* Cloud Pak is configured with an App Host.
+* The app is in a container-based format (available from the AppExchange as a `zip` file).
+
+The following Cloud Pak guides provide additional information: 
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+
+These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
+
+### Proxy Server
+The app **does** support a proxy server.
+
+### Python Environment
+Both Python 2.7 and Python 3.6 are supported.
+Additional package dependencies may exist for each of these packages:
+* ipaddress
+* pika~=1.2
+* resilient_circuits>=45.0.0
 
 ---
+
+## Installation
 
 ### Install
-* To install or uninstall an App using the App Host see [ibm.biz/res-install-app](https://ibm.biz/res-install-app)
-
-* To install or uninstall an Integration using the Integration Server see the [ibm.biz/res-install-int](https://ibm.biz/res-install-int)
----
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -107,17 +150,6 @@ The following table describes the settings you need to configure in the app.conf
 
 ---
 
-### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
----
 
 ## Function - ICDx: Find Events
 Takes a number of parameters in a search request and attempts to gather events from the ICDx Platform. Returns a response containing a list of events or a response with a 204 status code when no results are found.
@@ -168,13 +200,11 @@ results = {
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  #######################################
+```python
+#######################################
 ### Define pre-processing functions ###
 #######################################
 payload = {
@@ -243,16 +273,16 @@ def dict_to_json_str(d):
   
 inputs.icdx_search_request = dict_to_json_str(payload)
 
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
-  """
+```python
+"""
 Example of the return data for this workflow
 results = {
             "success": True or False
@@ -300,11 +330,106 @@ if results.result_set:
       
     row["execution_time"] = results.execution_time
     
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
+---
+## Function - ICDx: Get Archive List
+The Get Archive List API is used to return a list of archives in the ICDx system. The response is an unsorted list of archive metadata objects which can then be searched by a user.
+
+ ![screenshot: fn-icdx-get-archive-list ](./doc/screenshots/fn-icdx-get-archive-list.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+   "version":"1.0",
+   "success":True,
+   "reason":"None",
+   "content":{
+      "archives":[
+         {
+            "name":"System Archive",
+            "path":"system"
+         },
+         {
+            "name":"Default Archive",
+            "path":"default"
+         },
+         {
+            "path":"dedicated/d900b5f0-aa0d-11e9-e053-000000000001",
+            "uuid":"d900b5f0-aa0d-11e9-e053-000000000001"
+         },
+         {
+            "path":"dedicated/13547310-aec6-11e9-eb82-000000000002",
+            "uuid":"13547310-aec6-11e9-eb82-000000000002"
+         },
+         {
+            "path":"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001",
+            "uuid":"3c7b5bd0-1f21-11e9-fa8e-000000000001"
+         }
+      ]
+   },
+   "raw":"{\"archives\": [{\"name\": \"System Archive\", \"path\": \"system\"}, {\"name\": \"Default Archive\", \"path\": \"default\"}, {\"path\": \"dedicated/d900b5f0-aa0d-11e9-e053-000000000001\", \"uuid\": \"d900b5f0-aa0d-11e9-e053-000000000001\"}, {\"path\": \"dedicated/13547310-aec6-11e9-eb82-000000000002\", \"uuid\": \"13547310-aec6-11e9-eb82-000000000002\"}, {\"path\": \"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001\", \"uuid\": \"3c7b5bd0-1f21-11e9-fa8e-000000000001\"}]}",
+   "inputs":{
+      
+   },
+   "metrics":{
+      "version":"1.0",
+      "package":"fn-icdx",
+      "package_version":"1.0.1",
+      "host":"RG-MBP-18.local",
+      "execution_time_ms":1874,
+      "timestamp":"2020-10-02 14:48:23"
+   }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+"""
+results = {
+            "success": True or False,
+            "archives": List of available archives or None
+          }
+"""
+noteText = """<br>Found <b>{0}</b> archives available for searching""".format(len(results.archives))
+
+for archive in results.archives:
+  noteText += """<br> Archive Name: <b>{0}</b> with path: {1}""".format(archive["name"], archive["path"])
+
+incident.addNote(helper.createRichText(noteText))
+
+```
+
+</p>
 </details>
 
 ---
@@ -393,24 +518,22 @@ results = {
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+```python
+inputs.icdx_uuid = row.icdx_uuid
 
-  ```python
-  inputs.icdx_uuid = row.icdx_uuid
+```
 
-  ```
+</p>
+</details>
 
-  </p>
-  </details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  """
+```python
+"""
 Example of return data 
 
 results = {
@@ -475,120 +598,15 @@ if results.artifact_keys_as_list != None and results.artifact_values_as_list != 
     for artifact_value in artifact_values:
       incident.addArtifact(artifact_type, artifact_value, 'Escalated from ICDx Event with UUID {}. Gathered from the ICDx Utilities Integration'.format(results.inputs["icdx_uuid"]))
 
-  ```
-
-  </p>
-  </details>
-
-</details>
-
----
-## Function - ICDx: Get Archive List
-The Get Archive List API is used to return a list of archives in the ICDx system. The response is an unsorted list of archive metadata objects which can then be searched by a user.
-
- ![screenshot: fn-icdx-get-archive-list ](./doc/screenshots/fn-icdx-get-archive-list.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-   "version":"1.0",
-   "success":True,
-   "reason":"None",
-   "content":{
-      "archives":[
-         {
-            "name":"System Archive",
-            "path":"system"
-         },
-         {
-            "name":"Default Archive",
-            "path":"default"
-         },
-         {
-            "path":"dedicated/d900b5f0-aa0d-11e9-e053-000000000001",
-            "uuid":"d900b5f0-aa0d-11e9-e053-000000000001"
-         },
-         {
-            "path":"dedicated/13547310-aec6-11e9-eb82-000000000002",
-            "uuid":"13547310-aec6-11e9-eb82-000000000002"
-         },
-         {
-            "path":"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001",
-            "uuid":"3c7b5bd0-1f21-11e9-fa8e-000000000001"
-         }
-      ]
-   },
-   "raw":"{\"archives\": [{\"name\": \"System Archive\", \"path\": \"system\"}, {\"name\": \"Default Archive\", \"path\": \"default\"}, {\"path\": \"dedicated/d900b5f0-aa0d-11e9-e053-000000000001\", \"uuid\": \"d900b5f0-aa0d-11e9-e053-000000000001\"}, {\"path\": \"dedicated/13547310-aec6-11e9-eb82-000000000002\", \"uuid\": \"13547310-aec6-11e9-eb82-000000000002\"}, {\"path\": \"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001\", \"uuid\": \"3c7b5bd0-1f21-11e9-fa8e-000000000001\"}]}",
-   "inputs":{
-      
-   },
-   "metrics":{
-      "version":"1.0",
-      "package":"fn-icdx",
-      "package_version":"1.0.1",
-      "host":"RG-MBP-18.local",
-      "execution_time_ms":1874,
-      "timestamp":"2020-10-02 14:48:23"
-   }
-}
 ```
 
 </p>
-</details>
-
-<details><summary>Workflows</summary>
-
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  None
-  ```
-
-  </p>
-  </details>
-
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  """
-results = {
-            "success": True or False,
-            "archives": List of available archives or None
-          }
-"""
-noteText = """<br>Found <b>{0}</b> archives available for searching""".format(len(results.archives))
-
-for archive in results.archives:
-  noteText += """<br> Archive Name: <b>{0}</b> with path: {1}""".format(archive["name"], archive["path"])
-
-incident.addNote(helper.createRichText(noteText))
-
-  ```
-
-  </p>
-  </details>
-
 </details>
 
 ---
 
 
 ## Data Table - ICDx Queried Events
-
- ![screenshot: dt-icdx-queried-events](./doc/screenshots/dt-icdx-queried-events.png)
 
 #### API Name:
 icdx_events
@@ -597,9 +615,9 @@ icdx_events
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Artifact Type | `artifact_type` | `text` | Input Artifact Type that was queried |
-| Execution Time | `execution_time` | `datetimepicker` | - |
 | Device IP | `icdx_device_ip` | `text` | A Device IP gathered from Event (If Any) |
 | Device Name | `icdx_device_name` | `text` | A Device Name gathered from Event (If Any) |
+| Execution Time | `execution_time` | `datetimepicker` | - |
 | Severity ID | `icdx_severity_id` | `text` | The Severity of the Event. [1] Info; [2] Warning; [3] Minor; [4] Major; [5]; Critical; [6] Fatal |
 | Type | `icdx_type` | `text` | A Type of Event.  |
 | UUID | `icdx_uuid` | `text` | A Unique Identifier for the ICDx Event |
@@ -611,19 +629,18 @@ icdx_events
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| ICDx: Search for Events (Input Value JSON) | incident | `example_icdx_search_for_events` |
 | ICDx: Get Event Data | artifact | `example_icdx_get_event_data` |
-| ICDx: Search for Archives then query those archives for Events | incident | `example_icdx_search_for_events_from_archives_other_than_system` |
-| ICDx: Search for Events related to Device Name (Pre-Processing JSON) | artifact | `example_icdx_search_for_events_related_to_device_name` |
 | ICDx: Get Event Data from Row | icdx_events | `example_icdx_get_event_datatable` |
+| ICDx: Search for Archives then query those archives for Events | incident | `example_icdx_search_for_events_from_archives_other_than_system` |
+| ICDx: Search for Events (Input Value JSON) | incident | `example_icdx_search_for_events` |
+| ICDx: Search for Events related to Device Name (Pre-Processing JSON) | artifact | `example_icdx_search_for_events_related_to_device_name` |
 | ICDx: Search for Events related to IP (Pre-Processing JSON) | artifact | `example_icdx_search_for_events_related_to_ip` |
 
 ---
 
-## Troubleshooting & Support
-If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
 
-If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
+## Troubleshooting & Support
+Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community Provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is an IBM supported app. Please search [ibm.com/mysupport](https://ibm.com/mysupport) for assistance.
