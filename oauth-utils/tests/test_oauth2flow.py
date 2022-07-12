@@ -63,11 +63,11 @@ class TestOAuth2Flow:
     """ Test OAuth2Flow missing fn_opts setting"""
     @patch('requests.post', side_effect=mocked_requests_post)
     @pytest.mark.parametrize("fn_opts, expected_result", [
-        ({}, "'auth_url' is mandatory and is not set. You must set this value to run this function"),
-        ({"auth_url": "a"}, "'token_url' is mandatory and is not set. You must set this value to run this function"),
-        ({"auth_url": "a","token_url": "b"}, "'client_id' is mandatory and is not set. You must set this value to run this function"),
-        ({"auth_url": "a","token_url": "b", "client_id": "c"}, "'client_secret' is mandatory and is not set. You must set this value to run this function"),
-        ({"auth_url": "a","token_url": "b", "client_id": "c", "client_secret": "d"}, "'scope' is mandatory and is not set. You must set this value to run this function")
+        ({}, "Parameters 'auth_url, token_url, client_id, client_secret, scope' are required in the app.config and are not set. You must set these values to run this function."),
+        ({"auth_url": "a"}, "Parameters 'token_url, client_id, client_secret, scope' are required in the app.config and are not set. You must set these values to run this function."),
+        ({"auth_url": "a","token_url": "b"}, "Parameters 'client_id, client_secret, scope' are required in the app.config and are not set. You must set these values to run this function."),
+        ({"auth_url": "a","token_url": "b", "client_id": "c"}, "Parameters 'client_secret, scope' are required in the app.config and are not set. You must set these values to run this function."),
+        ({"auth_url": "a","token_url": "b", "client_id": "c", "client_secret": "d"}, "Parameter 'scope' is required in the app.config and is not set. You must set this value to run this function.")
     ])
     def test_missing_options(self, mock_post, fn_opts, expected_result):
         oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, None)

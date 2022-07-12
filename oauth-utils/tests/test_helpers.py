@@ -115,19 +115,19 @@ class TestOAuthUtilsHelpers:
     @pytest.mark.parametrize("scope, client_id, client_secret, token_url, auth_url, expected_results", [
         ("",  "1234567a-abc8-90d1-2efa3-123456789abcd", "ABCDEF-123456789abcd_2efa3", "https://test.ibm.com/oauth2/token",
          "https://test.ibm.com/oauth2/auth",
-         "'scope' is mandatory and is not set. You must set this value to run this function"),
+         ["scope"]),
         ("https://test.ibm.com/SMTP.Send", "", "ABCDEF-123456789abcd_2efa3", "https://test.ibm.com/oauth2/token",
          "https://test.ibm.com/oauth2/auth",
-         "'client_id' is mandatory and is not set. You must set this value to run this function"),
+         ["client_id"]),
         ("https://test.ibm.com/SMTP.Send", "1234567a-abc8-90d1-2efa3-123456789abcd", "", "https://test.ibm.com/oauth2/token",
          "https://test.ibm.com/oauth2/auth",
-         "'client_secret' is mandatory and is not set. You must set this value to run this function"),
+         ["client_secret"]),
         ("https://test.ibm.com/SMTP.Send", "1234567a-abc8-90d1-2efa3-123456789abcd", "ABCDEF-123456789abcd_2efa3",
          "", "https://test.ibm.com/oauth2/auth",
-         "'token_url' is mandatory and is not set. You must set this value to run this function"),
+         ["token_url"]),
         ("https://test.ibm.com/SMTP.Send", "1234567a-abc8-90d1-2efa3-123456789abcd", "ABCDEF-123456789abcd_2efa3",
          "https://test.ibm.com/oauth2/token", "",
-         "'auth_url' is mandatory and is not set. You must set this value to run this function")
+         ["auth_url"])
     ])
     def test_validate_fields_empty(self, scope, client_id, client_secret, token_url, auth_url, expected_results):
         opts = {
@@ -137,6 +137,5 @@ class TestOAuthUtilsHelpers:
             "token_url": token_url,
             "auth_url": auth_url
         }
-        with pytest.raises(ValueError) as e:
-            validate_fields(list(opts.keys()), opts)
-        assert str(e.value) == expected_results
+        result = validate_fields(list(opts.keys()), opts)
+        assert result == expected_results
