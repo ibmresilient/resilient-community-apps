@@ -115,9 +115,11 @@ def main(args=None):
     The main() function is the starting entry point function for utility.
     """
     script_args=parse_args(args)
+    use_app_config=True
 
     if any(a is not None for a in [script_args.scope, script_args.client_id, script_args.client_secret,
                                        script_args.token_url, script_args.auth_url]):
+        use_app_config = False
         # Use discrete values from command-line.
         print("Using OAuth2 discrete settings from command-line arguments.")
         fn_opts = set_configs(script_args)
@@ -134,7 +136,7 @@ def main(args=None):
 
     oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, script_args.port)
     # Validate settings
-    oauth2.validate_settings(fn_opts)
+    oauth2.validate_settings(fn_opts, use_app_config)
     # Get the authorization url.
     auth_url = oauth2.get_authorization_url()
     try:

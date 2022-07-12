@@ -114,15 +114,15 @@ def validate_fields(field_list, kwargs):
 
     ``kwargs`` can be a dict.
 
-    :param field_list: List of the mandatory fields.
+    :param field_list: List of the required fields.
     :param kwargs: A dict of all the fields to search.
-    :raises ValueError: if a field is missing
+    :return: list of missing or incorrect fields
 
     """
 
     mandatory_fields = field_list
     provided_fields = kwargs
-    mandatory_err_msg = "'{0}' is mandatory and is not set. You must set this value to run this function"
+    missing_fields = []
 
     if not isinstance(mandatory_fields, list):
         raise ValueError("'field_list' must be of type list, not {0}".format(type(mandatory_fields)))
@@ -135,10 +135,12 @@ def validate_fields(field_list, kwargs):
 
     # Validate that mandatory fields exist + are not  blank
     for field in mandatory_fields:
-        # If the field value is a defined empty str, raise an error
+        # If the field value is a defined empty str
         if isinstance(provided_fields.get(field), string_types):
             if not provided_fields.get(field):
-                raise ValueError(mandatory_err_msg.format(field))
+                missing_fields.append(field)
 
         if provided_fields.get(field) is None:
-            raise ValueError(mandatory_err_msg.format(field))
+            missing_fields.append(field)
+
+    return missing_fields

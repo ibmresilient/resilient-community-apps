@@ -96,16 +96,27 @@ class OAuth2Flow:
 
         return token_response["refresh_token"]
 
-    def validate_settings(self, fn_opts):
+    def validate_settings(self, fn_opts, use_app_config=True):
         """Validate app config settings.
 
         :param fn_opts: App settings dict.
+        :param use_app_config: Use app.config or command-line to read parameters .
         """
-        validate_fields([
+        missing_fields = validate_fields([
             "auth_url",
             "token_url",
             "client_id",
             "client_secret",
-            "scope"],
-        fn_opts)
+            "scope"
+        ],
+            fn_opts
+        )
 
+        if missing_fields:
+            plural = True if len(missing_fields) > 1 else False
+            required_err_msg = "Parameter{s} '{0}' {ia} required {cf} and {ia} not set. You must set {tv} to run this " \
+                               "function."\
+                .format(', '.join(missing_fields), s='s' if plural else '', ia='are' if plural else 'is',
+                        tv='these values' if plural else 'this value', cf='in the app.config' if use_app_config
+                else 'on the command-line')
+            raise ValueError(required_err_msg)
