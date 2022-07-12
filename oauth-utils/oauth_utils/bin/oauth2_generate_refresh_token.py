@@ -137,6 +137,7 @@ def main(args=None):
     oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, script_args.port)
     # Validate settings
     oauth2.validate_settings(fn_opts, use_app_config)
+    oauth2.validate_urls(fn_opts)
     # Get the authorization url.
     auth_url = oauth2.get_authorization_url()
     try:

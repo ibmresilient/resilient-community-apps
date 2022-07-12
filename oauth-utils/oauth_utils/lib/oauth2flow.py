@@ -9,7 +9,7 @@ if sys.version_info[0] == 3:
 else:
     from urllib import urlencode
 
-from oauth_utils.lib.helpers import validate_fields
+from oauth_utils.lib.helpers import validate_fields, validate_url
 
 REDIRECT_URI = "https://localhost:{}/callback"
 
@@ -120,3 +120,21 @@ class OAuth2Flow:
                         tv='these values' if plural else 'this value', cf='in the app.config' if use_app_config
                 else 'on the command-line')
             raise ValueError(required_err_msg)
+
+    def validate_urls(self, fn_opts):
+        """Validate URLS parameters strings are in correct format.
+
+        :param fn_opts: App settings dict.
+        :raises ValueError: if a url is not in correct format.
+        """
+        bad_urls = []
+        fields = ["auth_url", "token_url"]
+        for f in fields:
+            if not validate_url(fn_opts.get(f)):
+                bad_urls.append(f)
+        if bad_urls:
+            plural = True if len(bad_urls) > 1 else False
+            badurl_err_msg = "The URL{s} {0} {ia} malformed." \
+                .format(', '.join("'"+b+"'" for b in bad_urls), s='s' if plural else '', ia='are' if plural else 'is',
+                        tv='these values' if plural else 'this value')
+            raise ValueError(badurl_err_msg)

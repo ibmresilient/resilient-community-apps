@@ -7,11 +7,7 @@ import argparse
 import os
 import sys
 from six import string_types
-
-if sys.version_info[0] == 3:
-    from urllib.parse import urlencode
-else:
-    from urllib import urlencode
+from urllib.parse import urlparse
 
 DEFAULT_CONFIG_FILENAME = "app.config"
 
@@ -144,3 +140,17 @@ def validate_fields(field_list, kwargs):
             missing_fields.append(field)
 
     return missing_fields
+
+def validate_url(url):
+    """
+    Validate a string is a URL format.
+
+    :param url: String to validate as a URL.
+    :return: Boolean from result of validation.
+
+    """
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except:
+        return False
