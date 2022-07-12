@@ -120,3 +120,31 @@ class TestOAuth2Flow:
         oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, None)
         result = oauth2.authenticate(auth_code)
         assert str(result) == expected_result
+
+    """ Test validate_urls"""
+    @pytest.mark.parametrize("token_url, auth_url, expected_result", [
+        ("https://test.ibm.com/oauth2/token", "https://test.ibm.com/oauth2/auth", ''),
+    ])
+    def test_validate_urls(self,  token_url, auth_url, expected_result):
+        fn_opts = {
+            "token_url": token_url,
+            "auth_url": auth_url
+        }
+        oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, None)
+        result = oauth2.validate_urls(fn_opts)
+
+    """ Test validate_urls bad urls"""
+    @pytest.mark.parametrize("token_url, auth_url, expected_result", [
+        ("https://test.ibm.com/oauth2/token", "bbb", "The URL 'auth_url' is malformed."),
+        ("aaa", "https://test.ibm.com/oauth2/auth", "The URL 'token_url' is malformed.")
+    ])
+    def test_validate_urls_bad(self,  token_url, auth_url, expected_result):
+        fn_opts = {
+            "token_url": token_url,
+            "auth_url": auth_url
+        }
+        oauth2 = OAuth2Flow(fn_opts, CSRF_TOKEN, None)
+        with pytest.raises(ValueError) as e:
+            oauth2.validate_urls(fn_opts)
+        assert str(e.value) == expected_result
+

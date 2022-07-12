@@ -139,3 +139,14 @@ class TestOAuthUtilsHelpers:
         }
         result = validate_fields(list(opts.keys()), opts)
         assert result == expected_results
+
+    """ Test validate_urls """
+    @pytest.mark.parametrize("url, expected_results", [
+        ("https://test.ibm.com/oauth2/auth", True),
+        ("https://www.foo.bar", True),
+        ("abcdefg", False),
+        ("1234567", False),
+    ])
+    def test_validate_url(self, url, expected_results):
+        result = validate_url(url)
+        assert result == expected_results
