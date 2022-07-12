@@ -6,51 +6,102 @@
 import re
 import logging
 import datetime
+from urllib import request
 import pytz
+
+import requests
 
 import configparser
 from resilient_lib import  RequestsCommon
 from resilient_circuits import FunctionError
 
-
 DEFAULT_MEETING_LENGTH = 45
 
+requiredParameters = {
+    "rc"                          : RequestsCommon(),
+    "start"                       : datetime.datetime.now(),
+    "end"                         : datetime.datetime.now() + datetime.timedelta(minutes=20),
+    "userId"                      : "admin@calvinwynne-8xjq.wbx.ai",
+    "userPassword"                : "Q4Xr5bA0i]",
+    "bearerID"                    : "NDc5ZTczNDAtMGU0MC00Y2Q0LThkNTEtZjExNzk0MzM5MTljZmVmZmM0NWYtMjNl_P0A1_f688574e-8402-4b53-864e-e725f4468887",
+    "timzone"                     : "gmt05:30"
+}
+
+optionalParameters = {
+    "siteURL"                     : "calvinwynne-8xjq.webex.com",
+    "hostEmail"                   : "",
+    "title"                       : "Sample Meeting VSCode",
+    "password"                    : "abcd123",
+    "agenda"                      : "to test sample meetings",
+    "enabledAutoRecordMeeting"    : "false",
+    "allowAnyUserToBeCoHost"      : "false",
+    "enabledJoinBeforeHost"       : "false",
+    "enableConnectAudioBeforeHost": "false",
+    "excludePassword"             : "false",
+    "publicMeeting"               : "false",
+    "enabledWebcastView"          : "false",
+    "enableAutomaticLock"         : "false",
+    "allowFirstUserToBeCoHost"    : "false",
+    "allowAuthenticatedDevices"   : "false",
+    "sendEmail"                   : "true",
+}
+
+
 class WebexAPI:
-    def __init__(self, options, meeting_start_time, meeting_end_time):
-        self.opts = options
+    def __init__(self, requiredParameters, optionalParameters):
+        self.optionalParameters = optionalParameters
+        self.requiredParameters = requiredParameters
+        self.meeting_start_time = self.requiredParameters["start"]
+        self.meeting_end_time = self.check_endTime(self.requiredParameters["end"])
+        self.header = self.generate_header(self.requiredParameters["bearerID"])
 
-        self.meeting_start_time = meeting_start_time
-        if meeting_end_time is not None:
-            if meeting_start_time:
-                if meeting_end_time < meeting_start_time:
-                    raise ValueError('End time must be after start time')
-            else:
-                raise ValueError('If an end time is specified, a start time must also be specified')
-        self.meeting_end_time = meeting_end_time
+        self.webex_request()
 
-    def webex_request(self, path=None, method="GET", query=None, headers=None):
+
+    def check_endTime(self, meeting_end):
+        if not self.meeting_start_time:
+            self.meeting_start_time = datetime.datetime.now() + datetime.timedelta(minutes=2)
+        if meeting_end is not None:
+            if meeting_end < self.meeting_start_time:
+                raise ValueError('End time must be after start time')
+        else:
+            meeting_end = self.meeting_start_time + datetime.timedelta(minutes=DEFAULT_MEETING_LENGTH)
+        
+        self.meeting_start_time = self.meeting_start_time.strftime('%Y-%m-%dT%H:%M:%S')
+        return meeting_end.strftime('%Y-%m-%dT%H:%M:%S')
+
+
+    def generate_header(self, bearerID):
+        if not bearerID:
+            raise ValueError("Bearer ID not specified")
+        header = {
+            'Authorization' : "Bearer {}".format(bearerID),
+            'Content-Type'  :  'application/json'}
+        return header
+
+    def get_timeZones(self):
+        pass
+
+    def generate_meeting_parameters(self, meetingParameters):
+        request_parameters = '{\"start\":\"' + self.meeting_start_time + '\", \"end\":\"' + self.meeting_end_time + '\"'
+        for key in meetingParameters.keys():
+            request_parameters +=  ', \"{}\":\"{}\" '.format(key, meetingParameters[key])
+        print("\n\n\n")
+        request_parameters +=  "}"
+        print(request_parameters)
+        print("\n\n\n")
+        return 
+        
+
+
+    def webex_request(self):
         """Wrapper for requests, appends content-type and fills in site url"""
-        url = self.opts.get("webex_site_url") + path
+        url = 'https://webexapis.com/v1/meetings/'
 
-        if "http" not in url:
-            url = "https://" + url
-
-        if headers is None:
-            headers = {}
-
-        if method == "POST":
-            headers["Content-Type"] = "application/xml"
-
-        response = None
-        rc = self.opts.get("rc")
-
-        if method == "GET":
-            response = rc.execute_call_v2("get", url, headers=headers, proxies=rc.get_proxies())
-        elif method == "POST":
-            response = rc.execute_call_v2("post", url, data=query, headers=headers, proxies=rc.get_proxies())
+        response = requests.post(url, data=self.generate_meeting_parameters(self.optionalParameters), headers=self.header)
 
         if response is None:
-            raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format(method))
+            raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format("POST"))
 
         if response.status_code != 200 and response.status_code != 201 and response.status_code != 401:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
@@ -59,216 +110,13 @@ class WebexAPI:
             raise FunctionError("Security context is invalid, API returned 401!")
 
         return response
+        
 
-    def generate_get_timezones_xml(self):
-        """Generates the XML used to request a list of timezones and their properties"""
-        security_context = self.generate_security_context()
-
-        timezone_xml = """<?xml version="1.0" encoding="UTF-8"?>
-        <serv:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:serv="http://www.webex.com/schemas/2002/06/service">
-        <header>""" + security_context + """</header>
-        <body>
-        <bodyContent xsi:type="site.LstTimeZone">
-        </bodyContent>
-        </body>
-        </serv:message>"""
-
-        return timezone_xml
-
-    def get_timezone_info(self):
-        """Gets a list of timezones, then parses the results for timezone specified by user in app.config"""
-        timezone_xml = self.generate_get_timezones_xml()
-
-        path = "/WBXService/XMLService"
-
-        log = logging.getLogger(__name__)
-
-        response = self.webex_request(path, "POST", timezone_xml)
-
-        log.debug(response.text)
-
-        status_regex = "<serv:result>(.*)<\/serv:result>"
-        status_regex_search = re.search(status_regex, response.text)
-
-        # check if call failed
-        if status_regex_search is not None and status_regex_search.group(1) == "FAILURE":
-            reason_regex = "<serv:reason>(.*)<\/serv:reason>"
-            reason_regex_search = re.search(reason_regex, response.text)
-            return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": reason_regex_search.group(1)}
-
-        timezone_pattern = re.compile(r'<ns1:timeZoneID>([0-9]*)<\/ns1:timeZoneID><ns1:gmtOffset>[\-0-9]*<\/ns1:gmtOffset><ns1:description>([a-zA-Z+\-0-9:,\s\(\).&;]*)<\/ns1:description>')
-        gmt_time_pattern = r'GMT([\-+0-9]*):([0-9]*)'
-
-        for m in re.finditer(timezone_pattern, response.text):
-            if self.opts["timezone"] in m.group(2):
-                gmt_time_match = re.search(gmt_time_pattern, m.group(2))
-                gmt_hour = 0
-                gmt_minute = 0
-
-                if gmt_time_match:
-                    gmt_hour = int(gmt_time_match.group(1))
-                    gmt_minute = int(gmt_time_match.group(2))
-
-                return {"id": str(m.group(1)), "gmt_hour": gmt_hour, "gmt_minute": gmt_minute}
-
-        return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": "timezone not found: {}".format(self.opts["timezone"])}
-
-    def generate_security_context(self):
-        """Generates the security context required by the API for authentication"""
-        xml = "<webExID>{}</webExID><password>{}</password>".format(self.opts.get("email"), self.opts.get("password"))
-
-        if self.opts.get("site_id") and self.opts.get("partner_id"):
-            xml = xml + "<siteID>{}</siteID><partnerID>{}</partnerID>".format(self.opts.get("site_id"), self.opts.get("partner_id"))
-        else:
-            xml = xml + "<siteName>{}</siteName>".format(self.opts.get("sitename"))
-
-        xml = "<securityContext>{}</securityContext>".format(xml)
-
-        return xml
-
-    def generate_meeting_data(self):
-        """Generates partial XML that is used to create a meeting"""
-        meeting_password = self.opts.get("meeting_password")
-        meeting_name = self.opts.get("meeting_name")
-        meeting_agenda = self.opts.get("meeting_agenda")
-
-        timezone_info = self.get_timezone_info()
-        if type(timezone_info.get("id")) is int and timezone_info.get("id") is 0:
-            raise FunctionError(timezone_info.get("reason", "unknown reason"))
-
-        utc_offset = datetime.timedelta(hours=timezone_info["gmt_hour"], minutes=timezone_info["gmt_minute"])
-        now = datetime.datetime.now(pytz.utc)
-
-        timezones_with_offset = list({tz for tz in map(pytz.timezone, pytz.all_timezones_set)
-                                      if now.astimezone(tz).utcoffset() == utc_offset})
-        if self.meeting_start_time is None:
-            time = datetime.datetime.now(tz=timezones_with_offset[0])
-            duration = DEFAULT_MEETING_LENGTH
-        else:
-            time = datetime.datetime.fromtimestamp(self.meeting_start_time/1000, tz=timezones_with_offset[0])
-            if self.meeting_end_time:
-                duration = int((self.meeting_end_time/1000 - self.meeting_start_time/1000)/60)
-            else:
-                duration = DEFAULT_MEETING_LENGTH
-        meeting_time = time.strftime("%m/%d/%Y %H:%M:%S")
-
-        xml = """<accessControl>
-        <meetingPassword>{}</meetingPassword>
-        </accessControl>
-        <metaData>
-        <confName>{}</confName>
-        <agenda>{}</agenda>
-        </metaData>
-        <schedule>
-        <startDate>{}</startDate>
-        <duration>{}</duration>
-        <timeZoneID>{}</timeZoneID>
-        </schedule>""".format(meeting_password, meeting_name, meeting_agenda, meeting_time, duration,
-                              timezone_info.get("id"))
-
-        return xml
-
-    def generate_create_meeting_xml(self):
-        """Generates the entire XML data used to create a meeting"""
-        security_context = self.generate_security_context()
-        meeting_data = self.generate_meeting_data()
-
-        meeting_xml = """<?xml version="1.0" encoding="UTF-8"?>
-        <serv:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:serv="http://www.webex.com/schemas/2002/06/service">
-        <header>""" + security_context + """</header>
-        <body>
-        <bodyContent xsi:type="java:com.webex.service.binding.meeting.CreateMeeting">
-        """ + meeting_data + """</bodyContent>
-        </body>
-        </serv:message>"""
-
-        return meeting_xml
-
-    def create_meeting(self):
-        """Creates a meeting based on options specified in app.config and function args"""
-        meeting_xml = self.generate_create_meeting_xml()
-
-        print(meeting_xml)
-
-        path = "/WBXService/XMLService"
-        log = logging.getLogger(__name__)
-        log.debug(meeting_xml)
-
-        response = self.webex_request(path, "POST", meeting_xml)
-
-        if response.text == "":
-            raise FunctionError("Failed to create meeting, null response")
-
-        status_regex = "<serv:result>(.*)<\/serv:result>"
-        failure_reason_regex = "<serv:reason>(.*)<\/serv:reason>"
-
-        status_regex_search = re.search(status_regex, response.text)
-        failure_reason_regex_search = re.search(failure_reason_regex, response.text)
-
-        results = {}
-
-        if status_regex_search is not None:
-            results["status"] = status_regex_search.group(1)
-
-        if failure_reason_regex_search is not None:
-            results["fail_reason"] = failure_reason_regex_search.group(1)
-            return results
-
-        success_details_regex = "<serv:host>(.*)<\/serv:host>\s*<serv:attendee>(.*)<\/serv:attendee>"
-
-        success_details_regex_search = re.search(success_details_regex, response.text)
-
-        if success_details_regex_search is not None:
-            results["host_url"] = success_details_regex_search.group(1)
-            results["attendee_url"] = success_details_regex_search.group(2)
-
-        return results
+# WebexAPI(requiredParameters, optionalParameters)
 
 
-conf_file = configparser.ConfigParser()
-conf_file.read("/Users/calvinwynne/.resilient/app.config")
+import time
 
+print(time.strftime("%z", time.localtime()))
 
-options = conf_file["fn_webex"]
-
-
-opts = dict()
-rc = RequestsCommon()
-
-opts["rc"] = rc
-opts["webex_site_url"] = options.get("webex_site_url")
-opts["email"] = options.get("webex_email")
-opts["password"] = options.get("webex_password")
-opts["sitename"] = options.get("webex_site", None)
-opts["timezone"] = options.get("webex_timezone")
-
-print(opts)
-
-if options.get("webex_site_id"):
-    opts["site_id"] = options.get("webex_site_id")
-if options.get("webex_partner_id"):
-    opts["partner_id"] = options.get("webex_partner_id")
-
-webex_meeting_name = "VS code test"
-webex_meeting_password = "abc1234"
-webex_meeting_agenda = "no agenda"
-webex_meeting_start_time = None
-webex_meeting_end_time = None
-
-opts["meeting_password"] = webex_meeting_password
-opts["meeting_name"] = webex_meeting_name
-opts["meeting_agenda"] = webex_meeting_agenda
-
-common = WebexAPI(opts, webex_meeting_start_time, webex_meeting_end_time)
-
-response = common.create_meeting()
-
-if response.get("status") == "SUCCESS":
-    success = True
-else:
-    success = False
-
-print(response)
-
-
-
+print(time.mktimetm_year=2022, tm_mon=7, tm_mday=12, tm_hour=14, tm_min=24, tm_sec=28, tm_wday=1, tm_yday=193, tm_isdst=0))
