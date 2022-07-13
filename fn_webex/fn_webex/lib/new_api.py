@@ -87,7 +87,6 @@ class WebexAPI:
         except ValueError as msg:
             print(msg)
 
-
     def get_timeZones(self, timezone=None):
         if not timezone:
             return time.strftime("%z", time.localtime())
@@ -143,8 +142,6 @@ class WebexAPI:
         print(request_parameters)
         print("\n\n\n")
         return request_parameters
-        
-
 
     def webex_request(self):
         """Wrapper for requests, appends content-type and fills in site url"""
