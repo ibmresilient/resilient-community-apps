@@ -42,9 +42,9 @@ env:
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
     - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
     - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
+    
     - KEYWORD_UPLOAD_APP_TO_APPHOST="[deploy-apphost]"
     - UPLOAD_APP_TO_APPHOST=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_UPLOAD_APP_TO_APPHOST"* ]]; echo $?)
-    - BUILD_TYPE=`if [[ $BUILD_DEV_APP == 1 ]] || [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then echo "DEV"; else echo "MAIN"; fi`
 
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
@@ -228,19 +228,13 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "UPLOAD";
-          on:
-            all_branches: true
-            condition: "$UPLOAD_APP_TO_APPHOST = 1"
-        - provider: script
-          skip_cleanup: true
-          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
+          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" $UPLOAD_APP_TO_APPHOST;
           on:
             all_branches: true
             condition: "$BUILD_DEV_APP = 1"
         - provider: script
           skip_cleanup: true
-          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE" "DON'T UPLOAD";
+          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
           on:
             branch: master
       after_deploy:
