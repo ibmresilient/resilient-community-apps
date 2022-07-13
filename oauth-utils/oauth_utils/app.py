@@ -9,7 +9,7 @@ from oauth_utils.bin.oauth2_generate_refresh_token import main as oauth2_generat
 
 # Setup logging
 LOGGER_NAME = "oauth_utils"
-FORMATTER_CLASS=lambda prog: argparse.RawTextHelpFormatter(prog, max_help_position=35, width=80)
+FORMATTER_CLASS = lambda prog: argparse.RawTextHelpFormatter(prog, max_help_position=35, width=80)
 LOG = logging.getLogger(LOGGER_NAME)
 LOG.setLevel(logging.INFO)
 LOG.addHandler(logging.StreamHandler())
@@ -64,8 +64,14 @@ def main():
     subparsers = get_sub_parser(parent_parser)
 
     parser_oauth2_gen_refresh_token = subparsers.add_parser(
-        'oauth2_generate_refresh_token', help="Generate a refresh token for an OAuth2 service\n(to be used with an IBM "
-                                              "SOAR app)", formatter_class=FORMATTER_CLASS)
+        'oauth2_generate_refresh_token', description="A utility to generate a refresh token for an OAuth2 service"
+                                                     " (to be used with an IBM SOAR app).\nThe parameters used for "
+                                                     "the OAuth2 service can be taken from an app.config file or "
+                                                     "manually from the command-line (but not from both at the same "
+                                                     "time).\n(For further information please visit refer to the "
+                                                     "auth_utils documentation.)",
+        help="Generate a refresh token for an OAuth2 service\n(to be used with an IBM SOAR app)",
+        formatter_class=FORMATTER_CLASS)
     parser_oauth2_gen_refresh_token.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
     parser_oauth2_gen_refresh_token.add_argument('-t', '--timeout', help="(Optional) Timeout callback listener after "
                                                                          "timeout (seconds)")
