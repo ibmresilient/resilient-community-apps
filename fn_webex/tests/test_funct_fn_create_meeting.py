@@ -76,3 +76,4 @@ class TestFnCreateMeeting:
 
         results = call_fn_create_meeting_function(circuits_app, mock_inputs)
         assert(expected_results == results)
+
