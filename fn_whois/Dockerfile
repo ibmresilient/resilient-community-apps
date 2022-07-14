@@ -1,6 +1,6 @@
 # docker build -t resilient/{ext} .
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-39:latest
+FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
 #FROM resilient/rc-data-feeder-base
 
