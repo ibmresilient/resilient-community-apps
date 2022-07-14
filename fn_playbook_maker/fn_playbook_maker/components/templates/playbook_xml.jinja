@@ -1,0 +1,113 @@
+{% set start_event = "StartEvent_{}".format(make_short_uuid(None)) -%}
+{% set end_event_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+{% set task_size = 46 -%}
+{% set end_size = 42 -%}
+{% set shape_increment = 130 -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+	xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+	xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+	xmlns:resilient="http://resilient.ibm.com/bpmn"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test">
+	<process id="{{ playbook_info.playbook_uuid }}" isExecutable="true" name="{{ playbook_info.playbook_uuid }}">
+		<documentation/>
+		{% set ns = namespace() -%}
+		{% set ns.funct_seq = 0 -%}
+		{% set ns.script_seq = 0 -%}
+		{% set ns.function_flow_list = [] -%}
+		{# this repeats per function #}
+		{% for current_funct in functions -%}
+			{% set ns.function_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+			{% set ns.script_event_flow = "Flow_{}".format(make_short_uuid(None)) -%}
+			{% set ns.function_flow_list = ns.function_flow_list + [([ns.function_flow, ns.script_event_flow])] -%}
+			{% set ns.funct_seq = ns.script_seq + 1 -%}
+			{% set ns.script_seq = ns.funct_seq + 1 -%}
+			{% if ns.funct_seq == 1 -%}
+				<startEvent id="{{ start_event }}">
+					<outgoing>{{ ns.function_flow }}</outgoing>
+				</startEvent>
+			{% endif -%}
+			<serviceTask id="ServiceTask_{{ ns.funct_seq }}" name="{{ current_funct.function_display_name }}" resilient:type="function">
+				<extensionElements>
+					<resilient:function uuid="{{ current_funct.function_uuid }}">{{ current_funct.preprocessor_script | json }}</resilient:function>
+				</extensionElements>
+				<incoming>{{ ns.function_flow }}</incoming>
+				<outgoing>{{ ns.script_event_flow }}</outgoing>
+			</serviceTask>
+			<scriptTask id="ScriptTask_{{ ns.script_seq }}" name="{{ current_funct.script_info.name }}">
+				<extensionElements>
+					<resilient:script uuid="{{ current_funct.script_info.uuid }}"/>
+				</extensionElements>
+				<incoming>{{ ns.script_event_flow }}</incoming>
+				<outgoing>{{ end_event_flow }}</outgoing>
+				<script>script</script>
+			</scriptTask>
+			{% if ns.funct_seq == 1 -%}
+				<sequenceFlow id="{{ ns.function_flow }}" sourceRef="{{ start_event }}" targetRef="ServiceTask_{{ ns.funct_seq }}"/>
+			{% else -%}
+				<sequenceFlow id="{{ ns.function_flow }}" sourceRef="ScriptTask_{{ ns.prev_script_seq }}" targetRef="ServiceTask_{{ ns.funct_seq }}"/>
+			{% endif -%}
+			<sequenceFlow id="{{ ns.script_event_flow }}" sourceRef="ServiceTask_{{ ns.funct_seq }}" targetRef="ScriptTask_{{ ns.script_seq }}"/>
+			{% set ns.prev_script_seq = ns.script_seq -%}
+			{# end function #}
+		{% endfor -%}
+		{% set end_seq = ns.script_seq + 1 -%}
+		<endEvent id="EndPoint_{{ end_seq }}" resilient:documentation="End point">
+			<incoming>{{ end_event_flow }}</incoming>
+		</endEvent>
+		<sequenceFlow id="{{ end_event_flow }}" sourceRef="ScriptTask_{{ ns.script_seq }}" targetRef="EndPoint_{{ end_seq }}"/>
+	</process>
+	<bpmndi:BPMNDiagram id="BPMNDiagram_1">
+		<bpmndi:BPMNPlane bpmnElement="{{ playbook_info.playbook_uuid }}" id="BPMNPlane_1">
+			{# this repeats per function #}
+			{# edge and shapes for functions and post-processing scripts #}
+			{% set ns.funct_seq = 0 -%}
+			{% set ns.script_seq = 0 -%}
+			{% set ns.y_start = 0 -%}
+			{# start shape #}
+			<bpmndi:BPMNShape bpmnElement="{{ start_event }}" id="{{ start_event }}_di">
+				<omgdc:Bounds height="52" width="187.083" x="627" y="75"/>
+				<bpmndi:BPMNLabel>
+					<omgdc:Bounds height="0" width="90" x="616" y="100"/>
+				</bpmndi:BPMNLabel>
+			</bpmndi:BPMNShape>
+			{% for function_script in ns.function_flow_list -%}
+				{% set ns.funct_seq = ns.script_seq + 1 -%}
+				{% set ns.script_seq = ns.funct_seq + 1 -%}
+				{# function #}
+				{% set ns.y_start = ns.y_start + shape_increment -%}
+				{% set ns.y_end = ns.y_start + task_size -%}
+				<bpmndi:BPMNEdge bpmnElement="{{ function_script[0] }}" id="{{ function_script[0] }}_di">
+					<omgdi:waypoint x="721" y="{{ ns.y_start }}"/>
+					<omgdi:waypoint x="721" y="{{ ns.y_end }}"/>
+				</bpmndi:BPMNEdge>
+				<bpmndi:BPMNShape bpmnElement="ServiceTask_{{ ns.funct_seq }}" id="ServiceTask_{{ ns.funct_seq }}_di">
+					<omgdc:Bounds height="84" width="196" x="623" y="{{ ns.y_end }}"/>
+				</bpmndi:BPMNShape>
+				{# script #}
+				{% set ns.y_start = ns.y_start + shape_increment -%}
+				{% set ns.y_end = ns.y_start + task_size -%}
+				<bpmndi:BPMNEdge bpmnElement="{{ function_script[1] }}" id="{{ function_script[1] }}_di">
+					<omgdi:waypoint x="721" y="{{ ns.y_start }}"/>
+					<omgdi:waypoint x="721" y="{{ ns.y_end }}"/>
+				</bpmndi:BPMNEdge>
+				<bpmndi:BPMNShape bpmnElement="ScriptTask_{{ ns.script_seq }}" id="ScriptTask_{{ ns.script_seq }}_di">
+					<omgdc:Bounds height="84" width="196" x="623" y="{{ ns.y_end }}"/>
+				</bpmndi:BPMNShape>
+			{% endfor -%}
+			{# end shape #}
+			{% set ns.y_start = ns.y_start + shape_increment -%}
+			{% set ns.y_end = ns.y_start + end_size -%}
+			<bpmndi:BPMNEdge bpmnElement="{{ end_event_flow }}" id="{{ end_event_flow }}_di">
+				<omgdi:waypoint x="721" y="{{ ns.y_start }}"/>
+				<omgdi:waypoint x="721" y="{{ ns.y_end }}"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="EndPoint_{{ end_seq }}" id="EndPoint_{{ end_seq }}_di">
+				<omgdc:Bounds height="52" width="132.15" x="655" y="{{ ns.y_end }}"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</definitions>
