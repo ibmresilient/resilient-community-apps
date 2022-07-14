@@ -27,7 +27,6 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -311,6 +310,9 @@ You can clone a script if you wish a private copy with this function output loca
 | --------- | ------ | ------------------ |
 | Playbook Maker | incident | `playbook_maker` |
 
+Note: In order to create playbooks for datatables, edit the rule `Playbook Maker` with the `pbm_playbook_type` activity field and change the reference `<change for datatables>` to your custom datatable API name(s).
+
+![screenshot: fn-make-playbook ](./doc/screenshots/playbook_type.png)
 ---
 
 ## Troubleshooting & Support
