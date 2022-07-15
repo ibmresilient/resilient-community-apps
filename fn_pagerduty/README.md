@@ -24,7 +24,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.2 | 07/2022 | Initial Release |
+| 1.0.0 | 09/2018 | Initial Release |
+| 1.0.1 | 05/2020 | Support added for App Host |
+| 1.0.2 | 07/2022 | Updated documentation to new format |
 
 ---
 
@@ -83,10 +85,11 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app does support a proxy server.
+The app does not support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 and 3.9 are supported
+
 Additional package dependencies may exist for each of these packages:
 * beautifulsoup4
 * pdpyras
@@ -121,9 +124,9 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **api_token** | Yes | `<api_token>` | API Token from pagerduty |
-| **from_email** | Yes | `some@email.com` | Email that triggers pagerduty incidents |
-| **resilient_client** | Yes | `IBM Resilient` | -- |
-| **verifyflag** | Yes | `False` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **from_email** | Yes | `some@email.com` | for some endpoints (namely creating and modifying incidents), pagerduty requires the "email address of the user to record as having taken the action". In this app, this is passed to the package `pdpyras` as `default_from`. You can read about pdpyras [here](https://pagerduty.github.io/pdpyras/#using-a-basic-rest-api-key), and read about pagerduty's REST API headers (of which is the from_email header) [here](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTUw-rest-api-v2-overview)|
+| **resilient_client** | Yes | `IBM Resilient` | this refers to the name identifier used for logging|
+| **verifyflag** | Yes | `False` | True/False flag associated with https client certification (False means no https certification) |
 
 
 ---
@@ -131,7 +134,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - PagerDuty Create Incident
 Create a PagerDuty Incident based on a Resilient Incident
 
- ![screenshot: fn-pagerduty-create-incident ](./doc/screenshots/fn-pagerduty-create-incident.png) <!-- ::CHANGE_ME:: -->
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -206,8 +209,6 @@ incident.properties.pd_incident_url = "<a href='{}' target='blank'>Link</a>".for
 ## Function - PagerDuty Create Note
 Create a PagerDuty Note based on a Resilient Incident's Note
 
- ![screenshot: fn-pagerduty-create-note ](./doc/screenshots/fn-pagerduty-create-note.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -264,7 +265,6 @@ None
 ## Function - PagerDuty Transition Incident
 Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)
 
- ![screenshot: fn-pagerduty-transition-incident ](./doc/screenshots/fn-pagerduty-transition-incident.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -274,7 +274,7 @@ Transition a PagerDuty Incident based on changes to a Resilient Incident (such a
 | `pd_description` | `text` | No | `-` | descrption from pagerduty |
 | `pd_incident_id` | `text` | Yes | `-` | id of incident |
 | `pd_priority` | `text` | No | `-` | incident priority |
-| `pd_status` | `text` | No | `-` | - |
+| `pd_status` | `text` | No | `-` | status of pagerduty incident |
 
 </p>
 </details>
