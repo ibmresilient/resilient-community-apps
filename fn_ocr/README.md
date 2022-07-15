@@ -243,6 +243,17 @@ if content is not None:
 
 ---
 
+
+## Rules
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
+| Parse Image (Artifact) | artifact | `parse_image` |
+| Parse Image (Attachment) | attachment | `parse_image_attachment` |
+| Parse Image (Base64) | incident | `parse_image_base64` |
+
+---
+
+
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 

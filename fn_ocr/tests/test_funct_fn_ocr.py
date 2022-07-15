@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-import pytest
-import pytesseract
-import pandas as pd
-import cv2
-from mock import MagicMock, patch
 import sys
+
+import cv2
+import pandas as pd
+import pytesseract
+import pytest
+from mock import patch
+from resilient_circuits import (BaseFunctionError, FunctionResult,
+                                SubmitTestFunction)
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult, BaseFunctionError
 
 PACKAGE_NAME = "fn_ocr"
 FUNCTION_NAME = "fn_ocr"

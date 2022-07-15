@@ -3,16 +3,14 @@
 """AppFunction implementation"""
 
 
-from email.mime import base
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError 
-from resilient_lib import  get_file_attachment
-
 import base64
+
 import cv2
-import json
 import numpy as np
 import pytesseract
-import pandas as pd
+from resilient_circuits import (AppFunctionComponent, FunctionError,
+                                FunctionResult, app_function)
+from resilient_lib import get_file_attachment
 
 PACKAGE_NAME = "fn_ocr"
 FN_NAME = "fn_ocr"
