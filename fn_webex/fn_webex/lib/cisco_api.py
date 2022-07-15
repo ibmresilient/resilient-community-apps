@@ -2,6 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+from lib2to3.pytree import convert
 import time
 import re
 import logging
@@ -17,13 +18,12 @@ from resilient_circuits import FunctionError
 
 DEFAULT_MEETING_LENGTH = 45
 
-'''
 requiredParameters = {
     "rc"                          : RequestsCommon(),
-    "start"                       : datetime.datetime.now() + datetime.timedelta(minutes=2),
-    "end"                         : datetime.datetime.now() + datetime.timedelta(minutes=20),
+    "start"                       : 1657973238000,
+    "end"                         : 1657975870000,
     "url"                         : "https://webexapis.com/v1/meetings/",
-    "bearerID"                    : "MDViZWYyOWYtNGQwMC00OGRlLWE3MzMtZTc3NDNiODU3ZTYzNzEyZWE1N2UtNzll_PF84_602d7d50-4ed5-40fc-a8ad-63646501cd00",
+    "bearerID"                    : "NGM3OGJiMzgtM2E5Yi00OTNlLWE5NDgtYmZkNTVjODQ4NzJiNDFmMWVlODUtZDBi_P0A1_f688574e-8402-4b53-864e-e725f4468887",
     "timzone"                     : "gmt05:30"
 }
 
@@ -45,14 +45,13 @@ optionalParameters = {
     "allowAuthenticatedDevices"   : "false",
     "sendEmail"                   : "true",
 }
-'''
+
 
 
 class WebexAPI:
     def __init__(self, requiredParameters, optionalParameters):
         # self.test_get_timeZones()
         # self.test_generate_header()
-
 
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
@@ -65,10 +64,31 @@ class WebexAPI:
         self.rc = self.requiredParameters.get("rc")
         self.create_meeting()
 
+    def convert_to_dict(self, to_convert):
+        ret = {}
+        for bracket in ["[", "]", "{", "}", "\""]:
+            to_convert = to_convert.replace(bracket,"")
+        for pair in to_convert.split(","):
+            key = pair.split(":")[0]
+            value = pair[len(key)+1:]
+            ret[key] = value
+        return ret
+
 
     def create_meeting(self):
         meetingOptions = self.generate_meeting_parameters(self.optionalParameters)
-        return self.webex_request("post", meetingOptions)
+        response = self.webex_request("post", meetingOptions)
+
+        if response.text == "":
+            raise FunctionError("Failed to create meeting, null response")
+        
+        results = self.convert_to_dict(response.text)
+        if response.status_code == 200:
+            results["status"] = True
+        else:
+            results["status"] = False
+        return results
+        
 
 
     def check_time(self, meeting_start, meeting_end):
@@ -133,16 +153,16 @@ class WebexAPI:
         """Wrapper for requests, appends content-type and fills in site url"""
         webexurl = self.requiredParameters.get("url")
         response = self.rc.execute_call_v2(method, webexurl, data=data,
-                                           headers=self.header, proxies=self.rc.get_proxies())
-
+                                        headers=self.header, proxies=self.rc.get_proxies())
         if response is None:
-            raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format("POST"))
+            raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format(method))
         if response.status_code != 200 and response.status_code != 201 and response.status_code != 401:
-            raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
+            raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, webexurl))
         elif response.status_code == 401:
             raise FunctionError("Security context is invalid, API returned 401!")
-
         return response  
+
+
 
 
     def test_get_timeZones(self):
@@ -174,5 +194,4 @@ class WebexAPI:
             print(msg)
 
 
-
-# WebexAPI(requiredParameters, optionalParameters)
+WebexAPI(requiredParameters, optionalParameters)
