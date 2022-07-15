@@ -140,7 +140,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1657910956757,
+  "export_date": 1657914234136,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -410,6 +410,74 @@
       "values": []
     },
     {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/pd_incident_id",
+      "hide_notification": false,
+      "id": 279,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "pd_incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [
+        {
+          "tag_handle": "fn_pagerduty",
+          "value": null
+        }
+      ],
+      "templates": [],
+      "text": "PagerDuty Incident ID",
+      "tooltip": "field to contain the pagerduty incident Id created",
+      "type_id": 0,
+      "uuid": "e9ca1e45-845b-4117-942a-41074e9ee096",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/pd_incident_url",
+      "hide_notification": false,
+      "id": 278,
+      "input_type": "textarea",
+      "internal": false,
+      "is_tracked": false,
+      "name": "pd_incident_url",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": true,
+      "tags": [
+        {
+          "tag_handle": "fn_pagerduty",
+          "value": null
+        }
+      ],
+      "templates": [],
+      "text": "PagerDuty Incident URL",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "15fbd365-9042-4eee-a322-4e49b07b5ce1",
+      "values": []
+    },
+    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -637,13 +705,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 8,
+  "id": 11,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1657910954949,
+      "create_date": 1657914232264,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -652,7 +720,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1657910954949,
+      "update_date": 1657914232264,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -696,25 +764,6 @@
       "actions": [],
       "content": {
         "version": 6,
-        "workflow_id": "pagerduty_transition_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pagerduty_transition_incident\" isExecutable=\"true\" name=\"PagerDuty Transition Incident\"\u003e\u003cdocumentation\u003eTransition a PagerDuty Incident to either acknowledged or resolved. The rule for this workflow should only trigger if a PagerDuty Incident has already been created.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05krtsc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05krtsc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1praj43\"/\u003e\u003cendEvent id=\"EndEvent_0v4y1vv\"\u003e\u003cincoming\u003eSequenceFlow_089j3v9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1praj43\" name=\"PagerDuty Transition Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b89c0c8-91fc-407a-8ec0-1b63851eaa20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\nif incident.resolution_id:\\n  inputs.pd_status = \u0027resolved\u0027\\n  inputs.pd_description = incident.resolution_summary.content\\n#else:\\n#  inputs.pd_status = \u0027acknowledged\u0027\\n  \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05krtsc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_089j3v9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_089j3v9\" sourceRef=\"ServiceTask_1praj43\" targetRef=\"EndEvent_0v4y1vv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0mo7kai\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs include an Incident\u0027s priority and resolution summary (if present for closed Incidents). Choose the transition status (acknowledged or resolved) for the Incident\u00a0]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0r5a3pl\" sourceRef=\"ServiceTask_1praj43\" targetRef=\"TextAnnotation_0mo7kai\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05krtsc\" id=\"SequenceFlow_05krtsc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v4y1vv\" id=\"EndEvent_0v4y1vv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"508\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"526\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1praj43\" id=\"ServiceTask_1praj43_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_089j3v9\" id=\"SequenceFlow_089j3v9_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0mo7kai\" id=\"TextAnnotation_0mo7kai_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"321\" x=\"113\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0r5a3pl\" id=\"Association_0r5a3pl_di\"\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "description": "Transition a PagerDuty Incident to either acknowledged or resolved. The rule for this workflow should only trigger if a PagerDuty Incident has already been created.",
-      "export_key": "pagerduty_transition_incident",
-      "last_modified_by": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
-      "last_modified_time": 1657903000755,
-      "name": "PagerDuty Transition Incident",
-      "object_type": "incident",
-      "programmatic_name": "pagerduty_transition_incident",
-      "tags": [],
-      "uuid": "ed9375ad-6616-4a9e-a2b7-b44dff57ce0e",
-      "workflow_id": 18
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
         "workflow_id": "pagerduty_create_note",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pagerduty_create_note\" isExecutable=\"true\" name=\"PagerDuty Create Note\"\u003e\u003cdocumentation\u003eCreate a PagerDuty Note based on a Resilient Incident Note. The rule for this workflow should only trigger if a PagerDuty Incident has already been created.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0geppld\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0oipeed\" name=\"PagerDuty Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"efdef5a6-796a-412a-bee7-5edd42ef92b3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\ninputs.pd_description = note.text.content\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0geppld\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gsdntz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0geppld\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0oipeed\"/\u003e\u003cendEvent id=\"EndEvent_1uo6e51\"\u003e\u003cincoming\u003eSequenceFlow_0gsdntz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0gsdntz\" sourceRef=\"ServiceTask_0oipeed\" targetRef=\"EndEvent_1uo6e51\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_036hwr5\"\u003e\u003ctext\u003eInput includes Resilient Incident Note description\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0opfhdj\" sourceRef=\"ServiceTask_0oipeed\" targetRef=\"TextAnnotation_036hwr5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0oipeed\" id=\"ServiceTask_0oipeed_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0geppld\" id=\"SequenceFlow_0geppld_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1uo6e51\" id=\"EndEvent_1uo6e51_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"434\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"452\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gsdntz\" id=\"SequenceFlow_0gsdntz_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_036hwr5\" id=\"TextAnnotation_036hwr5_di\"\u003e\u003comgdc:Bounds height=\"53\" width=\"166\" x=\"130\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0opfhdj\" id=\"Association_0opfhdj_di\"\u003e\u003comgdi:waypoint x=\"275\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"237\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -729,6 +778,25 @@
       "tags": [],
       "uuid": "f0069d34-6a3a-4cd0-934a-6dfc7a1c73ad",
       "workflow_id": 17
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "pagerduty_transition_incident",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"pagerduty_transition_incident\" isExecutable=\"true\" name=\"PagerDuty Transition Incident\"\u003e\u003cdocumentation\u003eTransition a PagerDuty Incident to either acknowledged or resolved. The rule for this workflow should only trigger if a PagerDuty Incident has already been created.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_05krtsc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_05krtsc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1praj43\"/\u003e\u003cendEvent id=\"EndEvent_0v4y1vv\"\u003e\u003cincoming\u003eSequenceFlow_089j3v9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1praj43\" name=\"PagerDuty Transition Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b89c0c8-91fc-407a-8ec0-1b63851eaa20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\nif incident.resolution_id:\\n  inputs.pd_status = \u0027resolved\u0027\\n  inputs.pd_description = incident.resolution_summary.content\\n#else:\\n#  inputs.pd_status = \u0027acknowledged\u0027\\n  \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_05krtsc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_089j3v9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_089j3v9\" sourceRef=\"ServiceTask_1praj43\" targetRef=\"EndEvent_0v4y1vv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0mo7kai\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs include an Incident\u0027s priority and resolution summary (if present for closed Incidents). Choose the transition status (acknowledged or resolved) for the Incident\u00a0]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0r5a3pl\" sourceRef=\"ServiceTask_1praj43\" targetRef=\"TextAnnotation_0mo7kai\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_05krtsc\" id=\"SequenceFlow_05krtsc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"286\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"242\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v4y1vv\" id=\"EndEvent_0v4y1vv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"508\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"526\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1praj43\" id=\"ServiceTask_1praj43_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"286\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_089j3v9\" id=\"SequenceFlow_089j3v9_di\"\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"508\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"447\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0mo7kai\" id=\"TextAnnotation_0mo7kai_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"321\" x=\"113\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0r5a3pl\" id=\"Association_0r5a3pl_di\"\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"115\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Transition a PagerDuty Incident to either acknowledged or resolved. The rule for this workflow should only trigger if a PagerDuty Incident has already been created.",
+      "export_key": "pagerduty_transition_incident",
+      "last_modified_by": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
+      "last_modified_time": 1657903000755,
+      "name": "PagerDuty Transition Incident",
+      "object_type": "incident",
+      "programmatic_name": "pagerduty_transition_incident",
+      "tags": [],
+      "uuid": "ed9375ad-6616-4a9e-a2b7-b44dff57ce0e",
+      "workflow_id": 18
     },
     {
       "actions": [],

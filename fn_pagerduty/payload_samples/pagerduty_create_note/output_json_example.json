@@ -1,3 +1,17 @@
 {
-    
+  "note": {
+    "id": "PNL36C8",
+    "user": {
+      "id": "PMTNPRV",
+      "type": "user_reference",
+      "summary": "Sami Amer",
+      "self": "https://api.pagerduty.com/users/PMTNPRV",
+      "html_url": "https://soar-hydra.pagerduty.com/users/PMTNPRV"
+    },
+    "content": "Test Note",
+    "created_at": "2022-07-15T15:48:12-04:00",
+    "channel": {
+      "summary": "The PagerDuty website or APIs"
+    }
+  }
 }

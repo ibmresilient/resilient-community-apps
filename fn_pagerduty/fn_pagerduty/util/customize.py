@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_transition_incident"],
         "workflows": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_transition_incident"],
         "actions": [u"Create PagerDuty Note", u"Resolve PagerDuty Incident", u"Trigger PagerDuty Incident", u"Update PagerDuty Incident"],
-        "incident_fields": [],
+        "incident_fields": [u"pd_incident_id", u"pd_incident_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -57,6 +57,9 @@ def customization_data(client=None):
         - Resolve PagerDuty Incident
         - Trigger PagerDuty Incident
         - Update PagerDuty Incident
+    - Incident Fields:
+        - pd_incident_id
+        - pd_incident_url
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

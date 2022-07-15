@@ -157,16 +157,93 @@ Create a PagerDuty Incident based on a Resilient Incident
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_pagerduty --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_pagerduty
-} 
+  "pd": {
+    "incident": {
+      "acknowledgements": [],
+      "alert_counts": {
+        "all": 0,
+        "resolved": 0,
+        "triggered": 0
+      },
+      "alert_grouping": null,
+      "assigned_via": "escalation_policy",
+      "assignments": [
+        {
+          "assignee": {
+            "html_url": "https://soar-hydra.pagerduty.com/users/PMTNPRV",
+            "id": "PMTNPRV",
+            "self": "https://api.pagerduty.com/users/PMTNPRV",
+            "summary": "Sami Amer",
+            "type": "user_reference"
+          },
+          "at": "2022-07-15T19:47:21Z"
+        }
+      ],
+      "basic_alert_grouping": null,
+      "body": {
+        "details": "https://murine1.fyre.ibm.com:443/#incidents/2100\n"
+      },
+      "created_at": "2022-07-15T19:47:21Z",
+      "description": "Resilient: pd_test",
+      "escalation_policy": {
+        "html_url": "https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55",
+        "id": "PYAMD55",
+        "self": "https://api.pagerduty.com/escalation_policies/PYAMD55",
+        "summary": "Default",
+        "type": "escalation_policy_reference"
+      },
+      "first_trigger_log_entry": {
+        "html_url": "https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4",
+        "id": "R5OQSQS81S9AS5KS9FLX770IG4",
+        "self": "https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4",
+        "summary": "Triggered through the website.",
+        "type": "trigger_log_entry_reference"
+      },
+      "html_url": "https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB",
+      "id": "Q1I8E2P0CJSIIB",
+      "impacted_services": [
+        {
+          "html_url": "https://soar-hydra.pagerduty.com/service-directory/PFA4BVU",
+          "id": "PFA4BVU",
+          "self": "https://api.pagerduty.com/services/PFA4BVU",
+          "summary": "API Service",
+          "type": "service_reference"
+        }
+      ],
+      "incident_key": "RES-2100",
+      "incident_number": 8,
+      "incidents_responders": [],
+      "is_mergeable": true,
+      "last_status_change_at": "2022-07-15T19:47:21Z",
+      "last_status_change_by": {
+        "html_url": "https://soar-hydra.pagerduty.com/service-directory/PFA4BVU",
+        "id": "PFA4BVU",
+        "self": "https://api.pagerduty.com/services/PFA4BVU",
+        "summary": "API Service",
+        "type": "service_reference"
+      },
+      "pending_actions": [],
+      "responder_requests": [],
+      "self": "https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB",
+      "service": {
+        "html_url": "https://soar-hydra.pagerduty.com/service-directory/PFA4BVU",
+        "id": "PFA4BVU",
+        "self": "https://api.pagerduty.com/services/PFA4BVU",
+        "summary": "API Service",
+        "type": "service_reference"
+      },
+      "status": "triggered",
+      "subscriber_requests": [],
+      "summary": "[#8] Resilient: pd_test",
+      "teams": [],
+      "title": "Resilient: pd_test",
+      "type": "incident",
+      "urgency": "high"
+    }
+  }
+}
 ```
 
 </p>
@@ -225,16 +302,24 @@ Create a PagerDuty Note based on a Resilient Incident's Note
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_pagerduty --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_pagerduty
-} 
+  "note": {
+    "channel": {
+      "summary": "The PagerDuty website or APIs"
+    },
+    "content": "Test Note",
+    "created_at": "2022-07-15T15:48:12-04:00",
+    "id": "PNL36C8",
+    "user": {
+      "html_url": "https://soar-hydra.pagerduty.com/users/PMTNPRV",
+      "id": "PMTNPRV",
+      "self": "https://api.pagerduty.com/users/PMTNPRV",
+      "summary": "Sami Amer",
+      "type": "user_reference"
+    }
+  }
+}
 ```
 
 </p>
@@ -284,16 +369,78 @@ Transition a PagerDuty Incident based on changes to a Resilient Incident (such a
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_pagerduty --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_pagerduty
-} 
+  "incident": {
+    "acknowledgements": [],
+    "alert_counts": {
+      "all": 0,
+      "resolved": 0,
+      "triggered": 0
+    },
+    "alert_grouping": null,
+    "assigned_via": "escalation_policy",
+    "assignments": [],
+    "basic_alert_grouping": null,
+    "created_at": "2022-07-15T19:47:21Z",
+    "description": "Resilient: pd_test",
+    "escalation_policy": {
+      "html_url": "https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55",
+      "id": "PYAMD55",
+      "self": "https://api.pagerduty.com/escalation_policies/PYAMD55",
+      "summary": "Default",
+      "type": "escalation_policy_reference"
+    },
+    "first_trigger_log_entry": {
+      "html_url": "https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4",
+      "id": "R5OQSQS81S9AS5KS9FLX770IG4",
+      "self": "https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4",
+      "summary": "Triggered through the website.",
+      "type": "trigger_log_entry_reference"
+    },
+    "html_url": "https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB",
+    "id": "Q1I8E2P0CJSIIB",
+    "impacted_services": [
+      {
+        "html_url": "https://soar-hydra.pagerduty.com/service-directory/PFA4BVU",
+        "id": "PFA4BVU",
+        "self": "https://api.pagerduty.com/services/PFA4BVU",
+        "summary": "API Service",
+        "type": "service_reference"
+      }
+    ],
+    "incident_key": "RES-2100",
+    "incident_number": 8,
+    "incidents_responders": [],
+    "is_mergeable": true,
+    "last_status_change_at": "2022-07-15T19:55:22Z",
+    "last_status_change_by": {
+      "html_url": "https://soar-hydra.pagerduty.com/users/PMTNPRV",
+      "id": "PMTNPRV",
+      "self": "https://api.pagerduty.com/users/PMTNPRV",
+      "summary": "Sami Amer",
+      "type": "user_reference"
+    },
+    "pending_actions": [],
+    "resolve_reason": null,
+    "responder_requests": [],
+    "self": "https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB",
+    "service": {
+      "html_url": "https://soar-hydra.pagerduty.com/service-directory/PFA4BVU",
+      "id": "PFA4BVU",
+      "self": "https://api.pagerduty.com/services/PFA4BVU",
+      "summary": "API Service",
+      "type": "service_reference"
+    },
+    "status": "resolved",
+    "subscriber_requests": [],
+    "summary": "[#8] Resilient: pd_test",
+    "teams": [],
+    "title": "Resilient: pd_test",
+    "type": "incident",
+    "urgency": "high"
+  }
+}
 ```
 
 </p>
