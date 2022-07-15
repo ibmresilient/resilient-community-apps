@@ -105,10 +105,12 @@ def cli_authorize(oauth2, auth_url):
     else:
         auth_code = raw_input("Enter redirected URL: ")
     params = parse_qs(urlparse(auth_code).query)
-    auth_code = params['code'][0]
-    refresh_token = oauth2.authenticate(auth_code)
-    print("\n\nrefresh_token=" + refresh_token + "\n")
-
+    if params.get("code"):
+        auth_code = params['code'][0]
+        refresh_token = oauth2.authenticate(auth_code)
+        print("\n\nrefresh_token=" + refresh_token + "\n")
+    else:
+        print("ERROR: Code not available in redirected URL.")
 
 def main(args=None):
     """
