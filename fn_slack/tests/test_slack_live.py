@@ -15,7 +15,7 @@ slack_test_channel = "test-channel"
 class TestSlack(object):
     """ Tests for the fn_slack function"""
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_channel_by_name(self, mocked_api_call):
         """ Test find Slack channel by name"""
         print("Test find Slack channel by name\n")
@@ -58,7 +58,7 @@ class TestSlack(object):
 
         assert slack_utils.get_channel_name() == slack_test_channel
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_channel_by_name_error(self, mocked_api_call):
         """ Test find Slack channel by name error"""
         print("Test find Slack channel by name error\n")
@@ -74,7 +74,7 @@ class TestSlack(object):
         except IntegrationError:
             assert True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_create_channel(self, mocked_api_call):
         """ Test create Slack channel"""
         print("Test create Slack channel\n")
@@ -96,7 +96,7 @@ class TestSlack(object):
         )
         assert slack_utils.get_channel_name() == slack_test_channel
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_create_channel_error(self, mocked_api_call):
         """ Test find Slack channel by name error"""
         print("TTest create Slack channel error\n")
@@ -181,7 +181,7 @@ class TestSlack(object):
         ("a@a.com, b@b.com, ", ["W012A3CDE", "W012A3CDE"]),
         ("", [])
     ])
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_user_ids_based_on_email(self, mocked_api_call, user_email_list, expected_list_ids):
         """ Test find user ids on email"""
         print("Test find user ids on email\n")
@@ -197,7 +197,7 @@ class TestSlack(object):
         results = slack_utils.find_user_ids_based_on_email(user_email_list)
         assert results == expected_list_ids
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_user_ids_based_on_email_error_pass(self, mocked_api_call):
         """ Test find Slack user id by email error pass"""
         print("Test find Slack user id by email error pass\n")
@@ -214,7 +214,7 @@ class TestSlack(object):
         except IntegrationError:
             assert False
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_user_ids_based_on_email_error(self, mocked_api_call):
         """ Test find Slack user id by email error"""
         print("Test find Slack user id by email error\n")
@@ -235,7 +235,7 @@ class TestSlack(object):
         (["W1234567890", "U2345678901", "U3456789012"], "W1234567890,U2345678901,U3456789012"),
         (["W1234567890"], "W1234567890")
     ])
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_invite_users_to_channel(self, mocked_api_call, user_ids_list, expected_ids):
         """ Test invite Slack users to a channel"""
         print("Test invite Slack users to a channel\n")
@@ -268,7 +268,7 @@ class TestSlack(object):
         except IntegrationError:
             assert False
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_invite_users_to_channel_error_pass(self, mocked_api_call):
         """ Test invite Slack users to a channel - already in channel error pass"""
         print("Test invite Slack users to a channel - already in channel error pass\n")
@@ -292,7 +292,7 @@ class TestSlack(object):
         except IntegrationError:
             assert False
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_invite_users_to_channel_error(self, mocked_api_call):
         """ Test invite Slack users to a channel error"""
         print("Test invite Slack users to a channel error\n")
@@ -348,7 +348,7 @@ class TestSlack(object):
         except IntegrationError:
             assert True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_post_message_no_attachment(self, mocked_api_call):
         """ Test post and reply Slack message without attachment
         # 1 - Test sending a message with a non json payload"""
@@ -382,7 +382,7 @@ class TestSlack(object):
         )
         assert results.get("ok") is True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_post_message_attachment(self, mocked_api_call):
         """ Test post and reply Slack message with attachment
         2 - Test sending a reply with json payload"""
@@ -425,7 +425,7 @@ class TestSlack(object):
         )
         assert results.get("ok") is True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_post_message_error(self, mocked_api_call):
         """ Test post and reply Slack message error"""
         print("Test post and reply Slack message error\n")
@@ -464,7 +464,7 @@ class TestSlack(object):
             "Incident Types": {"type": "string", "data": "u'[u\\'Malware\\', u\\'Lost PC / laptop / tablet\\']'"}
         }
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_permalink(self, mocked_api_call):
         """ Test get a permalink"""
         print("Test get a permalink\n")
@@ -485,7 +485,7 @@ class TestSlack(object):
         permalink = slack_utils.get_permalink("fake_thread_id")
         assert permalink == "https://ghostbusters.slack.com/archives/C0EAQDV4Z/p135854651500008"
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_permalink_error(self, mocked_api_call):
         """ Test get a permalink error"""
         print("Test get a permalink error\n")
@@ -507,7 +507,7 @@ class TestSlack(object):
         except IntegrationError:
             assert True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_archive_channel(self, mocked_api_call):
         """ Test archive channel"""
         print("TTest archive channel\n")
@@ -527,7 +527,7 @@ class TestSlack(object):
 
         assert results.get("ok") is True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_archive_channel_error(self, mocked_api_call):
         """ Test archive channel error"""
         print("TTest archive channel error\n")
@@ -547,7 +547,7 @@ class TestSlack(object):
 
         assert results.get("ok") is False
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_user_info(self, mocked_api_call):
         """ Test get user info"""
         print("Test get user info\n")
@@ -570,7 +570,7 @@ class TestSlack(object):
         )
         assert display_name == "Egon Spengler"
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_user_info_no_display_name(self, mocked_api_call):
         """ Test get user info"""
         print("Test get user info\n")
@@ -590,7 +590,7 @@ class TestSlack(object):
         )
         assert display_name == "spengler"
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_user_info_error(self, mocked_api_call):
         """ Test get user info error"""
         print("Test get user info error\n")
@@ -633,7 +633,7 @@ class TestSlack(object):
         except IntegrationError:
             assert True
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_channel_parent_message_history(self, mocked_api_call):
         """ Test get channel parent msg history"""
         print("Test get channel parent msg history\n")
@@ -673,7 +673,7 @@ class TestSlack(object):
         message_ts_list = slack_utils._get_channel_parent_message_history()
         assert message_ts_list == [{'text': 'one', "ts": "1"}, {'text': 'two', "ts": "2"}, {'text': 'three', "ts": "3"}, {'text': 'four', "ts": "4"}]
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_channel_parent_message_history_error(self, mocked_api_call):
         """ Test get channel parent msg history error"""
         print("Test get channel parent msg history error\n")
@@ -691,7 +691,7 @@ class TestSlack(object):
             assert True
 
     @patch('fn_slack.lib.slack_common.SlackUtils._get_channel_parent_message_history')
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_channel_complete_history(self, mocked_api_call, mocked_msg_history_list):
         """ Test get complete history"""
         print("Test get complete history\n")
@@ -737,7 +737,7 @@ class TestSlack(object):
                            {'text': 'parent_two'}]
 
     @patch('fn_slack.lib.slack_common.SlackUtils._get_channel_parent_message_history')
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_get_channel_complete_history_error(self, mocked_api_call, mocked_msg_history_list):
         """ Test get complete history error """
         print("Test get complete history error\n")
@@ -1003,7 +1003,7 @@ class TestSlack(object):
         {"attachment": {"name": "n", "content_type": "ct", "inc_id": "id", "type": "tp"}},  # attachment
         {"name": "n", "content_type": "ct", "inc_id": "id", "type": "tp"}  # artifact attachment
     ])
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_post_attachment(self, mocked_api_call, attachment_data):
         """ Test Slack post attachment - file upload"""
         print("Test Slack post attachment - file upload\n")
@@ -1020,7 +1020,7 @@ class TestSlack(object):
         except IntegrationError:
             assert False
 
-    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_slack_post_attachment_error(self, mocked_api_call):
         """ Test Slack post attachment - file upload error"""
         print("Test Slack post attachment - file upload error\n")
