@@ -210,7 +210,16 @@ matrix:
         - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
       script:
         - echo "Installing and running SonarQube scan"
-        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$PACKAGE_NAME/$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" 1 0
+        - IS_DATA_FEEDER_PLUGIN=`[[ "$PACKAGE_NAME" == *"rc_data_feed_plugin"* ]]; echo $?`
+        - |
+          if [ $IS_DATA_FEEDER_PLUGIN -eq 0 ]; then
+              echo "This is a data feeder plugin. Modifying SONAR_SRCS"
+              SONAR_SRCS="$PACKAGE_NAME/data_feeder_plugins";
+          else
+              SONAR_SRCS="$PACKAGE_NAME/$PACKAGE_NAME";
+          fi
+        - echo $SONAR_SRCS
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$SONAR_SRCS" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: build image and app zip
       name: Build Image and App zip
