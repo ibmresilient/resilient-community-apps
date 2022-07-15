@@ -92,11 +92,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
