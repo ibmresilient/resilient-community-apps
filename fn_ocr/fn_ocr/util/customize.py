@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_ocr",
         "message_destinations": [u"fn_ocr"],
         "functions": [u"fn_ocr"],
-        "workflows": [],
-        "actions": [],
+        "workflows": [u"parse_image", u"parse_image_attachment", u"parse_image_base64"],
+        "actions": [u"Parse Image (Artifact)", u"Parse Image (Attachment)", u"Parse Image (Base64)"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -46,6 +46,14 @@ def customization_data(client=None):
         - fn_ocr
     - Functions:
         - fn_ocr
+    - Workflows:
+        - parse_image
+        - parse_image_attachment
+        - parse_image_base64
+    - Rules:
+        - Parse Image (Artifact)
+        - Parse Image (Attachment)
+        - Parse Image (Base64)
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

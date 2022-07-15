@@ -44,11 +44,12 @@
 ---
 
 ## Overview
-**Resilient Circuits Components for 'fn_ocr'**
+**IBM SOAR app for text recognition in images**
 
  ![screenshot: main](./doc/screenshots/main.png) 
 
 An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.
+About OCR: OCR stands for Optical Character Recognition, and most often refers to the detection of letters, words, and sentences in images. The goal with any OCR is the same: extract the useful chunks of text from an image in an easy-to-read format.
 
 ### Key Features
 * Parse a picture and return lines with associated average confidence, allowing for automated reading of screenshots and other images
@@ -104,6 +105,8 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
+Both Python 3.6 and 3.9 are supported
+
 Additional package dependencies may exist for each of these packages:
 
 * opencv-python-headless == 4.5.5.64

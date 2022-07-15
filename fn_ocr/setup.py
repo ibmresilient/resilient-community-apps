@@ -29,7 +29,7 @@ setup(
     author_email="",
     url="https://ibm.biz/soarcommunity",
     description="IBM SOAR app for text recognition in images",
-    long_description="""An App that introduces OCR functionality, which can parse text from images""",
+    long_description="""An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.\nAbout OCR: OCR stands for Optical Character Recognition, and most often refers to the detection of letters, words, and sentences in images. The goal with any OCR is the same: extract the useful chunks of text from an image in an easy-to-read format.""",
     install_requires=[
         "resilient-circuits>=45.0.0",
         "pytesseract==0.3.8",
