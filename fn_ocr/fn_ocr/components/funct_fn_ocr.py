@@ -101,4 +101,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult({}, success=False, reason="OCR could find nothing in the image")
         else:
             yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")
