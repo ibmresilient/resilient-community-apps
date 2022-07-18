@@ -63,6 +63,27 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 This app uses a custom build process on the backend which compiles tesseract and dependant libraries from source; this may lead to longer than average installation.
 Please keep in mind that this app relies on Tesseract 5.0.1, which is popular open-source OCR. Any limitations found in Tesseract 5.0.1 will similary be present in this app e.g. rotated text cannot be detected if it is shorter than 70 characters.
 
+### Integration Server Installation
+If you are running your own integration server (as opposed to using containers), you will need to install Tesseract OCR in your environment. Luckily, Tesseract is popular enough that, more often than not, there are pre-compiled binaries. The pre-compiled packages often come with language packages, but not always. Please see instructions below for installing on your OS, as well as how to add more langauges. 
+
+You can also [build from source](https://tesseract-ocr.github.io/tessdoc/Compiling.html), although note that you will need to also install or compile [Leptonica](http://www.leptonica.org). You can check the Dockerfile for this app for an example of how to build from scratch, but keep in mind that it is likely you will not need to build any of the image libraries (libpng, libjpeg, libtiff, etc.) on your own local machine, as they are either present or available through `apt`, `yum`, `brew`, etc.
+
+If you build from source, you should add languages manually, by downloading [.traineddata files](https://github.com/tesseract-ocr/tessdata_fast) and placing them in `/usr/local/share/tessdata`.
+
+For general installation instructions, see [here](https://tesseract-ocr.github.io/tessdoc/Home.html#binaries).
+
+
+#### Ubuntu and Debian
+See [Ubuntu](https://launchpad.net/~alex-p/+archive/ubuntu/tesseract-ocr-devel), [Debian](https://notesalexp.org/tesseract-ocr/#tesseract_5.x).
+
+To add a language, you can run `sudo apt install tesseract-ocr-{lang}`, where `{lang}` is one of the language codes that can be found [here](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html).
+
+#### Windows
+See [Windows](https://notesalexp.org/tesseract-ocr/#tesseract_5.x). For extra languages, see [here](https://github.com/UB-Mannheim/tesseract/wiki/Install-additional-language-and-script-models)
+
+#### MacOS
+For MacOS there is a [brew formula](https://formulae.brew.sh/formula/tesseract). There is also a [brew formula](https://formulae.brew.sh/formula/tesseract-lang) for extra languages. 
+
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
