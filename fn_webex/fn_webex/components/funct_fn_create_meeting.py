@@ -9,36 +9,6 @@ from resilient_lib import IntegrationError, validate_fields, RequestsCommon, Res
 PACKAGE_NAME = "fn_webex"
 FN_NAME = "fn_create_meeting"
 
-'''
-requiredParameters = {
-    "start"                       : datetime.datetime.now() + datetime.timedelta(minutes=2),
-    "end"                         : datetime.datetime.now() + datetime.timedelta(minutes=20),
-    "url"                         : "https://webexapis.com/v1/meetings/",
-    "bearerID"                    : "MDViZWYyOWYtNGQwMC00OGRlLWE3MzMtZTc3NDNiODU3ZTYzNzEyZWE1N2UtNzll_PF84_602d7d50-4ed5-40fc-a8ad-63646501cd00"
-    "rc"                          : ""
-    "timzone"                     : "gmt 05:30",
-}
-
-meetingParameters = {
-    "siteURL"                     : "calvinwynne-8xjq.webex.com",
-    "hostEmail"                   : "",
-    "title"                       : "Sample Meeting VSCode",
-    "password"                    : "abcd123",
-    "agenda"                      : "to test sample meetings",
-    "enabledAutoRecordMeeting"    : "false",
-    "allowAnyUserToBeCoHost"      : "false",
-    "enabledJoinBeforeHost"       : "false",
-    "enableConnectAudioBeforeHost": "false",
-    "excludePassword"             : "false",
-    "publicMeeting"               : "false",
-    "enabledWebcastView"          : "false",
-    "enableAutomaticLock"         : "false",
-    "allowFirstUserToBeCoHost"    : "false",
-    "allowAuthenticatedDevices"   : "false",
-    "sendEmail"                   : "true",
-}
-'''
-
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_create_meeting'"""
 
@@ -91,7 +61,7 @@ class FunctionComponent(AppFunctionComponent):
 
         webex = WebexAPI(self.requiredParameters, self.meetingParameters)
         response = webex.create_meeting()
-        
+
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
         results = rp.done(response.get("status"), response)
 

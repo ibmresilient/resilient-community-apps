@@ -2,67 +2,28 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-from lib2to3.pytree import convert
+
 import time
-import re
 import logging
 import datetime
+
 from urllib import request
-import pytz
-
-import requests
-
-import configparser
 from resilient_lib import  RequestsCommon
+from lib2to3.pytree import convert
 from resilient_circuits import FunctionError
 
 DEFAULT_MEETING_LENGTH = 45
 
-requiredParameters = {
-    "rc"                          : RequestsCommon(),
-    "start"                       : 1657973238000,
-    "end"                         : 1657975870000,
-    "url"                         : "https://webexapis.com/v1/meetings/",
-    "bearerID"                    : "NGM3OGJiMzgtM2E5Yi00OTNlLWE5NDgtYmZkNTVjODQ4NzJiNDFmMWVlODUtZDBi_P0A1_f688574e-8402-4b53-864e-e725f4468887",
-    "timzone"                     : "gmt05:30"
-}
-
-optionalParameters = {
-    "siteURL"                     : "calvinwynne-8xjq.webex.com",
-    "hostEmail"                   : "",
-    "title"                       : "Sample Meeting VSCode",
-    "password"                    : "abcd123",
-    "agenda"                      : "to test sample meetings",
-    "enabledAutoRecordMeeting"    : "false",
-    "allowAnyUserToBeCoHost"      : "false",
-    "enabledJoinBeforeHost"       : "false",
-    "enableConnectAudioBeforeHost": "false",
-    "excludePassword"             : "false",
-    "publicMeeting"               : "false",
-    "enabledWebcastView"          : "false",
-    "enableAutomaticLock"         : "false",
-    "allowFirstUserToBeCoHost"    : "false",
-    "allowAuthenticatedDevices"   : "false",
-    "sendEmail"                   : "true",
-}
-
-
 
 class WebexAPI:
     def __init__(self, requiredParameters, optionalParameters):
-        # self.test_get_timeZones()
-        # self.test_generate_header()
-
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
+        self.rc = self.requiredParameters.get("rc")
         self.header = self.generate_header(self.requiredParameters["bearerID"])
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
-        print("\n \n \n", self.requiredParameters["start"], self.requiredParameters["end"], "\n \n \n")
         self.check_time(self.requiredParameters["start"], self.requiredParameters["end"])
-
-
-        self.rc = self.requiredParameters.get("rc")
-        self.create_meeting()
+        
 
     def convert_to_dict(self, to_convert):
         ret = {}
@@ -88,7 +49,6 @@ class WebexAPI:
         else:
             results["status"] = False
         return results
-        
 
 
     def check_time(self, meeting_start, meeting_end):
@@ -140,12 +100,12 @@ class WebexAPI:
             raise ValueError("Invalid Timezone format. Expected format GMT -01:00")
         return formatted_timezone 
 
+
     def generate_meeting_parameters(self, meetingParameters):
         request_parameters = '{\"start\":\"' + self.meeting_start_time + '\", \"end\":\"' + self.meeting_end_time + '\"'
         for key in meetingParameters.keys():
             request_parameters +=  ', \"{}\":\"{}\" '.format(key, meetingParameters[key])
         request_parameters +=  "}"
-        print("\n \n \n", request_parameters, "\n \n \n")
         return request_parameters
 
 
@@ -160,38 +120,6 @@ class WebexAPI:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, webexurl))
         elif response.status_code == 401:
             raise FunctionError("Security context is invalid, API returned 401!")
-        return response  
+        return response
 
 
-
-
-    def test_get_timeZones(self):
-        assert(self.get_timeZones("GMT 05:30")   == "+0530")
-        assert(self.get_timeZones("GMT +05:30")  == "+0530")
-        assert(self.get_timeZones("GMT -05:30")  == "-0530")
-        assert(self.get_timeZones("UTC -05:30")  == "-0530")
-        assert(self.get_timeZones("GMT 0530")    == "+0530")
-        assert(self.get_timeZones(" GMT 0530  ") == "+0530")
-        assert(self.get_timeZones("0530")        == "+0530")
-        assert(self.get_timeZones(" -05:30  ")    == "-0530")
-        assert(self.get_timeZones() == time.strftime("%z", time.localtime()))
-        try:
-            self.get_timeZones("GMT 05:£30")
-        except ValueError as msg:
-            print(msg)
-        try:
-            self.get_timeZones("IST 05:30")
-        except ValueError as msg:
-            print(msg)
-
-    def test_generate_header(self):
-        assert(isinstance(self.generate_header("ID123"), dict))
-        assert(self.generate_header("ID123")["Authorization"] == "Bearer ID123")
-        assert(self.generate_header("ID123")["Content-Type" ] == "application/json")
-        try:
-            self.generate_header(None)
-        except ValueError as msg:
-            print(msg)
-
-
-WebexAPI(requiredParameters, optionalParameters)
