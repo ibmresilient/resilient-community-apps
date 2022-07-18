@@ -90,9 +90,11 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.slack_create_channel(slack_test_channel, False)
         mocked_api_call.assert_called_with(
-            "conversations.create",
-            name=slack_test_channel,
-            is_private=False
+            api_method = "conversations.create",
+            params = {
+                "name" : slack_test_channel,
+                'is_private' : False
+            }
         )
         assert slack_utils.get_channel_name() == slack_test_channel
 
@@ -260,9 +262,11 @@ class TestSlack(object):
         try:
             slack_utils.invite_users_to_channel(user_ids_list)
             mocked_api_call.assert_called_with(
-                "conversations.invite",
-                channel="C0EAQDV4Z",
-                users=expected_ids
+                api_method = "conversations.invite",
+                params = {
+                    "channel" : "C0EAQDV4Z",
+                    "users" : expected_ids
+                }
             )
             assert True
         except IntegrationError:
@@ -370,15 +374,17 @@ class TestSlack(object):
         payload = "testing"
         results = slack_utils.slack_post_message(None, payload, True, None, True, def_username)
         mocked_api_call.assert_called_with(
-            "chat.postMessage",
-            channel="C1H9RESGL",
-            as_user=True,
-            username=def_username,
-            parse="none",
-            link_names=1,
-            mrkdown=True,
-            text=payload,
-            attachments=None
+            api_method = "chat.postMessage",
+            params = {
+                "channel" : "C1H9RESGL",
+                "as_user" : True,
+                "username" : def_username,
+                "parse" : "none",
+                "link_names" : 1,
+                "mrkdown" : True,
+                "text" : payload,
+                "attachments" : None
+            }
         )
         assert results.get("ok") is True
 
@@ -413,15 +419,17 @@ class TestSlack(object):
         attachment_json = convert_slack_details_to_payload(slack_details, resoptions)
 
         mocked_api_call.assert_called_with(
-            "chat.postMessage",
-            channel="C1H9RESGL",
-            as_user=True,
-            username=def_username,
-            parse="none",
-            link_names=1,
-            mrkdown=True,
-            attachments=attachment_json,
-            text=None
+            api_method = "chat.postMessage",
+            params = {
+                "channel" : "C1H9RESGL",
+                "as_user" : True,
+                "username" : def_username,
+                "parse" : "none",
+                "link_names" : 1,
+                "mrkdown" : True,
+                "attachments" : attachment_json,
+                "text" : None
+            }
         )
         assert results.get("ok") is True
 
@@ -565,8 +573,10 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         display_name = slack_utils.get_user_display_name("W012A3CDE")
         mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
-            "users.info",
-            user="W012A3CDE"
+            api_method = "users.info",
+            params = {
+                "user" : "W012A3CDE"
+            }
         )
         assert display_name == "Egon Spengler"
 
@@ -585,8 +595,10 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         display_name = slack_utils.get_user_display_name("W012A3CDE")
         mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
-            "users.info",
-            user="W012A3CDE"
+            api_method = "users.info",
+            params = {
+                "user" : "W012A3CDE"
+            }
         )
         assert display_name == "spengler"
 
