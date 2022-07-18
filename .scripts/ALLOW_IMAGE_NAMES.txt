@@ -35,7 +35,7 @@ fn_greynoise
 fn_grpc_interface
 fn_hibp
 fn_html2pdf
-#fn_icdx-INT-4873
+fn_icdx
 fn_incident_utils
 fn_ioc_parser_v2
 fn_ipinfo
@@ -66,6 +66,7 @@ fn_pastebin
 fn_phish_ai
 fn_phish_tank
 fn_pipl
+fn_playbook_maker
 fn_playbook_utils
 fn_proofpoint_tap
 fn_proofpoint_trap

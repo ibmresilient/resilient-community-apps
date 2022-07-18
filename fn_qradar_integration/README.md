@@ -35,7 +35,7 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
-| 2.2.4 | July. 2022 | Bug Fix for windows clients |
+| 2.2.4 | July. 2022 | Update SOAR required version |
 | 2.2.3 | June. 2022 | Bug fix for using with MSSP |
 | 2.2.2 | May. 2022 | Add more documentation and bug fix |
 | 2.2.1 | March 2022 | Cancel QRadar queries which have timed out |

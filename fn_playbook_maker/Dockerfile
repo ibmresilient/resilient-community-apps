@@ -1,11 +1,13 @@
-# docker build -t ibmresilient/fn_icdx:1.1.0 -t ibmresilient/fn_icdx:latest .
+# docker build -t ibmresilient/fn_playbook_maker:1.0.0 -t ibmresilient/fn_playbook_maker:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
-ARG APPLICATION=fn_icdx
-ARG RESILIENT_CIRCUITS_VERSION=45.0
+ARG APPLICATION=fn_playbook_maker
+ARG RESILIENT_CIRCUITS_VERSION=44.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
+
+# Environment variable for any app to check if running in a container
 ARG APP_HOST_CONTAINER=1
 ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 
@@ -34,8 +36,6 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 #COPY /path/to/extra_package /tmp/packages/.
 #RUN pip install /tmp/packages/<extra_package>*.tar.gz
 
-# uncomment to expose port only if a custom threat feed
-#EXPOSE 9000
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs
