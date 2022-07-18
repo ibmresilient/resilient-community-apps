@@ -58,7 +58,7 @@ class TestGoogleCloudSccUpdateFinding:
     }
 
     expected_results_1 = {
-        "findings_list": [updated_findings[0].get("findings")],
+        "findings_list": [{"finding": updated_findings[0].get("finding")}],
         "updated_key": "next_steps",
         "updated_value": "Nothing to do next"
     }
@@ -70,7 +70,7 @@ class TestGoogleCloudSccUpdateFinding:
     }
 
     expected_results_2 = {
-        "findings_list": [updated_findings[0].get("findings")],
+        "findings_list": [{"finding": updated_findings[0].get("finding")}],
         "updated_key": "source_properties.prop_a",
         "updated_value": "test"
     }
@@ -86,8 +86,8 @@ class TestGoogleCloudSccUpdateFinding:
             mock_app_common_instance = MagicMock()
 
             mock_app_common_instance.get_findings.return_value = [ListFindingsResponse.ListFindingsResult(findings[0], ignore_unknown_fields=True)]
-            mock_app_common_instance.update_finding.return_value = Finding(updated_findings[0].get("findings"), ignore_unknown_fields=True)
-            mock_app_common_instance.enrich_finding.return_value = updated_findings[0].get("findings")
+            mock_app_common_instance.update_finding.return_value = Finding(updated_findings[0].get("finding"), ignore_unknown_fields=True)
+            mock_app_common_instance.enrich_finding.return_value = updated_findings[0].get("finding")
             mock_scc_common.return_value = mock_app_common_instance
 
             results = call_google_cloud_scc_update_finding_function(circuits_app, mock_inputs)
