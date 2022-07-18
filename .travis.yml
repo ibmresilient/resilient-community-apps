@@ -40,8 +40,11 @@ env:
     - PYPI_INDEX="https://pypi.org/simple"
 
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
-    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
-    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
+    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" == *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
+    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 0 ]; then echo "DEV"; else echo "MAIN"; fi`
+
+    - KEYWORD_UPLOAD_APP_TO_APPHOST="[deploy-apphost]"
+    - UPLOAD_APP_TO_APPHOST=$([[ "$TRAVIS_COMMIT_MESSAGE" == *"$KEYWORD_UPLOAD_APP_TO_APPHOST"* ]]; echo $?)
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - DEV_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
@@ -74,7 +77,6 @@ matrix:
   fast_finish: true
 
   include:
-
     - stage: run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests - Main - PyPi
       python: 2.7
@@ -234,10 +236,10 @@ matrix:
       deploy:
         - provider: script
           skip_cleanup: true
-          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" $UPLOAD_APP_TO_APPHOST;
           on:
             all_branches: true
-            condition: "$BUILD_DEV_APP = 1"
+            condition: "$BUILD_DEV_APP = 0"
         - provider: script
           skip_cleanup: true
           script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
@@ -247,7 +249,7 @@ matrix:
         - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
         - FILE_NAME=$(basename $PATH_APP_ZIP);
-        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+        - if [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success"; else $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n [$PACKAGE_NAME] can be found at <https://${FYRE_CLUSTER_DOMAIN}/#admin?tab=apps| ${FYRE_CLUSTER_DOMAIN}> if successfully deployed." "success"; fi
 
     - stage: rebuild all images
       python: 3.9
