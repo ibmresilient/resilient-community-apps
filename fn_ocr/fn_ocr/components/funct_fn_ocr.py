@@ -48,14 +48,6 @@ class FunctionComponent(AppFunctionComponent):
         lang = getattr(fn_inputs,"ocr_language", "eng")
         base64_string = getattr(fn_inputs,"ocr_base64", None)
 
-        self.LOG.info("incident_id: %s", incident_id)
-        self.LOG.info("artifact_id: %s", artifact_id)
-        self.LOG.info("attachment_id: %s", attachment_id) 
-        self.LOG.info("task_id: %s", task_id)
-        self.LOG.info("OCR Confidence Threshold: %.2f", confidence_threshold)
-        self.LOG.info("OCR Language is: %s", lang)
-        self.LOG.info("OCR Base64 Input is: %s", isinstance(base64_string,str)) # this can be very long, and could even cause the function to time out. Instead print if it exists
-
         if incident_id is None:
             raise FunctionError("Error: incident_id must be specified.")
         elif artifact_id is None and base64_string is None and attachment_id is None:
