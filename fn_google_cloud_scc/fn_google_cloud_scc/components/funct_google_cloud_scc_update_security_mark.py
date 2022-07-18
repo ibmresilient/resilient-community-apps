@@ -29,11 +29,10 @@ class FunctionComponent(AppFunctionComponent):
 
         self.app_common = GoogleSCCCommon(self.options)
 
-        validate_fields(["google_scc_finding_name", 
-                         "google_scc_update_value", "google_scc_update_key"], fn_inputs)
+        validate_fields(["google_scc_finding_name", "google_scc_update_key"], fn_inputs)
         finding_name = fn_inputs.google_scc_finding_name
         update_key = fn_inputs.google_scc_update_key
-        update_value = fn_inputs.google_scc_update_value
+        update_value = getattr(fn_inputs, "google_scc_update_value", None) # this allows for deletion
 
         # make the call to update the marks
         updated_marks, _ = self.app_common.update_security_mark(finding_name, update_key, update_value)

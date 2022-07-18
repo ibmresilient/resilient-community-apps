@@ -299,9 +299,9 @@ class SOARCommon():
         formatted_cells = {}
 
         for column in rowdata:
-            formatted_cells[column] = {"value": rowdata.get(column)};
+            formatted_cells[column] = {"value": rowdata.get(column)}
 
-        formatted_cells = {"cells": formatted_cells};
+        formatted_cells = {"cells": formatted_cells}
 
         return self.rest_client.post(uri=uri, payload=formatted_cells)
 

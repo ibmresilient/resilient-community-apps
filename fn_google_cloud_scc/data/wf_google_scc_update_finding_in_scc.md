@@ -36,29 +36,32 @@ else:
 SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{1}</span>"
 LINK_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
 
-findings_list = results.get("content").get("findings_list", [])
+severity_mapping = {
+  "CRITICAL": "High", 
+  "HIGH": "High", 
+  "MEDIUM": "Medium", 
+  "LOW": "Low", 
+  "DEFAULT": "Low"
+}
 
-if results.get("success"):
+if results and results.get("success"):
+  findings_list = results.get("content", {}).get("findings_list", [])
+  
+  
   # have to iterate because this function is set up to return a list
   # to support multiple incident updates at the same time
   # but in this specific workflow we intend to just update the incident associated with
   # this incident
   for i in range(len(findings_list)):
-    if findings_list[i].get("finding").get("name") == incident.properties.google_scc_name:
-      finding = findings_list[i].get("finding")
-      compliance_standards = finding.get("source_properties").get("compliance_standards")
-      security_marks = finding.get("security_marks").get("marks")
-    
-      incident.properties.google_scc_class = SPAN_FORMATTER.format(finding.get("finding_class"), finding.get("finding_class"))
-      standards_list = [SPAN_FORMATTER.format(standard.upper(), "{0} : {1}".format(standard.upper(), compliance_standards[standard][0]['ids'][0])) for standard in compliance_standards]
-      incident.properties.google_scc_compliance_standards = " ".join(standards_list)
+    finding = findings_list[i].get("finding", {})
+    if finding.get("name", "") == incident.properties.google_scc_name:
+      security_marks = finding.get("security_marks", {}).get("marks")
+
+
       marks_list = [SPAN_FORMATTER.format(mark_key, "{0} : {1}".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]
       incident.properties.google_scc_security_marks = " ".join(marks_list)
-      incident.properties.google_scc_remediation_link = "<b>{0}</b><br>".format(finding.get("resource", {}).get("display_name")) + LINK_FORMATTER.format(finding.get("external_uri"), finding.get("resource", {}).get("name"))
-      incident.properties.google_scc_category = SPAN_FORMATTER.format(finding.get("category"), finding.get("category"))
-      incident.properties.google_scc_recommendation = finding.get("linkified_recommendation")
-      incident.properties.google_scc_vulnerability = finding.get("vulnerability").get("cve")
-      incident.properties.google_scc_state = finding.get("state")
+      incident.properties.google_scc_state = finding.get("state", "UNKNOWN")
+      incident.severity_code = severity_mapping.get(finding.get("severity"), "LOW")
 ```
 
 ---

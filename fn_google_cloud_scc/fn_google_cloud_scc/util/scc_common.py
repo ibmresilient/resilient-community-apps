@@ -87,7 +87,7 @@ class GoogleSCCCommon():
         :param order_by: (Optional) Expression that defines what fields and order to use for sorting
         :type order_by: str
         :param field_mask: (Optional) A field mask to specify the Finding fields to be listed in the response. An empty field mask will list all fields
-        :type field_mask: google.protobuf.field_mask_pb2.FieldMask 
+        :type field_mask: ``google.protobuf.field_mask_pb2.FieldMask``
         :return: list of finding results. see above for format
         :rtype: list[dict]
         """
@@ -172,28 +172,30 @@ class GoogleSCCCommon():
 
         return finding_dict
 
-    def update_security_mark(self, finding_name, mark_key, mark_value):
+    def update_security_mark(self, finding_name, mark_key, mark_value=None):
         """
-        Add security marks to a finding.
+        Add/change/delete security marks on a finding.
+
+        mark_value can be None, in which case the mark_key will be deleted
 
         :param finding_name: The finding's name
         :type finding_name: str
         :param mark_key: The key of the security mark to be added
         :type mark_key: str
         :param mark_value: The value associated with the given key to be added
-        :type mark_value: str|int
+        :type mark_value: str|int|None
         :return: updated marks and the marks that were given to SCC
         :rtype: tuple(dict, dict)
         """
-        mark_value = str(mark_value)
 
         name = f"{finding_name}/securityMarks"
 
         field_mask = FieldMask(paths=[f"marks.{mark_key}"])
-        marks = {mark_key: mark_value}
+        marks = {mark_key: str(mark_value)}
 
         marks_request = {
-            "security_marks": {"name": name, "marks": marks},
+            # if you want to delete, then just pass {"name": name}
+            "security_marks": {"name": name, "marks": marks} if mark_value else {"name": name},
             "update_mask": field_mask
         }
 

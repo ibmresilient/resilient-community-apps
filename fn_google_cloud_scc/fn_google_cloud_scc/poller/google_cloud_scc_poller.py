@@ -14,7 +14,7 @@ from fn_google_cloud_scc.util.scc_common import (DT_NAME, PACKAGE_NAME,
                                                  SOAR_ID_MARK, GoogleSCCCommon,
                                                  linkify)
 from resilient import get_client
-from resilient_circuits import ResilientComponent
+from resilient_circuits import AppFunctionComponent
 from resilient_lib import (make_payload_from_template, str_to_bool,
                            validate_fields)
 
@@ -87,22 +87,18 @@ def is_entity_closed(finding):
     """
     return GoogleSCCCommon.is_finding_closed(finding, ENTITY_CLOSE_FIELD)
 
-class PollerComponent(ResilientComponent):
+class PollerComponent(AppFunctionComponent):
     """
     poller for escalating SOAR incidents and synchronizing changes
     """
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(PollerComponent, self).__init__(opts)
-        self.options = opts.get(PACKAGE_NAME, {})
-
-        # Validate required fields in app.config are set
-        validate_fields([
+        required_fields = [
             "polling_interval",
-            "polling_lookback",
-        ],
-        self.options)
+            "polling_lookback"
+        ]
+        super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
         # collect settings necessary and initialize libraries used by the poller
         if not self._init_env(opts, self.options):

@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_google_cloud_scc",
         "message_destinations": [u"fn_google_cloud_scc"],
         "functions": [u"google_cloud_scc_update_finding", u"google_cloud_scc_update_security_mark", u"google_scc_get_findings"],
-        "workflows": [u"google_scc_add_finding_source_property_in_scc", u"google_scc_close_finding_in_scc", u"google_scc_refresh_finding", u"google_scc_update_finding_in_scc", u"google_scc_update_finding_source_property_in_scc_from_dt", u"google_scc_update_security_mark"],
+        "workflows": [u"google_scc_add_finding_source_property_in_scc", u"google_scc_close_finding_in_scc", u"google_scc_delete_security_mark", u"google_scc_refresh_finding", u"google_scc_update_finding_in_scc", u"google_scc_update_finding_source_property_in_scc_from_dt", u"google_scc_update_security_mark"],
         "actions": [u"Add Source Property", u"Close Finding in SCC", u"Refresh Finding", u"Update Finding in SCC", u"Update Security Marks in SCC", u"Update Source Property"],
         "incident_fields": [u"google_scc_category", u"google_scc_class", u"google_scc_compliance_standards", u"google_scc_id", u"google_scc_name", u"google_scc_project_display_name", u"google_scc_project_name", u"google_scc_recommendation", u"google_scc_remediation_link", u"google_scc_resource_display_name", u"google_scc_resource_name", u"google_scc_security_marks", u"google_scc_state", u"google_scc_type", u"google_scc_url", u"google_scc_vulnerability"],
         "incident_artifact_types": [],
@@ -51,6 +51,7 @@ def customization_data(client=None):
     - Workflows:
         - google_scc_add_finding_source_property_in_scc
         - google_scc_close_finding_in_scc
+        - google_scc_delete_security_mark
         - google_scc_refresh_finding
         - google_scc_update_finding_in_scc
         - google_scc_update_finding_source_property_in_scc_from_dt

@@ -71,7 +71,7 @@ class FunctionComponent(AppFunctionComponent):
             # enrich the finding with custom fields
             result = self.app_common.enrich_finding(result)
 
-            findings_list.append(result)
+            findings_list.append({"finding": result})
 
 
         results = {

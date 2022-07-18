@@ -17,222 +17,179 @@
           "items": {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string"
-              },
-              "parent": {
-                "type": "string"
-              },
-              "resource_name": {
-                "type": "string"
-              },
-              "state": {
-                "type": "string"
-              },
-              "category": {
-                "type": "string"
-              },
-              "external_uri": {
-                "type": "string"
-              },
-              "source_properties": {
-                "type": "object",
-                "properties": {
-                  "ResourcePath": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "ReactivationCount": {
-                    "type": "number"
-                  },
-                  "OpenPorts": {
-                    "type": "object",
-                    "properties": {
-                      "TCP": {
-                        "type": "array",
-                        "items": {
-                          "type": "number"
-                        }
-                      },
-                      "SCTP": {
-                        "type": "array",
-                        "items": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  },
-                  "compliance_standards": {
-                    "type": "object",
-                    "properties": {
-                      "pci": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "ids": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "nist": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "ids": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "cis": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "ids": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "version": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "iso": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "ids": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "DeactivationReason": {
-                    "type": "string"
-                  },
-                  "ScannerName": {
-                    "type": "string"
-                  },
-                  "ExceptionInstructions": {
-                    "type": "string"
-                  },
-                  "Recommendation": {
-                    "type": "string"
-                  },
-                  "ExposedService": {
-                    "type": "string"
-                  },
-                  "Explanation": {
-                    "type": "string"
-                  }
-                }
-              },
-              "security_marks": {
+              "finding": {
                 "type": "object",
                 "properties": {
                   "name": {
                     "type": "string"
                   },
-                  "marks": {
+                  "parent": {
+                    "type": "string"
+                  },
+                  "resource_name": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "external_uri": {
+                    "type": "string"
+                  },
+                  "source_properties": {
                     "type": "object",
                     "properties": {
-                      "IBM_SOAR_ID": {
+                      "Explanation": {
                         "type": "string"
                       },
-                      "UPDATE": {
+                      "ScannerName": {
+                        "type": "string"
+                      },
+                      "ResourcePath": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "DeactivationReason": {
+                        "type": "string"
+                      },
+                      "ReactivationCount": {
+                        "type": "number"
+                      },
+                      "compliance_standards": {
+                        "type": "object",
+                        "properties": {
+                          "cis": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "version": {
+                                  "type": "string"
+                                },
+                                "ids": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "pci": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "ids": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "ExceptionInstructions": {
+                        "type": "string"
+                      },
+                      "Recommendation": {
                         "type": "string"
                       }
                     }
                   },
+                  "security_marks": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "marks": {
+                        "type": "object",
+                        "properties": {
+                          "IBM_SOAR_ID": {
+                            "type": "string"
+                          },
+                          "new_mark": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "canonical_name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "event_time": {
+                    "type": "string"
+                  },
+                  "create_time": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "string"
+                  },
                   "canonical_name": {
                     "type": "string"
-                  }
-                }
-              },
-              "event_time": {
-                "type": "string"
-              },
-              "create_time": {
-                "type": "string"
-              },
-              "severity": {
-                "type": "string"
-              },
-              "canonical_name": {
-                "type": "string"
-              },
-              "mute": {
-                "type": "string"
-              },
-              "finding_class": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "next_steps": {
-                "type": "string"
-              },
-              "external_systems": {
-                "type": "object"
-              },
-              "connections": {
-                "type": "array"
-              },
-              "mute_initiator": {
-                "type": "string"
-              },
-              "iam_bindings": {
-                "type": "array"
-              },
-              "finding_url": {
-                "type": "string"
-              },
-              "linkified_description": {
-                "type": "string"
-              },
-              "recommendation": {
-                "type": "string"
-              },
-              "linkified_recommendation": {
-                "type": "string"
-              },
-              "indicator": {
-                "type": "object",
-                "properties": {
-                  "ip_addresses": {
+                  },
+                  "mute": {
+                    "type": "string"
+                  },
+                  "finding_class": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "next_steps": {
+                    "type": "string"
+                  },
+                  "external_systems": {
+                    "type": "object"
+                  },
+                  "connections": {
                     "type": "array"
                   },
-                  "domains": {
+                  "mute_initiator": {
+                    "type": "string"
+                  },
+                  "iam_bindings": {
                     "type": "array"
+                  },
+                  "finding_url": {
+                    "type": "string"
+                  },
+                  "linkified_description": {
+                    "type": "string"
+                  },
+                  "recommendation": {
+                    "type": "string"
+                  },
+                  "linkified_recommendation": {
+                    "type": "string"
+                  },
+                  "indicator": {
+                    "type": "object",
+                    "properties": {
+                      "ip_addresses": {
+                        "type": "array"
+                      },
+                      "domains": {
+                        "type": "array"
+                      }
+                    }
+                  },
+                  "vulnerability": {
+                    "type": "object",
+                    "properties": {
+                      "cve": {}
+                    }
                   }
-                }
-              },
-              "vulnerability": {
-                "type": "object",
-                "properties": {
-                  "cve": {}
                 }
               }
             }
