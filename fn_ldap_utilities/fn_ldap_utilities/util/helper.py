@@ -73,7 +73,7 @@ class LDAPUtilitiesHelper:
         self.LDAP_IS_ACTIVE_DIRECTORY = self.str_to_bool(self.__get_config_option(
             app_configs=app_configs, option_name="ldap_is_active_directory"))
         self.LDAP_CONNECT_TIMEOUT = int(self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_connect_timeout"))
+            app_configs=app_configs, option_name="ldap_connect_timeout", placeholder=30))
 
         if self.LDAP_AUTH_TYPE not in [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]:
             raise ValueError("Invalid value for 'ldap_auth'. '{}' is not a supported authentication method. Support methods are: {}}".format(
