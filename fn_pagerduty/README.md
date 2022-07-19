@@ -1,4 +1,4 @@
-# fn_pagerduty
+# PagerDuty App 
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -34,7 +34,7 @@
 
 **Resilient Circuits Components for 'fn_pagerduty'**
 
-Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerducty incidents, create notes and transition incidents (acknowledged and resolved)
+Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerduty incidents, create notes and transition incidents (acknowledged and resolved)
 
 ### Key Features
 This Resilient Functions package provides integration with PagerDuty for:
@@ -52,13 +52,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `30.0.0`.
+* SOAR platform >= `43.1.49`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `30.0.0`.
+* SOAR platform >= `43.1.49`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=43.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |

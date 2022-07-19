@@ -5,20 +5,22 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_pagerduty',
-    version='1.0.1',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    display_name="PagerDuty App",
+    version='1.0.2',
+    url='https://ibm.biz/soarcommunity',
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'fn_pagerduty'",
-    long_description="Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerducty incidents, create notes and transition incidents (acknowledged and resolved)",
+    author='IBM SOAR',
+    author_email='',
+    description="IBM SOAR app for PagerDuty integration",
+    long_description="An app that integrates SOAR incidents with PagerDuty incidents. Used to create pagerduty incidents from SOAR incidents, as well as automatically creating notes and transitioning incidents (acknowledged and resolved)",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=43.0.0',
         'beautifulsoup4',
         'pdpyras',
         'resilient-lib'
     ],
     packages=find_packages(),
+    python_requires=">=3.6",
     include_package_data=True,
     platforms='any',
     classifiers=[
