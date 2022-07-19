@@ -26,3 +26,4 @@ resilient_circuits_lockfile
 .python-version
 
 !.drivers/**
+fn_webex/dist/validate_report.md
