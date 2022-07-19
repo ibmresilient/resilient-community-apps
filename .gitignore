@@ -24,6 +24,3 @@ resilient_circuits_lockfile
 *.pytest_cache
 *.bak
 .python-version
-
-!.drivers/**
-fn_webex/dist/validate_report.md

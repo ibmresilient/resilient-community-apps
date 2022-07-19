@@ -19,20 +19,23 @@
 # Cisco Webex
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - Create WebEx Meeting](#function---create-webex-meeting)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Cisco Webex](#cisco-webex)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - Create WebEx Meeting](#function---create-webex-meeting)
+  - [Rules](#rules)
+  - [Troubleshooting & Support](#troubleshooting--support)
+    - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -42,7 +45,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release | <!-- ::CHANGE_ME:: -->
+| 2.0.0 | 7/2022 | Migrated to REST api |
+| 1.1.1 | 8/2021 | Rebuild app.zip |
+| 1.1.0 | 2/2021 | App Host Support|
+| 1.0.0 | 8/2018 | Initial Release |
 
 ---
 
@@ -53,7 +59,7 @@
 -->
 **Resilient Circuits Components for 'fn_webex'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
 
 Resilient Circuits Components for 'fn_webex'
 
@@ -61,9 +67,10 @@ Resilient Circuits Components for 'fn_webex'
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+* This package provides a function that creates Cisco WebEx meeting host URL and attendee URL given the following parameters: meeting start and end time, meeting name and agenda and a WebEx password.
+
+* An example workflow is included that writes the host URL and attendee URL to an incident note as live links to access the meeting.
+* An example rule is included that activates an menu popup that prompts the user for a meeting start and end time and an optional meeting agenda and password.
 
 ---
 
@@ -71,7 +78,6 @@ Resilient Circuits Components for 'fn_webex'
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -90,7 +96,6 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -112,46 +117,12 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=45.0.0
-
-### Endpoint Developed With
-
-This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
-
-#### Prerequisites
-<!--
-List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
--->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
-
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
-
----
 
 ## Installation
 
@@ -164,6 +135,9 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
+| **webex_site_url** | Yes | `meet8.webex.com` | *WebEx HostName.* |
+| **bearerid** | Yes | `` | *Bearer ID generated by the endpoint for each session* |
+| **webex_timezone** | Yes | `GMT -05:00` | *Timezone in which meeting is created.* |
 
 
 ---
@@ -171,18 +145,19 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Create WebEx Meeting
 Creates a WebEx meeting and returns the Host URL and Attendee URL.
 
- ![screenshot: fn-create-webex-meeting ](./doc/screenshots/fn-create-webex-meeting.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-create-webex-meeting ](./doc/screenshots/fn-create-webex-meeting-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `webex_meeting_agenda` | `text` | No | `-` | Meeting agenda |
+| `webex_meeting_start_time` | `datetimepicker` | No | `-` | - |
 | `webex_meeting_end_time` | `datetimepicker` | No | `-` | - |
+| `webex_meeting_agenda` | `text` | No | `-` | Meeting agenda |
 | `webex_meeting_name` | `text` | No | `-` | Meeting name |
 | `webex_meeting_password` | `text` | No | `-` | Meeting password |
-| `webex_meeting_start_time` | `datetimepicker` | No | `-` | - |
+
 
 </p>
 </details>
@@ -335,11 +310,18 @@ incident.addNote(note)
 
 ---
 
+## Rules
 
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
+| Example: Create WebEx Meeting: Incident | incident | `example_create_webex_meeting` |
+<p>
 
+The example incident rule activates the following activity popup menu to allow the user to enter the WebEx meeting information: 
 
+![screenshot: main](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
 
-
+---
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
