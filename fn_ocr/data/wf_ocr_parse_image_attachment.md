@@ -32,7 +32,7 @@ inputs.ocr_base64 = None
 content = workflow.properties.ocr_results["content"]
 
 if content is not None:
-  output_text = "Below are the lines detected by OCR, as well as their confidence scores (threshold = {0})\n\n".format(workflow.properties.ocr_results.get("inputs", {}).get("ocr_confidence_threshold"))
+  output_text = "Below are the lines detected by OCR, as well as their confidence scores (threshold >= {0})\n\n".format(workflow.properties.ocr_results.get("inputs", {}).get("ocr_confidence_threshold"))
   for line in content:
     output_text += '"' + line.get("text",None) + f'" \t\t <i>Confidence Score: {round(line.get("confidence",None),2)}%</i>\n\n'
   
