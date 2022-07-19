@@ -21,7 +21,12 @@
       ],
       "name": "Parse Image (Artifact)",
       "object_type": "artifact",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "277afaba-2fc0-4251-b787-097207f4b81c",
@@ -44,7 +49,7 @@
         }
       ],
       "workflows": [
-        "parse_image"
+        "ocr_parse_image"
       ]
     },
     {
@@ -59,7 +64,12 @@
       ],
       "name": "Parse Image (Attachment)",
       "object_type": "attachment",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "c0862b14-5f9e-4af4-a532-b26592e3f802",
@@ -82,7 +92,7 @@
         }
       ],
       "workflows": [
-        "parse_image_attachment"
+        "ocr_parse_image_attachment"
       ]
     },
     {
@@ -97,7 +107,12 @@
       ],
       "name": "Parse Image (Base64)",
       "object_type": "incident",
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b83af406-afb1-4df7-808f-d2cd58c56977",
@@ -128,13 +143,13 @@
         }
       ],
       "workflows": [
-        "parse_image_base64"
+        "ocr_parse_image_base64"
       ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1657825902089,
+  "export_date": 1658243665249,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -455,7 +470,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Base 64 String",
       "tooltip": "The Base64 String of an Image to be Parsed",
@@ -485,7 +505,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "OCR Language",
       "tooltip": "Language that the OCR should look for. If the wrong language is selected, the app may not return the best possible prediction",
@@ -606,7 +631,12 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [],
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
       "templates": [],
       "text": "Confidence Threshold",
       "tooltip": "Lowest confidence to consider when returning predictions",
@@ -634,7 +664,7 @@
         "format": "text"
       },
       "destination_handle": "fn_ocr",
-      "display_name": "Read Text From Image Bytes",
+      "display_name": "OCR: Read Text From Image Bytes",
       "export_key": "fn_ocr",
       "id": 1,
       "last_modified_by": {
@@ -643,7 +673,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1656615849897,
+      "last_modified_time": 1658243181810,
       "name": "fn_ocr",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"text\": \"Description\", \"confidence\": 93.921173}], \"raw\": null, \"inputs\": {\"ocr_confidence_threshold\": 49, \"ocr_artifact_id\": 23, \"ocr_language\": \"eng\", \"ocr_task_id\": null, \"ocr_base64\": null, \"ocr_incident_id\": 2098}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-ocr\", \"package_version\": \"1.0.0\", \"host\": \"Host\", \"execution_time_ms\": 1161, \"timestamp\": \"2022-06-27 14:08:28\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"text\": {\"type\": \"string\"}, \"confidence\": {\"type\": \"number\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ocr_confidence_threshold\": {\"type\": \"integer\"}, \"ocr_artifact_id\": {\"type\": \"integer\"}, \"ocr_language\": {\"type\": \"string\"}, \"ocr_task_id\": {}, \"ocr_base64\": {\"type\": \"string\"}, \"ocr_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -654,7 +684,7 @@
         }
       ],
       "uuid": "c690d533-585f-4b9d-a6c8-9d570f2fac5c",
-      "version": 4,
+      "version": 5,
       "view_items": [
         {
           "content": "166063ce-ba2c-44d8-b0d1-b4f23edfddec",
@@ -717,45 +747,60 @@
         {
           "actions": [],
           "description": null,
-          "name": "Parse Image (Artifact)",
+          "name": "OCR: Parse Image (Artifact)",
           "object_type": "artifact",
-          "programmatic_name": "parse_image",
-          "tags": [],
+          "programmatic_name": "ocr_parse_image",
+          "tags": [
+            {
+              "tag_handle": "fn_ocr",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 7
         },
         {
           "actions": [],
           "description": null,
-          "name": "Parse Image (Attachment)",
+          "name": "OCR: Parse Image (Attachment)",
           "object_type": "attachment",
-          "programmatic_name": "parse_image_attachment",
-          "tags": [],
+          "programmatic_name": "ocr_parse_image_attachment",
+          "tags": [
+            {
+              "tag_handle": "fn_ocr",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 2
+          "workflow_id": 8
         },
         {
           "actions": [],
           "description": null,
-          "name": "Parse Image (Base64)",
+          "name": "OCR: Parse Image (Base64)",
           "object_type": "incident",
-          "programmatic_name": "parse_image_base64",
-          "tags": [],
+          "programmatic_name": "ocr_parse_image_base64",
+          "tags": [
+            {
+              "tag_handle": "fn_ocr",
+              "value": null
+            }
+          ],
           "uuid": null,
-          "workflow_id": 3
+          "workflow_id": 9
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 12,
+  "id": 18,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1657825900600,
+      "create_date": 1658243663238,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -764,7 +809,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1657825900600,
+      "update_date": 1658243663238,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -813,59 +858,74 @@
     {
       "actions": [],
       "content": {
-        "version": 18,
-        "workflow_id": "parse_image",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"parse_image\" isExecutable=\"true\" name=\"Parse Image (Artifact)\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0lk1vog\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0x72p05\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"166063ce-ba2c-44d8-b0d1-b4f23edfddec\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"None\"}},\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores\\\\n\\\\n\\\"\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line[\\\"text\\\"] + f\u0027\\\" \\\\t\\\\t Confidence Score: {round(line[\\\"confidence\\\"],2)}%\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\ninputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lk1vog\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m1h8th\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lk1vog\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0x72p05\"/\u003e\u003cendEvent id=\"EndEvent_02vdjnl\"\u003e\u003cincoming\u003eSequenceFlow_1m1h8th\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m1h8th\" sourceRef=\"ServiceTask_0x72p05\" targetRef=\"EndEvent_02vdjnl\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"179\" y=\"167\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"174\" y=\"202\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"186\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"154\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0x72p05\" id=\"ServiceTask_0x72p05_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"145\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lk1vog\" id=\"SequenceFlow_0lk1vog_di\"\u003e\u003comgdi:waypoint x=\"215\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"257\" y=\"178.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02vdjnl\" id=\"EndEvent_02vdjnl_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"505.2328638497653\" y=\"197\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523.2328638497653\" y=\"236\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m1h8th\" id=\"SequenceFlow_1m1h8th_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"479\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"479\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"494\" y=\"193.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 5,
+        "workflow_id": "ocr_parse_image",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"ocr_parse_image\" isExecutable=\"true\" name=\"OCR: Parse Image (Artifact)\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Sends an \"Other File\" type artifact to fn_ocr, creating a note of lines that are above the set confidence threshold.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0lk1vog\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0x72p05\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"166063ce-ba2c-44d8-b0d1-b4f23edfddec\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"None\"}},\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores (threshold = {0})\\\\n\\\\n\\\".format(workflow.properties.ocr_results.get(\\\"inputs\\\", {}).get(\\\"ocr_confidence_threshold\\\"))\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line.get(\\\"text\\\",None) + f\u0027\\\" \\\\t\\\\t \u0026lt;i\u0026gt;Confidence Score: {round(line.get(\\\"confidence\\\", None),2)}%\u0026lt;/i\u0026gt;\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n\\ninputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lk1vog\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1m1h8th\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lk1vog\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0x72p05\"/\u003e\u003cendEvent id=\"EndEvent_02vdjnl\"\u003e\u003cincoming\u003eSequenceFlow_1m1h8th\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1m1h8th\" sourceRef=\"ServiceTask_0x72p05\" targetRef=\"EndEvent_02vdjnl\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"179\" y=\"167\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"174\" y=\"202\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"186\" xsi:type=\"omgdc:Point\" y=\"198\"/\u003e\u003comgdi:waypoint x=\"154\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0x72p05\" id=\"ServiceTask_0x72p05_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"339\" y=\"145\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lk1vog\" id=\"SequenceFlow_0lk1vog_di\"\u003e\u003comgdi:waypoint x=\"215\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"287\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"257\" y=\"178.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02vdjnl\" id=\"EndEvent_02vdjnl_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"505.2328638497653\" y=\"197\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523.2328638497653\" y=\"236\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1m1h8th\" id=\"SequenceFlow_1m1h8th_di\"\u003e\u003comgdi:waypoint x=\"439\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"479\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"479\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003comgdi:waypoint x=\"505\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"494\" y=\"193.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 18,
-      "description": "",
-      "export_key": "parse_image",
+      "content_version": 5,
+      "description": "Sends an \"Other File\" type artifact to fn_ocr, creating a note of lines that are above the set confidence threshold.",
+      "export_key": "ocr_parse_image",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656616404601,
-      "name": "Parse Image (Artifact)",
+      "last_modified_time": 1658243047246,
+      "name": "OCR: Parse Image (Artifact)",
       "object_type": "artifact",
-      "programmatic_name": "parse_image",
-      "tags": [],
-      "uuid": "6e51d47d-0c15-4d81-8ad9-8bca9feeef2b",
-      "workflow_id": 1
+      "programmatic_name": "ocr_parse_image",
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
+      "uuid": "3d766b2c-dc44-4eaf-98da-4784ef8318d4",
+      "workflow_id": 7
     },
     {
       "actions": [],
       "content": {
-        "version": 4,
-        "workflow_id": "parse_image_attachment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"parse_image_attachment\" isExecutable=\"true\" name=\"Parse Image (Attachment)\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mww2ez\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0t2unnc\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores\\\\n\\\\n\\\"\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line[\\\"text\\\"] + f\u0027\\\" \\\\t\\\\t Confidence Score: {round(line[\\\"confidence\\\"],2)}%\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\ninputs.ocr_attachment_id = attachment.id if attachment.id else None\\n# inputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mww2ez\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0y8t2rp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_04acwe7\"\u003e\u003cincoming\u003eSequenceFlow_0y8t2rp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0y8t2rp\" sourceRef=\"ServiceTask_0t2unnc\" targetRef=\"EndEvent_04acwe7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0mww2ez\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0t2unnc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"210\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"205\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"213\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0t2unnc\" id=\"ServiceTask_0t2unnc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"353\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04acwe7\" id=\"EndEvent_04acwe7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"539.8955223880597\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"557.8955223880597\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0y8t2rp\" id=\"SequenceFlow_0y8t2rp_di\"\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"496.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mww2ez\" id=\"SequenceFlow_0mww2ez_di\"\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"299.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 5,
+        "workflow_id": "ocr_parse_image_attachment",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"ocr_parse_image_attachment\" isExecutable=\"true\" name=\"OCR: Parse Image (Attachment)\"\u003e\u003cdocumentation\u003eSends an attachment to fn_ocr, creating a note of lines that are above the set confidence threshold.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mww2ez\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0t2unnc\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores (threshold = {0})\\\\n\\\\n\\\".format(workflow.properties.ocr_results.get(\\\"inputs\\\", {}).get(\\\"ocr_confidence_threshold\\\"))\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line.get(\\\"text\\\",None) + f\u0027\\\" \\\\t\\\\t \u0026lt;i\u0026gt;Confidence Score: {round(line.get(\\\"confidence\\\",None),2)}%\u0026lt;/i\u0026gt;\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\ninputs.ocr_attachment_id = attachment.id if attachment.id else None\\n\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mww2ez\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0y8t2rp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_04acwe7\"\u003e\u003cincoming\u003eSequenceFlow_0y8t2rp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0y8t2rp\" sourceRef=\"ServiceTask_0t2unnc\" targetRef=\"EndEvent_04acwe7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0mww2ez\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0t2unnc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"210\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"205\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"213\" xsi:type=\"omgdc:Point\" y=\"215\"/\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0t2unnc\" id=\"ServiceTask_0t2unnc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"353\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04acwe7\" id=\"EndEvent_04acwe7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"539.8955223880597\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"557.8955223880597\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0y8t2rp\" id=\"SequenceFlow_0y8t2rp_di\"\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"496.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mww2ez\" id=\"SequenceFlow_0mww2ez_di\"\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"299.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
-      "description": "",
-      "export_key": "parse_image_attachment",
+      "content_version": 5,
+      "description": "Sends an attachment to fn_ocr, creating a note of lines that are above the set confidence threshold.",
+      "export_key": "ocr_parse_image_attachment",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656616412816,
-      "name": "Parse Image (Attachment)",
+      "last_modified_time": 1658243066089,
+      "name": "OCR: Parse Image (Attachment)",
       "object_type": "attachment",
-      "programmatic_name": "parse_image_attachment",
-      "tags": [],
-      "uuid": "518bfac5-043b-459c-9af4-08b3c4169d08",
-      "workflow_id": 2
+      "programmatic_name": "ocr_parse_image_attachment",
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
+      "uuid": "1e49088d-6ae6-43c8-b872-cb3317c287e6",
+      "workflow_id": 8
     },
     {
       "actions": [],
       "content": {
         "version": 2,
-        "workflow_id": "parse_image_base64",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"parse_image_base64\" isExecutable=\"true\" name=\"Parse Image (Base64)\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u36jkn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00lupd7\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores\\\\n\\\\n\\\"\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line[\\\"text\\\"] + f\u0027\\\" \\\\t\\\\t Confidence Score: {round(line[\\\"confidence\\\"],2)}%\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\n# inputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = rule.properties.ocr_base64\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u36jkn\u003c/incoming\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u36jkn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00lupd7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00lupd7\" id=\"ServiceTask_00lupd7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"179\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u36jkn\" id=\"SequenceFlow_0u36jkn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"232\" y=\"205.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "ocr_parse_image_base64",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"ocr_parse_image_base64\" isExecutable=\"true\" name=\"OCR: Parse Image (Base64)\"\u003e\u003cdocumentation\u003eIncident-level action that accepts a Base64 string representing an image; creates a note of lines that are above the set confidence threshold.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u36jkn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00lupd7\" name=\"Read Text From Image Bytes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c690d533-585f-4b9d-a6c8-9d570f2fac5c\"\u003e{\"inputs\":{\"f68e397a-c89a-4d1c-ad3e-c4de71006d11\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"35ce524f-3a34-40f9-ae46-bebb39f4c275\"}}},\"post_processing_script\":\"content = workflow.properties.ocr_results[\\\"content\\\"]\\n\\nif content is not None:\\n  output_text = \\\"Below are the lines detected by OCR, as well as their confidence scores\\\\n\\\\n\\\"\\n  for line in content:\\n    output_text += \u0027\\\"\u0027 + line[\\\"text\\\"] + f\u0027\\\" \\\\t\\\\t Confidence Score: {round(line[\\\"confidence\\\"],2)}%\\\\n\\\\n\u0027\\n  \\n  \\n  incident.addNote(output_text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.ocr_incident_id = incident.id\\n# inputs.ocr_attachment_id = attachment.id if attachment.id else None\\n# inputs.ocr_artifact_id = artifact.id if artifact.id else None\\ninputs.ocr_task_id = task.id if task and task.id else None\\ninputs.ocr_confidence_threshold = rule.properties.ocr_confidence_threshold\\ninputs.ocr_language = rule.properties.ocr_language\\ninputs.ocr_base64 = rule.properties.ocr_base64\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ocr_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u36jkn\u003c/incoming\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u36jkn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00lupd7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00lupd7\" id=\"ServiceTask_00lupd7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"235\" y=\"179\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u36jkn\" id=\"SequenceFlow_0u36jkn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"217\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003comgdi:waypoint x=\"235\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"232\" y=\"205.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 2,
-      "description": "",
-      "export_key": "parse_image_base64",
+      "description": "Incident-level action that accepts a Base64 string representing an image; creates a note of lines that are above the set confidence threshold.",
+      "export_key": "ocr_parse_image_base64",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656541621591,
-      "name": "Parse Image (Base64)",
+      "last_modified_time": 1658242744053,
+      "name": "OCR: Parse Image (Base64)",
       "object_type": "incident",
-      "programmatic_name": "parse_image_base64",
-      "tags": [],
-      "uuid": "1b8082e7-7e74-481e-9f90-9d7a847c9a74",
-      "workflow_id": 3
+      "programmatic_name": "ocr_parse_image_base64",
+      "tags": [
+        {
+          "tag_handle": "fn_ocr",
+          "value": null
+        }
+      ],
+      "uuid": "3b4fc348-2fce-4815-9c9c-ddf141f12e13",
+      "workflow_id": 9
     }
   ],
   "workspaces": []

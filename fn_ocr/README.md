@@ -64,7 +64,7 @@ This app uses a custom build process on the backend which compiles tesseract and
 Please keep in mind that this app relies on Tesseract 5.0.1, which is popular open-source OCR. Any limitations found in Tesseract 5.0.1 will similary be present in this app e.g. rotated text cannot be detected if it is shorter than 70 characters.
 
 ### Integration Server Installation
-If you are running your own integration server (as opposed to using containers), you will need to install Tesseract OCR in your environment. Luckily, Tesseract is popular enough that, more often than not, there are pre-compiled binaries. The pre-compiled packages often come with language packages, but not always. Please see instructions below for installing on your OS, as well as how to add more langauges. 
+If you are running your own integration server (as opposed to using AppHost), you will need to install Tesseract OCR in your environment. Luckily, Tesseract is popular enough that, more often than not, there are pre-compiled binaries. The pre-compiled packages often come with language packages, but not always. Please see instructions below for installing on your OS, as well as how to add more langauges. 
 
 You can also [build from source](https://tesseract-ocr.github.io/tessdoc/Compiling.html), although note that you will need to also install or compile [Leptonica](http://www.leptonica.org). You can check the Dockerfile for this app for an example of how to build from scratch, but keep in mind that it is likely you will not need to build any of the image libraries (libpng, libjpeg, libtiff, etc.) on your own local machine, as they are either present or available through `apt`, `yum`, `brew`, etc.
 
@@ -130,7 +130,7 @@ Both Python 3.6 and 3.9 are supported
 
 Additional package dependencies may exist for each of these packages:
 
-* opencv-python-headless == 4.5.5.64
+* opencv-python-headless ~= 4.5.5.64
 * resilient-circuits >= 45.0.0
 * numpy >= 1.19
 * pandas >= 1.1.5
@@ -151,7 +151,7 @@ This app has been implemented using:
 
 ---
 
-## Function - Read Text From Image Bytes
+## Function - OCR: Read Text From Image Bytes
 runs OCR on an image in byte string format and returns the relevant results
 
  ![screenshot: fn-read-text-from-image-bytes ](./doc/screenshots/fn-read-text-from-image-bytes.png) 
@@ -250,10 +250,9 @@ inputs.ocr_base64 = None
 content = workflow.properties.ocr_results["content"]
 
 if content is not None:
-  output_text = "Below are the lines detected by OCR, as well as their confidence scores\n\n"
+  output_text = "Below are the lines detected by OCR, as well as their confidence scores (threshold = {0})\n\n".format(workflow.properties.ocr_results.get("inputs", {}).get("ocr_confidence_threshold"))
   for line in content:
-    output_text += '"' + line["text"] + f'" \t\t Confidence Score: {round(line["confidence"],2)}%\n\n'
-  
+    output_text += '"' + line.get("text",None) + f'" \t\t <i>Confidence Score: {round(line.get("confidence", None),2)}%</i>\n\n'
   
   
   incident.addNote(output_text)
@@ -268,9 +267,9 @@ if content is not None:
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Parse Image (Artifact) | artifact | `parse_image` |
-| Parse Image (Attachment) | attachment | `parse_image_attachment` |
-| Parse Image (Base64) | incident | `parse_image_base64` |
+| Parse Image (Artifact) | artifact | `ocr_parse_image` |
+| Parse Image (Attachment) | attachment | `ocr_parse_image_attachment` |
+| Parse Image (Base64) | incident | `ocr_parse_image_base64` |
 
 ---
 
