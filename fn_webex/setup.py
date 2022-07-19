@@ -28,8 +28,9 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="http://ibm.biz/soarcommunity",
-    description="Resilient Circuits Components for 'fn_webex'",
-    long_description="""Resilient Circuits Components for 'fn_webex'""",
+    description="This package provides a function that interfaces the CISCO webes platform",
+    long_description="This package provides a function that creates Cisco WebEx meeting host URL and attendee URL given the following parameters: meeting start and end time, meeting name and agenda and a WebEx password",
+    
     install_requires=[
         "resilient-circuits>=45.0.0"
     ],
