@@ -57,6 +57,7 @@ fn_misp
 fn_mitre_integration
 fn_mxtoolbox
 fn_netdevice
+fn_ocr
 fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
