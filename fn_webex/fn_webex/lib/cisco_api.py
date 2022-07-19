@@ -22,7 +22,7 @@ class WebexAPI:
         self.rc = self.requiredParameters.get("rc")
         self.header = self.generate_header(self.requiredParameters["bearerID"])
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
-        self.check_time(self.requiredParameters["start"], self.requiredParameters["end"])
+        self.check_time(self.timezone, self.requiredParameters["start"], self.requiredParameters["end"])
         
 
     def convert_to_dict(self, to_convert):
@@ -51,21 +51,24 @@ class WebexAPI:
         return results
 
 
-    def check_time(self, meeting_start, meeting_end):
+    def check_time(self, timezone, meeting_start, meeting_end):
         if meeting_start is not None:
             meeting_start = datetime.datetime.fromtimestamp(meeting_start/1000)
         else :
             meeting_start = datetime.datetime.now() + datetime.timedelta(minutes=2)
-
         if meeting_end is not None:
             meeting_end = datetime.datetime.fromtimestamp(meeting_end/1000)
             if meeting_end < meeting_start:
-                raise ValueError('End time must be after start time')
+                raise ValueError('Meeting end time {}, must be after meeting start time {}'.format(
+                    meeting_end.strftime('%Y-%m-%dT%H:%M:%S'), meeting_start.strftime('%Y-%m-%dT%H:%M:%S')))
+            elif meeting_end < datetime.datetime.now():
+                raise ValueError('Meeting end time {}, must be after current time {}'.format(
+                    meeting_end.strftime('%Y-%m-%dT%H:%M:%S'), datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')))
         else:
             meeting_end = meeting_start + datetime.timedelta(minutes=DEFAULT_MEETING_LENGTH)
-        
-        self.meeting_start_time = meeting_start.strftime('%Y-%m-%dT%H:%M:%S') + self.timezone
-        self.meeting_end_time   = meeting_end.strftime('%Y-%m-%dT%H:%M:%S') + self.timezone
+
+        self.meeting_start_time = meeting_start.strftime('%Y-%m-%dT%H:%M:%S') + timezone
+        self.meeting_end_time   = meeting_end.strftime('%Y-%m-%dT%H:%M:%S') + timezone
 
 
     def generate_header(self, bearerID):
@@ -121,5 +124,3 @@ class WebexAPI:
         elif response.status_code == 401:
             raise FunctionError("Security context is invalid, API returned 401!")
         return response
-
-

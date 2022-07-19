@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-from multiprocessing.sharedctypes import Value
 import json
 import time
 import pytest
+import datetime
 
 from mock import patch
 from pyclbr import Function
 from resilient_lib import RequestsCommon
 from fn_webex.lib.cisco_api import WebexAPI
+from resilient_circuits.util import get_config_data
 from resilient_circuits.action_message import FunctionError_ as FunctionError
-from resilient_circuits.util import get_config_data, get_function_definition
-
 
 PACKAGE_NAME = "fn_webex"
 FUNCTION_NAME = "fn_create_meeting"
@@ -44,8 +43,8 @@ class TestFnCreateMeeting:
 
     requiredParameters = {
             "rc"                          : RequestsCommon(),
-            "start"                       : 1657973238000,
-            "end"                         : 1657975870000,
+            "start"                       : round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000,
+            "end"                         : round((datetime.datetime.now() + datetime.timedelta(minutes=95)).timestamp()) * 1000,
             "url"                         : "http://www.example.com",
             "bearerID"                    : "1234",
             "timzone"                     : "gmt 05:30"
@@ -75,7 +74,8 @@ class TestFnCreateMeeting:
         requiredParameters["start"] = 0
         requiredParameters["end"]   = 0
         optionalParameters["title"] = ""
-        webex = WebexAPI(requiredParameters, optionalParameters)
+        with pytest.raises(ValueError) as err:
+            webex = WebexAPI(requiredParameters, optionalParameters)
         with pytest.raises(FunctionError) as err:
             webex.create_meeting()
 
@@ -94,10 +94,10 @@ class TestFnCreateMeeting:
 class TestWebexApi:
     requiredParameters = {
             "rc"                          : RequestsCommon(),
-            "start"                       : 1657973238000,
-            "end"                         : 1657975870000,
-            "url"                         : "",
-            "bearerID"                    : "NGM3OGJiMzgtM2E5Yi00OTNlLWE5NDgtYmZkNTVjODQ4NzJiNDFmMWVlODUtZDBi_P0A1_f688574e-8402-4b53-864e-e725f4468887",
+            "start"                       : round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000,
+            "end"                         : round((datetime.datetime.now() + datetime.timedelta(minutes=95)).timestamp()) * 1000,
+            "url"                         : "http://www.example.com",
+            "bearerID"                    : "1234",
             "timzone"                     : "gmt 05:30"
         }
     optionalParameters = {
@@ -115,16 +115,11 @@ class TestWebexApi:
         ("0530"      , "+0530"),( " -05:30  " , "-0530")])
     def test_get_timeZones(self, mock_inputs, expected_results):
         assert(self.webex.get_timeZones(mock_inputs) == expected_results)
-
         assert(self.webex.get_timeZones(None) == time.strftime("%z", time.localtime()))
-        try:
+        with pytest.raises(ValueError) as err:
             self.webex.get_timeZones("GMT 05:£30")
-        except ValueError as msg:
-            print(msg)
-        try:
+        with pytest.raises(ValueError) as err:
             self.webex.get_timeZones("IST 05:30")
-        except ValueError as msg:
-            print(msg)
 
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
@@ -137,4 +132,17 @@ class TestWebexApi:
         with pytest.raises(ValueError) as err:
             self.webex.generate_header(None), expected_results
 
+    def test_check_time(self):
+        start_time = round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000
+        end_time = round((datetime.datetime.now() + datetime.timedelta(minutes=5)).timestamp()) * 1000
+        with pytest.raises(ValueError) as err:
+            self.webex.check_time("+0000", start_time, end_time)
 
+        start_time = round((datetime.datetime.now() - datetime.timedelta(minutes=45)).timestamp()) * 1000
+        end_time = round((datetime.datetime.now() - datetime.timedelta(minutes=5)).timestamp()) * 1000
+        with pytest.raises(ValueError) as err:
+            self.webex.check_time("+0000", start_time, end_time)
+
+        start_time = self.requiredParameters.get("start")
+        end_time = self.requiredParameters.get("end")
+        self.webex.check_time("+0000", start_time, end_time)
