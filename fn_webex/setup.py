@@ -22,12 +22,12 @@ def snake_to_camel(word):
 
 setup(
     name="fn_webex",
-    display_name="<<display name of your app here>>",
-    version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
+    display_name="Cisco Webex",
+    version="2.0.0",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="http://ibm.biz/soarcommunity",
     description="Resilient Circuits Components for 'fn_webex'",
     long_description="""Resilient Circuits Components for 'fn_webex'""",
     install_requires=[

@@ -62,6 +62,8 @@ else:
   ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
 
   text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
+  for key in content:
+      text += u"<br />{} : {}".format(key, content.get(key))
   
 note = helper.createRichText(text)
 incident.addNote(note)

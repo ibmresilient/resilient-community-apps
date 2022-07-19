@@ -48,6 +48,7 @@ class WebexAPI:
             results["status"] = True
         else:
             results["status"] = False
+            raise FunctionError("Failed to create meeting")
         return results
 
 
