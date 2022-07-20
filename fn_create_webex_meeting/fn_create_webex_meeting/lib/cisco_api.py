@@ -218,37 +218,3 @@ class WebexAPI:
             results["attendee_url"] = success_details_regex_search.group(2)
 
         return results
-
-
-
-
-WebexAPI(requiredParameters, optionalParameters)
-
-
-requiredParameters = {
-    "rc"                          : RequestsCommon(),
-    "start"                       : 1657973238000,
-    "end"                         : 1657975870000,
-    "url"                         : "https://webexapis.com/v1/meetings/",
-    "bearerID"                    : "NGM3OGJiMzgtM2E5Yi00OTNlLWE5NDgtYmZkNTVjODQ4NzJiNDFmMWVlODUtZDBi_P0A1_f688574e-8402-4b53-864e-e725f4468887",
-    "timzone"                     : "gmt05:30"
-}
-
-optionalParameters = {
-    "siteURL"                     : "calvinwynne-8xjq.webex.com",
-    "hostEmail"                   : "",
-    "title"                       : "Sample Meeting VSCode",
-    "password"                    : "abcd123",
-    "agenda"                      : "to test sample meetings",
-    "enabledAutoRecordMeeting"    : "false",
-    "allowAnyUserToBeCoHost"      : "false",
-    "enabledJoinBeforeHost"       : "false",
-    "enableConnectAudioBeforeHost": "false",
-    "excludePassword"             : "false",
-    "publicMeeting"               : "false",
-    "enabledWebcastView"          : "false",
-    "enableAutomaticLock"         : "false",
-    "allowFirstUserToBeCoHost"    : "false",
-    "allowAuthenticatedDevices"   : "false",
-    "sendEmail"                   : "true",
-}
