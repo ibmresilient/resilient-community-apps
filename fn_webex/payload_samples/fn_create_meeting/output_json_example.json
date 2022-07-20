@@ -65,7 +65,7 @@
     "version": "1.0",
     "package": "fn-webex",
     "package_version": "1.0.0",
-    "host": "example@example.com",
+    "host": "local",
     "execution_time_ms": 2276,
     "timestamp": "2022-07-15 14:14:05"
   }
