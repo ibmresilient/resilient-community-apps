@@ -99,6 +99,9 @@ def get_configs(path_config_file=None, app_name=None):
     if app_name is None:
         raise ValueError("There is no function defined in app.config.")
 
+    if not opts.get(app_name, None):
+        raise ValueError("The function '{}' not defined in the app.config.".format(app_name))
+
     return opts[app_name]
 
 def validate_fields(field_list, kwargs):
