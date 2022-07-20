@@ -6,5 +6,11 @@ include fn_slack/LICENSE
 include fn_slack/doc/*
 include fn_slack/data/templates/*.jinja*
 include apikey_permisions.txt
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
 global-exclude *.bak

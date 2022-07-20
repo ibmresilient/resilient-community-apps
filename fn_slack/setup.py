@@ -22,20 +22,20 @@ def snake_to_camel(word):
 
 setup(
     name='fn_slack',
-    version='2.0.0',
+    display_name='Slack Integration for SOAR',
+    version='1.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
-    url="https://ibm.com/mysupport",
-    description="Resilient Circuits Components for 'fn_slack'",
+    url='https://ibm.com/mysupport',
+    description="SOAR Components for 'fn_slack'",
     long_description="Function creates a Slack message based on a Resilient Incident, it's Tasks, Notes, Artifacts "
                      "and Attachments, exports conversation history from Slack channel to a text file, saves the "
                      "text file as an Attachment and archives the Slack channel.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib',
-        'slackclient>=2.0.0',
-        'bs4'
+        'resilient_circuits>=45.0.0',
+        'slackclient~=2.9.4',
+        'beautifulsoup4~=4.11.1'
     ],
     packages=find_packages(),
     include_package_data=True,

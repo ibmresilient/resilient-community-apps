@@ -257,9 +257,9 @@ class SlackUtils(object):
 
         results = self.slack_client.api_call(
             api_method = "files.upload",
-            params = {
+            data = {
                 "channels" : self.get_channel_id(),
-                "file" : attachment_content,
+                "content" : attachment_content,
                 "filename" : file_name,
                 "filetype" : file_type,
                 "title" : u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
