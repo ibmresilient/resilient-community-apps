@@ -68,7 +68,7 @@ def main():
                                                      " (to be used with an IBM SOAR app).\nThe parameters used for "
                                                      "the OAuth2 service can be taken either from an app.config file or "
                                                      "manually from the command-line.\n(For further information please "
-                                                     "visit refer to the auth_utils documentation.)",
+                                                     "refer to the auth_utils documentation.)",
         help="Generate a refresh token for an OAuth2 service\n(to be used with an IBM SOAR app)",
         formatter_class=FORMATTER_CLASS)
     parser_oauth2_gen_refresh_token.add_argument("-c", "--config_file", help="(Optional) Location of app.config file")
