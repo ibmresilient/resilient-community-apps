@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import time
 import logging
@@ -26,6 +26,15 @@ class WebexAPI:
         
 
     def convert_to_dict(self, to_convert):
+        '''
+        The primary purpose of this function is to covert a string in a json format to a dictionary.
+        This function will be replaced with json.loads() function from the json library.
+
+        Arguments:
+        ---------
+        to_convert : String
+                     Any string in a json format (key value pair) can be passed in as a string
+        '''
         ret = {}
         for bracket in ["[", "]", "{", "}", "\""]:
             to_convert = to_convert.replace(bracket,"")
@@ -37,6 +46,10 @@ class WebexAPI:
 
 
     def create_meeting(self):
+        '''
+        Gathers all the required parameters to schedule a meeting and generates an output based
+        on the response from endpoint server.
+        '''
         meetingOptions = self.generate_meeting_parameters(self.optionalParameters)
         response = self.webex_request("post", meetingOptions)
 
@@ -53,6 +66,29 @@ class WebexAPI:
 
 
     def check_time(self, timezone, meeting_start, meeting_end):
+        '''
+        This function determines and formats the meeting start and end time as per the webex api
+        requirements. The meeting start and end datetime is specified in the forma of a timestamp. 
+        These values are then converted to ISO 8601 format and passed on to the webex api. This 
+        function provides the user with a certain level of flexibility when it comes to specifying 
+        the meeting start and end time. For instance:
+
+            * Only if end time is specified: meeting will start at 2 minutes from current time 
+              till the specified end time
+            * Only if start time is specified, meeting will start from the specified start time
+              till 45 minutes from the start time
+            * If neither meeting start or end time is specified meeting starts 2 minutes from 
+              current time till 45 minutes from the start time
+
+        Arguments:
+        ---------
+        timezone      : String
+                        The timezone in accordance to which the meeting is to be scheduled
+        meeting_start : Integer
+                        Meeting start date and time in timestamp format
+        meeting_end   : Integer
+                        Meeting end date and time in timestamp format
+        '''
         if meeting_start is not None:
             meeting_start = datetime.datetime.fromtimestamp(meeting_start/1000)
         else :
@@ -73,15 +109,34 @@ class WebexAPI:
 
 
     def generate_header(self, bearerID):
+        '''
+        Checks for bearerID and returns it in a json format for request header
+        
+        Arguments:
+        ---------
+        bearerID : Integer
+                   Session ID that is required for authentication
+        '''
         if not bearerID:
             raise ValueError("Bearer ID not specified")
-        header = {
+        return {
             'Authorization' : "Bearer {}".format(bearerID),
             'Content-Type'  : 'application/json'}
-        return header
 
 
     def get_timeZones(self, timezone):
+        '''
+        This function determines and formats the timezone for the meeting. If no timezone is provided, 
+        the application automatially assigns systems local timezone. The timezone is to be provided in
+        the form of a sting in the specified formats: GMT +01:00 or UMT -0500 or -05:30. The function
+        automatically formats the timezone in accordance with the webex api requirements.
+
+        Arguments:
+        ---------
+        timezone : String
+                   Timezone to be provided as a sting. Acceptable format 
+                   GMT -01:00, GMT -0100, UMT -01:00, -01:00
+        '''
         if timezone is None:
             return time.strftime("%z", time.localtime())
         else:
@@ -106,6 +161,14 @@ class WebexAPI:
 
 
     def generate_meeting_parameters(self, meetingParameters):
+        '''
+        Formating the meeting parameters in json format
+        
+        Arguments:
+        ---------
+        meetingParameters : dict
+                            required meeting settings in the form of a json
+        '''
         request_parameters = '{\"start\":\"' + self.meeting_start_time + '\", \"end\":\"' + self.meeting_end_time + '\"'
         for key in meetingParameters.keys():
             request_parameters +=  ', \"{}\":\"{}\" '.format(key, meetingParameters[key])
@@ -114,14 +177,24 @@ class WebexAPI:
 
 
     def webex_request(self, method, data):
-        """Wrapper for requests, appends content-type and fills in site url"""
+        """
+        Wrapper for requests, appends content-type and fills in site url
+        
+        Arguments:
+        ---------
+        method  : String
+                  request execution method
+        data    : String
+                  request body
+        """
         webexurl = self.requiredParameters.get("url")
-        response = self.rc.execute_call_v2(method, webexurl, data=data,
+        response = self.rc.execute(method, webexurl, data=data,
                                         headers=self.header, proxies=self.rc.get_proxies())
         if response is None:
             raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format(method))
-        if response.status_code != 200 and response.status_code != 201 and response.status_code != 401:
+        if response.status_code not in [200, 201, 401]:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, webexurl))
         elif response.status_code == 401:
             raise FunctionError("Security context is invalid, API returned 401!")
         return response
+        

@@ -15,6 +15,11 @@ log.addHandler(logging.StreamHandler())
 def selftest_function(opts):
     app_configs = opts.get("fn_webex", {})
 
+
+    validate_fields([{"name" : "webex_site_url", 
+                        "name" : "webex_bearerID", 
+                        "name" : "webex_timezone"}], app_configs)
+
     requiredParameters, meetingParameters = {}, {}
     
     requiredParameters["start"] = round((datetime.datetime.now() + datetime.timedelta(minutes=10)).timestamp()) * 1000
@@ -30,12 +35,6 @@ def selftest_function(opts):
     meetingParameters["agenda"] = ""
     meetingParameters["password"] = "Selftest123#"
     meetingParameters["sendEmail"] = True
-
-
-
-    validate_fields([{"name" : "webex_site_url", 
-                        "name" : "webex_bearerID", 
-                        "name" : "webex_timezone"}], app_configs)
     
     try :
         webex = WebexAPI(requiredParameters, meetingParameters)

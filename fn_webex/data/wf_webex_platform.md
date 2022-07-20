@@ -21,19 +21,19 @@
 # To set meeting name to the workflow inputs, uncomment the following lines
 inputs.webex_meeting_name = incident.name
 
-inputs.webex_meeting_start_time = inputs.webex_meeting_start_time if rule.properties.webex_meeting_start_time is None else rule.properties.webex_meeting_start_time
-inputs.webex_meeting_end_time = inputs.webex_meeting_end_time if rule.properties.webex_meeting_end_time is None else rule.properties.webex_meeting_end_time
+inputs.webex_meeting_start_time = inputs.webex_meeting_start_time if not rule.properties.webex_meeting_start_time else rule.properties.webex_meeting_start_time
+inputs.webex_meeting_end_time = inputs.webex_meeting_end_time if not rule.properties.webex_meeting_end_time else rule.properties.webex_meeting_end_time
 
 # Get the agenda from the activity field or the incident description
 if rule.properties.webex_meeting_agenda is None:
-  if incident.description is not None and incident.description.content is not None:
+  if not incident.description and not incident.description.content:
     inputs.webex_meeting_agenda = incident.description.content
   else:
     inputs.webex_meeting_agenda = ""
 else:
   inputs.webex_meeting_agenda = rule.properties.webex_meeting_agenda
 
-inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties.webex_meeting_password is None else rule.properties.webex_meeting_password
+inputs.webex_meeting_password = inputs.webex_meeting_password if not rule.properties.webex_meeting_password else rule.properties.webex_meeting_password
   
 ```
 
@@ -52,10 +52,10 @@ else:
   host_url = content.get("host_url")
   attendee_url = content.get("attendee_url")
 
-  if host_url is None:
+  if not host_url:
     host_url = ""
 
-  if attendee_url is None:
+  if not attendee_url:
     attendee_url = ""
     
   ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)

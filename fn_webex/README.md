@@ -57,11 +57,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_webex'**
+**SOAR Components for 'fn_webex'**
 
  ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
 
-Resilient Circuits Components for 'fn_webex'
+SOAR Components for 'fn_webex'
 
 ### Key Features
 <!--
