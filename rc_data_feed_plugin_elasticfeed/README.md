@@ -8,6 +8,7 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 # History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0   | 07/2022 | New base images and functionality for attachments |
 | 1.0.1   | 08/2020 | App Host support |
 | 1.0.0   | 12/2019 | Initial release |
 

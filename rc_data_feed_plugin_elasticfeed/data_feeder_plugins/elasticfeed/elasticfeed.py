@@ -19,11 +19,9 @@ from rc_data_feed.lib.type_info import TypeInfo
 LOG = logging.getLogger(__name__)
 
 DEF_INDEX_SETTINGS = {
-    "settings": {
-        "index": {
-            "blocks": {
-                "read_only_allow_delete": "false"
-            }
+    "index": {
+        "blocks": {
+            "read_only_allow_delete": "false"
         }
     }
 }
@@ -32,8 +30,9 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     """Feed destination for writing Resilient data to a local directory."""
     def __init__(self, rest_client_helper, options):   # pylint: disable=unused-argument
         super(ElasticFeedDestination, self).__init__()
-        self.url = options.get("url")
         self.port = int(options.get("port", 9200))
+        self.url = "{}:{}".format(options.get("url"), self.port)
+
         self.user = options.get("auth_user")
         self.password = options.get("auth_password")
         self.index_prefix = options.get("index_prefix")
@@ -50,25 +49,27 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             # Attempt to create an SSL context, should work fine if no CERT is provided
             if self.cafile is None or self.cafile.lower() == 'false':
                 context = create_default_context()
+                # Connect to the ElasticSearch instance
+                context.check_hostname = False
+                self.es = Elasticsearch(self.url,
+                        ssl_context=context,
+                        http_auth=http_auth,
+                        verify_certs=False)
             else:
                 context = create_default_context(cafile=self.cafile)
                 # Connect to the ElasticSearch instance
-            self.es = Elasticsearch(self.url,
-                                    port=self.port,
-                                    ssl_context=context,
-                                    http_auth=http_auth)
+                self.es = Elasticsearch(self.url,
+                                        ssl_context=context,
+                                        http_auth=http_auth)
         else:
             # Connect without to Elastic without HTTPS
             self.es = Elasticsearch(self.url,
-                                    port=self.port,
-                                    verify_certs=False,
-                                    cafile=self.cafile,
                                     http_auth=http_auth)
 
 
     def _create_index(self, index):
-        if not self.es.indices.exists(index):
-            results = self.es.indices.create(index, body=DEF_INDEX_SETTINGS)
+        if not self.es.indices.exists(index=index):
+            results = self.es.indices.create(index=index, settings=DEF_INDEX_SETTINGS)
             LOG.debug(u"settings on {}: {}".format(index, results))
 
 
@@ -101,7 +102,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     def _fn_elasticsearch_index(self, index, object_type, type_id, payload):
         """Function: Allows a user to index a specified payload"""
 
-        result = self.es.index(index=index, doc_type=object_type, id=type_id, body=payload)
+        result = self.es.index(index=index, id=type_id, document=payload)
 
         if result.get("result") not in ("created", "updated"):
             msg_error = u"Unable to index {}, {}, {} ({})".format(index, object_type, type_id, payload)
@@ -119,13 +120,13 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             }
         }
 
-        result = self.es.update(index=index, doc_type=object_type, id=type_id, body=update_payload)
+        result = self.es.update(index=index, id=type_id, doc=update_payload)
 
 
     def _fn_elasticsearch_delete(self, index, object_type, type_id):
         """Function: Allows a user to delete a specified payload"""
 
-        result = self.es.delete(index=index, doc_type=object_type, id=type_id)
+        result = self.es.delete(index=index, id=type_id)
 
         if result.get("result") not in ("deleted"):
             msg_error = u"Unable to delete {}, {}, {}".format(index, object_type, type_id)
