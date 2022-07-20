@@ -15,9 +15,8 @@ setup(
     long_description="An app that integrates SOAR incidents with PagerDuty incidents. Used to create pagerduty incidents from SOAR incidents, as well as automatically creating notes and transitioning incidents (acknowledged and resolved)",
     install_requires=[
         'resilient_circuits>=43.0.0',
-        'beautifulsoup4',
-        'pdpyras',
-        'resilient-lib'
+        'beautifulsoup4~=4.11.1',
+        'pdpyras~=4.5.0',
     ],
     packages=find_packages(),
     python_requires=">=3.6",
