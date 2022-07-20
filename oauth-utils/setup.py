@@ -22,7 +22,7 @@ setup(
     ],
     extras_require={
         'browser': [
-            'flask==1.1.1',
+            'flask==2.0.3',
             'pyOpenssl==21.0.0'
         ]
     },
