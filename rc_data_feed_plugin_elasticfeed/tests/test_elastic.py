@@ -51,7 +51,7 @@ else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
-
+@pytest.mark.livetest
 def test_index():
     """
     test that all fields sent for a elastic_feed are present
@@ -70,6 +70,7 @@ def test_index():
 
     assert result["_version"] == 1
 
+@pytest.mark.livetest
 def test_update():
     """
     test that all fields sent for a elastic_feed are present
@@ -97,6 +98,7 @@ def test_update():
     # depends on previous tests
     assert result["_version"] == 2
 
+@pytest.mark.livetest
 def test_alter():
     """
     test that all fields sent for a elastic_feed are present
@@ -124,6 +126,7 @@ def test_alter():
     # depends on previous tests
     assert test_result["_version"] == 3
 
+@pytest.mark.livetest
 def test_delete():
     es_feed = ElasticFeedDestination(None, APP_CONFIG)
 
