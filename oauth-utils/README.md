@@ -277,7 +277,8 @@ scope=https://mail.google.com/
 token_url=https://accounts.google.com/o/oauth2/token
 auth_url=https://accounts.google.com/o/oauth2/auth
 ```
-* Execute the `oauth2_generate_refresh_token` utility using the new credentials as command-line arguments.
+* Ensure you are logged out of any Google accounts.
+* Execute the `oauth2_generate_refresh_token` utility using the new credentials as command line arguments.
 ```
 $ oauth-utils oauth2_generate_refresh_token -ci=337895628616-h4epvvbqv5946aun1u9qg7kqp6tu5c1j.apps.googleusercontent.com -cs=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 -sc=https://mail.google.com/ -tu=https://accounts.google.com/o/oauth2/token -au=https://accounts.google.com/o/oauth2/auth
 Running from command line.
@@ -289,7 +290,8 @@ https://accounts.google.com/o/oauth2/auth?state=6a3290f368de76e0dc83d7a380ca91e8
 
 Enter callback URL: 
 ```
-* Enter the URL in a browser login and follow the directions by clicking `Continue` in each presented screen.
+* Ensure you are logged out of any Google accounts.
+* Enter the URL in a browser, log in as the SMTP email user, and follow the directions by clicking `Continue` in each presented screen.
 
   ![screenshot: oauth-utils-goog-web ](./doc/screenshots/oauth-utils-goog-web.png)
   
@@ -402,6 +404,7 @@ scope=offline_access https://outlook.office365.com/SMTP.Send
 token_url=https://login.microsoftonline.com/c06fa6c3-5dd0-48c9-9a4b-7edbf1904269/oauth2/v2.0/token
 auth_url=https://login.microsoftonline.com/c06fa6c3-5dd0-48c9-9a4b-7edbf1904269/oauth2/v2.0/authorize
 ```
+* Ensure you are logged out of any Microsoft accounts.
 * Using the browser mode option, execute the `oauth2_generate_refresh_token` utility using the new credentials in the app.config file.
 ```
 $ oauth-utils oauth2_generate_refresh_token -b
