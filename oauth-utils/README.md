@@ -293,7 +293,6 @@ https://accounts.google.com/o/oauth2/auth?state=6a3290f368de76e0dc83d7a380ca91e8
 
 Enter callback URL: 
 ```
-* Ensure you are logged out of any Google accounts.
 * Enter the URL in a browser, log in as the SMTP email user, and follow the directions by clicking `Continue` in each presented screen.
 
   ![screenshot: oauth-utils-goog-web ](./doc/screenshots/oauth-utils-goog-web.png)
