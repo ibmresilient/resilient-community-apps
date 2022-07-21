@@ -25,6 +25,9 @@
   - [Install](#install)
   - [Configuration](#configuration)
   - [Usage](#usage)
+- [Configure OAuth 2.0 credentials](#configure-oauth-20-credentials)
+  - [Google Gmail](#google-gmail)
+  - [Microsoft Outlook 365](#microsoft-outlook-365)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -202,7 +205,7 @@ optional arguments:
 
 ---
 
-## Setup of OAuth 2.0 credentials for 3rd party providers
+## Configure OAuth 2.0 credentials
 
 To use the oauth2_generate_refresh_token utility, set up an app or project for an OAuth 2.0 identity provider service from which you can get the required configuration settings, such as:
 ```
@@ -214,7 +217,7 @@ auth_url
 ```
 The setup procedure varies depending on the provider. This document provides examples for 2 well known services `Google Gmail` and `Microsoft Outlook 365`. These examples can be used to send email using SMTP.
 
-### Creating OAuth 2.0 credentials for Gmail
+### Google Gmail
 #### Endpoints
 Google Authorization endpoint - used by client to obtain authorization from the resource owner.
 ```
@@ -315,7 +318,7 @@ refresh_token=1//07JEwfJ_7KNbWCgYIARAAGAcSNwF-L9IrH71Z4sT_VsmL4kO3rSaW4fEKKTpetF
 
 See: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/answer/6158849?hl=en)
 
-### Creating up OAuth 2.0 credentials for Microsoft Outlook
+### Microsoft Outlook 365
 #### Endpoints
 Microsoft Authorization endpoint - used by client to obtain authorization from the resource owner.
 ```
