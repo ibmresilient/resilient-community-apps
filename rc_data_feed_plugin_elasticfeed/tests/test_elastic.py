@@ -12,8 +12,10 @@ TYPE_NAME = "all_types"
 
 APP_CONFIG = {
     "class": "ElasticFeed",
-    "url": "http://localhost",
+    "url": "https://9.46.73.248",
     "port": "9200",
+    "auth_user": "elastic",
+    "auth_password": "+nK4SrSK1Y3C1-hnyQ5R",
     "index_prefix": "res_test_",
     "cafile": "false"
 }
@@ -22,11 +24,9 @@ TS = int(time.time())
 
 INDEX = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
 
-ES = Elasticsearch(APP_CONFIG['url'],
-                   port=APP_CONFIG['port'],
+ES = Elasticsearch("{}:{}".format(APP_CONFIG['url'], APP_CONFIG['port']),
                    verify_certs=False,
-                   cafile=APP_CONFIG['cafile'],
-                   http_auth=None)
+                   http_auth=(APP_CONFIG['auth_user'], APP_CONFIG['auth_password']))
 
 MSG_PAYLOAD = OrderedDict({"id":  TS,
                            "inc_id": 2301,
@@ -63,7 +63,7 @@ def test_index():
     es_feed.send_data(context, MSG_PAYLOAD)
 
     # test the results
-    result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+    result = ES.get(index=INDEX, id=MSG_PAYLOAD['id'])
 
     for key, value in RESULT_PAYLOAD.items():
         assert result["_source"][key] == value
@@ -89,7 +89,7 @@ def test_update():
     # test the results
     ES.indices.refresh(index=INDEX)
 
-    result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=update_payload['id'])
+    result = ES.get(index=INDEX, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert result["_source"][key] == value
@@ -116,7 +116,7 @@ def test_alter():
     # test the results
     ES.indices.refresh(index=INDEX)
 
-    test_result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=update_payload['id'])
+    test_result = ES.get(index=INDEX, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert test_result["_source"][key] == value
@@ -133,7 +133,7 @@ def test_delete():
 
     # test the results
     with pytest.raises(Exception) as err:
-        test_result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+        test_result = ES.get(index=INDEX, id=MSG_PAYLOAD['id'])
         assert err['found'] == False
 
 
