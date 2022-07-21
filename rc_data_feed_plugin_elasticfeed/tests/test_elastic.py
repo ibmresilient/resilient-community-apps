@@ -15,7 +15,7 @@ APP_CONFIG = {
     "url": "https://9.46.73.248",
     "port": "9200",
     "auth_user": "elastic",
-    "auth_password": "+nK4SrSK1Y3C1-hnyQ5R",
+    "auth_password": "Af4L5LmnU9JyscOwtoYr",
     "index_prefix": "res_test_",
     "cafile": "false"
 }
@@ -26,7 +26,7 @@ INDEX = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
 
 ES = Elasticsearch("{}:{}".format(APP_CONFIG['url'], APP_CONFIG['port']),
                    verify_certs=False,
-                   http_auth=(APP_CONFIG['auth_user'], APP_CONFIG['auth_password']))
+                   basic_auth=(APP_CONFIG['auth_user'], APP_CONFIG['auth_password']))
 
 MSG_PAYLOAD = OrderedDict({"id":  TS,
                            "inc_id": 2301,

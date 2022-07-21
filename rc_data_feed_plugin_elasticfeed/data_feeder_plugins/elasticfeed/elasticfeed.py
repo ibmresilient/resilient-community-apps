@@ -41,9 +41,9 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         self.init_elastic()
 
     def init_elastic(self):
-        http_auth = None
+        basic_auth = None
         if self.user:
-            http_auth= (self.user, self.password)
+            basic_auth= (self.user, self.password)
 
         if self.url.lower().startswith('https'):
             # Attempt to create an SSL context, should work fine if no CERT is provided
@@ -53,18 +53,18 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
                 context.check_hostname = False
                 self.es = Elasticsearch(self.url,
                         ssl_context=context,
-                        http_auth=http_auth,
+                        basic_auth=basic_auth,
                         verify_certs=False)
             else:
                 context = create_default_context(cafile=self.cafile)
                 # Connect to the ElasticSearch instance
                 self.es = Elasticsearch(self.url,
                                         ssl_context=context,
-                                        http_auth=http_auth)
+                                        basic_auth=basic_auth)
         else:
             # Connect without to Elastic without HTTPS
             self.es = Elasticsearch(self.url,
-                                    http_auth=http_auth)
+                                    basic_auth=basic_auth)
 
 
     def _create_index(self, index):

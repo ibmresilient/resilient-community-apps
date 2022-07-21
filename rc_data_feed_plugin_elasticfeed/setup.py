@@ -13,7 +13,7 @@ setup(
     description="IBM SOAR Components for sending data feeds to other (BI) systems",
     long_description="IBM SOAR Components for sending data feeds to other (BI) systems",
     install_requires=[
-        'rc_data_feed',
+        'rc_data_feed>=2.2.1',
         'elasticsearch>=8.3',
         'resilient'
     ],
