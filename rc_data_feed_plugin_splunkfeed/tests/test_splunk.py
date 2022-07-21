@@ -3,6 +3,7 @@
 
 import json
 import os
+import pytest
 import re
 import sys
 import time
@@ -63,7 +64,7 @@ else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
-
+@pytest.mark.livetest
 def test_index():
     """
     test that all fields sent for a file_feed are present
@@ -83,6 +84,7 @@ def test_index():
     for key, value in RESULT_PAYLOAD.items():
         assert raw[key] == value
 
+@pytest.mark.livetest
 def test_update():
     """
     test that all fields sent for a file_feed are present
@@ -108,6 +110,7 @@ def test_update():
     for key, value in update_result.items():
         assert raw[key] == value
 
+@pytest.mark.livetest
 def test_alter():
     """
     test that all fields sent for a file_feed are present
