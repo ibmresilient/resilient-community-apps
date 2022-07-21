@@ -19,19 +19,37 @@ else:
 
 TIMEOUT=5
 
+TEST_CONFIG = """[splunk_hec_feed]
+class=SplunkHECFeed
+token=0ec4a079-8e59-487c-be4b-61db5bb498cd
+host=spryly1.fyre.ibm.com
+port=8088
+index=resilient
+# only use source_type if using one type. otherwise, the resilient object type (incident, note, artifact, etc.) is used
+#event_source_type=txt
+event_host=localhost
+event_source=resilient
+use_ssl=true
+user=admin
+password=ResPassw0rd
+timestamp_in_seconds=true"""
+
 '''
 tested with:
 export TEST_RESILIENT_APP_CONFIG=/path/to/test/app.config
 '''
 
 # get the section for the splunk plugin integration based on an test environment variable
-app_config_file = os.environ['TEST_RESILIENT_APP_CONFIG']
+app_config_file = os.environ.get('TEST_RESILIENT_APP_CONFIG')
 config = configparser.ConfigParser()
-with open(app_config_file) as f:
-    if sys.version_info.major < 3:
-        config.readfp(f)
-    else:
-        config.read_file(f)
+if app_config_file:
+    with open(app_config_file) as f:
+        if sys.version_info.major < 3:
+            config.readfp(f)
+        else:
+            config.read_file(f)
+else:
+    config.read_string(TEST_CONFIG)
 
 APP_CONFIG = config._sections['splunk_hec_feed']
 
