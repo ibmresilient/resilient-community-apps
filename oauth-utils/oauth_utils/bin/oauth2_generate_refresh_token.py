@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
-"""Utility to retrieve OAuth2 refresh token in order to configure the Outbound email app"""
+"""Utility to retrieve OAuth 2.0 refresh token in order to configure the Outbound email app"""
 import os
 import sys
 import argparse
@@ -20,7 +20,7 @@ from oauth_utils.lib.oauth2flow import OAuth2Flow
 
 # Global variables
 FLASK_TIMEOUT = 60 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
-CMD_DESCRIPTION = "A utility to generate a refresh token for an OAuth2 service to be used with an IBM SOAR app."
+CMD_DESCRIPTION = "A utility to generate a refresh token for an OAuth 2.0 service to be used with an IBM SOAR app."
 # Generate csrf state token
 CSRF_TOKEN = hashlib.sha256(os.urandom(64)).hexdigest()
 
@@ -51,11 +51,11 @@ def parse_args(args=None):
         parser.add_argument('-b', '--browser', action='store_true', help="Use browser and listener")
         parser.add_argument('-a', '--app_name', help="Specify the app name")
         parser.add_argument('-p', '--port', help="Specify port for callback url and listener")
-        parser.add_argument('-ci', '--client_id', help="Specify oauth2 application client ID")
-        parser.add_argument('-cs', '--client_secret', help="Specify oauth2 application client secret")
-        parser.add_argument('-sc', '--scope', help="Specify oauth2 application scope")
-        parser.add_argument('-tu', '--token_url', help="Specify oauth2 application token url")
-        parser.add_argument('-au', '--auth_url', help="Specify oauth2 application authorization url")
+        parser.add_argument('-ci', '--client_id', help="Specify OAuth 2.0 application client ID")
+        parser.add_argument('-cs', '--client_secret', help="Specify OAuth 2.0 application client secret")
+        parser.add_argument('-sc', '--scope', help="Specify OAuth 2.0 application scope")
+        parser.add_argument('-tu', '--token_url', help="Specify OAuth 2.0 application token url")
+        parser.add_argument('-au', '--auth_url', help="Specify OAuth 2.0 application authorization url")
         args = parser.parse_args()
 
     if args.config_file:
@@ -123,16 +123,16 @@ def main(args=None):
                                        script_args.token_url, script_args.auth_url]):
         use_app_config = False
         # Use discrete values from command-line.
-        print("Using OAuth2 discrete settings from command-line arguments.")
+        print("Using OAuth 2.0 discrete settings from command line arguments.")
         fn_opts = set_configs(script_args)
         if script_args.config_file:
-            print("ERROR: Using arguments for an app.config file and OAuth2 service settings are not allowed at the "
+            print("ERROR: Using arguments for an app.config file and OAuth 2.0 service settings are not allowed at the "
                   "same time.")
             os._exit(0)
     else:
         # Use values from an app.config file.
         path_config_file = get_config_file(script_args.config_file)
-        print("Reading OAuth2 settings from app.config file {}.".format(path_config_file))
+        print("Reading OAuth 2.0 settings from app.config file {}.".format(path_config_file))
         # Get the app.config section for the app.
         fn_opts = get_configs(path_config_file=path_config_file, app_name=script_args.app_name)
 

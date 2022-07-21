@@ -22,7 +22,7 @@ def get_parent_parser():
     """
 
     parser = argparse.ArgumentParser(prog='oauth-utils', formatter_class=FORMATTER_CLASS,
-                                 description='Tools to manage oauth for IBM SOAR apps',
+                                 description='Tools to manage OAuth for IBM SOAR apps',
                                      epilog="For support, please visit ibm.biz/soarcommunity")
 
     parser.usage = """
@@ -64,12 +64,12 @@ def main():
     subparsers = get_sub_parser(parent_parser)
 
     parser_oauth2_gen_refresh_token = subparsers.add_parser(
-        'oauth2_generate_refresh_token', description="A utility to generate a refresh token for an OAuth2 service"
+        'oauth2_generate_refresh_token', description="A utility to generate a refresh token for an OAuth 2.0 service"
                                                      " (to be used with an IBM SOAR app).\nThe parameters used for "
-                                                     "the OAuth2 service can be taken either from an app.config file or "
-                                                     "manually from the command-line.\n(For further information please "
+                                                     "the OAuth 2.0 service can be taken either from an app.config file or "
+                                                     "manually from the command line.\n(For further information please "
                                                      "refer to the auth_utils documentation.)",
-        help="Generate a refresh token for an OAuth2 service\n(to be used with an IBM SOAR app)",
+        help="Generate a refresh token for an OAuth 2.0 service\n(to be used with an IBM SOAR app)",
         formatter_class=FORMATTER_CLASS)
     parser_oauth2_gen_refresh_token.add_argument("-c", "--config_file", help="Location of app.config file")
     parser_oauth2_gen_refresh_token.add_argument('-t', '--timeout', help="Timeout callback listener after "
@@ -79,14 +79,14 @@ def main():
     parser_oauth2_gen_refresh_token.add_argument('-a', '--app_name', help="Specify the app name")
     parser_oauth2_gen_refresh_token.add_argument('-p', '--port', help="Specify port for callback url and "
                                                                       "listener")
-    parser_oauth2_gen_refresh_token.add_argument('-ci', '--client_id', help="Specify oauth2 application "
+    parser_oauth2_gen_refresh_token.add_argument('-ci', '--client_id', help="Specify OAuth 2.0 application "
                                                                             "client ID")
-    parser_oauth2_gen_refresh_token.add_argument('-cs', '--client_secret', help="Specify oauth2 application "
+    parser_oauth2_gen_refresh_token.add_argument('-cs', '--client_secret', help="Specify OAuth 2.0 application "
                                                                                 "client secret")
-    parser_oauth2_gen_refresh_token.add_argument('-sc', '--scope', help="Specify oauth2 application scope")
-    parser_oauth2_gen_refresh_token.add_argument('-tu', '--token_url', help="Specify oauth2 application "
+    parser_oauth2_gen_refresh_token.add_argument('-sc', '--scope', help="Specify OAuth 2.0 application scope")
+    parser_oauth2_gen_refresh_token.add_argument('-tu', '--token_url', help="Specify OAuth 2.0 application "
                                                                             "token url")
-    parser_oauth2_gen_refresh_token.add_argument('-au', '--auth_url', help="Specify oauth2 application "
+    parser_oauth2_gen_refresh_token.add_argument('-au', '--auth_url', help="Specify OAuth 2.0 application "
                                                                            "authorization url")
     parser_oauth2_gen_refresh_token.set_defaults(function=oauth2_generate_refresh_token)
 
