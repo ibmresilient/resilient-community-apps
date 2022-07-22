@@ -65,7 +65,7 @@ The OAuth Utilities package provides tools and utilities to support OAuth for IB
 -->
 ### Python Environment
 Both Python 3.6 and python 3.9 are supported.
-Additional package dependencies may exist for each of these packages:
+Additional package dependencies might exist for each of these packages:
 * Jinja2>=30.0.0
 * six>=39.0.0
 * urllib3>=0.18.2
@@ -77,7 +77,7 @@ Additional package dependencies may exist for each of these packages:
 #### Prerequisites
 * Utility `oauth2_generate_refresh_token`: An OAuth 2.0 identity provider service with an app or project configured to allow user access to a 3rd party application.
 #### Configuration
-* Utility `oauth2_generate_refresh_token`: The following settings must be available for the OAuth 2.0 service.
+* Utility `oauth2_generate_refresh_token`: The following settings must be provided for the OAuth 2.0 service.
 ```
 client_id 
 client_secret 
@@ -86,7 +86,7 @@ token_url
 auth_url
 ```
 #### Permission
-* Utility `oauth2_generate_refresh_token`: The provider OAuth 2.0 configuration settings must have required access to the 3rd party app.
+* Utility `oauth2_generate_refresh_token`: The provided OAuth 2.0 configuration settings must have required access to the 3rd party app.
 
 ---
 ## Installation
@@ -207,7 +207,7 @@ optional arguments:
 
 ## Configure OAuth 2.0 credentials
 
-To use the oauth2_generate_refresh_token utility, set up an app or project for an OAuth 2.0 identity provider service from which you can get the required configuration settings, such as:
+To use the `oauth2_generate_refresh_token` utility, set up an app or project for an OAuth 2.0 identity provider service from which you can get the required configuration settings, such as:
 ```
 client_id 
 client_secret 
@@ -215,7 +215,7 @@ scope
 token_url 
 auth_url
 ```
-The setup procedure varies depending on the provider. This document provides examples for 2 well known services `Google Gmail` and `Microsoft Outlook 365`. These examples can be used to send email using SMTP.
+The setup procedure varies depending on the provider. This document provides examples for 2 well known services `Google Gmail` and                 `Microsoft Outlook 365`. These examples can be used to send email using SMTP.
 
 ### Google Gmail
 #### Endpoints
@@ -236,11 +236,11 @@ token_url=https://accounts.google.com/o/oauth2/token
     ![screenshot: oauth-utils-goog-create-project_2](./doc/screenshots/oauth-utils-goog-create-project_2.png)
 
 #### Configure OAuth Consent Screen.
-* In the APIs and Services section, click on OAuth Consent Screen and set the user type to `External`. Click on `Create`.
+* In the APIs and Services section, click OAuth Consent Screen and set the user type to `External`. Click on `Create`.
 
     ![screenshot: oauth-utils-goog-user-external](./doc/screenshots/oauth-utils-goog-user-external.png)
 
-* Enter a name for your application and provide an email address where Google may contact you.
+* Enter a name for your application and provide an email address where Google might contact you.
 
     ![screenshot: oauth-utils-goog-oc-app-info](./doc/screenshots/oauth-utils-goog-oc-app-info.png)
 
@@ -259,11 +259,11 @@ token_url=https://accounts.google.com/o/oauth2/token
    
 #### Configure Credentials.
 
-* In the APIs & Services section, click on `Credentials` and then click on `Create credentials`.
+* In the APIs & Services section, click `Credentials` and then click `Create credentials`.
 
     ![screenshot: oauth-utils-goog-creds-create](./doc/screenshots/oauth-utils-goog-creds-create.png)
 
-* Select `OAuth Client ID` to create a new client ID then select `Desktop app`. The client ID is used verify application identify to Google’s OAuth servers.
+* Select `OAuth Client ID` to create a new client ID then select `Desktop app`. The client ID is used to verify application identify to Google’s OAuth servers.
 
     ![screenshot: oauth-utils-goog-creds-desktop](./doc/screenshots/oauth-utils-goog-creds-desktop.png)
     ![screenshot: oauth-utils-goog-creds-desktop_2](./doc/screenshots/oauth-utils-goog-creds-desktop_2.png)  
@@ -313,7 +313,7 @@ refresh_token=1//07JEwfJ_7KNbWCgYIARAAGAcSNwF-L9IrH71Z4sT_VsmL4kO3rSaW4fEKKTpetF
 ```
 * Add the resultant `refresh_token` to the app.config file for the required app.
 
-**_NOTE:_** In the example we used a test user with User Type of `External`. Selecting User Type `Internal` will allow the application to access the Google api without having to go through the verification process.
+**_NOTE:_** In the example, we used a test user with User Type of `External`. Selecting User Type `Internal` allows the application to access the Google API without having to go through the verification process.
 
 See: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/answer/6158849?hl=en)
 
@@ -321,14 +321,14 @@ See: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/a
 #### Endpoints
 Microsoft Authorization endpoint - used by client to obtain authorization from the resource owner.
 ```
-https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/authorize
+auth_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/authorize
 ```
 Microsoft Token endpoint - used by client to exchange an authorization grant or refresh token for an access token.
 ```
-https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
+token_url=https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
 ```
 #### App Registration
-* As the SMTP email user log in to the [Microsoft Azure Portal](https://portal.azure.com/) and authenticate.
+* As the SMTP email user, log in to the [Microsoft Azure Portal](https://portal.azure.com/) and authenticate.
 * Under `Azure services`, click  on `Azure Active Directory`.
   
   ![screenshot: oauth-utils-ms-azure ](./doc/screenshots/oauth-utils-ms-azure.png)
@@ -346,7 +346,7 @@ https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
   ![screenshot: oauth-utils-ms-cli-id ](./doc/screenshots/oauth-utils-ms-cli-id.png)
 
 #### Authentication
-* Under `Manage` on the left-hand menu, select `Authentication`.
+* Under `Manage` on the left menu, select `Authentication`.
 
    ![screenshot: oauth-utils-ms-auth ](./doc/screenshots/oauth-utils-ms-auth.png) 
   
@@ -355,7 +355,7 @@ https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
    ![screenshot: oauth-utils-ms-auth_2 ](./doc/screenshots/oauth-utils-ms-auth_2.png) 
 
 #### API Permissions
-* On the left-hand side under `Manage`, select `API Permissions`.
+* On the left side under `Manage`, select `API Permissions`.
 * Click `Add a permission`.
   
   ![screenshot: oauth-utils-ms-perms ](./doc/screenshots/oauth-utils-ms-perms.png) 
@@ -377,7 +377,7 @@ SMTP.Send
   ![screenshot: oauth-utils-ms-grant_2 ](./doc/screenshots/oauth-utils-ms-grant_2.png) 
 
 #### Create client secret
-* On the left-hand side under `Manage`, select `Certificate and secrets`.
+* On the left side under `Manage`, select `Certificate and secrets`.
 * Click `New client secret`.
 * Enter a name for the client secret.
   ![screenshot: oauth-utils-ms-sec ](./doc/screenshots/oauth-utils-ms-sec.png) 
@@ -386,7 +386,7 @@ SMTP.Send
 
   ![screenshot: oauth-utils-ms-sec_3 ](./doc/screenshots/oauth-utils-ms-sec_3.png) 
 
-* Save the secret `Value` locally. This will be used as the value for the `client_secret` setting/argument.
+* Save the secret `Value` locally. This is be used as the value for the `client_secret` setting/argument.
 
 #### Authenticated SMTP
 * Log in to [Microsoft 365 admin center](https://admin.microsoft.com) as an admin user and go to `Users` > `Active users`.
@@ -417,7 +417,7 @@ Reading OAuth2 settings from app.config file /Users/johnpren/.resilient/app.conf
 Starting callback listener on port 8080.
 Starting browser.
 ```
-A web browser is launched, and the rest of the process will be completed using the browser.
+A web browser is launched, and the rest of the process is be completed using the browser.
 
 * In the browser, sign in as the SMTP email user.
 
@@ -427,7 +427,7 @@ A web browser is launched, and the rest of the process will be completed using t
 
  ![screenshot: oauth-utils-ms-brow-accept ](./doc/screenshots/oauth-utils-ms-brow-accept.png)
 
-* The browser is redirected to the callback URL (default port 8080) and will be processed by a local listener.
+* The browser is redirected to the callback URL (default port 8080) and is processed by a local listener.
 
 * If you are satisfied that it is redirected to the correct location, click `Accept the Risk and Continue`.
 
