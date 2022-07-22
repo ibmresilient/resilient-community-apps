@@ -12,10 +12,11 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-joe-sandbox-analysis Functions for IBM Resilient
+# fn-joe-sandbox-analysis Functions for IBM SOAR
 
-- [fn-joe-sandbox-analysis Functions for IBM Resilient](#fn-joe-sandbox-analysis-functions-for-ibm-resilient)
+- [fn-joe-sandbox-analysis Functions for IBM SOAR](#fn-joe-sandbox-analysis-functions-for-ibm-resilient)
   - [Release Notes](#release-notes)
+    - [v1.0.5](#v105)
     - [v1.0.4](#v104)
     - [v1.0.3](#v103)
     - [v1.0.1](#v101)
@@ -27,9 +28,9 @@
     - [Integration Server](#integration-server)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
-    - [Resilient Action Status](#resilient-action-status)
-    - [Resilient Scripting Log](#resilient-scripting-log)
-    - [Resilient Logs](#resilient-logs)
+    - [SOAR Action Status](#soar-action-status)
+    - [SOAR Scripting Log](#soar-scripting-log)
+    - [SOAR Logs](#soar-logs)
     - [Resilient-Circuits](#resilient-circuits)
   - [Support](#support)
 
@@ -40,7 +41,8 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-
+### v1.0.5
+* Bug fix
 ### v1.0.4
 * Apphost support
 ### v1.0.3
@@ -57,9 +59,9 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Joe Sandbox functions**
+**Joe Sandbox functions**
 
-*This package contains a function that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.*
+*This package contains a function that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM SOAR.*
  
  ![screenshot: main](./doc/screenshots/1.png)
 
@@ -111,7 +113,7 @@ Go to the Configuration tab and edit the app.config file, editing the API key fo
   ```
   $ resilient-circuits config -u -l fn-joe-sandbox-analysis
   ```
-* Import the fn_joe_sandbox_analysis **customizations** into the Resilient platform:
+* Import the fn_joe_sandbox_analysis **customizations** into the SOAR platform:
   ```
   $ resilient-circuits customize -y -l fn-joe-sandbox-analysis
   ```
@@ -154,18 +156,18 @@ Go to the Configuration tab and edit the app.config file, editing the API key fo
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
-### Resilient Action Status
+### SOAR Action Status
 * When viewing an incident, use the Actions menu to view **Action Status**.
 * By default, pending and errors are displayed.
 * Modify the filter for actions to also show Completed actions.
 * Clicking on an action displays additional information on the progress made or what error occurred.
 
-### Resilient Scripting Log
+### SOAR Scripting Log
 * A separate log file is available to review scripting errors.
 * This is useful when issues occur in the pre-processing or post-processing scripts.
 * The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
-### Resilient Logs
+### SOAR Logs
 * By default, Resilient logs are retained at `/usr/share/co3/logs`.
 * The `client.log` may contain additional information regarding the execution of functions.
 
@@ -193,4 +195,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_joe_sandbox_analysis | 1.0.4 | IBM Resilient | http://ibm.biz/resilientcommunity |
+| fn_joe_sandbox_analysis | 1.0.4 | IBM QRadar SOAR | http://ibm.biz/resilientcommunity |
