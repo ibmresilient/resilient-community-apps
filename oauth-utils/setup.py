@@ -12,7 +12,7 @@ setup(
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
     description="OAuth utilities for IBM SOAR apps",
-    long_description="Utilities to support OAuth2 for SOAR functions",
+    long_description="Utilities to support OAuth for SOAR apps",
     install_requires=[
         'Jinja2>=2.9.6',
         'six',
