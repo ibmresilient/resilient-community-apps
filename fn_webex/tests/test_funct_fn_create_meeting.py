@@ -58,7 +58,7 @@ class TestFnCreateMeeting:
             "sendEmail"                   : "",
         }
 
-    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
     @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
     def test_call_create_meeting(self, mock, mock2):
 
