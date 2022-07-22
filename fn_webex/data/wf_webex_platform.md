@@ -25,7 +25,7 @@ inputs.webex_meeting_start_time = inputs.webex_meeting_start_time if not rule.pr
 inputs.webex_meeting_end_time = inputs.webex_meeting_end_time if not rule.properties.webex_meeting_end_time else rule.properties.webex_meeting_end_time
 
 # Get the agenda from the activity field or the incident description
-if rule.properties.webex_meeting_agenda is None:
+if not rule.properties.webex_meeting_agenda:
   if not incident.description and not incident.description.content:
     inputs.webex_meeting_agenda = incident.description.content
   else:
@@ -61,7 +61,7 @@ else:
   ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)
   ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
 
-  text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
+  text = u"<b>Cisco WebEx Meeting Links:</b><br>Host URL: {0}<br>Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
   for key in content:
       text += u"<br />{} : {}".format(key, content.get(key))
   

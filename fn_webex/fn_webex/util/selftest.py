@@ -38,7 +38,7 @@ def selftest_function(opts):
     
     try :
         webex = WebexAPI(requiredParameters, meetingParameters)
-        response = webex.create_meeting()
+        webex.webex_request("get", data='''{}''')
         return {
             "state": "success",
             "reason": "success"
