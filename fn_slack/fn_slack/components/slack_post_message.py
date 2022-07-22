@@ -40,7 +40,7 @@ class FunctionComponent(ResilientComponent):
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
         """Function: Create a Slack message based on an Incident, Task, Note or an Artifact data.
-        All the fields to send to Dlack are sent in slack_text. A json structure is used to know how to interpret field
+        All the fields to send to Slack are sent in slack_text. A json structure is used to know how to interpret field
         meanings. A structure can look like this with conversions based on the 'type' key/value pair:
 
         {
