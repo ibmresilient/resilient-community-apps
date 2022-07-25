@@ -1,7 +1,7 @@
 # docker build -t ibmresilient/fn_proofpoint_tap:1.0.3 -t ibmresilient/fn_proofpoint_tap:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_proofpoint_tap
 ARG RESILIENT_CIRCUITS_VERSION=37

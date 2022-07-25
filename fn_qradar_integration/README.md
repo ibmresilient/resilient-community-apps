@@ -39,6 +39,8 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.4 | July. 2022 | Update SOAR required version |
+| 2.2.3 | June. 2022 | Bug fix for using with MSSP |
 | 2.2.2 | May. 2022 | Add more documentation and bug fix |
 | 2.2.1 | March 2022 | Cancel QRadar queries which have timed out |
 | 2.2.0 | March 2022 | Allow multiple QRadar instances |
@@ -91,11 +93,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `42.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -220,7 +222,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name  = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -302,7 +304,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -381,7 +383,7 @@ results = {
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = rule.properties.qradar_reference_set_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -457,7 +459,7 @@ results = {
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -552,7 +554,7 @@ inputs.qradar_reference_table_item_value = artifact.value
 inputs.qradar_reference_table_item_inner_key = rule.properties.qradar_ref_table_inner_key
 inputs.qradar_reference_table_item_outer_key = rule.properties.qradar_ref_table_outer_key
 inputs.qradar_reference_table_name = rule.properties.qradar_reference_table_name
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -775,7 +777,7 @@ results = {
 <p>
 
 ```python
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 ```
 
 </p>
@@ -1101,7 +1103,7 @@ results = {
 ```python
 inputs.qradar_search_param2 = incident.properties.qradar_id
 
-inputs.qradar_label = rule.properties.qradar_servers
+inputs.qradar_label = rule.properties.qradar_server
 
 if rule.properties.qradar_query_all_results:
   inputs.qradar_query_all_results = rule.properties.qradar_query_all_results

@@ -1,7 +1,7 @@
 # docker build -t ibmresilient/fn_microsoft_sentinel:1.0.0 -t ibmresilient/fn_microsoft_sentinel:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
-FROM registry.access.redhat.com/ubi8/python-36:latest
+FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_microsoft_sentinel
 ARG RESILIENT_CIRCUITS_VERSION=39
