@@ -124,6 +124,14 @@ class TemplateHelper(object):
 
         return self.get_value_as_string(field_def, field_value)
 
+    def get_artifact_values(self, artifacts):
+        # return list of artifacts
+        return artifacts.get("data")
+
+    def get_note_values(self, notes):
+        # returns a list of note objects
+        return notes.get("root_comments")
+
     # gets the values for the specified field across all rows and returns as comma-separated list
     def get_datatable_value_array(self, inc_id, datatable_name, field_name):
         LOG.info(

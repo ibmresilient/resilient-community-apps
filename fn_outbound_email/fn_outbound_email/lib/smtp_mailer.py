@@ -200,9 +200,15 @@ class SendSMTPEmail(ResilientComponent):
     def get_incident_data(self, mail_incident_id):
         return self.rest_client().get("/incidents/{}?handle_format=names".format(mail_incident_id))
 
-    def render_template(self, template_string, incident_data, mail_data):
+    def get_artifact_data(self, mail_incident_id):
+        return self.rest_client().post("/incidents/{}/artifacts/query_paged?include_related_incident_count=true".format(mail_incident_id), payload={})
+
+    def get_note_data(self, mail_incident_id):
+        return self.rest_client().post("/incidents/{}/comments/query?include_tasks=true".format(mail_incident_id), payload={})
+
+    def render_template(self, template_string, incident_data, mail_data, artifact_data={}, note_data={}):
         template = self.jinja_env.from_string(template_string)
-        return template.render(incident=incident_data, mail=mail_data)
+        return template.render(incident=incident_data, mail=mail_data, artifact=artifact_data, note=note_data)
 
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""
