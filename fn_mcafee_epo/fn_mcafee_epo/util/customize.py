@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_mcafee_epo",
         "message_destinations": [u"mcafee_epo_message_destination"],
-        "functions": [u"mcafee_epo_find_a_system", u"mcafee_epo_list_tags", u"mcafee_epo_remove_tag", u"mcafee_tag_an_epo_asset"],
-        "workflows": [u"mcafee_epo_apply_a_tag", u"mcafee_epo_apply_tags", u"mcafee_epo_get_system_info", u"mcafee_epo_list_tags", u"mcafee_epo_remove_tag"],
-        "actions": [u"McAfee ePO apply a tag", u"McAfee ePO apply tags", u"McAfee ePO get system info", u"McAfee ePO list tags", u"McAfee ePO remove tags"],
+        "functions": [u"mcafee_epo_find_a_system", u"mcafee_epo_list_tags", u"mcafee_epo_remove_tag", u"mcafee_epo_wake_up_agent", u"mcafee_tag_an_epo_asset"],
+        "workflows": [u"mcafee_epo_apply_a_tag", u"mcafee_epo_apply_tags", u"mcafee_epo_get_system_info", u"mcafee_epo_list_tags", u"mcafee_epo_remove_tag", u"mcafee_epo_wake_up_agent"],
+        "actions": [u"McAfee ePO apply a tag", u"McAfee ePO apply tags", u"McAfee ePO get system info", u"McAfee ePO list tags", u"McAfee ePO remove tags", u"McAfee ePO Wake up Agent"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -48,6 +48,7 @@ def customization_data(client=None):
         - mcafee_epo_find_a_system
         - mcafee_epo_list_tags
         - mcafee_epo_remove_tag
+        - mcafee_epo_wake_up_agent
         - mcafee_tag_an_epo_asset
     - Workflows:
         - mcafee_epo_apply_a_tag
@@ -55,12 +56,14 @@ def customization_data(client=None):
         - mcafee_epo_get_system_info
         - mcafee_epo_list_tags
         - mcafee_epo_remove_tag
+        - mcafee_epo_wake_up_agent
     - Rules:
         - McAfee ePO apply a tag
         - McAfee ePO apply tags
         - McAfee ePO get system info
         - McAfee ePO list tags
         - McAfee ePO remove tags
+        - McAfee ePO Wake up Agent
     - Data Tables:
         - mcafee_epo_tags
     """

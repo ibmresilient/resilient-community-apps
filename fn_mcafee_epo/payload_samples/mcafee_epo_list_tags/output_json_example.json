@@ -14,64 +14,44 @@
       "tagName": "Workstation"
     },
     {
-      "tagNotes": "This will automatically be assigned to system where the users have had Local Domain Users added.",
+      "tagNotes": "",
       "tagId": 3,
-      "tagName": "EE:ALDU"
-    },
-    {
-      "tagNotes": "DXL Broker",
-      "tagId": 4,
-      "tagName": "DXLBROKER"
-    },
-    {
-      "tagNotes": "Apply Tag to TIEServers",
-      "tagId": 5,
-      "tagName": "TIESERVER"
-    },
-    {
-      "tagNotes": "Protection Workspace tag for escalated systems",
-      "tagId": 6,
-      "tagName": "Escalated"
-    },
-    {
-      "tagNotes": "Protection Workspace tag for systems to be excluded from the compliance check",
-      "tagId": 7,
-      "tagName": "Excluded from Compliance Check"
-    },
-    {
-      "tagNotes": "Sample tag creation for partners",
-      "tagId": 8,
-      "tagName": "IBM QRadar"
-    },
-    {
-      "tagNotes": "Apply Tag to Active Response Server",
-      "tagId": 9,
-      "tagName": "MARSERVER"
-    },
-    {
-      "tagNotes": "Apply Tag to Active Response Server",
-      "tagId": 10,
-      "tagName": "MARAGG"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 11,
-      "tagName": "Shut Down"
-    },
-    {
-      "tagNotes": "",
-      "tagId": 12,
-      "tagName": "myTag"
-    },
-    {
-      "tagNotes": "aaa",
-      "tagId": 13,
-      "tagName": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 "
-    },
-    {
-      "tagNotes": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 ",
-      "tagId": 14,
       "tagName": "SOAR"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 4,
+      "tagName": "Windows server 2016"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 5,
+      "tagName": "Linux"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 6,
+      "tagName": "Intel(R) Xeon(R) CPU"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 7,
+      "tagName": "Intel Core Processor"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 8,
+      "tagName": "Test"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 9,
+      "tagName": "AA"
+    },
+    {
+      "tagNotes": "",
+      "tagId": 10,
+      "tagName": "123"
     }
   ],
   "raw": null,
@@ -81,7 +61,7 @@
     "package": "fn-mcafee-epo",
     "package_version": "1.1.0",
     "host": "local",
-    "execution_time_ms": 1040,
-    "timestamp": "2022-07-01 12:39:59"
+    "execution_time_ms": 580,
+    "timestamp": "2022-07-22 14:03:38"
   }
 }
