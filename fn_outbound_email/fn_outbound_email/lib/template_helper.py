@@ -128,10 +128,25 @@ class TemplateHelper(object):
         # return list of artifacts
         return artifacts.get("data")
 
-    def get_note_values(self, notes):
-        # returns a list of note objects
-        return notes.get("root_comments")
+    def notes_helper(self, p, ret):
+            # base case: comment has no children
+            if not p.get("children"):
+                return ret
+            else:
+                # for each note, get all the children
+                for c in p.get("children"):
+                    ret.append(c)
+                    self.notes_helper(c, ret)
 
+    def get_note_values(self, notes):
+        # returns a list of note objets
+        ret = []
+        # get the top level comments
+        for root_parent in notes.get("root_comments"):
+            ret.append(root_parent)
+            self.notes_helper(root_parent, ret)
+        return ret
+    
     # gets the values for the specified field across all rows and returns as comma-separated list
     def get_datatable_value_array(self, inc_id, datatable_name, field_name):
         LOG.info(
