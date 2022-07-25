@@ -129,9 +129,9 @@ The following table provides the settings required to execute this utility. Thes
 | token_url | Yes | `https://myservice.com/o/oauth2/token` | `-tu or --token_url <TOKEN_URL>` | *OAuth 2.0 application or project token url.* |
 | auth_url | Yes  | `https://myservice.com/o/oauth2/auth` | `-au or --auth_url <AUTH_URL>` | *OAuth 2.0 application or project authorization url.* |
 
-**_NOTE:_** The settings are read from an app.config file if one is located in the environment. Alternative app.config files can be selected using the -c or --config_file option.
-
 **_NOTE:_** The settings are all read either from an app.config file or as command-line arguments. These operations are mutually exclusive.
+
+**_NOTE:_** The settings are read from an app.config file if one is located in the environment. Alternative app.config files can be selected using the -c or --config_file option.
 
 #### Arguments
 The following table provides additional optional command-line arguments which can be used to execute this utility.
