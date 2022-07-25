@@ -40,6 +40,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 07/2022 | Initial Release | 
+| 1.0.1 | 07/2022 | Updated README and minor changes to Python dependencies |
 
 ---
 
