@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_ocr",
     display_name="Image OCR",
-    version="1.0.1",
+    version="1.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -32,8 +32,8 @@ setup(
     long_description="""An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.\nAbout OCR: OCR stands for Optical Character Recognition, and most often refers to the detection of letters, words, and sentences in images. The goal with any OCR is the same: extract the useful chunks of text from an image in an easy-to-read format.""",
     install_requires=[
         "resilient-circuits>=45.0.0",
-        "pytesseract==0.3.8; python_version <= '3.6'",
-        "pytesseract~=0.3.9; python_version > '3.6'",
+        "pytesseract==0.3.8; python_version <= 3.6",
+        "pytesseract~=0.3.9; python_version > 3.6",
         "numpy~=1.19",
         "opencv-python-headless~=4.5.5.64",
         "pandas~=1.1.5",
