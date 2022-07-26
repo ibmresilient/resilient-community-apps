@@ -31,14 +31,12 @@ class Client:
         self.password = password
         self.trust_cert = trust_cert
         self.rc = RequestsCommon(opts, options)
-        self.timeout = options.get("timeout", 60)
 
     def request(self, command_name, params):
         """
         Make the call to ePO, returning results as json formatted
         :param command_name:
         :param params: ePO command params
-        :param timeout: Default timeout is 30 seconds
         :return:
         """
         params_ext = params.copy() if params else {}
@@ -52,7 +50,7 @@ class Client:
         url = urljoin(self.url, 'remote/{}'.format(command_name))
 
         # Make request
-        r = self.rc.execute_call_v2("get", url, **request_params, timeout=self.timeout)
+        r = self.rc.execute_call_v2("get", url, **request_params)
 
         if r.status_code >= 300 or not r.text.startswith('OK'):
             raise IntegrationError("find tags failed: {}".format(r.text))

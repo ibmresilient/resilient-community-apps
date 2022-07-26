@@ -16,6 +16,10 @@ class FunctionComponent(AppFunctionComponent):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
+        # Checks if timeout is given in app.config
+        if not self.options.get("timeout"):
+            # If timeout is not given set default to 60 seconds
+            self.options["timeout"] = 60
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
