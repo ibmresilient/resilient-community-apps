@@ -6,7 +6,7 @@
 from urllib import request
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
-from resilient_lib import validate_fields, RequestsCommon
+from resilient_lib import validate_fields
 
 FN_NAME = "mcafee_epo_wake_up_agent"
 
@@ -27,12 +27,6 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
-
-        timeout = RequestsCommon(self.opts, self.options).get_timeout()
-        # Checks if timeout is given in app.config
-        if not timeout:
-            # If timeout is not given set default to 60 seconds
-            timeout = 60
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems"], fn_inputs)

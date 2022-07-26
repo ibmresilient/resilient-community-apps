@@ -30,6 +30,9 @@ class Client:
         self.username = username
         self.password = password
         self.trust_cert = trust_cert
+        # Set default timeout if timeout not given in app.config
+        if not options.get("timeout"):
+            options["timeout"] = 60 # 60 seconds
         self.rc = RequestsCommon(opts, options)
 
     def request(self, command_name, params):
