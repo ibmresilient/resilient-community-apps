@@ -6,6 +6,7 @@
   - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -22,6 +23,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.0.0 | 7/2022 | Added OAuth 2.0 support for SMTP |
 | v1.3.1 | 1/2022 | Bug fixes for get_datatable function in template_helper.py |
 | v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
 | v1.2.1 | 5/2021 | Bug fix for python 2 |
@@ -99,6 +101,98 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 ### Proxy Server
 The app **does not** support a proxy server.
 
+### Python Environment
+Both Python 2.7, 3.6 and 3.9 are supported.
+Additional package dependencies may exist for each of these packages:
+* Jinja2>=2.9.6
+* resilient_circuits>=39.0.0
+* resilient_lib>=32.0.0
+* six
+
+#### Prerequisites
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+#####  Basic authentication
+* A password is required for the SMTP server.
+#####  OAuth 2.0 authorization
+* You need to setup a web application for an OAuth 2.0 SMTP identity provider service from which you get the required configuration settings to use OAuth 2.0 authorization.
+* The Required settings are:
+```
+client_id
+client_secret
+scope
+token_url
+auth_url
+```
+These values are used to generate a refresh_token which is used in the SOAR app to generate an access token.
+
+##### Configuration
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+#####  OAuth 2.0 authorization
+* Setup a web app and note the prerequisite settings above and add them to the `app.config` for the app.
+##### Authorize
+* Use the settings to create an authorization code URL similar to the following example:
+
+`https://smtpservice.com/oauth2/auth?state=123456abcde&scope=https%3A%2F%2Fmail.smtpservice.com%2F&client_id=123&response_type=code&response_mode=query&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Fcallback`
+
+* To authorize a token, copy the URL into a browser login as the app user and follow the directions. After the user gets authorized for the web app you will eventually end up with a redirect or callback URL in the browser location window similar to the following.
+
+`https://localhost:8080/callback?state=123456abcde&code=123456&scope=https://mail.smtpservice.com/`
+
+* The user should verify that the state value matches the one it sent to the authorization server to help prevent any malicious attacks.
+
+
+##### Fetch the tokens
+* Exchange the authorization code for an access and refresh token.
+
+
+The user sends an HTTP POST request to the authorization server's token endpoint with the following values:
+
+```
+https://api.authorization-server.com/token
+  grant_type=authorization_code
+  &code=123456
+  &redirect_uri=https://localhost:8080/callback
+  &client_id=123
+  &client_secret=456
+```
+* If the authorization code is valid, the authorization server will generate an access token and refresh tokenand return it to the client.
+
+For example:
+
+```
+{
+  'access_token': 'abcdefg1234567',
+  'expires_in': 3599,
+  'refresh_token': 'hijklmn89123456',
+  'scope': 'https://mail.smtpservice.com/',
+  'token_type': 'Bearer'
+}
+```
+
+* Add the refresh token to the app.config for the SOAR app.
+
+##### Using oauth-utils package
+
+Instead of using the manual steps outlined above, the user can simplify the process by using the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+
+#### Permissions
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+* The user must have permission or authorization to send messages using the SMTP protocol.
+
+**_NOTE:_** The SMTP user will use either OAuth 2.0 authorization settings or use a password for basic authentication.
+
+For Google with OAuth2 see: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/answer/6158849?hl=en)
+
+For Microsoft with OAuth2 see: [Using OAuth 2.0 with Microsoft for Office 365 users](https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth)
+
+For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
+
 ---
 
 ## Installation
@@ -113,8 +207,14 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for smpt server* |
-| **smtp_user** | Yes | `` | *smtp authentication user* |
-| **smtp_password** | Yes | `` | *smtp authentication user password* |
+| **smtp_user** | Yes | `a@mail.smtpservice.com` | *smtp authentication user.* |
+| **smtp_password** | Yes | `Abcd1234!` | *smtp basic authentication user password.* |
+| **client_id** | No | `1234567a-abc8-90d1-2efa3-123456789abcd` | *smtp OAuth 2.0 Authorization client ID* |
+| **client_secret** | No | `ABCDEF-123456789abcd123456789a_aWX4` | *smtp OAuth 2.0 Authorization client secret.* |
+| **scope** | No | `https://mail.smtpservice.com/` | *smtp OAuth 2.0 Authorization scope.* |
+| **token_url** | Yes | `https://smtpservice.com/oauth2/token` | *smtp OAuth 2.0 Authorization token URL.* |
+| **auth_url** | No | `https://smtpservice.com/oauth2/auth` | *smtp OAuth 2.0 Authorization authorization URL .* |
+| **refresh_token** | No | `` | *smtp OAuth 2.0 Authorization refresh token.* |
 | **from_email_address** | No | `a@example.com` | *Introduced in 1.3.0. Email address for use as email sender* |
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection* |
@@ -122,6 +222,11 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_ssl_cafile** | Yes | `` | *false or /path/to/smtp_certifcate.pem or crt file* |
 | **template_file** | Yes | `data/example_send_email.jinja` | */path/to/template.jinja for rendering the email body* |
 
+**_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
+
+**_NOTE:_** The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+
+For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 
 ---
 
