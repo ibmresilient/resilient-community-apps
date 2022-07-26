@@ -34,7 +34,7 @@ class Client:
 
         self.rc = RequestsCommon(opts, options)
         self.timeout = self.rc.get_timeout()
-        if not self.timeout:
+        if not self.timeout or self.timeout < SIXTY_SECONDS:
             self.timeout = SIXTY_SECONDS
 
     def request(self, command_name, params):
