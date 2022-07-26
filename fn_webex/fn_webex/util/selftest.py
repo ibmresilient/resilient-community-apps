@@ -24,12 +24,16 @@ def selftest_function(opts):
     
     requiredParameters["start"] = round((datetime.datetime.now() + datetime.timedelta(minutes=10)).timestamp()) * 1000
     requiredParameters["end"] =  round((datetime.datetime.now() + datetime.timedelta(minutes=40)).timestamp()) * 1000
-    requiredParameters["url"] = app_configs.get("webex_site_url")
-    requiredParameters["bearerID"] = app_configs.get("webex_bearerid")
+    requiredParameters["authURL"] = app_configs.get("auth_url")
+    requiredParameters["tokenURL"] = app_configs.get("token_url")
+    requiredParameters["scope"] = app_configs.get("scope")
+    requiredParameters["clientID"] = app_configs.get("client_id")
+    requiredParameters["clientSecret"] = app_configs.get("client_secret")
+    requiredParameters["refreshToken"] = app_configs.get("refresh_token")
     requiredParameters["rc"] = RequestsCommon(opts, app_configs)
     requiredParameters["timezone"] = app_configs.get("webex_timezone", None)
+    requiredParameters["siteURL"] = "https://webexapis.com/v1/meetings/"
 
-    meetingParameters["siteURL"] = app_configs.get("webex_siteurl", "")
     meetingParameters["hostEmail"] = app_configs.get("hostEmail", "")
     meetingParameters["title"] = "Selftest Meeting"
     meetingParameters["agenda"] = ""

@@ -4,13 +4,10 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import time
-import logging
 import datetime
 
-from urllib import request
-from resilient_lib import  RequestsCommon
-from lib2to3.pytree import convert
 from resilient_circuits import FunctionError
+from multiprocessing import AuthenticationError
 
 DEFAULT_MEETING_LENGTH = 45
 
@@ -20,10 +17,30 @@ class WebexAPI:
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
-        self.header = self.generate_header(self.requiredParameters["bearerID"])
+        self.bearerID = self.generate_bearerID()
+        self.header = self.generate_header(self.bearerID)
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
         self.check_time(self.timezone, self.requiredParameters["start"], self.requiredParameters["end"])
-        
+
+
+    def generate_bearerID(self):
+        data = {
+            "client_id": self.requiredParameters["clientID"],
+            "scope": self.requiredParameters["scope"],
+            "client_secret": self.requiredParameters["clientSecret"],
+            "refresh_token": self.requiredParameters["refreshToken"],
+            "grant_type": "refresh_token"
+        }
+        result = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data)
+
+        if "access_token" in result.json():
+            self.bearerID = result.json().get("access_token")
+            return self.bearerID
+
+        msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
+            .format(result.json().get("error"), result.json().get("error_description"))
+        raise FunctionError(msg)
+
 
     def convert_to_dict(self, to_convert):
         '''
@@ -187,7 +204,7 @@ class WebexAPI:
         data    : String
                   request body
         """
-        webexurl = self.requiredParameters.get("url")
+        webexurl = self.requiredParameters.get("siteURL")
         response = self.rc.execute(method, webexurl, data=data,
                                         headers=self.header, proxies=self.rc.get_proxies())
         if response is None:

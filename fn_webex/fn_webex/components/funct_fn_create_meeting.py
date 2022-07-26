@@ -17,8 +17,8 @@ class FunctionComponent(AppFunctionComponent):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.requiredParameters, self.meetingParameters = {}, {}
         self.opts = opts
-        self.config_options = opts.get(PACKAGE_NAME, {})      
-        
+        self.config_options = opts.get(PACKAGE_NAME, {})
+
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -28,19 +28,24 @@ class FunctionComponent(AppFunctionComponent):
                          "name" : "webex_bearerID", 
                          "name" : "webex_timezone"}], self.config_options)
 
+        self.requiredParameters["authURL"] = self.config_options.get("auth_url")
+        self.requiredParameters["tokenURL"] = self.config_options.get("token_url")
+        self.requiredParameters["scope"] = self.config_options.get("scope")
+        self.requiredParameters["clientID"] = self.config_options.get("client_id")
+        self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
+        self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time
-        self.requiredParameters["url"] = self.config_options.get("webex_site_url")
-        self.requiredParameters["bearerID"] = self.config_options.get("webex_bearerid")
-        self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["timezone"] = self.config_options.get("webex_timezone", None)
+        self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
 
-        self.meetingParameters["siteURL"] = self.config_options.get("webex_siteurl", "")
         self.meetingParameters["hostEmail"] = self.config_options.get("hostEmail", "")
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda
         self.meetingParameters["password"] = fn_inputs.webex_meeting_password
         self.meetingParameters["sendEmail"] = True
+
+        self.requiredParameters["rc"] = self.rc
+        self.requiredParameters["siteURL"] = "https://webexapis.com/v1/meetings/"
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
