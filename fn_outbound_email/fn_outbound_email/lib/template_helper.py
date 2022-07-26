@@ -124,7 +124,7 @@ class TemplateHelper(object):
 
         return self.get_value_as_string(field_def, field_value)
 
-    def get_artifact_values(self, artifacts):
+    def get_artifacts(self, artifacts):
         # return list of artifacts
         return artifacts.get("data")
 
@@ -140,7 +140,7 @@ class TemplateHelper(object):
                     ret.append(c)
                     self.notes_helper(c, ret)
 
-    def get_note_values(self, notes, get_children):
+    def get_notes(self, notes, get_children):
         # returns a list of note objets
         all_notes = []
         # get the top level comments

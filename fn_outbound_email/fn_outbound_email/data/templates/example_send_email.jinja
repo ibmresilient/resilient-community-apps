@@ -12,7 +12,7 @@
 
 {# UNCOMMENT TO INCLDE ARTIFACTS #}
 {# {% macro get_artifact(art) -%}
-	{% set values = template_helper.get_artifact_values(art) %}
+	{% set values = template_helper.get_artifacts(art) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
     {% for a in values %}
         <tr>
@@ -25,11 +25,11 @@
 {# UNCOMMENT TO INCLUDE NOTES #}
 {# {% macro get_note(note) -%}
     {% set get_children = True %}
-	{% set values = template_helper.get_note_values(note, get_children) %}
+	{% set values = template_helper.get_notes(note, get_children) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
     {% for n in values %}
         <tr>
-            <td width="200" style="{{style}}">{{ n.get("text") | safe }}</td>
+            <td colspan="2" style="{{style}}">{{ n.get("text") | safe }}</td>
         </tr>
     {% endfor %}
 {%- endmacro %} #}
