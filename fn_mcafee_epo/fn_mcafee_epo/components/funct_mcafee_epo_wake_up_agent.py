@@ -3,9 +3,10 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
+from urllib import request
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, RequestsCommon
 
 FN_NAME = "mcafee_epo_wake_up_agent"
 
@@ -16,10 +17,6 @@ class FunctionComponent(AppFunctionComponent):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
-        # Checks if timeout is given in app.config
-        if not self.options.get("timeout"):
-            # If timeout is not given set default to 60 seconds
-            self.options["timeout"] = 60
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -30,6 +27,12 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+
+        timeout = RequestsCommon(self.opts, self.options).get_timeout()
+        # Checks if timeout is given in app.config
+        if not timeout:
+            # If timeout is not given set default to 60 seconds
+            timeout = 60
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems"], fn_inputs)
