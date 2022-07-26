@@ -134,7 +134,7 @@ class TemplateHelper(object):
                 return ret
             else:
                 # for each note, get all the children
-                for c in p.get("children"):
+                for c in p.get("children"):        
                     ret.append(c)
                     self.notes_helper(c, ret)
 
@@ -143,8 +143,9 @@ class TemplateHelper(object):
         ret = []
         # get the top level comments
         for root_parent in notes.get("root_comments"):
-            ret.append(root_parent)
-            self.notes_helper(root_parent, ret)
+            if "Email Sent if mail server is valid/authenticated" not in root_parent.get("text"):
+                ret.append(root_parent)
+                self.notes_helper(root_parent, ret)
         return ret
     
     # gets the values for the specified field across all rows and returns as comma-separated list
