@@ -70,7 +70,7 @@ class WebexAPI:
         meetingOptions = self.generate_meeting_parameters(self.optionalParameters)
         response = self.webex_request("post", meetingOptions)
 
-        if response.text == "":
+        if not response.text:
             raise FunctionError("Failed to create meeting, null response")
         
         results = self.convert_to_dict(response.text)
