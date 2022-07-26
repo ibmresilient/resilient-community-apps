@@ -37,8 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         # Make wakeupAgent call to given system
         response = client.request(
             "system.wakeupAgent",
-            {"names": fn_inputs.mcafee_epo_systems.strip()},
-            timeout=60) # Timeout after 1 minute, so it has enought time to make the call
+            {"names": fn_inputs.mcafee_epo_systems.strip()})
 
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 

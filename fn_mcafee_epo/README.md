@@ -116,6 +116,7 @@ The following table provides the settings you need to configure the app. These s
 | **epo_username** | Yes | `<your_epo_username>` | *Your McAfee ePO server username* |
 | **epo_password** | Yes | `<your_epo_password>` | *Your McAfee ePO server password* |
 | **epo_trust_cert** | Yes | `false` | *Path to server certificate or false to bypass verification* |
+| **timeout** | No | `60` | *Timeout is seconds for calls made to the EPo server* |
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
@@ -510,10 +511,7 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 <p>
 
 ```python
-if "completed: 1" in results["content"]:
-  incident.addNote("Successful agent wake up on system: {}".format(results['inputs']['mcafee_epo_systems']))
-elif "failed: 1" in results["content"]:
-  incident.addNote("Failed to wake up agent on system: {}".format(results['inputs']['mcafee_epo_systems']))
+incident.addNote(results["content"])
 ```
 
 </p>
@@ -584,9 +582,9 @@ inputs.mcafee_epo_tag = row['epo_tag']
 
 ```python
 if results.content:
-  note = u"ePO tags: {} applied to system: {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
+  note = u"ePO tags: {} applied to system(s): {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
 else:
-  note = u"ePO system: {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
+  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
 
 incident.addNote(note)
 ```

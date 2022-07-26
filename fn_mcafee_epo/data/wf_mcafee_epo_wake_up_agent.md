@@ -23,10 +23,7 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 
 ### Post-Processing Script
 ```python
-if "completed: 1" in results["content"]:
-  incident.addNote("Successful agent wake up on system: {}".format(results['inputs']['mcafee_epo_systems']))
-elif "failed: 1" in results["content"]:
-  incident.addNote("Failed to wake up agent on system: {}".format(results['inputs']['mcafee_epo_systems']))
+incident.addNote(results["content"])
 ```
 
 ---
