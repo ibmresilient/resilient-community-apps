@@ -6,6 +6,7 @@
 import time
 import datetime
 
+from resilient_lib import IntegrationError
 from resilient_circuits import FunctionError
 from multiprocessing import AuthenticationError
 
@@ -17,13 +18,31 @@ class WebexAPI:
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
-        self.bearerID = self.generate_bearerID()
-        self.header = self.generate_header(self.bearerID)
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
         self.check_time(self.timezone, self.requiredParameters["start"], self.requiredParameters["end"])
 
 
+    def Authenticate(self):
+        '''
+        Helper method that establishes a connection with the Client servers and performs an OAuth
+        authentication. The server returns a beareID for the session, which then is used to make
+        requests. This bearerID is incorporated with the header for every request henceforth
+        '''
+        self.bearerID = self.generate_bearerID()
+        self.header = self.generate_header(self.bearerID)
+
+
     def generate_bearerID(self):
+        '''
+        This function perfroms OAuth authentication and retrieves the bearerID which is necessary
+        to interact with the webex endpoint.
+
+        Options:
+        -------
+        client_id : This ID is generated while creating an integration on the webex endpoint
+        
+        
+        '''
         data = {
             "client_id": self.requiredParameters["clientID"],
             "scope": self.requiredParameters["scope"],
@@ -31,11 +50,13 @@ class WebexAPI:
             "refresh_token": self.requiredParameters["refreshToken"],
             "grant_type": "refresh_token"
         }
-        result = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data)
+        try:
+            result = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data)
+        except IntegrationError as err:
+                raise IntegrationError("Is the refresh_token up to date?")
 
         if "access_token" in result.json():
-            self.bearerID = result.json().get("access_token")
-            return self.bearerID
+            return result.json().get("access_token")
 
         msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
             .format(result.json().get("error"), result.json().get("error_description"))
@@ -68,7 +89,7 @@ class WebexAPI:
         on the response from endpoint server.
         '''
         meetingOptions = self.generate_meeting_parameters(self.optionalParameters)
-        response = self.webex_request("post", meetingOptions)
+        response = self.webex_request("POST", meetingOptions)
 
         if not response.text:
             raise FunctionError("Failed to create meeting, null response")

@@ -25,8 +25,11 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
             self.text = text
             self.status_code = status_code
 
+        def json(self):
+            return json.loads(self.text)
+
     response = None
-    if data:
+    if data and not isinstance(data, dict):
         data = json.loads(data)
     if url == "":        
         response = MockResponse(text="", status_code=404)
@@ -34,8 +37,14 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
         response = None
     elif url != "" and data.get("start") != "" and data.get("end") != "" and data.get("title") != "":
         response = MockResponse(text="done", status_code=200)
-    if headers.get("bearerID") == "":
+    if headers and headers.get("bearerID") == "":
         response = MockResponse(text="Invalid bearerID", status_code=401)
+
+    if "client_secret" in data:
+        if data.get("client_secret") == "":
+            response = MockResponse(text='''{"access_token" : ""}''', status_code=200)
+        else:
+            response = MockResponse(text='''{"access_token" : "ID1234"}''', status_code=200)
     return response
 
 
@@ -45,9 +54,14 @@ class TestFnCreateMeeting:
             "rc"                          : RequestsCommon(),
             "start"                       : round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000,
             "end"                         : round((datetime.datetime.now() + datetime.timedelta(minutes=95)).timestamp()) * 1000,
-            "url"                         : "http://www.example.com",
+            "siteURL"                     : "http://www.example.com",
+            "tokenURL"                    : "http://www.example.com",
             "bearerID"                    : "1234",
-            "timzone"                     : "gmt 05:30"
+            "timzone"                     : "gmt 05:30",
+            "clientID"                    : "client123",
+            "clientSecret"                : "Secret123",
+            "refreshToken"                : "token1234",
+            "scope"                       : "scope1 scope2 scope3"
         }
     optionalParameters = {
             "siteURL"                     : "",
@@ -59,13 +73,14 @@ class TestFnCreateMeeting:
         }
 
     @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
-    @patch('resilient_lib.RequestsCommon.execute_call_v2', side_effect=mocked_requests_post)
+    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
     def test_call_create_meeting(self, mock, mock2):
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
-        requiredParameters["url"] = ""
+        requiredParameters["siteURL"] = ""
         webex = WebexAPI(requiredParameters, optionalParameters)
+        webex.Authenticate()
         with pytest.raises(FunctionError) as err:
             webex.create_meeting()
         
@@ -81,13 +96,15 @@ class TestFnCreateMeeting:
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
-        requiredParameters["bearerID"] = ""
+        requiredParameters["clientSecret"] = ""
+        webex = WebexAPI(requiredParameters, optionalParameters)
         with pytest.raises(ValueError) as err:
-            webex = WebexAPI(requiredParameters, optionalParameters)
+            webex.Authenticate()
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
         webex = WebexAPI(requiredParameters, optionalParameters)
+        webex.Authenticate()
         webex.create_meeting()
 
 
@@ -97,8 +114,13 @@ class TestWebexApi:
             "start"                       : round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000,
             "end"                         : round((datetime.datetime.now() + datetime.timedelta(minutes=95)).timestamp()) * 1000,
             "url"                         : "http://www.example.com",
+            "tokenURL"                    : "http://www.example.com",
             "bearerID"                    : "1234",
-            "timzone"                     : "gmt 05:30"
+            "timzone"                     : "gmt 05:30",
+            "clientID"                    : "client123",
+            "clientSecret"                : "secret123",
+            "refreshToken"                : "token1234",
+            "scope"                       : "scope1 scope2 scope3"
         }
     optionalParameters = {
             "siteURL"                     : "",
@@ -123,7 +145,7 @@ class TestWebexApi:
 
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        ("ID123" , {"Bearer ID123" : "application/json"}), 
+        ("ID123" , {'Authorization' : "Bearer ID123", 'Content-Type' : "application/json"}), 
     ])
     def test_generate_header(self, mock_inputs, expected_results):
         assert(isinstance(self.webex.generate_header(mock_inputs), dict))
