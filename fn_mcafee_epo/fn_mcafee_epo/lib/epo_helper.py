@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 from resilient_lib import RequestsCommon, validate_fields, IntegrationError
 
 PACKAGE_NAME = "fn_mcafee_epo"
+SIXTY_SECONDS = 60 # Default timeout
 
 def init_client(opts, options):
     validate_fields(["epo_url", "epo_username",
@@ -31,6 +32,9 @@ class Client:
         self.password = password
         self.trust_cert = trust_cert
         self.rc = RequestsCommon(opts, options)
+        self.timeout = self.rc.get_timeout()
+        if not self.timeout or self.timeout < SIXTY_SECONDS:
+            self.timeout = SIXTY_SECONDS
 
     def request(self, command_name, params):
         """
@@ -45,7 +49,8 @@ class Client:
         request_params = {
             "params": params_ext,
             "auth": (self.username, self.password),
-            "verify": False if self.trust_cert.lower() == "false" else True
+            "verify": False if self.trust_cert.lower() == "false" else True,
+            "timeout": self.timeout
         }
         url = urljoin(self.url, 'remote/{}'.format(command_name))
 
@@ -66,14 +71,14 @@ class Client:
 def b_to_s(value):
     try:
         return value.decode()
-    except:
+    except Exception:
         return value
 
 def get_list(tags):
     tag_list = [tags]
     try:
         tag_list = loads(tags.replace("'", '"').replace('u"', '"'))
-    except:
+    except Exception:
         pass
 
     return tag_list

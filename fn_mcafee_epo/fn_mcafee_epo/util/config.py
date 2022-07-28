@@ -14,6 +14,8 @@ epo_username=<your_epo_username>
 epo_password=<your_epo_password>
 # Accepts values true or false
 epo_trust_cert=false
+# Timeout in seconds deafult is 60 seconds
+timeout=60
 # uncomment to uses proxy settings
 #https_proxy=https://<proxy_host>:<port>
 #http_proxy=http://<proxy_host>:<port>

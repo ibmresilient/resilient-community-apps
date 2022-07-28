@@ -1,4 +1,4 @@
-# McAfee ePO Integration for SOAR
+# McAfee ePO Integration for SOAR 
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -16,6 +16,7 @@
 - [Function - McAfee ePO find a system](#function---mcafee-epo-find-a-system)
 - [Function - McAfee ePO list tags](#function---mcafee-epo-list-tags)
 - [Function - McAfee ePO remove tag](#function---mcafee-epo-remove-tag)
+- [Function - McAfee ePO Wake up agent](#function---mcafee-epo-wake-up-agent)
 - [Function - McAfee tag an ePO asset](#function---mcafee-tag-an-epo-asset)
 - [Data Table - McAfee ePO tags](#data-table---mcafee-epo-tags)
 - [Rules](#rules)
@@ -25,7 +26,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 07/2022 | Multiple changes |
+| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
 | 1.0.1 | 10/2019 | Fix py2/3 incompatibility |
@@ -45,6 +46,7 @@ The McAfee ePO function applies a tag to a system in ePO. The function takes as 
 * Add and remove tags to an ePO system
 * List available tags 
 * Get info on an ePO system
+* Wakes up a systems agent
 
 ---
 
@@ -92,7 +94,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.0 are supported.
+Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib
 * resilient_circuits>=43.0.0
@@ -114,6 +116,7 @@ The following table provides the settings you need to configure the app. These s
 | **epo_username** | Yes | `<your_epo_username>` | *Your McAfee ePO server username* |
 | **epo_password** | Yes | `<your_epo_password>` | *Your McAfee ePO server password* |
 | **epo_trust_cert** | Yes | `false` | *Path to server certificate or false to bypass verification* |
+| **timeout** | No | `60` | *Timeout is seconds for calls made to the EPo server* |
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
@@ -248,6 +251,8 @@ if artifact.description:
   artifact.description = u"{}\n\n{}".format(artifact.description.content, info)
 else:
   artifact.description = info
+
+incident.addNote(info)
 ```
 
 </p>
@@ -288,72 +293,52 @@ results = {
     },
     {
       "tagId": 3,
-      "tagName": "EE:ALDU",
-      "tagNotes": "This will automatically be assigned to system where the users have had Local Domain Users added."
+      "tagName": "SOAR",
+      "tagNotes": ""
     },
     {
       "tagId": 4,
-      "tagName": "DXLBROKER",
-      "tagNotes": "DXL Broker"
+      "tagName": "Windows server 2016",
+      "tagNotes": ""
     },
     {
       "tagId": 5,
-      "tagName": "TIESERVER",
-      "tagNotes": "Apply Tag to TIEServers"
+      "tagName": "Linux",
+      "tagNotes": ""
     },
     {
       "tagId": 6,
-      "tagName": "Escalated",
-      "tagNotes": "Protection Workspace tag for escalated systems"
+      "tagName": "Intel(R) Xeon(R) CPU",
+      "tagNotes": ""
     },
     {
       "tagId": 7,
-      "tagName": "Excluded from Compliance Check",
-      "tagNotes": "Protection Workspace tag for systems to be excluded from the compliance check"
+      "tagName": "Intel Core Processor",
+      "tagNotes": ""
     },
     {
       "tagId": 8,
-      "tagName": "IBM QRadar",
-      "tagNotes": "Sample tag creation for partners"
+      "tagName": "Test",
+      "tagNotes": ""
     },
     {
       "tagId": 9,
-      "tagName": "MARSERVER",
-      "tagNotes": "Apply Tag to Active Response Server"
+      "tagName": "AA",
+      "tagNotes": ""
     },
     {
       "tagId": 10,
-      "tagName": "MARAGG",
-      "tagNotes": "Apply Tag to Active Response Server"
-    },
-    {
-      "tagId": 11,
-      "tagName": "Shut Down",
+      "tagName": "123",
       "tagNotes": ""
-    },
-    {
-      "tagId": 12,
-      "tagName": "myTag",
-      "tagNotes": ""
-    },
-    {
-      "tagId": 13,
-      "tagName": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 ",
-      "tagNotes": "aaa"
-    },
-    {
-      "tagId": 14,
-      "tagName": "SOAR",
-      "tagNotes": "\u0100 \u0101 \u0102 \u0103 \u0104 \u0105 "
     }
   ],
   "inputs": {},
   "metrics": {
-    "execution_time_ms": 1040,
+    "execution_time_ms": 580,
     "host": "local",
     "package": "fn-mcafee-epo",
     "package_version": "1.1.0",
-    "timestamp": "2022-07-01 12:39:59",
+    "timestamp": "2022-07-22 14:03:38",
     "version": "1.0"
   },
   "raw": null,
@@ -468,6 +453,71 @@ else:
 </details>
 
 ---
+## Function - McAfee ePO Wake up agent
+Wake up an ePO agent
+
+ ![screenshot: fn-mcafee-epo-wake-up-agent ](./doc/screenshots/fn-mcafee-epo-wake-up-agentfn-mcafee-epo-wake-up-agent.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mcafee_epo_systems` | `text` | No | `-` | Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": "completed: 1\nfailed: 0\nexpired: 0",
+  "inputs": {
+    "mcafee_epo_systems": "WIN-MTHJTQ4ELBP"
+  },
+  "metrics": {
+    "execution_time_ms": 25666,
+    "host": "local",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "timestamp": "2022-07-25 08:43:47",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.mcafee_epo_systems = rule.properties.epo_system
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+incident.addNote(results["content"])
+```
+
+</p>
+</details>
+
+---
 ## Function - McAfee tag an ePO asset
 Applies tag to the systems in ePO. Inputs include:
 - mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.
@@ -532,9 +582,9 @@ inputs.mcafee_epo_tag = row['epo_tag']
 
 ```python
 if results.content:
-  note = u"ePO tags: {} applied to system: {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
+  note = u"ePO tags: {} applied to system(s): {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
 else:
-  note = u"ePO system: {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
+  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
 
 incident.addNote(note)
 ```
@@ -562,6 +612,7 @@ mcafee_epo_tags
 ---
 
 
+
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
@@ -570,6 +621,7 @@ mcafee_epo_tags
 | McAfee ePO get system info | artifact | `mcafee_epo_get_system_info` |
 | McAfee ePO list tags | incident | `mcafee_epo_list_tags` |
 | McAfee ePO remove tags | artifact | `mcafee_epo_remove_tag` |
+| McAfee ePO Wake up Agent | incident | `mcafee_epo_wake_up_agent` |
 
 ---
 

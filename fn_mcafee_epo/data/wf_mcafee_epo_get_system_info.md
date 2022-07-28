@@ -35,6 +35,8 @@ if artifact.description:
   artifact.description = u"{}\n\n{}".format(artifact.description.content, info)
 else:
   artifact.description = info
+
+incident.addNote(info)
 ```
 
 ---
