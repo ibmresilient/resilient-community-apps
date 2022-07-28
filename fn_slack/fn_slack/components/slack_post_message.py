@@ -12,9 +12,11 @@ Many of the features of posting a Slack message are under customer control inclu
 - Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
 """
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
 from fn_slack.lib.slack_common import *
+from resilient_circuits import (FunctionError, FunctionResult,
+                                ResilientComponent, StatusMessage, function,
+                                handler)
+from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
 SLACK_SECTION_HDR = "fn_slack"
@@ -90,6 +92,7 @@ class FunctionComponent(ResilientComponent):
             slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean (optional)
             slack_as_user = kwargs.get("slack_as_user")   # Boolean (optional)
             slack_username = kwargs.get("slack_username")  # text (optional)
+            channel_id = kwargs.get("slack_channel_id") # text (optional)
 
             LOG.debug("incident_id: %s", incident_id)
             LOG.debug("task_id: %s", task_id)
@@ -100,6 +103,8 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("slack_mrkdwn: %s", slack_mrkdown)
             LOG.debug("slack_as_user: %s", slack_as_user)
             LOG.debug("slack_username: %s", slack_username)
+            LOG.debug("channel_id: %s", channel_id)
+
 
             # configuration specific slack parameters
             api_token = self.options['api_token']
@@ -115,7 +120,7 @@ class FunctionComponent(ResilientComponent):
 
             # Find or create a channel
             slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
-                input_channel_name, slack_is_private, res_client, incident_id, task_id)
+                input_channel_name, slack_is_private, res_client, incident_id, task_id, channel_id)
 
             # Add users to the channel
             if slack_participant_emails:
@@ -124,14 +129,14 @@ class FunctionComponent(ResilientComponent):
 
                 # invite users to a channel
                 if user_id_list:
-                    slack_utils.invite_users_to_channel(user_id_list)
+                    slack_utils.invite_users_to_channel(user_id_list, channel_id)
 
             # Post a message
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_text, slack_as_user,
-                                                                slack_username, slack_mrkdown, def_username)
+                                                                slack_username, slack_mrkdown, def_username, channel_id)
 
             # Generate a permalink URL to join this conversation
-            conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
+            conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"), channel_id)
 
             # Create an association if there isn't one
             if has_association_in_slack_db is False:

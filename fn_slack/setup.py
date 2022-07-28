@@ -34,8 +34,7 @@ setup(
                      "text file as an Attachment and archives the Slack channel.",
     install_requires=[
         'resilient_circuits>=45.0.0',
-        'slackclient~=2.9.4',
-        'beautifulsoup4~=4.11.1'
+        'slackclient~=2.9.4'
     ],
     packages=find_packages(),
     include_package_data=True,

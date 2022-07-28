@@ -50,6 +50,8 @@ class FunctionComponent(ResilientComponent):
             slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean (optional)
             slack_participant_emails = kwargs.get("slack_participant_emails")  # text (optional)
             slack_text = kwargs.get("slack_text")  # text (optional)
+            channel_id = kwargs.get("slack_channel_id") # text (optional)
+
 
             LOG.info("incident_id: %s", incident_id)
             LOG.info("task_id: %s", task_id)
@@ -59,6 +61,8 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("slack_text: %s", slack_text)
             LOG.debug("slack_is_private: %s", slack_is_private)
             LOG.debug("slack_participant_emails: %s", slack_participant_emails)
+            LOG.info("channel_id: %s", channel_id)
+
 
             # configuration specific slack parameters
             api_token = self.options['api_token']
@@ -73,7 +77,7 @@ class FunctionComponent(ResilientComponent):
 
             # Find or create a channel
             slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
-                input_channel_name, slack_is_private, res_client, incident_id, task_id)
+                input_channel_name, slack_is_private, res_client, incident_id, task_id, channel_id)
 
             # Add users to the channel
             if slack_participant_emails:
@@ -82,20 +86,20 @@ class FunctionComponent(ResilientComponent):
 
                 # invite users to a channel
                 if user_id_list:
-                    slack_utils.invite_users_to_channel(user_id_list)
+                    slack_utils.invite_users_to_channel(user_id_list, channel_id)
 
             # Get the the attachment from Incident or Task
             attachment_content, attachment_data = slack_utils.get_file_attachment_data(res_client, incident_id,
                                                                                        artifact_id, task_id, attachment_id)
 
             # Upload file to Slack
-            results_attachment_uploaded = slack_utils.slack_post_attachment(attachment_content, attachment_data, slack_text)
+            results_attachment_uploaded = slack_utils.slack_post_attachment(attachment_content, attachment_data, slack_text, channel_id)
 
             # Find ts for file upload message
             file_ts = slack_utils.get_ts_from_file_upload_results(results_attachment_uploaded)
 
             # Generate a permalink URL to join this conversation
-            conversation_url = slack_utils.get_permalink(file_ts)
+            conversation_url = slack_utils.get_permalink(file_ts, channel_id)
 
             # Create an association if there isn't one
             if has_association_in_slack_db is False:

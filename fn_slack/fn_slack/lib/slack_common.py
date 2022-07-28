@@ -2,20 +2,24 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 from __future__ import division
-import logging
-import json
-import time
+
 import collections
+import json
+import logging
+import os
 import re
 import tempfile
-import os
-from os.path import join, pardir
+import time
+from tkinter.messagebox import NO
 import unicodedata
-import slack
-import resilient_circuits.template_functions as template_functions
-from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import *
+from os.path import join, pardir
 
+import resilient_circuits.template_functions as template_functions
+import slack
+from fn_slack.lib.errors import IntegrationError
+from resilient_lib import (build_incident_url, build_resilient_url, clean_html,
+                           readable_datetime, unescape, validate_fields)
+from six import string_types
 
 LOG = logging.getLogger(__name__)
 
@@ -29,7 +33,7 @@ RES_PREFIX = "RES"
 # Slack recommends no more than 200 results at a time.
 SLACK_HISTORY_MESSAGE_LIMIT = 100
 SLACK_HISTORY_REPLY_MESSAGE_LIMIT = 20
-SLACK_LOAD_CHANNELS_LIMIT = 100
+SLACK_LOAD_CHANNELS_LIMIT = 200
 
 
 class SlackUtils(object):
@@ -94,7 +98,20 @@ class SlackUtils(object):
         if warn:
             self.warnings.append(warn)
 
-    def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id):
+    def check_channel_id(self, channel_id):
+        try:
+            channel_object = self.slack_client.api_call(
+                api_method = "conversations.info",
+                params = {
+                    "channel" : channel_id,
+                }
+            )
+            self.channel = channel_object.data.get("channel")
+        except:
+            return False 
+        return True
+
+    def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id, channel_id=None):
         """
         If channel_name is NOT specified in the function input, method will perform a lookup
         for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
@@ -116,7 +133,7 @@ class SlackUtils(object):
             input_channel_name, res_client, incident_id, task_id)
 
         # find the channel in Slack Workspace
-        self.find_channel_by_name(slack_channel_name)
+        self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
@@ -189,7 +206,7 @@ class SlackUtils(object):
 
         return slack_channel_name, res_associated_channel_name
 
-    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
+    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username, channel_id=None):
         """
         Process the slack post
         :param resoptions: app.config resilient section
@@ -214,10 +231,13 @@ class SlackUtils(object):
                       "see JSON message '{}'. %s", json_error)
             payload = slack_text
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
             api_method = "chat.postMessage",
             params = {
-                "channel" : self.get_channel_id(),
+                "channel" : channel_id,
                 "as_user" : slack_as_user,
                 "username" : slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
                 "parse" : "none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
@@ -235,7 +255,7 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Message add failed: " + json.dumps(results))
 
-    def slack_post_attachment(self, attachment_content, attachment_data, slack_text):
+    def slack_post_attachment(self, attachment_content, attachment_data, slack_text, channel_id=None):
         """
         Function uploads file to your slack_channel.
         :param attachment_content:
@@ -255,10 +275,13 @@ class SlackUtils(object):
             incident_id = attachment_data.get("inc_id")
             artifact_type = attachment_data.get("type")
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
             api_method = "files.upload",
             data = {
-                "channels" : self.get_channel_id(),
+                "channels" : channel_id,
                 "content" : attachment_content,
                 "filename" : file_name,
                 "filetype" : file_type,
@@ -296,7 +319,7 @@ class SlackUtils(object):
 
         return user_id_list
 
-    def invite_users_to_channel(self, user_id_list):
+    def invite_users_to_channel(self, user_id_list, channel_id=None):
         """
         Method invites 1-30 users to a public or private channel.
         :param user_id_list: A comma separated list of user IDs. Up to 30 users may be listed.
@@ -304,10 +327,12 @@ class SlackUtils(object):
         """
         users_id = ",".join(user_id_list)
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
         results = self.slack_client.api_call(
             api_method = "conversations.invite",
             params = {
-                "channel" : self.get_channel_id(),
+                "channel" : channel_id,
                 "users" : users_id
             }
         )
@@ -320,18 +345,22 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Invite users failed: " + json.dumps(results))
 
-    def find_channel_by_name(self, slack_channel_name):
+    def find_channel(self, slack_channel_name, channel_id=None):
         """
         Method verifies if suggested slack channel already exists and updates the channel instance variable.
         :param slack_channel_name: Name of the public or private channel
         :return:
         """
-        all_channels = self._slack_find_channels()
+        if channel_id:
+            self.check_channel_id(channel_id)
+            return
+        else:
+            all_channels = self._slack_find_channels()
 
-        for ch in all_channels:
-            if ch.get("name") == slack_channel_name:
-                self.channel = ch
-                break
+            for ch in all_channels:
+                if ch.get("name") == slack_channel_name:
+                    self.channel = ch
+                    break
 
     def _slack_find_channels(self, cursor=None):
         """
@@ -427,16 +456,20 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Slack error response: " + results.get("error", ""))
 
-    def get_permalink(self, thread_id):
+    def get_permalink(self, thread_id, channel_id=None):
         """
         Retrieve a permalink URL for a specific extant message
         :param thread_id: A message's ts value, uniquely identifying it within a channel
         :return: permalink
         """
+        
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
             api_method = "chat.getPermalink",
             params = {
-                "channel" : self.get_channel_id(),
+                "channel" : channel_id,
                 "message_ts" : thread_id
             }
         )
@@ -719,7 +752,7 @@ class SlackUtils(object):
             reply_count = message.get("reply_count")
 
             # 3 get the timestamp
-            msg_time = readable_datetime(float(message.get("ts")), False)
+            msg_time = readable_datetime(float(message.get("ts")), False, '%Y-%m-%d %H:%M:%S')
 
             # 4 get the text message
             text, pretext = None, None
@@ -780,15 +813,18 @@ class SlackUtils(object):
 
         return new_attachment
 
-    def archive_channel(self):
+    def archive_channel(self, channel_id=None):
         """
         Function sets the channel to archive.
         :return: JSON result
         """
+        if not channel_id:
+            channel_id = self.get_channel_id()
+            
         results = self.slack_client.api_call(
             api_method = "conversations.archive",
             params = {
-                "channel" : self.get_channel_id()
+                "channel" : channel_id
             }
         )
         LOG.debug(results)
@@ -927,7 +963,7 @@ def build_payload(ordered_data_dict):
                 payload += "\n"
             # Slack expects epoch date in seconds, using future import for division and using operator '//' to yield int in Py2 and Py3
             payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data//1000,
-                                                                                 readable_datetime(input_data, True))
+                                                                                 readable_datetime(input_data, True, '%Y-%m-%d %H:%M:%S'))
 
         elif input_type == 'boolean' and input_data:
             if payload:
@@ -973,10 +1009,10 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         resilient_url_dict = ordered_data.pop("Resilient URL", None)  # get the "Resilient URL" and delete it from the dict
         url = None
         if resilient_url_dict and resilient_url_dict.get("type") == "incident" and resilient_url_dict.get("data"):
-            url = build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), resilient_url_dict.get("data"))
+            url = build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), resilient_url_dict.get("data"), resoptions['org'])
 
         additional_text_dict = ordered_data.pop("Additional Text", None)  # get the "Additional Text" and delete it from the dict
-        pretext = None
+        pretext = ""
         if additional_text_dict and additional_text_dict.get("type") == "string" and additional_text_dict.get("data"):
             pretext = additional_text_dict.get("data")
 
@@ -991,8 +1027,8 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         attachment_json = [
             {
                 "pretext": pretext,
-                "fallback": "Resilient {}".format(type_data),
-                "title": "Resilient {}".format(type_data),
+                "fallback": "SOAR {}".format(type_data),
+                "title": "SOAR {}".format(type_data),
                 "title_link": url,
                 "text": payload,
                 "color": "#36a64f"
