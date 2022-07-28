@@ -26,7 +26,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li></ul> |
+| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li><li>Add Rule to get information about systems from a list of system properties</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
 | 1.0.1 | 10/2019 | Fix py2/3 incompatibility |
@@ -47,6 +47,7 @@ The McAfee ePO function applies a tag to a system in ePO. The function takes as 
 * List available tags 
 * Get info on an ePO system
 * Wakes up a systems agent
+* Get system information from a list of Guids
 
 ---
 
