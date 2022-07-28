@@ -19,7 +19,8 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Find an ePO system based on property such as system name, tag, IP address, MAC address, etc."""
+        """Function: Find ePO systems based on property such as system name, tag, IP address, MAC address, etc.
+           Return: List of systems found and information about the systems"""
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 

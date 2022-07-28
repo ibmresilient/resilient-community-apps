@@ -26,7 +26,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li><li>Add Rule to get information about systems from a list of system properties</li></ul> |
+| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li><li>Update funct_mcafee_epo_find_a_system function to allow a lit of systems properties to be used and return a list of systems</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
 | 1.0.1 | 10/2019 | Fix py2/3 incompatibility |
