@@ -29,11 +29,20 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
 
-        response = client.request(
-            "system.find",
-            {"searchText": fn_inputs.mcafee_epo_systems.strip()})
+        def response(systems):
+            return client.request(
+                "system.find",
+                {"searchText": systems.strip().replace(",","")})
+
+        if ',' in fn_inputs.mcafee_epo_systems:
+            results = []
+            systems = fn_inputs.mcafee_epo_systems.split()
+            for system in systems:
+                results.append(response(system)[0])
+        else:
+            results = response(fn_inputs.mcafee_epo_systems)
 
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(response)
+        yield FunctionResult(results)
