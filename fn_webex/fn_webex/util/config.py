@@ -7,7 +7,10 @@ def config_section_data():
 
     config_data = u"""[fn_webex]
 # this may also be the conference id for the developer sandbox
-webex_site_url = <URL>
-webex_bearerid = <BearerID>
-webex_timezone = GMT 00:00"""
+webex_timezone = GMT 00:00
+client_id = <Issued when creating the integration>
+client_secret = <Issued when creating the integration>
+refresh_token = <Generated using the OAuth Utilities Tool>
+scope = <A space-separated list of scopes being requested by your integration (see below)>
+"""
     return config_data

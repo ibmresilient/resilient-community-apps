@@ -28,24 +28,22 @@ class FunctionComponent(AppFunctionComponent):
                          "name" : "webex_bearerID", 
                          "name" : "webex_timezone"}], self.config_options)
 
-        self.requiredParameters["authURL"] = self.config_options.get("auth_url")
-        self.requiredParameters["tokenURL"] = self.config_options.get("token_url")
-        self.requiredParameters["scope"] = self.config_options.get("scope")
-        self.requiredParameters["clientID"] = self.config_options.get("client_id")
-        self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
-        self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time
         self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
+        self.requiredParameters["clientID"] = self.config_options.get("client_id")
+        self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
+        self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
+        self.requiredParameters["scope"] = self.config_options.get("scope")
 
-        self.meetingParameters["hostEmail"] = self.config_options.get("hostEmail", "")
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda
         self.meetingParameters["password"] = fn_inputs.webex_meeting_password
         self.meetingParameters["sendEmail"] = True
 
         self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["siteURL"] = "https://webexapis.com/v1/meetings/"
+        self.requiredParameters["siteURL"]  = "https://webexapis.com/v1/meetings/"
+        self.requiredParameters["tokenURL"] = "https://webexapis.com/v1/access_token"
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)

@@ -6,7 +6,6 @@ import pytest
 import datetime
 
 from mock import patch
-from pyclbr import Function
 from resilient_lib import RequestsCommon
 from fn_webex.lib.cisco_api import WebexAPI
 from resilient_circuits.util import get_config_data
@@ -136,12 +135,12 @@ class TestWebexApi:
         ("UTC -05:30", "-0530"), ("GMT 0530"  , "+0530"), (" GMT 0530 ", "+0530"),
         ("0530"      , "+0530"),( " -05:30  " , "-0530")])
     def test_get_timeZones(self, mock_inputs, expected_results):
-        assert(self.webex.get_timeZones(mock_inputs) == expected_results)
-        assert(self.webex.get_timeZones(None) == time.strftime("%z", time.localtime()))
         with pytest.raises(ValueError) as err:
             self.webex.get_timeZones("GMT 05:£30")
         with pytest.raises(ValueError) as err:
             self.webex.get_timeZones("IST 05:30")
+        assert(self.webex.get_timeZones(mock_inputs), expected_results)
+        assert(self.webex.get_timeZones(None), time.strftime("%z", time.localtime()))
 
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
