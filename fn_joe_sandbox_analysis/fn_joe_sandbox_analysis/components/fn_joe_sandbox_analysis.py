@@ -10,7 +10,10 @@ import tempfile
 import re
 from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, str_to_bool
+
+REQUEST_VERIFY_APP_CONFIG = "verify"
+REQUESTS_VERIFY_ENV_VAR = "REQUESTS_CA_BUNDLE"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'fn_joe_sandbox_analysis"""
@@ -48,15 +51,6 @@ class FunctionComponent(ResilientComponent):
         def remove_temp_files(files):
             for f in files:
                 os.remove(f)
-
-        def str_to_bool(str):
-            """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-            if str.lower() == 'true':
-                return True
-            elif str.lower() == 'false':
-                return False
-            else:
-                raise ValueError("{} is not a boolean".format(str))
 
         def get_config_option(option_name, optional=False):
             """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
@@ -205,6 +199,48 @@ class FunctionComponent(ResilientComponent):
             proxies = rc.get_proxies()
             return proxies
 
+        def get_verify_ssl(opts, app_options):
+            """
+            Get "verify" parameter from app config or from env var
+            REQUESTS_CA_BUNDLE which is the default way to set
+            verify with python requests library.
+
+            Value can be set in [integrations] or in the [fn_joe_sandbox_analysis] section
+
+            Value in [fn_joe_sandbox_analysis] takes precedence over [integrations]
+            which takes precedence over REQUESTS_CA_BUNDLE
+
+            :param app_options: App config dict
+            :type app_options: dict
+            :return: Value to set requests.session.verify to (as used in jbxapi).
+                Either a path or a boolean
+            :rtype: bool|str(path)
+            """
+
+            verify = app_options.get(REQUEST_VERIFY_APP_CONFIG)
+
+            # NOTE: specifically want ``if verify is None`` rather than
+            # ``if not verify``, as the value of verify can be set to "False"
+            if verify is None:
+                verify = opts.get("integrations", {}).get(REQUEST_VERIFY_APP_CONFIG)
+
+            if verify is None:
+                verify = os.getenv(REQUESTS_VERIFY_ENV_VAR)
+
+            # because verify can be either a boolean or a path,
+            # we need to check if it is a string with a boolean 
+            # value first then, and only then, we convert it to a bool
+            # NOTE: that this will then only support "true" or "false"
+            # (case-insensitive) rather than the normal "true", "yes", etc...
+            if isinstance(verify, str) and verify.lower() in ["false", "true"]:
+                verify = str_to_bool(verify)
+
+            return verify
+        ##############################
+        ###### END HELPER FUNCS ######
+        ##############################
+
+
         try:
             # Get Joe Sandbox options from app.config file
             API_KEY = get_config_option("jsb_api_key")
@@ -251,9 +287,13 @@ class FunctionComponent(ResilientComponent):
             except Exception as proxy_error:
                 proxies = None
 
+            # get bool or path to custom ca bundle to pass to "verify_ssl"
+            # in jbxapi.JoeSandbox constructor
+            verify_ssl = get_verify_ssl(self.opts, self.options)
+
             # Instansiate new Joe Sandbox object
             joesandbox = jbxapi.JoeSandbox(
-                apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies)
+                apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies, verify_ssl=verify_ssl)
 
             # Instansiate new SOAR API object
             client = self.rest_client()
