@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from urllib import request
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
 from resilient_lib import validate_fields
