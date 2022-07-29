@@ -32,6 +32,7 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
 
+        # Connect to ePO server
         client = init_client(self.opts, self.options)
 
         # Make wakeupAgent call to given system
