@@ -138,7 +138,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+| QRadar Advisor with Watson | 2.6.3 | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
 
 #### Prerequisites
 <!--
@@ -185,16 +185,10 @@ The following table provides the settings you need to configure the app. These s
 | **qradar_host** | Yes | `myhost` | *QRadar host.* |
 | **full_search_timeout** | No | `1200` | *Full search timeout in seconds.* |
 | **full_search_period** | No | `5` | *Full search period in seconds.* |
+| **offense_analysis_timeout** | No | `1200` | *Timeout for analysis in seconds.* |
+| **offense_analysis_period** | No | `5` | *Period for analysis in seconds.* |
 | **verify_cert** | Yes | `` | *<Path to certificate file> or false. * |
 
-qradar_host=qradar_host
-qradar_advisor_token=qradar_advisor_token_keyring_protection_recommended
-qradar_advisor_app_id=app_id_from_qradar_server
-verify_cert=[true, false] for verify https certificate or not
-full_search_timeout=optional_full_search_timeout_in_seconds_default_1200
-full_search_period=optional_full_search_period_in_seconds_default_5
-offense_analysis_timeout=optional_offense_analysis_timeout_in_seconds_default_1200
-offense_analysis_period=optional_offense_analysis_period_in_seconds_default_5
 ### Custom Layouts
 <!--
   Use this section to provide guidance on where the user should add any custom fields and data tables.
