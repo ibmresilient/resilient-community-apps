@@ -6,7 +6,10 @@ Usage: resilient-circuits selftest -l fn_joe_sandbox_analysis
 """
 
 import logging
+import os
+
 import jbxapi
+from fn_joe_sandbox_analysis.components.fn_joe_sandbox_analysis import get_verify_ssl
 from resilient_lib import RequestsCommon, str_to_bool
 
 log = logging.getLogger(__name__)
@@ -61,8 +64,10 @@ def selftest_function(opts):
     except Exception as proxy_error:
         proxies = None
 
+    verify_ssl = get_verify_ssl(opts, app_configs)
+
     joesandbox = jbxapi.JoeSandbox(
-        apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies)
+        apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies, verify_ssl=verify_ssl)
 
     test = joesandbox.server_online()
     if test:
