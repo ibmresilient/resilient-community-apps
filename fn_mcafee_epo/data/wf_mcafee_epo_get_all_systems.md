@@ -11,26 +11,26 @@
 `mcafee_epo_execute_query`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
 ### Pre-Processing Script
 ```python
-None
+inputs.mcafee_epo_target = "EPOLeafNode"
 ```
 
 ### Post-Processing Script
 ```python
 if results['content']:
-  incident.addNote(str(results['content']))
-  # table_row = incident.addRow("mcafee_epo_systems")
-  # table_row["system_name"] =
-  # table_row["agent_guid"] = 
-  # table_row["last_communication"] = 
-  # table_row["tags"] =
-  # table_row["operating_system"] =
+  for system in results['content']:
+    table_row = incident.addRow("mcafee_epo_systems")
+    table_row["system_name"] = system.get("EPOLeafNode.NodeName")
+    table_row["agent_guid"] = system.get("EPOLeafNode.AgentGUID")
+    table_row["last_communication"] = system.get("EPOLeafNode.LastUpdate")
+    table_row["tags"] = system.get("EPOLeafNode.Tags")
+    table_row["operating_system"] = system.get("EPOLeafNode.os")
 ```
 
 ---

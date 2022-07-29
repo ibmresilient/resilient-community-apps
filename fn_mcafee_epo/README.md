@@ -13,11 +13,13 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Function - McAfee ePO Execute Query](#function---mcafee-epo-execute-query)
 - [Function - McAfee ePO find a system](#function---mcafee-epo-find-a-system)
 - [Function - McAfee ePO list tags](#function---mcafee-epo-list-tags)
 - [Function - McAfee ePO remove tag](#function---mcafee-epo-remove-tag)
 - [Function - McAfee ePO Wake up agent](#function---mcafee-epo-wake-up-agent)
 - [Function - McAfee tag an ePO asset](#function---mcafee-tag-an-epo-asset)
+- [Data Table - McAfee ePO Systems](#data-table---mcafee-epo-systems)
 - [Data Table - McAfee ePO tags](#data-table---mcafee-epo-tags)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -26,7 +28,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li><li>Update funct_mcafee_epo_find_a_system function to allow a list of systems properties to be used and return a list of systems</li></ul> |
+| 1.1.0 | 07/2022 | <ul><li>Add function "Wake up agent"</li><li>Update funct_mcafee_epo_find_a_system function to allow a list of systems properties to be used and return a list of systems</li><li>Add function to execute queries on ePO server</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
 | 1.0.1 | 10/2019 | Fix py2/3 incompatibility |
@@ -48,6 +50,7 @@ The McAfee ePO function applies a tag to a system in ePO. The function takes as 
 * Get info on an ePO system
 * Wakes up a systems agent
 * Get system information from a list of Guids
+* List all systems
 
 ---
 
@@ -126,6 +129,125 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
+## Function - McAfee ePO Execute Query
+Execute a query on the ePO server
+
+ ![screenshot: fn-mcafee-epo-execute-query ](./doc/screenshots/fn-mcafee-epo-execute-query.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mcafee_epo_queryid` | `number` | No | `-` | The ID of the query you want to run |
+| `mcafee_epo_target` | `text` | No | `-` | ePO data types target name |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": [
+    {
+      "EPOLeafNode.AgentGUID": "E1A00018-09C4-11ED-2BBA-005056B00018",
+      "EPOLeafNode.AgentVersion": "5.6.5.236",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastCommSecure": "1",
+      "EPOLeafNode.LastUpdate": "2022-07-29T08:14:34-07:00",
+      "EPOLeafNode.ManagedState": 1,
+      "EPOLeafNode.NodeName": "int-mcafee-tie",
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Linux, Server",
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.os": "Linux|Server|4.9|227-1.mlos2.x86_64"
+    },
+    {
+      "EPOLeafNode.AgentGUID": "D7700006-3C1E-40A9-ACB2-B74E50006D5E",
+      "EPOLeafNode.AgentVersion": "5.5.1.388",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastCommSecure": "1",
+      "EPOLeafNode.LastUpdate": "2022-07-29T07:42:48-07:00",
+      "EPOLeafNode.ManagedState": 1,
+      "EPOLeafNode.NodeName": "MCAFEE-EPO-CLIE",
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.Tags": "Intel Core Processor, Server, Windows server 2016",
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.os": "Windows Server 2016|Server|10.0|"
+    },
+    {
+      "EPOLeafNode.AgentGUID": "B7E000E0-CDE7-11EB-3210-005000041000",
+      "EPOLeafNode.AgentVersion": "5.6.6.232",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastCommSecure": "1",
+      "EPOLeafNode.LastUpdate": "2022-07-29T08:00:07-07:00",
+      "EPOLeafNode.ManagedState": 1,
+      "EPOLeafNode.NodeName": "WIN-MTHJTQ4ELBP",
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Server, Windows server 2016",
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.os": "Windows Server 2016|Server|10.0|"
+    }
+  ],
+  "inputs": {
+    "mcafee_epo_target": "EPOLeafNode"
+  },
+  "metrics": {
+    "execution_time_ms": 531,
+    "host": "local",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "timestamp": "2022-07-29 11:15:14",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.mcafee_epo_target = "EPOLeafNode"
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results['content']:
+  for system in results['content']:
+    table_row = incident.addRow("mcafee_epo_systems")
+    table_row["system_name"] = system.get("EPOLeafNode.NodeName")
+    table_row["agent_guid"] = system.get("EPOLeafNode.AgentGUID")
+    table_row["last_communication"] = system.get("EPOLeafNode.LastUpdate")
+    table_row["tags"] = system.get("EPOLeafNode.Tags")
+    table_row["operating_system"] = system.get("EPOLeafNode.os")
+```
+
+</p>
+</details>
+
+---
 ## Function - McAfee ePO find a system
 Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc.
 
@@ -596,6 +718,23 @@ incident.addNote(note)
 ---
 
 
+## Data Table - McAfee ePO Systems
+
+ ![screenshot: dt-mcafee-epo-systems](./doc/screenshots/dt-mcafee-epo-systems.png)
+
+#### API Name:
+mcafee_epo_systems
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Agent GUID | `agent_guid` | `text` | - |
+| Last Communication | `last_communication` | `text` | - |
+| Operating System | `operating_system` | `text` | - |
+| System Name | `system_name` | `text` | - |
+| Tags | `tags` | `text` | - |
+
+---
 ## Data Table - McAfee ePO tags
 
  ![screenshot: dt-mcafee-epo-tags](./doc/screenshots/dt-mcafee-epo-tags.png)
@@ -619,7 +758,9 @@ mcafee_epo_tags
 | --------- | ------ | ------------------ |
 | McAfee ePO apply a tag | mcafee_epo_tags | `mcafee_epo_apply_a_tag` |
 | McAfee ePO apply tags | artifact | `mcafee_epo_apply_tags` |
+| McAfee ePO Get All Systems | incident | `mcafee_epo_get_all_systems` |
 | McAfee ePO get system info | artifact | `mcafee_epo_get_system_info` |
+| McAfee ePO Get System Info from Property | incident | `mcafee_epo_get_system_info_from_property` |
 | McAfee ePO list tags | incident | `mcafee_epo_list_tags` |
 | McAfee ePO remove tags | artifact | `mcafee_epo_remove_tag` |
 | McAfee ePO Wake up Agent | incident | `mcafee_epo_wake_up_agent` |
