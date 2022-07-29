@@ -59,25 +59,6 @@
 | 1.0.1 | 8/2018 | Watson Search fixed version compatibility with search that returns no data |
 | 1.0.0 | 2018 | Initial Release |
 
-### v2.0.2
-- Support added for App Host.
-- Support added for proxies.
-- Updated deprecated API endpoints.
-- Bug fixes.
-
-### v2.0.1
-- Bug fixes for Python 3.
-
-### v2.0
-- Supports the V2.0 release.
-
-### v1.0.1
-- For Watson Search fixed version compatibility with search that returns no data.
-- Fix typo in post-process script.
-
-### v1.0
-- Initial release.
-
 ---
 
 ## Overview
