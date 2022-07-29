@@ -43,6 +43,7 @@
 -->
 ### v1.0.5
 * Bug fix
+* Added support for self-signed certificates when connecting to an on-premises machine
 ### v1.0.4
 * Apphost support
 ### v1.0.3
@@ -81,6 +82,15 @@
 
 ## Installation
 
+### Configuration Details
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **``jsb_accept_tac``** | Yes | `True` | |
+| **``jsb_api_key``** | Yes | | *API Key to Joe Sandbox server with appropriate permissions to submit workflows* |
+| **``jsb_analysis_url``** | Yes | `https://<your_jsb_server>/<path_to_api_endpoint>` | *Base URL for your Joe Sandbox server's API* |
+| **``jsb_analysis_report_ping_delay``** | Yes | `120` | *Ping delay* |
+| **``jsb_analysis_report_request_timeout``** | Yes | `1800` | *Workflow time out (default: 1800 seconds)* |
+
 ### App Host
 
 All the components for running this integration in a container already exist when using the App Host app.
@@ -89,13 +99,13 @@ To install,
 
 Navigate to Administrative Settings and then the Apps tab.
 
-Click the Install button and select the downloaded file: ```app-joe_sandbox_analysis-1.0.4.zip```.
+Click the Install button and select the downloaded file: ```app-joe_sandbox_analysis-x.x.x.zip```.
 
-Go to the Configuration tab and edit the app.config file, editing the API key for fn_joe_sandbox_analysis qand making any additional setting changes.
+Go to the Configuration tab and edit the app.config file, edit the API key for `fn_joe_sandbox_analysis` and add the URL. Make any additional setting changes as necessary.
 
 
 ### Integration Server
-* Download the `fn_joe_sandbox_analysis.zip`.
+* Download the `app-joe_sandbox_analysis-x.x.x.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
@@ -121,16 +131,9 @@ Go to the Configuration tab and edit the app.config file, editing the API key fo
   ```
   $ nano ~/.resilient/app.config
   ```
-  | Config | Required | Example | Description |
-  | ------ | :------: | ------- | ----------- |
-  | **jsb_accept_tac** | Yes | `True` | *Enter a description of the config here* |
-  | **jsb_api_key** | Yes | `` | *Enter a description of the config here* |
-  | **jsb_analysis_url** | Yes | `https://jbxcloud.joesecurity.org/v2/analysis` | *Enter a description of the config here* |
-  | **jsb_analysis_report_ping_delay** | Yes | `120` | *Enter a description of the config here* |
-  | **jsb_analysis_report_request_timeout** | Yes | `1800` | *Enter a description of the config here* |
 
 * **Save** and **Close** the app.config file.
-* [Optional]: Run selftest to test the Integration you configured:
+* [Optional]: Run selftest to test the App you configured:
   ```
   $ resilient-circuits selftest -l fn-joe-sandbox-analysis
   ```
