@@ -5,10 +5,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_qradar_advisor',
+    display_name="QRadar Advisor Functions",
     version='2.1.0',
     license='MIT',
     author='IBM SOAR',
-    author_email='support@resilientsystems.com',
+    author_email='',
     url='https://ibm.com/mysupport',
     description="IBM SOAR QRadar Advisor Functions",
     long_description="The QRadar Advisor integration with IBM QRadar SOAR enables SOAR users to gather Cyber "
