@@ -36,7 +36,6 @@
     - [App Configuration](#app-configuration)
   - [Function - Create WebEx Meeting](#function---create-webex-meeting)
   - [Rules](#rules)
-  - [!screenshot: activityPopup](#)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -349,7 +348,8 @@ incident.addNote(note)
 
 The example incident rule activates the following activity popup menu to allow the user to enter the WebEx meeting information: 
 
- ![screenshot: activityPopup](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
+![screenshot: activityPopup](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
+
 ---
 
 ## Troubleshooting & Support
