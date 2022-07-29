@@ -198,44 +198,6 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(opts, options)
             proxies = rc.get_proxies()
             return proxies
-
-        def get_verify_ssl(opts, app_options):
-            """
-            Get "verify" parameter from app config or from env var
-            REQUESTS_CA_BUNDLE which is the default way to set
-            verify with python requests library.
-
-            Value can be set in [integrations] or in the [fn_joe_sandbox_analysis] section
-
-            Value in [fn_joe_sandbox_analysis] takes precedence over [integrations]
-            which takes precedence over REQUESTS_CA_BUNDLE
-
-            :param app_options: App config dict
-            :type app_options: dict
-            :return: Value to set requests.session.verify to (as used in jbxapi).
-                Either a path or a boolean
-            :rtype: bool|str(path)
-            """
-
-            verify = app_options.get(REQUEST_VERIFY_APP_CONFIG)
-
-            # NOTE: specifically want ``if verify is None`` rather than
-            # ``if not verify``, as the value of verify can be set to "False"
-            if verify is None:
-                verify = opts.get("integrations", {}).get(REQUEST_VERIFY_APP_CONFIG)
-
-            if verify is None:
-                verify = os.getenv(REQUESTS_VERIFY_ENV_VAR)
-
-            # because verify can be either a boolean or a path,
-            # we need to check if it is a string with a boolean 
-            # value first then, and only then, we convert it to a bool
-            # NOTE: that this will then only support "true" or "false"
-            # (case-insensitive) rather than the normal "true", "yes", etc...
-            if isinstance(verify, str) and verify.lower() in ["false", "true"]:
-                verify = str_to_bool(verify)
-
-            return verify
         ##############################
         ###### END HELPER FUNCS ######
         ##############################
@@ -364,3 +326,43 @@ class FunctionComponent(ResilientComponent):
 
         finally:
             remove_temp_files(TEMP_FILES)
+
+
+
+def get_verify_ssl(opts, app_options):
+    """
+    Get "verify" parameter from app config or from env var
+    REQUESTS_CA_BUNDLE which is the default way to set
+    verify with python requests library.
+
+    Value can be set in [integrations] or in the [fn_joe_sandbox_analysis] section
+
+    Value in [fn_joe_sandbox_analysis] takes precedence over [integrations]
+    which takes precedence over REQUESTS_CA_BUNDLE
+
+    :param app_options: App config dict
+    :type app_options: dict
+    :return: Value to set requests.session.verify to (as used in jbxapi).
+        Either a path or a boolean
+    :rtype: bool|str(path)
+    """
+
+    verify = app_options.get(REQUEST_VERIFY_APP_CONFIG)
+
+    # NOTE: specifically want ``if verify is None`` rather than
+    # ``if not verify``, as the value of verify can be set to "False"
+    if verify is None:
+        verify = opts.get("integrations", {}).get(REQUEST_VERIFY_APP_CONFIG)
+
+    if verify is None:
+        verify = os.getenv(REQUESTS_VERIFY_ENV_VAR)
+
+    # because verify can be either a boolean or a path,
+    # we need to check if it is a string with a boolean 
+    # value first then, and only then, we convert it to a bool
+    # NOTE: that this will then only support "true" or "false"
+    # (case-insensitive) rather than the normal "true", "yes", etc...
+    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
+        verify = str_to_bool(verify)
+
+    return verify
