@@ -32,10 +32,11 @@
   - [Installation](#installation)
     - [Install](#install)
     - [Webex Configuration](#webex-configuration)
+    - [OAuth Authentication](#oauth-authentication)
     - [App Configuration](#app-configuration)
   - [Function - Create WebEx Meeting](#function---create-webex-meeting)
   - [Rules](#rules)
-  - [!screenshot: main](#)
+  - [!screenshot: activityPopup](#)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -135,10 +136,28 @@ The following steps can be followed to create an app integration:
 * Navigate to [Webex Developer](https://developer.webex.com/my-apps/new) and click on *Create an Integration*
 * The webesite will then present the user with a series of questions. The three primary field that is required for this integratio to work would be Mobile SDK, Redirect URI and Scopes.
 * Select *No* for using Mobile SDk.
-* Redirect URI is required for completing the OAuth grant flow. 
+* Redirect URI is required for completing the OAuth grant flow. In this case : `https://localhost:8080/callback`
 * Scopes define the level of access that your integration requires. All meetings related scopes are to be selected.
-  
+* Upon completion, the user will be provided with a Client ID, Client Secret and an OAuth Authorization URL, which is then used for authentication.
+
  ![screenshot: webex-app-integration ](./doc/screenshots/webex-app-integration-scope.png)
+
+### OAuth Authentication
+To establish a secure connection between the Webex integration and  _SOAR platform_, the [OAuth Utilities Documentation](https://github.ibm.com/Resilient/resilient-community-apps/tree/master/oauth-utils) is to be used. 
+
+* The tool is used to generate a unique *Refresh token*, which is then used by the app.
+* There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://github.ibm.com/Resilient/resilient-community-apps/tree/master/oauth-utils)
+* Once such method would be using the CLI. A sample command has been provided below:
+
+```
+oauth-utils oauth2_generate_refresh_token \
+-tu https://webexapis.com/v1/access_token \
+-au https://webexapis.com/v1/authorize \
+-ci <CLIENT_ID> \
+-cs <CLIENT_SECRET> \
+-sc "meeting:recordings_read meeting:schedules_read"
+```
+This generates the required _Refresh Token_ for app configuration.
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
@@ -146,10 +165,10 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **webex_timezone** | Yes | `GMT -05:00` | *Timezone in which meeting is created.* |
-| **client_id** | Yes | | *Issued when creating the integration* |
-| **client_secret** | Yes | | *Issued when creating the integration* |
+| **client_id** | Yes | Cf7f235XXXXXXXXXX509cda551c7ddXXXX930ae68d377754b971XXXXXXXXX | *Issued when creating the integration* |
+| **client_secret** | Yes | dca551c7dXXXX930aeXXXX509cda551c7ddXXXX930ae68d54b971XXXXXXXXX | *Issued when creating the integration* |
 | **refresh_token** | Yes | | *Generated using the OAuth Utilities Tool* |
-| **scope** | Yes | `meeting:schedules_write meeting:preferences_read` | *Issued when creating the integration* |
+| **scope** | Yes | `meeting:schedules_write meeting:schedules_read` | *Issued when creating the integration* |
 
 ---
 
@@ -330,7 +349,7 @@ incident.addNote(note)
 
 The example incident rule activates the following activity popup menu to allow the user to enter the WebEx meeting information: 
 
- ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
+ ![screenshot: activityPopup](./doc/screenshots/fn-create-webex-meeting-activity-popup.png)
 ---
 
 ## Troubleshooting & Support
