@@ -61,7 +61,7 @@ class TestSlackArchiveChannel:
     @patch('fn_slack.components.slack_archive_channel.SlackUtils.get_channel_complete_history')
     @patch('fn_slack.components.slack_archive_channel.SlackUtils.slack_post_message')
     @patch('fn_slack.components.slack_archive_channel.SlackUtils.get_channel')
-    @patch('fn_slack.components.slack_archive_channel.SlackUtils.find_channel_by_name')
+    @patch('fn_slack.components.slack_archive_channel.SlackUtils.find_channel')
     @patch('fn_slack.components.slack_archive_channel.slack_channel_name_datatable_lookup', return_value = {"channel" : "xyz"})
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)

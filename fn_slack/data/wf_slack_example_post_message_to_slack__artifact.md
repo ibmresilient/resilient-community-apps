@@ -82,6 +82,10 @@ inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails 
 # Slack text message
 # Container field to retain JSON fields to send to Slack.
 inputs.slack_text = slack_text
+
+# Slack Channel ID, faster than finding via channel name
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id is not None else inputs.slack_channel_id
+
 ```
 
 ### Post-Processing Script

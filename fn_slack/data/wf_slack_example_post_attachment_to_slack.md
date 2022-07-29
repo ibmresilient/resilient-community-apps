@@ -48,6 +48,10 @@ inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails 
 # Slack additional text message
 # Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.
 inputs.slack_text = rule.properties.rule_slack_text if rule.properties.rule_slack_text is not None else ''
+
+# Slack Channel ID, faster than finding via channel name
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id is not None else inputs.slack_channel_id
+
 ```
 
 ### Post-Processing Script
