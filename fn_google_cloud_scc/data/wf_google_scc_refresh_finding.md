@@ -46,6 +46,7 @@ if results.get("success") and len(findings_list) == 1:
   incident.properties.google_scc_recommendation = finding.get("linkified_recommendation")
   incident.properties.google_scc_vulnerability = finding.get("vulnerability").get("cve")
   incident.properties.google_scc_state = finding.get("state")
+  incident.properties.google_scc_next_steps = finding.get("next_steps")
   
 ```
 

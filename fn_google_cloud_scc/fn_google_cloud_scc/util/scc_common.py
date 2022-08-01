@@ -45,15 +45,18 @@ class GoogleSCCCommon():
 
 
     def query_entities_since_ts(self, timestamp, *_args, **_kwargs):
-        """get changed entities since last poller run
+        """
+        Get changed entities since last poller run
 
-        Args:
-            timestamp (datetime): datetime when the last poller ran
-            *args: additional positional parameters needed for endpoint queries
-            **kwargs: additional key/value paris needed for endpoint queries
+        :param timestamp: datetime when the last poller ran
+        :type timestamp: datetime
+        :param *_args: additional positional parameters needed for endpoint queries
+        :type _args: dict
+        :param **_kwargs: additional key/value paris needed for endpoint queries
+        :type _kwargs: dict
 
-        Returns:
-            list: changed entity list
+        :return: changed entity list
+        :rtype: list
         """
 
         findings_filter = f"eventTime >= \"{readable_datetime(timestamp)}\""

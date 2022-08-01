@@ -32,6 +32,7 @@
     "google_scc_compliance_standards": "{% for standard in source_properties['compliance_standards'] %}
 <span class='label' rel='tooltip' title='{{ standard|upper }}'>{{ standard|upper }} : {{ source_properties['compliance_standards'][standard][0]['ids'][0] }}</span> 
       {% endfor %}",
+    "google_scc_next_steps": "{{ next_steps }}",
     "google_scc_security_marks": "{% for mark_key in security_marks['marks'] %}
 <span class='label' rel='tooltip' title='{{ mark_key }}'>{{ mark_key }} : {{ security_marks['marks'][mark_key] }}</span> 
       {% endfor %}",

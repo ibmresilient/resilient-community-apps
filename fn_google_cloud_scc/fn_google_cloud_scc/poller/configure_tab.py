@@ -31,6 +31,7 @@ class GoogleSCCTab(Tab):
         Field("google_scc_security_marks"),
         Field("google_scc_compliance_standards"),
         Field("google_scc_vulnerability"),
+        Field("google_scc_next_steps"),
         Field("description"),
         Field("severity_code"),
         Field("google_scc_state"),

@@ -13,11 +13,11 @@
         }
       ],
       "enabled": true,
-      "export_key": "Add Source Property",
+      "export_key": "SCC: Add Source Property",
       "id": 25,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Add Source Property",
+      "name": "SCC: Add Source Property",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
@@ -64,11 +64,11 @@
         }
       ],
       "enabled": true,
-      "export_key": "Close Finding in SCC",
+      "export_key": "SCC: Close Finding",
       "id": 19,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Close Finding in SCC",
+      "name": "SCC: Close Finding",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
@@ -91,11 +91,47 @@
         }
       ],
       "enabled": true,
-      "export_key": "Refresh Finding",
+      "export_key": "SCC: Delete Security Mark",
+      "id": 26,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "SCC: Delete Security Mark",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "85a5cde7-23ce-44b9-8347-373707cc01a6",
+      "view_items": [
+        {
+          "content": "208afcc7-4f79-4abf-80f2-acaa3516668b",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "google_scc_delete_security_mark"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.google_scc_name",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "SCC: Refresh Finding",
       "id": 20,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Refresh Finding",
+      "name": "SCC: Refresh Finding",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
@@ -118,27 +154,19 @@
         }
       ],
       "enabled": true,
-      "export_key": "Update Finding in SCC",
-      "id": 21,
+      "export_key": "SCC: Update Next Steps",
+      "id": 31,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Update Finding in SCC",
+      "name": "SCC: Update Next Steps",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
-      "uuid": "fcfc4620-0fb6-42a6-8f4e-917084d71bf5",
+      "uuid": "decd944f-05ac-4ce7-8e50-5b216f9be606",
       "view_items": [
         {
-          "content": "b6e73168-8f5b-4122-bdc2-b812c582df0d",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "a85c950e-7a82-4c28-a944-189ef59c8016",
+          "content": "4f5e6173-3c9d-4a64-beea-80b26fc0a821",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -147,7 +175,7 @@
         }
       ],
       "workflows": [
-        "google_scc_update_finding_in_scc"
+        "google_scc_update_next_steps_in_scc"
       ]
     },
     {
@@ -162,11 +190,11 @@
         }
       ],
       "enabled": true,
-      "export_key": "Update Security Marks in SCC",
+      "export_key": "SCC: Update Security Marks",
       "id": 22,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Update Security Marks in SCC",
+      "name": "SCC: Update Security Marks",
       "object_type": "incident",
       "tags": [],
       "timeout_seconds": 86400,
@@ -206,11 +234,81 @@
         }
       ],
       "enabled": true,
-      "export_key": "Update Source Property",
+      "export_key": "SCC: Update Severity",
+      "id": 30,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "SCC: Update Severity",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "ab5feeb2-cfee-4b92-93b5-b0ced7f6f5d4",
+      "view_items": [
+        {
+          "content": "602d981c-d2c0-4d76-8678-4573ea53d6b2",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "google_scc_update_severity_in_scc"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.google_scc_name",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "incident.severity_code",
+          "method": "changed",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "SCC: Update Severity on Change",
+      "id": 32,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "SCC: Update Severity on Change",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "392476f7-8b55-46f0-a84e-95b16d41e3a7",
+      "view_items": [],
+      "workflows": [
+        "google_scc_auto_update_severity_in_scc"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.google_scc_name",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "SCC: Update Source Property",
       "id": 24,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "Update Source Property",
+      "name": "SCC: Update Source Property",
       "object_type": "google_scc_finding_source_properties_dt",
       "tags": [],
       "timeout_seconds": 86400,
@@ -229,11 +327,47 @@
       "workflows": [
         "google_scc_update_finding_source_property_in_scc_from_dt"
       ]
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.properties.google_scc_name",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "SCC: Update State",
+      "id": 29,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "SCC: Update State",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "27890201-c89a-4469-bd06-fdf7fe87bcdf",
+      "view_items": [
+        {
+          "content": "1eb93f46-d3a4-498e-8849-b4d95c57919a",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "google_scc_update_state_in_scc"
+      ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1658168006705,
+  "export_date": 1659382663338,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -422,61 +556,44 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/google_scc_field_to_update",
+      "export_key": "actioninvocation/google_scc_updated_state",
       "hide_notification": false,
-      "id": 303,
+      "id": 314,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
-      "name": "google_scc_field_to_update",
+      "name": "google_scc_updated_state",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
       "prefix": "properties",
       "read_only": false,
+      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "Field to Update",
+      "text": "State",
       "tooltip": "",
       "type_id": 6,
-      "uuid": "b6e73168-8f5b-4122-bdc2-b812c582df0d",
+      "uuid": "1eb93f46-d3a4-498e-8849-b4d95c57919a",
       "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "ACTIVE",
+          "properties": null,
+          "uuid": "adde4cb6-dd47-47e8-b82b-63045f6c2433",
+          "value": 105
+        },
         {
           "default": true,
           "enabled": true,
           "hidden": false,
-          "label": "next_steps",
+          "label": "INACTIVE",
           "properties": null,
-          "uuid": "24534551-38cb-4302-a24d-f939abb8ffa0",
-          "value": 64
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "severity",
-          "properties": null,
-          "uuid": "d2c26aed-0468-4d51-b269-3f13e5f3248c",
-          "value": 65
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "description",
-          "properties": null,
-          "uuid": "b0fc2662-8a96-4f24-93ea-eb0d25599418",
-          "value": 66
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "state",
-          "properties": null,
-          "uuid": "bc1b15bf-5b1f-4c1e-9895-8475cbae51ee",
-          "value": 67
+          "uuid": "216361bf-97cc-4b9f-9617-2b4748237d87",
+          "value": 106
         }
       ]
     },
@@ -508,6 +625,103 @@
       "type_id": 6,
       "uuid": "208afcc7-4f79-4abf-80f2-acaa3516668b",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/google_scc_updated_next_steps",
+      "hide_notification": false,
+      "id": 315,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "google_scc_updated_next_steps",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Next Steps",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "4f5e6173-3c9d-4a64-beea-80b26fc0a821",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/google_scc_updated_severity",
+      "hide_notification": false,
+      "id": 316,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "google_scc_updated_severity",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Severity",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "602d981c-d2c0-4d76-8678-4573ea53d6b2",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "LOW",
+          "properties": null,
+          "uuid": "6161a915-ab9a-4ae2-a2c0-8649cf83df4e",
+          "value": 107
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "MEDIUM",
+          "properties": null,
+          "uuid": "1d36f008-aafe-4eed-a698-b6d8b3d1e4b4",
+          "value": 108
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "HIGH",
+          "properties": null,
+          "uuid": "5aca8b07-5d5c-43a3-947b-8f170ef7e9f8",
+          "value": 109
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "CRITICAL",
+          "properties": null,
+          "uuid": "1104a94e-9be4-4f6c-aa78-c1955c912cbb",
+          "value": 110
+        }
+      ]
     },
     {
       "allow_default_value": false,
@@ -923,6 +1137,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "incident/google_scc_next_steps",
+      "hide_notification": false,
+      "id": 313,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "google_scc_next_steps",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "Next Steps",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "6d72493b-cef9-4819-839a-1b64c2fc42df",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/google_scc_remediation_link",
       "hide_notification": false,
       "id": 276,
@@ -1066,6 +1309,16 @@
         {
           "actions": [],
           "description": null,
+          "name": "Google SCC: (Auto) Update Severity in SCC",
+          "object_type": "incident",
+          "programmatic_name": "google_scc_auto_update_severity_in_scc",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 20
+        },
+        {
+          "actions": [],
+          "description": null,
           "name": "Google SCC: (Datatable) Update Finding Source Property in SCC",
           "object_type": "google_scc_finding_source_properties_dt",
           "programmatic_name": "google_scc_update_finding_source_property_in_scc_from_dt",
@@ -1096,12 +1349,32 @@
         {
           "actions": [],
           "description": null,
-          "name": "Google SCC: Update Finding in SCC",
+          "name": "Google SCC: Update Next Steps in SCC",
           "object_type": "incident",
-          "programmatic_name": "google_scc_update_finding_in_scc",
+          "programmatic_name": "google_scc_update_next_steps_in_scc",
           "tags": [],
           "uuid": null,
-          "workflow_id": 7
+          "workflow_id": 18
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Google SCC: Update Severity in SCC",
+          "object_type": "incident",
+          "programmatic_name": "google_scc_update_severity_in_scc",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 17
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "Google SCC: Update State in SCC",
+          "object_type": "incident",
+          "programmatic_name": "google_scc_update_state_in_scc",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 19
         }
       ]
     },
@@ -1230,13 +1503,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 60,
+  "id": 83,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1658168005051,
+      "create_date": 1659382661530,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1245,7 +1518,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1658168005051,
+      "update_date": 1659382661530,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1376,6 +1649,25 @@
     {
       "actions": [],
       "content": {
+        "version": 2,
+        "workflow_id": "google_scc_auto_update_severity_in_scc",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_auto_update_severity_in_scc\" isExecutable=\"true\" name=\"Google SCC: (Auto) Update Severity in SCC\"\u003e\u003cdocumentation\u003eUpdate the severity in SCC on update of severity in SOAR\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wovk7d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_1xkd9ry\"\u003e\u003cincoming\u003eSequenceFlow_1c23j7e\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_198g1h2\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"SEVERITY_MAP = {\\n  \\\"High\\\": \\\"HIGH\\\",\\n  \\\"Medium\\\": \\\"MEDIUM\\\",\\n  \\\"Low\\\": \\\"LOW\\\"\\n}\\n\\nfinding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"severity\\\"\\n  inputs.google_scc_update_value = SEVERITY_MAP.get(incident.severity_code, \\\"LOW\\\")\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wovk7d\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1c23j7e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wovk7d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_198g1h2\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1c23j7e\" sourceRef=\"ServiceTask_198g1h2\" targetRef=\"EndEvent_1xkd9ry\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1xkd9ry\" id=\"EndEvent_1xkd9ry_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_198g1h2\" id=\"ServiceTask_198g1h2_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"241\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wovk7d\" id=\"SequenceFlow_1wovk7d_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1c23j7e\" id=\"SequenceFlow_1c23j7e_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"368.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Update the severity in SCC on update of severity in SOAR",
+      "export_key": "google_scc_auto_update_severity_in_scc",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1659379015451,
+      "name": "Google SCC: (Auto) Update Severity in SCC",
+      "object_type": "incident",
+      "programmatic_name": "google_scc_auto_update_severity_in_scc",
+      "tags": [],
+      "uuid": "6f84eb55-67d8-415c-8da0-61d600a9a62b",
+      "workflow_id": 20
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 5,
         "workflow_id": "google_scc_update_finding_source_property_in_scc_from_dt",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_update_finding_source_property_in_scc_from_dt\" isExecutable=\"true\" name=\"Google SCC: (Datatable) Update Finding Source Property in SCC\"\u003e\u003cdocumentation\u003eUpdate the value of a source property of a Finding in Google SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0kl0uqs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_19qj83i\"\u003e\u003cincoming\u003eSequenceFlow_0pelz5j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0kl0uqs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gxe2lt\"/\u003e\u003cserviceTask id=\"ServiceTask_0gxe2lt\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"success\\\"):\\n  row.google_scc_source_property_value = results.get(\\\"inputs\\\", {}).get(\\\"google_scc_update_value\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"source_properties.\\\" + row.google_scc_source_property\\n  inputs.google_scc_update_value = rule.properties.google_scc_update_value if rule.properties.google_scc_update_value else \\\"\\\"\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kl0uqs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0pelz5j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0pelz5j\" sourceRef=\"ServiceTask_0gxe2lt\" targetRef=\"EndEvent_19qj83i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19qj83i\" id=\"EndEvent_19qj83i_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kl0uqs\" id=\"SequenceFlow_0kl0uqs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"211.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gxe2lt\" id=\"ServiceTask_0gxe2lt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"225\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0pelz5j\" id=\"SequenceFlow_0pelz5j_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"345.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1391,25 +1683,6 @@
       "tags": [],
       "uuid": "8eb1b7ff-818d-451a-b604-38afb1bebe71",
       "workflow_id": 12
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "google_scc_delete_security_mark",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_delete_security_mark\" isExecutable=\"true\" name=\"Google SCC: Delete Security Mark\"\u003e\u003cdocumentation\u003eDelete a given security mark in SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0d81hhf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0d4oxx8\"\u003e\u003cincoming\u003eSequenceFlow_0qcn8uc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_18utv8k\" name=\"Google Cloud SCC: Update Security...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b7e73358-b767-43b0-a945-5ac6ecff346a\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\n\\nif results.get(\\\"success\\\"):\\n  note_text = \\\"Removed security mark \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; in SCC\\\"\\n  \\n  update_key = results.get(\\\"content\\\").get(\\\"updated_key\\\")\\n  \\n  incident.addNote(note_text.format(update_key))\\n  \\n  security_marks = results.get(\\\"content\\\").get(\\\"updated_marks\\\", {}).get(\\\"marks\\\")\\n  marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n  incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  inputs.google_scc_finding_name = finding_name\\n  inputs.google_scc_update_key = rule.properties.google_scc_security_mark_key\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d81hhf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0qcn8uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0d81hhf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_18utv8k\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0qcn8uc\" sourceRef=\"ServiceTask_18utv8k\" targetRef=\"EndEvent_0d4oxx8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0d4oxx8\" id=\"EndEvent_0d4oxx8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"413\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"431\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18utv8k\" id=\"ServiceTask_18utv8k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d81hhf\" id=\"SequenceFlow_0d81hhf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qcn8uc\" id=\"SequenceFlow_0qcn8uc_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"413\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Delete a given security mark in SCC.",
-      "export_key": "google_scc_delete_security_mark",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1658167901895,
-      "name": "Google SCC: Delete Security Mark",
-      "object_type": "incident",
-      "programmatic_name": "google_scc_delete_security_mark",
-      "tags": [],
-      "uuid": "06a49496-6f17-48b7-ac43-7703caa0a9aa",
-      "workflow_id": 14
     },
     {
       "actions": [],
@@ -1433,6 +1706,25 @@
     {
       "actions": [],
       "content": {
+        "version": 11,
+        "workflow_id": "google_scc_refresh_finding",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_refresh_finding\" isExecutable=\"true\" name=\"Google SCC: Refresh Finding\"\u003e\u003cdocumentation\u003eUpdate the details of a finding on an incident that has already been sent from Google SCC to SOAR\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15c37ld\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_1lrg8e0\"\u003e\u003cincoming\u003eSequenceFlow_0fzbfgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_11b7aog\" name=\"Google Cloud SCC: Get Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0dca4ef8-3246-4a24-8de5-bebe2d6d67b6\"\u003e{\"inputs\":{\"c5b7294f-b00c-45b8-8c86-7948256c90a1\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nfindings_list = results.get(\\\"content\\\").get(\\\"findings_list\\\", [])\\n\\nif results.get(\\\"success\\\") and len(findings_list) == 1:\\n  finding = findings_list[0].get(\\\"finding\\\")\\n  compliance_standards = finding.get(\\\"source_properties\\\").get(\\\"compliance_standards\\\")\\n  security_marks = finding.get(\\\"security_marks\\\").get(\\\"marks\\\")\\n\\n  incident.properties.google_scc_class = SPAN_FORMATTER.format(finding.get(\\\"finding_class\\\"), finding.get(\\\"finding_class\\\"))\\n  standards_list = [SPAN_FORMATTER.format(standard.upper(), \\\"{0} : {1}\\\".format(standard.upper(), compliance_standards[standard][0][\u0027ids\u0027][0])) for standard in compliance_standards]\\n  incident.properties.google_scc_compliance_standards = \\\" \\\".join(standards_list)\\n  marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n  incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n  incident.properties.google_scc_remediation_link = \\\"\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\\".format(finding.get(\\\"resource\\\", {}).get(\\\"display_name\\\")) + LINK_FORMATTER.format(finding.get(\\\"external_uri\\\"), finding.get(\\\"resource\\\", {}).get(\\\"name\\\"))\\n  incident.properties.google_scc_category = SPAN_FORMATTER.format(finding.get(\\\"category\\\"), finding.get(\\\"category\\\"))\\n  incident.properties.google_scc_recommendation = finding.get(\\\"linkified_recommendation\\\")\\n  incident.properties.google_scc_vulnerability = finding.get(\\\"vulnerability\\\").get(\\\"cve\\\")\\n  incident.properties.google_scc_state = finding.get(\\\"state\\\")\\n  incident.properties.google_scc_next_steps = finding.get(\\\"next_steps\\\")\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15c37ld\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fzbfgb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15c37ld\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11b7aog\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0fzbfgb\" sourceRef=\"ServiceTask_11b7aog\" targetRef=\"EndEvent_1lrg8e0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"166\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"161\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"173\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003comgdi:waypoint x=\"154\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1lrg8e0\" id=\"EndEvent_1lrg8e0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"490\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"508\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11b7aog\" id=\"ServiceTask_11b7aog_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"297\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15c37ld\" id=\"SequenceFlow_15c37ld_di\"\u003e\u003comgdi:waypoint x=\"202\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"249.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fzbfgb\" id=\"SequenceFlow_0fzbfgb_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"490\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
+      "description": "Update the details of a finding on an incident that has already been sent from Google SCC to SOAR",
+      "export_key": "google_scc_refresh_finding",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1659371022358,
+      "name": "Google SCC: Refresh Finding",
+      "object_type": "incident",
+      "programmatic_name": "google_scc_refresh_finding",
+      "tags": [],
+      "uuid": "a5acb188-2f89-40bc-9e35-5c6046223784",
+      "workflow_id": 6
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 4,
         "workflow_id": "google_scc_add_finding_source_property_in_scc",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_add_finding_source_property_in_scc\" isExecutable=\"true\" name=\"Google SCC: Add Source Property\"\u003e\u003cdocumentation\u003eAdd a new source property to a Finding in Google SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0kl0uqs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_19qj83i\"\u003e\u003cincoming\u003eSequenceFlow_0pelz5j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0kl0uqs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gxe2lt\"/\u003e\u003cserviceTask id=\"ServiceTask_0gxe2lt\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"success\\\"):\\n  row = incident.addRow(\\\"google_scc_finding_source_properties_dt\\\")\\n  row.google_scc_source_property = results.get(\\\"inputs\\\", {}).get(\\\"google_scc_update_key\\\").split(\\\".\\\")[-1]\\n  row.google_scc_source_property_value = results.get(\\\"inputs\\\", {}).get(\\\"google_scc_update_value\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = rule.properties.google_scc_source_property_name\\n  if \\\"source_properties.\\\" not in inputs.google_scc_update_key:\\n    inputs.google_scc_update_key = \\\"source_properties.\\\" + inputs.google_scc_update_key\\n  inputs.google_scc_update_value = rule.properties.google_scc_update_value\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kl0uqs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0pelz5j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0pelz5j\" sourceRef=\"ServiceTask_0gxe2lt\" targetRef=\"EndEvent_19qj83i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19qj83i\" id=\"EndEvent_19qj83i_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"366\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"384\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kl0uqs\" id=\"SequenceFlow_0kl0uqs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"211.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gxe2lt\" id=\"ServiceTask_0gxe2lt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"225\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0pelz5j\" id=\"SequenceFlow_0pelz5j_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"345.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1452,15 +1744,34 @@
     {
       "actions": [],
       "content": {
-        "version": 8,
-        "workflow_id": "google_scc_close_finding_in_scc",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_close_finding_in_scc\" isExecutable=\"true\" name=\"Google SCC: Close Finding in SCC\"\u003e\u003cdocumentation\u003eManually moves a finding to INACTIVE in SCC\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1itzf5l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0140cph\"\u003e\u003cincoming\u003eSequenceFlow_0dw58ln\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1ica1jt\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"success\\\"):\\n  updated_state = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [{}])[0].get(\\\"state\\\", \\\"UNKNOWN\\\")\\n  incident.properties.google_scc_state = updated_state\\n  \\n  incident.addNote(\\\"Finding moved to \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; in SCC.\\\".format(updated_state))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"state\\\"\\n  inputs.google_scc_update_value = \\\"INACTIVE\\\"\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1itzf5l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dw58ln\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1itzf5l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ica1jt\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0dw58ln\" sourceRef=\"ServiceTask_1ica1jt\" targetRef=\"EndEvent_0140cph\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0140cph\" id=\"EndEvent_0140cph_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"392\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ica1jt\" id=\"ServiceTask_1ica1jt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1itzf5l\" id=\"SequenceFlow_1itzf5l_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dw58ln\" id=\"SequenceFlow_0dw58ln_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "google_scc_delete_security_mark",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_delete_security_mark\" isExecutable=\"true\" name=\"Google SCC: Delete Security Mark\"\u003e\u003cdocumentation\u003eDelete a given security mark in SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0d81hhf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0d4oxx8\"\u003e\u003cincoming\u003eSequenceFlow_0qcn8uc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_18utv8k\" name=\"Google Cloud SCC: Update Security...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b7e73358-b767-43b0-a945-5ac6ecff346a\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\n\\nif results.get(\\\"success\\\"):\\n  note_text = \\\"Removed security mark \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; in SCC\\\"\\n  \\n  update_key = results.get(\\\"content\\\").get(\\\"updated_key\\\")\\n  \\n  incident.addNote(note_text.format(update_key))\\n  \\n  security_marks = results.get(\\\"content\\\").get(\\\"updated_marks\\\", {}).get(\\\"marks\\\")\\n  marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n  incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  inputs.google_scc_finding_name = finding_name\\n  inputs.google_scc_update_key = rule.properties.google_scc_security_mark_key\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d81hhf\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0qcn8uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0d81hhf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_18utv8k\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0qcn8uc\" sourceRef=\"ServiceTask_18utv8k\" targetRef=\"EndEvent_0d4oxx8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0d4oxx8\" id=\"EndEvent_0d4oxx8_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"413\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"431\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18utv8k\" id=\"ServiceTask_18utv8k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d81hhf\" id=\"SequenceFlow_0d81hhf_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qcn8uc\" id=\"SequenceFlow_0qcn8uc_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"413\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 8,
+      "content_version": 2,
+      "description": "Delete a given security mark in SCC.",
+      "export_key": "google_scc_delete_security_mark",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1658167901895,
+      "name": "Google SCC: Delete Security Mark",
+      "object_type": "incident",
+      "programmatic_name": "google_scc_delete_security_mark",
+      "tags": [],
+      "uuid": "06a49496-6f17-48b7-ac43-7703caa0a9aa",
+      "workflow_id": 14
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "google_scc_close_finding_in_scc",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_close_finding_in_scc\" isExecutable=\"true\" name=\"Google SCC: Close Finding in SCC\"\u003e\u003cdocumentation\u003eManually moves a finding to INACTIVE in SCC\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1itzf5l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0140cph\"\u003e\u003cincoming\u003eSequenceFlow_0dw58ln\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1ica1jt\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"success\\\"):\\n  updated_state = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [{}])[0].get(\\\"finding\\\").get(\\\"state\\\", \\\"UNKNOWN\\\")\\n  incident.properties.google_scc_state = updated_state\\n  \\n  incident.addNote(\\\"Finding moved to \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; in SCC.\\\".format(updated_state))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"state\\\"\\n  inputs.google_scc_update_value = \\\"INACTIVE\\\"\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1itzf5l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dw58ln\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1itzf5l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ica1jt\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0dw58ln\" sourceRef=\"ServiceTask_1ica1jt\" targetRef=\"EndEvent_0140cph\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0140cph\" id=\"EndEvent_0140cph_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"392\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"410\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ica1jt\" id=\"ServiceTask_1ica1jt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1itzf5l\" id=\"SequenceFlow_1itzf5l_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dw58ln\" id=\"SequenceFlow_0dw58ln_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
       "description": "Manually moves a finding to INACTIVE in SCC",
       "export_key": "google_scc_close_finding_in_scc",
-      "last_modified_by": "ad261c1f-f1cc-4115-bbce-a151f88bac5e",
-      "last_modified_time": 1656517672996,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1659382316915,
       "name": "Google SCC: Close Finding in SCC",
       "object_type": "incident",
       "programmatic_name": "google_scc_close_finding_in_scc",
@@ -1471,40 +1782,59 @@
     {
       "actions": [],
       "content": {
-        "version": 10,
-        "workflow_id": "google_scc_refresh_finding",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_refresh_finding\" isExecutable=\"true\" name=\"Google SCC: Refresh Finding\"\u003e\u003cdocumentation\u003eUpdate the details of a finding on an incident that has already been sent from Google SCC to SOAR\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15c37ld\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_1lrg8e0\"\u003e\u003cincoming\u003eSequenceFlow_0fzbfgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_11b7aog\" name=\"Google Cloud SCC: Get Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0dca4ef8-3246-4a24-8de5-bebe2d6d67b6\"\u003e{\"inputs\":{\"c5b7294f-b00c-45b8-8c86-7948256c90a1\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nfindings_list = results.get(\\\"content\\\").get(\\\"findings_list\\\", [])\\n\\nif results.get(\\\"success\\\") and len(findings_list) == 1:\\n  finding = findings_list[0].get(\\\"finding\\\")\\n  compliance_standards = finding.get(\\\"source_properties\\\").get(\\\"compliance_standards\\\")\\n  security_marks = finding.get(\\\"security_marks\\\").get(\\\"marks\\\")\\n\\n  incident.properties.google_scc_class = SPAN_FORMATTER.format(finding.get(\\\"finding_class\\\"), finding.get(\\\"finding_class\\\"))\\n  standards_list = [SPAN_FORMATTER.format(standard.upper(), \\\"{0} : {1}\\\".format(standard.upper(), compliance_standards[standard][0][\u0027ids\u0027][0])) for standard in compliance_standards]\\n  incident.properties.google_scc_compliance_standards = \\\" \\\".join(standards_list)\\n  marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n  incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n  incident.properties.google_scc_remediation_link = \\\"\u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;\u0026lt;br\u0026gt;\\\".format(finding.get(\\\"resource\\\", {}).get(\\\"display_name\\\")) + LINK_FORMATTER.format(finding.get(\\\"external_uri\\\"), finding.get(\\\"resource\\\", {}).get(\\\"name\\\"))\\n  incident.properties.google_scc_category = SPAN_FORMATTER.format(finding.get(\\\"category\\\"), finding.get(\\\"category\\\"))\\n  incident.properties.google_scc_recommendation = finding.get(\\\"linkified_recommendation\\\")\\n  incident.properties.google_scc_vulnerability = finding.get(\\\"vulnerability\\\").get(\\\"cve\\\")\\n  incident.properties.google_scc_state = finding.get(\\\"state\\\")\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15c37ld\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0fzbfgb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15c37ld\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11b7aog\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0fzbfgb\" sourceRef=\"ServiceTask_11b7aog\" targetRef=\"EndEvent_1lrg8e0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"166\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"161\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"173\" xsi:type=\"omgdc:Point\" y=\"219\"/\u003e\u003comgdi:waypoint x=\"154\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1lrg8e0\" id=\"EndEvent_1lrg8e0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"490\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"508\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11b7aog\" id=\"ServiceTask_11b7aog_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"297\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15c37ld\" id=\"SequenceFlow_15c37ld_di\"\u003e\u003comgdi:waypoint x=\"202\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"297\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"249.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0fzbfgb\" id=\"SequenceFlow_0fzbfgb_di\"\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"490\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"443.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 2,
+        "workflow_id": "google_scc_update_state_in_scc",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_update_state_in_scc\" isExecutable=\"true\" name=\"Google SCC: Update State in SCC\"\u003e\u003cdocumentation\u003eUpdate state (to either ACTIVE or INACTIVE) in Google SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t00e0z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_09589by\"\u003e\u003cincoming\u003eSequenceFlow_19jl3e9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_13x66ja\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nseverity_mapping = {\\n  \\\"CRITICAL\\\": \\\"High\\\", \\n  \\\"HIGH\\\": \\\"High\\\", \\n  \\\"MEDIUM\\\": \\\"Medium\\\", \\n  \\\"LOW\\\": \\\"Low\\\", \\n  \\\"DEFAULT\\\": \\\"Low\\\"\\n}\\n\\nif results and results.get(\\\"success\\\"):\\n  findings_list = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [])\\n  \\n  \\n  # have to iterate because this function is set up to return a list\\n  # to support multiple incident updates at the same time\\n  # but in this specific workflow we intend to just update the incident associated with\\n  # this incident\\n  for i in range(len(findings_list)):\\n    finding = findings_list[i].get(\\\"finding\\\", {})\\n    if finding.get(\\\"name\\\", \\\"\\\") == incident.properties.google_scc_name:\\n      security_marks = finding.get(\\\"security_marks\\\", {}).get(\\\"marks\\\")\\n\\n\\n      marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n      incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n      incident.properties.google_scc_state = finding.get(\\\"state\\\", \\\"UNKNOWN\\\")\\n      incident.severity_code = severity_mapping.get(finding.get(\\\"severity\\\"), \\\"DEFAULT\\\")\\n      incident.properties.google_scc_next_steps = finding.get(\\\"next_steps\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"state\\\"\\n  inputs.google_scc_update_value = rule.properties.google_scc_updated_state\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t00e0z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19jl3e9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t00e0z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13x66ja\"/\u003e\u003csequenceFlow id=\"SequenceFlow_19jl3e9\" sourceRef=\"ServiceTask_13x66ja\" targetRef=\"EndEvent_09589by\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09589by\" id=\"EndEvent_09589by_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"643\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13x66ja\" id=\"ServiceTask_13x66ja_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t00e0z\" id=\"SequenceFlow_1t00e0z_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19jl3e9\" id=\"SequenceFlow_19jl3e9_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 10,
-      "description": "Update the details of a finding on an incident that has already been sent from Google SCC to SOAR",
-      "export_key": "google_scc_refresh_finding",
+      "content_version": 2,
+      "description": "Update state (to either ACTIVE or INACTIVE) in Google SCC.",
+      "export_key": "google_scc_update_state_in_scc",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656520023911,
-      "name": "Google SCC: Refresh Finding",
+      "last_modified_time": 1659377443055,
+      "name": "Google SCC: Update State in SCC",
       "object_type": "incident",
-      "programmatic_name": "google_scc_refresh_finding",
+      "programmatic_name": "google_scc_update_state_in_scc",
       "tags": [],
-      "uuid": "a5acb188-2f89-40bc-9e35-5c6046223784",
-      "workflow_id": 6
+      "uuid": "6728d400-cd43-4049-a307-464369170a28",
+      "workflow_id": 19
     },
     {
       "actions": [],
       "content": {
-        "version": 35,
-        "workflow_id": "google_scc_update_finding_in_scc",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_update_finding_in_scc\" isExecutable=\"true\" name=\"Google SCC: Update Finding in SCC\"\u003e\u003cdocumentation\u003eUpdate given key-value pair in Google SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t00e0z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_09589by\"\u003e\u003cincoming\u003eSequenceFlow_19jl3e9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_13x66ja\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nseverity_mapping = {\\n  \\\"CRITICAL\\\": \\\"High\\\", \\n  \\\"HIGH\\\": \\\"High\\\", \\n  \\\"MEDIUM\\\": \\\"Medium\\\", \\n  \\\"LOW\\\": \\\"Low\\\", \\n  \\\"DEFAULT\\\": \\\"Low\\\"\\n}\\n\\nif results and results.get(\\\"success\\\"):\\n  findings_list = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [])\\n  \\n  \\n  # have to iterate because this function is set up to return a list\\n  # to support multiple incident updates at the same time\\n  # but in this specific workflow we intend to just update the incident associated with\\n  # this incident\\n  for i in range(len(findings_list)):\\n    finding = findings_list[i].get(\\\"finding\\\", {})\\n    if finding.get(\\\"name\\\", \\\"\\\") == incident.properties.google_scc_name:\\n      security_marks = finding.get(\\\"security_marks\\\", {}).get(\\\"marks\\\")\\n\\n\\n      marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n      incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n      incident.properties.google_scc_state = finding.get(\\\"state\\\", \\\"UNKNOWN\\\")\\n      incident.severity_code = severity_mapping.get(finding.get(\\\"severity\\\"), \\\"LOW\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = rule.properties.google_scc_field_to_update\\n  inputs.google_scc_update_value = rule.properties.google_scc_update_value\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t00e0z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19jl3e9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t00e0z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13x66ja\"/\u003e\u003csequenceFlow id=\"SequenceFlow_19jl3e9\" sourceRef=\"ServiceTask_13x66ja\" targetRef=\"EndEvent_09589by\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09589by\" id=\"EndEvent_09589by_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"643\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13x66ja\" id=\"ServiceTask_13x66ja_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t00e0z\" id=\"SequenceFlow_1t00e0z_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19jl3e9\" id=\"SequenceFlow_19jl3e9_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 4,
+        "workflow_id": "google_scc_update_severity_in_scc",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_update_severity_in_scc\" isExecutable=\"true\" name=\"Google SCC: Update Severity in SCC\"\u003e\u003cdocumentation\u003eUpdate severity in Google SCC. (Either Low, Medium, High, or Critical)\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t00e0z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_09589by\"\u003e\u003cincoming\u003eSequenceFlow_19jl3e9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_13x66ja\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nseverity_mapping = {\\n  \\\"CRITICAL\\\": \\\"High\\\", \\n  \\\"HIGH\\\": \\\"High\\\", \\n  \\\"MEDIUM\\\": \\\"Medium\\\", \\n  \\\"LOW\\\": \\\"Low\\\", \\n  \\\"DEFAULT\\\": \\\"Low\\\"\\n}\\n\\nif results and results.get(\\\"success\\\"):\\n  findings_list = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [])\\n  \\n  \\n  # have to iterate because this function is set up to return a list\\n  # to support multiple incident updates at the same time\\n  # but in this specific workflow we intend to just update the incident associated with\\n  # this incident\\n  for i in range(len(findings_list)):\\n    finding = findings_list[i].get(\\\"finding\\\", {})\\n    if finding.get(\\\"name\\\", \\\"\\\") == incident.properties.google_scc_name:\\n      security_marks = finding.get(\\\"security_marks\\\", {}).get(\\\"marks\\\")\\n\\n\\n      marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n      incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n      incident.properties.google_scc_state = finding.get(\\\"state\\\", \\\"UNKNOWN\\\")\\n      incident.severity_code = severity_mapping.get(finding.get(\\\"severity\\\"), \\\"DEFAULT\\\")\\n      incident.properties.google_scc_next_steps = finding.get(\\\"next_steps\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"severity\\\"\\n  inputs.google_scc_update_value = rule.properties.google_scc_updated_severity\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t00e0z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19jl3e9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t00e0z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13x66ja\"/\u003e\u003csequenceFlow id=\"SequenceFlow_19jl3e9\" sourceRef=\"ServiceTask_13x66ja\" targetRef=\"EndEvent_09589by\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09589by\" id=\"EndEvent_09589by_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"643\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13x66ja\" id=\"ServiceTask_13x66ja_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t00e0z\" id=\"SequenceFlow_1t00e0z_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19jl3e9\" id=\"SequenceFlow_19jl3e9_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 35,
-      "description": "Update given key-value pair in Google SCC.",
-      "export_key": "google_scc_update_finding_in_scc",
+      "content_version": 4,
+      "description": "Update severity in Google SCC. (Either Low, Medium, High, or Critical)",
+      "export_key": "google_scc_update_severity_in_scc",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1658166302488,
-      "name": "Google SCC: Update Finding in SCC",
+      "last_modified_time": 1659381750080,
+      "name": "Google SCC: Update Severity in SCC",
       "object_type": "incident",
-      "programmatic_name": "google_scc_update_finding_in_scc",
+      "programmatic_name": "google_scc_update_severity_in_scc",
       "tags": [],
-      "uuid": "b738ce19-04aa-4f6f-84e7-0434e20fcdbb",
-      "workflow_id": 7
+      "uuid": "a90df9bf-a340-41bf-973d-d95f27855649",
+      "workflow_id": 17
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "google_scc_update_next_steps_in_scc",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"google_scc_update_next_steps_in_scc\" isExecutable=\"true\" name=\"Google SCC: Update Next Steps in SCC\"\u003e\u003cdocumentation\u003eUpdate next steps in Google SCC.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1t00e0z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_09589by\"\u003e\u003cincoming\u003eSequenceFlow_19jl3e9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_13x66ja\" name=\"Google Cloud SCC: Update Findings\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d888332c-d6e1-42d3-ad87-b90207ed14e4\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/span\u0026gt;\\\"\\nLINK_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nseverity_mapping = {\\n  \\\"CRITICAL\\\": \\\"High\\\", \\n  \\\"HIGH\\\": \\\"High\\\", \\n  \\\"MEDIUM\\\": \\\"Medium\\\", \\n  \\\"LOW\\\": \\\"Low\\\", \\n  \\\"DEFAULT\\\": \\\"Low\\\"\\n}\\n\\nif results and results.get(\\\"success\\\"):\\n  findings_list = results.get(\\\"content\\\", {}).get(\\\"findings_list\\\", [])\\n  \\n  \\n  # have to iterate because this function is set up to return a list\\n  # to support multiple incident updates at the same time\\n  # but in this specific workflow we intend to just update the incident associated with\\n  # this incident\\n  for i in range(len(findings_list)):\\n    finding = findings_list[i].get(\\\"finding\\\", {})\\n    if finding.get(\\\"name\\\", \\\"\\\") == incident.properties.google_scc_name:\\n      security_marks = finding.get(\\\"security_marks\\\", {}).get(\\\"marks\\\")\\n\\n\\n      marks_list = [SPAN_FORMATTER.format(mark_key, \\\"{0} : {1}\\\".format(mark_key, security_marks.get(mark_key))) for mark_key in security_marks]\\n      incident.properties.google_scc_security_marks = \\\" \\\".join(marks_list)\\n      incident.properties.google_scc_state = finding.get(\\\"state\\\", \\\"UNKNOWN\\\")\\n      incident.severity_code = severity_mapping.get(finding.get(\\\"severity\\\"), \\\"DEFAULT\\\")\\n      incident.properties.google_scc_next_steps = finding.get(\\\"next_steps\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"finding_name = incident.properties.google_scc_name.get(\\\"content\\\")\\n\\nif finding_name:\\n  # for this specific workflow, we want to only update the finding that\\n  # is associated with this incident so we pass in the finding name as the filter\\n  inputs.google_scc_filter = \\\"name = \\\\\\\"{0}\\\\\\\"\\\".format(finding_name)\\n  \\n  inputs.google_scc_update_key = \\\"next_steps\\\"\\n  inputs.google_scc_update_value = rule.properties.google_scc_updated_next_steps\\nelse:\\n  raise ValueError(\\\"Could not find appropriate finding name value\\\")\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t00e0z\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19jl3e9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1t00e0z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13x66ja\"/\u003e\u003csequenceFlow id=\"SequenceFlow_19jl3e9\" sourceRef=\"ServiceTask_13x66ja\" targetRef=\"EndEvent_09589by\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09589by\" id=\"EndEvent_09589by_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"625\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"643\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13x66ja\" id=\"ServiceTask_13x66ja_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"364\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t00e0z\" id=\"SequenceFlow_1t00e0z_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"281\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19jl3e9\" id=\"SequenceFlow_19jl3e9_di\"\u003e\u003comgdi:waypoint x=\"464\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"625\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Update next steps in Google SCC.",
+      "export_key": "google_scc_update_next_steps_in_scc",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1659377350523,
+      "name": "Google SCC: Update Next Steps in SCC",
+      "object_type": "incident",
+      "programmatic_name": "google_scc_update_next_steps_in_scc",
+      "tags": [],
+      "uuid": "7e4c4080-2dee-46e8-87a3-30663e194437",
+      "workflow_id": 18
     }
   ],
   "workspaces": []

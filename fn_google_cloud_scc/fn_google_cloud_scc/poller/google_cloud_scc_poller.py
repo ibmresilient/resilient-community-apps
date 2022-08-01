@@ -14,7 +14,7 @@ from fn_google_cloud_scc.util.scc_common import (DT_NAME, PACKAGE_NAME,
                                                  SOAR_ID_MARK, GoogleSCCCommon,
                                                  linkify)
 from resilient import get_client
-from resilient_circuits import AppFunctionComponent
+from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (make_payload_from_template, str_to_bool,
                            validate_fields)
 
@@ -120,7 +120,7 @@ class PollerComponent(AppFunctionComponent):
             [bool]: [True if poller is configured]
         """
         self.polling_interval = float(options.get("polling_interval", 0))
-        if not self.polling_interval:
+        if not self.polling_interval or is_this_a_selftest(self):
             return False
 
         LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)

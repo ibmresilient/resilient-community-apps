@@ -43,9 +43,10 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
     """
     def poller_wrapper(func):
         # decorator for running a function forever, passing the ms timestamp of
-        #  when the last poller run to the function it's calling
+        # when the last poller run to the function it's calling
         @functools.wraps(func)
         def wrapped(self, *args):
+
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
 
