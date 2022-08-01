@@ -291,7 +291,7 @@ def _add_source_properties_dt(finding, soar_case_id, soar_common, dt_name):
     source_properties = finding.get("source_properties")
 
     for prop in source_properties:
-        val = linkify(str(source_properties.get(prop, "UNKNOWN")))
+        val = str(source_properties.get(prop, "UNKNOWN"))
 
         row_data = {
             "google_scc_source_property": prop,
