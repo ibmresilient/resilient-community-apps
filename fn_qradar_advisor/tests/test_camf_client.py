@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 from fn_qradar_advisor.lib.qradar_cafm_client import QRadarCafmClient
 from fn_qradar_advisor.lib.qradar_cafm_client import TacticsTokenError
