@@ -30,6 +30,7 @@ class FunctionComponent(AppFunctionComponent):
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
+        # Log parameters
         self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
 
         def response(systems):
