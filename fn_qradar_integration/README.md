@@ -32,13 +32,10 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.5 | July. 2022 | Bug Fix for windows clients |
 | 2.2.4 | July. 2022 | Update SOAR required version |
 | 2.2.3 | June. 2022 | Bug fix for using with MSSP |
 | 2.2.2 | May. 2022 | Add more documentation and bug fix |
@@ -93,11 +90,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `42.0.0`.
+* SOAR platform >= `42.0.7058`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `42.0.0`.
+* SOAR platform >= `42.0.7058`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=39.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -126,12 +123,12 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** support a proxy server.
+The app **does not** support a proxy server.
 
 ---
 
 ## Package Dependencies
-- resilient_circuits version 39 or later
+- resilient_circuits version 42 or later
 - python version 3.6 or later
 
 ## Installation
@@ -149,7 +146,7 @@ The following table provides the settings you need to configure the app. These s
 | **username** | Yes | `admin` | *Username for QRadar authentication* |
 | **qradarpassword** | Yes | `changeme` | *username password for QRadar authentication* |
 | **qradartoken** | Yes | `changeme` | *QRadar token to use rather than password* |
-| **verify_cert** | Yes | `false|/path/to/cert` | *Path to the certificate file* |
+| **verify_cert** | Yes | `false|/path/to/cert` | *false or path to the certificate file* |
 
 #### 2.2.0 Changes
 Starting in version 2.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
@@ -161,11 +158,6 @@ Be aware that modifications to the workflows will be needed to correctly pass th
 If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `qradar_label` function input field.
 
 ### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
 * Import the Data Tables and Custom Fields like the screenshot below, creating a new tab or using an
 existing one for the datatables used:
 
@@ -1226,7 +1218,7 @@ qradar_offense_event
 | Category | `category` | `text` | - |
 | Log Source | `log_source` | `text` | logsourceid |
 | Protocol | `protocol` | `text` | protocolid |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of thew QRadar server used |
 | Rule | `rule` | `text` | creeventlist |
 | Start Time | `start_time` | `text` | starttime |
 
@@ -1241,7 +1233,7 @@ qradar_reference_set
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Item Value | `item_value` | `text` | Item value |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of thew QRadar server used |
 | Reference Set | `reference_set` | `text` | Name of reference set |
 | Source | `source` | `text` | how this value is added to the reference set |
 
@@ -1256,7 +1248,7 @@ qradar_reference_table_queried_rows
 | ----------- | --------------- | ---- | ------- |
 | Inner Key | `inner_key` | `text` | - |
 | Outer Key | `outer_key` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of thew QRadar server used |
 | Status | `status` | `text` | - |
 | Table | `table` | `text` | - |
 | Value | `value` | `text` | - |
@@ -1273,7 +1265,7 @@ qradar_reference_table
 | Collection Id | `collection_id` | `text` | - |
 | Namespace | `namespace` | `text` | - |
 | Number Of Elements | `number_of_elements` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of thew QRadar server used |
 | Reference Table | `reference_table` | `text` | - |
 
 ---
