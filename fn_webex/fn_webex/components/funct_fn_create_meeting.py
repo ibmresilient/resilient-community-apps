@@ -2,13 +2,16 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
-from re import S
+
 from fn_webex.lib.cisco_api import WebexAPI
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, RequestsCommon, ResultPayload
+from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_webex"
 FN_NAME = "fn_create_meeting"
+SITE_URL = "https://webexapis.com/v1/meetings/"
+TOKEN_URL = "https://webexapis.com/v1/access_token"
+
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_create_meeting'"""
@@ -42,8 +45,8 @@ class FunctionComponent(AppFunctionComponent):
         self.meetingParameters["sendEmail"] = True
 
         self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["siteURL"]  = "https://webexapis.com/v1/meetings/"
-        self.requiredParameters["tokenURL"] = "https://webexapis.com/v1/access_token"
+        self.requiredParameters["siteURL"]  = SITE_URL
+        self.requiredParameters["tokenURL"] = TOKEN_URL
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)

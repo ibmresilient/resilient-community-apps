@@ -30,7 +30,6 @@
     - [Proxy Server](#proxy-server)
     - [Python Environment](#python-environment)
   - [Installation](#installation)
-    - [Install](#install)
     - [Webex Configuration](#webex-configuration)
     - [OAuth Authentication](#oauth-authentication)
     - [App Configuration](#app-configuration)
@@ -41,10 +40,6 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 2.0.0 | 7/2022 | Migrated to REST api |
@@ -55,15 +50,12 @@
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
+
 **SOAR Components for 'fn_webex'**
 
- ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
+This application extends the meeting and collaboration functionality of Webex to IBM Security QRadar SOAR Platform.
 
-SOAR Components for 'fn_webex'
+ ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
 
 ### Key Features
 * This package provides a function that creates Cisco WebEx meeting host URL and attendee URL given the following parameters: meeting start and end time, meeting name and agenda and a WebEx password.
@@ -122,12 +114,11 @@ Additional package dependencies may exist for each of these packages:
 
 ## Installation
 
-### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### Webex Configuration
-For this application to perform the above-mentioned functions, a Webex app integration must be created at [Webex Developer](https://developer.webex.com/my-apps/new) using the user's organization account. This Integrations is how the _SOAR platform_ requests permission to invoke the Webex REST API from _SOAR platform_. To do this in a secure way OAuth 2 standard is used, which allows third-party integrations to get a temporary access token for authenticating API calls. The [OAuth Utilities package](https://exchange.xforce.ibmcloud.com/hub/extension/44aaa4fd44c75e22ec979d994ff9948a) developed for IBM SOAR apps is to be used to perform this Authentication.
+For this application to perform the above-mentioned functions, a Webex app integration must be created at [Webex Developer](https://developer.webex.com/my-apps/new) using the user's organization account. This Integrations is how the _SOAR platform_ requests permission to invoke the Webex REST API from _SOAR platform_. To do this in a secure way, OAuth 2 standard is used, which allows third-party integrations to get a temporary access token for authenticating API calls. The [OAuth Utilities package](https://exchange.xforce.ibmcloud.com/hub/extension/44aaa4fd44c75e22ec979d994ff9948a) developed for IBM SOAR apps is to be used to perform this Authentication.
 
  ![screenshot: webex-app-integration ](./doc/screenshots/webex-app-integration-sdk.png)
 
@@ -164,9 +155,9 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **webex_timezone** | Yes | `GMT -05:00` | *Timezone in which meeting is created.* |
-| **client_id** | Yes | Cf7f235XXXXXXXXXX509cda551c7ddXXXX930ae68d377754b971XXXXXXXXX | *Issued when creating the integration* |
-| **client_secret** | Yes | dca551c7dXXXX930aeXXXX509cda551c7ddXXXX930ae68d54b971XXXXXXXXX | *Issued when creating the integration* |
-| **refresh_token** | Yes | | *Generated using the OAuth Utilities Tool* |
+| **client_id** | Yes | `Cf7f235XXXXXXXXXX509cda551c7ddXXXX930ae68d377754b971XXXXXXXXX` | *Issued when creating the integration* |
+| **client_secret** | Yes | `dca551c7dXXXX930aeXXXX509cda551c7ddXXXX930ae68d54b971XXXXXXXXX` | *Issued when creating the integration* |
+| **refresh_token** | Yes | `mRhMXXXXXXXXXXmNjItMTg2_P0A1_f688574e-8402-4b53-864e-xxxxxxxxxxx` | *Generated using the OAuth Utilities Tool* |
 | **scope** | Yes | `meeting:schedules_write meeting:schedules_read` | *Issued when creating the integration* |
 
 ---
