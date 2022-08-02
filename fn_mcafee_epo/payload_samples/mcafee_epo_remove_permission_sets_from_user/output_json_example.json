@@ -1,3 +1,19 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": true,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_username": "test",
+    "mcafee_epo_permsetname": "Executive Reviewer"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 584,
+    "timestamp": "2022-08-02 12:46:01"
+  }
 }

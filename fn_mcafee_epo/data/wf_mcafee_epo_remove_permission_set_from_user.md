@@ -24,7 +24,8 @@ inputs.mcafee_epo_username = rule.properties.epo_username
 
 ### Post-Processing Script
 ```python
-None
+if results['content']:
+  incident.addNote("Permissions set: {} was removed from user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
 ```
 
 ---

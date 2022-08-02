@@ -39,10 +39,12 @@ class FunctionComponent(AppFunctionComponent):
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
-
-        yield FunctionResult(client.request(
+        response = client.request(
             "core.addPermSetsForUser",
             {"userName": fn_inputs.mcafee_epo_username,
              "permSetName": fn_inputs.mcafee_epo_permsetname}
-        ))
+        )
+
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+
+        yield FunctionResult(response)

@@ -24,7 +24,8 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 
 ### Post-Processing Script
 ```python
-None
+if results['content']:
+  incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
 ```
 
 ---
