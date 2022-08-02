@@ -4,7 +4,7 @@
 
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME
+from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, DT_NAME
 
 import logging
 
@@ -19,22 +19,23 @@ class GoogleSCCTab(Tab):
 
     UUID = UUID_VAL
     CONTAINS = [
+        Field("google_scc_remediation_link"),
+        Field("google_scc_recommendation"),
         Field("google_scc_id"),
         Field("google_scc_name"),
         Field("google_scc_type"),
-        Field("google_scc_resource_display_name"),
         Field("google_scc_project_display_name"),
-        Field("google_scc_recommendation"),
         Field("google_scc_url"),
-        Field("google_scc_remediation_link"),
         Field("google_scc_class"),
         Field("google_scc_category"),
         Field("google_scc_security_marks"),
         Field("google_scc_compliance_standards"),
         Field("google_scc_vulnerability"),
+        Field("google_scc_next_steps"),
         Field("description"),
         Field("severity_code"),
-        Field("google_scc_state")
+        Field("google_scc_state"),
+        Datatable(DT_NAME)
     ]
 
     SHOW_IF = [

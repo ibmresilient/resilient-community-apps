@@ -43,9 +43,10 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
     """
     def poller_wrapper(func):
         # decorator for running a function forever, passing the ms timestamp of
-        #  when the last poller run to the function it's calling
+        # when the last poller run to the function it's calling
         @functools.wraps(func)
         def wrapped(self, *args):
+
             last_poller_time = getattr(self, named_last_poller_time)
             exit_event = Event()
 
@@ -268,18 +269,42 @@ class SOARCommon():
             raise IntegrationError from err
 
     def create_datatable_row(self, case_id, datatable, rowdata):
-        """create a row in a SOAR case datatable
+        """
+        Create a row in a SOAR datatable.
+        ``rowdata`` should be formatted as a dictionary of
+        column name and value pairs
 
-        Args:
-            case_id (int): case containing the datatable
-            datatable (str): name of datatable
-            rowdata (dict): columns and values to add
+        **Example:**
 
-        Returns:
-            None
+        .. code-block:: python
+
+            from resilient-lib import SOARCommon
+
+            soar_common = SOARCommon(res_client)
+
+            case_id = get_case_id()
+            rowdata = {"column_1_api_name": 1, "column_2_api_name": 2}
+
+            soar_common.create_datatable_row(case_id, "my_dt", rowdata)
+
+        :param case_id: case containing the datatable
+        :type case_id: str|int
+        :param datatable: name of datatable
+        :type datatable: str
+        :param rowdata: columns and values to add
+        :type rowdata: dict
         """
         uri = "/".join([INCIDENTS_URI, str(case_id), "table_data", datatable, "row_data"])
-        return self.rest_client.post(uri=uri, payload=rowdata)
+
+
+        formatted_cells = {}
+
+        for column in rowdata:
+            formatted_cells[column] = {"value": rowdata.get(column)}
+
+        formatted_cells = {"cells": formatted_cells}
+
+        return self.rest_client.post(uri=uri, payload=formatted_cells)
 
     def get_case(self, case_id):
         """ get an SOAR case based on the case id """

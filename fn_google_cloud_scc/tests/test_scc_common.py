@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime
 from unittest.mock import patch
 
@@ -5,7 +6,8 @@ import pytest
 from fn_google_cloud_scc.util.scc_common import GoogleSCCCommon, linkify
 from google.cloud import securitycenter
 
-from .data.mock_objs import MockSecurityCenterClient, config_data, to_dict, findings
+from .data.mock_objs import (MockSecurityCenterClient, config_data, findings,
+                             to_dict)
 
 
 @pytest.fixture(scope="module")
@@ -27,6 +29,18 @@ def test_query_entities_since_ts(mock_list_findings, mock_to_dict, fx_scc_common
     assert "finding_url" in findings_result_list[0].get("finding")
     assert "linkified_recommendation" in findings_result_list[0].get("finding")
 
+def test_enrich_finding(fx_scc_common: GoogleSCCCommon):
+    app_common = fx_scc_common
+
+    assert "finding_url" not in findings[0].get("finding")
+
+    # have to make a deep copy to allow for parallel processing here
+    finding = copy.deepcopy(findings[0].get("finding"))
+
+    finding = app_common.enrich_finding(finding)
+
+    assert "finding_url" in finding
+
 def test_make_linkback_url(fx_scc_common: GoogleSCCCommon):
     app_common = fx_scc_common
 
@@ -38,7 +52,7 @@ def test_create_initial_note(fx_scc_common: GoogleSCCCommon):
     app_common = fx_scc_common
 
     note = app_common.create_initial_note(findings[0].get("finding"))
-    assert note == 'description<br><br>recommendation. follow link: <a href="https://example.com/dot_at_end_not_included" target="_blank">https://example.com/dot_at_end_not_included</a>.'
+    assert note == 'description<br><br>recommendation. follow link: <a href="https://example.com/dot_at_end_not_included" target="_blank">https://example.com/dot_at_end_not_included</a>.<br><br>See more details in the Google SCC tab of this incident.'
 
 def test_get_finding_id():
     f_id = GoogleSCCCommon.get_finding_id(findings[0].get("finding"), "finding")

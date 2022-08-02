@@ -2,12 +2,13 @@
 
 """AppFunction implementation"""
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, make_payload_from_template
-
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon
+from fn_google_cloud_scc.poller.google_cloud_scc_poller import (
+    CLOSE_INCIDENT_TEMPLATE, ENTITY_LABEL, SOAR_ENTITY_ID_FIELD, get_entity_id)
 from fn_google_cloud_scc.poller.soar_common import SOARCommon
-from fn_google_cloud_scc.poller.google_cloud_scc_poller import SOAR_ENTITY_ID_FIELD, CLOSE_INCIDENT_TEMPLATE, ENTITY_LABEL, get_entity_id
+from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import IntegrationError, make_payload_from_template, validate_fields
 
 FN_NAME = "google_scc_get_findings"
 
@@ -56,7 +57,7 @@ class FunctionComponent(AppFunctionComponent):
             soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: finding_id }, open_cases=False)
 
             if soar_case and soar_case.get("plan_status", "") == "A":
-                soar_case_id = soar_case["id"]
+                soar_case_id = soar_case.get("id")
 
                 soar_close_payload = make_payload_from_template(
                                                 self.soar_close_case_template,
@@ -71,7 +72,7 @@ class FunctionComponent(AppFunctionComponent):
                 cases_closed.append(soar_case_id)
                 yield self.status_message("Closed SOAR case {0} from {1} {2}".format(soar_case_id, ENTITY_LABEL, finding_id))
         elif close_case_if_inactive:
-            raise IntegrationError("Cannot set 'google_scc_close_case_on_change' when given filter returns more than one incident. Use filter like: 'name = \\\"<finding_name>\\\"'")
+            raise IntegrationError("Cannot set 'google_scc_close_case_on_change' to 'True' when given filter returns more than one incident. Use filter like: 'name = \\\"<finding_name>\\\"'")
 
         results = {
             "findings_list": findings,

@@ -2,20 +2,26 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
+import logging
 import re
+from datetime import datetime, timezone
 from urllib.parse import urlencode
 
-from google.cloud import securitycenter
+from google.cloud.securitycenter import (Finding, ListFindingsResponse,
+                                         SecurityCenterClient, SecurityMarks)
 from google.protobuf.field_mask_pb2 import FieldMask
 from resilient_lib import readable_datetime, validate_fields
 
 # alias the ListFindingsResponse.ListFindingsResult to FindingResult
-FindingResult = securitycenter.ListFindingsResponse.ListFindingsResult
+FindingResult = ListFindingsResponse.ListFindingsResult
 
 PACKAGE_NAME = "fn_google_cloud_scc"
 FINDINGS_BASE_URL = "/security/command-center/findings"
 ORG_NAME_FRAGMENT = "organizations"
-SOAR_MARKS_PATH="IBM_SOAR_ID"
+SOAR_ID_MARK = "IBM_SOAR_ID"
+DT_NAME = "google_scc_finding_source_properties_dt"
+
+LOG = logging.getLogger(__name__)
 
 class GoogleSCCCommon():
 
@@ -30,7 +36,7 @@ class GoogleSCCCommon():
         self.console_base_url = options.get("google_cloud_base_url")
 
         cred_file = options.get("google_application_credentials_path")
-        self.client = securitycenter.SecurityCenterClient.from_service_account_file(cred_file)
+        self.client = SecurityCenterClient.from_service_account_file(cred_file)
 
         self.org_id = options.get("google_cloud_organization_id")
         self.default_findings_filter = options.get("findings_filter") # ok if None
@@ -38,16 +44,19 @@ class GoogleSCCCommon():
         self.org_name = f"{ORG_NAME_FRAGMENT}/{self.org_id}"
 
 
-    def query_entities_since_ts(self, timestamp, *args, **kwargs):
-        """get changed entities since last poller run
+    def query_entities_since_ts(self, timestamp, *_args, **_kwargs):
+        """
+        Get changed entities since last poller run
 
-        Args:
-            timestamp (datetime): datetime when the last poller ran
-            *args: additional positional parameters needed for endpoint queries
-            **kwargs: additional key/value paris needed for endpoint queries
+        :param timestamp: datetime when the last poller ran
+        :type timestamp: datetime
+        :param *_args: additional positional parameters needed for endpoint queries
+        :type _args: dict
+        :param **_kwargs: additional key/value paris needed for endpoint queries
+        :type _kwargs: dict
 
-        Returns:
-            list: changed entity list
+        :return: changed entity list
+        :rtype: list
         """
 
         findings_filter = f"eventTime >= \"{readable_datetime(timestamp)}\""
@@ -59,7 +68,7 @@ class GoogleSCCCommon():
         )
 
 
-    def get_findings(self, findings_filter=None, findings_read_time=None, compare_duration=None, order_by=None, field_mask=None):
+    def get_findings(self, findings_filter=None, findings_read_time=None, compare_duration=None, order_by=None, field_mask=None, return_findings_result_list=False):
         """
         Get findings given request parameters. See the SCC Client docs for more details on the parameters and their types.
 
@@ -81,7 +90,7 @@ class GoogleSCCCommon():
         :param order_by: (Optional) Expression that defines what fields and order to use for sorting
         :type order_by: str
         :param field_mask: (Optional) A field mask to specify the Finding fields to be listed in the response. An empty field mask will list all fields
-        :type field_mask: google.protobuf.field_mask_pb2.FieldMask 
+        :type field_mask: ``google.protobuf.field_mask_pb2.FieldMask``
         :return: list of finding results. see above for format
         :rtype: list[dict]
         """
@@ -89,6 +98,7 @@ class GoogleSCCCommon():
         # if no filter was given but a default filter is defined in the
         # config, take that filter for all findings requests
         if not findings_filter and self.default_findings_filter:
+            LOG.info("Using default list findings filter from app.config.")
             findings_filter = self.default_findings_filter
 
         # The "sources/-" suffix lists findings across all sources.
@@ -105,6 +115,8 @@ class GoogleSCCCommon():
 
         finding_result_iterator = self.client.list_findings(request=findings_request)
 
+        if return_findings_result_list:
+            return [finding for finding in finding_result_iterator]
 
         # convert to dict so that the objs are formatted to the fomat below and 
         # enums are converted to their string representation
@@ -113,55 +125,119 @@ class GoogleSCCCommon():
         #   {"finding": {...}, "resource": {...}, "state_change": "<some_val>"},
         #   ...
         # ]
-        finding_results = [FindingResult.to_dict(finding, use_integers_for_enums=False) for finding in finding_result_iterator]
 
-        for finding_result in finding_results:
-            finding = finding_result.get("finding", {})
+        finding_results = []
+
+        for finding_result in finding_result_iterator:
+            finding_result = FindingResult.to_dict(finding_result, use_integers_for_enums=False)
 
             # add resources from result obj to finding obj
             finding_result["finding"]["resource"] = finding_result.get("resource")
 
-            # create linkback
-            finding_result["finding"]["finding_url"] = self.make_linkback_url(finding)
+            finding_result["finding"] = self.enrich_finding(finding_result["finding"])
 
-            # create a second description that is linkified
-            finding_result["finding"]["linkified_description"] = linkify(finding.get("description"))
-
-            # add recommendation
-            finding_result["finding"]["recommendation"] = self.get_finding_source_property(finding, "Recommendation")
-            finding_result["finding"]["linkified_recommendation"] = linkify(finding.get("recommendation"))
-
-            # some properties aren't always there but we want to have something so that the templates don't fail
-            finding_result["finding"]["indicator"] = finding.get("indicator", {"ip_addresses": [], "domains": []})
-            finding_result["finding"]["vulnerability"] = finding.get("vulnerability", {"cve": None})
+            finding_results.append(finding_result)
 
         return finding_results
 
-    def add_security_mark(self, finding, soar_case_id):
+    def enrich_finding(self, finding_dict):
         """
-        Add security marks to a finding.
+        Adds some custom fields and cleans some fields of the finding
+        to make it easier to parse for jinja templates and postprocessing
 
-        :param finding: The finding response object's finding dict
-        :type finding: dict
-        :param soar_case_id: The case id to be associated in the added mark
-        :type soar_case_id: str|int
+        Adds the following fields to the dictionary:
+            ["finding_url", "linkified_description", "recommendation", 
+            "linkified_recommendation", "indicator", "vulnerability"]
+
+        NOTE: indicator and vulnerability may already exist - if they do, they remain unchanged.
+        if they don't, default empty values are added for easy parsing in jinja template.
+        the default empty values match the format that would be there if they existed
+        as of ``google-cloud-securitycenter`` v1.11.1
+
+        :param finding_dict: the result of converting a finding to a dictionary with the google API
+        :type finding_dict: dict
+        :return: modified dict with new fields
+        """
+
+        # create linkback
+        finding_dict["finding_url"] = self.make_linkback_url(finding_dict)
+
+        # create a second description that is linkified
+        finding_dict["linkified_description"] = linkify(finding_dict.get("description"))
+
+        # add recommendation and href version
+        finding_dict["recommendation"] = self.get_finding_source_property(finding_dict, "Recommendation")
+        finding_dict["linkified_recommendation"] = linkify(finding_dict.get("recommendation"))
+
+        # some properties aren't always there but we want to have something so that the templates don't fail
+        finding_dict["indicator"] = finding_dict.get("indicator", {"ip_addresses": [], "domains": []})
+        finding_dict["vulnerability"] = finding_dict.get("vulnerability", {"cve": None})
+
+        return finding_dict
+
+    def update_security_mark(self, finding_name, mark_key, mark_value=None):
+        """
+        Add/change/delete security marks on a finding.
+
+        mark_value can be None, in which case the mark_key will be deleted
+
+        :param finding_name: The finding's name
+        :type finding_name: str
+        :param mark_key: The key of the security mark to be added
+        :type mark_key: str
+        :param mark_value: The value associated with the given key to be added
+        :type mark_value: str|int|None
         :return: updated marks and the marks that were given to SCC
+        :rtype: tuple(dict, dict)
         """
-        soar_case_id = str(soar_case_id)
 
-        name = f"{finding.get('name')}/securityMarks"
+        name = f"{finding_name}/securityMarks"
 
-        field_mask = FieldMask(paths=[f"marks.{SOAR_MARKS_PATH}"])
-        marks = {SOAR_MARKS_PATH: soar_case_id}
+        field_mask = FieldMask(paths=[f"marks.{mark_key}"])
+        marks = {mark_key: str(mark_value)}
 
         marks_request = {
-            "security_marks": {"name": name, "marks": marks},
+            # if you want to delete, then just pass {"name": name}
+            "security_marks": {"name": name, "marks": marks} if mark_value else {"name": name},
             "update_mask": field_mask
         }
 
         updated_marks = self.client.update_security_marks(request=marks_request)
 
-        return updated_marks, marks
+        return SecurityMarks.to_dict(updated_marks), marks
+
+    def update_finding(self, finding_with_updates: Finding, fields_to_update: list):
+        """
+        Use the Google API to update a finding.
+        Requires that a Finding object is given, with the name of the finding
+        that is to be changed and the other fields that should be modified set
+        to their modified values.
+        A field mask will be created off of the list of fields_to_update so that
+        only those fields are modified in the call — be careful in what you pass
+        to that list as it must match the fields that are modified in the given finding
+        and also should not have any extraneous fields to avoid unintended updates.
+
+        :param finding_with_updates: the finding object with original name and desired fields updated
+        :type finding_with_updates: ``google.cloud.securitycenter.Finding``
+        :param fields_to_updated: list of fields that are to be updated
+        :type fields_to_update: list
+        :return: finding object representing the finding's updated state
+        :rtype: ``google.cloud.securitycenter.Finding``
+        """
+        event_time = datetime.now(tz=timezone.utc)
+        finding_with_updates.event_time = event_time
+        fields_to_update.append("event_time")
+
+        update_mask = FieldMask(
+            paths=fields_to_update
+        )
+
+        update_request = {
+            "finding": finding_with_updates,
+            "update_mask": update_mask
+        }
+
+        return self.client.update_finding(request=update_request)
 
     def make_linkback_url(self, finding):
         """
@@ -190,7 +266,7 @@ class GoogleSCCCommon():
         description =  finding.get("description")
         recommendation = self.get_finding_source_property(finding, 'Recommendation')
 
-        return linkify(description) + "<br><br>" + linkify(recommendation)
+        return linkify(description) + "<br><br>" + linkify(recommendation) + "<br><br>" + "See more details in the Google SCC tab of this incident."
 
     @staticmethod
     def get_finding_id(finding, entity_id):
@@ -199,7 +275,7 @@ class GoogleSCCCommon():
         """
         name = finding.get("name")
 
-        parsed_path = securitycenter.SecurityCenterClient.parse_finding_path(name)
+        parsed_path = SecurityCenterClient.parse_finding_path(name)
         return parsed_path.get(entity_id)
 
     @staticmethod
@@ -208,7 +284,7 @@ class GoogleSCCCommon():
         Given a finding, is it's state "INACTIVE"?
         """
         current_state = finding.get(finding_close_field)
-        return current_state == securitycenter.Finding.State.INACTIVE.name
+        return current_state == Finding.State.INACTIVE.name
 
     @staticmethod
     def get_finding_source_property(finding, source_prop):
