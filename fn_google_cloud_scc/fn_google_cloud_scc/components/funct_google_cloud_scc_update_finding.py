@@ -97,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
         # multiple nested keys are not supported.
         # only supports single keys or <parent>.<key>
         if len(update_key.split(".")) > 2:
-            raise IntegrationError("'{0}' does not support updating multiple nested properties. Max nesting = 1".format(FN_NAME))
+            raise IntegrationError("'{0}' does not support updating multiple nested properties. Max nesting = 1\nFor example '<parent>.<key>'".format(FN_NAME))
         elif len(update_key.split(".")) == 2:
             # grab the parent key, set value equal to {<key> : <value>}
             key = update_key.split(".")[0]
