@@ -24,7 +24,7 @@ if finding_name:
   inputs.google_scc_finding_name = finding_name
   inputs.google_scc_update_key = rule.properties.google_scc_security_mark_key
 else:
-  raise ValueError("Could not find appropriate finding name value")
+  log.fail("Could not find value for finding_name in Incident")
 ```
 
 ### Post-Processing Script

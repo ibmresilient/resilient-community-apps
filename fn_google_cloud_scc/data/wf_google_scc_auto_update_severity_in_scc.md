@@ -34,7 +34,7 @@ if finding_name:
   inputs.google_scc_update_key = "severity"
   inputs.google_scc_update_value = SEVERITY_MAP.get(incident.severity_code, "LOW")
 else:
-  raise ValueError("Could not find appropriate finding name value")
+  log.fail("Could not find value for finding_name in Incident")
 ```
 
 ### Post-Processing Script

@@ -22,6 +22,8 @@ finding_name = incident.properties.google_scc_name.get("content")
 
 if finding_name:
   inputs.google_scc_filter = "name = \"{0}\"".format(finding_name)
+else:
+  log.fail("Could not find value for finding_name in Incident")
 ```
 
 ### Post-Processing Script
