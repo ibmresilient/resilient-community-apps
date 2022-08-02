@@ -63,6 +63,8 @@ if results and results.get("success"):
       incident.properties.google_scc_state = finding.get("state", "UNKNOWN")
       incident.severity_code = severity_mapping.get(finding.get("severity"), "DEFAULT")
       incident.properties.google_scc_next_steps = finding.get("next_steps")
+      
+      break
 ```
 
 ---
