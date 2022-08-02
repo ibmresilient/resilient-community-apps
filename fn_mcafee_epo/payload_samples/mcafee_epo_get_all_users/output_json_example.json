@@ -1,3 +1,43 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 1,
+      "name": "admin",
+      "fullName": "",
+      "email": "",
+      "phoneNumber": "",
+      "disabled": false,
+      "admin": true,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "",
+      "allowedIPs": ""
+    },
+    {
+      "id": 2,
+      "name": "system",
+      "fullName": "",
+      "email": "",
+      "phoneNumber": "",
+      "disabled": true,
+      "admin": true,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "",
+      "allowedIPs": ""
+    }
+  ],
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 5508,
+    "timestamp": "2022-08-02 10:18:31"
+  }
 }

@@ -26,15 +26,20 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
+        # Set parameters
+        permsetname = fn_inputs.mcafee_epo_permsetname if hasattr(fn_inputs, "mcafee_epo_permsetname") else None
+
         # Log parameters
-        self.LOG.info("mcafee_epo_permsetname: %s", fn_inputs.mcafee_epo_permsetname if hasattr(fn_inputs, "mcafee_epo_permsetname") else None)
+        self.LOG.info("mcafee_epo_permsetname: %s", permsetname)
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
+        response = client.request(
+            "core.listUsers",
+            {"permSetName": permsetname}
+        )
+
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-        yield FunctionResult(client.request(
-            "core.listUsers",
-            {"permSetName": fn_inputs.mcafee_epo_permsetname}
-        ))
+        yield FunctionResult(response)

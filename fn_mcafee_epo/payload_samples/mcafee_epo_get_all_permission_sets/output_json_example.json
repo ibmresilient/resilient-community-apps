@@ -1,3 +1,33 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 4,
+      "name": "Executive Reviewer"
+    },
+    {
+      "id": 1,
+      "name": "Global Reviewer"
+    },
+    {
+      "id": 2,
+      "name": "Group Admin"
+    },
+    {
+      "id": 3,
+      "name": "Group Reviewer"
+    }
+  ],
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 552,
+    "timestamp": "2022-08-02 09:43:53"
+  }
 }
