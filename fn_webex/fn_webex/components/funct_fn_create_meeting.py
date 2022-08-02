@@ -51,9 +51,14 @@ class FunctionComponent(AppFunctionComponent):
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
 
-        webex = WebexAPI(self.requiredParameters, self.meetingParameters)
-        webex.Authenticate()
-        response = webex.create_meeting()
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        try:
+            webex = WebexAPI(self.requiredParameters, self.meetingParameters)
+            webex.Authenticate()
+            response = webex.create_meeting()
+            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
+            yield FunctionResult(value=response, success=True)
 
-        yield FunctionResult(response)
+        except Exception as err:
+            yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
+            yield FunctionResult(value=response, success=False, reason=err)
+            
