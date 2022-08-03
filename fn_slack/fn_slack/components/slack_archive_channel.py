@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("There is no slack_channel name associated with Incident or Task available to be archived")
 
             if not channel_id:
-                slack_utils.find_channel(res_associated_channel_name)
+                self.channel = slack_utils.find_channel(res_associated_channel_name)
             else:
                 slack_utils.check_channel_id(channel_id)
 

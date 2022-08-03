@@ -55,9 +55,9 @@ class TestSlack(object):
                     }
             }]
         slack_utils = SlackUtils("fake_api_key")
-        slack_utils.find_channel(slack_test_channel)
+        self.channel = slack_utils.find_channel(slack_test_channel)
 
-        assert slack_utils.get_channel_name() == slack_test_channel
+        assert self.channel.get("name") == slack_test_channel
 
     @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
     def test_find_channelerror(self, mocked_api_call):
@@ -70,7 +70,7 @@ class TestSlack(object):
 
         try:
             slack_utils = SlackUtils("fake_api_key")
-            slack_utils.find_channel(slack_test_channel)
+            self.channel =  slack_utils.find_channel(slack_test_channel)
             assert False
         except IntegrationError:
             assert True
@@ -120,14 +120,17 @@ class TestSlack(object):
         """ Test check Slack channel ID"""
         print("Test check Slack channel ID\n")
 
-        mocked_api_call.return_value = {
-            "ok": True,
-            "channel":
-                {
-                    "id": "C0EAQDV4Z",
-                    "name": "test-channel"
-                }
-        }
+        class MockChannelObj:
+            data = {
+                "ok": True,
+                "channel":
+                    {
+                        "id": "C0EAQDV4Z",
+                        "name": "test-channel"
+                    }
+            }
+
+        mocked_api_call.return_value = MockChannelObj()
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.check_channel_id(slack_test_channel_id)
         mocked_api_call.assert_called_with(
@@ -136,7 +139,7 @@ class TestSlack(object):
                 "channel" : slack_test_channel_id
             }
         )
-        channel = mocked_api_call.return_value.get("channel")
+        channel = mocked_api_call.return_value.data.get("channel")
         assert channel.get("id") == slack_test_channel_id
 
     @patch('fn_slack.lib.slack_common.slack.WebClient.api_call')
@@ -144,11 +147,13 @@ class TestSlack(object):
         """ Test check Slack channel ID error"""
         print("Test check Slack channel ID error\n")
 
-        mocked_api_call.return_value = {
-            "ok": False,
-        }
+        class MockChannelObj:
+            data = {
+                "ok": False,
+            }
 
-        
+        mocked_api_call.return_value = MockChannelObj
+
         slack_utils = SlackUtils("fake_api_key")
         mocked_api_response = slack_utils.check_channel_id(slack_test_channel_id)
         if not mocked_api_response:
@@ -1138,7 +1143,6 @@ class TestSlack(object):
     def test_find_or_create_channel_error(self, mocked_found_channel, mocked_channel_name, slack_is_private, is_channel, is_private, is_archived):
         """ Test find or create channel error"""
         print("Test find or create channel error\n")
-        mocked_found_channel.return_value = True  # do nothing
         mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
         mocked_channel = {
             "id": "C0EAQDV4Z",
@@ -1159,13 +1163,13 @@ class TestSlack(object):
     @patch('fn_slack.lib.slack_common.SlackUtils.find_channel')
     @patch('fn_slack.lib.slack_common.SlackUtils.slack_create_channel')
     @patch('fn_slack.lib.slack_common.SlackUtils.get_channel_name')
-    def test_find_or_create_channel(self, mocked_returned_channel_name, mocked_created_channel, mocked_found_channel,
+    @patch('fn_slack.lib.slack_common.SlackUtils.get_channel')
+    def test_find_or_create_channel(self, mocked_get_channel, mocked_returned_channel_name, mocked_created_channel, mocked_found_channel,
                                     mocked_channel_name):
         """ Test find or create channel"""
         print("Test find or create channel\n")
-        mocked_found_channel.return_value = True  # do nothing
+        mocked_get_channel.return_value = False
         mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
-        mocked_created_channel.return_value = True  # do nothing
         mocked_returned_channel_name.return_value = "edited-test-channel" # Slack validation can modify the submitted channel name
 
         slack_utils = SlackUtils("fake_api_key")
@@ -1181,9 +1185,8 @@ class TestSlack(object):
     def test_find_or_create_channel_is_private_error(self, mocked_created_channel, mocked_found_channel, mocked_channel_name):
         """ Test find or create channel - is private error"""
         print("Test find or create channel - is private error\n")
-        mocked_found_channel.return_value = True  # do nothing
+        mocked_found_channel.return_value = False  # do nothing
         mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
-        mocked_created_channel.return_value = True  # do nothing
 
         slack_utils = SlackUtils("fake_api_key")
         try:

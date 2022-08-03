@@ -10,7 +10,6 @@ import os
 import re
 import tempfile
 import time
-from tkinter.messagebox import NO
 import unicodedata
 from os.path import join, pardir
 
@@ -98,6 +97,7 @@ class SlackUtils(object):
         if warn:
             self.warnings.append(warn)
 
+    # helper function for find_channel() which will then use the less efficient channel name to search for it
     def check_channel_id(self, channel_id):
         try:
             channel_object = self.slack_client.api_call(
@@ -107,7 +107,7 @@ class SlackUtils(object):
                 }
             )
             self.channel = channel_object.data.get("channel")
-        except:
+        except ValueError: # will fail if no channel is found due to channel id being passed as None or not existing, return false
             return False 
         return True
 
@@ -133,7 +133,7 @@ class SlackUtils(object):
             input_channel_name, res_client, incident_id, task_id)
 
         # find the channel in Slack Workspace
-        self.find_channel(slack_channel_name, channel_id)
+        self.channel = self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
@@ -359,8 +359,7 @@ class SlackUtils(object):
 
             for ch in all_channels:
                 if ch.get("name") == slack_channel_name:
-                    self.channel = ch
-                    break
+                    return ch
 
     def _slack_find_channels(self, cursor=None):
         """
