@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_outbound_email",
         "message_destinations": [u"email_outbound"],
-        "functions": [u"send_email"],
+        "functions": [u"send_email", u"send_email2"],
         "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_text", u"example_send_task_email_html"],
         "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email Text", u"Example: Send Task Email HTML"],
         "incident_fields": [],
@@ -29,7 +29,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -38,13 +39,14 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 43.1.49
 
     Contents:
     - Message Destinations:
         - email_outbound
     - Functions:
         - send_email
+        - send_email2
     - Workflows:
         - example_send_incident_email_html
         - example_send_incident_email_text
