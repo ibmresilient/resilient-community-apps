@@ -1,9 +1,9 @@
-# Resilient Function - fn_bigfix
+# SOAR Function - fn_bigfix
 
-This Resilient Function package can be used to perform the following actions from a workflow using the Functions feature of the Resilient
+This SOAR Function package can be used to perform the following actions from a workflow using the Functions feature of the SOAR
 Circuits integration framework.
 ```
-Run Bigfix query for Resilient artifacts to determine if there are any hits.
+Run Bigfix query for SOAR artifacts to determine if there are any hits.
 Retrieve properties of an endpoint, with hits, from Bigfix.
 Remediate hits in Bigfix environment.
 Update status of a Bigfix remediating action.
@@ -11,7 +11,7 @@ Update status of a Bigfix remediating action.
 
 Prerequisites:
 ```
-resilient version 31 or later
+SOAR version 31 or later
 resilient_circuits version 31 or later
 ```
 * For more info about BigFix, please visit https://www.ibm.com/support/knowledgecenter/en/SSQL82_9.5.0/com.ibm.bigfix.doc/welcome/BigFix_Platform_welcome.html
@@ -45,7 +45,7 @@ Run with: `resilient-circuits run`.
 ## fn_bigfix Example
 
 The fn_bigfix function fn_bigfix_artifact requires 7 input parameters. The parameters are setup from a
-Resilient systems workflow on the Resilient console.
+SOAR systems workflow on the SOAR console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script.
 
 ```
@@ -57,7 +57,7 @@ inputs.bigfix_artifact_properties_value = "TESTVAL"
 inputs.bigfix_incident_id = 2095
 inputs.bigfix_incident_plan_status = "A"
 ```
-The results returned to Resilient will be in JSON format and will consist of a list of
+The results returned to SOAR will be in JSON format and will consist of a list of
 endpoints where hits for the artifact have been found.
 ```
 {'hits_count': 1,

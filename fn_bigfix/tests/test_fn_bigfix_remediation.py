@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Test fn_bigfix_remediation function"""
+
 from __future__ import print_function
 import pytest
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from  mock_artifacts import mocked_bigfix_client
+from tests.mock_artifacts import mocked_bigfix_client
 
-"""
-Suite of tests to test fn_bigfix_remediation Resilient Function
-"""
+"""Suite of tests to test fn_bigfix_remediation SOAR Function"""
 
 PACKAGE_NAME = "fn_bigfix"
 FUNCTION_NAME = "fn_bigfix_remediation"
@@ -20,7 +18,7 @@ FUNCTION_NAME = "fn_bigfix_remediation"
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+# Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def assert_keys_in(json_obj, *keys):
@@ -43,7 +41,7 @@ class TestFnBigfixRemediation:
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+        assert func
 
     @patch('fn_bigfix.components.fn_bigfix_remediation.BigFixClient', side_effect=mocked_bigfix_client)
     @pytest.mark.parametrize("bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id, expected_results", [
@@ -53,7 +51,7 @@ class TestFnBigfixRemediation:
         (12315198, "HKLM\\SOFTWARE\\JP\\JP2\\com.jp.browsercore", "Registry Key", 2095, 130),
     ])
     def test_success(self, mock_get, circuits_app, bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id, expected_results):
-        """ Tests for fn_bigfix_remediation using mocked data.  """
+        """ Tests for fn_bigfix_remediation using mocked data. """
 
         keys = ["status", "remediation_date", "status_message", "action_id"]
 
@@ -66,4 +64,3 @@ class TestFnBigfixRemediation:
         results = call_fn_bigfix_remediation_function(circuits_app, function_params)
         assert_keys_in(results, *keys)
         assert(expected_results == results["action_id"])
-

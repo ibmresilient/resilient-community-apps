@@ -1,26 +1,24 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-
-""" Resilient functions component to run a Bigfix Query against a Bigfix server for an artifact to determine
-if are hits on any of the BigFix endpoints"""
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+"""AppFunction implementation"""
 
 # Set up:
 # Destination: a Queue named "bigfix_artifact".
 # Manual Action: Execute a REST query against a BigFix server return hits.
 
-import logging
-import datetime
-import json
-
-from fn_bigfix.util.helpers import validate_opts, validate_params, create_attachment
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_bigfix.lib.bigfix_client import BigFixClient
+from datetime import datetime
+from json import loads, dumps
+from resilient_lib import validate_fields
 from fn_bigfix.lib.bigfix_helpers import get_hits
+from fn_bigfix.lib.bigfix_client import BigFixClient
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_bigfix.util.helpers import validate_opts, create_attachment, PACKAGE_NAME
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_bigfix_artifact' of package fn_bigfix.
+FN_NAME = "fn_bigfix_artifact"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'fn_bigfix_artifact' of package fn_bigfix.
 
         The Function does a BigFix query to determine BigFix endpoints with hits and takes the
         following parameters:
@@ -48,116 +46,85 @@ class FunctionComponent(ResilientComponent):
              'query_execution_date': '07-17-2018 17:44:21'
             }
         """
+
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
         self.options = opts.get("fn_bigfix", {})
-        validate_opts(self)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get("fn_bigfix", {})
-        validate_opts(self)
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: SOAR Function : Bigfix artifact - Get hits in BigFix for artifact."""
 
-    @function("fn_bigfix_artifact")
-    def _fn_bigfix_artifact_function(self, event, *args, **kwargs):
-        """Function: Resilient Function : Bigfix artifact - Get hits in BigFix for artifact."""
+        # Validate parameters
+        validate_fields(["bigfix_artifact_id", "bigfix_artifact_value", "bigfix_artifact_type", "bigfix_artifact_properties_name",
+                        "bigfix_artifact_properties_value", "bigfix_incident_id", "bigfix_incident_plan_status"], fn_inputs)
+
+        params = {"artifact_id": fn_inputs.bigfix_artifact_id, "artifact_value": fn_inputs.bigfix_artifact_value,
+                  "artifact_properties_name": fn_inputs.bigfix_artifact_properties_name,
+                  "artifact_properties_value": fn_inputs.bigfix_artifact_properties_value,
+                  "artifact_type": fn_inputs.bigfix_artifact_type, "incident_id": fn_inputs.bigfix_incident_id,
+                  "incident_plan_status": fn_inputs.bigfix_incident_plan_status}
+
+        self.LOG.info(str(params))
+
+        yield self.status_message(u"Running BigFix Query for Artifact id {}, with value {} ...".format(params["artifact_id"], params["artifact_value"]))
+        bigfix_client = BigFixClient(self.opts, self.options)
+
         try:
-            # Get the function parameters:
-            bigfix_artifact_id = kwargs.get("bigfix_artifact_id")  # number
-            bigfix_artifact_value = kwargs.get("bigfix_artifact_value")  # text
-            bigfix_artifact_type = kwargs.get("bigfix_artifact_type")  # text
-            bigfix_artifact_properties_name = kwargs.get("bigfix_artifact_properties_name")  # text
-            bigfix_artifact_properties_value = kwargs.get("bigfix_artifact_properties_value")  # text
-            bigfix_incident_id = kwargs.get("bigfix_incident_id")  # number
-            bigfix_incident_plan_status = kwargs.get("bigfix_incident_plan_status")  # text
-
-
-            log = logging.getLogger(__name__)
-            log.info("bigfix_artifact_id: %s", bigfix_artifact_id)
-            log.info("bigfix_artifact_value: %s", bigfix_artifact_value)
-            log.info("bigfix_artifact_type: %s", bigfix_artifact_type)
-            log.info("bigfix_artifact_properties_name: %s", bigfix_artifact_properties_name)
-            log.info("bigfix_artifact_properties_value: %s", bigfix_artifact_properties_value)
-            log.info("bigfix_incident_id: %s", bigfix_incident_id)
-            log.info("bigfix_incident_plan_status: %s", bigfix_incident_plan_status)
-
-            params = {"artifact_id": bigfix_artifact_id, "artifact_value": bigfix_artifact_value,
-                      "artifact_properties_name": bigfix_artifact_properties_name,
-                      "artifact_properties_value": bigfix_artifact_properties_value,
-                      "artifact_type": bigfix_artifact_type, "incident_id": bigfix_incident_id,
-                      "incident_plan_status": bigfix_incident_plan_status}
-
-            validate_params(params, "fn_bigfix_artifact")
-
-            yield StatusMessage(u"Running BigFix Query for Artifact id {0}, with value {1} ..."
-                                .format(params["artifact_id"], params["artifact_value"] ))
-            bigfix_client = BigFixClient(self.opts, self.options)
-
-            try:
-                artifact_data = None
-                if params["incident_plan_status"] != 'C':
-                    # If incident isn't closed
-                    if params["artifact_type"] == "IP Address":
-                        artifact_data = bigfix_client.get_bf_computer_by_ip(bigfix_artifact_value)
-                    elif params["artifact_type"] == "File Path":
-                        artifact_data = bigfix_client.get_bf_computer_by_file_path(bigfix_artifact_value)
-                    elif params["artifact_type"] == "Process Name":
-                        artifact_data = bigfix_client.get_bf_computer_by_process_name(bigfix_artifact_value)
-                    elif params["artifact_type"] == "Service":
-                        artifact_data = bigfix_client.get_bf_computer_by_service_name(bigfix_artifact_value)
-                    elif params["artifact_type"] == "Registry Key":
-                        artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(bigfix_artifact_value,
-                                                                                               params["artifact_properties_name"],
-                                                                                               params["artifact_properties_value"])
-                    else:
-                        raise ValueError("Unsupported artifact type {}.".format(bigfix_artifact_type))
-            except Exception as e:
-                log.exception("Failed to query BigFix.")
-                yield StatusMessage("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
-                raise Exception("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
-
-            if bigfix_incident_plan_status == 'C':
-                yield StatusMessage("Ignoring action, incident {} is closed".format(params["incident_id"]))
-                results = {}
-            elif not artifact_data:
-                yield StatusMessage("Could not find data about the artifact {}".format(params["artifact_value"]))
-                results = {}
-            else:
-                hits = get_hits(artifact_data, params)
-                if len(hits) == 0:
-                    yield StatusMessage("No hits detected for artifact id '{0}' with value '{1}' and of type '{2}'."
-                                        .format(params["artifact_id"], params["artifact_value"],
-                                                params["artifact_type"]))
-                    results = {}
-                elif len(hits) > int(self.options.get("bigfix_hunt_results_limit", "200")):
-                    yield StatusMessage("Adding artifact data as an incident attachment")
-                    # Define file name and content to add as an attachment
-                    file_name = u"query_for_artifact_{0}_{1}_{2}.txt" \
-                        .format(params["artifact_id"], params["artifact_type"],
-                                datetime.datetime.today().strftime('%Y%m%d'))
-                    file_content = u""
-                    for data in hits:
-                        file_content += u"Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
-                            .format(data["computer_id"], data["computer_name"], params["artifact_value"],
-                                    params["artifact_type"])
-                    # Create an attachment
-                    att_report = create_attachment(self.rest_client(), file_name, file_content, params)
-                    results = {"hits_over_limit": True, "att_name": att_report["name"], "hits_count": len(hits)}
+            if params["incident_plan_status"] != 'C':
+                # If incident isn't closed
+                if params["artifact_type"] == "IP Address":
+                    artifact_data = bigfix_client.get_bf_computer_by_ip(
+                        params["artifact_value"])
+                elif params["artifact_type"] == "File Path":
+                    artifact_data = bigfix_client.get_bf_computer_by_file_path(
+                        params["artifact_value"])
+                elif params["artifact_type"] == "Process Name":
+                    artifact_data = bigfix_client.get_bf_computer_by_process_name(
+                        params["artifact_value"])
+                elif params["artifact_type"] == "Service":
+                    artifact_data = bigfix_client.get_bf_computer_by_service_name(
+                        params["artifact_value"])
+                elif params["artifact_type"] == "Registry Key":
+                    artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(
+                        params["artifact_value"], params["artifact_properties_name"], params["artifact_properties_value"])
                 else:
-                    query_execution_date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
-                    results = {"endpoint_hits": json.loads(json.dumps(hits)), "hits_count": len(hits),
-                               "query_execution_date": query_execution_date}
+                    raise ValueError("Unsupported artifact type {}.".format(
+                        params["artifact_type"]))
+        except Exception as e:
+            yield self.status_message("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
 
-            yield StatusMessage("done...")
+        results = {}
+        if params["incident_plan_status"] == 'C':
+            yield self.status_message("Ignoring action, incident {} is closed".format(params["incident_id"]))
+        elif not artifact_data:
+            yield self.status_message("Could not find data about the artifact {}".format(params["artifact_value"]))
+        else:
+            hits = get_hits(artifact_data)
+            hits_len = len(hits)
+            if not hits_len:
+                yield self.status_message("No hits detected for artifact id '{}' with value '{}' and of type '{}'.".format(params["artifact_id"], params["artifact_value"], params["artifact_type"]))
+            elif hits_len > int(self.options.get("bigfix_hunt_results_limit", "200")):
+                yield self.status_message("Adding artifact data as an incident attachment")
+                # Define file name and content to add as an attachment
+                file_name = u"query_for_artifact_{}_{}_{}.txt".format(
+                    params["artifact_id"], params["artifact_type"], datetime.today().strftime('%Y%m%d'))
+                file_content = u""
+                for data in hits:
+                    file_content += u"Resource ID: {}. Resource Name: {}. Artifact value: {}. Artifact Type: {} \n".format(
+                        data["computer_id"], data["computer_name"], params["artifact_value"], params["artifact_type"])
+                # Create an attachment
+                att_report = create_attachment(
+                    self.rest_client(), file_name, file_content, params)
+                results = {"hits_over_limit": True,
+                           "att_name": att_report["name"], "hits_count": hits_len}
+            else:
+                results = {"endpoint_hits": loads(dumps(hits)),
+                    "hits_count": hits_len,
+                    "query_execution_date": datetime.now().strftime('%m-%d-%Y %H:%M:%S')}
 
-            log.debug(results)
+        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            log.exception("Exception in Resilient Function for BigFix integration.")
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(results)
