@@ -25,6 +25,8 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
+
+        resclient = self.rest_client()
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_meeting_start_time", "webex_meeting_end_time"], fn_inputs)
         validate_fields([{"name" : "webex_site_url", 
