@@ -28,7 +28,8 @@ class FunctionComponent(AppFunctionComponent):
 
         resclient = self.rest_client()
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_meeting_start_time", "webex_meeting_end_time"], fn_inputs)
+        validate_fields(["webex_meeting_start_time", "webex_meeting_end_time", 
+                         "webex_meeting_name"], fn_inputs)
         validate_fields([{"name" : "webex_site_url", 
                          "name" : "webex_bearerID", 
                          "name" : "webex_timezone"}], self.config_options)
@@ -42,13 +43,17 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["scope"] = self.config_options.get("scope")
 
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
-        self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda
-        self.meetingParameters["password"] = fn_inputs.webex_meeting_password
+        self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
+        self.meetingParameters["password"] = fn_inputs.webex_meeting_password if hasattr(fn_inputs, 'webex_meeting_password') else None
         self.meetingParameters["sendEmail"] = True
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["siteURL"]  = SITE_URL
         self.requiredParameters["tokenURL"] = TOKEN_URL
+
+        print("\n\n\n\n")
+        print(fn_inputs.webex_add_all_members)
+        print(fn_inputs.webex_meeting_attendee)
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
