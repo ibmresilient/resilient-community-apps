@@ -99,6 +99,8 @@ class SlackUtils(object):
 
     # helper function for find_channel() which will then use the less efficient channel name to search for it
     def check_channel_id(self, channel_id):
+        if not channel_id:
+            return False
         try:
             channel_object = self.slack_client.api_call(
                 api_method = "conversations.info",
@@ -107,7 +109,7 @@ class SlackUtils(object):
                 }
             )
             self.channel = channel_object.data.get("channel")
-        except ValueError: # will fail if no channel is found due to channel id being passed as None or not existing, return false
+        except IntegrationError("Channel not found: "): # will fail if no channel is found with this channel id, return false
             return False 
         return True
 
@@ -132,8 +134,8 @@ class SlackUtils(object):
         slack_channel_name, res_associated_channel_name = self._find_the_proper_channel_name(
             input_channel_name, res_client, incident_id, task_id)
 
-        # find the channel in Slack Workspace
-        self.channel = self.find_channel(slack_channel_name, channel_id)
+        # find the channel in Slack Workspace and set the value of channel via 
+        self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
@@ -926,6 +928,35 @@ class SlackUtils(object):
 
         return results
 
+    def get_channel_users_list(self, channel_id):
+        # channel_id = self.get_channel_id()
+        results = self.slack_client.api_call(
+                    api_method = "conversations.members",
+                    params = {
+                        "channel" : channel_id
+                    }
+                )
+
+        LOG.debug(results)
+
+        users_id_list = results.get("members")
+
+        return users_id_list
+
+    def get_users_info(self, users_id_list):
+        users_list = []
+        for user in users_id_list:
+            results = self.slack_client.api_call(
+                        api_method = "users.info",
+                        params = {
+                            "user" : user
+                        }
+                    )
+            LOG.debug(results)
+
+            users_list.append(("{}: {}".format(results["user"]["profile"]["display_name"], results["user"]["profile"]["email"])))
+
+        return users_list
 
 def build_payload(ordered_data_dict):
     """

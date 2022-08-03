@@ -142,12 +142,19 @@ class FunctionComponent(ResilientComponent):
             if has_association_in_slack_db is False:
                 slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
 
+            users_list = slack_utils.get_channel_users_list(channel_id)
+            user_info = slack_utils.get_users_info(users_list)
+
             # Yield Status Messages
             for warn in slack_utils.get_warnings():
                 yield StatusMessage(warn)
 
-            results = {"channel": slack_channel_name,
-                       "url": conversation_url}
+
+            results = {
+                        "channel": slack_channel_name,
+                        "url": conversation_url,
+                        "user_info" : user_info
+                    }
 
             LOG.info(results)
 

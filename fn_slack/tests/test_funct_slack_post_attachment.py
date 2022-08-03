@@ -62,6 +62,8 @@ class TestSlackPostAttachment:
     expected_results_1 = {"value": "xyz"}
 
 
+    @patch('fn_slack.components.slack_post_attachment.SlackUtils.get_users_info', return_value = "")
+    @patch('fn_slack.components.slack_post_attachment.SlackUtils.get_channel_users_list')
     @patch('fn_slack.components.slack_post_attachment.SlackUtils.get_permalink', return_value = "")
     @patch('fn_slack.components.slack_post_attachment.SlackUtils.get_ts_from_file_upload_results')
     @patch('fn_slack.components.slack_post_attachment.SlackUtils.slack_post_attachment')
@@ -71,7 +73,7 @@ class TestSlackPostAttachment:
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)
     ])
-    def test_success(self, mock_find_or_create_channel, mock_user_id_list, mock_data, mock_post, mock_upload, mock_get_permalink, circuits_app, mock_inputs, expected_results):
+    def test_success(self, mock_find_or_create_channel, mock_user_id_list, mock_data, mock_post, mock_upload, mock_get_permalink, mock_user_list, mock_user_info, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
         results = call_slack_post_attachment_function(circuits_app, mock_inputs)
