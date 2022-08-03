@@ -99,6 +99,8 @@ class SlackUtils(object):
 
     # helper function for find_channel() which will then use the less efficient channel name to search for it
     def check_channel_id(self, channel_id):
+        if not channel_id:
+            return False
         try:
             channel_object = self.slack_client.api_call(
                 api_method = "conversations.info",
@@ -107,7 +109,7 @@ class SlackUtils(object):
                 }
             )
             self.channel = channel_object.data.get("channel")
-        except ValueError: # will fail if no channel is found due to channel id being passed as None or not existing, return false
+        except IntegrationError("Channel not found: "): # will fail if no channel is found with this channel id, return false
             return False 
         return True
 
@@ -132,7 +134,7 @@ class SlackUtils(object):
         slack_channel_name, res_associated_channel_name = self._find_the_proper_channel_name(
             input_channel_name, res_client, incident_id, task_id)
 
-        # find the channel in Slack Workspace
+        # find the channel in Slack Workspace and set the value of channel via
         self.channel = self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
