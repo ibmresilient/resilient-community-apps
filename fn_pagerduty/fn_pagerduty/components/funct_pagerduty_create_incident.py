@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
         # Get the function parameters:
         incidentID = kwargs.get("incidentID")
 
-        url = build_incident_url(build_resilient_url(self.res_options.get('host'), self.res_options.get('port')), incidentID)
+        url = build_incident_url(build_resilient_url(self.res_options.get('host'), self.res_options.get('port')), incidentID,self.res_options.get("org"))
 
         payloadDict = pd_options.copy()
         payloadDict['incidentID'] = incidentID
