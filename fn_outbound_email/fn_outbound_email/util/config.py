@@ -14,8 +14,11 @@ def config_section_data():
     return u"""[fn_outbound_email]
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
-#Smtp User required for TLS and OAuth2
+## Basic Authentication settings
+#smtp user required for TLS and OAuth2
 smtp_user=
+smtp_password=
+## End of Basic Authentication settings
 
 ## OAuth2 authentication settings
 # Leave OAuth2 settings blank or commented out if using Basic Authentication.
@@ -46,10 +49,6 @@ auth_url=
 # the generate_oauth2_refresh_token utility from the oauth-utils package.
 refresh_token=
 ## End of OAuth2 authentication settings
-
-## Basic Authentication settings
-smtp_password=
-## End of Basic Authentication settings
 
 #If smtp_user is not an email address then from_email_address should equal the email address
 from_email_address=

@@ -270,3 +270,37 @@ class TemplateHelper(object):
             list_result = str_value
 
         return list_result
+
+def get_template(app_config, template_name):
+    template_path = _get_template_path(app_config, template_name)
+    if template_path:
+        with open(template_path, 'r') as f:
+            return f.readall()
+
+def _get_template_path(app_config, template_name):
+    """_summary_
+
+    Args:
+        app_config (_type_): _description_
+        template_name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    template_file_path = None
+    if template_name:
+        if not app_config.get(template_name):
+            LOG.error("Template name '%s' not found.")
+            return None
+    
+        # determine if a relative path or an absolute path
+        template_file_path = app_config.get(template_name)
+        if not template_file_path.startswith("/"):  # absolute
+            cpath = path.dirname(__file__)
+            template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], template_file_path)
+
+        if not path.exists(template_file_path):
+            LOG.error(u"Template file path '%s' not found.", template_file_path)
+            return None
+
+    return template_file_path

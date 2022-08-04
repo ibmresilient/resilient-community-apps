@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 import base64
-import ssl
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
@@ -14,7 +13,6 @@ from ssl import Purpose, create_default_context
 from jinja2 import Environment, select_autoescape
 from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
-from resilient_lib.components.integration_errors import IntegrationError
 from fn_outbound_email.lib.template_helper import TemplateHelper
 from fn_outbound_email.lib.oauth2 import OAuth2
 
@@ -23,6 +21,19 @@ log = logging.getLogger(__name__)
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'
+
+# mail header information
+MESSAGE_ID_HEADER = "Message-ID"
+IN_REPLY_TO_HEADER = "In-Reply-To"
+REFERENCES_HEADER = "References"
+IMPORTANCE_HEADER = "Importance"
+PRIORITY_HEADER = "X-Priority"
+# translation between importance and x-priority setting
+PRIORITY_LOOKUP = {
+    "high": "1",
+    "normal": "2",
+    "low": "3"
+}
 
 class SendSMTPEmail(ResilientComponent):
 
@@ -68,6 +79,17 @@ class SendSMTPEmail(ResilientComponent):
             self.oauth2.refresh_token()
             self.oauth2.generate_oauth2_string()
 
+        # headers
+        self.headers = {}
+        if self.mail_context.get('mail_message_id'):
+            self.headers[MESSAGE_ID_HEADER] = self.mail_context['mail_message_id']
+        if self.mail_context.get('mail_in_reply_to'):
+            self.headers[IN_REPLY_TO_HEADER] = self.mail_context['mail_in_reply_to']
+            self.headers[REFERENCES_HEADER] = self.mail_context['mail_in_reply_to']
+        if self.mail_context.get('mail_importance'):
+            self.headers[IMPORTANCE_HEADER] = self.mail_context['mail_importance']
+            self.headers[PRIORITY_HEADER] = PRIORITY_LOOKUP.get(self.mail_context['mail_importance'].lower(), 2)
+
     def send(self, body_html="", body_text=""):
         if not self.opts:
             raise SimpleSendEmailException("opts required")
@@ -95,6 +117,11 @@ class SendSMTPEmail(ResilientComponent):
         multipart_message['CC'] = ", ".join(self.cc_address_list)
         multipart_message['BCC'] = ", ".join(self.bcc_address_list)
 
+        # add headers if present
+        if self.headers:
+            for k,v in self.headers.items():
+                multipart_message.add_header(k, v)
+
         log.info("Building MIME object")
         # Set subject
         multipart_message['Subject'] = self.mail_subject
@@ -119,19 +146,18 @@ class SendSMTPEmail(ResilientComponent):
         log.info("Starting email connection...")
         smtp_connection = None
         try:
-
             if self.smtp_config_section.get("smtp_ssl_mode") == "ssl":
                 log.info("Building SSL connection object")
                 smtp_connection = SMTP_SSL(host=self.smtp_server,
-                                                   port=self.smtp_port,
-                                                   certfile=self.smtp_cafile,
-                                                   context=self.get_smtp_ssl_context(),
-                                                   timeout=self.smtp_conn_timeout)
+                                           port=self.smtp_port,
+                                           certfile=self.smtp_cafile,
+                                           context=self.get_smtp_ssl_context(),
+                                           timeout=self.smtp_conn_timeout)
             else:
                 log.info("Building generic connection object")
                 smtp_connection = SMTP(host=self.smtp_server,
-                                               port=self.smtp_port,
-                                               timeout=self.smtp_conn_timeout)
+                                       port=self.smtp_port,
+                                       timeout=self.smtp_conn_timeout)
 
                 if self.smtp_config_section.get("smtp_ssl_mode") == "starttls":
                     log.info("Starting TLS...")
