@@ -20,6 +20,7 @@
 ```python
 # To set meeting name to the workflow inputs, uncomment the following lines
 inputs.webex_meeting_name = incident.name
+inputs.webex_incident_id = str(incident.id)
 
 # Get the agenda from the activity field or the incident description
 if rule.properties.webex_meeting_agenda is None:
@@ -32,11 +33,9 @@ else:
 
 inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties.webex_meeting_password is None else rule.properties.webex_meeting_password
 
-if not rule.properties.webex_meeting_attendee:
-    if inputs.webex_meeting_attendee == "none":
-        inputs.webex_meeting_attendee = ""
-else:
+if rule.properties.webex_meeting_attendee:
     inputs.webex_meeting_attendee = rule.properties.webex_meeting_attendee
+    
 ```
 
 ### Post-Processing Script

@@ -26,9 +26,8 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
 
-        resclient = self.rest_client()
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_meeting_name"], fn_inputs)
+        validate_fields(["webex_meeting_name", "webex_incident_id", "webex_add_all_members", "webex_meeting_attendee"], fn_inputs)
         validate_fields([{"name" : "webex_site_url", 
                          "name" : "webex_bearerID", 
                          "name" : "webex_timezone"}], self.config_options)
@@ -40,6 +39,9 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
         self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
         self.requiredParameters["scope"] = self.config_options.get("scope")
+        self.requiredParameters["incidentID"] = fn_inputs.webex_incident_id
+        self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
+        self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendee
 
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
@@ -47,25 +49,26 @@ class FunctionComponent(AppFunctionComponent):
         self.meetingParameters["sendEmail"] = True
 
         self.requiredParameters["rc"] = self.rc
+        self.requiredParameters["resclient"] = self.rest_client()
         self.requiredParameters["siteURL"]  = SITE_URL
         self.requiredParameters["tokenURL"] = TOKEN_URL
 
-        print("\n\n\n\n")
-        print(fn_inputs.webex_add_all_members)
-        print(fn_inputs.webex_meeting_attendee)
-        print("\n\n\n\n")
+        
+        print("\n\n\n\n\n\n",fn_inputs.webex_add_all_members)
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
 
-        try:
-            webex = WebexAPI(self.requiredParameters, self.meetingParameters)
-            webex.Authenticate()
-            response = webex.create_meeting()
-            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
-            yield FunctionResult(value=response, success=True)
+        webex = WebexAPI(self.requiredParameters, self.meetingParameters)
+        webex.generate_attendee_list()
+        webex.Authenticate()
+        webex.createRetrieveRoom()
+        # try:
+        #     response = webex.create_meeting()
+        #     yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
+        #     yield FunctionResult(value=response, success=True)
 
-        except Exception as err:
-            yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
-            reason = err.__str__()
-            yield FunctionResult(value=None, success=False, reason=reason)
+        # except Exception as err:
+        #     yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
+        #     reason = err.__str__()
+        #     yield FunctionResult(value=None, success=False, reason=reason)

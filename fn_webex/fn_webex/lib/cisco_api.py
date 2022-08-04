@@ -15,6 +15,7 @@ DEFAULT_MEETING_LENGTH = 45
 
 class WebexAPI:
     def __init__(self, requiredParameters, optionalParameters):
+        self.resclient = requiredParameters["resclient"]
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
@@ -81,6 +82,42 @@ class WebexAPI:
             value = pair[len(key)+1:]
             ret[key] = value
         return ret
+
+    def generate_attendee_list(self):
+        def isDirectMember(ids):
+            for user in orgMemberList:
+                if ids == user.get("id"): 
+                    return user.get("email")
+                
+        def isGroupMember(ids):
+            ret = []
+            for group in orgGroupList:
+                if ids == group.get("id"):
+                    for member in group.get("members"):
+                        ret.append(isDirectMember(member))
+            return ret
+
+        emailIDs = []
+        incidentMembers = self.resclient.get("/incidents/{}/members".format(self.requiredParameters["incidentID"]))
+        orgMemberList   = self.resclient.post("/users/query_paged?return_level=normal", payload={}).get("data")
+        orgGroupList    = self.resclient.get("/groups")
+
+        if self.requiredParameters["addAllMembers"]:
+            for incident_member in incidentMembers.get("members"):
+                if isDirectMember(incident_member):
+                    emailIDs.append(isDirectMember(incident_member))
+                elif isGroupMember(incident_member):
+                    emailIDs.extend(isGroupMember(incident_member))
+        elif self.requiredParameters["webex_meeting_attendee"].lower().strip() == "none":
+            raise ValueError("Error: Failed to add participants to the meeting. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
+        else:
+            emailIDs = self.requiredParameters["additionalAttendee"].strip().replace(" ", "").split(",")
+        self.emailIDs = emailIDs
+        print("\n\n\n\n\n\n",self.emailIDs, self.requiredParameters["addAllMembers"])
+
+    def createRetrieveRoom(self):
+        response = self.rc.execute("get", "https://webexapis.com/v1/rooms/", headers=self.header, proxies=self.rc.get_proxies())
+        print("\n\n\n\n\n\n", response)
 
 
     def create_meeting(self):
