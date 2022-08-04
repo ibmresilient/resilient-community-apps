@@ -7,7 +7,7 @@ from __future__ import print_function
 import pytest
 from time import time
 from fn_bigfix.lib.bigfix_helpers import get_hits, poll_action_status
-from tests.mock_artifacts import get_artifact_data_1, get_artifact_data_2, mocked_bigfix_client
+from mock_artifacts import get_artifact_data_1, get_artifact_data_2, mocked_bigfix_client
 
 """Suite of tests to test BigFix Helper functions"""
 

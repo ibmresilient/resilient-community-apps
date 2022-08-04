@@ -8,7 +8,7 @@ import pytest
 from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.mock_artifacts import mocked_bigfix_client
+from mock_artifacts import mocked_bigfix_client
 
 """Suite of tests to test fn_bigfix_artifact SOAR Function"""
 

@@ -9,7 +9,7 @@ from mock import patch
 from datetime import datetime
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from tests.mock_artifacts import mocked_bigfix_client, mocked_res_client
+from mock_artifacts import mocked_bigfix_client, mocked_res_client
 
 """Suite of tests to test fn_bigfix_assets SOAR Function"""
 

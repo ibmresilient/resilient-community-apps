@@ -6,7 +6,7 @@
 from __future__ import print_function
 import pytest
 from fn_bigfix.util.helpers import validate_opts, create_attachment
-from tests.mock_artifacts import mocked_res_client
+from mock_artifacts import mocked_res_client
 
 """Suite of tests to test Helper functions"""
 
@@ -15,7 +15,7 @@ def assert_keys_in(json_obj, *keys):
         assert key in json_obj
 
 class Func(object):
-    def __init__(self, options={}):
+    def __init__(self, options=object):
         self.options = options
 
 class TestHelpersValidatOpts:

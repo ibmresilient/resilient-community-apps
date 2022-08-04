@@ -5,7 +5,7 @@
 from __future__ import print_function
 import pytest
 from mock import patch
-from tests.mock_artifacts import mocked_requests
+from mock_artifacts import mocked_requests
 from fn_bigfix.lib.bigfix_client import BigFixClient
 
 """Suite of tests to test BigFix client class"""
