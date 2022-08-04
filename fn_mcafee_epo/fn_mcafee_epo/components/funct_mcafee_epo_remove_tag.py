@@ -5,7 +5,7 @@
 
 from fn_mcafee_epo.lib.epo_helper import init_client, get_list, PACKAGE_NAME
 from resilient_lib import validate_fields
-from resilient_circuits import FunctionResult, AppFunctionComponent, app_function, FunctionResult
+from resilient_circuits import FunctionResult, AppFunctionComponent, app_function
 
 FN_NAME = "mcafee_epo_remove_tag"
 
@@ -38,6 +38,7 @@ class FunctionComponent(AppFunctionComponent):
         # determine if a list of tags was given
         tag_list = get_list(fn_inputs.mcafee_epo_tag)
 
+        # Connect to ePO server
         client = init_client(self.opts, self.options)
 
         for tag in tag_list:

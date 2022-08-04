@@ -5,7 +5,7 @@
 
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
 from resilient_lib import validate_fields
-from resilient_circuits import FunctionResult, AppFunctionComponent, app_function, FunctionResult
+from resilient_circuits import FunctionResult, AppFunctionComponent, app_function
 
 FN_NAME = "mcafee_epo_find_a_system"
 
@@ -26,6 +26,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems"], fn_inputs)
+
+        # Connect to ePO server
         client = init_client(self.opts, self.options)
 
         self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
