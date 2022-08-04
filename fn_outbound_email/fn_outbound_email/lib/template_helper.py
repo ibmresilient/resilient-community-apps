@@ -272,10 +272,19 @@ class TemplateHelper(object):
         return list_result
 
 def get_template(app_config, template_name):
+    """_summary_
+
+    Args:
+        app_config (_type_): _description_
+        template_name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     template_path = _get_template_path(app_config, template_name)
     if template_path:
         with open(template_path, 'r') as f:
-            return f.readall()
+            return f.read()
 
 def _get_template_path(app_config, template_name):
     """_summary_
