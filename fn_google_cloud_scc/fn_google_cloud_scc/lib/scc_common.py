@@ -7,15 +7,20 @@ import re
 from datetime import datetime, timezone
 from urllib.parse import urlencode
 
-from google.cloud.securitycenter import (Finding, ListFindingsResponse,
+from google.cloud.securitycenter import (Finding, ListAssetsResponse,
+                                         ListFindingsResponse,
                                          SecurityCenterClient, SecurityMarks)
 from google.protobuf.field_mask_pb2 import FieldMask
-from resilient_lib import readable_datetime, validate_fields
+from google.api_core.exceptions import InvalidArgument
+from resilient_lib import readable_datetime, validate_fields, IntegrationError
 
 # alias the ListFindingsResponse.ListFindingsResult to FindingResult
+# and same for assets
 FindingResult = ListFindingsResponse.ListFindingsResult
+AssetResult = ListAssetsResponse.ListAssetsResult
 
 PACKAGE_NAME = "fn_google_cloud_scc"
+ASSETS_BASE_URL = "/security/command-center/assets"
 FINDINGS_BASE_URL = "/security/command-center/findings"
 ORG_NAME_FRAGMENT = "organizations"
 SOAR_ID_MARK = "IBM_SOAR_ID"
@@ -68,7 +73,7 @@ class GoogleSCCCommon():
         )
 
 
-    def get_findings(self, findings_filter=None, findings_read_time=None, compare_duration=None, order_by=None, field_mask=None, return_findings_result_list=False):
+    def get_findings(self, findings_filter=None, findings_read_time=None, compare_duration=None, order_by=None, fields_to_return=None, return_findings_result_list=False):
         """
         Get findings given request parameters. See the SCC Client docs for more details on the parameters and their types.
 
@@ -84,13 +89,13 @@ class GoogleSCCCommon():
         :param findings_filter: (Optional) Filter for findings to be found. When used with query_entities_since_ts, this filter is set to query all eventTime values greater than the last poll timestamp
         :type findings_filter: str
         :param findings_read_time: (Optional) Time used as a reference point when filtering findings. SCC allows for filtering findings at any point in time
-        :type findings_read_time:  google.protobuf.timestamp_pb2.Timestamp 
+        :type findings_read_time:  google.protobuf.timestamp_pb2.Timestamp
         :param compare_duration: (Optional) Updates the returned objects "state_change" value to indicate if the object changed during the given duration
-        :type compare_duration: google.protobuf.duration_pb2.Duration 
+        :type compare_duration: google.protobuf.duration_pb2.Duration
         :param order_by: (Optional) Expression that defines what fields and order to use for sorting
         :type order_by: str
-        :param field_mask: (Optional) A field mask to specify the Finding fields to be listed in the response. An empty field mask will list all fields
-        :type field_mask: ``google.protobuf.field_mask_pb2.FieldMask``
+        :param fields_to_return: (Optional) A field mask listed as a comma-separated string of fields to be returned
+        :type fields_to_return: str
         :return: list of finding results. see above for format
         :rtype: list[dict]
         """
@@ -110,7 +115,7 @@ class GoogleSCCCommon():
             "read_time": findings_read_time,
             "compare_duration": compare_duration,
             "order_by": order_by,
-            "field_mask": field_mask
+            "field_mask": FieldMask(paths=[field.strip() for field in fields_to_return.split(",")]) if fields_to_return else None
         }
 
         finding_result_iterator = self.client.list_findings(request=findings_request)
@@ -160,7 +165,7 @@ class GoogleSCCCommon():
         """
 
         # create linkback
-        finding_dict["finding_url"] = self.make_linkback_url(finding_dict)
+        finding_dict["finding_url"] = self.make_finding_linkback_url(finding_dict)
 
         # create a second description that is linkified
         finding_dict["linkified_description"] = linkify(finding_dict.get("description"))
@@ -239,7 +244,169 @@ class GoogleSCCCommon():
 
         return self.client.update_finding(request=update_request)
 
-    def make_linkback_url(self, finding):
+
+    def list_assets(self, filter=None, fields_to_return=None, read_time=None, compare_duration=None, order_by=None):
+        """
+        List the assests of the organization under monitoring by SCC.
+        The filter and ``fields_to_return`` are important parts of this
+        method.
+
+        This method assumes the ``fields_to_return`` field is given in the format
+        that would come from the SOAR pre-processing script, i.e. a string
+        of comma-separated values that indicate the values to return.
+        Google's API is quite picky about the format of these so here are a
+        few examples of acceptable ``fields_to_return`` formats:
+
+        Example:
+
+        .. code-block::python
+
+            fields_to_return = "asset.resource_properties, asset.security_center_properties"
+
+        :param filter: (Optional) Filter for assets to be found., defaults to None
+        :type filter: str, optional
+        :param read_time: (Optional) Time used as a reference point when filtering findings. SCC allows for filtering findings at any point in time, defaults to None
+        :type read_time: google.protobuf.timestamp_pb2.Timestamp, optional
+        :param compare_duration: (Optional) Updates the returned objects "state_change" value to indicate if the object changed during the given duration, defaults to None
+        :type compare_duration: google.protobuf.duration_pb2.Duration, optional
+        :param order_by: (Optional) Expression that defines what fields and order to use for sorting, defaults to None
+        :type order_by: str, optional
+        :param fields_to_return: (Optional) A field mask listed as a comma-separated string of fields to be returned, defaults to None
+        :type fields_to_return: str, optional
+        :return: list of assets results
+        :rtype: list[dict]
+        """
+
+        assets_request = {
+            "parent": self.org_name,
+            "filter": filter,
+            "read_time": read_time,
+            "compare_duration": compare_duration,
+            "order_by": order_by,
+            "field_mask": FieldMask(paths=[field.strip() for field in fields_to_return.split(",")]) if fields_to_return else None
+        }
+
+        try:
+            # list the assets
+            asset_iterator = self.client.list_assets(request=assets_request)
+        except InvalidArgument as e:
+            # it is probably pretty common that the user might input
+            # the field mask or filter wrong as it is hard to get right...
+            # if that is the case, try to given them as good a message
+            # as possible to remedy the field_mask issue
+            if hasattr(e, "message") and "invalid field_mask" in e.message.lower():
+                msg = "Invalid Field Mask: {0}. Field Mask should be given like: 'asset.resource_properties,...'".format(fields_to_return)
+                raise IntegrationError(msg)
+            elif hasattr(e, "message") and "invalid filter" in e.message.lower():
+                msg = "Invalid Filter: {0}. Filter should be given like: 'securityMarks.marks.test=\"1\"'".format(filter)
+                raise IntegrationError(msg)
+            else:
+                raise e
+
+        assets_results = []
+
+        for asset_result in asset_iterator:
+            asset_result = AssetResult.to_dict(asset_result, use_integers_for_enums=False)
+            asset_result["asset"]["link"] = self.make_asset_linkback_url(asset_result["asset"])
+            assets_results.append(asset_result)
+
+        return assets_results
+
+    def format_assets(self, assets):
+        """
+        Take assets list as given from Google SCC API, and
+        format it in a nice, readable way for presentation in
+        a note in SOAR.
+
+        This method obscures out the values of the asset that are
+        deemed less-useful for nice formatting. The rest of the data
+        will still be returned from the function, but will need to
+        be manually parsed and displayed in a post-processing script.
+
+        :param assets: dict representation of the asset query result
+        :type assets: dict
+        :param app_common: SCC app object
+        :type app_common: GoogleSCCCommon
+        :return: HTML formatted string to neatly represent the assets list result
+        :rtype: str
+        """
+
+        formatted_assets_list = ""
+
+        for asset in assets:
+            # just grab the asset information from the whole asset object
+            # i.e. ignore the state_change data
+            asset = asset.get("asset", {})
+
+
+            # list the link as a ref to name
+            link = asset.get("link")
+            name = asset.get("name")
+            formatted_assets_list += f"<a target='_blank' href={link}>{name}</a>\n"
+
+
+            # parse out the security center props and resource props
+            security_center_props = asset.get("security_center_properties", {})
+            resource_props = asset.get("resource_properties", {})
+            # build the strs associated and append them
+            formatted_assets_list += self._format_section(security_center_props, "Security Center Properties")
+            formatted_assets_list += self._format_section(resource_props, "Resource Properties")
+
+
+
+            # Handle any security marks as span objects for nice formatting
+            marks = asset.get("security_marks", {}).get("marks", {})
+            # NOTE: no need to compute length here (unlike the others) due to the nature
+            # of security marks; there won't be marks if the key's value doesn't exist
+            formatted_assets_list += f"\t<b>Security Marks ({len(marks)}){':' if len(marks) else ''}</b>"
+            for key in marks:
+                value = marks.get(key)
+                if value:
+                    formatted_assets_list += f" <span class='label' rel='tooltip' title='{key}'>{key} : {value}</span>"
+            formatted_assets_list += "\n"
+
+
+            # append create and update times
+            create_time = asset.get("create_time", "")
+            update_time = asset.get("update_time", "")
+            formatted_assets_list += f"\t<b>Create time</b>: {create_time}\n\t<b>Update time</b>: {update_time}\n"
+
+
+            # add news lines for next asset
+            formatted_assets_list += "\n"
+
+        return formatted_assets_list
+
+    @staticmethod
+    def _format_section(section, section_title):
+        """
+        Small helper method for format_assets to help format the
+        security center properties and resource properties
+        sections.
+
+        :param section: dict of the section's data
+        :type section: dict
+        :param section_title: title for the section (i.e. Security Center Properties)
+        :type section_title: str
+        :return: formatted string with the title in bold and the contents presented neatly
+        :rtype: str
+        """
+
+        length = 0
+        section_str = ""
+
+        for key in section:
+            # list out each property
+            value = section.get(key)
+            if value:
+                length += 1
+                section_str += f"\t\t<b>{key}</b>: {value}\n"
+
+        return f"\t<b>{section_title} ({length}):</b>\n" + section_str
+
+
+
+    def make_finding_linkback_url(self, finding):
         """
         Create a link back to the finding as that is not readily available from the API
 
@@ -252,6 +419,20 @@ class GoogleSCCCommon():
 
         query = urlencode(query={ "organizationId": self.org_id, "resourceId": name })
         return f"{self.console_base_url}{FINDINGS_BASE_URL}?{query}"
+
+    def make_asset_linkback_url(self, asset):
+        """
+        Create a link back to the asset as that is not readily available from the API
+
+        :param asset: The asset response object's asset dict
+        :type asset: dict
+        :return: the link to the asset
+        :rtype: str
+        """
+        name = asset.get("name")
+
+        query = urlencode(query={ "organizationId": self.org_id, "resourceId": name })
+        return f"{self.console_base_url}{ASSETS_BASE_URL}?{query}"
 
     def create_initial_note(self, finding):
         """

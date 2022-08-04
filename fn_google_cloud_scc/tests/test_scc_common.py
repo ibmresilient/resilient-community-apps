@@ -3,11 +3,11 @@ from datetime import datetime
 from unittest.mock import patch
 
 import pytest
-from fn_google_cloud_scc.util.scc_common import GoogleSCCCommon, linkify
+from fn_google_cloud_scc.lib.scc_common import GoogleSCCCommon, linkify
 from google.cloud import securitycenter
 
-from .data.mock_objs import (MockSecurityCenterClient, config_data, findings,
-                             to_dict)
+from .data.mock_objs import (MockSecurityCenterClient, assets, config_data,
+                             findings, to_dict)
 
 
 @pytest.fixture(scope="module")
@@ -41,12 +41,19 @@ def test_enrich_finding(fx_scc_common: GoogleSCCCommon):
 
     assert "finding_url" in finding
 
-def test_make_linkback_url(fx_scc_common: GoogleSCCCommon):
+def test_make_finding_linkback_url(fx_scc_common: GoogleSCCCommon):
     app_common = fx_scc_common
 
-    link = app_common.make_linkback_url(findings[0].get("finding"))
+    link = app_common.make_finding_linkback_url(findings[0].get("finding"))
     
     assert link == "https://console.cloud.google.com/security/command-center/findings?organizationId=123456789&resourceId=organizations%2F%3Corg_id%3E%2Fsources%2F%3Csource_id%3E%2Ffindings%2F%3Cfinding_id%3E"
+
+def test_make_asset_linkback_url(fx_scc_common: GoogleSCCCommon):
+    app_common = fx_scc_common
+
+    link = app_common.make_asset_linkback_url(assets[0].get("asset"))
+    
+    assert link == "https://console.cloud.google.com/security/command-center/assets?organizationId=123456789&resourceId=organizations%2F259357470209%2Fassets%2F11712294571846742175"
 
 def test_create_initial_note(fx_scc_common: GoogleSCCCommon):
     app_common = fx_scc_common

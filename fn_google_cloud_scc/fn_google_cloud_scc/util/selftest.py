@@ -21,7 +21,7 @@ Return examples:
 import logging
 
 from google.auth.exceptions import DefaultCredentialsError
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon
+from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, GoogleSCCCommon
 from resilient_lib import validate_fields
 
 log = logging.getLogger(__name__)
