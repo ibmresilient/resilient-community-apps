@@ -53,7 +53,7 @@ class WebexAPI:
         try:
             result = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data)
         except IntegrationError as err:
-                raise IntegrationError("Is the refresh_token up to date?")
+                raise IntegrationError("Unable to authenticate: Error: Is the refresh_token up to date?")
 
         if "access_token" in result.json():
             return result.json().get("access_token")

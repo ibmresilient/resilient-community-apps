@@ -28,14 +28,13 @@ class FunctionComponent(AppFunctionComponent):
 
         resclient = self.rest_client()
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_meeting_start_time", "webex_meeting_end_time", 
-                         "webex_meeting_name"], fn_inputs)
+        validate_fields(["webex_meeting_name"], fn_inputs)
         validate_fields([{"name" : "webex_site_url", 
                          "name" : "webex_bearerID", 
                          "name" : "webex_timezone"}], self.config_options)
 
-        self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time
-        self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time
+        self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
+        self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time if hasattr(fn_inputs, 'webex_meeting_end_time') else None
         self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
         self.requiredParameters["clientID"] = self.config_options.get("client_id")
         self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
@@ -54,6 +53,7 @@ class FunctionComponent(AppFunctionComponent):
         print("\n\n\n\n")
         print(fn_inputs.webex_add_all_members)
         print(fn_inputs.webex_meeting_attendee)
+        print("\n\n\n\n")
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
@@ -67,5 +67,5 @@ class FunctionComponent(AppFunctionComponent):
 
         except Exception as err:
             yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
-            yield FunctionResult(value=response, success=False, reason=err)
-            
+            reason = err.__str__()
+            yield FunctionResult(value=None, success=False, reason=reason)
