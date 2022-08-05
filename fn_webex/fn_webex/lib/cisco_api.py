@@ -125,7 +125,7 @@ class WebexAPI:
         response = self.rc.execute("get", "https://webexapis.com/v1/rooms/", headers=self.header, proxies=self.rc.get_proxies())
         res = json.loads(response.text)
         if len(res.get('items')) == 0:
-            data = "{\"title\" : \"Incident " + self.requiredParameters["incidentID"] + ": " + self.optionalParameters["title"] + "\"}"
+            data = "{\"title\" : \"Incident " + self.requiredParameters.get("incidentID") + ": " + self.optionalParameters.get("title") + "\"}"
             response = self.rc.execute("post", "https://webexapis.com/v1/rooms/", headers=self.header, data=data, proxies=self.rc.get_proxies())
             res = json.loads(response.text)
             self.requiredParameters["roomID"] = res.get("id")
@@ -134,15 +134,28 @@ class WebexAPI:
             self.requiredParameters["roomID"] = res.get("items")[0].get("id")
             self.LOG.info("Webex: Retrieving existing room: {}".format(self.requiredParameters["roomID"]))
 
+
     def addMembership(self):
         for user in self.emailIDs:
-            data = "{\"roomId\" : \"" + self.requiredParameters["roomID"] + "\", \"personEmail\" : \"" + user + "\"}" 
+            data = "{\"roomId\" : \"" + self.requiredParameters.get("roomID") + "\", \"personEmail\" : \"" + user + "\"}" 
             try:
                 _ = self.rc.execute("post", "https://webexapis.com/v1/memberships", headers=self.header, data=data, proxies=self.rc.get_proxies())
                 self.LOG.info("Webex: User {} added to incident room".format(user))
             except IntegrationError as err:
                 self.LOG.info("Webex: User {} is already a member of the room".format(user))
-                
+
+
+    def getRoomDetails(self):
+        print(self.header)
+        res = self.rc.execute("get", "https://webexapis.com/v1/rooms/{}/meetingInfo".format(self.requiredParameters.get("roomID")), headers=self.header,  proxies=self.rc.get_proxies())
+        if res.status_code == 200:
+            response = json.loads(res.text)
+            response["status"] = True
+            return response
+        else:
+            self.LOG.info("Webex: Unable to retrieve room details, Room ID : {}".format(self.requiredParameters.get("roomID")))
+
+
 
     def create_meeting(self):
         '''
