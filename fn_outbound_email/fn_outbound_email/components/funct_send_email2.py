@@ -40,20 +40,20 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
+        mail_data = fn_inputs._asdict()
         # validations
         validate_fields(["smtp_server"], self.app_configs)
         validate_fields(["mail_incident_id", "mail_to", "mail_from"], fn_inputs)
 
-        if hasattr(fn_inputs, "mail_inline_template") and hasattr(fn_inputs, "mail_template_name"):
+        if mail_data.get("mail_inline_template") and mail_data.get("mail_template_name"):
             raise ValueError("Specify either mail_inline_template or mail_template_name but not both")
 
-        if hasattr(fn_inputs, "mail_body") and \
-           (hasattr(fn_inputs, "mail_template_name") or hasattr(fn_inputs, "mail_inline_template")):
+        if mail_data.get("mail_body") and \
+           (mail_data.get("mail_template_name") or mail_data.get("mail_inline_template")):
             raise ValueError("Special either mail_body or one of mail_inline_template or mail_template_name")
 
         # configuration setup
         soar_helper = SoarHelper(self.rest_client())
-        mail_data = fn_inputs._asdict()
         mail_incident_id = fn_inputs.mail_incident_id
 
         mail_data['mail_to'] = split_string(mail_data.get('mail_to'))
@@ -79,26 +79,26 @@ class FunctionComponent(AppFunctionComponent):
                 template_data = get_template(self.app_configs._asdict(),
                                              mail_data.get('mail_template_name'))
 
-            rendered_mail_html = send_smtp_email.render_template(template_data,
+            rendered_mail_body = send_smtp_email.render_template(template_data,
                                                                  incident_data,
                                                                  mail_data,
                                                                  artifact_data,
                                                                  note_data)
-            LOG.debug("Rendered mail body: %s", rendered_mail_html)
+            LOG.debug("Rendered mail body: %s", rendered_mail_body)
 
-            error_msg = send_smtp_email.send(body_html=rendered_mail_html)
+            error_msg = send_smtp_email.send(body_html=rendered_mail_body)
         elif mail_data.get('mail_body'):
             LOG.info("Non-rendered mail_body")
-            error_msg = send_smtp_email.send(body_text=mail_data.get('mail_body'))
+            rendered_mail_body = mail_data.get('mail_body')
+            error_msg = send_smtp_email.send(rendered_mail_body)
         else:
-            # TODO
-            pass
+            raise ValueError("No email body or template specified")
 
         if error_msg:
             yield self.status_message("An error occurred while sending the email: {}".format(error_msg))
 
         results = {
-            "mail_body": rendered_mail_html
+            "mail_body": rendered_mail_body
         }
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

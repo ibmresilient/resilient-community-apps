@@ -11,31 +11,43 @@
 `send_email2`
 
 ### Output Name
-``
+`outbound_email_results`
 
 ### Message Destination
 `email_outbound`
 
 ### Pre-Processing Script
 ```python
+import hashlib
+import time
+
+MESSAGE_ID_DOMAIN = "qradarsoar.ibm.com"
+
 inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_from = rule.properties.mail_from
-inputs.mail_subject = u"[{0}] {1}".format(incident.id, incident.name)
+inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name) if not rule.properties.get('mail_subject') else rule.properties.mail_subject
 #inputs.mail_template_name="template_file"
 
-if rule.properties.mail_message_id:
+if rule.properties.get('mail_message_id'):
   # generate a message-id
+  seed_value = str(int(time.time()*1000))
+  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()
+  msg_id = "{}-{}-{}-{}-{}".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])
+  inputs.mail_message_id = "{}@{}".format(msg_id, MESSAGE_ID_DOMAIN)
   
-if rule.properties.mail_in_reply_to and incident.properties.email_message_id
+if rule.properties.get('mail_in_reply_to') and incident.properties.email_message_id:
   inputs.mail_in_reply_to = incident.properties.email_message_id
   
-if rule.properties.mail_importance:
-  inputs.mail_importance = rule.properties.mail_importance
-
-inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
+if rule.properties.get('mail_importance'):
+  inputs.mail_importance = rule.properties.mail_importance if rule.properties.mail_importance else None
+  
+if rule.properties.get('mail_body'):
+  inputs.mail_body = rule.properties.mail_body
+else:
+  inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 {% macro get_row(label,field_name) -%}
 	{% set value = template_helper.get_incident_value(incident,field_name) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
@@ -71,13 +83,7 @@ inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",Non
 
 ### Post-Processing Script
 ```python
-if results.success:
-  noteText = u"""Email Sent if mail server is valid/authenticated\n 
-  <br>From: {0}<br> To: {1}<br> CC: {2}<br> BCC: {3}<br> Subject: {4} <br> 
-  Body: {5} <br>""".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text)
-else:
-  noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
-incident.addNote(helper.createRichText(noteText))
+None
 ```
 
 ---

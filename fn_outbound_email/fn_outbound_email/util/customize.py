@@ -27,9 +27,9 @@ def codegen_reload_data():
         "incident_fields": [u"email_message_id"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"email_conversations"],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [u"Save Outbound Email Results"],
         "playbooks": []
     }
 
@@ -59,6 +59,10 @@ def customization_data(client=None):
         - Example: Send Task Email HTML
     - Incident Fields:
         - email_message_id
+    - Data Tables:
+        - email_conversations
+    - Scripts:
+        - Save Outbound Email Results
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
