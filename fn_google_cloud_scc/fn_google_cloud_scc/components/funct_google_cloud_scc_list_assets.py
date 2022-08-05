@@ -50,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
             success = True
             reason = None
         except IntegrationError as e:
-            # list_assets only throws and IntegrationError when filter or field mask is incorrect
+            # list_assets only throws an IntegrationError when filter or field mask is incorrect
             results = {}
             success = False
             reason = e.value

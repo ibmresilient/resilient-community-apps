@@ -7,12 +7,12 @@ import re
 from datetime import datetime, timezone
 from urllib.parse import urlencode
 
+from google.api_core.exceptions import InvalidArgument
 from google.cloud.securitycenter import (Finding, ListAssetsResponse,
                                          ListFindingsResponse,
                                          SecurityCenterClient, SecurityMarks)
 from google.protobuf.field_mask_pb2 import FieldMask
-from google.api_core.exceptions import InvalidArgument
-from resilient_lib import readable_datetime, validate_fields, IntegrationError
+from resilient_lib import IntegrationError, readable_datetime, validate_fields
 
 # alias the ListFindingsResponse.ListFindingsResult to FindingResult
 # and same for assets
@@ -338,12 +338,10 @@ class GoogleSCCCommon():
             # i.e. ignore the state_change data
             asset = asset.get("asset", {})
 
-
             # list the link as a ref to name
             link = asset.get("link")
             name = asset.get("name")
             formatted_assets_list += f"<a target='_blank' href={link}>{name}</a>\n"
-
 
             # parse out the security center props and resource props
             security_center_props = asset.get("security_center_properties", {})
@@ -351,8 +349,6 @@ class GoogleSCCCommon():
             # build the strs associated and append them
             formatted_assets_list += self._format_section(security_center_props, "Security Center Properties")
             formatted_assets_list += self._format_section(resource_props, "Resource Properties")
-
-
 
             # Handle any security marks as span objects for nice formatting
             marks = asset.get("security_marks", {}).get("marks", {})
@@ -365,12 +361,10 @@ class GoogleSCCCommon():
                     formatted_assets_list += f" <span class='label' rel='tooltip' title='{key}'>{key} : {value}</span>"
             formatted_assets_list += "\n"
 
-
             # append create and update times
             create_time = asset.get("create_time", "")
             update_time = asset.get("update_time", "")
             formatted_assets_list += f"\t<b>Create time</b>: {create_time}\n\t<b>Update time</b>: {update_time}\n"
-
 
             # add news lines for next asset
             formatted_assets_list += "\n"

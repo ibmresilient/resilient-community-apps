@@ -31,7 +31,7 @@ add_soar_id_as_security_mark=True
 #soar_close_case_template=
 
 # Number of seconds between poller cycles. A value of 0 disables the poller
-polling_interval=60
+polling_interval=10
 # Number of minutes to lookback for queries the first time the poller runs.
 polling_lookback=120
 """
