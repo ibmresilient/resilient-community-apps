@@ -36,6 +36,8 @@ inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties
 if rule.properties.webex_meeting_attendee:
     inputs.webex_meeting_attendee = rule.properties.webex_meeting_attendee
     
+if rule.properties.webex_add_all_members is not None:
+    inputs.webex_add_all_members = rule.properties.webex_add_all_members
 ```
 
 ### Post-Processing Script

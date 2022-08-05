@@ -52,9 +52,7 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["resclient"] = self.rest_client()
         self.requiredParameters["siteURL"]  = SITE_URL
         self.requiredParameters["tokenURL"] = TOKEN_URL
-
-        
-        print("\n\n\n\n\n\n",fn_inputs.webex_add_all_members)
+        self.requiredParameters["logger"] = self.LOG
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("fn_msg: %s", fn_msg)
@@ -63,6 +61,7 @@ class FunctionComponent(AppFunctionComponent):
         webex.generate_attendee_list()
         webex.Authenticate()
         webex.createRetrieveRoom()
+        webex.addMembership()
         # try:
         #     response = webex.create_meeting()
         #     yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))

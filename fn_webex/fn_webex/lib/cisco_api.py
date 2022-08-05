@@ -5,6 +5,7 @@
 
 import time
 import datetime
+import json
 
 from resilient_lib import IntegrationError
 from resilient_circuits import FunctionError
@@ -19,6 +20,7 @@ class WebexAPI:
         self.optionalParameters = optionalParameters
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
+        self.LOG = self.requiredParameters["logger"]
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
         self.check_time(self.timezone, self.requiredParameters["start"], self.requiredParameters["end"])
 
@@ -103,22 +105,44 @@ class WebexAPI:
         orgGroupList    = self.resclient.get("/groups")
 
         if self.requiredParameters["addAllMembers"]:
+            if len(incidentMembers.get("members")) == 0:
+                self.LOG.info("Webex: There are no members assigned to this incident")
             for incident_member in incidentMembers.get("members"):
                 if isDirectMember(incident_member):
                     emailIDs.append(isDirectMember(incident_member))
                 elif isGroupMember(incident_member):
                     emailIDs.extend(isGroupMember(incident_member))
-        elif self.requiredParameters["webex_meeting_attendee"].lower().strip() == "none":
+        elif self.requiredParameters["additionalAttendee"].lower().strip() == "none":
             raise ValueError("Error: Failed to add participants to the meeting. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
-        else:
-            emailIDs = self.requiredParameters["additionalAttendee"].strip().replace(" ", "").split(",")
+        
+        if self.requiredParameters["additionalAttendee"].lower().strip() != "none":
+            emailIDs += self.requiredParameters["additionalAttendee"].lower().strip().replace(" ", "").split(",")
         self.emailIDs = emailIDs
-        print("\n\n\n\n\n\n",self.emailIDs, self.requiredParameters["addAllMembers"])
+        self.LOG.info("Webex: Members to be added to the room {}".format(self.emailIDs))
+
 
     def createRetrieveRoom(self):
         response = self.rc.execute("get", "https://webexapis.com/v1/rooms/", headers=self.header, proxies=self.rc.get_proxies())
-        print("\n\n\n\n\n\n", response)
+        res = json.loads(response.text)
+        if len(res.get('items')) == 0:
+            data = "{\"title\" : \"Incident " + self.requiredParameters["incidentID"] + ": " + self.optionalParameters["title"] + "\"}"
+            response = self.rc.execute("post", "https://webexapis.com/v1/rooms/", headers=self.header, data=data, proxies=self.rc.get_proxies())
+            res = json.loads(response.text)
+            self.requiredParameters["roomID"] = res.get("id")
+            self.LOG.info("Webex: Creating new room: {}".format(self.requiredParameters["roomID"]))
+        else:
+            self.requiredParameters["roomID"] = res.get("items")[0].get("id")
+            self.LOG.info("Webex: Retrieving existing room: {}".format(self.requiredParameters["roomID"]))
 
+    def addMembership(self):
+        for user in self.emailIDs:
+            data = "{\"roomId\" : \"" + self.requiredParameters["roomID"] + "\", \"personEmail\" : \"" + user + "\"}" 
+            try:
+                _ = self.rc.execute("post", "https://webexapis.com/v1/memberships", headers=self.header, data=data, proxies=self.rc.get_proxies())
+                self.LOG.info("Webex: User {} added to incident room".format(user))
+            except IntegrationError as err:
+                self.LOG.info("Webex: User {} is already a member of the room".format(user))
+                
 
     def create_meeting(self):
         '''
