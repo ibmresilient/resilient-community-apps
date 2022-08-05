@@ -12,6 +12,8 @@ def config_section_data():
     config_data = u"""[fn_slack]
 # Slack app OAuth Access Token
 api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
+# Uncomment to have post attachments posted by a bot instead of a user
+# api_bot_token=xoxb-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
 
 # Username represents the default submission author.
 # Used together with 'as_user=False'.

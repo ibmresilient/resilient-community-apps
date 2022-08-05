@@ -65,7 +65,11 @@ class FunctionComponent(ResilientComponent):
 
 
             # configuration specific slack parameters
-            api_token = self.options['api_token']
+            if self.options.get('api_bot_token'):
+                api_token = self.options.get('api_bot_token')
+            else:
+                api_token = self.options.get('api_token')
+
 
             # get proxies if they exist
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
