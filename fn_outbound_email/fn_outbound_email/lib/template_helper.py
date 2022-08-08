@@ -124,6 +124,34 @@ class TemplateHelper(object):
 
         return self.get_value_as_string(field_def, field_value)
 
+    def get_artifacts(self, artifacts):
+        # return list of artifacts
+        return artifacts.get("data")
+
+    # helper fuction to get child notes recursively
+    # takes top level comment and returns a list of all the children and nested children
+    def notes_helper(self, p, ret):
+            # base case: comment has no children
+            if not p.get("children"):
+                return ret
+            else:
+                # for each note, get all the children
+                for c in p.get("children"):        
+                    ret.append(c)
+                    self.notes_helper(c, ret)
+
+    def get_notes(self, notes, get_children):
+        # returns a list of note objets
+        all_notes = []
+        # get the top level comments
+        for root_parent in notes.get("root_comments"):
+            if "Email Sent if mail server is valid" not in root_parent.get("text"):
+                all_notes.append(root_parent)
+                # to get nested child notes, execute recursive function
+                if get_children:
+                    self.notes_helper(root_parent, all_notes)
+        return all_notes
+    
     # gets the values for the specified field across all rows and returns as comma-separated list
     def get_datatable_value_array(self, inc_id, datatable_name, field_name):
         LOG.info(

@@ -51,10 +51,10 @@ The Outbound Email App for IBM SOAR provides a way of sending email from the SOA
   List the Key Features of the Integration
 -->
 The Outbound Email App provides the following functionality:
-* Send email to lists of recipients (to, cc, bcc)
-* Format email using a predefined HTML template or specify your own template
+* Send email to lists of recipients (to, cc, bcc).
+* Format email using a predefined html template or specify your own template.
 * Send attachments with the email at the incident level or task level.
-* Example rules included at the incident and task levels
+* Example rules included at the incident and task levels.
 ---
 
 ## Requirements
@@ -370,6 +370,67 @@ incident.addNote(helper.createRichText(noteText))
 | Example: Send Incident Email HTML | incident | `example_send_incident_email_html` |
 | Example: Send Incident Email Text | incident | `example_send_incident_email_text` |
 | Example: Send Task Email HTML | task | `example_send_task_email_html` |
+
+---
+## Further customization
+In the example_send_email.jinja template, there is example logic to include artifact and note data. If using this template, uncomment the following sections to:
+
+<details><summary>Include artifact value and description</summary>
+<p>
+
+```
+{# {% macro get_artifact(art) -%}
+	{% set values = template_helper.get_artifact_values(art) %}
+	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
+    {% for a in values %}
+        <tr>
+            <td width="100" style="{{style}}">{{ a.get("value") | safe }}</td>
+            <td width="200" style="{{style}}">{{ a.get("description") | safe }}</td>
+        </tr>
+    {% endfor %}
+{%- endmacro %} #}
+...
+{# <tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT ARTIFACTS</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+    {{ get_artifact(artifact) }}
+</tr> #}
+```
+
+</p>
+</details>
+
+
+<details><summary>Include note text (by default also includes all child note data; set `get_children = False` if you would like to exclude child note data). </summary>
+<p>
+
+```
+{# {% macro get_note(note) -%}
+  {% set get_children = True %}
+	{% set values = template_helper.get_note_values(note, get_children) %}
+	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
+    {% for n in values %}
+        <tr>
+            <td width="200" style="{{style}}">{{ n.get("text") | safe }}</td>
+        </tr>
+    {% endfor %}
+{%- endmacro %} #}
+...
+
+{# <tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+    {{ get_note(note) }}
+</tr> #}
+
+```
+
+</p>
+</details>
 
 ---
 

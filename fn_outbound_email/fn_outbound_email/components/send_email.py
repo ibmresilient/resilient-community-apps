@@ -130,10 +130,12 @@ class FunctionComponent(ResilientComponent):
             send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 
             incident_data = send_smtp_email.get_incident_data(mail_incident_id)
+            artifact_data = send_smtp_email.get_artifact_data(mail_incident_id)
+            note_data = send_smtp_email.get_note_data(mail_incident_id)
 
             if mail_body_html:
                 LOG.info("Rendering template")
-                rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data)
+                rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data, artifact_data, note_data)
                 LOG.debug(rendered_mail_html)
 
                 if not rendered_mail_html:
