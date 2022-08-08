@@ -42,7 +42,7 @@ inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
-inputs.mail_subject = u"[{0}] {1} Task:{2}".format(incident.id, incident.name, task.name)
+inputs.mail_subject = u"[{0}] {1} Task: {2}".format(incident.id, incident.name, task.name)
 
 creation_date = datetime.fromtimestamp( incident.create_date/1000)
 type_ids = u", ".join(incident.incident_type_ids)
@@ -61,6 +61,8 @@ else:
     Created: {2}
 <br>
     Incident Type: {3}
+<br>
+    Incident Link: <a target='_blank' href='{{{{ template_helper.generate_incident_url({5}) }}}}'>{5}</a>
 <br>
     Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({5},{6}) }}}}'>{4}</a>
 <br>
