@@ -44,13 +44,13 @@ if rule.properties.get('mail_in_reply_to') and incident.properties.email_message
 if rule.properties.get('mail_importance'):
   inputs.mail_importance = rule.properties.mail_importance if rule.properties.mail_importance else None
   
-if rule.properties.get('mail_body'):
-  inputs.mail_body = rule.properties.mail_body
+if rule.properties.get('mail_body') and rule.properties.get('mail_body').content:
+  inputs.mail_body = rule.properties.mail_body.content
 else:
   inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
+{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
 {% macro get_row(label,field_name) -%}
 	{% set value = template_helper.get_incident_value(incident,field_name) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
     {% if value and value not in NOT_FOUND and not value.startswith('-') %}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
@@ -65,6 +65,7 @@ else:
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
+    {{ get_row('Incident:','severity_code') }}
     {{ get_row('Severity:','severity_code') }}
     {{ get_row('Status:','plan_status') }}<br>
     {{ get_row('Created:','create_date') }}<br>
@@ -74,7 +75,11 @@ else:
         <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
+</tr>
     {{ get_row('Description:','description') }}
+<tr>
+    <td width="100" style="{{style}}; font-weight:bold">Incident link</td>
+    <td style="{{style}}"><a target="_blank" href="{{ template_helper.generate_incident_url(incident.id) }}">{{ incident.id }}</a></td>
 </tr>
 </table>
 <br>
