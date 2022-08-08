@@ -62,9 +62,7 @@ else:
 <br>
     Incident Type: {3}
 <br>
-    Task: {4}
-<br>
-    Task Link: <a target='_blank' href='{{{{ template_helper.generate_task_url({5},{6}) }}}}'>Task Link</a>
+    Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({5},{6}) }}}}'>{4}</a>
 <br>
     Instructions: 
 <br>

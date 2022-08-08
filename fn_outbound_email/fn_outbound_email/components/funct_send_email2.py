@@ -58,7 +58,7 @@ class FunctionComponent(AppFunctionComponent):
 
         mail_data['mail_to'] = split_string(mail_data.get('mail_to'))
         mail_data['mail_cc'] = split_string(mail_data.get('mail_cc'))
-        mail_data['mail_bcc'] = split_string(mail_data.get('mail_cc'))
+        mail_data['mail_bcc'] = split_string(mail_data.get('mail_bcc'))
         mail_data['mail_attachments'] = soar_helper.process_attachments(inc_id=mail_data.get('mail_incident_id'),
                                                                         attachments=mail_data.get('mail_attachments'))
 
