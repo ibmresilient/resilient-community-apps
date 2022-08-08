@@ -4,6 +4,7 @@ include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_google_cloud_scc/util *
 recursive-include fn_google_cloud_scc/poller *
+recursive-include fn_google_cloud_scc/lib *
 include fn_google_cloud_scc/LICENSE
 include doc/*.md
 include doc/screenshots/*
