@@ -46,10 +46,10 @@ class OAuth2:
 
         self.rc = RequestsCommon(opts={}, function_opts=fn_opts)
 
-    def refresh_token(self):
+    def refresh_access_token(self):
         """"Refresh OAuth2 token.
 
-        Run the refresh_token flow.
+        Run the refresh_token flow to get a new access token.
 
         :return "access_token": OAuth2 access token attribute [str]
         """

@@ -112,7 +112,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("mail_cc: %s", mail_cc)
             LOG.info("mail_bcc: %s", mail_bcc)
             LOG.info("mail_subject: %s", mail_subject)
-            LOG.info("mail_body_html: %s", mail_body_html)
+            LOG.debug("mail_body_html: %s", mail_body_html)
             LOG.info("mail_body_text: %s", mail_body_text)
             LOG.info("mail_attachments: %s", mail_attachments)
 
