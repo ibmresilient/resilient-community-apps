@@ -32,7 +32,6 @@
 | v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
 | v1.0.9 | 5/2020 | App Host compatibility |
 | v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
-* For customers upgrading from a pervious release, the app.config file must be manually edited.
 
 ---
 
@@ -41,18 +40,19 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM QRadar SOAR app for 'fn_outbound_email'**
+**IBM QRadar SOAR app for Outbound Email**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-IBM QRadar SOAR app for 'fn_outbound_email'
+The Outbound Email App for IBM SOAR provides a way of sending email from the SOAR platform. The email message contains information about the incident that the email action was performed on.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
+The Outbound Email App provides the following functionality:
 * Send email to lists of recipients (to, cc, bcc)
-* Format email using a predefined html template or specify your own template
+* Format email using a predefined HTML template or specify your own template
 * Send attachments with the email at the incident level or task level.
 * Example rules included at the incident and task levels
 ---
@@ -102,7 +102,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does not** support a proxy server.
 
 ### Python Environment
-Both Python 2.7, 3.6 and 3.9 are supported.
+Python 2.7, 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * Jinja2>=2.9.6
 * resilient_circuits>=39.0.0
@@ -117,7 +117,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 * A password is required for the SMTP server.
 #####  OAuth 2.0 authorization
 * You need to setup a web application for an OAuth 2.0 SMTP identity provider service from which you get the required configuration settings to use OAuth 2.0 authorization.
-* The Required settings are:
+* The required settings are:
 ```
 client_id
 client_secret
@@ -125,7 +125,7 @@ scope
 token_url
 auth_url
 ```
-These values are used to generate a refresh_token which is used in the SOAR app to generate an access token.
+These values are used to generate a refresh_token which is used by the SOAR app to generate an access token.
 
 ##### Configuration
 <!--
@@ -159,7 +159,7 @@ https://api.authorization-server.com/token
   &client_id=123
   &client_secret=456
 ```
-* If the authorization code is valid, the authorization server will generate an access token and refresh tokenand return it to the client.
+* If the authorization code is valid, the authorization generates an access and refresh token and returns them to the client.
 
 For example:
 
@@ -177,7 +177,7 @@ For example:
 
 ##### Using oauth-utils package
 
-Instead of using the manual steps outlined above, the user can simplify the process by using the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+Instead of using the manual steps outlined above, the user can simplify the process by using the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token. The oauth-utils package includes setup examples for some popular email providers.
 
 #### Permissions
 <!--
@@ -187,11 +187,11 @@ List any user permissions that are needed to use this endpoint. For example, lis
 
 **_NOTE:_** The SMTP user will use either OAuth 2.0 authorization settings or use a password for basic authentication.
 
-For Google with OAuth2 see: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/answer/6158849?hl=en)
+For Google with OAuth2 see: [Setting up OAuth 2.0 with Google Cloud](https://support.google.com/cloud/answer/6158849?hl=en).
 
-For Microsoft with OAuth2 see: [Using OAuth 2.0 with Microsoft for Office 365 users](https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth)
+For Microsoft with OAuth2 see: [Using OAuth 2.0 with Microsoft for Office 365 users](https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth).
 
-For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
+For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps) or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 
 ---
 
@@ -206,25 +206,27 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for smpt server* |
-| **smtp_user** | Yes | `a@mail.smtpservice.com` | *smtp authentication user.* |
-| **smtp_password** | Yes | `Abcd1234!` | *smtp basic authentication user password.* |
-| **client_id** | No | `1234567a-abc8-90d1-2efa3-123456789abcd` | *smtp OAuth 2.0 Authorization client ID* |
-| **client_secret** | No | `ABCDEF-123456789abcd123456789a_aWX4` | *smtp OAuth 2.0 Authorization client secret.* |
-| **scope** | No | `https://mail.smtpservice.com/` | *smtp OAuth 2.0 Authorization scope.* |
-| **token_url** | Yes | `https://smtpservice.com/oauth2/token` | *smtp OAuth 2.0 Authorization token URL.* |
-| **auth_url** | No | `https://smtpservice.com/oauth2/auth` | *smtp OAuth 2.0 Authorization authorization URL .* |
-| **refresh_token** | No | `` | *smtp OAuth 2.0 Authorization refresh token.* |
-| **from_email_address** | No | `a@example.com` | *Introduced in 1.3.0. Email address for use as email sender* |
-| **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS* |
-| **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection* |
-| **smtp_ssl_mode** | Yes | `None` | *set to 'starttls' when using smtp_user and smtp_password* |
-| **smtp_ssl_cafile** | Yes | `` | *false or /path/to/smtp_certifcate.pem or crt file* |
-| **template_file** | Yes | `data/example_send_email.jinja` | */path/to/template.jinja for rendering the email body* |
+| **smtp_server** | Yes | `xxx.xxx.xxx.xxx` | *IP Address or fully qualified domain name for SMTP server.* |
+| **smtp_user** | Yes | `a@mail.smtpservice.com` | *SMTP authentication user.* |
+| **smtp_password** | No | `Abcd1234!` | *SMTP basic authentication user password.* |
+| **client_id** | No | `1234567a-abc8-90d1-2efa3-123456789abcd` | *SMTP OAuth 2.0 Authorization client ID* |
+| **client_secret** | No | `ABCDEF-123456789abcd123456789a_aWX4` | *SMTP OAuth 2.0 Authorization client secret.* |
+| **scope** | No | `https://mail.smtpservice.com/` | *SMTP OAuth 2.0 Authorization scope.* |
+| **token_url** | No | `https://smtpservice.com/oauth2/token` | *SMTP OAuth 2.0 Authorization token URL.* |
+| **auth_url** | No | `https://smtpservice.com/oauth2/auth` | *SMTP OAuth 2.0 Authorization authorization URL.* |
+| **refresh_token** | No | `` | *SMTP OAuth 2.0 Authorization refresh token.* |
+| **from_email_address** | No | `a@example.com` | *Introduced in 1.3.0. Email address for use as email sender.* |
+| **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS.* |
+| **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection.* |
+| **smtp_ssl_mode** | Yes | `None` | *Set to 'starttls' when using smtp_user and smtp_password.* |
+| **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
+| **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 
 **_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
 
 **_NOTE:_** The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+
+**_NOTE:_** For customers upgrading from a pervious release, the app.config file must be manually edited.
 
 For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 
@@ -240,15 +242,15 @@ Send a plain text or HTML-formatted email with SOAR Incident details in the emai
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mail_attachments` | `text` | No | `-` | comma separated list of attachments or '*' for all |
-| `mail_bcc` | `text` | No | `-` | comma separated list of bcc recipients |
-| `mail_body_html` | `text` | No | `-` | jinja template file to use to produce html email content from incident data. This content overrides the use of the `template_file` setting in our app.config file |
-| `mail_body_text` | `text` | No | `-` | Already rendered email body content |
-| `mail_cc` | `text` | No | `-` | comma separated list of cc recipients |
-| `mail_from` | `text` | No | `-` | email sender |
-| `mail_incident_id` | `number` | No | `-` | incident_id |
-| `mail_subject` | `text` | No | `-` | email subject |
-| `mail_to` | `text` | No | `-` | comma separated list of email recipients |
+| `mail_attachments` | `text` | No | `-` | Comma separated list of attachments or '*' for all. |
+| `mail_bcc` | `text` | No | `-` | Comma separated list of bcc recipients. |
+| `mail_body_html` | `text` | No | `-` | JINJA template file to use to produce html email content from incident data. This content overrides the use of the `template_file` setting in our app.config file. |
+| `mail_body_text` | `text` | No | `-` | Already rendered email body content. |
+| `mail_cc` | `text` | No | `-` | Comma separated list of cc recipients. |
+| `mail_from` | `text` | No | `-` | Email sender. |
+| `mail_incident_id` | `number` | No | `-` | The SOAR incident_id. |
+| `mail_subject` | `text` | No | `-` | Email subject. |
+| `mail_to` | `text` | No | `-` | Comma separated list of email recipients. |
 
 </p>
 </details>
@@ -382,22 +384,22 @@ fn-outbound-email:
     selftest: failure, Elapsed time: 0.416000 seconds
 ```
 
-* Email servers are often restrictive on which applications/users that are authorized to send emails, for instance if you have 2FA authentication enabled on a gmail account, you must add a specific application password or allow less secure apps (Not recommended)
+* Email servers are often restrictive on which applications or users are authorized to send emails. For example, if you have 2FA authentication enabled on a gmail account, you must add a specific application password or allow less secure apps. (Not recommended.)
 
-    https://hotter.io/docs/email-accounts/app-password-gmail/
+   https://hotter.io/docs/email-accounts/app-password-gmail/
 
    https://hotter.io/docs/email-accounts/secure-app-gmail/
 
-* Occasionally, mailservers may indicate that emails have been sent successfully (including a successful note on the the associated incident) and yet they be blocked by the receiving mailserver due to insecure spam filters. This is a limitation of SMTP authentication mechanism.
+* Occasionally, mail servers might indicate that emails have been sent successfully (including a successful note on the the associated incident) but they are blocked by the receiving mail server due to insecure spam filters. This is a limitation of SMTP authentication mechanism.
 
-* The port of TLS handshakes may also differ between mailservers (587/2525), a short history of port allocation can be found at:
+* The port for TLS handshakes might also differ between mail servers (587/2525). A short history of port allocation can be found at:
 https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/
 
-* More info on smtp protocol:
+* More info on SMTP protocol:
 
   https://pepipost.com/blog/what-is-smtp
 
-* Some mailservers will not work with this level of authentication/protocal.
+* Some mailservers do not work with this level of authentication/protocal.
 
 ---
 
