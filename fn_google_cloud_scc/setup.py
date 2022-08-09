@@ -32,7 +32,7 @@ setup(
     long_description="""Bidirectional synchronization of Google Cloud Security Command Center Findings. Additional functions are provided for manual synchronization, manually updating Findings, and listing cloud assets monitored in Google SCC.""",
     install_requires=[
         "resilient-circuits          >= 45.0",
-        "google-cloud-securitycenter ~= 1.11"
+        "google-cloud-securitycenter ~= 1.12"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
