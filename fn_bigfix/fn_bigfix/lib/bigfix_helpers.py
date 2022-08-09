@@ -18,11 +18,11 @@ def get_hits(artifact_data):
 
     hits = []
     for d in artifact_data:
-        if (d["failure"] == 0 or d["failure"] == "False") and d["result"] == "True":
+        if (d.get("failure") == 0 or d.get("failure") == "False"):
             hits.append(d)
     # if no hits result will be an empty list.
     if hits:
-        LOG.info("Detected hits on %s endpoints.", len(hits))
+        LOG.info("Detected hits on {} endpoints.".format(len(hits)))
     else:
         LOG.info("Detected no hits.")
 

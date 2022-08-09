@@ -10,7 +10,7 @@
 from datetime import datetime
 from resilient_lib import validate_fields
 from fn_bigfix.lib.bigfix_client import BigFixClient
-from fn_bigfix.util.helpers import validate_opts, PACKAGE_NAME
+from fn_bigfix.util.helpers import PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 FN_NAME = "fn_bigfix_remediation"

@@ -13,7 +13,7 @@ from resilient_lib import validate_fields
 from fn_bigfix.lib.bigfix_helpers import get_hits
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_bigfix.util.helpers import validate_opts, create_attachment, PACKAGE_NAME
+from fn_bigfix.util.helpers import create_attachment, PACKAGE_NAME
 
 FN_NAME = "fn_bigfix_artifact"
 
@@ -57,12 +57,11 @@ class FunctionComponent(AppFunctionComponent):
         """Function: SOAR Function : Bigfix artifact - Get hits in BigFix for artifact."""
 
         # Validate parameters
-        validate_fields(["bigfix_artifact_id", "bigfix_artifact_value", "bigfix_artifact_type", "bigfix_artifact_properties_name",
-                        "bigfix_artifact_properties_value", "bigfix_incident_id", "bigfix_incident_plan_status"], fn_inputs)
+        validate_fields(["bigfix_artifact_id", "bigfix_artifact_value", "bigfix_artifact_type", "bigfix_incident_id", "bigfix_incident_plan_status"], fn_inputs)
 
         params = {"artifact_id": fn_inputs.bigfix_artifact_id, "artifact_value": fn_inputs.bigfix_artifact_value,
-                  "artifact_properties_name": fn_inputs.bigfix_artifact_properties_name,
-                  "artifact_properties_value": fn_inputs.bigfix_artifact_properties_value,
+                  "artifact_properties_name": fn_inputs.bigfix_artifact_properties_name if hasattr(fn_inputs, 'bigfix_artifact_properties_name') else None,
+                  "artifact_properties_value": fn_inputs.bigfix_artifact_properties_value if hasattr(fn_inputs, 'bigfix_artifact_properties_value') else None,
                   "artifact_type": fn_inputs.bigfix_artifact_type, "incident_id": fn_inputs.bigfix_incident_id,
                   "incident_plan_status": fn_inputs.bigfix_incident_plan_status}
 
@@ -122,7 +121,8 @@ class FunctionComponent(AppFunctionComponent):
             else:
                 results = {"endpoint_hits": loads(dumps(hits)),
                     "hits_count": hits_len,
-                    "query_execution_date": datetime.now().strftime('%m-%d-%Y %H:%M:%S')}
+                    "query_execution_date": datetime.now().strftime('%m-%d-%Y %H:%M:%S'),
+                    "hits_over_limit": False}
 
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 

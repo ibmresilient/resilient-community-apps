@@ -11,7 +11,7 @@
 `fn_bigfix_assets`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_bigfix`
@@ -25,17 +25,19 @@ inputs.bigfix_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-status = results.status
-status_note = results.status_note
-att_name= results.att_name
+result = results.get("content")
+status = result.get("status")
+status_note = result.get("status_note")
+att_name = result.get("att_name")
 
-if (status and status == "OK"):
-  noteText = u"BigFix Integration: Ran query for BigFix Asset id <b>'{0}'</b> and name <b>'{1}'</b>. " \
-             "Added as an attachment. Attachment name : <b>{2}</b> "\
+if status and status == "OK":
+  noteText = u"BigFix Integration: Ran query for BigFix Asset id <b>'{}'</b> and name <b>'{}'</b>. " \
+             "Added as an attachment. Attachment name: <b>{}</b> "\
               .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name), att_name)
 else:
-  noteText = u"BigFix Integration: Query unsuccessful for BigFix Asset id <b>'{0}'</b> and name <b>'{1}'</b>."\
+  noteText = u"BigFix Integration: Query unsuccessful for BigFix Asset id <b>'{}'</b> and name <b>'{}'</b>."\
               .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name))
+
 incident.addNote(helper.createRichText(noteText))
 ```
 

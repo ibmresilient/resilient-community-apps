@@ -26,20 +26,19 @@ inputs.bigfix_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-status = results.status
-status_message = results.status_message
-remediation_date = results.remediation_date
-action_id = results.action_id
-if (status and status == "OK"):
-  row.res_remediation_status = status_message
-  row.res_remediation_date = remediation_date
+result = results.get("content")
+status = result.get("status")
+action_id = result.get("action_id")
+if status and status == "OK":
+  row.res_remediation_status = result.get("status_message")
+  row.res_remediation_date = result.get("remediation_date")
   row.res_bigfix_action_id = action_id
-  noteText = u"Big Fix Integration: Action created successfully to remediate artifact value <b>'{0}'</b> " \
-              "and type <b>'{1}'</b> on endpoint <b>'{2}'</b>. BigFix Action ID <b>'{3}'</b>."\
+  noteText = u"Big Fix Integration: Action created successfully to remediate artifact value <b>'{}'</b> " \
+              "and type <b>'{}'</b> on endpoint <b>'{}'</b>. BigFix Action ID <b>'{}'</b>."\
               .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name), action_id)
 else:
-  noteText = u"Big Fix Integration: Action creation unsuccessful to remediate artifact value <b>'{0}'</b> " \
-             "and type <b>'{1}'</b> on endpoint <b>'{2}'</b>."\
+  noteText = u"Big Fix Integration: Action creation unsuccessful to remediate artifact value <b>'{}'</b> " \
+             "and type <b>'{}'</b> on endpoint <b>'{}'</b>."\
             .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name))
 incident.addNote(helper.createRichText(noteText))
 ```
@@ -64,15 +63,18 @@ inputs.bigfix_action_id = row.res_bigfix_action_id
 
 ### Post-Processing Script
 ```python
-status = results.status
-status_message = results.status_message
+result = results.get('content')
+status = result.get("status")
+status_message = result.get("status_message")
 action_id = row.res_bigfix_action_id
+
 if (status and (status == "OK" or status == "Failed")):
   row.res_remediation_status = status_message
-  noteText = "Big Fix Integration: Big Fix Action ID <b>'{0}'</b> finished with status <b>'{1}'</b>." \
+  noteText = "Big Fix Integration: Big Fix Action ID <b>'{}'</b> finished with status <b>'{}'</b>." \
               .format(action_id, status_message)
 else:
-  noteText = "Big Fix Integration: Big Fix Action ID <b>'{0}'</b> unsuccessful.".format(action_id)
+  noteText = "Big Fix Integration: Big Fix Action ID <b>'{}'</b> unsuccessful.".format(action_id)
+
 incident.addNote(helper.createRichText(noteText))
 ```
 

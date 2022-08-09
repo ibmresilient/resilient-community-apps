@@ -49,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
         # Validate parameters
         validate_fields(["bigfix_action_id"], fn_inputs)
 
-        self.LOG.info("bigfix_action_id: %s", fn_inputs.bigfix_action_id)
+        self.LOG.info("bigfix_action_id: {}".format(fn_inputs.bigfix_action_id))
 
         yield self.status_message("Running Query BigFix for BigFix action id '{}' ...".format(fn_inputs.bigfix_action_id))
         bigfix_client = BigFixClient(self.opts, self.options)

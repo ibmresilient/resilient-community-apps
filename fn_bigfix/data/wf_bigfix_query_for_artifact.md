@@ -30,38 +30,31 @@ inputs.bigfix_incident_plan_status = incident.plan_status
 
 ### Post-Processing Script
 ```python
-# List of fields in datatable for fn_bigfix_artifact
-DATA_TBL_FIELDS = ["res_query_execution_date", "res_artifact_type", "res_artifact_value", "res_bigfix_computer_id", "res_bigfix_computer_name",
-                   "res_remediation_status", "res_bigfix_action_id", "res_remediation_date"]
+noteText = u"BigFix Integration: Ran query for artifact id {} of type {} and value {}.".format(artifact.id, artifact.type, artifact.value)
 
-RESULTS_TO_DATA_TBL = {"computer_id": "res_bigfix_computer_id", "computer_name": "res_bigfix_computer_name",}
-
-# Processing
-endpoint_hits = results.endpoint_hits
-hits_over_limit = results.hits_over_limit
-att_name = results.att_name
-hits_count = results.hits_count
-query_execution_date = results.query_execution_date
-noteText = u"BigFix Integration: Ran query for artifact id <b>'{0}'</b> of type <b>'{1}'</b> and " \
-            "value <b>'{2}'</b>.".format(artifact.id, artifact.type, unicode(artifact.value))
-if (hits_over_limit or endpoint_hits):
-  if (hits_over_limit):
-    noteText += "There were <b>{0}</b> hits found. Added as an attachment. " \
-                "Attachment name : <b>{1}</b>".format(hits_count, att_name)
-  else:
-    if endpoint_hits:
-      for eh in endpoint_hits:
-        newrow = incident.addRow('res_bigfix_query_results')
-        newrow["res_query_execution_date"] = query_execution_date
-        newrow["res_remediation_status"] = "None"
-        newrow["res_artifact_type"] = artifact.type
-        newrow["res_artifact_value"] = artifact.value
-        for k, v in RESULTS_TO_DATA_TBL.items():
-          newrow[v] = unicode(eh[k])
-    noteText += "There were <b>'{0}'</b> hits found.".format(hits_count)
+if results.get("content"):
+  content = results.get("content")
+  endpoint_hits = content.get("endpoint_hits")
+  hits_count = content.get("hits_count")
+  query_execution_date = content.get("query_execution_date")
+  hits_over_limit = content.get("hits_over_limit")
+  att_name = content.get("att_name")
+  if hits_over_limit:
+    noteText += "There were {} hits found. Added as an attachment. Attachment name: {}".format(hits_count, att_name)
+  elif endpoint_hits:
+    noteText += "There were {} hits found.".format(hits_count)
+    for eh in endpoint_hits:
+      newrow = incident.addRow('res_bigfix_query_results')
+      newrow["res_query_execution_date"] = query_execution_date
+      newrow["res_remediation_status"] = "None"
+      newrow["res_artifact_type"] = artifact.type
+      newrow["res_artifact_value"] = artifact.value
+      newrow["res_bigfix_computer_id"] = eh.get("computer_id")
+      newrow["res_bigfix_computer_name"] = eh.get("computer_name")
 else:
-  noteText += "There were <b>no</b> hits found."
-incident.addNote(helper.createRichText(noteText))
+  noteText += "There were no hits found."
+
+incident.addNote(noteText)
 ```
 
 ---

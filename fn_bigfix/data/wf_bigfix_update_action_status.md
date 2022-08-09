@@ -23,15 +23,18 @@ inputs.bigfix_action_id = row.res_bigfix_action_id
 
 ### Post-Processing Script
 ```python
-status = results.status
-status_message = results.status_message
+result = results.get("content")
+status = result.get("status")
+status_message = result.get("status_message")
 action_id = row.res_bigfix_action_id
+
 if (status and (status == "OK" or status == "Failed")):
   row.res_remediation_status = status_message
-  noteText = "Big Fix Integration: Big Fix Action ID <b>'{0}'</b> finished with status <b>'{1}'</b>." \
+  noteText = "Big Fix Integration: Big Fix Action ID <b>'{}'</b> finished with status <b>'{}'</b>." \
               .format(action_id, status_message)
 else:
-  noteText = "Big Fix Integration: Big Fix Action ID <b>'{0}'</b> unsuccessful.".format(action_id)
+  noteText = "Big Fix Integration: Big Fix Action ID <b>'{}'</b> unsuccessful.".format(action_id)
+
 incident.addNote(helper.createRichText(noteText))
 ```
 

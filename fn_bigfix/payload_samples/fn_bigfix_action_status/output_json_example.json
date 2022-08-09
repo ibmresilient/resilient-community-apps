@@ -1,3 +1,21 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "OK",
+    "status_message": "The Fixlet which this action addresses is not relevant on this machine."
+  },
+  "raw": null,
+  "inputs": {
+    "bigfix_action_id": 48
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bigfix",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 60372,
+    "timestamp": "2022-08-08 14:07:26"
+  }
 }
