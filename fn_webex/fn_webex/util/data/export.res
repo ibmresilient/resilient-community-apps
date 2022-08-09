@@ -3,10 +3,39 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1659728159318,
+  "export_date": 1660043508379,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/webex_incident_id",
+      "hide_notification": false,
+      "id": 289,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "webex_incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "Leave this field blank",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "webex_incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "9aa23a09-3fd0-4f44-8932-729d1edff840",
+      "values": []
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -266,6 +295,36 @@
       "values": []
     },
     {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/webex_team_name",
+      "hide_notification": false,
+      "id": 292,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "webex_team_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "webex_team_name",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "6f5a8140-bebb-45a5-b639-6d581fc49f3e",
+      "values": []
+    },
+    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -375,7 +434,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1659728005959,
+      "last_modified_time": 1659956850750,
       "name": "webex_create_room",
       "tags": [
         {
@@ -384,8 +443,16 @@
         }
       ],
       "uuid": "ab9bd63a-728e-4c80-aa36-27e288813c34",
-      "version": 51,
+      "version": 52,
       "view_items": [
+        {
+          "content": "9aa23a09-3fd0-4f44-8932-729d1edff840",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
         {
           "content": "ae2a9043-96f5-4ab8-915c-52d898dfdd0b",
           "element": "field_uuid",
@@ -411,7 +478,18 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "workflow_create_room",
+          "object_type": "incident",
+          "programmatic_name": "workflow_create_room",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 5
+        }
+      ]
     },
     {
       "created_date": 1659727464787,
@@ -429,12 +507,28 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1659728100752,
+      "last_modified_time": 1659968954998,
       "name": "webex_create_team",
       "tags": [],
       "uuid": "7e202188-beda-403c-b0e8-0b626c201382",
-      "version": 3,
+      "version": 5,
       "view_items": [
+        {
+          "content": "9aa23a09-3fd0-4f44-8932-729d1edff840",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "6f5a8140-bebb-45a5-b639-6d581fc49f3e",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
         {
           "content": "0bc70659-40ad-4178-9174-c7841eb3c9b3",
           "element": "field_uuid",
@@ -452,18 +546,29 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "webex_create_team",
+          "object_type": "incident",
+          "programmatic_name": "webex_create_team",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 6
+        }
+      ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 15,
+  "id": 16,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1659728156827,
+      "create_date": 1660043505628,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -472,7 +577,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1659728156827,
+      "update_date": 1660043505628,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
