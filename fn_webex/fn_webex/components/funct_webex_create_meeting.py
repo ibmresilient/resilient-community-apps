@@ -3,18 +3,18 @@
 #
 # """AppFunction implementation"""
 
-from fn_webex.lib.cisco_api import WebexAPI
+from fn_webex.lib.cisco_meetings import WebexMeetings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_webex"
-FN_NAME = "fn_create_meeting"
+FN_NAME = "webex_create_meeting"
 SITE_URL = "https://webexapis.com/v1/meetings/"
 TOKEN_URL = "https://webexapis.com/v1/access_token"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'fn_create_meeting'"""
+    """Component that implements function 'webex_create_meeting'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -29,8 +29,8 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_meeting_name", "webex_incident_id", "webex_add_all_members", "webex_meeting_attendee"], fn_inputs)
         validate_fields([{"name" : "webex_site_url", 
-                         "name" : "webex_bearerID", 
-                         "name" : "webex_timezone"}], self.config_options)
+                          "name" : "webex_bearerID", 
+                          "name" : "webex_timezone"}], self.config_options)
 
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time if hasattr(fn_inputs, 'webex_meeting_end_time') else None
@@ -58,7 +58,7 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info("fn_msg: %s", fn_msg)
 
         try:
-            webex = WebexAPI(self.requiredParameters, self.meetingParameters)
+            webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
             webex.generate_attendee_list()
             webex.Authenticate()
             webex.createRetrieveRoom()

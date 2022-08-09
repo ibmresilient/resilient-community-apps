@@ -5,13 +5,13 @@
 
 # WebEx Platform
 
-## Function - Create WebEx Meeting
+## Function - Webex: Create Meeting
 
 ### API Name
-`fn_create_meeting`
+`webex_create_meeting`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_webex`
@@ -51,20 +51,9 @@ if not results.success:
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
 else:
+  ref_html_room = u"""<a href='{0}'>Link</a>""".format(content.get("meetingLink"))
 
-  host_url = content.get("host_url")
-  attendee_url = content.get("attendee_url")
-
-  if host_url is None:
-    host_url = ""
-
-  if attendee_url is None:
-    attendee_url = ""
-    
-  ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)
-  ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
-
-  text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
+  text = u"<b>Cisco WebEx Meeting Links:</b><br />Webex Room URL: {0}".format(ref_html_room)
   for key in content:
       text += u"<br />{} : {}".format(key, content.get(key))
   

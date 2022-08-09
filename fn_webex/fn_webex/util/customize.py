@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_webex",
         "message_destinations": [u"fn_webex"],
-        "functions": [u"fn_create_meeting"],
+        "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team"],
         "workflows": [u"webex_platform"],
         "actions": [],
         "incident_fields": [],
@@ -45,7 +45,9 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_webex
     - Functions:
-        - fn_create_meeting
+        - webex_create_meeting
+        - webex_create_room
+        - webex_create_team
     - Workflows:
         - webex_platform
     """
