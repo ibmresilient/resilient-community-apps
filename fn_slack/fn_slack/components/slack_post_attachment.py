@@ -10,6 +10,7 @@ Many of the features of posting a Slack message are under customer control inclu
 - Uploading Incident, Task or Artifact Attachments
 """
 
+from multiprocessing.sharedctypes import Value
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon
 from fn_slack.lib.slack_common import *
@@ -67,9 +68,10 @@ class FunctionComponent(ResilientComponent):
             # configuration specific slack parameters
             if self.options.get('api_bot_token'):
                 api_token = self.options.get('api_bot_token')
-            else:
+            elif self.options.get('api_token'):
                 api_token = self.options.get('api_token')
-
+            else:
+                raise ValueError("Either api_bot_token or api_token are required")
 
             # get proxies if they exist
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)

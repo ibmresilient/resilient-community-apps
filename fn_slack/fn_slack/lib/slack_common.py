@@ -954,7 +954,7 @@ class SlackUtils(object):
                     )
             LOG.debug(results)
 
-            users_list.append(("{}: {}".format(results["user"]["profile"]["display_name"], results["user"]["profile"]["email"])))
+            users_list.append("{}: {}".format(results.get("user",{}).get("profile",{}).get("display_name",{}), results.get("user",{}).get("profile",{}).get("email",{})))
 
         return users_list
 
