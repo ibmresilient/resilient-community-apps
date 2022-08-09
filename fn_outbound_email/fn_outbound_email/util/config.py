@@ -50,10 +50,6 @@ auth_url=
 refresh_token=
 ## End of OAuth 2.0 authentication settings ##
 
-## Start of Basic Authentication settings ##
-smtp_password=
-## End of Basic Authentication settings ##
-
 #If smtp_user is not an email address then from_email_address should equal the email address
 from_email_address=
 
