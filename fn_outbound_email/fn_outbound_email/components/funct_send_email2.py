@@ -3,8 +3,9 @@
 """AppFunction implementation"""
 import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, str_to_bool
 from fn_outbound_email.lib.soar_helper import SoarHelper, split_string
+from fn_outbound_email.lib.configure_tab import init_email_tab
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 from fn_outbound_email.lib.template_helper import get_template
 
@@ -17,6 +18,11 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+
+        # configure tab?
+        app_config = opts.get(PACKAGE_NAME)
+        if str_to_bool(app_config.get("enable_email_conversations", "false")):
+            init_email_tab()
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):

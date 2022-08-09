@@ -53,6 +53,8 @@ IBM QRadar SOAR app for 'fn_outbound_email'
 * Format email using a predefined html template or specify your own template.
 * Send attachments with the email at the incident level or task level.
 * Example rules included at the incident and task levels.
+* Unified view of inbound and outbound emails
+* Manage threaded conversations
 ---
 
 ## Requirements
@@ -65,17 +67,18 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `41.0.0`.
+* SOAR platform >= `43.1.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `41.0.0`.
+* SOAR platform >= `43.1.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
     * Org Data: Read and Edit
     * Incident: Read
     * Functions: Read
+    * Layout: Read, Update
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
