@@ -28,9 +28,11 @@
 	{% set values = template_helper.get_notes(note, get_children) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
     {% for n in values %}
-        <tr>
-            <td colspan="2" style="{{style}}">{{ n.get("text") | safe }}</td>
-        </tr>
+        {% if n.get("text", "")%}
+            <tr>
+                <td colspan="2" style="{{style}}">{{ n.get("text", "") | safe }}</td>
+            </tr>
+        {% endif %}
     {% endfor %}
 {%- endmacro %} #}
 
