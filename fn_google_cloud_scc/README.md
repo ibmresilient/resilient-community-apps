@@ -49,17 +49,17 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM SOAR app with bidirectional syncronization and functions for Google Cloud SCC**
+**IBM SOAR app with bidirectional synchronization and functions for Google Cloud SCC**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Bidirectional synchronization of Google Cloud Security Command Center Findings. Additional functions are provided for manual synchronization, manually updating Findings, and listing cloud assets monitored in Google SCC.
+Bidirectional synchronization of Google Cloud Security Command Center findings. Additional functions are provided for manual synchronization, manually updating findings, and listing cloud assets monitored in Google SCC.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Automatic case escalation from Security Command Center Findings to cases in SOAR
+* Automatic case escalation from Security Command Center findings to cases in SOAR
 * Key actions provided in SOAR to remediate the findings in Google Cloud
 * Manual updates to findings directly from the SOAR interface
 * List cloud assets monitored in the Security Command Center
@@ -101,7 +101,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -153,7 +153,7 @@ The following table provides the settings you need to configure the app. These s
 | **google_application_credentials_path** | Yes | `/var/rescircuits/google-service-acct.json` | *Path to the credentials file created following the directions [here](https://cloud.google.com/security-command-center/docs/how-to-programmatic-access). On App Host this needs to be uploaded as a file through the configuration tab.* |
 | **google_cloud_organization_id** | Yes | `1234567890` | *ID of the organization that has SCC configured. Can be found from the Google Cloud Console.* |
 | **add_soar_id_as_security_mark** | No | `True` | *True/False whether or not to create Security Marks in SCC with the IBM SOAR ID when a finding is synced to SOAR. If omitted, defaults to False.* |
-| **findings_filter** | No | `severity = "MEDIUM"` | *Filter to use when syncronizing findings from SCC to SOAR. If no filter is provided, all new findings will be syncronized. Information on how to format a finding filter can be found here. `AND` and `OR` can be used to string clauses together. NOTE: string values must be captured in quotation marks.* |
+| **findings_filter** | No | `severity = "MEDIUM"` | *Filter to use when synchronizing findings from SCC to SOAR. If no filter is provided, all new findings will be syncronized. Information on how to format a finding filter can be found here. `AND` and `OR` can be used to string clauses together. NOTE: string values must be captured in quotation marks.* |
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
 | **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
 | **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
@@ -174,6 +174,8 @@ When overriding the template in App Host, specify the file path for each file as
 
 Below are the default templates used which can be copied, modified and used with app_config's
 `soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
+To see the fields available, checkout the output of the `Get Findings` function. There you will find all the fields that
+are made available to the poller when creating, updating, and closing findings.
 
 <details><summary>soar_create_case_template.jinja</summary>
 
@@ -188,7 +190,7 @@ Below are the default templates used which can be copied, modified and used with
     "DEFAULT": "Low"
   }'''
   %}
-  {# modify to specify your specific **data** fields #}
+
   "name": "Google SCC Finding - {{ category }}",
   {# `description` is also available without hyperlinks added #}
   "description": "{{ linkified_description | replace('"', '\\"') }}",
@@ -196,7 +198,7 @@ Below are the default templates used which can be copied, modified and used with
   "start_date": {{ create_time | soar_datetimeformat(split_at='.') }},
   "plan_status": "A",
   "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
-  {# specify your custom fields for your endpoint solution #}
+
   "properties": {
     "google_scc_id": "{{ finding_id }}",
     "google_scc_name": "{{ name }}",
@@ -282,7 +284,7 @@ Below are the default templates used which can be copied, modified and used with
   }'''
   %}
   "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
-  {# specify your custom fields for your endpoint solution #}
+
   "properties": {
     "google_scc_class": "<span class='label' rel='tooltip' title='{{ finding_class }}'>{{ finding_class }}</span>",
     "google_scc_compliance_standards": "{% for standard in source_properties['compliance_standards'] %}
@@ -311,6 +313,7 @@ Below are the default templates used which can be copied, modified and used with
   "plan_status": "C",
   "resolution_id": "Resolved",
   "resolution_summary": "Closed by Google Cloud SCC. {{ source_properties['DeactivationReason'] if 'DeactivationReason' in source_properties }}",
+
   {# add additional fields based on your 'on close' field requirements #}
   "properties": {
     "google_scc_class": "<span class='label' rel='tooltip' title='{{ finding_class }}'>{{ finding_class }}</span>",
@@ -344,7 +347,7 @@ securityMarks.marks.IBM_SOAR_ID = "1001" AND severity = "MEDIUM
 securityCenterProperties.resourceType="google.cloud.billing.BillingAccount"
 ```
 
-More details on [Findings filters](https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.sources.findings/list#query-parameters) and [Assets filters](https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.assets/list#query-parameters).
+More details on [findings filters](https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.sources.findings/list#query-parameters) and [assets filters](https://cloud.google.com/security-command-center/docs/reference/rest/v1/organizations.assets/list#query-parameters).
 
 ### Assets Field Masks
 When using the `List Assets` function, a field mask may be applied to restrict the values that are returned from the query. Field masks follow the format `asset.<section>.<value>` and can be strung together in a comma-separated list.
@@ -357,7 +360,7 @@ asset.resource_properties, asset.security_center_properties.resource_type
 ---
 
 ## Function - Google Cloud SCC: Get Findings
-Function to get findings from Google Cloud Security Command Center. Optional filter is available.
+Function to get findings from Google Cloud Security Command Center. Optional filter is available. This function is used in the given workflow for refreshing a finding, but with specific filter given for the one finding that is intended to be refreshed. You can design your own workflows and playbooks to take advantage of this function with custom filters for other purposes. See the example pre and post processing scripts and the output section for details on how the function can be used.
 
  ![screenshot: fn-google-cloud-scc-get-findings ](./doc/screenshots/fn-google-cloud-scc-get-findings.png)
 
@@ -367,7 +370,7 @@ Function to get findings from Google Cloud Security Command Center. Optional fil
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `google_scc_close_case_on_change` | `boolean` | Yes | `True` | A boolean — if true, the case will be closed on update when INACTIVE in SCC |
-| `google_scc_filter` | `text` | No | `severity="MEDIUM"` | A filter for SCC findings query. If none is given the optional default finding filter from the app.config will be used |
+| `google_scc_filter` | `text` | No | `name="<full_finding_name>"` | A filter for SCC findings query. If none is given the optional default finding filter from the app.config will be used |
 
 </p>
 </details>
@@ -384,48 +387,48 @@ results = {
     "findings_list": [
       {
         "finding": {
-          "canonical_name": "projects/\u003cproject_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+          "canonical_name": "projects/<project_id>/sources/<source_id>/findings/<finding_id>",
           "category": "LEGACY_AUTHORIZATION_ENABLED",
           "connections": [],
           "create_time": "2022-06-16T14:46:23.690Z",
           "description": "In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac",
           "event_time": "2022-06-16T17:19:24.097Z",
           "external_systems": {},
-          "external_uri": "https://console.cloud.google.com/\u003clink_to_solution\u003e",
+          "external_uri": "https://console.cloud.google.com/<link_to_solution>",
           "finding_class": "MISCONFIGURATION",
-          "finding_id": "\u003cfinding_id\u003e",
-          "finding_url": "https://console.cloud.google.com/security/command-center/findings?organizationId=\u003corg_id\u003e\u0026resourceId=organizations%2F\u003corg_id\u003e%2Fsources%2F\u003csource_id\u003e%2Ffindings%2F\u003cfinding_id\u003e",
+          "finding_id": "<finding_id>",
+          "finding_url": "https://console.cloud.google.com/security/command-center/findings?organizationId=<org_id>&resourceId=organizations%2F<org_id>%2Fsources%2F<source_id>%2Ffindings%2F<finding_id>",
           "iam_bindings": [],
           "indicator": {
             "domains": [],
             "ip_addresses": []
           },
-          "linkified_description": "In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at \u003ca href=\"https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac\" target=\"_blank\"\u003ehttps://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac\u003c/a\u003e",
-          "linkified_recommendation": "Go to \u003ca href=\"https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=\u003cproject_display_name\u003e\" target=\"_blank\"\u003ehttps://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=\u003cproject_display_name\u003e\u003c/a\u003e click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
+          "linkified_description": "In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at <a href=\"https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac\" target=\"_blank\">https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac</a>",
+          "linkified_recommendation": "Go to <a href=\"https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=<project_display_name>\" target=\"_blank\">https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=<project_display_name></a> click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
           "mute": "UNDEFINED",
           "mute_initiator": "",
-          "name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+          "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
           "next_steps": "",
-          "parent": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e",
-          "recommendation": "Go to https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=\u003cproject_display_name\u003e click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
+          "parent": "organizations/<org_id>/sources/<source_id>",
+          "recommendation": "Go to https://console.cloud.google.com/kubernetes/clusters/details/us-central1-c/cluster-2?project=<project_display_name> click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
           "resource": {
-            "display_name": "\u003cresource_name\u003e",
+            "display_name": "<resource_name>",
             "folders": [],
-            "name": "//container.googleapis.com/\u003cresource_name\u003e",
-            "parent_display_name": "\u003cproject_display_name\u003e",
-            "parent_name": "//cloudresourcemanager.googleapis.com/projects/\u003cproject_id\u003e",
-            "project_display_name": "\u003cproject_display_name\u003e",
-            "project_name": "//cloudresourcemanager.googleapis.com/projects/\u003cproject_id\u003e",
+            "name": "//container.googleapis.com/<resource_name>",
+            "parent_display_name": "<project_display_name>",
+            "parent_name": "//cloudresourcemanager.googleapis.com/projects/<project_id>",
+            "project_display_name": "<project_display_name>",
+            "project_name": "//cloudresourcemanager.googleapis.com/projects/<project_id>",
             "type_": "google.container.Cluster"
           },
-          "resource_name": "//container.googleapis.com/\u003cresource_path\u003e",
+          "resource_name": "//container.googleapis.com/<resource_path>",
           "security_marks": {
             "canonical_name": "",
             "marks": {
               "IBM_SOAR_ID": "2190",
               "UP": "DATE"
             },
-            "name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e/securityMarks"
+            "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>/securityMarks"
           },
           "severity": "HIGH",
           "source_properties": {
@@ -433,10 +436,10 @@ results = {
             "ExceptionInstructions": "Add the security mark \"allow_legacy_authorization_enabled\" to the asset with a value of \"true\" to prevent this finding from being activated again.",
             "Explanation": "In Kubernetes, Role-based access control (RBAC) allows you to define roles with rules containing a set of permissions and grant permissions at the cluster and namespace level. This provides better security by ensuring that users only have access to specific resources. It is recommended that you disable legacy Attribute-based access control (ABAC). Learn more about disabling ABAC, as well as other techniques for hardening your Kubernetes clusters at https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_abac",
             "ReactivationCount": 0.0,
-            "Recommendation": "Go to \u003cinsert_link\u003e click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
+            "Recommendation": "Go to <insert_link> click \"Edit\", and disable \"Legacy Authorization\". Note that a cluster cannot be modified while it is reconfiguring itself.",
             "ResourcePath": [
-              "projects/\u003cproject_name\u003e/",
-              "organizations/\u003corg_id\u003e/"
+              "projects/<project_name>/",
+              "organizations/<org_id>/"
             ],
             "ScannerName": "CONTAINER_SCANNER",
             "compliance_standards": {
@@ -469,13 +472,13 @@ results = {
           }
         },
         "resource": {
-          "display_name": "\u003cresource_name\u003e",
+          "display_name": "<resource_name>",
           "folders": [],
-          "name": "//container.googleapis.com/\u003cresource-path\u003e",
-          "parent_display_name": "\u003cproject_display_name\u003e",
-          "parent_name": "//cloudresourcemanager.googleapis.com/projects/\u003cproject_id\u003e",
-          "project_display_name": "\u003cproject_display_name\u003e",
-          "project_name": "//cloudresourcemanager.googleapis.com/projects/\u003cproject_id\u003e",
+          "name": "//container.googleapis.com/<resource-path>",
+          "parent_display_name": "<project_display_name>",
+          "parent_name": "//cloudresourcemanager.googleapis.com/projects/<project_id>",
+          "project_display_name": "<project_display_name>",
+          "project_name": "//cloudresourcemanager.googleapis.com/projects/<project_id>",
           "type_": "google.container.Cluster"
         },
         "state_change": "UNUSED"
@@ -484,7 +487,7 @@ results = {
   },
   "inputs": {
     "google_scc_close_case_on_change": true,
-    "google_scc_filter": "name = \"organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e\""
+    "google_scc_filter": "name = \"organizations/<org_id>/sources/<source_id>/findings/<finding_id>\""
   },
   "metrics": {
     "execution_time_ms": 5565,
@@ -552,7 +555,7 @@ if results.get("success") and len(findings_list) == 1:
 
 ---
 ## Function - Google Cloud SCC: List Assets
-List the assets of a Google Cloud organization that is being monitored in SCC.
+List the assets of a Google Cloud organization that is being monitored in SCC. This function returns two objects (see the output for more details). The one that is used in the example post-processing script (the value `assets_formatted` that is returned from the function) is a neatly formatted HTML string and can be directly posted as a note, as it is in the example. If your use case requires parsing the results in a different way, you can use the `assets_raw` value returned from the function and parse them as you desire.
 
  ![screenshot: fn-google-cloud-scc-list-assets ](./doc/screenshots/fn-google-cloud-scc-list-assets.png)
 
@@ -575,36 +578,36 @@ List the assets of a Google Cloud organization that is being monitored in SCC.
 ```python
 results = {
   "content": {
-    "assets_formatted": "\u003cnicely formatted string version of assets...\u003e",
+    "assets_formatted": "<nicely formatted string version of assets...>",
     "assets_raw": [
       {
         "asset": {
           "canonical_name": "projects/216150104097/assets/11712294571846742175",
           "create_time": "2022-05-24T16:36:54.136Z",
           "iam_policy": {
-            "policy_blob": "\u003cpolicy_blob\u003e"
+            "policy_blob": "<policy_blob>"
           },
-          "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=\u003corg_id\u003e\u0026resourceId=\u003cresource_name\u003e",
+          "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=<org_id>&resourceId=<resource_name>",
           "name": "organizations/259357470209/assets/11712294571846742175",
           "resource_properties": {
             "createTime": "2022-05-24T16:13:28.44Z",
             "lifecycleState": "ACTIVE",
-            "name": "\u003cproject\u003e",
+            "name": "<project>",
             "parent": "{\"id\":\"259357470209\",\"type\":\"organization\"}",
-            "projectId": "\u003cproject\u003e",
+            "projectId": "<project>",
             "projectNumber": "216150104097"
           },
           "security_center_properties": {
             "folders": [],
-            "resource_display_name": "\u003cproject\u003e",
+            "resource_display_name": "<project>",
             "resource_name": "//cloudresourcemanager.googleapis.com/projects/216150104097",
             "resource_owners": [
-              "user:\u003cuser\u003e"
+              "user:<user>"
             ],
             "resource_parent": "//cloudresourcemanager.googleapis.com/organizations/259357470209",
-            "resource_parent_display_name": "\u003cname\u003e",
+            "resource_parent_display_name": "<name>",
             "resource_project": "//cloudresourcemanager.googleapis.com/projects/216150104097",
-            "resource_project_display_name": "\u003cproject\u003e",
+            "resource_project_display_name": "<project>",
             "resource_type": "google.cloud.resourcemanager.Project"
           },
           "security_marks": {
@@ -623,7 +626,7 @@ results = {
           "iam_policy": {
             "policy_blob": ""
           },
-          "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=\u003corg_id\u003e\u0026resourceId=\u003cresource_name\u003e",
+          "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=<org_id>&resourceId=<resource_name>",
           "name": "organizations/259357470209/assets/3331741957707965158",
           "resource_properties": {
             "creationTimestamp": "2022-06-15T07:54:37.897-07:00",
@@ -631,21 +634,21 @@ results = {
             "defaultServiceAccount": "216150104097-compute@developer.gserviceaccount.com",
             "id": "9048930534532860994",
             "kind": "compute#project",
-            "name": "\u003cproject\u003e",
-            "selfLink": "https://www.googleapis.com/compute/v1/projects/\u003cproject\u003e",
+            "name": "<project>",
+            "selfLink": "https://www.googleapis.com/compute/v1/projects/<project>",
             "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
           },
           "security_center_properties": {
             "folders": [],
-            "resource_display_name": "\u003cproject\u003e",
+            "resource_display_name": "<project>",
             "resource_name": "//compute.googleapis.com/projects/9048930534532860994",
             "resource_owners": [
-              "user:\u003cuser\u003e"
+              "user:<user>"
             ],
             "resource_parent": "//cloudresourcemanager.googleapis.com/projects/216150104097",
-            "resource_parent_display_name": "\u003cname\u003e",
+            "resource_parent_display_name": "<name>",
             "resource_project": "//cloudresourcemanager.googleapis.com/projects/216150104097",
-            "resource_project_display_name": "\u003cproject\u003e",
+            "resource_project_display_name": "<project>",
             "resource_type": "google.compute.Project"
           },
           "security_marks": {
@@ -661,7 +664,7 @@ results = {
   },
   "inputs": {
     "google_scc_field_mask": null,
-    "google_scc_filter": "securityCenterProperties.resourceDisplayName=\"\u003cproject\u003e\""
+    "google_scc_filter": "securityCenterProperties.resourceDisplayName=\"<project>\""
   },
   "metrics": {
     "execution_time_ms": 6014,
@@ -765,37 +768,37 @@ results = {
     "findings_list": [
       {
         "finding": {
-          "canonical_name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+          "canonical_name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
           "category": "OPEN_SSH_PORT",
           "connections": [],
           "create_time": "2022-06-15T14:55:13.751Z",
           "description": "Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.",
           "event_time": "2022-06-23T17:00:31.447393Z",
           "external_systems": {},
-          "external_uri": "https://console.cloud.google.com/\u003clink_to_solution\u003e",
+          "external_uri": "https://console.cloud.google.com/<link_to_solution>",
           "finding_class": "MISCONFIGURATION",
-          "finding_url": "https://console.cloud.google.com/security/command-center/findings?organizationId=\u003corg_id\u003e\u0026resourceId=\u003cfinding_name\u003e",
+          "finding_url": "https://console.cloud.google.com/security/command-center/findings?organizationId=<org_id>&resourceId=<finding_name>",
           "iam_bindings": [],
           "indicator": {
             "domains": [],
             "ip_addresses": []
           },
           "linkified_description": "Firewall rules that allow connections from all IP addresses on TCP port 22 or SCTP port 22 may expose SSH services to attackers.",
-          "linkified_recommendation": "Restrict the firewall rules at: \u003ca href=\"https://console.cloud.google.com/\u003clink_to_solution\u003e\" target=\"_blank\"\u003ehttps://console.cloud.google.com/\u003clink_to_solution\u003e\u003c/a\u003e",
+          "linkified_recommendation": "Restrict the firewall rules at: <a href=\"https://console.cloud.google.com/<link_to_solution>\" target=\"_blank\">https://console.cloud.google.com/<link_to_solution></a>",
           "mute": "UNDEFINED",
           "mute_initiator": "",
-          "name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+          "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
           "next_steps": "These are the next steps",
-          "parent": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e",
-          "recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/\u003clink_to_solution\u003e",
-          "resource_name": "//container.googleapis.com/\u003cresource_path\u003e",
+          "parent": "organizations/<org_id>/sources/<source_id>",
+          "recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/<link_to_solution>",
+          "resource_name": "//container.googleapis.com/<resource_path>",
           "security_marks": {
             "canonical_name": "",
             "marks": {
               "FAKE": "Security Mark",
               "IBM_SOAR_ID": "2248"
             },
-            "name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e/securityMarks"
+            "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>/securityMarks"
           },
           "severity": "MEDIUM",
           "source_properties": {
@@ -812,10 +815,10 @@ results = {
               ]
             },
             "ReactivationCount": 0.0,
-            "Recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/\u003clink_to_solution\u003e",
+            "Recommendation": "Restrict the firewall rules at: https://console.cloud.google.com/<link_to_solution>",
             "ResourcePath": [
-              "projects/\u003cproject_name\u003e/",
-              "organizations/\u003corg_id\u003e/"
+              "projects/<project_name>/",
+              "organizations/<org_id>/"
             ],
             "ScannerName": "FIREWALL_SCANNER",
             "compliance_standards": {
@@ -873,7 +876,7 @@ results = {
     "updated_value": "INACTIVE"
   },
   "inputs": {
-    "google_scc_filter": "name = \"organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e\"",
+    "google_scc_filter": "name = \"organizations/<org_id>/sources/<source_id>/findings/<finding_id>\"",
     "google_scc_update_key": "state",
     "google_scc_update_value": "INACTIVE"
   },
@@ -960,17 +963,17 @@ results = {
   "content": {
     "updated_key": "UPDATE",
     "updated_marks": {
-      "canonical_name": "projects/\u003cproject_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+      "canonical_name": "projects/<project_id>/sources/<source_id>/findings/<finding_id>",
       "marks": {
         "IBM_SOAR_ID": "2248",
         "UPDATE": "Security Mark"
       },
-      "name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e/securityMarks"
+      "name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>/securityMarks"
     },
     "updated_value": "Security Mark"
   },
   "inputs": {
-    "google_scc_finding_name": "organizations/\u003corg_id\u003e/sources/\u003csource_id\u003e/findings/\u003cfinding_id\u003e",
+    "google_scc_finding_name": "organizations/<org_id>/sources/<source_id>/findings/<finding_id>",
     "google_scc_update_key": "UPDATE",
     "google_scc_update_value": "Security Mark"
   },
