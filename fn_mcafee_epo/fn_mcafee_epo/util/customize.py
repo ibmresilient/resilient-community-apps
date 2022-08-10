@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_mcafee_epo",
         "message_destinations": [u"mcafee_epo_message_destination"],
         "functions": [u"mcafee_epo_add_permission_sets_to_user", u"mcafee_epo_add_user", u"mcafee_epo_execute_query", u"mcafee_epo_find_a_system", u"mcafee_epo_get_all_permission_sets", u"mcafee_epo_get_all_users", u"mcafee_epo_list_tags", u"mcafee_epo_remove_permission_sets_from_user", u"mcafee_epo_remove_tag", u"mcafee_epo_update_user", u"mcafee_epo_wake_up_agent", u"mcafee_tag_an_epo_asset"],
-        "workflows": [u"mcafee_epo_add_permission_sets_to_user", u"mcafee_epo_apply_a_tag", u"mcafee_epo_apply_tags", u"mcafee_epo_get_all_permission_sets", u"mcafee_epo_get_all_systems", u"mcafee_epo_get_all_users", u"mcafee_epo_get_system_info", u"mcafee_epo_get_system_info_from_property", u"mcafee_epo_list_tags", u"mcafee_epo_remove_permission_set_from_user", u"mcafee_epo_remove_tag", u"mcafee_epo_wake_up_agent"],
-        "actions": [u"McAfee ePO Add Permission Set to User", u"McAfee ePO apply a tag", u"McAfee ePO apply tags", u"McAfee ePO Get All Permission Sets", u"McAfee ePO Get All Systems", u"McAfee ePO Get All Users", u"McAfee ePO get system info", u"McAfee ePO Get System Info from Property", u"McAfee ePO list tags", u"McAfee ePO Remove Permission Set from User", u"McAfee ePO remove tags", u"McAfee ePO Wake up Agent"],
+        "workflows": [u"mcafee_epo_add_permission_sets_to_user", u"mcafee_epo_add_user", u"mcafee_epo_apply_a_tag", u"mcafee_epo_apply_tags", u"mcafee_epo_get_all_permission_sets", u"mcafee_epo_get_all_systems", u"mcafee_epo_get_all_users", u"mcafee_epo_get_system_info", u"mcafee_epo_get_system_info_from_property", u"mcafee_epo_list_tags", u"mcafee_epo_remove_permission_set_from_user", u"mcafee_epo_remove_tag", u"mcafee_epo_update_user", u"mcafee_epo_wake_up_agent"],
+        "actions": [u"McAfee ePO Add Permission Set to User", u"McAfee ePO Add User", u"McAfee ePO apply a tag", u"McAfee ePO apply tags", u"McAfee ePO Get All Permission Sets", u"McAfee ePO Get All Systems", u"McAfee ePO Get All Users", u"McAfee ePO get system info", u"McAfee ePO Get System Info from Property", u"McAfee ePO list tags", u"McAfee ePO Remove Permission Set from User", u"McAfee ePO remove tags", u"McAfee ePO Update User", u"McAfee ePO Wake up Agent"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -59,6 +59,7 @@ def customization_data(client=None):
         - mcafee_tag_an_epo_asset
     - Workflows:
         - mcafee_epo_add_permission_sets_to_user
+        - mcafee_epo_add_user
         - mcafee_epo_apply_a_tag
         - mcafee_epo_apply_tags
         - mcafee_epo_get_all_permission_sets
@@ -69,9 +70,11 @@ def customization_data(client=None):
         - mcafee_epo_list_tags
         - mcafee_epo_remove_permission_set_from_user
         - mcafee_epo_remove_tag
+        - mcafee_epo_update_user
         - mcafee_epo_wake_up_agent
     - Rules:
         - McAfee ePO Add Permission Set to User
+        - McAfee ePO Add User
         - McAfee ePO apply a tag
         - McAfee ePO apply tags
         - McAfee ePO Get All Permission Sets
@@ -82,6 +85,7 @@ def customization_data(client=None):
         - McAfee ePO list tags
         - McAfee ePO Remove Permission Set from User
         - McAfee ePO remove tags
+        - McAfee ePO Update User
         - McAfee ePO Wake up Agent
     - Data Tables:
         - mcafee_epo_permission_sets

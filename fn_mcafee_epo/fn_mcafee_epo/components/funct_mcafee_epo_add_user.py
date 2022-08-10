@@ -64,7 +64,7 @@ class FunctionComponent(AppFunctionComponent):
         client = init_client(self.opts, self.options)
 
         response = client.request(
-            "core.updateUser",
+            "core.addUser",
             {"userName": username,
              "password": password,
              "fullName": fullname,
