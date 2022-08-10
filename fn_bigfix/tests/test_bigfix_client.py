@@ -13,7 +13,6 @@ from fn_bigfix.lib.bigfix_client import BigFixClient
 def get_opts():
     return dict({
         "integrations": {
-            "https_proxy": "https:\/\/127.0.0.1:8080"
         },
         "fn_bigfix": get_config(),
     })
@@ -69,6 +68,7 @@ class TestPostBfClientQuery:
         """Test create_attachment using mocked data."""
         bigfix_client = BigFixClient(get_opts(), get_config())
         response = bigfix_client.post_bfclientquery(query_id)
+        assert response == expected_results
 
 class TestPostBfActionQuery:
     """Test bigfix_client._post_bf_action_query using mocked data."""
@@ -103,6 +103,7 @@ class TestPostBfActionQuery:
             bigfix_client = BigFixClient(get_opts(), get_config())
             response = bigfix_client._process_bf_computer_query_response_to_attachment(
                 response_text, title)
+            assert expected_results in response
 
 class TestGetBfActionStatus:
     """Test bigfix_client.get_bf_action_status using mocked data."""

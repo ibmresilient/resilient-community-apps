@@ -21,10 +21,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-def assert_keys_in(json_obj, *keys):
-    for key in keys:
-        assert key in json_obj
-
 def call_fn_bigfix_remediation_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("fn_bigfix_remediation", function_params)
@@ -45,15 +41,10 @@ class TestFnBigfixRemediation:
 
     @patch('fn_bigfix.components.fn_bigfix_remediation.BigFixClient', side_effect=mocked_bigfix_client)
     @pytest.mark.parametrize("bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id, expected_results", [
-        (12315195, "/tmp/testfile.txt", "File Path", 2095, 127),
-        (12315196, "besclient", "Process Name", 2095, 128),
-        (12315197, "lfsvc", "Service", 2095, 129),
-        (12315198, "HKLM\\SOFTWARE\\JP\\JP2\\com.jp.browsercore", "Registry Key", 2095, 130),
+        (12315195, "/tmp/testfile.txt", "File Path", 2095, 127)
     ])
     def test_success(self, mock_get, circuits_app, bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id, expected_results):
         """ Tests for fn_bigfix_remediation using mocked data. """
-
-        keys = ["status", "remediation_date", "status_message", "action_id"]
 
         function_params = {
             "bigfix_asset_id": bigfix_asset_id,
@@ -62,5 +53,4 @@ class TestFnBigfixRemediation:
             "bigfix_incident_id": bigfix_incident_id
         }
         results = call_fn_bigfix_remediation_function(circuits_app, function_params)
-        assert_keys_in(results, *keys)
-        assert(expected_results == results["action_id"])
+        assert(expected_results == results.get("content")["action_id"])

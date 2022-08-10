@@ -22,10 +22,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-def assert_keys_in(json_obj, *keys):
-    for key in keys:
-        assert key in json_obj
-
 def call_fn_bigfix_assets_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("fn_bigfix_assets", function_params)
@@ -53,14 +49,11 @@ class TestFnBigfixAssets:
     def test_success(self, mock_get_1, mock_get_2, circuits_app, bigfix_asset_id, bigfix_asset_name, bigfix_incident_id, expected_results_1, expected_results_2):
         """ Tests for fn_bigfix_assets using mocked data. """
 
-        keys = ["status", "att_name"]
-
         function_params = {
             "bigfix_asset_id": bigfix_asset_id,
             "bigfix_asset_name": bigfix_asset_name,
             "bigfix_incident_id": bigfix_incident_id
         }
         results = call_fn_bigfix_assets_function(circuits_app, function_params)
-        assert_keys_in(results, *keys)
-        assert (expected_results_1 == results["status"])
-        assert (expected_results_2 == results["att_name"])
+        assert (expected_results_1 == results.get("content")["status"])
+        assert (expected_results_2 == results.get("content")["att_name"])
