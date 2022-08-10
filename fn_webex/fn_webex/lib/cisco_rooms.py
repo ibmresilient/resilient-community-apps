@@ -65,6 +65,7 @@ class WebexRooms:
         response = self.rc.execute("post", "https://webexapis.com/v1/rooms/", headers=self.header, data=data, proxies=self.rc.get_proxies())
         res = json.loads(response.text)
         self.requiredParameters["roomID"] = res.get("id")
+        self.requiredParameters["roomName"] = res.get("title")
         self.LOG.info("Webex: Creating new room: {}".format(self.requiredParameters["roomID"]))
 
 
@@ -78,6 +79,7 @@ class WebexRooms:
             for room in res.get("items"):
                 if room.get("title") == self.requiredParameters.get("roomName"):
                     self.requiredParameters["roomID"] = room.get("id")
+                    self.requiredParameters["roomName"] = room.get("title")
                     break
             if not self.requiredParameters.get("roomID"):
                 self.createRoom()
@@ -99,8 +101,9 @@ class WebexRooms:
         if res.status_code == 200:
             self.LOG.info("Webex: Retrieved room details, Room Name : {}".format(self.requiredParameters.get("roomName")))
             response = json.loads(res.text)
-            response["Attendees"] = ", ".join(self.emailIDs)
+            response["attendees"] = ", ".join(self.emailIDs)
             response["status"] = True
+            response["roomName"] = self.requiredParameters.get("roomName")
         else:
             self.LOG.info("Webex: Unable to retrieve room details, Room ID : {}".format(self.requiredParameters.get("roomID")))
             response = json.loads(res.text)

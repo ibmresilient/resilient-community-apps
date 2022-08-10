@@ -95,7 +95,7 @@ class WebexTeams:
         if res.status_code == 200:
             self.LOG.info("Webex: Retrieved team details, team Name : {}".format(self.requiredParameters.get("teamName")))
             response = json.loads(res.text)
-            response["Attendees"] = ", ".join(self.emailIDs)
+            response["attendees"] = ", ".join(self.emailIDs)
             response["status"] = True
         else:
             self.LOG.info("Webex: Unable to retrieve team details, team ID : {}".format(self.requiredParameters.get("teamID")))

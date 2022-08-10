@@ -39,7 +39,7 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["scope"] = self.config_options.get("scope")
         self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
         self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
-        self.requiredParameters["teamID"] = fn_inputs.webex_teamID if hasattr(fn_inputs, 'webex_teamID') else None
+        self.requiredParameters["teamID"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
         self.requiredParameters["roomName"] = fn_inputs.webex_room_name
         self.requiredParameters["incidentID"] = fn_inputs.webex_incident_id
 
