@@ -76,7 +76,7 @@ class SendSMTPEmail(ResilientComponent):
         self.rc = RequestsCommon(opts=opts, function_opts=opts.get(CONFIG_DATA_SECTION, {}))
         if self.client_id:
             # Using OAuth2 authentication.
-            self.oauth2.refresh_token()
+            self.oauth2.refresh_access_token()
             self.oauth2.generate_oauth2_string()
 
         # headers
