@@ -26,7 +26,7 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```

@@ -63,7 +63,7 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 ```
