@@ -51,6 +51,7 @@ refresh_token=
 ## End of OAuth2 authentication settings
 
 #If smtp_user is not an email address then from_email_address should equal the email address
+#  Also used with selftest
 from_email_address=
 
 # SMTP PORT NUMBER, 25 or 587/2525
