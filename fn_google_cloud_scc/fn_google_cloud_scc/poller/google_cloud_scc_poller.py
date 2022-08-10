@@ -10,7 +10,7 @@ from fn_google_cloud_scc.poller.configure_tab import init_scc_tab
 from fn_google_cloud_scc.poller.soar_common import (SOARCommon,
                                                     get_last_poller_date,
                                                     get_template_dir, poller)
-from fn_google_cloud_scc.util.scc_common import (DT_NAME, PACKAGE_NAME,
+from fn_google_cloud_scc.lib.scc_common import (DT_NAME, PACKAGE_NAME,
                                                  SOAR_ID_MARK, GoogleSCCCommon,
                                                  linkify)
 from resilient import get_client

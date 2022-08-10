@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import copy
 
-from fn_google_cloud_scc.util.scc_common import GoogleSCCCommon
+from fn_google_cloud_scc.lib.scc_common import GoogleSCCCommon
 from google.cloud import securitycenter
 
 config_data = {
@@ -97,6 +97,89 @@ findings = [{
     },
     "state_change": "UNUSED"
 }]
+
+assets = [
+  {
+    "asset": {
+      "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=<org_id>&resourceId=<resource_name>",
+      "name": "organizations/259357470209/assets/11712294571846742175",
+      "security_center_properties": {
+        "resource_name": "//cloudresourcemanager.googleapis.com/projects/216150104097",
+        "resource_type": "google.cloud.resourcemanager.Project",
+        "resource_parent": "//cloudresourcemanager.googleapis.com/organizations/259357470209",
+        "resource_project": "//cloudresourcemanager.googleapis.com/projects/216150104097",
+        "resource_owners": [
+          "user:<user>"
+        ],
+        "resource_display_name": "<project>",
+        "resource_parent_display_name": "<name>",
+        "resource_project_display_name": "<project>",
+        "folders": []
+      },
+      "resource_properties": {
+        "projectNumber": "216150104097",
+        "name": "<project>",
+        "lifecycleState": "ACTIVE",
+        "projectId": "<project>",
+        "createTime": "2022-05-24T16:13:28.44Z",
+        "parent": "{\"id\":\"259357470209\",\"type\":\"organization\"}"
+      },
+      "security_marks": {
+        "name": "organizations/259357470209/assets/11712294571846742175/securityMarks",
+        "marks": {},
+        "canonical_name": ""
+      },
+      "create_time": "2022-05-24T16:36:54.136Z",
+      "update_time": "2022-06-15T15:04:11.754Z",
+      "iam_policy": {
+        "policy_blob": "<policy_blob>"
+      },
+      "canonical_name": "projects/216150104097/assets/11712294571846742175"
+    },
+    "state_change": "UNUSED"
+  },
+  {
+    "asset": {
+      "link": "https://console.cloud.google.com/security/command-center/assets?organizationId=<org_id>&resourceId=<resource_name>",
+      "name": "organizations/259357470209/assets/3331741957707965158",
+      "security_center_properties": {
+        "resource_name": "//compute.googleapis.com/projects/9048930534532860994",
+        "resource_type": "google.compute.Project",
+        "resource_parent": "//cloudresourcemanager.googleapis.com/projects/216150104097",
+        "resource_project": "//cloudresourcemanager.googleapis.com/projects/216150104097",
+        "resource_owners": [
+          "user:<user>"
+        ],
+        "resource_display_name": "<project>",
+        "resource_parent_display_name": "<name>",
+        "resource_project_display_name": "<project>",
+        "folders": []
+      },
+      "resource_properties": {
+        "defaultServiceAccount": "216150104097-compute@developer.gserviceaccount.com",
+        "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS",
+        "name": "<project>",
+        "defaultNetworkTier": "PREMIUM",
+        "creationTimestamp": "2022-06-15T07:54:37.897-07:00",
+        "kind": "compute#project",
+        "selfLink": "https://www.googleapis.com/compute/v1/projects/<project>",
+        "id": "9048930534532860994"
+      },
+      "security_marks": {
+        "name": "organizations/259357470209/assets/3331741957707965158/securityMarks",
+        "marks": {},
+        "canonical_name": ""
+      },
+      "create_time": "2022-06-15T14:54:38.794Z",
+      "update_time": "2022-06-15T14:54:38.794Z",
+      "iam_policy": {
+        "policy_blob": ""
+      },
+      "canonical_name": "projects/216150104097/assets/3331741957707965158"
+    },
+    "state_change": "UNUSED"
+  }
+]
 
 
 updated_findings = [{

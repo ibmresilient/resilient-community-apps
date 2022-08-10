@@ -29,7 +29,7 @@ setup(
     author_email="",
     url="https://ibm.com/mysupport",
     description="IBM SOAR app with bidirectional syncronization and functions for Google Cloud SCC",
-    long_description="""Bidirectional synchronization of Google Cloud Security Command Center Findings. Additional functions are provided for manual synchronization, manually creating Findings, and listing cloud assets monitored in Google SCC.""",
+    long_description="""Bidirectional synchronization of Google Cloud Security Command Center Findings. Additional functions are provided for manual synchronization, manually updating Findings, and listing cloud assets monitored in Google SCC.""",
     install_requires=[
         "resilient-circuits          >= 45.0",
         "google-cloud-securitycenter ~= 1.11"

@@ -4,7 +4,7 @@
 
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, DT_NAME
+from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, DT_NAME
 
 import logging
 

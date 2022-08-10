@@ -2,7 +2,7 @@
 
 """AppFunction implementation"""
 
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon
+from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, GoogleSCCCommon
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields

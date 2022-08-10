@@ -4,7 +4,7 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, FindingResult, GoogleSCCCommon
+from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, FindingResult, GoogleSCCCommon
 from google.cloud.securitycenter import Finding, ListFindingsResponse
 from resilient_circuits import FunctionResult, SubmitTestFunction
 from resilient_circuits.util import get_config_data, get_function_definition

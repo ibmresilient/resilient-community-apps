@@ -5,7 +5,7 @@
 from fn_google_cloud_scc.poller.google_cloud_scc_poller import (
     CLOSE_INCIDENT_TEMPLATE, ENTITY_LABEL, SOAR_ENTITY_ID_FIELD, get_entity_id)
 from fn_google_cloud_scc.poller.soar_common import SOARCommon
-from fn_google_cloud_scc.util.scc_common import PACKAGE_NAME, GoogleSCCCommon
+from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, GoogleSCCCommon
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import IntegrationError, make_payload_from_template, validate_fields
