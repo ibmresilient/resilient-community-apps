@@ -147,7 +147,8 @@ class TemplateHelper(object):
         all_notes = []
         # get the top level comments
         for root_parent in notes.get("root_comments"):
-            if "Email Sent if mail server is valid" not in root_parent.get("text"):
+            str_to_check = "email sent if mail server is valid"     # gets added in post-processing script note
+            if str_to_check not in root_parent.get("text", "").lower():
                 all_notes.append(root_parent)
                 # to get nested child notes, execute recursive function
                 if get_children:
