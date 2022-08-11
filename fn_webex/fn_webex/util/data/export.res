@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1660222751249,
+  "export_date": 1660257204059,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -619,13 +619,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 18,
+  "id": 19,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1660222748623,
+      "create_date": 1660257201459,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -634,7 +634,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1660222748623,
+      "update_date": 1660257201459,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
