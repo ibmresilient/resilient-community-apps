@@ -165,7 +165,6 @@ class WebexMeetings:
         data    : String
                     request body
         """
-        print(data, self.header, "\n\n\n\n")
         webexurl = self.requiredParameters.get("siteURL")
         response = self.rc.execute(method, webexurl, data=data,
                                         headers=self.header, proxies=self.rc.get_proxies())
