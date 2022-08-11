@@ -42,7 +42,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 7/2022 | Migrated to REST api |
+| 2.0.0 | 7/2022 |Migrated to REST api and added the ability to create rooms for incidents|
 | 1.1.1 | 8/2021 | Rebuild app.zip |
 | 1.1.0 | 2/2021 | App Host Support|
 | 1.0.0 | 8/2018 | Initial Release |
@@ -94,7 +94,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -108,7 +108,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 are supported.
+Python 3.6 is supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=45.0.0
 
