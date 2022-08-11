@@ -15,6 +15,7 @@
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
   - [Endpoint Developed With](#endpoint-developed-with)
+  - [Known Issues](#known-issues)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -127,7 +128,8 @@ This app has been implemented using:
 | ------------ | --------------- |
 | Google Cloud Security Command Center | v1 |
 
-NOTE: As of publishing v1.0 of this app, there is a known issue in the Google Cloud Security Command Center user interface where if a finding's state is manually changed from ACTIVE to INACTIVE, it will not trigger an update time event. These update times are relied on heavily in the app to provided bi-directional syncronization. If you intend to manually update the state in SCC, you will have to subsequently manually refresh the finding details into the case in SOAR to correctly reflect the updated state. There are no other known issues.
+### Known Issues
+NOTE: As of publishing version 1.0.0 of this app, there is a known issue in the Google Cloud Security Command Center user interface where if a finding's state is manually changed from ACTIVE to INACTIVE, it will not trigger an update time event. These update times are relied on heavily in the app to provided bi-directional syncronization. If you intend to manually update the state in SCC, you will have to subsequently manually refresh the finding details into the case in SOAR to correctly reflect the updated state. There are no other known issues.
 
 ### Prerequisites
 <!--
