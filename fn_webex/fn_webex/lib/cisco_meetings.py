@@ -7,8 +7,13 @@ from multiprocessing import AuthenticationError
 DEFAULT_MEETING_LENGTH = 45
 
 class WebexMeetings:
-    def __init__(self):
-        pass
+    def __init__(self, requiredParameters, meetingParameters):
+        self.requiredParameters = requiredParameters
+        self.meetingParameters = meetingParameters
+        self.rc = requiredParameters.get("rc")
+        self.LOG = requiredParameters.get("logger")
+        self.header = requiredParameters.get("header")
+
 
     def convert_to_dict(self, to_convert):
         '''
@@ -28,16 +33,18 @@ class WebexMeetings:
             value = pair[len(key)+1:]
             ret[key] = value
         return ret
-        
+
+
     def create_meeting(self):
         '''
         Gathers all the required parameters to schedule a meeting and generates an output based
         on the response from endpoint server.
         '''
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
+        self.LOG.info("Timezone set to: {}".format(self.timezone))
         self.check_time(self.timezone, self.requiredParameters["start"], self.requiredParameters["end"])
 
-        meetingOptions = self.generate_meeting_parameters(self.optionalParameters)
+        meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
         response = self.webex_request("POST", meetingOptions)
 
         if not response.text:
@@ -50,6 +57,7 @@ class WebexMeetings:
             results["status"] = False
             raise FunctionError("Failed to create meeting")
         return results
+
 
     def check_time(self, timezone, meeting_start, meeting_end):
         '''
@@ -157,6 +165,7 @@ class WebexMeetings:
         data    : String
                     request body
         """
+        print(data, self.header, "\n\n\n\n")
         webexurl = self.requiredParameters.get("siteURL")
         response = self.rc.execute(method, webexurl, data=data,
                                         headers=self.header, proxies=self.rc.get_proxies())

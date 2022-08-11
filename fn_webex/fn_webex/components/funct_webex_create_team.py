@@ -49,23 +49,33 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["siteURL"]  = SITE_URL
         self.requiredParameters["tokenURL"] = TOKEN_URL
 
-        fn_msg = self.get_fn_msg()
-        self.LOG.info("fn_msg: %s", fn_msg)
-
-        authenticator = WebexAuthentication(self.requiredParameters)
-        self.requiredParameters["header"] = authenticator.Authenticate()
-
-        webex = WebexTeams(self.requiredParameters)
-        webex.generate_member_list()
-        webex.createRetrieveTeam()
-        webex.addMembership()
-        response = webex.getTeamDetails()
-        yield FunctionResult(response, success=True)
-        
         try:
+            yield self.status_message("Authenticating Webex using OAuth Access Token: '{0}'".format(FN_NAME))
+            self.LOG.info("Webex: Creating a Security context and establishing a connection with the Webex EndPoint")
+            authenticator = WebexAuthentication(self.requiredParameters)
+            self.requiredParameters["header"] = authenticator.Authenticate()
+            yield self.status_message("Successfully Authenticated!")
+            
+        except Exception as err:
+            self.LOG.error("Failed to create Security Context")
+            yield self.status_message("Failed to Authenticate {}! Is the Refresh token Upto date?".format(FN_NAME))
+            reason = err.__str__()
+            yield FunctionResult(value=None, success=False, reason=reason)
+        
+        try:        
+            webex = WebexTeams(self.requiredParameters)
+            webex.generate_member_list()
+            webex.createRetrieveTeam()
+            yield self.status_message("Successfully created/retrieved a team")
+            webex.addMembership()
+            yield self.status_message("Successfully added membership to the room")
+            response = webex.getTeamDetails()
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
+            yield FunctionResult(response, success=True)
 
         except Exception as err:
             yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
+            yield self.status_message("Does the integration have the appropriate scopes required to perform this action?")
             reason = err.__str__()
             yield FunctionResult(None, success=False, reason=reason)
+            
