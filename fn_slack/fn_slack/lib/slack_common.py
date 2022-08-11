@@ -99,8 +99,6 @@ class SlackUtils(object):
 
     # helper function for find_channel() which will then use the less efficient channel name to search for it
     def check_channel_id(self, channel_id):
-        if not channel_id:
-            return False
         try:
             channel_object = self.slack_client.api_call(
                 api_method = "conversations.info",
@@ -109,9 +107,9 @@ class SlackUtils(object):
                 }
             )
             self.channel = channel_object.data.get("channel")
-        except IntegrationError("Channel not found: "): # will fail if no channel is found with this channel id, return false
-            return False 
-        return True
+        except Exception as e: # will fail if no channel is found with this channel id
+            raise IntegrationError(e)
+        return self.channel
 
     def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id, channel_id=None):
         """
@@ -135,7 +133,7 @@ class SlackUtils(object):
             input_channel_name, res_client, incident_id, task_id)
 
         # find the channel in Slack Workspace and set the value of channel via 
-        self.find_channel(slack_channel_name, channel_id)
+        self.channel = self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
@@ -354,8 +352,7 @@ class SlackUtils(object):
         :return:
         """
         if channel_id:
-            self.check_channel_id(channel_id)
-            return
+            return self.check_channel_id(channel_id)
         else:
             all_channels = self._slack_find_channels()
 
@@ -929,7 +926,8 @@ class SlackUtils(object):
         return results
 
     def get_channel_users_list(self, channel_id):
-        # channel_id = self.get_channel_id()
+        if not channel_id:
+            channel_id = self.get_channel_id()
         results = self.slack_client.api_call(
                     api_method = "conversations.members",
                     params = {
@@ -953,8 +951,8 @@ class SlackUtils(object):
                         }
                     )
             LOG.debug(results)
-
-            users_list.append("{}: {}".format(results.get("user",{}).get("profile",{}).get("display_name",{}), results.get("user",{}).get("profile",{}).get("email",{})))
+            if not results.get("user",{}).get("is_bot"):
+                users_list.append("{}: {}".format(results.get("user",{}).get("profile",{}).get("display_name",{}), results.get("user",{}).get("profile",{}).get("email",{})))
 
         return users_list
 

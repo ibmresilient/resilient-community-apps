@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             if not channel_id:
                 self.channel = slack_utils.find_channel(res_associated_channel_name)
             else:
-                slack_utils.check_channel_id(channel_id)
+                self.channel = slack_utils.check_channel_id(channel_id)
 
             if slack_utils.get_channel() is None:
                 raise FunctionError(

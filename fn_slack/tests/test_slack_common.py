@@ -147,17 +147,12 @@ class TestSlack(object):
         """ Test check Slack channel ID error"""
         print("Test check Slack channel ID error\n")
 
-        class MockChannelObj:
-            data = {
-                "ok": False,
-            }
-
-        mocked_api_call.return_value = MockChannelObj
+        mocked_api_call.side_effect = Exception
 
         slack_utils = SlackUtils("fake_api_key")
-        mocked_api_response = slack_utils.check_channel_id(slack_test_channel_id)
-        if not mocked_api_response:
-            assert mocked_api_response == mocked_api_call.return_value.get("ok")
+        with pytest.raises(IntegrationError):
+            slack_utils.check_channel_id(slack_test_channel_id)
+        
 
     @pytest.mark.parametrize("channel,expected_channel_id", [
         ({"id": "C0EAQDV4Z", "name": "test-channel"}, 'C0EAQDV4Z'),

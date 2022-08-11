@@ -66,9 +66,7 @@ class FunctionComponent(ResilientComponent):
 
 
             # configuration specific slack parameters
-            if self.options.get('api_bot_token'):
-                api_token = self.options.get('api_bot_token')
-            elif self.options.get('api_token'):
+            if self.options.get('api_token'):
                 api_token = self.options.get('api_token')
             else:
                 raise ValueError("Either api_bot_token or api_token are required")
