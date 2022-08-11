@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1660130749681,
+  "export_date": 1660222751249,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -382,28 +382,12 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1659727541179,
+      "last_modified_time": 1660213428348,
       "name": "webex_create_meeting",
       "tags": [],
       "uuid": "674a0970-dab8-4bd1-8e67-4ac8d5068b38",
-      "version": 1,
+      "version": 2,
       "view_items": [
-        {
-          "content": "9d368a2f-edf4-4353-a8ba-37f86c5a84e7",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "5706ac62-97ee-4b54-9807-9f4b124ececc",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
         {
           "content": "14438dc7-4874-4971-9aa7-5596b13276a1",
           "element": "field_uuid",
@@ -427,13 +411,29 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "5706ac62-97ee-4b54-9807-9f4b124ececc",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "9d368a2f-edf4-4353-a8ba-37f86c5a84e7",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
         {
           "actions": [],
           "description": null,
-          "name": "WebEx Platform",
+          "name": "Webex: Create Meeting",
           "object_type": "incident",
           "programmatic_name": "webex_platform",
           "tags": [
@@ -619,13 +619,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 17,
+  "id": 18,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1660130747240,
+      "create_date": 1660222748623,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -634,7 +634,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1660130747240,
+      "update_date": 1660222748623,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -683,16 +683,16 @@
     {
       "actions": [],
       "content": {
-        "version": 86,
+        "version": 97,
         "workflow_id": "webex_platform",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"webex_platform\" isExecutable=\"true\" name=\"WebEx Platform\"\u003e\u003cdocumentation\u003eA platform to create a meeting with team members\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1jvh0lg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0cp3aej\" name=\"Webex: Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"674a0970-dab8-4bd1-8e67-4ac8d5068b38\"\u003e{\"inputs\":{},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Cisco WebEx Meeting\\\"\\n\\n  fail_reason = content.get(\\\"fail_reason\\\")\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\nelse:\\n  ref_html_room = u\\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;Link\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(content.get(\\\"meetingLink\\\"))\\n\\n  text = u\\\"\u0026lt;b\u0026gt;Cisco WebEx Meeting Links:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;Webex Room URL: {0}\\\".format(ref_html_room)\\n  for key in content:\\n      text += u\\\"\u0026lt;br /\u0026gt;{} : {}\\\".format(key, content.get(key))\\n  \\nnote = helper.createRichText(text)\\nincident.addNote(note)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# To set meeting name to the workflow inputs, uncomment the following lines\\ninputs.webex_meeting_name = incident.name\\ninputs.webex_incident_id = str(incident.id)\\n\\n# Get the agenda from the activity field or the incident description\\nif rule.properties.webex_meeting_agenda is None:\\n  if incident.description is not None and incident.description.content is not None:\\n    inputs.webex_meeting_agenda = incident.description.content\\n  else:\\n    inputs.webex_meeting_agenda = \\\"\\\"\\nelse:\\n  inputs.webex_meeting_agenda = rule.properties.webex_meeting_agenda\\n\\ninputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties.webex_meeting_password is None else rule.properties.webex_meeting_password\\n\\nif rule.properties.webex_meeting_attendee:\\n    inputs.webex_meeting_attendee = rule.properties.webex_meeting_attendee\\n    \\nif rule.properties.webex_add_all_members is not None:\\n    inputs.webex_add_all_members = rule.properties.webex_add_all_members\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1jvh0lg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_12scroy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_04gd8py\"\u003e\u003cincoming\u003eSequenceFlow_12scroy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1jvh0lg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0cp3aej\"/\u003e\u003csequenceFlow id=\"SequenceFlow_12scroy\" sourceRef=\"ServiceTask_0cp3aej\" targetRef=\"EndEvent_04gd8py\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_172tdgi\"\u003e\u003ctext\u003eInputs:\u00a0webex_meeting_name, webex_meeting_agenda, and webex_meeting_password\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0nvlnia\" sourceRef=\"ServiceTask_0cp3aej\" targetRef=\"TextAnnotation_172tdgi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_01xqm6h\"\u003e\u003ctext\u003eOutputs: host_url and attendee_url written to incident note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1aeawdv\" sourceRef=\"ServiceTask_0cp3aej\" targetRef=\"TextAnnotation_01xqm6h\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_121irbg\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1kqsb5m\" sourceRef=\"EndEvent_04gd8py\" targetRef=\"TextAnnotation_121irbg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"175\" y=\"251\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"170\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"65\" y=\"347\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"180\" xsi:type=\"omgdc:Point\" y=\"280\"/\u003e\u003comgdi:waypoint x=\"124\" xsi:type=\"omgdc:Point\" y=\"347\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0cp3aej\" id=\"ServiceTask_0cp3aej_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"614\" y=\"229\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_172tdgi\" id=\"TextAnnotation_172tdgi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"433\" x=\"44\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0nvlnia\" id=\"Association_0nvlnia_di\"\u003e\u003comgdi:waypoint x=\"614\" xsi:type=\"omgdc:Point\" y=\"248\"/\u003e\u003comgdi:waypoint x=\"296\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_01xqm6h\" id=\"TextAnnotation_01xqm6h_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"378\" x=\"854\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1aeawdv\" id=\"Association_1aeawdv_di\"\u003e\u003comgdi:waypoint x=\"714\" xsi:type=\"omgdc:Point\" y=\"246\"/\u003e\u003comgdi:waypoint x=\"1010\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04gd8py\" id=\"EndEvent_04gd8py_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1113.2577962577961\" y=\"251\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"1131.2577962577961\" y=\"290\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_121irbg\" id=\"TextAnnotation_121irbg_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"1249\" y=\"347\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1kqsb5m\" id=\"Association_1kqsb5m_di\"\u003e\u003comgdi:waypoint x=\"1147\" xsi:type=\"omgdc:Point\" y=\"278\"/\u003e\u003comgdi:waypoint x=\"1272\" xsi:type=\"omgdc:Point\" y=\"347\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jvh0lg\" id=\"SequenceFlow_1jvh0lg_di\"\u003e\u003comgdi:waypoint x=\"211\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"614\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"412.5\" y=\"247\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12scroy\" id=\"SequenceFlow_12scroy_di\"\u003e\u003comgdi:waypoint x=\"714\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"1113\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"913.5\" y=\"247\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"webex_platform\" isExecutable=\"true\" name=\"Webex: Create Meeting\"\u003e\u003cdocumentation\u003eA sample workflow to create a meeting with team members\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1jvh0lg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0cp3aej\" name=\"Webex: Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"674a0970-dab8-4bd1-8e67-4ac8d5068b38\"\u003e{\"inputs\":{\"03dd1531-acbb-4db8-9950-53520eabbb5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"abcd12345\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Cisco WebEx Meeting\\\"\\n\\n  fail_reason = content.get(\\\"fail_reason\\\")\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\nelse:\\n  ref_html_room = u\\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;Link\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(content.get(\\\"webLink\\\"))\\n\\n  text = u\\\"\u0026lt;b\u0026gt;Cisco WebEx Meeting:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;Webex Room URL: {0}\\\".format(ref_html_room)\\n  text += u\\\"\u0026lt;br /\u0026gt;Meeting Name: {}\\\".format(content.get(\\\"title\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Password: {}\\\".format(content.get(\\\"password\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Agenda: {}\\\".format(content.get(\\\"agenda\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Start Time: {}\\\".format(content.get(\\\"start\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;End Time: {}\\\".format(content.get(\\\"end\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Timezone: {}\\\".format(content.get(\\\"timezone\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Meeting Id: {}\\\".format(content.get(\\\"id\\\"))\\n  \\nnote = helper.createRichText(text)\\nincident.addNote(note)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# To set meeting name to the workflow inputs, uncomment the following lines\\ninputs.webex_meeting_name = incident.name if rule.properties.webex_meeting_name is None else rule.properties.webex_meeting_name\\n\\n# Get the agenda from the activity field or the incident description\\nif rule.properties.webex_meeting_agenda is None:\\n  if incident.description is not None and incident.description.content is not None:\\n    inputs.webex_meeting_agenda = incident.description.content\\n  else:\\n    inputs.webex_meeting_agenda = \\\"\\\"\\nelse:\\n  inputs.webex_meeting_agenda = rule.properties.webex_meeting_agenda\\n\\ninputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties.webex_meeting_password is None else rule.properties.webex_meeting_password\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1jvh0lg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_12scroy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_04gd8py\"\u003e\u003cincoming\u003eSequenceFlow_12scroy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1jvh0lg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0cp3aej\"/\u003e\u003csequenceFlow id=\"SequenceFlow_12scroy\" sourceRef=\"ServiceTask_0cp3aej\" targetRef=\"EndEvent_04gd8py\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_172tdgi\"\u003e\u003ctext\u003eInputs:\u00a0webex_meeting_name, webex_meeting_agenda, and webex_meeting_password\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0nvlnia\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_172tdgi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_01xqm6h\"\u003e\u003ctext\u003eOutputs: host_url and attendee_url written to incident note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1aeawdv\" sourceRef=\"EndEvent_04gd8py\" targetRef=\"TextAnnotation_01xqm6h\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_121irbg\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1kqsb5m\" sourceRef=\"EndEvent_04gd8py\" targetRef=\"TextAnnotation_121irbg\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"401\" y=\"251\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"396\" y=\"286\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"369\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"287\"/\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0cp3aej\" id=\"ServiceTask_0cp3aej_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"607\" y=\"229\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_172tdgi\" id=\"TextAnnotation_172tdgi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"433\" x=\"202\" y=\"136\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0nvlnia\" id=\"Association_0nvlnia_di\"\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"251\"/\u003e\u003comgdi:waypoint x=\"419\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_01xqm6h\" id=\"TextAnnotation_01xqm6h_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"378\" x=\"672\" y=\"136\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1aeawdv\" id=\"Association_1aeawdv_di\"\u003e\u003comgdi:waypoint x=\"861\" xsi:type=\"omgdc:Point\" y=\"251\"/\u003e\u003comgdi:waypoint x=\"861\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_04gd8py\" id=\"EndEvent_04gd8py_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"843\" y=\"251\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"816\" y=\"290\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_121irbg\" id=\"TextAnnotation_121irbg_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"811\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1kqsb5m\" id=\"Association_1kqsb5m_di\"\u003e\u003comgdi:waypoint x=\"861\" xsi:type=\"omgdc:Point\" y=\"287\"/\u003e\u003comgdi:waypoint x=\"861\" xsi:type=\"omgdc:Point\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1jvh0lg\" id=\"SequenceFlow_1jvh0lg_di\"\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"607\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"477\" y=\"247\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12scroy\" id=\"SequenceFlow_12scroy_di\"\u003e\u003comgdi:waypoint x=\"707\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"269\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"730\" y=\"247\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 86,
-      "description": "A platform to create a meeting with team members",
+      "content_version": 97,
+      "description": "A sample workflow to create a meeting with team members",
       "export_key": "webex_platform",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1659727979652,
-      "name": "WebEx Platform",
+      "last_modified_time": 1660222544531,
+      "name": "Webex: Create Meeting",
       "object_type": "incident",
       "programmatic_name": "webex_platform",
       "tags": [
