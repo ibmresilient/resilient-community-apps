@@ -2,12 +2,14 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
+from logging import getLogger
 from json import loads, decoder
 from urllib.parse import urljoin
 from resilient_lib import RequestsCommon, validate_fields, IntegrationError
 
 PACKAGE_NAME = "fn_mcafee_epo"
 SIXTY_SECONDS = 60 # Default timeout
+LOG = getLogger()
 
 def init_client(opts, options):
     validate_fields(["epo_url", "epo_username",
@@ -20,6 +22,22 @@ def init_client(opts, options):
         opts,
         options
     )
+
+def clear(rest_client, table_name, incident_id):
+    """
+    Clear data in given table on SOAR
+    :param res_rest_client: SOAR rest client connection
+    :param table_name: API access name of the table to clear
+    :param incident_id: SOAR ID for the incident
+    :return: None
+    """
+    try:
+        rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
+        LOG.info("Data in table {} in incident {} has been cleared".format(table_name, incident_id))
+
+    except Exception as err_msg:
+        LOG.error("Failed to clear table: {} error: {}".format(table_name, err_msg))
+        raise IntegrationError("Error while clearing table: {}".format(table_name))
 
 class Client:
     """

@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.mcafee_epo_target = "EPOLeafNode"
+inputs.datatable_name = "mcafee_epo_systems"
+inputs.incident_id = incident.id
 ```
 
 ### Post-Processing Script

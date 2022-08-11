@@ -16,30 +16,8 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "mcafee_epo_pass": {
-          "type": "string"
-        },
-        "mcafee_epo_allowed_ips": {},
-        "mcafee_epo_phone_number": {
-          "type": "string"
-        },
-        "mcafee_epo_email": {
-          "type": "string"
-        },
         "mcafee_epo_username": {
           "type": "string"
-        },
-        "mcafee_epo_notes": {
-          "type": "string"
-        },
-        "mcafee_epo_user_disabled": {
-          "type": "boolean"
-        },
-        "mcafee_epo_fullname": {
-          "type": "string"
-        },
-        "mcafee_epo_admin": {
-          "type": "boolean"
         }
       }
     },

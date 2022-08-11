@@ -26,6 +26,7 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 ```python
 if results['content']:
   incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
+  row.users = "{}, {}".format(row.users, rule.properties.epo_username)
 ```
 
 ---

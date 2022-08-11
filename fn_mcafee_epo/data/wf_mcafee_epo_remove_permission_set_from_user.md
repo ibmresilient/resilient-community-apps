@@ -11,7 +11,7 @@
 `mcafee_epo_remove_permission_sets_from_user`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -26,6 +26,9 @@ inputs.mcafee_epo_username = rule.properties.epo_username
 ```python
 if results['content']:
   incident.addNote("Permissions set: {} was removed from user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
+  usersList = list(row.users.split(", "))
+  usersList.remove(rule.properties.epo_username)
+  row.users = str(usersList).replace("[","").replace("]","").replace("u","").replace("'","")
 ```
 
 ---
