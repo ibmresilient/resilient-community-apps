@@ -64,7 +64,7 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("Failed to Authenticate {}! Is the Refresh token Upto date?".format(FN_NAME))
             reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)
-        
+
         try:
             webex = WebexRooms(self.requiredParameters)
             webex.generate_member_list()

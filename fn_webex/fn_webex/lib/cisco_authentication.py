@@ -10,8 +10,8 @@ from resilient_circuits import FunctionError
 class WebexAuthentication:
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
-        self.rc  = requiredParameters["rc"]
-        self.LOG = self.requiredParameters["logger"]
+        self.rc  = requiredParameters.get("rc")
+        self.LOG = self.requiredParameters.get("logger")
 
 
     def Authenticate(self):

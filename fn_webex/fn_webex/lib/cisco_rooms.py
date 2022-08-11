@@ -20,7 +20,7 @@ class WebexRooms:
 
 
     def isDirectMember(self, ids, orgMemberList):
-        for user in orgMemberList:
+        for user in orgMemberList:  
             if ids == user.get("id"): 
                 return user.get("email")
             
