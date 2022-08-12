@@ -29,6 +29,9 @@ class FunctionComponent(AppFunctionComponent):
         # Validate fields
         validate_fields(["mcafee_epo_group_id"], fn_inputs)
 
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
+
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 

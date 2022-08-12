@@ -27,9 +27,11 @@ inputs.incident_id = incident.id
 if results.get("content"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_client_tasks")
-    table["task_name"] = x.get("")
-    table["owner"] = x.get("")
-    table["assignments"] = x.get("")
+    table["object_name"] = x.get("objectName")
+    table["type_name"] = x.get("typeName")
+    table["product_name"] = x.get("productName")
+    table["product_id"] = x.get("productId")
+    table["object_id"] = x.get("objectId")
 ```
 
 ---
