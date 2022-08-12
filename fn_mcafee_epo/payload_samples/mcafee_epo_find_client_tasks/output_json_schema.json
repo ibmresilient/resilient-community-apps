@@ -14,50 +14,22 @@
       "items": {
         "type": "object",
         "properties": {
-          "EPOLeafNode.Tags": {
+          "productId": {
             "type": "string"
           },
-          "EPOLeafNode.ExcludedTags": {
+          "typeName": {
             "type": "string"
           },
-          "EPOLeafNode.LastUpdate": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "EPOLeafNode.os": {
+          "objectName": {
             "type": "string"
           },
-          "EPOLeafNode.NodeName": {
-            "type": "string"
-          },
-          "EPOLeafNode.ManagedState": {
+          "typeId": {
             "type": "integer"
           },
-          "EPOLeafNode.AgentVersion": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "EPOLeafNode.AgentGUID": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "EPOLeafNode.ResortEnabled": {
-            "type": "boolean"
-          },
-          "EPOLeafNode.TransferSiteListsID": {
-            "type": "boolean"
-          },
-          "EPOLeafNode.SequenceErrorCount": {
+          "objectId": {
             "type": "integer"
           },
-          "EPOLeafNode.SequenceErrorCountLastUpdate": {},
-          "EPOLeafNode.LastCommSecure": {
+          "productName": {
             "type": "string"
           }
         }
@@ -71,9 +43,6 @@
           "type": "integer"
         },
         "datatable_name": {
-          "type": "string"
-        },
-        "mcafee_epo_target": {
           "type": "string"
         }
       }

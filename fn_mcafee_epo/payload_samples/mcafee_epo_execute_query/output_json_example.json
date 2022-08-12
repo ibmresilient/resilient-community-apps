@@ -6,12 +6,12 @@
     {
       "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Linux, Server",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-07-29T08:14:34-07:00",
+      "EPOLeafNode.LastUpdate": "2022-08-12T06:10:31-07:00",
       "EPOLeafNode.os": "Linux|Server|4.9|227-1.mlos2.x86_64",
       "EPOLeafNode.NodeName": "int-mcafee-tie",
       "EPOLeafNode.ManagedState": 1,
       "EPOLeafNode.AgentVersion": "5.6.5.236",
-      "EPOLeafNode.AgentGUID": "E1A00018-09C4-11ED-2BBA-005056B00018",
+      "EPOLeafNode.AgentGUID": "E1ABB618-09C4-11ED-2BBA-005056B43418",
       "EPOLeafNode.ResortEnabled": false,
       "EPOLeafNode.TransferSiteListsID": false,
       "EPOLeafNode.SequenceErrorCount": 0,
@@ -21,12 +21,12 @@
     {
       "EPOLeafNode.Tags": "Intel Core Processor, Server, Windows server 2016",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-07-29T07:42:48-07:00",
+      "EPOLeafNode.LastUpdate": "2022-08-12T05:42:46-07:00",
       "EPOLeafNode.os": "Windows Server 2016|Server|10.0|",
       "EPOLeafNode.NodeName": "MCAFEE-EPO-CLIE",
       "EPOLeafNode.ManagedState": 1,
       "EPOLeafNode.AgentVersion": "5.5.1.388",
-      "EPOLeafNode.AgentGUID": "D7700006-3C1E-40A9-ACB2-B74E50006D5E",
+      "EPOLeafNode.AgentGUID": "D770FEB6-3C1E-40A9-ACB2-B74E5FF66D5E",
       "EPOLeafNode.ResortEnabled": false,
       "EPOLeafNode.TransferSiteListsID": false,
       "EPOLeafNode.SequenceErrorCount": 0,
@@ -36,21 +36,68 @@
     {
       "EPOLeafNode.Tags": "Intel(R) Xeon(R) CPU, Server, Windows server 2016",
       "EPOLeafNode.ExcludedTags": "",
-      "EPOLeafNode.LastUpdate": "2022-07-29T08:00:07-07:00",
+      "EPOLeafNode.LastUpdate": "2022-08-12T06:00:08-07:00",
       "EPOLeafNode.os": "Windows Server 2016|Server|10.0|",
       "EPOLeafNode.NodeName": "WIN-MTHJTQ4ELBP",
       "EPOLeafNode.ManagedState": 1,
       "EPOLeafNode.AgentVersion": "5.6.6.232",
-      "EPOLeafNode.AgentGUID": "B7E000E0-CDE7-11EB-3210-005000041000",
+      "EPOLeafNode.AgentGUID": "B7E3C7E0-CDE7-11EB-3210-005056B41000",
       "EPOLeafNode.ResortEnabled": false,
       "EPOLeafNode.TransferSiteListsID": false,
       "EPOLeafNode.SequenceErrorCount": 0,
       "EPOLeafNode.SequenceErrorCountLastUpdate": null,
       "EPOLeafNode.LastCommSecure": "1"
+    },
+    {
+      "EPOLeafNode.Tags": "",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastUpdate": null,
+      "EPOLeafNode.os": "|||",
+      "EPOLeafNode.NodeName": "SystemA",
+      "EPOLeafNode.ManagedState": 0,
+      "EPOLeafNode.AgentVersion": null,
+      "EPOLeafNode.AgentGUID": null,
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.LastCommSecure": "0"
+    },
+    {
+      "EPOLeafNode.Tags": "",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastUpdate": null,
+      "EPOLeafNode.os": "|||",
+      "EPOLeafNode.NodeName": "LostSystem",
+      "EPOLeafNode.ManagedState": 0,
+      "EPOLeafNode.AgentVersion": null,
+      "EPOLeafNode.AgentGUID": null,
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.LastCommSecure": "0"
+    },
+    {
+      "EPOLeafNode.Tags": "",
+      "EPOLeafNode.ExcludedTags": "",
+      "EPOLeafNode.LastUpdate": null,
+      "EPOLeafNode.os": "|||",
+      "EPOLeafNode.NodeName": "toDelete",
+      "EPOLeafNode.ManagedState": 0,
+      "EPOLeafNode.AgentVersion": null,
+      "EPOLeafNode.AgentGUID": null,
+      "EPOLeafNode.ResortEnabled": false,
+      "EPOLeafNode.TransferSiteListsID": false,
+      "EPOLeafNode.SequenceErrorCount": 0,
+      "EPOLeafNode.SequenceErrorCountLastUpdate": null,
+      "EPOLeafNode.LastCommSecure": "0"
     }
   ],
   "raw": null,
   "inputs": {
+    "incident_id": 2108,
+    "datatable_name": "mcafee_epo_systems",
     "mcafee_epo_target": "EPOLeafNode"
   },
   "metrics": {
@@ -58,7 +105,7 @@
     "package": "fn-mcafee-epo",
     "package_version": "1.1.0",
     "host": "local",
-    "execution_time_ms": 531,
-    "timestamp": "2022-07-29 11:15:14"
+    "execution_time_ms": 1252,
+    "timestamp": "2022-08-12 09:10:36"
   }
 }

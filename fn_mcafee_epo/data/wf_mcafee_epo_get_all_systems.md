@@ -32,7 +32,8 @@ if results['content']:
     table_row["agent_guid"] = system.get("EPOLeafNode.AgentGUID")
     table_row["last_communication"] = system.get("EPOLeafNode.LastUpdate")
     table_row["tags"] = system.get("EPOLeafNode.Tags")
-    table_row["operating_system"] = system.get("EPOLeafNode.os")
+    table_row["operating_system"] = system.get("EPOLeafNode.os").replace("|", " | ")
+    table_row["deleted"] = False
 ```
 
 ---

@@ -7,10 +7,10 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
 from resilient_lib import validate_fields
 
-FN_NAME = "mcafee_epo_remove_permission_sets_from_user"
+FN_NAME = "mcafee_epo_find_systems_in_group"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'mcafee_epo_remove_permission_sets_from_user'"""
+    """Component that implements function 'mcafee_epo_find_systems_in_group'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -18,29 +18,27 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Remove permission set(s) from an ePO user
+        Function: Find systems in a specified group on ePO server
         Inputs:
-            -   fn_inputs.mcafee_epo_username
-            -   fn_inputs.mcafee_epo_permsetname
+            -   fn_inputs.mcafee_epo_sub_group
+            -   fn_inputs.mcafee_epo_group_id
         """
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-        # Get the function parameters:
-        validate_fields(
-            ["mcafee_epo_username", "mcafee_epo_permsetname"], fn_inputs)
-
-        # Log parameters
-        self.LOG.info("mcafee_epo_username: %s", fn_inputs.mcafee_epo_username)
-        self.LOG.info("mcafee_epo_permsetname: %s", fn_inputs.mcafee_epo_permsetname)
+        # Validate fields
+        validate_fields(["mcafee_epo_group_id"], fn_inputs)
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
+        response = client.request(
+            "epogroup.findSystems",
+            {"groupId": fn_inputs.mcafee_epo_group_id,
+            "searchSubgroups": fn_inputs.mcafee_epo_sub_group if hasattr(fn_inputs, "mcafee_epo_sub_group") else None
+            }
+        )
+
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 
-        yield FunctionResult(client.request(
-            "core.removePermSetsForUser",
-            {"userName": fn_inputs.mcafee_epo_username,
-            "permSetName": fn_inputs.mcafee_epo_permsetname}
-        ))
+        yield FunctionResult(response)

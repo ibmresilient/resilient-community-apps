@@ -35,6 +35,7 @@ if results["content"]:
     table_row["admin"] = bool(user.get("admin"))
     table_row["notes"] = user.get("notes")
     table_row["allowed_ips"] = user.get("allowedIPs")
+    table_row["user_deleted"] = False
 ```
 
 ---

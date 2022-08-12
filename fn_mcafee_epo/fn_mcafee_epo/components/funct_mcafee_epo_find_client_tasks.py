@@ -4,13 +4,12 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
-from resilient_lib import validate_fields
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 
-FN_NAME = "mcafee_epo_remove_user"
+FN_NAME = "mcafee_epo_find_client_tasks"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'mcafee_epo_remove_user'"""
+    """Component that implements function 'mcafee_epo_find_client_tasks'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -18,26 +17,29 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Delete a user from the ePO server
+        Function: Find client tasks on the ePO server
         Inputs:
-            -   fn_inputs.mcafee_epo_username
+            -   fn_inputs.incident_id
+            -   fn_inputs.mcafee_epo_search_text
+            -   fn_inputs.datatable_name
         """
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
 
-        # Validate parameters
-        validate_fields(["mcafee_epo_username"], fn_inputs)
-
         # Log parameters
-        self.LOG.info("mcafee_epo_username: %s", fn_inputs.mcafee_epo_username)
+        self.LOG.info(str(fn_inputs))
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
         response = client.request(
-            "core.removeUser",
-            {"userName": fn_inputs.mcafee_epo_username}
+            "clienttask.find",
+            {"searchText": fn_inputs.mcafee_epo_search_text if hasattr(fn_inputs, "mcafee_epo_search_text") else None}
         )
+
+        # Clear datatable if requires params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 

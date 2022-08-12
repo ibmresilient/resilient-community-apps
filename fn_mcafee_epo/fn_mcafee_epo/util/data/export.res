@@ -194,6 +194,82 @@
       "automations": [],
       "conditions": [],
       "enabled": true,
+      "export_key": "McAfee ePO Delete System",
+      "id": 112,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee ePO Delete System",
+      "object_type": "mcafee_epo_systems",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "1439363f-d3c4-4d1f-920b-14f7b5f4253a",
+      "view_items": [],
+      "workflows": [
+        "mcafee_epo_delete_system"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "McAfee ePO Find All Client Tasks",
+      "id": 113,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee ePO Find All Client Tasks",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "43e61e08-37a4-4577-a3d3-e31fd7c2cb9f",
+      "view_items": [],
+      "workflows": [
+        "mcafee_epo_find_all_client_tasks"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "McAfee ePO Find All Groups",
+      "id": 110,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee ePO Find All Groups",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "35ca8fb3-519e-48ca-9d0a-b3ac7523be98",
+      "view_items": [],
+      "workflows": [
+        "mcafee_epo_find_all_groups"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "McAfee ePO Find Systems in Group",
+      "id": 111,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "McAfee ePO Find Systems in Group",
+      "object_type": "mcafee_epo_groups",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "0ef0dfe6-ec80-4005-810a-53043dcf1bb1",
+      "view_items": [],
+      "workflows": [
+        "mcafee_epo_find_systems_in_group"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
       "export_key": "McAfee ePO Get All Permission Sets",
       "id": 91,
       "logic_type": "all",
@@ -599,7 +675,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1660218473223,
+  "export_date": 1660312041403,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -843,6 +919,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/mcafee_epo_uninstall",
+      "hide_notification": false,
+      "id": 1185,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_uninstall",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_uninstall",
+      "tooltip": "True or false to uninstall system",
+      "type_id": 11,
+      "uuid": "f3512f4f-b0fe-427f-9114-1fe12aaa9f04",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/mcafee_epo_allowed_ips",
       "hide_notification": false,
       "id": 1091,
@@ -959,6 +1064,35 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/mcafee_epo_system_name_or_id",
+      "hide_notification": false,
+      "id": 1183,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_system_name_or_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_system_name_or_id",
+      "tooltip": "Comma seperated list of systems name or system ids",
+      "type_id": 11,
+      "uuid": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
       "id": 1168,
@@ -978,6 +1112,64 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "1f8b5186-4843-473e-a7ef-261488512aad",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_epo_uninstall_software",
+      "hide_notification": false,
+      "id": 1184,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_uninstall_software",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_uninstall_software",
+      "tooltip": "True or false to uninstall software on system",
+      "type_id": 11,
+      "uuid": "21706c4d-8ec9-4d45-8650-03e4ad3604ad",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_epo_sub_group",
+      "hide_notification": false,
+      "id": 1182,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_sub_group",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_sub_group",
+      "tooltip": "Sub group name",
+      "type_id": 11,
+      "uuid": "23690958-a914-48b2-acec-4362f9816641",
       "values": []
     },
     {
@@ -1094,6 +1286,64 @@
       "tooltip": "ePO data types target name",
       "type_id": 11,
       "uuid": "3b19d71b-890d-472c-bec7-40a035c1bca2",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_epo_search_text",
+      "hide_notification": false,
+      "id": 1171,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_search_text",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_search_text",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "4ebc533a-359e-486d-9355-6c2a45a52d02",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/mcafee_epo_group_id",
+      "hide_notification": false,
+      "id": 1181,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "mcafee_epo_group_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "mcafee_epo_group_id",
+      "tooltip": "Id for the group on the ePO server",
+      "type_id": 11,
+      "uuid": "53bbb755-1c65-48c2-a323-c64ca989de16",
       "values": []
     },
     {
@@ -1848,6 +2098,66 @@
       ]
     },
     {
+      "created_date": 1660308791490,
+      "description": {
+        "content": "Delete a system from the ePO server",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_epo_message_destination",
+      "display_name": "McAfee ePO Delete System",
+      "export_key": "mcafee_epo_delete_system",
+      "id": 70,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1660308866979,
+      "name": "mcafee_epo_delete_system",
+      "tags": [],
+      "uuid": "4011b9c6-eeba-49da-b5f7-27fdce026c83",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "1f6f5cd4-cccf-4d78-9cc6-84a6550152c6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f3512f4f-b0fe-427f-9114-1fe12aaa9f04",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "21706c4d-8ec9-4d45-8650-03e4ad3604ad",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee ePO Delete System",
+          "object_type": "mcafee_epo_systems",
+          "programmatic_name": "mcafee_epo_delete_system",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 71
+        }
+      ]
+    },
+    {
       "created_date": 1659097746345,
       "description": {
         "content": "Execute a query on the ePO server",
@@ -1976,6 +2286,178 @@
           "tags": [],
           "uuid": null,
           "workflow_id": 66
+        }
+      ]
+    },
+    {
+      "created_date": 1660311201330,
+      "description": {
+        "content": "Find client tasks on the ePO server",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_epo_message_destination",
+      "display_name": "McAfee ePO Find Client Tasks",
+      "export_key": "mcafee_epo_find_client_tasks",
+      "id": 71,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1660311201352,
+      "name": "mcafee_epo_find_client_tasks",
+      "tags": [],
+      "uuid": "948b9c0a-1d8e-47c4-a277-1180ee5d3f5e",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "9767f563-47d2-4daf-b353-284342833db8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1f8b5186-4843-473e-a7ef-261488512aad",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "4ebc533a-359e-486d-9355-6c2a45a52d02",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee ePO Find All Client Tasks",
+          "object_type": "incident",
+          "programmatic_name": "mcafee_epo_find_all_client_tasks",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 72
+        }
+      ]
+    },
+    {
+      "created_date": 1660220678938,
+      "description": {
+        "content": "Find groups on the ePO server",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_epo_message_destination",
+      "display_name": "McAfee ePO Find Groups",
+      "export_key": "mcafee_epo_find_groups",
+      "id": 68,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1660220690986,
+      "name": "mcafee_epo_find_groups",
+      "tags": [],
+      "uuid": "cec9d0f8-06bc-4168-9fec-554d2fef8a99",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "4ebc533a-359e-486d-9355-6c2a45a52d02",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "9767f563-47d2-4daf-b353-284342833db8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1f8b5186-4843-473e-a7ef-261488512aad",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee ePO Find All Groups",
+          "object_type": "incident",
+          "programmatic_name": "mcafee_epo_find_all_groups",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 69
+        }
+      ]
+    },
+    {
+      "created_date": 1660227845569,
+      "description": {
+        "content": "Find systems in a specified group on ePO server",
+        "format": "text"
+      },
+      "destination_handle": "mcafee_epo_message_destination",
+      "display_name": "McAfee ePO Find Systems in Group",
+      "export_key": "mcafee_epo_find_systems_in_group",
+      "id": 69,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1660227845590,
+      "name": "mcafee_epo_find_systems_in_group",
+      "tags": [],
+      "uuid": "0cbf4250-b833-421d-a9be-a36e0d236022",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "53bbb755-1c65-48c2-a323-c64ca989de16",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "23690958-a914-48b2-acec-4362f9816641",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "McAfee ePO Find Systems in Group",
+          "object_type": "mcafee_epo_groups",
+          "programmatic_name": "mcafee_epo_find_systems_in_group",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 70
         }
       ]
     },
@@ -2541,13 +3023,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 36,
+  "id": 43,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1660218471982,
+      "create_date": 1660312039965,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2556,7 +3038,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1660218471982,
+      "update_date": 1660312039965,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2595,6 +3077,242 @@
   "task_order": [],
   "timeframes": null,
   "types": [
+    {
+      "actions": [],
+      "display_name": "McAfee ePO Client Tasks",
+      "export_key": "mcafee_epo_client_tasks",
+      "fields": {
+        "assignments": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_client_tasks/assignments",
+          "hide_notification": false,
+          "id": 1187,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "assignments",
+          "operation_perms": {},
+          "operations": [],
+          "order": 2,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Assignments",
+          "tooltip": "Users that are assigned to the task",
+          "type_id": 1021,
+          "uuid": "db73f701-5335-44f3-8512-b5ab16dd923b",
+          "values": [],
+          "width": 269
+        },
+        "owner": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_client_tasks/owner",
+          "hide_notification": false,
+          "id": 1188,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "owner",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Owner",
+          "tooltip": "Owner of the task",
+          "type_id": 1021,
+          "uuid": "76b639f3-fd97-4a36-804e-2f9f5498928b",
+          "values": [],
+          "width": 180
+        },
+        "task_name": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_client_tasks/task_name",
+          "hide_notification": false,
+          "id": 1189,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "task_name",
+          "operation_perms": {},
+          "operations": [],
+          "order": 0,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Task name",
+          "tooltip": "Name of the task",
+          "type_id": 1021,
+          "uuid": "e8f32012-13a1-4d12-b20d-d5a858fe675a",
+          "values": [],
+          "width": 235
+        }
+      },
+      "for_actions": false,
+      "for_custom_fields": false,
+      "for_notifications": false,
+      "for_workflows": false,
+      "id": null,
+      "parent_types": [
+        "incident"
+      ],
+      "properties": {
+        "can_create": false,
+        "can_destroy": false,
+        "for_who": []
+      },
+      "scripts": [],
+      "tags": [],
+      "type_id": 8,
+      "type_name": "mcafee_epo_client_tasks",
+      "uuid": "59880177-40ca-43c7-9b0c-576377bad687"
+    },
+    {
+      "actions": [],
+      "display_name": "McAfee ePO Groups",
+      "export_key": "mcafee_epo_groups",
+      "fields": {
+        "group_id": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_groups/group_id",
+          "hide_notification": false,
+          "id": 1178,
+          "input_type": "number",
+          "internal": false,
+          "is_tracked": false,
+          "name": "group_id",
+          "operation_perms": {},
+          "operations": [],
+          "order": 0,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Group ID",
+          "tooltip": "ID of the group",
+          "type_id": 1020,
+          "uuid": "2de87667-95f3-4320-a85a-da3c5b627f97",
+          "values": [],
+          "width": 218
+        },
+        "group_path": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_groups/group_path",
+          "hide_notification": false,
+          "id": 1179,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "group_path",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Group Path",
+          "tooltip": "Path to the group on the ePO server",
+          "type_id": 1020,
+          "uuid": "db3dc49e-1ef6-45c3-a2ff-2410a30b06ae",
+          "values": [],
+          "width": 254
+        },
+        "systems": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_groups/systems",
+          "hide_notification": false,
+          "id": 1180,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "systems",
+          "operation_perms": {},
+          "operations": [],
+          "order": 2,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Systems",
+          "tooltip": "Name of the systems in the group",
+          "type_id": 1020,
+          "uuid": "21d97c6d-690e-4ccf-8509-4988debe3d1a",
+          "values": [],
+          "width": 209
+        }
+      },
+      "for_actions": false,
+      "for_custom_fields": false,
+      "for_notifications": false,
+      "for_workflows": false,
+      "id": null,
+      "parent_types": [
+        "incident"
+      ],
+      "properties": {
+        "can_create": false,
+        "can_destroy": false,
+        "for_who": []
+      },
+      "scripts": [],
+      "tags": [],
+      "type_id": 8,
+      "type_name": "mcafee_epo_groups",
+      "uuid": "93b7e7d5-e9b9-481c-8fc2-f923d311bb42"
+    },
     {
       "actions": [],
       "display_name": "McAfee ePO Permission sets",
@@ -2717,6 +3435,37 @@
           "uuid": "4a06727d-bb13-4420-a42a-05f1fa2233fc",
           "values": [],
           "width": 205
+        },
+        "deleted": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_systems/deleted",
+          "hide_notification": false,
+          "id": 1186,
+          "input_type": "boolean",
+          "internal": false,
+          "is_tracked": false,
+          "name": "deleted",
+          "operation_perms": {},
+          "operations": [],
+          "order": 5,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "Deleted",
+          "tooltip": "If the System is deleted or not",
+          "type_id": 1014,
+          "uuid": "d88bd8b7-af58-42dd-bc4e-fa31bdab3a84",
+          "values": [],
+          "width": 59
         },
         "last_communication": {
           "allow_default_value": false,
@@ -3171,7 +3920,7 @@
           "type_id": 1016,
           "uuid": "063a6b3b-73ab-458b-8855-ed8aca82c7f9",
           "values": [],
-          "width": 44
+          "width": 94
         },
         "phone_number": {
           "allow_default_value": false,
@@ -3203,6 +3952,37 @@
           "uuid": "c9638dca-a693-47f6-a616-cd31d8c4d366",
           "values": [],
           "width": 144
+        },
+        "user_deleted": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "mcafee_epo_users/user_deleted",
+          "hide_notification": false,
+          "id": 1170,
+          "input_type": "boolean",
+          "internal": false,
+          "is_tracked": false,
+          "name": "user_deleted",
+          "operation_perms": {},
+          "operations": [],
+          "order": 8,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "tags": [],
+          "templates": [],
+          "text": "User Deleted",
+          "tooltip": "",
+          "type_id": 1016,
+          "uuid": "3cbbe5b4-e52c-4b1f-89a1-197c86f3e16e",
+          "values": [],
+          "width": 59
         },
         "user_name": {
           "allow_default_value": false,
@@ -3260,82 +4040,6 @@
     {
       "actions": [],
       "content": {
-        "version": 4,
-        "workflow_id": "mcafee_epo_apply_tags",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_apply_tags\" isExecutable=\"true\" name=\"McAfee ePO apply tags\"\u003e\u003cdocumentation\u003eApply tag(s) to an ePO system. This workflow uses an artifact as representing the ePO system to tag.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mees7m\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16nkdp9\" name=\"McAfee tag an ePO asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.content:\\n  note = u\\\"ePO tag(s) added: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\nelse:\\n  note = u\\\"ePO system not found or tag already applied: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, note)\\nelse:\\n  artifact.description = note\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(rule.properties.ss_tags)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mees7m\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jns448\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mees7m\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16nkdp9\"/\u003e\u003cendEvent id=\"EndEvent_0ct39x5\"\u003e\u003cincoming\u003eSequenceFlow_0jns448\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jns448\" sourceRef=\"ServiceTask_16nkdp9\" targetRef=\"EndEvent_0ct39x5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15dsftr\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17pn86l\" sourceRef=\"ServiceTask_16nkdp9\" targetRef=\"TextAnnotation_15dsftr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16nkdp9\" id=\"ServiceTask_16nkdp9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mees7m\" id=\"SequenceFlow_1mees7m_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ct39x5\" id=\"EndEvent_0ct39x5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jns448\" id=\"SequenceFlow_0jns448_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15dsftr\" id=\"TextAnnotation_15dsftr_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"137\" x=\"353\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17pn86l\" id=\"Association_17pn86l_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Apply tag(s) to an ePO system. This workflow uses an artifact as representing the ePO system to tag.",
-      "export_key": "mcafee_epo_apply_tags",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656686039392,
-      "name": "McAfee ePO apply tags",
-      "object_type": "artifact",
-      "programmatic_name": "mcafee_epo_apply_tags",
-      "tags": [],
-      "uuid": "23de1b1f-1cb8-4f97-95fa-bb2a8e657cfb",
-      "workflow_id": 3
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 12,
-        "workflow_id": "mcafee_epo_get_user_with_permission_set",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_user_with_permission_set\" isExecutable=\"true\" name=\"McAfee ePO Get Users with Permission Set\"\u003e\u003cdocumentation\u003eGet a list of users that have the permission set\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pt3gk7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11j3hcl\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  usersList = []\\n  for user in results.get(\\\"content\\\"):\\n    usersList.append(user.get(\\\"name\\\"))\\n  row.users = str(usersList).replace(\\\"[\\\",\\\"\\\").replace(\\\"]\\\",\\\"\\\").replace(\\\"u\\\",\\\"\\\").replace(\\\"\u0027\\\",\\\"\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_permsetname = row.permission_set_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pt3gk7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_028b6tu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1pt3gk7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11j3hcl\"/\u003e\u003cendEvent id=\"EndEvent_1x2lg26\"\u003e\u003cincoming\u003eSequenceFlow_028b6tu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_028b6tu\" sourceRef=\"ServiceTask_11j3hcl\" targetRef=\"EndEvent_1x2lg26\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11j3hcl\" id=\"ServiceTask_11j3hcl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pt3gk7\" id=\"SequenceFlow_1pt3gk7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1x2lg26\" id=\"EndEvent_1x2lg26_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"385\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"403\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028b6tu\" id=\"SequenceFlow_028b6tu_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 12,
-      "description": "Get a list of users that have the permission set",
-      "export_key": "mcafee_epo_get_user_with_permission_set",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660158956551,
-      "name": "McAfee ePO Get Users with Permission Set",
-      "object_type": "mcafee_epo_permission_sets",
-      "programmatic_name": "mcafee_epo_get_user_with_permission_set",
-      "tags": [],
-      "uuid": "19e967ba-d74d-43d8-9c2d-93529cacf3bc",
-      "workflow_id": 67
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
-        "workflow_id": "mcafee_epo_remove_user",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_remove_user\" isExecutable=\"true\" name=\"McAfee ePO Remove User\"\u003e\u003cdocumentation\u003eDelete a user form the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dwph4o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0f1tt7g\" name=\"McAfee ePO Remove User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"83c00069-064a-4f1b-b8e5-043d36cb79de\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  row.del\\n  incident.addNote(\\\"User: {} removed  from ePO server\\\".format(row.user_name))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_username = row.user_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dwph4o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f5f6l1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dwph4o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0f1tt7g\"/\u003e\u003cendEvent id=\"EndEvent_048zj27\"\u003e\u003cincoming\u003eSequenceFlow_0f5f6l1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0f5f6l1\" sourceRef=\"ServiceTask_0f1tt7g\" targetRef=\"EndEvent_048zj27\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0f1tt7g\" id=\"ServiceTask_0f1tt7g_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"234\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dwph4o\" id=\"SequenceFlow_0dwph4o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_048zj27\" id=\"EndEvent_048zj27_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"360\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"378\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f5f6l1\" id=\"SequenceFlow_0f5f6l1_di\"\u003e\u003comgdi:waypoint x=\"334\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"347\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "description": "Delete a user form the ePO server",
-      "export_key": "mcafee_epo_remove_user",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660218062866,
-      "name": "McAfee ePO Remove User",
-      "object_type": "mcafee_epo_users",
-      "programmatic_name": "mcafee_epo_remove_user",
-      "tags": [],
-      "uuid": "f2ae9b69-d635-4abf-8114-6999c38ca624",
-      "workflow_id": 68
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "mcafee_epo_remove_tag",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_remove_tag\" isExecutable=\"true\" name=\"McAfee ePO remove tag\"\u003e\u003cdocumentation\u003eRemove tag(s) from an ePO system. This workflow use an artifact representing the system to tag.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pzlzpj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1spfyme\" name=\"McAfee ePO remove tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1cb1fd7a-0eeb-4230-9edb-c8f6f47b1ae9\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.content:\\n  note = u\\\"ePO system not found or tag not applied: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\nelse:\\n  note = u\\\"ePO tag(s) removed: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, note)\\nelse:\\n  artifact.description = note\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(rule.properties.ss_tags)\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pzlzpj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ygkcww\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1pzlzpj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1spfyme\"/\u003e\u003cendEvent id=\"EndEvent_1johhu0\"\u003e\u003cincoming\u003eSequenceFlow_1ygkcww\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ygkcww\" sourceRef=\"ServiceTask_1spfyme\" targetRef=\"EndEvent_1johhu0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1spfyme\" id=\"ServiceTask_1spfyme_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pzlzpj\" id=\"SequenceFlow_1pzlzpj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1johhu0\" id=\"EndEvent_1johhu0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ygkcww\" id=\"SequenceFlow_1ygkcww_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"376\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Remove tag(s) from an ePO system. This workflow use an artifact representing the system to tag.",
-      "export_key": "mcafee_epo_remove_tag",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1656686143855,
-      "name": "McAfee ePO remove tag",
-      "object_type": "artifact",
-      "programmatic_name": "mcafee_epo_remove_tag",
-      "tags": [],
-      "uuid": "477b4168-74da-4c1a-b073-4e4be021b89a",
-      "workflow_id": 4
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 12,
         "workflow_id": "mcafee_epo_wake_up_agent",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_wake_up_agent\" isExecutable=\"true\" name=\"McAfee ePO Wake up Agent\"\u003e\u003cdocumentation\u003eWake up agent\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1qn10xw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wapcdn\" name=\"McAfee ePO Wake up agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a8b3bef5-36fc-4d69-b366-6fd3def996d2\"\u003e{\"inputs\":{},\"post_processing_script\":\"incident.addNote(results[\\\"content\\\"])\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = rule.properties.epo_system\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1qn10xw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0i01ddl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qn10xw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wapcdn\"/\u003e\u003cendEvent id=\"EndEvent_0yc6dui\"\u003e\u003cincoming\u003eSequenceFlow_0i01ddl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i01ddl\" sourceRef=\"ServiceTask_0wapcdn\" targetRef=\"EndEvent_0yc6dui\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wapcdn\" id=\"ServiceTask_0wapcdn_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"283\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qn10xw\" id=\"SequenceFlow_1qn10xw_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"283\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"240.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0yc6dui\" id=\"EndEvent_0yc6dui_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"435\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"453\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i01ddl\" id=\"SequenceFlow_0i01ddl_di\"\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"435\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -3355,59 +4059,21 @@
     {
       "actions": [],
       "content": {
-        "version": 21,
+        "version": 22,
         "workflow_id": "mcafee_epo_update_user",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_update_user\" isExecutable=\"true\" name=\"McAfee ePO Update User\"\u003e\u003cdocumentation\u003eUpdate a user on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mecdzt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1trazkd\" name=\"McAfee ePO Update User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a45c768a-d8d0-4666-a002-b7ddf6624fe6\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = \\\"\\\"\\nif results.get(\\\"content\\\"):\\n  inputs = results.get(\\\"inputs\\\")\\n  if inputs.get(\\\"mcafee_epo_new_username\\\"):\\n    row.user_name = inputs.get(\\\"mcafee_epo_new_username\\\")\\n    note += \\\"Username updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_new_username\\\"))\\n  if inputs.get(\\\"mcafee_epo_fullname\\\"):\\n    row.full_name = inputs.get(\\\"mcafee_epo_fullname\\\")\\n    note += \\\"Full name updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_fullname\\\"))\\n  if inputs.get(\\\"mcafee_epo_email\\\"):\\n    row.email = inputs.get(\\\"mcafee_epo_email\\\")\\n    note += \\\"Email updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_email\\\"))\\n  if inputs.get(\\\"mcafee_epo_phone_number\\\"):\\n    row.phone_number = inputs.get(\\\"mcafee_epo_phone_number\\\")\\n    note += \\\"Phone number updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_phone_number\\\"))\\n  if inputs.get(\\\"mcafee_epo_user_disabled\\\") != None:\\n    row.disabled = bool(inputs.get(\\\"mcafee_epo_user_disabled\\\"))\\n    note += \\\"User disbaled updated: {}\\\\n\\\".format(bool(inputs.get(\\\"mcafee_epo_user_disabled\\\")))\\n  if inputs.get(\\\"mcafee_epo_admin\\\") != None:\\n    row.admin = bool(inputs.get(\\\"mcafee_epo_admin\\\"))\\n    note += \\\"Admin updated: {}\\\\n\\\".format(bool(inputs.get(\\\"mcafee_epo_admin\\\")))\\n  if inputs.get(\\\"mcafee_epo_notes\\\"):\\n    row.notes = inputs.get(\\\"mcafee_epo_notes\\\")\\n    note += \\\"Notes updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_notes\\\"))\\n  if inputs.get(\\\"mcafee_epo_allowed_ips\\\"):\\n    row.allowed_ips = inputs.get(\\\"mcafee_epo_allowed_ips\\\")\\n    note += \\\"Allowed IPs updated: {}\\\\n\\\".format(inputs.get(\\\"mcafee_epo_allowed_ips\\\"))\\n  incident.addNote(\\\"User: {} updated \\\\n{}\\\".format(row.user_name, note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_admin = rule.properties.epo_admin\\ninputs.mcafee_epo_allowed_ips = rule.properties.epo_allowed_ips\\ninputs.mcafee_epo_email = rule.properties.epo_email\\ninputs.mcafee_epo_fullname = rule.properties.epo_full_name\\ninputs.mcafee_epo_notes = rule.properties.epo_notes\\ninputs.mcafee_epo_pass = rule.properties.epo_user_password\\ninputs.mcafee_epo_phone_number = rule.properties.epo_phone_number\\ninputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled\\ninputs.mcafee_epo_username = row.user_name\\ninputs.mcafee_epo_new_username = rule.properties.epo_new_username\\ninputs.mcafee_epo_subjectdn = rule.properties.epo_subject_dn\\ninputs.mcafee_epo_windowsdomain = rule.properties.epo_windows_domain\\ninputs.mcafee_epo_windowsusername = rule.properties.epo_windows_username\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mecdzt\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vq8hdo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mecdzt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1trazkd\"/\u003e\u003cendEvent id=\"EndEvent_18pse67\"\u003e\u003cincoming\u003eSequenceFlow_1vq8hdo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vq8hdo\" sourceRef=\"ServiceTask_1trazkd\" targetRef=\"EndEvent_18pse67\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1trazkd\" id=\"ServiceTask_1trazkd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"246\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mecdzt\" id=\"SequenceFlow_1mecdzt_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_18pse67\" id=\"EndEvent_18pse67_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"387\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"405\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vq8hdo\" id=\"SequenceFlow_1vq8hdo_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"387\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 21,
+      "content_version": 22,
       "description": "Update a user on the ePO server",
       "export_key": "mcafee_epo_update_user",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660154080218,
+      "last_modified_time": 1660218904931,
       "name": "McAfee ePO Update User",
       "object_type": "mcafee_epo_users",
       "programmatic_name": "mcafee_epo_update_user",
       "tags": [],
       "uuid": "cee811c6-4dda-459f-b1a0-ebdfef3bd932",
       "workflow_id": 65
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 12,
-        "workflow_id": "mcafee_epo_get_all_permission_sets",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_permission_sets\" isExecutable=\"true\" name=\"McAfee ePO Get all Permission Sets\"\u003e\u003cdocumentation\u003eGet all of the permission sets on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wqcqhu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1g1o5nz\" name=\"McAfee ePO Get All Permission set...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4c45547c-5c2f-4711-90c1-7715706605fc\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results[\\\"content\\\"]:\\n  for permset in results[\\\"content\\\"]:\\n    table_row = incident.addRow(\\\"mcafee_epo_permission_sets\\\")\\n    table_row[\\\"permission_set_name\\\"] = permset.get(\\\"name\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_permission_sets\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wqcqhu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0w0u7jz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wqcqhu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1g1o5nz\"/\u003e\u003cendEvent id=\"EndEvent_0gbncxm\"\u003e\u003cincoming\u003eSequenceFlow_0w0u7jz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0w0u7jz\" sourceRef=\"ServiceTask_1g1o5nz\" targetRef=\"EndEvent_0gbncxm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1g1o5nz\" id=\"ServiceTask_1g1o5nz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wqcqhu\" id=\"SequenceFlow_1wqcqhu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0gbncxm\" id=\"EndEvent_0gbncxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"391\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w0u7jz\" id=\"SequenceFlow_0w0u7jz_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 12,
-      "description": "Get all of the permission sets on the ePO server",
-      "export_key": "mcafee_epo_get_all_permission_sets",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660158691997,
-      "name": "McAfee ePO Get all Permission Sets",
-      "object_type": "incident",
-      "programmatic_name": "mcafee_epo_get_all_permission_sets",
-      "tags": [],
-      "uuid": "67fbc2e0-e4b0-422e-bef5-421e9b7c760d",
-      "workflow_id": 51
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 22,
-        "workflow_id": "mcafee_epo_get_all_systems",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_systems\" isExecutable=\"true\" name=\"McAfee ePO Get All Systems\"\u003e\u003cdocumentation\u003eGet all of the systems in the system tree on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16y6xff\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rrlpjh\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{\"3b19d71b-890d-472c-bec7-40a035c1bca2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"EPOLeafNode\"}}},\"post_processing_script\":\"if results[\u0027content\u0027]:\\n  for system in results[\u0027content\u0027]:\\n    table_row = incident.addRow(\\\"mcafee_epo_systems\\\")\\n    table_row[\\\"system_name\\\"] = system.get(\\\"EPOLeafNode.NodeName\\\")\\n    table_row[\\\"agent_guid\\\"] = system.get(\\\"EPOLeafNode.AgentGUID\\\")\\n    table_row[\\\"last_communication\\\"] = system.get(\\\"EPOLeafNode.LastUpdate\\\")\\n    table_row[\\\"tags\\\"] = system.get(\\\"EPOLeafNode.Tags\\\")\\n    table_row[\\\"operating_system\\\"] = system.get(\\\"EPOLeafNode.os\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.datatable_name = \\\"mcafee_epo_systems\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16y6xff\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07jpeij\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16y6xff\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rrlpjh\"/\u003e\u003cendEvent id=\"EndEvent_0eo73dv\"\u003e\u003cincoming\u003eSequenceFlow_07jpeij\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_07jpeij\" sourceRef=\"ServiceTask_0rrlpjh\" targetRef=\"EndEvent_0eo73dv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rrlpjh\" id=\"ServiceTask_0rrlpjh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"232\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16y6xff\" id=\"SequenceFlow_16y6xff_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"232\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"215\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0eo73dv\" id=\"EndEvent_0eo73dv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"368\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07jpeij\" id=\"SequenceFlow_07jpeij_di\"\u003e\u003comgdi:waypoint x=\"332\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"350\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 22,
-      "description": "Get all of the systems in the system tree on the ePO server",
-      "export_key": "mcafee_epo_get_all_systems",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660158359062,
-      "name": "McAfee ePO Get All Systems",
-      "object_type": "incident",
-      "programmatic_name": "mcafee_epo_get_all_systems",
-      "tags": [],
-      "uuid": "3e778eda-1193-40e1-bbd9-fefd9572dac5",
-      "workflow_id": 50
     },
     {
       "actions": [],
@@ -3427,6 +4093,101 @@
       "tags": [],
       "uuid": "50099f17-2f9a-4b2d-91d2-63625065cfee",
       "workflow_id": 1
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "mcafee_epo_remove_user",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_remove_user\" isExecutable=\"true\" name=\"McAfee ePO Remove User\"\u003e\u003cdocumentation\u003eDelete a user from the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dwph4o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0f1tt7g\" name=\"McAfee ePO Remove User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"83c00069-064a-4f1b-b8e5-043d36cb79de\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  row.user_deleted = True\\n  incident.addNote(\\\"User: {} removed  from ePO server\\\".format(row.user_name))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_username = row.user_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dwph4o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0f5f6l1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dwph4o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0f1tt7g\"/\u003e\u003cendEvent id=\"EndEvent_048zj27\"\u003e\u003cincoming\u003eSequenceFlow_0f5f6l1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0f5f6l1\" sourceRef=\"ServiceTask_0f1tt7g\" targetRef=\"EndEvent_048zj27\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0f1tt7g\" id=\"ServiceTask_0f1tt7g_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"234\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dwph4o\" id=\"SequenceFlow_0dwph4o_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"234\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"216\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_048zj27\" id=\"EndEvent_048zj27_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"360\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"378\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f5f6l1\" id=\"SequenceFlow_0f5f6l1_di\"\u003e\u003comgdi:waypoint x=\"334\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"347\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
+      "description": "Delete a user from the ePO server",
+      "export_key": "mcafee_epo_remove_user",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660218894516,
+      "name": "McAfee ePO Remove User",
+      "object_type": "mcafee_epo_users",
+      "programmatic_name": "mcafee_epo_remove_user",
+      "tags": [],
+      "uuid": "f2ae9b69-d635-4abf-8114-6999c38ca624",
+      "workflow_id": 68
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 17,
+        "workflow_id": "mcafee_epo_get_all_users",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_users\" isExecutable=\"true\" name=\"McAfee ePO Get All Users\"\u003e\u003cdocumentation\u003eGet all of the users on an ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15b09rg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_18zpd3n\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results[\\\"content\\\"]:\\n  for user in results[\\\"content\\\"]:\\n    table_row = incident.addRow(\\\"mcafee_epo_users\\\")\\n    table_row[\\\"user_name\\\"] = user.get(\\\"name\\\")\\n    table_row[\\\"full_name\\\"] = user.get(\\\"fullName\\\")\\n    table_row[\\\"email\\\"] = user.get(\\\"email\\\")\\n    table_row[\\\"phone_number\\\"] = user.get(\\\"phoneNumber\\\")\\n    table_row[\\\"disabled\\\"] = bool(user.get(\\\"disabled\\\"))\\n    table_row[\\\"admin\\\"] = bool(user.get(\\\"admin\\\"))\\n    table_row[\\\"notes\\\"] = user.get(\\\"notes\\\")\\n    table_row[\\\"allowed_ips\\\"] = user.get(\\\"allowedIPs\\\")\\n    table_row[\\\"user_deleted\\\"] = False\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_users\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15b09rg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sm0yak\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15b09rg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_18zpd3n\"/\u003e\u003cendEvent id=\"EndEvent_1yzqlrq\"\u003e\u003cincoming\u003eSequenceFlow_1sm0yak\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1sm0yak\" sourceRef=\"ServiceTask_18zpd3n\" targetRef=\"EndEvent_1yzqlrq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18zpd3n\" id=\"ServiceTask_18zpd3n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15b09rg\" id=\"SequenceFlow_15b09rg_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"224\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1yzqlrq\" id=\"EndEvent_1yzqlrq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"410\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sm0yak\" id=\"SequenceFlow_1sm0yak_di\"\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 17,
+      "description": "Get all of the users on an ePO server",
+      "export_key": "mcafee_epo_get_all_users",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660218831243,
+      "name": "McAfee ePO Get All Users",
+      "object_type": "incident",
+      "programmatic_name": "mcafee_epo_get_all_users",
+      "tags": [],
+      "uuid": "98616f26-6b33-4808-bd74-b713d24b9e68",
+      "workflow_id": 52
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "mcafee_epo_delete_system",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_delete_system\" isExecutable=\"true\" name=\"McAfee ePO Delete System\"\u003e\u003cdocumentation\u003eDelete a system from the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1naoxaz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11n97ur\" name=\"McAfee ePO Delete System\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4011b9c6-eeba-49da-b5f7-27fdce026c83\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  row.deleted = True\\n  incident.addNote(\\\"System: {} deleted\\\".format(row.system_name))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_system_name_or_id = row.system_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1naoxaz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1uesimp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1naoxaz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11n97ur\"/\u003e\u003cendEvent id=\"EndEvent_170sr3p\"\u003e\u003cincoming\u003eSequenceFlow_1uesimp\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1uesimp\" sourceRef=\"ServiceTask_11n97ur\" targetRef=\"EndEvent_170sr3p\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11n97ur\" id=\"ServiceTask_11n97ur_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"241\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1naoxaz\" id=\"SequenceFlow_1naoxaz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"241\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"219.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_170sr3p\" id=\"EndEvent_170sr3p_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"372\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"390\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uesimp\" id=\"SequenceFlow_1uesimp_di\"\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"356.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "description": "Delete a system from the ePO server",
+      "export_key": "mcafee_epo_delete_system",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660309203091,
+      "name": "McAfee ePO Delete System",
+      "object_type": "mcafee_epo_systems",
+      "programmatic_name": "mcafee_epo_delete_system",
+      "tags": [],
+      "uuid": "802f6b84-79ab-4cfc-9bfd-391b0cc668d8",
+      "workflow_id": 71
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 51,
+        "workflow_id": "mcafee_epo_get_system_info_from_property",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_system_info_from_property\" isExecutable=\"true\" name=\"McAfee ePO Get System Info from Property\"\u003e\u003cdocumentation\u003eGet information about systems from a lit of system properties\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10ab8pu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yjbgrc\" name=\"McAfee ePO find a system\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = \u0027\u0027\\n\\nfor x in range(len(results[\u0027content\u0027])):\\n  content = dict((k, v) for k, v in results[\u0027content\u0027][x].iteritems() if v and \\\"N/A\\\" not in str(v))\\n  note += \\\"{}\\\\n{}\\\".format(results[\u0027content\u0027][x].get(\u0027EPOComputerProperties.ComputerName\u0027), str(content))\\n\\nincident.addNote(note.replace(\\\"{\\\",\\\"\\\").replace(\\\"u\u0027\\\",\\\"\u0027\\\").replace(\\\"}\\\",\\\"\\\\n\\\\n\\\"))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = rule.properties.epo_system\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10ab8pu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1d76i4s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10ab8pu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yjbgrc\"/\u003e\u003cendEvent id=\"EndEvent_09bu20t\"\u003e\u003cincoming\u003eSequenceFlow_1d76i4s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1d76i4s\" sourceRef=\"ServiceTask_1yjbgrc\" targetRef=\"EndEvent_09bu20t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yjbgrc\" id=\"ServiceTask_1yjbgrc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"245\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10ab8pu\" id=\"SequenceFlow_10ab8pu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"245\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09bu20t\" id=\"EndEvent_09bu20t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"383\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1d76i4s\" id=\"SequenceFlow_1d76i4s_di\"\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 51,
+      "description": "Get information about systems from a lit of system properties",
+      "export_key": "mcafee_epo_get_system_info_from_property",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660155815955,
+      "name": "McAfee ePO Get System Info from Property",
+      "object_type": "incident",
+      "programmatic_name": "mcafee_epo_get_system_info_from_property",
+      "tags": [],
+      "uuid": "2cb0172a-f414-4c84-bc17-2b8180849877",
+      "workflow_id": 49
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "mcafee_epo_find_all_client_tasks",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_find_all_client_tasks\" isExecutable=\"true\" name=\"McAfee ePO Find All Client Tasks\"\u003e\u003cdocumentation\u003eFind all of the client tasks on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wzo119\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_13qnild\" name=\"McAfee ePO Find Client Tasks\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"948b9c0a-1d8e-47c4-a277-1180ee5d3f5e\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  for x in results.get(\\\"content\\\"):\\n    table = incident.addRow(\\\"mcafee_epo_client_tasks\\\")\\n    table[\\\"task_name\\\"] = x.get(\\\"\\\")\\n    table[\\\"owner\\\"] = x.get(\\\"\\\")\\n    table[\\\"assignments\\\"] = x.get(\\\"\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_client_tasks\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wzo119\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0l08t8q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wzo119\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_13qnild\"/\u003e\u003cendEvent id=\"EndEvent_0vkqeof\"\u003e\u003cincoming\u003eSequenceFlow_0l08t8q\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0l08t8q\" sourceRef=\"ServiceTask_13qnild\" targetRef=\"EndEvent_0vkqeof\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_13qnild\" id=\"ServiceTask_13qnild_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"233\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wzo119\" id=\"SequenceFlow_1wzo119_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"233\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"215.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0vkqeof\" id=\"EndEvent_0vkqeof_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"367\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"385\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0l08t8q\" id=\"SequenceFlow_0l08t8q_di\"\u003e\u003comgdi:waypoint x=\"333\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"350\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "description": "Find all of the client tasks on the ePO server",
+      "export_key": "mcafee_epo_find_all_client_tasks",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660312021854,
+      "name": "McAfee ePO Find All Client Tasks",
+      "object_type": "incident",
+      "programmatic_name": "mcafee_epo_find_all_client_tasks",
+      "tags": [],
+      "uuid": "3674d301-6cab-46a1-adfa-ed4b06078efa",
+      "workflow_id": 72
     },
     {
       "actions": [],
@@ -3469,21 +4230,59 @@
     {
       "actions": [],
       "content": {
-        "version": 51,
-        "workflow_id": "mcafee_epo_get_system_info_from_property",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_system_info_from_property\" isExecutable=\"true\" name=\"McAfee ePO Get System Info from Property\"\u003e\u003cdocumentation\u003eGet information about systems from a lit of system properties\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10ab8pu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yjbgrc\" name=\"McAfee ePO find a system\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"post_processing_script\":\"note = \u0027\u0027\\n\\nfor x in range(len(results[\u0027content\u0027])):\\n  content = dict((k, v) for k, v in results[\u0027content\u0027][x].iteritems() if v and \\\"N/A\\\" not in str(v))\\n  note += \\\"{}\\\\n{}\\\".format(results[\u0027content\u0027][x].get(\u0027EPOComputerProperties.ComputerName\u0027), str(content))\\n\\nincident.addNote(note.replace(\\\"{\\\",\\\"\\\").replace(\\\"u\u0027\\\",\\\"\u0027\\\").replace(\\\"}\\\",\\\"\\\\n\\\\n\\\"))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = rule.properties.epo_system\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10ab8pu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1d76i4s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_10ab8pu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yjbgrc\"/\u003e\u003cendEvent id=\"EndEvent_09bu20t\"\u003e\u003cincoming\u003eSequenceFlow_1d76i4s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1d76i4s\" sourceRef=\"ServiceTask_1yjbgrc\" targetRef=\"EndEvent_09bu20t\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yjbgrc\" id=\"ServiceTask_1yjbgrc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"245\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10ab8pu\" id=\"SequenceFlow_10ab8pu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"245\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09bu20t\" id=\"EndEvent_09bu20t_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"383\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"401\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1d76i4s\" id=\"SequenceFlow_1d76i4s_di\"\u003e\u003comgdi:waypoint x=\"345\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"383\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 6,
+        "workflow_id": "mcafee_epo_get_system_info",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_system_info\" isExecutable=\"true\" name=\"McAfee ePO get system info\"\u003e\u003cdocumentation\u003eGet information on an ePO system\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ww09gi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_02avpdz\" name=\"McAfee ePO find a system\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.content:\\n  info = u\\\"ePO system not found\\\"\\nelse:\\n  info = u\\\"ePO system info\\\\n\\\"\\n  for system in results.content:\\n    for setting in system:\\n      info = u\\\"{}\\\\n{}: {}\\\".format(info, setting, system[setting])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, info)\\nelse:\\n  artifact.description = info\\n\\nincident.addNote(info)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ww09gi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11w64qz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ww09gi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_02avpdz\"/\u003e\u003cendEvent id=\"EndEvent_1shs028\"\u003e\u003cincoming\u003eSequenceFlow_11w64qz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11w64qz\" sourceRef=\"ServiceTask_02avpdz\" targetRef=\"EndEvent_1shs028\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1p16xdz\"\u003e\u003ctext\u003e\u003c![CDATA[Return system info as the artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0v38vt5\" sourceRef=\"ServiceTask_02avpdz\" targetRef=\"TextAnnotation_1p16xdz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_02avpdz\" id=\"ServiceTask_02avpdz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ww09gi\" id=\"SequenceFlow_0ww09gi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1shs028\" id=\"EndEvent_1shs028_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"405\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"423\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11w64qz\" id=\"SequenceFlow_11w64qz_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"378.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1p16xdz\" id=\"TextAnnotation_1p16xdz_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"178\" x=\"347\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0v38vt5\" id=\"Association_0v38vt5_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 51,
-      "description": "Get information about systems from a lit of system properties",
-      "export_key": "mcafee_epo_get_system_info_from_property",
+      "content_version": 6,
+      "description": "Get information on an ePO system",
+      "export_key": "mcafee_epo_get_system_info",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660155815955,
-      "name": "McAfee ePO Get System Info from Property",
-      "object_type": "incident",
-      "programmatic_name": "mcafee_epo_get_system_info_from_property",
+      "last_modified_time": 1657131067684,
+      "name": "McAfee ePO get system info",
+      "object_type": "artifact",
+      "programmatic_name": "mcafee_epo_get_system_info",
       "tags": [],
-      "uuid": "2cb0172a-f414-4c84-bc17-2b8180849877",
-      "workflow_id": 49
+      "uuid": "1498bc37-0695-4b96-9fa8-02fee0c06da4",
+      "workflow_id": 2
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "mcafee_epo_remove_tag",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_remove_tag\" isExecutable=\"true\" name=\"McAfee ePO remove tag\"\u003e\u003cdocumentation\u003eRemove tag(s) from an ePO system. This workflow use an artifact representing the system to tag.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pzlzpj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1spfyme\" name=\"McAfee ePO remove tag\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1cb1fd7a-0eeb-4230-9edb-c8f6f47b1ae9\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.content:\\n  note = u\\\"ePO system not found or tag not applied: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\nelse:\\n  note = u\\\"ePO tag(s) removed: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, note)\\nelse:\\n  artifact.description = note\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(rule.properties.ss_tags)\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pzlzpj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ygkcww\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1pzlzpj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1spfyme\"/\u003e\u003cendEvent id=\"EndEvent_1johhu0\"\u003e\u003cincoming\u003eSequenceFlow_1ygkcww\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ygkcww\" sourceRef=\"ServiceTask_1spfyme\" targetRef=\"EndEvent_1johhu0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1spfyme\" id=\"ServiceTask_1spfyme_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pzlzpj\" id=\"SequenceFlow_1pzlzpj_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1johhu0\" id=\"EndEvent_1johhu0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ygkcww\" id=\"SequenceFlow_1ygkcww_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"376\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Remove tag(s) from an ePO system. This workflow use an artifact representing the system to tag.",
+      "export_key": "mcafee_epo_remove_tag",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1656686143855,
+      "name": "McAfee ePO remove tag",
+      "object_type": "artifact",
+      "programmatic_name": "mcafee_epo_remove_tag",
+      "tags": [],
+      "uuid": "477b4168-74da-4c1a-b073-4e4be021b89a",
+      "workflow_id": 4
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 8,
+        "workflow_id": "mcafee_epo_find_systems_in_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_find_systems_in_group\" isExecutable=\"true\" name=\"McAfee ePO Find Systems in Group\"\u003e\u003cdocumentation\u003eFind all systems in a group\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0us16lp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1jfyfzr\" name=\"McAfee ePO Find Systems in Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0cbf4250-b833-421d-a9be-a36e0d236022\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  systemsList = []\\n  for x in results.get(\\\"content\\\"):\\n    systemsList.append(x.get(\\\"EPOComputerProperties.ComputerName\\\"))\\n  row.systems = str(systemsList).replace(\\\"[\\\",\\\"\\\").replace(\\\"]\\\",\\\"\\\").replace(\\\"u\\\",\\\"\\\").replace(\\\"\u0027\\\",\\\"\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_group_id = row.group_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0us16lp\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17rtsxl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0us16lp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1jfyfzr\"/\u003e\u003cendEvent id=\"EndEvent_1wbzt8g\"\u003e\u003cincoming\u003eSequenceFlow_17rtsxl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17rtsxl\" sourceRef=\"ServiceTask_1jfyfzr\" targetRef=\"EndEvent_1wbzt8g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1jfyfzr\" id=\"ServiceTask_1jfyfzr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"246\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0us16lp\" id=\"SequenceFlow_0us16lp_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wbzt8g\" id=\"EndEvent_1wbzt8g_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"375\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17rtsxl\" id=\"SequenceFlow_17rtsxl_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"375\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"360.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 8,
+      "description": "Find all systems in a group",
+      "export_key": "mcafee_epo_find_systems_in_group",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660229503022,
+      "name": "McAfee ePO Find Systems in Group",
+      "object_type": "mcafee_epo_groups",
+      "programmatic_name": "mcafee_epo_find_systems_in_group",
+      "tags": [],
+      "uuid": "037a1637-aa05-46fd-886e-82fd04557578",
+      "workflow_id": 70
     },
     {
       "actions": [],
@@ -3507,34 +4306,34 @@
     {
       "actions": [],
       "content": {
-        "version": 16,
-        "workflow_id": "mcafee_epo_get_all_users",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_users\" isExecutable=\"true\" name=\"McAfee ePO Get All Users\"\u003e\u003cdocumentation\u003eGet all of the users on an ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_15b09rg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_18zpd3n\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results[\\\"content\\\"]:\\n  for user in results[\\\"content\\\"]:\\n    table_row = incident.addRow(\\\"mcafee_epo_users\\\")\\n    table_row[\\\"user_name\\\"] = user.get(\\\"name\\\")\\n    table_row[\\\"full_name\\\"] = user.get(\\\"fullName\\\")\\n    table_row[\\\"email\\\"] = user.get(\\\"email\\\")\\n    table_row[\\\"phone_number\\\"] = user.get(\\\"phoneNumber\\\")\\n    table_row[\\\"disabled\\\"] = bool(user.get(\\\"disabled\\\"))\\n    table_row[\\\"admin\\\"] = bool(user.get(\\\"admin\\\"))\\n    table_row[\\\"notes\\\"] = user.get(\\\"notes\\\")\\n    table_row[\\\"allowed_ips\\\"] = user.get(\\\"allowedIPs\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_users\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_15b09rg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sm0yak\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_15b09rg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_18zpd3n\"/\u003e\u003cendEvent id=\"EndEvent_1yzqlrq\"\u003e\u003cincoming\u003eSequenceFlow_1sm0yak\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1sm0yak\" sourceRef=\"ServiceTask_18zpd3n\" targetRef=\"EndEvent_1yzqlrq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_18zpd3n\" id=\"ServiceTask_18zpd3n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15b09rg\" id=\"SequenceFlow_15b09rg_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"224\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1yzqlrq\" id=\"EndEvent_1yzqlrq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"410\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sm0yak\" id=\"SequenceFlow_1sm0yak_di\"\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"400\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 8,
+        "workflow_id": "mcafee_epo_find_all_groups",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_find_all_groups\" isExecutable=\"true\" name=\"McAfee ePO Find All Groups\"\u003e\u003cdocumentation\u003eFind all the groups on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ihnfbs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1qxadyp\" name=\"McAfee ePO Find Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cec9d0f8-06bc-4168-9fec-554d2fef8a99\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  for x in results.get(\\\"content\\\"):\\n    table = incident.addRow(\\\"mcafee_epo_groups\\\")\\n    table[\\\"group_id\\\"] = int(x.get(\\\"groupId\\\"))\\n    table[\\\"group_path\\\"] = x.get(\\\"groupPath\\\")\\n  \",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_groups\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ihnfbs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_099h1ik\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ihnfbs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qxadyp\"/\u003e\u003cendEvent id=\"EndEvent_1v54w98\"\u003e\u003cincoming\u003eSequenceFlow_099h1ik\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_099h1ik\" sourceRef=\"ServiceTask_1qxadyp\" targetRef=\"EndEvent_1v54w98\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qxadyp\" id=\"ServiceTask_1qxadyp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"250\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ihnfbs\" id=\"SequenceFlow_1ihnfbs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"224\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1v54w98\" id=\"EndEvent_1v54w98_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"390\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_099h1ik\" id=\"SequenceFlow_099h1ik_di\"\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"390\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 16,
-      "description": "Get all of the users on an ePO server",
-      "export_key": "mcafee_epo_get_all_users",
+      "content_version": 8,
+      "description": "Find all the groups on the ePO server",
+      "export_key": "mcafee_epo_find_all_groups",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660158246300,
-      "name": "McAfee ePO Get All Users",
+      "last_modified_time": 1660222094016,
+      "name": "McAfee ePO Find All Groups",
       "object_type": "incident",
-      "programmatic_name": "mcafee_epo_get_all_users",
+      "programmatic_name": "mcafee_epo_find_all_groups",
       "tags": [],
-      "uuid": "98616f26-6b33-4808-bd74-b713d24b9e68",
-      "workflow_id": 52
+      "uuid": "0942dce8-758b-441f-87db-1743be5c086a",
+      "workflow_id": 69
     },
     {
       "actions": [],
       "content": {
-        "version": 9,
+        "version": 10,
         "workflow_id": "mcafee_epo_add_user",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_add_user\" isExecutable=\"true\" name=\"McAfee ePO Add User\"\u003e\u003cdocumentation\u003eAdd a user to the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0dsuw3n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yyfkii\" name=\"McAfee ePO Add User\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0d34aa89-8ebf-4c17-9c7f-4ea851c37a82\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  incident.addNote(\\\"User: {} successfully created.\\\".format(rule.properties.epo_username))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_username = rule.properties.epo_username\\ninputs.mcafee_epo_pass = rule.properties.epo_user_password\\ninputs.mcafee_epo_admin = rule.properties.epo_admin\\ninputs.mcafee_epo_allowed_ips = rule.properties.epo_allowed_ips\\ninputs.mcafee_epo_email = rule.properties.epo_email\\ninputs.mcafee_epo_fullname = rule.properties.epo_full_name\\ninputs.mcafee_epo_notes = rule.properties.epo_notes\\ninputs.mcafee_epo_phone_number = rule.properties.epo_phone_number\\ninputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0dsuw3n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1945ef3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0dsuw3n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yyfkii\"/\u003e\u003cendEvent id=\"EndEvent_09we1qu\"\u003e\u003cincoming\u003eSequenceFlow_1945ef3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1945ef3\" sourceRef=\"ServiceTask_1yyfkii\" targetRef=\"EndEvent_09we1qu\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yyfkii\" id=\"ServiceTask_1yyfkii_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dsuw3n\" id=\"SequenceFlow_0dsuw3n_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_09we1qu\" id=\"EndEvent_09we1qu_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"380\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"398\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1945ef3\" id=\"SequenceFlow_1945ef3_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"380\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"361.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 9,
+      "content_version": 10,
       "description": "Add a user to the ePO server",
       "export_key": "mcafee_epo_add_user",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1660150590147,
+      "last_modified_time": 1660218802816,
       "name": "McAfee ePO Add User",
       "object_type": "incident",
       "programmatic_name": "mcafee_epo_add_user",
@@ -3545,21 +4344,78 @@
     {
       "actions": [],
       "content": {
-        "version": 6,
-        "workflow_id": "mcafee_epo_get_system_info",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_system_info\" isExecutable=\"true\" name=\"McAfee ePO get system info\"\u003e\u003cdocumentation\u003eGet information on an ePO system\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ww09gi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_02avpdz\" name=\"McAfee ePO find a system\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0030078d-417f-4d92-9212-6853914b56af\"\u003e{\"inputs\":{},\"post_processing_script\":\"if not results.content:\\n  info = u\\\"ePO system not found\\\"\\nelse:\\n  info = u\\\"ePO system info\\\\n\\\"\\n  for system in results.content:\\n    for setting in system:\\n      info = u\\\"{}\\\\n{}: {}\\\".format(info, setting, system[setting])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, info)\\nelse:\\n  artifact.description = info\\n\\nincident.addNote(info)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ww09gi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11w64qz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ww09gi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_02avpdz\"/\u003e\u003cendEvent id=\"EndEvent_1shs028\"\u003e\u003cincoming\u003eSequenceFlow_11w64qz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11w64qz\" sourceRef=\"ServiceTask_02avpdz\" targetRef=\"EndEvent_1shs028\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1p16xdz\"\u003e\u003ctext\u003e\u003c![CDATA[Return system info as the artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0v38vt5\" sourceRef=\"ServiceTask_02avpdz\" targetRef=\"TextAnnotation_1p16xdz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_02avpdz\" id=\"ServiceTask_02avpdz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"252\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ww09gi\" id=\"SequenceFlow_0ww09gi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"252\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"225\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1shs028\" id=\"EndEvent_1shs028_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"405\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"423\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11w64qz\" id=\"SequenceFlow_11w64qz_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"378.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1p16xdz\" id=\"TextAnnotation_1p16xdz_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"178\" x=\"347\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0v38vt5\" id=\"Association_0v38vt5_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 24,
+        "workflow_id": "mcafee_epo_get_all_systems",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_systems\" isExecutable=\"true\" name=\"McAfee ePO Get All Systems\"\u003e\u003cdocumentation\u003eGet all of the systems in the system tree on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16y6xff\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rrlpjh\" name=\"McAfee ePO Execute Query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3a78912f-473f-4eaf-86b3-05dc87c5e14a\"\u003e{\"inputs\":{\"3b19d71b-890d-472c-bec7-40a035c1bca2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"EPOLeafNode\"}}},\"post_processing_script\":\"if results[\u0027content\u0027]:\\n  for system in results[\u0027content\u0027]:\\n    table_row = incident.addRow(\\\"mcafee_epo_systems\\\")\\n    table_row[\\\"system_name\\\"] = system.get(\\\"EPOLeafNode.NodeName\\\")\\n    table_row[\\\"agent_guid\\\"] = system.get(\\\"EPOLeafNode.AgentGUID\\\")\\n    table_row[\\\"last_communication\\\"] = system.get(\\\"EPOLeafNode.LastUpdate\\\")\\n    table_row[\\\"tags\\\"] = system.get(\\\"EPOLeafNode.Tags\\\")\\n    table_row[\\\"operating_system\\\"] = system.get(\\\"EPOLeafNode.os\\\").replace(\\\"|\\\", \\\" | \\\")\\n    table_row[\\\"deleted\\\"] = False\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_target = \\\"EPOLeafNode\\\"\\ninputs.datatable_name = \\\"mcafee_epo_systems\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16y6xff\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07jpeij\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_16y6xff\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rrlpjh\"/\u003e\u003cendEvent id=\"EndEvent_0eo73dv\"\u003e\u003cincoming\u003eSequenceFlow_07jpeij\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_07jpeij\" sourceRef=\"ServiceTask_0rrlpjh\" targetRef=\"EndEvent_0eo73dv\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rrlpjh\" id=\"ServiceTask_0rrlpjh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"232\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16y6xff\" id=\"SequenceFlow_16y6xff_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"232\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"215\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0eo73dv\" id=\"EndEvent_0eo73dv_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"368\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"386\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07jpeij\" id=\"SequenceFlow_07jpeij_di\"\u003e\u003comgdi:waypoint x=\"332\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"350\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 6,
-      "description": "Get information on an ePO system",
-      "export_key": "mcafee_epo_get_system_info",
+      "content_version": 24,
+      "description": "Get all of the systems in the system tree on the ePO server",
+      "export_key": "mcafee_epo_get_all_systems",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1657131067684,
-      "name": "McAfee ePO get system info",
-      "object_type": "artifact",
-      "programmatic_name": "mcafee_epo_get_system_info",
+      "last_modified_time": 1660310122617,
+      "name": "McAfee ePO Get All Systems",
+      "object_type": "incident",
+      "programmatic_name": "mcafee_epo_get_all_systems",
       "tags": [],
-      "uuid": "1498bc37-0695-4b96-9fa8-02fee0c06da4",
-      "workflow_id": 2
+      "uuid": "3e778eda-1193-40e1-bbd9-fefd9572dac5",
+      "workflow_id": 50
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 14,
+        "workflow_id": "mcafee_epo_get_user_with_permission_set",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_user_with_permission_set\" isExecutable=\"true\" name=\"McAfee ePO Get Users with Permission Set\"\u003e\u003cdocumentation\u003eGet a list of users that have the permission set\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1pt3gk7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11j3hcl\" name=\"McAfee ePO Get All Users\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6b9906aa-5409-44cb-b88b-192c49598d35\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.get(\\\"content\\\"):\\n  usersList = []\\n  for user in results.get(\\\"content\\\"):\\n    usersList.append(user.get(\\\"name\\\"))\\n  row.users = str(usersList).replace(\\\"[\\\",\\\"\\\").replace(\\\"]\\\",\\\"\\\").replace(\\\"u\\\",\\\"\\\").replace(\\\"\u0027\\\",\\\"\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_permsetname = row.permission_set_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1pt3gk7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_028b6tu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1pt3gk7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11j3hcl\"/\u003e\u003cendEvent id=\"EndEvent_1x2lg26\"\u003e\u003cincoming\u003eSequenceFlow_028b6tu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_028b6tu\" sourceRef=\"ServiceTask_11j3hcl\" targetRef=\"EndEvent_1x2lg26\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11j3hcl\" id=\"ServiceTask_11j3hcl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1pt3gk7\" id=\"SequenceFlow_1pt3gk7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1x2lg26\" id=\"EndEvent_1x2lg26_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"385\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"403\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_028b6tu\" id=\"SequenceFlow_028b6tu_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 14,
+      "description": "Get a list of users that have the permission set",
+      "export_key": "mcafee_epo_get_user_with_permission_set",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660229392284,
+      "name": "McAfee ePO Get Users with Permission Set",
+      "object_type": "mcafee_epo_permission_sets",
+      "programmatic_name": "mcafee_epo_get_user_with_permission_set",
+      "tags": [],
+      "uuid": "19e967ba-d74d-43d8-9c2d-93529cacf3bc",
+      "workflow_id": 67
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 13,
+        "workflow_id": "mcafee_epo_get_all_permission_sets",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_get_all_permission_sets\" isExecutable=\"true\" name=\"McAfee ePO Get all Permission Sets\"\u003e\u003cdocumentation\u003eGet all of the permission sets on the ePO server\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1wqcqhu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1g1o5nz\" name=\"McAfee ePO Get All Permission set...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4c45547c-5c2f-4711-90c1-7715706605fc\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results[\\\"content\\\"]:\\n  for permset in results[\\\"content\\\"]:\\n    table_row = incident.addRow(\\\"mcafee_epo_permission_sets\\\")\\n    table_row[\\\"permission_set_name\\\"] = permset.get(\\\"name\\\")\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.datatable_name = \\\"mcafee_epo_permission_sets\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1wqcqhu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0w0u7jz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1wqcqhu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1g1o5nz\"/\u003e\u003cendEvent id=\"EndEvent_0gbncxm\"\u003e\u003cincoming\u003eSequenceFlow_0w0u7jz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0w0u7jz\" sourceRef=\"ServiceTask_1g1o5nz\" targetRef=\"EndEvent_0gbncxm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1g1o5nz\" id=\"ServiceTask_1g1o5nz_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"247\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wqcqhu\" id=\"SequenceFlow_1wqcqhu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"247\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"222.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0gbncxm\" id=\"EndEvent_0gbncxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"391\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"409\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0w0u7jz\" id=\"SequenceFlow_0w0u7jz_di\"\u003e\u003comgdi:waypoint x=\"347\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"391\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"369\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 13,
+      "description": "Get all of the permission sets on the ePO server",
+      "export_key": "mcafee_epo_get_all_permission_sets",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1660220963423,
+      "name": "McAfee ePO Get all Permission Sets",
+      "object_type": "incident",
+      "programmatic_name": "mcafee_epo_get_all_permission_sets",
+      "tags": [],
+      "uuid": "67fbc2e0-e4b0-422e-bef5-421e9b7c760d",
+      "workflow_id": 51
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "mcafee_epo_apply_tags",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"mcafee_epo_apply_tags\" isExecutable=\"true\" name=\"McAfee ePO apply tags\"\u003e\u003cdocumentation\u003eApply tag(s) to an ePO system. This workflow uses an artifact as representing the ePO system to tag.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mees7m\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_16nkdp9\" name=\"McAfee tag an ePO asset\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"67c5b852-f38f-40f7-8a68-1ae8e8a78549\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.content:\\n  note = u\\\"ePO tag(s) added: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\nelse:\\n  note = u\\\"ePO system not found or tag already applied: {}\\\".format(results.inputs[\u0027mcafee_epo_tag\u0027])\\n\\nif artifact.description:\\n  artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, note)\\nelse:\\n  artifact.description = note\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.mcafee_epo_systems = artifact.value\\ninputs.mcafee_epo_tag = str(rule.properties.ss_tags)\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mees7m\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jns448\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1mees7m\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_16nkdp9\"/\u003e\u003cendEvent id=\"EndEvent_0ct39x5\"\u003e\u003cincoming\u003eSequenceFlow_0jns448\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0jns448\" sourceRef=\"ServiceTask_16nkdp9\" targetRef=\"EndEvent_0ct39x5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15dsftr\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned to artifact description\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17pn86l\" sourceRef=\"ServiceTask_16nkdp9\" targetRef=\"TextAnnotation_15dsftr\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_16nkdp9\" id=\"ServiceTask_16nkdp9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mees7m\" id=\"SequenceFlow_1mees7m_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ct39x5\" id=\"EndEvent_0ct39x5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jns448\" id=\"SequenceFlow_0jns448_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"395\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15dsftr\" id=\"TextAnnotation_15dsftr_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"137\" x=\"353\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17pn86l\" id=\"Association_17pn86l_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Apply tag(s) to an ePO system. This workflow uses an artifact as representing the ePO system to tag.",
+      "export_key": "mcafee_epo_apply_tags",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1656686039392,
+      "name": "McAfee ePO apply tags",
+      "object_type": "artifact",
+      "programmatic_name": "mcafee_epo_apply_tags",
+      "tags": [],
+      "uuid": "23de1b1f-1cb8-4f97-95fa-bb2a8e657cfb",
+      "workflow_id": 3
     },
     {
       "actions": [],
