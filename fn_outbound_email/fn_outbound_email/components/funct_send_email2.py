@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """AppFunction implementation"""
+from bs4 import BeautifulSoup
 import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, str_to_bool
@@ -92,11 +93,11 @@ class FunctionComponent(AppFunctionComponent):
                                                                  note_data)
             LOG.debug("Rendered mail body: %s", rendered_mail_body)
 
-            error_msg = send_smtp_email.send(body_html=rendered_mail_body)
+            error_msg = send_msg(send_smtp_email, rendered_mail_body)
         elif mail_data.get('mail_body'):
             LOG.info("Non-rendered mail_body")
             rendered_mail_body = mail_data.get('mail_body')
-            error_msg = send_smtp_email.send(rendered_mail_body)
+            error_msg = send_msg(send_smtp_email, rendered_mail_body)
         else:
             raise ValueError("No email body or template specified")
 
@@ -113,3 +114,31 @@ class FunctionComponent(AppFunctionComponent):
         yield FunctionResult(results,
                              success=not bool(error_msg),
                              reason=error_msg)
+
+def send_msg(send_smtp_email, content):
+    """send the message, using the context of the content to send as html or plain text
+
+    Args:
+        send_smtp_email (SMTPMailer): mailer object
+        content (str): body of email
+
+    Returns:
+        str: any error which occured
+    """
+    if isHTML(content):
+        return send_smtp_email.send(body_html=content)
+    else:
+        return send_smtp_email.send(body_text=content.replace('\n', '\r\n'))
+
+
+def isHTML(content):
+    """Use BeautifulSoup to determine if content contains HTML
+
+    Args:
+        content (str): body of email
+
+    Returns:
+        bool: true if html detected
+    """
+    soup = BeautifulSoup(content, 'html.parser')
+    return bool(soup.find())

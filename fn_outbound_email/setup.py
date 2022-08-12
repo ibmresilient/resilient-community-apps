@@ -30,6 +30,7 @@ setup(
     description="IBM Security SOAR app for 'fn_outbound_email'",
     long_description="IBM Security SOAR app for 'fn_outbound_email'",
     install_requires=[
+        'b4',
         'resilient_circuits>=39.0.0',
         'resilient_lib>=46.0.0',
         'Jinja2>=2.9.6',
