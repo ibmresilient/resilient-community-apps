@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_webex",
         "message_destinations": [u"fn_webex"],
         "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team"],
-        "workflows": [u"webex_platform"],
+        "workflows": [u"create_webex_team_with_room", u"webex_create_team", u"webex_platform", u"workflow_create_room"],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -49,7 +49,10 @@ def customization_data(client=None):
         - webex_create_room
         - webex_create_team
     - Workflows:
+        - create_webex_team_with_room
+        - webex_create_team
         - webex_platform
+        - workflow_create_room
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

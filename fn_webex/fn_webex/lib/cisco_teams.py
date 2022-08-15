@@ -8,7 +8,6 @@ from multiprocessing.sharedctypes import Value
 
 from resilient_lib import IntegrationError
 from resilient_circuits import FunctionError
-from multiprocessing import AuthenticationError
 
 
 class WebexTeams:
