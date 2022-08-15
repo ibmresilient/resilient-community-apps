@@ -12,6 +12,7 @@ INTERNAL_BRANCH=$1
 EXTERNAL_BRANCH=$2
 PATH_EXCLUDE_FILES=$3
 PATH_SCRIPTS_DIR=$4
+PATH_COMMON_SCRIPTS_DIR=$5
 NOW=`date '+%Y_%m_%d'`
 TEMP_BRANCH="repo_sync_$NOW"
 
@@ -38,6 +39,11 @@ if [ -z "$4" ] ; then
     exit 1
 fi
 
+if [ -z "$5" ] ; then
+    echo "ERROR: Must provide PATH_COMMON_SCRIPTS_DIR name as fifth parameter."
+    exit 1
+fi
+
 cd $TRAVIS_BUILD_DIR
 
 ###############
@@ -55,6 +61,7 @@ INTERNAL_BRANCH:\t$INTERNAL_BRANCH\n\
 EXTERNAL_BRANCH:\t$EXTERNAL_BRANCH\n\
 PATH_EXCLUDE_FILES:\t$PATH_EXCLUDE_FILES\n\
 PATH_SCRIPTS_DIR:\t$PATH_SCRIPTS_DIR\n\
+PATH_COMMON_SCRIPTS_DIR:\t$PATH_COMMON_SCRIPTS_DIR\n\
 TEMP_BRANCH:\t\t$TEMP_BRANCH\
 "
 
@@ -75,6 +82,9 @@ done
 print_msg "Renaming '$PATH_SCRIPTS_DIR' directory to '$PATH_SCRIPTS_DIR.bak'"
 mv $PATH_SCRIPTS_DIR $PATH_SCRIPTS_DIR.bak
 
+print_msg "Renaming '$PATH_COMMON_SCRIPTS_DIR' directory to '$PATH_COMMON_SCRIPTS_DIR.bak'"
+mv $PATH_COMMON_SCRIPTS_DIR $PATH_COMMON_SCRIPTS_DIR.bak
+
 print_msg "Locally commit all changes to '$TEMP_BRANCH'"
 git add -A && git commit -m "Syncing external repository $NOW"
 
@@ -88,8 +98,8 @@ print_msg "Merge changes in from '$TEMP_BRANCH' temp branch"
 git merge $TEMP_BRANCH --allow-unrelated-histories --no-edit -X theirs
 
 print_msg "Push changes to INTERNAL '$INTERNAL_BRANCH' branch"
-# git push origin -u $INTERNAL_BRANCH
+git push -u origin $INTERNAL_BRANCH
 
 print_msg "Sync INTERNAL '$INTERNAL_BRANCH' with EXTERNAL '$EXTERNAL_BRANCH' branch"
-# git push https://$GH_TOKEN_PUBLIC@github.com:/ibmresilient/resilient-community-apps.git $INTERNAL_BRANCH:$EXTERNAL_BRANCH
+git push https://$GH_TOKEN_PUBLIC@github.com:/ibmresilient/resilient-community-apps.git $INTERNAL_BRANCH:$EXTERNAL_BRANCH
 

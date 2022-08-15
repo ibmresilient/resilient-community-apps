@@ -57,6 +57,8 @@ env:
     - SONAR_SCANNER_CLI_FILENAME="sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip"
     - SONAR_QUBE_URL="https://sonarqube.secintel.intranet.ibm.com"
 
+    - GH_PUBLIC_LINK="https://github.com/ibmresilient/resilient-community-apps"
+
 # Install package deps
 before_install:
   - pip install -U pip setuptools requests retry2
@@ -296,6 +298,6 @@ matrix:
     - stage: sync public repo
       script:
         - echo "Syncing INTERNAL repo with PUBLIC repo"
-        - $PATH_SCRIPTS_DIR/sync_public_repo.sh "public_main" "main" "$PATH_EXCLUDE_FILES" "$PATH_SCRIPTS_DIR"
+        - $PATH_SCRIPTS_DIR/sync_public_repo.sh "public_main" "main" "$PATH_EXCLUDE_FILES" "$PATH_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR"
       after_success:
-        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "PUBLIC Docs for $NEW_VERSION have been published and are available at <$PAGES_PUBLIC_LINK|$PAGES_PUBLIC_LINK>" "success";
+        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "PUBLIC Repo has been updated. Review the changes at <$GH_PUBLIC_LINK|$GH_PUBLIC_LINK>" "success";
