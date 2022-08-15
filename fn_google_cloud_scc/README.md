@@ -129,7 +129,7 @@ This app has been implemented using:
 | Google Cloud Security Command Center | v1 |
 
 ### Known Issues
-NOTE: As of publishing version 1.0.0 of this app, there is a known issue in the Google Cloud Security Command Center user interface where if a finding's state is manually changed from ACTIVE to INACTIVE, it will not trigger an update time event. These update times are relied on heavily in the app to provided bi-directional syncronization. If you intend to manually update the state in SCC, you will have to subsequently manually refresh the finding details into the case in SOAR to correctly reflect the updated state. There are no other known issues.
+NOTE: As of publishing version 1.0.0 of this app, there is a known issue in the Google Cloud Security Command Center user interface where if a finding's state is manually changed from ACTIVE to INACTIVE, it will not trigger an update time event. These update times are relied on heavily in the app to provided bi-directional synchronization. If you intend to manually update the state in SCC, you will have to subsequently manually refresh the finding details into the case in SOAR to correctly reflect the updated state. There are no other known issues.
 
 ### Prerequisites
 <!--
@@ -155,7 +155,7 @@ The following table provides the settings you need to configure the app. These s
 | **google_application_credentials_path** | Yes | `/var/rescircuits/google-service-acct.json` | *Path to the credentials file created following the directions [here](https://cloud.google.com/security-command-center/docs/how-to-programmatic-access). On App Host this needs to be uploaded as a file through the configuration tab.* |
 | **google_cloud_organization_id** | Yes | `1234567890` | *ID of the organization that has SCC configured. Can be found from the Google Cloud Console.* |
 | **add_soar_id_as_security_mark** | No | `True` | *True/False whether or not to create Security Marks in SCC with the IBM SOAR ID when a finding is synced to SOAR. If omitted, defaults to False.* |
-| **findings_filter** | No | `severity = "MEDIUM"` | *Filter to use when synchronizing findings from SCC to SOAR. If no filter is provided, all new findings will be syncronized. Information on how to format a finding filter can be found here. `AND` and `OR` can be used to string clauses together. NOTE: string values must be captured in quotation marks.* |
+| **findings_filter** | No | `severity = "MEDIUM"` | *Filter to use when synchronizing findings from SCC to SOAR. If no filter is provided, all new findings will be synchronized. Information on how to format a finding filter can be found here. `AND` and `OR` can be used to string clauses together. NOTE: string values must be captured in quotation marks.* |
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
 | **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
 | **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
