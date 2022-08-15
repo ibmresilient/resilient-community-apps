@@ -24,13 +24,13 @@
 - [Filters and Field Masks](#filters-and-field-masks)
   - [Findings and Assets Filters](#findings-and-assets-filters)
   - [Assets Field Masks](#assets-field-masks)
+- [Rules](#rules)
 - [Function - Google Cloud SCC: Get Findings](#function---google-cloud-scc-get-findings)
 - [Function - Google Cloud SCC: List Assets](#function---google-cloud-scc-list-assets)
 - [Function - Google Cloud SCC: Update Findings](#function---google-cloud-scc-update-findings)
 - [Function - Google Cloud SCC: Update Security Mark](#function---google-cloud-scc-update-security-mark)
 - [Data Table - Finding Source Properties](#data-table---finding-source-properties)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -167,14 +167,14 @@ The following table provides the settings you need to configure the app. These s
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
-# Templates for SOAR Cases
-It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields in SOAR.
+## Templates for SOAR Cases
+It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
 
-This is especially relevant if you have required custom close fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case_template` and reference those required close fields in the template.
+This is especially relevant if you have required custom _close_ fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case_template` and reference those required close fields in the template.
 
 When overriding the template in App Host, specify the file path for each file as `/var/rescircuits`.
 
-Below are the default templates used which can be copied, modified and used with app_config's
+Below are the default templates used which can be copied, modified, and used with app_config's
 `soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
 To see the fields available, checkout the output of the `Get Findings` function. There you will find all the fields that
 are made available to the poller when creating, updating, and closing findings.
@@ -335,7 +335,7 @@ are made available to the poller when creating, updating, and closing findings.
 ```
 </details>
 
-# Filters and Field Masks
+## Filters and Field Masks
 
 ### Findings and Assets Filters
 To use filters when gathering findings or assets, they must follow strict format restrictions set out by Google SCC. Below are a few examples of properly formatted filters. These can be used in workflows that call the `List Assets` function or the `Get Findings` function, or in the app.config value for `findings_filter` (which is used as a default for auto-sync and for `Get Findings` if no other filter is provided). Filters can be strung together with AND and OR logical operators, and parentheses are supported. OR has higher precendence than AND.
@@ -358,6 +358,24 @@ Example:
 ```
 asset.resource_properties, asset.security_center_properties.resource_type
 ```
+
+---
+
+
+## Rules
+| Rule Name | Object | Workflow Triggered | Description |
+| --------- | ------ | ------------------ | ----------- |
+| SCC: Add Source Property | incident | `google_scc_add_finding_source_property_in_scc` | Add a source property key-value pair to a finding in SCC |
+| SCC: Close Finding | incident | `google_scc_close_finding_in_scc` | Move a finding from `ACTIVE` to `INACTIVE` in SCC |
+| SCC: Delete Security Mark | incident | `google_scc_delete_security_mark` | Completely remove a security mark from a finding in SCC |
+| SCC: List Assets | incident | `google_scc_list_assets` | Runs a query to list the assets in SCC and post them to a note; should be used with the provided filters and optional field mask |
+| SCC: Refresh Finding | incident | `google_scc_refresh_finding` | Manually refresh the values of a finding to update in SOAR |
+| SCC: Update Next Steps | incident | `google_scc_update_next_steps_in_scc` | Set the value of the `next_steps` field of a finding in SCC |
+| SCC: Update Security Marks | incident | `google_scc_update_security_mark` | Change the value or set a new security mark in SCC |
+| SCC: Update Severity | incident | `google_scc_update_severity_in_scc` | Change the severity of a finding in SCC |
+| SCC: Update Severity on Change | incident | `google_scc_auto_update_severity_in_scc` | Automatically changes the severity of a finding based on severity changes of the SOAR incident |
+| SCC: Update Source Property | datatable | `google_scc_update_finding_source_property_in_scc_from_dt` | Change the value of a source property of a finding in SCC from rows of the source properties datatable in SOAR |
+| SCC: Update State | incident | `google_scc_update_state_in_scc` | Update the state of a finding to either `ACTIVE` or `INACTIVE` in SCC |
 
 ---
 
@@ -1072,24 +1090,6 @@ google_scc_finding_source_properties_dt
 | Finding Type | `google_scc_type` | `text` | `properties` |
 | Finding Link | `google_scc_url` | `textarea` | `properties` |
 | Associated Vulnerability | `google_scc_vulnerability` | `text` | `properties` |
-
----
-
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| SCC: Add Source Property | incident | `google_scc_add_finding_source_property_in_scc` |
-| SCC: Close Finding | incident | `google_scc_close_finding_in_scc` |
-| SCC: Delete Security Mark | incident | `google_scc_delete_security_mark` |
-| SCC: List Assets | incident | `google_scc_list_assets` |
-| SCC: Refresh Finding | incident | `google_scc_refresh_finding` |
-| SCC: Update Next Steps | incident | `google_scc_update_next_steps_in_scc` |
-| SCC: Update Security Marks | incident | `google_scc_update_security_mark` |
-| SCC: Update Severity | incident | `google_scc_update_severity_in_scc` |
-| SCC: Update Severity on Change | incident | `google_scc_auto_update_severity_in_scc` |
-| SCC: Update Source Property | google_scc_finding_source_properties_dt | `google_scc_update_finding_source_property_in_scc_from_dt` |
-| SCC: Update State | incident | `google_scc_update_state_in_scc` |
 
 ---
 
