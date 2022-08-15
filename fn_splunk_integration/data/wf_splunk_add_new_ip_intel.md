@@ -90,7 +90,7 @@ if results.get("content", {}).get("status", False):
   result_row.intel_collection = results.inputs['splunk_threat_intel_type']
   result_row.intel_field = results.inputs['splunk_query_param1']
   result_row.intel_value = results.inputs['splunk_query_param2']
-  result_row.splunk_server = rule.properties.splunk_servers
+  result_row.splunk_server = rule.properties.splunk_server
 
 ```
 
