@@ -20,7 +20,7 @@
 ```python
 inputs.mcafee_epo_system_name_or_id = rule.properties.epo_system_names_or_ids
 inputs.mcafee_epo_product_id = row.product_id
-inputs.mcafee_epo_task_id = int(row.object_id)
+inputs.mcafee_epo_task_id = int(row.task_id)
 ```
 
 ### Post-Processing Script
