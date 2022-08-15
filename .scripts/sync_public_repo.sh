@@ -13,6 +13,7 @@ EXTERNAL_BRANCH=$2
 PATH_EXCLUDE_FILES=$3
 PATH_SCRIPTS_DIR=$4
 PATH_COMMON_SCRIPTS_DIR=$5
+PATH_DOWNLOAD_SCRIPT=$6
 NOW=`date '+%Y_%m_%d'`
 TEMP_BRANCH="repo_sync_$NOW"
 
@@ -41,6 +42,11 @@ fi
 
 if [ -z "$5" ] ; then
     echo "ERROR: Must provide PATH_COMMON_SCRIPTS_DIR name as fifth parameter."
+    exit 1
+fi
+
+if [ -z "$6" ] ; then
+    echo "ERROR: Must provide PATH_DOWNLOAD_SCRIPT name as sixth parameter."
     exit 1
 fi
 
@@ -85,8 +91,11 @@ mv $PATH_SCRIPTS_DIR $PATH_SCRIPTS_DIR.bak
 print_msg "Renaming '$PATH_COMMON_SCRIPTS_DIR' directory to '$PATH_COMMON_SCRIPTS_DIR.bak'"
 mv $PATH_COMMON_SCRIPTS_DIR $PATH_COMMON_SCRIPTS_DIR.bak
 
+print_msg "Renaming '$PATH_DOWNLOAD_SCRIPT' file to '$PATH_DOWNLOAD_SCRIPT.bak'"
+mv $PATH_DOWNLOAD_SCRIPT $PATH_DOWNLOAD_SCRIPT.bak
+
 print_msg "Locally commit all changes to '$TEMP_BRANCH'"
-git add -A && git commit -m "Syncing external repository $NOW"
+git add -A && git commit -m "Syncing external repository on $NOW"
 
 print_msg "Checkout INTERNAL '$INTERNAL_BRANCH' branch"
 git checkout $INTERNAL_BRANCH

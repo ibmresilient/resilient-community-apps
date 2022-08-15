@@ -26,6 +26,7 @@ env:
   global:
     - PATH_SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
     - PATH_COMMON_SCRIPTS_DIR="$TRAVIS_BUILD_DIR/common_scripts"
+    - PATH_DOWNLOAD_SCRIPT_SAVE_LOC="$TRAVIS_BUILD_DIR/download_script.py"
     - PATH_SONAR_PROPERTIES="$TRAVIS_BUILD_DIR/sonar-project.properties"
     - PATH_ALLOW_IMAGE_NAMES="$PATH_SCRIPTS_DIR/ALLOW_IMAGE_NAMES.txt"
     - PATH_EXCLUDE_FILES="$PATH_SCRIPTS_DIR/paths_to_exclude.txt"
@@ -62,7 +63,7 @@ env:
 # Install package deps
 before_install:
   - pip install -U pip setuptools requests retry2
-  - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+  - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
   - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
 
 # Exclude these branches from having jobs ran.
@@ -162,7 +163,7 @@ matrix:
     #     - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
     #     - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
     #     - pip install requests retry2
-    #     - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+    #     - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
     #   script:
     #     - echo "Installing and running SonarQube scan"
     #     - ALL_ALLOWED_IMAGES=`python $PATH_COMMON_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
@@ -213,7 +214,7 @@ matrix:
     #     - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
     #     - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
     #     - pip install requests retry2
-    #     - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+    #     - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
     #     - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
     #   script:
     #     - echo "Installing and running SonarQube scan"
@@ -298,6 +299,6 @@ matrix:
     - stage: sync public repo
       script:
         - echo "Syncing INTERNAL repo with PUBLIC repo"
-        - $PATH_SCRIPTS_DIR/sync_public_repo.sh "public_main" "main" "$PATH_EXCLUDE_FILES" "$PATH_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR"
+        - $PATH_SCRIPTS_DIR/sync_public_repo.sh "public_main" "main" "$PATH_EXCLUDE_FILES" "$PATH_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
       after_success:
-        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "PUBLIC Repo has been updated. Review the changes at <$GH_PUBLIC_LINK|$GH_PUBLIC_LINK>" "success";
+        - $PATH_COMMON_SCRIPTS_DIR.bak/send_slack_notification.sh "PUBLIC Repo has been updated. Review the changes at <$GH_PUBLIC_LINK|$GH_PUBLIC_LINK>" "success";
