@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "details": {},
+    "success_count": 1,
+    "failure_count": 0,
+    "warnings": [],
+    "success": true,
+    "message": "1 event updated successfully"
+  },
+  "raw": "{\"details\": {}, \"success_count\": 1, \"failure_count\": 0, \"warnings\": [], \"success\": true, \"message\": \"1 event updated successfully\"}",
+  "inputs": {
+    "event_id": "7D8101AA-B8DB-44FF-94A2-E06831523B77@@_internal@@8bb2bdb9cfa9795e6fb4beef77440e59",
+    "notable_event_status": 2,
+    "comment": "SOAR incident is active",
+    "splunk_label": "splunk_76"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-splunk-integration",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 5794,
+    "timestamp": "2022-03-17 10:55:55"
+  }
+}
