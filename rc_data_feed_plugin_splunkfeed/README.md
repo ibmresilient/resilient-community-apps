@@ -111,5 +111,18 @@ port | Ex. 8088 | The default is 8088 |
 * Splunk events are immutable. IBM SOAR object changes are represented as new events. No event deletion is possible.
 * Be aware that when using `reload=True`, all IBM SOAR records will be duplicated in Splunk each time resilient-circuits is re-started. Use the app.config setting `reload_types` to specify the data sent if you want to either limit the object types or to also include datatables.
 
-# Data Feed Documentation
+# Splunk Configuration
+Follow these steps to create an HTTP Event Collector:
+
+1. Go to Settings and select Indexes.
+2. Create an index for data feeder. Your requirements will guide you to the correct settings. We have tested with Index Data Type `Events` and App `Search and Reporting`.
+![create screenshot](./doc/screenshots/index.png) 
+3. Go to Settings and select Data Inputs.
+4. For HTTP Event Collector, click the `Add new` Action.
+5. Enter information about your collector, specifically, the index(es) to enable and the Default Index. No other settings are necessary (such as Source Type) but can be added for further identification.
+![create screenshot](./doc/screenshots/create_collector.png) 
+6. Once created, copy the Token Value for use in the app.config `token` setting.
+![token screenshot](./doc/screenshots/collector_token.png)
+
+# Additional Data Feed Documentation
 For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.ibm.com/Resilient/resilient-community-apps/blob/master/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).
