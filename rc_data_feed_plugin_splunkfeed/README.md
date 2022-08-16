@@ -91,7 +91,7 @@ include_attachment_data=false
 workspaces=
 ```
 
-# SplunkHECFeed Clas
+# SplunkHECFeed Class
 The SplunkHECFeed class utilizes the Splunk HTTP Event Collector for data import. This is convenient as the data from IBM SOAR is readily converted to JSON which can be natively consumed by Splunk.
 
 | Key | Values | Description |
@@ -110,3 +110,6 @@ port | Ex. 8088 | The default is 8088 |
 * Enable the HTTP Event Collector within Splunk ES before using this data feed.
 * Splunk events are immutable. IBM SOAR object changes are represented as new events. No event deletion is possible.
 * Be aware that when using `reload=True`, all IBM SOAR records will be duplicated in Splunk each time resilient-circuits is re-started. Use the app.config setting `reload_types` to specify the data sent if you want to either limit the object types or to also include datatables.
+
+# Data Feed Documentation
+For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.ibm.com/Resilient/resilient-community-apps/blob/master/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).
