@@ -34,11 +34,11 @@
 
 ## Overview
 
-**SOAR Components for 'fn_webex'**
+**SOAR Components for Cisco Webex**
 
 This package extends the meeting and collaboration functionality of Webex to IBM Security QRadar SOAR Platform. This package provides SOAR platform with the ability to interface with Cisco Webex and create rooms, teams and meetings. The user now can create Meeitngs, Rooms and teams from within a SOAR incident and assign its members to it.
 
- ![screenshot: main](./doc/screenshots/fn-create-webex-meeting-workflow.png)
+ ![screenshot: main](./doc/screenshots/workflow_create_rooms_teams.png)
 
 ### Key Features
 * This package provdes with a function that allows for creating one or more Webex Teams and add incident and other specified members to it.
@@ -64,6 +64,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
+  
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -117,10 +118,10 @@ The following steps can be followed to create an app integration:
  ![screenshot: webex-app-integration ](./doc/screenshots/webex-app-integration-scope.png)
 
 ### OAuth Authentication
-To establish a secure connection between the Webex integration and  _SOAR platform_, the [OAuth Utilities Documentation](https://github.ibm.com/Resilient/resilient-community-apps/tree/master/oauth-utils) is to be used. 
+To establish a secure connection between the Webex integration and  _SOAR platform_, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used. 
 
 * The tool is used to generate a unique *Refresh token*, which is then used by the app.
-* There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://github.ibm.com/Resilient/resilient-community-apps/tree/master/oauth-utils)
+* There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
 * Once such method would be using the CLI. A sample command has been provided below:
 
 ```
@@ -138,11 +139,11 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **webex_timezone** | Yes | `GMT -05:00` | *Timezone in which meeting is created.* |
-| **client_id** | Yes | `Cf7f235XXXXXXXXXX509cda551c7ddXXXX930ae68d377754b971XXXXXXXXX` | *Issued when creating the integration* |
-| **client_secret** | Yes | `dca551c7dXXXX930aeXXXX509cda551c7ddXXXX930ae68d54b971XXXXXXXXX` | *Issued when creating the integration* |
-| **refresh_token** | Yes | `mRhMXXXXXXXXXXmNjItMTg2_P0A1_f688574e-8402-4b53-864e-xxxxxxxxxxx` | *Generated using the OAuth Utilities Tool* |s
-| **scope** | Yes | `meeting:schedules_write meeting:schedules_read` | *Issued when creating the integration* |
+| **webex_timezone** | Yes | `GMT -05:00` | Reference Timezone for the meeting |
+| **client_id** | Yes | `Cf7f235XXXXXXXXXXddXXXX930ae68d377754b971XXXXXXXXX` | Issued while creating the integration |
+| **client_secret** | Yes | `dca551c7dXXXX930aeXXXXddXXXX930ae68d54b971XXXXXXXXX` | Issued while creating the integration |
+| **refresh_token** | Yes | `mRhMXXXXXXXXXXmNjI53-864e-xxxxxxxxxxx` | Generated using the OAuth Utilities Tool |
+| **scope** | Yes | `meeting:schedules_write meeting:schedules_read` | Issued while creating the integration |
 
 ---
 
@@ -311,7 +312,7 @@ Creates a Webex Room with incident members and adds additional members or teams 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `webex_room_name` | `text` | No | `Incident Room` | Name of the Room |
-| `webex_team_id` | `text` | No | `Ydca551c7dXXXX930aeXXXX509cda551c7ddXXXX930ae68d54b971XXXXXXXXX` | If a Webex team is already available, the entire team can be directly added by specifying its ID. |
+| `webex_team_id` | `text` | No | `Ydca551c7dXXXd54b971XXXXXXXXX` | If a Webex team is already available, the entire team can be directly added by specifying its ID. |
 | `webex_add_all_members` | `boolean` | Yes | `Yes` | Select this option to include all incident members to this Webex room |
 | `webex_meeting_attendees` | `text` | No | `sara@example.com, mathew@example.com` | The list of email address of the attendees in a comma-separated format|
 
