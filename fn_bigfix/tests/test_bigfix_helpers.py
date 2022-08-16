@@ -11,10 +11,6 @@ from mock_artifacts import get_artifact_data_1, get_artifact_data_2, mocked_bigf
 
 """Suite of tests to test BigFix Helper functions"""
 
-def assert_keys_in(json_obj, *keys):
-    for key in keys:
-        assert key in json_obj
-
 class TestBigFixHelpersGetHits:
     """ Test for get_hits using mocked data. """
     @pytest.mark.parametrize("artifact_data, params, expected_results_1, expected_results_2", [
@@ -24,9 +20,8 @@ class TestBigFixHelpersGetHits:
          "incident_id": 23456, "artifact_id": 7891}, 5, 2)
     ])
     def test_get_hits(self, artifact_data, params, expected_results_1, expected_results_2):
-        hits = get_hits(artifact_data)
         assert (len(artifact_data)) == expected_results_1
-        assert (len(hits)) == expected_results_2
+        assert (len(get_hits(artifact_data))) == expected_results_2
 
 class TestBigFixHelperPollActionStatus:
     """ Test for poll_action_status using mocked data. """
@@ -40,9 +35,8 @@ class TestBigFixHelperPollActionStatus:
     ])
     def test_poll_action_status(self, result_type, bigfix_action_id, retry_interval, response_interval, retry_timeout, expected_results_1, expected_results_2):
         """ Test create_attachment using mocked data. """
-        end_time = time() + response_interval
 
         (status, status_message) = poll_action_status(mocked_bigfix_client(
-            "get_bf_action_status", result_type, end_time), bigfix_action_id, retry_interval, retry_timeout)
+            "get_bf_action_status", result_type, time() + response_interval), bigfix_action_id, retry_interval, retry_timeout)
         assert status == expected_results_1
         assert status_message == expected_results_2

@@ -354,10 +354,10 @@ def get_check_is_folder():
 def mocked_res_client(*args):
     """Function will be used by the mock to replace SOAR client"""
     class MockResponse:
-        def __init__(self, *arg):
-            if arg and arg[0] == "post_attachment":
-                self.file_name = arg[1]
-                self.incident_id = arg[2]
+        def __init__(self, *args):
+            if args and args[0] == "post_attachment":
+                self.file_name = args[1]
+                self.incident_id = args[2]
 
         def __contains__(self, key):
             return True if key in self.__dict__.keys() else False
@@ -374,10 +374,10 @@ def mocked_res_client(*args):
 def mocked_bigfix_client(*args):
     """Function will be used by the mock to replace bigfix_client"""
     class MockResponse:
-        def __init__(self, *arg):
-            if arg and arg[0] == "get_bf_action_status":
-                self.result_type = arg[1]
-                self.end_time = arg[2]
+        def __init__(self, *args):
+            if args and args[0] == "get_bf_action_status":
+                self.result_type = args[1]
+                self.end_time = args[2]
 
         def __contains__(self, key):
             return True if key in self.__dict__.keys() else False
@@ -496,30 +496,30 @@ def mocked_bigfix_client(*args):
 def mocked_requests(*args, **kwargs):
     """Function will be used by the mock to replace get and post requests """
     class MockResponse:
-        def __init__(self, *arg, **kwargs):
+        def __init__(self, *args, **kwargs):
             self.status_code = 200
-            if arg and "/api/query?" in arg[0]:
-                computer_id = arg[0].split("id of it = ", 1)[
+            if args and "/response_text" in args[0]:
+                self.text = get_response_text_asset_props(args[1])
+            elif args and "/api/query?" in args[1]:
+                computer_id = args[1].split("id of it = ", 1)[
                     1].split(')', 1)[0]
                 self.text = get_response_text_asset_props(computer_id)
-            elif arg and "/api/clientqueryresults/" in arg[0]:
-                query_id = arg[0].split('/')[5].split('?', 1)[0]
+            elif args and "/api/clientqueryresults/" in args[1]:
+                query_id = args[1].split('/')[5].split('?', 1)[0]
                 self.text = get_response_artifact_data(query_id)
-            elif arg and "/api/clientquery" in arg[0]:
+            elif args and "/api/clientquery" in args[1]:
                 if "exists file".encode() in kwargs["data"]:
                     self.text = post_response_artifact_query("DeleteFile")
                 elif "exists process".encode() in kwargs["data"]:
                     self.text = post_response_artifact_query("KillProcess")
-            elif arg and "/api/actions" in arg[0]:
+            elif args and "/api/actions" in args[1]:
                 if "Delete File".encode() in kwargs["data"]:
                     self.text = post_response_artifact_remediate("DeleteFile")
                 elif "Delete Registry Key".encode() in kwargs["data"]:
                     self.text = post_response_artifact_remediate(
                         "DeleteRegKey")
-            elif arg and "/response_text" in arg[0]:
-                self.text = get_response_text_asset_props(arg[1])
-            elif arg and "/api/action" in arg[0]:
-                action_id = arg[0].split('/')[5]
+            elif args and "/api/action" in args[1]:
+                action_id = args[1].split('/')[5]
                 self.text = get_response_action_status_success(action_id)
 
     return MockResponse(*args, **kwargs)

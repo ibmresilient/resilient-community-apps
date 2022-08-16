@@ -42,8 +42,6 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get("fn_bigfix", {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -53,7 +51,8 @@ class FunctionComponent(AppFunctionComponent):
                         "bigfix_incident_id"], fn_inputs)
 
         params = {"asset_name": fn_inputs.bigfix_asset_name,
-                  "asset_id": fn_inputs.bigfix_asset_id, "incident_id": fn_inputs.bigfix_incident_id}
+                  "asset_id": fn_inputs.bigfix_asset_id,
+                  "incident_id": fn_inputs.bigfix_incident_id}
 
         self.LOG.info(str(params))
 

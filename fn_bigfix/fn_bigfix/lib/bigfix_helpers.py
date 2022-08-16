@@ -11,7 +11,6 @@ LOG = getLogger(__name__)
 def get_hits(artifact_data):
     """Get endpoints with hits from results returned from BigFix.
     :param artifact_data: Data returned from Bigfix
-    :param params: Dictionary of SOAR Function parameters
     :return hits: Dictionary of endpoints with hit
     """
     LOG.debug("Filtering endpoint responses for hits.")

@@ -49,8 +49,6 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get("fn_bigfix", {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -59,10 +57,12 @@ class FunctionComponent(AppFunctionComponent):
         # Validate parameters
         validate_fields(["bigfix_artifact_id", "bigfix_artifact_value", "bigfix_artifact_type", "bigfix_incident_id", "bigfix_incident_plan_status"], fn_inputs)
 
-        params = {"artifact_id": fn_inputs.bigfix_artifact_id, "artifact_value": fn_inputs.bigfix_artifact_value,
+        params = {"artifact_id": fn_inputs.bigfix_artifact_id,
+                  "artifact_value": fn_inputs.bigfix_artifact_value,
                   "artifact_properties_name": fn_inputs.bigfix_artifact_properties_name if hasattr(fn_inputs, 'bigfix_artifact_properties_name') else None,
                   "artifact_properties_value": fn_inputs.bigfix_artifact_properties_value if hasattr(fn_inputs, 'bigfix_artifact_properties_value') else None,
-                  "artifact_type": fn_inputs.bigfix_artifact_type, "incident_id": fn_inputs.bigfix_incident_id,
+                  "artifact_type": fn_inputs.bigfix_artifact_type,
+                  "incident_id": fn_inputs.bigfix_incident_id,
                   "incident_plan_status": fn_inputs.bigfix_incident_plan_status}
 
         self.LOG.info(str(params))

@@ -37,8 +37,6 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
 
     @app_function(FN_NAME)

@@ -41,8 +41,6 @@ class FunctionComponent(AppFunctionComponent):
     """
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get("fn_bigfix", {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):

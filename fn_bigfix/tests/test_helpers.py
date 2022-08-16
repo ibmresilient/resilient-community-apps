@@ -10,10 +10,6 @@ from mock_artifacts import mocked_res_client
 
 """Suite of tests to test Helper functions"""
 
-def assert_keys_in(json_obj, *keys):
-    for key in keys:
-        assert key in json_obj
-
 class Func(object):
     def __init__(self, options=object):
         self.options = options
@@ -56,9 +52,7 @@ class TestHelpersCreateAttachment:
     ])
     def test_create_attachment(self, file_name, file_content, params):
         """ Test create_attachment using mocked data. """
-        keys = ["name", "inc_id"]
 
         results = create_attachment(mocked_res_client("post_attachment", file_name, params["incident_id"]), file_name, file_content, params)
-        assert_keys_in(results, *keys)
         assert results["name"] == file_name
         assert results["inc_id"] == params["incident_id"]

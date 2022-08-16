@@ -8,7 +8,6 @@ from time import sleep
 from ntpath import split
 from textwrap import dedent
 from logging import getLogger
-import requests
 from resilient_lib import RequestsCommon
 import xml.etree.ElementTree as elementTree
 
@@ -19,12 +18,13 @@ class BigFixClient(object):
 
     def __init__(self, opts, options):
         """Class constructor"""
+        self.rc = RequestsCommon(opts, options)
         self.base_url = "{}:{}".format(options.get(
             "bigfix_url"), options.get("bigfix_port"))
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
-        self.proxies = RequestsCommon(opts, options).get_proxies()
         self.headers = {'content-type': 'application/json'}
+        self.verify = options.get("bigfix_verify", False)
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))
         if options.get("bigfix_endpoints_wait"):
@@ -36,15 +36,12 @@ class BigFixClient(object):
         self.computers_endpoint = '/api/computers'
         self.computer_endpoint = '/api/computer/{id}'
 
-        requests.packages.urllib3.disable_warnings()
-
     def test_connectivity(self):
         """Connectivity Test which is used by resilient_circuits selftest.
         Calls http 'get' request against 'api/computers' endpoint.
         :return: Response
         """
-        return requests.get("{}{}".format(self.base_url, self.computers_endpoint),
-            auth=(self.bf_user, self.bf_pass), verify=False, timeout=None, proxies=self.proxies)
+        return self.rc.execute("get", "{}{}".format(self.base_url, self.computers_endpoint), auth=(self.bf_user, self.bf_pass), verify=self.verify)
 
     def get_bf_computer_properties(self, computer_id):
         """ Bigfix query - Get endpoint properties.
@@ -55,8 +52,8 @@ class BigFixClient(object):
             'then((name of source analysis of property of it|"Retrieved Property",name of property of it,values of it) of '\
             'property results of bes computers whose(id of it = {0})) else error "Too Many Results"'.format(computer_id)
 
-        response = requests.get("{}/{}".format(self.base_url, query_str), auth=(self.bf_user,
-                       self.bf_pass), verify=False, timeout=None, proxies=self.proxies)
+        response = self.rc.execute("get", "{}/{}".format(self.base_url, query_str), auth=(self.bf_user,
+                       self.bf_pass), verify=self.verify)
         if response.status_code == 200:
             try:
                 qr_to_attachment = self._process_bf_computer_query_response_to_attachment(response,
@@ -300,8 +297,8 @@ class BigFixClient(object):
 
         while timeout > 0:
             result = []
-            r = requests.get(req_url, auth=(self.bf_user, self.bf_pass),
-                    verify=False, proxies=self.proxies)
+            r = self.rc.execute("get", req_url, auth=(self.bf_user, self.bf_pass),
+                    verify=self.verify)
             if r.status_code == 200:
                 try:
                     response = loads(r.text)
@@ -379,8 +376,8 @@ class BigFixClient(object):
                 target_elem, 'CustomRelevance')
             target_comp_elem.text = 'true'
 
-        r = requests.post("{}/{}".format(self.base_url, 'api/clientquery'), auth=(self.bf_user, self.bf_pass),
-                 verify=False, data=elementTree.tostring(post_xml), proxies=self.proxies)
+        r = self.rc.execute("post", "{}/{}".format(self.base_url, 'api/clientquery'), auth=(self.bf_user, self.bf_pass),
+                 verify=self.verify, data=elementTree.tostring(post_xml))
 
         if r.status_code == 200:
             try:
@@ -421,8 +418,8 @@ class BigFixClient(object):
         target_comp_elem = elementTree.SubElement(target_elem, 'ComputerID')
         target_comp_elem.text = str(computer_id)
 
-        r = requests.post("{}/{}".format(self.base_url, 'api/actions'), auth=(self.bf_user, self.bf_pass),
-                 verify=False, data=elementTree.tostring(post_xml), proxies=self.proxies)
+        r = self.rc.execute("post", "{}/{}".format(self.base_url, 'api/actions'), auth=(self.bf_user, self.bf_pass),
+                 verify=self.verify, data=elementTree.tostring(post_xml))
 
         if r.status_code == 200:
             try:
@@ -494,8 +491,9 @@ class BigFixClient(object):
         :param action_id: BigFix actions id
         :return status: Return BigFix actions status
         """
-        r = requests.get(u"{}/api/action/{}/status".format(self.base_url, action_id),
-                auth=(self.bf_user, self.bf_pass), verify=False, proxies=self.proxies)
+
+        r = self.rc.execute("get", u"{}/api/action/{}/status".format(self.base_url, action_id),
+                auth=(self.bf_user, self.bf_pass), verify=self.verify)
 
         if r.status_code == 200:
             try:

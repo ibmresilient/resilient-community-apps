@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_bigfix/util *
+recursive-include fn_bigfix/lib *
 include fn_bigfix/LICENSE
 include doc/*.md
 include doc/screenshots/*

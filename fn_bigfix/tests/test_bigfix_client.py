@@ -31,8 +31,8 @@ def get_config():
 
 class TestGetBfComputerProperties:
     """Test bigfix_client.get_bf_computer_properties using mocked data."""
+    @patch("resilient_lib.RequestsCommon.execute", side_effect=mocked_requests)
 
-    @patch('requests.get', side_effect=mocked_requests)
     @pytest.mark.parametrize("computer_id, expected_results", [
         (13550086, "Computer ID 13550086 Properties"),
         (12315195, "Computer ID 12315195 Properties")
@@ -45,7 +45,7 @@ class TestGetBfComputerProperties:
 class TestGetBfClientQuery:
     """Test bigfix_client.get_bfclientquery using mocked data."""
 
-    @patch('requests.get', side_effect=mocked_requests)
+    @patch("resilient_lib.RequestsCommon.execute", side_effect=mocked_requests)
     @pytest.mark.parametrize("query_id, expected_results", [
         (123, 2),
         (124, 4),
@@ -59,7 +59,7 @@ class TestGetBfClientQuery:
 class TestPostBfClientQuery:
     """Test bigfix_client.post_bfclientquery using mocked data."""
 
-    @patch('requests.post', side_effect=mocked_requests)
+    @patch("resilient_lib.RequestsCommon.execute", side_effect=mocked_requests)
     @pytest.mark.parametrize("query_id, expected_results", [
         ('exists file "/tmp/testfile.txt"', 142),
         ('exists process whose(name of it as lowercase = "besclient)', 144)
@@ -73,7 +73,7 @@ class TestPostBfClientQuery:
 class TestPostBfActionQuery:
     """Test bigfix_client._post_bf_action_query using mocked data."""
 
-    @patch('requests.post', side_effect=mocked_requests)
+    @patch("resilient_lib.RequestsCommon.execute", side_effect=mocked_requests)
     @pytest.mark.parametrize("query, computer_id, action_name, expected_results", [
         ('delete "/tmp/testfile.txt"', 13550086,
          "Delete File /tmp/testfile.txt", "142"),
@@ -108,7 +108,7 @@ class TestPostBfActionQuery:
 class TestGetBfActionStatus:
     """Test bigfix_client.get_bf_action_status using mocked data."""
 
-    @patch('requests.get', side_effect=mocked_requests)
+    @patch("resilient_lib.RequestsCommon.execute", side_effect=mocked_requests)
     @pytest.mark.parametrize(
         "action_id, expected_results",
         [
