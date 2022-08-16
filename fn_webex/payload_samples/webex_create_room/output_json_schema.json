@@ -1,3 +1,90 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "roomId": {
+          "type": "string"
+        },
+        "meetingLink": {
+          "type": "string"
+        },
+        "sipAddress": {
+          "type": "string"
+        },
+        "meetingNumber": {
+          "type": "string"
+        },
+        "meetingId": {
+          "type": "string"
+        },
+        "callInTollFreeNumber": {
+          "type": "string"
+        },
+        "callInTollNumber": {
+          "type": "string"
+        },
+        "attendees": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "roomName": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "webex_incident_id": {
+          "type": "string"
+        },
+        "webex_room_name": {
+          "type": "string"
+        },
+        "webex_add_all_members": {
+          "type": "boolean"
+        },
+        "webex_team_id": {
+          "type": "string"
+        },
+        "webex_meeting_attendees": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

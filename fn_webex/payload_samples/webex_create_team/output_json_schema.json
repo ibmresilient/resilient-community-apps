@@ -1,3 +1,74 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "creatorId": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "attendees": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "webex_team_name": {
+          "type": "string"
+        },
+        "webex_incident_id": {
+          "type": "string"
+        },
+        "webex_add_all_members": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

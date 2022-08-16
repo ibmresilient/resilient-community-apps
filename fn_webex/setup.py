@@ -28,9 +28,9 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="http://ibm.biz/soarcommunity",
-    description="This package provides a function that interfaces the CISCO webes platform",
-    long_description="This package provides a function that creates Cisco WebEx meeting host URL and attendee URL given the following parameters: meeting start and end time, meeting name and agenda and a WebEx password",
-    
+    description="This package extends the meeting and collaboration functionality of Webex to IBM Security QRadar SOAR Platform",
+    long_description='''This package provides SOAR platform with the ability to interface with Cisco Webex and create rooms teams and meetings. 
+    The user now can create Meeitngs, Rooms and teams from within a SOAR incident and assign its members to it.''',
     install_requires=[
         "resilient-circuits>=45.0.0"
     ],
