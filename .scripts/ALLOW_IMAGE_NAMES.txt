@@ -123,8 +123,6 @@ rc-cts-passivetotal
 rc-cts-shadowserver
 rc-cts-urlscanio
 
-sc_email_parser
-
 #No_Related_image
 #fn_apility
 #fn_cb_protection
