@@ -7,13 +7,17 @@ import json
 from fn_webex.lib import constants
 from resilient_lib import IntegrationError
 
-class WebexRooms:
+class WebexTeamsRooms:
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
         self.header = requiredParameters.get("header")
         self.LOG = self.requiredParameters.get("logger")
         self.resclient = requiredParameters.get("resclient")
+        self.entityURL = requiredParameters.get("entityURL")
+        self.entityID = requiredParameters.get("entityID")
+        self.entityName = requiredParameters.get("entityName")
+        self.retrieveMembershipURL = self.requiredParameters(self.entityURL) + self.requiredParameters.get(self.entityID)
 
 
     def isDirectMember(self, incidentMemberId, orgMemberList):
@@ -31,10 +35,10 @@ class WebexRooms:
         --------
             (<str>): Email address of the incident member
         """
-        for user in orgMemberList:  
+        for user in orgMemberList:
             if incidentMemberId == user.get("id"): 
                 return user.get("email")
-            
+
 
     def isGroupMember(self, incidentMemberId, orgMemberList, orgGroupList):
         """
@@ -63,7 +67,7 @@ class WebexRooms:
 
     def generate_member_list(self):
         """
-        Generates a list of email addresses of the members to be added to the room. The 
+        Generates a list of email addresses of the members to be added to the room/team. The 
         function queries incident member list, organization group list, and organization
         user list. Using these, it then compares and accquires the email addresses of all
         users that are members to the incident, if >>addAllMembers<< in enabled. Else just
@@ -87,96 +91,98 @@ class WebexRooms:
                 elif self.isGroupMember(incident_member, orgMemberList, orgGroupList):
                     emailIDs.extend(self.isGroupMember(incident_member, orgMemberList, orgGroupList))
         elif not self.requiredParameters["additionalAttendee"]:
-            self.LOG.warn("Warning: No participants were added to the room. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
+            self.LOG.warn("Warning: No participants were added to the room/team. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
         
         if self.requiredParameters["additionalAttendee"]:
             emailIDs += self.requiredParameters["additionalAttendee"].lower().replace(" ", "").split(",")
         self.emailIDs = emailIDs
-        self.LOG.info("Webex: Members to be added to the room {}".format(self.emailIDs))
+        self.LOG.info("Webex: Members to be added to the room/team {}".format(self.emailIDs))
 
 
     def addMembership(self):
         """
-        Adds members to the room using the email addresses from >>emailIDs<<. If user already
-        a member of the room, ignores.
+        Adds members to the room/team using the email addresses from >>emailIDs<<. If user already
+        a member of the room/team, ignores.
         """
         for user in self.emailIDs:
-            data = {"roomId" : self.requiredParameters.get("roomID"), "personEmail" : user}
+            data = {self.entityID : self.requiredParameters.get(self.entityID), "personEmail" : user}
             try:
-                _ = self.rc.execute("post", self.requiredParameters.get("roomsMembershipUrl"),
+                _ = self.rc.execute("post", self.requiredParameters.get("membershipUrl"),
                                     headers=self.header, data=json.dumps(data))
-                self.LOG.info("Webex: User {} added to incident room".format(user))
+                self.LOG.info("Webex: User {} added to incident room/team".format(user))
             except IntegrationError as err:
-                self.LOG.info("Webex: User {} is already a member of the room".format(user))
+                self.LOG.info("Webex: User {} is already a member of the room/team".format(user))
 
 
-    def createRetrieveRoom(self):
+    def createRetrieveRoomTeam(self):
         """
-        Trys and retrieves room details if available, if not creates a new room
+        Trys and retrieves room/team details if available, if not creates a new room/team
 
         Returns:
         --------
-            roomID   (<str>) : ID of the room
-            roomName (<str>) : Name of the room
+            room/team ID   (<str>) : ID of the room/team
+            room/team Name (<str>) : Name of the room/team
         """
-        self.requiredParameters["roomID"] = None
-        response = self.rc.execute("get", self.requiredParameters.get("roomsURL"), headers=self.header)
+        self.requiredParameters[self.entityID] = None
+        callingKey = "name" if self.entityName == "teamName" else "roomName"
+        response = self.rc.execute("get", self.requiredParameters.get(self.entityURL), headers=self.header)
         res = response.json()
         if len(res.get('items')) == 0:
-            self.createRoom()
+            self.createRoomTeam()
         else:
-            for room in res.get("items"):
-                if room.get("title") == self.requiredParameters.get("roomName"):
-                    self.requiredParameters["roomID"] = room.get("id")
-                    self.requiredParameters["roomName"] = room.get("title")
+            for objs in res.get("items"):
+                if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
+                    self.requiredParameters[self.entityID] = objs.get("id")
+                    self.requiredParameters[self.entityName] = objs.get(callingKey)
                     break
-            if not self.requiredParameters.get("roomID"):
-                self.createRoom()
-            self.LOG.info("Webex: Retrieving existing room: {}".format(self.requiredParameters["roomID"]))
+            if not self.requiredParameters.get(self.entityID):
+                self.createRoomTeam()
+            self.LOG.info("Webex: Retrieving existing room/team: {}".format(self.requiredParameters[self.entityID]))
 
 
-    def createRoom(self):
+    def createRoomTeam(self):
         """
-        Creates a room with the required configurations such as:
-            - Room name
+        Creates a room/team with the required configurations such as:
+            - room/team name
             - Existing teamId
             - list of Attendees
 
         Returns:
         -------
-            roomID   (<str>) : ID of the room
-            roomName (<str>) : Name of the room
+            room/team ID   (<str>) : ID of the room/team
+            room/team Name (<str>) : Name of the room/team
         """
-        data = {"title" : self.requiredParameters.get("roomName")}
-        if self.requiredParameters.get("teamID"):
+        callingKey = "name" if self.entityName == "teamName" else "roomName"
+        data = {callingKey : self.requiredParameters.get(self.entityName)}
+        if self.entityName == "roomName" and self.requiredParameters.get("teamID"):
             data["teamID"] = self.requiredParameters.get("teamID")
-        response = self.rc.execute("post", self.requiredParameters.get("roomsURL"),
+        response = self.rc.execute("post", self.requiredParameters.get(self.entityURL),
                                     headers=self.header, data=json.dumps(data))
         res = response.json()
-        self.requiredParameters["roomID"] = res.get("id")
-        self.requiredParameters["roomName"] = res.get("title")
-        self.LOG.info("Webex: Creating new room: {}".format(self.requiredParameters["roomID"]))
+        self.requiredParameters[self.entityID] = res.get("id")
+        self.requiredParameters[self.entityName] = res.get(callingKey)
+        self.LOG.info("Webex: Created new room/team: {}".format(self.requiredParameters[self.entityID]))
 
 
-    def getRoomDetails(self):
+    def getRoomTeamDetails(self):
         """
-        Upon successfully creating a room, it retrieves the room details and returns the result back to
+        Upon successfully creating a team, it retrieves the room details and returns the result back to
         the SOAR platform in the form of dictionary.
 
         Returns:
         --------
             (<dict>): response from the endpoint with room name and other information
         """
-        membershipURL = self.requiredParameters.get("roomsURL") + "{}/meetingInfo".format(self.requiredParameters.get("roomID"))
-        response = self.rc.execute("get", membershipURL, headers=self.header)
+
+        response = self.rc.execute("get", self.retrieveMembershipURL, headers=self.header)
         if response.status_code == 200:
-            self.LOG.info("Webex: Retrieved room details, Room Name : {}".format(self.requiredParameters.get("roomName")))
+            self.LOG.info("Webex: Retrieved room/team details, room/team  Name : {}".format(self.requiredParameters.get(self.entityName)))
             response = response.json()
             response["attendees"] = ", ".join(self.emailIDs)
             response["status"] = True
-            response["roomName"] = self.requiredParameters.get("roomName")
+            response[self.entityName] = self.requiredParameters.get(self.entityName)
         else:
-            self.LOG.info("Webex: Unable to retrieve room details, Room ID : {}".format(self.requiredParameters.get("roomID")))
+            self.LOG.info("Webex: Unable to retrieve room/team details, room/team ID : {}".format(self.requiredParameters.get(self.entityID)))
             response = json.loads(response.text)
             response["status"] = False
         return response

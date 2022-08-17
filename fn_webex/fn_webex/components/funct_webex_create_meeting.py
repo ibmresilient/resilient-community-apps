@@ -2,17 +2,15 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
-
+from fn_webex.lib import constants
 from fn_webex.lib.cisco_meetings import WebexMeetings
 from fn_webex.lib.cisco_authentication import WebexAuthentication
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+
 from resilient_lib import validate_fields
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 PACKAGE_NAME = "fn_webex"
 FN_NAME = "webex_create_meeting"
-SITE_URL = "https://webexapis.com/v1/meetings/"
-TOKEN_URL = "https://webexapis.com/v1/access_token"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_create_meeting'"""
@@ -29,8 +27,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_meeting_name"], fn_inputs)
-        validate_fields([{"name" : "webex_site_url", 
-                          "name" : "webex_bearerID", 
+        validate_fields([{"name" : "webex_site_url",
                           "name" : "webex_timezone"}], self.config_options)
 
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
@@ -48,8 +45,8 @@ class FunctionComponent(AppFunctionComponent):
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["resclient"] = self.rest_client()
-        self.requiredParameters["siteURL"]  = SITE_URL
-        self.requiredParameters["tokenURL"] = TOKEN_URL
+        self.requiredParameters["meetingsURL"]  = self.config_options.get("webex_site_url") + constants.MEETINGS_URL
+        self.requiredParameters["tokenURL"] = self.config_options.get("webex_site_url") + constants.TOKEN_URL
         self.requiredParameters["logger"] = self.LOG
 
         fn_msg = self.get_fn_msg()
@@ -68,9 +65,11 @@ class FunctionComponent(AppFunctionComponent):
             reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)
 
+
+        webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
+        response = webex.create_meeting()
         try:
-            webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
-            response = webex.create_meeting()
+
             yield self.status_message("Successfully created a meeting")
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(value=response, success=True)

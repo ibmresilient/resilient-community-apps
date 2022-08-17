@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
-
+from fn_webex.lib import constants
 from fn_webex.lib.cisco_rooms import WebexRooms
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
@@ -10,8 +10,6 @@ from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_webex"
 FN_NAME = "webex_create_room"
-SITE_URL = "https://webexapis.com/v1/meetings/"
-TOKEN_URL = "https://webexapis.com/v1/access_token"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_create_meeting'"""
@@ -46,9 +44,11 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["logger"] = self.LOG
         self.requiredParameters["resclient"] = self.rest_client()
-        self.requiredParameters["siteURL"]  = SITE_URL
-        self.requiredParameters["tokenURL"] = TOKEN_URL
 
+        self.requiredParameters["tokenURL"] = TOKEN_URL
+        self.requiredParameters["roomsURL"] = self.config_options.get("webex_site_url") + constants.ROOMS_URL
+        self.requiredParameters["roomsMembershipUrl"] = self.config_options.get("webex_site_url") + constants.ROOMS_MEMBERSHIP_URL
+        
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
 

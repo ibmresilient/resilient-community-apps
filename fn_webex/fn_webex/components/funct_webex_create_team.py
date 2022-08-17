@@ -2,16 +2,13 @@
 
 """AppFunction implementation"""
 
-from fn_webex.lib.cisco_teams import WebexTeams
+from fn_webex.lib.cisco_roomsTeams import WebexTeams
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_webex"
 FN_NAME = "webex_create_team"
-SITE_URL = "https://webexapis.com/v1/meetings/"
-TOKEN_URL = "https://webexapis.com/v1/access_token"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_create_meeting'"""
