@@ -33,7 +33,7 @@ class GoogleSCCCommon():
     def __init__(self, options):
 
         validate_fields([
-            "google_application_credentials_path", 
+            "google_application_credentials_path",
             "google_cloud_organization_id",
             "google_cloud_base_url"
         ], options)
