@@ -2,6 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 import json
+from operator import truediv
 import os
 import pytest
 import re
@@ -81,6 +82,10 @@ if sys.version_info.major == 2:
 else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
+
+def test_build_pass():
+    """ This test does nothing. It's required for the build process to have one passing test """
+    return True
 
 @pytest.mark.livetest
 def test_index():
