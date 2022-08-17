@@ -10,6 +10,7 @@ from os import path
 from datetime import datetime
 from operator import itemgetter
 from six import string_types
+from resilient_lib import build_incident_url, build_task_url, build_resilient_url
 
 LOG = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ class TemplateHelper(object):
         """Initialize the Template services."""
 
         self.component = resilient_component
+        self.rest_client = self.component.rest_client()
 
         self.choices = {}
         self.extends = None
@@ -28,7 +30,7 @@ class TemplateHelper(object):
         LOG.info(
             'get_datatable: ({}) ({})'.format(datatable_name, incident_id))
         try:
-            datatable = self.component.rest_client().get(
+            datatable = self.rest_client.get(
                 "/incidents/{}/table_data/{}?"
                 "handle_format=names&text_content_output_format=objects_no_convert".format(
                     incident_id, datatable_name))
@@ -41,7 +43,7 @@ class TemplateHelper(object):
             LOG.error("The datatable name {} doesn't match".format(datatable_name))
             return
 
-        table_def = self.component.rest_client().get(
+        table_def = self.rest_client.get(
             "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
                 datatable['id']))
 
@@ -81,14 +83,14 @@ class TemplateHelper(object):
         conditions = {"filters": [{"conditions": query_conditons}],
                       "sorts": [{"field_name": "create_date", "type": "desc"}]}
 
-        query_result = self.component.rest_client().post(
+        query_result = self.rest_client.post(
             "/incidents/query_paged?handle_format=objects&text_content_output_format=objects_no_convert", conditions)
 
         row_list = []
 
         for incident in query_result["data"]:
             if incident["id"] not in exclude_incidents:
-                incident = self.component.rest_client().get("/incidents/{}".format(incident["id"]))
+                incident = self.rest_client.get("/incidents/{}".format(incident["id"]))
                 row = {}
                 for want_field in want_fields_list:
                     field_value = self.get_incident_value(incident, want_field)
@@ -105,7 +107,7 @@ class TemplateHelper(object):
 
     def get_field_defs(self, type_name):
         if not self.field_defs:
-            self.field_defs = self.component.rest_client().get('/types?handle_format=names')
+            self.field_defs = self.rest_client.get('/types?handle_format=names')
 
         return self.field_defs[type_name]['fields']
 
@@ -145,7 +147,8 @@ class TemplateHelper(object):
         all_notes = []
         # get the top level comments
         for root_parent in notes.get("root_comments"):
-            if "Email Sent if mail server is valid" not in root_parent.get("text"):
+            str_to_check = "email sent if mail server is valid"     # gets added in post-processing script note
+            if str_to_check not in root_parent.get("text", "").lower():
                 all_notes.append(root_parent)
                 # to get nested child notes, execute recursive function
                 if get_children:
@@ -158,7 +161,7 @@ class TemplateHelper(object):
             'get_datatable_value_array ({}) ({}) ({})'.format(inc_id, datatable_name,
                                                                                  field_name))
         try:
-            datatable = self.component.rest_client().get(
+            datatable = self.rest_client.get(
                 "/incidents/{}/table_data/{}?"
                 "handle_format=names&text_content_output_format=objects_no_convert".format(
                     inc_id, datatable_name))
@@ -167,7 +170,7 @@ class TemplateHelper(object):
             LOG.error("The datatable {} doesn't exist".format(datatable_name))
             return '-'
 
-        table_def = self.component.rest_client().get(
+        table_def = self.rest_client.get(
             "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
                 datatable['id']))
 
@@ -270,3 +273,55 @@ class TemplateHelper(object):
             list_result = str_value
 
         return list_result
+
+    def generate_incident_url(self, inc_id):
+        org_id = self.rest_client.org_id
+        return build_incident_url(self.rest_client.base_url, inc_id, org_id)
+
+
+    def generate_task_url(self, inc_id, task_id):
+        org_id = self.rest_client.org_id
+        return build_task_url(self.rest_client.base_url, inc_id, task_id, org_id)
+
+def get_template(app_config, template_name):
+    """_summary_
+
+    Args:
+        app_config (_type_): _description_
+        template_name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    template_path = _get_template_path(app_config, template_name)
+    if template_path:
+        with open(template_path, 'r') as f:
+            return f.read()
+
+def _get_template_path(app_config, template_name):
+    """_summary_
+
+    Args:
+        app_config (_type_): _description_
+        template_name (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    template_file_path = None
+    if template_name:
+        if not app_config.get(template_name):
+            LOG.error("Template name '%s' not found.")
+            return None
+    
+        # determine if a relative path or an absolute path
+        template_file_path = app_config.get(template_name)
+        if not template_file_path.startswith("/"):  # absolute
+            cpath = path.dirname(__file__)
+            template_file_path = path.join(cpath[0:len(cpath) - cpath[::-1].index("/") - 1], template_file_path)
+
+        if not path.exists(template_file_path):
+            LOG.error(u"Template file path '%s' not found.", template_file_path)
+            return None
+
+    return template_file_path

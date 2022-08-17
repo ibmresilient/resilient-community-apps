@@ -55,6 +55,8 @@ The Outbound Email App provides the following functionality:
 * Format email using a predefined html template or specify your own template.
 * Send attachments with the email at the incident level or task level.
 * Example rules included at the incident and task levels.
+* Unified view of inbound and outbound emails
+* Manage threaded conversations
 ---
 
 ## Requirements
@@ -67,17 +69,18 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `41.0.0`.
+* SOAR platform >= `43.1.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `41.0.0`.
+* SOAR platform >= `43.1.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
     * Org Data: Read and Edit
     * Incident: Read
     * Functions: Read
+    * Layout: Read, Update
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
@@ -373,12 +376,15 @@ incident.addNote(helper.createRichText(noteText))
 
 ---
 ## Further customization
-In the example_send_email.jinja template, there is example logic to include artifact and note data. If using this template, uncomment the following sections to:
+A Jinja template for the email body can be created in the AppHost by navigating to the Outbound Email app > Configuration section. Under App Settings, you can select New File. Copy the file path that you save for this template and set the value for `template_file` in app.config to this path.
+
+In the default template packaged with this app, `data/example_send_email.jinja`, there is example logic to include artifact and note data. This logic is commented out in the example template and can be used to:
 
 <details><summary>Include artifact value and description</summary>
 <p>
 
 ```
+{# UNCOMMENT TO INCLUDE ARTIFACTS #}
 {# {% macro get_artifact(art) -%}
 	{% set values = template_helper.get_artifact_values(art) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
@@ -390,6 +396,7 @@ In the example_send_email.jinja template, there is example logic to include arti
     {% endfor %}
 {%- endmacro %} #}
 ...
+{# UNCOMMENT TO INCLUDE ARTIFACTS #}
 {# <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT ARTIFACTS</h3>
@@ -407,6 +414,7 @@ In the example_send_email.jinja template, there is example logic to include arti
 <p>
 
 ```
+{# UNCOMMENT TO INCLUDE NOTES #}
 {# {% macro get_note(note) -%}
   {% set get_children = True %}
 	{% set values = template_helper.get_note_values(note, get_children) %}
@@ -418,7 +426,7 @@ In the example_send_email.jinja template, there is example logic to include arti
     {% endfor %}
 {%- endmacro %} #}
 ...
-
+{# UNCOMMENT TO INCLUDE NOTES #}
 {# <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>

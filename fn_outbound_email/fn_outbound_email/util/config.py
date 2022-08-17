@@ -14,8 +14,11 @@ def config_section_data():
     return u"""[fn_outbound_email]
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
-#Smtp User required for TLS and OAuth2
+## Basic Authentication settings
+#smtp user required for TLS and OAuth2
 smtp_user=
+smtp_password=
+## End of Basic Authentication settings
 
 ## Start of OAuth 2.0 authentication settings ##
 # Leave OAuth 2.0 settings blank or commented out if using Basic Authentication.
@@ -47,11 +50,8 @@ auth_url=
 refresh_token=
 ## End of OAuth 2.0 authentication settings ##
 
-## Start of Basic Authentication settings ##
-smtp_password=
-## End of Basic Authentication settings ##
-
 #If smtp_user is not an email address then from_email_address should equal the email address
+#  Also used with selftest
 from_email_address=
 
 # SMTP PORT NUMBER, 25 or 587/2525
@@ -69,4 +69,6 @@ smtp_ssl_mode=starttls
 # The integration will use this template out of the box. If removed, it will default to the pre-processing script.
 # template_file=data/templates/example_send_email.jinja
 template_file=data/templates/example_send_email.jinja
+# enhance the 'email' tab with email conversation fields and datatable
+#enable_email_conversations=true/false
     """
