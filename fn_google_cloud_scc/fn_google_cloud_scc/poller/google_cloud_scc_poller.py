@@ -173,7 +173,7 @@ class PollerComponent(AppFunctionComponent):
         try:
             cases_insert = cases_closed = cases_updated = 0
             for finding_result_obj in entity_list:
-                finding = finding_result_obj.get(ENTITY_LABEL)
+                finding = finding_result_obj.get(ENTITY_ID)
 
                 finding_id = get_entity_id(finding)
                 finding["finding_id"] = finding_id
