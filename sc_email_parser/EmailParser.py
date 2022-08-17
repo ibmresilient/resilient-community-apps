@@ -1,14 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-from email.message import EmailMessage
 import re
+import time
 
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
-
-# HEADERS to track
-MESSAGE_ID = "Message-ID"
-IN_REPLY_TO = "In-Reply-To"
 
 # This is the Python 3 version of the email sample script.
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
@@ -21,11 +17,7 @@ IN_REPLY_TO = "In-Reply-To"
 
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
 # Change this value to reflect who will be the owner of the incident before running the script.
-newIncidentOwner = ""
-
-# if use_in_reply_to = True, a match for an existing incident will first occur by incident name
-#   and then by the message In-Reply-To message id.
-use_in_reply_to = False
+newIncidentOwner = "b@example.com"
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -561,16 +553,47 @@ class EmailProcessor(object):
             if subject is not None:
                 self.addUniqueArtifact(u"{0}".format(
                     subject), "Email Subject", "Suspicious email subject")
-
+      
+    @staticmethod
+    def get_message_id(headers):
+      msg_id = headers.get("X-Original-Message-ID") or headers.get("X-Microsoft-Original-Message-ID") or headers.get("X-Google-Original-Message-ID") or headers.get("Message-ID")
+      if msg_id:
+        match = MESSAGE_PATTERN.findall(msg_id[0].strip())
+        if match:
+          return match[0]
+    
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain
-        msg_id = headers.get(MESSAGE_ID)
-        if msg_id:
-          # strip off any angle brackets
-          match = MESSAGE_PATTERN.findall(msg_id[0].strip())
-          if match and hasattr(incident.properties, 'email_message_id'):
-            incident.properties.email_message_id = match[0]
+        msg_id = processor.get_message_id(headers)
+        if msg_id and hasattr(incident.properties, 'email_message_id'):
+          incident.properties.email_message_id = msg_id
+    
+    @staticmethod
+    def add_email_conversation(headers, msg_body, msg_attachments):
+      # attempt to add to incident datatable, if present
+      
+      def handle_list(value):
+        # convert a list to comma separate list, if neccessary
+        if value and isinstance(value, list):
+          return ", ".join(value)
+        
+        return value
+        
+      try:
+        row = incident.addRow('email_conversations')
+        row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
+        row['source'] = "inbound"
+        row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
+        row['from'] = handle_list(headers.get("From"))
+        row['subject'] = handle_list(headers.get("Subject"))
+        row['body'] = "\n".join(msg_body)
+        row['attachments'] = ", ".join(msg_attachments)
+        row['message_id'] = processor.get_message_id(headers)
+        row['in_reply_to'] = handle_list(headers.get("References"))
+        row['importance'] = handle_list((headers.get("Importance") or {"1": "high", "2": "normal", "3": "low"}.get(headers.get("X-Priority"), "normal")))
+      except Exception as err:
+        log.failure(str(err))
 
 ###
 # Mainline starts here
@@ -595,18 +618,6 @@ query = query_builder.build()
 incidents = helper.findIncidents(query)
 
 if len(incidents) == 0:
-    # check to see if this is a reply to an existing message
-    if use_in_reply_to and emailmessage.headers.get(IN_REPLY_TO) and hasattr(incident.properties, 'email_message_id'):
-        in_reply_to = emailmessage.headers.get(IN_REPLY_TO)
-        match = MESSAGE_PATTERN.findall(in_reply_to[0].strip())
-        # build the query for incidents which have this header
-        query_builder.reset()
-        query_builder.equals(fields.incident.email_message_id, match[0])
-        query_builder.equals(fields.incident.plan_status, "Active")
-        query = query_builder.build()
-        incidents = helper.findIncidents(query)
-
-if len(incidents) == 0:
     # A similar incident does not already exist. Create a new incident and associate the email with it.
     log.info(u"Creating new incident {0}".format(newIncidentTitle))
 
@@ -619,6 +630,7 @@ if len(incidents) == 0:
 
     # add message-id for easy tracking
     processor.save_message_id(emailmessage.headers)
+    
 else:
     # A similar incident already exists. Associate the email with this preexisting incident.
     log.info(u"Associating with existing incident {0}".format(incidents[0].id))
@@ -650,3 +662,6 @@ processor.processArtifactCategory(processor.makeHexPattern(
 
 # Add email message attachments to incident
 processor.processAttachments()
+
+# add to email conversation datatable
+processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])
