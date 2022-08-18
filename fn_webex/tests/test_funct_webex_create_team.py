@@ -54,7 +54,7 @@ class mocked_restClient:
                     ]}
 
 
-def mocked_requestCommon(method, url, data=None, headers=None, proxies=None):
+def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, callback=None):
     class MockResponse:
         def __init__(self, text, status_code):
             self.text = text
@@ -63,15 +63,19 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None):
         def json(self):
             return json.loads(self.text)
     
+    response = None
     if url == "https://webexapis.com/v1/teams/":
-        return MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
+        response = MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
 
     elif url == "https://webexapis.com/v1/team/memberships":
-        return None
+        response = None
 
     elif url == "https://webexapis.com/v1/teams/{}".format("Y123"):
-        return MockResponse('''{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
+        response = MockResponse('''{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
 
+    if callback:
+        response = callback(response)
+    return response
 
 def call_webex_create_room_function():
     requiredParameters = {

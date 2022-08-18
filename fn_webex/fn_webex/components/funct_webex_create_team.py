@@ -62,16 +62,16 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("Failed to Authenticate {}! Is the Refresh token Upto date?".format(FN_NAME))
             reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)
-        
-        webex = WebexInterface(self.requiredParameters)
-        webex.generate_member_list()
-        webex.createRetrieveEntity()
-        yield self.status_message("Successfully created/retrieved a team")
-        webex.addMembership()
-        yield self.status_message("Successfully added membership to the room")
-        response = webex.getEntityDetails()
-        yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
+
         try:
+            webex = WebexInterface(self.requiredParameters)
+            webex.generate_member_list()
+            webex.createRetrieveEntity()
+            yield self.status_message("Successfully created/retrieved a team")
+            webex.addMembership()
+            yield self.status_message("Successfully added membership to the room")
+            response = webex.getEntityDetails()
+            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(response, success=True)
 

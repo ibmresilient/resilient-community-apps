@@ -65,11 +65,9 @@ class FunctionComponent(AppFunctionComponent):
             reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)
 
-
-        webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
-        response = webex.create_meeting()
         try:
-
+            webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
+            response = webex.create_meeting()
             yield self.status_message("Successfully created a meeting")
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(value=response, success=True)
