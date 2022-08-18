@@ -19,7 +19,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
+def mocked_requests_post(method, url, data=None, headers=None, proxies=None, callback=None):
     class MockResponse:
         def __init__(self, text, status_code):
             self.text = text
@@ -32,20 +32,23 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None):
     if data and not isinstance(data, dict):
         data = json.loads(data)
     if url == "":        
-        response = MockResponse(text="", status_code=404)
+        response = MockResponse(text=None, status_code=404)
     elif url != "" and data.get("start") == "" and data.get("end") == "" and data.get("title") == "":
         response = None
     elif url != "" and data.get("start") != "" and data.get("end") != "" and data.get("title") != "":
-        response = MockResponse(text="done", status_code=200)
+        response = MockResponse(text=json.dumps({"reason" : "done"}), status_code=200)
     if headers and headers.get("bearerID") == "":
-        response = MockResponse(text="Invalid bearerID", status_code=401)
+        response = MockResponse(text=json.dumps({"reason" : "Invalid bearerID"}), status_code=401)
 
     if "client_secret" in data:
         if data.get("client_secret") == "":
             response = MockResponse(text='''{"access_token" : ""}''', status_code=200)
         else:
             response = MockResponse(text='''{"access_token" : "ID1234"}''', status_code=200)
-    return response
+    if callback:
+        return callback(response)
+    else:
+        return response
 
 class LOG:
     def __init__(self):
@@ -66,7 +69,7 @@ class TestFnCreateMeeting:
             "rc"           : RequestsCommon(),
             "start"        : round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000,
             "end"          : round((datetime.datetime.now() + datetime.timedelta(minutes=95)).timestamp()) * 1000,
-            "siteURL"      : "http://www.example.com",
+            "meetingsURL"  : "http://www.example.com",
             "tokenURL"     : "http://www.example.com",
             "bearerID"     : "1234",
             "timzone"      : "gmt 05:30",
@@ -86,12 +89,11 @@ class TestFnCreateMeeting:
         }
 
     @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
-    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
-    def test_call_create_meeting(self, mock, mock2):
+    def test_call_create_meeting(self, mock):
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
-        requiredParameters["siteURL"] = ""
+        requiredParameters["meetingsURL"] = ""
         authenticator = WebexAuthentication(requiredParameters)
         requiredParameters["header"] = authenticator.Authenticate()
         webex = WebexMeetings(requiredParameters, optionalParameters)

@@ -3,7 +3,7 @@
 #
 # """AppFunction implementation"""
 from fn_webex.lib import constants
-from fn_webex.lib.cisco_rooms import WebexRooms
+from fn_webex.lib.cisco_interface import WebexInterface
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
@@ -37,17 +37,19 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["scope"] = self.config_options.get("scope")
         self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
         self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
-        self.requiredParameters["teamID"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
+        self.requiredParameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
         self.requiredParameters["roomName"] = fn_inputs.webex_room_name
-        self.requiredParameters["incidentID"] = fn_inputs.webex_incident_id
+        self.requiredParameters["incidentId"] = fn_inputs.webex_incident_id
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["logger"] = self.LOG
         self.requiredParameters["resclient"] = self.rest_client()
 
-        self.requiredParameters["tokenURL"] = TOKEN_URL
-        self.requiredParameters["roomsURL"] = self.config_options.get("webex_site_url") + constants.ROOMS_URL
-        self.requiredParameters["roomsMembershipUrl"] = self.config_options.get("webex_site_url") + constants.ROOMS_MEMBERSHIP_URL
+        self.requiredParameters["entityId"]   = "roomId"
+        self.requiredParameters["entityName"] = "roomName"
+        self.requiredParameters["tokenURL"] = self.config_options.get("webex_site_url") + constants.TOKEN_URL
+        self.requiredParameters["entityURL"]  = self.config_options.get("webex_site_url") + constants.ROOMS_URL
+        self.requiredParameters["membershipUrl"] = self.config_options.get("webex_site_url") + constants.ROOMS_MEMBERSHIP_URL
         
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
@@ -65,13 +67,13 @@ class FunctionComponent(AppFunctionComponent):
             reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)
 
-        webex = WebexRooms(self.requiredParameters)
+        webex = WebexInterface(self.requiredParameters)
         webex.generate_member_list()
-        webex.createRetrieveRoom()
+        webex.createRetrieveEntity()
         yield self.status_message("Successfully created/retrieved a room")
         webex.addMembership()
         yield self.status_message("Successfully added membership to the room")
-        response = webex.getRoomDetails()
+        response = webex.getEntityDetails()
         yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
         try:
             yield FunctionResult(response, success=True)

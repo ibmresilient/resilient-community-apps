@@ -5,7 +5,7 @@ import pytest
 from mock import patch
 import json
 from resilient_lib import RequestsCommon
-from fn_webex.lib.cisco_teams import WebexTeams
+from fn_webex.lib.cisco_interface import WebexInterface
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import FunctionResult
 
@@ -76,21 +76,24 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None):
 def call_webex_create_room_function():
     requiredParameters = {
             "rc"         : RequestsCommon(),
-            "incidentID" : 1234,
+            "incidentId" : 1234,
             "header"     : None,
             "logger"     : LOG(),
             "resclient"  : mocked_restClient(),
             "addAllMembers" : True,
             "roomName"   : "UnittestRoom",
-            "roomID"     : "Y123",
+            "roomId"     : "Y123",
+            "entityURL"  : "https://webexapis.com/v1/teams/",
+            "entityName" : "teamName",
+            "entityId"   : "teamId",
             'additionalAttendee' : "sara@example.com, hannah@example.com, harsha@example.com"
         }
 
-    webex = WebexTeams(requiredParameters)
+    webex = WebexInterface(requiredParameters)
     webex.generate_member_list()
-    webex.createRetrieveTeam()
+    webex.createRetrieveEntity()
     webex.addMembership()
-    response = webex.getTeamDetails()
+    response = webex.getEntityDetails()
     return FunctionResult(response, success=True)
 
 
