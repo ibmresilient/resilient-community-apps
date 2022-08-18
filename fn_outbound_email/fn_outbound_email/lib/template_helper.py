@@ -14,6 +14,9 @@ from resilient_lib import build_incident_url, build_task_url, build_resilient_ur
 
 LOG = logging.getLogger(__name__)
 
+CONFIG_DATA_SECTION = 'fn_outbound_email'
+TEMPLATES_SECTION = "{}:templates".format(CONFIG_DATA_SECTION)
+
 class TemplateHelper(object):
     def __init__(self, resilient_component):
         """Initialize the Template services."""
@@ -287,13 +290,13 @@ def get_template(app_config, template_name):
     """_summary_
 
     Args:
-        app_config (_type_): _description_
-        template_name (_type_): _description_
+        app_config (dict): all sections in app.config
+        template_name (str): name of template to use
 
     Returns:
-        _type_: _description_
+        str: entire template to use read from disk
     """
-    template_path = _get_template_path(app_config, template_name)
+    template_path = _get_template_path(app_config.get(TEMPLATES_SECTION, {}), template_name)
     if template_path:
         with open(template_path, 'r') as f:
             return f.read()
@@ -302,16 +305,16 @@ def _get_template_path(app_config, template_name):
     """_summary_
 
     Args:
-        app_config (_type_): _description_
-        template_name (_type_): _description_
+        app_config (dict): template section in app.config
+        template_name (str): name of template to use
 
     Returns:
-        _type_: _description_
+        str: path to template file on disk
     """
     template_file_path = None
-    if template_name:
-        if not app_config.get(template_name):
-            LOG.error("Template name '%s' not found.")
+    if app_config and template_name:
+        if template_name not in app_config:
+            LOG.error("Template name '%s' not found.", template_name)
             return None
     
         # determine if a relative path or an absolute path
@@ -325,3 +328,15 @@ def _get_template_path(app_config, template_name):
             return None
 
     return template_file_path
+
+def get_template_names(opts):
+    """get template names from the app.config file
+
+    Args:
+        opts (dict): all sections within app.config
+    """
+
+    templates = opts.get(TEMPLATES_SECTION)
+
+    if templates:
+        return templates.keys()

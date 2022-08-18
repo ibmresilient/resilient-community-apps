@@ -2,28 +2,34 @@
 
 """AppFunction implementation"""
 from bs4 import BeautifulSoup
-import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, str_to_bool
 from fn_outbound_email.lib.soar_helper import SoarHelper, split_string
 from fn_outbound_email.lib.configure_tab import init_email_tab
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
-from fn_outbound_email.lib.template_helper import get_template
+from fn_outbound_email.lib.template_helper import get_template, get_template_names, CONFIG_DATA_SECTION
 
-PACKAGE_NAME = "fn_outbound_email"
 FN_NAME = "send_email2"
-LOG = logging.getLogger(__name__)
+MAIL_TEMPLATE_SELECT = "mail_template_select" # activity field to change update the select list
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'send_email2'"""
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        super(FunctionComponent, self).__init__(opts, CONFIG_DATA_SECTION)
 
         # configure tab?
-        app_config = opts.get(PACKAGE_NAME)
+        app_config = opts.get(CONFIG_DATA_SECTION)
         if str_to_bool(app_config.get("enable_email_conversations", "false")):
             init_email_tab()
+
+        # read the template names to include in the selection list
+
+        select_list = get_template_names(opts)
+        if select_list:
+            soar_helper = SoarHelper(self.rest_client())
+            soar_helper.update_select_list(MAIL_TEMPLATE_SELECT, select_list)
+
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -79,23 +85,28 @@ class FunctionComponent(AppFunctionComponent):
 
             # inline template?
             if mail_data.get('mail_inline_template'):
-                LOG.info("Rendering mail_inline_template")
+                self.LOG.info("Rendering mail_inline_template")
                 template_data = mail_data.get('mail_inline_template')
             else:
-                LOG.info("Rendering template: %s", mail_data.get('mail_template_name'))
-                template_data = get_template(self.app_configs._asdict(),
+                self.LOG.info("Rendering template: %s", mail_data.get('mail_template_name'))
+                template_data = get_template(self.opts,
                                              mail_data.get('mail_template_name'))
 
-            rendered_mail_body = send_smtp_email.render_template(template_data,
-                                                                 incident_data,
-                                                                 mail_data,
-                                                                 artifact_data,
-                                                                 note_data)
-            LOG.debug("Rendered mail body: %s", rendered_mail_body)
+            if not template_data:
+                rendered_mail_body = None
+                error_msg = "No template found: {}".format(mail_data.get('mail_template_name'))
+                yield self.status_message(error_msg)
+            else:
+                rendered_mail_body = send_smtp_email.render_template(template_data,
+                                                                     incident_data,
+                                                                     mail_data,
+                                                                     artifact_data,
+                                                                     note_data)
+                self.LOG.debug("Rendered mail body: %s", rendered_mail_body)
 
-            error_msg = send_msg(send_smtp_email, rendered_mail_body)
+                error_msg = send_msg(send_smtp_email, rendered_mail_body)
         elif mail_data.get('mail_body'):
-            LOG.info("Non-rendered mail_body")
+            self.LOG.info("Non-rendered mail_body")
             rendered_mail_body = mail_data.get('mail_body')
             error_msg = send_msg(send_smtp_email, rendered_mail_body)
         else:

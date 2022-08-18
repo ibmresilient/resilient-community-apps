@@ -13,12 +13,11 @@ from ssl import Purpose, create_default_context
 from jinja2 import Environment, select_autoescape
 from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
-from fn_outbound_email.lib.template_helper import TemplateHelper
+from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SECTION
 from fn_outbound_email.lib.oauth2 import OAuth2
 
 log = logging.getLogger(__name__)
 
-CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'
 

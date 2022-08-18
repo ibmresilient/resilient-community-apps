@@ -71,4 +71,10 @@ smtp_ssl_mode=starttls
 template_file=data/templates/example_send_email.jinja
 # enhance the 'email' tab with email conversation fields and datatable
 #enable_email_conversations=true/false
-    """
+
+[fn_outbound_email:templates]
+## specify templates for email processing. These templates are added to the mail_template_select activity field
+#   choose a label which will identify the template to use
+#labelA=/path/to/template.jinja
+#labelB=/path/to/another_template.jinja
+"""
