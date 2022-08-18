@@ -1,3 +1,24 @@
 {
-    
+  "tactics": {
+    "id": "c0dfacf7-235e-416c-9b2b-c250ef8f3919",
+    "has_ibm_default": true,
+    "last_updated": 1607611408002,
+    "mapping": {
+      "Initial Access": {
+        "confidence": "high",
+        "user_override": false,
+        "enabled": true,
+        "ibm_default": true,
+        "id": "TA0001",
+        "techniques": {
+          "Valid Accounts": {
+            "confidence": "high",
+            "enabled": true,
+            "id": "T1078"
+          }
+        }
+      }
+    },
+    "min-mitre-version": 7
+  }
 }

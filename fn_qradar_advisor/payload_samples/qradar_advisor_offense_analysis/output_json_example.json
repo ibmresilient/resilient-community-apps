@@ -1,3 +1,97 @@
 {
-    
+  "observables": [
+    {
+      "toxicity": "very-low",
+      "relevance": "very-high",
+      "description": "userD",
+      "type": "identity"
+    },
+    {
+      "toxicity": "high",
+      "relevance": "medium",
+      "description": "89.223.26.52",
+      "type": "ipv4-addr"
+    },
+    {
+      "toxicity": "very-low",
+      "relevance": "medium",
+      "description": "192.168.0.17",
+      "type": "ipv4-addr"
+    },
+    {
+      "toxicity": "very-low",
+      "relevance": "medium",
+      "description": "193.184.16.214",
+      "type": "ipv4-addr"
+    },
+    {
+      "toxicity": "",
+      "relevance": "",
+      "description": "Command and Control",
+      "type": "x-mitre-tactic"
+    }
+  ],
+  "note": "<ul><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png\" alt=\"identity\" style=\"width:20px; height:20px\"/> userD</li><ul style=\"list-style-type:none\"><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/> 192.168.0.17</li></ul></ul><ul><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/> 89.223.26.52</li><ul style=\"list-style-type:none\"><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/> 192.168.0.17<img src=\"https://image.flaticon.com/icons/svg/282/282100.svg\" alt=\"link\" style=\"width:15px; height:15px\"/></li><li>x-mitre-tactic Command and Control</li></ul></ul><ul><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/> 193.184.16.214</li><ul style=\"list-style-type:none\"><li><img src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/> 192.168.0.17<img src=\"https://image.flaticon.com/icons/svg/282/282100.svg\" alt=\"link\" style=\"width:15px; height:15px\"/></li></ul></ul><p>There are 5 objects and 2 links.</p>",
+  "insights": {
+    "start_time": 1659629011957,
+    "stop_time": 1659636230480,
+    "threat_actors": [],
+    "malware_families": [],
+    "high_value_assets": [],
+    "risky_users": [],
+    "high_value_users": [],
+    "watched_users": [],
+    "related_investigations": [
+      {
+        "id": 1,
+        "type": "Investigations",
+        "is_search": true,
+        "analysis_time": null,
+        "source": null,
+        "concern_score": null,
+        "priority": null
+      }
+    ],
+    "tactics": [
+      {
+        "id": "TA0011",
+        "tactic_id": "Command and Control",
+        "confidence": 60,
+        "nodes": [
+          {
+            "type": "IpAddress",
+            "is_internal": false,
+            "label": "89.223.26.52"
+          }
+        ],
+        "rules": [],
+        "data_sources": [
+          "xfe"
+        ],
+        "event_count": 206,
+        "flow_count": 0,
+        "techniques": []
+      }
+    ],
+    "insights": "Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious.",
+    "stage3_insights": "",
+    "is_stage3_pending": false
+  },
+  "stix": {
+    "type": "bundle",
+    "id": "bundle--9813614d-e715-4ad4-a4bd-7cf204190449",
+    "spec_version": "2.0",
+    "objects": [
+      {
+        "type": "identity",
+        "id": "identity--2f4ac158-751e-42de-bf88-2a02fe6a5840",
+        "created": "2022-08-04T17:08:32.000Z",
+        "modified": "2022-08-04T17:08:32.000Z",
+        "name": "userD",
+        "identity_class": "individual",
+        "x_ibm_security_toxicity": "very-low",
+        "x_ibm_security_relevance": "very-high"
+      }
+    ]
+  }
 }

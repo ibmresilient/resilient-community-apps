@@ -1,3 +1,87 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "observables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "toxicity": {
+            "type": "string"
+          },
+          "relevance": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "note": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "stix": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "spec_version": {
+          "type": "string"
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string"
+              },
+              "modified": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "pattern": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "valid_from": {
+                "type": "string"
+              },
+              "x_ibm_security_toxicity": {
+                "type": "string"
+              },
+              "x_ibm_security_relevance": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
