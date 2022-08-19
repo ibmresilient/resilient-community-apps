@@ -120,7 +120,8 @@ rc_data_feed
 #rc-data-feed-plugin-kafkafeed
 rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
-#rc-data-feed-plugin-splunkfeed
+rc_data_feed_plugin_splunkfeed
+
 
 #Custom_Threat_Services
 rc-cts-abuseipdb
