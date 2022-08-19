@@ -6,7 +6,6 @@
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 from datetime import datetime
-import time
 
 FN_NAME = "mcafee_epo_list_issues"
 
