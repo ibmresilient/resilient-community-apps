@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         mail_data = fn_inputs._asdict()
         # validations
         validate_fields(["smtp_server"], self.app_configs)
-        validate_fields(["mail_incident_id", "mail_to", "mail_from"], fn_inputs)
+        validate_fields(["mail_incident_id", "mail_to"], fn_inputs)
 
         if mail_data.get("mail_inline_template") and mail_data.get("mail_template_name"):
             raise ValueError("Specify either mail_inline_template or mail_template_name but not both")
@@ -74,6 +74,9 @@ class FunctionComponent(AppFunctionComponent):
         mail_data['mail_bcc'] = split_string(mail_data.get('mail_bcc'))
         mail_data['mail_attachments'] = soar_helper.process_attachments(inc_id=mail_data.get('mail_incident_id'),
                                                                         attachments=mail_data.get('mail_attachments'))
+
+        if not mail_data.get('mail_from'):
+            mail_data['mail_from'] = self.app_configs.get("from_email_address")
 
         send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 

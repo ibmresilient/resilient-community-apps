@@ -50,7 +50,8 @@ auth_url=
 refresh_token=
 ## End of OAuth 2.0 authentication settings ##
 
-#If smtp_user is not an email address then from_email_address should equal the email address
+# If smtp_user is not an email address then from_email_address should equal the email address
+# If the function's mail_from input is blank, this value will used
 #  Also used with selftest
 from_email_address=
 

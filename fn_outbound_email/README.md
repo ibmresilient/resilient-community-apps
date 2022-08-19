@@ -408,19 +408,19 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mail_attachments` | `text` | No | `-` | comma separated list of incident attachments |
-| `mail_bcc` | `text` | No | `-` | comma separated list of blind cc recipients |
-| `mail_body` | `text` | No | `-` | body of message sent asis |
+| `mail_from` | `text` | No | `-` | email address of the email sender. If null, then the app.config from_email_address is used. |
+| `mail_to` | `text` | Yes | `-` | comma separated list of recipients |
 | `mail_cc` | `text` | No | `-` | comma separated list of cc recipients |
-| `mail_from` | `text` | No | `-` | email address of the email sender |
-| `mail_importance` | `select` | Yes | `-` | specify Importance (X-Priority) header to use |
+| `mail_bcc` | `text` | No | `-` | comma separated list of blind cc recipients |
+| `mail_subject` | `text` | No | `-` | - |
+| `mail_body` | `text` | No | `-` | body of message sent asis |
+| `mail_attachments` | `text` | No | `-` | comma separated list of incident attachments |
+| `mail_importance` | `select` | No | `-` | specify Importance (X-Priority) header to use |
 | `mail_in_reply_to` | `text` | No | `-` | specify in-replay-to header to use: ex: 1638585706.2677204.1655401056967@mail.com |
-| `mail_incident_id` | `number` | No | `-` | - |
+| `mail_incident_id` | `number` | Yes | `-` | - |
 | `mail_inline_template` | `text` | No | `jinja formatted document` | inline template as alternative to app.config mail_template_name |
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
-| `mail_subject` | `text` | No | `-` | - |
 | `mail_template_name` | `text` | No | `template_xx` | The name of a specific template as defined in app.config. |
-| `mail_to` | `text` | No | `-` | comma separated list of recipients |
 
 </p>
 </details>
