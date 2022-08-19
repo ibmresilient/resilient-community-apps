@@ -46,7 +46,7 @@ if rule.properties.get('mail_importance'):
 if rule.properties.get('mail_body') and rule.properties.get('mail_body').content:
   inputs.mail_body = rule.properties.mail_body.content
 elif rule.properties.mail_template_select:
-  inputs.mail_template_name=rule.properties.mail_template_select
+  inputs.mail_template_label=rule.properties.mail_template_select
 else:
   inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 {% set style = "font-family: Calibri; color: rgb(31,73,125)" %}

@@ -418,9 +418,9 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_importance` | `select` | No | `-` | specify Importance (X-Priority) header to use |
 | `mail_in_reply_to` | `text` | No | `-` | specify in-replay-to header to use: ex: 1638585706.2677204.1655401056967@mail.com |
 | `mail_incident_id` | `number` | Yes | `-` | - |
-| `mail_inline_template` | `text` | No | `jinja formatted document` | inline template as alternative to app.config mail_template_name |
+| `mail_inline_template` | `text` | No | `jinja formatted document` | inline template as alternative to app.config mail_template_label |
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
-| `mail_template_name` | `text` | No | `template_xx` | The name of a specific template as defined in app.config. |
+| `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
 
 </p>
 </details>
@@ -495,7 +495,7 @@ if rule.properties.get('mail_importance'):
 if rule.properties.get('mail_body') and rule.properties.get('mail_body').content:
   inputs.mail_body = rule.properties.mail_body.content
 elif rule.properties.mail_template_select:
-  inputs.mail_template_name=rule.properties.mail_template_select
+  inputs.mail_template_label=rule.properties.mail_template_select
 else:
   inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 {% set style = "font-family: Calibri; color: rgb(31,73,125)" %}

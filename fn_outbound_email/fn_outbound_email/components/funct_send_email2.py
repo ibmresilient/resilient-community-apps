@@ -48,7 +48,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mail_attachments
             -   fn_inputs.mail_importance
             -   fn_inputs.mail_inline_template
-            -   fn_inputs.mail_template_name
+            -   fn_inputs.mail_template_label
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -58,12 +58,12 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["smtp_server"], self.app_configs)
         validate_fields(["mail_incident_id", "mail_to"], fn_inputs)
 
-        if mail_data.get("mail_inline_template") and mail_data.get("mail_template_name"):
-            raise ValueError("Specify either mail_inline_template or mail_template_name but not both")
+        if mail_data.get("mail_inline_template") and mail_data.get("mail_template_label"):
+            raise ValueError("Specify either mail_inline_template or mail_template_label but not both")
 
         if mail_data.get("mail_body") and \
-           (mail_data.get("mail_template_name") or mail_data.get("mail_inline_template")):
-            raise ValueError("Special either mail_body or one of mail_inline_template or mail_template_name")
+           (mail_data.get("mail_template_label") or mail_data.get("mail_inline_template")):
+            raise ValueError("Special either mail_body or one of mail_inline_template or mail_template_label")
 
         # configuration setup
         soar_helper = SoarHelper(self.rest_client())
@@ -81,7 +81,7 @@ class FunctionComponent(AppFunctionComponent):
         send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 
         # if templates are specified, get the template data
-        if mail_data.get('mail_inline_template') or mail_data.get('mail_template_name'):
+        if mail_data.get('mail_inline_template') or mail_data.get('mail_template_label'):
             incident_data = soar_helper.get_incident_data(mail_incident_id)
             artifact_data = soar_helper.get_artifact_data(mail_incident_id)
             note_data = soar_helper.get_note_data(mail_incident_id)
@@ -91,13 +91,13 @@ class FunctionComponent(AppFunctionComponent):
                 self.LOG.info("Rendering mail_inline_template")
                 template_data = mail_data.get('mail_inline_template')
             else:
-                self.LOG.info("Rendering template: %s", mail_data.get('mail_template_name'))
+                self.LOG.info("Rendering template: %s", mail_data.get('mail_template_label'))
                 template_data = get_template(self.opts,
-                                             mail_data.get('mail_template_name'))
+                                             mail_data.get('mail_template_label'))
 
             if not template_data:
                 rendered_mail_body = None
-                error_msg = "No template found: {}".format(mail_data.get('mail_template_name'))
+                error_msg = "No template found: {}".format(mail_data.get('mail_template_label'))
                 yield self.status_message(error_msg)
             else:
                 rendered_mail_body = send_smtp_email.render_template(template_data,
