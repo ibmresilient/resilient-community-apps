@@ -41,7 +41,7 @@ content = results.get("content")
 if not results.success:
   text = u"Unable to create Cisco WebEx Meeting"
 
-  fail_reason = results.get("reason")
+  fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
 else:
