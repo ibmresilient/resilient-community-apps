@@ -21,8 +21,11 @@
 # To set meeting name to the workflow inputs, uncomment the following lines
 inputs.webex_incident_id = str(incident.id)
 inputs.webex_team_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.webex_team_name is None else rule.properties.webex_team_name
-if rule.properties.webex_meeting_attendees.content is not None:
-  inputs.webex_meeting_attendees = rule.properties.webex_meeting_attendees.content
+
+if rule.properties.webex_meeting_attendees:
+  if rule.properties.webex_meeting_attendees.content:
+    inputs.webex_meeting_attendees = rule.properties.webex_meeting_attendees.content
+    
 if rule.properties.webex_add_all_members is not None:
   inputs.webex_add_all_members = rule.properties.webex_add_all_members
 ```
@@ -32,7 +35,7 @@ if rule.properties.webex_add_all_members is not None:
 content = results.get("content")
 if not results.success:
   text = u"Unable to create Cisco WebEx Meeting"
-  fail_reason = content.get("fail_reason")
+  fail_reason = results.get("reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
 else:
@@ -77,7 +80,7 @@ content = results.get("content")
 
 if not results.success:
   text = u"Unable to create Cisco WebEx Room"
-  fail_reason = content.get("fail_reason")
+  fail_reason = results.get("reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
