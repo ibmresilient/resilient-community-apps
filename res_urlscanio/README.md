@@ -18,6 +18,14 @@ The workflows in this package depend on the following
 - fn_urlscan.io Version 1.1.5
 
 
+## Prerequisite
+This package requires the URLScan.io integration to be downloaded from the [app exchange](https://exchange.xforce.ibmcloud.com/hub/extension/1f4b922185c28f0521d613508729e3ff) and installed.
+
+### Install
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
+* To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
+
+
 ## Import
 Ensure that the above packages have been installed.
 Download the res_urlscanio package and unzip it. 

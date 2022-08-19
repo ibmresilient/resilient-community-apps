@@ -1,35 +1,36 @@
 {
-    "content":{
-       "firewall":"firewall_1",
-       "network_object_description":"None",
-       "network_object_group":"BLOCKLIST_IN",
-       "network_object_kind":"IPv4Address",
-       "network_object_name":"None",
-       "network_object_value":"7.7.7.0",
-       "reason":"Object Kind: IPv4Address, Object Value: 7.7.7.0, Object Name: None, is added to Firewall: firewall_1, Group: BLOCKLIST_IN"
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "firewall": "firewall_1",
+    "network_object_group": "BLOCKLIST_IN",
+    "network_object_name": "MyFqdn",
+    "network_object_description": "fqdn name",
+    "network_object_kind": "IPv4FQDN",
+    "network_object_value": "www.fqdn.com",
+    "reason": "Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN"
+  },
+  "raw": "{\"firewall\": \"firewall_1\", \"network_object_group\": \"BLOCKLIST_IN\", \"network_object_name\": \"MyFqdn\", \"network_object_description\": \"fqdn name\", \"network_object_kind\": \"IPv4FQDN\", \"network_object_value\": \"www.fqdn.com\", \"reason\": \"Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN\"}",
+  "inputs": {
+    "cisco_asa_network_object_description": "fqdn name",
+    "cisco_asa_artifact_type": "DNS Name",
+    "cisco_asa_fqdn_ip_version": {
+      "id": 427,
+      "name": "IPv4FQDN"
     },
-    "inputs":{
-       "cisco_asa_artifact_type":"IP Address",
-       "cisco_asa_end_range":"None",
-       "cisco_asa_firewall":"firewall_1",
-       "cisco_asa_fqdn_ip_version":{
-          "id":138,
-          "name":"IPv4FQDN"
-       },
-       "cisco_asa_network_object_group":"BLOCKLIST_IN",
-       "cisco_asa_network_object_name":"None",
-       "cisco_asa_network_object_value":"7.7.7.0"
-    },
-    "metrics":{
-       "execution_time_ms":27793,
-       "host":"MacBook-Pro.local",
-       "package":"fn-cisco-asa",
-       "package_version":"1.0.0",
-       "timestamp":"2021-04-07 16:53:29",
-       "version":"1.0"
-    },
-    "raw":"{\"firewall\": \"firewall_1\", \"network_object_group\": \"BLOCKLIST_IN\", \"network_object_name\": null, \"network_object_description\": null, \"network_object_kind\": \"IPv4Address\", \"network_object_value\": \"7.7.7.0\", \"reason\": \"Object Kind: IPv4Address, Object Value: 7.7.7.0, Object Name: None, is added to Firewall: firewall_1, Group: BLOCKLIST_IN\"}",
-    "reason":"None",
-    "success":true,
-    "version":"1.0"
- }
+    "cisco_asa_network_object_name": "MyFqdn",
+    "cisco_asa_firewall": "firewall_1",
+    "cisco_asa_network_object_group": "BLOCKLIST_IN",
+    "cisco_asa_end_range": null,
+    "cisco_asa_network_object_value": "www.fqdn.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-asa",
+    "package_version": "1.0.0",
+    "host": "My-MacBook-Pro.local",
+    "execution_time_ms": 696,
+    "timestamp": "2022-06-24 12:30:41"
+  }
+}

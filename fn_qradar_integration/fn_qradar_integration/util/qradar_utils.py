@@ -58,6 +58,12 @@ class QRadarServers():
         :param servers_list: list of qradar servers
         :return: dictionary of options for choosen server
         """
+        # If label not given and using previous versions app.config [fn_qradar_integration]
+        if not qradar_label and servers_list.get(qradar_constants.PACKAGE_NAME):
+            return servers_list[qradar_constants.PACKAGE_NAME]
+        elif not qradar_label:
+            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
+
         label = qradar_constants.PACKAGE_NAME+":"+qradar_label
         if qradar_label and label in servers_list:
             options = servers_list[label]

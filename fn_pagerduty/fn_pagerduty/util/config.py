@@ -14,6 +14,7 @@ api_token=<api_token>
 from_email=<from_email_address>
 # bypass https certificate validation (only set to False for testing purposes)
 verifyFlag=False
+resilient_client=IBM Resilient
 """
 
     return config_data

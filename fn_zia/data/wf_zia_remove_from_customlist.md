@@ -42,21 +42,29 @@ def main():
     configured_name = INPUTS.get("zia_configured_name")
     if CONTENT:
         response = CONTENT.get("response")
-        activation = CONTENT.get("activation")
-        # In order to test all urls have been successfully added, convert string of urls
-        # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
-        # domain.com:port/index.html
-        customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
-        updated_customlist = response.get("urls")
-        if not any(a in updated_customlist for a in customlist_urls):
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
-                        u"with category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
-                        .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
-            note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+        if "error_code" not in response:
+            activation = CONTENT.get("activation")
+            # In order to test all urls have been successfully added, convert string of urls
+            # to a list and convert urls to the format used by ZIA. e.g. https://user:password@domain.com:port/index.html ->
+            # domain.com:port/index.html
+            customlist_urls = [re.sub(r'^.*\/\/(.*@)*(.*)', r'\2', u) for u in re.split("\s+|,", urls)]
+            updated_customlist = response.get("urls")
+            if not any(a in updated_customlist for a in customlist_urls):
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Successfully removed URLs <b>{1}</b> from customlist "\
+                            u"with category ID <b>{2}</b> and configured name <b>{3}</b> for SOAR function <b>{4}</b>."\
+                            .format(WF_NAME, urls, category_id, configured_name, FN_NAME)
+                note_text += u" Activation status: <b>{0}</b>.".format(activation["status"])
+            else:
+                note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls removed while attempting "\
+                            u"to remove URLs <b>{1}</b> from customlist with category ID <b>{2}</b> and configured name <b>{3}</b> "\
+                            u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id,  FN_NAME)
         else:
-            note_text = u"ZIA Integration: Workflow <b>{0}</b>: Not all urls removed while attempting "\
-                        u"to remove URLs <b>{1}</b> from customlist with category ID <b>{2}</b> and configured name <b>{3}</b> "\
-                        u"for SOAR function <b>{4}</b>.".format(WF_NAME, urls, category_id,  FN_NAME)
+            note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was an error returned while attempting " \
+                         u"to remove URLs <b>{1}</b> from customlist of category ID <b>{2}</b> for SOAR function <b>{3}</b>."\
+                .format(WF_NAME, urls, category_id, FN_NAME)
+            note_text += u"<br>Error code: <b>{0}</b>, Error code: <b>{1}</b>, Details: <b>{2}</b>."\
+                .format(response["error_code"], response["status"], response["text"] )
+
     else:
         note_text += u"ZIA Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to remove URLs <b>{1}</b> from customlist of category ID <b>{2}</b> for SOAR function <b>{3}</b>."\

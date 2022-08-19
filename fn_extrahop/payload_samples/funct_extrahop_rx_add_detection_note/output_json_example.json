@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": "success"
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_update_time": 0,
+    "extrahop_note": "\nIBM SOAR 16/05/2022 15:13:37\n[SOAR Case - 4305](https://127.0.0.1:1443/#incidents/4305)\n[SOAR case - '4305'](Closed with resolution summary: 'test closed.')",
+    "extrahop_detection_id": 3
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 892,
+    "timestamp": "2022-05-16 15:29:16"
+  }
+}

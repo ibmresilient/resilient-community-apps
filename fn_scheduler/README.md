@@ -31,11 +31,14 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+  - [Supported Scheduled Rules/Playbooks](#supported-scheduled-rulesplaybooks)
 - [Function - Scheduled Rule Create](#function---scheduled-rule-create)
+- [Function - Modify Scheduled Job](#function---scheduled-rule-modify)
 - [Function - Scheduled Rule List](#function---scheduled-rule-list)
 - [Function - Scheduled Rule Pause](#function---scheduled-rule-pause)
 - [Function - Scheduled Rule Remove](#function---scheduled-rule-remove)
 - [Function - Scheduled Rule Resume](#function---scheduled-rule-resume)
+- [Function - Run Scheduled Job Now](#function---run-scheduled-job-now)
 - [Data Table - Scheduler Rules](#data-table---scheduler-rules)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -43,11 +46,12 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.0   | May  2022 | Support for Playbooks. Added support for Datatables |
 | 1.1.2   | Feb. 2022 | Use ``APScheduler < 3.9`` if ``Python Version < 3.6`` |
 | 1.1.1   | Aug. 2021 | remove SOAR credentials from saved rules in db |
 | 1.1.0   | Apr. 2021 | app.config setting for optional note creation |
@@ -63,8 +67,16 @@ When migrating to v1.0.2 from a previous release, add the following setting to y
 # db url if using a postgreSQL DB. Use this with AppHost
 #db_url=postgresql+psycopg2://username:password@host:port/database
 ```
-Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL. 
+Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL.
 This is necessary in an App Host environment to retain your schedules outside the app container.
+
+### Notes regarding v2.0.0 Support for Playbooks
+Playbooks have been rolling out across several releases of the SOAR product. Depending on the version of SOAR you are running, different capabilities are exposed. V43.0 represents the minimum version to schedule playbooks. V45.0 represents the mimimum version to schedule playbooks with dynamic input fields values.
+
+| SOAR Version | Capability |
+| ------------ | ---------- |
+| V43.0 | Manual activation type for Playbooks introduced |
+| V45.0 | Activation form for Input fields for Playbooks introduced |
 
 ---
 
@@ -77,10 +89,10 @@ This is necessary in an App Host environment to retain your schedules outside th
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Times to run can be specified in the following ways:
 
-1) cron (ex. * 0 * * * for every night at midnight)
-2) interval (ex. 5h for every 5 hours)
-3) date (ex. 2019/10/23 12:00:00)
-4) delta (ex. 1h for one hour in the future)
+1) cron (ex. * 0 * * * for every night at midnight). For more information about cron entry syntax, see [Wikipedia](https://en.wikipedia.org/wiki/Cron)
+2) interval (ex. `30s` for every 30 seconds, `10m` for every 10 minutes, `5h` for every 5 hours, `1d` for once daily)
+3) date (ex. 2022/4/23 12:00:00 or 2022-4-23 12:00:00)
+4) delta (ex. `30s` for 30 seconds in the future, `10m` for 10 minutes in the future, etc.)
 
 Schedule rules using `cron` and `interval` are reocurring whereas `date` and `delta` are single event schedules. Scheduled rules are persisted so that restarts of resilient-circuits will resume already scheduled rules.
 
@@ -95,41 +107,41 @@ Functions available include:
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `35.2.32`.
+* SOAR platform >= `41.2`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `35.2.32`.
+* SOAR platform >= `41.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=32.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.5.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -145,8 +157,8 @@ Additional package dependencies may exist for each of these packages:
 * APScheduler >= 3.9;python_version >= '3.6'
 * python-dateutil>=2.8.1
 * pytz
-* resilient_circuits>=32.0.0
-* resilient_lib>=33.0.189
+* resilient_circuits>=42.0
+* resilient_lib>=42.0
 * SQLAlchemy>=1.3.8
 
 ---
@@ -175,14 +187,43 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-A datatable is used to display scheduled rules and to take actions such as pause, resume and remove a rule. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change. 
+A datatable is used to display scheduled rules/playbook and to take actions such as pause, resume and remove a scheduled job. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
 
 ---
 
-## Function - Scheduled Rule Create
-Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc.
+### Supported Scheduled Rules/Playbooks
+Scheduled rules/playbooks are possible for:
+* incidents
+* artifacts
+* tasks
+* attachments (not pre-packaged)
+* datatables (not pre_packaged)
 
- ![screenshot: fn-scheduled-rule-create ](./doc/screenshots/combined_worflow_activity_fields.png)
+When creating a rule to schedule for an attachment, set the following field in the pre-processing script:
+```
+inputs.object_id = attachment.id
+```
+
+When creating a fule to schedule for a given datatable, the pre-processing script will look like this (assuming you're using rule activity fields)
+
+```
+inputs.scheduler_type = rule.properties.schedule_type
+if rule.properties.schedule_type == 'date':
+  # date format converted to use dashes
+  inputs.scheduler_type_value = rule.properties.schedule_type_value.replace("/", "-")
+else:
+  inputs.scheduler_type_value = rule.properties.schedule_type_value
+inputs.scheduler_rule_name = rule.properties.schedule_rule_name
+inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
+inputs.scheduler_label_prefix = rule.properties.schedule_label_prefix
+inputs.incident_id = incident.id
+inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
+```
+
+## Function - Scheduled Rule Create
+Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.
+
+ ![screenshot: fn-scheduled-rule-create ](./doc/screenshots/create_scheduled_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -193,10 +234,11 @@ Schedule a rule to run on a schedule. This rule will be executed for a given inc
 | `object_id` | `number` | No | `-` | ID for task, artifact, attachment, etc. |
 | `row_id` | `number` | No | `-` | row information for datatable rules |
 | `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule. The incident id is appended to the name for uniqueness |
-| `scheduler_rule_name` | `text` | Yes | `-` | Name of rule to schedule |
-| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields |
-| `scheduler_type` | `select` | No | `-` | type of schedule to create. cron, interval, date or delta |
-| `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy/mm/dd hh:mm:ss) or cron value |
+| `scheduler_rule_name` | `text` | Yes | `-` | Name of rule/playbook to schedule |
+| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule/playbook in field=value format separated by semicolons. These fields should match the api name for the rule's activity or playbook's activation input fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
+| `scheduler_type` | `select` | Yes | `-` | type of schedule to create. cron, date, delta, or interval |
+| `scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
+| `scheduler_is_playbook` | boolean | Yes | Yes | Yes if scheduling a playbook, No for a rule |
 
 </p>
 </details>
@@ -228,7 +270,7 @@ results = {
     'coalesce': False,
     'version': 1,
     'kwargs': {
-      
+
     }
   },
 ```
@@ -250,6 +292,7 @@ inputs.scheduler_rule_name = rule.properties.schedule_rule_name
 inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
 inputs.scheduler_label_prefix = rule.properties.schedule_label_prefix
 inputs.incident_id = incident.id
+inputs.scheduler_is_playbook = rule.properties.schedule_is_playbook
 ```
 
 </p>
@@ -259,7 +302,114 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-None
+import java.util.Date as Date
+
+TYPE_LOOKUP = {0: 'Incident', 1: "Task", 4: "Artifact", 5: "Attachment"}
+
+if results.success:
+  job = results.content
+  row = incident.addRow("scheduler_rules")
+  row['reported_on'] = str(Date())
+  row['schedule_label'] = job['id']
+  row['schedule_type'] = job['type']
+  row['incident_id'] = job['args'][0]
+  row['schedule'] = job['value']
+  row['status'] = 'Active'
+  row['next_run_time'] = job['next_run_time']
+  row['rule_type'] = TYPE_LOOKUP.get(job['args'][6], "Datatable")
+  if job['args'][8]:
+    row['rule'] = "<a href='#playbooks/designer/{}'>{}</a>".format(job['args'][5], job['args'][4])
+  else:
+    row['rule'] = "<a href='#customize?tab=actions&id={}'>{}</a>".format(job['args'][5], job['args'][4])
+else:
+  incident.addNote("Schedule a Rule/Playbook failed: {}".format(result.reason))
+```
+
+</p>
+</details>
+
+---
+## Function - Scheduled Rule Modify
+Modify a Scheduled job associated with a rule or playbook. Settings which can be modified include the trigger criteria (cron, delta, date or interval) and the parameters passed to the rule or playbook.
+
+ ![screenshot: modify_scheduled_job ](./doc/screenshots/modify_scheduled_job.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule.  |
+| `modify_scheduler_type` | `select` | No | `-` | type of schedule to create. cron, date, delta, or interval |
+| `modify_scheduler_type_value` | `text` | Yes | `-` | interval, date (yyyy-mm-dd hh:mm:ss) or cron value |
+| `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule/playbook in field=value format separated by semicolons. These fields should match the api name for the rule activity or playbook's activation input fields. Ex: `rule_activity_field1=value1;rule_activity_field2=value2` |
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'success': True,
+  'content': {
+    'args': (2219, # incident_id
+    None, # object_id
+    None, # row_id
+    u'rule3', # Rule to execute
+    u'Delete rule3', # Scheduled rule Label
+    49, # rule_id
+    0, # object_type_id
+    None,
+    None),
+    'executor': 'default',
+    'max_instances': 1,
+    'func': 'fn_scheduler.components.create_a_scheduled_rule:triggered_job',
+    'id': u'rule3',
+    'next_run_time': 'Oct 03 2019 12:35PM',
+    'name': 'triggered_job',
+    'misfire_grace_time': 1,
+    'trigger': None,
+    'coalesce': False,
+    'version': 1,
+    'kwargs': {
+
+    }
+  },
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row['schedule_label']
+inputs.modify_scheduler_type = rule.properties.modify_schedule_type
+inputs.modify_scheduler_type_value = rule.properties.modify_schedule_type_value
+inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import java.util.Date as Date
+
+if not results.success:
+  incident.addNote("Modify Scheduled Rule/Playbook failed: {}".format(results.reason))
+else:
+  job = results.content
+  row['reported_on'] = str(Date())
+  row['schedule_type'] = job.get('type')
+  row['schedule'] = job.get('value')
+  incident.addNote("Modify Scheduled Rule/Playbook succeeded for: {}".format(job.get('id')))
 ```
 
 </p>
@@ -341,7 +491,7 @@ else:
     row['schedule'] = job['value']
     row['reported_on'] = str(Date())
     row['status'] = 'Active' if job['next_run_time'] else 'Paused'
-    
+
 ```
 
 </p>
@@ -351,14 +501,14 @@ else:
 ## Function - Scheduled Rule Pause
 Pause a scheduled rule
 
- ![screenshot: fn-scheduled-rule-pause ](./doc/screenshots/pause_a_scheduled_rule.png)
+ ![screenshot: fn-scheduled-rule-pause ](./doc/screenshots/scheduled_job_actions.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -431,16 +581,15 @@ else:
 
 ---
 ## Function - Scheduled Rule Remove
-Stop a schedule
+Stop and remove a scheduled job
 
- ![screenshot: fn-scheduled-rule-remove ](./doc/screenshots/remove_a_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -485,14 +634,13 @@ else:
 ## Function - Scheduled Rule Resume
 Resume a scheduled job
 
- ![screenshot: fn-scheduled-rule-resume ](./doc/screenshots/resume_a_scheduled_rule.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `scheduler_label` | `text` | No | `-` | Scheduled job name for identification |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
 
 </p>
 </details>
@@ -564,6 +712,72 @@ else:
 
 ---
 
+## Function - Run Scheduled Job Now
+Run a scheduled job immediately
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label` | `text` | Yes | `-` | Scheduled job name for identification |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+  },
+  "raw": null,
+  "inputs": {
+    "scheduler_label": "rulex1-5713"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-scheduler",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 1609,
+    "timestamp": "2022-04-28 17:39:27"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row['schedule_label']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if not results.success:
+  incident.addNote("Run Scheduled Job Now failed for job {}: {}".format(row['schedule_label'], results.reason))
+else:
+  msg = "Run Scheduled Job Now suceeeded for job: {}, Rule/Playbook: {}".format(row['schedule_label'], row['rule'].content)
+  incident.addNote(helper.createRichText(msg))
+```
+
+</p>
+</details>
+
+---
 
 ## Data Table - Scheduler Rules
 
@@ -573,12 +787,14 @@ scheduler_rules
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Incident Id | `incident_id` | `text` | - |
 | Reported Date | `reported_on` | `text` | - |
-| Rule | `rule` | `text` | - |
-| Schedule | `schedule` | `text` | - |
 | Schedule Label | `schedule_label` | `text` | - |
+| Incident Id | `incident_id` | `text` | - |
+| Rule/Playbook Type | `rule_type` | `text` | - |
+| Rule/Playbook | `rule` | `text` | - |
 | Schedule Type | `schedule_type` | `text` | - |
+| Schedule | `schedule` | `text` | - |
+| Next Run Time | `next_run_time` | `text` |
 | Status | `status` | `text` | - |
 
 ---
@@ -595,6 +811,7 @@ scheduler_rules
 | Schedule a Rule to Run | incident | `schedule_rule_to_run` |
 | Schedule a Rule to Run - Artifact | artifact | `schedule_a_rule_to_run_artifact` |
 | Schedule a Rule to Run - Task | task | `schedule_a_rule_to_run__task` |
+| Run Scheduled Job Now | scheduler_rules | `run_scheduled_job_now` |
 
 ---
 
@@ -602,7 +819,7 @@ scheduler_rules
 
 ### Rules
 * Rules must be enabled to be scheduled and are again checked when the scheduled rule is triggered.
-* Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`. 
+* Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`.
 * All schedules must be in the future.
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.

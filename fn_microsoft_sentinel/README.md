@@ -49,6 +49,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.4 | 6/2022 | Several template fixes for tags (labels) and severity |
 | 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
 | 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
 | 1.0.1 | 11/2021 | Minor bug fixes and datatable improvements |
@@ -745,4 +746,4 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.
+This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.

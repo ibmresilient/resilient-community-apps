@@ -26,9 +26,11 @@ def codegen_reload_data():
         "actions": [u"Cisco ASA: Add FQDN to Network Object Group", u"Cisco ASA: Add IP Address to Network Object Group", u"Cisco ASA: Add IP Range to Network Object Group", u"Cisco ASA: Add IPv4Network to Network Object Group", u"Cisco ASA: Add IPv6Network to Network Object Group", u"Cisco ASA: Get Network Object Details", u"Cisco ASA: Get Network Object Group", u"Cisco ASA: Remove Network Object from Network Object Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
         "scripts": [u"Convert JSON to rich text v1.1"],
+        "playbooks": []
     }
 
 
@@ -37,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 37.0.5832
+    IBM SOAR Platform Version: 43.0.0
 
     Contents:
     - Message Destinations:

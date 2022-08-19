@@ -1,12 +1,33 @@
 language: python
 python: 3.9
 os: linux
+dist: xenial
+
+git:
+  depth: false
+
+stages:
+  - name: run tests and sonar scan on all packages
+    if: tag IS blank AND branch = master AND type = cron
+  - name: run package tests
+    if: type != cron
+  - name: sonarqube scan
+    if: type != cron
+  - name: build image and app zip
+    if: tag IS blank AND type = push
+  - name: rebuild all images
+    if: tag =~ ^rebuild/.+
+  - name: sync all images
+    if: tag =~ ^sync/.+
+
 env:
   global:
-    - SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
-    - PATH_ALLOW_IMAGE_NAMES="$SCRIPTS_DIR/ALLOW_IMAGE_NAMES.txt"
-    - PATH_PIP_REQ_MAIN="$SCRIPTS_DIR/requirements_main.txt"
-    - PATH_PIP_REQ_TESTS="$SCRIPTS_DIR/requirements_tests.txt"
+    - PATH_SCRIPTS_DIR="$TRAVIS_BUILD_DIR/.scripts"
+    - PATH_COMMON_SCRIPTS_DIR="$TRAVIS_BUILD_DIR/common_scripts"
+    - PATH_SONAR_PROPERTIES="$TRAVIS_BUILD_DIR/sonar-project.properties"
+    - PATH_ALLOW_IMAGE_NAMES="$PATH_SCRIPTS_DIR/ALLOW_IMAGE_NAMES.txt"
+    - PATH_PIP_REQ_MAIN="$PATH_SCRIPTS_DIR/requirements_main.txt"
+    - PATH_PIP_REQ_TESTS="$PATH_SCRIPTS_DIR/requirements_tests.txt"
     - FILE_NAME_EXTRA_SETUP=".travis_extra_setup.sh"
 
     - QUAY_API_URL="$QUAY_URL/api/v1"
@@ -18,15 +39,26 @@ env:
 
     - PYPI_INDEX="https://pypi.org/simple"
 
-    - PACKAGE_NAME=`python $SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
-
     - KEYWORD_BUILD_DEV_APP="[build-dev-app]"
-    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
-    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 1 ]; then echo "DEV"; else echo "MAIN"; fi`
+    - BUILD_DEV_APP=$([[ "$TRAVIS_COMMIT_MESSAGE" == *"$KEYWORD_BUILD_DEV_APP"* ]]; echo $?)
+    - BUILD_TYPE=`if [ $BUILD_DEV_APP == 0 ]; then echo "DEV"; else echo "MAIN"; fi`
+
+    - KEYWORD_UPLOAD_APP_TO_APPHOST="[deploy-apphost]"
+    - UPLOAD_APP_TO_APPHOST=$([[ "$TRAVIS_COMMIT_MESSAGE" == *"$KEYWORD_UPLOAD_APP_TO_APPHOST"* ]]; echo $?)
 
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - DEV_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
     - PYPI_INDEX_TO_USE=`if [ $DEV_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
+
+    - SONAR_SCANNER_CLI_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli"
+    - SONAR_SCANNER_CLI_FILENAME="sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip"
+    - SONAR_QUBE_URL="https://sonarqube.secintel.intranet.ibm.com"
+
+# Install package deps
+before_install:
+  - pip install -U pip setuptools requests retry2
+  - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+  - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
 
 # Exclude these branches from having jobs ran.
 branches:
@@ -41,38 +73,11 @@ notifications:
   on_success: never
   on_failure: always
 
-stages:
-  - name: run all tests
-    if: tag IS blank AND branch = master AND type = cron
-  - name: run package tests
-    if: type != cron
-  # Every commit not on master performs static analysis
-  - name: static analysis
-    if: tag IS blank AND type != cron
-  - name: build image and app zip
-    if: tag IS blank AND type = push
-  # Rebuild all images
-  - name: rebuild all images
-    if: tag =~ ^rebuild/.+
-  # Sync all images
-  - name: sync all images
-    if: tag =~ ^sync/.+
-
 matrix:
-
-  # Specification of jobs which may fail but should not fail the build
-  # TODO: Review
-  allow_failures:
-    # The safety checker job is likely to fail often in its initial usage
-    # Rather than explicity setting it to always pass
-    # Allow failures of the job to still gather the useful info
-    - name: Safety Checker
-
   fast_finish: true
 
   include:
-
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests - Main - PyPi
       python: 2.7
       env:
@@ -82,9 +87,9 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.6 Unit Tests - Main - PyPi
       python: 3.6
       env:
@@ -94,9 +99,9 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.9 Unit Tests - Main - PyPi
       python: 3.9
       env:
@@ -106,9 +111,9 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.9 Unit Tests - Main - PyPi"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 2.7 Unit Tests - Main - Artifactory
       python: 2.7
       env:
@@ -118,9 +123,9 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.6 Unit Tests - Main - Artifactory
       python: 3.6
       env:
@@ -130,9 +135,9 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
 
-    - stage: run all tests
+    - stage: run tests and sonar scan on all packages
       name: Python 3.9 Unit Tests - Main - Artifactory
       python: 3.9
       env:
@@ -142,7 +147,21 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.9 Unit Tests - Main - Artifactory"
-        - $SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+
+    - stage: run tests and sonar scan on all packages
+      name: SonarQube Scan on All Packages
+      language: java
+      env: RUN_TYPE=sonarqube
+      before_install:
+        - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
+        - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
+        - pip install requests retry2
+        - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+      script:
+        - echo "Installing and running SonarQube scan"
+        - ALL_ALLOWED_IMAGES=`python $PATH_COMMON_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -155,7 +174,7 @@ matrix:
       script:
         - echo "$TRAVIS_COMMIT_MESSAGE"
         - echo "Starting Python 2.7 Unit Tests - Package"
-        - $SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
       name: Python 3.6 Unit Tests - Package
@@ -167,7 +186,7 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.6 Unit Tests - Package"
-        - $SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
     - stage: run package tests
       name: Python 3.9 Unit Tests - Package
@@ -179,48 +198,30 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
         - echo "Starting Python 3.9 Unit Tests - Package"
-        - $SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    # Jobs that perform static analysis; code quality, security scans etc
-    - stage: static analysis
-      name: Py2.7 Bandit Security Scan
-      python: 2.7
-      env:
-        - ANALYSIS_NAME="Py2.7 Bandit Security Scan"
-      install:
-        - pip install bandit==1.6.2
+    - stage: sonarqube scan
+      name: SonarQube Scan
+      language: java
+      env: RUN_TYPE=sonarqube
+      before_install:
+        - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
+        - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
+        - pip install requests retry2
+        - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO"
+        - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
       script:
-        - $SCRIPTS_DIR/run_bandit_scan.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Py3.9 Bandit Security Scan
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="Py3.9 Bandit Security Scan"
-      install:
-        - pip install bandit
-      script:
-        - $SCRIPTS_DIR/run_bandit_scan.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Pylint
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="Pylint"
-      install:
-        - pip install pylint
-      script:
-        - $SCRIPTS_DIR/pylint.sh "$PACKAGE_NAME"
-
-    - stage: static analysis
-      name: Safety Checker
-      python: 3.9
-      env:
-        - ANALYSIS_NAME="CVE Search against dependancies"
-      install:
-        - pip install safety
-      script:
-        - $SCRIPTS_DIR/run_safety_scan_for_cve.sh "$PACKAGE_NAME"
+        - echo "Installing and running SonarQube scan"
+        - IS_DATA_FEEDER_PLUGIN=`[[ "$PACKAGE_NAME" == *"rc_data_feed_plugin"* ]]; echo $?`
+        - |
+          if [ $IS_DATA_FEEDER_PLUGIN -eq 0 ]; then
+              echo "This is a data feeder plugin. Modifying SONAR_SRCS"
+              SONAR_SRCS="$PACKAGE_NAME/data_feeder_plugins";
+          else
+              SONAR_SRCS="$PACKAGE_NAME/$PACKAGE_NAME";
+          fi
+        - echo $SONAR_SRCS
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$SONAR_SRCS" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: build image and app zip
       name: Build Image and App zip
@@ -231,22 +232,24 @@ matrix:
       script: skip
       before_deploy:
         - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
-        - $SCRIPTS_DIR/install_ibmcli.sh
+        - $PATH_SCRIPTS_DIR/install_ibmcli.sh
       deploy:
         - provider: script
-          script: $SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE";
+          skip_cleanup: true
+          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "DEV" "$PYPI_INDEX_TO_USE" $UPLOAD_APP_TO_APPHOST;
           on:
             all_branches: true
-            condition: "$BUILD_DEV_APP = 1"
+            condition: "$BUILD_DEV_APP = 0"
         - provider: script
-          script: $SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
+          skip_cleanup: true
+          script: $PATH_SCRIPTS_DIR/build_image_and_app_zip.sh "$PACKAGE_NAME" "MAIN" "$PYPI_INDEX_TO_USE";
           on:
             branch: master
       after_deploy:
         - PATH_APP_ZIP=`cat "$TRAVIS_BUILD_DIR/PATH_APP_ZIP.txt"`;
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
         - FILE_NAME=$(basename $PATH_APP_ZIP);
-        - $SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success";
+        - if [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success"; else $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n [$PACKAGE_NAME] can be found at <https://${FYRE_CLUSTER_DOMAIN}/#admin?tab=apps| ${FYRE_CLUSTER_DOMAIN}> if successfully deployed." "success"; fi
 
     - stage: rebuild all images
       python: 3.9
@@ -257,7 +260,7 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install resilient-sdk
         - sudo apt-get install jq
-        - $SCRIPTS_DIR/install_ibmcli.sh
+        - $PATH_SCRIPTS_DIR/install_ibmcli.sh
       script:
         # This will take split the git tag on '/'
         # E.g.:
@@ -268,7 +271,7 @@ matrix:
         - PYTHON_LIBRARIES_VERSION=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - IMAGE_TO_REBUILD=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
         - REPO_TO_PUSH=$(echo $TRAVIS_TAG | cut -d "/" -f 4)
-        - $SCRIPTS_DIR/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
+        - $PATH_SCRIPTS_DIR/rebuild_images.sh "$PYTHON_LIBRARIES_VERSION" "$IMAGE_TO_REBUILD" "$REPO_TO_PUSH"
 
     - stage: sync all images
       python: 3.9
@@ -277,7 +280,7 @@ matrix:
       install:
         - sudo apt-get update
         - sudo apt-get install jq
-        - $SCRIPTS_DIR/install_ibmcli.sh
+        - $PATH_SCRIPTS_DIR/install_ibmcli.sh
       script:
         # This will take split the git tag on '/'. The Date is optional but recommended so that syncs can be tracked
         # E.g.:
@@ -285,4 +288,4 @@ matrix:
         #  - to sync ALL images from QUAY to ICR: tag with 'sync/QUAY/ICR/<DATE>' and commit message 'INT-0001 {sync} QUAY to ICR <reason>'
         - SOURCE_REPO=$(echo $TRAVIS_TAG | cut -d "/" -f 2)
         - DEST_REPO=$(echo $TRAVIS_TAG | cut -d "/" -f 3)
-        - $SCRIPTS_DIR/sync_registries.sh "$SOURCE_REPO" "$DEST_REPO"
+        - $PATH_SCRIPTS_DIR/sync_registries.sh "$SOURCE_REPO" "$DEST_REPO"
