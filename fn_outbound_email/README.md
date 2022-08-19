@@ -11,6 +11,9 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Function - Outbound Email: Send Email](#function---outbound-email-send-email)
+- [Function - Outbound Email: Send Email 2](#function---outbound-email-send-email-2)
+- [Script - Save Outbound Email Results](#script---save-outbound-email-results)
+- [Data Table - Email Conversations](#data-table---email-conversations)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -23,7 +26,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0 | 8/2022 | Added OAuth 2.0 support for SMTP |
+| v2.0.0 | 8/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
 | v1.3.1 | 1/2022 | Bug fixes for get_datatable function in template_helper.py |
 | v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
 | v1.2.1 | 5/2021 | Bug fix for python 2 |
@@ -33,6 +36,18 @@
 | v1.0.9 | 5/2020 | App Host compatibility |
 | v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
 
+
+### v2.0
+Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
+with inbound mail. This release incorporates many changes which are summarized here:
+
+* Unified display of inbound emails with outbound email through a datatable. See [Script - Outbound Email Results](#script---outbound-email-results) and [Datatable - Email Conversations].(#datatable---email-conversations).
+* Auto modification of the Email tab to include email conversations datatable.
+* Multiple template support defined in the app.config file.
+* Additional header available for outbound email (i.e. message-id, in-reply-to, importance).
+* Enhanced incident data available to include from templates (i.e. artifacts, notes and links back to SOAR).
+* A new function to preserve the original outbound email capability and allow all the new functionality in
+v2.0 to be added. See [Function - Outbound Email: Send Email2](#function---outbound-email-send-email2).
 ---
 
 ## Overview
@@ -111,6 +126,7 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=39.0.0
 * resilient_lib>=32.0.0
 * six
+* BeautifulSoup 
 
 #### Prerequisites
 <!--
@@ -146,7 +162,6 @@ List any steps that are needed to configure the endpoint to use this app.
 `https://localhost:8080/callback?state=123456abcde&code=123456&scope=https://mail.smtpservice.com/`
 
 * The user should verify that the state value matches the one it sent to the authorization server to help prevent any malicious attacks.
-
 
 ##### Fetch the tokens
 * Exchange the authorization code for an access and refresh token.
@@ -232,6 +247,22 @@ The following table provides the settings you need to configure the app. These s
 **_NOTE:_** For customers upgrading from a pervious release, the app.config file must be manually edited.
 
 For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
+
+
+### 2.0 changes
+In v2.0, an additional section, `[fn_outbound_email:templates]`, is added to track the use of multiple templates. These templates are automatically added to the mail_template_select rule activity field used within the example rules. For MSSP environments, this automatic update capability will not work. It's recommended that your playbook or workflow use a `text` activity field instead for template name input.
+
+Below is the section and it's definitions:
+
+```
+[fn_outbound_email:templates]
+## specify templates for email processing. These templates are added to the mail_template_select activity field
+#   choose a label which will identify the template to use
+#labelA=/path/to/template.jinja
+#labelB=/path/to/another_template.jinja
+```
+
+When upgrading from previous outbound email app versions, please add this section information to your app.config file manually.
 
 ---
 
@@ -367,12 +398,244 @@ incident.addNote(helper.createRichText(noteText))
 
 ---
 
+## Function - Outbound Email: Send Email 2
+Send a plain text or HTML-formatted email with SOAR incident details in the email body. Additional capability exists to refer to pre-defined templates as well add contextual email headers. This function replaces the send_email function which remains for legacy use. 
+
+ ![screenshot: fn-outbound-email-send-email-2 ](./doc/screenshots/send_email2.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mail_from` | `text` | No | `-` | email address of the email sender. If null, then the app.config from_email_address is used. |
+| `mail_to` | `text` | Yes | `-` | comma separated list of recipients |
+| `mail_cc` | `text` | No | `-` | comma separated list of cc recipients |
+| `mail_bcc` | `text` | No | `-` | comma separated list of blind cc recipients |
+| `mail_subject` | `text` | No | `-` | - |
+| `mail_body` | `text` | No | `-` | body of message sent asis |
+| `mail_attachments` | `text` | No | `-` | comma separated list of incident attachments |
+| `mail_importance` | `select` | No | `-` | specify Importance (X-Priority) header to use |
+| `mail_in_reply_to` | `text` | No | `-` | specify in-replay-to header to use: ex: 1638585706.2677204.1655401056967@mail.com |
+| `mail_incident_id` | `number` | Yes | `-` | - |
+| `mail_inline_template` | `text` | No | `jinja formatted document` | inline template as alternative to app.config mail_template_label |
+| `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
+| `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "mail_body": "\n\u003ch2\u003eIncident Summary\u003c/h2\u003e\n    Severity Code: Low\n\u003cbr\u003e\n    Plan Status: A\n\u003cbr\u003e\n    Created: 2022-08-05 14:03:23.441000\n\u003cbr\u003e\n    Incident Type: Lost PC / laptop / tablet\n\u003cbr\u003e\n    Task: \u003ca target=\u0027_blank\u0027 href=\u0027https://9.30.55.116:443/#incidents/2139?orgId=201\u0026amp;taskId=994\u0026amp;tabName=details\u0027\u003eNotify carrier/ISP\u003c/a\u003e\n\u003cbr\u003e\n    Instructions: \n\u003cbr\u003e\nIf the lost or stolen device has cellular access, call the device service provider and notify them of the device loss."
+  },
+  "inputs": {
+    "mail_attachments": "original_msg,.txt",
+    "mail_cc": null,
+    "mail_from": "userA@example.com",
+    "mail_importance": "normal",
+    "mail_incident_id": 2139,
+    "mail_inline_template": "\n\u003ch2\u003eIncident Summary\u003c/h2\u003e\n    Severity Code: Low\n\u003cbr\u003e\n    Plan Status: A\n\u003cbr\u003e\n    Created: 2022-08-05 14:03:23.441000\n\u003cbr\u003e\n    Incident Type: Lost PC / laptop / tablet\n\u003cbr\u003e\n    Task: \u003ca target=\u0027_blank\u0027 href=\u0027{{ template_helper.generate_task_url(2139,994) }}\u0027\u003eNotify carrier/ISP\u003c/a\u003e\n\u003cbr\u003e\n    Instructions: \n\u003cbr\u003e\nIf the lost or stolen device has cellular access, call the device service provider and notify them of the device loss.\n",
+    "mail_subject": "[2139] Incident generated from email \"send -\u003e receive\" via mailbox outlook Task:Notify carrier/ISP",
+    "mail_to": "userB@example.com"
+  },
+  "metrics": {
+    "execution_time_ms": 3363,
+    "host": "localhost",
+    "package": "fn-outbound-email",
+    "package_version": "2.0.0",
+    "timestamp": "2022-08-08 15:37:59",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+import hashlib
+import time
+
+MESSAGE_ID_DOMAIN = "qradarsoar.ibm.com"
+
+inputs.mail_to = rule.properties.mail_to
+inputs.mail_cc = rule.properties.mail_cc
+inputs.mail_attachments = rule.properties.mail_attachments
+inputs.mail_incident_id = incident.id
+inputs.mail_from = rule.properties.mail_from
+inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name) if not rule.properties.get('mail_subject') else rule.properties.mail_subject
+
+if rule.properties.get('mail_message_id'):
+  # generate a message-id
+  seed_value = str(int(time.time()*1000))
+  uuid_hash = hashlib.md5(seed_value.encode()).hexdigest()
+  msg_id = "{}-{}-{}-{}-{}".format(uuid_hash[0:8], uuid_hash[8:12], uuid_hash[12:16], uuid_hash[16:20], uuid_hash[20:])
+  inputs.mail_message_id = "{}@{}".format(msg_id, MESSAGE_ID_DOMAIN)
+  
+if rule.properties.get('mail_in_reply_to') and incident.properties.email_message_id:
+  inputs.mail_in_reply_to = incident.properties.email_message_id
+  
+if rule.properties.get('mail_importance'):
+  inputs.mail_importance = rule.properties.mail_importance if rule.properties.mail_importance else None
+  
+if rule.properties.get('mail_body') and rule.properties.get('mail_body').content:
+  inputs.mail_body = rule.properties.mail_body.content
+elif rule.properties.mail_template_select:
+  inputs.mail_template_label=rule.properties.mail_template_select
+else:
+  inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
+{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
+{% macro get_row(label,field_name) -%}
+	{% set value = template_helper.get_incident_value(incident,field_name) %}
+    {% if value and value not in NOT_FOUND and not value.startswith('-') %}
+    <tr>
+        <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
+        <td style="{{style}}">{{ value | striptags }}</td>
+    </tr>
+    {% endif %}
+{%- endmacro %}
+<table width="100%" >
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT DETAILS</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+    {{ get_row('Incident:','severity_code') }}
+    {{ get_row('Severity:','severity_code') }}
+    {{ get_row('Status:','plan_status') }}<br>
+    {{ get_row('Created:','create_date') }}<br>
+    {{ get_row('Category:','incident_type_ids') }}
+<tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+    {{ get_row('Description:','description') }}
+<tr>
+    <td width="100" style="{{style}}; font-weight:bold">Incident link</td>
+    {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+    <td style="{{style}}"><a target="_blank" href="{{ inc_url }}">{{ incident.id }}</a></td>
+</tr>
+</table>
+<br>
+"""
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+# results managed through the Outbound Email Results script which uses the workflow property `outbound_email_results`.
+```
+
+</p>
+</details>
+
+---
+
+## Script - Save Outbound Email Results
+Save outbound email results in the Email Conversations datatable. This script uses the `outbound_email_results` workflow or playbook property.
+
+**Object:** incident
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+import time
+
+try:
+  e_results = workflow.properties.outbound_email_results
+except:
+  try:
+    e_results = playbook.functions.results.outbound_email_results
+  except:
+    pass
+
+if e_results:
+  row = incident.addRow('email_conversations')
+  row['status'] = "success" if e_results.get('success') else "failure: {}".format(e_results.get('reason'))
+  
+  row['date_sent'] = int(time.time()*1000)
+  row['source'] = "outbound"
+  row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(e_results.get('inputs', {}).get('mail_to'), e_results.get('inputs', {}).get('mail_cc'), e_results.get('inputs', {}).get('mail_bcc'))
+  row['from'] = e_results.get('inputs', {}).get('mail_from')
+  row['subject'] = e_results.get('inputs', {}).get('mail_subject')
+  row['body'] = e_results.get('content', {}).get("mail_body")
+  row['attachments'] = e_results.get('inputs', {}).get('mail_attachments')
+  row['importance'] = e_results.get('inputs', {}).get('mail_importance')
+  row['in_reply_to'] = e_results.get('inputs', {}).get('mail_in_reply_to')
+  row['message_id'] = e_results.get('inputs', {}).get('mail_message_id')
+else:
+  incident.addNote("workflow.properties.outbound_email_results not found: {}".format(workflow.properties.keys()))
+  
+```
+
+</p>
+</details>
+
+---
+
+## Data Table - Email Conversations
+
+ ![screenshot: dt-email-conversations](./doc/screenshots/dt_email_conversations.png)
+
+#### API Name:
+email_conversations
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Date Sent | `date_sent` | `datetimepicker` | - |
+| Source | `source` | `text` | inbound/outbound |
+| Status | `status` | `text` | success/failure |
+| From | `from` | `text` | - |
+| Recipients | `recipients` | `textarea` | To/CC/BCC |
+| Subject | `subject` | `text` | - |
+| Body | `body` | `textarea` | - |
+| Attachments | `attachments` | `text` | - |
+| Message Id | `message_id` | `text` | - |
+| In Reply To | `in_reply_to` | `text` | - |
+| Importance | `importance` | `text` | low/normal/high |
+
+---
+
+## Custom Fields
+| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
+| ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Email Message-ID | `email_message_id` | `text` | `properties` | - | message-id associated with the inbound email message |
+
+---
+
+
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | Example: Send Incident Email HTML | incident | `example_send_incident_email_html` |
+| Example: Send Incident Email HTML2 | incident | `example_send_incident_email_html2` |
 | Example: Send Incident Email Text | incident | `example_send_incident_email_text` |
 | Example: Send Task Email HTML | task | `example_send_task_email_html` |
+| Example: Send Task Email HTML2 | task | `example_send_task_email_html2` |
+| Outbound Email: Reply to Message | email_conversations | `outbound_email_reply_to_message` |
 
 ---
 ## Further customization
@@ -384,26 +647,99 @@ In the default template packaged with this app, `data/example_send_email.jinja`,
 <p>
 
 ```
+{% set NOT_FOUND = ["Not Found!","-","None",None] %}
+{% macro get_row(label,field_name) -%}
+	{% set value = template_helper.get_incident_value(incident,field_name) %}
+	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
+    {% if value and value not in NOT_FOUND and not value.startswith('-') %}
+    <tr>
+        <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
+        <td style="{{style}}">{{ value | safe }}</td>
+    </tr>
+    {% endif %}
+{%- endmacro %}
+
 {# UNCOMMENT TO INCLUDE ARTIFACTS #}
 {# {% macro get_artifact(art) -%}
-	{% set values = template_helper.get_artifact_values(art) %}
+	{% set values = template_helper.get_artifacts(art) %}
 	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
     {% for a in values %}
         <tr>
-            <td width="100" style="{{style}}">{{ a.get("value") | safe }}</td>
+            <td width="200" style="{{style}}">{{ a.get("value") | safe }}</td>
             <td width="200" style="{{style}}">{{ a.get("description") | safe }}</td>
         </tr>
     {% endfor %}
 {%- endmacro %} #}
-...
+
+{# UNCOMMENT TO INCLUDE NOTES #}
+{# {% macro get_note(note) -%}
+    {% set get_children = True %}
+	{% set values = template_helper.get_notes(note, get_children) %}
+	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
+    {% for n in values %}
+        {% if n.get("text", "")%}
+            <tr>
+                <td colspan="2" style="{{style}}">{{ n.get("text", "") | safe }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+{%- endmacro %} #}
+
+<table width="100%" >
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT DETAILS</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+    {{ get_row('Severity:','severity_code') }}<br>
+    {{ get_row('Status:','plan_status') }}<br>
+    {{ get_row('Created:','create_date') }}<br>
+    {{ get_row('Category:','incident_type_ids') }}<br>
+<tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+{{ get_row('Description:','description') }}
+
 {# UNCOMMENT TO INCLUDE ARTIFACTS #}
 {# <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT ARTIFACTS</h3>
+        <p style="color: rgb(68,114,196)">Note: Artifacts are included in the e-mail if present in the incident.</p>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
-    {{ get_artifact(artifact) }}
-</tr> #}
+</tr>
+{{ get_artifact(artifact) }}
+#}
+
+{# UNCOMMENT TO INCLUDE NOTES #}
+{# <tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>
+        <p style="color: rgb(68,114,196)">Note: Notes are included in the e-mail if present in the incident.</p>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+{{ get_note(note) }}
+#}
+
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT LINK</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+        <a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+    </td>
+</tr>
+</table>
+<br>
 ```
 
 </p>

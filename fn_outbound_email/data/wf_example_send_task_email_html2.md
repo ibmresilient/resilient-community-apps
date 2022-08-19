@@ -49,8 +49,8 @@ type_ids = u", ".join(incident.incident_type_ids)
 sev_code = u"{}".format(incident.severity_code)
 current_plan = u"{}".format(incident.plan_status)
 
-if rule.properties.get('mail_template'):
-  inputs.mail_template_name = rule.properties.mail_template_name
+if rule.properties.get('mail_template_select'):
+  inputs.mail_template_label = rule.properties.mail_template_select
 else:
   inputs.mail_inline_template = u"""
 <h2>Incident Summary</h2>

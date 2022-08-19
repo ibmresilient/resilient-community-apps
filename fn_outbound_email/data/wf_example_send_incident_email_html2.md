@@ -29,7 +29,6 @@ inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_from = rule.properties.mail_from
 inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name) if not rule.properties.get('mail_subject') else rule.properties.mail_subject
-#inputs.mail_template_name="template_file"
 
 if rule.properties.get('mail_message_id'):
   # generate a message-id
@@ -46,6 +45,8 @@ if rule.properties.get('mail_importance'):
   
 if rule.properties.get('mail_body') and rule.properties.get('mail_body').content:
   inputs.mail_body = rule.properties.mail_body.content
+elif rule.properties.mail_template_select:
+  inputs.mail_template_label=rule.properties.mail_template_select
 else:
   inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 {% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
@@ -79,7 +80,8 @@ else:
     {{ get_row('Description:','description') }}
 <tr>
     <td width="100" style="{{style}}; font-weight:bold">Incident link</td>
-    <td style="{{style}}"><a target="_blank" href="{{ template_helper.generate_incident_url(incident.id) }}">{{ incident.id }}</a></td>
+    {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+    <td style="{{style}}"><a target="_blank" href="{{ inc_url }}">{{ incident.id }}</a></td>
 </tr>
 </table>
 <br>
