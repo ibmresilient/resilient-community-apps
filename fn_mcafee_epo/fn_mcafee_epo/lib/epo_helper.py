@@ -76,7 +76,7 @@ class Client:
         r = self.rc.execute_call_v2("get", url, **request_params)
 
         if r.status_code >= 300 or not r.text.startswith('OK'):
-            raise IntegrationError("find tags failed: {}".format(r.text))
+            raise IntegrationError("Failed: {}".format(r.text))
 
         # Convert result to true json
         try:
