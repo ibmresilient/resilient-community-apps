@@ -139,6 +139,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
+| **webex_site_url** | Yes | `https://webexapis.com` | Webex endpoint URL |
 | **webex_timezone** | Yes | `GMT -05:00` | Reference Timezone for the meeting |
 | **client_id** | Yes | `Cf7f235XXXXXXXXXXddXXXX930ae68d377754b971XXXXXXXXX` | Issued while creating the integration |
 | **client_secret** | Yes | `dca551c7dXXXX930aeXXXXddXXXX930ae68d54b971XXXXXXXXX` | Issued while creating the integration |
