@@ -62,7 +62,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP:
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP \
+              or not kwargs.get("mail_from"):
                 mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
@@ -70,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             mail_body_html = kwargs.get("mail_body_html", None)
             jinja = False
 
-            if mail_body_html:
+            if not mail_body_html:
                 if self.template_file_path:
                     with open(self.template_file_path, "r") as template:
                         jinja = True
