@@ -2,14 +2,38 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
-from resilient_lib import IntegrationError
+from fn_webex.lib import constants
+from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import FunctionError
 
-
 class WebexAuthentication:
-    def __init__(self, requiredParameters):
+    def __init__(self, requiredParameters, app_config):
+        """
+        This application refreshes the OAuth authetication >>RefreshToken<< to interface with 
+        the Cisco Webex Endpoint using the Client ID and the Client Secret that was generated
+        while an integration is created at developers.webex.com .
+
+        Args:
+        -----
+            clientID     (<str>) : Client ID of the integration created on developer.webex.com
+            elientSecret (<str>) : Client Secret of the same integration
+            refreshToken (<str>) : Refresh token generated using the OAuth Utilities Tool
+            scope        (<str>) : Scopes selected during integraiton creation is to be
+                                   specified in a space seperated fashion
+
+        Returns:
+        --------
+            RequestHeader (<dict>) : An authorization Bearer ID and Content-Type as 
+                                     application/json
+        """
+
+        validate_fields(["client_id", "scope", "client_secret", "refresh_token"], app_config)
         self.requiredParameters = requiredParameters
+        self.requiredParameters["clientID"] = app_config.get("client_id")
+        self.requiredParameters["clientSecret"] = app_config.get("client_secret")
+        self.requiredParameters["refreshToken"] = app_config.get("refresh_token")
+        self.requiredParameters["scope"] = app_config.get("scope")
+        self.requiredParameters["tokenURL"] = app_config.get("webex_site_url") + constants.TOKEN_URL
         self.rc  = requiredParameters.get("rc")
         self.LOG = self.requiredParameters.get("logger")
 
@@ -23,6 +47,7 @@ class WebexAuthentication:
         bearerID = self.generate_bearerID()
         header = self.generate_header(bearerID)
         return header
+
 
     def generate_bearerID(self):
         '''

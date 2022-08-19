@@ -24,6 +24,29 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
+        """
+        This function creates and schedules a Webex meeting.
+
+        Args:
+        -----
+            start        (<str>) : Meeting start time
+            end          (<str>) : Meeting end time
+            timezone     (<str>) : Meeting timezone
+            meetingsURL  (<str>) : A url of the webex meetings API
+            title        (<str>) : Meeting title
+            agenda       (<str>) : Meeting agenda
+            password     (<str>) : Meeting password
+            sendEmail    (<bool>): Sends the meeting invite to the attendees
+            rc           (<rc>)  : A resilient wrapper for Requests object
+            logger       (<logger>)      : A resilient wrapper for logger obhect
+            resclient    (<rest_client>) : Rest client to interact with the SOAR instance
+ 
+        Yields:
+        -------
+            (<FunctionResult>): States if the application was executed successfully or not.
+                                Returns the response retrieved from the Webex endpoint in 
+                                the form of a dictionary.
+        """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_meeting_name"], fn_inputs)
@@ -33,10 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time if hasattr(fn_inputs, 'webex_meeting_end_time') else None
         self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
-        self.requiredParameters["clientID"] = self.config_options.get("client_id")
-        self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
-        self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
-        self.requiredParameters["scope"] = self.config_options.get("scope")
+        self.requiredParameters["meetingsURL"]  = self.config_options.get("webex_site_url") + constants.MEETINGS_URL
 
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
@@ -45,8 +65,6 @@ class FunctionComponent(AppFunctionComponent):
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["resclient"] = self.rest_client()
-        self.requiredParameters["meetingsURL"]  = self.config_options.get("webex_site_url") + constants.MEETINGS_URL
-        self.requiredParameters["tokenURL"] = self.config_options.get("webex_site_url") + constants.TOKEN_URL
         self.requiredParameters["logger"] = self.LOG
 
         fn_msg = self.get_fn_msg()
@@ -55,7 +73,7 @@ class FunctionComponent(AppFunctionComponent):
         try:
             yield self.status_message("Authenticating Webex using OAuth Access Token: '{0}'".format(FN_NAME))
             self.LOG.info("Webex: Creating a Security context and establishing a connection with the Webex EndPoint")
-            authenticator = WebexAuthentication(self.requiredParameters)
+            authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
             self.requiredParameters["header"] = authenticator.Authenticate()
             yield self.status_message("Successfully Authenticated!")
 

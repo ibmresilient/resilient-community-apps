@@ -73,10 +73,6 @@ class TestFnCreateMeeting:
             "tokenURL"     : "http://www.example.com",
             "bearerID"     : "1234",
             "timzone"      : "gmt 05:30",
-            "clientID"     : "client123",
-            "clientSecret" : "Secret123",
-            "refreshToken" : "token1234",
-            "scope"        : "scope1 scope2 scope3",
             "logger"       : LOG()
         }
     optionalParameters = {
@@ -87,14 +83,23 @@ class TestFnCreateMeeting:
             "agenda"      : "pytest",
             "sendEmail"   : "",
         }
+    app_configuration = {
+            "client_id"     : "client123",
+            "client_secret" : "Secret123",
+            "refresh_token" : "token1234",
+            "scope"         : "scope1 scope2 scope3",
+            "webex_site_url": "webexapis.com"
+
+    }
 
     @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
     def test_call_create_meeting(self, mock):
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
+        app_configuration  = self.app_configuration.copy()
         requiredParameters["meetingsURL"] = ""
-        authenticator = WebexAuthentication(requiredParameters)
+        authenticator = WebexAuthentication(requiredParameters, app_configuration)
         requiredParameters["header"] = authenticator.Authenticate()
         webex = WebexMeetings(requiredParameters, optionalParameters)
         with pytest.raises(FunctionError) as err:
@@ -102,6 +107,7 @@ class TestFnCreateMeeting:
         
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
+        app_configuration  = self.app_configuration.copy()
         requiredParameters["start"] = 0
         requiredParameters["end"]   = 0
         optionalParameters["title"] = ""
@@ -111,15 +117,17 @@ class TestFnCreateMeeting:
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
-        requiredParameters["clientSecret"] = ""
+        app_configuration  = self.app_configuration.copy()
+        app_configuration["client_secret"] = ""
         with pytest.raises(ValueError) as err:
-            authenticator = WebexAuthentication(requiredParameters)
+            authenticator = WebexAuthentication(requiredParameters, app_configuration)
             requiredParameters["header"] = authenticator.Authenticate()
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
+        app_configuration  = self.app_configuration.copy()
         webex = WebexMeetings(requiredParameters, optionalParameters)
-        authenticator = WebexAuthentication(self.requiredParameters)
+        authenticator = WebexAuthentication(self.requiredParameters, app_configuration)
         self.requiredParameters["header"] = authenticator.Authenticate()
         webex.create_meeting()
 

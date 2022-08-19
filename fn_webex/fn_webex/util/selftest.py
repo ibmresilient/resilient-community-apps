@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import datetime
 
+from fn_webex.lib import constants
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 from resilient_lib import validate_fields, RequestsCommon
 
@@ -20,19 +20,12 @@ def selftest_function(opts):
                       "name" : "webex_bearerID", 
                       "name" : "webex_timezone"}], app_configs)
 
-    requiredParameters, meetingParameters = {}, {}
-    
-    requiredParameters["scope"] = app_configs.get("scope")
-    requiredParameters["clientID"] = app_configs.get("client_id")
-    requiredParameters["clientSecret"] = app_configs.get("client_secret")
-    requiredParameters["refreshToken"] = app_configs.get("refresh_token")
+    requiredParameters = {}
     requiredParameters["rc"] = RequestsCommon(opts, app_configs)
-
-    requiredParameters["siteURL"] = "https://webexapis.com/v1/meetings/"    
-    requiredParameters["tokenURL"] = "https://webexapis.com/v1/access_token"
+    requiredParameters["tokenURL"] = app_configs.get("webex_site_url") + constants.TOKEN_URL
     
     try :
-        authenticator = WebexAuthentication(requiredParameters)
+        authenticator = WebexAuthentication(requiredParameters, app_configs)
         _ = authenticator.Authenticate()
         return {
             "state": "success",

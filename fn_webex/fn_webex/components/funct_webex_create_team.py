@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
-"""AppFunction implementation"""
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#
+# """AppFunction implementation"""
 from fn_webex.lib import constants
 from fn_webex.lib.cisco_interface import WebexInterface
 from fn_webex.lib.cisco_authentication import WebexAuthentication
@@ -23,22 +24,37 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
 
+        """
+        This function creates a Webex team and adds a team to it.
+
+        Args:
+        -----
+            teamName           (<str>)  : Name of the team to be created
+            incidentId         (<str>)  : Incident ID
+            addAllMembers      (<bool>) : Adds all members of the incident to the team
+            additionalAttendee (<str>)  : Additonal attendees to be added
+            entityId           (<str>)  : always >>teamId<<
+            entityName         (<str>)  : always >>teamName<<
+            entityURL          (<str>)  : Teams API URL
+            membershipURL      (<str>)  : Teams Membership API URL
+            rc                  (<rc>)  : A resilient wrapper for Requests object
+            logger           (<logger>) : A resilient wrapper for logger obhect
+            resclient   (<rest_client>) : Rest client to interact with the SOAR instance
+ 
+        Yields:
+        -------
+            (<FunctionResult>): States if the application was executed successfully or not.
+                                Returns the response retrieved from the Webex endpoint in 
+                                the form of a dictionary.
+        """
+
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_team_name", "webex_add_all_members", "webex_incident_id"], fn_inputs)
-        validate_fields([{"name" : "client_id",
-                          "name" : "scope",
-                          "name" : "client_secret",
-                          "name" : "refresh_token"}], self.config_options)
 
-        self.requiredParameters["clientID"] = self.config_options.get("client_id")
-        self.requiredParameters["clientSecret"] = self.config_options.get("client_secret")
-        self.requiredParameters["refreshToken"] = self.config_options.get("refresh_token")
-        self.requiredParameters["scope"] = self.config_options.get("scope")
-        self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
-        self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
-        self.requiredParameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
         self.requiredParameters["teamName"] = fn_inputs.webex_team_name
         self.requiredParameters["incidentId"] = fn_inputs.webex_incident_id
+        self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
+        self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["logger"] = self.LOG
@@ -53,7 +69,7 @@ class FunctionComponent(AppFunctionComponent):
         try:
             yield self.status_message("Authenticating Webex using OAuth Access Token: '{0}'".format(FN_NAME))
             self.LOG.info("Webex: Creating a Security context and establishing a connection with the Webex EndPoint")
-            authenticator = WebexAuthentication(self.requiredParameters)
+            authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
             self.requiredParameters["header"] = authenticator.Authenticate()
             yield self.status_message("Successfully Authenticated!")
             
