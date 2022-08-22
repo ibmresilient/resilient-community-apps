@@ -52,6 +52,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.1 | 08/2022 | Update documentation |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 | 1.2.2 | 04/2022 | Delete search on time-out |
 | 1.2.1 | 03/2022 | Bug fix |
@@ -192,7 +193,9 @@ Fetch QRadar offense Details.
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
-| `qradar_query_type` | `text` | No | `-` | - |
+| `qradar_query_type` | `text` | No | `-` | Can equal `offensesummary`, `offenserules`, or `sourceip` |
+| `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
+| `soar_incident_id` | `integer` | No | ID of the SOAR incident the function is running in |
 
 </p>
 </details>
@@ -292,7 +295,7 @@ results = {
 <p>
 
 ```python
-inputs.qradar_offense_id= incident.properties.qradar_id
+inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_table_name = "qr_triggered_rules"
@@ -335,7 +338,9 @@ Search QRadar Top events for the given offense ID.
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
-| `qradar_query_type` | `text` | No | `-` | - |
+| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
+| `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
+| `soar_incident_id` | `integer` | No | ID of the SOAR incident the function is running in |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
 | `qradar_search_param3` | `text` | No | `-` | - |
@@ -831,7 +836,7 @@ qr_flows
 | QR Destination IP Count | `qr_destination_ip_count` | `textarea` | `properties` | - | The no. of Destination IPs associated with the QRadar Offense |
 | QR Event Count | `qr_event_count` | `textarea` | `properties` | - | The no. of events associated with the QRadar Offense |
 | QR Flow Count | `qr_flow_count` | `textarea` | `properties` | - | The no. of flows associated with the QRadar Offense |
-| QR Incident Last Updated Time | `qr_last_updated_time` | `datetimepicker` | `properties` | - | - |
+| QR Incident Last Updated Time | `qr_last_updated_time` | `datetimepicker` | `properties` | - | The time that the SOAR incident was last updated |
 | QR Magnitude | `qr_magnitude` | `textarea` | `properties` | - | Indicates the relative importance of the offense. This value is calculated based on the relevance, severity, and credibility ratings. |
 | QR Offense Index Type | `qr_offense_index_type` | `text` | `properties` | - | The type on which the QRadar Offense is indexed |
 | QR Offense Index Value | `qr_offense_index_value` | `text` | `properties` | - | The value by which QRadar Offense is indexed |
@@ -840,13 +845,11 @@ qr_flows
 | QR Severity | `qr_severity` | `textarea` | `properties` | - | Indicates the threat that an attack poses in relation to how prepared the destination is for the attack. |
 | QR Source IP Count | `qr_source_ip_count` | `textarea` | `properties` | - | The no. of Source IPs associated with the QRadar Offense |
 | QRadar Destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
-| QR Offense Id | `qradar_id` | `text` | `properties` | - | - |
+| QR Offense Id | `qradar_id` | `text` | `properties` | - | The ID that QRadar gave tthe offense |
 
 ---
 
 ## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | Create Artifact from Assets info | qr_assets | `-` |
