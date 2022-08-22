@@ -24,7 +24,7 @@ inputs.mcafee_epo_issue_id = row.issue_id
 ### Post-Processing Script
 ```python
 if results.get("content"):
-  row.deleted = bool(True)
+  row.issue_deleted = bool(True)
   incident.addNote("Issue: '{}' deleted successfully.".format(row.issue_id))
 ```
 

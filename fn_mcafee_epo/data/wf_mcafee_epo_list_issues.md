@@ -28,7 +28,7 @@ if results.get("content"):
   for c in results.get("content"):
     row = incident.addRow("mcafee_epo_issues")
     row["issue_name"] = c.get("name")
-    row["issue_id"] = c.get("id")
+    row["issue_id"] = int(c.get("id"))
     row["severity"] = c.get("severity")
     row["issue_due_date"] = c.get("dueDate")
     row["issue_description"] = c.get("description")
@@ -38,7 +38,7 @@ if results.get("content"):
     row["resolution"] = c.get("resolution")
     row["assignee_name"] = c.get("assigneeName")
     row["issue_state"] = c.get("state")
-    row["ticket_id"] = c.get("ticketId")
+    row["ticket_id"] = int(c.get("ticketId")) if c.get("ticketId") else None
     row["issue_deleted"] = bool(False)
 ```
 

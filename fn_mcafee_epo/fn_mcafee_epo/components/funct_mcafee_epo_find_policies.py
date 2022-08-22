@@ -4,13 +4,12 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
-from resilient_lib import validate_fields
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 
-FN_NAME = "mcafee_epo_find_systems_in_group"
+FN_NAME = "mcafee_epo_find_policies"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'mcafee_epo_find_systems_in_group'"""
+    """Component that implements function 'mcafee_epo_find_policies'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -18,16 +17,14 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Find systems in a specified group on ePO server
+        Function: Finds all policies that match the given search text or find all policies if no search text is given
         Inputs:
-            -   fn_inputs.mcafee_epo_sub_group
-            -   fn_inputs.mcafee_epo_group_id
+            -   fn_inputs.mcafee_epo_search_text
+            -   fn_inputs.incident_id
+            -   fn_inputs.datatable_name
         """
 
         yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
-
-        # Validate fields
-        validate_fields(["mcafee_epo_group_id"], fn_inputs)
 
         # Log parameters
         self.LOG.info(str(fn_inputs))
@@ -36,11 +33,13 @@ class FunctionComponent(AppFunctionComponent):
         client = init_client(self.opts, self.options)
 
         response = client.request(
-            "epogroup.findSystems",
-            {"groupId": int(fn_inputs.mcafee_epo_group_id),
-            "searchSubgroups": fn_inputs.mcafee_epo_sub_group if hasattr(fn_inputs, "mcafee_epo_sub_group") else None
-            }
+            "policy.find",
+            {"mcafee_epo_search_text": fn_inputs.mcafee_epo_search_text if hasattr(fn_inputs, "mcafee_epo_search_text") else None}
         )
+
+        # Clear datatable if requires params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
         yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
 

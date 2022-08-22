@@ -51,7 +51,7 @@ class FunctionComponent(AppFunctionComponent):
             "retryAttempts": fn_inputs.mcafee_epo_retry_attempts if hasattr(fn_inputs, "mcafee_epo_retry_attempts") else None,
             "retryIntervalInSeconds": fn_inputs.mcafee_epo_retry_intervals_in_seconds if hasattr(fn_inputs, "mcafee_epo_retry_intervals_in_seconds") else None,
             "abortAfterMinutes": fn_inputs.mcafee_epo_abort_after_minutes if hasattr(fn_inputs, "mcafee_epo_abort_after_minutes") else None,
-            "useAllAgentHandlers": fn_inputs.mcafee_epo_use_all_agent_handlers if hasattr(fn_inputs, "mcafee_epo_use_all_agent_handlers") else False,
+            "useAllAgentHandlers": bool(fn_inputs.mcafee_epo_use_all_agent_handlers) if hasattr(fn_inputs, "mcafee_epo_use_all_agent_handlers") else False,
             "stopAfterMinutes": fn_inputs.mcafee_epo_stop_after_minutes if hasattr(fn_inputs, "mcafee_epo_stop_after_minutes") else None,
             "randomMinutes": fn_inputs.mcafee_epo_random_minutes if hasattr(fn_inputs, "mcafee_epo_random_minutes") else None,
             "timeoutInHours": fn_inputs.mcafee_epo_timeout_in_hours if hasattr(fn_inputs, "mcafee_epo_timeout_in_hours") else None}

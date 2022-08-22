@@ -51,20 +51,20 @@ class FunctionComponent(AppFunctionComponent):
         response = client.request(
             "system.importSystem",
             {"names": fn_inputs.mcafee_epo_system_name_or_id,
-             "branchNodeID": fn_inputs.mcafee_epo_group_id,
-             "allowDuplicates": fn_inputs.mcafee_epo_allow_duplicates if fn_inputs.mcafee_epo_allow_duplicates else False,
-             "uninstallRemoved": fn_inputs.mcafee_epo_uninstall if fn_inputs.mcafee_epo_uninstall else True,
-             "pushAgent": fn_inputs.mcafee_epo_push_agent if fn_inputs.mcafee_epo_push_agent else False,
-             "pushAgentForceInstall": fn_inputs.mcafee_epo_push_agent_force_install if fn_inputs.mcafee_epo_push_agent_force_install else None,
-             "pushAgentSkipIfInstalled": fn_inputs.mcafee_epo_push_agent_skip_if_installed if fn_inputs.mcafee_epo_push_agent_skip_if_installed else True,
-             "pushAgentSuppressUI": fn_inputs.mcafee_epo_push_agent_suppress_ui if fn_inputs.mcafee_epo_push_agent_suppress_ui else False,
-             "pushAgentInstallPath": fn_inputs.mcafee_epo_push_agent_install_path if fn_inputs.mcafee_epo_push_agent_install_path else None,
-             "pushAgentPackagePath": fn_inputs.mcafee_epo_push_agent_package_path if fn_inputs.mcafee_epo_push_agent_package_path else None,
-             "pushAgentDomainName": fn_inputs.mcafee_epo_push_agent_domain_name if fn_inputs.mcafee_epo_push_agent_domain_name else None,
-             "pushAgentUserName": fn_inputs.mcafee_epo_push_agent_username if fn_inputs.mcafee_epo_push_agent_username else None,
-             "pushAgentPassword": fn_inputs.mcafee_epo_push_agent_password if fn_inputs.mcafee_epo_push_agent_password else None,
-             "deleteIfRemoved": fn_inputs.mcafee_epo_delete_if_removed if fn_inputs.mcafee_epo_delete_if_removed else True,
-             "flattenTreeStructure": fn_inputs.mcafee_epo_flatten_tree_structure if fn_inputs.mcafee_epo_flatten_tree_structure else False
+             "branchNodeID": int(fn_inputs.mcafee_epo_group_id),
+             "allowDuplicates": bool(fn_inputs.mcafee_epo_allow_duplicates) if hasattr(fn_inputs, "mcafee_epo_allow_duplicates") else False,
+             "uninstallRemoved": bool(fn_inputs.mcafee_epo_uninstall) if hasattr(fn_inputs, "mcafee_epo_uninstall") else True,
+             "pushAgent": bool(fn_inputs.mcafee_epo_push_agent) if hasattr(fn_inputs, "mcafee_epo_push_agent") else False,
+             "pushAgentForceInstall": bool(fn_inputs.mcafee_epo_push_agent_force_install) if hasattr(fn_inputs, "mcafee_epo_push_agent_force_install") else False,
+             "pushAgentSkipIfInstalled": bool(fn_inputs.mcafee_epo_push_agent_skip_if_installed) if hasattr(fn_inputs, "mcafee_epo_push_agent_skip_if_installed") else True,
+             "pushAgentSuppressUI": bool(fn_inputs.mcafee_epo_push_agent_suppress_ui) if hasattr(fn_inputs, "mcafee_epo_push_agent_suppress_ui") else False,
+             "pushAgentInstallPath": fn_inputs.mcafee_epo_push_agent_install_path if hasattr(fn_inputs, "mcafee_epo_push_agent_install_path") else None,
+             "pushAgentPackagePath": fn_inputs.mcafee_epo_push_agent_package_path if hasattr(fn_inputs, "mcafee_epo_push_agent_package_path") else None,
+             "pushAgentDomainName": fn_inputs.mcafee_epo_push_agent_domain_name if hasattr(fn_inputs, "mcafee_epo_push_agent_domain_name") else None,
+             "pushAgentUserName": fn_inputs.mcafee_epo_push_agent_username if hasattr(fn_inputs, "mcafee_epo_push_agent_username") else None,
+             "pushAgentPassword": fn_inputs.mcafee_epo_push_agent_password if hasattr(fn_inputs, "mcafee_epo_push_agent_password") else None,
+             "deleteIfRemoved": bool(fn_inputs.mcafee_epo_delete_if_removed) if hasattr(fn_inputs, "mcafee_epo_delete_if_removed") else True,
+             "flattenTreeStructure": bool(fn_inputs.mcafee_epo_flatten_tree_structure) if hasattr(fn_inputs, "mcafee_epo_flatten_tree_structure") else False
              }
         )
 

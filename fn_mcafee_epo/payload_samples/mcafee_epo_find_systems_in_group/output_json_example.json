@@ -4,8 +4,8 @@
   "reason": null,
   "content": [
     {
-      "EPOComputerProperties.ParentID": 13,
-      "EPOComputerProperties.ComputerName": "LostSystem",
+      "EPOComputerProperties.ParentID": 12,
+      "EPOComputerProperties.ComputerName": "SystemA",
       "EPOComputerProperties.Description": null,
       "EPOComputerProperties.ComputerDescription": null,
       "EPOComputerProperties.TimeZone": "",
@@ -56,19 +56,19 @@
       "EPOLeafNode.ManagedState": 0,
       "EPOLeafNode.AgentGUID": null,
       "EPOLeafNode.AgentVersion": null,
-      "EPOBranchNode.AutoID": 3
+      "EPOBranchNode.AutoID": 5
     }
   ],
   "raw": null,
   "inputs": {
-    "mcafee_epo_group_id": 3
+    "mcafee_epo_group_id": 5
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
     "package_version": "1.1.0",
     "host": "local",
-    "execution_time_ms": 582,
-    "timestamp": "2022-08-11 10:54:38"
+    "execution_time_ms": 578,
+    "timestamp": "2022-08-22 11:45:56"
   }
 }
