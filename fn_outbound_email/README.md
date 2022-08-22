@@ -606,8 +606,9 @@ email_conversations
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Date Sent | `date_sent` | `datetimepicker` | - |
-| Source | `source` | `text` | inbound/outbound |
 | Status | `status` | `text` | success/failure |
+| Source | `source` | `text` | inbound/outbound |
+| Id | `inbound_id` | `int` | inbound email id |
 | From | `from` | `text` | - |
 | Recipients | `recipients` | `textarea` | To/CC/BCC |
 | Subject | `subject` | `text` | - |
@@ -639,7 +640,7 @@ email_conversations
 
 ---
 ## Further customization
-A Jinja template for the email body can be created in the AppHost by navigating to the Outbound Email app > Configuration section. Under App Settings, you can select New File. Copy the file path that you save for this template and set the value for `template_file` in app.config to this path.
+In V2.0, you can defined multiple Jinja templates to support different email messages can be created in the AppHost by navigating to the Outbound Email app > Configuration section. Under App Settings, you can select New File. Copy the file path that you save for this template and set the value for `template_file` in app.config to this path.
 
 In the default template packaged with this app, `data/example_send_email.jinja`, there is example logic to include artifact and note data. This logic is commented out in the example template and can be used to:
 
