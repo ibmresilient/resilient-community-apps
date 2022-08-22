@@ -195,3 +195,14 @@ class FunctionComponent(ResilientComponent):
 
         self.log.debug(results)
         return results
+
+    def ss():
+        request_params = {
+            "start": self.meeting_start_time,
+            "end": self.meeting_end_time
+        }
+
+        json.dumps(request_params)
+        
+        
+        '{\"start\":\"' + self.meeting_start_time + '\", \"end\":\"' + self.meeting_end_time + '\"'

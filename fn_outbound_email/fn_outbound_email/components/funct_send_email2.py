@@ -76,7 +76,7 @@ class FunctionComponent(AppFunctionComponent):
                                                                         attachments=mail_data.get('mail_attachments'))
 
         if not mail_data.get('mail_from'):
-            mail_data['mail_from'] = self.app_configs.get("from_email_address")
+            mail_data['mail_from'] = getattr(self.app_configs, "from_email_address")
 
         send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 
