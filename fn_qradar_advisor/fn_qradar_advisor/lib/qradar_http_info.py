@@ -3,7 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import requests
 import base64
-import urllib.parse
+import sys
+if sys.version_info.major < 3:
+    from urllib import quote 
+else:
+    # Python 3.x
+    from urllib.parse import quote
 from resilient_lib import RequestsCommon
 
 QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
@@ -198,7 +203,7 @@ class HttpInfo(object):
         """
         URL used to get the list of apps in QRadar instance.
         """
-        url_encoded_rule_name = urllib.parse.quote(qradar_rule_name)
+        url_encoded_rule_name = quote(qradar_rule_name)
         return QRADAR_ANALYTICS_RULE_BY_NAME_URL.format(host=self.host, rule_name=url_encoded_rule_name)
 
     def get_qradar_ucm_get_tactics_url(self):

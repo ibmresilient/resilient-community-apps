@@ -180,8 +180,7 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **qradar_advisor_app_id** | Yes | `` | *App ID from the QRadar server.* |
 | **qradar_advisor_token** | Yes | `` | *QRadar Advisor token.* |
-| **qradar_cafm_app_id** | Yes | `` | *Cyber Adversary Framwork Mapping App Id.* |
-| **qradar_cafm_token** | Yes | `` | *Cyber Adversary Framwork Mapping token.* |
+| **qradar_ucm_token** | Yes | `` | *Use Case Manager token.* |
 | **qradar_host** | Yes | `myhost` | *QRadar host.* |
 | **full_search_timeout** | No | `1200` | *Full search timeout in seconds.* |
 | **full_search_period** | No | `5` | *Full search period in seconds.* |

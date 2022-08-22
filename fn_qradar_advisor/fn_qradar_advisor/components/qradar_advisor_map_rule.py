@@ -5,12 +5,10 @@
 """Function implementation"""
 import requests
 import json
-import urllib.parse
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 from fn_qradar_advisor.lib.qradar_ucm_client import QRadarUCMClient
-from fn_qradar_advisor.lib.qradar_cafm_client import QRadarCafmClient
 
 
 class FunctionComponent(ResilientComponent):
