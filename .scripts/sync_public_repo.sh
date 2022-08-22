@@ -8,7 +8,7 @@
 # param $6: (required) path to the $PATH_DOWNLOAD_SCRIPT file
 
 # Dependencies on:
-#   the environmental variable $GH_PUBLIC_SYNC_PATH which will include the $GH_PUBLIC_TOKEN
+#   the environmental variable $GH_PUBLIC_SYNC_PATH which will include the $GH_PUBLIC_TOKEN_COMMUNITY_APPS
 #   that must have write permissions of our EXTERNAL repo
 
 ###############
@@ -104,7 +104,7 @@ rename_path "$PATH_COMMON_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR.bak"
 rename_path "$PATH_DOWNLOAD_SCRIPT" "$PATH_DOWNLOAD_SCRIPT.bak"
 
 print_msg "Locally commit all changes to '$TEMP_BRANCH'"
-git add -A && git commit -m "Syncing external repository on $NOW"
+git add -A && git commit -q -m "Syncing external repository on $NOW"
 
 print_msg "Checkout INTERNAL '$INTERNAL_BRANCH' branch"
 git checkout $INTERNAL_BRANCH

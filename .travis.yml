@@ -59,6 +59,7 @@ env:
     - SONAR_QUBE_URL="https://sonarqube.secintel.intranet.ibm.com"
 
     - GH_PUBLIC_LINK="https://github.com/ibmresilient/resilient-community-apps"
+    - GH_PUBLIC_SYNC_PATH="https://$GH_PUBLIC_TOKEN_COMMUNITY_APPS@github.com:/ibmresilient/resilient-community-apps.git"
 
 # Install package deps
 before_install:
@@ -301,4 +302,4 @@ matrix:
         - echo "Syncing INTERNAL repo with PUBLIC repo"
         - $PATH_SCRIPTS_DIR/sync_public_repo.sh "public_main" "main" "$PATH_EXCLUDE_FILES" "$PATH_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
       after_success:
-        - $PATH_COMMON_SCRIPTS_DIR.bak/send_slack_notification.sh "PUBLIC Repo has been updated. Review the changes at <$GH_PUBLIC_LINK|$GH_PUBLIC_LINK>" "success";
+        - $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "PUBLIC Repo has been updated. Review the changes at <$GH_PUBLIC_LINK|$GH_PUBLIC_LINK>" "success";
