@@ -3,7 +3,13 @@
 # param $1: (required) internal branch name to push to. Normally 'public_main'
 # param $2: (required) external branch name to sync to. Normally 'main'
 # param $3: (required) path to the paths_to_exclude.txt file with each path on seperate line
-# param $4: (required) path to the .scripts dir
+# param $4: (required) path to the $PATH_SCRIPTS_DIR dir
+# param $5: (required) path to the $PATH_COMMON_SCRIPTS_DIR dir
+# param $6: (required) path to the $PATH_DOWNLOAD_SCRIPT file
+
+# Dependencies on:
+#   the environmental variable $GH_PUBLIC_SYNC_PATH which will include the $GH_PUBLIC_TOKEN
+#   that must have write permissions of our EXTERNAL repo
 
 ###############
 ## Variables ##
@@ -59,6 +65,14 @@ print_msg () {
     printf "\n--------------------\n$1\n--------------------\n"
 }
 
+rename_path () {
+    src_path=$1
+    target_path=$2
+
+    print_msg "Renaming '$src_path' to '$target_path'"
+    mv $src_path $target_path
+}
+
 ###########
 ## Start ##
 ###########
@@ -85,14 +99,9 @@ for path in "${EXCLUDE_PATHS[@]}"; do
     rm -rf $TRAVIS_BUILD_DIR/$path
 done
 
-print_msg "Renaming '$PATH_SCRIPTS_DIR' directory to '$PATH_SCRIPTS_DIR.bak'"
-mv $PATH_SCRIPTS_DIR $PATH_SCRIPTS_DIR.bak
-
-print_msg "Renaming '$PATH_COMMON_SCRIPTS_DIR' directory to '$PATH_COMMON_SCRIPTS_DIR.bak'"
-mv $PATH_COMMON_SCRIPTS_DIR $PATH_COMMON_SCRIPTS_DIR.bak
-
-print_msg "Renaming '$PATH_DOWNLOAD_SCRIPT' file to '$PATH_DOWNLOAD_SCRIPT.bak'"
-mv $PATH_DOWNLOAD_SCRIPT $PATH_DOWNLOAD_SCRIPT.bak
+rename_path "$PATH_SCRIPTS_DIR" "$PATH_SCRIPTS_DIR.bak"
+rename_path "$PATH_COMMON_SCRIPTS_DIR" "$PATH_COMMON_SCRIPTS_DIR.bak"
+rename_path "$PATH_DOWNLOAD_SCRIPT" "$PATH_DOWNLOAD_SCRIPT.bak"
 
 print_msg "Locally commit all changes to '$TEMP_BRANCH'"
 git add -A && git commit -m "Syncing external repository on $NOW"
@@ -110,5 +119,8 @@ print_msg "Push changes to INTERNAL '$INTERNAL_BRANCH' branch"
 git push -u origin $INTERNAL_BRANCH
 
 print_msg "Sync INTERNAL '$INTERNAL_BRANCH' with EXTERNAL '$EXTERNAL_BRANCH' branch"
-git push https://$GH_TOKEN_PUBLIC@github.com:/ibmresilient/resilient-community-apps.git $INTERNAL_BRANCH:$EXTERNAL_BRANCH
+git push $GH_PUBLIC_SYNC_PATH $INTERNAL_BRANCH:$EXTERNAL_BRANCH
 
+rename_path "$PATH_SCRIPTS_DIR.bak" "$PATH_SCRIPTS_DIR"
+rename_path "$PATH_COMMON_SCRIPTS_DIR.bak" "$PATH_COMMON_SCRIPTS_DIR"
+rename_path "$PATH_DOWNLOAD_SCRIPT.bak" "$PATH_DOWNLOAD_SCRIPT"
