@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import re
 import time
@@ -17,7 +17,7 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
 # Change this value to reflect who will be the owner of the incident before running the script.
-newIncidentOwner = "b@example.com"
+newIncidentOwner = ""
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -584,6 +584,7 @@ class EmailProcessor(object):
         row = incident.addRow('email_conversations')
         row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
         row['source'] = "inbound"
+        row['inbound_id'] = emailmessage.id
         row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
         row['from'] = handle_list(headers.get("From"))
         row['subject'] = handle_list(headers.get("Subject"))
