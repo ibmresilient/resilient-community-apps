@@ -41,7 +41,7 @@ inputs.mail_importance = rule.properties.mail_importance if rule.properties.mail
 inputs.mail_in_reply_to = row['message_id']
 inputs.mail_incident_id = incident.id
 inputs.mail_subject = "re: {}".format(row['subject'])
-inputs.mail_template_label = rule.properties.mail_template_name
+inputs.mail_template_label = rule.properties.mail_template_select
 ```
 
 ### Post-Processing Script
