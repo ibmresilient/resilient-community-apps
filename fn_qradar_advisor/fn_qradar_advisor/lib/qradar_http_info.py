@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import requests
 import base64
+import urllib.parse
 from resilient_lib import RequestsCommon
 
 QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
@@ -15,6 +16,12 @@ QRADAR_ABOUT_URL="/about"
 QRADAR_ANALYSIS_URL = "/investigations/offense/{offense_id}/analysis"
 QRADAR_ANALYSIS_STATUS_URL = "/investigations/offense/{offense_id}/analysis/status"
 QRADAR_ANALYSIS_RESULT_URL = "/investigations/offense/{offense_id}/analysis/{stage}/stix"
+QRADAR_ANALYTICS_RULE_BY_NAME_URL = "{host}/api/analytics/rules?fields=name%2C%20id%2C%20identifier&filter=name%20%3D%20%22{rule_name}%22"
+QRADAR_GUI_APP_FRAMEWORK_APPLICATIONS_URL = "{host}/api/gui_app_framework/applications"
+
+QRADAR_UCM_BASE_URL = "{host}/console/plugins/app_proxy:UseCaseManager_Service"
+QRADAR_UCM_MAPPINGS_TACTICS = "/api/mappings/tactics"
+QRADAR_UCM_MITRE_MITRE_COVERAGE = "/api/mitre/mitre_coverage/{rule_id}"
 
 QRADAR_CFMA_MAPPINGS = "/mappings"
 QRADAR_CFMA_TUNING="/config/tuning"
@@ -34,6 +41,7 @@ class HttpInfo(object):
         self.xsrf_token = None
         self.log = log
         self.api_base_url = QRADAR_PLUGIN_API_URL.format(host=self.host, app_id=self.app_id)
+        self.ucm_base_url = QRADAR_UCM_BASE_URL.format(host=self.host)
 
         self.session = requests.session()
         self.session.headers["Accept"] = "application/json"
@@ -180,3 +188,27 @@ class HttpInfo(object):
         url = self.api_base_url + QRADAR_OFFENSE_INSIGHTS_URL.format(offense_id=offense_id)
         return url
 
+    def get_qradar_apps_url(self):
+        """
+        URL used to get the list of apps in QRadar instance.
+        """
+        return QRADAR_GUI_APP_FRAMEWORK_APPLICATIONS_URL.format(host=self.qradar_host)
+
+    def get_qradar_get_rule_url(self, qradar_rule_name):
+        """
+        URL used to get the list of apps in QRadar instance.
+        """
+        url_encoded_rule_name = urllib.parse.quote(qradar_rule_name)
+        return QRADAR_ANALYTICS_RULE_BY_NAME_URL.format(host=self.host, rule_name=url_encoded_rule_name)
+
+    def get_qradar_ucm_get_tactics_url(self):
+        """
+        URL used to get the list of apps in QRadar UCM MITRE ATT&CK tactics and techniques.
+        """
+        return self.ucm_base_url + QRADAR_UCM_MAPPINGS_TACTICS
+
+    def get_qradar_ucm_get_mitre_mitre_coverage_url(self, rule_id):
+        """
+        URL used to get all rule and child mappings in QRadar UCM instances.
+        """
+        return self.ucm_base_url + QRADAR_UCM_MITRE_MITRE_COVERAGE.format(rule_id=rule_id)

@@ -3,9 +3,13 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """Function implementation"""
-
+import requests
+import json
+import urllib.parse
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import validate_fields
+from fn_qradar_advisor.lib.qradar_ucm_client import QRadarUCMClient
 from fn_qradar_advisor.lib.qradar_cafm_client import QRadarCafmClient
 
 
@@ -34,10 +38,12 @@ class FunctionComponent(ResilientComponent):
     def _qradar_advisor_map_rule_function(self, event, *args, **kwargs):
         """Function: Map rule to MITRE ATT&CK tactic"""
         try:
+            log = logging.getLogger(__name__)
+            validate_fields(["qradar_rule_name"], kwargs)
+
             # Get the function parameters:
             qradar_rule_name = kwargs.get("qradar_rule_name")  # text
 
-            log = logging.getLogger(__name__)
             log.info("qradar_rule_name: %s", qradar_rule_name)
 
             qradar_verify_cert = True
@@ -46,14 +52,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
-            client = QRadarCafmClient(qradar_host=self.options["qradar_host"],
-                                      cafm_token=self.options["qradar_cafm_token"],
-                                      cafm_app_id=self.options["qradar_cafm_app_id"],
-                                      cafile=qradar_verify_cert, log=log,
-                                      opts=self.opts, function_opts=self.options)
-
+            client = QRadarUCMClient(qradar_host=self.options["qradar_host"],
+                                     qradar_token=self.options["qradar_ucm_token"],
+                                     advisor_app_id=self.options["qradar_advisor_app_id"],
+                                     cafile=qradar_verify_cert, log=log,
+                                     opts=self.opts, function_opts=self.options)
             tactics = client.find_tactic_mapping(qradar_rule_name)
-
+            
             yield StatusMessage("done...")
 
             results = {

@@ -17,7 +17,7 @@ setup(
                      "MITRE ATT&CK information from QRadar Advisor. The integration supports QRadar Advisor quick search, "
                      "full search, map a rule, and retrieve offense insights and analysis.",
     install_requires=[
-        'resilient_circuits>=44.0.0'
+        'resilient_circuits>=46.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
