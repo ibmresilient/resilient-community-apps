@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_uninstall
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate parameters
         validate_fields(["mcafee_epo_system_name_or_id", "mcafee_epo_group_id"], fn_inputs)
@@ -51,23 +51,23 @@ class FunctionComponent(AppFunctionComponent):
         response = client.request(
             "system.importSystem",
             {"names": fn_inputs.mcafee_epo_system_name_or_id,
-             "branchNodeID": int(fn_inputs.mcafee_epo_group_id),
-             "allowDuplicates": bool(fn_inputs.mcafee_epo_allow_duplicates) if hasattr(fn_inputs, "mcafee_epo_allow_duplicates") else False,
-             "uninstallRemoved": bool(fn_inputs.mcafee_epo_uninstall) if hasattr(fn_inputs, "mcafee_epo_uninstall") else True,
-             "pushAgent": bool(fn_inputs.mcafee_epo_push_agent) if hasattr(fn_inputs, "mcafee_epo_push_agent") else False,
-             "pushAgentForceInstall": bool(fn_inputs.mcafee_epo_push_agent_force_install) if hasattr(fn_inputs, "mcafee_epo_push_agent_force_install") else False,
-             "pushAgentSkipIfInstalled": bool(fn_inputs.mcafee_epo_push_agent_skip_if_installed) if hasattr(fn_inputs, "mcafee_epo_push_agent_skip_if_installed") else True,
-             "pushAgentSuppressUI": bool(fn_inputs.mcafee_epo_push_agent_suppress_ui) if hasattr(fn_inputs, "mcafee_epo_push_agent_suppress_ui") else False,
-             "pushAgentInstallPath": fn_inputs.mcafee_epo_push_agent_install_path if hasattr(fn_inputs, "mcafee_epo_push_agent_install_path") else None,
-             "pushAgentPackagePath": fn_inputs.mcafee_epo_push_agent_package_path if hasattr(fn_inputs, "mcafee_epo_push_agent_package_path") else None,
-             "pushAgentDomainName": fn_inputs.mcafee_epo_push_agent_domain_name if hasattr(fn_inputs, "mcafee_epo_push_agent_domain_name") else None,
-             "pushAgentUserName": fn_inputs.mcafee_epo_push_agent_username if hasattr(fn_inputs, "mcafee_epo_push_agent_username") else None,
-             "pushAgentPassword": fn_inputs.mcafee_epo_push_agent_password if hasattr(fn_inputs, "mcafee_epo_push_agent_password") else None,
-             "deleteIfRemoved": bool(fn_inputs.mcafee_epo_delete_if_removed) if hasattr(fn_inputs, "mcafee_epo_delete_if_removed") else True,
-             "flattenTreeStructure": bool(fn_inputs.mcafee_epo_flatten_tree_structure) if hasattr(fn_inputs, "mcafee_epo_flatten_tree_structure") else False
-             }
+             "branchNodeID": fn_inputs.mcafee_epo_group_id,
+             "allowDuplicates": getattr(fn_inputs, "mcafee_epo_allow_duplicates", False),
+             "uninstallRemoved": getattr(fn_inputs, "mcafee_epo_uninstall", True),
+             "pushAgent": getattr(fn_inputs, "mcafee_epo_push_agent", False),
+             "pushAgentForceInstall": getattr(fn_inputs, "mcafee_epo_push_agent_force_install", False),
+             "pushAgentSkipIfInstalled": getattr(fn_inputs, "mcafee_epo_push_agent_skip_if_installed", True),
+             "pushAgentSuppressUI": getattr(fn_inputs, "mcafee_epo_push_agent_suppress_ui", False),
+             "pushAgentInstallPath": getattr(fn_inputs, "mcafee_epo_push_agent_install_path", None),
+             "pushAgentPackagePath": getattr(fn_inputs, "mcafee_epo_push_agent_package_path", None),
+             "pushAgentDomainName": getattr(fn_inputs, "mcafee_epo_push_agent_domain_name", None),
+             "pushAgentUserName": getattr(fn_inputs, "mcafee_epo_push_agent_username", None),
+             "pushAgentPassword": getattr(fn_inputs, "mcafee_epo_push_agent_password", None),
+             "deleteIfRemoved": getattr(fn_inputs, "mcafee_epo_delete_if_removed", True),
+             "flattenTreeStructure": getattr(fn_inputs, "mcafee_epo_flatten_tree_structure", False)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

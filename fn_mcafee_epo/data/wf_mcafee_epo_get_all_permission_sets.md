@@ -24,7 +24,7 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results["content"]:
+if results.get("success"):
   for permset in results["content"]:
     table_row = incident.addRow("mcafee_epo_permission_sets")
     table_row["permission_set_name"] = permset.get("name")

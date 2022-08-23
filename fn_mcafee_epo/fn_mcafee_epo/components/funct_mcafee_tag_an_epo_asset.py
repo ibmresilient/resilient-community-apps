@@ -25,13 +25,13 @@ class FunctionComponent(AppFunctionComponent):
 
         Applies tag to the systems in ePO.
         """
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems", "mcafee_epo_tag"], fn_inputs)
 
-        self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
-        self.LOG.info("mcafee_epo_tag: %s", fn_inputs.mcafee_epo_tag)
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
         # determine if a list of tags was given
         tag_list = get_list(fn_inputs.mcafee_epo_tag)
@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
             }
             response = client.request("system.applyTag", params)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(response)

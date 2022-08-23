@@ -33,7 +33,7 @@ inputs.mcafee_epo_ticket_server_name = rule.properties.epo_ticket_server_name
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   row = incident.addRow("mcafee_epo_issues")
   row["issue_name"] = rule.properties.epo_issue_name
   row["severity"] = rule.properties.epo_issue_severity
@@ -46,7 +46,7 @@ if results.get("content"):
   row["assignee_name"] =rule.properties.epo_issue_assignee
   row["issue_state"] = rule.properties.epo_issue_state
   row["ticket_id"] = rule.properties.epo_ticket_id
-  row["issue_deleted"] = bool(False)
+  row["issue_deleted"] = False
 ```
 
 ---

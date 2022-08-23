@@ -25,39 +25,38 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.incident_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        # Create dictionary of inputs
-        inputs_dict = fn_inputs._asdict()
-
         # Log parameters
-        self.LOG.info(str(inputs_dict))
+        self.LOG.info(str(fn_inputs))
 
         # Get function parameters:
-        datatable = fn_inputs.datatable_name if hasattr(fn_inputs, "datatable_name") else None
-        incident_id = fn_inputs.incident_id if hasattr(fn_inputs, "incident_id") else None
-        if inputs_dict.get('mcafee_epo_queryid') and inputs_dict.get('mcafee_epo_target'):
+        query_id = getattr(fn_inputs, "mcafee_epo_queryid", None)
+        target = getattr(fn_inputs, "mcafee_epo_target", None)
+
+        if query_id and target:
             raise ValueError("Define either mcafee_epo_queryid or mcafee_epo_target, but not both.")
-        elif inputs_dict.get('mcafee_epo_queryid'):
+        elif query_id:
             response = client.request(
                 "core.executeQuery",
-                {"queryId": fn_inputs.mcafee_epo_queryid}
+                {"queryId": query_id}
             )
-        elif inputs_dict.get('mcafee_epo_target'):
+        elif target:
             response = client.request(
                 "core.executeQuery",
-                {"target": fn_inputs.mcafee_epo_target}
+                {"target": target}
             )
         else:
             raise ValueError("Either mcafee_epo_queryid or mcafee_epo_target have to be defined.")
 
-        # Clear datatable if requires params are given
-        if datatable and incident_id:
-            clear(self.rest_client(), datatable, incident_id)
+        # Clear datatable if required params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

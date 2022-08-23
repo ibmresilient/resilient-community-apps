@@ -25,7 +25,7 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results['content']:
+if results.get('success'):
   for system in results['content']:
     table_row = incident.addRow("mcafee_epo_systems")
     table_row["system_name"] = system.get("EPOLeafNode.NodeName")

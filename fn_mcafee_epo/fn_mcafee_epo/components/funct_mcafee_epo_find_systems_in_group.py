@@ -24,7 +24,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_group_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate fields
         validate_fields(["mcafee_epo_group_id"], fn_inputs)
@@ -37,11 +37,11 @@ class FunctionComponent(AppFunctionComponent):
 
         response = client.request(
             "epogroup.findSystems",
-            {"groupId": int(fn_inputs.mcafee_epo_group_id),
-            "searchSubgroups": fn_inputs.mcafee_epo_sub_group if hasattr(fn_inputs, "mcafee_epo_sub_group") else None
-            }
+            {"groupId": fn_inputs.mcafee_epo_group_id,
+            "searchSubgroups": getattr(fn_inputs, "mcafee_epo_sub_group", None)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

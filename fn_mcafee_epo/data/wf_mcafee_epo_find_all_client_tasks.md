@@ -24,7 +24,7 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_client_tasks")
     table["object_name"] = x.get("objectName")

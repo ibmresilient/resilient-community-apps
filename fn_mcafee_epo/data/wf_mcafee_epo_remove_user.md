@@ -23,7 +23,7 @@ inputs.mcafee_epo_username = row.user_name
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   row.user_deleted = True
   incident.addNote("User: {} removed  from ePO server".format(row.user_name))
 ```

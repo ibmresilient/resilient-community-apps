@@ -25,7 +25,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_uninstall
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate parameter
         validate_fields(["mcafee_epo_system_name_or_id"], fn_inputs)
@@ -39,10 +39,11 @@ class FunctionComponent(AppFunctionComponent):
         response = client.request(
             "system.delete",
             {"names": fn_inputs.mcafee_epo_system_name_or_id,
-            "uninstall": bool(fn_inputs.mcafee_epo_uninstall) if hasattr(fn_inputs, "mcafee_epo_uninstall") else False,
-            "uninstallSoftware": bool(fn_inputs.mcafee_epo_uninstall_software) if hasattr(fn_inputs, "mcafee_epo_uninstall_software") else False}
+            "uninstall": getattr(fn_inputs, "mcafee_epo_uninstall", False),
+            "uninstallSoftware": getattr(fn_inputs, "mcafee_epo_uninstall_software", False)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

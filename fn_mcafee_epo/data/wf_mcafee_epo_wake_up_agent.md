@@ -23,7 +23,7 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 
 ### Post-Processing Script
 ```python
-incident.addNote(results["content"])
+incident.addNote(results.get("content"))
 ```
 
 ---

@@ -23,11 +23,11 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   usersList = []
   for user in results.get("content"):
     usersList.append(user.get("name"))
-  row.users = str(usersList).replace("[","").replace("]","").replace("u","").replace("'","")
+  row.users = str(usersList).replace("[","").replace("]","").replace("'","")
 ```
 
 ---

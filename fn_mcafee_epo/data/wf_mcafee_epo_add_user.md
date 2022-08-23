@@ -27,12 +27,11 @@ inputs.mcafee_epo_fullname = rule.properties.epo_full_name
 inputs.mcafee_epo_notes = rule.properties.epo_notes
 inputs.mcafee_epo_phone_number = rule.properties.epo_phone_number
 inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
-
 ```
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("User: {} successfully created.".format(rule.properties.epo_username))
 ```
 

@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_type_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate parameters
         validate_fields(["mcafee_epo_system_name_or_id", "mcafee_epo_type_id", "mcafee_epo_product_id", "mcafee_epo_object_id"], fn_inputs)
@@ -42,11 +42,12 @@ class FunctionComponent(AppFunctionComponent):
             "policy.assignToSystem",
             {"names": fn_inputs.mcafee_epo_system_name_or_id,
             "productId": fn_inputs.mcafee_epo_product_id,
-            "objectId": int(fn_inputs.mcafee_epo_object_id),
-            "typeId": int(fn_inputs.mcafee_epo_type_id),
-            "resetInheritance": bool(fn_inputs.mcafee_epo_reset_inheritance) if hasattr(fn_inputs, "mcafee_epo_reset_inheritance") else False}
+            "objectId": fn_inputs.mcafee_epo_object_id,
+            "typeId": fn_inputs.mcafee_epo_type_id,
+            "resetInheritance": getattr(fn_inputs, "mcafee_epo_reset_inheritance", False)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

@@ -24,7 +24,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.datatable_name
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Log parameters
         self.LOG.info(str(fn_inputs))
@@ -34,13 +34,14 @@ class FunctionComponent(AppFunctionComponent):
 
         response = client.request(
             "policy.find",
-            {"mcafee_epo_search_text": fn_inputs.mcafee_epo_search_text if hasattr(fn_inputs, "mcafee_epo_search_text") else None}
+            {"searchText": getattr(fn_inputs, "mcafee_epo_search_text", None)}
         )
 
-        # Clear datatable if requires params are given
+        # Clear datatable if required params are given
         if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
             clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

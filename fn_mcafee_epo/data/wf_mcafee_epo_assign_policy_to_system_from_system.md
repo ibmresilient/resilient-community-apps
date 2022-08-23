@@ -26,7 +26,7 @@ inputs.mcafee_epo_object_id = rule.properties.epo_policy_id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("Policy: '{}' Assigned to system: '{}'".format(rule.properties.epo_policy_id, row.system_name))
 ```
 

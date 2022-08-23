@@ -24,7 +24,7 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   for c in results.get("content"):
     row = incident.addRow("mcafee_epo_issues")
     row["issue_name"] = c.get("name")
@@ -39,7 +39,7 @@ if results.get("content"):
     row["assignee_name"] = c.get("assigneeName")
     row["issue_state"] = c.get("state")
     row["ticket_id"] = int(c.get("ticketId")) if c.get("ticketId") else None
-    row["issue_deleted"] = bool(False)
+    row["issue_deleted"] = False
 ```
 
 ---

@@ -11,7 +11,7 @@
 `mcafee_epo_update_user`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -36,7 +36,7 @@ inputs.mcafee_epo_windowsusername = rule.properties.epo_windows_username
 ### Post-Processing Script
 ```python
 note = ""
-if results.get("content"):
+if results.get("success"):
   inputs = results.get("inputs")
   if inputs.get("mcafee_epo_new_username"):
     row.user_name = inputs.get("mcafee_epo_new_username")

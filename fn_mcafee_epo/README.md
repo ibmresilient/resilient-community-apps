@@ -22,7 +22,7 @@
 - [Function - McAfee ePO Delete Issue](#function---mcafee-epo-delete-issue)
 - [Function - McAfee ePO Delete System](#function---mcafee-epo-delete-system)
 - [Function - McAfee ePO Execute Query](#function---mcafee-epo-execute-query)
-- [Function - McAfee ePO find a system](#function---mcafee-epo-find-a-system)
+- [Function - McAfee ePO Find a System](#function---mcafee-epo-find-a-system)
 - [Function - McAfee ePO Find Client Tasks](#function---mcafee-epo-find-client-tasks)
 - [Function - McAfee ePO Find Groups](#function---mcafee-epo-find-groups)
 - [Function - McAfee ePO Find Policies](#function---mcafee-epo-find-policies)
@@ -30,15 +30,15 @@
 - [Function - McAfee ePO Get All Permission sets](#function---mcafee-epo-get-all-permission-sets)
 - [Function - McAfee ePO Get All Users](#function---mcafee-epo-get-all-users)
 - [Function - McAfee ePO List Issues](#function---mcafee-epo-list-issues)
-- [Function - McAfee ePO list tags](#function---mcafee-epo-list-tags)
+- [Function - McAfee ePO List Tags](#function---mcafee-epo-list-tags)
 - [Function - McAfee ePO Remove Permission sets from user](#function---mcafee-epo-remove-permission-sets-from-user)
-- [Function - McAfee ePO remove tag](#function---mcafee-epo-remove-tag)
+- [Function - McAfee ePO Remove Tag](#function---mcafee-epo-remove-tag)
 - [Function - McAfee ePO Remove User](#function---mcafee-epo-remove-user)
 - [Function - McAfee ePO Run Client Task](#function---mcafee-epo-run-client-task)
 - [Function - McAfee ePO Update Issue](#function---mcafee-epo-update-issue)
 - [Function - McAfee ePO Update User](#function---mcafee-epo-update-user)
 - [Function - McAfee ePO Wake up agent](#function---mcafee-epo-wake-up-agent)
-- [Function - McAfee tag an ePO asset](#function---mcafee-tag-an-epo-asset)
+- [Function - McAfee Tag an ePO Asset](#function---mcafee-tag-an-epo-asset)
 - [Data Table - McAfee ePO Client Tasks](#data-table---mcafee-epo-client-tasks)
 - [Data Table - McAfee ePO Groups](#data-table---mcafee-epo-groups)
 - [Data Table - McAfee ePO Issues](#data-table---mcafee-epo-issues)
@@ -97,7 +97,6 @@ The McAfee ePO functions allow for manipilation of tags, systems, users, issues,
 * Find all tags specified in ePO
 * Remove a tag associated with an ePO system(s).
 * Applies tag to the systems in ePO. Inputs include: - mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO. - mcafee_epo_tag: A tag managed on ePO.
-
 
 ---
 
@@ -237,9 +236,12 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 <p>
 
 ```python
-if results['content']:
-  incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
-  row.users = "{}, {}".format(row.users, rule.properties.epo_username)
+if results['success']:
+  if rule.properties.epo_username not in row.users:
+    row.users = "{}, {}".format(row.users, rule.properties.epo_username)
+    incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
+  else:
+    incident.addNote("User: {} already has permission set: {}".format(results['inputs']['mcafee_epo_username'], results['inputs']['mcafee_epo_permsetname']))
 ```
 
 </p>
@@ -349,7 +351,7 @@ inputs.mcafee_epo_push_agent_install_path = rule.properties.epo_push_agent_insta
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   row = incident.addRow("mcafee_epo_systems")
   row["system_name"] = rule.properties.epo_system_names_or_ids
 ```
@@ -431,7 +433,6 @@ inputs.mcafee_epo_fullname = rule.properties.epo_full_name
 inputs.mcafee_epo_notes = rule.properties.epo_notes
 inputs.mcafee_epo_phone_number = rule.properties.epo_phone_number
 inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
-
 ```
 
 </p>
@@ -441,7 +442,7 @@ inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("User: {} successfully created.".format(rule.properties.epo_username))
 ```
 
@@ -514,7 +515,7 @@ inputs.mcafee_epo_product_id = rule.properties.epo_product_id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("Policy: '{}' Assigned to Group: '{}'".format(rule.properties.epo_policy_id, row.group_id))
 ```
 
@@ -597,7 +598,7 @@ inputs.mcafee_epo_object_id = rule.properties.epo_policy_id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("Policy: '{}' Assigned to system: '{}'".format(rule.properties.epo_policy_id, row.system_name))
 ```
 
@@ -695,7 +696,7 @@ inputs.mcafee_epo_ticket_server_name = rule.properties.epo_ticket_server_name
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   row = incident.addRow("mcafee_epo_issues")
   row["issue_name"] = rule.properties.epo_issue_name
   row["severity"] = rule.properties.epo_issue_severity
@@ -708,7 +709,7 @@ if results.get("content"):
   row["assignee_name"] =rule.properties.epo_issue_assignee
   row["issue_state"] = rule.properties.epo_issue_state
   row["ticket_id"] = rule.properties.epo_ticket_id
-  row["issue_deleted"] = bool(False)
+  row["issue_deleted"] = False
 ```
 
 </p>
@@ -773,8 +774,8 @@ inputs.mcafee_epo_issue_id = row.issue_id
 <p>
 
 ```python
-if results.get("content"):
-  row.issue_deleted = bool(True)
+if results.get("success"):
+  row.issue_deleted = True
   incident.addNote("Issue: '{}' deleted successfully.".format(row.issue_id))
 ```
 
@@ -849,7 +850,7 @@ inputs.mcafee_epo_system_name_or_id = row.system_name
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   row.deleted = True
   incident.addNote("System: {} deleted".format(row.system_name))
 ```
@@ -1014,7 +1015,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results['content']:
+if results.get('success'):
   for system in results['content']:
     table_row = incident.addRow("mcafee_epo_systems")
     table_row["system_name"] = system.get("EPOLeafNode.NodeName")
@@ -1029,7 +1030,7 @@ if results['content']:
 </details>
 
 ---
-## Function - McAfee ePO find a system
+## Function - McAfee ePO Find a System
 Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc.
 
  ![screenshot: fn-mcafee-epo-find-a-system ](./doc/screenshots/fn-mcafee-epo-find-a-system.png)
@@ -1143,13 +1144,13 @@ inputs.mcafee_epo_systems = artifact.value
 <p>
 
 ```python
-if not results.content:
+if not results.get("success"):
   info = u"ePO system not found"
 else:
   info = u"ePO system info\n"
   for system in results.content:
     for setting in system:
-      info = u"{}\n{}: {}".format(info, setting, system[setting])
+      info = u"{}\n{}: {}".format(info, setting, system.get("setting"))
 
 if artifact.description:
   artifact.description = u"{}\n\n{}".format(artifact.description.content, info)
@@ -1250,7 +1251,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_client_tasks")
     table["object_name"] = x.get("objectName")
@@ -1343,12 +1344,11 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_groups")
     table["group_id"] = int(x.get("groupId"))
     table["group_path"] = x.get("groupPath")
-  
 ```
 
 </p>
@@ -1627,7 +1627,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results["content"]:
+if results.get("success"):
   for policy in results["content"]:
     table_row = incident.addRow("mcafee_epo_policies")
     table_row["object_name"] = policy.get("objectName")
@@ -1757,11 +1757,11 @@ inputs.mcafee_epo_group_id = row.group_id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   systemsList = []
   for x in results.get("content"):
     systemsList.append(x.get("EPOComputerProperties.ComputerName"))
-  row.systems = str(systemsList).replace("[","").replace("]","").replace("u","").replace("'","")
+  row.systems = str(systemsList).replace("[","").replace("]","").replace("'","")
 ```
 
 </p>
@@ -1844,7 +1844,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results["content"]:
+if results.get("success"):
   for permset in results["content"]:
     table_row = incident.addRow("mcafee_epo_permission_sets")
     table_row["permission_set_name"] = permset.get("name")
@@ -1915,7 +1915,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results["content"]:
+if results.get("success"):
   for user in results["content"]:
     table_row = incident.addRow("mcafee_epo_users")
     table_row["user_name"] = user.get("name")
@@ -2025,7 +2025,7 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   for c in results.get("content"):
     row = incident.addRow("mcafee_epo_issues")
     row["issue_name"] = c.get("name")
@@ -2040,14 +2040,14 @@ if results.get("content"):
     row["assignee_name"] = c.get("assigneeName")
     row["issue_state"] = c.get("state")
     row["ticket_id"] = int(c.get("ticketId")) if c.get("ticketId") else None
-    row["issue_deleted"] = bool(False)
+    row["issue_deleted"] = False
 ```
 
 </p>
 </details>
 
 ---
-## Function - McAfee ePO list tags
+## Function - McAfee ePO List Tags
 Find all tags specified in ePO
 
  ![screenshot: fn-mcafee-epo-list-tags ](./doc/screenshots/fn-mcafee-epo-list-tags.png)
@@ -2153,7 +2153,7 @@ None
 <p>
 
 ```python
-if results.success:
+if results.get("success"):
   for tag in sorted(results.content, key = lambda i: i['tagName'].lower()):
     row = incident.addRow("mcafee_epo_tags")
     row['epo_id'] = tag['tagId']
@@ -2226,18 +2226,18 @@ inputs.mcafee_epo_username = rule.properties.epo_username
 <p>
 
 ```python
-if results['content']:
+if results.gett('success'):
   incident.addNote("Permissions set: {} was removed from user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
   usersList = list(row.users.split(", "))
   usersList.remove(rule.properties.epo_username)
-  row.users = str(usersList).replace("[","").replace("]","").replace("u","").replace("'","")
+  row.users = str(usersList).replace("[","").replace("]","").replace("'","")
 ```
 
 </p>
 </details>
 
 ---
-## Function - McAfee ePO remove tag
+## Function - McAfee ePO Remove Tag
 Remove a tag associated with an ePO system(s).
 
  ![screenshot: fn-mcafee-epo-remove-tag ](./doc/screenshots/fn-mcafee-epo-remove-tag.png)
@@ -2298,7 +2298,7 @@ inputs.mcafee_epo_tag = str(rule.properties.ss_tags)
 <p>
 
 ```python
-if not results.content:
+if not results.get("success"):
   note = u"ePO system not found or tag not applied: {}".format(results.inputs['mcafee_epo_tag'])
 else:
   note = u"ePO tag(s) removed: {}".format(results.inputs['mcafee_epo_tag'])
@@ -2371,7 +2371,7 @@ inputs.mcafee_epo_username = row.user_name
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   row.user_deleted = True
   incident.addNote("User: {} removed  from ePO server".format(row.user_name))
 ```
@@ -2451,7 +2451,7 @@ inputs.mcafee_epo_task_id = int(row.task_id)
 <p>
 
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(rule.properties.epo_system_names_or_ids, row.object_name))
 ```
 
@@ -2551,7 +2551,7 @@ inputs.mcafee_epo_ticket_server_name = rule.properties.epo_ticket_server_name
 
 ```python
 note = ""
-if results.get("content"):
+if results.get("success"):
   inputs = results.get("inputs")
   if inputs.get("mcafee_epo_issue_priority"):
     row.priority = inputs.get("mcafee_epo_issue_priority")
@@ -2685,7 +2685,7 @@ inputs.mcafee_epo_windowsusername = rule.properties.epo_windows_username
 
 ```python
 note = ""
-if results.get("content"):
+if results.get("success"):
   inputs = results.get("inputs")
   if inputs.get("mcafee_epo_new_username"):
     row.user_name = inputs.get("mcafee_epo_new_username")
@@ -2776,14 +2776,14 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 <p>
 
 ```python
-incident.addNote(results["content"])
+incident.addNote(results.get("content"))
 ```
 
 </p>
 </details>
 
 ---
-## Function - McAfee tag an ePO asset
+## Function - McAfee Tag an ePO Asset
 Applies tag to the systems in ePO. Inputs include:
 - mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.
 - mcafee_epo_tag: A tag managed on ePO.
@@ -2846,7 +2846,7 @@ inputs.mcafee_epo_tag = row['epo_tag']
 <p>
 
 ```python
-if results.content:
+if results.get("success"):
   note = u"ePO tags: {} applied to system(s): {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
 else:
   note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
@@ -3012,8 +3012,8 @@ mcafee_epo_users
 | McAfee ePO Add Permission Set to User | mcafee_epo_permission_sets | `mcafee_epo_add_permission_sets_to_user` |
 | McAfee ePO Add System | incident | `mcafee_epo_add_system` |
 | McAfee ePO Add User | incident | `mcafee_epo_add_user` |
-| McAfee ePO apply a tag | mcafee_epo_tags | `mcafee_epo_apply_a_tag` |
-| McAfee ePO apply tags | artifact | `mcafee_epo_apply_tags` |
+| McAfee ePO Apply a Tag | mcafee_epo_tags | `mcafee_epo_apply_a_tag` |
+| McAfee ePO Apply Tags | artifact | `mcafee_epo_apply_tags` |
 | McAfee ePO Assign Policy to Group from Group | mcafee_epo_groups | `mcafee_epo_assign_policy_to_group_from_group` |
 | McAfee ePO Assign Policy to Group from Policy | mcafee_epo_policies | `mcafee_epo_assign_policy_to_group_from_policy` |
 | McAfee ePO Assign Policy to System from System | mcafee_epo_systems | `mcafee_epo_assign_policy_to_system_from_system` |
@@ -3028,14 +3028,14 @@ mcafee_epo_users
 | McAfee ePO Get All Permission Sets | incident | `mcafee_epo_get_all_permission_sets` |
 | McAfee ePO Get All Systems | incident | `mcafee_epo_get_all_systems` |
 | McAfee ePO Get All Users | incident | `mcafee_epo_get_all_users` |
-| McAfee ePO get system info | artifact | `mcafee_epo_get_system_info` |
+| McAfee ePO Get System Info | artifact | `mcafee_epo_get_system_info` |
 | McAfee ePO Get System Info from Property | incident | `mcafee_epo_get_system_info_from_property` |
 | McAfee ePO Get System Information | mcafee_epo_systems | `mcafee_epo_get_system_information` |
 | McAfee ePO Get Users with Permission Set | mcafee_epo_permission_sets | `mcafee_epo_get_user_with_permission_set` |
 | McAfee ePO List Issues | incident | `mcafee_epo_list_issues` |
-| McAfee ePO list tags | incident | `mcafee_epo_list_tags` |
+| McAfee ePO List Tags | incident | `mcafee_epo_list_tags` |
 | McAfee ePO Remove Permission Set from User | mcafee_epo_permission_sets | `mcafee_epo_remove_permission_set_from_user` |
-| McAfee ePO remove tags | artifact | `mcafee_epo_remove_tag` |
+| McAfee ePO Remove Tags | artifact | `mcafee_epo_remove_tag` |
 | McAfee ePO Remove User | mcafee_epo_users | `mcafee_epo_remove_user` |
 | McAfee ePO Run Client Task | mcafee_epo_client_tasks | `mcafee_epo_run_client_task` |
 | McAfee ePO Run Client Task on System | mcafee_epo_systems | `mcafee_epo_run_client_task_on_system` |

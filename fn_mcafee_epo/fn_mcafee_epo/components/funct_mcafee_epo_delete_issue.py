@@ -23,7 +23,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_issue_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Vaildate function parameters:
         validate_fields(["mcafee_epo_issue_id"], fn_inputs)
@@ -39,6 +39,7 @@ class FunctionComponent(AppFunctionComponent):
             {"id": fn_inputs.mcafee_epo_issue_id}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

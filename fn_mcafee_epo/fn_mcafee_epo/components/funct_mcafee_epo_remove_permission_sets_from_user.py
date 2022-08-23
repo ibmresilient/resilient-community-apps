@@ -24,23 +24,24 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_permsetname
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get the function parameters:
         validate_fields(
             ["mcafee_epo_username", "mcafee_epo_permsetname"], fn_inputs)
 
         # Log parameters
-        self.LOG.info("mcafee_epo_username: %s", fn_inputs.mcafee_epo_username)
-        self.LOG.info("mcafee_epo_permsetname: %s", fn_inputs.mcafee_epo_permsetname)
+        self.LOG.info(str(fn_inputs))
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
-
-        yield FunctionResult(client.request(
+        response = client.request(
             "core.removePermSetsForUser",
             {"userName": fn_inputs.mcafee_epo_username,
             "permSetName": fn_inputs.mcafee_epo_permsetname}
-        ))
+        )
+
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+
+        yield FunctionResult(response)

@@ -32,7 +32,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_stop_after_minutes
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
          # Get the function parameters:
         validate_fields(["mcafee_epo_system_name_or_id", "mcafee_epo_task_id", "mcafee_epo_product_id"], fn_inputs)
@@ -48,15 +48,16 @@ class FunctionComponent(AppFunctionComponent):
             {"names": fn_inputs.mcafee_epo_system_name_or_id,
             "productId": fn_inputs.mcafee_epo_product_id,
             "taskId": fn_inputs.mcafee_epo_task_id,
-            "retryAttempts": fn_inputs.mcafee_epo_retry_attempts if hasattr(fn_inputs, "mcafee_epo_retry_attempts") else None,
-            "retryIntervalInSeconds": fn_inputs.mcafee_epo_retry_intervals_in_seconds if hasattr(fn_inputs, "mcafee_epo_retry_intervals_in_seconds") else None,
-            "abortAfterMinutes": fn_inputs.mcafee_epo_abort_after_minutes if hasattr(fn_inputs, "mcafee_epo_abort_after_minutes") else None,
-            "useAllAgentHandlers": bool(fn_inputs.mcafee_epo_use_all_agent_handlers) if hasattr(fn_inputs, "mcafee_epo_use_all_agent_handlers") else False,
-            "stopAfterMinutes": fn_inputs.mcafee_epo_stop_after_minutes if hasattr(fn_inputs, "mcafee_epo_stop_after_minutes") else None,
-            "randomMinutes": fn_inputs.mcafee_epo_random_minutes if hasattr(fn_inputs, "mcafee_epo_random_minutes") else None,
-            "timeoutInHours": fn_inputs.mcafee_epo_timeout_in_hours if hasattr(fn_inputs, "mcafee_epo_timeout_in_hours") else None}
+            "retryAttempts": getattr(fn_inputs, "mcafee_epo_retry_attempts", None),
+            "retryIntervalInSeconds": getattr(fn_inputs, "mcafee_epo_retry_intervals_in_seconds", None),
+            "abortAfterMinutes": getattr(fn_inputs, "mcafee_epo_abort_after_minutes", None),
+            "useAllAgentHandlers": getattr(fn_inputs, "mcafee_epo_use_all_agent_handlers", False),
+            "stopAfterMinutes": getattr(fn_inputs, "mcafee_epo_stop_after_minutes", None),
+            "randomMinutes": getattr(fn_inputs, "mcafee_epo_random_minutes", None),
+            "timeoutInHours": getattr(fn_inputs, "mcafee_epo_timeout_in_hours", None)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

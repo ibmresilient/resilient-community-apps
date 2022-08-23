@@ -23,7 +23,7 @@ inputs.mcafee_epo_system_name_or_id = row.system_name
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   row.deleted = True
   incident.addNote("System: {} deleted".format(row.system_name))
 ```

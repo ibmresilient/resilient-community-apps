@@ -25,7 +25,7 @@ inputs.mcafee_epo_task_id = int(row.task_id)
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(rule.properties.epo_system_names_or_ids, row.object_name))
 ```
 

@@ -24,12 +24,11 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_groups")
     table["group_id"] = int(x.get("groupId"))
     table["group_path"] = x.get("groupPath")
-  
 ```
 
 ---

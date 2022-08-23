@@ -11,7 +11,7 @@
 `mcafee_epo_update_issue`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -35,7 +35,7 @@ inputs.mcafee_epo_ticket_server_name = rule.properties.epo_ticket_server_name
 ### Post-Processing Script
 ```python
 note = ""
-if results.get("content"):
+if results.get("success"):
   inputs = results.get("inputs")
   if inputs.get("mcafee_epo_issue_priority"):
     row.priority = inputs.get("mcafee_epo_issue_priority")

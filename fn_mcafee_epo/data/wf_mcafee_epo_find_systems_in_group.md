@@ -23,11 +23,11 @@ inputs.mcafee_epo_group_id = row.group_id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   systemsList = []
   for x in results.get("content"):
     systemsList.append(x.get("EPOComputerProperties.ComputerName"))
-  row.systems = str(systemsList).replace("[","").replace("]","").replace("u","").replace("'","")
+  row.systems = str(systemsList).replace("[","").replace("]","").replace("'","")
 ```
 
 ---

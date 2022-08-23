@@ -25,7 +25,7 @@ inputs.mcafee_epo_product_id = row.product_id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
+if results.get("success"):
   incident.addNote("Policy: '{}' Assigned to group: '{}'".format(row.object_name, rule.properties.epo_group_id))
 ```
 

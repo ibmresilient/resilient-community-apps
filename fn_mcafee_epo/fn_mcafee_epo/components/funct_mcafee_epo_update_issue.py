@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_issue_description
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Vaildate function parameters:
         validate_fields(["mcafee_epo_issue_id"], fn_inputs)
@@ -48,20 +48,21 @@ class FunctionComponent(AppFunctionComponent):
         response = client.request(
             "issue.updateIssue",
             {"id": fn_inputs.mcafee_epo_issue_id,
-            "name": fn_inputs.mcafee_epo_issue_name if hasattr(fn_inputs, "mcafee_epo_issue_name") else None,
-            "desc": fn_inputs.mcafee_epo_issue_description if hasattr(fn_inputs, "mcafee_epo_issue_description") else None,
+            "name": getattr(fn_inputs, "mcafee_epo_issue_name", None),
+            "desc": getattr(fn_inputs, "mcafee_epo_issue_description", None),
             "type": fn_inputs.mcafee_epo_issue_type.upper() if hasattr(fn_inputs, "mcafee_epo_issue_type") and fn_inputs.mcafee_epo_issue_type else None,
             "state": fn_inputs.mcafee_epo_issue_state.upper() if hasattr(fn_inputs, "mcafee_epo_issue_state") and fn_inputs.mcafee_epo_issue_state else None,
             "priority": fn_inputs.mcafee_epo_issue_priority.upper() if hasattr(fn_inputs, "mcafee_epo_issue_priority") and fn_inputs.mcafee_epo_issue_priority else None,
             "severity": fn_inputs.mcafee_epo_issue_severity.upper() if hasattr(fn_inputs, "mcafee_epo_issue_severity") and fn_inputs.mcafee_epo_issue_severity else None,
             "resolution": fn_inputs.mcafee_epo_issue_resolution.upper().replace(" ","") if hasattr(fn_inputs, "mcafee_epo_issue_resolution") and fn_inputs.mcafee_epo_issue_resolution else None,
             "due": readable_datetime(fn_inputs.mcafee_epo_issue_due, rtn_format='%Y-%m-%d %H:%M:%S') if hasattr(fn_inputs, "mcafee_epo_issue_due") and fn_inputs.mcafee_epo_issue_due else None,
-            "assigneeName": fn_inputs.mcafee_epo_issue_assignee if hasattr(fn_inputs, "mcafee_epo_issue_assignee") else None,
-            "ticketServerName": fn_inputs.mcafee_epo_ticket_server_name if hasattr(fn_inputs, "mcafee_epo_ticket_server_name") else None,
-            "ticketId": fn_inputs.mcafee_epo_ticket_id if hasattr(fn_inputs, "mcafee_epo_ticket_id") else None,
-            "properties": fn_inputs.mcafee_epo_issue_properties if hasattr(fn_inputs, "mcafee_epo_issue_properties") else None}
+            "assigneeName": getattr(fn_inputs, "mcafee_epo_issue_assignee", None),
+            "ticketServerName": getattr(fn_inputs, "mcafee_epo_ticket_server_name", None),
+            "ticketId": getattr(fn_inputs, "mcafee_epo_ticket_id", None),
+            "properties": getattr(fn_inputs, "mcafee_epo_issue_properties", None)}
         )
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

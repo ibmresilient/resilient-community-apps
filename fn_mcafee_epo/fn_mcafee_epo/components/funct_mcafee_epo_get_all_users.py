@@ -24,28 +24,24 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.incident_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
-
-        # Set parameters
-        permsetname = fn_inputs.mcafee_epo_permsetname if hasattr(fn_inputs, "mcafee_epo_permsetname") else None
-        datatable = fn_inputs.datatable_name if hasattr(fn_inputs, "datatable_name") else None
-        incident_id = fn_inputs.incident_id if hasattr(fn_inputs, "incident_id") else None
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Log parameters
-        self.LOG.info("mcafee_epo_permsetname: %s", permsetname)
+        self.LOG.info(str(fn_inputs))
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
         response = client.request(
             "core.listUsers",
-            {"permSetName": permsetname}
+            {"permSetName": getattr(fn_inputs, "mcafee_epo_permsetname", None)}
         )
 
-        # Clear datatable if requires params are given
-        if datatable and incident_id:
-            clear(self.rest_client(), datatable, incident_id)
+        # Clear datatable if required params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

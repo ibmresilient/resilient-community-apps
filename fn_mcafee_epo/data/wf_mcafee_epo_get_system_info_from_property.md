@@ -5,7 +5,7 @@
 
 # McAfee ePO Get System Info from Property
 
-## Function - McAfee ePO find a system
+## Function - McAfee ePO Find a System
 
 ### API Name
 `mcafee_epo_find_a_system`
@@ -24,12 +24,12 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 ### Post-Processing Script
 ```python
 note = ''
+if results.get("success"):
+  for x in range(len(results['content'])):
+    content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
+    note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
 
-for x in range(len(results['content'])):
-  content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
-  note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
-
-incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
+  incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
 ```
 
 ---

@@ -23,12 +23,13 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mcafee_epo_systems
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems"], fn_inputs)
 
-        self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
@@ -38,7 +39,7 @@ class FunctionComponent(AppFunctionComponent):
             "system.wakeupAgent",
             {"names": fn_inputs.mcafee_epo_systems.strip()})
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(response)
