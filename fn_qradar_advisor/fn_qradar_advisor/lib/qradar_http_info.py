@@ -4,11 +4,7 @@
 import requests
 import base64
 import sys
-if sys.version_info.major < 3:
-    from urllib import quote 
-else:
-    # Python 3.x
-    from urllib.parse import quote
+from urllib.parse import quote
 from resilient_lib import RequestsCommon
 
 QRADAR_PLUGIN_API_URL = "{host}/console/plugins/{app_id}/app_proxy/api"
