@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_qradar_advisor"],
         "functions": [u"qradar_advisor_full_search", u"qradar_advisor_map_rule", u"qradar_advisor_offense_analysis", u"qradar_advisor_quick_search"],
         "workflows": [u"qradar_advisor_full_search", u"qradar_advisor_map_rule", u"qradar_advisor_offense_analysis", u"qradar_advisor_quick_search"],
-        "actions": [u"Create Artifact (QRadar Advisor Analysis)", u"Create Artifact (Watson Search with Local Context)", u"Map QRadar rule", u"QRadar Advisor Offense Analysis", u"Watson Search", u"Watson Search with Local Context"],
+        "actions": [u"Create Artifact (QRadar Advisor Analysis)", u"Create Artifact (Watson Search with Local Context)", u"QRadar Advisor: Map QRadar rule", u"QRadar Advisor: Offense Analysis", u"Watson Search", u"Watson Search with Local Context"],
         "incident_fields": [u"mitre_tactic_name", u"qradar_id", u"qradar_rule"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -57,8 +57,8 @@ def customization_data(client=None):
     - Rules:
         - Create Artifact (QRadar Advisor Analysis)
         - Create Artifact (Watson Search with Local Context)
-        - Map QRadar rule
-        - QRadar Advisor Offense Analysis
+        - QRadar Advisor: Map QRadar rule
+        - QRadar Advisor: Offense Analysis
         - Watson Search
         - Watson Search with Local Context
     - Incident Fields:

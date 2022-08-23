@@ -117,7 +117,7 @@ if not status_set:
 '''
 #
 # We ONLY create artifacts for those observables that can be mapped to
-# default Resilient artifacts. If customer has custom artifacts, and wants
+# default SOAR artifacts. If customer has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 mapping = {

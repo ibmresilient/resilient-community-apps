@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_qradar_advisor
+# QRadar Advisor Functions
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -52,7 +52,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.0 | 9/2022 | Payload samples. |
+| 2.1.0 | 9/2022 | QRadar Use Case Manager support. CAFM deprecated. Payload samples. |
 | 2.0.2 | 9/2020 | App Host & proxy support. Updated deprecated API endpoints. |
 | 2.0.1 | 2019 | Python 3 bug fix |
 | 2.0.0 | 2019 | Support for 2.0  |
@@ -68,7 +68,7 @@
 -->
 **IBM SOAR QRadar Advisor Functions**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 The QRadar Advisor integration with IBM QRadar SOAR enables SOAR users to gather Cyber MITRE ATT&CK information from QRadar Advisor. The integration supports QRadar Advisor quick search, full search, map a rule, and retrieve offense insights and analysis.
 
@@ -76,17 +76,24 @@ The QRadar Advisor integration with IBM QRadar SOAR enables SOAR users to gather
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+Backed by IBM Watson, QRadar Advisor applies artificial intelligence to automatically investigate indicators of compromise (IOC), utilizes cognitive reasoning to provide critical insights, and ultimately accelerates the response cycle. It can augment a security analyst to gain a head start in assessing incidents and reduce the risk of missing threats.
 
+QRadar Advisor Integration Function enables Qradar SOAR users to gather Cyber Threat Intelligence(CTI) data from IBM Watson and QRadar. This information is critical for effective identification of potential IOC and quick response to incidents. In addition, this integration receives MITRE ATT&CK information from QRadar Advisor. As a result, an example workflow of this integration depends on the MITRE ATTACK function integration.
+
+QRadar Advisor integration includes four functions:
+
+* Perform a Watson Search on an indicator and retrieve suspicious observables related to it.
+* Perform a Watson Search with Local Context on an indicator and retrieve a cyber threat intelligence (CTI) report on it in Structured Threat Information eXpression (STIX2) format.
+* Perform an analysis on a QRadar offense, and retrieve CTI data from QRadar Advisor and IBM Watson in STIX format.
+* Map a given QRadar rule to MITRE ATT&CK tactics. 
+
+The package also includes workflow examples to demonstrate the usage of the above functions. 
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -99,12 +106,13 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `44.0.7583`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=44.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -129,24 +137,25 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 are 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=44.0.0
+* resilient_circuits>=46.0.0
 
 ### Endpoint Developed With
 
 This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| QRadar Advisor with Watson | 2.6.3 | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+| Product Name | Product Version |
+| ------------ | --------------- |
+| QRadar Advisor with Watson | 2.6.3 |
+| QRadar Use Case Manager | 3.5.0 |
 
 #### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
+* QRadar 7.3.0 or later
+* Qradar Advisor with Watson 
+* QRadar Use Case Manager 3.1.0 or greater
 
 #### Configuration
 <!--
@@ -178,15 +187,31 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **qradar_advisor_app_id** | Yes | `` | *App ID from the QRadar server.* |
+| **qradar_advisor_app_id** | Yes | `` | *QRadar Advisor App Id.* |
 | **qradar_advisor_token** | Yes | `` | *QRadar Advisor token.* |
-| **qradar_ucm_token** | Yes | `` | *Use Case Manager token.* |
 | **qradar_host** | Yes | `myhost` | *QRadar host.* |
-| **full_search_timeout** | No | `1200` | *Full search timeout in seconds.* |
-| **full_search_period** | No | `5` | *Full search period in seconds.* |
-| **offense_analysis_timeout** | No | `1200` | *Timeout for analysis in seconds.* |
-| **offense_analysis_period** | No | `5` | *Period for analysis in seconds.* |
-| **verify_cert** | Yes | `` | *<Path to certificate file> or false. * |
+| **qradar_ucm_token** | Yes | `` | *QRadar Use Case Manager token.* |
+| **verify_cert** | Yes | `` | *Boolean indicating whether to validate the QRadar server certificate.* |
+
+### Configure QRadar Advisor With Watson
+You need to have QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page. 
+
+ ![screenshot: qradar-configure](./doc/screenshots/qradar-advisor-configuration.png)
+
+To access the QRadar Advisor REST API, you need to know its app_id, which you can access by clicking the QRadar Advisor’s Configuration icon. 
+
+For example, in the URL address shown in the configuration page screenshot, the app_id is 1101 for this QRadar Advisor instance.
+You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page.
+
+### Configure QRadar Use Case MAnager
+You need to have QRadar Use Case Manager installed on a QRadar server and fully configured, as shown in the following configuration page.  
+
+
+ ![screenshot: qradar-ucm-configure](./doc/screenshots/qradar-ucm-configuration.png)
+
+You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page.
+This token can be the same as the authorization token used for QRadar Advisor above. 
+
 
 ### Custom Layouts
 <!--
@@ -196,15 +221,15 @@ The following table provides the settings you need to configure the app. These s
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 
 ---
 
 ## Function - QRadar Advisor Map Rule
-Map rule to MITRE ATT&CK tactic
+Map rule to MITRE ATT&CK tactic.
 
- ![screenshot: fn-qradar-advisor-map-rule ](./doc/screenshots/fn-qradar-advisor-map-rule.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-advisor-map-rule ](./doc/screenshots/fn-qradar-advisor-map-rule.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -221,16 +246,31 @@ Map rule to MITRE ATT&CK tactic
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_qradar_advisor --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_qradar_advisor
-} 
+  "tactics": {
+    "has_ibm_default": true,
+    "id": "c0dfacf7-235e-416c-9b2b-c250ef8f3919",
+    "last_updated": 1607611408002,
+    "mapping": {
+      "Initial Access": {
+        "confidence": "high",
+        "enabled": true,
+        "ibm_default": true,
+        "id": "TA0001",
+        "techniques": {
+          "Valid Accounts": {
+            "confidence": "high",
+            "enabled": true,
+            "id": "T1078"
+          }
+        },
+        "user_override": false
+      }
+    },
+    "min-mitre-version": 7
+  }
+}
 ```
 
 </p>
@@ -262,9 +302,9 @@ incident.properties.mitre_tactic_name = att_tactics
 
 ---
 ## Function - QRadar Advisor Offense Analysis
-Given a Resilient artifact, this function performs a QRadar Advisor analysis and returns Local, Watson enriched, or Expanded local context (default) results.
+Given a SOAR artifact, this function performs a QRadar Advisor analysis and returns Local, Watson enriched, or Expanded local context (default) results.
 
- ![screenshot: fn-qradar-advisor-offense-analysis ](./doc/screenshots/fn-qradar-advisor-offense-analysis.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-advisor-offense-analysis ](./doc/screenshots/fn-qradar-advisor-offense-analysis.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -283,16 +323,104 @@ Given a Resilient artifact, this function performs a QRadar Advisor analysis and
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_qradar_advisor --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_qradar_advisor
-} 
+  "insights": {
+    "high_value_assets": [],
+    "high_value_users": [],
+    "insights": "Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious.",
+    "is_stage3_pending": false,
+    "malware_families": [],
+    "related_investigations": [
+      {
+        "analysis_time": null,
+        "concern_score": null,
+        "id": 1,
+        "is_search": true,
+        "priority": null,
+        "source": null,
+        "type": "Investigations"
+      }
+    ],
+    "risky_users": [],
+    "stage3_insights": "",
+    "start_time": 1659629011957,
+    "stop_time": 1659636230480,
+    "tactics": [
+      {
+        "confidence": 60,
+        "data_sources": [
+          "xfe"
+        ],
+        "event_count": 206,
+        "flow_count": 0,
+        "id": "TA0011",
+        "nodes": [
+          {
+            "is_internal": false,
+            "label": "89.223.26.52",
+            "type": "IpAddress"
+          }
+        ],
+        "rules": [],
+        "tactic_id": "Command and Control",
+        "techniques": []
+      }
+    ],
+    "threat_actors": [],
+    "watched_users": []
+  },
+  "note": "\u003cul\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png\" alt=\"identity\" style=\"width:20px; height:20px\"/\u003e userD\u003c/li\u003e\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 192.168.0.17\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e\u003cul\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 89.223.26.52\u003c/li\u003e\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 192.168.0.17\u003cimg src=\"https://image.flaticon.com/icons/svg/282/282100.svg\" alt=\"link\" style=\"width:15px; height:15px\"/\u003e\u003c/li\u003e\u003cli\u003ex-mitre-tactic Command and Control\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e\u003cul\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 193.184.16.214\u003c/li\u003e\u003cul style=\"list-style-type:none\"\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 192.168.0.17\u003cimg src=\"https://image.flaticon.com/icons/svg/282/282100.svg\" alt=\"link\" style=\"width:15px; height:15px\"/\u003e\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e\u003cp\u003eThere are 5 objects and 2 links.\u003c/p\u003e",
+  "observables": [
+    {
+      "description": "userD",
+      "relevance": "very-high",
+      "toxicity": "very-low",
+      "type": "identity"
+    },
+    {
+      "description": "89.223.26.52",
+      "relevance": "medium",
+      "toxicity": "high",
+      "type": "ipv4-addr"
+    },
+    {
+      "description": "192.168.0.17",
+      "relevance": "medium",
+      "toxicity": "very-low",
+      "type": "ipv4-addr"
+    },
+    {
+      "description": "193.184.16.214",
+      "relevance": "medium",
+      "toxicity": "very-low",
+      "type": "ipv4-addr"
+    },
+    {
+      "description": "Command and Control",
+      "relevance": "",
+      "toxicity": "",
+      "type": "x-mitre-tactic"
+    }
+  ],
+  "stix": {
+    "id": "bundle--9813614d-e715-4ad4-a4bd-7cf204190449",
+    "objects": [
+      {
+        "created": "2022-08-04T17:08:32.000Z",
+        "id": "identity--2f4ac158-751e-42de-bf88-2a02fe6a5840",
+        "identity_class": "individual",
+        "modified": "2022-08-04T17:08:32.000Z",
+        "name": "userD",
+        "type": "identity",
+        "x_ibm_security_relevance": "very-high",
+        "x_ibm_security_toxicity": "very-low"
+      }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+  }
+}
 ```
 
 </p>
@@ -382,9 +510,9 @@ if process_insights:
 
 ---
 ## Function - Watson Search
-Given a Resilient artifact, this function performs a Watson Search (a QRadar Advisor quick search) and returns a summary.
+Given a SOAR artifact, this function performs a Watson Search (a QRadar Advisor quick search) and returns a summary.
 
- ![screenshot: fn-watson-search ](./doc/screenshots/fn-watson-search.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-watson-search ](./doc/screenshots/fn-watson-search.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -401,16 +529,63 @@ Given a Resilient artifact, this function performs a Watson Search (a QRadar Adv
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_qradar_advisor --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_qradar_advisor
-} 
+  "search": {
+    "is_toxic": true,
+    "other_count": 3,
+    "reference_count": 1,
+    "search_results": {
+      "other_observables": [
+        {
+          "label": "www.poloatmer.ru",
+          "reference_count": 1,
+          "timestamp": 1524258360,
+          "type": "DomainName"
+        },
+        {
+          "label": "gorinfotech.ru",
+          "reference_count": 1,
+          "timestamp": 1513402560,
+          "type": "DomainName"
+        },
+        {
+          "label": "forexpack.ru",
+          "reference_count": 1,
+          "timestamp": 1498685280,
+          "type": "DomainName"
+        }
+      ],
+      "suspicious_observables": [
+        {
+          "label": "Botnet Command and Control Server:Regional Internet Registry",
+          "reference_count": 1,
+          "timestamp": 1660857629,
+          "type": "Reputation"
+        },
+        {
+          "label": "89.223.26.52",
+          "reference_count": 1,
+          "timestamp": 1660857629,
+          "type": "IpAddress"
+        }
+      ]
+    },
+    "search_value": "89.223.26.52",
+    "search_value_type": "IpAddress",
+    "suspicious_count": 2
+  },
+  "whois": {
+    "contact_country": "Russia",
+    "contact_email": "abuse@selectel.ru",
+    "contact_name": null,
+    "contact_org": "SELECTEL-NET",
+    "contact_type": "registrant",
+    "created_date": "2022-02-02T12:51:32.000Z",
+    "registrar_name": "RIPE",
+    "updated_date": "2022-02-02T12:51:32.000Z"
+  }
+}
 ```
 
 </p>
@@ -524,7 +699,7 @@ if not status_set:
 '''
 #
 # We ONLY create artifacts for those observables that can be mapped to
-# default Resilient artifacts. If customer has custom artifacts, and wants
+# default SOAR artifacts. If customer has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 mapping = {
@@ -660,9 +835,9 @@ else:
 
 ---
 ## Function - Watson Search with Local Context
-Given a Resilient artifact, this function performs a Watson Search with Local Context (a QRadar Advisor full search) and returns Local, Watson enriched, or Expanded local context (default) results.
+Given a SOAR artifact, this function performs a Watson Search with Local Context (a QRadar Advisor full search) and returns Local, Watson enriched, or Expanded local context (default) results.
 
- ![screenshot: fn-watson-search-with-local-context ](./doc/screenshots/fn-watson-search-with-local-context.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-watson-search-with-local-context ](./doc/screenshots/fn-watson-search-with-local-context.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -680,16 +855,40 @@ Given a Resilient artifact, this function performs a Watson Search with Local Co
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_qradar_advisor --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_qradar_advisor
-} 
+  "note": "\u003cul\u003e\u003cli\u003e\u003cimg src=\"https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png\" alt=\"ipv4-addr\" style=\"width:20px; height:20px\"/\u003e 89.223.26.52\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eThere is 1 object and 0 link.\u003c/p\u003e",
+  "observables": [
+    {
+      "description": "89.223.26.52",
+      "relevance": "very-high",
+      "toxicity": "very-low",
+      "type": "ipv4-addr"
+    }
+  ],
+  "stix": {
+    "id": "bundle--610d4a69-eb55-4655-b6ee-2fa86473c517",
+    "objects": [
+      {
+        "created": "2022-08-18T21:22:05.000Z",
+        "id": "indicator--13f7fe84-2fc9-4f8e-ac1f-9ab6ae14bb10",
+        "labels": [
+          "benign"
+        ],
+        "modified": "2022-08-18T21:22:05.000Z",
+        "name": "IpAddress",
+        "pattern": "[ipv4-addr:value=\u002789.223.26.52\u0027]",
+        "type": "indicator",
+        "valid_from": "2022-08-18T21:22:05.000Z",
+        "x_ibm_security_relevance": "very-high",
+        "x_ibm_security_toxicity": "very-low"
+      }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+  },
+  "summary": "Watson Search with Local Context of indicator 89.223.26.52 returns 1 observable."
+}
 ```
 
 </p>
@@ -703,7 +902,7 @@ value = artifact.value
 type = artifact.type
 
 #
-# Watso Search with Local Context only supports 5 indicator types: IP Address, Hash, DomainName, URL, Username. 
+# Watson Search with Local Context only supports 5 indicator types: IP Address, Hash, DomainName, URL, Username. 
 # The “user:” prefix needs to be added to a username search.
 #
 mapping = {
@@ -758,6 +957,55 @@ if add_task:
 </p>
 </details>
 
+
+<p>
+This example workflow invokes the function “Watson Search with Local Context”. The function calls the QRadar Advisor REST API to perform a Watson Search with Local Context on an indicator.
+<p>
+To use this example workflow and rule included in the package for this function, the user needs to create an incident and add an artifact. For this function to work, the artifact type must correspond to one indicator type. QRadar Advisor supports searches on the following indicators:
+
+*  IP addresses
+*  Hashes
+*  Domains
+*  URLs
+*  Persons
+<p>
+QRadar Advisor supports three return stages:
+
+*  Stage1: feature hunt
+*  Stage2: cognitive investigation added on top of the result of stage 1
+*  Stage3: wider feature hunt added on top of the result of stage 2
+
+<p>
+The user can specify the desired return stage in the pre-process script of the example workflow.
+<p>
+The search REST API of QRadar Advisor returns CTI information in Structured Threat Information Expression (STIX 2.0) format. It is normally a STIX bundle with STIX objects. The function processes the STIX data and performs the following:
+
+*  Generates a HTML representation of the STIX data
+*  Extracts observables from the STIX objects
+*  Generates a summary from the STIX data
+<p>
+The return data from this function includes the raw STIX data in json dictionary format.
+<p>
+In the post-process script, the HTML representation is used to create a note. The observables are used to populate the custom data table, "Watson Search with Local Context results", and the summary is used to create a task. Note that the raw STIX data is accessible from the post-process script as results.stix, and can be parsed to create custom code.
+<p>
+In the following example, an IP Address artifact was added to an incident with value “193.184.16.214”. The user can then select Watson Search with Local Context from the artifact menu to search QRadar Advisor for the observable.
+
+Please note that both Watson Search and Watson Search with Local Context perform queries for information about an indicator. Therefore, only those artifacts that can be mapped into indicators are supported. The types of artifacts that can be searched include:
+*	DNS Name
+*	Malware SHA-256 Hash
+*	Malware SHA-1 Hash
+*	Malware MD5 Hash
+*	IP Address
+*	URL
+*	User Account
+
+Note that a full search like this could take up to 15 minutes. Once it is completed, the note created for this indicator can be viewed from the Notes tab of this incident.
+
+ ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-local-context-note.png)
+
+Please note that the icons shown in the above note use external URL referencing to the official site for STIX2 icons (https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard). Therefore, those icons are shown only if the QRadar SOAR platform can access the above website.
+Also note that some indicators have a link icon at the end. These indicators are basically placeholders for the other (real) indicators with the same value. Think of them as symbolic links in a folder tree. 
+
 ---
 
 ## Script - Create Artifact for QRadar Advisor Analysis Observable
@@ -771,7 +1019,7 @@ Create an artifact for the selected observable.
 ```python
 #
 # We create artifacts for those observables according to how they can be mapped to 
-# Resilient default artifacts. If user has custom artifacts, and wants
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict. 
 #
 # All the other observables without direct mapping, try to make decision depending
@@ -828,7 +1076,7 @@ Create an artifact for the selected row
 ```python
 #
 # We create artifacts for those observables according to how they can be mapped to
-# Resilient default artifacts. If user has custom artifacts, and wants
+# SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
 #
 # All the other observables without direct mapping, try to make decision depending
@@ -877,7 +1125,7 @@ else:
 
 ## Data Table - QRadar Advisor analysis results
 
- ![screenshot: dt-qradar-advisor-analysis-results](./doc/screenshots/dt-qradar-advisor-analysis-results.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-qradar-advisor-analysis-results](./doc/screenshots/dt-qradar-advisor-analysis-results.png)
 
 #### API Name:
 qradar_advisor_observable
@@ -893,7 +1141,7 @@ qradar_advisor_observable
 ---
 ## Data Table - Watson Search with Local Context results
 
- ![screenshot: dt-watson-search-with-local-context-results](./doc/screenshots/dt-watson-search-with-local-context-results.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-watson-search-with-local-context-results](./doc/screenshots/dt-watson-search-with-local-context-results.png)
 
 #### API Name:
 qradar_advisor_observable_for_artifact
@@ -925,8 +1173,8 @@ qradar_advisor_observable_for_artifact
 | --------- | ------ | ------------------ |
 | Create Artifact (QRadar Advisor Analysis) | qradar_advisor_observable | `-` |
 | Create Artifact (Watson Search with Local Context) | qradar_advisor_observable_for_artifact | `-` |
-| Map QRadar rule | incident | `qradar_advisor_map_rule` |
-| QRadar Advisor Offense Analysis | incident | `qradar_advisor_offense_analysis` |
+| QRadar Advisor: Map QRadar rule | incident | `qradar_advisor_map_rule` |
+| QRadar Advisor: Offense Analysis | incident | `qradar_advisor_offense_analysis` |
 | Watson Search | artifact | `qradar_advisor_quick_search` |
 | Watson Search with Local Context | artifact | `qradar_advisor_full_search` |
 
