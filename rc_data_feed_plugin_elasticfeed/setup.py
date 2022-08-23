@@ -5,6 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_elasticfeed',
+    display_name='Data Feeder Elastic Plugin for SOAR',
     version='1.1.0',
     license='MIT',
     author='IBM SOAR',

@@ -8,6 +8,8 @@ This module contains the ElasticFeedDestination for writing Resilient data
 to an Elasticseach index.
 """
 
+import base64
+import copy
 import logging
 
 from ssl import create_default_context
@@ -80,7 +82,8 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         """
         name = context.type_info.get_pretty_type_name()
 
-        elastic_payload = context.type_info.flatten(payload, TypeInfo.translate_value)
+        elastic_payload = context.type_info.flatten(payload,
+                                                    translate_func=translate_value_for_bytes(make_string))
 
         # add the incident_id and object id to all payloads, if needed
         elastic_payload['inc_id'] = context.inc_id
@@ -141,3 +144,45 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         """
         new_payload =  dict((key, value) for key, value in payload.items() if value)
         return new_payload
+
+
+def translate_value_for_bytes(bytes_func):
+    """[define mappings for SOAR fields to Elastic fields]
+
+    Args:
+        blob_func ([method]): [method to run when encountering a blob field type. ie attachment content]
+
+    Returns:
+        [object]: [translated field ready for saving]
+    """
+    mapping = TypeInfo.get_default_mapping()
+    mapping['blob'] = bytes_func
+
+    def translate_value(type_info, field, value):
+        chged_value = copy.copy(value)
+        if chged_value is not None:
+            input_type = field['input_type']
+            if input_type in mapping:
+                chged_value = mapping[input_type](type_info, field, chged_value)
+            elif input_type != 'none':
+                LOG.warning("Unable to find a mapping for field type: %s", input_type)
+
+            if isinstance(chged_value, list):
+                chged_value = mapping["list"](type_info, field, chged_value)
+
+        return chged_value
+
+    return translate_value
+
+def make_string(type_info, field, value):
+        """[convert byte array into base64 format required by the elastic]
+
+        Args:
+            value ([byte array]): [description]
+
+        Returns:
+            base64 converted format
+        """
+
+        if value:
+            return base64.b64encode(value).decode('utf-8')

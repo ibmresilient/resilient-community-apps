@@ -12,6 +12,23 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 | 1.0.1   | 08/2020 | App Host support |
 | 1.0.0   | 12/2019 | Initial release |
 
+## 1.1.0 Changes
+
+This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
+
+| Parameter | Value(s) | Capability |
+| --------- | -------- | ---------- |
+| reload_types | incident,task,note,artifact,attachment,<data_table_api_name> | use reload_types to limit the types of objects when reload=true. Leave empty to include all data. |
+| workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
+| include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
+
+# Compatibility
+
+SOAR Compatibilty: 30.0 or higher
+
+CP4S Compatibility: 1.4 or higher
+
+
 # License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
