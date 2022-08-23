@@ -14,15 +14,13 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """Function: Find ePO systems based on property such as system name, tag, IP address, MAC address, etc.
            Return: List of systems found and information about the systems"""
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get the function parameters:
         validate_fields(["mcafee_epo_systems"], fn_inputs)
@@ -30,12 +28,14 @@ class FunctionComponent(AppFunctionComponent):
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        self.LOG.info("mcafee_epo_systems: %s", fn_inputs.mcafee_epo_systems)
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
         def response(systems):
             return client.request(
                 "system.find",
-                {"searchText": systems.strip().replace(",","")})
+                {"searchText": systems.strip().replace(",","")}
+            )
 
         if ',' in fn_inputs.mcafee_epo_systems:
             results = []
@@ -45,7 +45,7 @@ class FunctionComponent(AppFunctionComponent):
         else:
             results = response(fn_inputs.mcafee_epo_systems)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)

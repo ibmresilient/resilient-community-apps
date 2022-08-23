@@ -13,18 +13,18 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """Function: list all tags defined in ePO"""
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        response = client.request("system.findTag", {})
+
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(client.request("system.findTag", {}))
+        yield FunctionResult(response)

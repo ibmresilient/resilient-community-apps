@@ -21,7 +21,10 @@
             "type": "string"
           },
           "EPOLeafNode.LastUpdate": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "EPOLeafNode.os": {
             "type": "string"
@@ -33,10 +36,16 @@
             "type": "integer"
           },
           "EPOLeafNode.AgentVersion": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "EPOLeafNode.AgentGUID": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "EPOLeafNode.ResortEnabled": {
             "type": "boolean"
@@ -58,6 +67,12 @@
     "inputs": {
       "type": "object",
       "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "datatable_name": {
+          "type": "string"
+        },
         "mcafee_epo_target": {
           "type": "string"
         }

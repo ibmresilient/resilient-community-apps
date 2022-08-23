@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
-from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 FN_NAME = "mcafee_epo_execute_query"
@@ -13,8 +13,6 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -23,32 +21,42 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.mcafee_epo_target
             -   fn_inputs.mcafee_epo_queryid
+            -   fn_inputs.datatable_name
+            -   fn_inputs.incident_id
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Connect to ePO server
         client = init_client(self.opts, self.options)
 
-        # Create dictionary of inputs
-        inputs_dict = fn_inputs._asdict()
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
         # Get function parameters:
-        if inputs_dict.get('mcafee_epo_queryid') and inputs_dict.get('mcafee_epo_target'):
+        query_id = getattr(fn_inputs, "mcafee_epo_queryid", None)
+        target = getattr(fn_inputs, "mcafee_epo_target", None)
+
+        if query_id and target:
             raise ValueError("Define either mcafee_epo_queryid or mcafee_epo_target, but not both.")
-        elif inputs_dict.get('mcafee_epo_queryid'):
+        elif query_id:
             response = client.request(
                 "core.executeQuery",
-                {"queryId": fn_inputs.mcafee_epo_queryid}
+                {"queryId": query_id}
             )
-        elif inputs_dict.get('mcafee_epo_target'):
+        elif target:
             response = client.request(
                 "core.executeQuery",
-                {"target": fn_inputs.mcafee_epo_target}
+                {"target": target}
             )
         else:
             raise ValueError("Either mcafee_epo_queryid or mcafee_epo_target have to be defined.")
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        # Clear datatable if required params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+
+        # Produce a FunctionResult with the results
         yield FunctionResult(response)

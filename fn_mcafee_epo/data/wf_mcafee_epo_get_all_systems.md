@@ -19,18 +19,21 @@
 ### Pre-Processing Script
 ```python
 inputs.mcafee_epo_target = "EPOLeafNode"
+inputs.datatable_name = "mcafee_epo_systems"
+inputs.incident_id = incident.id
 ```
 
 ### Post-Processing Script
 ```python
-if results['content']:
+if results.get('success'):
   for system in results['content']:
     table_row = incident.addRow("mcafee_epo_systems")
     table_row["system_name"] = system.get("EPOLeafNode.NodeName")
     table_row["agent_guid"] = system.get("EPOLeafNode.AgentGUID")
     table_row["last_communication"] = system.get("EPOLeafNode.LastUpdate")
     table_row["tags"] = system.get("EPOLeafNode.Tags")
-    table_row["operating_system"] = system.get("EPOLeafNode.os")
+    table_row["operating_system"] = system.get("EPOLeafNode.os").replace("|", " | ")
+    table_row["deleted"] = False
 ```
 
 ---
