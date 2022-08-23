@@ -63,6 +63,7 @@ Several functions to operate with Splunk ES intel collections, including updates
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
 - Ability to connect to SOAR server with HTTPS on port 443 and 65001
 - Ability to connect to Splunk server with HTTPS on port 8089
+- In the app.config either username & password OR token are required
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -121,7 +122,7 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure. 
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -130,7 +131,7 @@ The following table provides the settings you need to configure the app. These s
 | **splunkpassword** | No | `changeme` | Splunk password |
 | **username** | No | `admin` | Splunk login username |
 | **token** | No | `` | Splunk authentication token |
-| **verify_cert** | Yes | `false|/path/to/cert` | Verify https certtificate or not |
+| **verify_cert** | Yes | `false|/path/to/cert` | Verify https certificate or not |
 
 #### 1.1.0 Changes
 Starting in version 1.1.0, more than one Splunk instance can be configured for SOAR case data synchronization. For enterprises with only one Splunk instance, your app.config file will continue to define the Splunk instance under the `[fn_splunk_integration]` section header.
