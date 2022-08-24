@@ -78,11 +78,11 @@ class WebexInterface:
             emailIds (<list>) : a list of all participant email addresses to be added
         """
         emailIds = []
-        incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT, "{}/members".format(self.requiredParameters["incidentId"])))
+        incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT, "{}/members".format(self.requiredParameters.get("incidentId"))))
         orgMemberList   = self.resclient.post(constants.RES_USERS, payload={}).get("data")
         orgGroupList    = self.resclient.get(constants.RES_GROUPS)
 
-        if self.requiredParameters["addAllMembers"]:
+        if self.requiredParameters.get("addAllMembers"):
             if len(incidentMembers.get("members")) == 0:
                 self.LOG.info("Webex: There are no members assigned to this incident")
             for incident_member in incidentMembers.get("members"):
@@ -90,7 +90,7 @@ class WebexInterface:
                     emailIds.append(self.isDirectMember(incident_member, orgMemberList))
                 elif self.isGroupMember(incident_member, orgMemberList, orgGroupList):
                     emailIds.extend(self.isGroupMember(incident_member, orgMemberList, orgGroupList))
-        elif not self.requiredParameters["additionalAttendee"]:
+        elif not self.requiredParameters.get("additionalAttendee"):
             self.LOG.warn("Warning: No participants were added to the room/team. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
         
         if self.requiredParameters.get("additionalAttendee"):
@@ -134,11 +134,11 @@ class WebexInterface:
                 if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
                     self.requiredParameters[self.entityId] = objs.get("id")
                     self.requiredParameters[self.entityName] = objs.get(callingKey)
-                    self.LOG.info("Webex: Retrieving existing room/team: {}".format(self.requiredParameters[self.entityId]))
+                    self.LOG.info("Webex: Retrieving existing room/team: {}".format(self.requiredParameters.get(self.entityId)))
                     break
             if not self.requiredParameters.get(self.entityId):
                 self.createRoomTeam()
-                self.LOG.info("Webex: Creating new room/team: {}".format(self.requiredParameters[self.entityId]))
+                self.LOG.info("Webex: Creating new room/team: {}".format(self.requiredParameters.get(self.entityId)))
         self.retrieveMembershipURL = self.requiredParameters.get("entityURL") + self.requiredParameters.get(self.entityId)
         if self.entityName == "roomName":
             self.retrieveMembershipURL += "/meetingInfo"
@@ -167,7 +167,7 @@ class WebexInterface:
         res = response.json()
         self.requiredParameters[self.entityId] = res.get("id")
         self.requiredParameters[self.entityName] = res.get(callingKey)
-        self.LOG.info("Webex: Created new room/team: {}".format(self.requiredParameters[self.entityId]))
+        self.LOG.info("Webex: Created new room/team: {}".format(self.requiredParameters.get(self.entityId)))
 
 
     def getEntityDetails(self):
