@@ -995,7 +995,7 @@ class TestSlack(object):
         mocked_temp_file.name.return_value = "Name"
 
         try:
-            slack_utils._post_attachment_to_resilient(mocked_res_client, incident_id, task_id, mocked_temp_file)
+            slack_utils._post_attachment_to_resilient(mocked_res_client, incident_id, task_id, mocked_temp_file, "test-channel")
             assert True
         except ValueError:
             assert False
@@ -1018,7 +1018,7 @@ class TestSlack(object):
         mocked_temp_file.name.return_value = "Name"
 
         try:
-            slack_utils._post_attachment_to_resilient(mocked_res_client, 2095, 2251214, mocked_temp_file)
+            slack_utils._post_attachment_to_resilient(mocked_res_client, 2095, 2251214, mocked_temp_file, "test-channel")
             assert False
         except ValueError:
             assert True

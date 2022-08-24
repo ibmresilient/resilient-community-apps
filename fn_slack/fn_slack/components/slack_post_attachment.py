@@ -10,7 +10,6 @@ Many of the features of posting a Slack message are under customer control inclu
 - Uploading Incident, Task or Artifact Attachments
 """
 
-from multiprocessing.sharedctypes import Value
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon
 from fn_slack.lib.slack_common import *

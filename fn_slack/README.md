@@ -57,7 +57,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**SOAR Components for 'fn_slack'**
+**SOAR App for 'fn_slack'**
 
 
 
@@ -155,7 +155,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx` | Slack app OAuth Access Token |
+| **api_token** | Yes | `xoxb-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx` | Slack app OAuth Access Token |
 | **username** | Yes | `IBM SOAR` | Username represents the default submission author. Using a bot token instead of a person token will overwrite the username, using the bot name instead when posting |
 
 The remainder of this section details the Slack configuration file changes.
@@ -178,7 +178,7 @@ Function exports conversation history from Slack channel to a text file, saves t
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
-| `slack_channel_id` | `text` | No | `Optional` | Optional. Executing without channel ID archives the channel that this is associated with. |
+| `slack_channel_id` | `text` | No | `Optional, faster` | Optional. Executing without channel ID archives the channel that this is associated with. |
 | `task_id` | `number` | No | `-` | - |
 
 </p>

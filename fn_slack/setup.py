@@ -28,7 +28,7 @@ setup(
     author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="SOAR Components for 'fn_slack'",
+    description="SOAR App for 'fn_slack'",
     long_description="Function creates a Slack message based on a SOAR Incident, it's Tasks, Notes, Artifacts "
                      "and Attachments, exports conversation history from Slack channel to a text file, saves the "
                      "text file as an Attachment and archives the Slack channel.",

@@ -66,11 +66,14 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("There is no slack_channel name associated with Incident or Task available to be archived")
 
             if not channel_id:
-                self.channel = slack_utils.find_channel(res_associated_channel_name)
+                channel = slack_utils.find_channel(res_associated_channel_name)
+                channel_id = channel.get("id")
+                channel_name = channel.get("name")
             else:
-                self.channel = slack_utils.check_channel_id(channel_id)
+                channel = slack_utils.check_channel_id(channel_id)
+                channel_name= channel.get("name")
 
-            if slack_utils.get_channel() is None:
+            if channel is None:
                 raise FunctionError(
                     u"There is no private or public channel named {} in your workspace".format(res_associated_channel_name))
 
@@ -79,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                     u"Channel {} is already marked as archived".format(res_associated_channel_name))
             else:
                 yield StatusMessage(
-                    u"Found channel #{} with id {}".format(res_associated_channel_name, slack_utils.get_channel_id()))
+                    u"Found channel #{} with id {}".format(res_associated_channel_name, channel_id))
 
             # notify the channel that we are going to archive
             text = u"Slack channel {} has been set to be archived from Resilient.".format(res_associated_channel_name)
@@ -90,13 +93,13 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError(u"Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
 
             # get the channel history
-            messages = slack_utils.get_channel_complete_history()
+            messages = slack_utils.get_channel_complete_history(channel_id)
 
             template_file = self.options.get('template_file', None)
 
             # Saving conversation history to a text file and post it as attachment
             new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id,
-                                                                                task_id, template_file=template_file)
+                                                                                task_id, channel_name, template_file=template_file)
             if new_attachment is not None:
                 yield StatusMessage("Channel's chat history was uploaded as an Attachment")
             else:
