@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
+from urllib import parse
 from fn_webex.lib import constants
 from fn_webex.lib.cisco_interface import WebexInterface
 from fn_webex.lib.cisco_authentication import WebexAuthentication
@@ -63,8 +64,8 @@ class FunctionComponent(AppFunctionComponent):
 
         self.requiredParameters["entityId"]   = "roomId"
         self.requiredParameters["entityName"] = "roomName"
-        self.requiredParameters["entityURL"]  = self.config_options.get("webex_site_url") + constants.ROOMS_URL
-        self.requiredParameters["membershipUrl"] = self.config_options.get("webex_site_url") + constants.ROOMS_MEMBERSHIP_URL
+        self.requiredParameters["entityURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.ROOMS_URL)
+        self.requiredParameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.ROOMS_MEMBERSHIP_URL)
 
         self.requiredParameters["rc"] = self.rc
         self.requiredParameters["logger"] = self.LOG

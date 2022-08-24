@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
+from urllib import parse
 from fn_webex.lib import constants
 from fn_webex.lib.cisco_interface import WebexInterface
 from fn_webex.lib.cisco_authentication import WebexAuthentication
@@ -62,9 +63,9 @@ class FunctionComponent(AppFunctionComponent):
 
         self.requiredParameters["entityId"]   = "teamId"
         self.requiredParameters["entityName"] = "teamName"
-        self.requiredParameters["tokenURL"] = self.config_options.get("webex_site_url") + constants.TOKEN_URL
-        self.requiredParameters["entityURL"]  = self.config_options.get("webex_site_url") + constants.TEAMS_URL
-        self.requiredParameters["membershipUrl"] = self.config_options.get("webex_site_url") + constants.TEAMS_MEMBERSHIP_URL
+        self.requiredParameters["tokenURL"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.TOKEN_URL)
+        self.requiredParameters["entityURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_URL)
+        self.requiredParameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_MEMBERSHIP_URL)
 
         try:
             yield self.status_message("Authenticating Webex using OAuth Access Token: '{0}'".format(FN_NAME))

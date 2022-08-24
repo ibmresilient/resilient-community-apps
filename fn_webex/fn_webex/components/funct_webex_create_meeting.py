@@ -2,6 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
+from urllib import parse
 from fn_webex.lib import constants
 from fn_webex.lib.cisco_meetings import WebexMeetings
 from fn_webex.lib.cisco_authentication import WebexAuthentication
@@ -56,7 +57,7 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time if hasattr(fn_inputs, 'webex_meeting_end_time') else None
         self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
-        self.requiredParameters["meetingsURL"]  = self.config_options.get("webex_site_url") + constants.MEETINGS_URL
+        self.requiredParameters["meetingsURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.MEETINGS_URL)
 
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
