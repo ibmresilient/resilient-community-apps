@@ -65,7 +65,10 @@ class FunctionComponent(ResilientComponent):
 
 
             # configuration specific slack parameters
-            api_token = self.options['api_token']
+            if self.options.get('api_token'):
+                api_token = self.options.get('api_token')
+            else:
+                raise ValueError("Either api_bot_token or api_token are required")
 
             # get proxies if they exist
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
@@ -109,8 +112,14 @@ class FunctionComponent(ResilientComponent):
             for warn in slack_utils.get_warnings():
                 yield StatusMessage(warn)
 
-            results = {"channel": slack_channel_name,
-                       "url": conversation_url}
+            users_list = slack_utils.get_channel_users_list(channel_id)
+            user_info = slack_utils.get_users_info(users_list)
+
+            results = {
+                        "channel": slack_channel_name,
+                        "url": conversation_url,
+                        "user_info" : user_info
+                    }
 
             LOG.info(results)
 

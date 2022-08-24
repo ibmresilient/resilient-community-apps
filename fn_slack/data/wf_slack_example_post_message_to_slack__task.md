@@ -107,8 +107,11 @@ inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.sl
 
 ### Post-Processing Script
 ```python
+users = ""
+for user in results.user_info:
+  users += "{} \n".format(user)
 # Create a note
-noteText = u"""Task was posted to <a href='{}'>Slack channel #{}</a>.""".format(results.url, results.channel)
+noteText = u"""Task was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(results.url, results.channel, users)
 task.addNote(helper.createRichText(noteText))
 ```
 

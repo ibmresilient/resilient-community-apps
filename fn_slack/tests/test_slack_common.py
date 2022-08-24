@@ -147,17 +147,12 @@ class TestSlack(object):
         """ Test check Slack channel ID error"""
         print("Test check Slack channel ID error\n")
 
-        class MockChannelObj:
-            data = {
-                "ok": False,
-            }
-
-        mocked_api_call.return_value = MockChannelObj
+        mocked_api_call.side_effect = Exception
 
         slack_utils = SlackUtils("fake_api_key")
-        mocked_api_response = slack_utils.check_channel_id(slack_test_channel_id)
-        if not mocked_api_response:
-            assert mocked_api_response == mocked_api_call.return_value.get("ok")
+        with pytest.raises(IntegrationError):
+            slack_utils.check_channel_id(slack_test_channel_id)
+        
 
     @pytest.mark.parametrize("channel,expected_channel_id", [
         ({"id": "C0EAQDV4Z", "name": "test-channel"}, 'C0EAQDV4Z'),
@@ -1000,7 +995,7 @@ class TestSlack(object):
         mocked_temp_file.name.return_value = "Name"
 
         try:
-            slack_utils._post_attachment_to_resilient(mocked_res_client, incident_id, task_id, mocked_temp_file)
+            slack_utils._post_attachment_to_resilient(mocked_res_client, incident_id, task_id, mocked_temp_file, "test-channel")
             assert True
         except ValueError:
             assert False
@@ -1023,7 +1018,7 @@ class TestSlack(object):
         mocked_temp_file.name.return_value = "Name"
 
         try:
-            slack_utils._post_attachment_to_resilient(mocked_res_client, 2095, 2251214, mocked_temp_file)
+            slack_utils._post_attachment_to_resilient(mocked_res_client, 2095, 2251214, mocked_temp_file, "test-channel")
             assert False
         except ValueError:
             assert True

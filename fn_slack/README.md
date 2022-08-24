@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# fn_slack
+# Slack Integration for SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -31,6 +31,7 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
 - [Function - Archive Slack Channel](#function---archive-slack-channel)
 - [Function - Post attachment to Slack](#function---post-attachment-to-slack)
 - [Function - Post message to Slack](#function---post-message-to-slack)
@@ -44,8 +45,8 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-| Version| Comment |
-| ------- | ------ |
+| Version | Date | Notes |
+| ------- | ---- | ----- |
 | 2.0.0 | Migrated slackclient to v2, performance improvements |
 | 1.0.2 | Support for App Host, proxy support added |
 
@@ -56,7 +57,9 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_slack'**
+**SOAR App for 'fn_slack'**
+
+
 
 Function creates a Slack message based on a SOAR Incident, it's Tasks, Notes, Artifacts and Attachments, exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.
 
@@ -69,8 +72,7 @@ Function creates a Slack message based on a SOAR Incident, it's Tasks, Notes, Ar
 * Preserving embedded links
 * Posting messages from Incidents, Notes, Artifacts and Tasks displaying authorship
 * Uploading Incident, Task or Artifact attachment
-* Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
-* Exporting conversation history to a text file, saving it as an Attachment in Resilient and archiving Slack channel
+* Exporting conversation history to a text file, saving it as an Attachment in SOAR and archiving Slack channel
 
 ---
 
@@ -78,7 +80,6 @@ Function creates a Slack message based on a SOAR Incident, it's Tasks, Notes, Ar
 <!--
   List any Requirements 
 --> 
-
 * slackclient~=2.9.4
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -125,7 +126,6 @@ The app does support a proxy server.
 ### Python Environment
 Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* beautifulsoup4~=4.11.1
 * resilient_circuits>=45.0.0
 * slackclient~=2.9.4
 
@@ -150,16 +150,13 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-
----
-
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx` | Slack app OAuth Access Token |
-| **username** | Yes | `Resilient` | Username represents the default submission author. |
+| **api_token** | Yes | `xoxb-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx` | Slack app OAuth Access Token |
+| **username** | Yes | `IBM SOAR` | Username represents the default submission author. Using a bot token instead of a person token will overwrite the username, using the bot name instead when posting |
 
 The remainder of this section details the Slack configuration file changes.
 
@@ -168,13 +165,12 @@ It's possible to override the template used for archiving a channel.
 Use the app.config setting: `template_file=/var/rescircuits/slack_template.jinja2` to reference the template file named `slack_template.jinja2` at location
 `/var/rescircuits`. See the default template referenced [in the Template file section](#template_file).
 
-
 ---
 
 ## Function - Archive Slack Channel
 Function exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.
 
- ![screenshot: fn-archive-slack-channel ](./doc/screenshots/fn-archive-slack-channel.png)
+ ![screenshot: fn-archive-slack-channel ](./doc/screenshots/fn-archive-slack-channel.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -182,6 +178,7 @@ Function exports conversation history from Slack channel to a text file, saves t
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
+| `slack_channel_id` | `text` | No | `Optional, faster` | Optional. Executing without channel ID archives the channel that this is associated with. |
 | `task_id` | `number` | No | `-` | - |
 
 </p>
@@ -207,6 +204,8 @@ results = {
 ```python
 # ID of this incident
 inputs.incident_id = incident.id
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+
 ```
 
 </p>
@@ -238,6 +237,7 @@ Function uploads Incident, Task or Artifact Attachments to Slack channel.
 | `attachment_id` | `number` | No | `-` | - |
 | `incident_id` | `number` | Yes | `-` | - |
 | `slack_channel` | `text` | No | `-` | Name of the existing or a new slack channel used to send message to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. |
+| `slack_channel_id` | `text` | No | `Optional` | Optional. Executing without channel ID archives the channel that this is associated with. |
 | `slack_is_channel_private` | `boolean` | No | `-` | Indicate if the channel you are posting to should be private. |
 | `slack_participant_emails` | `text` | No | `-` | Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel. |
 | `slack_text` | `text` | Yes | `-` | Text message or a container field to retain JSON fields to send to Slack. |
@@ -254,7 +254,7 @@ Function uploads Incident, Task or Artifact Attachments to Slack channel.
 ```python
 results = {
   "channel": "testingv2",
-  "url": "https://ibm-resilient-test.slack.com/archives/C03QZGV0YJU/p1658330688241129"
+  "url": "https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330688241129"
 }
 ```
 
@@ -291,6 +291,10 @@ inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails 
 # Slack additional text message
 # Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.
 inputs.slack_text = rule.properties.rule_slack_text if rule.properties.rule_slack_text is not None else ''
+
+# Slack Channel ID, faster than finding via channel name
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+
 ```
 
 </p>
@@ -300,8 +304,11 @@ inputs.slack_text = rule.properties.rule_slack_text if rule.properties.rule_slac
 <p>
 
 ```python
+users = ""
+for user in results.user_info:
+  users += "{} \n".format(user)
 # Create a note
-noteText = u"""Artifact Attachment was posted to <a href='{}'>Slack channel #{}</a>.""".format(results.url, results.channel)
+noteText = u"""Artifact Attachment was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(results.url, results.channel, users)
 incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -312,7 +319,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - Post message to Slack
 Function sends a message from an Incident, Task, Note or an Artifact to a Slack channel.
 
- ![screenshot: fn-post-message-to-slack ](./doc/screenshots/fn-post-message-to-slack.png)
+ ![screenshot: fn-post-message-to-slack ](./doc/screenshots/fn-post-message-to-slack.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -322,6 +329,7 @@ Function sends a message from an Incident, Task, Note or an Artifact to a Slack 
 | `incident_id` | `number` | Yes | `-` | - |
 | `slack_as_user` | `boolean` | No | `-` | Set to true and the authenticated user of the Slack App will appear as the author of the message, ignoring any values provided for slack_username.  |
 | `slack_channel` | `text` | No | `-` | Name of the existing or a new slack channel used to send message to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. |
+| `slack_channel_id` | `text` | No | `Optional` | Optional. Executing without channel ID archives the channel that this is associated with. |
 | `slack_is_channel_private` | `boolean` | No | `-` | Indicate if the channel you are posting to should be private. |
 | `slack_mrkdwn` | `boolean` | No | `-` | Disable Slack markup parsing by setting to false. |
 | `slack_participant_emails` | `text` | No | `-` | Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel. |
@@ -340,7 +348,7 @@ Function sends a message from an Incident, Task, Note or an Artifact to a Slack 
 ```python
 results = {
   "channel": "testingv2",
-  "url": "https://ibm-resilient-test.slack.com/archives/C03QZGV0YJU/p1658330751752819"
+  "url": "https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330751752819"
 }
 ```
 
@@ -415,6 +423,10 @@ inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails 
 # Slack text message
 # Container field to retain JSON fields to send to Slack.
 inputs.slack_text = slack_text
+
+# Slack Channel ID, faster than finding via channel name
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+
 ```
 
 </p>
@@ -424,8 +436,11 @@ inputs.slack_text = slack_text
 <p>
 
 ```python
+users = ""
+for user in results.user_info:
+  users += "{} \n".format(user)
 # Create a note
-noteText = u"""Artifact was posted to <a href='{}'>Slack channel #{}</a>.""".format(results.url, results.channel)
+noteText = u"""Artifact was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(results.url, results.channel, users)
 incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -436,6 +451,7 @@ incident.addNote(helper.createRichText(noteText))
 
 
 ## Data Table - Slack Conversations
+
 #### API Name:
 slack_conversations_db
 
@@ -496,7 +512,6 @@ slack_conversations_db
         {{- '\t' }}{{ file_permalink }}{{ '\n' -}}
     {% endif %}{{ '\n' -}}
 {%- endif -%}
-
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
