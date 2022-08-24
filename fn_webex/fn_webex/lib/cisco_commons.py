@@ -17,7 +17,7 @@ def check_response(response):
     if response is None:
         raise FunctionError("Invalid METHOD passed to webex_request!")
     if response.status_code not in [200, 201, 404]:
-        raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code))
+        raise FunctionError("API call failed! HTTP Status: {}".format(response.status_code))
     elif response.status_code == 401:
         raise FunctionError("Security context is invalid, API returned 401!")
     return response
