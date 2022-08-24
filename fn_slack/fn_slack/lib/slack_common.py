@@ -97,9 +97,11 @@ class SlackUtils(object):
         if warn:
             self.warnings.append(warn)
 
-    # helper function for find_channel() which will then use the less efficient channel name to search for it
     def check_channel_id(self, channel_id):
         """
+        helper function for find_channel() which will then use the less efficient channel name to search for it
+        :param channel_id:
+        :return: channel
         """
         try:
             channel_object = self.slack_client.api_call(
