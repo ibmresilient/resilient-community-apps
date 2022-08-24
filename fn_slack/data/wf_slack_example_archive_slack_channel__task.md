@@ -23,6 +23,10 @@ inputs.incident_id = incident.id
 
 # ID of this Task
 inputs.task_id = task.id
+
+# Slack Channel ID, faster than finding via channel name
+inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+
 ```
 
 ### Post-Processing Script

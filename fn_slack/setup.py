@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_slack',
     display_name='Slack Integration for SOAR',
-    version='1.1.0',
+    version='2.0.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -34,8 +34,7 @@ setup(
                      "text file as an Attachment and archives the Slack channel.",
     install_requires=[
         'resilient_circuits>=45.0.0',
-        'slackclient~=2.9.4',
-        'beautifulsoup4~=4.11.1'
+        'slackclient~=2.9.4'
     ],
     packages=find_packages(),
     include_package_data=True,

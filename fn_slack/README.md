@@ -46,7 +46,7 @@
 -->
 | Version| Comment |
 | ------- | ------ |
-| 1.1.0 | Migrated slackclient to v2 |
+| 2.0.0 | Migrated slackclient to v2, performance improvements |
 | 1.0.2 | Support for App Host, proxy support added |
 
 ---
