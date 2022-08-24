@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
-from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 from resilient_circuits import FunctionResult, AppFunctionComponent, app_function
 
 FN_NAME = "mcafee_epo_list_tags"
@@ -23,6 +23,10 @@ class FunctionComponent(AppFunctionComponent):
         client = init_client(self.opts, self.options)
 
         response = client.request("system.findTag", {})
+
+        # Clear datatable if required params are given
+        if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
+            clear(self.rest_client(), fn_inputs.datatable_name, fn_inputs.incident_id)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

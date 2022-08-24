@@ -18,7 +18,8 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.datatable_name = "mcafee_epo_tags"
+inputs.incident_id = incident.id
 ```
 
 ### Post-Processing Script
