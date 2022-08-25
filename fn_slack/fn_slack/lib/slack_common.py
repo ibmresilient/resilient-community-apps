@@ -245,7 +245,7 @@ class SlackUtils(object):
             params = {
                 "channel" : channel_id,
                 "as_user" : slack_as_user,
-                "username" : slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
+                "username" : slack_username if slack_username else def_username,  # Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored
                 "parse" : "none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
                 "link_names" : 1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
                 "mrkdown" : slack_markdown,

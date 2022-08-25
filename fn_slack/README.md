@@ -47,9 +47,11 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | Migrated slackclient to v2, performance improvements |
+| 2.0.0 | Migrated slackclient to v2, Added lookup via channel ID to improve speed |
 | 1.0.2 | Support for App Host, proxy support added |
 
+### fn_slack 2.0.0 Considerations
+Slack integration is now able to use the channel ID instead of the channel name to post and archive. When using the channel name, this function must first retrieve a list of all channels in a workspace and then iterate through the list to find the desired channel. Using the channel ID, the function is able to immediately retrieve the desired channel and therefore is reccommended to use over channel name when calling functions via SOAR.
 ---
 
 ## Overview
