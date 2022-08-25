@@ -1,0 +1,80 @@
+{
+  "qrhost":"192.xxx.xxx.xx",
+  "offenseid":"331",
+  "rules_data":[
+     {
+        "actions":{
+           "eventAnnotation":"None",
+           "offenseAnnotation":"None",
+           "credibility":"None",
+           "ensureOffense":true,
+           "offenseMapping":{
+              "id":"0",
+              "name":"Source IP",
+              "__typename":"OffenseType"
+           },
+           "relevance":"None",
+           "severity":"None",
+           "drop":false,
+           "__typename":"RuleActions"
+        },
+        "creationDate":"1146812107068",
+        "enabled":true,
+        "groups":[
+           {
+              "fullName":"Recon",
+              "name":"Recon",
+              "__typename":"Group"
+           }
+        ],
+        "id":"100289",
+        "modificationDate":"1592840490372",
+        "name":"Local L2L Database Scanner",
+        "notes":"Reports a scan from a local host against other local targets. At least 30 hosts were scanned in 10 minutes. ",
+        "owner":"admin",
+        "origin":"SYSTEM",
+        "responses":{
+           "newEvents":{
+              "name":"Local Database Scanner Detected",
+              "__typename":"RuleResponseEvent"
+           },
+           "email":"None",
+           "log":false,
+           "addToReferenceData":"None",
+           "addToReferenceSet":"None",
+           "removeFromReferenceData":"None",
+           "removeFromReferenceSet":"None",
+           "notify":false,
+           "notifySeverityOverride":false,
+           "selectiveForwardingResponse":"None",
+           "customAction":"None",
+           "__typename":"RuleResponse"
+        },
+        "tests":[
+           {
+              "group":"Event Property Tests",
+              "negate":false,
+              "text":"when the event context is Local to Local, Local to Remote",
+              "uid":"1",
+              "__typename":"RuleTest"
+           },
+           {
+              "group":"Functions",
+              "negate":false,
+              "text":"when an event matches any of the following <BB>BB:PortDefinition: Database Ports</BB>",
+              "uid":"3",
+              "__typename":"RuleTest"
+           },
+           {
+              "group":"Functions",
+              "negate":false,
+              "text":"when any of these <BB>BB:CategoryDefinition: Recon Events</BB> <BB>BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times</BB> across more than 29 destination IP within 10 minutes",
+              "uid":"4",
+              "__typename":"RuleTest"
+           }
+        ],
+        "type":"COMMON",
+        "__typename":"Rule"
+     }
+  ]
+}
