@@ -11,12 +11,13 @@ def config_section_data():
     """
     config_data = u"""[fn_slack]
 # Slack app OAuth Access Token
-api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
+api_token=xoxb-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
 
 # Username represents the default submission author.
 # Used together with 'as_user=False'.
 # You can also update the username on the Workflow.
-username=Resilient
+# Using a bot token instead of a person token will overwrite the username, using the bot name instead when posting
+username=IBM SOAR
 
 # template file override
 #template_file=/var/rescircuits/slack_template.jinja2
