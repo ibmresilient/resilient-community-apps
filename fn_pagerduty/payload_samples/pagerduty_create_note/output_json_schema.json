@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "note": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "self": {
+              "type": "string"
+            },
+            "html_url": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
