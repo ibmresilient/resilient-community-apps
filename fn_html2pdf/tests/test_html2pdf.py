@@ -42,7 +42,7 @@ class TestUtilitiesHtml2Pdf:
         ("<table border=\"1\"><tr><th>key10</th><td><table border=\"1\"><tr><th>key20</th><td><table border=\"1\"><tr><th>a</th><td>a1</td></tr><tr><th>b</th><td>b1</td></tr><tr><th>key30</th><td><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul></td></tr></table></td></tr></table></td></tr></table>",
          "string", None, "data/html2pdf/no_stylesheet.b64"),
         ("<table border=\"1\"><tr><th>key10</th><td><table border=\"1\"><tr><th>key20</th><td><table border=\"1\"><tr><th>a</th><td>a1</td></tr><tr><th>b</th><td>b1</td></tr><tr><th>key30</th><td><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul></td></tr></table></td></tr></table></td></tr></table>",
-         "string", "@page { size: landscape; }* { font-family: Arial; font-size: small; }table { border-collapse: collapse; }table, th, td { border: 1px solid black; }", "data/html2pdf/stylesheet.b64")
+         "string", "@page { size: landscape; }* { font-family: Arial; font-size: small; }table { border-collapse: collapse; }table, th, td { border: 1px solid red; }", "data/html2pdf/stylesheet.b64")
     ])
     def test_success(self, circuits_app, html2pdf_data, html2pdf_data_type, html2pdf_stylesheet, expected_results):
         """ Test calling with sample values for the parameters """
