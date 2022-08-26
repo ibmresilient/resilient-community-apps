@@ -32,7 +32,7 @@ class QRadarUCMClient(object):
             tactics = self.get_tactics_of_rule(rule_name, rule_id)
         else:
             # Log that there is no tactic mapping and return empty mapping 
-            log.info("Map rule: QRadar ID not found for found for rule: %s", rule_name)
+            self.log.info("Map rule: QRadar ID not found for found for rule: %s", rule_name)
             tactics = {'mapping': {}}
 
         return tactics

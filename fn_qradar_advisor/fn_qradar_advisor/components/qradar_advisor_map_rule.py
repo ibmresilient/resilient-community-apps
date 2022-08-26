@@ -35,21 +35,21 @@ class FunctionComponent(ResilientComponent):
     @function("qradar_advisor_map_rule")
     def _qradar_advisor_map_rule_function(self, event, *args, **kwargs):
         """Function: Map rule to MITRE ATT&CK tactic"""
-        try:
-            log = logging.getLogger(__name__)
-            validate_fields(["qradar_rule_name"], kwargs)
+        log = logging.getLogger(__name__)
+        validate_fields(["qradar_rule_name"], kwargs)
 
             # Get the function parameters:
-            qradar_rule_name = kwargs.get("qradar_rule_name")  # text
+        qradar_rule_name = kwargs.get("qradar_rule_name")  # text
 
-            log.info("qradar_rule_name: %s", qradar_rule_name)
+        log.info("qradar_rule_name: %s", qradar_rule_name)
 
-            qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
-                qradar_verify_cert = False
+        qradar_verify_cert = True
+        if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+            qradar_verify_cert = False
 
-            yield StatusMessage("starting...")
+        yield StatusMessage("starting...")
 
+        try:
             client = QRadarUCMClient(qradar_host=self.options["qradar_host"],
                                      qradar_token=self.options["qradar_ucm_token"],
                                      advisor_app_id=self.options["qradar_advisor_app_id"],

@@ -86,8 +86,9 @@ QRadar Advisor integration includes four functions:
 * Perform a Watson Search with Local Context on an indicator and retrieve a cyber threat intelligence (CTI) report on it in Structured Threat Information eXpression (STIX2) format.
 * Perform an analysis on a QRadar offense, and retrieve CTI data from QRadar Advisor and IBM Watson in STIX format.
 * Map a given QRadar rule to MITRE ATT&CK tactics. 
+<p>
+The package also includes workflow examples to demonstrate the usage of the above functions.
 
-The package also includes workflow examples to demonstrate the usage of the above functions. 
 ---
 
 ## Requirements
