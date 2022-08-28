@@ -99,7 +99,7 @@ def get_event_uuid(misp_client, misp_event_id):
   
 def get_attribute_uuid(misp_client, misp_attribute_value, misp_event_id):
     misp_event = MISPEvent()
-    misp_event.id = int(misp_event_id)
+    misp_event.uuid= get_event_uuid(misp_client,misp_event_id)
     event_response = misp_client.get_event(misp_event)
     attribute_uuid = None
     if not event_response['Event']['Attribute']:
