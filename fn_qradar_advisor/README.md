@@ -821,7 +821,7 @@ else:
 </details>
 
 The example Watson Search workflow creates artifacts from the observables found and writes results to an incident note:
- ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-result-note-.png)
+ ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-result-note.png)
 
 ---
 ## Function - Watson Search with Local Context
