@@ -59,7 +59,7 @@ class TestEmailHeaderValidationUsingDkimarc:
         (test_emails.dkim_only(), {"dkim_verify": True,
                                    "arc_verify": False,
                                    "dkim_message": "Validation successful",
-                                   "arc_message": "Message is not ARC signed"}),
+                                   "arc_message": "Most recent ARC-Message-Signature did not validate"}),
         (test_emails.dkim_only_fail(), {"dkim_verify": False,
                                         "arc_verify": False,
                                         "dkim_message": "Most recent DKIM-Message-Signature did not validate",
