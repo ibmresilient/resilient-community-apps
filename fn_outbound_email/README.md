@@ -15,7 +15,7 @@
 - [Script - Save Outbound Email Results](#script---save-outbound-email-results)
 - [Data Table - Email Conversations](#data-table---email-conversations)
 - [Rules](#rules)
-- [Enhancements for Multiple Templates and Attachment & Notes Inclusion](#enhancements-for-multiple-templates-and-attachment-&-notes-inclusion)
+- [Enhancements for Multiple Templates and Attachment & Notes Inclusion](#enhancements-for-multiple-templates-and-attachment--notes-inclusion)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
