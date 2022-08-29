@@ -192,7 +192,11 @@ The following table provides the settings you need to configure the app. These s
 | **qradar_advisor_token** | Yes | `` | *QRadar Advisor token.* |
 | **qradar_host** | Yes | `myhost` | *QRadar host.* |
 | **qradar_ucm_token** | Yes | `` | *QRadar Use Case Manager token.* |
-| **verify_cert** | Yes | `` | *Boolean indicating whether to validate the QRadar server certificate.* |
+| **verify_cert** | Yes | `` | *Boolean indicating whether to  validate the QRadar server certificate.* |
+| **full_search_timeout** | No | 1200 | *Full search timeout in seconds.* |
+| **full_search_period** | No | 5 | *Full search period in seconds.* |
+| **offense_analysis_timeout** | No | 1200 | *Offense analysis timeout in seconds.* |
+| **offense_analysis_period** | No | 5 | *Offense analysis period in seconds.* |
 
 ### Configure QRadar Advisor With Watson
 You need to have QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page. 
