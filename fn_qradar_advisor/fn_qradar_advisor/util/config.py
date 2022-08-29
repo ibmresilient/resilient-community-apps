@@ -16,6 +16,11 @@ qradar_advisor_app_id=
 verify_cert=
 # Use Case Manager - used to map rule to MITRE tactic
 qradar_ucm_token=
+# Optional parameters for search and anaylsis (in seconds)
+# full_search_timeout=1200
+# full_search_period=5
+# offense_analysis_timeout=1200
+# offense_analysis_period=5
 # Settings for access to Qradar Advisor via a proxy
 #http_proxy=http://proxy:80
 #https_proxy=https://proxy:80
