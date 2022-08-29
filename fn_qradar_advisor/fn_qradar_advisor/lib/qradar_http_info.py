@@ -24,8 +24,6 @@ QRADAR_UCM_BASE_URL = "{host}/console/plugins/app_proxy:UseCaseManager_Service"
 QRADAR_UCM_MAPPINGS_TACTICS = "/api/mappings/tactics"
 QRADAR_UCM_MITRE_MITRE_COVERAGE = "/api/mitre/mitre_coverage/{rule_id}"
 
-QRADAR_CFMA_MAPPINGS = "/mappings"
-QRADAR_CFMA_TUNING="/config/tuning"
 
 class HttpInfo(object):
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
@@ -51,19 +49,6 @@ class HttpInfo(object):
         self.session.cookies["SEC"] = self.token
         self.session.proxies = RequestsCommon(opts, function_opts).get_proxies()
 
-    def get_all_mappings(self):
-        """
-        Get the url to api/mappings
-        :return:
-        """
-        return self.api_base_url + QRADAR_CFMA_MAPPINGS
-
-    def get_tuning_url(self):
-        """
-        Get the url tp api/config/tuning endpoint
-        :return:
-        """
-        return self.api_base_url + QRADAR_CFMA_TUNING
 
     def get_about_url(self):
         """

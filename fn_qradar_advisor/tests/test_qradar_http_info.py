@@ -60,12 +60,6 @@ class TestQRadarHttpInfo(object):
         # offense insights
         assert http_info.get_offense_insights_url(offense_id) == api_base_url + "/investigations/offense/" + str(offense_id) + "/insights"
 
-        # all mappings
-        assert http_info.get_all_mappings() == api_base_url + "/mappings"
-
-        # tuning
-        assert http_info.get_tuning_url() == api_base_url + "/config/tuning"
-
         # verify cert
         assert http_info.get_cafile() == cafile
 
