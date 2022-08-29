@@ -17,8 +17,8 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.requiredParameters, self.meetingParameters = {}, {}
         self.opts = opts
+        self.requiredParameters = {}
         self.config_options = opts.get(PACKAGE_NAME, {})
 
 
@@ -82,13 +82,13 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             webex = WebexInterface(self.requiredParameters)
+            webex.findOperation()
             webex.generate_member_list()
             webex.createRetrieveEntity()
             yield self.status_message("Successfully created/retrieved a team")
             webex.addMembership()
             yield self.status_message("Successfully added membership to the room")
             response = webex.getEntityDetails()
-            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(response, success=True)
 
@@ -97,4 +97,3 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("Does the integration have the appropriate scopes required to perform this action?")
             reason = err.__str__()
             yield FunctionResult(None, success=False, reason=reason)
-            

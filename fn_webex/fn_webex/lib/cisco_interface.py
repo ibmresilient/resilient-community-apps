@@ -15,9 +15,20 @@ class WebexInterface:
         self.header = requiredParameters.get("header")
         self.LOG = self.requiredParameters.get("logger")
         self.resclient = requiredParameters.get("resclient")
-        self.entityId = requiredParameters.get("entityId")
-        self.entityName = requiredParameters.get("entityName")
         self.check_response = cisco_commons.check_response
+
+    def findOperation(self):
+        """
+        This function detemines the operaiton that is being perofrmed. All the below functions
+        work for Room as well as teams. So this detemine the API to be used.
+
+        Returns:
+        --------
+            entityId   (<str>): teamId or RoomId depending on the API
+            entityName (<str>): teamName or RoomName depending on the API
+        """
+        self.entityId   = self.requiredParameters.get("entityId")
+        self.entityName = self.requiredParameters.get("entityName")
 
 
     def isDirectMember(self, incidentMemberId, orgMemberList):

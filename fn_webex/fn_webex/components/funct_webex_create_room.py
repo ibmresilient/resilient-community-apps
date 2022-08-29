@@ -17,8 +17,8 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.requiredParameters, self.meetingParameters = {}, {}
         self.opts = opts
+        self.requiredParameters = {}
         self.config_options = opts.get(PACKAGE_NAME, {})
 
 
@@ -89,6 +89,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             webex = WebexInterface(self.requiredParameters)
+            webex.findOperation()
             webex.generate_member_list()
             webex.createRetrieveEntity()
             yield self.status_message("Successfully created/retrieved a room")
