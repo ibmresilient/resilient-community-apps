@@ -24,6 +24,7 @@ QRADAR_UCM_BASE_URL = "{host}/console/plugins/app_proxy:UseCaseManager_Service"
 QRADAR_UCM_MAPPINGS_TACTICS = "/api/mappings/tactics"
 QRADAR_UCM_MITRE_MITRE_COVERAGE = "/api/mitre/mitre_coverage/{rule_id}"
 
+UCM_UUID = "2ad681ee-473c-4675-b47e-c115509b8fad"
 
 class HttpInfo(object):
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log, opts=None, function_opts=None):
@@ -174,11 +175,17 @@ class HttpInfo(object):
         url = self.api_base_url + QRADAR_OFFENSE_INSIGHTS_URL.format(offense_id=offense_id)
         return url
 
+    def get_UCM_UUID(self):
+        """
+        Return the UUID of the Use Case Manager app
+        """
+        return UCM_UUID
+
     def get_qradar_apps_url(self):
         """
         URL used to get the list of apps in QRadar instance.
         """
-        return QRADAR_GUI_APP_FRAMEWORK_APPLICATIONS_URL.format(host=self.qradar_host)
+        return QRADAR_GUI_APP_FRAMEWORK_APPLICATIONS_URL.format(host=self.host)
 
     def get_qradar_get_rule_url(self, qradar_rule_name):
         """

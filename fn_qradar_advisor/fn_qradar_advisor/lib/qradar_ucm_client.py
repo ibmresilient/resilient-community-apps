@@ -18,6 +18,38 @@ class QRadarUCMClient(object):
                                   opts=opts, function_opts=function_opts)
         self.log = log
 
+    def test_connectivity(self):
+        """test_connectivity - determine if the Use Case Manager UCM app is installed and running.
+           UCM is used to map a QRadar rule to a MITRE tactic.  Use QRadar app framework 
+           endpoint to see which entensions are installed on the server and then check if UCM is 
+           in the RUNNING state.
+        """
+        url = self.http_info.get_qradar_apps_url()
+
+        session = self.http_info.get_session()
+        response = session.get(url=url, 
+                               data=None,
+                               verify=self.http_info.get_cafile())
+        status_code = response.status_code
+        ucm_running = False
+        if status_code > 200:
+            return status_code, ucm_running
+
+        response_json = response.json()
+        ucm_uuid = self.http_info.get_UCM_UUID()
+
+        # Loop through the installed extensions and look for the UCM uuid and it's state.
+        if response_json:
+            for app in response_json:
+                manifest = app.get("manifest")
+                if manifest:
+                    uuid = manifest.get("uuid")
+                    if uuid == ucm_uuid:
+                        application_state = app.get("application_state")
+                        if application_state.get("status") == 'RUNNING':
+                            ucm_running = True
+                        break
+        return status_code, ucm_running
 
     def find_tactic_mapping(self, rule_name):
         """

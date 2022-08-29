@@ -142,7 +142,7 @@ Both Python 3.6 are 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=46.0.0
 
-### Endpoint Developed With
+### Development Endpoint Environment
 
 This app has been implemented using:
 | Product Name | Product Version |
@@ -157,23 +157,6 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 * QRadar 7.3.0 or later
 * Qradar Advisor with Watson 
 * QRadar Use Case Manager 3.1.0 or greater
-
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
 
 ---
 
