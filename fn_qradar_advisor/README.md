@@ -198,15 +198,14 @@ The following table provides the settings you need to configure the app. These s
 | **offense_analysis_timeout** | No | 1200 | *Offense analysis timeout in seconds.* |
 | **offense_analysis_period** | No | 5 | *Offense analysis period in seconds.* |
 
-### Configure QRadar Advisor With Watson
-You need to have QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page. 
+### Configure IBM QRadar Advisor with Watson
+You need to have IBM QRadar Advisor With Watson installed on a QRadar server, and fully configured, as shown in the following configuration page. 
 
  ![screenshot: qradar-configure](./doc/screenshots/qradar-advisor-configuration.png)
 
-To access the QRadar Advisor REST API, you need to know its app_id, which you can access by clicking the QRadar Advisor’s Configuration icon. 
-
-For example, in the URL address shown in the configuration page screenshot, the app_id is 1101 for this QRadar Advisor instance.
-You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page.
+To access the QRadar Advisor REST API, you need to know its app_id, which you can access by clicking the QRadar Advisor’s Configuration icon. For example, in the URL address shown in the configuration page screenshot, the app_id is 1101 for this QRadar Advisor instance.
+<p>
+You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page in QRadar.
 
 ### Configure QRadar Use Case MAnager
 You need to have QRadar Use Case Manager installed on a QRadar server and fully configured, as shown in the following configuration page.  
@@ -214,7 +213,7 @@ You need to have QRadar Use Case Manager installed on a QRadar server and fully 
 
  ![screenshot: qradar-ucm-configure](./doc/screenshots/qradar-ucm-configuration.png)
 
-You also need an access token to use the REST API. You can obtain access tokens from the Authorized Service Token section of the Admin page.
+An access token is required to use the REST API. You can obtain access tokens from the Authorized Service Token section of QRadar's Admin page.
 This token can be the same as the authorization token used for QRadar Advisor above. 
 
 
@@ -224,7 +223,7 @@ This token can be the same as the authorization token used for QRadar Advisor ab
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+Create a QRaW custom incident tab and drag the Data Tables and Custom Fields on to it like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -838,6 +837,9 @@ else:
 </p>
 </details>
 
+The example Watson Search workflow creates artifacts from the observables found and writes results to an incident note:
+ ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-result-note-.png)
+
 ---
 ## Function - Watson Search with Local Context
 Given a SOAR artifact, this function performs a Watson Search with Local Context (a QRadar Advisor full search) and returns Local, Watson enriched, or Expanded local context (default) results.
@@ -1011,6 +1013,9 @@ Note that a full search like this could take up to 15 minutes. Once it is comple
 Please note that the icons shown in the above note use external URL referencing to the official site for STIX2 icons (https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard). Therefore, those icons are shown only if the QRadar SOAR platform can access the above website.
 Also note that some indicators have a link icon at the end. These indicators are basically placeholders for the other (real) indicators with the same value. Think of them as symbolic links in a folder tree. 
 
+If an observable is found a new task is created and can be viewed in the Tasks tab:
+
+ ![screenshot: watson-search-with-local-context ](./doc/screenshots/watson-search-local-context-task.png)
 ---
 
 ## Script - Create Artifact for QRadar Advisor Analysis Observable
