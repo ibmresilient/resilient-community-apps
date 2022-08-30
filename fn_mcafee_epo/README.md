@@ -2143,7 +2143,8 @@ results = {
 <p>
 
 ```python
-None
+inputs.datatable_name = "mcafee_epo_tags"
+inputs.incident_id = incident.id
 ```
 
 </p>
