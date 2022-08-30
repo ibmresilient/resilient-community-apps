@@ -32,18 +32,15 @@ def clear(rest_client, table_name, incident_id):
     :return: None
     """
     try:
-        rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
-        LOG.info("Data in table {} in incident {} has been cleared".format(table_name, incident_id))
+        rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
+        LOG.info(f"Data in table {table_name} in incident {incident_id} has been cleared")
 
     except Exception as err_msg:
-        LOG.error("Failed to clear table: {} error: {}".format(table_name, err_msg))
-        raise IntegrationError("Error while clearing table: {}".format(table_name))
+        LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
+        raise IntegrationError(f"Error while clearing table: {table_name}")
 
 class Client:
-    """
-    class to make ePo API calls
-    """
-
+    """Class to make ePo API calls"""
     def __init__(self, url, username, password, trust_cert, opts, options):
         self.url = url
         self.username = username
@@ -57,9 +54,9 @@ class Client:
     def request(self, command_name, params):
         """
         Make the call to ePO, returning results as json formatted
-        :param command_name:
+        :param command_name: Name of the command
         :param params: ePO command params
-        :return:
+        :return: Response of request to the server
         """
         params_ext = params.copy() if params else {}
         params_ext.setdefault(':output', 'json')
@@ -70,13 +67,13 @@ class Client:
             "verify": False if self.trust_cert.lower() == "false" else True,
             "timeout": self.timeout
         }
-        url = urljoin(self.url, 'remote/{}'.format(command_name))
+        url = urljoin(self.url, f'remote/{command_name}')
 
         # Make request
         r = self.rc.execute_call_v2("get", url, **request_params)
 
         if r.status_code >= 300 or not r.text.startswith('OK'):
-            raise IntegrationError("Failed: {}".format(r.text))
+            raise IntegrationError(f"Failed: {r.text}")
 
         # Convert result to true json
         try:
