@@ -48,17 +48,17 @@ if rule.properties.get('mail_body') and rule.properties.get('mail_body').content
 elif rule.properties.mail_template_select:
   inputs.mail_template_label=rule.properties.mail_template_select
 else:
-  inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
-{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-{% macro get_row(label,field_name) -%}
-	{% set value = template_helper.get_incident_value(incident,field_name) %}
-    {% if value and value not in NOT_FOUND and not value.startswith('-') %}
+  inputs.mail_inline_template = """{% set NOT_FOUND = ["Not Found!","-","None",None] -%}
+{% set style = "font-family: Calibri; color: rgb(31,73,125)" -%}
+{% macro get_row(label, field_name) -%}
+	{% set value = template_helper.get_incident_value(incident,field_name) -%}
+    {% if value and value not in NOT_FOUND and not value.startswith('-') -%}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
         <td style="{{style}}">{{ value | striptags }}</td>
     </tr>
-    {% endif %}
-{%- endmacro %}
+    {% endif -%}
+{% endmacro -%}
 <table width="100%" >
 <tr>
     <td colspan="2">
@@ -80,12 +80,13 @@ else:
     {{ get_row('Description:','description') }}
 <tr>
     <td width="100" style="{{style}}; font-weight:bold">Incident link</td>
-    {% set inc_url = template_helper.generate_incident_url(incident.id) %}
-    <td style="{{style}}"><a target="_blank" href="{{ inc_url }}">{{ incident.id }}</a></td>
+    {% set inc_url = template_helper.generate_incident_url(incident.id) -%}
+    <td style="{{style}}"><a target="_blank" href="{{ inc_url }}">{{ incident.id }}: {{ incident.name }}</a></td>
 </tr>
 </table>
 <br>
 """
+
 ```
 
 ### Post-Processing Script

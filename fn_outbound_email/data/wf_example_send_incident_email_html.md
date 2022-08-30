@@ -54,6 +54,18 @@ inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
     </td>
     {{ get_row('Description:','description') }}
 </tr>
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT LINK</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+        <a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+    </td>
+</tr>
 </table>
 <br>
 """

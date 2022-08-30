@@ -297,6 +297,7 @@ def get_template(app_config, template_name):
         str: entire template to use read from disk
     """
     template_path = _get_template_path(app_config.get(TEMPLATES_SECTION, {}), template_name)
+    LOG.debug(f"Template name: {template_name} = {template_path}")
     if template_path:
         with open(template_path, 'r') as f:
             return f.read()

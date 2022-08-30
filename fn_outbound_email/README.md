@@ -1,5 +1,6 @@
 ## Table of Contents
 - [Release Notes](#release-notes)
+  - [v2.0](#v2_0)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
@@ -10,6 +11,7 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [2.0 Changes](#2_0-changes)
 - [Function - Outbound Email: Send Email](#function---outbound-email-send-email)
 - [Function - Outbound Email: Send Email 2](#function---outbound-email-send-email-2)
 - [Script - Save Outbound Email Results](#script---save-outbound-email-results)
@@ -34,7 +36,7 @@
 | v1.1.1 | 2/2021 | Bug fixes associated with sending attachments |
 | v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
 | v1.0.9 | 5/2020 | App Host compatibility |
-| v1.0.8 | 4/2020 | Initial Release after internal development by Professional Services, no prior release notes |
+| v1.0.8 | 4/2020 | Initial Release |
 
 
 ### v2.0
@@ -48,6 +50,7 @@ with inbound mail. This release incorporates many changes which are summarized h
 * Enhanced incident data available to include from templates (i.e. artifacts, notes and links back to SOAR).
 * A new function to preserve the original outbound email capability and allow all the new functionality in
 v2.0 to be added. See [Function - Outbound Email: Send Email2](#function---outbound-email-send-email2).
+* OAuth authenticateion
 ---
 
 ## Overview
@@ -72,6 +75,7 @@ The Outbound Email App provides the following functionality:
 * Example rules included at the incident and task levels.
 * Unified view of inbound and outbound emails
 * Manage threaded conversations
+* Support for OAuth authentications
 ---
 
 ## Requirements
@@ -134,7 +138,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 -->
 #####  Basic authentication
 * A password is required for the SMTP server.
-#####  OAuth 2.0 authorization
+#####  OAuth 2.0 Authorization
 * You need to setup a web application for an OAuth 2.0 SMTP identity provider service from which you get the required configuration settings to use OAuth 2.0 authorization.
 * The required settings are:
 ```
@@ -150,7 +154,7 @@ These values are used to generate a refresh_token which is used by the SOAR app 
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-#####  OAuth 2.0 authorization
+#####  OAuth 2.0 Authorization
 * Setup a web app and note the prerequisite settings above and add them to the `app.config` for the app.
 ##### Authorize
 * Use the settings to create an authorization code URL similar to the following example:
@@ -249,7 +253,7 @@ The following table provides the settings you need to configure the app. These s
 For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 
 
-### 2.0 changes
+### 2.0 Changes
 In v2.0, an additional section, `[fn_outbound_email:templates]`, is added to track the use of multiple templates. These templates are automatically added to the mail_template_select rule activity field used within the example rules. For MSSP environments, this automatic update capability will not work. It's recommended that your playbook or workflow use a `text` activity field instead for template name input.
 
 Below is the section and it's definitions:
