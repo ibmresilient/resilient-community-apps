@@ -17,14 +17,13 @@ class LDAPUtilitiesHelper:
         elif str.lower() == 'false':
             return False
         else:
-            raise ValueError("{} is not a boolean".format(str))
+            raise ValueError(f"{str} is not a boolean")
 
     @staticmethod
     def __get_config_option(app_configs, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
         option = app_configs.get(option_name)
-        err = "'{}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
-            option_name)
+        err = f"'{option_name}' is mandatory and is not set in app.config file. You must set this value to run this function"
 
         if (not option or (placeholder and option == placeholder)) and not optional:
             raise ValueError(err)
@@ -46,8 +45,7 @@ class LDAPUtilitiesHelper:
                 raise_exceptions=True)
 
         except Exception as err:
-            raise ValueError(
-                "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+            raise ValueError(f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
     def __init__(self, app_configs):
 
@@ -76,8 +74,7 @@ class LDAPUtilitiesHelper:
             app_configs=app_configs, option_name="ldap_connect_timeout", placeholder=30))
 
         if self.LDAP_AUTH_TYPE not in [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]:
-            raise ValueError("Invalid value for 'ldap_auth'. '{}' is not a supported authentication method. Support methods are: {}}".format(
-                self.LDAP_AUTH_TYPE, [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]))
+            raise ValueError(f"Invalid value for 'ldap_auth'. '{self.LDAP_AUTH_TYPE}' is not a supported authentication method. Support methods are: {[v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]}")
 
         if self.LDAP_AUTH_TYPE == SUPPORTED_LDAP_AUTH_TYPE_TYPES.SIMPLE.value: # "SIMPLE"
             if not self.LDAP_USER_DN or not self.LDAP_PASSWORD:

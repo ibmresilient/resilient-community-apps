@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-#
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
-#
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #   Util classes for LDAP
 
 from . import helper
@@ -18,7 +16,7 @@ class LDAPDomains():
             domain_name = u"{}".format(domain)
             domain_data = opts.get(domain_name)
             if not domain_data:
-                raise KeyError(u"Unable to find ldap domain: {}".format(domain_name))
+                raise KeyError(f"Unable to find ldap domain: {domain_name}")
 
             domains[domain] = domain_data
 
@@ -43,7 +41,7 @@ class LDAPDomains():
         elif ldap_domain_name == helper.PACKAGE_NAME or len(domains_list) == 1:
             return domains_list[list(domains_list.keys())[0]]
         else:
-            raise IntegrationError("{} did not match domain given in the app.config".format(ldap_domain_name))
+            raise IntegrationError(f"{ldap_domain_name} did not match domain given in the app.config")
 
     def _get_domain_name_list(self, opts):
         """
@@ -58,7 +56,5 @@ class LDAPDomains():
         return domain_list
 
     def get_domain_name_list(self):
-        """
-        Return list of all domain names
-        """
+        """Return list of all domain names"""
         return self.domain_name_list
