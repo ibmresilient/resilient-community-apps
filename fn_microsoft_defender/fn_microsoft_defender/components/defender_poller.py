@@ -92,6 +92,7 @@ class DefenderPollerComponent(ResilientComponent):
         self.last_poller_time = self._get_last_poller_date(int(self.options.get('polling_lookback', DEFAULT_POLLER_LOOBACK_MINUTES)))
 
         self.new_incident_filters = get_profile_filters(self.options.get('new_incident_filters'))
+        self.alert_filters = get_profile_filters(self.options.get('alert_filters'))
 
         # Create api client
         self.defender_client = DefenderAPI(self.options['tenant_id'],
@@ -143,16 +144,17 @@ class DefenderPollerComponent(ResilientComponent):
             resilient_incident = self.resilient_common.find_incident(defender_incident_id)
 
             _result_resilient_incident = self._create_update_incident(defender_incident, resilient_incident,
-                                                                      self.new_incident_filters)
+                                                                      self.new_incident_filters, self.alert_filters)
 
 
-    def _create_update_incident(self, defender_incident, resilient_incident, new_incident_filters):
+    def _create_update_incident(self, defender_incident, resilient_incident, new_incident_filters, alert_filters):
         """[perform the operations on the defender incident: create, update or close]
 
         Args:
             defender_incident ([dict]): [defender to act upon]
             resilient_incident ([dict]): [existing resilient or none]
             new_incident_filters ([dict]): [filter to apply to new incidents]
+            alert_filters ([dict]): [filter to apply to alerts]
 
         Returns:
             resilient_incident ([dict])
@@ -195,7 +197,8 @@ class DefenderPollerComponent(ResilientComponent):
                                   int(self.last_poller_time.timestamp()*1000))
         else:
             # apply filters to only escalate certain alerts
-            if check_incident_filters(defender_incident, new_incident_filters):
+            if check_incident_filters(defender_incident, new_incident_filters) and \
+                check_alert_filters(defender_incident.get("alerts"), alert_filters):
                 # create a new incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                                                     self.options.get("create_incident_template"),
@@ -205,7 +208,7 @@ class DefenderPollerComponent(ResilientComponent):
                 LOG.info("Created incident %s from Defender incident %s",
                          updated_resilient_incident['id'], defender_incident_id)
             else:
-                LOG.info("Defender incident %s bypassed due to new_incident_filters",
+                LOG.info("Defender incident %s bypassed due to new_incident_filters and alert_filters",
                          defender_incident_id)
                 updated_resilient_incident = None
 
@@ -275,6 +278,48 @@ def check_incident_filters(defender_incident, new_incident_filters):
             result_list.append(result)
 
     return all(result_list)
+
+def check_alert_filters(alert_list, alert_filters):
+    """apply the app.config profile filters to determine which incidents to escalate
+       based on the alerts which make up the defender incident
+
+    Args:
+        alert_list ([list]): [incident alert list]
+        alert_filters ([dict]): [filters to apply]
+
+    Returns:
+        [bool]: [True if defender incident should be escalated]
+    """
+    if not alert_filters:
+        return True
+
+    for alert in alert_list:
+        alert_result = []
+        for filter_name, filter_value in alert_filters.items():
+            if filter_name in alert:
+                if isinstance(filter_value, list):
+                    filter_result = None
+                    for value in filter_value:
+                        if isinstance(alert[filter_name], list):
+                            filter_result = bool(value in alert[filter_name])
+                        else:
+                            filter_result = bool(value == alert[filter_name])
+                        # just need one to match for one pass
+                        if filter_result:
+                            break
+                elif isinstance(alert[filter_name], list):
+                    filter_result = bool(filter_value in alert[filter_name])
+                else:
+                    filter_result = bool(filter_value == alert[filter_name])
+
+                if filter_result is not None:
+                    alert_result.append(filter_result)
+
+        # if one alert passes all criteria, return with success
+        if alert_result and all(alert_result):
+            return True
+
+    return False
 
 def get_defender_incident_id(defender_incident):
     """

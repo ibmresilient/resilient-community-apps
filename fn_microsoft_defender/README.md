@@ -69,7 +69,10 @@
 | 1.0.0 | 10/2021 | Initial Release |
 | 1.0.1 | 3/2022 | Bug fix for defender_update_incident |
 | 1.0.2 | 7/2022 | Bug fix for defender_get_related_alert_information |
+| 1.1.0 | 9/2022 | Added filtering at the alert level |
 
+### V1.1 Considerations 
+See section [App Configuration](#app-configuration) for the new app.config setting: `alert_filters`. This setting must be manually added to your app.config file in order to use it with the poller to filter incident creation.
 ---
 
 ## Overview
@@ -172,8 +175,9 @@ The following table provides the settings you need to configure the app. These s
 | **app_secret** | Yes | `940c4d2-...-9d32e1b` | *Azure app secret.* |
 | **api_url** | Yes | `https://api.securitycenter.microsoft.com` | *API utl. This can be customized per Azure region.* |
 | **polling_lookback** | Yes | `120` | *When resilient-circuits starts, number of minutes to look back for changes to Sentinel incidents.* |
-| **polling_interval** | Yes | `60` | *Number of seconds for the poller to run.* |
-| **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *filers to apply for promoting Sentinel incidents to SOAR. All criteria need to match. For lists [], one value needs to match.* |
+| **polling_interval** | Yes | `60` | *Number of seconds for the poller to run. Set to 0 to disable the poller* |
+| **new_incident_filters** | No | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *filters to apply for promoting Defender incidents to SOAR. All criteria need to match. For lists [], one value needs to match.* |
+| **alert_filters** | No | `"serviceSource": ["MicrosoftDefenderForEndpoint"],"severity": ["High", "Medium","Low"]` | *Introduced in v1.1. Filters to apply for promoting Defender incidents to SOAR, based on the alerts associated within a Defender incident. The SOAR incident is created if all criteria is matched for at least one alert. For lists [], one value needs to match.* |
 | **create_incident_template** | No | /path/to/incident_creation_template.jinja | *custom template for incident creation* |
 | **update_incident_template** | No | /path/to/incident_update_template.jinja | *custom template for incident updates* |
 | **close_incident_template** | No | /path/to/incident_close_template.jinja | *custom template for closing a incident* |
