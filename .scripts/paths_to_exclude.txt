@@ -16,6 +16,7 @@ whitesource.config
 
 #AppFiles
 fn_service_now/snow_app
+fn_email_header_validation/tests
 fn_playbook_maker
 res_hibp
 res_qraw_mitre
