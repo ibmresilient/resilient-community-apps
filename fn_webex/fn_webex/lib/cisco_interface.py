@@ -198,6 +198,20 @@ class WebexInterface:
 
 
     def deleteEntity(self):
+        """
+        This function deletes a room or a team based on the id specified to it. It monitors the response returned
+        from the endpoint for 204, 404 and 405 responses. 
+
+        Response Codes:
+        ---------------
+            204 - Successfully deleted the room or team
+            404 - Room or team not found
+            405 - Room cannot be deleted, delete the team associated with it
+
+        Returns:
+        --------
+            (_dict_): Response from the endpoint
+        """
         if "room" in self.requiredParameters.get("entityName").strip().lower():
             deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.ROOMS_URL)
         else :
