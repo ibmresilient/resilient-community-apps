@@ -3,6 +3,7 @@
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import json
+import re
 
 from urllib import parse
 from fn_webex.lib import constants, cisco_commons
@@ -15,7 +16,7 @@ class WebexInterface:
         self.header = requiredParameters.get("header")
         self.LOG = self.requiredParameters.get("logger")
         self.resclient = requiredParameters.get("resclient")
-        self.check_response = cisco_commons.check_response
+        self.response_handler = cisco_commons.ResponseHandler()
 
     def findOperation(self):
         """
@@ -136,8 +137,7 @@ class WebexInterface:
         """
         self.requiredParameters[self.entityId] = None
         callingKey = "name" if self.entityName == "teamName" else "title"
-        response = self.rc.execute("get", self.requiredParameters.get("entityURL"), headers=self.header, callback=self.check_response)
-        res = response.json()
+        res = self.rc.execute("get", self.requiredParameters.get("entityURL"), headers=self.header, callback=self.response_handler.check_response)
         if len(res.get('items')) == 0:
             self.createRoomTeam()
         else:
@@ -150,10 +150,10 @@ class WebexInterface:
             if not self.requiredParameters.get(self.entityId):
                 self.createRoomTeam()
                 self.LOG.info("Webex: Creating new room/team: {}".format(self.requiredParameters.get(self.entityId)))
-        self.retrieveMembershipURL = self.requiredParameters.get("entityURL") + self.requiredParameters.get(self.entityId)
+        retrieveMembershipURL = parse.urljoin(self.requiredParameters.get("entityURL"), self.requiredParameters.get(self.entityId) + "/")
         if self.entityName == "roomName":
-            self.retrieveMembershipURL += "/meetingInfo"
-        
+            retrieveMembershipURL = parse.urljoin(retrieveMembershipURL, "meetingInfo")
+        self.retrieveMembershipURL = retrieveMembershipURL
 
 
     def createRoomTeam(self):
@@ -173,9 +173,8 @@ class WebexInterface:
         if self.entityName == "roomName" and self.requiredParameters.get("teamId"):
             self.LOG.info("Webex: Adding team to room: {}".format(self.requiredParameters.get("teamId")))
             data["teamId"] = self.requiredParameters.get("teamId")
-        response = self.rc.execute("post", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, data=json.dumps(data), callback=self.check_response)
-        res = response.json()
+        res = self.rc.execute("post", self.requiredParameters.get("entityURL"),
+                                    headers=self.header, data=json.dumps(data), callback=self.response_handler.check_response)
         self.requiredParameters[self.entityId] = res.get("id")
         self.requiredParameters[self.entityName] = res.get(callingKey)
         self.LOG.info("Webex: Created new room/team: {}".format(self.requiredParameters.get(self.entityId)))
@@ -190,10 +189,23 @@ class WebexInterface:
         --------
             (<dict>): response from the endpoint with room name and other information
         """
-        response = self.rc.execute("get", self.retrieveMembershipURL, headers=self.header)
+        response = self.rc.execute("get", self.retrieveMembershipURL, headers=self.header, callback=self.response_handler.check_response)
         self.LOG.info("Webex: Retrieved room/team details, room/team  Name : {}".format(self.requiredParameters.get(self.entityName)))
-        response = response.json()
         response["attendees"] = ", ".join(self.emailIds)
         response["status"] = True
         response[self.entityName] = self.requiredParameters.get(self.entityName)
+        return response
+
+
+    def deleteEntity(self):
+        if "room" in self.requiredParameters.get("entityName").strip().lower():
+            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.ROOMS_URL)
+        else :
+            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.TEAMS_URL)
+
+        deletionURL = parse.urljoin(deletionURL, self.requiredParameters.get("entityId"))
+        self.LOG.info("Webex: Deleting {}".format(self.requiredParameters.get("entityName")))
+        self.response_handler.add_exempt_codes(codes=[404, 405])
+        response = self.rc.execute("delete", deletionURL, headers=self.header, callback=self.response_handler.check_response)
+        self.response_handler.clear_exempt_codes()
         return response

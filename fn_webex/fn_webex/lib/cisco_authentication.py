@@ -72,7 +72,9 @@ class WebexAuthentication:
                 raise IntegrationError("Unable to authenticate: Error: Is the refresh_token up to date?")
 
         if "access_token" in result.json():
-            return result.json().get("access_token")
+            bearerID = result.json().get("access_token")
+            self.LOG.debug("Webex: Bearer ID for current session: {}".format(bearerID))
+            return bearerID
 
         msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
             .format(result.json().get("error"), result.json().get("error_description"))
