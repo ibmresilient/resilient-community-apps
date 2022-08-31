@@ -46,7 +46,7 @@ inputs.mail_body_html = u"""
     Instructions: 
 <br>
 {5}
-""".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get("content"))
+""".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get("content") if task.instructions else '-')
 
 ```
 
