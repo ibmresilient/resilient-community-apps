@@ -69,7 +69,7 @@ else:
     Instructions: 
 <br>
 {7}
-""".format(sev_code, current_plan, creation_date, type_ids, task.name, incident.id, task.id, task.instructions.get('content'))
+""".format(sev_code, current_plan, creation_date, type_ids, task.name, incident.id, task.id, task.instructions.get("content") if task.instructions else '-')
 
 ```
 
