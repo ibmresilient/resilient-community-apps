@@ -1,5 +1,5 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-VERSION = 1.1
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+VERSION = 1.2
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
   A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
@@ -12,7 +12,7 @@ VERSION = 1.1
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', {
-    "version": 1.1,
+    "version": 1.2,
     "header": "Artifact scan results for: {}".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",
@@ -24,7 +24,7 @@ VERSION = 1.1
   
   Format of workflow.property.convert_json_to_rich_text:
   { 
-    "version": 1.1, [this is for future compatibility]
+    "version": 1.2, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
     "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
@@ -41,9 +41,11 @@ import re
 
 # needed for python 3
 try:
-    unicode("abc")
+    unicode("abc") # fails in py3
+    py2 = True
 except:
     unicode = str
+    py2 = False
 
 
 rc = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
@@ -68,7 +70,12 @@ class ConvertJson:
               [str]: None|original text if no links|text with html links
         """
         formatted_item = item
-        if item and not isinstance(item, (int, bool, float)):
+        if py2:
+            num_type = bool(item and isinstance(item, (int, long, bool, float)))
+        else:
+            num_type = bool(item and isinstance(item, (int, bool, float)))
+
+        if item and not num_type:
             list = rc.findall(item)
             if list:
                 for link in list:
@@ -147,7 +154,8 @@ class ConvertJson:
                                 item_list.append(u"None<br>")
                         else:
                             item_list.append(self.expand_list(value, is_list=is_list))
-                        notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
+
+                        notes.append(self.add_separator(self.separator, u"".join(make_unicode(v) for v in item_list), is_list=is_list))
 
         result_notes = u"".join(notes)
         if isinstance(self.separator, list):
@@ -178,6 +186,12 @@ class ConvertJson:
 
         return u"{}{}".format(separator.join(_items), separator if not is_list else u"")
 
+def make_unicode(value):
+    if value is None:
+        return 'None'
+
+    return unicode(value)
+
 def get_properties(property_name):
     """
     Logic to collect the json and parameters from a workflow property.
@@ -186,46 +200,54 @@ def get_properties(property_name):
     Returns:
       padding, separator, header, json_omit_list, incident_field, json, sort_keys
     """
-    if not workflow.properties.get(property_name):
-        helper.fail("workflow.properties.{} undefined".format(property_name))
+    result_properties = None
+    try:
+        result_properties = workflow.properties[property_name]
+    except:
+        try:
+            result_properties = playbook.functions.results[property_name]
+        except:
+            result_properties = None
 
-    padding = int(workflow.properties[property_name].get("padding", 10))
-    separator = workflow.properties[property_name].get("separator", u"<br />")
+    if not result_properties:
+        helper.fail("Playbook/workflow property not found: {}".format(property_name))
+
+    padding = int(result_properties.get("padding", 10))
+    separator = result_properties.get("separator", u"<br />")
     if isinstance(separator, list) and len(separator) != 2:
         helper.fail("list of separators should be specified as a pair such as ['<div>', '</div>']: {}".format(separator))
 
-    header = workflow.properties[property_name].get("header")
-    json_omit_list = workflow.properties[property_name].get("json_omit_list")
+    header = result_properties.get("header")
+    json_omit_list = result_properties.get("json_omit_list")
     if not json_omit_list:
         json_omit_list = []
-    incident_field = workflow.properties[property_name].get("incident_field")
+    incident_field = result_properties.get("incident_field")
     
-    json = workflow.properties[property_name].get("json", {})
+    json = result_properties.get("json", {})
     if not isinstance(json, dict) and not isinstance(json, list):
         helper.fail("json element is not formatted correctly: {}".format(json))
-    sort_keys = bool(workflow.properties[property_name].get("sort", False))
+    sort_keys = bool(result_properties.get("sort", False))
 
     return padding, separator, header, json_omit_list, incident_field, json, sort_keys
 
 
 ## S T A R T
-if 'workflow' in globals():
-    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties('convert_json_to_rich_text')
+padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties('convert_json_to_rich_text')
 
-    if header:
-        if isinstance(separator, list):
-            hdr = u"{0}{1}{2}".format(separator[0], header, separator[1])
-        else:
-            hdr = u"{0}{1}".format(header, separator)
+if header:
+    if isinstance(separator, list):
+        hdr = u"{0}{1}{2}".format(separator[0], header, separator[1])
     else:
-        hdr = u""
+        hdr = u"{0}{1}".format(header, separator)
+else:
+    hdr = u""
 
-    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
-    converted_json = convert.convert_json_to_rich_text(json)
-    result = u"{}{}".format(hdr, converted_json if converted_json else "\nNone")
+convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
+converted_json = convert.convert_json_to_rich_text(json)
+result = u"{}{}".format(hdr, converted_json if converted_json else "\nNone")
 
-    rich_text_note = helper.createRichText(result)
-    if incident_field:
-        incident[incident_field] = rich_text_note
-    else:
-        incident.addNote(rich_text_note)
+rich_text_note = helper.createRichText(result)
+if incident_field:
+    incident[incident_field] = rich_text_note
+else:
+    incident.addNote(rich_text_note)
