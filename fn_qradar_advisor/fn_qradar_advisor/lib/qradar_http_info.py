@@ -3,7 +3,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import requests
 import base64
-import sys
 from urllib.parse import quote
 from resilient_lib import RequestsCommon
 
