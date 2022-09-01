@@ -39,10 +39,7 @@ def selftest_function(opts):
                                         cafile=qradar_verify_cert, log=log,
                                         opts=opts, function_opts=options)
             ucm_status_code, ucm_running = ucm_client.test_connectivity()
-            if ucm_running:
-                return {"state": "success", "status_code": ucm_status_code}
-            else:
-                return {"state": "failure", "status_code": ucm_status_code}      
+            return {"state": 'success' if ucm_running else 'failure', "status_code": ucm_status_code}   
         else:
             return {"state": "failure", "status_code": r.status_code}
 

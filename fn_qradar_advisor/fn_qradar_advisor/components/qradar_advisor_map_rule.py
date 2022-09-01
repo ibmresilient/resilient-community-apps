@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
         log.info("qradar_rule_name: %s", qradar_rule_name)
 
         qradar_verify_cert = True
-        if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+        if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
             qradar_verify_cert = False
 
         yield StatusMessage("starting...")
