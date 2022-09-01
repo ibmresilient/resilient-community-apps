@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-from fn_webex.lib import constants
+from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import FunctionError
 
@@ -36,6 +36,7 @@ class WebexAuthentication:
         self.requiredParameters["tokenURL"] = app_config.get("webex_site_url") + constants.TOKEN_URL
         self.rc  = requiredParameters.get("rc")
         self.LOG = self.requiredParameters.get("logger")
+        self.response_handler = cisco_commons.ResponseHandler()
 
 
     def Authenticate(self):
@@ -66,18 +67,16 @@ class WebexAuthentication:
             "refresh_token": self.requiredParameters["refreshToken"],
             "grant_type": "refresh_token"
         }
-        try:
-            result = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data)
-        except IntegrationError as err:
-                raise IntegrationError("Unable to authenticate: Error: Is the refresh_token up to date?")
+        response = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data, 
+                                 callback=self.response_handler.check_response)
 
-        if "access_token" in result.json():
-            bearerID = result.json().get("access_token")
+        if "access_token" in response:
+            bearerID = response.get("access_token")
             self.LOG.debug("Webex: Bearer ID for current session: {}".format(bearerID))
             return bearerID
 
         msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
-            .format(result.json().get("error"), result.json().get("error_description"))
+            .format(response.get("error"), response.get("error_description"))
         raise FunctionError(msg)
 
 

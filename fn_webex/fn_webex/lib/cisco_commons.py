@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from resilient_lib import IntegrationError
 
 class ResponseHandler:
@@ -70,7 +71,8 @@ class ResponseHandler:
             IntegrationError : If the recieved response is None, raises this error. This
                                could be due to an invalid call methord being passed.
         """
-        if self.response is None:
+        
+        if not self.response:
             raise IntegrationError("API call failed! Invalid METHOD passed to rc.execute()! Response returned was None")
         elif self.response.status_code == 204:
             self.msg = "API call successful! No content returned"
@@ -103,14 +105,17 @@ class ResponseHandler:
         """
         if self.msg: 
             if self.response.status_code in self.exempt_codes:
+
                 if self.response.status_code == 204:
                     res = {}
                 else:
                     res = self.response.json()
+
                 res["status_code"] = self.response.status_code
                 if self.msg:
                     res["message"] = self.msg
                 return res
+                
             else:
                 raise IntegrationError(self.msg)
         else:
@@ -131,7 +136,6 @@ class ResponseHandler:
         --------
             (<dict>) : Response body with status code.
         """
-        self.response = None
         self.response = response
         self.monitor_status()
         return self.raise_or_return_erros()

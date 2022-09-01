@@ -3,11 +3,13 @@
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import json
+from multiprocessing.sharedctypes import Value
 import re
 
 from urllib import parse
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
+from resilient_circuits import FunctionResult
 
 class WebexInterface:
     def __init__(self, requiredParameters):
@@ -204,22 +206,28 @@ class WebexInterface:
 
         Response Codes:
         ---------------
-            204 - Successfully deleted the room or team
-            404 - Room or team not found
-            405 - Room cannot be deleted, delete the team associated with it
+            204 - Successfully deleted the room or team.
+            404 - Room or team not found.
+            405 - Room cannot be deleted, delete the team associated.
 
         Returns:
         --------
-            (_dict_): Response from the endpoint
+            (<dict>): Response from the endpoint
         """
         if "room" in self.requiredParameters.get("entityName").strip().lower():
             deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.ROOMS_URL)
         else :
             deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.TEAMS_URL)
-
         deletionURL = parse.urljoin(deletionURL, self.requiredParameters.get("entityId"))
         self.LOG.info("Webex: Deleting {}".format(self.requiredParameters.get("entityName")))
         self.response_handler.add_exempt_codes(codes=[404, 405])
         response = self.rc.execute("delete", deletionURL, headers=self.header, callback=self.response_handler.check_response)
         self.response_handler.clear_exempt_codes()
-        return response
+        if response.get("status_code") == 204:
+            return FunctionResult(response, success=True)
+        elif response.get("status_code") == 404:
+            return FunctionResult(response, success=False, reason="The specified room/team ID could not be found!")
+        elif response.get("status_code") == 405:
+            return FunctionResult(response, success=False, reason="This room cannot be deleted directly. Delete the team associated with it to clear this space.")
+        else:
+            return FunctionResult(response, success=False, reason="Unfamiliar response. Status code : {}".format(response.get("status_code")))

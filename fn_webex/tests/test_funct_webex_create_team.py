@@ -30,6 +30,9 @@ class LOG:
     
     def error(self, msg):
         print("[ERROR]", msg)
+    
+    def debug(self, msg):
+        print("[ERROR]", msg)
 
 
 class mocked_restClient:
@@ -46,11 +49,11 @@ class mocked_restClient:
         if "users" in request:
             return {"data" : [
                         {'id':  1, 'display_name': 'Admin User', 'status': 'A', 'email': 'admin@example.com'}, 
-                        {'id': 16, 'display_name': 'Resilient Sysadmin', 'status': 'A', 'email': 'c.wynne9+soar1@nuigalway.ie'},
-                        {'id': 17, 'display_name': 'soar2 Sysadmin', 'status': 'A', 'email': 'c.wynne9+soar2@nuigalway.ie'},
-                        {'id': 18, 'display_name': 'soar3 Sysadmin', 'status': 'A', 'email': 'c.wynne9+soar3@nuigalway.ie'}, 
-                        {'id': 19, 'display_name': 'soar4 Sysadmin', 'status': 'A', 'email': 'c.wynne9+soar4@nuigalway.ie'},
-                        {'id': 20, 'display_name': 'soar5 Sysadmin', 'status': 'A', 'email': 'c.wynne9+soar5@nuigalway.ie'}
+                        {'id': 16, 'display_name': 'Resilient Sysadmin', 'status': 'A', 'email': 'soar1@example.ie'},
+                        {'id': 17, 'display_name': 'soar2 Sysadmin', 'status': 'A', 'email': 'soar2@example.ie'},
+                        {'id': 18, 'display_name': 'soar3 Sysadmin', 'status': 'A', 'email': 'soar3@example.ie'}, 
+                        {'id': 19, 'display_name': 'soar4 Sysadmin', 'status': 'A', 'email': 'soar4@example.ie'},
+                        {'id': 20, 'display_name': 'soar5 Sysadmin', 'status': 'A', 'email': 'soar5@example.ie'}
                     ]}
 
 
@@ -70,9 +73,9 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, cal
     elif url == "https://webexapis.com/v1/team/memberships":
         response = None
 
-    elif url == "https://webexapis.com/v1/teams/{}".format("Y123"):
+    elif url == "https://webexapis.com/v1/teams/{}/".format("Y123"):
         response = MockResponse('''{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
-
+    
     if callback:
         response = callback(response)
     return response
@@ -90,10 +93,12 @@ def call_webex_create_room_function():
             "entityURL"  : "https://webexapis.com/v1/teams/",
             "entityName" : "teamName",
             "entityId"   : "teamId",
+            "membershipUrl" : "https://webexapis.com/v1/team/memberships",
             'additionalAttendee' : "sara@example.com, hannah@example.com, harsha@example.com"
         }
 
     webex = WebexInterface(requiredParameters)
+    webex.findOperation()
     webex.generate_member_list()
     webex.createRetrieveEntity()
     webex.addMembership()
@@ -118,7 +123,7 @@ class TestWebexCreateRoom:
                 'title': 'UnittestRoom',
                 'created': '2022-08-11T18:24:46.655Z', 'isPublic': 'false'
                 }],
-            'attendees': 'c.wynne9+soar1@nuigalway.ie, c.wynne9+soar2@nuigalway.ie, c.wynne9+soar3@nuigalway.ie, sara@example.com, hannah@example.com, harsha@example.com',
+            'attendees': 'soar1@example.ie, soar2@example.ie, soar3@example.ie, sara@example.com, hannah@example.com, harsha@example.com',
             'status': True, 
             'roomName': 'UnittestRoom'}
         results = call_webex_create_room_function()
