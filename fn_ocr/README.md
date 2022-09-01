@@ -48,13 +48,12 @@
 
  ![screenshot: main](./doc/screenshots/main.png) 
 
-An App that introduces OCR functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.
-About OCR: OCR stands for Optical Character Recognition, and most often refers to the detection of letters, words, and sentences in images. The goal with any OCR is the same: extract the useful chunks of text from an image in an easy-to-read format.
+An App that introduces OCR (Optical Character Recognition) functionality to SOAR, which can parse text from images. Uses Tesseract OCR, an open-source package with python bindings, to parse an image and return each line with an attached confidence metric.
 
 ### Key Features
 * Parse a picture and return lines with associated average confidence, allowing for automated reading of screenshots and other images
 * Accepts different languages and can filter based on a minimum confidence score per line 
-* Can parse images from artifacts (see playbook) or directly using a Base64 string 
+* Can parse images from artifacts and attachments (see rules and workflows) or directly using a Base64 string 
 
 ---
 
@@ -112,7 +111,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
