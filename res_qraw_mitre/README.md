@@ -1,4 +1,4 @@
-# Resilient Content Package for QRadar Advisor and MITRE ATT&CK<sup>TM</sup>
+# QRadar SOAR Content Package for QRadar Advisor and MITRE ATT&CK<sup>TM</sup>
 
 ## Description
 
@@ -14,15 +14,16 @@ This content package contains a single resource file with the following workflow
 
 ## Package Dependences
 The workflows in this package depend on the following integration packages
-- QRadar Advisor integration 2.0
-- QRadar integration 2.0 (optional)
-- MITRE integration 1.0
+- QRadar Advisor integration 2.1.0
+- QRadar integration 2.2.5
+- MITRE integration 2.0.2
 
+![Installed Screenshot](./screenshots/3-apps-installed.png)
 
 ## Import
 First of all, ensure that the above integration packages have been installed.
 Download the res_qraw_mitre package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
-In Resilient server, go to Administrator Settings->Organization->Import->Import Settings 
+In the QRadar SOAR UI, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
 and select the qraw_mitres.res file downloaded above.
 ![Import Screenshot](./screenshots/import_res.png)
 
