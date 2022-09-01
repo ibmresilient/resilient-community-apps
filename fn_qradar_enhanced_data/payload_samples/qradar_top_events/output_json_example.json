@@ -1,0 +1,46 @@
+{
+    "qrhost":"192.xxx.xxx.xx",
+    "offenseid":"331",
+    "events":[
+       {
+          "categoryname":"FTP Action Allowed",
+          "magnitude":"9",
+          "eventcount":"1",
+          "eventtime":"1607458945836",
+          "sourceipcount":"1",
+          "destinationipcount":"1"
+       },
+       {
+          "categoryname":"SFTP Login Succeeded",
+          "magnitude":"6",
+          "eventcount":"1",
+          "eventtime":"1607458944884",
+          "sourceipcount":"1",
+          "destinationipcount":"1"
+       },
+       {
+          "categoryname":"Firewall Deny",
+          "magnitude":"8",
+          "eventcount":"50",
+          "eventtime":"1607458816101",
+          "sourceipcount":"1",
+          "destinationipcount":"50"
+       },
+       {
+          "categoryname":"Network Sweep",
+          "magnitude":"9",
+          "eventcount":"1",
+          "eventtime":"1607458807831",
+          "sourceipcount":"1",
+          "destinationipcount":"1"
+       },
+       {
+          "categoryname":"Database Reconnaissance",
+          "magnitude":"7",
+          "eventcount":"1",
+          "eventtime":"1607458796816",
+          "sourceipcount":"1",
+          "destinationipcount":"1"
+       }
+    ]
+ }
