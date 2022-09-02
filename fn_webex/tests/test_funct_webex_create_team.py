@@ -98,11 +98,11 @@ def call_webex_create_room_function():
         }
 
     webex = WebexInterface(requiredParameters)
-    webex.findOperation()
+    webex.find_operation()
     webex.generate_member_list()
-    webex.createRetrieveEntity()
-    webex.addMembership()
-    response = webex.getEntityDetails()
+    webex.retrieve_entity()
+    webex.add_membership()
+    response = webex.get_entity_details()
     return FunctionResult(response, success=True)
 
 
