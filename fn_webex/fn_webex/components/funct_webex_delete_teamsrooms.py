@@ -76,7 +76,7 @@ class FunctionComponent(AppFunctionComponent):
 
         if authenticated:
             webex = WebexInterface(self.requiredParameters)
-            yield webex.deleteEntity()
+            yield webex.delete_entity()
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
         else:
             yield FunctionResult(value=None, success=False, reason=reason)
