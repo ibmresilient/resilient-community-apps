@@ -9,7 +9,6 @@ import re
 from urllib import parse
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
-from resilient_circuits import FunctionResult
 
 class WebexInterface:
     def __init__(self, requiredParameters):

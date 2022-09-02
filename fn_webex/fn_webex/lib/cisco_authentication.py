@@ -4,7 +4,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError, validate_fields
-from resilient_circuits import FunctionError
 
 class WebexAuthentication:
     def __init__(self, requiredParameters, app_config):
@@ -77,7 +76,7 @@ class WebexAuthentication:
 
         msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
             .format(response.get("error"), response.get("error_description"))
-        raise FunctionError(msg)
+        raise IntegrationError(msg)
 
 
     def generate_header(self, bearerID):
