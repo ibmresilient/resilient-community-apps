@@ -2,14 +2,14 @@ import json
 import time, datetime
 
 from fn_webex.lib import constants, cisco_commons
-from resilient_circuits import FunctionError
+from resilient_lib import IntegrationError
 
 
 class WebexMeetings:
     def __init__(self, requiredParameters, meetingParameters):
         self.requiredParameters = requiredParameters
         self.meetingParameters = meetingParameters
-        self.check_response = cisco_commons.check_response
+        self.response_handler = cisco_commons.ResponseHandler()
         self.rc = requiredParameters.get("rc")
         self.LOG = requiredParameters.get("logger")
         self.header = requiredParameters.get("header")
@@ -32,17 +32,13 @@ class WebexMeetings:
         meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
 
         response = self.rc.execute("post", webexurl, data=meetingOptions,
-                                        headers=self.header, callback=self.check_response)
-        if not response.text:
-            raise FunctionError("Failed to create meeting, null response")
-        results = response.json()
-        
-        if response.status_code == 200:
-            results["status"] = True
+                                        headers=self.header, callback=self.response_handler.check_response)
+        if response.get("status_code") == 200:
+            response["status"] = True
         else:
-            results["status"] = False
-            raise FunctionError("Failed to create meeting")
-        return results
+            response["status"] = False
+            raise IntegrationError("Failed to create meeting")
+        return response
 
 
     def check_time(self, timezone, meeting_start, meeting_end):

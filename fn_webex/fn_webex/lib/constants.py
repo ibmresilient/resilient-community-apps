@@ -21,3 +21,7 @@ TEAMS_MEMBERSHIP_URL = "/v1/team/memberships/"
 RES_GROUPS = "/groups"
 RES_USERS = "/users/query_paged?return_level=normal"
 RES_INCIDENT = "/incidents/"
+
+
+MSG_CREATE_SECURITY =  "Webex: Creating a Security context and establishing a connection with the Webex EndPoint"
+MSG_FAILED_AUTH = "Failed to create Security Context. Failed to Authenticate!"

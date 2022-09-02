@@ -8,7 +8,7 @@ import datetime
 from mock import patch
 from resilient_lib import RequestsCommon
 from resilient_circuits.util import get_config_data
-from resilient_circuits.action_message import FunctionError_ as FunctionError
+from resilient_lib import IntegrationError
 from fn_webex.lib.cisco_meetings import WebexMeetings
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 
@@ -27,12 +27,12 @@ def mocked_requests_post(method, url, data=None, headers=None, proxies=None, cal
 
         def json(self):
             return json.loads(self.text)
-
+    
     response = None
     if data and not isinstance(data, dict):
         data = json.loads(data)
-    if url == "":        
-        response = MockResponse(text=None, status_code=404)
+    if url == "":
+        response = MockResponse(text=json.dumps({"message" : "Item Not Found!"}), status_code=404)
     elif url != "" and data.get("start") == "" and data.get("end") == "" and data.get("title") == "":
         response = None
     elif url != "" and data.get("start") != "" and data.get("end") != "" and data.get("title") != "":
@@ -62,6 +62,10 @@ class LOG:
     
     def error(self, msg):
         print("[ERROR]", msg)
+    
+    def debug(self, msg):
+        print("[ERROR]", msg)
+
     
 class TestFnCreateMeeting:
 
@@ -93,7 +97,16 @@ class TestFnCreateMeeting:
     }
 
     @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
-    def test_call_create_meeting(self, mock):
+    def test_call_authenticator(self, mock):
+        requiredParameters = self.requiredParameters.copy()
+        app_configuration  = self.app_configuration.copy()
+        app_configuration["client_secret"] = ""
+        with pytest.raises(ValueError) as err:
+            authenticator = WebexAuthentication(requiredParameters, app_configuration)
+            requiredParameters["header"] = authenticator.Authenticate()
+
+    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
+    def test_call_invalid_url(self, mock):
 
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
@@ -102,27 +115,22 @@ class TestFnCreateMeeting:
         authenticator = WebexAuthentication(requiredParameters, app_configuration)
         requiredParameters["header"] = authenticator.Authenticate()
         webex = WebexMeetings(requiredParameters, optionalParameters)
-        with pytest.raises(FunctionError) as err:
+        with pytest.raises(IntegrationError) as err:
             webex.create_meeting()
-        
+
+    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
+    def test_call_invaid_time(self, mock):
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
-        app_configuration  = self.app_configuration.copy()
         requiredParameters["start"] = 0
         requiredParameters["end"]   = 0
         optionalParameters["title"] = ""
         webex = WebexMeetings(requiredParameters, optionalParameters)
-        with pytest.raises(ValueError) as err:
+        with pytest.raises(IntegrationError) as err:
             webex.create_meeting()
 
-        requiredParameters = self.requiredParameters.copy()
-        optionalParameters = self.optionalParameters.copy()
-        app_configuration  = self.app_configuration.copy()
-        app_configuration["client_secret"] = ""
-        with pytest.raises(ValueError) as err:
-            authenticator = WebexAuthentication(requiredParameters, app_configuration)
-            requiredParameters["header"] = authenticator.Authenticate()
-
+    @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
+    def test_call_create_meeting_pass(self, mock):
         requiredParameters = self.requiredParameters.copy()
         optionalParameters = self.optionalParameters.copy()
         app_configuration  = self.app_configuration.copy()

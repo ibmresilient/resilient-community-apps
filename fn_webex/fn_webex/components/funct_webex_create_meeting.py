@@ -28,16 +28,22 @@ class FunctionComponent(AppFunctionComponent):
         """
         This function creates and schedules a Webex meeting.
 
-        Args:
-        -----
+        Fn Inputs:
+        ----------
             start        (<str>) : Meeting start time
             end          (<str>) : Meeting end time
-            timezone     (<str>) : Meeting timezone
-            meetingsURL  (<str>) : A url of the webex meetings API
             title        (<str>) : Meeting title
             agenda       (<str>) : Meeting agenda
             password     (<str>) : Meeting password
+        
+        Config Options:
+        ---------------
+            timezone     (<str>) : Meeting timezone
+            meetingsURL  (<str>) : A url of the webex meetings API
             sendEmail    (<bool>): Sends the meeting invite to the attendees
+
+        Self Objects:
+        -------------
             rc           (<rc>)  : A resilient wrapper for Requests object
             logger       (<logger>)      : A resilient wrapper for logger obhect
             resclient    (<rest_client>) : Rest client to interact with the SOAR instance
@@ -54,45 +60,44 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields([{"name" : "webex_site_url",
                           "name" : "webex_timezone"}], self.config_options)
 
-        self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
         self.requiredParameters["end"] = fn_inputs.webex_meeting_end_time if hasattr(fn_inputs, 'webex_meeting_end_time') else None
+        self.requiredParameters["start"] = fn_inputs.webex_meeting_start_time if hasattr(fn_inputs, 'webex_meeting_start_time') else None
         self.requiredParameters["timezone"] = self.config_options.get("webex_timezone")
-        self.requiredParameters["meetingsURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.MEETINGS_URL)
+        self.requiredParameters["meetingsURL"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.MEETINGS_URL)
+
+        self.requiredParameters["rc"]  = self.rc
+        self.requiredParameters["logger"] = self.LOG
+        self.requiredParameters["resclient"] = self.rest_client()
 
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
         self.meetingParameters["password"] = fn_inputs.webex_meeting_password if hasattr(fn_inputs, 'webex_meeting_password') else None
         self.meetingParameters["sendEmail"] = True
 
-        self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["resclient"] = self.rest_client()
-        self.requiredParameters["logger"] = self.LOG
-
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
 
         try:
-            yield self.status_message("Authenticating Webex using OAuth Access Token: '{0}'".format(FN_NAME))
-            self.LOG.info("Webex: Creating a Security context and establishing a connection with the Webex EndPoint")
+            yield self.status_message(constants.MSG_CREATE_SECURITY)
+            self.LOG.info(constants.MSG_CREATE_SECURITY)
             authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
             self.requiredParameters["header"] = authenticator.Authenticate()
+            authenticated = True
             yield self.status_message("Successfully Authenticated!")
 
         except Exception as err:
-            self.LOG.error("Failed to create Security Context")
-            yield self.status_message("Failed to Authenticate {}! Is the Refresh token Upto date?".format(FN_NAME))
-            reason = err.__str__()
-            yield FunctionResult(value=None, success=False, reason=reason)
+            self.LOG.error(constants.MSG_FAILED_AUTH)
+            yield self.status_message(constants.MSG_FAILED_AUTH)
+            reason = str(err)
+            authenticated = False
 
-        try:
+        if authenticated:
             webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
             response = webex.create_meeting()
             yield self.status_message("Successfully created a meeting")
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(value=response, success=True)
 
-        except Exception as err:
+        else:
             yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
-            yield self.status_message("Does the integration have the appropriate scopes required to perform this action?")
-            reason = err.__str__()
             yield FunctionResult(value=None, success=False, reason=reason)

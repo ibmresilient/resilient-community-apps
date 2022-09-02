@@ -3,10 +3,13 @@
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import json
+from multiprocessing.sharedctypes import Value
+import re
 
 from urllib import parse
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
+from resilient_circuits import FunctionResult
 
 class WebexInterface:
     def __init__(self, requiredParameters):
@@ -15,12 +18,43 @@ class WebexInterface:
         self.header = requiredParameters.get("header")
         self.LOG = self.requiredParameters.get("logger")
         self.resclient = requiredParameters.get("resclient")
-        self.entityId = requiredParameters.get("entityId")
-        self.entityName = requiredParameters.get("entityName")
-        self.check_response = cisco_commons.check_response
+        self.response_handler = cisco_commons.ResponseHandler()
 
 
-    def isDirectMember(self, incidentMemberId, orgMemberList):
+    def create_team_room(self):
+        '''
+        A wrapper function that allows for creating a team or a room. For a room or a team
+        to be created, the following functions are executed in the specified order.
+
+            - find_operation       : Determines if a room or team is to be created.
+            - generate_member_list : Generates a list of members to be added.
+            - retrieve_entity      : Tries to find a room or a team with the same name.
+                                     Else creates a new one using create_entity
+            - add_membership       : Adds the list of members to the room or team
+            - get_entity_details   : Retrieves the room/team information
+        '''
+        self.find_operation()
+        self.generate_member_list()
+        self.retrieve_entity()
+        self.add_membership()
+        return self.get_entity_details()
+
+
+    def find_operation(self):
+        """
+        This function detemines the operaiton that is being perofrmed. All the below functions
+        work for Room as well as teams. So this detemine the API to be used.
+
+        Returns:
+        --------
+            entityId   (<str>): teamId or RoomId depending on the API
+            entityName (<str>): teamName or RoomName depending on the API
+        """
+        self.entityId   = self.requiredParameters.get("entityId")
+        self.entityName = self.requiredParameters.get("entityName")
+
+
+    def is_direct_member(self, incidentMemberId, orgMemberList):
         """
         Checks to see if the member Id accquired from the incident belongs to the list of all 
         users from the organization. Upon match, it then extracts the email address for that 
@@ -40,11 +74,11 @@ class WebexInterface:
                 return user.get("email")
 
 
-    def isGroupMember(self, incidentMemberId, orgMemberList, orgGroupList):
+    def is_group_member(self, incidentMemberId, orgMemberList, orgGroupList):
         """
         Checks to see if the member Id accquired from the incident belongs to the list of
         all groups from the organization. Upon match, it then queries a list of Ids 
-        associated with that group and matches with user using the >>iSDirectMember<< 
+        associated with that group and matches with user using the >>is_direct_member<< 
         function
 
         Args:
@@ -61,7 +95,7 @@ class WebexInterface:
         for group in orgGroupList:
             if incidentMemberId == group.get("id"):
                 for member in group.get("members"):
-                    ret.append(self.isDirectMember(member, orgMemberList))
+                    ret.append(self.is_direct_member(member, orgMemberList))
         return ret
 
 
@@ -86,10 +120,10 @@ class WebexInterface:
             if len(incidentMembers.get("members")) == 0:
                 self.LOG.info("Webex: There are no members assigned to this incident")
             for incident_member in incidentMembers.get("members"):
-                if self.isDirectMember(incident_member, orgMemberList):
-                    emailIds.append(self.isDirectMember(incident_member, orgMemberList))
-                elif self.isGroupMember(incident_member, orgMemberList, orgGroupList):
-                    emailIds.extend(self.isGroupMember(incident_member, orgMemberList, orgGroupList))
+                if self.is_direct_member(incident_member, orgMemberList):
+                    emailIds.append(self.is_direct_member(incident_member, orgMemberList))
+                elif self.is_group_member(incident_member, orgMemberList, orgGroupList):
+                    emailIds.extend(self.is_group_member(incident_member, orgMemberList, orgGroupList))
         elif not self.requiredParameters.get("additionalAttendee"):
             self.LOG.warn("Warning: No participants were added to the room/team. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
         
@@ -99,7 +133,7 @@ class WebexInterface:
         self.LOG.info("Webex: Members to be added to the room/team {}".format(self.emailIds))
 
 
-    def addMembership(self):
+    def add_membership(self):
         """
         Adds members to the room/team using the email addresses from >>emailIds<<. If user already
         a member of the room/team, ignores.
@@ -114,7 +148,7 @@ class WebexInterface:
                 self.LOG.info("Webex: User {} is already a member of the room/team".format(user))
 
 
-    def createRetrieveEntity(self):
+    def retrieve_entity(self):
         """
         Trys and retrieves room/team details if available, if not creates a new room/team
 
@@ -125,10 +159,9 @@ class WebexInterface:
         """
         self.requiredParameters[self.entityId] = None
         callingKey = "name" if self.entityName == "teamName" else "title"
-        response = self.rc.execute("get", self.requiredParameters.get("entityURL"), headers=self.header, callback=self.check_response)
-        res = response.json()
+        res = self.rc.execute("get", self.requiredParameters.get("entityURL"), headers=self.header, callback=self.response_handler.check_response)
         if len(res.get('items')) == 0:
-            self.createRoomTeam()
+            self.create_entity()
         else:
             for objs in res.get("items"):
                 if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
@@ -137,15 +170,15 @@ class WebexInterface:
                     self.LOG.info("Webex: Retrieving existing room/team: {}".format(self.requiredParameters.get(self.entityId)))
                     break
             if not self.requiredParameters.get(self.entityId):
-                self.createRoomTeam()
+                self.create_entity()
                 self.LOG.info("Webex: Creating new room/team: {}".format(self.requiredParameters.get(self.entityId)))
-        self.retrieveMembershipURL = self.requiredParameters.get("entityURL") + self.requiredParameters.get(self.entityId)
+        retrieveMembershipURL = parse.urljoin(self.requiredParameters.get("entityURL"), self.requiredParameters.get(self.entityId) + "/")
         if self.entityName == "roomName":
-            self.retrieveMembershipURL += "/meetingInfo"
-        
+            retrieveMembershipURL = parse.urljoin(retrieveMembershipURL, "meetingInfo")
+        self.retrieveMembershipURL = retrieveMembershipURL
 
 
-    def createRoomTeam(self):
+    def create_entity(self):
         """
         Creates a room/team with the required configurations such as:
             - room/team name
@@ -162,15 +195,14 @@ class WebexInterface:
         if self.entityName == "roomName" and self.requiredParameters.get("teamId"):
             self.LOG.info("Webex: Adding team to room: {}".format(self.requiredParameters.get("teamId")))
             data["teamId"] = self.requiredParameters.get("teamId")
-        response = self.rc.execute("post", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, data=json.dumps(data), callback=self.check_response)
-        res = response.json()
+        res = self.rc.execute("post", self.requiredParameters.get("entityURL"),
+                                    headers=self.header, data=json.dumps(data), callback=self.response_handler.check_response)
         self.requiredParameters[self.entityId] = res.get("id")
         self.requiredParameters[self.entityName] = res.get(callingKey)
         self.LOG.info("Webex: Created new room/team: {}".format(self.requiredParameters.get(self.entityId)))
 
 
-    def getEntityDetails(self):
+    def get_entity_details(self):
         """
         Upon successfully creating a team, it retrieves the room details and returns the result back to
         the SOAR platform in the form of dictionary.
@@ -179,10 +211,10 @@ class WebexInterface:
         --------
             (<dict>): response from the endpoint with room name and other information
         """
-        response = self.rc.execute("get", self.retrieveMembershipURL, headers=self.header)
+        response = self.rc.execute("get", self.retrieveMembershipURL, headers=self.header, callback=self.response_handler.check_response)
         self.LOG.info("Webex: Retrieved room/team details, room/team  Name : {}".format(self.requiredParameters.get(self.entityName)))
-        response = response.json()
         response["attendees"] = ", ".join(self.emailIds)
         response["status"] = True
         response[self.entityName] = self.requiredParameters.get(self.entityName)
         return response
+        
