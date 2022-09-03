@@ -3,6 +3,7 @@ import time, datetime
 
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
+from resilient_circuits import FunctionResult
 
 
 class WebexMeetings:
@@ -27,17 +28,13 @@ class WebexMeetings:
         '''
         webexurl = self.requiredParameters.get("meetingsURL")
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
-        self.LOG.info("Timezone set to: {}".format(self.timezone))
+        self.LOG.info("Wenex Meeting: Timezone set to: {}".format(self.timezone))
+
         self.check_time(self.timezone, self.requiredParameters.get("start"), self.requiredParameters.get("end"))
         meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
 
         response = self.rc.execute("post", webexurl, data=meetingOptions,
                                         headers=self.header, callback=self.response_handler.check_response)
-        if response.get("status_code") == 200:
-            response["status"] = True
-        else:
-            response["status"] = False
-            raise IntegrationError("Failed to create meeting")
         return response
 
 
@@ -69,6 +66,8 @@ class WebexMeetings:
         """
         if meeting_start:
             meeting_start = datetime.datetime.fromtimestamp(meeting_start/constants.REMOVE_MILLISECONDS)
+            if meeting_start < datetime.datetime.now():
+                raise ValueError('Meeting start time {}, must be after current time'.format(meeting_start.strftime(constants.DATETIME_FORMAT)))
         else :
             meeting_start = datetime.datetime.now() + datetime.timedelta(minutes=constants.MEETING_START_TIME_BUFFER)
         if meeting_end:

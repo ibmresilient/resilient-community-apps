@@ -2,6 +2,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+import json
+
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import FunctionError
@@ -69,6 +71,8 @@ class WebexAuthentication:
         }
         response = self.rc.execute("POST", self.requiredParameters["tokenURL"], data=data, 
                                  callback=self.response_handler.check_response)
+        self.LOG.debug("Webex Authentication : {}".format(json.dumps(response)))
+
 
         if "access_token" in response:
             bearerID = response.get("access_token")
@@ -77,7 +81,7 @@ class WebexAuthentication:
 
         msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
             .format(response.get("error"), response.get("error_description"))
-        raise FunctionError(msg)
+        raise IntegrationError(msg)
 
 
     def generate_header(self, bearerID):
