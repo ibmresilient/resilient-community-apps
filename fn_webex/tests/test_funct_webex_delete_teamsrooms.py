@@ -57,7 +57,7 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, cal
 
 def call_webex_delete_entity_function(requiredParameters):
     webex = WebexInterface(requiredParameters)
-    response = webex.deleteEntity()
+    response = webex.delete_entity()
     return response
 
 
