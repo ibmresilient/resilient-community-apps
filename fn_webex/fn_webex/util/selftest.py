@@ -22,6 +22,7 @@ def selftest_function(opts):
 
     requiredParameters = {}
     requiredParameters["rc"] = RequestsCommon(opts, app_configs)
+    requiredParameters["logger"] = log
     requiredParameters["tokenURL"] = app_configs.get("webex_site_url") + constants.TOKEN_URL
     
     try :
@@ -34,4 +35,4 @@ def selftest_function(opts):
     except Exception as err:
         return {
                 "state": "failure",
-                "reason": err.__str__()}
+                "reason": str(err)}
