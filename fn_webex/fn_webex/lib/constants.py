@@ -25,3 +25,6 @@ RES_INCIDENT = "/incidents/"
 
 MSG_CREATE_SECURITY =  "Webex: Creating a Security context and establishing a connection with the Webex EndPoint"
 MSG_FAILED_AUTH = "Failed to create Security Context. Failed to Authenticate!"
+MSG_INVALID_TIMEZONE = "Invalid Timezone format. Supported format UTC +01:00"
+MSG_INVLAID_STARTTIME = "Meeting start time ({}), must be after current time"
+MSG_INVALID_ENDTIME = "Meeting end time ({}), must be after meeting start time({}) and current time ({})"

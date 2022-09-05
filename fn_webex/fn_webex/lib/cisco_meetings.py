@@ -3,6 +3,7 @@ import time, datetime
 
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
+from resilient_circuits import FunctionResult
 
 
 class WebexMeetings:
@@ -27,17 +28,13 @@ class WebexMeetings:
         '''
         webexurl = self.requiredParameters.get("meetingsURL")
         self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
-        self.LOG.info("Timezone set to: {}".format(self.timezone))
+        self.LOG.info("Wenex Meeting: Timezone set to: {}".format(self.timezone))
+
         self.check_time(self.timezone, self.requiredParameters.get("start"), self.requiredParameters.get("end"))
         meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
 
         response = self.rc.execute("post", webexurl, data=meetingOptions,
                                         headers=self.header, callback=self.response_handler.check_response)
-        if response.get("status_code") == 200:
-            response["status"] = True
-        else:
-            response["status"] = False
-            raise IntegrationError("Failed to create meeting")
         return response
 
 
@@ -69,16 +66,19 @@ class WebexMeetings:
         """
         if meeting_start:
             meeting_start = datetime.datetime.fromtimestamp(meeting_start/constants.REMOVE_MILLISECONDS)
+            if meeting_start < datetime.datetime.now():
+                raise IntegrationError(constants.MSG_INVLAID_STARTTIME.format(meeting_start.strftime(constants.DATETIME_FORMAT)))
         else :
             meeting_start = datetime.datetime.now() + datetime.timedelta(minutes=constants.MEETING_START_TIME_BUFFER)
         if meeting_end:
             meeting_end = datetime.datetime.fromtimestamp(meeting_end/constants.REMOVE_MILLISECONDS)
+            _current_time = datetime.datetime.now().strftime(constants.DATETIME_FORMAT)
             if meeting_end < meeting_start:
-                raise ValueError('Meeting end time {}, must be after meeting start time {}'.format(
-                    meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT)))
+                raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
+                    meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
             elif meeting_end < datetime.datetime.now():
-                raise ValueError('Meeting end time {}, must be after current time {}'.format(
-                    meeting_end.strftime(constants.DATETIME_FORMAT), datetime.datetime.now().strftime(constants.DATETIME_FORMAT)))
+                raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
+                    meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
         else:
             meeting_end = meeting_start + datetime.timedelta(minutes=constants.DEFAULT_MEETING_LENGTH)
 
@@ -90,36 +90,30 @@ class WebexMeetings:
         '''
         This function determines and formats the timezone for the meeting. If no timezone is provided, 
         the application automatially assigns systems local timezone. The timezone is to be provided in
-        the form of a sting in the specified formats: GMT +01:00 or UMT -0500 or -05:30. The function
+        the form of a sting in the specified formats: UTC -05:30. The function
         automatically formats the timezone in accordance with the webex api requirements.
 
         Args:
         ---------
         timezone : String
                     Timezone to be provided as a sting. Acceptable format 
-                    GMT -01:00, GMT -0100, UMT -01:00, -01:00
+                    UTC +01:00
         '''
         if timezone is None:
             return time.strftime("%z", time.localtime())
         else:
             timezone = timezone.strip()
-        formatted_timezone = ""
-        _temp = timezone.split(" ")
-        if len(_temp) > 1:
-            if "gmt" in _temp[0].lower() or "utc" in _temp[0].lower():
-                if "-" not in _temp[1] and "+" not in _temp[1]:
-                    formatted_timezone = "+"
-                formatted_timezone += _temp[1].replace(":", "")
-            else:
-                raise ValueError("Unsupported timezone specified. Supported timezones GMT or UTC")
-        elif len(_temp) == 1:
-            if "-" not in timezone and "+" not in timezone:
-                formatted_timezone = "+"
-            formatted_timezone += timezone.replace(":", "")
-        
-        if not formatted_timezone[1:].isdigit():
-            raise ValueError("Invalid Timezone format. Expected format GMT -01:00")
-        return formatted_timezone 
+        timezone = timezone.replace(":", "")
+        timezone = timezone.split(" ")
+        if len(timezone) > 1:
+            timezone = timezone[1].strip()
+            if "+" not in timezone and "-" not in timezone:
+                timezone = "".join(["+", timezone])
+        else:
+            raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
+        if not timezone[1:].isdigit():
+            raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
+        return timezone
 
 
     def generate_meeting_parameters(self, meetingParameters):

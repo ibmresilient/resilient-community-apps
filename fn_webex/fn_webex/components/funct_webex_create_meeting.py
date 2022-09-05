@@ -88,16 +88,20 @@ class FunctionComponent(AppFunctionComponent):
         except Exception as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)
             yield self.status_message(constants.MSG_FAILED_AUTH)
-            reason = str(err)
-            authenticated = False
+            yield self.status_message("Failed to Authenticate : '{0}'".format(FN_NAME))
+            yield FunctionResult(value=None, success=False, reason=str(err))
 
         if authenticated:
-            webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
-            response = webex.create_meeting()
-            yield self.status_message("Successfully created a meeting")
-            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
-            yield FunctionResult(value=response, success=True)
+            try:
+                webex = WebexMeetings(self.requiredParameters, self.meetingParameters)
+                response = webex.create_meeting()
+                yield self.status_message("Successfully created a meeting")
+                yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
 
-        else:
-            yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
-            yield FunctionResult(value=None, success=False, reason=reason)
+                if response.get("status_code") == 200:
+                    yield FunctionResult(response, success=True)
+                else:
+                    yield FunctionResult(response, success=False, reason=response["message"])
+
+            except Exception as err:
+                yield FunctionResult({"message" : str(err)}, success=False, reason=str(err))

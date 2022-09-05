@@ -165,13 +165,12 @@ class TestWebexMeetings:
     webex = WebexMeetings(requiredParameters, optionalParameters)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         ("GMT 05:30" , "+0530"), ("GMT +05:30", "+0530"), ("GMT -05:30", "-0530"),
-        ("UTC -05:30", "-0530"), ("GMT 0530"  , "+0530"), (" GMT 0530 ", "+0530"),
-        ("0530"      , "+0530"),( " -05:30  " , "-0530")])
+        ("UTC -05:30", "-0530"), ("GMT 0530"  , "+0530"), (" GMT 0530 ", "+0530")])
     def test_get_timeZones(self, mock_inputs, expected_results):
-        with pytest.raises(ValueError) as err:
+        with pytest.raises(IntegrationError) as err:
             self.webex.get_timeZones("GMT 05:£30")
-        with pytest.raises(ValueError) as err:
-            self.webex.get_timeZones("IST 05:30")
+        with pytest.raises(IntegrationError) as err:
+            self.webex.get_timeZones("++05:30")
         assert(self.webex.get_timeZones(mock_inputs), expected_results)
         assert(self.webex.get_timeZones(None), time.strftime("%z", time.localtime()))
 
@@ -179,12 +178,12 @@ class TestWebexMeetings:
     def test_check_time(self):
         start_time = round((datetime.datetime.now() + datetime.timedelta(minutes=45)).timestamp()) * 1000
         end_time = round((datetime.datetime.now() + datetime.timedelta(minutes=5)).timestamp()) * 1000
-        with pytest.raises(ValueError) as err:
+        with pytest.raises(IntegrationError) as err:
             self.webex.check_time("+0000", start_time, end_time)
 
         start_time = round((datetime.datetime.now() - datetime.timedelta(minutes=45)).timestamp()) * 1000
         end_time = round((datetime.datetime.now() - datetime.timedelta(minutes=5)).timestamp()) * 1000
-        with pytest.raises(ValueError) as err:
+        with pytest.raises(IntegrationError) as err:
             self.webex.check_time("+0000", start_time, end_time)
 
         start_time = self.requiredParameters.get("start")
