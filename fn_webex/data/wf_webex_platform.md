@@ -21,6 +21,16 @@
 # To set meeting name to the workflow inputs, uncomment the following lines
 inputs.webex_meeting_name = incident.name if rule.properties.webex_meeting_name is None else rule.properties.webex_meeting_name
 
+if rule.properties.webex_meeting_start_time:
+  inputs.webex_meeting_start_time = rule.properties.webex_meeting_start_time      
+else:
+  inputs.webex_meeting_start_time = None
+
+if rule.properties.webex_meeting_end_time:
+  inputs.webex_meeting_end_time = rule.properties.webex_meeting_end_time      
+else:
+  inputs.webex_meeting_end_time = None
+  
 # Get the agenda from the activity field or the incident description
 if rule.properties.webex_meeting_agenda is None:
   if incident.description is not None and incident.description.content is not None:
@@ -41,9 +51,8 @@ content = results.get("content")
 if not results.success:
   text = u"Unable to create Cisco WebEx Meeting"
 
-  fail_reason = results.reason
-  if fail_reason:
-    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+  if results.reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, results.reason)
 else:
   ref_html_room = u"""<a href='{0}'>Link</a>""".format(content.get("webLink"))
 
