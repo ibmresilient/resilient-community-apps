@@ -2,20 +2,23 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 from __future__ import division
-import logging
-import json
-import time
+
 import collections
+import json
+import logging
+import os
 import re
 import tempfile
-import os
-from os.path import join, pardir
+import time
 import unicodedata
-from slackclient import SlackClient
-import resilient_circuits.template_functions as template_functions
-from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import *
+from os.path import join, pardir
 
+import resilient_circuits.template_functions as template_functions
+import slack
+from fn_slack.lib.errors import IntegrationError
+from resilient_lib import (build_incident_url, build_resilient_url, clean_html,
+                           readable_datetime, unescape, validate_fields)
+from six import string_types
 
 LOG = logging.getLogger(__name__)
 
@@ -29,7 +32,7 @@ RES_PREFIX = "RES"
 # Slack recommends no more than 200 results at a time.
 SLACK_HISTORY_MESSAGE_LIMIT = 100
 SLACK_HISTORY_REPLY_MESSAGE_LIMIT = 20
-SLACK_LOAD_CHANNELS_LIMIT = 100
+SLACK_LOAD_CHANNELS_LIMIT = 200
 
 
 class SlackUtils(object):
@@ -38,7 +41,8 @@ class SlackUtils(object):
     """
 
     def __init__(self, api_token, proxies=None):
-        self.slack_client = SlackClient(api_token, proxies=proxies)
+        self.slack_client = slack.WebClient(token=api_token, proxy=proxies)
+        
         self.channel = None
         self.warnings = []
 
@@ -93,7 +97,25 @@ class SlackUtils(object):
         if warn:
             self.warnings.append(warn)
 
-    def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id):
+    def check_channel_id(self, channel_id):
+        """
+        helper function for find_channel() which will then use the less efficient channel name to search for it
+        :param channel_id:
+        :return: channel
+        """
+        try:
+            channel_object = self.slack_client.api_call(
+                api_method = "conversations.info",
+                params = {
+                    "channel" : channel_id,
+                }
+            )
+            self.channel = channel_object.data.get("channel")
+        except Exception as e: # will fail if no channel is found with this channel id
+            raise IntegrationError(e)
+        return self.channel
+
+    def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id, channel_id=None):
         """
         If channel_name is NOT specified in the function input, method will perform a lookup
         for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
@@ -108,14 +130,15 @@ class SlackUtils(object):
         :param res_client:
         :param incident_id:
         :param task_id:
+        :param channel_id:
         :return: slack_channel_name, True if res_associated_channel_name exists
         """
         # Pick the right channel to post in
         slack_channel_name, res_associated_channel_name = self._find_the_proper_channel_name(
             input_channel_name, res_client, incident_id, task_id)
 
-        # find the channel in Slack Workspace
-        self.find_channel_by_name(slack_channel_name)
+        # find the channel in Slack Workspace and set the value of channel via 
+        self.channel = self.find_channel(slack_channel_name, channel_id)
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
@@ -188,7 +211,7 @@ class SlackUtils(object):
 
         return slack_channel_name, res_associated_channel_name
 
-    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
+    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username, channel_id=None):
         """
         Process the slack post
         :param resoptions: app.config resilient section
@@ -198,6 +221,7 @@ class SlackUtils(object):
         :param slack_username:
         :param slack_markdown:
         :param def_username - name to use for who posted the message
+        :param channel_id:
         :return: JSON result
         """
         attachment_json = None
@@ -213,16 +237,21 @@ class SlackUtils(object):
                       "see JSON message '{}'. %s", json_error)
             payload = slack_text
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
-            "chat.postMessage",
-            channel=self.get_channel_id(),
-            as_user=slack_as_user,
-            username=slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
-            parse="none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
-            link_names=1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
-            mrkdown=slack_markdown,
-            attachments=attachment_json,
-            text=payload
+            api_method = "chat.postMessage",
+            params = {
+                "channel" : channel_id,
+                "as_user" : slack_as_user,
+                "username" : slack_username if slack_username else def_username,  # Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored
+                "parse" : "none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
+                "link_names" : 1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
+                "mrkdown" : slack_markdown,
+                "attachments" : attachment_json,
+                "text" : payload
+            }
         )
         LOG.debug(results)
 
@@ -232,12 +261,13 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Message add failed: " + json.dumps(results))
 
-    def slack_post_attachment(self, attachment_content, attachment_data, slack_text):
+    def slack_post_attachment(self, attachment_content, attachment_data, slack_text, channel_id=None):
         """
         Function uploads file to your slack_channel.
         :param attachment_content:
         :param attachment_data:
         :param slack_text
+        :param channel_id:
         :return: JSON result
         """
         attachment = attachment_data.get("attachment")
@@ -252,14 +282,19 @@ class SlackUtils(object):
             incident_id = attachment_data.get("inc_id")
             artifact_type = attachment_data.get("type")
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
-            "files.upload",
-            channels=self.get_channel_id(),
-            file=attachment_content,
-            filename=file_name,
-            filetype=file_type,
-            title=u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
-            initial_comment=slack_text
+            api_method = "files.upload",
+            data = {
+                "channels" : channel_id,
+                "content" : attachment_content,
+                "filename" : file_name,
+                "filetype" : file_type,
+                "title" : u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
+                "initial_comment" : slack_text
+            }
         )
         LOG.debug(results)
 
@@ -291,18 +326,23 @@ class SlackUtils(object):
 
         return user_id_list
 
-    def invite_users_to_channel(self, user_id_list):
+    def invite_users_to_channel(self, user_id_list, channel_id=None):
         """
         Method invites 1-30 users to a public or private channel.
         :param user_id_list: A comma separated list of user IDs. Up to 30 users may be listed.
+        :param channel_id:
         :return: JSON result
         """
         users_id = ",".join(user_id_list)
 
+        if not channel_id:
+            channel_id = self.get_channel_id()
         results = self.slack_client.api_call(
-            "conversations.invite",
-            channel=self.get_channel_id(),
-            users=users_id
+            api_method = "conversations.invite",
+            params = {
+                "channel" : channel_id,
+                "users" : users_id
+            }
         )
         LOG.debug(results)
 
@@ -313,18 +353,23 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Invite users failed: " + json.dumps(results))
 
-    def find_channel_by_name(self, slack_channel_name):
+    def find_channel(self, slack_channel_name, channel_id=None):
         """
         Method verifies if suggested slack channel already exists and updates the channel instance variable.
         :param slack_channel_name: Name of the public or private channel
+        :param channel_id:
         :return:
         """
-        all_channels = self._slack_find_channels()
+        if channel_id:
+            self.channel = self.check_channel_id(channel_id)
+        else:
+            all_channels = self._slack_find_channels()
 
-        for ch in all_channels:
-            if ch.get("name") == slack_channel_name:
-                self.channel = ch
-                break
+            for ch in all_channels:
+                if ch.get("name") == slack_channel_name:
+                    self.channel = ch
+        
+        return self.channel
 
     def _slack_find_channels(self, cursor=None):
         """
@@ -339,11 +384,13 @@ class SlackUtils(object):
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.list",
-                exclude_archived=False,  # we need to load archived channels
-                types="public_channel,private_channel",
-                limit=SLACK_LOAD_CHANNELS_LIMIT,
-                cursor=cursor
+                api_method="conversations.list",
+                params={
+                    "exclude_archived" : False,  # we need to load archived channels
+                    "types" : "public_channel,private_channel",
+                    "limit" : SLACK_LOAD_CHANNELS_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -361,8 +408,10 @@ class SlackUtils(object):
         :return: JSON result
         """
         results = self.slack_client.api_call(
-            "users.lookupByEmail",
-            email=user_email
+            api_method = "users.lookupByEmail",
+            params = {
+                "email" : user_email
+            }
         )
         LOG.debug(results)
 
@@ -402,9 +451,11 @@ class SlackUtils(object):
         :return:
         """
         results = self.slack_client.api_call(
-            "conversations.create",
-            name=slack_channel_name,
-            is_private=is_private
+            api_method = "conversations.create",
+            params = {
+                "name" : slack_channel_name,
+                "is_private" : is_private
+            }
         )
         LOG.debug(results)
 
@@ -414,16 +465,23 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Slack error response: " + results.get("error", ""))
 
-    def get_permalink(self, thread_id):
+    def get_permalink(self, thread_id, channel_id=None):
         """
         Retrieve a permalink URL for a specific extant message
         :param thread_id: A message's ts value, uniquely identifying it within a channel
+        :param channel_id:
         :return: permalink
         """
+        
+        if not channel_id:
+            channel_id = self.get_channel_id()
+
         results = self.slack_client.api_call(
-            "chat.getPermalink",
-            channel=self.get_channel_id(),
-            message_ts=thread_id
+            api_method = "chat.getPermalink",
+            params = {
+                "channel" : channel_id,
+                "message_ts" : thread_id
+            }
         )
         LOG.debug(results)
 
@@ -459,7 +517,7 @@ class SlackUtils(object):
 
         return file_ts
 
-    def _get_channel_parent_message_history(self, cursor=None):
+    def _get_channel_parent_message_history(self, channel_id=None, cursor=None):
         """
         Method returns only parent messages from a conversation.
 
@@ -467,16 +525,20 @@ class SlackUtils(object):
         latest or oldest arguments, and then continue paging using the cursor. Cursor-based pagination will
         make it easier to incrementally collect information. To begin pagination, specify a limit value under 1000.
         Slack recommends no more than 200 results at a time.
+        :param channel_id:
+        :param cursor:
         :return: list of parent messages
         """
         parent_messages_list = []
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.history",
-                channel=self.get_channel_id(),
-                limit=SLACK_HISTORY_MESSAGE_LIMIT,
-                cursor=cursor
+                api_method = "conversations.history",
+                params = {
+                    "channel" : channel_id,
+                    "limit" : SLACK_HISTORY_MESSAGE_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -513,7 +575,7 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Slack error response: " + results.get("error", ""))
 
-    def get_channel_complete_history(self):
+    def get_channel_complete_history(self, channel_id=None):
         """
         Method will return the entire conversation history, parent messages (with attachments) and their threads.
 
@@ -526,9 +588,10 @@ class SlackUtils(object):
         duplicate messages.
 
         History loads from the newest to the oldest.
+        :param channel_id:
         :return: list of complete conversation messages
         """
-        parent_messages_list = self._get_channel_parent_message_history()
+        parent_messages_list = self._get_channel_parent_message_history(channel_id)
 
         history = []
 
@@ -562,11 +625,13 @@ class SlackUtils(object):
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
-                "conversations.replies",
-                channel=self.get_channel_id(),
-                ts=msg_ts,
-                limit=SLACK_HISTORY_REPLY_MESSAGE_LIMIT,
-                cursor=cursor
+                api_method = "conversations.replies",
+                params = {
+                    "channel" : self.get_channel_id(),
+                    "ts" : msg_ts,
+                    "limit" : SLACK_HISTORY_REPLY_MESSAGE_LIMIT,
+                    "cursor" : cursor
+                }
             )
             LOG.debug(results)
 
@@ -604,8 +669,10 @@ class SlackUtils(object):
         :return: user
         """
         results = self.slack_client.api_call(
-            "users.info",
-            user=user_id
+            api_method = "users.info",
+            params = {
+                "user" : user_id
+            }
         )
         LOG.debug(results)
 
@@ -615,7 +682,7 @@ class SlackUtils(object):
         else:
             raise IntegrationError("Slack error response: " + results.get("error", ""))
 
-    def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id, template_file=None):
+    def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id, channel_name=None, template_file=None):
         """
         Method saves conversation history to a text file and posts it as an attachment.
         :param messages list of message dict
@@ -656,7 +723,7 @@ class SlackUtils(object):
                     number += 1
 
                 temp_file.close()
-                new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file)
+                new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file, channel_name)
 
             except ValueError as err:
                 raise err
@@ -698,7 +765,7 @@ class SlackUtils(object):
             reply_count = message.get("reply_count")
 
             # 3 get the timestamp
-            msg_time = readable_datetime(float(message.get("ts")), False)
+            msg_time = readable_datetime(float(message.get("ts")), False, '%Y-%m-%d %H:%M:%S')
 
             # 4 get the text message
             text, pretext = None, None
@@ -725,7 +792,7 @@ class SlackUtils(object):
             return data
         return None
 
-    def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file):
+    def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file, channel_name=None):
         """
         Function posts an attachment to Resilient.
         :param res_client:
@@ -747,7 +814,7 @@ class SlackUtils(object):
         # to return the Slack channel name to normal form 'form' for the Unicode string 'unistr'.
         # The normal form KD (NFKD) will apply the compatibility decomposition,
         # i.e. replace all compatibility characters with their equivalents.
-        channel_name_ascii = unicodedata.normalize('NFKD', self.get_channel_name()).encode('ascii', 'ignore')
+        channel_name_ascii = unicodedata.normalize('NFKD', channel_name).encode('ascii', 'ignore')
         attachment_name = u"Slack_channel_{}_history.txt".format(channel_name_ascii)
 
         # POST the new attachment
@@ -759,14 +826,20 @@ class SlackUtils(object):
 
         return new_attachment
 
-    def archive_channel(self):
+    def archive_channel(self, channel_id=None):
         """
         Function sets the channel to archive.
+        :param channel_id:
         :return: JSON result
         """
+        if not channel_id:
+            channel_id = self.get_channel_id()
+            
         results = self.slack_client.api_call(
-            "conversations.archive",
-            channel=self.get_channel_id()
+            api_method = "conversations.archive",
+            params = {
+                "channel" : channel_id
+            }
         )
         LOG.debug(results)
 
@@ -862,12 +935,52 @@ class SlackUtils(object):
         :return: JSON result
         """
         results = self.slack_client.api_call(
-            "api.test"
+            api_method = "api.test"
         )
         LOG.debug(results)
 
         return results
 
+    def get_channel_users_list(self, channel_id):
+        """
+        This method retrieves a list of user IDs belonging to the members of a conversation
+        :param channel_id:
+        :return: JSON result
+        """
+        if not channel_id:
+            channel_id = self.get_channel_id()
+        results = self.slack_client.api_call(
+                    api_method = "conversations.members",
+                    params = {
+                        "channel" : channel_id
+                    }
+                )
+
+        LOG.debug(results)
+
+        users_id_list = results.get("members")
+
+        return users_id_list
+
+    def get_users_info(self, users_id_list):
+        """
+        This method retrieves info for every user ID in users_is_list
+        :param users_id_list:
+        :return: list of strings containing info on ever user in the conversation
+        """
+        users_list = []
+        for user in users_id_list:
+            results = self.slack_client.api_call(
+                        api_method = "users.info",
+                        params = {
+                            "user" : user
+                        }
+                    )
+            LOG.debug(results)
+            if not results.get("user",{}).get("is_bot"):
+                users_list.append("{}: {}".format(results.get("user",{}).get("profile",{}).get("display_name",{}), results.get("user",{}).get("profile",{}).get("email",{})))
+
+        return users_list
 
 def build_payload(ordered_data_dict):
     """
@@ -904,7 +1017,7 @@ def build_payload(ordered_data_dict):
                 payload += "\n"
             # Slack expects epoch date in seconds, using future import for division and using operator '//' to yield int in Py2 and Py3
             payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data//1000,
-                                                                                 readable_datetime(input_data, True))
+                                                                                 readable_datetime(input_data, True, '%Y-%m-%d %H:%M:%S'))
 
         elif input_type == 'boolean' and input_data:
             if payload:
@@ -950,10 +1063,10 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         resilient_url_dict = ordered_data.pop("Resilient URL", None)  # get the "Resilient URL" and delete it from the dict
         url = None
         if resilient_url_dict and resilient_url_dict.get("type") == "incident" and resilient_url_dict.get("data"):
-            url = build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), resilient_url_dict.get("data"))
+            url = build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), resilient_url_dict.get("data"), resoptions['org'])
 
         additional_text_dict = ordered_data.pop("Additional Text", None)  # get the "Additional Text" and delete it from the dict
-        pretext = None
+        pretext = ""
         if additional_text_dict and additional_text_dict.get("type") == "string" and additional_text_dict.get("data"):
             pretext = additional_text_dict.get("data")
 
@@ -968,8 +1081,8 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         attachment_json = [
             {
                 "pretext": pretext,
-                "fallback": "Resilient {}".format(type_data),
-                "title": "Resilient {}".format(type_data),
+                "fallback": "SOAR {}".format(type_data),
+                "title": "SOAR {}".format(type_data),
                 "title_link": url,
                 "text": payload,
                 "color": "#36a64f"

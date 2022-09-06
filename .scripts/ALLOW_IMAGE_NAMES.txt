@@ -30,12 +30,13 @@ fn_exchange_online
 fn_extrahop
 fn_geocoding
 fn_google_cloud_dlp
+fn_google_cloud_scc
 fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
 fn_hibp
 fn_html2pdf
-#fn_icdx-INT-4873
+fn_icdx
 fn_incident_utils
 fn_ioc_parser_v2
 fn_ipinfo
@@ -57,6 +58,7 @@ fn_misp
 fn_mitre_integration
 fn_mxtoolbox
 fn_netdevice
+fn_ocr
 fn_odbc_query
 fn_outbound_email
 fn_pa_panorama
@@ -66,6 +68,7 @@ fn_pastebin
 fn_phish_ai
 fn_phish_tank
 fn_pipl
+fn_playbook_maker
 fn_playbook_utils
 fn_proofpoint_tap
 fn_proofpoint_trap
@@ -108,13 +111,17 @@ fn_xforce
 fn_yeti
 fn_zia
 
+#OAuth-Utilities
+#oauth-utils
+
 #Data_Feeder
 rc_data_feed
 #rc-data-feed-plugin-elasticfeed
 #rc-data-feed-plugin-kafkafeed
 rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
-#rc-data-feed-plugin-splunkfeed
+rc_data_feed_plugin_splunkfeed
+
 
 #Custom_Threat_Services
 rc-cts-abuseipdb

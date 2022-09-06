@@ -48,18 +48,10 @@ class TestEmailHeaderValidationUsingDkimarc:
                                        "arc_verify": False,
                                        "dkim_message": "Message is not DKIM signed",
                                        "arc_message": "Most recent ARC-Message-Signature did not validate"}),
-        (test_emails.dkim_arc_success(), {"dkim_verify": True,
-                                          "arc_verify": True,
-                                          "dkim_message": "Validation successful",
-                                          "arc_message": "success"}),
         (test_emails.no_headers(), {"dkim_verify": False,
                                     "arc_verify": False,
                                     "dkim_message": "Message is not DKIM signed",
                                     "arc_message": "Message is not ARC signed"}),
-        (test_emails.dkim_only(), {"dkim_verify": True,
-                                   "arc_verify": False,
-                                   "dkim_message": "Validation successful",
-                                   "arc_message": "Message is not ARC signed"}),
         (test_emails.dkim_only_fail(), {"dkim_verify": False,
                                         "arc_verify": False,
                                         "dkim_message": "Most recent DKIM-Message-Signature did not validate",
@@ -67,6 +59,26 @@ class TestEmailHeaderValidationUsingDkimarc:
     ])
     def test_success(self, circuits_app, email_header_validation_target_email, expected_results):
         """ Test calling with sample values for the parameters """
+        function_params = { 
+            "email_header_validation_target_email": email_header_validation_target_email
+        }
+        results = call_email_header_validation_using_dkimarc_function(circuits_app, function_params)
+        assert(expected_results == results)
+
+    @pytest.mark.livetest
+    @pytest.mark.parametrize("email_header_validation_target_email, expected_results", [
+        (test_emails.dkim_arc_success(), {"dkim_verify": True,
+                                          "arc_verify": True,
+                                          "dkim_message": "Validation successful",
+                                          "arc_message": "success"}),
+        (test_emails.dkim_only(), {"dkim_verify": True,
+                                   "arc_verify": False,
+                                   "dkim_message": "Validation successful",
+                                   "arc_message": "Most recent ARC-Message-Signature did not validate"}),
+    ])
+    def test_success_live(self, circuits_app, email_header_validation_target_email, expected_results):
+        """ These parameters only have passing tests when tox is ran locally """
+
         function_params = { 
             "email_header_validation_target_email": email_header_validation_target_email
         }

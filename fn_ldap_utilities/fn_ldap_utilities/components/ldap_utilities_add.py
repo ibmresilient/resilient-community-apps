@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'ldap_utilities_add' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'ldap_utilities_add' running in workflow '{wf_instance_id}'")
 
             # Validate that required fields are given
             validate_fields(["ldap_dn"], kwargs)
@@ -63,6 +63,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info("ldap_attribute_name_values: %s", attribute_list)
             LOG.info("ldap_multiple_group_dn: %s", group_list)
 
+            # Initiate variable, so that it does not error when called
+            conn = ""
+
             # Instansiate helper (which gets appconfigs from file)
             ldap = LDAPDomains(self.opts)
             helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
@@ -73,10 +76,10 @@ class FunctionComponent(ResilientComponent):
                 # Bind to the connection
                 conn.bind()
             except Exception as err:
-                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+                raise ValueError(f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
             # Inform user
-            yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
+            yield StatusMessage(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
 
             try:
                 yield StatusMessage("Attempting to execute add")
@@ -89,13 +92,13 @@ class FunctionComponent(ResilientComponent):
                         yield StatusMessage("Attempting to execute group add")
                         ad_add_members_to_groups(conn, [ldap_dn], group_list, True)
                 except Exception as err:
-                    raise IntegrationError("Unable to add: {} to group(s): {}".format(ldap_dn, group_list))
+                    raise IntegrationError(f"Unable to add: {ldap_dn} to group(s): {group_list}")
             except LDAPObjectClassError:
                 raise ValueError("objectClass is needed in attribute input, EX: 'objectClass': 'user'")
             except LDAPEntryAlreadyExistsResult:
                 raise ValueError("User already exists")
             except Exception as err:
-                LOG.debug('Error: {}'.format(err))
+                LOG.debug(f'Error: {err}')
                 raise ValueError("Ensure dn is correct")
             finally:
                 # Unbind connection
@@ -109,7 +112,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 results = rp.done(False, result)
 
-            yield StatusMessage("Finished 'ldap_utilities_add' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Finished 'ldap_utilities_add' running in workflow '{wf_instance_id}'")
 
             # success
             yield FunctionResult(results)
