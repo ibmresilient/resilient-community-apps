@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": [
+      {
+        "mod_time": 1649866540057,
+        "node_id": null,
+        "id": 3,
+        "extrahop_id": "02f6b87341f00000",
+        "discovery_id": "02f6b87341f00000",
+        "display_name": "Device 02f6b87341f00000",
+        "description": null,
+        "user_mod_time": 1644418537403,
+        "discover_time": 1644418320000,
+        "vlanid": 0,
+        "parent_id": null,
+        "macaddr": "02:F6:B8:73:41:F0",
+        "vendor": null,
+        "is_l3": false,
+        "ipaddr4": "192.168.1.159",
+        "ipaddr6": null,
+        "device_class": "node",
+        "default_name": "Device 02f6b87341f00000",
+        "custom_name": null,
+        "cdp_name": "",
+        "dhcp_name": "",
+        "netbios_name": "",
+        "dns_name": "",
+        "custom_type": "",
+        "auto_role": "other",
+        "analysis_level": 2,
+        "analysis": "advanced",
+        "role": "other",
+        "on_watchlist": true,
+        "last_seen_time": 1647052200000,
+        "model": null,
+        "model_override": null,
+        "custom_make": null,
+        "custom_model": null,
+        "critical": false,
+        "custom_criticality": null,
+        "cloud_instance_id": null,
+        "cloud_instance_type": null,
+        "cloud_instance_name": null,
+        "cloud_account": null,
+        "vpc_id": null,
+        "subnet_id": null
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_search_filter": "{\"filter\": {\"operator\": \"=\", \"field\": \"ipaddr\", \"operand\": \"192.168.1.159\"}}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 965,
+    "timestamp": "2022-04-13 17:17:19"
+  }
+}
