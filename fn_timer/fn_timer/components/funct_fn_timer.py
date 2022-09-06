@@ -47,25 +47,6 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-
-        # Example validating required fn_inputs
-        # validate_fields(["required_input_one", "required_input_two"], fn_inputs)
-
-        # Example accessing optional attribute in fn_inputs and initializing it to None if it does not exist (this is similar for app_configs)
-        # optional_input =  getattr(fn_inputs, "optional_input", None)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example interacting with REST API
-        # res_client = self.rest_client()
-        # function_details = res_client.get("/functions/{0}?handle_format=names".format(FN_NAME))
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
         try:
             # Get the function parameters:
             timer_time = getattr(fn_inputs,"timer_time", None)  # text
@@ -95,7 +76,7 @@ class FunctionComponent(AppFunctionComponent):
                 total_time_in_seconds = get_sleep_time_in_seconds(timer_time)
 
             if total_time_in_seconds > max_timer_in_seconds:
-                raise ValueError('Requested sleep timer {}s is greater than max_timer {}s set in app.config'.format(total_time_in_seconds, max_timer_in_seconds))
+                raise ValueError(f'Requested sleep timer {total_time_in_seconds}s is greater than max_timer {max_timer_in_seconds}s set in app.config')
 
             # Compute the workflow check interval time based on the total time in seconds.
             wf_check_interval = compute_interval_time(total_time_in_seconds)

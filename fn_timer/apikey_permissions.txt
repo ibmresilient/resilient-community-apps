@@ -69,5 +69,6 @@ read_function
 #edit_privacy_data
 #read_stats
 #read_all_action_invocations
-#read_workspace
-#edit_data
+read_workspace
+#edit_date
+read_playbook

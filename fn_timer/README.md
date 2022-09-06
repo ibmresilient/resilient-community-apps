@@ -134,6 +134,8 @@ This function implements a timer (sleep) function that when called from a workfl
 | `timer_epoch` | `datetimepicker` | No | `-` | Epoch specifying the time the timer should end |
 | `timer_time` | `text` | No | `60s` | Specify time to wait as a string value/units where units is 's' for seconds, 'm' for minutes 'h' for hours and 'd' for days. For example: 60 seconds : "60s"; 45 minutes : "45m"; 12 hours : 12h |
 
+One of these two parameters are required to be set in order to use this function.
+
 </p>
 </details>
 
