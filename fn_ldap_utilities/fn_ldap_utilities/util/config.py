@@ -51,5 +51,4 @@ ldap_password=password
 ldap_user_ntlm=Domain\\User
 ldap_is_active_directory=False
 ldap_connect_timeout=10
-
 """
