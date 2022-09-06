@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "Create operation successful.",
+    "status": true
+  },
+  "raw": "{\"message\": \"Create operation successful.\", \"status\": true}",
+  "inputs": {
+    "splunk_query_param1": "domain",
+    "splunk_threat_intel_type": "ip_intel",
+    "splunk_label": "splunk_76",
+    "splunk_query_param2": "www.hgj.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-splunk-integration",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 2824,
+    "timestamp": "2022-03-17 10:44:17"
+  }
+}
