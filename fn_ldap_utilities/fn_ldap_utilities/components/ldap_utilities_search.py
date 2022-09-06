@@ -69,8 +69,7 @@ class FunctionComponent(ResilientComponent):
 
             if search(re_pattern, ldap_search_filter):
                 if not ldap_param_value:
-                    raise ValueError("The LDAP Search Filter '{}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.".format(
-                        ldap_search_filter))
+                    raise ValueError(f"The LDAP Search Filter '{ldap_search_filter}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.")
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
                     ldap_search_filter = sub(
@@ -82,7 +81,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'ldap_utilities_search' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'ldap_utilities_search' running in workflow '{wf_instance_id}'")
 
             # Validate that required fields are given
             validate_fields(["ldap_search_base", "ldap_search_filter"], kwargs)
@@ -109,6 +108,9 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
+            # Initiate variable, so that it does not error when called
+            conn = ""
+
             # Instansiate helper (which gets appconfigs from file)
             ldap = LDAPDomains(self.opts)
             helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
@@ -123,11 +125,11 @@ class FunctionComponent(ResilientComponent):
                 # Bind to the connection
                 conn.bind()
             except Exception as err:
-                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+                raise ValueError(f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
             try:
                 # Inform user
-                yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
+                yield StatusMessage(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
 
                 entries = []
                 success = False
@@ -147,17 +149,17 @@ class FunctionComponent(ResilientComponent):
                     for entry in entries:
                         entry.update(entry.pop("attributes", None))
 
-                    yield StatusMessage("{} entries found".format(len(entries)))
+                    yield StatusMessage(f"{len(entries)} entries found")
                     success = True
 
                 else:
                     yield StatusMessage("No entries found")
 
             except LDAPSocketOpenError as err:
-                LOG.debug("Error: {}".format(err))
+                LOG.debug(f"Error: {err}")
                 raise ValueError("Invalid Search Base", input_ldap_search_base)
             except LDAPInvalidFilterError as err:
-                LOG.debug("Error: {}".format(err))
+                LOG.debug(f"Error: {err}")
                 raise ValueError("Invalid search filter", input_ldap_search_filter)
             except Exception as err:
                 raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
@@ -172,7 +174,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(success, entries)
             results["entries"] = entries
 
-            yield StatusMessage("Finished 'ldap_utilities_search' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Finished 'ldap_utilities_search' running in workflow '{wf_instance_id}'")
             LOG.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the return value.

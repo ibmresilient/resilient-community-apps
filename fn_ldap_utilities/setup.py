@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_ldap_utilities',
-    version='2.0.0',
+    version='2.0.1',
     license='MIT',
     display_name='SOAR LDAP Utilities',
     author='IBM SOAR',
