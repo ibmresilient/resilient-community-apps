@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "meetingNumber": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "agenda": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phoneAndVideoSystemPassword": {
+          "type": "string"
+        },
+        "meetingType": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "hostUserId": {
+          "type": "string"
+        },
+        "hostDisplayName": {
+          "type": "string"
+        },
+        "hostEmail": {
+          "type": "string"
+        },
+        "hostKey": {
+          "type": "string"
+        },
+        "siteUrl": {
+          "type": "string"
+        },
+        "webLink": {
+          "type": "string"
+        },
+        "sipAddress": {
+          "type": "string"
+        },
+        "dialInIpAddress": {
+          "type": "string"
+        },
+        "enabledAutoRecordMeeting": {
+          "type": "string"
+        },
+        "allowAnyUserToBeCoHost": {
+          "type": "string"
+        },
+        "allowFirstUserToBeCoHost": {
+          "type": "string"
+        },
+        "allowAuthenticatedDevices": {
+          "type": "string"
+        },
+        "enabledJoinBeforeHost": {
+          "type": "string"
+        },
+        "joinBeforeHostMinutes": {
+          "type": "string"
+        },
+        "enableConnectAudioBeforeHost": {
+          "type": "string"
+        },
+        "excludePassword": {
+          "type": "string"
+        },
+        "publicMeeting": {
+          "type": "string"
+        },
+        "enableAutomaticLock": {
+          "type": "string"
+        },
+        "unlockedMeetingJoinSecurity": {
+          "type": "string"
+        },
+        "telephony": {
+          "type": "string"
+        },
+        "callInNumbers": {
+          "type": "string"
+        },
+        "callInNumber": {
+          "type": "string"
+        },
+        "tollType": {
+          "type": "string"
+        },
+        "links": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "meetingOptions": {
+          "type": "string"
+        },
+        "enabledVideo": {
+          "type": "string"
+        },
+        "enabledPolling": {
+          "type": "string"
+        },
+        "enabledNote": {
+          "type": "string"
+        },
+        "noteType": {
+          "type": "string"
+        },
+        "enabledClosedCaptions": {
+          "type": "string"
+        },
+        "enabledFileTransfer": {
+          "type": "string"
+        },
+        "enabledUCFRichMedia": {
+          "type": "string"
+        },
+        "sessionTypeId": {
+          "type": "string"
+        },
+        "scheduledType": {
+          "type": "string"
+        },
+        "simultaneousInterpretation": {
+          "type": "string"
+        },
+        "enabledBreakoutSessions": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "webex_meeting_name": {
+          "type": "string"
+        },
+        "webex_meeting_password": {
+          "type": "string"
+        },
+        "webex_meeting_agenda": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
