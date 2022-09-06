@@ -3,17 +3,40 @@ import time, datetime
 
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
-from resilient_circuits import FunctionResult
 
 
 class WebexMeetings:
+    """
+        Allows for creating a Cisco Webex Meeting from within an incident or a task.
+        Createws a webex meeting using the meetings API and specifies the start, end time,
+        title, agenda and duration.
+
+        Inputs:
+        -------
+            start        (<str>) : Meeting start time
+            end          (<str>) : Meeting end time
+            title        (<str>) : Meeting title
+            agenda       (<str>) : Meeting agenda
+            password     (<str>) : Meeting password
+            duration     (<int>) : Duration of the meeting
+            sendEmail    (<Bool>): Send invite as email
+            timezone     (<str>) : Meeting timezone
+            meetingsURL  (<str>) : A url of the webex meetings API
+            sendEmail    (<bool>): Sends the meeting invite to the attendees
+
+        Returns:
+        --------
+        Response         (<dict>): A response with the meeting options and details
+                                   or the error message if the meeting creation
+                                   fails
+    """
     def __init__(self, requiredParameters, meetingParameters):
-        self.requiredParameters = requiredParameters
-        self.meetingParameters = meetingParameters
-        self.response_handler = cisco_commons.ResponseHandler()
         self.rc = requiredParameters.get("rc")
         self.LOG = requiredParameters.get("logger")
         self.header = requiredParameters.get("header")
+        self.response_handler = cisco_commons.ResponseHandler()
+        self.meetingParameters = meetingParameters
+        self.requiredParameters = requiredParameters
 
 
     def create_meeting(self):

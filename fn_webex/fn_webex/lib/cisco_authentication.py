@@ -9,26 +9,28 @@ from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import FunctionError
 
 class WebexAuthentication:
-    def __init__(self, requiredParameters, app_config):
-        """
+    """
         This application refreshes the OAuth authetication >>RefreshToken<< to interface with 
         the Cisco Webex Endpoint using the Client ID and the Client Secret that was generated
-        while an integration is created at developers.webex.com .
+        while an integration is created at developers.webex.com . Inputs are taken in the form
+        of a dictionary: requiredParameters. The below mentioned inputs need to be available
+        in the requiredParameters dictionary for the authenticator to work.
 
-        Args:
+        Inputs:
         -----
             clientID     (<str>) : Client ID of the integration created on developer.webex.com
             elientSecret (<str>) : Client Secret of the same integration
             refreshToken (<str>) : Refresh token generated using the OAuth Utilities Tool
             scope        (<str>) : Scopes selected during integraiton creation is to be
-                                   specified in a space seperated fashion
+                                    specified in a space seperated fashion
 
         Returns:
         --------
             RequestHeader (<dict>) : An authorization Bearer ID and Content-Type as 
-                                     application/json
-        """
-
+                                        application/json
+    """
+    
+    def __init__(self, requiredParameters, app_config):
         validate_fields(["client_id", "scope", "client_secret", "refresh_token"], app_config)
         self.requiredParameters = requiredParameters
         self.requiredParameters["clientID"] = app_config.get("client_id")

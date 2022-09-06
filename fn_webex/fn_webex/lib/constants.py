@@ -3,25 +3,27 @@
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-
+# Webex Meeting constants
 REMOVE_MILLISECONDS = 1000
 MEETING_START_TIME_BUFFER = 2
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
+# Cisco Authentication URL
 TOKEN_URL = "/v1/access_token"
 
+# Cisco Webex Rooms and teams api URLs
 ROOMS_URL = "/v1/rooms/"
 TEAMS_URL = "/v1/teams/"
 MEETINGS_URL = "/v1/meetings/"
-
 ROOMS_MEMBERSHIP_URL = "/v1/memberships/"
 TEAMS_MEMBERSHIP_URL = "/v1/team/memberships/"
 
+# Soar rest-client URLs
 RES_GROUPS = "/groups"
 RES_USERS = "/users/query_paged?return_level=normal"
 RES_INCIDENT = "/incidents/"
 
-
+# Log and status messages
 MSG_CREATE_SECURITY =  "Webex: Creating a Security context and establishing a connection with the Webex EndPoint"
 MSG_FAILED_AUTH = "Failed to create Security Context. Failed to Authenticate!"
 MSG_INVALID_TIMEZONE = "Invalid Timezone format. Supported format UTC +01:00"

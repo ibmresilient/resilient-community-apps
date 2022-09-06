@@ -1,25 +1,34 @@
 from multiprocessing.sharedctypes import Value
 from resilient_lib import IntegrationError
 
+
+
 class ResponseHandler:
     """
     Handles the responses received from the Webex endpoint.
-
     Used as a callback function for request_common.execute
 
     The behaviour of the response received can be customized by allowing 
     certain response codes to pass through and not raise an exception.
+
+    Input:
+    ------
+        Response  (<response>) : A response from rc.execute
+
+    Defaults:
+    ---------
+        msg                    : Message in accordance with the error code
+        default_exempt_codes   : default list of codes that are to be 
+                                 exempted from raising an exception
+        exempt_codes           : list of codes that are to be exempted
+                                 from raising an exception
+
+    Returns:
+    --------
+            (<dict>) : Response with appropriate status code and message
     """
     def __init__(self):
-        """
-        Defaults:
-        ---------
-            msg                  : Message in accordance with the error code
-            default_exempt_codes : default list of codes that are to be 
-                                   exempted from raising an exception
-            exempt_codes         : list of codes that are to be exempted
-                                   from raising an exception
-        """
+
         self.msg = None
         self.default_exempt_codes = [204]
         self.exempt_codes = self.default_exempt_codes
