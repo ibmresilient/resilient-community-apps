@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_meeting_name"], fn_inputs)
+        validate_fields(["webex_meeting_name", "webex_send_email", "webex_meeting_duration"], fn_inputs)
         validate_fields([{"name" : "webex_site_url",
                           "name" : "webex_timezone"}], self.config_options)
 
@@ -72,7 +72,8 @@ class FunctionComponent(AppFunctionComponent):
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
         self.meetingParameters["password"] = fn_inputs.webex_meeting_password if hasattr(fn_inputs, 'webex_meeting_password') else None
-        self.meetingParameters["sendEmail"] = True
+        self.meetingParameters["duration"] = fn_inputs.webex_meeting_duration
+        self.meetingParameters["sendEmail"] = fn_inputs.webex_send_email
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)

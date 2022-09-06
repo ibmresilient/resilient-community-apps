@@ -80,7 +80,7 @@ class WebexMeetings:
                 raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
                     meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
         else:
-            meeting_end = meeting_start + datetime.timedelta(minutes=constants.DEFAULT_MEETING_LENGTH)
+            meeting_end = meeting_start + datetime.timedelta(minutes=self.meetingParameters.get("duration"))
 
         self.meeting_start_time = meeting_start.strftime(constants.DATETIME_FORMAT) + timezone
         self.meeting_end_time   = meeting_end.strftime(constants.DATETIME_FORMAT) + timezone
