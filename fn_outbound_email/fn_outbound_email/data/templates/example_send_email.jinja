@@ -21,8 +21,7 @@
     {% endfor -%}
 {%- endmacro -%}
 
-{% macro get_note(note) -%}
-    {% set get_children = True -%}
+{% macro get_note(note, get_children=True) -%}
     {% set values = template_helper.get_notes(note, get_children) -%}
     {% for n in values -%}
         {% if n.get("text", "") -%}

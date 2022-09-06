@@ -1,6 +1,6 @@
 ## Table of Contents
 - [Release Notes](#release-notes)
-  - [v2.0](#v2_0)
+  - [v2.0 Changes](#v2_0-changes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
@@ -40,15 +40,15 @@
 | v1.0.8 | 4/2020 | Initial Release |
 
 
-### v2.0
+### v2.0 Changes
 Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
 with inbound mail. This release incorporates many changes which are summarized here:
 
 * Unified display of inbound emails with outbound email through a datatable. See [Script - Outbound Email Results](#script---outbound-email-results) and [Datatable - Email Conversations].(#datatable---email-conversations).
 * Auto modification of the Email tab to include email conversations datatable.
 * Multiple template support defined in the app.config file.
+* Expanded template capability supporting notes, artifacts and links back to SOAR. See [Enhancements for Multiple Templates and Attachment & Notes Inclusion](#enhancements-for-multiple-templates-and-attachment--notes-inclusion).
 * Additional header available for outbound email (i.e. message-id, in-reply-to, importance).
-* Enhanced incident data available to include from templates (i.e. artifacts, notes and links back to SOAR).
 * A new function to preserve the original outbound email capability and allow all the new functionality in
 v2.0 to be added. See [Function - Outbound Email: Send Email2](#function---outbound-email-send-email2).
 * OAuth authenticateion
@@ -653,43 +653,39 @@ In the default template packaged with this app, `data/example_send_email.jinja`,
 <p>
 
 ```
-{% set NOT_FOUND = ["Not Found!","-","None",None] %}
-{% macro get_row(label,field_name) -%}
-	{% set value = template_helper.get_incident_value(incident,field_name) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-    {% if value and value not in NOT_FOUND and not value.startswith('-') %}
+{% set NOT_FOUND = ["Not Found!","-","None",None] -%}
+{% set style = "font-family: Calibri; color: rgb(31,73,125)" -%}
+{% macro get_row(label, field_name) -%}
+	{% set value = template_helper.get_incident_value(incident, field_name) -%}
+    {% if value and value not in NOT_FOUND and not value.startswith('-') -%}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
         <td style="{{style}}">{{ value | safe }}</td>
     </tr>
-    {% endif %}
-{%- endmacro %}
+    {% endif -%}
+{% endmacro -%}
 
-{# UNCOMMENT TO INCLUDE ARTIFACTS #}
-{# {% macro get_artifact(art) -%}
-	{% set values = template_helper.get_artifacts(art) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-    {% for a in values %}
+{% macro get_artifact(art) -%}
+    {% set values = template_helper.get_artifacts(art) -%}
+    {% for a in values -%}
         <tr>
             <td width="200" style="{{style}}">{{ a.get("value") | safe }}</td>
-            <td width="200" style="{{style}}">{{ a.get("description") | safe }}</td>
+            {% set descr = a.get("description") if a.get("description") else '-' -%}
+            <td width="200" style="{{style}}">{{ descr | safe }}</td>
         </tr>
-    {% endfor %}
-{%- endmacro %} #}
+    {% endfor -%}
+{%- endmacro -%}
 
-{# UNCOMMENT TO INCLUDE NOTES #}
-{# {% macro get_note(note) -%}
-    {% set get_children = True %}
-	{% set values = template_helper.get_notes(note, get_children) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-    {% for n in values %}
-        {% if n.get("text", "")%}
+{% macro get_note(note, get_children=True) -%}
+    {% set values = template_helper.get_notes(note, get_children) -%}
+    {% for n in values -%}
+        {% if n.get("text", "") -%}
             <tr>
                 <td colspan="2" style="{{style}}">{{ n.get("text", "") | safe }}</td>
             </tr>
-        {% endif %}
-    {% endfor %}
-{%- endmacro %} #}
+        {% endif -%}
+    {% endfor -%}
+{% endmacro -%}
 
 <table width="100%" >
 <tr>
@@ -698,20 +694,21 @@ In the default template packaged with this app, `data/example_send_email.jinja`,
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-    {{ get_row('Severity:','severity_code') }}<br>
-    {{ get_row('Status:','plan_status') }}<br>
-    {{ get_row('Created:','create_date') }}<br>
-    {{ get_row('Category:','incident_type_ids') }}<br>
+    {{ get_row('Severity:', 'severity_code') }}<br>
+    {{ get_row('Status:', 'plan_status') }}<br>
+    {{ get_row('Created:', 'create_date') }}<br>
+    {{ get_row('Category:', 'incident_type_ids') }}<br>
 <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-{{ get_row('Description:','description') }}
+{{ get_row('Description:', 'description') }}
 
 {# UNCOMMENT TO INCLUDE ARTIFACTS #}
-{# <tr>
+{#
+<tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT ARTIFACTS</h3>
         <p style="color: rgb(68,114,196)">Note: Artifacts are included in the e-mail if present in the incident.</p>
@@ -722,14 +719,15 @@ In the default template packaged with this app, `data/example_send_email.jinja`,
 #}
 
 {# UNCOMMENT TO INCLUDE NOTES #}
-{# <tr>
+{#
+<tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>
         <p style="color: rgb(68,114,196)">Note: Notes are included in the e-mail if present in the incident.</p>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-{{ get_note(note) }}
+{{ get_note(note, get_children=True) }}
 #}
 
 <tr>
@@ -757,31 +755,37 @@ In the default template packaged with this app, `data/example_send_email.jinja`,
 
 ```
 {# UNCOMMENT TO INCLUDE NOTES #}
-{# {% macro get_note(note) -%}
-  {% set get_children = True %}
-	{% set values = template_helper.get_note_values(note, get_children) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-    {% for n in values %}
-        <tr>
-            <td width="200" style="{{style}}">{{ n.get("text") | safe }}</td>
-        </tr>
-    {% endfor %}
-{%- endmacro %} #}
-...
-{# UNCOMMENT TO INCLUDE NOTES #}
-{# <tr>
+{#
+ <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
-    {{ get_note(note) }}
-</tr> #}
-
+    {{ get_note(note, get_children=True) }}
+</tr> 
+#}
 ```
 
 </p>
 </details>
 
+### Incident Links
+
+To include a link back to the SOAR incident, add the following information to your template:
+
+```
+{% set inc_url = template_helper.generate_incident_url(incident.id) %}
+<a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+```
+
+### Task Links
+
+To include a link back to the SOAR task, add the following information to your inline template. Unfortunetely, this cannot be added to a template defined in your app.config file.
+
+```
+"Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({inc_id}, {task_id}) }}}}'>{task_name}</a>".format(inc_id=incident.id, task_id=task.id, task_name=task.name)
+
+```
 ---
 
 ## Troubleshooting & Support

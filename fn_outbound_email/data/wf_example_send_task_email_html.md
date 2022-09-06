@@ -41,12 +41,14 @@ inputs.mail_body_html = u"""
 <br>
     Incident Type: {3}
 <br>
-    Task: {4}
+    Incident Link: <a target='_blank' href='{{{{ template_helper.generate_incident_url({6}) }}}}'>{6}</a>
+<br>
+    Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({6},{7}) }}}}'>{4}</a>
 <br>
     Instructions: 
 <br>
 {5}
-""".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get("content") if task.instructions else '-')
+""".format(sev_code, current_plan, creation_date, type_ids, task.name, task.instructions.get("content") if task.instructions else '-', incident.id, task.id)
 
 ```
 
