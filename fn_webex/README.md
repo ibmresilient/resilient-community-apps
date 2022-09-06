@@ -209,7 +209,7 @@ results = {
     "sessionTypeId": "3",
     "simultaneousInterpretation": "enabled:false",
     "sipAddress": "25967357926@example.com",
-    "siteUrl": "example-5xth.webex.com",
+    "siteUrl": "example-ex.webex.com",
     "start": "2022-08-11T13:33:00Z",
     "state": "active",
     "status": true,
