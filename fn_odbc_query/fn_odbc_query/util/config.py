@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[fn_odbc_query]
+    return u"""[fn_odbc_query]
 # Define your connection string
 sql_connection_string=Driver={PostgreSQL};Server=IPAddress;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;
 
@@ -41,6 +41,4 @@ sql_database_type=PostgreSQL
 # Some ODBC drivers do not implement the connection timeout and will throw pyodbc.Error while trying to set it.
 # The error will be logged as a warning and will not terminate the workflow.
 #sql_query_timeout=10
-    """
-    return config_data
-
+"""

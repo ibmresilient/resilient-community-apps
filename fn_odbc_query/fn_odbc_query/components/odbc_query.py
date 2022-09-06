@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
-"""Resilient functions component to execute ODBC queries"""
+"""SOAR functions component to execute ODBC queries"""
 
 # Set up:
 # Destination: a Queue named "fn_odbc_query".
@@ -17,9 +16,8 @@ from fn_odbc_query.util import function_utils, odbc_utils
 
 LOG = logging.getLogger(__name__)
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_odbc_query'
+    """Component that implements SOAR function 'fn_odbc_query'
 
     The Function executes an ODBC query and takes the following parameters:
         sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3
@@ -60,7 +58,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_odbc_query")
     def _fn_odbc_query_function(self, event, *args, **kwargs):
-        """Resilient Function: A function that makes ODBC queries
+        """SOAR Function: A function that makes ODBC queries
 
         Using prepared SQL statements, where parameters are passed to the database separately,
         protecting against SQL injection attacks.
