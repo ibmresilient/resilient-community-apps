@@ -3,7 +3,6 @@ import time, datetime
 
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
-from resilient_circuits import FunctionResult
 
 
 class WebexMeetings:

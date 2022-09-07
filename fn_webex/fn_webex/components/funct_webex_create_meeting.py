@@ -77,7 +77,6 @@ class FunctionComponent(AppFunctionComponent):
         self.meetingParameters["duration"] = fn_inputs.webex_meeting_duration
         self.meetingParameters["sendEmail"] = fn_inputs.webex_send_email
 
-
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
 
@@ -89,6 +88,7 @@ class FunctionComponent(AppFunctionComponent):
             authenticated = True
             self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
             yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
+
 
         except Exception as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)

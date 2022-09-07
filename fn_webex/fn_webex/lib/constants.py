@@ -5,12 +5,12 @@
 
 # Webex Meeting constants
 REMOVE_MILLISECONDS = 1000
-DEFAULT_MEETING_LENGTH = 45
 MEETING_START_TIME_BUFFER = 2
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 # Cisco Authentication URL
 TOKEN_URL = "/v1/access_token"
+
 
 # Cisco Webex Rooms and teams API URLs
 ROOMS_URL = "/v1/rooms/"

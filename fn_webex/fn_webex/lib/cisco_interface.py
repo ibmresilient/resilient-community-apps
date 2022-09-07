@@ -9,6 +9,7 @@ from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
 from resilient_circuits import FunctionResult
 
+
 class WebexInterface:
     """
         This application allows for creating a team or a room using the Cisco Webex API. This
@@ -29,8 +30,9 @@ class WebexInterface:
         Returns:
         --------
             Response          (<dict>)  : A response with the room/team options and details
-                                            or the error message if the meeting creation
-                                            fails
+                                          or the error message if the meeting creation
+                                          fails
+
     """
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
@@ -59,7 +61,7 @@ class WebexInterface:
         self.add_membership()
         return self.get_entity_details()
 
-
+      
     def find_operation(self):
         """
         This function detemines the operaiton that is being perofrmed. All the below functions
@@ -271,3 +273,4 @@ class WebexInterface:
             return FunctionResult(response, success=False, reason="This room cannot be deleted directly. Delete the team associated with it to clear this space.")
         else:
             return FunctionResult(response, success=False, reason="Unfamiliar response. Status code : {}".format(response.get("status_code")))
+
