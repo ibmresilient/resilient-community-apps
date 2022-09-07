@@ -140,19 +140,19 @@ class WebexInterface:
 
         if self.requiredParameters.get("addAllMembers"):
             if len(incidentMembers.get("members")) == 0:
-                self.LOG.info("Webex: There are no members assigned to this incident")
+                self.LOG.info(constants.LOG_INCIDENT_NO_MEMBERS)
             for incident_member in incidentMembers.get("members"):
                 if self.is_direct_member(incident_member, orgMemberList):
                     emailIds.append(self.is_direct_member(incident_member, orgMemberList))
                 elif self.is_group_member(incident_member, orgMemberList, orgGroupList):
                     emailIds.extend(self.is_group_member(incident_member, orgMemberList, orgGroupList))
         elif not self.requiredParameters.get("additionalAttendee"):
-            self.LOG.warn("Warning: No participants were added to the room/team. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field.")
+            self.LOG.warn(constants.MSG_WARN_NO_PARTICIPANTS.format(self.requiredParameters.get("entityName")))
         
         if self.requiredParameters.get("additionalAttendee"):
             emailIds += self.requiredParameters.get("additionalAttendee").lower().replace(" ", "").split(",")
         self.emailIds = emailIds
-        self.LOG.info("Webex: Members to be added to the room/team {}".format(self.emailIds))
+        self.LOG.info(constants.LOG_ADD_MEMEBERS.format(self.requiredParameters.get("entityName"), self.emailIds))
 
 
     def add_membership(self):
@@ -165,7 +165,7 @@ class WebexInterface:
             try:
                 _ = self.rc.execute("post", self.requiredParameters.get("membershipUrl"),
                                     headers=self.header, data=json.dumps(data))
-                self.LOG.info("Webex: User {} added to incident room/team".format(user))
+                self.LOG.info("Webex: User {} added to incident {}".format(user, self.requiredParameters.get("entityName")))
             except IntegrationError as err:
                 self.LOG.info("Webex: User {} is already a member of the room/team".format(user))
 

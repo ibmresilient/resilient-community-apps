@@ -36,3 +36,7 @@ MSG_SUCCESS_DELETION = "Successfully deleted {} : {}"
 MSG_ENTITY_NOT_FOUND = "The specified {} could not be found!"
 MSG_ENTITY_NO_DIRECT_DELETE = "This room cannot be deleted directly. Delete the team associated with it to clear this space."
 MSG_UNFAMILIAR_RESPONSE_CODE = "Unfamiliar response. Status code : {}"
+
+LOG_WARN_NO_PARTICIPANTS = "No participants were added to the {}. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field."
+LOG_ADD_MEMEBERS = "Webex: Members to be added to the {} {}"
+LOG_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this incident"
