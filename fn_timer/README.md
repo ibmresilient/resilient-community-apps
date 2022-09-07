@@ -182,7 +182,7 @@ results = {
 
 ```python
 # Get the timer values from the rule properties custom field
-list_time_values = rule.properties.parallel_timers
+list_time_values = rule.properties.timer_parallel_timers
 
 # Get the list of 2 timer values
 time_list = list_time_values.split(',')
