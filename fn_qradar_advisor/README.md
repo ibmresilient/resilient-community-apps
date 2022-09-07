@@ -970,7 +970,7 @@ The user can specify the desired return stage in the pre-process script of the e
 <p>
 The search REST API of QRadar Advisor returns CTI information in Structured Threat Information Expression (STIX 2.0) format. It is normally a STIX bundle with STIX objects. The function processes the STIX data and performs the following:
 
-*  Generates a HTML representation of the STIX data
+*  Generates an HTML representation of the STIX data
 *  Extracts observables from the STIX objects
 *  Generates a summary from the STIX data
 <p>
