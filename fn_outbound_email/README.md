@@ -775,7 +775,7 @@ To include a link back to the SOAR incident, add the following information to yo
 
 ```
 {% set inc_url = template_helper.generate_incident_url(incident.id) %}
-<a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+<a target='_blank' href='{ inc_url }'>{ incident.id }: { incident.name }</a>
 ```
 
 ### Task Links
