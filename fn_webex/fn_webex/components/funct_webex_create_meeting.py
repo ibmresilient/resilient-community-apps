@@ -72,7 +72,9 @@ class FunctionComponent(AppFunctionComponent):
         self.meetingParameters["title"] = fn_inputs.webex_meeting_name
         self.meetingParameters["agenda"] = fn_inputs.webex_meeting_agenda if hasattr(fn_inputs, 'webex_meeting_agenda') else None
         self.meetingParameters["password"] = fn_inputs.webex_meeting_password if hasattr(fn_inputs, 'webex_meeting_password') else None
-        self.meetingParameters["sendEmail"] = True
+        self.meetingParameters["duration"] = fn_inputs.webex_meeting_duration
+        self.meetingParameters["sendEmail"] = fn_inputs.webex_send_email
+
 
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
@@ -83,7 +85,8 @@ class FunctionComponent(AppFunctionComponent):
             authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
             self.requiredParameters["header"] = authenticator.Authenticate()
             authenticated = True
-            yield self.status_message("Successfully Authenticated!")
+            self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
+            yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
 
         except Exception as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)

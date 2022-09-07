@@ -31,6 +31,12 @@ if rule.properties.webex_meeting_end_time:
 else:
   inputs.webex_meeting_end_time = None
   
+if rule.properties.webex_send_email is not None:
+  inputs.webex_send_email = rule.properties.webex_send_email
+
+if rule.properties.webex_meeting_duration:
+  inputs.webex_meeting_duration = rule.properties.webex_meeting_duration
+  
 # Get the agenda from the activity field or the incident description
 if rule.properties.webex_meeting_agenda is None:
   if incident.description is not None and incident.description.content is not None:

@@ -73,20 +73,18 @@ class FunctionComponent(AppFunctionComponent):
             authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
             self.requiredParameters["header"] = authenticator.Authenticate()
             authenticated = True
-            yield self.status_message("Successfully Authenticated!")
+            self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
+            yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
 
         except Exception as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)
             yield self.status_message(constants.MSG_FAILED_AUTH)
-            reason = str(err)
             authenticated = False
+            yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
+            yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:
             webex = WebexInterface(self.requiredParameters)
             response = webex.create_team_room()
             yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(response, success=True)
-
-        else:
-            yield self.status_message("Failed to run App Function : '{0}'".format(FN_NAME))
-            yield FunctionResult(None, success=False, reason=reason)
