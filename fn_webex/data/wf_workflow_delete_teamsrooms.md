@@ -28,7 +28,20 @@ if rule.properties.webex_roomteam_selector is not None:
 
 ### Post-Processing Script
 ```python
-None
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to create Cisco WebEx Room"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  text  = u"<b>Cisco Webex:</b><br />"
+  text += content.get("message")
+
+note = helper.createRichText(text)
+incident.addNote(note)
 ```
 
 ---
