@@ -54,6 +54,7 @@ def customization_data(client=None):
         - webex_create_team
         - webex_platform
         - workflow_create_room
+        - workflow_delete_teamsrooms
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
