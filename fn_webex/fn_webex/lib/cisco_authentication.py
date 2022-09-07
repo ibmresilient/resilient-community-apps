@@ -6,7 +6,6 @@ import json
 
 from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError, validate_fields
-from resilient_circuits import FunctionError
 
 class WebexAuthentication:
     """
