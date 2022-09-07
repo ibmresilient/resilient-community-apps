@@ -19,7 +19,7 @@ class ResponseHandler:
                                  exempted from raising an exception
         exempt_codes           : list of codes that are to be exempted
                                  from raising an exception
-
+                                 
     Returns:
     --------
             (<dict>) : Response with appropriate status code and message

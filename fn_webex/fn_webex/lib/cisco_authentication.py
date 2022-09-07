@@ -21,7 +21,7 @@ class WebexAuthentication:
             elientSecret (<str>) : Client Secret of the same integration
             refreshToken (<str>) : Refresh token generated using the OAuth Utilities Tool
             scope        (<str>) : Scopes selected during integraiton creation is to be
-                                   specified in a space seperated fashion
+                                    specified in a space seperated fashion
 
         Returns:
         --------
