@@ -59,7 +59,7 @@ class FunctionComponent(AppFunctionComponent):
         self.requiredParameters["baseURL"] = self.config_options.get("webex_site_url")
         self.requiredParameters["entityId"]   = fn_inputs.webex_entity_id
         self.requiredParameters["entityName"] = fn_inputs.webex_roomteam_selector
-
+        
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
             self.LOG.info(constants.MSG_CREATE_SECURITY)

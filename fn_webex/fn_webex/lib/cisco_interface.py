@@ -265,12 +265,14 @@ class WebexInterface:
         self.response_handler.add_exempt_codes(codes=[404, 405])
         response = self.rc.execute("delete", deletionURL, headers=self.header, callback=self.response_handler.check_response)
         self.response_handler.clear_exempt_codes()
+
         if response.get("status_code") == 204:
+            response["message"] = constants.MSG_SUCCESS_DELETION.format(self.requiredParameters.get("entityName"), self.requiredParameters.get("entityId"))
             return FunctionResult(response, success=True)
         elif response.get("status_code") == 404:
-            return FunctionResult(response, success=False, reason="The specified room/team ID could not be found!")
+            return FunctionResult(response, success=False, reason=constants.MSG_ENTITY_NOT_FOUND.format(self.requiredParameters.get("entityName")))
         elif response.get("status_code") == 405:
-            return FunctionResult(response, success=False, reason="This room cannot be deleted directly. Delete the team associated with it to clear this space.")
+            return FunctionResult(response, success=False, reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
         else:
-            return FunctionResult(response, success=False, reason="Unfamiliar response. Status code : {}".format(response.get("status_code")))
+            return FunctionResult(response, success=False, reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
 

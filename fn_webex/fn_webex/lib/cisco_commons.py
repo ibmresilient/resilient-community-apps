@@ -78,7 +78,7 @@ class ResponseHandler:
                                could be due to an invalid call methord being passed.
         """
         
-        if not self.response:
+        if self.response is None:
             raise IntegrationError("API call failed! Invalid METHOD passed to rc.execute()! Response returned was None")
         elif self.response.status_code == 204:
             self.msg = "API call successful! No content returned"

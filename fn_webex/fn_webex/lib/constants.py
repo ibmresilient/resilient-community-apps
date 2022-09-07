@@ -31,3 +31,8 @@ MSG_INVALID_TIMEZONE = "Invalid Timezone format. Supported format UTC +01:00"
 MSG_INVLAID_STARTTIME = "Meeting start time ({}), must be after current time"
 MSG_INVALID_ENDTIME = "Meeting end time ({}), must be after meeting start time({}) and current time ({})"
 MSG_SUCCESS_AUTHENTICATED = "Security context create! Successfully Authenticated!"
+
+MSG_SUCCESS_DELETION = "Successfully deleted {} : {}"
+MSG_ENTITY_NOT_FOUND = "The specified {} could not be found!"
+MSG_ENTITY_NO_DIRECT_DELETE = "This room cannot be deleted directly. Delete the team associated with it to clear this space."
+MSG_UNFAMILIAR_RESPONSE_CODE = "Unfamiliar response. Status code : {}"
