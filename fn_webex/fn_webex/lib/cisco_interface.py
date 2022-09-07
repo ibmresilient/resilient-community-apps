@@ -12,6 +12,28 @@ from resilient_lib import IntegrationError
 from resilient_circuits import FunctionResult
 
 class WebexInterface:
+    """
+        This application allows for creating a team or a room using the Cisco Webex API. This
+        provides SOAR with the ability to create teams and rooms from within a SOAR incident
+        or a task. 
+
+        Inputs:
+        -----
+            teamName           (<str>)  : Name of the team to be created
+            incidentId         (<str>)  : Incident ID
+            addAllMembers      (<bool>) : Adds all members of the incident to the team
+            additionalAttendee (<str>)  : Additonal attendees to be added
+            entityId           (<str>)  : always >>teamId<<
+            entityName         (<str>)  : always >>teamName<<
+            entityURL          (<str>)  : Teams API URL
+            membershipURL      (<str>)  : Teams Membership API URL
+
+        Returns:
+        --------
+            Response          (<dict>)  : A response with the room/team options and details
+                                            or the error message if the meeting creation
+                                            fails
+    """
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
@@ -26,12 +48,12 @@ class WebexInterface:
         A wrapper function that allows for creating a team or a room. For a room or a team
         to be created, the following functions are executed in the specified order.
 
-            - find_operation       : Determines if a room or team is to be created.
-            - generate_member_list : Generates a list of members to be added.
-            - retrieve_entity      : Tries to find a room or a team with the same name.
+            * find_operation       : Determines if a room or team is to be created.
+            * generate_member_list : Generates a list of members to be added.
+            * retrieve_entity      : Tries to find a room or a team with the same name.
                                      Else creates a new one using create_entity
-            - add_membership       : Adds the list of members to the room or team
-            - get_entity_details   : Retrieves the room/team information
+            * add_membership       : Adds the list of members to the room or team
+            * get_entity_details   : Retrieves the room/team information
         '''
         self.find_operation()
         self.generate_member_list()

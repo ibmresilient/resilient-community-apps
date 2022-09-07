@@ -35,4 +35,4 @@ def selftest_function(opts):
     except Exception as err:
         return {
                 "state": "failure",
-                "reason": err.__str__()}
+                "reason": str(err)}

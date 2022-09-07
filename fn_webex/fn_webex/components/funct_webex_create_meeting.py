@@ -34,7 +34,9 @@ class FunctionComponent(AppFunctionComponent):
             end          (<str>) : Meeting end time
             title        (<str>) : Meeting title
             agenda       (<str>) : Meeting agenda
-            password     (<str>) : Meeting password
+            password     (<str>) : Meeting password+            
+            duration     (<int>) : Duration of the meeting
++           sendEmail    (<Bool>): Send invite as email
         
         Config Options:
         ---------------
@@ -56,7 +58,7 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_meeting_name"], fn_inputs)
+        validate_fields(["webex_meeting_name", "webex_send_email", "webex_meeting_duration"], fn_inputs)
         validate_fields([{"name" : "webex_site_url",
                           "name" : "webex_timezone"}], self.config_options)
 

@@ -86,6 +86,7 @@ class TestFnCreateMeeting:
             "password"    : "abcd123",
             "agenda"      : "pytest",
             "sendEmail"   : "",
+            "duration"    : 45
         }
     app_configuration = {
             "client_id"     : "client123",

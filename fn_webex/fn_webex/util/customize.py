@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_webex",
         "message_destinations": [u"fn_webex"],
         "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team", u"webex_delete_teamsrooms"],
-        "workflows": [u"create_webex_team_with_room", u"webex_create_team", u"webex_platform", u"workflow_create_room"],
+        "workflows": [u"create_webex_team_with_room", u"webex_create_team", u"webex_platform", u"workflow_create_room", u"workflow_delete_teamsrooms"],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
