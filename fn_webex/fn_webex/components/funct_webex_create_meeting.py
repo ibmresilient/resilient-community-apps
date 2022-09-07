@@ -34,9 +34,9 @@ class FunctionComponent(AppFunctionComponent):
             end          (<str>) : Meeting end time
             title        (<str>) : Meeting title
             agenda       (<str>) : Meeting agenda
-            password     (<str>) : Meeting password+            
+            password     (<str>) : Meeting password
             duration     (<int>) : Duration of the meeting
-+           sendEmail    (<Bool>): Send invite as email
+            sendEmail    (<Bool>): Send invite as email
         
         Config Options:
         ---------------

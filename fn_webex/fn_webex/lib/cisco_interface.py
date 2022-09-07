@@ -3,8 +3,6 @@
 
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import json
-from multiprocessing.sharedctypes import Value
-import re
 
 from urllib import parse
 from fn_webex.lib import constants, cisco_commons
