@@ -8,6 +8,8 @@ This module contains the ElasticFeedDestination for writing Resilient data
 to an Elasticseach index.
 """
 
+import base64
+import copy
 import logging
 
 from ssl import create_default_context
@@ -19,11 +21,9 @@ from rc_data_feed.lib.type_info import TypeInfo
 LOG = logging.getLogger(__name__)
 
 DEF_INDEX_SETTINGS = {
-    "settings": {
-        "index": {
-            "blocks": {
-                "read_only_allow_delete": "false"
-            }
+    "index": {
+        "blocks": {
+            "read_only_allow_delete": "false"
         }
     }
 }
@@ -32,8 +32,9 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     """Feed destination for writing Resilient data to a local directory."""
     def __init__(self, rest_client_helper, options):   # pylint: disable=unused-argument
         super(ElasticFeedDestination, self).__init__()
-        self.url = options.get("url")
         self.port = int(options.get("port", 9200))
+        self.url = "{}:{}".format(options.get("url"), self.port)
+
         self.user = options.get("auth_user")
         self.password = options.get("auth_password")
         self.index_prefix = options.get("index_prefix")
@@ -42,33 +43,35 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         self.init_elastic()
 
     def init_elastic(self):
-        http_auth = None
+        basic_auth = None
         if self.user:
-            http_auth= (self.user, self.password)
+            basic_auth= (self.user, self.password)
 
         if self.url.lower().startswith('https'):
             # Attempt to create an SSL context, should work fine if no CERT is provided
             if self.cafile is None or self.cafile.lower() == 'false':
                 context = create_default_context()
+                # Connect to the ElasticSearch instance
+                context.check_hostname = False
+                self.es = Elasticsearch(self.url,
+                        ssl_context=context,
+                        basic_auth=basic_auth,
+                        verify_certs=False)
             else:
                 context = create_default_context(cafile=self.cafile)
                 # Connect to the ElasticSearch instance
-            self.es = Elasticsearch(self.url,
-                                    port=self.port,
-                                    ssl_context=context,
-                                    http_auth=http_auth)
+                self.es = Elasticsearch(self.url,
+                                        ssl_context=context,
+                                        basic_auth=basic_auth)
         else:
             # Connect without to Elastic without HTTPS
             self.es = Elasticsearch(self.url,
-                                    port=self.port,
-                                    verify_certs=False,
-                                    cafile=self.cafile,
-                                    http_auth=http_auth)
+                                    basic_auth=basic_auth)
 
 
     def _create_index(self, index):
-        if not self.es.indices.exists(index):
-            results = self.es.indices.create(index, body=DEF_INDEX_SETTINGS)
+        if not self.es.indices.exists(index=index):
+            results = self.es.indices.create(index=index, settings=DEF_INDEX_SETTINGS)
             LOG.debug(u"settings on {}: {}".format(index, results))
 
 
@@ -79,7 +82,8 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         """
         name = context.type_info.get_pretty_type_name()
 
-        elastic_payload = context.type_info.flatten(payload, TypeInfo.translate_value)
+        elastic_payload = context.type_info.flatten(payload,
+                                                    translate_func=translate_value_for_bytes(make_string))
 
         # add the incident_id and object id to all payloads, if needed
         elastic_payload['inc_id'] = context.inc_id
@@ -101,7 +105,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     def _fn_elasticsearch_index(self, index, object_type, type_id, payload):
         """Function: Allows a user to index a specified payload"""
 
-        result = self.es.index(index=index, doc_type=object_type, id=type_id, body=payload)
+        result = self.es.index(index=index, id=type_id, document=payload)
 
         if result.get("result") not in ("created", "updated"):
             msg_error = u"Unable to index {}, {}, {} ({})".format(index, object_type, type_id, payload)
@@ -119,13 +123,13 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             }
         }
 
-        result = self.es.update(index=index, doc_type=object_type, id=type_id, body=update_payload)
+        result = self.es.update(index=index, id=type_id, doc=update_payload)
 
 
     def _fn_elasticsearch_delete(self, index, object_type, type_id):
         """Function: Allows a user to delete a specified payload"""
 
-        result = self.es.delete(index=index, doc_type=object_type, id=type_id)
+        result = self.es.delete(index=index, id=type_id)
 
         if result.get("result") not in ("deleted"):
             msg_error = u"Unable to delete {}, {}, {}".format(index, object_type, type_id)
@@ -140,3 +144,45 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         """
         new_payload =  dict((key, value) for key, value in payload.items() if value)
         return new_payload
+
+
+def translate_value_for_bytes(bytes_func):
+    """[define mappings for SOAR fields to Elastic fields]
+
+    Args:
+        blob_func ([method]): [method to run when encountering a blob field type. ie attachment content]
+
+    Returns:
+        [object]: [translated field ready for saving]
+    """
+    mapping = TypeInfo.get_default_mapping()
+    mapping['blob'] = bytes_func
+
+    def translate_value(type_info, field, value):
+        chged_value = copy.copy(value)
+        if chged_value is not None:
+            input_type = field['input_type']
+            if input_type in mapping:
+                chged_value = mapping[input_type](type_info, field, chged_value)
+            elif input_type != 'none':
+                LOG.warning("Unable to find a mapping for field type: %s", input_type)
+
+            if isinstance(chged_value, list):
+                chged_value = mapping["list"](type_info, field, chged_value)
+
+        return chged_value
+
+    return translate_value
+
+def make_string(type_info, field, value):
+        """[convert byte array into base64 format required by the elastic]
+
+        Args:
+            value ([byte array]): [description]
+
+        Returns:
+            base64 converted format
+        """
+
+        if value:
+            return base64.b64encode(value).decode('utf-8')

@@ -5,16 +5,17 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed_plugin_elasticfeed',
-    version='1.0.1',
+    display_name='Data Feeder Elastic Plugin for SOAR',
+    version='1.1.0',
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author='IBM SOAR',
+    author_email='',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for sending data feeds to other (BI) systems",
-    long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
+    description="IBM SOAR Components for sending data feeds to other (BI) systems",
+    long_description="IBM SOAR Components for sending data feeds to other (BI) systems",
     install_requires=[
-        'rc_data_feed',
-        'elasticsearch',
+        'rc_data_feed>=2.2.1',
+        'elasticsearch>=8.3',
         'resilient'
     ],
     packages=find_packages(),

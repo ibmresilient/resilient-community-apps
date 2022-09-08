@@ -1,5 +1,5 @@
 # Introduction
-This package contains the Elasticsearch Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
+This package contains the Elasticsearch Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for IBM QRadar SOAR incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in Elasticsearch.
 
@@ -8,8 +8,26 @@ Refer to the documentation on the Data Feed extension for uses cases support and
 # History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0   | 07/2022 | New base images and functionality for attachments |
 | 1.0.1   | 08/2020 | App Host support |
 | 1.0.0   | 12/2019 | Initial release |
+
+## 1.1.0 Changes
+
+This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
+
+| Parameter | Value(s) | Capability |
+| --------- | -------- | ---------- |
+| reload_types | incident,task,note,artifact,attachment,<data_table_api_name> | use reload_types to limit the types of objects when reload=true. Leave empty to include all data. |
+| workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
+| include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
+
+# Compatibility
+
+SOAR Compatibilty: 30.0 or higher
+
+CP4S Compatibility: 1.4 or higher
+
 
 # License
 
@@ -17,11 +35,11 @@ Unless otherwise specified, contents of this repository are published under the 
 [LICENSE](LICENSE).
 
 # Installation
-  The integration package contains Python components that are called by the Resilient platform. These components run in the Resilient Circuits integration framework. The package also includes Resilient customizations that will be imported into the platform.
+  The integration package contains Python components that are called by the IBM SOAR platform. These components run in the Resilient Circuits integration framework. The package also includes IBM SOAR customizations that will be imported into the platform.
   
 ## App Host Installation
 With App Host, all the run-time components are pre-built. Perform the following steps to install and configure:
-1. Within Resilient, navigate Administrative Settings and then Apps. 
+1. Within IBM SOAR, navigate Administrative Settings and then Apps. 
 2. Click on the Install button and select the downloaded app-rc_data_feed_plugin_elasticfeed-x.x.x.zip file. This step will install the associated rules and message destination.
 3. Once installed, navigate to the app's Configuration tab and edit the app.config file updating the `[resilient]` 
 section as necessary and updating the `[elastic_feed]` section to reflect the location and authentication settings for your instance of Elasticsearch.
@@ -55,7 +73,7 @@ section as necessary and updating the `[elastic_feed]` section to reflect the lo
 ```
 *	Edit the resilient-circuits configuration file, as follows:
     
-     - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
+     - In the [resilient] section, ensure that you provide all the information required to connect to the IBM SOAR platform.
      - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
      `feed_names=elastic_feed`
      - In the [elastic_feed] section, configure the settings for your elasticsearch environment.
@@ -87,7 +105,7 @@ The following configuration items are supported:
 | class | ElasticFeed | Indicates that the section is for an ElasticSearch. |
 | url | | Ex. https://eliastic.yourorg.com	URL of Elastic server. Port is specified in it’s own parameter. |
 | port | | Ex. 9200	Default is 9200 |
-| index | | Ex. resilient	if using multiple organizations, consider indexes such as resilient<org_ID> |
+| index_prefix | resilient_ | Ex. Prefix for index. For example, an incident will be created under 'resilient_incident' if the setting is 'resilient_'. When using multiple organizations, consider indexes such as resilient_<org_ID>_.  Index values must be lower case. |
 | auth_user | | User and password to authenticate to ElasticSearch. | 
 | auth_password	| | User and password to authenticate to ElasticSearch. | 
 | cafile | True | False	Specify  ‘false’ to bypass certification authentication |
