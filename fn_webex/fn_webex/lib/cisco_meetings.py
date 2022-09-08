@@ -1,8 +1,9 @@
 import json
-import time, datetime
+import time
+import datetime
 
-from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError
+from fn_webex.lib import constants, cisco_commons
 
 
 class WebexMeetings:
