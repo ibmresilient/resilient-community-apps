@@ -46,13 +46,17 @@ class FunctionComponent(AppFunctionComponent):
             alert_info = ALERT_TYPES.keys()
 
         result = {}
-        for type in alert_info:
-            url = '/'.join([ALERTS_URL, alert_id])
-            url = "{}?{}".format(url, EXPAND_PARAMS_URL)
+        url = '/'.join([ALERTS_URL, alert_id])
+        url = "{}?{}".format(url, EXPAND_PARAMS_URL)
+        alert_payload, _status, _reason = defender_api.call(url)
+        self.LOG.debug(alert_payload)
+        result['General'] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
 
+        for alert_type in alert_info:
+            url = '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(alert_type)])
             alert_payload, _status, _reason = defender_api.call(url)
             self.LOG.debug(alert_payload)
-            result[type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
+            result[alert_type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Add artifact to Splunk ES",
-      "id": 36,
+      "id": 100,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Add artifact to Splunk ES",
@@ -17,7 +17,7 @@
       "uuid": "f47cb64b-c16b-46c8-9e91-78c456779bc6",
       "view_items": [
         {
-          "content": "19536b13-46af-4a43-b573-f7af49d0c307",
+          "content": "3679d08f-7f06-4639-97f6-1894d8279cd1",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -42,7 +42,7 @@
       ],
       "enabled": true,
       "export_key": "Delete an intel entry in Splunk ES",
-      "id": 37,
+      "id": 101,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Delete an intel entry in Splunk ES",
@@ -61,7 +61,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Search Splunk ES for an artifact",
-      "id": 38,
+      "id": 102,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Search Splunk ES for an artifact",
@@ -72,7 +72,7 @@
       "uuid": "f568e487-24b6-4799-b89c-a042f3012284",
       "view_items": [
         {
-          "content": "19536b13-46af-4a43-b573-f7af49d0c307",
+          "content": "3679d08f-7f06-4639-97f6-1894d8279cd1",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -89,7 +89,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Update Splunk ES notable event",
-      "id": 39,
+      "id": 103,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Update Splunk ES notable event",
@@ -98,16 +98,7 @@
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "fc9fe54f-c935-4602-94b9-b1224e559092",
-      "view_items": [
-        {
-          "content": "19536b13-46af-4a43-b573-f7af49d0c307",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
+      "view_items": [],
       "workflows": [
         "splunk_update_notable"
       ]
@@ -115,8 +106,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1652193707431,
+  "export_date": 1660141356674,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -128,7 +120,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param2",
       "hide_notification": false,
-      "id": 406,
+      "id": 1136,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -157,7 +149,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param10",
       "hide_notification": false,
-      "id": 407,
+      "id": 1137,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -186,7 +178,7 @@
       "deprecated": false,
       "export_key": "__function/event_id",
       "hide_notification": false,
-      "id": 408,
+      "id": 1138,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -215,7 +207,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param7",
       "hide_notification": false,
-      "id": 409,
+      "id": 1139,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -244,7 +236,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param6",
       "hide_notification": false,
-      "id": 410,
+      "id": 1140,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -273,7 +265,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param8",
       "hide_notification": false,
-      "id": 411,
+      "id": 1141,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -302,7 +294,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param1",
       "hide_notification": false,
-      "id": 412,
+      "id": 1142,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -331,7 +323,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_max_return",
       "hide_notification": false,
-      "id": 413,
+      "id": 1143,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -360,7 +352,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_threat_intel_type",
       "hide_notification": false,
-      "id": 414,
+      "id": 1144,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -389,7 +381,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_label",
       "hide_notification": false,
-      "id": 415,
+      "id": 1145,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -418,7 +410,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param5",
       "hide_notification": false,
-      "id": 416,
+      "id": 1146,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -447,7 +439,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_threat_intel_key",
       "hide_notification": false,
-      "id": 417,
+      "id": 1147,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -476,7 +468,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param3",
       "hide_notification": false,
-      "id": 418,
+      "id": 1148,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -505,7 +497,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param4",
       "hide_notification": false,
-      "id": 419,
+      "id": 1149,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -534,7 +526,7 @@
       "deprecated": false,
       "export_key": "__function/notable_event_status",
       "hide_notification": false,
-      "id": 420,
+      "id": 1150,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -563,7 +555,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query_param9",
       "hide_notification": false,
-      "id": 421,
+      "id": 1151,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -592,7 +584,7 @@
       "deprecated": false,
       "export_key": "__function/comment",
       "hide_notification": false,
-      "id": 422,
+      "id": 1152,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -621,7 +613,7 @@
       "deprecated": false,
       "export_key": "__function/splunk_query",
       "hide_notification": false,
-      "id": 423,
+      "id": 1153,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -636,6 +628,15 @@
       "templates": [
         {
           "id": 7,
+          "name": "search index for type",
+          "template": {
+            "content": "search index = %param1% AND %param2% = %param3%",
+            "format": "text"
+          },
+          "uuid": "a55cf594-4753-4e75-8696-a1e8d665032a"
+        },
+        {
+          "id": 8,
           "name": "search threat_intel for type",
           "template": {
             "content": "inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key",
@@ -644,22 +645,13 @@
           "uuid": "e1e32c46-2964-4a7f-8652-caea8ac1ad53"
         },
         {
-          "id": 8,
+          "id": 9,
           "name": "search index and source for type",
           "template": {
             "content": "search index = %param1% source=%param2% AND %param3%=%param4%",
             "format": "text"
           },
           "uuid": "4ce8e66d-08b8-486c-8479-7ecc7886729e"
-        },
-        {
-          "id": 9,
-          "name": "search index for type",
-          "template": {
-            "content": "search index = %param1% AND %param2% = %param3%",
-            "format": "text"
-          },
-          "uuid": "a55cf594-4753-4e75-8696-a1e8d665032a"
         }
       ],
       "text": "splunk_query",
@@ -676,13 +668,13 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/splunk_servers",
+      "export_key": "actioninvocation/splunk_server",
       "hide_notification": false,
-      "id": 405,
-      "input_type": "select",
+      "id": 1154,
+      "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "name": "splunk_servers",
+      "name": "splunk_server",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -691,21 +683,11 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "Splunk Servers",
-      "tooltip": "List of splunk servers from app.config",
+      "text": "Splunk Server",
+      "tooltip": "Enter the label of the splunk server to use",
       "type_id": 6,
-      "uuid": "19536b13-46af-4a43-b573-f7af49d0c307",
-      "values": [
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "splunk_atlanta",
-          "properties": null,
-          "uuid": "5d32726c-0188-4a23-bf50-8d4c49eeb670",
-          "value": 108
-        }
-      ]
+      "uuid": "3679d08f-7f06-4639-97f6-1894d8279cd1",
+      "values": []
     },
     {
       "export_key": "incident/internal_customizations_field",
@@ -721,13 +703,7 @@
   ],
   "functions": [
     {
-      "created_date": 1652193636443,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1660140964792,
       "description": {
         "content": "Add a new Splunk ES threat intelligence item to a given collection. splunk_threat_intel_type is one of the 9 collections, including ip_intel, file_intel.... splunk_query_param1 to splunk_query_param10 are used to build a dict {splunk_query_param1:splunk_query_parame2, splunk_query_param3:splunk_query_param4....} This dict is used to create the new threat intel item.",
         "format": "text"
@@ -735,14 +711,14 @@
       "destination_handle": "splunk_es_rest",
       "display_name": "Splunk Add Intel Item",
       "export_key": "splunk_add_intel_item",
-      "id": 13,
+      "id": 63,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 12,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1652193636483,
+      "last_modified_time": 1660140964838,
       "name": "splunk_add_intel_item",
       "tags": [],
       "uuid": "3118f626-d719-40c5-a862-a76b93e585e6",
@@ -854,18 +830,12 @@
           "programmatic_name": "splunk_add_new_ip_intel",
           "tags": [],
           "uuid": null,
-          "workflow_id": 28
+          "workflow_id": 60
         }
       ]
     },
     {
-      "created_date": 1652193636508,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1660140964867,
       "description": {
         "content": "Delete a threat intelligence item from a given collection. splunk_threat_intel_type is one of 9 collections, including ip_intel, file_intel... splunk_threat_intel_key is the _key of the item to be deleted.",
         "format": "text"
@@ -873,14 +843,14 @@
       "destination_handle": "splunk_es_rest",
       "display_name": "Splunk Delete Threat Intel Item",
       "export_key": "splunk_delete_threat_intel_item",
-      "id": 14,
+      "id": 64,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 12,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1652193636549,
+      "last_modified_time": 1660140964913,
       "name": "splunk_delete_threat_intel_item",
       "tags": [],
       "uuid": "f66d22ca-b1f0-49c9-b328-22628bbc10c4",
@@ -920,18 +890,12 @@
           "programmatic_name": "example_of_deleting_an_intel_entry_in_splunk_es",
           "tags": [],
           "uuid": null,
-          "workflow_id": 27
+          "workflow_id": 59
         }
       ]
     },
     {
-      "created_date": 1652193636572,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1660140964942,
       "description": {
         "content": "Define a Splunk query string with parameters. Map parameters from inputs, and perform the query. For example, %param1% in the query string will be replaced by the value of splunk_query_param1. The return is a list.",
         "format": "text"
@@ -939,14 +903,14 @@
       "destination_handle": "splunk_es_rest",
       "display_name": "Splunk Search",
       "export_key": "splunk_search",
-      "id": 15,
+      "id": 65,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 12,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1652193636611,
+      "last_modified_time": 1660140964990,
       "name": "splunk_search",
       "tags": [],
       "uuid": "aee7fbff-c72e-4755-ba80-b39b31861354",
@@ -1026,18 +990,12 @@
           "programmatic_name": "search_splunk_ip_intel",
           "tags": [],
           "uuid": null,
-          "workflow_id": 29
+          "workflow_id": 61
         }
       ]
     },
     {
-      "created_date": 1652193636634,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1660140965018,
       "description": {
         "content": "Update notable events according to the status of the corresponding incident. Parameters: \n1. event_id: The event_id of the notable event; \n2. notable_event_status: Change new status for the notable event; \n3. comment: comment to be added to the notable event.",
         "format": "text"
@@ -1045,14 +1003,14 @@
       "destination_handle": "splunk_es_rest",
       "display_name": "Splunk Update Notable Event",
       "export_key": "splunk_update_notable",
-      "id": 16,
+      "id": 66,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 12,
+        "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1652193636674,
+      "last_modified_time": 1660140965064,
       "name": "splunk_update_notable",
       "tags": [],
       "uuid": "3e39198f-c337-42be-8420-9502d573e413",
@@ -1100,20 +1058,20 @@
           "programmatic_name": "splunk_update_notable",
           "tags": [],
           "uuid": null,
-          "workflow_id": 30
+          "workflow_id": 62
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 9,
+  "id": 27,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1652193705995,
+      "create_date": 1660141355055,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1122,7 +1080,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1652193705995,
+      "update_date": 1660141355055,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1139,7 +1097,7 @@
       "programmatic_name": "splunk_es_rest",
       "tags": [],
       "users": [
-        "admin@example.com"
+        "a@example.com"
       ],
       "uuid": "2a6a71e5-9807-482b-8eef-2d964ce47b03"
     }
@@ -1147,11 +1105,12 @@
   "notifications": null,
   "overrides": [],
   "phases": [],
+  "playbooks": null,
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7058,
+    "build_number": 49,
     "major": 42,
     "minor": 0,
     "version": "42.0.7058"
@@ -1175,7 +1134,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/create_date",
           "hide_notification": false,
-          "id": 397,
+          "id": 1127,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1191,7 +1150,7 @@
           "templates": [],
           "text": "Create Date",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "044cd37c-fa95-4467-acbc-ac0a234070ee",
           "values": [],
           "width": 142
@@ -1206,7 +1165,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/intel_collection",
           "hide_notification": false,
-          "id": 398,
+          "id": 1128,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1222,7 +1181,7 @@
           "templates": [],
           "text": "Intel Collection",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "a1f56334-033e-412c-8a86-3c75963cac64",
           "values": [],
           "width": 91
@@ -1237,7 +1196,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/intel_field",
           "hide_notification": false,
-          "id": 399,
+          "id": 1129,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1253,7 +1212,7 @@
           "templates": [],
           "text": "Intel Field",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "f03aea26-c6c0-439a-b8c0-00ccf3697a1f",
           "values": [],
           "width": 74
@@ -1268,7 +1227,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/intel_key",
           "hide_notification": false,
-          "id": 400,
+          "id": 1130,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1284,7 +1243,7 @@
           "templates": [],
           "text": "Intel Key",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "233afdf9-b92a-4d22-a881-310ab5d4bd85",
           "values": [],
           "width": 73
@@ -1299,7 +1258,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/intel_value",
           "hide_notification": false,
-          "id": 401,
+          "id": 1131,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1315,7 +1274,7 @@
           "templates": [],
           "text": "Intel Value",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "8bbc4c5b-17be-4d17-9005-31ce116759a8",
           "values": [],
           "width": 74
@@ -1330,7 +1289,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/source",
           "hide_notification": false,
-          "id": 402,
+          "id": 1132,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1346,7 +1305,7 @@
           "templates": [],
           "text": "Source",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "e1bb5fdc-8a46-4edb-aac3-e59876b0c896",
           "values": [],
           "width": 74
@@ -1361,7 +1320,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/splunk_server",
           "hide_notification": false,
-          "id": 403,
+          "id": 1133,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1377,7 +1336,7 @@
           "templates": [],
           "text": "Splunk Server",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "5b771e5b-d04b-4091-bb7f-fe6521d00eb9",
           "values": [],
           "width": 53
@@ -1392,7 +1351,7 @@
           "deprecated": false,
           "export_key": "splunk_intel_results/status",
           "hide_notification": false,
-          "id": 404,
+          "id": 1134,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1408,7 +1367,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1008,
+          "type_id": 1018,
           "uuid": "aeb2c921-ebac-42ee-b89e-30bf0fc1708d",
           "values": [],
           "width": 74
@@ -1438,82 +1397,78 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "example_of_deleting_an_intel_entry_in_splunk_es",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_deleting_an_intel_entry_in_splunk_es\" isExecutable=\"true\" name=\"Example of deleting an intel entry in Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow using the \"Splunk Delete Threat Intel Item\" function to delete an intel item from a Splunk collection.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1fsyszc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1j8papp\" name=\"Splunk Delete Threat Intel Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f66d22ca-b1f0-49c9-b328-22628bbc10c4\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027status_code\u0027: 201, \u0027content\u0027: {\u0027message\u0027: \u0027Delete operation successful.\u0027, \u0027status\u0027: True}}\\n\\nresult_note = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Artifact\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Splunk Delete Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(row.intel_value, \\n                             \\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"status\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\n\\nincident.addNote(helper.createRichText(result_note))\\nrow.status = \\\"Deleted\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.splunk_threat_intel_type = row.intel_collection\\ninputs.splunk_threat_intel_key = row.intel_key\\ninputs.splunk_label = row.splunk_server\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1fsyszc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1cdxs98\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1fsyszc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1j8papp\"/\u003e\u003cendEvent id=\"EndEvent_00odjzi\"\u003e\u003cincoming\u003eSequenceFlow_1cdxs98\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1cdxs98\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"EndEvent_00odjzi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_04vpsmi\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1xifsxc\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"TextAnnotation_04vpsmi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0gavnpw\"\u003e\u003ctext\u003e\u003c![CDATA[Delete an intel entry based on it\u0027s internal key\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17motrf\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"TextAnnotation_0gavnpw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1j8papp\" id=\"ServiceTask_1j8papp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"267\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1fsyszc\" id=\"SequenceFlow_1fsyszc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"267\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"232.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00odjzi\" id=\"EndEvent_00odjzi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430.97435897435895\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"448.97435897435895\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1cdxs98\" id=\"SequenceFlow_1cdxs98_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_04vpsmi\" id=\"TextAnnotation_04vpsmi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371.97435897435895\" y=\"75.92307692307692\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1xifsxc\" id=\"Association_1xifsxc_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"106\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0gavnpw\" id=\"TextAnnotation_0gavnpw_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"158\" x=\"159\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17motrf\" id=\"Association_17motrf_di\"\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "admin@example.com",
-      "description": "This is an example workflow using the \"Splunk Delete Threat Intel Item\" function to delete an intel item from a Splunk collection.",
-      "export_key": "example_of_deleting_an_intel_entry_in_splunk_es",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652193636982,
-      "name": "Example of deleting an intel entry in Splunk ES",
-      "object_type": "splunk_intel_results",
-      "programmatic_name": "example_of_deleting_an_intel_entry_in_splunk_es",
-      "tags": [],
-      "uuid": "c9e465ff-c829-4c0f-9231-0cf94465097f",
-      "workflow_id": 27
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "splunk_add_new_ip_intel",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"splunk_add_new_ip_intel\" isExecutable=\"true\" name=\"Example of adding artifact to Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow calling the \"Splunk Add Intel Item\" function to add a new collection item. The type is set determined by the artifact type.  Results are returned in a note and the Splunk Results datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14001kj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1aax9p0\" name=\"Splunk Add Intel Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3118f626-d719-40c5-a862-a76b93e585e6\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027status_code\u0027: 201, \u0027content\u0027: {\u0027message\u0027: \u0027Create operation successful.\u0027, \u0027status\u0027: True}}\\nimport java.util.Date as Date \\n\\nnow = Date().time\\n\\nresult_note = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Artifact\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Splunk Add Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(artifact.value, \\n                             \\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"status\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\n\\nif results.get(\\\"content\\\", {}).get(\\\"status\\\", False):\\n  incident.addNote(helper.createRichText(result_note))\\n  result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n  result_row.create_date = now\\n  result_row.status = \\\"Added\\\"\\n  result_row.intel_collection = results.inputs[\u0027splunk_threat_intel_type\u0027]\\n  result_row.intel_field = results.inputs[\u0027splunk_query_param1\u0027]\\n  result_row.intel_value = results.inputs[\u0027splunk_query_param2\u0027]\\n  result_row.splunk_server = rule.properties.splunk_servers\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"lookup_map = {\\n  \\\"DNS Name\\\": (\\\"ip_intel\\\", \\\"domain\\\"),\\n  \\\"Email Attachment\\\": None,\\n  \\\"Email Attachment Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"Email Body\\\": None,\\n  \\\"Email Recipient\\\": None,\\n  \\\"Email Sender\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Sender Name\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Subject\\\": (\\\"email_intel\\\", \\\"subject\\\"),\\n  \\\"File Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"File Path\\\": None,\\n  \\\"HTTP Request Header\\\": None,\\n  \\\"HTTP Response Header\\\": None,\\n  \\\"IP Address\\\": (\\\"ip_intel\\\", \\\"ip\\\"),\\n  \\\"Log File\\\": None,\\n  \\\"MAC Address\\\": None,\\n  \\\"Malware Family/Variant\\\": None,\\n  \\\"Malware MD5 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware Sample\\\": None,\\n  \\\"Malware Sample Fuzzy Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-1 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-256 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Mutex\\\": None,\\n  \\\"Network CIDR Range\\\": None,\\n  \\\"Other File\\\": None,\\n  \\\"Password\\\": None,\\n  \\\"Port\\\": None,\\n  \\\"Process Name\\\": (\\\"process_intel\\\", \\\"process\\\"),\\n  \\\"Registry Key\\\": (\\\"registry_intel\\\", \\\"registry_value_name\\\"),\\n  \\\"RFC 822 Email Message File\\\": None,\\n  \\\"Service\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"String\\\": None,\\n  \\\"System Name\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"URI Path\\\": None,\\n  \\\"URL\\\": (\\\"http_intel\\\", \\\"url\\\"),\\n  \\\"URL Referer\\\": (\\\"http_intel\\\", \\\"http_referrer\\\"),\\n  \\\"User Account\\\": None,\\n  \\\"User Agent\\\": (\\\"http_intel\\\", \\\"http_user_agent\\\")\\n}\\n\\nif artifact.type in lookup_map and lookup_map[artifact.type]:\\n  threat_type, threat_field_name = lookup_map[artifact.type]\\n  inputs.splunk_threat_intel_type = threat_type\\n  inputs.splunk_query_param1 = threat_field_name\\n  inputs.splunk_query_param2 = artifact.value\\n  inputs.splunk_label = rule.properties.splunk_servers\\nelse:\\n  helper.fail(\\\"Artifact type not supported: {}\\\".format(artifact.type))\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14001kj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1rp7f1j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14001kj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1aax9p0\"/\u003e\u003cendEvent id=\"EndEvent_05bgc5i\"\u003e\u003cincoming\u003eSequenceFlow_1rp7f1j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1rp7f1j\" sourceRef=\"ServiceTask_1aax9p0\" targetRef=\"EndEvent_05bgc5i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rg86ww\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Splunk Results datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cimwoi\" sourceRef=\"ServiceTask_1aax9p0\" targetRef=\"TextAnnotation_0rg86ww\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"196\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"191\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"201\" xsi:type=\"omgdc:Point\" y=\"203\"/\u003e\u003comgdi:waypoint x=\"158\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1aax9p0\" id=\"ServiceTask_1aax9p0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14001kj\" id=\"SequenceFlow_14001kj_di\"\u003e\u003comgdi:waypoint x=\"232\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"226.5\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05bgc5i\" id=\"EndEvent_05bgc5i_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"488\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"461\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rp7f1j\" id=\"SequenceFlow_1rp7f1j_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"488\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"404.5\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rg86ww\" id=\"TextAnnotation_0rg86ww_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"205\" x=\"394\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cimwoi\" id=\"Association_0cimwoi_di\"\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"157\"/\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "creator_id": "admin@example.com",
-      "description": "This is an example workflow calling the \"Splunk Add Intel Item\" function to add a new collection item. The type is set determined by the artifact type.  Results are returned in a note and the Splunk Results datatable.",
-      "export_key": "splunk_add_new_ip_intel",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652193637150,
-      "name": "Example of adding artifact to Splunk ES",
-      "object_type": "artifact",
-      "programmatic_name": "splunk_add_new_ip_intel",
-      "tags": [],
-      "uuid": "851e45ce-9031-45fa-80ec-c91b25a451a8",
-      "workflow_id": 28
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "search_splunk_ip_intel",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"search_splunk_ip_intel\" isExecutable=\"true\" name=\"Example of searching an artifact in Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow of using the \"Splunk Search\" function to search a Splunk collection based on the artifact type. The results are returned in the Splunk Results datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0okqtx9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1u54fw7\" name=\"Splunk Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"aee7fbff-c72e-4755-ba80-b39b31861354\"\u003e{\"inputs\":{\"7b229c20-5508-4449-af5e-e6d6d7bc9e39\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key\"}}},\"f4243c42-ed46-4b74-b28e-7b99c021ec7b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":10}}},\"post_processing_script\":\"# {\u0027events\u0027: [OrderedDict([(\u0027_key\u0027, \u00274fa89feac1004d7cbfcb974eb79c62e9\u0027), (\u0027ip\u0027, \u0027https://ibm.biz/soarcommunity\u0027), (\u0027item_key\u0027, \u00274fa89feac1004d7cbfcb974eb79c62e9\u0027), (\u0027threat_key\u0027, \u0027restapi\u0027), (\u0027time\u0027, \u00271598296740.6724114\u0027)]), OrderedDict([(\u0027_key\u0027, \u00279b14932c75aa4b1f909775bd10cb78d6\u0027), (\u0027ip\u0027, \u0027https://ibm.biz/soarcommunity\u0027), (\u0027item_key\u0027, \u00279b14932c75aa4b1f909775bd10cb78d6\u0027), (\u0027threat_key\u0027, \u0027restapi\u0027), (\u0027time\u0027, \u00271598296660.9374135\u0027)])]}\\n\\nif results.get(\\\"content\\\", None):\\n  for event in results.content:\\n    result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n    result_row.create_date = int(float(event.pop(\\\"time\\\"))*1000)\\n    result_row.source = event.pop(\\\"threat_key\\\")\\n    result_row.intel_collection = results.inputs[\u0027splunk_query_param1\u0027]\\n    result_row.intel_key = event.pop(\\\"_key\\\")\\n    result_row.splunk_server = rule.properties.splunk_servers\\n    result_row.status = \\\"Active\\\"\\n    event.pop(\\\"item_key\\\") # not presented\\n    # what\u0027s left is the artifact value\\n    for k, v in event.items():\\n      result_row.intel_field = k\\n      result_row.intel_value = v\\n      break\\nelse:\\n  result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n  result_row.intel_value = artifact.value\\n  result_row.status = \\\"Not Found\\\"\\n  result_row.splunk_server = rule.properties.splunk_servers\\n  \\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"lookup_map = {\\n  \\\"DNS Name\\\": (\\\"ip_intel\\\", \\\"domain\\\"),\\n  \\\"Email Attachment\\\": None,\\n  \\\"Email Attachment Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"Email Body\\\": None,\\n  \\\"Email Recipient\\\": None,\\n  \\\"Email Sender\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Sender Name\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Subject\\\": (\\\"email_intel\\\", \\\"subject\\\"),\\n  \\\"File Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"File Path\\\": None,\\n  \\\"HTTP Request Header\\\": None,\\n  \\\"HTTP Response Header\\\": None,\\n  \\\"IP Address\\\": (\\\"ip_intel\\\", \\\"ip\\\"),\\n  \\\"Log File\\\": None,\\n  \\\"MAC Address\\\": None,\\n  \\\"Malware Family/Variant\\\": None,\\n  \\\"Malware MD5 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware Sample\\\": None,\\n  \\\"Malware Sample Fuzzy Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-1 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-256 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Mutex\\\": None,\\n  \\\"Network CIDR Range\\\": None,\\n  \\\"Other File\\\": None,\\n  \\\"Password\\\": None,\\n  \\\"Port\\\": None,\\n  \\\"Process Name\\\": (\\\"process_intel\\\", \\\"process\\\"),\\n  \\\"Registry Key\\\": (\\\"registry_intel\\\", \\\"registry_value_name\\\"),\\n  \\\"RFC 822 Email Message File\\\": None,\\n  \\\"Service\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"String\\\": None,\\n  \\\"System Name\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"URI Path\\\": None,\\n  \\\"URL\\\": (\\\"http_intel\\\", \\\"url\\\"),\\n  \\\"URL Referer\\\": (\\\"http_intel\\\", \\\"http_referrer\\\"),\\n  \\\"User Account\\\": None,\\n  \\\"User Agent\\\": (\\\"http_intel\\\", \\\"http_user_agent\\\")\\n}\\n\\nif artifact.type in lookup_map and lookup_map.get(artifact.type):\\n  threat_type, threat_field_name = lookup_map.get(artifact.type)\\n  inputs.splunk_query_param1 = threat_type\\n  inputs.splunk_query_param2 = threat_field_name\\n  inputs.splunk_query_param3 = artifact.value\\n  inputs.splunk_label = rule.properties.splunk_servers\\nelse:\\n  helper.fail(\\\"Artifact type not supported: {}\\\".format(artifact.type))\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0okqtx9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0va1j4a\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0okqtx9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u54fw7\"/\u003e\u003cendEvent id=\"EndEvent_1pka5io\"\u003e\u003cincoming\u003eSequenceFlow_0va1j4a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0va1j4a\" sourceRef=\"ServiceTask_1u54fw7\" targetRef=\"EndEvent_1pka5io\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0g4jym4\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Splunk Search Results datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o0baxl\" sourceRef=\"ServiceTask_1u54fw7\" targetRef=\"TextAnnotation_0g4jym4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"289\" y=\"194\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"284\" y=\"229\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"197\" y=\"259\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"259\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u54fw7\" id=\"ServiceTask_1u54fw7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"404\" y=\"172\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0okqtx9\" id=\"SequenceFlow_0okqtx9_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364.5\" y=\"190\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1pka5io\" id=\"EndEvent_1pka5io_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"574\" y=\"194\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"547\" y=\"233\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0va1j4a\" id=\"SequenceFlow_0va1j4a_di\"\u003e\u003comgdi:waypoint x=\"504\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"539\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"539\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"509\" y=\"205.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0g4jym4\" id=\"TextAnnotation_0g4jym4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"189\" x=\"481\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o0baxl\" id=\"Association_0o0baxl_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"search_splunk_ip_intel\" isExecutable=\"true\" name=\"Example of searching an artifact in Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow of using the \"Splunk Search\" function to search a Splunk collection based on the artifact type. The results are returned in the Splunk Results datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0okqtx9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1u54fw7\" name=\"Splunk Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"aee7fbff-c72e-4755-ba80-b39b31861354\"\u003e{\"inputs\":{\"7b229c20-5508-4449-af5e-e6d6d7bc9e39\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key\"}}},\"f4243c42-ed46-4b74-b28e-7b99c021ec7b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":10}}},\"post_processing_script\":\"# {\u0027events\u0027: [OrderedDict([(\u0027_key\u0027, \u00274fa89feac1004d7cbfcb974eb79c62e9\u0027), (\u0027ip\u0027, \u0027https://ibm.biz/soarcommunity\u0027), (\u0027item_key\u0027, \u00274fa89feac1004d7cbfcb974eb79c62e9\u0027), (\u0027threat_key\u0027, \u0027restapi\u0027), (\u0027time\u0027, \u00271598296740.6724114\u0027)]), OrderedDict([(\u0027_key\u0027, \u00279b14932c75aa4b1f909775bd10cb78d6\u0027), (\u0027ip\u0027, \u0027https://ibm.biz/soarcommunity\u0027), (\u0027item_key\u0027, \u00279b14932c75aa4b1f909775bd10cb78d6\u0027), (\u0027threat_key\u0027, \u0027restapi\u0027), (\u0027time\u0027, \u00271598296660.9374135\u0027)])]}\\n\\nif results.get(\\\"content\\\", None):\\n  for event in results.content:\\n    result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n    result_row.create_date = int(float(event.pop(\\\"time\\\"))*1000)\\n    result_row.source = event.pop(\\\"threat_key\\\")\\n    result_row.intel_collection = results.inputs[\u0027splunk_query_param1\u0027]\\n    result_row.intel_key = event.pop(\\\"_key\\\")\\n    result_row.splunk_server = rule.properties.splunk_server\\n    result_row.status = \\\"Active\\\"\\n    event.pop(\\\"item_key\\\") # not presented\\n    # what\u0027s left is the artifact value\\n    for k, v in event.items():\\n      result_row.intel_field = k\\n      result_row.intel_value = v\\n      break\\nelse:\\n  result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n  result_row.intel_value = artifact.value\\n  result_row.status = \\\"Not Found\\\"\\n  result_row.splunk_server = rule.properties.splunk_server\\n  \\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"lookup_map = {\\n  \\\"DNS Name\\\": (\\\"ip_intel\\\", \\\"domain\\\"),\\n  \\\"Email Attachment\\\": None,\\n  \\\"Email Attachment Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"Email Body\\\": None,\\n  \\\"Email Recipient\\\": None,\\n  \\\"Email Sender\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Sender Name\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Subject\\\": (\\\"email_intel\\\", \\\"subject\\\"),\\n  \\\"File Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"File Path\\\": None,\\n  \\\"HTTP Request Header\\\": None,\\n  \\\"HTTP Response Header\\\": None,\\n  \\\"IP Address\\\": (\\\"ip_intel\\\", \\\"ip\\\"),\\n  \\\"Log File\\\": None,\\n  \\\"MAC Address\\\": None,\\n  \\\"Malware Family/Variant\\\": None,\\n  \\\"Malware MD5 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware Sample\\\": None,\\n  \\\"Malware Sample Fuzzy Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-1 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-256 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Mutex\\\": None,\\n  \\\"Network CIDR Range\\\": None,\\n  \\\"Other File\\\": None,\\n  \\\"Password\\\": None,\\n  \\\"Port\\\": None,\\n  \\\"Process Name\\\": (\\\"process_intel\\\", \\\"process\\\"),\\n  \\\"Registry Key\\\": (\\\"registry_intel\\\", \\\"registry_value_name\\\"),\\n  \\\"RFC 822 Email Message File\\\": None,\\n  \\\"Service\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"String\\\": None,\\n  \\\"System Name\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"URI Path\\\": None,\\n  \\\"URL\\\": (\\\"http_intel\\\", \\\"url\\\"),\\n  \\\"URL Referer\\\": (\\\"http_intel\\\", \\\"http_referrer\\\"),\\n  \\\"User Account\\\": None,\\n  \\\"User Agent\\\": (\\\"http_intel\\\", \\\"http_user_agent\\\")\\n}\\n\\nif artifact.type in lookup_map and lookup_map.get(artifact.type):\\n  threat_type, threat_field_name = lookup_map.get(artifact.type)\\n  inputs.splunk_query_param1 = threat_type\\n  inputs.splunk_query_param2 = threat_field_name\\n  inputs.splunk_query_param3 = artifact.value\\n  inputs.splunk_label = rule.properties.splunk_server\\nelse:\\n  helper.fail(\\\"Artifact type not supported: {}\\\".format(artifact.type))\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0okqtx9\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0va1j4a\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0okqtx9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1u54fw7\"/\u003e\u003cendEvent id=\"EndEvent_1pka5io\"\u003e\u003cincoming\u003eSequenceFlow_0va1j4a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0va1j4a\" sourceRef=\"ServiceTask_1u54fw7\" targetRef=\"EndEvent_1pka5io\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0g4jym4\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Splunk Search Results datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0o0baxl\" sourceRef=\"ServiceTask_1u54fw7\" targetRef=\"TextAnnotation_0g4jym4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"289\" y=\"194\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"284\" y=\"229\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"197\" y=\"259\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"259\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1u54fw7\" id=\"ServiceTask_1u54fw7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"404\" y=\"172\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0okqtx9\" id=\"SequenceFlow_0okqtx9_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"364.5\" y=\"190\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1pka5io\" id=\"EndEvent_1pka5io_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"574\" y=\"194\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"547\" y=\"233\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0va1j4a\" id=\"SequenceFlow_0va1j4a_di\"\u003e\u003comgdi:waypoint x=\"504\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"539\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"539\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"212\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"509\" y=\"205.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0g4jym4\" id=\"TextAnnotation_0g4jym4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"189\" x=\"481\" y=\"69\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0o0baxl\" id=\"Association_0o0baxl_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "creator_id": "admin@example.com",
+      "content_version": 2,
       "description": "This is an example workflow of using the \"Splunk Search\" function to search a Splunk collection based on the artifact type. The results are returned in the Splunk Results datatable.",
       "export_key": "search_splunk_ip_intel",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652193637321,
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1660141184246,
       "name": "Example of searching an artifact in Splunk ES",
       "object_type": "artifact",
       "programmatic_name": "search_splunk_ip_intel",
       "tags": [],
       "uuid": "c7df8026-0e4e-4f22-91b8-e50fd68464c8",
-      "workflow_id": 29
+      "workflow_id": 61
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "splunk_add_new_ip_intel",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"splunk_add_new_ip_intel\" isExecutable=\"true\" name=\"Example of adding artifact to Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow calling the \"Splunk Add Intel Item\" function to add a new collection item. The type is set determined by the artifact type.  Results are returned in a note and the Splunk Results datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_14001kj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1aax9p0\" name=\"Splunk Add Intel Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3118f626-d719-40c5-a862-a76b93e585e6\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027status_code\u0027: 201, \u0027content\u0027: {\u0027message\u0027: \u0027Create operation successful.\u0027, \u0027status\u0027: True}}\\nimport java.util.Date as Date \\n\\nnow = Date().time\\n\\nresult_note = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Artifact\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Splunk Add Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(artifact.value, \\n                             \\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"status\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\n\\nif results.get(\\\"content\\\", {}).get(\\\"status\\\", False):\\n  incident.addNote(helper.createRichText(result_note))\\n  result_row = incident.addRow(\\\"splunk_intel_results\\\")\\n  result_row.create_date = now\\n  result_row.status = \\\"Added\\\"\\n  result_row.intel_collection = results.inputs[\u0027splunk_threat_intel_type\u0027]\\n  result_row.intel_field = results.inputs[\u0027splunk_query_param1\u0027]\\n  result_row.intel_value = results.inputs[\u0027splunk_query_param2\u0027]\\n  result_row.splunk_server = rule.properties.splunk_server\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"lookup_map = {\\n  \\\"DNS Name\\\": (\\\"ip_intel\\\", \\\"domain\\\"),\\n  \\\"Email Attachment\\\": None,\\n  \\\"Email Attachment Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"Email Body\\\": None,\\n  \\\"Email Recipient\\\": None,\\n  \\\"Email Sender\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Sender Name\\\": (\\\"email_intel\\\", \\\"src_user\\\"),\\n  \\\"Email Subject\\\": (\\\"email_intel\\\", \\\"subject\\\"),\\n  \\\"File Name\\\": (\\\"file_intel\\\", \\\"file_name\\\"),\\n  \\\"File Path\\\": None,\\n  \\\"HTTP Request Header\\\": None,\\n  \\\"HTTP Response Header\\\": None,\\n  \\\"IP Address\\\": (\\\"ip_intel\\\", \\\"ip\\\"),\\n  \\\"Log File\\\": None,\\n  \\\"MAC Address\\\": None,\\n  \\\"Malware Family/Variant\\\": None,\\n  \\\"Malware MD5 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware Sample\\\": None,\\n  \\\"Malware Sample Fuzzy Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-1 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Malware SHA-256 Hash\\\": (\\\"file_intel\\\", \\\"file_hash\\\"),\\n  \\\"Mutex\\\": None,\\n  \\\"Network CIDR Range\\\": None,\\n  \\\"Other File\\\": None,\\n  \\\"Password\\\": None,\\n  \\\"Port\\\": None,\\n  \\\"Process Name\\\": (\\\"process_intel\\\", \\\"process\\\"),\\n  \\\"Registry Key\\\": (\\\"registry_intel\\\", \\\"registry_value_name\\\"),\\n  \\\"RFC 822 Email Message File\\\": None,\\n  \\\"Service\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"String\\\": None,\\n  \\\"System Name\\\": (\\\"service_intel\\\", \\\"service\\\"),\\n  \\\"URI Path\\\": None,\\n  \\\"URL\\\": (\\\"http_intel\\\", \\\"url\\\"),\\n  \\\"URL Referer\\\": (\\\"http_intel\\\", \\\"http_referrer\\\"),\\n  \\\"User Account\\\": None,\\n  \\\"User Agent\\\": (\\\"http_intel\\\", \\\"http_user_agent\\\")\\n}\\n\\nif artifact.type in lookup_map and lookup_map[artifact.type]:\\n  threat_type, threat_field_name = lookup_map[artifact.type]\\n  inputs.splunk_threat_intel_type = threat_type\\n  inputs.splunk_query_param1 = threat_field_name\\n  inputs.splunk_query_param2 = artifact.value\\n  inputs.splunk_label = rule.properties.splunk_server\\nelse:\\n  helper.fail(\\\"Artifact type not supported: {}\\\".format(artifact.type))\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_14001kj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1rp7f1j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_14001kj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1aax9p0\"/\u003e\u003cendEvent id=\"EndEvent_05bgc5i\"\u003e\u003cincoming\u003eSequenceFlow_1rp7f1j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1rp7f1j\" sourceRef=\"ServiceTask_1aax9p0\" targetRef=\"EndEvent_05bgc5i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rg86ww\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in Splunk Results datatable\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0cimwoi\" sourceRef=\"ServiceTask_1aax9p0\" targetRef=\"TextAnnotation_0rg86ww\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"196\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"191\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"201\" xsi:type=\"omgdc:Point\" y=\"203\"/\u003e\u003comgdi:waypoint x=\"158\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1aax9p0\" id=\"ServiceTask_1aax9p0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"311\" y=\"152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_14001kj\" id=\"SequenceFlow_14001kj_di\"\u003e\u003comgdi:waypoint x=\"232\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"226.5\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05bgc5i\" id=\"EndEvent_05bgc5i_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"488\" y=\"174\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"461\" y=\"213\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rp7f1j\" id=\"SequenceFlow_1rp7f1j_di\"\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003comgdi:waypoint x=\"488\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"404.5\" y=\"170.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rg86ww\" id=\"TextAnnotation_0rg86ww_di\"\u003e\u003comgdc:Bounds height=\"44\" width=\"205\" x=\"394\" y=\"66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0cimwoi\" id=\"Association_0cimwoi_di\"\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"157\"/\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "This is an example workflow calling the \"Splunk Add Intel Item\" function to add a new collection item. The type is set determined by the artifact type.  Results are returned in a note and the Splunk Results datatable.",
+      "export_key": "splunk_add_new_ip_intel",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1660141151170,
+      "name": "Example of adding artifact to Splunk ES",
+      "object_type": "artifact",
+      "programmatic_name": "splunk_add_new_ip_intel",
+      "tags": [],
+      "uuid": "851e45ce-9031-45fa-80ec-c91b25a451a8",
+      "workflow_id": 60
     },
     {
       "actions": [],
       "content": {
         "version": 1,
-        "workflow_id": "splunk_update_notable",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"splunk_update_notable\" isExecutable=\"true\" name=\"Example of updating Splunk ES notable event\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow calling the \"Splunk Update Notable Event\" function to update a given notable event. The event_status is mapped to the plan_status of the incident, and the comment is set in the Pre-Process Script tab accordingly.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0irbxe6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_152mu1x\" name=\"Splunk Update Notable Event\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e39198f-c337-42be-8420-9502d573e413\"\u003e{\"inputs\":{\"747afc0e-82a0-4def-acab-edd06f61f81e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Updating information from SOAR\"}}},\"post_processing_script\":\"# {\u0027status_code\u0027: 200, \u0027content\u0027: {\u0027details\u0027: {}, \u0027success_count\u0027: 1, \u0027failure_count\u0027: 0, \u0027warnings\u0027: [], \u0027success\u0027: True, \u0027message\u0027: \u00271 event updated successfully\u0027}}\\n\\nresult_note = u\\\"\u0026lt;b\u0026gt;Splunk Update notable event\u0026lt;/b\u0026gt;:\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\"\\nif isinstance(results.get(\\\"content\\\"), dict):\\n  result_note = result_note + u\\\"\\\"\\\"\u0026lt;b\u0026gt;Splunk Update Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(\\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"success\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\nelse:\\n  result_note = result_note + results.get(\\\"content\\\")\\n\\nincident.addNote(helper.createRichText(result_note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if incident.properties.splunk_notable_event_id:\\n  inputs.event_id = incident.properties.splunk_notable_event_id\\n  if incident.plan_status == \\\"C\\\":\\n      inputs.notable_event_status = 5\\n      inputs.comment = \\\"SOAR incident is closed\\\"\\n  else:\\n      inputs.notable_event_status = 2\\n      inputs.comment = \\\"SOAR incident is active\\\"\\n  inputs.splunk_label = rule.properties.splunk_servers\\nelse:\\n  helper.fail(\\\"Ensure that the incident custom field is set: splunk_notable_event_id\\\")\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0irbxe6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0yhrhv0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0irbxe6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_152mu1x\"/\u003e\u003cendEvent id=\"EndEvent_0ceci5l\"\u003e\u003cincoming\u003eSequenceFlow_0yhrhv0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0yhrhv0\" sourceRef=\"ServiceTask_152mu1x\" targetRef=\"EndEvent_0ceci5l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ean0am\"\u003e\u003ctext\u003e\u003c![CDATA[An incident created from a Splunk ES notable event shall carry a splunk_notable_event_id. This example workflow uses that event_id to update the corresponding notable event.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0vurcta\" sourceRef=\"ServiceTask_152mu1x\" targetRef=\"TextAnnotation_0ean0am\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"326\" y=\"142\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"321\" y=\"177\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"223\" y=\"226\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"332\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"284\" xsi:type=\"omgdc:Point\" y=\"226\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_152mu1x\" id=\"ServiceTask_152mu1x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"449\" y=\"120\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0irbxe6\" id=\"SequenceFlow_0irbxe6_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"405.5\" y=\"138\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ceci5l\" id=\"EndEvent_0ceci5l_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"622\" y=\"142\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"595\" y=\"181\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yhrhv0\" id=\"SequenceFlow_0yhrhv0_di\"\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003comgdi:waypoint x=\"622\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"540.5\" y=\"138.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ean0am\" id=\"TextAnnotation_0ean0am_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"329\" x=\"517\" y=\"23\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0vurcta\" id=\"Association_0vurcta_di\"\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"130\"/\u003e\u003comgdi:waypoint x=\"628\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "example_of_deleting_an_intel_entry_in_splunk_es",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_deleting_an_intel_entry_in_splunk_es\" isExecutable=\"true\" name=\"Example of deleting an intel entry in Splunk ES\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow using the \"Splunk Delete Threat Intel Item\" function to delete an intel item from a Splunk collection.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1fsyszc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1j8papp\" name=\"Splunk Delete Threat Intel Item\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f66d22ca-b1f0-49c9-b328-22628bbc10c4\"\u003e{\"inputs\":{},\"post_processing_script\":\"# {\u0027status_code\u0027: 201, \u0027content\u0027: {\u0027message\u0027: \u0027Delete operation successful.\u0027, \u0027status\u0027: True}}\\n\\nresult_note = u\\\"\\\"\\\"\u0026lt;b\u0026gt;Artifact\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Splunk Delete Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(row.intel_value, \\n                             \\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"status\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\n\\nincident.addNote(helper.createRichText(result_note))\\nrow.status = \\\"Deleted\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.splunk_threat_intel_type = row.intel_collection\\ninputs.splunk_threat_intel_key = row.intel_key\\ninputs.splunk_label = row.splunk_server\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1fsyszc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1cdxs98\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1fsyszc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1j8papp\"/\u003e\u003cendEvent id=\"EndEvent_00odjzi\"\u003e\u003cincoming\u003eSequenceFlow_1cdxs98\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1cdxs98\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"EndEvent_00odjzi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_04vpsmi\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in a note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1xifsxc\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"TextAnnotation_04vpsmi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0gavnpw\"\u003e\u003ctext\u003e\u003c![CDATA[Delete an intel entry based on it\u0027s internal key\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17motrf\" sourceRef=\"ServiceTask_1j8papp\" targetRef=\"TextAnnotation_0gavnpw\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1j8papp\" id=\"ServiceTask_1j8papp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"267\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1fsyszc\" id=\"SequenceFlow_1fsyszc_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"267\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"232.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00odjzi\" id=\"EndEvent_00odjzi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430.97435897435895\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"448.97435897435895\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1cdxs98\" id=\"SequenceFlow_1cdxs98_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_04vpsmi\" id=\"TextAnnotation_04vpsmi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"371.97435897435895\" y=\"75.92307692307692\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1xifsxc\" id=\"Association_1xifsxc_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"408\" xsi:type=\"omgdc:Point\" y=\"106\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0gavnpw\" id=\"TextAnnotation_0gavnpw_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"158\" x=\"159\" y=\"71\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17motrf\" id=\"Association_17motrf_di\"\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"110\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 1,
-      "creator_id": "admin@example.com",
+      "description": "This is an example workflow using the \"Splunk Delete Threat Intel Item\" function to delete an intel item from a Splunk collection.",
+      "export_key": "example_of_deleting_an_intel_entry_in_splunk_es",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1660140965476,
+      "name": "Example of deleting an intel entry in Splunk ES",
+      "object_type": "splunk_intel_results",
+      "programmatic_name": "example_of_deleting_an_intel_entry_in_splunk_es",
+      "tags": [],
+      "uuid": "c9e465ff-c829-4c0f-9231-0cf94465097f",
+      "workflow_id": 59
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "splunk_update_notable",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"splunk_update_notable\" isExecutable=\"true\" name=\"Example of updating Splunk ES notable event\"\u003e\u003cdocumentation\u003e\u003c![CDATA[This is an example workflow calling the \"Splunk Update Notable Event\" function to update a given notable event. The event_status is mapped to the plan_status of the incident, and the comment is set in the Pre-Process Script tab accordingly.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0irbxe6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_152mu1x\" name=\"Splunk Update Notable Event\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e39198f-c337-42be-8420-9502d573e413\"\u003e{\"inputs\":{\"747afc0e-82a0-4def-acab-edd06f61f81e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Updating information from SOAR\"}}},\"post_processing_script\":\"# {\u0027status_code\u0027: 200, \u0027content\u0027: {\u0027details\u0027: {}, \u0027success_count\u0027: 1, \u0027failure_count\u0027: 0, \u0027warnings\u0027: [], \u0027success\u0027: True, \u0027message\u0027: \u00271 event updated successfully\u0027}}\\n\\nresult_note = u\\\"\u0026lt;b\u0026gt;Splunk Update notable event\u0026lt;/b\u0026gt;:\u0026lt;br\u0026gt;\u0026lt;br\u0026gt;\\\"\\nif isinstance(results.get(\\\"content\\\"), dict):\\n  result_note = result_note + u\\\"\\\"\\\"\u0026lt;b\u0026gt;Splunk Update Status\u0026lt;/b\u0026gt;: {}\u0026lt;br\u0026gt;\\n\u0026lt;b\u0026gt;Message\u0026lt;/b\u0026gt;: {}\\\"\\\"\\\".format(\\\"Successful\\\" if results.get(\\\"content\\\", {}).get(\\\"success\\\", False) else \\\"Unsuccessful\\\",\\n                             results.get(\\\"content\\\", {}).get(\\\"message\\\", \\\"None\\\"))\\nelse:\\n  result_note = result_note + results.get(\\\"content\\\")\\n\\nincident.addNote(helper.createRichText(result_note))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"if incident.properties.splunk_notable_event_id:\\n  inputs.event_id = incident.properties.splunk_notable_event_id\\n  if incident.plan_status == \\\"C\\\":\\n      inputs.notable_event_status = 5\\n      inputs.comment = \\\"SOAR incident is closed\\\"\\n  else:\\n      inputs.notable_event_status = 2\\n      inputs.comment = \\\"SOAR incident is active\\\"\\n  inputs.splunk_label = rule.properties.splunk_server\\nelse:\\n  helper.fail(\\\"Ensure that the incident custom field is set: splunk_notable_event_id\\\")\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0irbxe6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0yhrhv0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0irbxe6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_152mu1x\"/\u003e\u003cendEvent id=\"EndEvent_0ceci5l\"\u003e\u003cincoming\u003eSequenceFlow_0yhrhv0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0yhrhv0\" sourceRef=\"ServiceTask_152mu1x\" targetRef=\"EndEvent_0ceci5l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ean0am\"\u003e\u003ctext\u003e\u003c![CDATA[An incident created from a Splunk ES notable event shall carry a splunk_notable_event_id. This example workflow uses that event_id to update the corresponding notable event.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0vurcta\" sourceRef=\"ServiceTask_152mu1x\" targetRef=\"TextAnnotation_0ean0am\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"326\" y=\"142\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"321\" y=\"177\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"223\" y=\"226\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"332\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"284\" xsi:type=\"omgdc:Point\" y=\"226\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_152mu1x\" id=\"ServiceTask_152mu1x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"449\" y=\"120\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0irbxe6\" id=\"SequenceFlow_0irbxe6_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"405.5\" y=\"138\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0ceci5l\" id=\"EndEvent_0ceci5l_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"622\" y=\"142\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"595\" y=\"181\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0yhrhv0\" id=\"SequenceFlow_0yhrhv0_di\"\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003comgdi:waypoint x=\"622\" xsi:type=\"omgdc:Point\" y=\"160\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"540.5\" y=\"138.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ean0am\" id=\"TextAnnotation_0ean0am_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"329\" x=\"517\" y=\"23\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0vurcta\" id=\"Association_0vurcta_di\"\u003e\u003comgdi:waypoint x=\"549\" xsi:type=\"omgdc:Point\" y=\"130\"/\u003e\u003comgdi:waypoint x=\"628\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
       "description": "This is an example workflow calling the \"Splunk Update Notable Event\" function to update a given notable event. The event_status is mapped to the plan_status of the incident, and the comment is set in the Pre-Process Script tab accordingly.",
       "export_key": "splunk_update_notable",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652193637455,
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1660141202621,
       "name": "Example of updating Splunk ES notable event",
       "object_type": "incident",
       "programmatic_name": "splunk_update_notable",
       "tags": [],
       "uuid": "1be3f306-2418-4aa9-87db-6c5712c574f8",
-      "workflow_id": 30
+      "workflow_id": 62
     }
   ],
   "workspaces": []

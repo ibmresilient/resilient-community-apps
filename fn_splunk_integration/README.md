@@ -39,6 +39,7 @@
 | 1.1.0 | 03/2022 | Allow for configuration of multiple Splunk instances |
 | 1.1.1 | 04/2022 | Fix for splunk_max_count |
 | 1.2.0 | 05/2022 | Add more documentation and bug fix |
+| 1.2.1 | 08/2022 | Bug fix for MSSP |
 
 * For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.1.0 Changes](#1.1.0-changes)
 
@@ -261,7 +262,7 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_threat_intel_type = threat_type
   inputs.splunk_query_param1 = threat_field_name
   inputs.splunk_query_param2 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 
@@ -293,7 +294,7 @@ if results.get("content", {}).get("status", False):
   result_row.intel_collection = results.inputs['splunk_threat_intel_type']
   result_row.intel_field = results.inputs['splunk_query_param1']
   result_row.intel_value = results.inputs['splunk_query_param2']
-  result_row.splunk_server = rule.properties.splunk_servers
+  result_row.splunk_server = rule.properties.splunk_server
 
 ```
 
@@ -500,7 +501,7 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 ```
@@ -521,7 +522,7 @@ if results.get("content", None):
     result_row.source = event.pop("threat_key")
     result_row.intel_collection = results.inputs['splunk_query_param1']
     result_row.intel_key = event.pop("_key")
-    result_row.splunk_server = rule.properties.splunk_servers
+    result_row.splunk_server = rule.properties.splunk_server
     result_row.status = "Active"
     event.pop("item_key") # not presented
     # what's left is the artifact value
@@ -533,7 +534,7 @@ else:
   result_row = incident.addRow("splunk_intel_results")
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
-  result_row.splunk_server = rule.properties.splunk_servers
+  result_row.splunk_server = rule.properties.splunk_server
 ```
 
 </p>
@@ -612,7 +613,7 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```
@@ -699,9 +700,8 @@ verify_cert=false|/path/to/cert
 The function input field `splunk_label` is required when Splunk server/servers in the app.config are labeled. In the example workflows pre-process scripts the
 input field `splunk_label` is defined the following way,
 ```python
-inputs.splunk_label = rule.properties.splunk_servers
+inputs.splunk_label = rule.properties.splunk_server
 ```
-The rule field `splunk_servers` is a select field that is filled with the labels of the splunk servers from the app.config when the integration is initialized.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
