@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -32,9 +32,7 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -45,15 +43,7 @@
           "type": "string"
         },
         "splunk_query": {
-          "type": "object",
-          "properties": {
-            "format": {
-              "type": "string"
-            },
-            "content": {
-              "type": "string"
-            }
-          }
+          "type": "string"
         },
         "splunk_label": {
           "type": "string"

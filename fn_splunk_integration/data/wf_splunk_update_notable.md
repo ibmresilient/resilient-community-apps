@@ -26,15 +26,13 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```
 
 ### Post-Processing Script
 ```python
-# {'status_code': 200, 'content': {'details': {}, 'success_count': 1, 'failure_count': 0, 'warnings': [], 'success': True, 'message': '1 event updated successfully'}}
-
 result_note = u"<b>Splunk Update notable event</b>:<br><br>"
 if isinstance(results.get("content"), dict):
   result_note = result_note + u"""<b>Splunk Update Status</b>: {}<br>

@@ -16,10 +16,10 @@ class TestSplunkUtils:
     # Test data
     fake_host = "mysplunk_url.com"
     fake_port = 8089
-    fake_url = "https://"+fake_host + ":" + str(fake_port)
-    auth_url = fake_url + "/services/auth/login"
-    update_notable_url = fake_url + "/services/notable_update"
-    threat_post_url = fake_url + "/services/data/threat_intel/item/"
+    fake_url = "https://{}:{}".format(fake_host, str(fake_port))
+    auth_url = "{}/services/auth/login".format(fake_url)
+    update_notable_url = "{}/services/notable_update".format(fake_url)
+    threat_post_url = "{}/services/data/threat_intel/item/".format(fake_url)
     fake_username = "Username"
     fake_password = "MyPassword"
     verify = True
@@ -43,15 +43,16 @@ class TestSplunkUtils:
 
     @patch("requests.post")
     def test_splunk_utils_getSessionKey(self, mocked_requests_post):
-        simContent = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+        simContent = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
 
         mocked_requests_post.return_value = self._generateResponse(simContent, 200)
 
         splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
-                                            port=self.fake_port,
-                                            username=self.fake_username,
-                                            password=self.fake_password,
-                                            verify=self.verify)
+                                               port=self.fake_port,
+                                               username=self.fake_username,
+                                               password=self.fake_password,
+                                               token=None,
+                                               verify=self.verify)
 
         retKey = splnk_utils.session_key
         headers = dict()
@@ -81,6 +82,7 @@ class TestSplunkUtils:
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             ret_key = splnk_utils.session_key
@@ -93,7 +95,7 @@ class TestSplunkUtils:
                                                     headers=headers,
                                                     data=post_data,
                                                     verify=self.verify)
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
         assert not ret_key
@@ -104,12 +106,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             content_dict = {"success": True, "message": "Updated successfuly"}
@@ -132,7 +135,7 @@ class TestSplunkUtils:
                                                     data=args,
                                                     verify=self.verify)
             assert ret["status_code"] == 200
-        except Exception as e:
+        except Exception:
             assert False
 
     @patch("requests.post")
@@ -147,12 +150,13 @@ class TestSplunkUtils:
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             # Failed to connect during login will throw exception
             assert False
 
-        except requests.ConnectionError as e:
+        except requests.ConnectionError:
             print("Test wrong url. ")
             assert True
 
@@ -163,12 +167,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.RequestException(Mock(status=404), "Ambiguous excetpion.")
@@ -189,12 +194,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Ambiguous excetpion.")
@@ -205,7 +211,7 @@ class TestSplunkUtils:
                                              cafile=self.verify)
             # request post throws exception
             assert False
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
     @patch("requests.post")
@@ -215,12 +221,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Ambiguous excetpion.")
@@ -231,7 +238,7 @@ class TestSplunkUtils:
                                              cafile=self.verify)
             # request post throws exception
             assert False
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
     @patch("requests.post")
@@ -241,12 +248,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.HTTPError(Mock(status=404), "Ambiguous excetpion.")
@@ -257,7 +265,7 @@ class TestSplunkUtils:
                                              cafile=self.verify)
             # request post throws exception
             assert False
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
     @patch("requests.post")
@@ -267,12 +275,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.URLRequired(Mock(status=404), "Ambiguous excetpion.")
@@ -283,7 +292,7 @@ class TestSplunkUtils:
                                              cafile=self.verify)
             # request post throws exception
             assert False
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
     @patch("requests.post")
@@ -293,12 +302,13 @@ class TestSplunkUtils:
         try:
             sim_status = 1
 
-            sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+            sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
             splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                    port=self.fake_port,
                                                    username=self.fake_username,
                                                    password=self.fake_password,
+                                                   token=None,
                                                    verify=self.verify)
 
             mocked_requests_post.side_effect = requests.TooManyRedirects(Mock(status=404), "Ambiguous excetpion.")
@@ -309,7 +319,7 @@ class TestSplunkUtils:
                                              cafile=self.verify)
             # request post throws exception
             assert False
-        except IntegrationError as e:
+        except IntegrationError:
             assert True
 
     @patch("splunklib.client.connect")
@@ -363,7 +373,7 @@ class TestSplunkUtils:
                 # Is this important? Asserting we call job.refresh first
                 mocked_job.refresh.assert_called_with()
 
-        except Exception as e:
+        except Exception:
             assert False
 
     @patch("splunklib.client.connect")
@@ -439,7 +449,7 @@ class TestSplunkUtils:
             time_used = time.time() - start_time
             print("Search times out after {} secs with time out set to {} secs".format(time_used, time_out))
             assert True
-        except Exception as e:
+        except Exception:
             assert False
 
     @patch("splunklib.client.connect")
@@ -494,10 +504,10 @@ class TestSplunkUtils:
                 # Is this important? Asserting we call job.refresh first
                 mocked_job.refresh.assert_called_with()
 
-        except IntegrationError as e:
+        except IntegrationError:
             print("Failed search throws SearchFailure as expected")
             assert True
-        except Exception as e:
+        except Exception:
             assert False
 
     @patch("splunklib.client.connect")
@@ -528,10 +538,10 @@ class TestSplunkUtils:
                 # If the search job can not be created, exception shall be thrown.
                 # The code should not get here.
                 assert False
-        except IntegrationError as e:
+        except IntegrationError:
             print("Failure in creating search job throws SearchJobFailure exception")
             assert True
-        except Exception as e:
+        except Exception:
             assert False
 
     @patch("splunklib.client.connect")
@@ -550,12 +560,13 @@ class TestSplunkUtils:
 
     @patch("requests.post")
     def test_add_threat_intel_item(self, mocked_requests_post):
-        sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+        sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
         mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
         splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                port=self.fake_port,
                                                username=self.fake_username,
                                                password=self.fake_password,
+                                               token=None,
                                                verify=self.verify)
         itemDict = {"ip":"8.8.8.8", "domain":"fake.domain.com"}
         threat_type = "ip_intel"
@@ -590,11 +601,12 @@ class TestSplunkUtils:
                                                port=self.fake_port,
                                                username=self.fake_username,
                                                password=self.fake_password,
+                                               token=None,
                                                verify=self.verify)
         # 2. Simulate wrong intel type
         try:
             splnk_utils.add_threat_intel_item("Fake type", {}, False)
-        except IntegrationError as e:
+        except IntegrationError:
             print("Fake intel type causes exception as expected.")
             assert(True)
 
@@ -638,12 +650,13 @@ class TestSplunkUtils:
     @patch("requests.post")
     def testDelete(self, mocked_requests_post, mocked_requests_delete):
         # 1. Connect successfully
-        sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+        sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
         mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
         splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                port=self.fake_port,
                                                username=self.fake_username,
                                                password=self.fake_password,
+                                               token=None,
                                                verify=self.verify)
         # 2. Call delete
         threat_type = "ip_intel"
@@ -658,7 +671,7 @@ class TestSplunkUtils:
         headers = dict()
         headers["Authorization"] = "Splunk %s" % self.simSessionKey
 
-        post_url = self.threat_post_url + threat_type + "/" + item_key
+        post_url = "{}{}/{}".format(self.threat_post_url, threat_type, item_key)
         mocked_requests_delete.assert_called_with(post_url,
                                                   headers=headers,
                                                   verify=self.verify)
@@ -668,12 +681,13 @@ class TestSplunkUtils:
     @patch("requests.post")
     def test_delete_threat_item_failure(self, mocked_requests_post, mocked_requests_delete):
         # 1. Connect successfully
-        sim_content = '<response><sessionKey>' + self.simSessionKey + '</sessionKey></response>'
+        sim_content = '<response><sessionKey>{}</sessionKey></response>'.format(self.simSessionKey)
         mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
         splnk_utils = splunk_utils.SplunkUtils(host=self.fake_host,
                                                port=self.fake_port,
                                                username=self.fake_username,
                                                password=self.fake_password,
+                                               token=None,
                                                verify=self.verify)
 
         # 2. Call delete with wrong threat_type
