@@ -38,7 +38,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "{}FunctionComponent = fn_qradar_integration.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_qradar_integration/components/[a-zA-Z]*.py")
+            "{}FunctionComponent = fn_odbc_query.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_odbc_query/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_odbc_query.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_odbc_query.util.customize:customization_data"],

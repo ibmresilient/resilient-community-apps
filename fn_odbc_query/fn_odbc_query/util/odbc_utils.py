@@ -12,7 +12,7 @@ class OdbcConnection(object):
     db_connection = None
     db_cursor = None
 
-    def __init__(self, sql_connection_string, sql_autocommit, sql_query_timeout):
+    def __init__(self, sql_connection_string, sql_autocommit=False, sql_query_timeout=30):
         self.db_connection = self.setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout)
 
     @staticmethod
