@@ -299,6 +299,5 @@ class WebexInterface:
         if response.get("status_code") == 405:
             return FunctionResult(response, success=False,
                         reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
-        else:
-            return FunctionResult(response, success=False,
-                reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
+        return FunctionResult(response, success=False,
+            reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))

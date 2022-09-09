@@ -125,10 +125,9 @@ class ResponseHandler:
                     res["message"] = self.msg
                 return res
             raise IntegrationError(self.msg)
-        else:
-            res = self.response.json()
-            res["status_code"] = self.response.status_code
-            return res
+        res = self.response.json()
+        res["status_code"] = self.response.status_code
+        return res
 
 
     def check_response(self, response):

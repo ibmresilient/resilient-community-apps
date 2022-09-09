@@ -3,12 +3,12 @@
 #
 # """AppFunction implementation"""
 from urllib import parse
-from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from resilient_lib import validate_fields, IntegrationError
 
 from fn_webex.lib import constants
-from fn_webex.lib.cisco_interface import WebexInterface
 from fn_webex.lib.cisco_authentication import WebexAuthentication
+from fn_webex.lib.cisco_interface import WebexInterface
 
 
 PACKAGE_NAME = "fn_webex"

@@ -5,12 +5,12 @@
 from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
-from fn_webex.lib import constants
 from fn_webex.lib.cisco_interface import WebexInterface
+from fn_webex.lib import constants
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 
-PACKAGE_NAME = "fn_webex"
 FN_NAME = "webex_delete_teamsrooms"
+PACKAGE_NAME = "fn_webex"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_delete_teamsrooms'"""
