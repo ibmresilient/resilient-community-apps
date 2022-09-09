@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
             log.info("timer_time: %s", timer_time)
             log.info("timer_epoch: %s", timer_epoch)
 
-            if timer_time is not None and timer_epoch is not None:
+            if timer_time and timer_epoch:
                 raise ValueError("Timer function takes one parameter as input: timer_time OR timer_epoch.")
 
             # Get max timer to sleep from app.config setting and convert to seconds.
@@ -70,7 +70,7 @@ class FunctionComponent(AppFunctionComponent):
             max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
 
             # Compute the time to wait in seconds
-            if timer_epoch is not None:
+            if timer_epoch:
                 total_time_in_seconds = get_sleep_time_from_epoch(timer_epoch)
             else:
                 total_time_in_seconds = get_sleep_time_in_seconds(timer_time)
