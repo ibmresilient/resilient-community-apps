@@ -293,10 +293,19 @@ def check_alert_filters(alert_list, alert_filters):
     if not alert_filters:
         return True
 
+    # for all alerts, only one alert needs to match the filter criteria to accept the defender incident
     for alert in alert_list:
         alert_result = []
+        # iterate over all alert_filters
         for filter_name, filter_value in alert_filters.items():
-            if filter_name in alert:
+            if filter_name not in alert:
+                LOG.warning(f"Alert filter: {filter_name} not found in alert. Continuing")
+            else:
+                # compare the filter against the alert value. different combinations exist:
+                #  alert: list, alert_filter: list
+                #  alert: single value, alert_filter: list
+                #  alert: list, alert_filter: single_value
+                #  alert: single value, alert_filter: single_value
                 if isinstance(filter_value, list):
                     filter_result = None
                     for value in filter_value:
@@ -312,10 +321,11 @@ def check_alert_filters(alert_list, alert_filters):
                 else:
                     filter_result = bool(filter_value == alert[filter_name])
 
+                # when a test is done, save the value to compare with all other tests
                 if filter_result is not None:
                     alert_result.append(filter_result)
 
-        # if one alert passes all criteria, return with success
+        # if one alert passes all criteria, return with success. Otherwise continue to next alert
         if alert_result and all(alert_result):
             return True
 

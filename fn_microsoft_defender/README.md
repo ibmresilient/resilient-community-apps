@@ -84,7 +84,7 @@ See section [App Configuration](#app-configuration) for the new app.config setti
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Perform operations against Defender such as set indicators, isolate and quarantine machines, and block file execution
+Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution.
 
 ### Key Features
 <!--
