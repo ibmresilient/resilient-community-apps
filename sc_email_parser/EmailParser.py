@@ -5,6 +5,8 @@ import time
 
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
+# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
+DEFANG_PATTERN = re.compile(r"([HTTPShttpsFTPftpNEWSnewsMAILTOmailtoFILEfile]+):")
 
 # This is the Python 3 version of the email sample script.
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
@@ -588,7 +590,8 @@ class EmailProcessor(object):
         row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
         row['from'] = handle_list(headers.get("From"))
         row['subject'] = handle_list(headers.get("Subject"))
-        row['body'] = "\n".join(msg_body)
+        body = "\n".join(msg_body)
+        row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", body)
         row['attachments'] = ", ".join(msg_attachments)
         row['message_id'] = processor.get_message_id(headers)
         row['in_reply_to'] = handle_list(headers.get("References"))
