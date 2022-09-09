@@ -110,7 +110,7 @@ class FunctionComponent(AppFunctionComponent):
                     wf_check_interval = total_time_in_seconds - current_sleep_time
 
             if wf_status.is_terminated:
-                yield StatusMessage('Workflow was terminated.')
+                yield StatusMessage('Workflow/playbook was terminated.')
 
             yield StatusMessage('Total sleep time {} seconds complete.'.format(current_sleep_time))
 
