@@ -6,7 +6,7 @@
 def config_section_data():
 
     config_data = u"""[fn_webex]
-# Creditals and other options required for fn_webex
+# Credentials and other options required for fn_webex
 
 webex_site_url = https://webexapis.com
 webex_timezone = UTC +00:00
