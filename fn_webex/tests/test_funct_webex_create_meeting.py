@@ -104,7 +104,7 @@ class TestFnCreateMeeting:
         app_configuration["client_secret"] = ""
         with pytest.raises(ValueError) as err:
             authenticator = WebexAuthentication(requiredParameters, app_configuration)
-            requiredParameters["header"] = authenticator.Authenticate()
+            requiredParameters["header"] = authenticator.authenticate()
 
     @patch('resilient_lib.RequestsCommon.execute', side_effect=mocked_requests_post)
     def test_call_invalid_url(self, mock):
@@ -114,7 +114,7 @@ class TestFnCreateMeeting:
         app_configuration  = self.app_configuration.copy()
         requiredParameters["meetingsURL"] = ""
         authenticator = WebexAuthentication(requiredParameters, app_configuration)
-        requiredParameters["header"] = authenticator.Authenticate()
+        requiredParameters["header"] = authenticator.authenticate()
         webex = WebexMeetings(requiredParameters, optionalParameters)
         with pytest.raises(IntegrationError) as err:
             webex.create_meeting()
@@ -137,7 +137,7 @@ class TestFnCreateMeeting:
         app_configuration  = self.app_configuration.copy()
         webex = WebexMeetings(requiredParameters, optionalParameters)
         authenticator = WebexAuthentication(self.requiredParameters, app_configuration)
-        self.requiredParameters["header"] = authenticator.Authenticate()
+        self.requiredParameters["header"] = authenticator.authenticate()
         webex.create_meeting()
 
 
