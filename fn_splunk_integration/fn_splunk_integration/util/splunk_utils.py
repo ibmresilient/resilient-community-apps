@@ -10,8 +10,8 @@ import urllib.parse as urlparse
 import splunklib.client as splunk_client
 import splunklib.results as splunk_results
 from resilient_lib import IntegrationError
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
 
+PACKAGE_NAME = "fn_splunk_integration"
 LOG = getLogger(__name__)
 
 class SplunkClient(object):
@@ -39,7 +39,7 @@ class SplunkClient(object):
         :param verify: True to validate the SSL cert
         :return: Connection to splunk
         """
-        LOG.info("Splunk SDK verify flag is {}".format(verify))
+        LOG.info(f"Splunk SDK verify flag is {verify}")
         return splunk_client.connect(host=host,
                                      port=port,
                                      username=username,
@@ -68,12 +68,11 @@ class SplunkClient(object):
             job = self.splunk_service.jobs.create(query, **query_args)
             if job_ttl:
                 job.set_ttl(job_ttl)
-        except Exception as e:
+            return job
+        except Exception:
             LOG.exception("Search job creation failed")
             # If we failed to create a search job, it does not make sense to go further
-            raise IntegrationError("Failed to create search job for query [{}] ".format(query))
-
-        return job
+            raise IntegrationError(f"Failed to create search job for query [{query}] ")
 
     def execute_query(self, query):
         """
@@ -91,9 +90,10 @@ class SplunkClient(object):
         done = False
 
         while not done:
+            dispatch_state = splunk_job["dispatchState"]
             if splunk_job.is_ready():
                 splunk_job.refresh()
-                done = splunk_job["dispatchState"] in ("FAILED", "DONE")
+                done = dispatch_state in ("FAILED", "DONE")
 
                 stats = {"name": splunk_job.name,
                          "isDone": splunk_job.isDone,
@@ -109,23 +109,21 @@ class SplunkClient(object):
 
             if not done:
                 if self.time_out != 0:
-                    if time() - start_time > self.time_out:
+                    if ((time() - start_time) > self.time_out):
                         splunk_job.cancel()
-                        raise IntegrationError("Query [{}] timed out. Final Status was [{}]".format(splunk_job.name, splunk_job["dispatchState"]))
-                LOG.debug("Sleeping for %s", self.polling_interval)
+                        raise IntegrationError(f"Query [{splunk_job.name}] timed out. Final Status was [{dispatch_state}]")
+                LOG.debug(f"Sleeping for {self.polling_interval}")
                 sleep(self.polling_interval)
 
-        if splunk_job["dispatchState"] != "DONE" or splunk_job["isFailed"] == True:
-            raise IntegrationError("Query [{}] failed with status [{}], {}".format(splunk_job.name, splunk_job["dispatchState"], str(splunk_job["messages"])))
+        if dispatch_state != "DONE" or splunk_job["isFailed"] == True:
+            raise IntegrationError(f"Query [{splunk_job.name}] failed with status [{dispatch_state}], {str(splunk_job['messages'])}")
 
         results_args = {}
         if self.max_return:
             results_args["count"] = self.max_return
 
         reader = splunk_results.ResultsReader(splunk_job.results(**results_args))
-        result = {"events": list([dict(row) for row in reader])}
-
-        return result
+        return {"events": list([dict(row) for row in reader])}
 
 class SplunkUtils(object):
     """ Use python requests to call Splunk REST API"""
@@ -139,11 +137,11 @@ class SplunkUtils(object):
                              "registry_intel", "certificate_intel"]
 
     def __init__(self, host, port, username, password, token, verify):
-        self.base_url = "https://{}:{}".format(host, port)
+        self.base_url = f"https://{host}:{port}"
         if username and password:
             self.get_session_key(username, password, verify)
         elif token:
-            self.header = {"Authorization": "Bearer {}".format(token)}
+            self.header = {"Authorization": f"Bearer {token}"}
 
     def get_session_key(self, username, password, verify):
         """
@@ -154,25 +152,49 @@ class SplunkUtils(object):
         :return: None
         """
 
-        headers = {"Accept": "application/html"}
-        url = "{}/services/auth/login".format(self.base_url)
+        url = f"{self.base_url}/services/auth/login"
         try:
             resp = requests.post(url,
-                                    headers=headers,
-                                    data=urlparse.urlencode({"username": username,
-                                                            "password": password}),
-                                    verify=verify)
+                                 headers={"Accept": "application/html"},
+                                 data=urlparse.urlencode({"username": username,
+                                                          "password": password}),
+                                 verify=verify)
             # This one we only allows 200. Otherwise login failed
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
                 session_key = str(resp.content)
                 self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
-                self.header = {"Authorization": "Splunk {}".format(self.session_key)}
+                self.header = {"Authorization": f"Splunk {self.session_key}"}
             else:
-                error_msg = "Splunk login failed with status {}".format(resp.status_code)
-                raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, error_msg))
+                error_msg = f"Splunk login failed with status {resp.status_code}"
+                raise IntegrationError(f"Request to url [{url}] throws exception. Error [{error_msg}]")
         except Exception as e:
             raise e
+
+    def send_post(self, url, args, cafile):
+        """ These exacte commands are used for both update_notable and add_threat_intel_item
+        :param url: The url api call
+        :param args: args for the api call
+        :param cafile: Certificae file
+        :return: Request response in json
+        """
+        try:
+            resp = requests.post(url, headers=self.header, data=args, verify=cafile)
+            # We shall just return the response in json and let the post process
+            # to make decision.
+            return {"status_code": resp.status_code,
+                    "content": resp.json()}
+
+        except requests.ConnectionError as e:
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [Connection error. {str(e)}]")
+        except requests.HTTPError as e:
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [An HTTP error. {str(e)}]")
+        except requests.URLRequired:
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [A valid URL is required]")
+        except requests.TooManyRedirects:
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [Too many redirects]")
+        except requests.RequestException as e:
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [Ambiguous exception when handling request. {str(e)}]")
 
     def update_notable(self, event_id, comment, status, cafile):
         """
@@ -184,31 +206,11 @@ class SplunkUtils(object):
         :return: Response in json
         """
 
-        args = {"comment": comment,
-                "status": status,
-                "ruleUIDs": [event_id]}
-
-        url = "{}/services/notable_update".format(self.base_url )
-
-        try:
-            resp = requests.post(url, headers=self.header, data=args, verify=cafile)
-            # We shall just return the response in json and let the post process
-            # to make decision.
-            ret = {"status_code": resp.status_code,
-                   "content": resp.json()}
-
-        except requests.ConnectionError as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Connection error. {}]".format(url, str(e)))
-        except requests.HTTPError as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [An HTTP error. {}]".format(url, str(e)))
-        except requests.URLRequired as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [A valid URL is required]".format(url))
-        except requests.TooManyRedirects as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Too many redirects]".format(url))
-        except requests.RequestException as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Ambiguous exception when handling request. {}]".format(url, str(e)))
-
-        return ret
+        return self.send_post(f"{self.base_url}/services/notable_update",
+                              {"comment": comment,
+                               "status": status,
+                               "ruleUIDs": [event_id]},
+                              cafile)
 
     def delete_threat_intel_item(self, threat_type, item_key, cafile):
         """
@@ -220,22 +222,20 @@ class SplunkUtils(object):
         :return: Response in json
         """
 
-        url = "{}/services/data/threat_intel/item/{}/{}".format(self.base_url, threat_type, item_key)
+        url = f"{self.base_url}/services/data/threat_intel/item/{threat_type}/{item_key}"
 
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
-            raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
         try:
             resp = requests.delete(url, headers=self.header, verify=cafile)
             # We shall just return the response in json and let the post process
             # to make decision.
-            ret = {"status_code": resp.status_code,
-                   "content": resp.json()}
+            return {"status_code": resp.status_code,
+                    "content": resp.json()}
 
         except Exception as e:
-            raise IntegrationError("Delete request to url [{}] throws exception. Error [Failed to delete: {}]".format(url, u"Failed to delete: " + str(e)))
-
-        return ret
+            raise IntegrationError(f"Delete request to url [{url}] throws exception. Error [Failed to delete: {str(e)}]")
 
     def add_threat_intel_item(self, threat_type, threat_dict, cafile):
         """
@@ -247,38 +247,18 @@ class SplunkUtils(object):
         :return: Response in json
         """
 
-        url = "{}/services/data/threat_intel/item/{}".format(self.base_url, threat_type)
+        url = f"{self.base_url}/services/data/threat_intel/item/{threat_type}"
 
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
-            raise IntegrationError("Request to url [{}] throws exception. Error [{}]".format(url, "{} is not supported"))
+            raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
-        item = {"item": dumps(threat_dict)}
-
-        try:
-            resp = requests.post(url, headers=self.header, data=item, verify=cafile)
-            # We shall just return the response in json and let the post process
-            # to make decision.
-            ret = {"status_code": resp.status_code,
-                   "content": resp.json()}
-
-        except requests.ConnectionError as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Connection error. {}]".format(url, str(e)))
-        except requests.HTTPError as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [An HTTP error. {}]".format(url, str(e)))
-        except requests.URLRequired as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [A valid URL is required]".format(url))
-        except requests.TooManyRedirects as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Too many redirects]".format(url))
-        except requests.RequestException as e:
-            raise IntegrationError("Request to url [{}] throws exception. Error [Ambiguous exception when handling request. {}]".format(url, str(e)))
-
-        return ret
+        return self.send_post(url, {"item": dumps(threat_dict)}, cafile)
 
 class SplunkServers():
-    def __init__(self, opts, options):
-        self.servers, self.server_name_list = self._load_servers(opts, options)
+    def __init__(self, opts):
+        self.servers, self.server_name_list = self._load_servers(opts)
 
-    def _load_servers(self, opts, options):
+    def _load_servers(self, opts):
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:

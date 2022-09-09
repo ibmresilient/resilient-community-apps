@@ -28,7 +28,7 @@ def selftest_function(opts):
 
             splunk_verify_cert = str_to_bool(server.get("verify_cert", ""))
 
-            LOG.info("Trying to connect to %s", server.get("host"))
+            LOG.info(f"Trying to connect to {server.get('host')}")
 
             SplunkClient.connect(host=server.get("host"),
                                  port=server.get("port"),
@@ -37,21 +37,17 @@ def selftest_function(opts):
                                  token=server.get("token", None),
                                  verify=splunk_verify_cert)
 
-            LOG.info("Test for {} was successful\n".format(server.get("host")))
+            LOG.info(f"Test for {server.get('host')} was successful\n")
 
         return {"state": "success"}
 
     except Exception as err:
-        err_reason_msg = """Could not connect to Splunk.
-            error: {0}
+        err_reason_msg = f"""Could not connect to Splunk.
+            error: {err}
             ---------
-            host: {1}
-            port: {2}
-            username: {3}\n""".format(
-            err,
-            server.get("host"),
-            server.get("port"),
-            server.get("username"))
+            host: {server.get("host")}
+            port: {server.get("port")}
+            username: {server.get("username")}\n"""
 
         LOG.error(err_reason_msg)
 

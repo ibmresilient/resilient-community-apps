@@ -4,8 +4,7 @@
 """AppFunction implementation"""
 
 from fn_splunk_integration.util.function_utils import get_servers_list,\
-    make_item_dict, function_basics
-from fn_splunk_integration.util.splunk_constants import QUERY_PARAM, PACKAGE_NAME
+    make_item_dict, function_basics, PACKAGE_NAME, QUERY_PARAM
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -28,27 +27,28 @@ class FunctionComponent(AppFunctionComponent):
         splunk_query_param4: field2 value;
         ....."""
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
+        # Validate required parameters
         validate_fields(["splunk_threat_intel_type"], fn_inputs)
 
         params_list = []
-        for input in fn_inputs._asdict():
+        for input, value in fn_inputs._asdict().items():
             if QUERY_PARAM in input:
-                params_list.append(fn_inputs._asdict().get(input))
+                params_list.append(value)
 
         # Build the dict used to add threat intel item
         item_dict = make_item_dict(params_list)
         # Log it for debug
-        self.LOG.debug("item dict: {}".format(str(item_dict)))
+        self.LOG.debug(f"item dict: {str(item_dict)}")
 
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
         splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                        threat_dict=item_dict,
-                                                        cafile=splunk_verify_cert)
+                                                     threat_dict=item_dict,
+                                                     cafile=splunk_verify_cert)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(splunk_result.get('content', {}))

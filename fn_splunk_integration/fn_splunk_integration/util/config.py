@@ -10,6 +10,8 @@ def config_section_data():
     """
     return u'''
 # If token given then username/password will be disregarded
+# Repeat this section for each splunk server you wish to configure
+# Change the 'splunk_label' to something to identify that server
 [fn_splunk_integration:splunk_label1]
 host=localhost
 port=8089

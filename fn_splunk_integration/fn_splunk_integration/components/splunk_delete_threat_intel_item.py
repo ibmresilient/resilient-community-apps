@@ -3,8 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
-from fn_splunk_integration.util.function_utils import get_servers_list, function_basics
+from fn_splunk_integration.util.function_utils import get_servers_list, function_basics, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -24,16 +23,17 @@ class FunctionComponent(AppFunctionComponent):
         splunk_threat_intel_key: _key returned from Splunk ES for this item
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
+        # Validate required parameters
         validate_fields(["splunk_threat_intel_type", "splunk_threat_intel_key"], fn_inputs)
 
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
         splunk_result = splunk.delete_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                                item_key=fn_inputs.splunk_threat_intel_key,
-                                                                cafile=splunk_verify_cert)
+                                                        item_key=fn_inputs.splunk_threat_intel_key,
+                                                        cafile=splunk_verify_cert)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(splunk_result.get('content', {}))

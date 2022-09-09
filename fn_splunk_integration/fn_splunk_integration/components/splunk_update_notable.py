@@ -3,8 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME
-from fn_splunk_integration.util.function_utils import get_servers_list, function_basics
+from fn_splunk_integration.util.function_utils import get_servers_list, function_basics, PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -26,18 +25,19 @@ class FunctionComponent(AppFunctionComponent):
             status:     Notable event status. Integer: 2=active, 5= closed
         """
 
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
+        # Validate required parameters
         validate_fields(["event_id"], fn_inputs)
 
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
         splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
-                                                    comment=fn_inputs.comment,
-                                                    status=fn_inputs.notable_event_status,
-                                                    cafile=splunk_verify_cert)
+                                              comment=fn_inputs.comment,
+                                              status=fn_inputs.notable_event_status,
+                                              cafile=splunk_verify_cert)
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the return value
         yield FunctionResult(splunk_result.get('content', {}))

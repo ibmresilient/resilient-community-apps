@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_splunk_integration"""
+"""Generate the SOAR customizations required for fn_splunk_integration"""
 
 import base64
 import os
@@ -32,7 +32,6 @@ def codegen_reload_data():
         "scripts": [],
         "playbooks": []
     }
-
 
 def customization_data(client=None):
     """
