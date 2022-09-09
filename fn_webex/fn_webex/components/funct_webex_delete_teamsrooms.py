@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_webex.lib import constants
@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
-        self.requiredParameters = {}
+        self.required_parameters = {}
         self.config_options = opts.get(PACKAGE_NAME, {})
 
 
@@ -31,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
         ----------
             entityId          (<str>) : ID of the Room or Team to be deleted
             entityName        (<str>) : Specifies if a Room or a Team is to be deleted
-        
+
         Config Options:
         ---------------
             baseURL           (<str>) : The Webex site url
@@ -45,31 +45,33 @@ class FunctionComponent(AppFunctionComponent):
         Yields:
         -------
                    (<FunctionResult>) : States if the application was executed successfully or not.
-                                        returns the response retrieved from the Webex endpoint in 
+                                        returns the response retrieved from the Webex endpoint in
                                         the form of a dictionary.
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_entity_id", "webex_roomteam_selector"], fn_inputs)
+        validate_fields(["webex_site_url", "webex_timezone", "client_id",
+                         "client_secret", "refresh_token", "scope"], self.config_options)
 
-        self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["logger"] = self.LOG
-        self.requiredParameters["resclient"] = self.rest_client()
+        self.required_parameters["rc"] = self.rc
+        self.required_parameters["logger"] = self.LOG
+        self.required_parameters["resclient"] = self.rest_client()
 
-        self.requiredParameters["baseURL"] = self.config_options.get("webex_site_url")
-        self.requiredParameters["entityId"]   = fn_inputs.webex_entity_id
-        self.requiredParameters["entityName"] = fn_inputs.webex_roomteam_selector
-        
+        self.required_parameters["baseURL"] = self.config_options.get("webex_site_url")
+        self.required_parameters["entityId"]   = fn_inputs.webex_entity_id
+        self.required_parameters["entityName"] = fn_inputs.webex_roomteam_selector
+
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
             self.LOG.info(constants.MSG_CREATE_SECURITY)
-            authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
-            self.requiredParameters["header"] = authenticator.Authenticate()
+            authenticator = WebexAuthentication(self.required_parameters, self.config_options)
+            self.required_parameters["header"] = authenticator.authenticate()
             authenticated = True
             self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
             yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
 
-        except Exception as err:
+        except IntegrationError as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)
             yield self.status_message(constants.MSG_FAILED_AUTH)
             authenticated = False
@@ -77,6 +79,6 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:
-            webex = WebexInterface(self.requiredParameters)
+            webex = WebexInterface(self.required_parameters)
             yield webex.delete_entity()
-            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
+            yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))

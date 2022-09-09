@@ -1,11 +1,12 @@
 from resilient_lib import IntegrationError
+from fn_webex.lib import constants
 
 class ResponseHandler:
     """
     Handles the responses received from the Webex endpoint.
     Used as a callback function for request_common.execute
 
-    The behaviour of the response received can be customized by allowing 
+    The behaviour of the response received can be customized by allowing
     certain response codes to pass through and not raise an exception.
 
     Input:
@@ -15,25 +16,25 @@ class ResponseHandler:
     Defaults:
     ---------
         msg                    : Message in accordance with the error code
-        default_exempt_codes   : default list of codes that are to be 
+        default_exempt_codes   : default list of codes that are to be
                                  exempted from raising an exception
         exempt_codes           : list of codes that are to be exempted
                                  from raising an exception
-                                 
+
     Returns:
     --------
             (<dict>) : Response with appropriate status code and message
     """
     def __init__(self):
 
-        self.msg = None
+        self.msg, self.response = None, None
         self.default_exempt_codes = [204]
         self.exempt_codes = self.default_exempt_codes
 
 
     def clear_exempt_codes(self, default=None):
         """
-        Clears the exempt code list or resets it back to the 
+        Clears the exempt code list or resets it back to the
         default value.
 
         Arguments:
@@ -58,7 +59,7 @@ class ResponseHandler:
 
         Raises:
         -------
-            TypeError: When unsupported type supplied for codes. 
+            TypeError: When unsupported type supplied for codes.
             Supported type <list> or <int>
         """
         if isinstance(codes, int):
@@ -66,8 +67,7 @@ class ResponseHandler:
         elif isinstance(codes, list):
             self.exempt_codes.extend(codes)
         else:
-            raise TypeError("""Unsupported type supplied for codes in add_exemp_codes.
-             Supported type <list> or <int>, type provided was {}""".type(codes))
+            raise IntegrationError(constants.MSG_UNSUPPORTED_TYPE.format(codes))
 
 
     def monitor_status(self):
@@ -80,10 +80,10 @@ class ResponseHandler:
             IntegrationError : If the recieved response is None, raises this error. This
                                could be due to an invalid call methord being passed.
         """
-        
+
         if self.response is None:
             raise IntegrationError("API call failed! Invalid METHOD passed to rc.execute()! Response returned was None")
-        elif self.response.status_code == 204:
+        if self.response.status_code == 204:
             self.msg = "API call successful! No content returned"
         elif self.response.status_code == 401:
             self.msg = "API call failed! Security context is invalid. API returned 401! {}".format(self.response.json().get("message"))
@@ -96,11 +96,11 @@ class ResponseHandler:
     def raise_or_return_erros(self):
         """
         Filters through the response to either raise or return the request.
-            - If the status code matches with the exempt list, the method 
-              will allow it to pass and returns the message body. 
+            - If the status code matches with the exempt list, the method
+              will allow it to pass and returns the message body.
             - If the status_code is not > 204 and not in exempt list, the method
-              raises an exception. 
-            - If the status code is 204 and in exempt list, creates a message 
+              raises an exception.
+            - If the status code is 204 and in exempt list, creates a message
               body and returns it with a custom message
 
         Raises:
@@ -112,7 +112,7 @@ class ResponseHandler:
             (<dict>): If the methord doesnot raise an error, it the returns the response
                       in the form of a dictionary.
         """
-        if self.msg: 
+        if self.msg:
             if self.response.status_code in self.exempt_codes:
 
                 if self.response.status_code == 204:
@@ -124,9 +124,7 @@ class ResponseHandler:
                 if self.msg:
                     res["message"] = self.msg
                 return res
-                
-            else:
-                raise IntegrationError(self.msg)
+            raise IntegrationError(self.msg)
         else:
             res = self.response.json()
             res["status_code"] = self.response.status_code

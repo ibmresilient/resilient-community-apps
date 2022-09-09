@@ -3,7 +3,7 @@
 #
 # """AppFunction implementation"""
 from urllib import parse
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_webex.lib import constants
@@ -20,7 +20,7 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
-        self.requiredParameters = {}
+        self.required_parameters = {}
         self.config_options = opts.get(PACKAGE_NAME, {})
 
 
@@ -36,7 +36,7 @@ class FunctionComponent(AppFunctionComponent):
             incidentId         (<str>)  : Incident ID
             addAllMembers      (<bool>) : Adds all members of the incident to the room
             additionalAttendee (<str>)  : Additonal attendees to be added
-        
+
         Self Objects:
         -------------
             rc                  (<rc>)  : A resilient wrapper for Requests object
@@ -49,50 +49,47 @@ class FunctionComponent(AppFunctionComponent):
             entityName         (<str>)  : always >>roomName<<
             entityURL          (<str>)  : Rooms API URL
             membershipURL      (<str>)  : Rooms Membership API URL
- 
+
         Yields:
         -------
             (<FunctionResult>): States if the application was executed successfully or not.
-                                Returns the response retrieved from the Webex endpoint in 
+                                Returns the response retrieved from the Webex endpoint in
                                 the form of a dictionary.
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
         validate_fields(["webex_room_name", "webex_add_all_members", "webex_incident_id"], fn_inputs)
-        validate_fields([{"name" : "client_id",
-                          "name" : "scope",
-                          "name" : "client_secret",
-                          "name" : "refresh_token"}], self.config_options)
+        validate_fields(["webex_site_url", "webex_timezone", "client_id",
+                        "client_secret", "refresh_token", "scope"], self.config_options)
 
+        self.required_parameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
+        self.required_parameters["roomName"] = fn_inputs.webex_room_name
+        self.required_parameters["incidentId"] = fn_inputs.webex_incident_id
+        self.required_parameters["addAllMembers"] = fn_inputs.webex_add_all_members
+        self.required_parameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
 
-        self.requiredParameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
-        self.requiredParameters["roomName"] = fn_inputs.webex_room_name
-        self.requiredParameters["incidentId"] = fn_inputs.webex_incident_id
-        self.requiredParameters["addAllMembers"] = fn_inputs.webex_add_all_members
-        self.requiredParameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
+        self.required_parameters["entityId"] = "roomId"
+        self.required_parameters["entityName"] = "roomName"
+        self.required_parameters["entityURL" ] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_URL)
+        self.required_parameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_MEMBERSHIP_URL)
 
-        self.requiredParameters["entityId"] = "roomId"
-        self.requiredParameters["entityName"] = "roomName"
-        self.requiredParameters["entityURL" ] = parse.urljoin(self.config_options.get("webex_site_url"), constants.ROOMS_URL)
-        self.requiredParameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.ROOMS_MEMBERSHIP_URL)
+        self.required_parameters["rc"] = self.rc
+        self.required_parameters["logger"] = self.LOG
+        self.required_parameters["resclient"] = self.rest_client()
 
-        self.requiredParameters["rc"] = self.rc
-        self.requiredParameters["logger"] = self.LOG
-        self.requiredParameters["resclient"] = self.rest_client()
-        
         fn_msg = self.get_fn_msg()
         self.LOG.info("Webex: %s", fn_msg)
 
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
             self.LOG.info(constants.MSG_CREATE_SECURITY)
-            authenticator = WebexAuthentication(self.requiredParameters, self.config_options)
-            self.requiredParameters["header"] = authenticator.Authenticate()
+            authenticator = WebexAuthentication(self.required_parameters, self.config_options)
+            self.required_parameters["header"] = authenticator.authenticate()
             authenticated = True
             self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
             yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
 
-        except Exception as err:
+        except IntegrationError as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)
             yield self.status_message(constants.MSG_FAILED_AUTH)
             authenticated = False
@@ -100,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:
-            webex = WebexInterface(self.requiredParameters)
+            webex = WebexInterface(self.required_parameters)
             response = webex.create_team_room()
-            yield self.status_message("Finished running App Function successfully: '{0}'".format(FN_NAME))
             yield FunctionResult(response, success=True)
+            yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))

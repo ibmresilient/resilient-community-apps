@@ -38,6 +38,7 @@ class WebexMeetings:
         self.response_handler = cisco_commons.ResponseHandler()
         self.meetingParameters = meetingParameters
         self.requiredParameters = requiredParameters
+        self.timezone, self.meeting_end_time, self.meeting_start_time = None, None, None
 
 
     def create_meeting(self):
@@ -45,20 +46,21 @@ class WebexMeetings:
         Gathers all the required parameters to schedule a meeting and generates an output based
         on the response from endpoint server. This methord needs to be called externally and usually
         is the entry point to creating a meeting.
-        
+
         Returns:
         --------
             (<dict>) : Vital meeting information and other configurations of the scheduled meeting
         '''
         webexurl = self.requiredParameters.get("meetingsURL")
-        self.timezone = self.get_timeZones(self.requiredParameters.get("timezone"))
+        self.get_timeZones(self.requiredParameters.get("timezone"))
         self.LOG.info("Wenex Meeting: Timezone set to: {}".format(self.timezone))
 
-        self.check_time(self.timezone, self.requiredParameters.get("start"), self.requiredParameters.get("end"))
+        self.check_time(self.timezone, self.requiredParameters.get("start"),
+                        self.requiredParameters.get("end"))
         meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
 
         response = self.rc.execute("post", webexurl, data=meetingOptions,
-                                        headers=self.header, callback=self.response_handler.check_response)
+                                headers=self.header, callback=self.response_handler.check_response)
         return response
 
 
@@ -100,7 +102,7 @@ class WebexMeetings:
             if meeting_end < meeting_start:
                 raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
                     meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
-            elif meeting_end < datetime.datetime.now():
+            if meeting_end < datetime.datetime.now():
                 raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
                     meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
         else:
@@ -124,9 +126,12 @@ class WebexMeetings:
                     UTC +01:00
         '''
         if timezone is None:
-            return time.strftime("%z", time.localtime())
-        else:
+            self.timezone = time.strftime("%z", time.localtime())
+            return
+        if isinstance(timezone, str):
             timezone = timezone.strip()
+        else:
+            raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
         timezone = timezone.replace(":", "")
         timezone = timezone.split(" ")
         if len(timezone) > 1:
@@ -137,7 +142,7 @@ class WebexMeetings:
             raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
         if not timezone[1:].isdigit():
             raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
-        return timezone
+        self.timezone = timezone
 
 
     def generate_meeting_parameters(self, meetingParameters):
