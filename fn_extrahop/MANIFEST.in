@@ -1,0 +1,12 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_extrahop/util *
+recursive-include fn_extrahop/lib *
+include fn_extrahop/LICENSE
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+
+exclude *.bak
+global-exclude *.bak
