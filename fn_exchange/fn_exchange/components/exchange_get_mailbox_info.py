@@ -45,10 +45,10 @@ class FunctionComponent(ResilientComponent):
             if len(info) == 1:
                 info = info[0]
                 results = {
-                    "name": getattr(info, "name"),
-                    "email_address": getattr(info, "email_address"),
-                    "routing_type": getattr(info, "routing_type"),
-                    "mailbox_type": getattr(info, "mailbox_type"),
+                    "name": getattr(info, "name", ""),
+                    "email_address": getattr(info, "email_address", ""),
+                    "routing_type": getattr(info, "routing_type", ""),
+                    "mailbox_type": getattr(info, "mailbox_type", ""),
                     "success": True
                 }
 
