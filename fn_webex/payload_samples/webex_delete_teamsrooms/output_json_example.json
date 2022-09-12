@@ -1,3 +1,22 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 204,
+    "message": "Successfully deleted Room : Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1"
+  },
+  "raw": null,
+  "inputs": {
+    "webex_entity_id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1",
+    "webex_roomteam_selector": "Room"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 5104,
+    "timestamp": "2022-02-12 14:01:16"
+  }
 }

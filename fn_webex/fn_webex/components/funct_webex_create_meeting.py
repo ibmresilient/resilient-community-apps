@@ -105,7 +105,7 @@ class FunctionComponent(AppFunctionComponent):
                 if response.get("status_code") == 200:
                     yield FunctionResult(response, success=True)
                 else:
-                    yield FunctionResult(response, success=False, reason=response["message"])
+                    yield FunctionResult(response, success=False, reason=response.get("message"))
 
             except IntegrationError as err:
                 yield FunctionResult({"message" : str(err)}, success=False, reason=str(err))
