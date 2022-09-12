@@ -26,29 +26,34 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-
         """
         This function creates a Webex team and adds a team to it.
 
-        Args:
-        -----
-            teamName           (<str>)  : Name of the team to be created
+        Fn Inputs:
+        ----------
+            teamName           (<str>)  : Name of the room to be created
             incidentId         (<str>)  : Incident ID
-            addAllMembers      (<bool>) : Adds all members of the incident to the team
+            addAllMembers      (<bool>) : Adds all members of the incident to the room
             additionalAttendee (<str>)  : Additonal attendees to be added
-            entityId           (<str>)  : always >>teamId<<
-            entityName         (<str>)  : always >>teamName<<
-            entityURL          (<str>)  : Teams API URL
-            membershipURL      (<str>)  : Teams Membership API URL
+
+        Self Objects:
+        -------------
             rc                  (<rc>)  : A resilient wrapper for Requests object
             logger           (<logger>) : A resilient wrapper for logger obhect
             resclient   (<rest_client>) : Rest client to interact with the SOAR instance
+
+        Constants:
+        ----------
+            entityId           (<str>)  : always >>roomId<<
+            entityName         (<str>)  : always >>roomName<<
+            entityURL          (<str>)  : Rooms API URL
+            membershipURL      (<str>)  : Rooms Membership API URL
 
         Yields:
         -------
             (<FunctionResult>): States if the application was executed successfully or not.
                                 Returns the response retrieved from the Webex endpoint in
-                                the form of a dictionary.
+                                the form of a dictionary
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
