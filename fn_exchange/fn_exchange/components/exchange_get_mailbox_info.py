@@ -45,14 +45,13 @@ class FunctionComponent(ResilientComponent):
             if len(info) == 1:
                 info = info[0]
                 results = {
-                    "email_address": info.email_address,
-                    "routing_type": info.routing_type,
-                    "mailbox_type": info.mailbox_type,
+                    "name": getattr(info, "name"),
+                    "email_address": getattr(info, "email_address"),
+                    "routing_type": getattr(info, "routing_type"),
+                    "mailbox_type": getattr(info, "mailbox_type"),
                     "success": True
                 }
 
-                if hasattr(info, "name"):
-                    results["name"] = info.name
             else:
                 results = {"success": False}
                 yield StatusMessage("No mailbox found for %s" % get_user)
