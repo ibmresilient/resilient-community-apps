@@ -18,6 +18,7 @@
   - [Function - Webex: Create Meeting](#function---webex-create-meeting)
   - [Function - Webex: Create Room](#function---webex-create-room)
   - [Function - Webex: Create Team](#function---webex-create-team)
+  - [Function - Webex: Delete Teams/Rooms](#function---webex-delete-teamsrooms)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -528,10 +529,99 @@ incident.addNote(note)
 
 ---
 
+## Function - Webex: Delete Teams/Rooms
+A sample function to delete Webex teams or rooms
+
+![screenshot: workflow-create-webex-room ](./doc/screenshots/workflow_delete_rooms_teams.png)
+
+<p align="center">
+<img src="./doc/screenshots/popup_delete_teams.png" />
+</p>
 
 
+<details><summary>Inputs:</summary>
+<p>
 
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `webex_roomteam_selector` | `select` | Yes | `Room` | Team or Room to be deleted |
+| `webex_entity_id` | `text` | Yes | `Yes` | ID of the room/team to be deleted |
 
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "message": "Successfully deleted Room : Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1",
+    "status_code": 204
+  },
+  "inputs": {
+    "webex_entity_id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1",
+    "webex_roomteam_selector": "Room"
+  },
+  "metrics": {
+    "execution_time_ms": 5104,
+    "host": "AppHost",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "timestamp": "2022-02-12 14:01:16",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+if rule.properties.webex_entity_id is not None:
+  inputs.webex_entity_id = rule.properties.webex_entity_id
+    
+if rule.properties.webex_roomteam_selector is not None:
+  inputs.webex_roomteam_selector = rule.properties.webex_roomteam_selector
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to create Cisco Webex Room"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  text  = u"<b>Cisco Webex:</b><br />"
+  text += content.get("message")
+
+note = helper.createRichText(text)
+incident.addNote(note)
+```
+
+</p>
+</details>
+
+---
 
 
 ## Troubleshooting & Support

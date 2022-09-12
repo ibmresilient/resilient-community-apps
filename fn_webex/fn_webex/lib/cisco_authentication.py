@@ -4,9 +4,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import json
 
-from fn_webex.lib import constants, cisco_commons
 from resilient_lib import IntegrationError, validate_fields
-from resilient_circuits import FunctionError
+from fn_webex.lib import constants, cisco_commons
 
 class WebexAuthentication:
     """
@@ -17,7 +16,7 @@ class WebexAuthentication:
         in the requiredParameters dictionary for the authenticator to work.
 
         Inputs:
-        -----
+        -------
             clientID     (<str>) : Client ID of the integration created on developer.webex.com
             elientSecret (<str>) : Client Secret of the same integration
             refreshToken (<str>) : Refresh token generated using the OAuth Utilities Tool
@@ -27,9 +26,9 @@ class WebexAuthentication:
         Returns:
         --------
             RequestHeader (<dict>) : An authorization Bearer ID and Content-Type as 
-                                        application/json
+                                     application/json
     """
-    
+
     def __init__(self, requiredParameters, app_config):
         validate_fields(["client_id", "scope", "client_secret", "refresh_token"], app_config)
         self.requiredParameters = requiredParameters
@@ -43,7 +42,7 @@ class WebexAuthentication:
         self.response_handler = cisco_commons.ResponseHandler()
 
 
-    def Authenticate(self):
+    def authenticate(self):
         '''
         Helper method that establishes a connection with the Client servers and performs an OAuth
         authentication. The server returns a beareID for the session, which then is used to make
@@ -96,7 +95,7 @@ class WebexAuthentication:
                    Session ID that is required for authentication
         '''
         if not bearerID:
-            raise ValueError("Bearer ID not specified")
+            raise IntegrationError("Bearer ID not specified")
         return {
             'Authorization' : "Bearer {}".format(bearerID),
             'Content-Type'  : 'application/json'}
