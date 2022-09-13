@@ -58,14 +58,14 @@ class WebexInterface:
             * add_membership       : Adds the list of members to the room or team
             * get_entity_details   : Retrieves the room/team information
         '''
-        self.find_operation()
+        self.find_api()
         self.generate_member_list()
         self.retrieve_entity()
         self.add_membership()
         return self.get_entity_details()
 
 
-    def find_operation(self):
+    def find_api(self):
         """
         This function detemines the operaiton that is being perofrmed. All the below functions
         work for Room as well as teams. So this detemine the API to be used.
@@ -200,11 +200,9 @@ class WebexInterface:
         else:
             for objs in res.get("items"):
                 if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
-                    self.requiredParameters[self.entityId] = objs.get("id")
-                    self.requiredParameters[self.entityName] = objs.get(callingKey)
                     self.LOG.info("Webex: Retrieving existing room/team: {}".format(
                                                             self.requiredParameters.get(self.entityId)))
-                    break
+                    raise IntegrationError(constants.MSG_ENTITY_EXISTS)
             if not self.requiredParameters.get(self.entityId):
                 self.create_entity()
                 self.LOG.info("Webex: Creating new room/team: {}".format(
@@ -232,15 +230,15 @@ class WebexInterface:
         data = {callingKey : self.requiredParameters.get(self.entityName)}
         if self.entityName == "roomName" and self.requiredParameters.get("teamId"):
             self.LOG.info("Webex: Adding team to room: {}".format(
-                                            self.requiredParameters.get("teamId")))
+                self.requiredParameters.get("teamId")))
             data["teamId"] = self.requiredParameters.get("teamId")
         res = self.rc.execute("post", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, data=json.dumps(data),
-                                    callback=self.response_handler.check_response)
+            headers=self.header, data=json.dumps(data),
+            callback=self.response_handler.check_response)
         self.requiredParameters[self.entityId] = res.get("id")
         self.requiredParameters[self.entityName] = res.get(callingKey)
         self.LOG.info("Webex: Created new room/team: {}".format(
-                                            self.requiredParameters.get(self.entityId)))
+            self.requiredParameters.get(self.entityId)))
 
 
     def get_entity_details(self):
@@ -260,44 +258,3 @@ class WebexInterface:
         response["status"] = True
         response[self.entityName] = self.requiredParameters.get(self.entityName)
         return response
-
-
-    def delete_entity(self):
-        """
-        This function deletes a room or a team based on the id specified to it.
-        It monitors the response returned from the endpoint for 204, 404 and 405 responses.
-
-        Response Codes:
-        ---------------
-            204 - Successfully deleted the room or team.
-            404 - Room or team not found.
-            405 - Room cannot be deleted, delete the team associated.
-
-        Returns:
-        --------
-            (<dict>): Response from the endpoint
-        """
-        if "room" in self.requiredParameters.get("entityName").strip().lower():
-            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.ROOMS_URL)
-        else :
-            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.TEAMS_URL)
-        deletionURL = parse.urljoin(deletionURL, self.requiredParameters.get("entityId"))
-        self.LOG.info("Webex: Deleting {}".format(self.requiredParameters.get("entityName")))
-        self.response_handler.add_exempt_codes(codes=[404, 405])
-        response = self.rc.execute("delete", deletionURL, headers=self.header,
-                            callback=self.response_handler.check_response)
-        self.response_handler.clear_exempt_codes()
-
-        if response.get("status_code") == 204:
-            response["message"] = constants.MSG_SUCCESS_DELETION.format(
-                                                        self.requiredParameters.get("entityName"),
-                                                        self.requiredParameters.get("entityId"))
-            return FunctionResult(response, success=True)
-        if response.get("status_code") == 404:
-            return FunctionResult(response, success=False,
-             reason=constants.MSG_ENTITY_NOT_FOUND.format(self.requiredParameters.get("entityName")))
-        if response.get("status_code") == 405:
-            return FunctionResult(response, success=False,
-                        reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
-        return FunctionResult(response, success=False,
-            reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
