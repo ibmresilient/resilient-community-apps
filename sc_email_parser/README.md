@@ -4,7 +4,7 @@ This package consists of the **RuleAndScript.res** and **ScriptAlone.res** IBM S
 ## History
 | Version | Date | Comments |
 | ------: | ---: | -------: |
-| 2.3.0 | 6/2022 | Capture of message_id header |
+| 2.3.0 | 9/2022 | Support for Outbound Email 2.0 conversations |
 | 2.2.0 | 7/2021 | Support for Python 3 |
 | 2.0.2 | 4/2020 | Bug fixes for phishing incident type |
 | 2.0.1 | 10/2019 | Fix when email address contains unicode characters |
@@ -14,13 +14,34 @@ This package consists of the **RuleAndScript.res** and **ScriptAlone.res** IBM S
 
 ### Changes for v2.3.0
 Version of the 2.3.0 of the parsing script introduces the ability to capture an email's Message-ID header. This value will be used to create email conversations based on the case's incoming email.
-Version 2.0.0 of fn_outbound_email will import a custom incident field (`email_message_id`) for retention of this information, along with new functionality to create outbound email conversations.
+Version 2.0.0 of [Outbound Email](https://exchange.xforce.ibmcloud.com/hub/extension/caafba4e4f6d130e7db30ed4d5e53504) will import a custom incident field (`email_message_id`) for retention of this information, along with new functionality to create outbound email conversations.
 
 If you want to use this parsing script without the fn_outbound_email app, you can manually create the incident field `email_message_id` and add it to a case tab, such as `Email`.
 The below images show the creation of the `email_message_id` custom field and its assignment to a tab. The script will continue to execute if this field is absent.
 
 ![screenshot: main](./doc/screenshots/creating_email_message_id.png)
 ![screenshot: main](./doc/screenshots/layouts.png)
+
+Also in [Outbound Email 2.0](https://exchange.xforce.ibmcloud.com/hub/extension/caafba4e4f6d130e7db30ed4d5e53504), a datatable is introduced to capture email conversations: 
+
+| Type | API Name |
+| :--- | :------- |
+| Datatable | email_conversations |
+
+This datatable is used to capture email conversation information for both inbound and outbound messages within an incident. If you're not using Outbound Email 2.0 or greater, this generic email script will continue to work without this datatable. 
+
+If you are using Outbound Email 2.0, you can edit this script to enable the logic to populate the inbound email message into the Email Conversations datatable. Uncomment the last line of the script containing `processor.add_email_conversation` to enable this feature. 
+
+```
+## Uncomment if you're using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable
+#processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])
+```
+
+Be aware that any url, mailto email address, url etc. is modified so that it is no longer clickable. This is done to reduce the possibility of clicking on a malicious link (such as in a phishing email). See the image below for an altered email representation.
+
+![Defanged Email Conversation](./doc/screenshots/email_conversations_datatable.png)
+
+
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:

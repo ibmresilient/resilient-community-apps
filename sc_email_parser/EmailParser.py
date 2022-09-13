@@ -12,7 +12,7 @@ DEFANG_PATTERN = re.compile(r"([HTTPShttpsFTPftpNEWSnewsMAILTOmailtoFILEfile]+):
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
 # Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
 # Use the hasattr function or a try/except block to check if an attribute exists before accessing it.
-# An example can be found on line 563.
+# An example can be found on line 571.
 
 # A script to create an incident from an email message, add artifacts to the incident based on information
 # present in the body of the message, and add any email attachments to the incident.
@@ -558,46 +558,47 @@ class EmailProcessor(object):
       
     @staticmethod
     def get_message_id(headers):
-      msg_id = headers.get("X-Original-Message-ID") or headers.get("X-Microsoft-Original-Message-ID") or headers.get("X-Google-Original-Message-ID") or headers.get("Message-ID")
-      if msg_id:
-        match = MESSAGE_PATTERN.findall(msg_id[0].strip())
-        if match:
-          return match[0]
+        # find the message id among several choices
+        msg_id = headers.get("X-Original-Message-ID") or headers.get("X-Microsoft-Original-Message-ID") or headers.get("X-Google-Original-Message-ID") or headers.get("Message-ID")
+        if msg_id:
+            match = MESSAGE_PATTERN.findall(msg_id[0].strip())
+            if match:
+                return match[0]
     
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain
         msg_id = processor.get_message_id(headers)
         if msg_id and hasattr(incident.properties, 'email_message_id'):
-          incident.properties.email_message_id = msg_id
+            incident.properties.email_message_id = msg_id
     
     @staticmethod
     def add_email_conversation(headers, msg_body, msg_attachments):
-      # attempt to add to incident datatable, if present
+        # attempt to add to incident datatable, if present
       
-      def handle_list(value):
-        # convert a list to comma separate list, if neccessary
-        if value and isinstance(value, list):
-          return ", ".join(value)
+        def handle_list(value):
+            # convert a list to comma separate list, if neccessary
+            if value and isinstance(value, list):
+                return ", ".join(value)
         
-        return value
+            return value
         
-      try:
-        row = incident.addRow('email_conversations')
-        row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
-        row['source'] = "inbound"
-        row['inbound_id'] = emailmessage.id
-        row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
-        row['from'] = handle_list(headers.get("From"))
-        row['subject'] = handle_list(headers.get("Subject"))
-        body = "\n".join(msg_body)
-        row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", body)
-        row['attachments'] = ", ".join(msg_attachments)
-        row['message_id'] = processor.get_message_id(headers)
-        row['in_reply_to'] = handle_list(headers.get("References"))
-        row['importance'] = handle_list((headers.get("Importance") or {"1": "high", "2": "normal", "3": "low"}.get(headers.get("X-Priority"), "normal")))
-      except Exception as err:
-        log.failure(str(err))
+        try:
+            row = incident.addRow('email_conversations')
+            row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
+            row['source'] = "inbound"
+            row['inbound_id'] = emailmessage.id
+            row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
+            row['from'] = handle_list(headers.get("From"))
+            row['subject'] = handle_list(headers.get("Subject"))
+            body = "\n".join(msg_body)
+            row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", body)
+            row['attachments'] = ", ".join(msg_attachments)
+            row['message_id'] = processor.get_message_id(headers)
+            row['in_reply_to'] = handle_list(headers.get("References"))
+            row['importance'] = handle_list((headers.get("Importance") or {"1": "high", "2": "normal", "3": "low"}.get(headers.get("X-Priority"), "normal")))
+        except Exception as err:
+            log.warn(str(err))
 
 ###
 # Mainline starts here
@@ -641,31 +642,35 @@ else:
     emailmessage.associateWithIncident(incidents[0])
 
 # Capture any URLs present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeUrlPattern(
-), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
+processor.processArtifactCategory(processor.makeUrlPattern(), 
+    "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
 
 # Capture any IPv4 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv4Pattern(
-), "IP Address", "Suspicious IP Address", processor.processIPFully)
+processor.processArtifactCategory(processor.makeIPv4Pattern(), 
+    "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture any IPv6 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv6Pattern(
-), "IP Address", "Suspicious IP Address", processor.processIPFully)
+processor.processArtifactCategory(processor.makeIPv6Pattern(), 
+    "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture 32-character hexadecimal substrings in the email body text and add them as MD5 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    32), "Malware MD5 Hash", "MD5 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(32), 
+    "Malware MD5 Hash", "MD5 hash of potential malware file")
 
 # Capture 40-character hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    40), "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(40), 
+    "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
 
 # Capture 64-character hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    64), "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(64), 
+    "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
 
 # Add email message attachments to incident
 processor.processAttachments()
 
-# add to email conversation datatable
-processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])
+## When using Outbound Email 2.0 or greater
+# add message-id for easy tracking
+processor.save_message_id(emailmessage.headers)
+
+## Uncomment if you're using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable
+#processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])
