@@ -17,7 +17,6 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        validate_fields([], self.options)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -50,56 +49,72 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(str(fn_inputs))
 
         sql_params = function_utils.prepare_sql_parameters(sql_condition_value1, sql_condition_value2,
-                                                               sql_condition_value3)
+                                                           sql_condition_value3)
 
-        # Validate
+        # Validate app.config settings
+        validate_fields(["sql_connection_string"], self.options)
 
+        sql_connection_string = self.options["sql_connection_string"]
+        sql_restricted_sql_statements = self.options.get("sql_restricted_sql_statements", None)
+        sql_autocommit = function_utils.str_to_bool(self.options.get("sql_autocommit", False))
+        sql_query_timeout = int(self.options.get("sql_query_timeout")) \
+            if self.options.get("sql_query_timeout") else None
+        sql_database_type = self.options.get("sql_database_type").lower() \
+            if self.options.get("sql_database_type") else None
+        sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
+            if self.options.get("sql_number_of_records_returned") else None
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self.app_configs)
+        # Validate Data
+        function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
-        # Example validating required fn_inputs
-        # validate_fields(["required_input_one", "required_input_two"], fn_inputs)
+        try:
+            # Connect with ODBC
+            odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit, sql_query_timeout)
+            odbc_connection.configure_unicode_settings(sql_database_type)
+            odbc_connection.create_cursor()
 
-        # Example accessing optional attribute in fn_inputs and initializing it to None if it does not exist (this is similar for app_configs)
-        # optional_input =  getattr(fn_inputs, "optional_input", None)
+            # Check what SQL statement is executed, get the first word in sql_query
+            sql_statement = function_utils.get_type_sql_statement(sql_query)
 
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
+            if sql_statement == 'select':
 
-        # Example interacting with REST API
-        # res_client = self.rest_client()
-        # function_details = res_client.get("/functions/{0}?handle_format=names".format(FN_NAME))
+                self.LOG.debug(u"Query: %s. Params: %s. Fetching %s records.",
+                               sql_query, sql_params, sql_number_of_records_returned)
 
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
+                rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
+                results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
+                self.LOG.info(json.dumps(str(results)))
 
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
+                if results.get("entries") is None:
+                    yield StatusMessage("No query results returned...")
+                else:
+                    yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
 
-        # Call API implementation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-        #
-        # yield self.status_message("Endpoint reached successfully and returning results for App Function: '{0}'".format(FN_NAME))
-        #
-        # yield FunctionResult(results)
-        ##############################################
+            elif sql_statement == 'update' or sql_statement == 'delete' \
+                    or sql_statement == 'insert':
+
+                self.LOG.debug(u"Query: %s. Params: %s.", sql_query, sql_params)
+
+                # Return row count and set results to empty list
+                row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
+                results = function_utils.prepare_results(None, None)
+
+                self.LOG.info(u"%s rows processed", row_count)
+                yield StatusMessage("{} rows processed".format(row_count))
+
+            else:
+                self.LOG.error(u"SQL statement '%s' is not supported", sql_statement)
+                raise ValueError("SQL statement '{}' is not supported".format(sql_statement))
+
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+        # Commit changes and tear down connection
+        finally:
+            yield StatusMessage("Closing ODBC connection...")
+
+            if odbc_connection:
+                odbc_connection.close_connections()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
