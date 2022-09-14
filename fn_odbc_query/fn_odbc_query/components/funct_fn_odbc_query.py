@@ -3,17 +3,43 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, StatusMessage
+from resilient_lib import IntegrationError, validate_fields, str_to_bool
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_odbc_query.util import function_utils, odbc_utils
 
 PACKAGE_NAME = "fn_odbc_query"
 FN_NAME = "fn_odbc_query"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'fn_odbc_query'"""
+    """Component that implements SOAR function 'fn_odbc_query'
+
+    The Function executes an ODBC query and takes the following parameters:
+        sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3
+
+    An example of query parameters might look like the following:
+
+        sql_select:
+        SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3
+            FROM mock_data WHERE id = ?
+        DELETE from mock_data WHERE id = ?
+        INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)
+        UPDATE mock_data SET id = ? WHERE email = ?
+
+        sql_condition_value1: custom condition value 1 | artifact.value | artifact.description | etc
+        sql_condition_value2: custom condition value 2 | artifact.value | artifact.description | etc
+        sql_condition_value3: custom condition value 3 | artifact.value | artifact.description | etc
+
+    The ODBC query will return a result in JSON format with an entry consisting of key value pairs.
+
+        {
+            'entries': [
+                {u'sql_column_1': "query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...},
+                {u'sql_column_1': query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...}
+                ...
+            ]
+        }
+    """
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -41,22 +67,17 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get the function parameters:
         sql_query = fn_inputs.sql_query
-        sql_condition_value1 = getattr(fn_inputs, "sql_condition_value1", None)
-        sql_condition_value2 = getattr(fn_inputs, "sql_condition_value2", None)
-        sql_condition_value3 = getattr(fn_inputs, "sql_condition_value3", None)
+        sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs))]
 
         # Log parameers
         self.LOG.info(str(fn_inputs))
-
-        sql_params = function_utils.prepare_sql_parameters(sql_condition_value1, sql_condition_value2,
-                                                           sql_condition_value3)
 
         # Validate app.config settings
         validate_fields(["sql_connection_string"], self.options)
 
         sql_connection_string = self.options["sql_connection_string"]
         sql_restricted_sql_statements = self.options.get("sql_restricted_sql_statements", None)
-        sql_autocommit = function_utils.str_to_bool(self.options.get("sql_autocommit", False))
+        sql_autocommit = str_to_bool(self.options.get("sql_autocommit", False))
         sql_query_timeout = int(self.options.get("sql_query_timeout")) \
             if self.options.get("sql_query_timeout") else None
         sql_database_type = self.options.get("sql_database_type").lower() \
@@ -64,7 +85,7 @@ class FunctionComponent(AppFunctionComponent):
         sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
             if self.options.get("sql_number_of_records_returned") else None
 
-        # Validate Data
+        # Validate sql query
         function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
         try:
@@ -74,37 +95,35 @@ class FunctionComponent(AppFunctionComponent):
             odbc_connection.create_cursor()
 
             # Check what SQL statement is executed, get the first word in sql_query
-            sql_statement = function_utils.get_type_sql_statement(sql_query)
+            sql_statement = sql_query.split(None, 1)[0].lower()
 
             if sql_statement == 'select':
 
-                self.LOG.debug(u"Query: %s. Params: %s. Fetching %s records.",
-                               sql_query, sql_params, sql_number_of_records_returned)
+                self.LOG.debug(f"Query: {sql_query}. Params: {sql_params}. Fetching {sql_number_of_records_returned} records.")
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
                 self.LOG.info(json.dumps(str(results)))
 
-                if results.get("entries") is None:
+                if not results.get("entries"):
                     yield StatusMessage("No query results returned...")
                 else:
-                    yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
+                    yield StatusMessage(f"Result contains {len(results.get('entries'))} entries...")
 
-            elif sql_statement == 'update' or sql_statement == 'delete' \
-                    or sql_statement == 'insert':
+            elif sql_statement in ['update', 'delete', 'insert']:
 
-                self.LOG.debug(u"Query: %s. Params: %s.", sql_query, sql_params)
+                self.LOG.debug(f"Query: {sql_query}. Params: {sql_params}.")
 
                 # Return row count and set results to empty list
                 row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
                 results = function_utils.prepare_results(None, None)
 
-                self.LOG.info(u"%s rows processed", row_count)
-                yield StatusMessage("{} rows processed".format(row_count))
+                self.LOG.info(f"{row_count} rows processed")
+                yield StatusMessage(f"{row_count} rows processed")
 
             else:
-                self.LOG.error(u"SQL statement '%s' is not supported", sql_statement)
-                raise ValueError("SQL statement '{}' is not supported".format(sql_statement))
+                self.LOG.error(f"SQL statement '{sql_statement}' is not supported")
+                raise ValueError(f"SQL statement '{sql_statement}' is not supported")
 
         except Exception as err:
             raise IntegrationError(str(err))

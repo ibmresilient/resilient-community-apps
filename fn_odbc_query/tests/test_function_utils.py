@@ -5,50 +5,10 @@
 #
 #
 import unittest
-from fn_odbc_query.util.function_utils import str_to_bool, prepare_sql_parameters, validate_data, get_type_sql_statement, prepare_results
+from fn_odbc_query.util.function_utils import prepare_sql_parameters, validate_data, prepare_results
 
 
 class TestFunctionUtils(unittest.TestCase):
-
-    def test_str_to_bool(self):
-        print("Testing casting string to boolean....")
-
-        result = str_to_bool("true")
-        self.assertEqual(result, True)
-
-        result = str_to_bool("True")
-        self.assertEqual(result, True)
-
-        result = str_to_bool("false")
-        self.assertEqual(result, False)
-
-        result = str_to_bool("Foo")
-        self.assertEqual(result, False)
-
-    def test_prepare_sql_parameters(self):
-        print("Testing preparing SQL params....")
-
-        param1 = "p1"
-        param2 = "p2"
-        param3 = "p3"
-
-        # Test for all None params
-        result = prepare_sql_parameters(None, None, None)
-        self.assertEqual(result, [])
-
-        # Test for non None params
-        result = prepare_sql_parameters(param1, param2, param3)
-        self.assertEqual(result, [param1, param2, param3])
-
-        # Test for None params
-        result = prepare_sql_parameters(None, param2, param3)
-        self.assertEqual(result, [param2, param3])
-
-        result = prepare_sql_parameters(param1, None, param3)
-        self.assertEqual(result, [param1, param3])
-
-        result = prepare_sql_parameters(param1, param2, None)
-        self.assertEqual(result, [param1, param2])
 
     def test_validate_data(self):
         print("Testing validating data....")
@@ -99,7 +59,7 @@ class TestFunctionUtils(unittest.TestCase):
 
         sql_query = "Delete from mock_data where id=3"
 
-        result = get_type_sql_statement(sql_query)
+        result = sql_query.split(None, 1)[0].lower()
 
         self.assertEqual(result, "delete")
 
