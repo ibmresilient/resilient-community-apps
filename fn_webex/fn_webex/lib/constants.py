@@ -43,6 +43,7 @@ MSG_UNFAMILIAR_RESPONSE_CODE = "Unfamiliar response. Status code : {}"
 MSG_UNSUPPORTED_TYPE = "Unsupported type supplied for codes in add_exemp_codes. Supported type <list> or <int>, type provided was {}"
 MSG_ENTITY_EXISTS = "The {} name that you are trying to create, already exists! Try using another name"
 MSG_INVALID_DELETE = "Please provide either the ID or the name of the {} to be deleted"
+MSG_INVALID_ENTITY_ID = "Unable to find a {} with the given ID: {}. Please check the ID or specify the Room Name"
 
 # LOG Messages
 LOG_WARN_NO_ADDITIONAL_PARTICIPANTS = "No participants were added to the {}. ADD_ALL_INCIDENT_MEMBERS was set to NO and no list of participants were provided in the ADDITIONAL_ATTENDEE field."

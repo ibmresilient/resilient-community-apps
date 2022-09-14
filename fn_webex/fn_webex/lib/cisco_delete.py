@@ -63,8 +63,12 @@ class WebexDelete:
         self.LOG.info(constants.LOG_FETCHING_ENTITY.format(self.entityType))
 
         if self.entityId:
+            self.deletionURL = parse.urljoin(self.deletionURL, self.entityId)
             res = self.rc.execute("get", self.deletionURL, headers=self.header,
                 callback=self.response_handler.check_response)
+            self.entityName = res.get(self.callingKey)
+            if not self.entityName:
+                raise IntegrationError(constants.MSG_INVALID_ENTITY_ID.format(self.entityType, self.entityId))
         else:
             res = self.rc.execute("get", self.deletionURL, headers=self.header,
                 callback=self.response_handler.check_response)
@@ -74,8 +78,8 @@ class WebexDelete:
                 for objs in res.get("items"):
                     print(objs.get(self.callingKey), entityName)
                     if objs.get(self.callingKey).strip() == entityName:
-                        self.entityName = objs.get(self.callingKey)
                         self.entityId = objs.get("id")
+                        self.entityName = objs.get(self.callingKey)
                         self.LOG.info("Webex: Retrieved {}: {}".format(self.entityType, self.entityName))
                         break
                 if not self.entityId:
