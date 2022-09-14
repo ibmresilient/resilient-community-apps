@@ -74,9 +74,13 @@ The Outbound Email App provides the following functionality:
 * Format email using a predefined html template or specify your own template.
 * Send attachments with the email at the incident level or task level.
 * Example rules included at the incident and task levels.
-* Unified view of inbound and outbound emails
-* Manage threaded conversations
-* Support for OAuth authentications
+
+New in version 2.0
+* Ability to reference additional email headers: message-id, importance, in-reply-to.
+* Define multiple templates from the app.config file.
+* Capture outbound email conversations including both inbound and outbound messages.
+* Expanded template support to include artifact, notes and SOAR links (case and task).
+* Support for OAuth authentication.
 ---
 
 ## Requirements
@@ -244,6 +248,7 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_ssl_mode** | Yes | `None` | *Set to 'starttls' when using smtp_user and smtp_password.* |
 | **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
+| **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
 
 **_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
 
@@ -404,7 +409,7 @@ incident.addNote(helper.createRichText(noteText))
 ---
 
 ## Function - Outbound Email: Send Email 2
-Send a plain text or HTML-formatted email with SOAR incident details in the email body. Additional capability exists to refer to pre-defined templates as well add contextual email headers. This function replaces the send_email function which remains for legacy use. 
+Send a plain text or HTML-formatted email with SOAR incident details in the email body. Additional capability exists to refer to pre-defined templates as well as add contextual email headers. This function replaces the send_email function which remains for legacy use. 
 
  ![screenshot: fn-outbound-email-send-email-2 ](./doc/screenshots/send_email2.png)
 

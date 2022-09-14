@@ -12,6 +12,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """ 
     return u"""[fn_outbound_email]
+# enhance the 'email' tab with email conversation fields and datatable
+#enable_email_conversations=true
 # SMTP SERVER (IP ADDRESS or FQDN)
 smtp_server=xxx.xxx.xxx.xxx
 ## Basic Authentication settings
@@ -70,8 +72,6 @@ smtp_ssl_mode=starttls
 # The integration will use this template out of the box. If removed, it will default to the pre-processing script.
 # template_file=data/templates/example_send_email.jinja
 template_file=data/templates/example_send_email.jinja
-# enhance the 'email' tab with email conversation fields and datatable
-#enable_email_conversations=true/false
 
 [fn_outbound_email:templates]
 ## specify templates for email processing. These templates are added to the mail_template_select activity field
