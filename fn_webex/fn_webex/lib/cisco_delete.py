@@ -22,6 +22,22 @@ class WebexDelete:
 
 
     def delete_team_room(self):
+        """
+        A wrapper function that executes all the below functions in the 
+        required order. 
+        * find_api()   : determines if the deletion operation is to be
+                         performed on a room or team and adapts the 
+                         functions accordinly.
+        * locate_entity: Locates the exact room or team to be deleted.
+        * delete_entity: Tries to delete the room or team and returns
+                         a response accordingly.
+
+        Returns:
+        -------
+            (<FunctionResult>): A dictionary with the response, the reason
+                                should the operation fail, and a success
+                                flag.
+        """
         try:
             self.find_api()
             self.locate_entity()
@@ -60,6 +76,27 @@ class WebexDelete:
 
 
     def locate_entity(self):
+        """
+        Finds the room or team based on the name or id given to the application. If an
+        ID is given, the application checks to see if a room or team exists with the same
+        ID and extracts the name of the room. If only the name is given, the application
+        checks to see if room or team is available by comparing the name with a list of 
+        all Rooms or teams associated with the organization and then extracts the ID. This
+        form of deletion is an expensive operation.
+
+        Raises:
+        -------
+            IntegrationError: Raises an error where to Room or team is unable to be located
+                              based on the ID
+            IntegrationError: Raises an error where to Room or team is unable to be located
+                              based on Name
+            IntegrationError: Raises an error when there are no rooms or teams to be deleted
+        
+        Returns:
+        --------
+            entityName (<str>): Actual name of the Room or Team
+            entityId   (<str>): The Id of the room or team
+        """
         self.LOG.info(constants.LOG_FETCHING_ENTITY.format(self.entityType))
 
         if self.entityId:
@@ -68,7 +105,8 @@ class WebexDelete:
                 callback=self.response_handler.check_response)
             self.entityName = res.get(self.callingKey)
             if not self.entityName:
-                raise IntegrationError(constants.MSG_INVALID_ENTITY_ID.format(self.entityType, self.entityId))
+                raise IntegrationError(constants.MSG_INVALID_ENTITY_ID.format(self.entityType,
+                    self.entityId))
         else:
             res = self.rc.execute("get", self.deletionURL, headers=self.header,
                 callback=self.response_handler.check_response)
@@ -80,7 +118,8 @@ class WebexDelete:
                     if objs.get(self.callingKey).strip() == entityName:
                         self.entityId = objs.get("id")
                         self.entityName = objs.get(self.callingKey)
-                        self.LOG.info("Webex: Retrieved {}: {}".format(self.entityType, self.entityName))
+                        self.LOG.info("Webex: Retrieved {}: {}".format(self.entityType,
+                            self.entityName))
                         break
                 if not self.entityId:
                     raise IntegrationError("Could not find {}: {}".format(
@@ -132,4 +171,4 @@ class WebexDelete:
                 reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
 
         return FunctionResult(response, success=False,
-                reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
+            reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
