@@ -194,14 +194,14 @@ class WebexInterface:
         self.requiredParameters[self.entityId] = None
         callingKey = "name" if self.entityName == "teamName" else "title"
         res = self.rc.execute("get", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, callback=self.response_handler.check_response)
+            headers=self.header, callback=self.response_handler.check_response)
         if len(res.get('items')) == 0:
             self.create_entity()
         else:
             for objs in res.get("items"):
                 if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
                     self.LOG.info("Webex: Retrieving existing room/team: {}".format(
-                                                            self.requiredParameters.get(self.entityId)))
+                        self.requiredParameters.get(self.entityId)))
                     raise IntegrationError(constants.MSG_ENTITY_EXISTS)
             if not self.requiredParameters.get(self.entityId):
                 self.create_entity()

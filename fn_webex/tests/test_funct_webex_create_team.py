@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
+from multiprocessing.sharedctypes import Value
 import pytest
 from mock import patch
 import json
@@ -67,20 +68,19 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, cal
             return json.loads(self.text)
     
     response = None
-    if url == "https://webexapis.com/v1/teams/":
-        response = MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
-
+    if url == "https://webexapis.com/v1/teams/" and method.lower()=="get":
+        response = MockResponse('{"items": [{"id": "Y123", "name": "UnittestTeam", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "name": "UnittestTeam2", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "name": "UnittestTeam3", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
+    elif url == "https://webexapis.com/v1/teams/" and method.lower()=="post":
+        response = MockResponse('{"id": "Y1235", "name": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}' ,status_code=200)
     elif url == "https://webexapis.com/v1/team/memberships":
         response = None
-
-    elif url == "https://webexapis.com/v1/teams/{}/".format("Y123"):
-        response = MockResponse('''{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
-    
+    elif url == "https://webexapis.com/v1/teams/{}/".format("Y1235"):
+        response = MockResponse('''{"items": [{"id": "Y123", "name": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
     if callback:
         response = callback(response)
     return response
 
-def call_webex_create_room_function():
+def call_webex_create_team_function():
     requiredParameters = {
             "rc"         : RequestsCommon(),
             "incidentId" : 1234,
@@ -88,21 +88,17 @@ def call_webex_create_room_function():
             "logger"     : LOG(),
             "resclient"  : mocked_restClient(),
             "addAllMembers" : True,
-            "roomName"   : "UnittestRoom",
-            "roomId"     : "Y123",
+            "teamName"   : "UnittestTeam5",
+            "teamId"     : "Y1235",
             "entityURL"  : "https://webexapis.com/v1/teams/",
-            "entityName" : "teamName",
             "entityId"   : "teamId",
+            "entityName" : "teamName",
             "membershipUrl" : "https://webexapis.com/v1/team/memberships",
             'additionalAttendee' : "sara@example.com, hannah@example.com, harsha@example.com"
         }
 
     webex = WebexInterface(requiredParameters)
-    webex.find_operation()
-    webex.generate_member_list()
-    webex.retrieve_entity()
-    webex.add_membership()
-    response = webex.get_entity_details()
+    response = webex.create_team_room()
     return FunctionResult(response, success=True)
 
 
@@ -119,14 +115,14 @@ class TestWebexCreateRoom:
         """ Test calling with sample values for the parameters """
         expected = {
             'items': [{
-                'id': 'Y123', 
-                'title': 'UnittestRoom',
+                'id': 'Y1235', 
+                'name': 'UnittestTeam5',
                 'created': '2022-08-11T18:24:46.655Z', 'isPublic': 'false'
                 }],
             'attendees': 'soar1@example.ie, soar2@example.ie, soar3@example.ie, sara@example.com, hannah@example.com, harsha@example.com',
             'status': True, 
-            'roomName': 'UnittestRoom'}
-        results = call_webex_create_room_function()
+            'roomName': 'UnittestRoom5'}
+        results = call_webex_create_team_function()
 
         assert(results.value["status"], True)
         assert(results.value, expected)
