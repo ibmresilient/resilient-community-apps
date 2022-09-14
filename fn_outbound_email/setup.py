@@ -27,8 +27,21 @@ setup(
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
-    description="IBM Security SOAR app for 'fn_outbound_email'",
-    long_description="IBM Security SOAR app for 'fn_outbound_email'",
+    description="Outbound Email",
+    long_description="""The Outbound Email App for IBM SOAR provides a way of sending email from the SOAR platform. The email message contains information about the incident that the email action was performed on.
+<br>
+<br>Key Features
+<br>* Send email to lists of recipients (to, cc, bcc).
+<br>* Format email using a predefined html template or specify your own template.
+<br>* Send attachments with the email at the incident level or task level.
+<br>* Example rules included at the incident and task levels.
+<br>
+<br>New in version 2.0
+<br>* Ability to reference additional email headers: message-id, importance, in-reply-to.
+<br>* Define multiple templates from the app.config file.
+<br>* Capture outbound email conversations including both inbound and outbound messages.
+<br>* Expanded template support to include artifact, notes and SOAR links (case and task).
+<br>* Support for OAuth authentication.""",
     install_requires=[
         'b4',
         'resilient_circuits>=39.0.0',
