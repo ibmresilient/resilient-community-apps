@@ -63,15 +63,13 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = rule.properties.splunk_servers
+  inputs.splunk_label = rule.properties.splunk_server
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 ```
 
 ### Post-Processing Script
 ```python
-# {'events': [OrderedDict([('_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '4fa89feac1004d7cbfcb974eb79c62e9'), ('threat_key', 'restapi'), ('time', '1598296740.6724114')]), OrderedDict([('_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('ip', 'https://ibm.biz/soarcommunity'), ('item_key', '9b14932c75aa4b1f909775bd10cb78d6'), ('threat_key', 'restapi'), ('time', '1598296660.9374135')])]}
-
 if results.get("content", None):
   for event in results.content:
     result_row = incident.addRow("splunk_intel_results")
@@ -79,7 +77,7 @@ if results.get("content", None):
     result_row.source = event.pop("threat_key")
     result_row.intel_collection = results.inputs['splunk_query_param1']
     result_row.intel_key = event.pop("_key")
-    result_row.splunk_server = rule.properties.splunk_servers
+    result_row.splunk_server = rule.properties.splunk_server
     result_row.status = "Active"
     event.pop("item_key") # not presented
     # what's left is the artifact value
@@ -91,9 +89,7 @@ else:
   result_row = incident.addRow("splunk_intel_results")
   result_row.intel_value = artifact.value
   result_row.status = "Not Found"
-  result_row.splunk_server = rule.properties.splunk_servers
-  
-
+  result_row.splunk_server = rule.properties.splunk_server
 ```
 
 ---
