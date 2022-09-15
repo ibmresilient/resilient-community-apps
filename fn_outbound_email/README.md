@@ -431,6 +431,7 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_inline_template` | `text` | No | `jinja formatted document` | inline template as alternative to app.config mail_template_label |
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
 | `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
+| `mail_merge_body` | `bool` | No | `Yes` | Flag to merge `mail_body` with either the results from `mail_line_template` or `mail_template_label`. This setting is useful when including the original email message in a reply. |
 
 </p>
 </details>
