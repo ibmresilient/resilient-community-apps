@@ -1,25 +1,28 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
 import re
 import time
+
+# The new incident owner - the email address of a user or the name of a group and cannot be blank.
+# Change this value to reflect who will be the owner of the incident before running the script.
+newIncidentOwner = ""
+
+# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation 
+SAVE_CONVERSATION = False
+
+# This is the Python 3 version of the email sample script.
+# References to 'unicode' were removed which is a keyword that does not exist in Python 3.
+# Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
+# Use the hasattr function or a try/except block to check if an attribute exists before accessing it.
+# An example can be found on line 575.
+
+# A script to create an incident from an email message, add artifacts to the incident based on information
+# present in the body of the message, and add any email attachments to the incident.
 
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 # check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
 DEFANG_PATTERN = re.compile(r"([HTTPShttpsFTPftpNEWSnewsMAILTOmailtoFILEfile]+):")
 
-# This is the Python 3 version of the email sample script.
-# References to 'unicode' were removed which is a keyword that does not exist in Python 3.
-# Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
-# Use the hasattr function or a try/except block to check if an attribute exists before accessing it.
-# An example can be found on line 571.
-
-# A script to create an incident from an email message, add artifacts to the incident based on information
-# present in the body of the message, and add any email attachments to the incident.
-
-# The new incident owner - the email address of a user or the name of a group and cannot be blank.
-# Change this value to reflect who will be the owner of the incident before running the script.
-newIncidentOwner = ""
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -588,11 +591,10 @@ class EmailProcessor(object):
             row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
             row['source'] = "inbound"
             row['inbound_id'] = emailmessage.id
-            row['recipients'] = "To: {}\nCC: {}\nBCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC")))
+            row['recipients'] = helper.createRichText("To: {}<br>CC: {}<br>BCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC"))))
             row['from'] = handle_list(headers.get("From"))
             row['subject'] = handle_list(headers.get("Subject"))
-            body = "\n".join(msg_body)
-            row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", body)
+            row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", msg_body)
             row['attachments'] = ", ".join(msg_attachments)
             row['message_id'] = processor.get_message_id(headers)
             row['in_reply_to'] = handle_list(headers.get("References"))
@@ -672,5 +674,7 @@ processor.processAttachments()
 # add message-id for easy tracking
 processor.save_message_id(emailmessage.headers)
 
-## Uncomment if you're using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable
-#processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])
+if SAVE_CONVERSATION:
+    processor.add_email_conversation(emailmessage.headers, 
+        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content, 
+        [attachment.suggested_filename for attachment in emailmessage.attachments])

@@ -30,7 +30,7 @@ Also in [Outbound Email 2.0](https://exchange.xforce.ibmcloud.com/hub/extension/
 
 This datatable is used to capture email conversation information for both inbound and outbound messages within an incident. If you're not using Outbound Email 2.0 or greater, this generic email script will continue to work without this datatable. 
 
-If you are using Outbound Email 2.0, you can edit this script to enable the logic to populate the inbound email message into the Email Conversations datatable. Uncomment the last line of the script containing `processor.add_email_conversation` to enable this feature. 
+If you are using Outbound Email 2.0 or greater, you can edit this script to enable the logic to populate the inbound email message into the incident's `Email Conversations` datatable. Modify line 10, SAVE_CONVERSATION = True, to perform this action 
 
 ```
 ## Uncomment if you're using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable
@@ -92,7 +92,7 @@ An email message can only be associated with one incident. If two scripts run on
 
 ## Configuration
 ### The incident owner
-New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 8 of the script:
+New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 25 of the script:
 
 ```python
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
@@ -112,9 +112,9 @@ There are two categories of allowlist used in the script: IP address and URL dom
 
 | Variable Name | Line number | Purpose |
 |:------------- | -----------:|:------- |
-| `ipV4AllowList` | 11 | IP v4 allowlist |
-| `ipV6AllowList` | 30 | IP v6 allowlist |
-| `domainAllowList` | 51 | URL domain allowlist |
+| `ipV4AllowList` | 28 | IP v4 allowlist |
+| `ipV6AllowList` | 47 | IP v6 allowlist |
+| `domainAllowList` | 68 | URL domain allowlist |
 
 Initially these allowlists are comprised of commented out entries which serve as examples of the data you might want to exclude from consideration. The allowlists will have no effect unless you uncomment the entries and make a grammatically correct list, or add some entries of your own.
 Please note that, compared to version v1 of the script, the allowlist variable location has changed and formats of the entries have been simplified.
