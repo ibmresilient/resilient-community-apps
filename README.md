@@ -3,7 +3,7 @@
 
 ## Change of Default Branch
 
-*We are updating the default GitHub Branch from `master` to `main`*
+*We are updating the default GitHub Branch from `master` to `main`*.
 
 
 # IBM SOAR Community Applications 
