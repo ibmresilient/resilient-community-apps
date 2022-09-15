@@ -80,8 +80,7 @@ class WebexAuthentication:
             self.LOG.debug("Webex: Bearer ID for current session: {}".format(bearerID))
             return bearerID
 
-        msg = u"Unable to authenticate: Error: {}\nDescription: {}"\
-            .format(response.get("error"), response.get("error_description"))
+        msg = u"Unable to authenticate: Error: {}".format(response.get("message"))
         raise IntegrationError(msg)
 
 
