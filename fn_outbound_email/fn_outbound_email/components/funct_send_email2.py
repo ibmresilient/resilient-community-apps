@@ -49,6 +49,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mail_importance
             -   fn_inputs.mail_inline_template
             -   fn_inputs.mail_template_label
+            -   fn_inputs.mail_merge_body
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -60,10 +61,6 @@ class FunctionComponent(AppFunctionComponent):
 
         if mail_data.get("mail_inline_template") and mail_data.get("mail_template_label"):
             raise ValueError("Specify either mail_inline_template or mail_template_label but not both")
-
-        if mail_data.get("mail_body") and \
-           (mail_data.get("mail_template_label") or mail_data.get("mail_inline_template")):
-            raise ValueError("Special either mail_body or one of mail_inline_template or mail_template_label")
 
         # configuration setup
         soar_helper = SoarHelper(self.rest_client())
@@ -107,6 +104,10 @@ class FunctionComponent(AppFunctionComponent):
                                                                      note_data)
                 self.LOG.debug("Rendered mail body: %s", rendered_mail_body)
 
+                # is there the original email to include?
+                if mail_data.get('mail_merge_data', False) and mail_data.get('mail_body'):
+                    rendered_mail_body= f"{rendered_mail_body}{mail_data.get('mail_body')}"
+
                 error_msg = send_msg(send_smtp_email, rendered_mail_body)
         elif mail_data.get('mail_body'):
             self.LOG.info("Non-rendered mail_body")
@@ -119,7 +120,8 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("An error occurred while sending the email: {}".format(error_msg))
 
         results = {
-            "mail_body": rendered_mail_body
+            "mail_body": rendered_mail_body,
+            "mail_from": mail_data.get('mail_from')
         }
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))

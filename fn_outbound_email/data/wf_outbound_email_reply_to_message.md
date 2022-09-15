@@ -21,9 +21,10 @@
 import hashlib
 import time
 
+# change this reflect a different message-id domain, as neeced
 MESSAGE_ID_DOMAIN = "qradarsoar.ibm.com"
 
-#inputs.mail_template_name="template_file"
+NEW_LINE = '\n'
 
 if rule.properties.get('mail_message_id'):
   # generate a message-id
@@ -42,6 +43,19 @@ inputs.mail_in_reply_to = row['message_id']
 inputs.mail_incident_id = incident.id
 inputs.mail_subject = "re: {}".format(row['subject'])
 inputs.mail_template_label = rule.properties.mail_template_select
+
+if rule.properties.mail_merge_body:
+  inputs.mail_merge_body = True
+  original_email = f"""Sent: xxx
+From: {row['from']}
+{row['recipients'].content}
+Subject: {row['subject']}
+
+{row['body'].content.replace("<br>", NEW_LINE)}"""
+  
+  if inputs.mail_body:
+    inputs.mail_body = f"{inputs.mail_body}<hr>"
+  inputs.mail_body = f"{inputs.mail_body if inputs.mail_body else ''}<div style='border-left: 2px solid gray'><div style='white-space: pre;margin-left: 5px'>{original_email}</div></div>"
 ```
 
 ### Post-Processing Script

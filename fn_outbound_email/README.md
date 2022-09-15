@@ -36,7 +36,7 @@
 | v1.2.0 | 4/2021 | Added capability for task attachments |
 | v1.1.1 | 2/2021 | Bug fixes associated with sending attachments |
 | v1.1.0 | 10/2020 | Bug fixes and send all or specific attachments |
-| v1.0.9 | 5/2020 | App Host compatibility |
+| v1.0.9 | 5/2020 | Edge Gateway (formerly App Host) compatibility |
 | v1.0.8 | 4/2020 | Initial Release |
 
 
@@ -90,9 +90,9 @@ New in version 2.0
 This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
-If deploying to a SOAR platform with an App Host, the requirements are:
+If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 * SOAR platform >= `43.1.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -116,7 +116,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= 1.4.
-* Cloud Pak is configured with an App Host.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information:
@@ -141,7 +141,7 @@ Additional package dependencies may exist for each of these packages:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-#####  Basic authentication
+#####  Basic Authentication
 * A password is required for the SMTP server.
 #####  OAuth 2.0 Authorization
 * You need to setup a web application for an OAuth 2.0 SMTP identity provider service from which you get the required configuration settings to use OAuth 2.0 authorization.
