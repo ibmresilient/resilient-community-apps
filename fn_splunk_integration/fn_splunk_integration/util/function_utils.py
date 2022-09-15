@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-#
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
-from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError
-from fn_splunk_integration.util.splunk_utils import SplunkServers
-from fn_splunk_integration.util.splunk_constants import PACKAGE_NAME, GET_FIELD, UPDATE_FIELD
 
+from logging import getLogger
+from resilient_lib import validate_fields, IntegrationError, str_to_bool
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
+
+PACKAGE_NAME = "fn_splunk_integration"
+QUERY_PARAM = "splunk_query_param"
 LOG = getLogger(__name__)
 
 def make_query_string(query_string, params):
@@ -17,12 +17,10 @@ def make_query_string(query_string, params):
     :return: (str) Query with params substitued
     """
 
-    index = 1
     for param in params:
         if param:
-            to_replace = "%%param%d%%" % index
-            query_string = query_string.replace(to_replace, param)
-        index += 1
+            index = params.index(param)+1
+            query_string = query_string.replace(f"%param{index}%", param)
 
     return query_string
 
@@ -38,16 +36,14 @@ def make_item_dict(params):
     if list_len%2 != 0:
         raise IntegrationError(str(params))
 
-    index = 0
-    while index < list_len:
+    for index in range(0, list_len, 2):
         if params[index]:
             # Allow the value (params[index + 1] here) to be empty (None)?
             # Let Splunk to return an error if it does not support empty value
             ret[params[index]] = params[index + 1]
         else:
             # If key is None, we can not add it to the dictionary
-            LOG.debug("The {}th key is None with value {}".format(str(index), str(params[index + 1])))
-        index += 2
+            LOG.debug(f"The {str(index)}th key is None with value {str(params[index + 1])}")
 
     return ret
 
@@ -64,55 +60,50 @@ def get_servers_list(opts):
     if options: # If no label given [fn_splunk_integration]
         server_list = {PACKAGE_NAME}
     else: # If label given [fn_splunk_integration:label]
-        servers = SplunkServers(opts, options)
+        servers = SplunkServers(opts)
         server_list = servers.get_server_name_list()
 
     # Creates a dictionary that is filled with the splunk servers
     # and there configurations 
     for server_name in server_list:
         servers_list[server_name] = opts.get(server_name, {})
-        validate_fields(["host", "port", "username", "splunkpassword"], servers_list[server_name])
+        validate_fields(["host", "port"], servers_list[server_name])
+        user = servers_list[server_name].get("username", None)
+        splunk_pass = servers_list[server_name].get("splunkpassword", None)
+        token = servers_list[server_name].get("token", None)
+        if not ((user and splunk_pass) or token):
+            raise ValueError("Either username/splunkpassword or token need to be given")
+        elif token:
+            servers_list[server_name]["username"] = None
+            servers_list[server_name]["splunkpassword"] = None
 
     return servers_list
 
-def update_splunk_servers_select_list(servers_list, res_rest_client, field_name):
-    """
-    Update values in splunk_servers select field
-    :param servers_list: List of splunk servers in app.config
-    :param res_rest_client: SOAR rest client connection
-    :param field_name: Activity field name
-    :return: None
-    """
+def function_basics(fn_inputs, servers_list, utils=True):
+    # Make that calls that all of the functions use
+    options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, servers_list)
 
-    # Create list of splunk server labels
-    server_name_list = []
-    for server in servers_list:
-        if ":" in server:
-            server_name_list.append(server[server.index(":")+1:])
-        else:
-            server_name_list.append(server)
+    splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
 
-    try:
-        payload = res_rest_client.get(GET_FIELD.format(field_name))
+    # Log all the info
+    LOG.info(str(fn_inputs))
 
-        if type(payload) == list or payload.get("input_type") != "select":
-            return None
+    # Log the splunk server we are using
+    LOG.info(f"Splunk host: {options.get('host')}, port: {options.get('port')}")
 
-        # Create payload 
-        if server_name_list:
+    if utils:
+        splunk = SplunkUtils(host=options.get("host"),
+                             port=options.get("port"),
+                             username=options.get("username", None),
+                             password=options.get("splunkpassword", None),
+                             token=options.get("token", None),
+                             verify=splunk_verify_cert)
+    else:
+        splunk = SplunkClient(host=options.get("host"),
+                              port=options.get("port"),
+                              username=options.get("username", None),
+                              password=options.get("splunkpassword", None),
+                              token=options.get("token", None),
+                              verify=splunk_verify_cert)
 
-            # Put payload with no values to delete old values
-            del payload["values"]
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
-
-            # Add values to the payload
-            payload["values"] = [
-                {"label": str(value), "enabled": True, "hidden": False}
-                for value in server_name_list
-            ]
-            # Put payload with values to SOAR
-            res_rest_client.put(UPDATE_FIELD.format(field_name), payload)
-
-    except Exception as err_msg:
-        LOG.warning("Action failed: {} error: {}".format(field_name, err_msg))
-        raise IntegrationError("Error while updating action field: {}".format(field_name))
+    return splunk, splunk_verify_cert
