@@ -44,16 +44,15 @@ class FunctionComponent(AppFunctionComponent):
 
         Constants:
         ----------
-            entityId           (<str>)  : always >>roomId<<
-            entityName         (<str>)  : always >>roomName<<
-            entityURL          (<str>)  : Rooms API URL
-            membershipURL      (<str>)  : Rooms Membership API URL
+            entityName         (<str>)  : Team Name
+            entityURL          (<str>)  : Teams API URL
+            membershipURL      (<str>)  : Teams Membership API URL
 
         Yields:
         -------
             (<FunctionResult>): States if the application was executed successfully or not.
                                 Returns the response retrieved from the Webex endpoint in
-                                the form of a dictionary
+                                the form of a dictionary.
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -61,20 +60,21 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["webex_site_url", "webex_timezone", "client_id",
                 "client_secret", "refresh_token", "scope"], self.config_options)
 
-        self.required_parameters["teamName"] = fn_inputs.webex_team_name
         self.required_parameters["incidentId"] = fn_inputs.webex_incident_id
         self.required_parameters["addAllMembers"] = fn_inputs.webex_add_all_members
-        self.required_parameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
+        self.required_parameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None 
+
+        self.required_parameters["entityName"] = fn_inputs.webex_team_name
+        self.required_parameters["entityType"] = "team"
+        self.required_parameters["entityURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_URL)
+        self.required_parameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_MEMBERSHIP_URL)
 
         self.required_parameters["rc"] = self.rc
         self.required_parameters["logger"] = self.LOG
         self.required_parameters["resclient"] = self.rest_client()
 
-        self.required_parameters["entityId"]   = "teamId"
-        self.required_parameters["entityName"] = "teamName"
-        self.required_parameters["tokenURL"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.TOKEN_URL)
-        self.required_parameters["entityURL"]  = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_URL)
-        self.required_parameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"), constants.TEAMS_MEMBERSHIP_URL)
+        fn_msg = self.get_fn_msg()
+        self.LOG.info("Webex: %s", fn_msg)
 
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
@@ -94,6 +94,5 @@ class FunctionComponent(AppFunctionComponent):
 
         if authenticated:
             webex = WebexInterface(self.required_parameters)
-            response = webex.create_team_room()
-            yield FunctionResult(response, success=True)
+            yield webex.create_team_room()
             yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))

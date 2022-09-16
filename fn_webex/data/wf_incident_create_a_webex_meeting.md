@@ -71,7 +71,6 @@ else:
   text += u"<br />Timezone: {}".format(content.get("timezone"))
   text += u"<br />Meeting Id: {}".format(content.get("id"))
   
-
 note = helper.createRichText(text)
 incident.addNote(note)
 ```

@@ -18,11 +18,11 @@
 
 ### Pre-Processing Script
 ```python
-if rule.properties.webex_entity_id is not None:
-  inputs.webex_entity_id = rule.properties.webex_entity_id
+if rule.properties.webex_team_id:
+  inputs.webex_entity_id = rule.properties.webex_team_id
 
-if rule.properties.webex_entity_name is not None:
-  inputs.webex_entity_name = rule.properties.webex_entity_name
+if rule.properties.webex_team_name:
+  inputs.webex_entity_name = rule.properties.webex_team_name
 ```
 
 ### Post-Processing Script
@@ -30,7 +30,7 @@ if rule.properties.webex_entity_name is not None:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to delete team"
+  text = u"Unable to delete the team"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)

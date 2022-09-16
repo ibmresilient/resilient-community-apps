@@ -151,7 +151,6 @@ class WebexDelete:
         self.response_handler.add_exempt_codes(codes=[404, 405])
         self.LOG.info(constants.LOG_EXEMPT_DELETE_CODES)
 
-        print("\n\n\n\n", self.deletionURL)
         response = self.rc.execute("delete", self.deletionURL, headers=self.header,
             callback=self.response_handler.check_response)
         self.response_handler.clear_exempt_codes()
@@ -170,5 +169,9 @@ class WebexDelete:
             return FunctionResult(response, success=False,
                 reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
 
-        return FunctionResult(response, success=False,
-            reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))
+        if "errors" in response and "description" in response["errors"][0]:
+            response["message"] = " ".join([response["message"], response["errors"][0]["description"]])
+
+        response["message"] = ". ".join([constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")),
+            response["message"]])
+        return FunctionResult(response, success=False, reason=response["message"])

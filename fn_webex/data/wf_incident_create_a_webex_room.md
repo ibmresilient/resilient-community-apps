@@ -38,7 +38,7 @@ if rule.properties.webex_add_all_members is not None:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Cisco Webex Room"
+  text = u"Unable to create a Webex Room"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
@@ -46,12 +46,12 @@ if not results.success:
 else:
   ref_html_room = u"""<a href='{0}'>Link</a>""".format(content.get("meetingLink"))
   text  = u"<b>Cisco Webex Room Details:</b><br />"
-  text += u"<br />Room Name: {}".format(content.get("roomName"))
-  text += u"<br />Room URL: {}".format(ref_html_room)
-  text += u"<br />Room ID: {}".format(content.get("roomId"))
+  text += u"<br />Name: {}".format(content.get("name"))
+  text += u"<br />Meeting link: {}".format(ref_html_room)
+  text += u"<br />Room ID: {}".format(content.get("id"))
   text += u"<br />Meeting ID: {}".format(content.get("meetingId"))
-  text += u"<br />Created Time: {}".format(content.get("created"))
-  text += u"<br />Call in TollNumber: {}".format(content.get("callInTollNumber"))
+  text += u"<br />Call in Toll Number: {}".format(content.get("callInTollNumber"))
+  text += u"<br />Call in TollFree Number: {}".format(content.get("callInTollFreeNumber", "-"))
 
 note = helper.createRichText(text)
 incident.addNote(note)

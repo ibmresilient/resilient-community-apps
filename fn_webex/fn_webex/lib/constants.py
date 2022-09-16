@@ -41,7 +41,7 @@ MSG_ENTITY_NOT_FOUND = "The specified {} {} could not be found!"
 MSG_ENTITY_NO_DIRECT_DELETE = "This room cannot be deleted directly. Delete the team associated with it to clear this space."
 MSG_UNFAMILIAR_RESPONSE_CODE = "Unfamiliar response. Status code : {}"
 MSG_UNSUPPORTED_TYPE = "Unsupported type supplied for codes in add_exemp_codes. Supported type <list> or <int>, type provided was {}"
-MSG_ENTITY_EXISTS = "The {} name that you are trying to create, already exists! Try using another name"
+MSG_ENTITY_EXISTS = "The {} name \"{}\" already exists! Try using another name"
 MSG_INVALID_DELETE = "Please provide either the ID or the name of the {} to be deleted"
 MSG_INVALID_ENTITY_ID = "Unable to find a {} with the given ID: {}. Please check the ID or specify the Room Name"
 

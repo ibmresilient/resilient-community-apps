@@ -18,11 +18,11 @@
 
 ### Pre-Processing Script
 ```python
-if rule.properties.webex_entity_id is not None:
-  inputs.webex_entity_id = rule.properties.webex_entity_id
+if rule.properties.webex_team_id:
+  inputs.webex_entity_id = rule.properties.webex_team_id
 
-if rule.properties.webex_entity_name is not None:
-  inputs.webex_entity_name = rule.properties.webex_entity_name
+if rule.properties.webex_team_name:
+  inputs.webex_entity_name = rule.properties.webex_team_name
 ```
 
 ### Post-Processing Script

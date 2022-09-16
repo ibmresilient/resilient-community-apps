@@ -62,7 +62,7 @@ if not results.success:
 else:
   ref_html_room = u"""<a href='{0}'>Link</a>""".format(content.get("webLink"))
 
-  text = u"<b>Cisco WebEx Meeting:</b><br />Webex Room URL: {0}".format(ref_html_room)
+  text = u"<b>Cisco Webex Meeting:</b><br />Webex Room URL: {0}".format(ref_html_room)
   text += u"<br />Meeting Name: {}".format(content.get("title"))
   text += u"<br />Password: {}".format(content.get("password"))
   text += u"<br />Agenda: {}".format(content.get("agenda"))
@@ -71,7 +71,6 @@ else:
   text += u"<br />Timezone: {}".format(content.get("timezone"))
   text += u"<br />Meeting Id: {}".format(content.get("id"))
   
-
 note = helper.createRichText(text)
 task.addNote(note)
 ```
