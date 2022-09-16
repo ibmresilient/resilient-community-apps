@@ -27,7 +27,7 @@ class WebexMeetings:
 
         Returns:
         --------
-        Response         (<dict>): A response with the meeting options and details
+            Response     (<dict>): A response with the meeting options and details
                                    or the error message if the meeting creation
                                    fails
     """
@@ -58,9 +58,14 @@ class WebexMeetings:
         self.check_time(self.timezone, self.requiredParameters.get("start"),
                         self.requiredParameters.get("end"))
         meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
-
+        
+        self.response_handler.add_exempt_codes(400)
         response = self.rc.execute("post", webexurl, data=meetingOptions,
                                 headers=self.header, callback=self.response_handler.check_response)
+        self.response_handler.clear_exempt_codes(default=True)
+
+        if "errors" in response and "description" in response["errors"][0]:
+            response["message"] = " ".join([response["message"], response["errors"][0]["description"]])
         return response
 
 

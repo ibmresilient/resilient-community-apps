@@ -80,7 +80,6 @@ class ResponseHandler:
             IntegrationError : If the recieved response is None, raises this error. This
                                could be due to an invalid call methord being passed.
         """
-
         if self.response is None:
             raise IntegrationError("API call failed! Invalid METHOD passed to rc.execute()! Response returned was None")
         if self.response.status_code == 204:

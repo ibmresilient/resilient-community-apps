@@ -5,3 +5,43 @@
 
 # Task: Delete a Webex Team
 
+## Function - Webex: Delete
+
+### API Name
+`webex_delete`
+
+### Output Name
+``
+
+### Message Destination
+`fn_webex`
+
+### Pre-Processing Script
+```python
+if rule.properties.webex_entity_id is not None:
+  inputs.webex_entity_id = rule.properties.webex_entity_id
+
+if rule.properties.webex_entity_name is not None:
+  inputs.webex_entity_name = rule.properties.webex_entity_name
+```
+
+### Post-Processing Script
+```python
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to delete team"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  text  = u"<b>Cisco Webex:</b><br />"
+  text += content.get("message")
+
+note = helper.createRichText(text)
+task.addNote(note)
+```
+
+---
+
