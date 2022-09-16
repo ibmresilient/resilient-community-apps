@@ -13,7 +13,7 @@ SAVE_CONVERSATION = False
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
 # Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
 # Use the hasattr function or a try/except block to check if an attribute exists before accessing it.
-# An example can be found on line 575.
+# An example can be found on line 575
 
 # A script to create an incident from an email message, add artifacts to the incident based on information
 # present in the body of the message, and add any email attachments to the incident.
@@ -591,7 +591,7 @@ class EmailProcessor(object):
             row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
             row['source'] = "inbound"
             row['inbound_id'] = emailmessage.id
-            row['recipients'] = helper.createRichText("To: {}<br>CC: {}<br>BCC: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC")), handle_list(headers.get("BCC"))))
+            row['recipients'] = helper.createRichText("To: {}<br>Cc: {}<br>Bcc: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC", '')), handle_list(headers.get("BCC", ''))))
             row['from'] = handle_list(headers.get("From"))
             row['subject'] = handle_list(headers.get("Subject"))
             row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", msg_body)
