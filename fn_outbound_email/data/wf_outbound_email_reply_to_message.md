@@ -20,6 +20,7 @@
 ```python
 import hashlib
 import time
+from datetime import datetime
 
 # change this reflect a different message-id domain, as neeced
 MESSAGE_ID_DOMAIN = "qradarsoar.ibm.com"
@@ -45,17 +46,20 @@ inputs.mail_subject = "re: {}".format(row['subject'])
 inputs.mail_template_label = rule.properties.mail_template_select
 
 if rule.properties.mail_merge_body:
-  inputs.mail_merge_body = True
-  original_email = f"""Sent: xxx
-From: {row['from']}
-{row['recipients'].content}
-Subject: {row['subject']}
-
-{row['body'].content.replace("<br>", NEW_LINE)}"""
+    # Sent: Thursday, June 9, 2022, 01:03:54 PM EDT
+    msg_sent = datetime.fromtimestamp(row['date_sent']/1000).strftime('%A, %B %d, %Y, %-I:%M:%S %p GMT')
+    inputs.mail_merge_body = True
+    original_email = f"""Sent: {msg_sent}
+<br>From: {row['from']}
+<br>{row['recipients'].content}
+<br>Subject: {row['subject']}
+<br>
+<br>
+{row['body'].content.replace("<br>", "")}"""
   
-  if inputs.mail_body:
-    inputs.mail_body = f"{inputs.mail_body}<hr>"
-  inputs.mail_body = f"{inputs.mail_body if inputs.mail_body else ''}<div style='border-left: 2px solid gray'><div style='white-space: pre;margin-left: 5px'>{original_email}</div></div>"
+    if inputs.mail_body:
+        inputs.mail_body = f"{inputs.mail_body}<hr>"
+    inputs.mail_body = f"{inputs.mail_body if inputs.mail_body else ''}<div style='border-left: 2px solid gray'><div style='white-space: nowrap;margin-left: 5px'>{original_email}</div></div>"
 ```
 
 ### Post-Processing Script
