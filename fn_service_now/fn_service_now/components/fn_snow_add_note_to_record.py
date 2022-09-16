@@ -6,7 +6,6 @@
 import json
 import logging
 
-from bs4 import BeautifulSoup
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
@@ -62,10 +61,9 @@ class FunctionComponent(ResilientComponent):
                 "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]  # select, text (required)
             }
 
-            # Convert rich text comment to plain text
-            soup = BeautifulSoup(inputs["sn_note_text"], 'html.parser')
-            soup = soup.get_text()
-            inputs["sn_note_text"] = soup.replace(u'\xa0', u' ')
+            # Since v2.0.10, we've changed this to support HTML; the old version cleared the HTML.
+            # SNOW supports surrounding rich text with "[code]" tags. Within that, basic HTML is supported
+            inputs["sn_note_text"] = "[code]" + inputs["sn_note_text"] + "[/code]"
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
