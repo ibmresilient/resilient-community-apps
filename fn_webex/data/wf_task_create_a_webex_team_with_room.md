@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 # To set meeting name to the workflow inputs, uncomment the following lines
+if task:
+  inputs.webex_task_id = str(task.id)
 inputs.webex_incident_id = str(incident.id)
 inputs.webex_team_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.webex_team_name is None else rule.properties.webex_team_name
 
@@ -70,9 +72,10 @@ task.addNote(note)
 ### Pre-Processing Script
 ```python
 # To set meeting name to the workflow inputs, uncomment the following lines
-
+if task:
+  inputs.webex_task_id = str(task.id)
 inputs.webex_incident_id = str(incident.id)
-inputs.webex_room_name = workflow.properties.team.get("content").get("name")
+inputs.webex_room_name = rule.properties.webex_room_name if rule.properties.webex_room_name else " ".join([workflow.properties.team.get("content").get("name"), "Room"])
 inputs.webex_team_id = workflow.properties.team.get("content").get("id")
 inputs.webex_meeting_attendees = None
 inputs.webex_add_all_members = False

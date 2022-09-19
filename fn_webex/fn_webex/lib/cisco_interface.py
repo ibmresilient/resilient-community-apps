@@ -33,7 +33,6 @@ class WebexInterface:
             Response          (<dict>)  : A response with the room/team options and details
                                           or the error message if the meeting creation
                                           fails
-
     """
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
@@ -87,7 +86,7 @@ class WebexInterface:
             entityType (<str>): Teams or Room api selector
             entityName (<str>): teamName or RoomName depending on the API
             callingKey (<str>): name or title depending on the API to fetch
-                                title of the entity from response
+                                title of the entity.
         """
         self.entityURL  = self.requiredParameters.get("entityURL")
         self.entityType = self.requiredParameters.get("entityType")
@@ -142,21 +141,24 @@ class WebexInterface:
     def generate_member_list(self):
         """
         Generates a list of email addresses of the members to be added to the room/team. The
-        function queries incident member list, organization group list, and organization
-        user list. Using these, it then compares and accquires the email addresses of all
-        users that are members to the incident, if >>addAllMembers<< in enabled. Else just
-        adds the email addresses specified in >>additionalAttendee<<
+        function queries incident member list or task member list, organization group list, 
+        and organization user list. Using these, it then compares and accquires the email 
+        addresses of all users that are members to the incident or task, if >>addAllMembers<<
+        in enabled. Else just adds the email addresses specified in >>additionalAttendee<<
 
         Returns:
         --------
             emailIds (<list>) : a list of all participant email addresses to be added
         """
         emailIds = []
-        incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
-                            "{}/members".format(self.requiredParameters.get("incidentId"))))
-        orgMemberList   = self.resclient.post(constants.RES_USERS, payload={}).get("data")
-        orgGroupList    = self.resclient.get(constants.RES_GROUPS)
-
+        if self.requiredParameters.get("taskId"):
+            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_TASK,
+                        "{}/members".format(self.requiredParameters.get("taskId"))))
+        else:
+            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
+                                "{}/members".format(self.requiredParameters.get("incidentId"))))
+        orgMemberList = self.resclient.post(constants.RES_USERS, payload={}).get("data")
+        orgGroupList  = self.resclient.get(constants.RES_GROUPS)
         if self.requiredParameters.get("addAllMembers"):
             if len(incidentMembers.get("members")) == 0:
                 self.LOG.info(constants.LOG_INCIDENT_NO_MEMBERS)
@@ -176,7 +178,7 @@ class WebexInterface:
 
         if self.requiredParameters.get("additionalAttendee"):
             emailIds += self.requiredParameters.get("additionalAttendee").lower().replace(" ", "").split(",")
-        self.emailIds = emailIds
+        self.emailIds = set(emailIds)
         self.LOG.info(constants.LOG_ADD_MEMEBERS.format(
                 self.entityType, self.emailIds))
 

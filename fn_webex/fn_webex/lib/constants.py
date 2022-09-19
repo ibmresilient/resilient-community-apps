@@ -25,6 +25,7 @@ TEAMS_MEMBERSHIP_URL = "/v1/team/memberships/"
 # Soar rest-client URLs
 RES_GROUPS = "/groups"
 RES_USERS = "/users/query_paged?return_level=normal"
+RES_TASK = "/tasks/"
 RES_INCIDENT = "/incidents/"
 
 # Status messages

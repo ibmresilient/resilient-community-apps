@@ -61,6 +61,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["webex_site_url", "webex_timezone", "client_id",
                         "client_secret", "refresh_token", "scope"], self.config_options)
 
+        self.required_parameters["taskId"] = fn_inputs.webex_task_id if hasattr(fn_inputs, 'webex_task_id') else None
         self.required_parameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
         self.required_parameters["incidentId"] = fn_inputs.webex_incident_id
         self.required_parameters["addAllMembers"] = fn_inputs.webex_add_all_members
