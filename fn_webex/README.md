@@ -18,7 +18,8 @@
   - [Function - Webex: Create Meeting](#function---webex-create-meeting)
   - [Function - Webex: Create Room](#function---webex-create-room)
   - [Function - Webex: Create Team](#function---webex-create-team)
-  - [Function - Webex: Delete Teams/Rooms](#function---webex-delete-teamsrooms)
+  - [Function - Webex: Delete Room](#function---webex-delete-room)
+  - [Function - Webex: Delete Team](#function---webex-delete-team)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
@@ -528,24 +529,20 @@ incident.addNote(note)
 </details>
 
 ---
+## Function - Webex: Delete Room
+Function to delete a Webex Room from an incident or task. For this function to work,
+either the Room ID or Room Name must be provided. In order to avoid any accidental 
+deletion, it is strongly recommended to use the Room  ID to delete a Room.
 
-## Function - Webex: Delete Teams/Rooms
-A sample function to delete Webex teams or rooms
-
-![screenshot: workflow-create-webex-room ](./doc/screenshots/workflow_delete_rooms_teams.png)
-
-<p align="center">
-<img src="./doc/screenshots/popup_delete_teams.png" />
-</p>
-
+ ![screenshot: fn-webex-delete-room ](./doc/screenshots/fn-webex-delete-room.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `webex_roomteam_selector` | `select` | Yes | `Room` | Team or Room to be deleted |
-| `webex_entity_id` | `text` | Yes | `Yes` | ID of the room/team to be deleted |
+| `webex_room_id` | `text` | No | `-` | - |
+| `webex_room_name` | `text` | No | `-` | - |
 
 </p>
 </details>
@@ -558,19 +555,18 @@ A sample function to delete Webex teams or rooms
 ```python
 results = {
   "content": {
-    "message": "Successfully deleted Room : Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1",
+    "message": "Successfully deleted room : Incident 2096 Task 102: Webex Initial Test",
     "status_code": 204
   },
   "inputs": {
-    "webex_entity_id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vNDlmOWI5MjAtMzA0Ni0xMWVkLTk1Y2MtNTMzZDM5ZTQ5YmQ1",
-    "webex_roomteam_selector": "Room"
+    "webex_room_name": "Incident 2096 Task 102: Webex Initial Test"
   },
   "metrics": {
-    "execution_time_ms": 5104,
+    "execution_time_ms": 3383,
     "host": "AppHost",
     "package": "fn-webex",
     "package_version": "2.0.0",
-    "timestamp": "2022-02-12 14:01:16",
+    "timestamp": "2022-09-19 11:29:54",
     "version": "1.0"
   },
   "raw": null,
@@ -587,12 +583,11 @@ results = {
 <p>
 
 ```python
-if rule.properties.webex_entity_id is not None:
-  inputs.webex_entity_id = rule.properties.webex_entity_id
-    
-if rule.properties.webex_roomteam_selector is not None:
-  inputs.webex_roomteam_selector = rule.properties.webex_roomteam_selector
+if rule.properties.webex_room_id:
+  inputs.webex_room_id = rule.properties.webex_room_id
 
+if rule.properties.webex_room_name:
+  inputs.webex_room_name = rule.properties.webex_room_name
 ```
 
 </p>
@@ -605,7 +600,7 @@ if rule.properties.webex_roomteam_selector is not None:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Cisco Webex Room"
+  text = u"Unable to delete the room"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
@@ -622,6 +617,99 @@ incident.addNote(note)
 </details>
 
 ---
+## Function - Webex: Delete Team
+Function to delete a Webex team from an incident or task. For this function to work,
+either the Team ID or Team Name must be provided. In order to avoid any accidental 
+deletion, it is strongly recommended to use the Team ID to delete a Team.
+
+ ![screenshot: fn-webex-delete-team ](./doc/screenshots/fn-webex-delete-team.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `webex_team_id` | `text` | No | `-` | ID of the team to be deleted |
+| `webex_team_name` | `text` | Yes | `-` | Name of the team to be deleted |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "message": "Successfully deleted team : Incident 2096 task 102: Webex Initial Test",
+    "status_code": 204
+  },
+  "inputs": {
+    "webex_team_name": "Incident 2096 task 102: Webex Initial Test"
+  },
+  "metrics": {
+    "execution_time_ms": 4362,
+    "host": "AppHost",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "timestamp": "2022-09-19 11:31:16",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+if rule.properties.webex_team_id:
+  inputs.webex_team_id = rule.properties.webex_team_id
+
+if rule.properties.webex_team_name:
+  inputs.webex_team_name = rule.properties.webex_team_name
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to delete the team"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  text  = u"<b>Cisco Webex:</b><br />"
+  text += content.get("message")
+
+note = helper.createRichText(text)
+incident.addNote(note)
+```
+
+</p>
+</details>
+
+---
+
+
+
+
+
 
 
 ## Troubleshooting & Support
