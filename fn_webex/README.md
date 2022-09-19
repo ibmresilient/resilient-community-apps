@@ -537,7 +537,7 @@ deletion, it is strongly recommended to use the Room  ID to delete a Room.
 ![screenshot: workflow-delete-webex-rooms ](./doc/screenshots/workflow_delete_rooms.png)
 
 <p align="center">
-<img src="./doc/screenshots/popup_delete_rooms.png" />
+<img src="./doc/screenshots/popup_delete_room.png" />
 </p>
 
 <details><summary>Inputs:</summary>
@@ -629,7 +629,7 @@ deletion, it is strongly recommended to use the Team ID to delete a Team.
 ![screenshot: workflow-delete-webex-teams ](./doc/screenshots/workflow_delete_teams.png)
 
 <p align="center">
-<img src="./doc/screenshots/popup_delete_teams.png" />
+<img src="./doc/screenshots/popup_delete_team.png" />
 </p>
 
 <details><summary>Inputs:</summary>
