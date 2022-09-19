@@ -58,6 +58,12 @@ class WebexInterface:
                                      Else creates a new one using create_entity
             * add_membership       : Adds the list of members to the room or team
             * get_entity_details   : Retrieves the room/team information
+
+        Returns:
+        --------
+            (<FunctionResult>): A dictionary with the response, the reason
+                    should the operation fail, and a success
+                    flag.
         '''
         try:
             self.find_api()
@@ -77,8 +83,11 @@ class WebexInterface:
 
         Returns:
         --------
-            entityId   (<str>): teamId or RoomId depending on the API
+            entityURL  (<str>): Teams or Room api URL
+            entityType (<str>): Teams or Room api selector
             entityName (<str>): teamName or RoomName depending on the API
+            callingKey (<str>): name or title depending on the API to fetch
+                                title of the entity from response
         """
         self.entityURL  = self.requiredParameters.get("entityURL")
         self.entityType = self.requiredParameters.get("entityType")

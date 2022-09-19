@@ -25,12 +25,13 @@ class WebexDelete:
         """
         A wrapper function that executes all the below functions in the 
         required order. 
-        * find_api()   : determines if the deletion operation is to be
-                         performed on a room or team and adapts the 
-                         functions accordinly.
-        * locate_entity: Locates the exact room or team to be deleted.
-        * delete_entity: Tries to delete the room or team and returns
-                         a response accordingly.
+        
+        * find_api      : determines if the deletion operation is to be
+                          performed on a room or team and adapts the 
+                          functions accordinly.
+        * locate_entity : Locates the exact room or team to be deleted.
+        * delete_entity : Tries to delete the room or team and returns
+                          a response accordingly.
 
         Returns:
         -------
