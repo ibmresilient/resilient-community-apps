@@ -534,7 +534,11 @@ Function to delete a Webex Room from an incident or task. For this function to w
 either the Room ID or Room Name must be provided. In order to avoid any accidental 
 deletion, it is strongly recommended to use the Room  ID to delete a Room.
 
- ![screenshot: fn-webex-delete-room ](./doc/screenshots/fn-webex-delete-room.png) <!-- ::CHANGE_ME:: -->
+![screenshot: workflow-delete-webex-rooms ](./doc/screenshots/workflow_delete_rooms.png)
+
+<p align="center">
+<img src="./doc/screenshots/popup_delete_rooms.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -622,7 +626,11 @@ Function to delete a Webex team from an incident or task. For this function to w
 either the Team ID or Team Name must be provided. In order to avoid any accidental 
 deletion, it is strongly recommended to use the Team ID to delete a Team.
 
- ![screenshot: fn-webex-delete-team ](./doc/screenshots/fn-webex-delete-team.png) <!-- ::CHANGE_ME:: -->
+![screenshot: workflow-delete-webex-teams ](./doc/screenshots/workflow_delete_teams.png)
+
+<p align="center">
+<img src="./doc/screenshots/popup_delete_teams.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
