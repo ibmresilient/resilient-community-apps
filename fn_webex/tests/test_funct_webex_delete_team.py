@@ -9,7 +9,7 @@ from fn_webex.lib.cisco_delete import WebexDelete
 from resilient_circuits.util import get_config_data, get_function_definition
 
 PACKAGE_NAME = "fn_webex"
-FUNCTION_NAME = "webex_delete"
+FUNCTION_NAME = "webex_delete_team"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)

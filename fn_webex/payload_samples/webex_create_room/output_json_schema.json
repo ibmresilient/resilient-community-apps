@@ -33,13 +33,16 @@
         "callInTollNumber": {
           "type": "string"
         },
-        "attendees": {
+        "status_code": {
+          "type": "integer"
+        },
+        "id": {
           "type": "string"
         },
-        "status": {
-          "type": "boolean"
+        "name": {
+          "type": "string"
         },
-        "roomName": {
+        "attendees": {
           "type": "string"
         }
       }
@@ -54,13 +57,12 @@
         "webex_room_name": {
           "type": "string"
         },
-        "webex_add_all_members": {
-          "type": "boolean"
-        },
-        "webex_team_id": {
+        "webex_task_id": {
           "type": "string"
         },
-        "webex_meeting_attendees": {}
+        "webex_add_all_members": {
+          "type": "boolean"
+        }
       }
     },
     "metrics": {

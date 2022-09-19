@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 204,
+    "message": "Successfully deleted team : Incident 2096 task 102: Webex Initial Test"
+  },
+  "raw": null,
+  "inputs": {
+    "webex_team_name": "Incident 2096 task 102: Webex Initial Test"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "host": "Calvins-MacBook-Pro.local",
+    "execution_time_ms": 4362,
+    "timestamp": "2022-09-19 11:31:16"
+  }
+}

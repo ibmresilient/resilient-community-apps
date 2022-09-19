@@ -8,31 +8,15 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "string"
-    },
+    "reason": {},
     "content": {
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string"
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "description": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "trackingId": {
-          "type": "string"
-        },
         "status_code": {
           "type": "integer"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -40,10 +24,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "webex_entity_id": {
-          "type": "string"
-        },
-        "webex_roomteam_selector": {
+        "webex_room_name": {
           "type": "string"
         }
       }

@@ -5,10 +5,10 @@
 
 # Incident: Delete a Webex Room
 
-## Function - Webex: Delete
+## Function - Webex: Delete Room
 
 ### API Name
-`webex_delete`
+`webex_delete_room`
 
 ### Output Name
 ``
@@ -19,10 +19,10 @@
 ### Pre-Processing Script
 ```python
 if rule.properties.webex_room_id:
-  inputs.webex_entity_id = rule.properties.webex_room_id
+  inputs.webex_room_id = rule.properties.webex_room_id
 
 if rule.properties.webex_room_name:
-  inputs.webex_entity_name = rule.properties.webex_room_name
+  inputs.webex_room_name = rule.properties.webex_room_name
 ```
 
 ### Post-Processing Script

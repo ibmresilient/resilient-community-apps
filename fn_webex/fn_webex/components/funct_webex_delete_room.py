@@ -10,7 +10,8 @@ from fn_webex.lib import constants
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 
 PACKAGE_NAME = "fn_webex"
-FN_NAME = "webex_delete"
+FN_NAME = "webex_delete_room"
+
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_delete_teamsrooms'"""
@@ -29,9 +30,8 @@ class FunctionComponent(AppFunctionComponent):
 
         Fn Inputs:
         ----------
-            entityId          (<str>) : ID of the Room or Team to be deleted
-            entityType        (<str>) : Specifies if a Room or a Team is to be deleted
-            entityName        (<str>) : Name of the Room or Team to be deleted
+            RoomId          (<str>) : ID of the Room or Team to be deleted
+            RoomName        (<str>) : Name of the Room or Team to be deleted
 
         Config Options:
         ---------------
@@ -51,7 +51,6 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_entity_type"], fn_inputs)
         validate_fields(["webex_site_url", "webex_timezone", "client_id",
                          "client_secret", "refresh_token", "scope"], self.config_options)
 
@@ -60,9 +59,9 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["resclient"] = self.rest_client()
 
         self.required_parameters["baseURL"] = self.config_options.get("webex_site_url")
-        self.required_parameters["entityId"] = fn_inputs.webex_entity_id if hasattr(fn_inputs, 'webex_entity_id') else None
-        self.required_parameters["entityName"] = fn_inputs.webex_entity_name if hasattr(fn_inputs, 'webex_entity_name') else None
-        self.required_parameters["entityType"] = fn_inputs.webex_entity_type
+        self.required_parameters["entityId"] = fn_inputs.webex_room_id if hasattr(fn_inputs, 'webex_room_id') else None
+        self.required_parameters["entityName"] = fn_inputs.webex_room_name if hasattr(fn_inputs, 'webex_room_name') else None
+        self.required_parameters["entityType"] = "room"
 
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)

@@ -5,10 +5,10 @@
 
 # Task: Delete a Webex Team
 
-## Function - Webex: Delete
+## Function - Webex: Delete Team
 
 ### API Name
-`webex_delete`
+`webex_delete_team`
 
 ### Output Name
 ``
@@ -19,10 +19,10 @@
 ### Pre-Processing Script
 ```python
 if rule.properties.webex_team_id:
-  inputs.webex_entity_id = rule.properties.webex_team_id
+  inputs.webex_team_id = rule.properties.webex_team_id
 
 if rule.properties.webex_team_name:
-  inputs.webex_entity_name = rule.properties.webex_team_name
+  inputs.webex_team_name = rule.properties.webex_team_name
 ```
 
 ### Post-Processing Script

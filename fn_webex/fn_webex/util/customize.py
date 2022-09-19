@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_webex",
         "message_destinations": [u"fn_webex"],
-        "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team", u"webex_delete"],
+        "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team", u"webex_delete_room", u"webex_delete_team"],
         "workflows": [u"create_webex_team_with_room", u"incident_create_a_webex_meeting", u"incident_create_a_webex_room", u"incident_create_a_webex_team", u"incident_delete_a_webex_room", u"incident_delete_a_webex_team", u"task_create_a_webex_meeting", u"task_create_a_webex_room", u"task_create_a_webex_team", u"task_create_a_webex_team_with_room", u"task_delete_a_webex_room", u"task_delete_a_webex_team"],
         "actions": [],
         "incident_fields": [],
@@ -48,7 +48,8 @@ def customization_data(client=None):
         - webex_create_meeting
         - webex_create_room
         - webex_create_team
-        - webex_delete
+        - webex_delete_room
+        - webex_delete_team
     - Workflows:
         - create_webex_team_with_room
         - incident_create_a_webex_meeting
