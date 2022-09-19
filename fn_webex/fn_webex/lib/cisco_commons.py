@@ -95,11 +95,11 @@ class ResponseHandler:
     def raise_or_return_erros(self):
         """
         Filters through the response to either raise or return the request.
-            - If the status code matches with the exempt list, the method
+            * If the status code matches with the exempt list, the method
               will allow it to pass and returns the message body.
-            - If the status_code is not > 204 and not in exempt list, the method
+            * If the status_code is not > 204 and not in exempt list, the method
               raises an exception.
-            - If the status code is 204 and in exempt list, creates a message
+            * If the status code is 204 and in exempt list, creates a message
               body and returns it with a custom message
 
         Raises:

@@ -77,11 +77,11 @@ class WebexMeetings:
         function provides the user with a certain level of flexibility when it comes to specifying 
         the meeting start and end time. For instance:
 
-            - Only if end time is specified: meeting will start from current time + time in minutes 
+            * Only if end time is specified: meeting will start from current time + time in minutes 
               specified in MEETING_START_TIME_BUFFER
-            - Only if start time is specified, meeting will start from the specified start time
+            * Only if start time is specified, meeting will start from the specified start time
               till 45 minutes from the start time
-            - If neither start nor end time is specified, meeting starts from current time + time in
+            * If neither start nor end time is specified, meeting starts from current time + time in
               minutes specified in MEETING_START_TIME_BUFFERto 45 minutes from the start time
 
         Args:

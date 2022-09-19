@@ -10,6 +10,26 @@ from fn_webex.lib import constants, cisco_commons
 
 
 class WebexDelete:
+    """
+        This application allows for deleting a team or a room using the Cisco Webex API. This
+        provides SOAR with the ability to delete teams and rooms from within a SOAR incident
+        or a task. Either the name or the ID must 
+
+        Inputs:
+        -----
+            incidentId         (<str>)  : Incident ID
+            taskId             (<str>)  : Task ID
+            entityId           (<str>)  : ID of the Team or Room to be deleted
+            entityName         (<str>)  : Name of the Team or Room to be deleted
+            entityURL          (<str>)  : Teams or Rooms API URL
+            enityType          (<str>)  : Rooms or Teams API selector
+
+        Returns:
+        --------
+            Response          (<dict>)  : A response with the room/team options and details
+                                          or the error message if the meeting creation
+                                          fails
+    """
     def __init__(self, requiredParameters):
         self.requiredParameters = requiredParameters
         self.rc = self.requiredParameters.get("rc")
@@ -26,12 +46,12 @@ class WebexDelete:
         A wrapper function that executes all the below functions in the 
         required order. 
         
-        * find_api      : determines if the deletion operation is to be
-                          performed on a room or team and adapts the 
-                          functions accordinly.
-        * locate_entity : Locates the exact room or team to be deleted.
-        * delete_entity : Tries to delete the room or team and returns
-                          a response accordingly.
+            * find_api      : determines if the deletion operation is to be
+                              performed on a room or team and adapts the 
+                              functions accordinly.
+            * locate_entity : Locates the exact room or team to be deleted.
+            * delete_entity : Tries to delete the room or team and returns
+                              a response accordingly.
 
         Returns:
         -------
@@ -115,7 +135,6 @@ class WebexDelete:
             if len(res.get('items')) > 0:
                 entityName = self.entityName.strip()
                 for objs in res.get("items"):
-                    print(objs.get(self.callingKey), entityName)
                     if objs.get(self.callingKey).strip() == entityName:
                         self.entityId = objs.get("id")
                         self.entityName = objs.get(self.callingKey)
@@ -127,7 +146,7 @@ class WebexDelete:
                         self.entityType,
                         self.entityName))
             else:
-                raise IntegrationError("Unable to retrieve {}! Delete operation failed".format(
+                raise IntegrationError(constants.LOG_UNABLE_TO_FIND.format(
                         self.entityType))
 
 

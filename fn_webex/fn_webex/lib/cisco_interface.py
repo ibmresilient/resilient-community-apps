@@ -23,8 +23,8 @@ class WebexInterface:
             incidentId         (<str>)  : Incident ID
             addAllMembers      (<bool>) : Adds all members of the incident to the team
             additionalAttendee (<str>)  : Additonal attendees to be added
-            entityId           (<str>)  : always >>teamId<<
-            entityName         (<str>)  : always >>teamName<<
+            entityId           (<str>)  : Team or Room ID
+            entityName         (<str>)  : Team or Room Name
             entityURL          (<str>)  : Teams API URL
             membershipURL      (<str>)  : Teams Membership API URL
 
@@ -91,7 +91,7 @@ class WebexInterface:
         self.entityURL  = self.requiredParameters.get("entityURL")
         self.entityType = self.requiredParameters.get("entityType")
         self.entityName = self.requiredParameters.get("entityName")
-        self.callingKey = "name" if self.entityType == "team" else "title"
+        self.callingKey = constants.TEAMS_CALLING_KEY if self.entityType == "team" else constants.ROOMS_CALLING_KEY
 
     def is_direct_member(self, incidentMemberId, orgMemberList):
         """
@@ -234,9 +234,9 @@ class WebexInterface:
     def create_entity(self):
         """
         Creates a room/team with the required configurations such as:
-            - room/team name
-            - Existing teamId
-            - list of Attendees
+            * room/team name
+            * Existing teamId
+            * list of Attendees
 
         Returns:
         -------
@@ -245,7 +245,7 @@ class WebexInterface:
         """
         data = {self.callingKey : self.entityName}
         if self.entityType == "room" and self.requiredParameters.get("teamId"):
-            self.LOG.info("Webex: Adding team to room: {}".format(
+            self.LOG.info(constants.LOG_ADD_TEAM_TO_ROOM.format(
                 self.requiredParameters.get("teamId")))
             data["teamId"] = self.requiredParameters.get("teamId")
         res = self.rc.execute("post", self.entityURL,
@@ -253,7 +253,7 @@ class WebexInterface:
             callback=self.response_handler.check_response)
         self.entityId = res.get("id")
         self.entityName = res.get(self.callingKey)
-        self.LOG.info("Webex: Created new {}: {}".format(self.entityType, self.entityId))
+        self.LOG.info(constants.LOG_CREATING_NEW_ENTITY.format(self.entityType, self.entityId))
 
 
     def get_entity_details(self):
@@ -267,7 +267,7 @@ class WebexInterface:
         """
         response = self.rc.execute("get", self.retrieveMembershipURL,
             headers=self.header, callback=self.response_handler.check_response)
-        self.LOG.info("Webex: Retrieved {} details, Name : {}".format(self.entityType,
+        self.LOG.info(constants.LOG_RETRIVING_ENTITY_DETAILS.format(self.entityType,
             self.entityName))
         response["id"] = self.entityId
         response["name"] = self.entityName
