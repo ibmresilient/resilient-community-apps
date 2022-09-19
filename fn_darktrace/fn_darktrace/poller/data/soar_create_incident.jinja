@@ -1,0 +1,101 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {% set severity_mapping = '''{
+    "critical": "High", 
+    "suspicious": "Medium", 
+    "compliance": "Low", 
+    "DEFAULT": "Low"
+  }'''
+  %}
+  "name": "Darktrace Incident - {{ enhancedIncidentEvents[0]['title'] }}",
+  "description": "{{ enhancedIncidentEvents[0]['summary'] }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ start }},
+  "start_date": {{ start }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}
+  "plan_status": "A",
+  "severity_code": "{{ category | soar_substitute(severity_mapping) }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "darktrace_aianalyst_incident_group_id": "{{ id }}",
+    "darktrace_incident_group_link": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident</a>",
+    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
+    "darktrace_incident_last_modified": {{ end }},
+    "darktrace_incident_group_start_time": {{ start }},
+    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices)",
+    "darktrace_initiating_device_ids": "{{ initialDevices }}",
+    "darktrace_group_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category }}</span>",
+    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
+    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+  },
+  {# add comments as necessary #}
+  "comments": [
+    {
+      "text": {
+        "format": "text",
+        "content": "Created by Darktrace"
+      }
+    }
+    {% for event in enhancedIncidentEvents %}
+      {% if event["comments"] %},{% endif %}
+      {% for comment in event["comments"] %}
+        {
+          "text": {
+            "format": "html",
+            "content": "<b>Darktrace Incident Comment</b><br><i>At {{ comment['time']|iso8601 }} <u>{{ comment['username'] }}</u> said:</i> {{ comment['message']|replace('"', '\\"') }}"
+          }
+        }
+        {% if not loop.last %},{% endif %}
+      {% endfor %}
+    {% endfor %}
+  ],
+  {# add artifacts as necessary #}
+  "artifacts": [
+    {% for device in enhancedDevices %}
+        {% set artifactFound = False %}
+      {% set device_description = "Darktrace Device (Type: " + device["typelabel"] + ") (ID: " + device["id"]|string() + ")" %}
+      {% if 'ip' in device %}
+        {% set artifactFound = True %}
+        {
+          "type": {
+            "name": "IP Address"
+          },
+          "value": "{{ device['ip'] }}",
+          "description": {
+            "format": "html",
+            "content": "{{ device_description }}"
+          }
+        }
+      {% endif %}
+      {% if 'macaddress' in device %}
+        {% if artifactFound %},{% endif %}
+        {% set artifactFound = True %}
+        {
+          "type": {
+            "name": "MAC Address"
+          },
+          "value": "{{ device['macaddress'] }}",
+          "description": {
+            "format": "html",
+            "content": "{{ device_description }}"
+          }
+        }
+      {% endif %}
+      {% if 'hostname' in device %}
+        {% if artifactFound %},{% endif %}
+        {
+          "type": {
+            "name": "System Name"
+          },
+          "value": "{{ device['hostname'] }}",
+          "description": {
+            "format": "html",
+            "content": "{{ device_description }}"
+          }
+        }
+      {% endif %}
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
