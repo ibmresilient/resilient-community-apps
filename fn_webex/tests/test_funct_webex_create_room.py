@@ -71,6 +71,8 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, cal
         response = MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom2", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom3", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
     elif url == "https://webexapis.com/v1/rooms/" and method.lower()=="post":
         response = MockResponse('{"id": "Y1235", "title": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}' ,status_code=200)
+    elif url == "https://webexapis.com/v1/rooms/Y1235/":
+        response = MockResponse('{"id": "Y1235", "title": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}' ,status_code=200)
     elif url == "https://webexapis.com/v1/memberships":
         response = None
     elif url == "https://webexapis.com/v1/rooms/{}/meetingInfo".format("Y1235"):
@@ -126,6 +128,5 @@ class TestWebexCreateRoom:
             'status': True, 
             'roomName': 'UnittestRoom5'}
         results = call_webex_create_room_function()
-
-        assert(results.value["status"], True)
+        assert(results.success, True)
         assert(results.value, expected)

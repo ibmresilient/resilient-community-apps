@@ -124,5 +124,5 @@ class TestWebexCreateRoom:
             'roomName': 'UnittestRoom5'}
         results = call_webex_create_team_function()
 
-        assert(results.value["status"], True)
+        assert(results.success, True)
         assert(results.value, expected)
