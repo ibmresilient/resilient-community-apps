@@ -70,9 +70,12 @@ incident.addNote(note)
 ### Pre-Processing Script
 ```python
 # Webex Room name has to be different from the Team name
+_team_name = "Incident {}: {}".format(str(incident.id),  incident.name)
+if workflow.properties.team.get("content"):
+  _team_name = workflow.properties.team.get("content").get("name") if workflow.properties.team.get("content").get("name") else _team_name
 
 inputs.webex_incident_id = str(incident.id)
-inputs.webex_room_name = rule.properties.webex_room_name if rule.properties.webex_room_name else " ".join([workflow.properties.team.get("content").get("name"), "Room"])
+inputs.webex_room_name = rule.properties.webex_room_name if rule.properties.webex_room_name else " ".join([_team_name, "Room"])
 inputs.webex_team_id = workflow.properties.team.get("content").get("id")
 inputs.webex_meeting_attendees = None
 inputs.webex_add_all_members = False
