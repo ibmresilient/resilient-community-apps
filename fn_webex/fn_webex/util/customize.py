@@ -23,7 +23,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_webex"],
         "functions": [u"webex_create_meeting", u"webex_create_room", u"webex_create_team", u"webex_delete_room", u"webex_delete_team"],
         "workflows": [u"create_webex_team_with_room", u"incident_create_a_webex_meeting", u"incident_create_a_webex_room", u"incident_create_a_webex_team", u"incident_delete_a_webex_room", u"incident_delete_a_webex_team", u"task_create_a_webex_meeting", u"task_create_a_webex_room", u"task_create_a_webex_team", u"task_create_a_webex_team_with_room", u"task_delete_a_webex_room", u"task_delete_a_webex_team"],
-        "actions": [],
+        "actions": [u"Webex: Create a Team with Room", u"Webex: Create Meeting", u"Webex: Create Room", u"Webex: Create task Meeting", u"Webex: Create task Room", u"Webex: Create task Team", u"Webex: Create task Team with Room", u"Webex: Create Team", u"Webex: Delete Room", u"Webex: Delete task Room", u"Webex: Delete task Team", u"Webex: Delete Team"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -63,6 +63,19 @@ def customization_data(client=None):
         - task_create_a_webex_team_with_room
         - task_delete_a_webex_room
         - task_delete_a_webex_team
+    - Rules:
+        - Webex: Create a Team with Room
+        - Webex: Create Meeting
+        - Webex: Create Room
+        - Webex: Create task Meeting
+        - Webex: Create task Room
+        - Webex: Create task Team
+        - Webex: Create task Team with Room
+        - Webex: Create Team
+        - Webex: Delete Room
+        - Webex: Delete task Room
+        - Webex: Delete task Team
+        - Webex: Delete Team
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
