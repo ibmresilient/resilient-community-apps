@@ -4,11 +4,19 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 # Webex Meeting constants
+EMAIL = "email"
+SYMBOL_PLUS = "+"
+SYMBOL_MINUS = "-"
+TIMEZONE_FORMAT = "%z"
 REMOVE_MILLISECONDS = 1000
 MEETING_START_TIME_BUFFER = 2
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 # Cisco Rooms and Teams constants
+ROOM = "room"
+TEAM = "teams"
+ROOM_ID = "roomId"
+TEAM_ID = "teamId"
 ROOMS_CALLING_KEY = "title"
 TEAMS_CALLING_KEY = "name"
 
@@ -27,6 +35,13 @@ RES_GROUPS = "/groups"
 RES_USERS = "/users/query_paged?return_level=normal"
 RES_TASK = "/tasks/"
 RES_INCIDENT = "/incidents/"
+
+# Response Handler Messages
+MSG_RESPONSE_NONE = "API call failed! Invalid METHOD passed to rc.execute()! Response returned was None"
+MSG_RESPONSE_204  = "API call successful! No content returned"
+MSG_RESPONSE_401 = "API call failed! Security context is invalid. API returned 401! {}"
+MSG_RESPONSE_404 = "API call failed! Item not found. API returned 404! {}"
+MSG_RESPONSE_405 =  "API call failed! Method Not Allowed. API returned 405! {}"
 
 # Status messages
 MSG_CREATE_SECURITY =  "Webex: Creating a Security context and establishing a connection with the Webex EndPoint"

@@ -30,15 +30,16 @@ class WebexDelete:
                                           or the error message if the meeting creation
                                           fails
     """
-    def __init__(self, requiredParameters):
-        self.requiredParameters = requiredParameters
-        self.rc = self.requiredParameters.get("rc")
-        self.header = requiredParameters.get("header")
-        self.LOG = self.requiredParameters.get("logger")
-        self.resclient = requiredParameters.get("resclient")
+    def __init__(self, required_parameters):
+        self.required_parameters = required_parameters
+        self.rc = self.required_parameters.get("rc")
+        self.header = self.required_parameters.get("header")
+        self.LOG = self.required_parameters.get("logger")
+        self.resclient = self.required_parameters.get("resclient")
         self.response_handler = cisco_commons.ResponseHandler()
-        self.entityId, self.entityName, self.entityType = None, None, None
-        self.delteionURL, self.callingKey = None, None
+        self.entity_id, self.entity_name, self.entity_type = None, None, None
+        self.deletion_url, self.calling_key = None, None
+        self.find_api()
 
 
     def delete_team_room(self):
@@ -60,7 +61,6 @@ class WebexDelete:
                                 flag.
         """
         try:
-            self.find_api()
             self.locate_entity()
             return self.delete_entity()
         except IntegrationError as err:
@@ -69,7 +69,7 @@ class WebexDelete:
 
     def find_api(self):
         """
-        This function detemines the operaiton that is being perofrmed.
+        This function determines the operation that is being perofrmed.
         All the below functions work for Room as well as teams. So this
         detemine the API to be used.
 
@@ -79,20 +79,20 @@ class WebexDelete:
             entityName (<str>): teamName or RoomName depending on the API
             entityType (<str>): Team or Room to be deleted
         """
-        self.entityId   = self.requiredParameters.get("entityId")
-        self.entityName = self.requiredParameters.get("entityName")
-        self.entityType = self.requiredParameters.get("entityType").strip().lower()
+        self.entity_id   = self.required_parameters.get("entityId")
+        self.entity_name = self.required_parameters.get("entityName")
+        self.entity_type = self.required_parameters.get("entityType").strip().lower()
         
-        if not self.entityName and not self.entityId:
-            raise IntegrationError(constants.MSG_INVALID_DELETE.format(self.entityType))
+        if not self.entity_name and not self.entity_id:
+            raise IntegrationError(constants.MSG_INVALID_DELETE.format(self.entity_type))
 
-        if "room" in self.entityType:
-            self.callingKey = constants.ROOMS_CALLING_KEY
-            self.deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), 
+        if constants.ROOM in self.entity_type:
+            self.calling_key = constants.ROOMS_CALLING_KEY
+            self.deletion_url = parse.urljoin(self.required_parameters.get("baseURL"), 
                 constants.ROOMS_URL)
         else :
-            self.callingKey = constants.TEAMS_CALLING_KEY
-            self.deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"),
+            self.calling_key = constants.TEAMS_CALLING_KEY
+            self.deletion_url = parse.urljoin(self.required_parameters.get("baseURL"),
                 constants.TEAMS_URL)
 
 
@@ -118,36 +118,36 @@ class WebexDelete:
             entityName (<str>): Actual name of the Room or Team
             entityId   (<str>): The Id of the room or team
         """
-        self.LOG.info(constants.LOG_FETCHING_ENTITY.format(self.entityType))
+        self.LOG.info(constants.LOG_FETCHING_ENTITY.format(self.entity_type))
 
-        if self.entityId:
-            self.deletionURL = parse.urljoin(self.deletionURL, self.entityId)
-            res = self.rc.execute("get", self.deletionURL, headers=self.header,
+        if self.entity_id:
+            self.deletion_url = parse.urljoin(self.deletion_url, self.entity_id)
+            res = self.rc.execute("get", self.deletion_url, headers=self.header,
                 callback=self.response_handler.check_response)
-            self.entityName = res.get(self.callingKey)
-            if not self.entityName:
-                raise IntegrationError(constants.MSG_INVALID_ENTITY_ID.format(self.entityType,
-                    self.entityId))
+            self.entity_name = res.get(self.calling_key)
+            if not self.entity_name:
+                raise IntegrationError(constants.MSG_INVALID_ENTITY_ID.format(self.entity_type,
+                    self.entity_id))
         else:
-            res = self.rc.execute("get", self.deletionURL, headers=self.header,
+            res = self.rc.execute("get", self.deletion_url, headers=self.header,
                 callback=self.response_handler.check_response)
 
             if len(res.get('items')) > 0:
-                entityName = self.entityName.strip()
+                entityName = self.entity_name.strip()
                 for objs in res.get("items"):
-                    if objs.get(self.callingKey).strip() == entityName:
-                        self.entityId = objs.get("id")
-                        self.entityName = objs.get(self.callingKey)
-                        self.LOG.info("Webex: Retrieved {}: {}".format(self.entityType,
-                            self.entityName))
+                    if objs.get(self.calling_key).strip() == entityName:
+                        self.entity_id = objs.get("id")
+                        self.entity_name = objs.get(self.calling_key)
+                        self.LOG.info("Webex: Retrieved {}: {}".format(self.entity_type,
+                            self.entity_name))
                         break
-                if not self.entityId:
+                if not self.entity_id:
                     raise IntegrationError("Could not find {}: {}".format(
-                        self.entityType,
-                        self.entityName))
+                        self.entity_type,
+                        self.entity_name))
             else:
                 raise IntegrationError(constants.LOG_UNABLE_TO_FIND.format(
-                        self.entityType))
+                        self.entity_type))
 
 
     def delete_entity(self):
@@ -165,25 +165,25 @@ class WebexDelete:
         --------
             (<dict>): Response from the endpoint
         """
-        self.deletionURL = parse.urljoin(self.deletionURL, self.entityId)
+        self.deletion_url = parse.urljoin(self.deletion_url, self.entity_id)
 
-        self.LOG.info("Webex: Deleting {}: {}".format(self.entityType, self.entityName))
+        self.LOG.info("Webex: Deleting {}: {}".format(self.entity_type, self.entity_name))
         self.response_handler.add_exempt_codes(codes=[404, 405])
         self.LOG.info(constants.LOG_EXEMPT_DELETE_CODES)
 
-        response = self.rc.execute("delete", self.deletionURL, headers=self.header,
+        response = self.rc.execute("delete", self.deletion_url, headers=self.header,
             callback=self.response_handler.check_response)
         self.response_handler.clear_exempt_codes()
 
         if response.get("status_code") == 204:
             response["message"] = constants.MSG_SUCCESS_DELETION.format(
-                self.entityType, self.entityName)
+                self.entity_type, self.entity_name)
             return FunctionResult(response, success=True)
 
         if response.get("status_code") == 404:
             return FunctionResult(response, success=False,
-                reason = constants.MSG_ENTITY_NOT_FOUND.format(self.entityType, 
-                self.entityName))
+                reason = constants.MSG_ENTITY_NOT_FOUND.format(self.entity_type, 
+                self.entity_name))
 
         if response.get("status_code") == 405:
             return FunctionResult(response, success=False,

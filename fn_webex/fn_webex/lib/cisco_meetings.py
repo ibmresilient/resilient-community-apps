@@ -31,13 +31,13 @@ class WebexMeetings:
                                    or the error message if the meeting creation
                                    fails
     """
-    def __init__(self, requiredParameters, meetingParameters):
-        self.rc = requiredParameters.get("rc")
-        self.LOG = requiredParameters.get("logger")
-        self.header = requiredParameters.get("header")
+    def __init__(self, required_parameters, meeting_parameters):
+        self.rc = required_parameters.get("rc")
+        self.LOG = required_parameters.get("logger")
+        self.header = required_parameters.get("header")
         self.response_handler = cisco_commons.ResponseHandler()
-        self.meetingParameters = meetingParameters
-        self.requiredParameters = requiredParameters
+        self.meeting_parameters = meeting_parameters
+        self.required_parameters = required_parameters
         self.timezone, self.meeting_end_time, self.meeting_start_time = None, None, None
 
 
@@ -51,13 +51,13 @@ class WebexMeetings:
         --------
             (<dict>) : Vital meeting information and other configurations of the scheduled meeting
         '''
-        webexurl = self.requiredParameters.get("meetingsURL")
-        self.get_timeZones(self.requiredParameters.get("timezone"))
+        webexurl = self.required_parameters.get("meetingsURL")
+        self.get_timeZones(self.required_parameters.get("timezone"))
         self.LOG.info("Wenex Meeting: Timezone set to: {}".format(self.timezone))
 
-        self.check_time(self.timezone, self.requiredParameters.get("start"),
-                        self.requiredParameters.get("end"))
-        meetingOptions = self.generate_meeting_parameters(self.meetingParameters)
+        self.check_time(self.timezone, self.required_parameters.get("start"),
+                        self.required_parameters.get("end"))
+        meetingOptions = self.generate_meeting_parameters(self.meeting_parameters)
         
         self.response_handler.add_exempt_codes(400)
         response = self.rc.execute("post", webexurl, data=meetingOptions,
@@ -111,7 +111,7 @@ class WebexMeetings:
                 raise IntegrationError(constants.MSG_INVALID_ENDTIME.format(
                     meeting_end.strftime(constants.DATETIME_FORMAT), meeting_start.strftime(constants.DATETIME_FORMAT), _current_time))
         else:
-            meeting_end = meeting_start + datetime.timedelta(minutes=self.meetingParameters.get("duration"))
+            meeting_end = meeting_start + datetime.timedelta(minutes=self.meeting_parameters.get("duration"))
 
         self.meeting_start_time = meeting_start.strftime(constants.DATETIME_FORMAT) + timezone
         self.meeting_end_time   = meeting_end.strftime(constants.DATETIME_FORMAT) + timezone
@@ -131,7 +131,7 @@ class WebexMeetings:
                     UTC +01:00
         '''
         if timezone is None:
-            self.timezone = time.strftime("%z", time.localtime())
+            self.timezone = time.strftime(constants.TIMEZONE_FORMAT, time.localtime())
             return
         if isinstance(timezone, str):
             timezone = timezone.strip()
@@ -141,8 +141,8 @@ class WebexMeetings:
         timezone = timezone.split(" ")
         if len(timezone) > 1:
             timezone = timezone[1].strip()
-            if "+" not in timezone and "-" not in timezone:
-                timezone = "".join(["+", timezone])
+            if constants.SYMBOL_PLUS not in timezone and constants.SYMBOL_MINUS not in timezone:
+                timezone = "".join([constants.SYMBOL_PLUS, timezone])
         else:
             raise IntegrationError(constants.MSG_INVALID_TIMEZONE)
         if not timezone[1:].isdigit():
@@ -150,19 +150,19 @@ class WebexMeetings:
         self.timezone = timezone
 
 
-    def generate_meeting_parameters(self, meetingParameters):
+    def generate_meeting_parameters(self, meeting_parameters):
         '''
         Formating the meeting parameters into key-value pairs
         
         Args:
         -----
-            meetingParameters (<dict>) : required meeting settings in the form of a json
+            meeting_parameters (<dict>) : required meeting settings in the form of a json
 
         Returns:
         --------
             (<str>) : Meeting options in a key-value pairs
         '''
         request_parameters = {"start" : self.meeting_start_time, "end" : self.meeting_end_time}
-        for key in meetingParameters.keys():
-            request_parameters[key] = meetingParameters.get(key)
+        for key in meeting_parameters.keys():
+            request_parameters[key] = meeting_parameters.get(key)
         return json.dumps(request_parameters)

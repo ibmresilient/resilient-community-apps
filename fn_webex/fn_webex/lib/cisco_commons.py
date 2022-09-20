@@ -81,15 +81,15 @@ class ResponseHandler:
                                could be due to an invalid call methord being passed.
         """
         if self.response is None:
-            raise IntegrationError("API call failed! Invalid METHOD passed to rc.execute()! Response returned was None")
+            raise IntegrationError(constants.MSG_RESPONSE_NONE)
         if self.response.status_code == 204:
-            self.msg = "API call successful! No content returned"
+            self.msg = constants.MSG_RESPONSE_204
         elif self.response.status_code == 401:
-            self.msg = "API call failed! Security context is invalid. API returned 401! {}".format(self.response.json().get("message"))
+            self.msg = constants.MSG_RESPONSE_401.format(self.response.json().get("message"))
         elif self.response.status_code == 404:
-            self.msg = "API call failed! Item not found. API returned 404! {}".format(self.response.json().get("message"))
+            self.msg = constants.MSG_RESPONSE_404.format(self.response.json().get("message"))
         elif self.response.status_code == 405:
-            self.msg = "API call failed! Method Not Allowed. API returned 405! {}".format(self.response.json().get("message"))
+            self.msg = constants.MSG_RESPONSE_405.format(self.response.json().get("message"))
 
 
     def raise_or_return_erros(self):

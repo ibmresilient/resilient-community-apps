@@ -61,7 +61,7 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["baseURL"] = self.config_options.get("webex_site_url")
         self.required_parameters["entityId"] = fn_inputs.webex_room_id if hasattr(fn_inputs, 'webex_room_id') else None
         self.required_parameters["entityName"] = fn_inputs.webex_room_name if hasattr(fn_inputs, 'webex_room_name') else None
-        self.required_parameters["entityType"] = "room"
+        self.required_parameters["entityType"] = constants.ROOM
 
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)

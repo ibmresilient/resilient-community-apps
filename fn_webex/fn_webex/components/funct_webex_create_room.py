@@ -68,7 +68,7 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
 
         self.required_parameters["entityName"] = fn_inputs.webex_room_name
-        self.required_parameters["entityType"] = "room"
+        self.required_parameters["entityType"] = constants.ROOM
         self.required_parameters["entityURL" ] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_URL)
         self.required_parameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_MEMBERSHIP_URL)
 

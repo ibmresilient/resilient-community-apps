@@ -60,7 +60,8 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["baseURL"] = self.config_options.get("webex_site_url")
         self.required_parameters["entityId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
         self.required_parameters["entityName"] = fn_inputs.webex_team_name if hasattr(fn_inputs, 'webex_team_name') else None
-        self.required_parameters["entityType"] = "team"
+        self.required_parameters["entityType"] = constants.TEAM
+        
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
             self.LOG.info(constants.MSG_CREATE_SECURITY)
@@ -81,4 +82,3 @@ class FunctionComponent(AppFunctionComponent):
             webex = WebexDelete(self.required_parameters)
             yield webex.delete_team_room()
             yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))
-    
