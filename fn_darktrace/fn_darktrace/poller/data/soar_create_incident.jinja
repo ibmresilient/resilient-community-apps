@@ -33,22 +33,10 @@
   "comments": [
     {
       "text": {
-        "format": "text",
-        "content": "Created by Darktrace"
+        "format": "html",
+        "content": "<b>Created by Darktrace</b>"
       }
     }
-    {% for event in enhancedIncidentEvents %}
-      {% if event["comments"] %},{% endif %}
-      {% for comment in event["comments"] %}
-        {
-          "text": {
-            "format": "html",
-            "content": "<b>Darktrace Incident Comment</b><br><i>At {{ comment['time']|iso8601 }} <u>{{ comment['username'] }}</u> said:</i> {{ comment['message']|replace('"', '\\"') }}"
-          }
-        }
-        {% if not loop.last %},{% endif %}
-      {% endfor %}
-    {% endfor %}
   ],
   {# add artifacts as necessary #}
   "artifacts": [

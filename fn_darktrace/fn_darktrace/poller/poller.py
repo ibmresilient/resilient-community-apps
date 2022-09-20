@@ -15,9 +15,10 @@ from resilient import get_client
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
+from resilient_lib.components.templates_common import iso8601
 
 ENTITY_ID = "id"
-ENTITY_CLOSE_FIELD = "active"
+ENTITY_CLOSE_FIELD = "acknowledged"
 SOAR_ENTITY_ID_FIELD = "darktrace_aianalyst_incident_group_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
 ENTITY_LABEL = "AI Analyst Incident" # label the name the case, alert, event, etc. native to your endpoint solution
 ENTITY_COMMENT_HEADER = "Created by Darktrace" # header used to identify comments create by the endpoint entity
@@ -176,16 +177,20 @@ class PollerComponent(AppFunctionComponent):
 
         # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
         query_results = query_entities(self.app_common, kwargs["last_poller_time"])
-        all_cases_from_darktrace, _ = self.soar_common.get_soar_cases({SOAR_ENTITY_ID_FIELD: True})
 
         if query_results:
             # iterate over all the entities.
             self.process_query_list(query_results)
 
-        if all_cases_from_darktrace:
-            self.update_comments(all_cases_from_darktrace)
+        # get list of open cases in SOAR that were created by Darktrace
+        # in order to update them with new comments or close them if they've
+        # been acknowledged in Darktrace
+        all_open_cases_from_darktrace, _ = self.soar_common.get_soar_cases({SOAR_ENTITY_ID_FIELD: True}, open_cases=True)
+        if all_open_cases_from_darktrace:
+            self.update_comments(all_open_cases_from_darktrace)
+            self.close_case_if_acknowledged_in_darktrace(all_open_cases_from_darktrace)
 
-    def process_query_list(self, query_results):
+    def process_query_list(self, query_results, allow_updates=True):
         """
         Perform all the processing on the entity list, creating, updating and closing SOAR
         cases based on the states of the endpoint entities.
@@ -200,6 +205,8 @@ class PollerComponent(AppFunctionComponent):
         try:
             cases_insert = cases_closed = cases_updated = 0
             for entity in query_results:
+                create_soar_case = close_soar_case = None
+
                 entity_id = get_entity_id(entity)
 
                 # determine if this is an existing SOAR case
@@ -209,13 +216,10 @@ class PollerComponent(AppFunctionComponent):
                 if not soar_case:
                     # create the SOAR case
                     soar_create_payload = make_payload_from_template(
-                                                        self.soar_create_case_template,
-                                                        CREATE_INCIDENT_TEMPLATE,
-                                                        entity
-                                                    )
-                    create_soar_case = self.soar_common.create_soar_case(
-                                                        soar_create_payload
-                                                    )
+                        self.soar_create_case_template,
+                        CREATE_INCIDENT_TEMPLATE,
+                        entity)
+                    create_soar_case = self.soar_common.create_soar_case(soar_create_payload)
 
                     soar_case_id = create_soar_case.get("id") # get newly created case_id
 
@@ -233,50 +237,86 @@ class PollerComponent(AppFunctionComponent):
                         if soar_case.get("plan_status", "C") == "A":
                             # close the SOAR case only if active
                             soar_close_payload = make_payload_from_template(
-                                                            self.soar_close_case_template,
-                                                            CLOSE_INCIDENT_TEMPLATE,
-                                                            entity
-                                                        )
-                            _close_soar_case = self.soar_common.update_soar_case(
-                                                            soar_case_id,
-                                                            soar_close_payload
-                                                        )
+                                self.soar_close_case_template,
+                                CLOSE_INCIDENT_TEMPLATE,
+                                entity)
+                            close_soar_case = self.soar_common.update_soar_case(soar_case_id, soar_close_payload)
 
                             cases_closed += 1
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-                    else:
+                    elif allow_updates:
                         # perform an update operation on the existing SOAR case
                         soar_update_payload = make_payload_from_template(
-                                                        self.soar_update_case_template,
-                                                        UPDATE_INCIDENT_TEMPLATE,
-                                                        entity
-                                                    )
-                        # Update description, tags, priority, assignee, stage, important
-                        _update_soar_case = self.soar_common.update_soar_case(
-                                                        soar_case_id,
-                                                        soar_update_payload
-                                                    )
+                            self.soar_update_case_template,
+                            UPDATE_INCIDENT_TEMPLATE,
+                            entity)
+                        self.soar_common.update_soar_case(soar_case_id, soar_update_payload)
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
 
 
-                # clear datatables as that's the easiest way to keep things correctly up to date
+                # clear datatables as that's the simplest way to keep things correctly up to date
                 # then fill datatables
-                clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
-                fill_events_dt(entity, soar_case_id, self.soar_common, EVENT_DT_NAME)
-                clear_dt(self.rest_client, DEVICE_DT_NAME, soar_case_id)
-                fill_devices_dt(entity, soar_case_id, self.soar_common, DEVICE_DT_NAME)
-                clear_dt(self.rest_client, MODEL_BREACHES_DT, soar_case_id)
-                fill_model_breaches_dt(entity, soar_case_id, self.soar_common, MODEL_BREACHES_DT)
+                # NOTE: table updates only need to happen if the case was just created,
+                # closed, or updated. if ``allow_updates`` is False, DTs only need to be cleared
+                # and repopulated if the case was created or closed
+                if allow_updates or (close_soar_case or create_soar_case):
+                    clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
+                    fill_events_dt(entity, soar_case_id, self.soar_common, EVENT_DT_NAME)
+                    clear_dt(self.rest_client, DEVICE_DT_NAME, soar_case_id)
+                    fill_devices_dt(entity, soar_case_id, self.soar_common, DEVICE_DT_NAME)
+                    clear_dt(self.rest_client, MODEL_BREACHES_DT, soar_case_id)
+                    fill_model_breaches_dt(entity, soar_case_id, self.soar_common, MODEL_BREACHES_DT)
 
-            LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
-                     cases_insert, cases_closed, cases_updated)
+            if cases_insert or cases_closed or cases_updated:
+                LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
+                        cases_insert, cases_closed, cases_updated)
         except Exception as err:
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
     def update_comments(self, cases):
-        pass
+        """_summary_
+
+        :param cases: _description_
+        :type cases: _type_
+        """
+        for case in cases:
+            case_id = case.get("id")
+            case_darktrace_group_id = case.get("properties", {}).get(SOAR_ENTITY_ID_FIELD)
+
+            comments = self.app_common.query_group_comments(case_darktrace_group_id)
+
+            if comments:
+                comments = self.soar_common.filter_soar_comments(case_id, comments)
+
+                for comment in comments:
+                    LOG.info("Added comment from Darktrace to IBM SOAR case %s", case_id)
+                    LOG.debug("Comment details: %s", comment)
+                    self.soar_common.create_case_comment(case_id, comment)
+
+    def close_case_if_acknowledged_in_darktrace(self, cases):
+        """_summary_
+
+        :param cases: _description_
+        :type cases: _type_
+        """
+        # for efficiency (only one API call), get a list of all the group_ids and join
+        # them together in a comma-separated string to use in the get_incident_groups API call
+        group_ids = ",".join([case.get("properties", {}).get(SOAR_ENTITY_ID_FIELD) for case in cases])
+        incident_groups = self.app_common.query_groups(query={"groupid": group_ids}, enhance=True)
+
+        # if no incident groups were found, exit gracefully
+        if not incident_groups:
+            return
+
+        # process each case and close if needed (i.e. if the case is currently open and
+        # should be moved to closed because the incident group is "acknowledged")
+        # but don't make any updates to the case as that would is handled elsewhere
+        # and would be too frequent
+        self.process_query_list(incident_groups, allow_updates=False)
+
+
 
 def fill_events_dt(entity, soar_case_id, soar_common, dt_name):
     """
@@ -323,6 +363,7 @@ def fill_model_breaches_dt(entity, soar_case_id, soar_common, dt_name):
     LOG.debug("Adding model breaches to datatable %s in incident %s", dt_name, soar_case_id)
 
     events = entity.get("enhancedIncidentEvents")
+    base_model_breach_url = entity.get("baseUrl") + "/#modelbreach/"
 
     for event in events:
         event_url = event.get("incidentEventUrl")
@@ -334,22 +375,22 @@ def fill_model_breaches_dt(entity, soar_case_id, soar_common, dt_name):
         for breach in event.get("relatedBreaches"):
             breach_id = str(breach.get("pbid"))
             breach_url = breach.get("breachUrl")
+            if not breach_url and base_model_breach_url:
+                breach_url = base_model_breach_url + breach_id
             breach_name = breach.get("modelName")
             breach_score = str(breach.get("threatScore"))
             breach_create_time = breach.get("timestamp")
-            breach_acknowledged = breach.get("acknowledged")
 
-            # format link
-            breach_url = URL_FORMATTER.format(breach_url, breach_name)
-            breach_acknowledged = "Yes" if breach_acknowledged else "No"
+            # format items as needed
+            if breach_url:
+                breach_url = URL_FORMATTER.format(breach_url, breach_name)
 
             row_data = {
                 "darktrace_associated_model_breaches_dt_name": breach_url,
                 "darktrace_associated_model_breaches_dt_breach_id": breach_id,
                 "darktrace_associated_model_breaches_dt_threat_score": breach_score,
                 "darktrace_associated_model_breaches_dt_time_occurred": breach_create_time,
-                "darktrace_associated_model_breaches_dt_associated_event": event_title,
-                "darktrace_associated_model_breaches_dt_acknowledged": breach_acknowledged
+                "darktrace_associated_model_breaches_dt_associated_event": event_title
             }
 
             soar_common.create_datatable_row(soar_case_id, dt_name, row_data)

@@ -9,6 +9,7 @@ from urllib.parse import urljoin
 
 from resilient_lib import (IntegrationError, RequestsCommon, str_to_bool,
                            validate_fields)
+from resilient_lib.components.templates_common import iso8601
 
 LOG = logging.getLogger(__name__)
 
@@ -72,7 +73,8 @@ class AppCommon():
         # optional configs
         self.verify = _get_verify_ssl(app_configs, integrations_configs)
         self.min_score = float(app_configs.get(MIN_SCORE_CONFIG, DEFAULT_MIN_SCORE))
-        self.saas_only = app_configs.get(SAAS_ONLY_CONFIG, DEFAULT_SAAS_ONLY)
+        saas_only_bool = str_to_bool(app_configs.get(SAAS_ONLY_CONFIG, DEFAULT_SAAS_ONLY))
+        self.saas_only = "true" if saas_only_bool else "false"
         self.locale = app_configs.get(LOCALE_CONFIG, DEFAULT_LOCALE)
         self.exclude_did = app_configs.get(EXCLUDE_DEVICE_LIST_CONFIG, "")
 
@@ -224,7 +226,7 @@ class AppCommon():
         base_query = {
             # params that are set by the app configs or passed in to this function
             "starttime": timestamp,
-            "minscore": self.min_score,
+            "mingroupscore": self.min_score,
             "locale": self.locale,
             "saasonly": self.saas_only,
             "excludedid": self.exclude_did,
@@ -235,59 +237,96 @@ class AppCommon():
         }
 
         try:
-            # in order to support auto-sync updates, we have first grab the
+            # in order to support auto-updates, we have first grab the
             # events that match the criteria since the last poll
             # these events will then generate the list of UUIDs to search
             # for in the groups endpoint
+            # NOTE: this can't be done directly with the group endpoint because
+            # the group start point might be too early. It works with the events
+            # end point because only events that are new will need to trigger an update
+            LOG.debug("Querying Darktrace for incident events since last timestamp with query %s", base_query)
             candidate_events = self.get_incident_events(params=base_query)
 
             # grab the list of all incident groups since the last timestamp.
             # each incident group is comprised of one or more events
             # who's data will be enhanced in the loop below
-            group_ids = ",".join(e.get("currentGroup", "") for e in candidate_events if e.get("currentGroup"))
+            group_ids = ",".join(e.get("currentGroup") for e in candidate_events if e.get("currentGroup"))
 
             # if no group ids are found, no entities to process so can return an empty list
             if not group_ids:
                 return []
 
             base_query.update({"includegroupurl": "true", "groupid": group_ids})
-            LOG.debug("Querying Darktrace for incident groups with query %s", base_query)
-            incident_groups = self.get_incident_groups(base_query)
+            return self.query_groups(base_query)
 
+        except IntegrationError as err:
+            LOG.error("%s poller fetch failed: %s", PACKAGE_NAME, str(err))
+            return []
+
+    def query_groups(self, query: dict, enhance: bool = True) -> list:
+        """
+        Get the list of incident groups given a query. Used to be called from
+        ``query_entities_since_ts`` and for enhanced updates from the poller
+        directly. For that reason, ``query`` should always have at least a value
+        set for ``"groupid"`` in it.
+
+        ``enhance`` can be set to false if all that is desired is the incident groups.
+        When ``enhance`` is set to False, this method is equivalent to directly calling
+        ``get_incident_groups`` with ``capture_error=False``.
+
+        :param query: /aianalyst/groups query params
+        :type query: dict
+        :param enhance: whether or not to enhance the data with extra API calls, defaults to True
+        :type enhance: bool, optional
+        :return: list of ai analyst incident groups with enhanced data for presentation in a SOAR case
+        :rtype: list
+        """
+        LOG.debug("Querying Darktrace for incident groups with query %s", query)
+        incident_groups = self.get_incident_groups(query)
+
+        if enhance:
             # enhance data for each group
             for group in incident_groups:
 
                 # enhance events
                 group["enhancedIncidentEvents"] = self.get_incident_events(group_id=group.get("id"), capture_error=True)
+                group["baseUrl"] = self.base_url.rstrip("/") # remove any trailing slashes for consistency
 
-                # add comments to each incident event
-                for event in group.get("enhancedIncidentEvents"):
-                    event.update(self.get_incident_group_comments(incident_id=event.get("id"), capture_error=True))
-
-                    # enhance breach details by adding url to each model breach object
-                    for breach in event.get("relatedBreaches"):
-                        breach_query = {
-                            "includebreachurl": "true",
-                            "includeacknowledged": "true",
-                            # restrict the returned data for performance
-                            "responsedata": "breachUrl,acknowledged",
-                            "pbid": breach.get("pbid")
-                        }
-                        breach.update(self.get_model_breaches(params=breach_query))
-
-                # enhance devices -- NOTE the endpoint allows for comma-separated list of did's
+                # enhance devices.
+                # NOTE the endpoint allows for comma-separated list of did's
                 # but will only return a list if there is at least a comma in there -- thus we
                 # need to include the last comma there otherwise if there was only one device
                 # we'd get a dict result rather than a list
                 query = {"did": ",".join(map(str, group.get("devices", []))) + ","}
                 group["enhancedDevices"] = self.get_devices(query, capture_error=True)
 
-
-        except IntegrationError as err:
-            LOG.error("%s incident groups API call failed: %s", PACKAGE_NAME, str(err))
-            return []
-
         return incident_groups
+
+    def query_group_comments(self, group_id: str) -> list:
+        """
+        Given a group ID in Darktrace, gather all comments and return them
+        formatted for posting to SOAR. Note that there should be additional filtering
+        once the list of all comments in returned to make sure comments aren't
+        synced more than once.
+
+        :param group_id: Group ID to use to search for comments on
+        :type group_id: str
+        :return: list of comment associated with the given group
+        :rtype: list[str]
+        """
+        comments = []
+
+        # there is only a comment endpoint for incidents
+        # so need to find all incidents in this group
+        events = self.get_incident_events(group_id=group_id)
+        for event in events:
+            event_comments = self.get_incident_event_comments(incident_id=event.get("id")).get("comments")
+
+            comments.extend(
+                [f"<b>Darktrace Incident Comment</b><br><i>At {iso8601(comment['time'])} <u>{comment['username']}</u> said:</i><br>{comment['message']}" for comment in event_comments]
+            )
+
+        return comments
 
     def get_system_status(self, params: dict = None, capture_error: bool = False) -> dict:
         """
@@ -306,7 +345,12 @@ class AppCommon():
         if not params:
             params = {"fast":True, "includechildren":False}
 
-        return self._execute_dt_request("GET", SYSTEM_STATUS_URI, params=params, capture_error=capture_error)
+        return self._execute_dt_request(
+            "GET",
+            SYSTEM_STATUS_URI,
+            params=params,
+            capture_error=capture_error
+        )
 
     def get_model_breaches(self, params: dict = None, capture_error: bool = False) -> list:
         """
@@ -324,7 +368,12 @@ class AppCommon():
         if not params:
             params = {"expandenums": "true"}
 
-        return self._execute_dt_request("GET", MODEL_BREACHES_URI, params=params, capture_error=capture_error)
+        return self._execute_dt_request(
+            "GET",
+            MODEL_BREACHES_URI,
+            params=params,
+            capture_error=capture_error
+        )
 
     def get_model_breach_comments(self, breach_id: str, params: dict = None, capture_error: bool = False) -> list:
         """
@@ -344,7 +393,12 @@ class AppCommon():
         if not params:
             params = {}
 
-        return self._execute_dt_request("GET", MODEL_BREACHES_COMMENTS_URI.format(breach_id), params=params, capture_error=capture_error)
+        return self._execute_dt_request(
+            "GET",
+            MODEL_BREACHES_COMMENTS_URI.format(breach_id),
+            params=params, 
+            capture_error=capture_error
+        )
 
     def get_incident_groups(self, params: dict = None, capture_error: bool = False) -> list:
         """
@@ -362,7 +416,12 @@ class AppCommon():
         if not params:
             params = {}
 
-        return self._execute_dt_request("GET", AI_ANALYST_INCIDENT_GROUPS, params=params, capture_error=capture_error)
+        return self._execute_dt_request(
+            "GET",
+            AI_ANALYST_INCIDENT_GROUPS,
+            params=params,
+            capture_error=capture_error
+        )
 
     def get_incident_events(self, group_id: str = None, params: dict = None, capture_error: bool = False) -> list:
         """
@@ -386,14 +445,20 @@ class AppCommon():
 
         if group_id:
             params.update({"groupid": group_id})
-        return self._execute_dt_request("GET", AI_ANALYST_EVENTS_URI, params=params, capture_error=capture_error)
+
+        return self._execute_dt_request(
+            "GET",
+            AI_ANALYST_EVENTS_URI,
+            params=params,
+            capture_error=capture_error
+        )
 
     ########
     # TODO: there is an endpoint that allows you to download an event as a PDF — this should be exposed!
     # EX: GET https://euw2-75824-01.cloud.darktrace.com/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
     ########
 
-    def get_incident_group_comments(self, incident_id: str = None, params: dict = None, capture_error: bool = False) -> dict:
+    def get_incident_event_comments(self, incident_id: str = None, params: dict = None, capture_error: bool = False) -> dict:
         """
         Get comments from an incident event.
 
@@ -411,7 +476,13 @@ class AppCommon():
 
         if incident_id:
             params.update({"incident_id": incident_id})
-        return self._execute_dt_request("GET", AI_ANALYST_EVENT_COMMENTS_URI, params=params, capture_error=capture_error)
+
+        return self._execute_dt_request(
+            "GET",
+            AI_ANALYST_EVENT_COMMENTS_URI,
+            params=params,
+            capture_error=capture_error
+        )
 
     def add_incident_group_comment(self, incident_id: str, comment: str, params: dict = None, capture_error: bool = False) -> dict:
         """
@@ -437,7 +508,14 @@ class AppCommon():
             "incident_id": incident_id,
             "message": comment
         }
-        return self._execute_dt_request("POST", AI_ANALYST_EVENT_COMMENTS_URI, data=body, params=params, capture_error=capture_error)
+
+        return self._execute_dt_request(
+            "POST",
+            AI_ANALYST_EVENT_COMMENTS_URI,
+            data=body,
+            params=params,
+            capture_error=capture_error
+        )
 
     def get_devices(self, params: dict = None, capture_error: bool = False) -> list:
         """
@@ -459,7 +537,12 @@ class AppCommon():
         if not params:
             params = {}
 
-        return self._execute_dt_request("GET", DEVICES_URI, params=params, capture_error=capture_error)
+        return self._execute_dt_request(
+            "GET",
+            DEVICES_URI,
+            params=params,
+            capture_error=capture_error
+        )
     #############
     # END CLASS #
     #############

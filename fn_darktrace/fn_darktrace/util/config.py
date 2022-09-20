@@ -18,7 +18,7 @@ api_secret=
 
 # 'min_score' is used to determine the minimum score threshold to use
 # when fetching incident groups to poll automatically into SOAR.
-# value should be in [0-1]
+# value should be in [0-100]
 min_score=0.0
 
 # 'locale' specifies the language locale to return any summary or descriptions

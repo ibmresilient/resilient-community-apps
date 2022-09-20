@@ -1,10 +1,10 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
-  {# specify your custom fields for your endpoint solution #}
   "properties": {
     "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices }}",
+    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices)",
     "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
+    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
     "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
   }
 }

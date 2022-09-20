@@ -32,7 +32,11 @@ setup(
     long_description="""Bi-directional App for Darktrace. Pulls in new AI Analyst Events as they are created \
         and creates a case in SOAR for each group of events.
     <br>As new events are added to a group, the case automatically updates with the new data.
-    <br><br>Also provides functionality for TODO""",
+    <br><br>Also provides functionality for 
+    
+    TODO
+    TODO
+    TODO!!""",
     install_requires=[
         "resilient-circuits>=46.0.0"
     ],

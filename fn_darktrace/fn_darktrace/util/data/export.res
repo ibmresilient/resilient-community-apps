@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1661966719500,
+  "export_date": 1663708147795,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -407,13 +407,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 15,
+  "id": 18,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1661966717563,
+      "create_date": 1663708145830,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -422,7 +422,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1661966717563,
+      "update_date": 1663708145830,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -779,38 +779,6 @@
       "display_name": "Associated Model Breaches",
       "export_key": "darktrace_associated_model_breaches_dt",
       "fields": {
-        "darktrace_associated_model_breaches_dt_acknowledged": {
-          "allow_default_value": false,
-          "blank_option": false,
-          "calculated": false,
-          "changeable": true,
-          "chosen": false,
-          "default_chosen_by_server": false,
-          "deprecated": false,
-          "export_key": "darktrace_associated_model_breaches_dt/darktrace_associated_model_breaches_dt_acknowledged",
-          "hide_notification": false,
-          "id": 313,
-          "input_type": "text",
-          "internal": false,
-          "is_tracked": false,
-          "name": "darktrace_associated_model_breaches_dt_acknowledged",
-          "operation_perms": {},
-          "operations": [],
-          "order": 2,
-          "placeholder": "",
-          "prefix": null,
-          "read_only": false,
-          "rich_text": false,
-          "short_text": "",
-          "tags": [],
-          "templates": [],
-          "text": "Acknowledged",
-          "tooltip": "",
-          "type_id": 1002,
-          "uuid": "93ad0743-9316-4d79-95f7-66608a8b4865",
-          "values": [],
-          "width": 113
-        },
         "darktrace_associated_model_breaches_dt_associated_event": {
           "allow_default_value": false,
           "blank_option": false,
@@ -821,14 +789,14 @@
           "deprecated": false,
           "export_key": "darktrace_associated_model_breaches_dt/darktrace_associated_model_breaches_dt_associated_event",
           "hide_notification": false,
-          "id": 312,
+          "id": 314,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
           "name": "darktrace_associated_model_breaches_dt_associated_event",
           "operation_perms": {},
           "operations": [],
-          "order": 5,
+          "order": 4,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -839,9 +807,9 @@
           "text": "Associated Event",
           "tooltip": "",
           "type_id": 1002,
-          "uuid": "db14e2b4-eb54-4a45-b009-537b7960ef03",
+          "uuid": "38aab9d6-89aa-400d-9286-0a19a010e6c9",
           "values": [],
-          "width": 137
+          "width": 211
         },
         "darktrace_associated_model_breaches_dt_breach_id": {
           "allow_default_value": false,
@@ -905,7 +873,7 @@
           "type_id": 1002,
           "uuid": "d86909f8-7b36-4f8c-9973-8c7c97e8fbed",
           "values": [],
-          "width": 437
+          "width": 292
         },
         "darktrace_associated_model_breaches_dt_threat_score": {
           "allow_default_value": false,
@@ -924,7 +892,7 @@
           "name": "darktrace_associated_model_breaches_dt_threat_score",
           "operation_perms": {},
           "operations": [],
-          "order": 3,
+          "order": 2,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -956,7 +924,7 @@
           "name": "darktrace_associated_model_breaches_dt_time_occurred",
           "operation_perms": {},
           "operations": [],
-          "order": 4,
+          "order": 3,
           "placeholder": "",
           "prefix": null,
           "read_only": false,
@@ -969,7 +937,7 @@
           "type_id": 1002,
           "uuid": "251b4ca8-680b-4b02-b2ad-0b073bd73e3a",
           "values": [],
-          "width": 152
+          "width": 113
         }
       },
       "for_actions": false,
