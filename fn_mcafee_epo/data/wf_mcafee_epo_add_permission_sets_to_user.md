@@ -26,10 +26,13 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 ```python
 if results['success']:
   if rule.properties.epo_username not in row.users:
-    row.users = "{}, {}".format(row.users, rule.properties.epo_username)
-    incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
+    if row.users:
+      row.users = "{}, {}".format(row.users, rule.properties.epo_username)
+    else:
+      row.users = rule.properties.epo_username
+    incident.addNote("Permissions set: {} was added to user: {}".format(rule.properties.epo_username, results['inputs']['mcafee_epo_username']))
   else:
-    incident.addNote("User: {} already has permission set: {}".format(results['inputs']['mcafee_epo_username'], results['inputs']['mcafee_epo_permsetname']))
+    incident.addNote("User: {} already has permission set: {}".format(rule.properties.epo_username, row.permission_set_name))
 ```
 
 ---

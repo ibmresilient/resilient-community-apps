@@ -24,11 +24,12 @@ inputs.mcafee_epo_username = rule.properties.epo_username
 
 ### Post-Processing Script
 ```python
-if results.gett('success'):
-  incident.addNote("Permissions set: {} was removed from user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
-  usersList = list(row.users.split(", "))
-  usersList.remove(rule.properties.epo_username)
-  row.users = str(usersList).replace("[","").replace("]","").replace("'","")
+if results.get('success'):
+  incident.addNote("Permissions set: {} was removed from user: {}".format(row.permission_set_name, rule.properties.epo_username))
+  if row.users:
+    usersList = list(row.users.split(", "))
+    usersList.remove(rule.properties.epo_username)
+    row.users = str(usersList).replace("[","").replace("]","").replace("'","")
 ```
 
 ---

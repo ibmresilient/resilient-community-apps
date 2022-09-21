@@ -27,7 +27,7 @@ if results.get("success"):
   usersList = []
   for user in results.get("content"):
     usersList.append(user.get("name"))
-  row.users = str(usersList).replace("[","").replace("]","").replace("'","")
+  row.users = str(usersList).replace("[","").replace("]","").replace("u'","'").replace("'","")
 ```
 
 ---

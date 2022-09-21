@@ -39,6 +39,10 @@ class FunctionComponent(AppFunctionComponent):
         # Vaildate function parameters:
         validate_fields(["mcafee_epo_issue_name", "mcafee_epo_issue_description"], fn_inputs)
 
+        due = getattr(fn_inputs, "mcafee_epo_issue_due", None)
+        if due:
+            due = readable_datetime(due, rtn_format='%Y-%m-%d %H:%M:%S')
+
         # Log parameters
         self.LOG.info(str(fn_inputs))
 
@@ -54,7 +58,7 @@ class FunctionComponent(AppFunctionComponent):
             "priority": fn_inputs.mcafee_epo_issue_priority.upper() if hasattr(fn_inputs, "mcafee_epo_issue_priority") and fn_inputs.mcafee_epo_issue_priority else "UNKNOWN",
             "severity": fn_inputs.mcafee_epo_issue_severity.upper() if hasattr(fn_inputs, "mcafee_epo_issue_severity") and fn_inputs.mcafee_epo_issue_severity else "UNKNOWN",
             "resolution": fn_inputs.mcafee_epo_issue_resolution.upper().replace(" ","") if hasattr(fn_inputs, "mcafee_epo_issue_resolution") and fn_inputs.mcafee_epo_issue_resolution else "NONE",
-            "due": readable_datetime(fn_inputs.mcafee_epo_issue_due, rtn_format='%Y-%m-%d %H:%M:%S') if hasattr(fn_inputs, "mcafee_epo_issue_due") else None,
+            "due": due,
             "assigneeName": getattr(fn_inputs, "mcafee_epo_issue_assignee", None),
             "ticketServerName": getattr(fn_inputs, "mcafee_epo_ticket_server_name", None),
             "ticketId": getattr(fn_inputs, "mcafee_epo_ticket_id", None),
