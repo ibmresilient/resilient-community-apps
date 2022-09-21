@@ -6,6 +6,7 @@
   - [Release Notes](#release-notes)
   - [Overview](#overview)
     - [Key Features](#key-features)
+  - [* Example rules are included that activates a menu popup that prompts the user for inputs to customize the team, room or a meeting.](#-example-rules-are-included-that-activates-a-menu-popup-that-prompts-the-user-for-inputs-to-customize-the-team-room-or-a-meeting)
   - [Requirements](#requirements)
     - [SOAR platform](#soar-platform)
     - [Cloud Pak for Security](#cloud-pak-for-security)
@@ -43,12 +44,12 @@ This package extends the meeting and collaboration functionality of Webex to IBM
  ![screenshot: main](./doc/screenshots/workflow_create_rooms_teams.png)
 
 ### Key Features
-* This package provdes with a function that allows for creating one or more Webex Teams and add incident and other specified members to it.
-* It also provides with a function that allows for creating one or more Webex Rooms for an incident and to add incident members or existing teams to it.
-* It also has the ability to create instant meetings or to schedule Webex meetings.
-* An example workflow is included that writes the host URL and attendee URL to an incident note as live links to access the meeting.
-* An example rule is included that activates an menu popup that prompts the user for a meeting start and end time and an optional meeting agenda and password.
-
+* This package provdes with functions that allows for creating one or more Webex Teams and Rooms and adds members from an incident or task to it.
+* Functionality to delete Teams or Rooms created from an incident or task is also possible using this package.
+* It allows for creating this Room and Team with additional members who are not a part of the Team or Room.
+* It has the ability to create instant meetings or to schedule meetings in advance from within a task or an incident.
+* Example workflows are included that performs the above mentioned operation and stores the meeting, room or team related information as note.
+* Example rules are included that activates a menu popup that prompts the user for inputs to customize the team, room or a meeting.
 ---
 
 ## Requirements
@@ -151,7 +152,11 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - Webex: Create Meeting
-A function to schedule meetings. This function takes in Meeting Name, password, Agenda, Start and End time as inputs and schedules meetings aaccordingly.
+A function to schedule meetings or create instant meetings from a task or a incident. This function promts the user for inputs and schedules meetings in accordance with that.
+The user is provided with a certain level of flexibility when it comes to choosing the time or date of the meeting. The user can set a start time or end time, or just provide
+the duration of the meeting. The package will automatically determine the start and end time based on these values. Should the user only provide an end time, the start time is
+assumed to be 2 mins from current time. If the user only provides a duration, the meeting starts 2 minutes from current time and ends after the specified duration. Note that
+the duration of the meeting cannot be set to a value more than 24 hours (1440 minutes).
 
 ![screenshot: workflow-create-webex-meeting ](./doc/screenshots/workflow_create_meetings.png)
 
@@ -165,8 +170,9 @@ A function to schedule meetings. This function takes in Meeting Name, password, 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `webex_meeting_name` | `text` | No | `Incident Meeting` | Meeting name |
-| `webex_meeting_password` | `text` | No | `abcd1234` | Meeting password |
-| `webex_meeting_agenda` | `text` | No | `Sample meeting` | Meeting agenda |
+| `webex_meeting_password` | `text` | Yes | `abcd1234` | Meeting password. The value must always be more than 4 characters |
+| `webex_meeting_agenda` | `text` | No | `Sample meeting` | Agenda for the meeting |
+| `webex_meeting_duration` | `Number` | No | `45` | Duration of meeting in minutes. Cannot be more that 1 day (1440 minutes). Takes effect when End time is not specified |
 | `webex_meeting_start_time` | `datetimepicker` | No | `05/16/2022 11:08:09 +01:00` | Meeting start date and time |
 | `webex_meeting_end_time` | `datetimepicker` | No | `05/16/2022 12:08:09 +01:00` | Meeting end date and time |
 
@@ -301,7 +307,10 @@ incident.addNote(note)
 
 ---
 ## Function - Webex: Create Room
-Creates a Webex Room with incident members and adds additional members or teams to the room.
+A function to create a Webex Room from an incident or a task. If no participants are added, Webex will create a blank Room. 
+If a team has already been created and needs to be assigned to this room, it can be added by specifying the team ID in the team ID field.
+It also has the ability to include all incident or task members and add additonal members to the team or room using the additional 
+attendees field.
 
 ![screenshot: workflow-create-webex-room ](./doc/screenshots/workflow_create_rooms.png)
 
@@ -315,7 +324,7 @@ Creates a Webex Room with incident members and adds additional members or teams 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `webex_room_name` | `text` | No | `Incident Room` | Name of the Room |
-| `webex_team_id` | `text` | No | `Ydca551c7dXXXd54b971XXXXXXXXX` | If a Webex team is already available, the entire team can be directly added by specifying its ID. |
+| `webex_team_id` | `text` | No | `Ydca551c7dXXXd54b971XXXXXXXXX` | If a Webex team is already available, the entire team can be directly added by specifying its ID |
 | `webex_add_all_members` | `boolean` | Yes | `Yes` | Select this option to include all incident members to this Webex room |
 | `webex_meeting_attendees` | `text` | No | `sara@example.com, mathew@example.com` | The list of email address of the attendees in a comma-separated format|
 
@@ -419,7 +428,9 @@ incident.addNote(note)
 
 ---
 ## Function - Webex: Create Team
-A function to create Webex teams
+A function to create a Webex Team from an incident or a task. The Team that is created using this function is automatically
+assigned with a room. It also has the ability to include all incident or task members and add additonal members to the team 
+or room using the additional attendees field.
 
 ![screenshot: workflow-create-webex-team ](./doc/screenshots/workflow_create_teams.png)
 
@@ -432,10 +443,11 @@ A function to create Webex teams
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `webex_team_name` | `text` | Yes | `SOAR Team` | Name of the team being created |
-| `webex_add_all_members` | `boolean` | Yes | `Yes` | Select this option to add all members to the webex meeting. If only selected members are to be added, specify their email address below. |
-| `webex_incident_id` | `text` | No | `Leave blank` | Incident Number |
+| `webex_team_name` | `text` | Yes | `SOAR Team` | Name of the team being created. If blank, uses the incident name and task ID as the team name |
+| `webex_add_all_members` | `boolean` | Yes | `Yes` | Adds all incidnet members or task members to the webex meeting. If only selected members are to be added, specify their email address in the below field |
 | `webex_meeting_attendees` | `text` | No | `sara@example.com, mathew@example.com` | The list of email address of the attendees in a comma-seperated format. Leave blank to select all attendees |
+| `webex_incident_id` | `text` | No | `Leave blank` | Incident Number |
+| `webex_task_id` | `text` | No | `Leave blank` | Task ID |
 
 </p>
 </details>
@@ -545,8 +557,8 @@ deletion, it is strongly recommended to use the Room  ID to delete a Room.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `webex_room_id` | `text` | No | `-` | - |
-| `webex_room_name` | `text` | No | `-` | - |
+| `webex_room_id` | `text` | No | `Ydca551c7dXXXd54b971XXXXXXXXX` | Unique ID used to identify a room, generated while creating a room |
+| `webex_room_name` | `text` | No | `SOAR Room` | Name of the room to be deleted. It is strongly recommended to use Room ID for deletion |
 
 </p>
 </details>
@@ -637,8 +649,8 @@ deletion, it is strongly recommended to use the Team ID to delete a Team.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `webex_team_id` | `text` | No | `-` | ID of the team to be deleted |
-| `webex_team_name` | `text` | Yes | `-` | Name of the team to be deleted |
+| `webex_team_id` | `text` | No | `Ydca551c7dXXXd54b971XXXXXXXXX` | Unique ID used to identify a team, generated while creating a team |
+| `webex_team_name` | `text` | Yes | `SOAR Team` | Name of the team to be deleted. It is strongly recommended to use Team ID for deletion |
 
 </p>
 </details>
@@ -713,11 +725,6 @@ incident.addNote(note)
 </details>
 
 ---
-
-
-
-
-
 
 
 ## Troubleshooting & Support
