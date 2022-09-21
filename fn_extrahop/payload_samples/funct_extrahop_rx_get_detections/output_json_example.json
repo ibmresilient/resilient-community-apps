@@ -1,0 +1,58 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": {
+      "id": 71,
+      "start_time": 1646559540000,
+      "update_time": 1647656040000,
+      "end_time": 1647051270000,
+      "title": "Weekly Summary: Weak Cipher Suites",
+      "description": "Over the past week, servers negotiated SSL/TLS sessions with a cipher suite that includes an encryption algorithm that is known to be vulnerable. Cipher suites that contain weak encryption algorithms such as CBC, 3DES, RC4, null, anonymous, and export should be removed from servers and replaced with stronger cipher suites.",
+      "categories": [
+        "sec",
+        "sec.caution"
+      ],
+      "risk_score": 61,
+      "type": "weak_cipher",
+      "participants": [
+        {
+          "object_type": "device",
+          "object_id": 3,
+          "role": "offender",
+          "external": false,
+          "id": 175
+        },
+        {
+          "object_type": "device",
+          "object_id": 6,
+          "role": "offender",
+          "external": false,
+          "id": 179
+        }
+      ],
+      "ticket_id": "3055",
+      "assignee": "a@a.com",
+      "status": "in_progress",
+      "resolution": null,
+      "properties": {},
+      "mitre_tactics": [],
+      "mitre_techniques": [],
+      "appliance_id": 0,
+      "is_user_created": false
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_detection_id": 71
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 1373,
+    "timestamp": "2022-04-13 17:01:56"
+  }
+}

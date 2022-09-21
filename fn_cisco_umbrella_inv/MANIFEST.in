@@ -1,0 +1,3 @@
+include README.md
+include fn_cisco_umbrella_inv/util/*
+include fn_cisco_umbrella_inv/LICENSE
