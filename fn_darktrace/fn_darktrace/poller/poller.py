@@ -11,7 +11,7 @@ from fn_darktrace.lib.app_common import (DEVICE_DT_NAME, EVENT_DT_NAME,
                                          MODEL_BREACHES_DT, PACKAGE_NAME,
                                          AppCommon)
 from fn_darktrace.poller.configure_tab import init_incident_groups_tab
-from resilient import get_client
+from resilient import get_client, SimpleClient
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
@@ -187,7 +187,8 @@ class PollerComponent(AppFunctionComponent):
         # been acknowledged in Darktrace
         all_open_cases_from_darktrace, _ = self.soar_common.get_soar_cases({SOAR_ENTITY_ID_FIELD: True}, open_cases=True)
         if all_open_cases_from_darktrace:
-            self.update_comments(all_open_cases_from_darktrace)
+            if self.app_common.auto_sync_comments:
+                self.update_comments(all_open_cases_from_darktrace)
             self.close_case_if_acknowledged_in_darktrace(all_open_cases_from_darktrace)
 
     def process_query_list(self, query_results, allow_updates=True):
@@ -204,10 +205,10 @@ class PollerComponent(AppFunctionComponent):
 
         try:
             cases_insert = cases_closed = cases_updated = 0
-            for entity in query_results:
+            for incident_group in query_results:
                 create_soar_case = close_soar_case = None
 
-                entity_id = get_entity_id(entity)
+                entity_id = get_entity_id(incident_group)
 
                 # determine if this is an existing SOAR case
                 soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
@@ -218,7 +219,7 @@ class PollerComponent(AppFunctionComponent):
                     soar_create_payload = make_payload_from_template(
                         self.soar_create_case_template,
                         CREATE_INCIDENT_TEMPLATE,
-                        entity)
+                        incident_group)
                     create_soar_case = self.soar_common.create_soar_case(soar_create_payload)
 
                     soar_case_id = create_soar_case.get("id") # get newly created case_id
@@ -233,13 +234,13 @@ class PollerComponent(AppFunctionComponent):
                 else:
                     soar_case_id = soar_case.get("id")
 
-                    if is_entity_closed(entity):
+                    if is_entity_closed(incident_group):
                         if soar_case.get("plan_status", "C") == "A":
                             # close the SOAR case only if active
                             soar_close_payload = make_payload_from_template(
                                 self.soar_close_case_template,
                                 CLOSE_INCIDENT_TEMPLATE,
-                                entity)
+                                incident_group)
                             close_soar_case = self.soar_common.update_soar_case(soar_case_id, soar_close_payload)
 
                             cases_closed += 1
@@ -249,11 +250,29 @@ class PollerComponent(AppFunctionComponent):
                         soar_update_payload = make_payload_from_template(
                             self.soar_update_case_template,
                             UPDATE_INCIDENT_TEMPLATE,
-                            entity)
+                            incident_group)
                         self.soar_common.update_soar_case(soar_case_id, soar_update_payload)
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                    else:
+                        # check to see if any individual incident events were acknowledged without the
+                        # incident group as a whole being acknowledged
+                        event_acknowledged = False
+                        for event in incident_group.get("enhancedIncidentEvents"):
+                            if event.get("acknowledged", False):
+                                # if any 1 event is acknowledged, the whole
+                                # dt will be cleared and updated any way so
+                                # it is ok to break out of the loop here and update the dt
+                                event_acknowledged = True
+                                break
+
+                        # update DT
+                        # NOTE: because of the logic for DT updates below, this will never run
+                        # at the same time that other updates detailed below are running
+                        if event_acknowledged:
+                            clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
+                            fill_events_dt(incident_group, soar_case_id, self.soar_common, EVENT_DT_NAME)
 
 
                 # clear datatables as that's the simplest way to keep things correctly up to date
@@ -263,11 +282,11 @@ class PollerComponent(AppFunctionComponent):
                 # and repopulated if the case was created or closed
                 if allow_updates or (close_soar_case or create_soar_case):
                     clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
-                    fill_events_dt(entity, soar_case_id, self.soar_common, EVENT_DT_NAME)
+                    fill_events_dt(incident_group, soar_case_id, self.soar_common, EVENT_DT_NAME)
                     clear_dt(self.rest_client, DEVICE_DT_NAME, soar_case_id)
-                    fill_devices_dt(entity, soar_case_id, self.soar_common, DEVICE_DT_NAME)
+                    fill_devices_dt(incident_group, soar_case_id, self.soar_common, DEVICE_DT_NAME)
                     clear_dt(self.rest_client, MODEL_BREACHES_DT, soar_case_id)
-                    fill_model_breaches_dt(entity, soar_case_id, self.soar_common, MODEL_BREACHES_DT)
+                    fill_model_breaches_dt(incident_group, soar_case_id, self.soar_common, MODEL_BREACHES_DT)
 
             if cases_insert or cases_closed or cases_updated:
                 LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
@@ -276,10 +295,17 @@ class PollerComponent(AppFunctionComponent):
             LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
     def update_comments(self, cases):
-        """_summary_
+        """
+        Runs through every open Darktrace case in SOAR and
+        sees if there are any new comments to sync across.
+        If there are, they are posted individually as a comment in SOAR
 
-        :param cases: _description_
-        :type cases: _type_
+        NOTE: This method can be heavy time-wise if there are a lot of open
+        cases from Darktrace in SOAR. That is why there is the option to disable
+        comment syncing. See the config.py file for more info.
+
+        :param cases: list of SOAR case objects
+        :type cases: list[dict]
         """
         for case in cases:
             case_id = case.get("id")
@@ -296,10 +322,14 @@ class PollerComponent(AppFunctionComponent):
                     self.soar_common.create_case_comment(case_id, comment)
 
     def close_case_if_acknowledged_in_darktrace(self, cases):
-        """_summary_
+        """
+        Generate a list of group objects based on the current
+        open cases from Darktrace in SOAR and see if they need
+        to be closed in SOAR (i.e. they've been "acknowledged")
+        in Darktrace.
 
-        :param cases: _description_
-        :type cases: _type_
+        :param cases: list of SOAR case objects
+        :type cases: list[dict]
         """
         # for efficiency (only one API call), get a list of all the group_ids and join
         # them together in a comma-separated string to use in the get_incident_groups API call
@@ -312,8 +342,8 @@ class PollerComponent(AppFunctionComponent):
 
         # process each case and close if needed (i.e. if the case is currently open and
         # should be moved to closed because the incident group is "acknowledged")
-        # but don't make any updates to the case as that would is handled elsewhere
-        # and would be too frequent
+        # but don't make any updates to the case as that is handled elsewhere
+        # and would be too frequent (thus the `allow_updates=False`)
         self.process_query_list(incident_groups, allow_updates=False)
 
 
@@ -356,7 +386,7 @@ def fill_events_dt(entity, soar_case_id, soar_common, dt_name):
 
         soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
 
-def fill_model_breaches_dt(entity, soar_case_id, soar_common, dt_name):
+def fill_model_breaches_dt(entity, soar_case_id, soar_common: SOARCommon, dt_name):
     """
     Helper method to add all model breaches as rows to a datatable
     """
@@ -395,7 +425,7 @@ def fill_model_breaches_dt(entity, soar_case_id, soar_common, dt_name):
 
             soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
 
-def fill_devices_dt(entity, soar_case_id, soar_common, dt_name):
+def fill_devices_dt(entity, soar_case_id, soar_common: SOARCommon, dt_name):
     """
     Helper method to add all devices as rows to a datatable
     """
@@ -428,9 +458,10 @@ def fill_devices_dt(entity, soar_case_id, soar_common, dt_name):
 
         soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
 
-def clear_dt(rest_client, table_name, incident_id):
+def clear_dt(rest_client: SimpleClient, table_name, incident_id):
     """
     Clear data in given table on SOAR
+    
     :param res_rest_client: SOAR rest client connection
     :param table_name: API access name of the table to clear
     :param incident_id: SOAR ID for the incident

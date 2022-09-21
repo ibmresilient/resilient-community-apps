@@ -22,7 +22,7 @@ MODEL_BREACHES_DT = "darktrace_associated_model_breaches_dt"
 SYSTEM_STATUS_URI = "/status"
 MODEL_BREACHES_URI = "/modelbreaches"
 MODEL_BREACHES_COMMENTS_URI = urljoin(MODEL_BREACHES_URI, "/{pbid}/comments")
-AI_ANALYST_INCIDENT_GROUPS = "/aianalyst/groups"
+AI_ANALYST_INCIDENT_GROUPS_URI = "/aianalyst/groups"
 AI_ANALYST_EVENTS_URI = "/aianalyst/incidentevents"
 AI_ANALYST_EVENT_COMMENTS_URI = "/aianalyst/incident/comments"
 DEVICES_URI = "/devices"
@@ -37,15 +37,18 @@ LOCALE_CONFIG = "locale"
 EXCLUDE_DEVICE_LIST_CONFIG = "exclude_did"
 SAAS_ONLY_CONFIG = "saas_only"
 REQUEST_VERIFY_CONFIG = "verify"
+COMMENT_SYNC_CONFIG = "auto_sync_darktrace_comments"
 
 # D E F A U L T S
 DEFAULT_VERIFY = True
 DEFAULT_MIN_SCORE = 0.0
 DEFAULT_SAAS_ONLY = "false"
 DEFAULT_LOCALE = "en_US"
+DEFAULT_COMMENT_SYNC = "true"
 
 # O T H E R   C O N S T A N T S
 UNSET_GROUP_ID = "UNSET"
+DT_TIME_FORMATTER = "%Y%m%dT%H%M%S"
 
 class AppCommon():
     def __init__(self, rc: RequestsCommon, app_configs: dict, integrations_configs: dict = {}) -> None:
@@ -73,10 +76,10 @@ class AppCommon():
         # optional configs
         self.verify = _get_verify_ssl(app_configs, integrations_configs)
         self.min_score = float(app_configs.get(MIN_SCORE_CONFIG, DEFAULT_MIN_SCORE))
-        saas_only_bool = str_to_bool(app_configs.get(SAAS_ONLY_CONFIG, DEFAULT_SAAS_ONLY))
-        self.saas_only = "true" if saas_only_bool else "false"
+        self.saas_only = "true" if str_to_bool(app_configs.get(SAAS_ONLY_CONFIG, DEFAULT_SAAS_ONLY)) else "false"
         self.locale = app_configs.get(LOCALE_CONFIG, DEFAULT_LOCALE)
         self.exclude_did = app_configs.get(EXCLUDE_DEVICE_LIST_CONFIG, "")
+        self.auto_sync_comments = str_to_bool(app_configs.get(COMMENT_SYNC_CONFIG, DEFAULT_COMMENT_SYNC))
 
     ##################
     # STATIC METHODS #
@@ -161,7 +164,7 @@ class AppCommon():
 
         return signature
 
-    def _execute_dt_request(self, method: str, path_request: str, params: dict = {}, time: str = None, capture_error=False, **kwargs) -> RequestsCommon.execute:
+    def _execute_dt_request(self, method: str, path_request: str, params: dict = {}, time: str = None, capture_error=False, **kwargs) -> dict:
         """
         Execute a request to Darktrace. Constructs the appropriate "signature" which is the 
         hash of the request path, the public key, and the time of the request, which is required by the DT API.
@@ -175,17 +178,17 @@ class AppCommon():
         :param params: Parameters to use for the request, defaults to {}
         :type params: dict, optional
         :param time: Time to execute the request for, formatted in %Y%m%dT%H%M%S. 
-                     If None, sets time to UTC.now; time must be within 30 minute of the execute time
+                     If None, sets time to UTC.now; time must be within 30 minutes of the execute time
         :type time: str, optional
         :param capture_error: If True, any failing request will be captured and no error will be thrown.
                               The error will be logged at debug level. Useful for frequently failing requests.
         :type capture_error: bool
-        :return: Response object
-        :rtype: ``requests.Response``
+        :return: json of the response
+        :rtype: dict
         """
 
         if not time:
-            time = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+            time = datetime.utcnow().strftime(DT_TIME_FORMATTER)
 
         # need to add the query params to the path_request so that the signature is correct
         # NOTE: can't use execute(..., params=params) because that will not generate the
@@ -418,7 +421,7 @@ class AppCommon():
 
         return self._execute_dt_request(
             "GET",
-            AI_ANALYST_INCIDENT_GROUPS,
+            AI_ANALYST_INCIDENT_GROUPS_URI,
             params=params,
             capture_error=capture_error
         )

@@ -5,7 +5,7 @@
   "resolution_summary": "Acknowledged in Darktrace",
   "properties": {
     "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices)",
+    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices involved)",
     "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
     "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
     "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"

@@ -16,6 +16,11 @@ instance_url=https://<instance>.cloud.darktrace.com
 api_key=
 api_secret=
 
+# Number of seconds between poller cycles. A value of 0 disables the poller
+polling_interval=60
+# Number of minutes to lookback for queries the first time the poller runs.
+polling_lookback=120
+
 # 'min_score' is used to determine the minimum score threshold to use
 # when fetching incident groups to poll automatically into SOAR.
 # value should be in [0-100]
@@ -26,6 +31,13 @@ min_score=0.0
 # see Darktrace customer portal for up todate list of locale options
 locale=en_US
 
+# OPTIONAL: turn off comment synchronization
+# This will stop polling Darktrace for new comments on open incidents.
+# By default this is turned on (i.e. True) but should be turned off if
+# Darktrace comments are not needed in SOAR. Comments from SOAR can still
+# be sent individually to Darktrace.
+auto_sync_darktrace_comments = True
+
 # OPTIONAL: comma-separated list of device IDs to be ignored when polling for new
 # AI Analyst incidents. This is useful when a certain device repeatedly causes
 # issues in the system.
@@ -34,11 +46,6 @@ exclude_did=
 
 # OPTIONAL: specify whether to only include events with SaaS related activity.
 saas_only=False
-
-# Number of seconds between poller cycles. A value of 0 disables the poller
-polling_interval=60
-# Number of minutes to lookback for queries the first time the poller runs.
-polling_lookback=120
 
 # OPTIONAL: use the 'verify' config to set a value for SSL verification
 # if 'False', no SSL will be used. if 'True' or unset, the default SSL root cert

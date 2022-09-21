@@ -1,0 +1,28 @@
+{
+  "id": 212,
+  "macaddress": "6e:b7:31:d5:33:6c",
+  "vendor": "Micro-Star INTL CO., LTD.",
+  "ip": "10.12.14.2",
+  "ips": [
+    {
+      "ip": "10.12.14.2",
+      "timems": 1587132000000,
+      "time": "2020-04-17 14:00:00",
+      "sid": 12
+    }
+  ],
+  "did": 212,
+  "sid": 12,
+  "hostname": "sarah-desktop-12",
+  "quarantine": 1623669514000,
+  "time": 1528807083000,
+  "endtime": 1587135192000,
+  "os": "Linux 3.11 and newer",
+  "typename": "desktop",
+  "typelabel": "Desktop",
+  "customFields": {
+    "DT-MANUAL": {
+      "notes": "Test Note"
+    }
+  }
+}
