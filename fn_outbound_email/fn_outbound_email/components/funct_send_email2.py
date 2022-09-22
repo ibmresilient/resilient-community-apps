@@ -105,7 +105,7 @@ class FunctionComponent(AppFunctionComponent):
                 self.LOG.debug("Rendered mail body: %s", rendered_mail_body)
 
                 # is there the original email to include?
-                if mail_data.get('mail_merge_data', False) and mail_data.get('mail_body'):
+                if mail_data.get('mail_merge_body', False) and mail_data.get('mail_body'):
                     rendered_mail_body= f"{rendered_mail_body}{mail_data.get('mail_body')}"
 
                 error_msg = send_msg(send_smtp_email, rendered_mail_body)
