@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
              "newUserName": getattr(fn_inputs, "mcafee_epo_new_username", None),
              "fullName": getattr(fn_inputs, "mcafee_epo_fullname", None),
              "email": getattr(fn_inputs, "mcafee_epo_email", None),
-             "phoneNumber": getattr(fn_inputs, "mcafee_epo_phonenumber", None),
+             "phoneNumber": getattr(fn_inputs, "mcafee_epo_phone_number", None),
              "notes": getattr(fn_inputs, "mcafee_epo_notes", None),
              "allowedIPs": getattr(fn_inputs, "mcafee_epo_allowed_ips", None),
              "disabled": getattr(fn_inputs, "mcafee_epo_user_disabled", None),

@@ -28,6 +28,12 @@ if results.get("success"):
   for x in range(len(results['content'])):
     content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
     note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
+
+  content = results['content'][0]
+  row.agent_guid = str(content.get('EPOLeafNode.AgentGUID'))
+  row.last_communication = str(content.get('EPOLeafNode.LastUpdate'))
+  row.tags = str(content.get('EPOLeafNode.Tags'))
+  row.operating_system = str(content.get("EPOLeafNode.os")).replace("|", " | ")
   
   incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
 ```

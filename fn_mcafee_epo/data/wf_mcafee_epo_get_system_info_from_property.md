@@ -28,7 +28,7 @@ if results.get("success"):
   for x in range(len(results['content'])):
     content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
     note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
-
+    
   incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
 ```
 

@@ -25,9 +25,9 @@ inputs.mcafee_epo_tag = row['epo_tag']
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  note = u"ePO tags: {} applied to system(s): {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
+  note = u"ePO tags: {} applied to system(s): {}".format(row.epo_tag, rule.properties.epo_system)
 else:
-  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
+  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(rule.properties.epo_system, row.epo_tag)
 
 incident.addNote(note)
 ```

@@ -11,7 +11,7 @@
 `mcafee_epo_add_permission_sets_to_user`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -30,7 +30,7 @@ if results['success']:
       row.users = "{}, {}".format(row.users, rule.properties.epo_username)
     else:
       row.users = rule.properties.epo_username
-    incident.addNote("Permissions set: {} was added to user: {}".format(rule.properties.epo_username, results['inputs']['mcafee_epo_username']))
+    incident.addNote("Permissions set: {} was added to user: {}".format(row.permission_set_name, rule.properties.epo_username))
   else:
     incident.addNote("User: {} already has permission set: {}".format(rule.properties.epo_username, row.permission_set_name))
 ```

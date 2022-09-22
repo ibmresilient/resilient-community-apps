@@ -11,7 +11,7 @@
 `mcafee_epo_assign_policy_to_group`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`

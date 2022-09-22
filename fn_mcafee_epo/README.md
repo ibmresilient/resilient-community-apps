@@ -63,6 +63,7 @@
 ---
 
 ## Overview
+The McAfee ePO functions allow for manipilation of tags, systems, users, issues, policies and permission sets on the McAfee ePO server. 
 
 **IBM Security SOAR app for McAfee ePO**
 
@@ -169,6 +170,7 @@ The following table provides the settings you need to configure the app. These s
 | **timeout** | No | `60` | *Timeout is seconds for calls made to the ePO server* |
 
 ### Custom Layouts
+
 * Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
@@ -239,10 +241,13 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 ```python
 if results['success']:
   if rule.properties.epo_username not in row.users:
-    row.users = "{}, {}".format(row.users, rule.properties.epo_username)
-    incident.addNote("Permissions set: {} was added to user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
+    if row.users:
+      row.users = "{}, {}".format(row.users, rule.properties.epo_username)
+    else:
+      row.users = rule.properties.epo_username
+    incident.addNote("Permissions set: {} was added to user: {}".format(row.permission_set_name, rule.properties.epo_username))
   else:
-    incident.addNote("User: {} already has permission set: {}".format(results['inputs']['mcafee_epo_username'], results['inputs']['mcafee_epo_permsetname']))
+    incident.addNote("User: {} already has permission set: {}".format(rule.properties.epo_username, row.permission_set_name))
 ```
 
 </p>
@@ -1159,6 +1164,8 @@ else:
   artifact.description = info
 
 incident.addNote(info)
+
+
 ```
 
 </p>
@@ -1259,7 +1266,7 @@ if results.get("success"):
     table["type_name"] = x.get("typeName")
     table["product_name"] = x.get("productName")
     table["product_id"] = x.get("productId")
-    table["object_id"] = x.get("objectId")
+    table["task_id"] = x.get("objectId")
 ```
 
 </p>
@@ -1762,7 +1769,7 @@ if results.get("success"):
   systemsList = []
   for x in results.get("content"):
     systemsList.append(x.get("EPOComputerProperties.ComputerName"))
-  row.systems = str(systemsList).replace("[","").replace("]","").replace("'","")
+  row.systems = str(systemsList).replace("[","").replace("]","").replace("u'","'").replace("'","")
 ```
 
 </p>
@@ -2058,6 +2065,8 @@ Find all tags specified in ePO
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `datatable_name` | `text` | No | `Name of the datatable being cleared` | - |
+| `incident_id` | `number` | No | `SOAR incident id` | - |
 
 </p>
 </details>
@@ -2228,11 +2237,12 @@ inputs.mcafee_epo_username = rule.properties.epo_username
 <p>
 
 ```python
-if results.gett('success'):
-  incident.addNote("Permissions set: {} was removed from user: {}".format(results['inputs']['mcafee_epo_permsetname'], results['inputs']['mcafee_epo_username']))
-  usersList = list(row.users.split(", "))
-  usersList.remove(rule.properties.epo_username)
-  row.users = str(usersList).replace("[","").replace("]","").replace("'","")
+if results.get('success'):
+  incident.addNote("Permissions set: {} was removed from user: {}".format(row.permission_set_name, rule.properties.epo_username))
+  if row.users:
+    usersList = list(row.users.split(", "))
+    usersList.remove(rule.properties.epo_username)
+    row.users = str(usersList).replace("[","").replace("]","").replace("'","")
 ```
 
 </p>
@@ -2849,9 +2859,9 @@ inputs.mcafee_epo_tag = row['epo_tag']
 
 ```python
 if results.get("success"):
-  note = u"ePO tags: {} applied to system(s): {}".format(results.inputs['mcafee_epo_tag'], results.inputs['mcafee_epo_systems'])
+  note = u"ePO tags: {} applied to system(s): {}".format(row.epo_tag, rule.properties.epo_system)
 else:
-  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(results.inputs['mcafee_epo_systems'], results.inputs['mcafee_epo_tag'])
+  note = u"ePO system(s): {} either not found or tag already applied for tags: {}".format(rule.properties.epo_system, row.epo_tag)
 
 incident.addNote(note)
 ```

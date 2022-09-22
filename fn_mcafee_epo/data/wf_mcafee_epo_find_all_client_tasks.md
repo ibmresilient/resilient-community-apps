@@ -11,7 +11,7 @@
 `mcafee_epo_find_client_tasks`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -31,7 +31,7 @@ if results.get("success"):
     table["type_name"] = x.get("typeName")
     table["product_name"] = x.get("productName")
     table["product_id"] = x.get("productId")
-    table["object_id"] = x.get("objectId")
+    table["task_id"] = x.get("objectId")
 ```
 
 ---

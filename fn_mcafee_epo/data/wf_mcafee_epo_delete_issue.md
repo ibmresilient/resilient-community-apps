@@ -11,7 +11,7 @@
 `mcafee_epo_delete_issue`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`

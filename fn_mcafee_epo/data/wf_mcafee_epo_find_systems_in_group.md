@@ -27,7 +27,7 @@ if results.get("success"):
   systemsList = []
   for x in results.get("content"):
     systemsList.append(x.get("EPOComputerProperties.ComputerName"))
-  row.systems = str(systemsList).replace("[","").replace("]","").replace("'","")
+  row.systems = str(systemsList).replace("[","").replace("]","").replace("u'","'").replace("'","")
 ```
 
 ---
