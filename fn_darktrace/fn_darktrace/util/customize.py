@@ -21,9 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_darktrace",
         "message_destinations": [u"fn_darktrace"],
-        "functions": [u"darktrace_get_model_breaches"],
+        "functions": [],
         "workflows": [],
-        "actions": [],
+        "actions": [u"Darktrace: Acknowledge Incident Event", u"Darktrace: Acknowledge Incident Group", u"Darktrace: Acknowledge Model Breach", u"Darktrace: Get External Endpoint Details", u"Darktrace: List Similar Devices", u"Darktrace: Send Comment"],
         "incident_fields": [u"darktrace_aianalyst_incident_group_id", u"darktrace_associated_device_ids", u"darktrace_breach_link", u"darktrace_group_category", u"darktrace_group_score", u"darktrace_incident_group_acknowledged", u"darktrace_incident_group_link", u"darktrace_incident_group_start_time", u"darktrace_incident_last_modified", u"darktrace_initiating_device_ids", u"darktrace_number_of_events_in_group", u"darktrace_pbid"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -44,8 +44,13 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_darktrace
-    - Functions:
-        - darktrace_get_model_breaches
+    - Rules:
+        - Darktrace: Acknowledge Incident Event
+        - Darktrace: Acknowledge Incident Group
+        - Darktrace: Acknowledge Model Breach
+        - Darktrace: Get External Endpoint Details
+        - Darktrace: List Similar Devices
+        - Darktrace: Send Comment
     - Incident Fields:
         - darktrace_aianalyst_incident_group_id
         - darktrace_associated_device_ids

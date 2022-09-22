@@ -22,7 +22,7 @@ APP_CONFIG = {
     "instance_url": "https://fake.cloud.darktrace.com/"
 }
 
-BASE_MOCK_PATH = os.path.abspath("./fn_darktrace/tests/mock_data")
+BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_data")
 PATH_STATUS_MOCK = os.path.join(BASE_MOCK_PATH, "GET_status.json")
 PATH_AIANALYST_GROUPS_MOCK = os.path.join(BASE_MOCK_PATH, "GET_aianalyst_groups.json")
 PATH_AIANALYST_INCIDENT_COMMENTS_MOCK = os.path.join(BASE_MOCK_PATH, "GET_aianalyst_incident_comments.json")

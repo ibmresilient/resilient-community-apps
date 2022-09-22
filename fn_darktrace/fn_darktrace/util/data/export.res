@@ -1,9 +1,151 @@
 {
   "action_order": [],
-  "actions": [],
+  "actions": [
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "darktrace_incident_events_dt.darktrace_incident_events_dt_acknowledged",
+          "method": "not_equals",
+          "type": null,
+          "value": "Yes"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Darktrace: Acknowledge Incident Event",
+      "id": 18,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: Acknowledge Incident Event",
+      "object_type": "darktrace_incident_events_dt",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "8c451390-a018-405c-95e6-3235b53c3316",
+      "view_items": [],
+      "workflows": []
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "incident.plan_status",
+          "method": "equals",
+          "type": null,
+          "value": "Active"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Darktrace: Acknowledge Incident Group",
+      "id": 17,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: Acknowledge Incident Group",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "ec3062d8-5999-48da-bb3a-013f8427197b",
+      "view_items": [],
+      "workflows": []
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Darktrace: Acknowledge Model Breach",
+      "id": 19,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: Acknowledge Model Breach",
+      "object_type": "darktrace_associated_model_breaches_dt",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "ef19c95e-493c-49a3-896d-a9a01aeb473b",
+      "view_items": [],
+      "workflows": []
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Darktrace: Get External Endpoint Details",
+      "id": 15,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: Get External Endpoint Details",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "2a847d8e-e8d4-4782-898e-1debbaf9cde3",
+      "view_items": [],
+      "workflows": []
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "darktrace_associated_devices_dt.darktrace_device_dt_id",
+          "method": "has_a_value",
+          "type": null,
+          "value": null
+        }
+      ],
+      "enabled": true,
+      "export_key": "Darktrace: List Similar Devices",
+      "id": 14,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: List Similar Devices",
+      "object_type": "darktrace_associated_devices_dt",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "0571a05d-48bb-4465-aaab-ff2b8106a02f",
+      "view_items": [],
+      "workflows": []
+    },
+    {
+      "automations": [],
+      "conditions": [
+        {
+          "evaluation_id": null,
+          "field_name": "note.text",
+          "method": "not_contains",
+          "type": null,
+          "value": "Darktrace Incident Comment"
+        },
+        {
+          "evaluation_id": null,
+          "field_name": "note.text",
+          "method": "not_contains",
+          "type": null,
+          "value": "Sent to Darktrace at"
+        }
+      ],
+      "enabled": true,
+      "export_key": "Darktrace: Send Comment",
+      "id": 16,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Darktrace: Send Comment",
+      "object_type": "note",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "948b35ea-d9ec-404b-bd64-4d6a9bee836a",
+      "view_items": [],
+      "workflows": []
+    }
+  ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1663708147795,
+  "export_date": 1663867983599,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -379,41 +521,16 @@
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa1"
     }
   ],
-  "functions": [
-    {
-      "created_date": 1660924543026,
-      "description": {
-        "content": "Get model breaches from Darktrace using the Darkrace API",
-        "format": "text"
-      },
-      "destination_handle": "fn_darktrace",
-      "display_name": "Darktrace: Get Model Breaches",
-      "export_key": "darktrace_get_model_breaches",
-      "id": 2,
-      "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
-      "last_modified_time": 1660924543039,
-      "name": "darktrace_get_model_breaches",
-      "tags": [],
-      "uuid": "fdba5dbe-ad2f-4834-aa4e-da09455613b8",
-      "version": 1,
-      "view_items": [],
-      "workflows": []
-    }
-  ],
+  "functions": [],
   "geos": null,
   "groups": null,
-  "id": 18,
+  "id": 20,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1663708145830,
+      "create_date": 1663867981090,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -422,7 +539,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1663708145830,
+      "update_date": 1663867981090,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],

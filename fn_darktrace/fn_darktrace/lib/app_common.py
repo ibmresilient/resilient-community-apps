@@ -345,6 +345,7 @@ class AppCommon():
         :return: returns the system status information
         :rtype: dict
         """
+        # defaults
         if not params:
             params = {"fast":True, "includechildren":False}
 
@@ -368,6 +369,7 @@ class AppCommon():
         :return: returns a list of model breaches
         :rtype: list
         """
+        # defaults
         if not params:
             params = {"expandenums": "true"}
 
@@ -393,6 +395,7 @@ class AppCommon():
         :return: returns the list of comments associated with the given breach
         :rtype: list
         """
+        # defaults
         if not params:
             params = {}
 
@@ -416,6 +419,7 @@ class AppCommon():
         :return: returns the list of incident groups
         :rtype: list
         """
+        # defaults
         if not params:
             params = {}
 
@@ -443,9 +447,11 @@ class AppCommon():
         :return: returns the list of incident events
         :rtype: list
         """
+        # defaults
         if not params:
             params = {"includeacknowledged": "true", "includeincidenteventurl": "true", "locale": self.locale}
 
+        # if group_id is provided, add/overwrite the value in the params
         if group_id:
             params.update({"groupid": group_id})
 
@@ -474,9 +480,11 @@ class AppCommon():
         :return: dict with object "comments" which is a list of comments on the incident event
         :rtype: list
         """
+        # default params
         if not params:
             params = {}
 
+        # if incident_id is given, add/overwrite it to the params
         if incident_id:
             params.update({"incident_id": incident_id})
 
@@ -487,7 +495,7 @@ class AppCommon():
             capture_error=capture_error
         )
 
-    def add_incident_group_comment(self, incident_id: str, comment: str, params: dict = None, capture_error: bool = False) -> dict:
+    def add_incident_group_comment(self, incident_id: str, comment: str, capture_error: bool = False) -> dict:
         """
         Add a comment to an incident group.
 
@@ -504,9 +512,12 @@ class AppCommon():
         :return: response from posting the comment
         :rtype: dict
         """
-        if not params:
-            params = {}
+        # TODO: check this method once/if the API endpoint is actually implemented in Darktrace for our use
+        # if they never expose it for us, we'll leave this here and open a ticket for further considerations
+        # once they do add the functionality
+        return None
 
+        # since this API is pretty simple, we'll require body params and build the body directly in this function
         body = {
             "incident_id": incident_id,
             "message": comment
@@ -516,7 +527,6 @@ class AppCommon():
             "POST",
             AI_ANALYST_EVENT_COMMENTS_URI,
             data=body,
-            params=params,
             capture_error=capture_error
         )
 
@@ -537,6 +547,7 @@ class AppCommon():
         :return: returns the list of devices
         :rtype: list
         """
+        # defaults
         if not params:
             params = {}
 
@@ -571,7 +582,7 @@ def _get_verify_ssl(app_configs: dict, integrations_configs: dict = {}) -> bool:
     :return: Value to set ``requests.request.verify`` to. Either a path or a boolean. Defaults to ``True``
     :rtype: bool|str(path)
     """
-
+    # start checking the app specific settings
     verify = app_configs.get(REQUEST_VERIFY_CONFIG)
 
     # NOTE: specifically want ``if verify is None`` rather than
