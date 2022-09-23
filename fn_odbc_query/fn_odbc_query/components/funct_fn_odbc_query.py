@@ -3,10 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, StatusMessage
-from resilient_lib import IntegrationError, validate_fields, str_to_bool
-import json
+from json import dumps
+
 from fn_odbc_query.util import function_utils, odbc_utils
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                StatusMessage, app_function)
+from resilient_lib import IntegrationError, str_to_bool, validate_fields
 
 PACKAGE_NAME = "fn_odbc_query"
 FN_NAME = "fn_odbc_query"
@@ -103,7 +105,7 @@ class FunctionComponent(AppFunctionComponent):
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
-                self.LOG.info(json.dumps(str(results)))
+                self.LOG.info(dumps(str(results)))
 
                 if not results.get("entries"):
                     yield StatusMessage("No query results returned...")

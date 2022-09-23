@@ -32,8 +32,8 @@ class OdbcConnection(object):
 
         # This fixes incorrect locale setting issue that causes
         # pyodbc.connect to abort on macOS with ODBC Driver 17 for SQL Server (msodbcsql17) working in Python 3.6.
-        import locale
-        locale.setlocale(locale.LC_ALL, "")
+        from locale import setlocale, LC_ALL
+        setlocale(LC_ALL, "")
 
         try:
             db_connection = pyodbc.connect(sql_connection_string)
