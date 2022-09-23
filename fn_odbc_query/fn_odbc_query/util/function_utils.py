@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
 from json import JSONDecodeError, loads
 
 def validate_data(sql_restricted_sql_statements, sql_query):

@@ -72,14 +72,14 @@ class FunctionComponent(AppFunctionComponent):
         sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs))]
 
         # Log parameers
-        self.LOG.info(str(fn_inputs))
+        self.LOG.info(str(sql_params))
 
         # Validate app.config settings
         validate_fields(["sql_connection_string"], self.options)
 
         sql_connection_string = self.options["sql_connection_string"]
         sql_restricted_sql_statements = self.options.get("sql_restricted_sql_statements", None)
-        sql_autocommit = str_to_bool(self.options.get("sql_autocommit", False))
+        sql_autocommit = str_to_bool(self.options.get("sql_autocommit", 'False'))
         sql_query_timeout = int(self.options.get("sql_query_timeout")) \
             if self.options.get("sql_query_timeout") else None
         sql_database_type = self.options.get("sql_database_type").lower() \
@@ -107,10 +107,10 @@ class FunctionComponent(AppFunctionComponent):
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
                 self.LOG.info(dumps(str(results)))
 
-                if not results.get("entries"):
-                    yield StatusMessage("No query results returned...")
-                else:
+                if results.get("entries"):
                     yield StatusMessage(f"Result contains {len(results.get('entries'))} entries...")
+                else:
+                    yield StatusMessage("No query results returned...")
 
             elif sql_statement in ['update', 'delete', 'insert']:
 
@@ -118,13 +118,12 @@ class FunctionComponent(AppFunctionComponent):
 
                 # Return row count and set results to empty list
                 row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
-                results = function_utils.prepare_results(None, None)
+                results = {"entries": None}
 
                 self.LOG.info(f"{row_count} rows processed")
                 yield StatusMessage(f"{row_count} rows processed")
 
             else:
-                self.LOG.error(f"SQL statement '{sql_statement}' is not supported")
                 raise ValueError(f"SQL statement '{sql_statement}' is not supported")
 
         except Exception as err:
