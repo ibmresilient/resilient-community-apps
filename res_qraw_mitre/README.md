@@ -21,7 +21,7 @@ The workflows in this package depend on the following integration packages
 ![Installed Screenshot](./screenshots/3-apps-installed.png)
 
 ## Import
-First of all, ensure that the above integration packages have been installed.
+First ensure that the above integration packages have been installed.
 Download the res_qraw_mitre package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
 In the QRadar SOAR UI, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
 and select the qraw_mitres.res file downloaded above.
@@ -39,15 +39,15 @@ and "MITRE Tactic Information"
 is a function from the MITRE integration. The data flow is shown below
 ![Dataflow1](./screenshots/dataflow1.png)
 Here, a user starts from an incident with a QRadar offense id. In the following example, 
-the incident is escalated from QRadar offense 23. 
+the incident is escalated from QRadar offense 3. 
 ![Offense Analysis](./screenshots/offense_analysis.png)
 Note for convenience, a tab was created to hold all the related information here. To do analysis for the related offense, select 
 Actions->"QRadar Advisor Offense Analysis with MITRE", to start this workflow. The first function, "QRadar 
 Advisor Offense Analysis", is called to get 
 the analysis and insights of the offense from QRadar Advisor. The insights contains MITRE ATT&CK 
 tactic information, shown in the "MITRE ATT&CK of Incident" data table. In this example, 
-QRadar Advisor returns a tactic called "Command and Control", together with a confidence value 
-of 60 (over 100). 
+QRadar Advisor returns a tactic called "Initial Access", together with a confidence value 
+of 44 (out of 100). 
 
 With this information, the second function "MITRE Tactic Information" is called. This function 
 retrieves the following information from the MITRE STIX TAXII server: 
@@ -74,14 +74,14 @@ workflow from the QRadar integration 2.0. These two workflows can make a complet
 This use case starts with an artifact. The dataflow is shown below. 
 ![Dataflow2](./screenshots/dataflow2.png)
 
-In this example, an IP address (192.168.0.155) was added to an incident as an
+In this example, an IP address (193.184.16.214) was added to an incident as an
 artifact. The user can then select the rule, "Find All QRadar Reference Sets". 
 It is a rule included in QRadar integration 2.0.
 ![Artifact](./screenshots/artifact.png)
 The result is shown in the "QRadar Reference Set" data table. Note that the "Source" column (if not empty)shows
 the QRadar rule that added this IP into the reference set. In this example, a rule called "RF Risklist Source Log"
 monitors source IPs that contact external malicious sites, and log the source IPs into a Reference Set called 
-"RF Risklist Source". This IP address (192.168.0.155) is in that Reference Set.
+"RF Risklist Source". This IP address (193.184.16.214) is in that Reference Set.
 
 Once the "QRadar Reference Set" data table is populated with data, user can select 
 "Map rule to MITRE tactic".
@@ -100,13 +100,11 @@ information is shown in the "MITRE ATT&CK Techniques" data table. From here, the
 tasks for selected techniques.
 
 ## Uninstall
-Manually delete the followings:
+Manually delete the following:
 1. Rules
 - "Map rule to MITRE tactic"
 - "QRadar Advisor Offense Analysis with MITRE"
-2. Data tables
-- MITRE ATT&CK of Artifact
-3. Workflows
+2. Workflows
 - Example of QRadar Advisor Offense Analysis with MITRE
 - Example of mapping QRadar rule to tactic 
 
