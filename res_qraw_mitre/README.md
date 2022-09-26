@@ -24,7 +24,7 @@ The workflows in this package depend on the following integration packages
 First ensure that the above integration packages have been installed.
 Download the res_qraw_mitre package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
 In the QRadar SOAR UI, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
-and select the qraw_mitres.res file downloaded above.
+and select the qraw_mitre.res file downloaded above.
 ![Import Screenshot](./screenshots/import_res.png)
 
 ## Usage
@@ -153,7 +153,6 @@ results = {
 </p>
 </details>
 
-<p>
 <details><summary>Example Qradar Advisor Offense Analysis Pre-Process Script:</summary>
 <p>
 
@@ -180,7 +179,7 @@ inputs.qradar_offense_id = incident.properties.qradar_id
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mitre_tactic_name"` | `text` | No | `Initial Access` | MITRE Tactic Name |
+| `mitre_tactic_name` | `text` | No | `Initial Access` | MITRE Tactic Name |
 | `mitre_tactic_id` | `text` | No | `TA0001` | MITRE Tacic Id |
 
 
@@ -231,10 +230,9 @@ results = {
 </p>
 </details>
 
-<p>
 
 <details><summary>Example MITRE Tactic Information Pre-Process Script:</summary>
-> **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
+**NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
 
 ```python
 insights = workflow.properties.qraw_offense_insights.insights
@@ -258,7 +256,7 @@ inputs.mitre_tactic_name = ", ".join(mitre_tactic_names)
 </p>
 </details>
 
-<details><summary>Example MITRE Tactic Information Pre-Process Post-Process Script:</summary>
+<details><summary>Example MITRE Tactic Information Post-Process Script:</summary>
 <p>
 
 ```python
@@ -356,21 +354,22 @@ for tactic in tactics:
 </p>
 </details>
 
+___
+
 <p>
 
-The "QRadar Advisor Offense Analysis" is a function from the QRadar Advisor integration, 
+"QRadar Advisor Offense Analysis" is a function from the QRadar Advisor integration, 
 and "MITRE Tactic Information"
 is a function from the MITRE integration. The data flow is shown below
 ![Dataflow1](./screenshots/dataflow1.png)
 Here, a user starts from an incident with a QRadar offense id. In the following example, 
 the incident is escalated from QRadar offense 3. 
 ![Offense Analysis](./screenshots/offense_analysis.png)
-Note for convenience, a tab was created to hold all the related information here. To do analysis for the related offense, select 
-Actions->"QRadar Advisor Offense Analysis with MITRE", to start this workflow. The first function, "QRadar 
+Note for convenience, a tab was created to hold all the related information here. To do analysis for the related offense, select the incident rule from the Actions->"QRadar Advisor Offense Analysis with MITRE" menu, to start this workflow. The first function, "QRadar 
 Advisor Offense Analysis", is called to get 
 the analysis and insights of the offense from QRadar Advisor. The insights contains MITRE ATT&CK 
-tactic information, shown in the "MITRE ATT&CK of Incident" data table. In this example, 
-QRadar Advisor returns a tactic called "Initial Access", together with a confidence value 
+tactic information, shown in the "MITRE ATT&CK Tactics" data table. In this example, 
+QRadar Advisor returns a tactics called "Initial Access" and "Command and Control" together with a confidence value 
 of 44 (out of 100). 
 
 With this information, the second function "MITRE Tactic Information" is called. This function 
@@ -393,8 +392,233 @@ A new task is created with description, detection, and mitigation for the select
 ### Example of mapping QRadar rule to tactic 
 This workflow also contains two functions.
 ![Workflow2](./screenshots/workflow2.png)
-The "QRadar Advisor Map Rule" is a function from the QRadar Advisor integration, and the 
-"MITRE Tactic Information" is a function from the MITRE integration.
+
+<details><summary>Inputs Qradar Advisor Map Rule:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_rule_name` | `text` | Yes | `EC: Personal Data Transferred to Third Countries/Regions` | Name of QRadar rule |
+
+</p>
+</details>
+
+<details><summary>Outputs QRadar Advisor Map Rule:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "tactics": {
+    "has_ibm_default": true,
+    "id": "c0dfacf7-235e-416c-9b2b-c250ef8f3919",
+    "last_updated": 1607611408002,
+    "mapping": {
+      "Initial Access": {
+        "confidence": "high",
+        "enabled": true,
+        "ibm_default": true,
+        "id": "TA0001",
+        "techniques": {
+          "Valid Accounts": {
+            "confidence": "high",
+            "enabled": true,
+            "id": "T1078"
+          }
+        },
+        "user_override": false
+      }
+    },
+    "min-mitre-version": 7
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Qradar Advisor Map Rule Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.qradar_rule_name = row.source
+```
+</p>
+</details>
+
+<details><summary>Example Qradar Advisor Map Rule Post-Process Script:</summary>
+<p>
+
+```python
+
+```
+</p>
+</details>
+<p>
+<details><summary>Inputs MITRE Tactics Information:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mitre_tactid_id` | `text` | No | `TA0001` | MITRE Tactic ID |
+| `mitre_tactid_name` | `text` | No | `Initial Access` | MITRE Tactic Name |
+</p>
+</details>
+
+<details><summary>Outputs MITRE Tactics Information:</summary>
+<p>
+
+```python
+```
+</p>
+</details>
+
+<details><summary>Example MITRE Tactic Information Pre-Process Script:</summary>
+<p>
+
+```python
+"""
+Sample data from QRaw:
+  {
+    u'id': u'SYSTEM-1458', 
+    u'has_ibm_default': True, 
+    u'mapping': {
+                  u'Privilege Escalation': {
+                                              u'user_override': False, 
+                                              u'confidence': u'high', 
+                                              u'ibm_default': True, 
+                                              u'enabled': True, 
+                                              u'techniques': {}
+                  }, 
+                  u'Execution': {
+                                  u'user_override': False, 
+                                  u'confidence': u'high', 
+                                  u'ibm_default': True, 
+                                  u'enabled': True, 
+                                  u'techniques': {}
+                  }, 
+                  u'Initial Access': {
+                                  u'user_override': False, 
+                                  u'confidence': u'high', 
+                                  u'ibm_default': True, 
+                                  u'enabled': True, 
+                                  u'techniques': {}
+                  }
+    }
+  }
+"""
+tactics = workflow.properties.qraw_rule_map.tactics
+
+mapping = tactics["mapping"]
+
+att_tactics = ", ".join(mapping.keys())
+inputs.mitre_tactic_name = att_tactics
+```
+</p>
+</details>
+
+<details><summary>Example MITRE Tactic Information Post-Process Script:</summary>
+<p>
+
+```python
+""" Example of data returned in ResultPayload's content
+{
+  "mitre_tactics": [
+    {
+      
+      "name": String,
+      "id": String,
+      "ref": "String",
+      "collection": "String", 
+      "mitre_techniques": [
+        {
+          "name": "String", 
+          "description": "String",
+          "external_references": [{"url": "String"}],
+          "x_mitre_detection": "String",
+          "id": "String",
+          "collection": "String"
+        }
+      ]
+    }
+  ]
+}
+"""
+# Read result from QRAW to get confidence information
+mapping = workflow.properties.qraw_rule_map.tactics["mapping"]
+tactic_names = mapping.keys()
+
+tactic_confidence = {}
+if tactic_names is not None:
+  for t_name in tactic_names:
+    tactic_confidence[t_name] = mapping[t_name]["confidence"]
+    
+tactics = results.content["mitre_tactics"]
+
+for tactic in tactics:
+  #
+  # MITRE ATTACK of Incident Datatable
+  #
+  tactic_row = incident.addRow("mitre_attack_of_incident")
+  tactic_row["collection"] = tactic["collection"]
+  tactic_row["attack_tactic"] = tactic["name"]
+  tactic_row["tactic_code"] = tactic["id"]
+  url_html = '<a href="' + tactic["ref"] + '">' + tactic["ref"] + '</a><br>'
+  tactic_row["reference"] = helper.createRichText(url_html)
+  tactic_row["confidence"] = str(tactic_confidence.get(tactic["name"], ""))
+  #
+  # MITRE ATT&CK techniques Datatable
+  #
+  techs = tactic["mitre_techniques"]
+  for att_tech in techs:
+    tech_row = incident.addRow("mitre_attack_techniques")
+    tech_row["collection"] = tactic["collection"]
+    tech_row["tactic"] = tactic["name"]
+
+    tech_row["technique_name"] = att_tech["name"]
+    tech_row["technique_description"] = helper.createRichText(att_tech["description"])
+    refs = att_tech["external_references"]
+    ref_html = ""
+    for ref in refs:
+      url = ref["url"]
+      
+      https_str = "https://"
+      http_str = "http://"
+
+      start_pos = url.find(https_str)
+
+      if start_pos != -1:
+        start_pos = start_pos + len(https_str)
+      else:
+        # try http://
+        start_pos = url.find(http_str)
+        if start_pos != -1:
+          start_pos = start_pos + len(http_str)
+        else:
+          start_pos = 0 
+
+      end_pos = url.find('/', start_pos)
+      if end_pos == 0:
+        # We don't know how to extract
+        display_str = url
+      elif end_pos == -1:
+        display_str = url[start_pos:]
+      else:
+        display_str = url[start_pos:end_pos]
+      
+      ref_html = ref_html + '<a href="' + ref["url"] + '">' + display_str + '</a><br>'
+    tech_row["references"] = helper.createRichText(ref_html)
+    tech_row["detection"] = helper.createRichText(att_tech["x_mitre_detection"])
+    tech_row["technique_id"] = att_tech["id"]
+
+```
+</p>
+</details>
+
+___
+
+"QRadar Advisor Map Rule" is a function from the QRadar Advisor integration, and "MITRE Tactic Information" is a function from the MITRE integration.
 
 This workflow can be used together with the "Example of finding all QRadar reference sets for artifact" 
 workflow from the QRadar integration 2.0. These two workflows can make a complete use case.
@@ -406,9 +630,9 @@ In this example, an IP address (193.184.16.214) was added to an incident as an
 artifact. The user can then select the rule, "Find All QRadar Reference Sets". 
 It is a rule included in QRadar integration 2.0.
 ![Artifact](./screenshots/artifact.png)
-The result is shown in the "QRadar Reference Set" data table. Note that the "Source" column (if not empty)shows
+The result is shown in the "QRadar Reference Set" data table. Note that the "Source" column (if not empty) shows
 the QRadar rule that added this IP into the reference set. In this example, a rule called "EC: Personal Data Transferred to Third Countries/Regions"
-monitors source IPs that contact external malicious sites, and log the source IPs into a Reference Set called 
+monitors source IPs that contact external malicious sites, and logs the source IPs into a Reference Set called 
 "EC Compromised Hosts". This IP address (193.184.16.214) is in that Reference Set.
 
 Once the "QRadar Reference Set" data table is populated with data, user can select 
@@ -418,7 +642,7 @@ This manual item invokes the "Example of mapping QRadar rule to tactic" workflow
 
 The workflow first call "QRadar Advisor Map Rule" function to map the rule to MITRE ATT&CK tactic. 
 
-In this example, QRadar Advisor maps the rule "RF Risklist Source Log" into a MITRE ATT&CK
+In this example, QRadar Advisor maps the rule "EC: Personal Data Transferred to Third Countries/Regions" into a MITRE ATT&CK
 tactic called "Initial Access".
 
 With this tactic information, the workflow makes a second call to the MITRE integration function,
