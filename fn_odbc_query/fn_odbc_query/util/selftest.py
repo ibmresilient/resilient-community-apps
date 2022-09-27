@@ -2,6 +2,7 @@
 
 import logging
 from fn_odbc_query.util.odbc_utils import OdbcConnection
+from resilient_lib import str_to_bool
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -13,14 +14,21 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get("fn_odbc_query", {})
+    sql_connection_string = options["sql_connection_string"]
+    sql_autocommit = str_to_bool(options.get("sql_autocommit", 'False'))
+    sql_query_timeout = int(options.get("sql_query_timeout")) \
+        if options.get("sql_query_timeout") else None
 
     reason = None
     try:
-        response = OdbcConnection(options.get("sql_connection_string"))
-        status = True if response else False
+        odbc_connection = OdbcConnection(sql_connection_string, sql_autocommit, sql_query_timeout)
+        status = True if odbc_connection else False
     except Exception as err:
         status = False
         reason = str(err)
+    finally:
+        if odbc_connection:
+            odbc_connection.close_connections()
 
     return {
         "state": "success" if status else "failure",

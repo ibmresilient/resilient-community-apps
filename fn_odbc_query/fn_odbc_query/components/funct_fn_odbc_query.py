@@ -113,7 +113,6 @@ class FunctionComponent(AppFunctionComponent):
                     yield StatusMessage("No query results returned...")
 
             elif sql_statement in ['update', 'delete', 'insert']:
-
                 self.LOG.debug(f"Query: {sql_query}. Params: {sql_params}.")
 
                 # Return row count and set results to empty list
@@ -132,7 +131,6 @@ class FunctionComponent(AppFunctionComponent):
         # Commit changes and tear down connection
         finally:
             yield StatusMessage("Closing ODBC connection...")
-
             if odbc_connection:
                 odbc_connection.close_connections()
 
