@@ -11,6 +11,32 @@
 `mcafee_epo_get_all_permission_sets`
 
 ### Output Name
+`permsets`
+
+### Message Destination
+`mcafee_epo_message_destination`
+
+### Pre-Processing Script
+```python
+None
+```
+
+### Post-Processing Script
+```python
+# if results.get("success"):
+#   for permset in results["content"]:
+#     table_row = incident.addRow("mcafee_epo_permission_sets")
+#     table_row["permission_set_name"] = permset.get("name")
+```
+
+---
+
+## Function - McAfee ePO Execute Query
+
+### API Name
+`mcafee_epo_execute_query`
+
+### Output Name
 `None`
 
 ### Message Destination
@@ -20,14 +46,23 @@
 ```python
 inputs.datatable_name = "mcafee_epo_permission_sets"
 inputs.incident_id = incident.id
+inputs.mcafee_epo_target = "EntitlementView"
+inputs.mcafee_epo_query_select = "EntitlementView.PrincipalName EntitlementView.GroupName"
 ```
 
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  for permset in results["content"]:
+  for permset in workflow.properties.permsets.get("content"):
+    permsetName = permset.get("name")
     table_row = incident.addRow("mcafee_epo_permission_sets")
-    table_row["permission_set_name"] = permset.get("name")
+    table_row["permission_set_name"] = permsetName
+    users = ""
+    for perm in results.get("content"):
+      user = perm.get("EntitlementView.PrincipalName")
+      if user and permsetName.lower() == perm.get("EntitlementView.GroupName").lower() and user not in users:
+        users = "{}, {}".format(users, user)
+    table_row["users"] = users[2:]
 ```
 
 ---

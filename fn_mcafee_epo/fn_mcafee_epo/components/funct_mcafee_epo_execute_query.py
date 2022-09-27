@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
+from tkinter import N
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
@@ -21,6 +22,9 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.mcafee_epo_target
             -   fn_inputs.mcafee_epo_queryid
+            -   fn_inputs.mcafee_epo_query_select
+            -   fn_inputs.mcafee_epo_query_group
+            -   fn_inputs.mcafee_epo_query_order
             -   fn_inputs.datatable_name
             -   fn_inputs.incident_id
         """
@@ -45,9 +49,15 @@ class FunctionComponent(AppFunctionComponent):
                 {"queryId": query_id}
             )
         elif target:
+            select = getattr(fn_inputs, "mcafee_epo_query_select", None)
+            group = getattr(fn_inputs, "mcafee_epo_query_group", None)
+            order = getattr(fn_inputs, "mcafee_epo_query_order", None)
             response = client.request(
                 "core.executeQuery",
-                {"target": target}
+                {"target": target,
+                 "select": f"(select {select})" if select else None,
+                 "group": f"(group {group})" if group else None,
+                 "order": f"(order ({order}))" if order else None}
             )
         else:
             raise ValueError("Either mcafee_epo_queryid or mcafee_epo_target have to be defined.")
