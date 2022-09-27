@@ -21,7 +21,7 @@ The workflows in this package depend on the following integration packages
 ![Installed Screenshot](./screenshots/3-apps-installed.png)
 
 ## Import
-First ensure that the above integration packages have been installed.
+First ensure that the three above integration packages have been installed.
 Download the res_qraw_mitre package. Unzip it if necessary(tar -xvf res_qraw_mitre.tar). 
 In the QRadar SOAR UI, go to Administrator Settings->Organization->Migrate Settings->Import->Import Settings 
 and select the qraw_mitre.res file downloaded above.
