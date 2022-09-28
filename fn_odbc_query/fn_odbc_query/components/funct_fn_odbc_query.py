@@ -91,11 +91,13 @@ class FunctionComponent(AppFunctionComponent):
         function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
         try:
+            yield self.status_message("Opening ODBC connection...")
             # Connect with ODBC
             odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit, sql_query_timeout)
             odbc_connection.configure_unicode_settings(sql_database_type)
             odbc_connection.create_cursor()
 
+            yield self.status_message("Executing an ODBC query...")
             # Check what SQL statement is executed, get the first word in sql_query
             sql_statement = sql_query.split(None, 1)[0].lower()
 
@@ -108,9 +110,9 @@ class FunctionComponent(AppFunctionComponent):
                 self.LOG.info(dumps(str(results)))
 
                 if results.get("entries"):
-                    yield StatusMessage(f"Result contains {len(results.get('entries'))} entries...")
+                    yield self.status_message(f"Result contains {len(results.get('entries'))} entries...")
                 else:
-                    yield StatusMessage("No query results returned...")
+                    yield self.status_message("No query results returned...")
 
             elif sql_statement in ['update', 'delete', 'insert']:
                 self.LOG.debug(f"Query: {sql_query}. Params: {sql_params}.")
@@ -120,7 +122,7 @@ class FunctionComponent(AppFunctionComponent):
                 results = {"entries": None}
 
                 self.LOG.info(f"{row_count} rows processed")
-                yield StatusMessage(f"{row_count} rows processed")
+                yield self.status_message(f"{row_count} rows processed")
 
             else:
                 raise ValueError(f"SQL statement '{sql_statement}' is not supported")
@@ -130,7 +132,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Commit changes and tear down connection
         finally:
-            yield StatusMessage("Closing ODBC connection...")
+            yield self.status_message("Closing ODBC connection...")
             if odbc_connection:
                 odbc_connection.close_connections()
 

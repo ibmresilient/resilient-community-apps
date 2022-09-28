@@ -11,7 +11,7 @@
 `fn_odbc_query`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_odbc_query`

@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example ODBC DELETE PostgreSQL",
-      "id": 132,
+      "id": 53,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example ODBC DELETE PostgreSQL",
@@ -25,7 +25,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example ODBC INSERT PostgreSQL",
-      "id": 133,
+      "id": 54,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example ODBC INSERT PostgreSQL",
@@ -44,7 +44,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example ODBC SELECT PostgreSQL",
-      "id": 134,
+      "id": 55,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example ODBC SELECT PostgreSQL",
@@ -63,7 +63,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example ODBC UPDATE PostgreSQL",
-      "id": 135,
+      "id": 56,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example ODBC UPDATE PostgreSQL",
@@ -80,7 +80,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1662489402793,
+  "export_date": 1664364184946,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -94,7 +94,7 @@
       "deprecated": false,
       "export_key": "__function/sql_condition_value3",
       "hide_notification": false,
-      "id": 1315,
+      "id": 1093,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -123,7 +123,7 @@
       "deprecated": false,
       "export_key": "__function/sql_condition_value1",
       "hide_notification": false,
-      "id": 1317,
+      "id": 1094,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -152,7 +152,7 @@
       "deprecated": false,
       "export_key": "__function/sql_condition_value2",
       "hide_notification": false,
-      "id": 1316,
+      "id": 1095,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -181,7 +181,7 @@
       "deprecated": false,
       "export_key": "__function/sql_query",
       "hide_notification": false,
-      "id": 1318,
+      "id": 1096,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -196,25 +196,16 @@
       "tags": [],
       "templates": [
         {
-          "id": 10,
-          "name": "INSERT PostgresSQL",
+          "id": 1,
+          "name": "DELETE PostgreSQL",
           "template": {
-            "content": "INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)",
+            "content": "DELETE from mock_data WHERE id = ?",
             "format": "text"
           },
-          "uuid": "ffca48c8-b424-4034-bf0c-2b1eb95dfd9e"
+          "uuid": "288b891b-35ff-42ef-9812-d0efb5821a44"
         },
         {
-          "id": 11,
-          "name": "UPDATE PostgreSQL",
-          "template": {
-            "content": "UPDATE mock_data SET id = ? WHERE first_name = ?",
-            "format": "text"
-          },
-          "uuid": "6fdf3c0f-b2a6-4a4a-837e-0ed53ed15d56"
-        },
-        {
-          "id": 12,
+          "id": 2,
           "name": "SELECT PostgreSQL",
           "template": {
             "content": "SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3 FROM mock_data WHERE id = ?",
@@ -223,13 +214,22 @@
           "uuid": "2d922c38-0973-4780-a1f5-f8ffbedebe5c"
         },
         {
-          "id": 13,
-          "name": "DELETE PostgreSQL",
+          "id": 3,
+          "name": "UPDATE PostgreSQL",
           "template": {
-            "content": "DELETE from mock_data WHERE id = ?",
+            "content": "UPDATE mock_data SET id = ? WHERE first_name = ?",
             "format": "text"
           },
-          "uuid": "288b891b-35ff-42ef-9812-d0efb5821a44"
+          "uuid": "6fdf3c0f-b2a6-4a4a-837e-0ed53ed15d56"
+        },
+        {
+          "id": 4,
+          "name": "INSERT PostgresSQL",
+          "template": {
+            "content": "INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)",
+            "format": "text"
+          },
+          "uuid": "ffca48c8-b424-4034-bf0c-2b1eb95dfd9e"
         }
       ],
       "text": "sql_query",
@@ -252,7 +252,7 @@
   ],
   "functions": [
     {
-      "created_date": 1662487590420,
+      "created_date": 1664363956549,
       "description": {
         "content": "A function that runs ODBC queries. Parameters are passed to the database separately, protecting against SQL injection attacks.\nInputs:\nsql_query: a SQL query with set parameters using a question mark as a place holder, SQL statements SELECT, INSERT, UPDATE and DELETE are supported\nsql_condition_value1: value for the question mark - condition value 1\nsql_condition_value2: value for the question mark - condition value 2\nsql_condition_value3: value for the question mark - condition value 3",
         "format": "text"
@@ -260,14 +260,14 @@
       "destination_handle": "fn_odbc_query",
       "display_name": "fn_odbc_query",
       "export_key": "fn_odbc_query",
-      "id": 83,
+      "id": 1,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1662487590483,
+      "last_modified_time": 1664363956601,
       "name": "fn_odbc_query",
       "tags": [],
       "uuid": "9cd2dc7f-1099-4769-a00c-9864616c5795",
@@ -315,7 +315,7 @@
           "programmatic_name": "example_odbc_delete_postgresql",
           "tags": [],
           "uuid": null,
-          "workflow_id": 91
+          "workflow_id": 1
         },
         {
           "actions": [],
@@ -325,7 +325,7 @@
           "programmatic_name": "example_odbc_insert_postgresql",
           "tags": [],
           "uuid": null,
-          "workflow_id": 94
+          "workflow_id": 3
         },
         {
           "actions": [],
@@ -335,7 +335,7 @@
           "programmatic_name": "example_odbc_select_postgresql",
           "tags": [],
           "uuid": null,
-          "workflow_id": 93
+          "workflow_id": 2
         },
         {
           "actions": [],
@@ -345,20 +345,20 @@
           "programmatic_name": "example_odbc_update_postgresql",
           "tags": [],
           "uuid": null,
-          "workflow_id": 92
+          "workflow_id": 4
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 83,
+  "id": 1,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1662489401252,
+      "create_date": 1664364183601,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -367,7 +367,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1662489401252,
+      "update_date": 1664364183601,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -392,15 +392,15 @@
   "notifications": null,
   "overrides": [],
   "phases": [],
-  "playbooks": null,
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 49,
-    "major": 43,
-    "minor": 1,
-    "version": "43.1.49"
+    "build_number": 7585,
+    "major": 44,
+    "minor": 0,
+    "version": "44.0.7585"
   },
   "tags": [],
   "task_order": [],
@@ -421,7 +421,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_artifact_value",
           "hide_notification": false,
-          "id": 1307,
+          "id": 1085,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -437,7 +437,7 @@
           "templates": [],
           "text": "sql_artifact_value",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "3cbc4ed4-f860-44b5-b03a-e3f274b4b567",
           "values": [],
           "width": 98
@@ -452,7 +452,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_1",
           "hide_notification": false,
-          "id": 1308,
+          "id": 1086,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -468,7 +468,7 @@
           "templates": [],
           "text": "sql_column_1",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "20ba5763-57a0-4e6a-a088-9c9cc1d089fb",
           "values": [],
           "width": 77
@@ -483,7 +483,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_2",
           "hide_notification": false,
-          "id": 1309,
+          "id": 1087,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -499,7 +499,7 @@
           "templates": [],
           "text": "sql_column_2",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "a38d0c80-1121-44a3-b159-6931ce56d171",
           "values": [],
           "width": 77
@@ -514,7 +514,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_3",
           "hide_notification": false,
-          "id": 1310,
+          "id": 1088,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -530,7 +530,7 @@
           "templates": [],
           "text": "sql_column_3",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "857bfc79-a1df-4f5a-ba8b-480e661a29a8",
           "values": [],
           "width": 76
@@ -545,7 +545,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_4",
           "hide_notification": false,
-          "id": 1311,
+          "id": 1089,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -561,7 +561,7 @@
           "templates": [],
           "text": "sql_column_4",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "aa81c8de-985d-41dd-bc61-39684cd78fb3",
           "values": [],
           "width": 77
@@ -576,7 +576,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_5",
           "hide_notification": false,
-          "id": 1312,
+          "id": 1090,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -592,7 +592,7 @@
           "templates": [],
           "text": "sql_column_5",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "54dc08e6-69be-4d02-8169-737259310830",
           "values": [],
           "width": 76
@@ -607,7 +607,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_column_6",
           "hide_notification": false,
-          "id": 1313,
+          "id": 1091,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -623,7 +623,7 @@
           "templates": [],
           "text": "sql_column_6",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "d9813f53-43cf-4b11-98bf-561f5852e774",
           "values": [],
           "width": 71
@@ -638,7 +638,7 @@
           "deprecated": false,
           "export_key": "sql_query_results_dt/sql_timestamp",
           "hide_notification": false,
-          "id": 1314,
+          "id": 1092,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -654,7 +654,7 @@
           "templates": [],
           "text": "sql_timestamp",
           "tooltip": "",
-          "type_id": 1026,
+          "type_id": 1000,
           "uuid": "bd697364-5a5c-4294-adde-738b8f2bc05b",
           "values": [],
           "width": 122
@@ -684,78 +684,78 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "example_odbc_delete_postgresql",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_delete_postgresql\" isExecutable=\"true\" name=\"Example ODBC DELETE PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC DELETE query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1umr4mg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ud4t2v\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"DELETE from mock_data WHERE id = ?\"}}}},\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1umr4mg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0b4o5cq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1o736kt\"\u003e\u003cincoming\u003eSequenceFlow_0b4o5cq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1umr4mg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ud4t2v\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0b4o5cq\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"EndEvent_1o736kt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0tctkk9\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1xv0spt\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"TextAnnotation_0tctkk9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_03dn1v9\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0gdjuzf\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"TextAnnotation_03dn1v9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"334\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"329\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"244\" y=\"250\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"305\" xsi:type=\"omgdc:Point\" y=\"250\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ud4t2v\" id=\"ServiceTask_1ud4t2v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"516\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1o736kt\" id=\"EndEvent_1o736kt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"763\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"736\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1umr4mg\" id=\"SequenceFlow_1umr4mg_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"398\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0b4o5cq\" id=\"SequenceFlow_0b4o5cq_di\"\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"763\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"644.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0tctkk9\" id=\"TextAnnotation_0tctkk9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"496\" x=\"106\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1xv0spt\" id=\"Association_1xv0spt_di\"\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_03dn1v9\" id=\"TextAnnotation_03dn1v9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"377\" x=\"649\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0gdjuzf\" id=\"Association_0gdjuzf_di\"\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"182\"/\u003e\u003comgdi:waypoint x=\"806\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Example workflow that runs ODBC DELETE query on PosgreSQL database.",
-      "export_key": "example_odbc_delete_postgresql",
-      "last_modified_by": "admin1@example.com",
-      "last_modified_time": 1662487591051,
-      "name": "Example ODBC DELETE PostgreSQL",
-      "object_type": "artifact",
-      "programmatic_name": "example_odbc_delete_postgresql",
-      "tags": [],
-      "uuid": "f3d3935b-7c8b-4734-85ec-2325a4e04edd",
-      "workflow_id": 91
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_odbc_select_postgresql",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_select_postgresql\" isExecutable=\"true\" name=\"Example ODBC SELECT PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC SELECT query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_02pwymv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0l9o32c\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3 FROM mock_data WHERE id = ?\"}}}},\"post_processing_script\":\"##  ODBC query workflow - post processing script ##\\n# Example of expected results.\\n\\\"\\\"\\\"\\n{\\n  \u0027entries\u0027: [\\n    {u\u0027sql_column_1\u0027: \\\"query_result_column_1_value, u\u0027sql_column_2\u0027: u\u0027query_result_column_2_value\u0027, ...},\\n    {u\u0027sql_column_1\u0027: query_result_column_1_value, u\u0027sql_column_2\u0027: u\u0027query_result_column_2_value\u0027, ...}\\n    ...\\n  ]\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n\\n# This list contains Resilient data table api field names.\\n# Exclude fist two columns \u0027sql_artifact_value\u0027 and \u0027sql_timestamp\u0027 from this list.\\n# Modify this list acording to your Resilent data table fields.\\nRESILENT_DATATABLE_COLUMN_NAMES_LIST = [\\n  \\\"sql_column_1\\\",\\n  \\\"sql_column_2\\\",\\n  \\\"sql_column_3\\\",\\n  \\\"sql_column_4\\\",\\n  \\\"sql_column_5\\\"]\\n  \\n# Processing\\nfrom java.util import Date\\n\\nif results.entries is not None:\\n  for entry in results.entries:\\n    row = incident.addRow(\\\"sql_query_results_dt\\\")\\n  \\n    row.sql_artifact_value = artifact.value\\n    row.sql_timestamp = Date()\\n  \\n    for item in RESILENT_DATATABLE_COLUMN_NAMES_LIST:\\n      if item in entry:\\n        try:\\n          row[item] = entry[item]\\n        except IndexError:\\n          row[item] = \\\"\\\"\",\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_02pwymv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v0hq8p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1dg0248\"\u003e\u003cincoming\u003eSequenceFlow_0v0hq8p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02pwymv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0l9o32c\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0v0hq8p\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"EndEvent_1dg0248\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10vm98n\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_05xe5vp\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"TextAnnotation_10vm98n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1xe3p1b\"\u003e\u003ctext\u003eresults: list of entries consisting of key-value pairs\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1e3y4ur\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"TextAnnotation_1xe3p1b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"327\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"322\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"216\" y=\"234\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"288\" xsi:type=\"omgdc:Point\" y=\"234\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0l9o32c\" id=\"ServiceTask_0l9o32c_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"491\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dg0248\" id=\"EndEvent_1dg0248_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"732\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"705\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02pwymv\" id=\"SequenceFlow_02pwymv_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"382\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0hq8p\" id=\"SequenceFlow_0v0hq8p_di\"\u003e\u003comgdi:waypoint x=\"591\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"732\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"616.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10vm98n\" id=\"TextAnnotation_10vm98n_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"485\" x=\"102\" y=\"48\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_05xe5vp\" id=\"Association_05xe5vp_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1xe3p1b\" id=\"TextAnnotation_1xe3p1b_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"380\" x=\"683\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1e3y4ur\" id=\"Association_1e3y4ur_di\"\u003e\u003comgdi:waypoint x=\"591\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"838\" xsi:type=\"omgdc:Point\" y=\"80\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Example workflow that runs ODBC SELECT query on PosgreSQL database.",
-      "export_key": "example_odbc_select_postgresql",
-      "last_modified_by": "admin1@example.com",
-      "last_modified_time": 1662487591460,
-      "name": "Example ODBC SELECT PostgreSQL",
-      "object_type": "artifact",
-      "programmatic_name": "example_odbc_select_postgresql",
-      "tags": [],
-      "uuid": "de5fb10d-fb27-4e58-b80b-ee00304f0903",
-      "workflow_id": 93
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_odbc_insert_postgresql",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_insert_postgresql\" isExecutable=\"true\" name=\"Example ODBC INSERT PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC INSERT query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0wi29yn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10bttpr\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)\"}}},\"cf253679-c066-424b-a6c9-897b27dbd32c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"9\"}},\"e3f3aebf-c49d-467f-8ed8-0051951adcc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Jane\"}},\"bfae970d-3466-4280-9d54-d830ea36a657\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Doe\"}}},\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0wi29yn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0u0min7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10fqjss\"\u003e\u003cincoming\u003eSequenceFlow_0u0min7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wi29yn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10bttpr\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0u0min7\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"EndEvent_10fqjss\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1iej64o\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1b95cnr\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"TextAnnotation_1iej64o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1w5j7fh\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t6ct3n\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"TextAnnotation_1w5j7fh\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"365\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"360\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"217\" y=\"252\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"213\"/\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"252\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10bttpr\" id=\"ServiceTask_10bttpr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"529\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10fqjss\" id=\"EndEvent_10fqjss_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"778\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"751\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wi29yn\" id=\"SequenceFlow_0wi29yn_di\"\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"529\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"420\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u0min7\" id=\"SequenceFlow_0u0min7_di\"\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"778\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"658.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1iej64o\" id=\"TextAnnotation_1iej64o_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"507\" x=\"118\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1b95cnr\" id=\"Association_1b95cnr_di\"\u003e\u003comgdi:waypoint x=\"533\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"65\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1w5j7fh\" id=\"TextAnnotation_1w5j7fh_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"393\" x=\"695\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t6ct3n\" id=\"Association_0t6ct3n_di\"\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"862\" xsi:type=\"omgdc:Point\" y=\"65\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Example workflow that runs ODBC INSERT query on PosgreSQL database.",
-      "export_key": "example_odbc_insert_postgresql",
-      "last_modified_by": "admin1@example.com",
-      "last_modified_time": 1662487591641,
-      "name": "Example ODBC INSERT PostgreSQL",
-      "object_type": "artifact",
-      "programmatic_name": "example_odbc_insert_postgresql",
-      "tags": [],
-      "uuid": "f5a9bde4-511a-40d7-9019-b8e44c2bb4ce",
-      "workflow_id": 94
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "example_odbc_update_postgresql",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_update_postgresql\" isExecutable=\"true\" name=\"Example ODBC UPDATE PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC UPDATE query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0i412x2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1timinw\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"UPDATE mock_data SET id = ? WHERE first_name = ?\"}}}},\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\\ninputs.sql_condition_value2 = artifact.description.content\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0i412x2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1lsi73m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_14slhbd\"\u003e\u003cincoming\u003eSequenceFlow_1lsi73m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i412x2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1timinw\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1lsi73m\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"EndEvent_14slhbd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ef0b5s\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1u1zs44\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"TextAnnotation_0ef0b5s\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0eva1qu\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1siptig\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"TextAnnotation_0eva1qu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"322\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"317\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"216\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"280\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1timinw\" id=\"ServiceTask_1timinw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"472\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14slhbd\" id=\"EndEvent_14slhbd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"679\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"652\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i412x2\" id=\"SequenceFlow_0i412x2_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lsi73m\" id=\"SequenceFlow_1lsi73m_di\"\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"580.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ef0b5s\" id=\"TextAnnotation_0ef0b5s_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"412\" x=\"672\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1u1zs44\" id=\"Association_1u1zs44_di\"\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"841\" xsi:type=\"omgdc:Point\" y=\"75\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0eva1qu\" id=\"TextAnnotation_0eva1qu_di\"\u003e\u003comgdc:Bounds height=\"33\" width=\"482\" x=\"95\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1siptig\" id=\"Association_1siptig_di\"\u003e\u003comgdi:waypoint x=\"478\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"76\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_update_postgresql\" isExecutable=\"true\" name=\"Example ODBC UPDATE PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC UPDATE query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0i412x2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1timinw\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"UPDATE mock_data SET id = ? WHERE first_name = ?\"}}}},\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\\ninputs.sql_condition_value2 = artifact.description.content\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0i412x2\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1lsi73m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_14slhbd\"\u003e\u003cincoming\u003eSequenceFlow_1lsi73m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0i412x2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1timinw\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1lsi73m\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"EndEvent_14slhbd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ef0b5s\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1u1zs44\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"TextAnnotation_0ef0b5s\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0eva1qu\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1siptig\" sourceRef=\"ServiceTask_1timinw\" targetRef=\"TextAnnotation_0eva1qu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"322\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"317\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"216\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"325\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"280\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1timinw\" id=\"ServiceTask_1timinw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"472\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14slhbd\" id=\"EndEvent_14slhbd_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"679\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"652\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0i412x2\" id=\"SequenceFlow_0i412x2_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"370\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lsi73m\" id=\"SequenceFlow_1lsi73m_di\"\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"580.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ef0b5s\" id=\"TextAnnotation_0ef0b5s_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"412\" x=\"672\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1u1zs44\" id=\"Association_1u1zs44_di\"\u003e\u003comgdi:waypoint x=\"572\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"841\" xsi:type=\"omgdc:Point\" y=\"75\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0eva1qu\" id=\"TextAnnotation_0eva1qu_di\"\u003e\u003comgdc:Bounds height=\"33\" width=\"482\" x=\"95\" y=\"43\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1siptig\" id=\"Association_1siptig_di\"\u003e\u003comgdi:waypoint x=\"478\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"76\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 2,
       "description": "Example workflow that runs ODBC UPDATE query on PosgreSQL database.",
       "export_key": "example_odbc_update_postgresql",
       "last_modified_by": "admin1@example.com",
-      "last_modified_time": 1662487591262,
+      "last_modified_time": 1664364158204,
       "name": "Example ODBC UPDATE PostgreSQL",
       "object_type": "artifact",
       "programmatic_name": "example_odbc_update_postgresql",
       "tags": [],
       "uuid": "091302b9-3df6-4b75-9495-a3e1ba74152d",
-      "workflow_id": 92
+      "workflow_id": 4
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "example_odbc_delete_postgresql",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_delete_postgresql\" isExecutable=\"true\" name=\"Example ODBC DELETE PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC DELETE query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1umr4mg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ud4t2v\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"DELETE from mock_data WHERE id = ?\"}}}},\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1umr4mg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0b4o5cq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1o736kt\"\u003e\u003cincoming\u003eSequenceFlow_0b4o5cq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1umr4mg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ud4t2v\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0b4o5cq\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"EndEvent_1o736kt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0tctkk9\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1xv0spt\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"TextAnnotation_0tctkk9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_03dn1v9\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0gdjuzf\" sourceRef=\"ServiceTask_1ud4t2v\" targetRef=\"TextAnnotation_03dn1v9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"334\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"329\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"244\" y=\"250\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"305\" xsi:type=\"omgdc:Point\" y=\"250\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ud4t2v\" id=\"ServiceTask_1ud4t2v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"516\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1o736kt\" id=\"EndEvent_1o736kt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"763\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"736\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1umr4mg\" id=\"SequenceFlow_1umr4mg_di\"\u003e\u003comgdi:waypoint x=\"370\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"398\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0b4o5cq\" id=\"SequenceFlow_0b4o5cq_di\"\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"763\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"644.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0tctkk9\" id=\"TextAnnotation_0tctkk9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"496\" x=\"106\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1xv0spt\" id=\"Association_1xv0spt_di\"\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_03dn1v9\" id=\"TextAnnotation_03dn1v9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"377\" x=\"649\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0gdjuzf\" id=\"Association_0gdjuzf_di\"\u003e\u003comgdi:waypoint x=\"616\" xsi:type=\"omgdc:Point\" y=\"182\"/\u003e\u003comgdi:waypoint x=\"806\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "Example workflow that runs ODBC DELETE query on PosgreSQL database.",
+      "export_key": "example_odbc_delete_postgresql",
+      "last_modified_by": "admin1@example.com",
+      "last_modified_time": 1664364040800,
+      "name": "Example ODBC DELETE PostgreSQL",
+      "object_type": "artifact",
+      "programmatic_name": "example_odbc_delete_postgresql",
+      "tags": [],
+      "uuid": "f3d3935b-7c8b-4734-85ec-2325a4e04edd",
+      "workflow_id": 1
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "example_odbc_select_postgresql",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_select_postgresql\" isExecutable=\"true\" name=\"Example ODBC SELECT PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC SELECT query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_02pwymv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0l9o32c\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3 FROM mock_data WHERE id = ?\"}}}},\"post_processing_script\":\"##  ODBC query workflow - post processing script ##\\n# Example of expected results.\\n\\\"\\\"\\\"\\n{\\n  \u0027entries\u0027: [\\n    {u\u0027sql_column_1\u0027: \\\"query_result_column_1_value, u\u0027sql_column_2\u0027: u\u0027query_result_column_2_value\u0027, ...},\\n    {u\u0027sql_column_1\u0027: query_result_column_1_value, u\u0027sql_column_2\u0027: u\u0027query_result_column_2_value\u0027, ...}\\n    ...\\n  ]\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n\\n# This list contains Resilient data table api field names.\\n# Exclude fist two columns \u0027sql_artifact_value\u0027 and \u0027sql_timestamp\u0027 from this list.\\n# Modify this list acording to your Resilent data table fields.\\nRESILENT_DATATABLE_COLUMN_NAMES_LIST = [\\n  \\\"sql_column_1\\\",\\n  \\\"sql_column_2\\\",\\n  \\\"sql_column_3\\\",\\n  \\\"sql_column_4\\\",\\n  \\\"sql_column_5\\\"]\\n\\n# Processing\\nfrom java.util import Date\\n\\nif results.entries:\\n  for entry in results.entries:\\n    row = incident.addRow(\\\"sql_query_results_dt\\\")\\n\\n    row.sql_artifact_value = artifact.value\\n    row.sql_timestamp = Date()\\n\\n    for item in RESILENT_DATATABLE_COLUMN_NAMES_LIST:\\n      if item in entry:\\n        try:\\n          row[item] = entry[item]\\n        except IndexError:\\n          row[item] = \\\"\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sql_condition_value1 = artifact.value\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_02pwymv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v0hq8p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1dg0248\"\u003e\u003cincoming\u003eSequenceFlow_0v0hq8p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_02pwymv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0l9o32c\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0v0hq8p\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"EndEvent_1dg0248\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10vm98n\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_05xe5vp\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"TextAnnotation_10vm98n\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1xe3p1b\"\u003e\u003ctext\u003eresults: list of entries consisting of key-value pairs\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1e3y4ur\" sourceRef=\"ServiceTask_0l9o32c\" targetRef=\"TextAnnotation_1xe3p1b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"327\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"322\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"216\" y=\"234\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"211\"/\u003e\u003comgdi:waypoint x=\"288\" xsi:type=\"omgdc:Point\" y=\"234\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0l9o32c\" id=\"ServiceTask_0l9o32c_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"491\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1dg0248\" id=\"EndEvent_1dg0248_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"732\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"705\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_02pwymv\" id=\"SequenceFlow_02pwymv_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"382\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v0hq8p\" id=\"SequenceFlow_0v0hq8p_di\"\u003e\u003comgdi:waypoint x=\"591\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"732\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"616.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10vm98n\" id=\"TextAnnotation_10vm98n_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"485\" x=\"102\" y=\"48\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_05xe5vp\" id=\"Association_05xe5vp_di\"\u003e\u003comgdi:waypoint x=\"495\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"369\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1xe3p1b\" id=\"TextAnnotation_1xe3p1b_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"380\" x=\"683\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1e3y4ur\" id=\"Association_1e3y4ur_di\"\u003e\u003comgdi:waypoint x=\"591\" xsi:type=\"omgdc:Point\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"838\" xsi:type=\"omgdc:Point\" y=\"80\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "Example workflow that runs ODBC SELECT query on PosgreSQL database.",
+      "export_key": "example_odbc_select_postgresql",
+      "last_modified_by": "admin1@example.com",
+      "last_modified_time": 1664364148543,
+      "name": "Example ODBC SELECT PostgreSQL",
+      "object_type": "artifact",
+      "programmatic_name": "example_odbc_select_postgresql",
+      "tags": [],
+      "uuid": "de5fb10d-fb27-4e58-b80b-ee00304f0903",
+      "workflow_id": 2
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "example_odbc_insert_postgresql",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_odbc_insert_postgresql\" isExecutable=\"true\" name=\"Example ODBC INSERT PostgreSQL\"\u003e\u003cdocumentation\u003eExample workflow that runs ODBC INSERT query on PosgreSQL database.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0wi29yn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_10bttpr\" name=\"fn_odbc_query\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9cd2dc7f-1099-4769-a00c-9864616c5795\"\u003e{\"inputs\":{\"0070aa06-fe8b-4a46-9152-7077f5aacbd4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)\"}}},\"cf253679-c066-424b-a6c9-897b27dbd32c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"9\"}},\"e3f3aebf-c49d-467f-8ed8-0051951adcc1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Jane\"}},\"bfae970d-3466-4280-9d54-d830ea36a657\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Doe\"}}},\"post_processing_script_language\":\"python\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0wi29yn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0u0min7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_10fqjss\"\u003e\u003cincoming\u003eSequenceFlow_0u0min7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wi29yn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10bttpr\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0u0min7\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"EndEvent_10fqjss\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1iej64o\"\u003e\u003ctext\u003einputs: sql_query, sql_condition_value1, sql_condition_value2 and sql_condition_value3\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1b95cnr\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"TextAnnotation_1iej64o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1w5j7fh\"\u003e\u003ctext\u003eresult: number of processed rows displayed in the Action Status\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0t6ct3n\" sourceRef=\"ServiceTask_10bttpr\" targetRef=\"TextAnnotation_1w5j7fh\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"365\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"360\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"217\" y=\"252\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"367\" xsi:type=\"omgdc:Point\" y=\"213\"/\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"252\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10bttpr\" id=\"ServiceTask_10bttpr_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"529\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_10fqjss\" id=\"EndEvent_10fqjss_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"778\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"751\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wi29yn\" id=\"SequenceFlow_0wi29yn_di\"\u003e\u003comgdi:waypoint x=\"401\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"529\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"420\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u0min7\" id=\"SequenceFlow_0u0min7_di\"\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"778\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"658.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1iej64o\" id=\"TextAnnotation_1iej64o_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"507\" x=\"118\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1b95cnr\" id=\"Association_1b95cnr_di\"\u003e\u003comgdi:waypoint x=\"533\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"65\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1w5j7fh\" id=\"TextAnnotation_1w5j7fh_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"393\" x=\"695\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0t6ct3n\" id=\"Association_0t6ct3n_di\"\u003e\u003comgdi:waypoint x=\"629\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"862\" xsi:type=\"omgdc:Point\" y=\"65\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Example workflow that runs ODBC INSERT query on PosgreSQL database.",
+      "export_key": "example_odbc_insert_postgresql",
+      "last_modified_by": "admin1@example.com",
+      "last_modified_time": 1664364062836,
+      "name": "Example ODBC INSERT PostgreSQL",
+      "object_type": "artifact",
+      "programmatic_name": "example_odbc_insert_postgresql",
+      "tags": [],
+      "uuid": "f5a9bde4-511a-40d7-9019-b8e44c2bb4ce",
+      "workflow_id": 3
     }
   ],
   "workspaces": []

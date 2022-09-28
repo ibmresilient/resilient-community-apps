@@ -45,17 +45,17 @@ RESILENT_DATATABLE_COLUMN_NAMES_LIST = [
   "sql_column_3",
   "sql_column_4",
   "sql_column_5"]
-  
+
 # Processing
 from java.util import Date
 
-if results.entries is not None:
+if results.entries:
   for entry in results.entries:
     row = incident.addRow("sql_query_results_dt")
-  
+
     row.sql_artifact_value = artifact.value
     row.sql_timestamp = Date()
-  
+
     for item in RESILENT_DATATABLE_COLUMN_NAMES_LIST:
       if item in entry:
         try:
