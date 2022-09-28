@@ -16,8 +16,8 @@ def selftest_function(opts):
     options = opts.get("fn_odbc_query", {})
     sql_connection_string = options["sql_connection_string"]
     sql_autocommit = str_to_bool(options.get("sql_autocommit", 'False'))
-    sql_query_timeout = int(options.get("sql_query_timeout")) \
-        if options.get("sql_query_timeout") else None
+    sql_query_timeout = options.get("sql_query_timeout", None)
+    sql_query_timeout = int(sql_query_timeout) if sql_query_timeout else None
 
     reason = None
     odbc_connection = None

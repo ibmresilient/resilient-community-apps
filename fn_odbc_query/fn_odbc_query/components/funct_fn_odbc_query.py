@@ -80,13 +80,12 @@ class FunctionComponent(AppFunctionComponent):
         sql_connection_string = self.options["sql_connection_string"]
         sql_restricted_sql_statements = self.options.get("sql_restricted_sql_statements", None)
         sql_autocommit = str_to_bool(self.options.get("sql_autocommit", 'False'))
-        sql_query_timeout = int(self.options.get("sql_query_timeout")) \
-            if self.options.get("sql_query_timeout") else None
-        sql_database_type = self.options.get("sql_database_type").lower() \
-            if self.options.get("sql_database_type") else None
-        sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
-            if self.options.get("sql_number_of_records_returned") else None
-
+        sql_query_timeout = self.options.get("sql_query_timeout", None)
+        sql_query_timeout = int(sql_query_timeout) if sql_query_timeout else None
+        sql_database_type = self.options.get("sql_database_type", None)
+        sql_database_type = sql_database_type.lower() if sql_database_type else None
+        sql_number_of_records_returned = self.options.get("sql_number_of_records_returned", None)
+        sql_number_of_records_returned = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
         # Validate sql query
         function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 

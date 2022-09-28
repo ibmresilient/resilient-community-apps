@@ -39,6 +39,7 @@ class OdbcConnection(object):
             db_connection = pyodbc.connect(sql_connection_string)
 
             # As per the Python DB API, the default value is False
+            sql_autocommit = sql_autocommit if sql_autocommit else False
             db_connection.autocommit = sql_autocommit
 
             # Some ODBC drivers do not implement the connection timeout and will throw pyodbc.Error while trying
@@ -55,6 +56,7 @@ class OdbcConnection(object):
             #
             # Try to catch a pyodbc.Error, log it as warning and pass.
             try:
+                sql_query_timeout = sql_query_timeout if sql_query_timeout else 30
                 db_connection.timeout = sql_query_timeout
             except pyodbc.Error as e:
                 LOG.warning(f"ODBC driver does not implement the connection timeout attribute. Error code: {e.args[0]} - {e.args[1]}")
@@ -125,7 +127,7 @@ class OdbcConnection(object):
         :param sql_params: function parameters
         """
         try:
-            self.db_cursor.execute(sql_query, sql_params)
+            r = self.db_cursor.execute(sql_query, sql_params)
 
             if not self.db_connection.autocommit:
                 self.db_connection.commit()

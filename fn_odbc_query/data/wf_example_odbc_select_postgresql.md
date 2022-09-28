@@ -11,7 +11,7 @@
 `fn_odbc_query`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_odbc_query`
@@ -23,23 +23,10 @@ inputs.sql_condition_value1 = artifact.value
 
 ### Post-Processing Script
 ```python
-##  ODBC query workflow - post processing script ##
-# Example of expected results.
-"""
-{
-  'entries': [
-    {u'sql_column_1': "query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...},
-    {u'sql_column_1': query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...}
-    ...
-  ]
-}
-"""
-#  Globals
-
-# This list contains Resilient data table api field names.
+# This list contains SOAR data table api field names.
 # Exclude fist two columns 'sql_artifact_value' and 'sql_timestamp' from this list.
-# Modify this list acording to your Resilent data table fields.
-RESILENT_DATATABLE_COLUMN_NAMES_LIST = [
+# Modify this list acording to your SOAR data table fields.
+DATATABLE_COLUMN_NAMES_LIST = [
   "sql_column_1",
   "sql_column_2",
   "sql_column_3",
@@ -49,19 +36,18 @@ RESILENT_DATATABLE_COLUMN_NAMES_LIST = [
 # Processing
 from java.util import Date
 
-if results.entries:
-  for entry in results.entries:
-    row = incident.addRow("sql_query_results_dt")
+if results.get("content").get("entries"):
+  for entry in results['content'].get("entries"):
+    table = incident.addRow("sql_query_results_dt")
+    table['sql_artifact_value'] = artifact.value
+    table['sql_timestamp'] = Date()
 
-    row.sql_artifact_value = artifact.value
-    row.sql_timestamp = Date()
-
-    for item in RESILENT_DATATABLE_COLUMN_NAMES_LIST:
+    for item in DATATABLE_COLUMN_NAMES_LIST:
       if item in entry:
         try:
-          row[item] = entry[item]
+          table[item] = entry[item]
         except IndexError:
-          row[item] = ""
+          table[item] = ""
 ```
 
 ---
