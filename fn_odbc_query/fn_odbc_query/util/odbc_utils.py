@@ -2,8 +2,11 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # Util classes for ODBC
 from logging import getLogger
-import pyodbc
 
+import pyodbc
+from resilient_lib import IntegrationError
+
+PACKAGE_NAME = "fn_odbc_query"
 SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
 LOG = getLogger(__name__)
 
@@ -18,7 +21,7 @@ class OdbcConnection(object):
     @staticmethod
     def setup_odbc_connection(sql_connection_string, sql_autocommit=False, sql_query_timeout=30):
         """
-        Setup ODBC connection to a SQL server using connection string obtained from the config file.
+        Setup ODBC connection to a SQL db using connection string obtained from the config file.
         Set autocommit and query timeout values based on the information in config file.
         :param sql_connection_string: config setting
         :param sql_autocommit: config setting
@@ -26,21 +29,20 @@ class OdbcConnection(object):
         :return: pyodbc Connection
         """
         # ODBC connection pooling is turned ON by default.
-        # Not all database drivers close connections on db_connection.close() to save round trips to the server.
+        # Not all database drivers close connections on db_connection.close() to save round trips to the db.
         # Pooling should be set to False to close connection on db_connection.close().
         pyodbc.pooling = False
 
         # This fixes incorrect locale setting issue that causes
-        # pyodbc.connect to abort on macOS with ODBC Driver 17 for SQL Server (msodbcsql17) working in Python 3.6.
-        from locale import setlocale, LC_ALL
+        # pyodbc.connect to abort on macOS with ODBC Driver 17 for SQL db (msodbcsql17) working in Python 3.6.
+        from locale import LC_ALL, setlocale
         setlocale(LC_ALL, "")
 
         try:
             db_connection = pyodbc.connect(sql_connection_string)
 
             # As per the Python DB API, the default value is False
-            sql_autocommit = sql_autocommit if sql_autocommit else False
-            db_connection.autocommit = sql_autocommit
+            db_connection.autocommit = sql_autocommit if sql_autocommit else False
 
             # Some ODBC drivers do not implement the connection timeout and will throw pyodbc.Error while trying
             # to set it.
@@ -56,8 +58,7 @@ class OdbcConnection(object):
             #
             # Try to catch a pyodbc.Error, log it as warning and pass.
             try:
-                sql_query_timeout = sql_query_timeout if sql_query_timeout else 30
-                db_connection.timeout = sql_query_timeout
+                db_connection.timeout = sql_query_timeout if sql_query_timeout else 30
             except pyodbc.Error as e:
                 LOG.warning(f"ODBC driver does not implement the connection timeout attribute. Error code: {e.args[0]} - {e.args[1]}")
 
@@ -68,7 +69,7 @@ class OdbcConnection(object):
 
     def configure_unicode_settings(self, sql_database_type):
         """
-        Configure unicode settings based on the type of SQL database server.
+        Configure unicode settings based on the type of SQL database db.
         Pyodbc recommends configurating connection's encoding and decoding, since many drivers behave differently.
         :param sql_database_type: config setting
         """
@@ -82,7 +83,7 @@ class OdbcConnection(object):
                 self.db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')
                 self.db_connection.setencoding(encoding='utf-8')
 
-            # Pyodbc Wiki page states recent MS SQL Server drivers match the specification,
+            # Pyodbc Wiki page states recent MS SQL db drivers match the specification,
             # no additional Unicode configuration is necessary. Using the pyodbc defaults is recommended.
 
     def set_db_cursor(self, db_cursor):
@@ -91,8 +92,7 @@ class OdbcConnection(object):
     def create_cursor(self):
         """Create cursor"""
         try:
-            db_cursor = self.db_connection.cursor()
-            self.set_db_cursor(db_cursor)
+            self.set_db_cursor(self.db_connection.cursor())
 
         except Exception as e:
             raise RuntimeError(f"Could not execute SQL statement, Exception {e}")
@@ -127,7 +127,7 @@ class OdbcConnection(object):
         :param sql_params: function parameters
         """
         try:
-            r = self.db_cursor.execute(sql_query, sql_params)
+            self.db_cursor.execute(sql_query, sql_params)
 
             if not self.db_connection.autocommit:
                 self.db_connection.commit()
@@ -138,9 +138,62 @@ class OdbcConnection(object):
         return self.db_cursor.rowcount
 
     def close_connections(self):
-        """  Tear down. Close connections if they're defined."""
+        """Tear down. Close connections if they're defined."""
         if self.db_cursor:
             self.db_cursor.close()
 
         if self.db_connection:
             self.db_connection.close()
+
+class odbcDBs():
+    def __init__(self, opts):
+        self.dbs, self.db_name_list = self._load_databases(opts)
+
+    def _load_databases(self, opts):
+        dbs = {}
+        db_name_list = self._get_database_name_list(opts)
+        for db in db_name_list:
+            db_data = opts.get(db)
+            if not db_data:
+                raise KeyError(f"Unable to find database: {db}")
+
+            dbs[db] = db_data
+
+        return dbs, db_name_list
+
+    def database_label_test(db_label, dbs_list):
+        """
+        Check if the given db_label is in the app.config
+        :param db_label: User selected database
+        :param dbs_list: list of databases
+        :return: dictionary of options for choosen database
+        """
+        # If label not given and using previous versions app.config [fn_odbc_query]
+        if not db_label and dbs_list.get(PACKAGE_NAME):
+            return dbs_list[PACKAGE_NAME]
+        elif not db_label:
+            raise IntegrationError("No label was given and is required if databases are labeled in the app.config")
+
+        label = f"{PACKAGE_NAME}:{db_label}"
+        if db_label and label in dbs_list:
+            options = dbs_list[label]
+        elif len(dbs_list) == 1:
+            options = dbs_list[list(dbs_list.keys())[0]]
+        else:
+            raise IntegrationError(f"{db_label} did not match labels given in the app.config")
+
+        return options
+
+    def _get_database_name_list(self, opts):
+        """
+        Return the list of database names defined in the app.config in fn_odbc_query.
+        :param opts: list of options
+        :return: list of databases
+        """
+        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:")]
+
+    def get_database_name_list(self):
+        """
+        Return list of all database names
+        """
+        return self.db_name_list

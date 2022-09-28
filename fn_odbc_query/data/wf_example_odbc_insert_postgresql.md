@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.db_label = rule.properties.db_label
 ```
 
 ### Post-Processing Script

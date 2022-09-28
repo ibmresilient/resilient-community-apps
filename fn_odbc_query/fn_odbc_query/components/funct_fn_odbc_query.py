@@ -7,44 +7,16 @@ from json import dumps
 
 from fn_odbc_query.util import function_utils, odbc_utils
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
-                                StatusMessage, app_function)
+                                app_function)
 from resilient_lib import IntegrationError, str_to_bool, validate_fields
 
-PACKAGE_NAME = "fn_odbc_query"
 FN_NAME = "fn_odbc_query"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements SOAR function 'fn_odbc_query'
-
-    The Function executes an ODBC query and takes the following parameters:
-        sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3
-
-    An example of query parameters might look like the following:
-
-        sql_select:
-        SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3
-            FROM mock_data WHERE id = ?
-        DELETE from mock_data WHERE id = ?
-        INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)
-        UPDATE mock_data SET id = ? WHERE email = ?
-
-        sql_condition_value1: custom condition value 1 | artifact.value | artifact.description | etc
-        sql_condition_value2: custom condition value 2 | artifact.value | artifact.description | etc
-        sql_condition_value3: custom condition value 3 | artifact.value | artifact.description | etc
-
-    The ODBC query will return a result in JSON format with an entry consisting of key value pairs.
-
-        {
-            'entries': [
-                {u'sql_column_1': "query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...},
-                {u'sql_column_1': query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...}
-                ...
-            ]
-        }
-    """
+    """Component that implements SOAR function 'fn_odbc_query'"""
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        super(FunctionComponent, self).__init__(opts, function_utils.PACKAGE_NAME)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -69,22 +41,26 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get the function parameters:
         sql_query = fn_inputs.sql_query
-        sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs))]
+        sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs)-1)]
+        db_label = getattr(fn_inputs, "db_label")
 
         # Log parameers
         self.LOG.info(str(sql_params))
 
-        # Validate app.config settings
-        validate_fields(["sql_connection_string"], self.options)
+        # Get configuration for database specified
+        options = function_utils.get_database_settings(self.opts, db_label)
 
-        sql_connection_string = self.options["sql_connection_string"]
-        sql_restricted_sql_statements = self.options.get("sql_restricted_sql_statements", None)
-        sql_autocommit = str_to_bool(self.options.get("sql_autocommit", 'False'))
-        sql_query_timeout = self.options.get("sql_query_timeout", None)
+        # Validate app.config settings
+        validate_fields([{"name": "sql_connection_string", "placeholder": "Driver={PostgreSQL};Server=IPAddress;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;"}], options)
+
+        sql_connection_string = options["sql_connection_string"]
+        sql_restricted_sql_statements = options.get("sql_restricted_sql_statements")
+        sql_autocommit = str_to_bool(options.get("sql_autocommit", 'False'))
+        sql_query_timeout = options.get("sql_query_timeout")
         sql_query_timeout = int(sql_query_timeout) if sql_query_timeout else None
-        sql_database_type = self.options.get("sql_database_type", None)
+        sql_database_type = options.get("sql_database_type")
         sql_database_type = sql_database_type.lower() if sql_database_type else None
-        sql_number_of_records_returned = self.options.get("sql_number_of_records_returned", None)
+        sql_number_of_records_returned = options.get("sql_number_of_records_returned")
         sql_number_of_records_returned = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
         # Validate sql query
         function_utils.validate_data(sql_restricted_sql_statements, sql_query)

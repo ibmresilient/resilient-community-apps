@@ -20,6 +20,7 @@
 ```python
 inputs.sql_condition_value1 = artifact.value
 inputs.sql_condition_value2 = artifact.description.content
+inputs.db_label = rule.properties.db_label
 ```
 
 ### Post-Processing Script

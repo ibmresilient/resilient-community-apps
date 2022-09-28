@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_odbc_query"""
+"""Generate the SOAR customizations required for fn_odbc_query"""
 
 import base64
 import os
@@ -12,7 +12,6 @@ except ImportError:
     from resilient_circuits.util import ImportDefinition
 
 RES_FILE = "data/export.res"
-
 
 def codegen_reload_data():
     """
@@ -32,7 +31,6 @@ def codegen_reload_data():
         "scripts": [],
         "playbooks": []
     }
-
 
 def customization_data(client=None):
     """
@@ -62,7 +60,7 @@ def customization_data(client=None):
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
     if not os.path.isfile(res_file):
-        raise FileNotFoundError("{} not found".format(RES_FILE))
+        raise FileNotFoundError("f{RES_FILE} not found")
 
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))
