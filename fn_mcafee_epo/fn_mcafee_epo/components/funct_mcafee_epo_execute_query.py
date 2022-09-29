@@ -3,7 +3,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """AppFunction implementation"""
 
-from tkinter import N
 from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME, clear
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
