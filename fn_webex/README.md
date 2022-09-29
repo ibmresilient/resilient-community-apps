@@ -1,12 +1,12 @@
-# Cisco Webex
+# Cisco Webex for IBM QRadar SOAR
 
 ## Table of Contents
-- [Cisco Webex](#cisco-webex)
+- [Cisco Webex for IBM QRadar SOAR](#cisco-webex-for-ibm-qradar-soar)
   - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
   - [Overview](#overview)
     - [Key Features](#key-features)
-  - [* Example rules are included that activates a menu popup that prompts the user for inputs to customize the team, room or a meeting.](#-example-rules-are-included-that-activates-a-menu-popup-that-prompts-the-user-for-inputs-to-customize-the-team-room-or-a-meeting)
+  - [* Example rules are included that activate a menu popup that prompts the user for inputs to customize the team, room or a meeting.](#-example-rules-are-included-that-activate-a-menu-popup-that-prompts-the-user-for-inputs-to-customize-the-team-room-or-a-meeting)
   - [Requirements](#requirements)
     - [SOAR platform](#soar-platform)
     - [Cloud Pak for Security](#cloud-pak-for-security)
@@ -37,19 +37,19 @@
 
 ## Overview
 
-**SOAR Components for Cisco Webex**
+**Cisco Webex for IBM QRadar SOAR**
 
 This package extends the meeting and collaboration functionality of Webex to IBM Security QRadar SOAR Platform. This package provides SOAR platform with the ability to interface with Cisco Webex and create rooms, teams and meetings. The user now can create Meeitngs, Rooms and teams from within a SOAR incident and assign its members to it.
 
  ![screenshot: main](./doc/screenshots/workflow_create_rooms_teams.png)
 
 ### Key Features
-* This package provdes with functions that allows for creating one or more Webex Teams and Rooms and adds members from an incident or task to it.
+* This package provides functions to create of one or more Webex Teams and Rooms and allows you to add members of an incident or task to them.
 * Functionality to delete Teams or Rooms created from an incident or task is also possible using this package.
-* It allows for creating this Room and Team with additional members who are not a part of the Team or Room.
+* It allows for creating Rooms and Teams with additional members who are not a part of the Team or Room.
 * It has the ability to create instant meetings or to schedule meetings in advance from within a task or an incident.
 * Example workflows are included that performs the above mentioned operation and stores the meeting, room or team related information as note.
-* Example rules are included that activates a menu popup that prompts the user for inputs to customize the team, room or a meeting.
+* Example rules are included that activate a menu popup that prompts the user for inputs to customize the team, room or a meeting.
 ---
 
 ## Requirements
@@ -152,7 +152,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - Webex: Create Meeting
-A function to schedule meetings or create instant meetings from a task or a incident. This function promts the user for inputs and schedules meetings in accordance with that.
+A function to schedule meetings or create instant meetings from a task or a incident. This function prompts the user for inputs and schedules meetings in accordance with that.
 The user is provided with a certain level of flexibility when it comes to choosing the time or date of the meeting. The user can set a start time or end time, or just provide
 the duration of the meeting. The package will automatically determine the start and end time based on these values. Should the user only provide an end time, the start time is
 assumed to be 2 mins from current time. If the user only provides a duration, the meeting starts 2 minutes from current time and ends after the specified duration. Note that
@@ -444,7 +444,7 @@ or room using the additional attendees field.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `webex_team_name` | `text` | Yes | `SOAR Team` | Name of the team being created. If blank, uses the incident name and task ID as the team name |
-| `webex_add_all_members` | `boolean` | Yes | `Yes` | Adds all incidnet members or task members to the webex meeting. If only selected members are to be added, specify their email address in the below field |
+| `webex_add_all_members` | `boolean` | Yes | `Yes` | Adds all incident members or task members to the webex meeting. If only selected members are to be added, specify their email address in the below field |
 | `webex_meeting_attendees` | `text` | No | `sara@example.com, mathew@example.com` | The list of email address of the attendees in a comma-seperated format. Leave blank to select all attendees |
 | `webex_incident_id` | `text` | No | `Leave blank` | Incident Number |
 | `webex_task_id` | `text` | No | `Leave blank` | Task ID |
