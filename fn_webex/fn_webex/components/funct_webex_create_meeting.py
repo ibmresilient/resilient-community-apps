@@ -89,7 +89,6 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info(constants.MSG_SUCCESS_AUTHENTICATED)
             yield self.status_message(constants.MSG_SUCCESS_AUTHENTICATED)
 
-
         except IntegrationError as err:
             self.LOG.error(constants.MSG_FAILED_AUTH)
             yield self.status_message(constants.MSG_FAILED_AUTH)

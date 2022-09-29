@@ -8,30 +8,10 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {},
-    "content": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "creatorId": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string"
-        },
-        "attendees": {
-          "type": "string"
-        },
-        "status": {
-          "type": "boolean"
-        }
-      }
+    "reason": {
+      "type": "string"
     },
+    "content": {},
     "raw": {},
     "inputs": {
       "type": "object",
@@ -40,6 +20,9 @@
           "type": "string"
         },
         "webex_incident_id": {
+          "type": "string"
+        },
+        "webex_task_id": {
           "type": "string"
         },
         "webex_add_all_members": {

@@ -5,12 +5,12 @@
 from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
-from fn_webex.lib.cisco_interface import WebexInterface
+from fn_webex.lib.cisco_delete import WebexDelete
 from fn_webex.lib import constants
 from fn_webex.lib.cisco_authentication import WebexAuthentication
 
-FN_NAME = "webex_delete_teamsrooms"
 PACKAGE_NAME = "fn_webex"
+FN_NAME = "webex_delete_team"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_delete_teamsrooms'"""
@@ -29,8 +29,8 @@ class FunctionComponent(AppFunctionComponent):
 
         Fn Inputs:
         ----------
-            entityId          (<str>) : ID of the Room or Team to be deleted
-            entityName        (<str>) : Specifies if a Room or a Team is to be deleted
+            teamId            (<str>) : ID of the Room or Team to be deleted
+            teamName          (<str>) : Name of the Room or Team to be deleted
 
         Config Options:
         ---------------
@@ -50,7 +50,6 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
-        validate_fields(["webex_entity_id", "webex_roomteam_selector"], fn_inputs)
         validate_fields(["webex_site_url", "webex_timezone", "client_id",
                          "client_secret", "refresh_token", "scope"], self.config_options)
 
@@ -59,9 +58,10 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["resclient"] = self.rest_client()
 
         self.required_parameters["baseURL"] = self.config_options.get("webex_site_url")
-        self.required_parameters["entityId"]   = fn_inputs.webex_entity_id
-        self.required_parameters["entityName"] = fn_inputs.webex_roomteam_selector
-
+        self.required_parameters["entityId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
+        self.required_parameters["entityName"] = fn_inputs.webex_team_name if hasattr(fn_inputs, 'webex_team_name') else None
+        self.required_parameters["entityType"] = constants.TEAM
+        
         try:
             yield self.status_message(constants.MSG_CREATE_SECURITY)
             self.LOG.info(constants.MSG_CREATE_SECURITY)
@@ -79,6 +79,6 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:
-            webex = WebexInterface(self.required_parameters)
-            yield webex.delete_entity()
+            webex = WebexDelete(self.required_parameters)
+            yield webex.delete_team_room()
             yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))

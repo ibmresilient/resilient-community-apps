@@ -12,37 +12,10 @@
     "content": {
       "type": "object",
       "properties": {
-        "roomId": {
-          "type": "string"
-        },
-        "meetingLink": {
-          "type": "string"
-        },
-        "sipAddress": {
-          "type": "string"
-        },
-        "meetingNumber": {
-          "type": "string"
-        },
-        "meetingId": {
-          "type": "string"
-        },
-        "callInTollFreeNumber": {
-          "type": "string"
-        },
-        "callInTollNumber": {
-          "type": "string"
-        },
         "status_code": {
           "type": "integer"
         },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "attendees": {
+        "message": {
           "type": "string"
         }
       }
@@ -51,17 +24,8 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "webex_incident_id": {
-          "type": "string"
-        },
         "webex_room_name": {
           "type": "string"
-        },
-        "webex_task_id": {
-          "type": "string"
-        },
-        "webex_add_all_members": {
-          "type": "boolean"
         }
       }
     },

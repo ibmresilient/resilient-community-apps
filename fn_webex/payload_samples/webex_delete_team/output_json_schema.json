@@ -24,10 +24,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "webex_entity_id": {
-          "type": "string"
-        },
-        "webex_roomteam_selector": {
+        "webex_team_name": {
           "type": "string"
         }
       }

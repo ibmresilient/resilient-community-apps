@@ -8,159 +8,31 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {},
+    "reason": {
+      "type": "string"
+    },
     "content": {
       "type": "object",
       "properties": {
-        "id": {
+        "message": {
           "type": "string"
         },
-        "meetingNumber": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "trackingId": {
           "type": "string"
         },
-        "title": {
-          "type": "string"
-        },
-        "agenda": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phoneAndVideoSystemPassword": {
-          "type": "string"
-        },
-        "meetingType": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "timezone": {
-          "type": "string"
-        },
-        "start": {
-          "type": "string"
-        },
-        "end": {
-          "type": "string"
-        },
-        "hostUserId": {
-          "type": "string"
-        },
-        "hostDisplayName": {
-          "type": "string"
-        },
-        "hostEmail": {
-          "type": "string"
-        },
-        "hostKey": {
-          "type": "string"
-        },
-        "siteUrl": {
-          "type": "string"
-        },
-        "webLink": {
-          "type": "string"
-        },
-        "sipAddress": {
-          "type": "string"
-        },
-        "dialInIpAddress": {
-          "type": "string"
-        },
-        "enabledAutoRecordMeeting": {
-          "type": "string"
-        },
-        "allowAnyUserToBeCoHost": {
-          "type": "string"
-        },
-        "allowFirstUserToBeCoHost": {
-          "type": "string"
-        },
-        "allowAuthenticatedDevices": {
-          "type": "string"
-        },
-        "enabledJoinBeforeHost": {
-          "type": "string"
-        },
-        "joinBeforeHostMinutes": {
-          "type": "string"
-        },
-        "enableConnectAudioBeforeHost": {
-          "type": "string"
-        },
-        "excludePassword": {
-          "type": "string"
-        },
-        "publicMeeting": {
-          "type": "string"
-        },
-        "enableAutomaticLock": {
-          "type": "string"
-        },
-        "unlockedMeetingJoinSecurity": {
-          "type": "string"
-        },
-        "telephony": {
-          "type": "string"
-        },
-        "callInNumbers": {
-          "type": "string"
-        },
-        "callInNumber": {
-          "type": "string"
-        },
-        "tollType": {
-          "type": "string"
-        },
-        "links": {
-          "type": "string"
-        },
-        "href": {
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        },
-        "meetingOptions": {
-          "type": "string"
-        },
-        "enabledVideo": {
-          "type": "string"
-        },
-        "enabledPolling": {
-          "type": "string"
-        },
-        "enabledNote": {
-          "type": "string"
-        },
-        "noteType": {
-          "type": "string"
-        },
-        "enabledClosedCaptions": {
-          "type": "string"
-        },
-        "enabledFileTransfer": {
-          "type": "string"
-        },
-        "enabledUCFRichMedia": {
-          "type": "string"
-        },
-        "sessionTypeId": {
-          "type": "string"
-        },
-        "scheduledType": {
-          "type": "string"
-        },
-        "simultaneousInterpretation": {
-          "type": "string"
-        },
-        "enabledBreakoutSessions": {
-          "type": "string"
-        },
-        "status": {
-          "type": "boolean"
+        "status_code": {
+          "type": "integer"
         }
       }
     },
@@ -174,9 +46,17 @@
         "webex_meeting_password": {
           "type": "string"
         },
+        "webex_send_email": {
+          "type": "boolean"
+        },
+        "webex_meeting_start_time": {},
         "webex_meeting_agenda": {
           "type": "string"
-        }
+        },
+        "webex_meeting_duration": {
+          "type": "integer"
+        },
+        "webex_meeting_end_time": {}
       }
     },
     "metrics": {

@@ -31,8 +31,8 @@ class FunctionComponent(AppFunctionComponent):
 
         Fn Inputs:
         ----------
-            teamId             (<str>)  : ID of the team to be added
             roomName           (<str>)  : Name of the room to be created
+            teamId             (<str>)  : ID of the team to be added
             incidentId         (<str>)  : Incident ID
             addAllMembers      (<bool>) : Adds all members of the incident to the room
             additionalAttendee (<str>)  : Additonal attendees to be added
@@ -45,8 +45,7 @@ class FunctionComponent(AppFunctionComponent):
 
         Constants:
         ----------
-            entityId           (<str>)  : always >>roomId<<
-            entityName         (<str>)  : always >>roomName<<
+            entityName         (<str>)  : Room Name
             entityURL          (<str>)  : Rooms API URL
             membershipURL      (<str>)  : Rooms Membership API URL
 
@@ -62,14 +61,14 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["webex_site_url", "webex_timezone", "client_id",
                         "client_secret", "refresh_token", "scope"], self.config_options)
 
+        self.required_parameters["taskId"] = fn_inputs.webex_task_id if hasattr(fn_inputs, 'webex_task_id') else None
         self.required_parameters["teamId"] = fn_inputs.webex_team_id if hasattr(fn_inputs, 'webex_team_id') else None
-        self.required_parameters["roomName"] = fn_inputs.webex_room_name
         self.required_parameters["incidentId"] = fn_inputs.webex_incident_id
         self.required_parameters["addAllMembers"] = fn_inputs.webex_add_all_members
         self.required_parameters["additionalAttendee"] = fn_inputs.webex_meeting_attendees if hasattr(fn_inputs, 'webex_meeting_attendees') else None
 
-        self.required_parameters["entityId"] = "roomId"
-        self.required_parameters["entityName"] = "roomName"
+        self.required_parameters["entityName"] = fn_inputs.webex_room_name
+        self.required_parameters["entityType"] = constants.ROOM
         self.required_parameters["entityURL" ] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_URL)
         self.required_parameters["membershipUrl"] = parse.urljoin(self.config_options.get("webex_site_url"),constants.ROOMS_MEMBERSHIP_URL)
 
@@ -98,6 +97,5 @@ class FunctionComponent(AppFunctionComponent):
 
         if authenticated:
             webex = WebexInterface(self.required_parameters)
-            response = webex.create_team_room()
-            yield FunctionResult(response, success=True)
+            yield webex.create_team_room()
             yield self.status_message(constants.MSG_SUCCESS_EXECUTION.format(FN_NAME))

@@ -23,9 +23,9 @@ class WebexInterface:
             incidentId         (<str>)  : Incident ID
             addAllMembers      (<bool>) : Adds all members of the incident to the team
             additionalAttendee (<str>)  : Additonal attendees to be added
-            entityId           (<str>)  : always >>teamId<<
-            entityName         (<str>)  : always >>teamName<<
-            entityURL          (<str>)  : Teams API URL
+            entity_Id          (<str>)  : Team or Room ID
+            entity_name        (<str>)  : Team or Room Name
+            entity_url         (<str>)  : Teams API URL
             membershipURL      (<str>)  : Teams Membership API URL
 
         Returns:
@@ -33,17 +33,17 @@ class WebexInterface:
             Response          (<dict>)  : A response with the room/team options and details
                                           or the error message if the meeting creation
                                           fails
-
     """
     def __init__(self, requiredParameters):
-        self.requiredParameters = requiredParameters
-        self.rc = self.requiredParameters.get("rc")
-        self.header = requiredParameters.get("header")
-        self.LOG = self.requiredParameters.get("logger")
-        self.resclient = requiredParameters.get("resclient")
+        self.required_parameters = requiredParameters
+        self.rc = self.required_parameters.get("rc")
+        self.header = self.required_parameters.get("header")
+        self.LOG = self.required_parameters.get("logger")
+        self.resclient = self.required_parameters.get("resclient")
         self.response_handler = cisco_commons.ResponseHandler()
-        self.entityId, self.entityName, self.emailIds = None, None, None
-        self.retrieveMembershipURL = None
+        self.entity_Id, self.entity_name = None, None
+        self.email_ids, self.entity_type = None, None
+        self.retrieve_membership_url = None
 
 
     def create_team_room(self):
@@ -57,29 +57,43 @@ class WebexInterface:
                                      Else creates a new one using create_entity
             * add_membership       : Adds the list of members to the room or team
             * get_entity_details   : Retrieves the room/team information
+
+        Returns:
+        --------
+            (<FunctionResult>): A dictionary with the response, the reason
+                    should the operation fail, and a success
+                    flag.
         '''
-        self.find_operation()
-        self.generate_member_list()
-        self.retrieve_entity()
-        self.add_membership()
-        return self.get_entity_details()
+        try:
+            self.find_api()
+            self.generate_member_list()
+            self.retrieve_entity()
+            self.add_membership()
+            response = self.get_entity_details()
+            return FunctionResult(response, success=True)
+        except IntegrationError as err:
+            return FunctionResult(None, success=False, reason = str(err))
 
 
-    def find_operation(self):
+    def find_api(self):
         """
         This function detemines the operaiton that is being perofrmed. All the below functions
         work for Room as well as teams. So this detemine the API to be used.
 
         Returns:
         --------
-            entityId   (<str>): teamId or RoomId depending on the API
-            entityName (<str>): teamName or RoomName depending on the API
+            entity_url  (<str>): Teams or Room api URL
+            entity_type (<str>): Teams or Room api selector
+            entity_name (<str>): teamName or RoomName depending on the API
+            calling_key (<str>): name or title depending on the API to fetch
+                                title of the entity.
         """
-        self.entityId   = self.requiredParameters.get("entityId")
-        self.entityName = self.requiredParameters.get("entityName")
+        self.entity_url  = self.required_parameters.get("entityURL")
+        self.entity_type = self.required_parameters.get("entityType")
+        self.entity_name = self.required_parameters.get("entityName")
+        self.calling_key = constants.TEAMS_CALLING_KEY if self.entity_type == constants.TEAM else constants.ROOMS_CALLING_KEY
 
-
-    def is_direct_member(self, incidentMemberId, orgMemberList):
+    def is_direct_member(self, incident_member_id, org_member_list):
         """
         Checks to see if the member Id accquired from the incident belongs to the list of all
         users from the organization. Upon match, it then extracts the email address for that
@@ -87,19 +101,19 @@ class WebexInterface:
 
         Args:
         -----
-            incidentMemberId (<str>) : The user Id accquired from the incident
-            orgMemberList    (<list>): The list of member Ids of all organization members
+            incident_member_id (<str>) : The user Id accquired from the incident
+            org_member_list    (<list>): The list of member Ids of all organization members
 
         Returns:
         --------
             (<str>): Email address of the incident member
         """
-        for user in orgMemberList:
-            if incidentMemberId == user.get("id"):
-                return user.get("email")
+        for user in org_member_list:
+            if incident_member_id == user.get("id"):
+                return user.get(constants.EMAIL)
 
 
-    def is_group_member(self, incidentMemberId, orgMemberList, orgGroupList):
+    def is_group_member(self, incident_member_id, org_member_list, org_group_list):
         """
         Checks to see if the member Id accquired from the incident belongs to the list of
         all groups from the organization. Upon match, it then queries a list of Ids
@@ -108,76 +122,80 @@ class WebexInterface:
 
         Args:
         -----
-            incidentMemberId (<str>) : The user Id accquired from the incident
-            orgMemberList    (<list>): The list of member Ids of all organization members
-            orgGroupList     (<list>): The list of group Ids of all organization members
+            incident_member_id (<str>) : The user Id accquired from the incident
+            org_member_list    (<list>): The list of member Ids of all organization members
+            org_group_list     (<list>): The list of group Ids of all organization members
 
         Returns:
         --------
             (<list>): list of all email addresses of incident members
         """
         ret = []
-        for group in orgGroupList:
-            if incidentMemberId == group.get("id"):
+        for group in org_group_list:
+            if incident_member_id == group.get("id"):
                 for member in group.get("members"):
-                    ret.append(self.is_direct_member(member, orgMemberList))
+                    ret.append(self.is_direct_member(member, org_member_list))
         return ret
 
 
     def generate_member_list(self):
         """
         Generates a list of email addresses of the members to be added to the room/team. The
-        function queries incident member list, organization group list, and organization
-        user list. Using these, it then compares and accquires the email addresses of all
-        users that are members to the incident, if >>addAllMembers<< in enabled. Else just
-        adds the email addresses specified in >>additionalAttendee<<
+        function queries incident member list or task member list, organization group list, 
+        and organization user list. Using these, it then compares and accquires the email 
+        addresses of all users that are members to the incident or task, if >>addAllMembers<<
+        in enabled. Else just adds the email addresses specified in >>additionalAttendee<<
 
         Returns:
         --------
-            emailIds (<list>) : a list of all participant email addresses to be added
+            email_ids (<list>) : a list of all participant email addresses to be added
         """
-        emailIds = []
-        incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
-                            "{}/members".format( self.requiredParameters.get("incidentId"))))
-        orgMemberList   = self.resclient.post(constants.RES_USERS, payload={}).get("data")
-        orgGroupList    = self.resclient.get(constants.RES_GROUPS)
-
-        if self.requiredParameters.get("addAllMembers"):
+        email_ids = []
+        if self.required_parameters.get("taskId"):
+            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_TASK,
+                        "{}/members".format(self.required_parameters.get("taskId"))))
+        else:
+            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
+                                "{}/members".format(self.required_parameters.get("incidentId"))))
+        org_member_list = self.resclient.post(constants.RES_USERS, payload={}).get("data")
+        org_group_list  = self.resclient.get(constants.RES_GROUPS)
+        if self.required_parameters.get("addAllMembers"):
             if len(incidentMembers.get("members")) == 0:
                 self.LOG.info(constants.LOG_INCIDENT_NO_MEMBERS)
             for incident_member in incidentMembers.get("members"):
-                if self.is_direct_member(incident_member, orgMemberList):
-                    emailIds.append(self.is_direct_member(incident_member,
-                                                            orgMemberList))
+                if self.is_direct_member(incident_member, org_member_list):
+                    email_ids.append(self.is_direct_member(incident_member,
+                                                            org_member_list))
                 elif self.is_group_member(incident_member,
-                                          orgMemberList,
-                                          orgGroupList):
-                    emailIds.extend(self.is_group_member(incident_member,
-                                                         orgMemberList,
-                                                         orgGroupList))
-        elif not self.requiredParameters.get("additionalAttendee"):
+                                          org_member_list,
+                                          org_group_list):
+                    email_ids.extend(self.is_group_member(incident_member,
+                                                         org_member_list,
+                                                         org_group_list))
+        elif not self.required_parameters.get("additionalAttendee"):
             self.LOG.warn(constants.LOG_WARN_NO_ADDITIONAL_PARTICIPANTS.format(
-                                            self.requiredParameters.get("entityName")))
+                self.entity_type))
 
-        if self.requiredParameters.get("additionalAttendee"):
-            emailIds += self.requiredParameters.get("additionalAttendee").lower().replace(" ", "").split(",")
-        self.emailIds = emailIds
+        if self.required_parameters.get("additionalAttendee"):
+            email_ids += self.required_parameters.get("additionalAttendee").lower().replace(" ", "").split(",")
+        self.email_ids = set(email_ids)
         self.LOG.info(constants.LOG_ADD_MEMEBERS.format(
-                self.requiredParameters.get("entityName"), self.emailIds))
+                self.entity_type, self.email_ids))
 
 
     def add_membership(self):
         """
-        Adds members to the room/team using the email addresses from >>emailIds<<. If user already
+        Adds members to the room/team using the email addresses from >>email_ids<<. If user already
         a member of the room/team, ignores.
         """
-        for user in self.emailIds:
-            data = {self.entityId : self.requiredParameters.get(self.entityId), "personEmail" : user}
+        idName = constants.TEAM_ID if self.entity_type == constants.TEAM else constants.ROOM_ID
+        for user in self.email_ids:
+            data = {idName : self.entity_Id, "personEmail" : user}
             try:
-                _ = self.rc.execute("post", self.requiredParameters.get("membershipUrl"),
-                                    headers=self.header, data=json.dumps(data))
+                _ = self.rc.execute("post", self.required_parameters.get("membershipUrl"),
+                    headers=self.header, data=json.dumps(data))
                 self.LOG.info("Webex: User {} added to incident {}".format(user,
-                                                        self.requiredParameters.get("entityName")))
+                    self.entity_type))
             except IntegrationError:
                 self.LOG.info("Webex: User {} is already a member of the room/team".format(user))
 
@@ -191,56 +209,51 @@ class WebexInterface:
             room/team Id   (<str>) : Id of the room/team
             room/team Name (<str>) : Name of the room/team
         """
-        self.requiredParameters[self.entityId] = None
-        callingKey = "name" if self.entityName == "teamName" else "title"
-        res = self.rc.execute("get", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, callback=self.response_handler.check_response)
+        self.entity_Id = None
+        res = self.rc.execute("get", self.entity_url,
+            headers=self.header, callback=self.response_handler.check_response)
         if len(res.get('items')) == 0:
             self.create_entity()
         else:
             for objs in res.get("items"):
-                if objs.get(callingKey) == self.requiredParameters.get(self.entityName):
-                    self.requiredParameters[self.entityId] = objs.get("id")
-                    self.requiredParameters[self.entityName] = objs.get(callingKey)
+                if objs.get(self.calling_key) == self.entity_name:
                     self.LOG.info("Webex: Retrieving existing room/team: {}".format(
-                                                            self.requiredParameters.get(self.entityId)))
-                    break
-            if not self.requiredParameters.get(self.entityId):
+                        self.entity_Id))
+                    raise IntegrationError(constants.MSG_ENTITY_EXISTS.format(self.entity_type,
+                        self.entity_name))
+            if not self.entity_Id:
                 self.create_entity()
                 self.LOG.info("Webex: Creating new room/team: {}".format(
-                                            self.requiredParameters.get(self.entityId)))
-        retrieveMembershipURL = parse.urljoin(self.requiredParameters.get("entityURL"),
-                                              self.requiredParameters.get(self.entityId) + "/")
-        if self.entityName == "roomName":
-            retrieveMembershipURL = parse.urljoin(retrieveMembershipURL, "meetingInfo")
-        self.retrieveMembershipURL = retrieveMembershipURL
+                    self.entity_Id))
+        retrieve_membership_url = parse.urljoin(self.entity_url, self.entity_Id + "/")
+        if self.entity_type == constants.ROOM:
+            retrieve_membership_url = parse.urljoin(retrieve_membership_url, "meetingInfo")
+        self.retrieve_membership_url = retrieve_membership_url
 
 
     def create_entity(self):
         """
         Creates a room/team with the required configurations such as:
-            - room/team name
-            - Existing teamId
-            - list of Attendees
+            * room/team name
+            * Existing teamId
+            * list of Attendees
 
         Returns:
         -------
             room/team Id   (<str>) : Id of the room/team
             room/team Name (<str>) : Name of the room/team
         """
-        callingKey = "name" if self.entityName == "teamName" else "title"
-        data = {callingKey : self.requiredParameters.get(self.entityName)}
-        if self.entityName == "roomName" and self.requiredParameters.get("teamId"):
-            self.LOG.info("Webex: Adding team to room: {}".format(
-                                            self.requiredParameters.get("teamId")))
-            data["teamId"] = self.requiredParameters.get("teamId")
-        res = self.rc.execute("post", self.requiredParameters.get("entityURL"),
-                                    headers=self.header, data=json.dumps(data),
-                                    callback=self.response_handler.check_response)
-        self.requiredParameters[self.entityId] = res.get("id")
-        self.requiredParameters[self.entityName] = res.get(callingKey)
-        self.LOG.info("Webex: Created new room/team: {}".format(
-                                            self.requiredParameters.get(self.entityId)))
+        data = {self.calling_key : self.entity_name}
+        if self.entity_type == constants.ROOM and self.required_parameters.get(constants.TEAM_ID):
+            self.LOG.info(constants.LOG_ADD_TEAM_TO_ROOM.format(
+                self.required_parameters.get(constants.TEAM_ID)))
+            data[constants.TEAM_ID] = self.required_parameters.get(constants.TEAM_ID)
+        res = self.rc.execute("post", self.entity_url,
+            headers=self.header, data=json.dumps(data),
+            callback=self.response_handler.check_response)
+        self.entity_Id = res.get("id")
+        self.entity_name = res.get(self.calling_key)
+        self.LOG.info(constants.LOG_CREATING_NEW_ENTITY.format(self.entity_type, self.entity_Id))
 
 
     def get_entity_details(self):
@@ -252,52 +265,11 @@ class WebexInterface:
         --------
             (<dict>): response from the endpoint with room name and other information
         """
-        response = self.rc.execute("get", self.retrieveMembershipURL,
-                            headers=self.header, callback=self.response_handler.check_response)
-        self.LOG.info("Webex: Retrieved room/team details, room/team  Name : {}".format(
-                                                self.requiredParameters.get(self.entityName)))
-        response["attendees"] = ", ".join(self.emailIds)
-        response["status"] = True
-        response[self.entityName] = self.requiredParameters.get(self.entityName)
+        response = self.rc.execute("get", self.retrieve_membership_url,
+            headers=self.header, callback=self.response_handler.check_response)
+        self.LOG.info(constants.LOG_RETRIVING_ENTITY_DETAILS.format(self.entity_type,
+            self.entity_name))
+        response["id"] = self.entity_Id
+        response["name"] = self.entity_name
+        response["attendees"] = ", ".join(self.email_ids)
         return response
-
-
-    def delete_entity(self):
-        """
-        This function deletes a room or a team based on the id specified to it.
-        It monitors the response returned from the endpoint for 204, 404 and 405 responses.
-
-        Response Codes:
-        ---------------
-            204 - Successfully deleted the room or team.
-            404 - Room or team not found.
-            405 - Room cannot be deleted, delete the team associated.
-
-        Returns:
-        --------
-            (<dict>): Response from the endpoint
-        """
-        if "room" in self.requiredParameters.get("entityName").strip().lower():
-            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.ROOMS_URL)
-        else :
-            deletionURL = parse.urljoin(self.requiredParameters.get("baseURL"), constants.TEAMS_URL)
-        deletionURL = parse.urljoin(deletionURL, self.requiredParameters.get("entityId"))
-        self.LOG.info("Webex: Deleting {}".format(self.requiredParameters.get("entityName")))
-        self.response_handler.add_exempt_codes(codes=[404, 405])
-        response = self.rc.execute("delete", deletionURL, headers=self.header,
-                            callback=self.response_handler.check_response)
-        self.response_handler.clear_exempt_codes()
-
-        if response.get("status_code") == 204:
-            response["message"] = constants.MSG_SUCCESS_DELETION.format(
-                                                        self.requiredParameters.get("entityName"),
-                                                        self.requiredParameters.get("entityId"))
-            return FunctionResult(response, success=True)
-        if response.get("status_code") == 404:
-            return FunctionResult(response, success=False,
-             reason=constants.MSG_ENTITY_NOT_FOUND.format(self.requiredParameters.get("entityName")))
-        if response.get("status_code") == 405:
-            return FunctionResult(response, success=False,
-                        reason=constants.MSG_ENTITY_NO_DIRECT_DELETE)
-        return FunctionResult(response, success=False,
-            reason=constants.MSG_UNFAMILIAR_RESPONSE_CODE.format(response.get("status_code")))

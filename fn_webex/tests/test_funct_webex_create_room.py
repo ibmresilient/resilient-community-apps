@@ -33,7 +33,7 @@ class LOG:
         print("[ERROR]", msg)
     
     def debug(self, msg):
-        print("[ERROR]", msg)
+        print("[DEBUG]", msg)
 
 
 class mocked_restClient:
@@ -67,14 +67,16 @@ def mocked_requestCommon(method, url, data=None, headers=None, proxies=None, cal
         def json(self):
             return json.loads(self.text)
     response = None
-    if url == "https://webexapis.com/v1/rooms/":
-        response = MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
-
+    if url == "https://webexapis.com/v1/rooms/" and method.lower()=="get":
+        response = MockResponse('{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y234", "title": "UnittestRoom2", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}, {"id": "Y345", "title": "UnittestRoom3", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}', 200)
+    elif url == "https://webexapis.com/v1/rooms/" and method.lower()=="post":
+        response = MockResponse('{"id": "Y1235", "title": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}' ,status_code=200)
+    elif url == "https://webexapis.com/v1/rooms/Y1235/":
+        response = MockResponse('{"id": "Y1235", "title": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}' ,status_code=200)
     elif url == "https://webexapis.com/v1/memberships":
         response = None
-
-    elif url == "https://webexapis.com/v1/rooms/{}/meetingInfo".format("Y123"):
-        response = MockResponse('''{"items": [{"id": "Y123", "title": "UnittestRoom", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
+    elif url == "https://webexapis.com/v1/rooms/{}/meetingInfo".format("Y1235"):
+        response = MockResponse('''{"items": [{"id": "Y1235", "title": "UnittestRoom5", "created": "2022-08-11T18:24:46.655Z","isPublic": "false"}]}''', status_code=200)
 
     else:
         raise ValueError(url)
@@ -91,8 +93,8 @@ def call_webex_create_room_function():
             "logger"     : LOG(),
             "resclient"  : mocked_restClient(),
             "addAllMembers" : True,
-            "roomName"   : "UnittestRoom",
-            "roomId"     : "Y123",
+            "roomName"   : "UnittestRoom5",
+            "roomId"     : "Y1235",
             "entityURL"  : "https://webexapis.com/v1/rooms/",
             "entityId"   : "roomId",
             "entityName" : "roomName",
@@ -101,11 +103,7 @@ def call_webex_create_room_function():
         }
 
     webex = WebexInterface(requiredParameters)
-    webex.find_operation()
-    webex.generate_member_list()
-    webex.retrieve_entity()
-    webex.add_membership()
-    response = webex.get_entity_details()
+    response = webex.create_team_room()
     return FunctionResult(response, success=True)
 
 
@@ -122,14 +120,13 @@ class TestWebexCreateRoom:
         """ Test calling with sample values for the parameters """
         expected = {
             'items': [{
-                'id': 'Y123', 
-                'title': 'UnittestRoom',
+                'id': 'Y1235', 
+                'title': 'UnittestRoom5',
                 'created': '2022-08-11T18:24:46.655Z', 'isPublic': 'false'
                 }],
             'attendees': 'soar1@example.ie, soar2@example.ie, soar3@example.ie, sara@example.com, hannah@example.com, harsha@example.com',
             'status': True, 
-            'roomName': 'UnittestRoom'}
+            'roomName': 'UnittestRoom5'}
         results = call_webex_create_room_function()
-
-        assert(results.value["status"], True)
+        assert(results.success, True)
         assert(results.value, expected)
