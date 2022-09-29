@@ -11,7 +11,8 @@ from resilient_circuits.template_functions import environment, render
 
 LOG = logging.getLogger(__name__)
 
-DUPLICATE_COMMAS = re.compile(r',\s*,')
+DUPLICATE_COMMAS = re.compile(r',(\s*,)+')
+LEADING_COMMAS = re.compile(r'\[\s*,')
 class JinjaEnvironment():
     def __init__(self):
         # Add the timestamp-parse function to the global JINJA environment
@@ -117,8 +118,9 @@ def render_json(template, data):
     for n in range(1, 32):
         result = result.replace(chr(n), " ")
 
-    # remove duplicate commas
+    # remove duplicate/unnessary commas
     result = DUPLICATE_COMMAS.sub(',', result)
+    result = LEADING_COMMAS.sub('[', result)
 
     # continue to parse the json, attempting to look for escape characters to fix
     attempt_counter = 0
@@ -136,6 +138,7 @@ def render_json(template, data):
                 # position of unescaped '\' before that
                 result = result[:offset] + r'\\' + result[offset+1:]
             else:
+                LOG.error(result)
                 raise e
             attempt_counter += 1
     return value
