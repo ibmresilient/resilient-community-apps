@@ -20,7 +20,7 @@ def validate_data(sql_restricted_sql_statements, sql_query):
         try:
             restricted_list = loads(sql_restricted_sql_statements)
         except JSONDecodeError as e:
-            raise ValueError(f"Restricted SQL statements must be defined in valid JSON  format. Error: {str(e)}")
+            raise ValueError(f"Restricted SQL statements must be defined in valid JSON format. Error: {str(e)}")
 
         if type(restricted_list) is not list:
             raise ValueError("Restricted SQL statements must be defined in valid JSON format as a list using square brackets.")
