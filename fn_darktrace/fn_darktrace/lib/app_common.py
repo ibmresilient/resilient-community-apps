@@ -5,7 +5,7 @@ import hashlib
 import hmac
 import logging
 from datetime import datetime
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote_plus
 
 from resilient_lib import (IntegrationError, RequestsCommon, str_to_bool,
                            validate_fields)
@@ -112,7 +112,7 @@ class AppCommon():
         :return: built full request with query added
         :rtype: str
         """
-        query = "&".join(f"{key}={str(params[key])}" if not isinstance(params[key], int) else f"{key}={params[key]}"
+        query = "&".join(f"{quote_plus(key, safe=',')}={quote_plus(str(params[key]), safe=',')}" if not isinstance(params[key], int) else f"{quote_plus(key, safe=',')}={quote_plus(params[key], safe=',')}"
                 for key in params)
         return base_request + "?" + query if params else base_request
 
@@ -191,8 +191,8 @@ class AppCommon():
             time = datetime.utcnow().strftime(DT_TIME_FORMATTER)
 
         # need to add the query params to the path_request so that the signature is correct
-        # NOTE: can't use execute(..., params=params) because that will not generate the
-        #       correct signature for the DT request
+        # NOTE: cannot specify params as an argument in resilient_lib.execute() because that 
+        #       will not generate the correct signature for the DT request
         path_request = self._generate_query_from_params(path_request, params)
         signature = self._generate_signature(path_request, time)
         url = urljoin(self.base_url, path_request)
