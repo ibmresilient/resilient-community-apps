@@ -112,9 +112,9 @@ class AppCommon():
         :return: built full request with query added
         :rtype: str
         """
-        query = "&".join(f"{quote_plus(key, safe=',')}={quote_plus(str(params[key]), safe=',')}" if not isinstance(params[key], int) else f"{quote_plus(key, safe=',')}={quote_plus(params[key], safe=',')}"
+        query = "&".join(f"{key}={str(params[key])}" if not isinstance(params[key], int) else f"{key}={params[key]}"
                 for key in params)
-        return base_request + "?" + query if params else base_request
+        return base_request + "?" + quote_plus(query, safe=",=&") if params else base_request
 
     ######################
     # END STATIC METHODS #
