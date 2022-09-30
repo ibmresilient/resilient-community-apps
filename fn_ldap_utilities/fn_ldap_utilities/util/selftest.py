@@ -20,6 +20,7 @@ def selftest_function(opts):
     state = "success"
     reason = "N/A"
     domain = "N/A"
+    conn = ""
 
     for domain_name in domains_list:
         try:
@@ -36,7 +37,7 @@ def selftest_function(opts):
 
             options = opts.get(domain_name, {})
 
-            log.info("Verifying app.config values for {} config section".format(str(options.get("ldap_server"))))
+            log.info(f"Verifying app.config values for {str(options.get('ldap_server'))} config section")
 
             # Instansiate LDAP Server and Connection
             conn = helper.get_ldap_connection()

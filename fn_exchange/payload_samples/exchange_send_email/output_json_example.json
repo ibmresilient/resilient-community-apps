@@ -1,0 +1,6 @@
+{
+  "recipients": "t.shelby@example.com",
+  "sender": "t.shelby@example.com",
+  "subject": "Warning! Another potential phishing email!",
+  "body": "Example Body"
+}

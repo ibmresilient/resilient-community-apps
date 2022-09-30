@@ -25,11 +25,9 @@ inputs.splunk_label = row.splunk_server
 
 ### Post-Processing Script
 ```python
-# {'status_code': 201, 'content': {'message': 'Delete operation successful.', 'status': True}}
-
 result_note = u"""<b>Artifact</b>: {}<br><br>
 <b>Splunk Delete Status</b>: {}<br>
-<b>Message</b>: {}""".format(row.intel_value, 
+<b>Message</b>: {}""".format(row.intel_value,
                              "Successful" if results.get("content", {}).get("status", False) else "Unsuccessful",
                              results.get("content", {}).get("message", "None"))
 

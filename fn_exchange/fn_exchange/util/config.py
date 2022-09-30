@@ -11,13 +11,19 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_exchange]
-verify_cert=[True|False]
+verify_cert=True
 server=example.com
-username=domain\\username - to use this package, this must be an admin account with mailbox access to other accounts
-email=admin@example.com - this is the default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.
+
+# To use this package, this must be an admin account with mailbox access to other accounts
+username=domain\\username
+
+# This is the default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.
+email=admin@example.com 
 password=password
-default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
-# Uncomment to specify proxy settings
+
+# Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
+default_folder_path=Top of Information Store/Inbox
+
 #https_proxy=https://your.proxy.com
 #http_proxy=http://your.proxy.com
 """

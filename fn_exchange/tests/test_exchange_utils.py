@@ -1,16 +1,20 @@
-# import unittest
+
 import pytest
-from exchangelib import FolderCollection, Folder, Account
+from exchangelib import Account, Folder, FolderCollection, EWSTimeZone
 from exchangelib.folders import Root
 from exchangelib.restriction import Q
-from fn_exchange.util.exchange_utils import exchange_utils, parse_time, FolderError, get_config_option, str_to_bool
-from mock_artifacts import MOCK_OPTS, MOCK_INT_OPTS, MockEmail, MockSender, MockAttachment, MockAttachmentId, \
-    MockAccount, MockFolder
+from fn_exchange.util.exchange_utils import (FolderError, exchange_utils,
+                                             get_config_option, parse_time,
+                                             str_to_bool)
+
+from mock_artifacts import (MOCK_INT_OPTS, MOCK_OPTS, MockAccount,
+                            MockAttachment, MockAttachmentId, MockEmail,
+                            MockFolder, MockSender)
 
 try:
     from unittest.mock import patch
 except ImportError:
-    from mock import patch, MagicMock
+    from mock import MagicMock, patch
 
 
 class TestExchangeUtils:
@@ -336,3 +340,8 @@ class TestExchangeUtils:
         assert get_config_option(MOCK_OPTS, 'default_timezone') == 'Etc/GMT'
         with pytest.raises(ValueError):
             get_config_option(MOCK_OPTS, 'option')
+
+    def test_get_tz(self):
+        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
+        tz = test_utils._get_tz()
+        assert isinstance(tz, EWSTimeZone)

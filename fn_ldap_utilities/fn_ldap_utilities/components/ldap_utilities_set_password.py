@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'ldap_utilities_set_password' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'ldap_utilities_set_password' running in workflow '{wf_instance_id}'")
 
             # Validate that required fields are given
             validate_fields(["ldap_dn"], kwargs)
@@ -54,6 +54,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info("ldap_return_new_password: %s", ldap_return_new_password)
             yield StatusMessage("Function Inputs OK")
 
+            # Initiate variable, so that it does not error when called
+            c = ""
+
             # Instansiate helper (which gets appconfigs from file)
             ldap = LDAPDomains(self.opts)
             helper = LDAPUtilitiesHelper(ldap.ldap_domain_name_test(ldap_domain_name, self.domains_list))
@@ -67,10 +70,10 @@ class FunctionComponent(ResilientComponent):
                 c.bind()
             except Exception as err:
                 raise ValueError(
-                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+                    f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
             # Inform user
-            yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
+            yield StatusMessage(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
 
             # If ldap_new_password empty, auto-generate pwd with length ldap_new_auto_password_len. If ldap_new_auto_password_len empty, creates 12 char length pwd.
             if not ldap_new_password:
@@ -84,7 +87,7 @@ class FunctionComponent(ResilientComponent):
                     res = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
 
             except Exception as err:
-                LOG.debug("Error: {}".format(err))
+                LOG.debug(f"Error: {err}")
                 raise ValueError("Could not change password. Check ldap_dn are valid")
 
             finally:
@@ -102,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             results["user_dn"] = ldap_dn
             results["inputs"]["ldap_new_password"] = ldap_new_password
 
-            yield StatusMessage("Finished 'ldap_utilities_set_password' that was running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Finished 'ldap_utilities_set_password' that was running in workflow '{wf_instance_id}'")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
