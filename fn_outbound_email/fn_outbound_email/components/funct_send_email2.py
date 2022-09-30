@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=line-too-long
 
 """AppFunction implementation"""
 from bs4 import BeautifulSoup
@@ -52,7 +54,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mail_merge_body
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         mail_data = fn_inputs._asdict()
         # validations
@@ -94,7 +96,7 @@ class FunctionComponent(AppFunctionComponent):
 
             if not template_data:
                 rendered_mail_body = None
-                error_msg = "No template found: {}".format(mail_data.get('mail_template_label'))
+                error_msg = f"No template found: {mail_data.get('mail_template_label')}"
                 yield self.status_message(error_msg)
             else:
                 rendered_mail_body = send_smtp_email.render_template(template_data,
@@ -117,14 +119,14 @@ class FunctionComponent(AppFunctionComponent):
             raise ValueError("No email body or template specified")
 
         if error_msg:
-            yield self.status_message("An error occurred while sending the email: {}".format(error_msg))
+            yield self.status_message(f"An error occurred while sending the email: {error_msg}")
 
         results = {
             "mail_body": rendered_mail_body,
             "mail_from": mail_data.get('mail_from')
         }
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results,
@@ -143,8 +145,8 @@ def send_msg(send_smtp_email, content):
     """
     if isHTML(content):
         return send_smtp_email.send(body_html=content)
-    else:
-        return send_smtp_email.send(body_text=content.replace('\n', '\r\n'))
+
+    return send_smtp_email.send(body_text=content.replace('\n', '\r\n'))
 
 
 def isHTML(content):

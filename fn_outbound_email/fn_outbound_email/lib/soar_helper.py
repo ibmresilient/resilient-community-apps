@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long
 
 import logging
 from os import path
@@ -37,12 +37,9 @@ class SoarHelper():
                 remaining_attachment_list.remove(file_name)
 
                 if incident_attachment['type'] == 'incident':
-                    file_contents = self.rest_client.get_content("/incidents/{}/attachments/{}/contents".
-                                                                  format(inc_id, incident_attachment["id"]))
+                    file_contents = self.rest_client.get_content(f"/incidents/{inc_id}/attachments/{incident_attachment['id']}/contents")
                 else:
-                    file_contents = self.rest_client.get_content("/tasks/{}/attachments/{}/contents".
-                                                                  format(incident_attachment["task_id"],
-                                                                         incident_attachment["id"]))
+                    file_contents = self.rest_client.get_content(f"/tasks/{incident_attachment['task_id']}/attachments/{incident_attachment['id']}/contents")
                 file_path = path.join(tempdir, file_name)
                 with open(file_path, "wb+") as temp_file:
                     temp_file.write(file_contents)
@@ -64,8 +61,7 @@ class SoarHelper():
         Returns:
             [set]: [file paths for attachments]
         """
-        incident_attachment_result = self.rest_client.post("/incidents/{}/attachments/query?include_tasks=true".
-                                                             format(inc_id), None)
+        incident_attachment_result = self.rest_client.post(f"/incidents/{inc_id}/attachments/query?include_tasks=true", None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
         if attachments and attachments == "*":
@@ -81,13 +77,13 @@ class SoarHelper():
         return all_attach
 
     def get_incident_data(self, mail_incident_id):
-        return self.rest_client.get("/incidents/{}?handle_format=names".format(mail_incident_id))
+        return self.rest_client.get(f"/incidents/{mail_incident_id}?handle_format=names")
 
     def get_artifact_data(self, mail_incident_id):
-        return self.rest_client.post("/incidents/{}/artifacts/query_paged?include_related_incident_count=true".format(mail_incident_id), payload={})
+        return self.rest_client.post(f"/incidents/{mail_incident_id}/artifacts/query_paged?include_related_incident_count=true", payload={})
 
     def get_note_data(self, mail_incident_id):
-        return self.rest_client.post("/incidents/{}/comments/query?include_tasks=false".format(mail_incident_id), payload={})
+        return self.rest_client.post(f"/incidents/{mail_incident_id}/comments/query?include_tasks=false", payload={})
 
     def update_select_list(self, field_name, selection_list):
         """
@@ -117,7 +113,7 @@ class SoarHelper():
             self.rest_client.put(UPDATE_FIELD.format(field_name), payload)
             return True
         except Exception as err_msg:
-            LOG.error("Action failed for field: {} error: {}".format(field_name, str(err_msg)))
+            LOG.error("Action failed for field: %s error: %s", field_name, str(err_msg))
             return False
 
 

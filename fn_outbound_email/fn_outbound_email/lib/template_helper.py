@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long
 
 import logging
 from re import compile, split
@@ -10,12 +10,12 @@ from os import path
 from datetime import datetime
 from operator import itemgetter
 from six import string_types
-from resilient_lib import build_incident_url, build_task_url, build_resilient_url
+from resilient_lib import build_incident_url, build_task_url
 
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-TEMPLATES_SECTION = "{}:templates".format(CONFIG_DATA_SECTION)
+TEMPLATES_SECTION = f"{CONFIG_DATA_SECTION}:templates"
 
 class TemplateHelper(object):
     def __init__(self, resilient_component):
@@ -30,29 +30,26 @@ class TemplateHelper(object):
 
     def get_datatable(self, datatable_name, incident_id, html=True):
         """datatable jinja template"""
-        LOG.info(
-            'get_datatable: ({}) ({})'.format(datatable_name, incident_id))
+        LOG.info('get_datatable: (%s) (%s)', datatable_name, incident_id)
         try:
             datatable = self.rest_client.get(
-                "/incidents/{}/table_data/{}?"
-                "handle_format=names&text_content_output_format=objects_no_convert".format(
-                    incident_id, datatable_name))
+                f"/incidents/{incident_id}/table_data/{datatable_name}?"
+                "handle_format=names&text_content_output_format=objects_no_convert")
         except:
-            LOG.error("The datatable {} doesn't exist".format(datatable_name))
+            LOG.error("The datatable %s doesn't exist", datatable_name)
             return '-'
 
         if not datatable:
             # failed to find the datatable with that name
-            LOG.error("The datatable name {} doesn't match".format(datatable_name))
+            LOG.error("The datatable name %s doesn't match", datatable_name)
             return
 
         table_def = self.rest_client.get(
-            "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
-                datatable['id']))
+            f"/types/{datatable['id']}?handle_format=objects&text_content_output_format=objects_no_convert")
 
         # sort the fields by their display order
         field_list = []
-        for field_def_key, field_def in table_def["fields"].items():
+        for _field_def_key, field_def in table_def["fields"].items():
             field_list.append(field_def)
         table_def["fields"] = sorted(field_list, key=itemgetter('order'))
 
@@ -77,8 +74,8 @@ class TemplateHelper(object):
             env = Environment(loader=FileSystemLoader(searchpath=local_template_file_path), autoescape=True)
             template = env.get_template('datatable.jinja')
             return template.render(table_name=table_def['display_name'], headers=table_def['fields'], rows=datatable['rows'], table=tables)
-        else:
-            return datatable
+
+        return datatable
 
     # returns an HTML-formatted table based on the query result
     def get_query_result(self, query_conditons, want_fields_list, exclude_incidents):
@@ -93,7 +90,7 @@ class TemplateHelper(object):
 
         for incident in query_result["data"]:
             if incident["id"] not in exclude_incidents:
-                incident = self.rest_client.get("/incidents/{}".format(incident["id"]))
+                incident = self.rest_client.get(f"/incidents/{incident['id']}")
                 row = {}
                 for want_field in want_fields_list:
                     field_value = self.get_incident_value(incident, want_field)
@@ -119,7 +116,7 @@ class TemplateHelper(object):
         field_def = self.get_field_defs('incident').get(field_name)
 
         if not field_def:
-            LOG.error("Tried to get invalid field value: " + field_name)
+            LOG.error("Tried to get invalid field value: %s", field_name)
             return None
 
         if field_def.get("prefix"):
@@ -136,14 +133,14 @@ class TemplateHelper(object):
     # helper fuction to get child notes recursively
     # takes top level comment and returns a list of all the children and nested children
     def notes_helper(self, p, ret):
-            # base case: comment has no children
-            if not p.get("children"):
-                return ret
-            else:
-                # for each note, get all the children
-                for c in p.get("children"):        
-                    ret.append(c)
-                    self.notes_helper(c, ret)
+        # base case: comment has no children
+        if not p.get("children"):
+            return ret
+
+        # for each note, get all the children
+        for c in p.get("children"):
+            ret.append(c)
+            self.notes_helper(c, ret)
 
     def get_notes(self, notes, get_children):
         # returns a list of note objets
@@ -157,25 +154,21 @@ class TemplateHelper(object):
                 if get_children:
                     self.notes_helper(root_parent, all_notes)
         return all_notes
-    
+
     # gets the values for the specified field across all rows and returns as comma-separated list
     def get_datatable_value_array(self, inc_id, datatable_name, field_name):
-        LOG.info(
-            'get_datatable_value_array ({}) ({}) ({})'.format(inc_id, datatable_name,
-                                                                                 field_name))
+        LOG.info('get_datatable_value_array (%s) (%s) (%s)', inc_id, datatable_name, field_name)
         try:
             datatable = self.rest_client.get(
-                "/incidents/{}/table_data/{}?"
-                "handle_format=names&text_content_output_format=objects_no_convert".format(
-                    inc_id, datatable_name))
+                f"/incidents/{inc_id}/table_data/{datatable_name}?"
+                "handle_format=names&text_content_output_format=objects_no_convert")
         except:
             # if the datatable doesn't "exist", it returns error
-            LOG.error("The datatable {} doesn't exist".format(datatable_name))
+            LOG.error("The datatable %s doesn't exist", datatable_name)
             return '-'
 
         table_def = self.rest_client.get(
-            "/types/{}?handle_format=objects&text_content_output_format=objects_no_convert".format(
-                datatable['id']))
+            f"/types/{datatable['id']}?handle_format=objects&text_content_output_format=objects_no_convert")
 
         result = set()
         for table_row in datatable["rows"]:
@@ -240,18 +233,18 @@ class TemplateHelper(object):
         date_object = datetime.utcfromtimestamp(value)
         if not date_format:
             return date_object.isoformat()
-        else:
-            return date_object.strftime(date_format)
+
+        return date_object.strftime(date_format)
 
     def get_action_field_value(self, action_data, field_name):
         field_def = self.get_field_defs('actioninvocation').get(field_name)
         if not field_def:
-            logging.error('action field name (%s) invalid' % field_name)
+            logging.error('action field name (%s) invalid', field_name)
             return None
 
         action_def_value_list = field_def.get('values')
         if not action_def_value_list:
-            logging.error('action field not a list type: (%s)' % field_name)
+            logging.error('action field not a list type: (%s)', field_name)
             return None
 
         for action_def_value in action_def_value_list:
@@ -272,7 +265,7 @@ class TemplateHelper(object):
         elif isinstance(str_value, (list, tuple)):
             list_result = str_value
         else:
-            logging.warning('Unexpected list type (%s) for (%s)' % (type(str_value).__name__, str_value))
+            logging.warning('Unexpected list type (%s) for (%s)', type(str_value).__name__, str_value)
             list_result = str_value
 
         return list_result
@@ -297,10 +290,12 @@ def get_template(app_config, template_name):
         str: entire template to use read from disk
     """
     template_path = _get_template_path(app_config.get(TEMPLATES_SECTION, {}), template_name)
-    LOG.debug(f"Template name: {template_name} = {template_path}")
+    LOG.debug("Template name: %s = %s", template_name, template_path)
     if template_path:
-        with open(template_path, 'r') as f:
+        with open(template_path, 'r', encoding='utf-8') as f:
             return f.read()
+
+    return None
 
 def _get_template_path(app_config, template_name):
     """_summary_
@@ -317,7 +312,7 @@ def _get_template_path(app_config, template_name):
         if template_name not in app_config:
             LOG.error("Template name '%s' not found.", template_name)
             return None
-    
+
         # determine if a relative path or an absolute path
         template_file_path = app_config.get(template_name)
         if not template_file_path.startswith("/"):  # absolute

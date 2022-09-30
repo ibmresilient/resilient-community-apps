@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
 from __future__ import print_function
@@ -36,8 +36,8 @@ class FunctionComponent(ResilientComponent):
         if "@" not in self.from_email_address:
             if "@" not in self.smtp_user:
                 raise IntegrationError("No sender address specified")
-            else:
-                self.from_email_address = self.smtp_user
+
+            self.from_email_address = self.smtp_user
 
         if self.template_file_path: #If a template file path is given in app.config
 
