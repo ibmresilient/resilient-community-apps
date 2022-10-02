@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# SOAR Utilities Function for SOAR
+# SOAR Function Utilities for SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -68,7 +68,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-SOAR functions taken from fn_utilities to simplify development of integrations by wrapping each external activity into an individual workflow/playbook component. These components can be easily installed, then used and combined in SOAR workflow/playbooks. The SOAR platform sends data to the function component that performs an activity then returns the results to the workflow/playbook. The results can be acted upon by scripts, rules, and workflow/playbook decision points to dynamically orchestrate the security incident response activities.
+SOAR functions taken from fn_utilities to simplify development of integrations by wrapping each external activity into an individual workflow/playbook component. The SOAR Platform sends data from artifacts, attachments, incident data, etc. to the function component and returns results to the workflow/playbook. The results can be acted upon by scripts, rules, and workflow/playbook decision points to dynamically orchestrate the security incident response activities.
 ---
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
@@ -950,7 +950,7 @@ Function that takes an incident_id and a JSON String of field_name and field_val
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
-| `soar_utils_close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {'resolution_id':'Resolved','resolution_summary':'closing'} |
+| `soar_utils_close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {"resolution_id":"Resolved","resolution_summary":"closing"} |
 
 </p>
 </details>

@@ -8,7 +8,6 @@ import base64
 import logging
 import json
 import mimetypes
-import sys
 from io import BytesIO
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import write_file_attachment

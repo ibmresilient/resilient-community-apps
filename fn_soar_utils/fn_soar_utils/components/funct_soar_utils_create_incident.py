@@ -12,8 +12,8 @@ if sys.version_info[0] >= 3:
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields
+from fn_soar_utils.util.soar_utils_common import PACKAGE_NAME
 
-PACKAGE_NAME = "fn_soar_utils"
 FN_NAME = "soar_utils_create_incident"
 
 INCIDENT_URL = "/incidents"

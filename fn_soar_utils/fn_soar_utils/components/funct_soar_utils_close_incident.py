@@ -10,8 +10,7 @@ if sys.version_info[0] >= 3:
     from json.decoder import JSONDecodeError as ValueError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import close_incident, ResultPayload
-
-PACKAGE_NAME = "fn_soar_utils"
+from fn_soar_utils.util.soar_utils_common import PACKAGE_NAME
 
 
 class FunctionComponent(ResilientComponent):
