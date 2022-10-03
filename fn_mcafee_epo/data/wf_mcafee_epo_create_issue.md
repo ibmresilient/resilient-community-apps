@@ -36,6 +36,7 @@ inputs.mcafee_epo_ticket_server_name = rule.properties.epo_ticket_server_name
 if results.get("success"):
   row = incident.addRow("mcafee_epo_issues")
   row["issue_name"] = rule.properties.epo_issue_name
+  row["issue_id"] = results.get("content")
   row["severity"] = rule.properties.epo_issue_severity
   row["issue_due_date"] = rule.properties.epo_issue_due
   row["issue_description"] = rule.properties.epo_issue_description

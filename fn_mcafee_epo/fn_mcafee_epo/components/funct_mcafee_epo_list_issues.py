@@ -37,11 +37,15 @@ class FunctionComponent(AppFunctionComponent):
             "issue.listIssues",
             {"id": getattr(fn_inputs, "mcafee_epo_issue_id", None)}
         )
-        # Convert str time to unix timestamp
+
         for x in response:
+            # Convert str time to unix timestamp
             if x.get("dueDate"):
                 dat = x.get("dueDate")
                 x["dueDate"] = int(datetime.timestamp((datetime.strptime(dat[:len(dat)-6], '%Y-%m-%dT%H:%M:%S')))*1000)
+            # Convert untyped to BASIC. The only type is BASIC, so all issues are type BASIC
+            if x.get('type') == 'issue.type.untyped':
+                x['type'] = 'BASIC'
 
          # Clear datatable if required params are given
         if hasattr(fn_inputs, "datatable_name") and hasattr(fn_inputs, "incident_id"):
