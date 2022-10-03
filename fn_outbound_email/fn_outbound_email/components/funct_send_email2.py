@@ -108,7 +108,7 @@ class FunctionComponent(AppFunctionComponent):
 
                 # is there the original email to include?
                 if mail_data.get('mail_merge_body', False) and mail_data.get('mail_body'):
-                    rendered_mail_body= f"{rendered_mail_body}{mail_data.get('mail_body')}"
+                    rendered_mail_body= f"{rendered_mail_body}\n{mail_data.get('mail_body')}"
 
                 error_msg = send_msg(send_smtp_email, rendered_mail_body)
         elif mail_data.get('mail_body'):
@@ -116,9 +116,10 @@ class FunctionComponent(AppFunctionComponent):
             rendered_mail_body = mail_data.get('mail_body')
             error_msg = send_msg(send_smtp_email, rendered_mail_body)
         else:
-            raise ValueError("No email body or template specified")
+            error_msg = "No email body or template specified"
 
         if error_msg:
+            rendered_mail_body = None
             yield self.status_message(f"An error occurred while sending the email: {error_msg}")
 
         results = {
