@@ -61,6 +61,9 @@ class SoarHelper():
         Returns:
             [set]: [file paths for attachments]
         """
+        if not attachments:
+            return None
+
         incident_attachment_result = self.rest_client.post(f"/incidents/{inc_id}/attachments/query?include_tasks=true", None)
         incident_attachment_list = incident_attachment_result['attachments']
         # convert the list of requested attachments
