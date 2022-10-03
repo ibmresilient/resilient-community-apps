@@ -161,6 +161,7 @@ The following table describes the settings you need to configure the App. If usi
 | sn_table_name | Yes | Name of the ServiceNow Table. It is where Incidents and Tasks from SOAR are created and synced. The app supports the Incident table and Security Incident table in ServiceNow (only one table is supported at a time). |
 | sn_username | Yes | The **User ID** from **Step 2.** |
 | sn_password | Yes | The **Password** from **Step 2.** |
+| render_rich_text | No | If **True** will send rich HTML notes from SOAR to ServiceNow. Should be set to False or omitted if `glide.ui.security.allow_codetag` is not enabled on your ServiceNow system. |
 
 
 ### Custom Layouts

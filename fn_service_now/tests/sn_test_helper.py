@@ -29,6 +29,7 @@ sn_api_uri=/api/x_ibmrt_resilient/api
 sn_table_name=incident
 sn_username=ibmresilient
 sn_password="$testpassword"
+render_rich_text=True
 """
 
 def mock_pre_scrip_dict_to_json_str(d):
