@@ -1,0 +1,49 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "severity": "LOW",
+      "activityLog": [
+        {
+          "date": "2022-08-19T06:00:56-07:00",
+          "dirty": true,
+          "issueId": 13,
+          "details": "",
+          "id": 17,
+          "title": "Issue Created",
+          "username": "admin"
+        }
+      ],
+      "dueDate": 1661965252000,
+      "creatorName": "admin",
+      "description": "Test issue creation",
+      "ticketServerName": null,
+      "priority": "MEDIUM",
+      "type": "issue.type.untyped",
+      "resolution": "WILLNOTFIX",
+      "createdDate": "2022-08-19T06:00:56-07:00",
+      "assigneeName": "Jefferson",
+      "subtype": null,
+      "name": "New issue",
+      "assignee": null,
+      "id": 13,
+      "state": "ASSIGNED",
+      "ticketId": null
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "incident_id": 2108,
+    "datatable_name": "mcafee_epo_issues"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1434,
+    "timestamp": "2022-08-19 09:03:21"
+  }
+}
