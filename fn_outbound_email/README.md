@@ -29,7 +29,8 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0 | 8/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
+| v2.0.0 | 10/2022 | bug fix |
+| v2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
 | v1.3.1 | 1/2022 | Bug fixes for get_datatable function in template_helper.py |
 | v1.3.0 | 7/2021 | Username in app.config does not need to be an email |
 | v1.2.1 | 5/2021 | Bug fix for python 2 |
