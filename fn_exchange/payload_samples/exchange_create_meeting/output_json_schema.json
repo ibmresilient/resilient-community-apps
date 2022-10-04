@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "required_attendees": {
+      "type": "string"
+    },
+    "optional_attendees": {},
+    "sender": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "body": {},
+    "start_time": {
+      "type": "integer"
+    },
+    "end_time": {
+      "type": "integer"
+    }
+  }
+}

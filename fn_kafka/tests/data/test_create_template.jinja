@@ -1,0 +1,23 @@
+{
+  {# JINJA template for creating a new IBM SOAR incident. #}
+  "name": "Kakfa Incident - {{ title|e }}",
+  {# use the filter resilient_datetimeformat to convert values for IBM SOAR's Epoch timestamp #}
+  "discovered_date": {{ createdTimeUtc|resilient_datetimeformat }},
+  "create_date": {{ firstActivityTimeUtc|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ description|e }}"
+  },
+  "incident_type_ids": ["{{ category }}"],
+  {# use the filter resilient_substitute to convert values for IBM SOAR's [N]ew and [A]ctive
+     ex. status |resilient_substitute('{"New": "N", "Active": "A"}') #}
+  "plan_status": "{{ status }}",
+  {# use properties for custom incident fields
+  "properties": {
+    "custom_int": {{ custom_int }}
+  },
+  #}
+  {# use the filter resilient_substitute to convert values for IBM SOAR's Low, Medium, High
+     ex. severity |resilient_substitute('{"Informational": "Low", "Critical": "High"}') #}
+  "severity_code": "{{ severity }}"
+}
