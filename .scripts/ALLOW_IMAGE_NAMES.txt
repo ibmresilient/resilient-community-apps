@@ -22,6 +22,7 @@ fn_components
 fn_create_webex_meeting
 fn_create_zoom_meeting
 fn_cve_search
+fn_darktrace
 fn_datatable_utils
 fn_elasticsearch
 fn_email_header_validation
