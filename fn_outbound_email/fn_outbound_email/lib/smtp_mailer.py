@@ -8,6 +8,7 @@ from smtplib import SMTP, SMTP_SSL
 import logging
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from ssl import Purpose, create_default_context
 from jinja2 import Environment, select_autoescape
 from resilient_circuits import ResilientComponent
