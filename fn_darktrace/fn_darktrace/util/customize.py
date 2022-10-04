@@ -27,7 +27,7 @@ def codegen_reload_data():
         "incident_fields": [u"darktrace_aianalyst_incident_group_id", u"darktrace_associated_device_ids", u"darktrace_breach_link", u"darktrace_group_category", u"darktrace_group_score", u"darktrace_incident_group_acknowledged", u"darktrace_incident_group_link", u"darktrace_incident_group_start_time", u"darktrace_incident_last_modified", u"darktrace_initiating_device_ids", u"darktrace_number_of_events_in_group", u"darktrace_pbid"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"darktrace_associated_devices_dt", u"darktrace_associated_model_breaches_dt", u"darktrace_incident_events_dt"],
+        "datatables": [u"darktrace_associated_devices_dt", u"darktrace_incident_events_dt", u"darktrace_model_breaches_dt"],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": []
@@ -66,8 +66,8 @@ def customization_data(client=None):
         - darktrace_pbid
     - Data Tables:
         - darktrace_associated_devices_dt
-        - darktrace_associated_model_breaches_dt
         - darktrace_incident_events_dt
+        - darktrace_model_breaches_dt
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

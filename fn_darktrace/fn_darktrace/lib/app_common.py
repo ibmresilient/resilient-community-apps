@@ -16,7 +16,7 @@ LOG = logging.getLogger(__name__)
 PACKAGE_NAME = "fn_darktrace"
 EVENT_DT_NAME = "darktrace_incident_events_dt"
 DEVICE_DT_NAME = "darktrace_associated_devices_dt"
-MODEL_BREACHES_DT = "darktrace_associated_model_breaches_dt"
+MODEL_BREACHES_DT = "darktrace_model_breaches_dt"
 
 # E N D P O I N T S
 SYSTEM_STATUS_URI = "/status"
@@ -300,7 +300,7 @@ class AppCommon():
                 # but will only return a list if there is at least a comma in there -- thus we
                 # need to include the last comma there otherwise if there was only one device
                 # we'd get a dict result rather than a list
-                query = {"did": ",".join(map(str, group.get("devices", []))) + ","}
+                query = {"did": ",".join(map(str, group.get("devices", []))) + ",", "includetags": "true"}
                 group["enhancedDevices"] = self.get_devices(query, capture_error=True)
 
         return incident_groups
@@ -515,7 +515,7 @@ class AppCommon():
         # TODO: check this method once/if the API endpoint is actually implemented in Darktrace for our use
         # if they never expose it for us, we'll leave this here and open a ticket for further considerations
         # once they do add the functionality
-        return None
+        return {}
 
         # since this API is pretty simple, we'll require body params and build the body directly in this function
         body = {

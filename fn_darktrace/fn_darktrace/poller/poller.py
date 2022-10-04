@@ -25,6 +25,7 @@ ENTITY_COMMENT_HEADER = "Created by Darktrace" # header used to identify comment
 
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{0}</span>"
 
 # Directory of default templates
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -416,11 +417,11 @@ def fill_model_breaches_dt(entity, soar_case_id, soar_common: SOARCommon, dt_nam
                 breach_url = URL_FORMATTER.format(breach_url, breach_name)
 
             row_data = {
-                "darktrace_associated_model_breaches_dt_name": breach_url,
-                "darktrace_associated_model_breaches_dt_breach_id": breach_id,
-                "darktrace_associated_model_breaches_dt_threat_score": breach_score,
-                "darktrace_associated_model_breaches_dt_time_occurred": breach_create_time,
-                "darktrace_associated_model_breaches_dt_associated_event": event_title
+                "darktrace_model_breaches_dt_name": breach_url,
+                "darktrace_model_breaches_dt_breach_id": breach_id,
+                "darktrace_model_breaches_dt_threat_score": breach_score,
+                "darktrace_model_breaches_dt_time_occurred": breach_create_time,
+                "darktrace_model_breaches_dt_associated_event": event_title
             }
 
             soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
@@ -433,25 +434,39 @@ def fill_devices_dt(entity, soar_case_id, soar_common: SOARCommon, dt_name):
 
     devices = entity.get("enhancedDevices")
 
+    base_device_url = entity.get("baseUrl") + "/#device/"
+
     for device in devices:
         device_id = str(device.get("id"))
         label = device.get("devicelabel")
         device_type = device.get("typelabel")
+        tags = device.get("tags")
         ip = device.get("ip")
         hostname = device.get("hostname")
         mac_address = device.get("macaddress")
-        vendor = device.get("vendor")
+        os = device.get("os")
+        credentials = device.get("credentials")
         first_seen = device.get("time")
         last_seen = device.get("endtime")
 
+
+        device_url = None
+        if device_id:
+            device_url = base_device_url + device_id
+            device_url = URL_FORMATTER.format(device_url, device_id)
+        credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
+        tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
+
         row_data = {
-            "darktrace_device_dt_id": device_id,
+            "darktrace_device_dt_id": device_url,
             "darktrace_device_dt_label": label,
             "darktrace_device_dt_type": device_type,
+            "darktrace_device_dt_tags": tags,
             "darktrace_device_dt_ip": ip,
             "darktrace_device_dt_hostname": hostname,
             "darktrace_device_dt_mac_address": mac_address,
-            "darktrace_device_dt_vendor": vendor,
+            "darktrace_device_dt_os": os,
+            "darktrace_device_dt_credentials": credentials,
             "darktrace_device_dt_first_seen": first_seen,
             "darktrace_device_dt_last_seen": last_seen
         }

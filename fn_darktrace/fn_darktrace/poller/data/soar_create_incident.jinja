@@ -72,6 +72,7 @@
       {% endif %}
       {% if 'hostname' in device %}
         {% if artifactFound %},{% endif %}
+        {% set artifactFound = True %}
         {
           "type": {
             "name": "System Name"
@@ -82,6 +83,22 @@
             "content": "{{ device_description }}"
           }
         }
+      {% endif %}
+      {% if 'credentials' in device %}
+        {% if artifactFound %},{% endif %}
+          {% for cred in device['credentials'] %}
+            {
+                "type": {
+                  "name": "User Account"
+                },
+                "value": "{{ cred['credential'] }}",
+                "description": {
+                  "format": "html",
+                  "content": "{{ device_description }} (Last Seen {{cred['lastSeen']|iso8601}})"
+                }
+            }
+            {% if not loop.last %},{% endif %}
+          {% endfor %}
       {% endif %}
       {% if not loop.last %},{% endif %}
     {% endfor %}
