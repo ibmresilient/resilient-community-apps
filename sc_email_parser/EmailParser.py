@@ -1,19 +1,23 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import re
+import time
+
+# The new incident owner - the email address of a user or the name of a group and cannot be blank.
+# Change this value to reflect who will be the owner of the incident before running the script.
+newIncidentOwner = ""
+
+# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation 
+SAVE_CONVERSATION = False
 
 # This is the Python 3 version of the email sample script.
 # References to 'unicode' were removed which is a keyword that does not exist in Python 3.
 # Attempting to access an attribute that does not exist results in an error in the Python 3 scripting engine.
 # Use the hasattr function or a try/except block to check if an attribute exists before accessing it.
-# An example can be found on line 560.
+# An example can be found on line 579
 
 # A script to create an incident from an email message, add artifacts to the incident based on information
 # present in the body of the message, and add any email attachments to the incident.
 
-# The new incident owner - the email address of a user or the name of a group and cannot be blank.
-# Change this value to reflect who will be the owner of the incident before running the script.
-newIncidentOwner = ""
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -60,6 +64,14 @@ domainAllowList = [
     # "*.ibm.com"
 ]
 
+# pattern used to find and extract the email message-id
+MESSAGE_PATTERN = re.compile(r"([^<>]+)")
+# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
+DEFANG_PATTERN = re.compile(r"([HTTPSFTPNEWSMAILTOFILE]+):", re.IGNORECASE)
+# replies to message
+REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
+# possible message-id names
+MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
 
 class Utils:
     """ A class to collect some utilities used by the rest of the script. """
@@ -549,6 +561,50 @@ class EmailProcessor(object):
             if subject is not None:
                 self.addUniqueArtifact(u"{0}".format(
                     subject), "Email Subject", "Suspicious email subject")
+      
+    @staticmethod
+    def get_message_id(headers):
+        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
+        # find the message id among several choices
+        msg_id = msg_id_list[0] if msg_id_list else None
+        if msg_id:
+            match = MESSAGE_PATTERN.findall(msg_id[0].strip()) # remove brackets <>
+            if match:
+                return match[0]
+    
+    @staticmethod
+    def save_message_id(headers):
+        # extract the message ID and retain
+        msg_id = processor.get_message_id(headers)
+        if msg_id and hasattr(incident.properties, 'email_message_id'):
+            incident.properties.email_message_id = msg_id
+    
+    @staticmethod
+    def add_email_conversation(headers, msg_body, msg_attachments):
+        # attempt to add to incident datatable, if present
+      
+        def handle_list(value):
+            # convert a list to comma separate list, if neccessary
+            if value and isinstance(value, list):
+                return ", ".join(value)
+        
+            return value
+        
+        try:
+            row = incident.addRow('email_conversations')
+            row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
+            row['source'] = "inbound"
+            row['inbound_id'] = emailmessage.id
+            row['recipients'] = helper.createRichText("To: {}<br>Cc: {}<br>Bcc: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC", '')), handle_list(headers.get("BCC", ''))))
+            row['from'] = handle_list(headers.get("From"))
+            row['subject'] = handle_list(headers.get("Subject"))
+            row['body'] = DEFANG_PATTERN.sub(r"x_\1_x:", msg_body)
+            row['attachments'] = ", ".join(msg_attachments)
+            row['message_id'] = processor.get_message_id(headers)
+            row['in_reply_to'] = handle_list(headers.get("References"))
+            row['importance'] = handle_list((headers.get("Importance") or {"1": "high", "2": "normal", "3": "low"}.get(headers.get("X-Priority"), "normal")))
+        except Exception as err:
+            log.warn(str(err))
 
 ###
 # Mainline starts here
@@ -563,7 +619,7 @@ subject = emailmessage.subject if hasattr(emailmessage, 'subject') else None
 
 # Create a suitable title for an incident based on the email
 newIncidentTitle = "Incident generated from email \"{0}\" via mailbox {1}".format(
-    subject, emailmessage.inbound_mailbox)
+    REPLY_PATTERN.sub("", subject), emailmessage.inbound_mailbox)
 
 # Check to see if a similar incident already exists
 # We will search for an incident which has the same name as we would give a new incident
@@ -583,34 +639,41 @@ if len(incidents) == 0:
     # This does not need to be done for an existing incident.
     processor.addBasicInfoToIncident()
 
+    # add message-id for easy tracking
+    processor.save_message_id(emailmessage.headers)
 else:
     # A similar incident already exists. Associate the email with this preexisting incident.
     log.info(u"Associating with existing incident {0}".format(incidents[0].id))
     emailmessage.associateWithIncident(incidents[0])
 
 # Capture any URLs present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeUrlPattern(
-), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
+processor.processArtifactCategory(processor.makeUrlPattern(), 
+    "URL", "Suspicious URL", processor.fixURL, processor.checkDomainAllowList)
 
 # Capture any IPv4 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv4Pattern(
-), "IP Address", "Suspicious IP Address", processor.processIPFully)
+processor.processArtifactCategory(processor.makeIPv4Pattern(), 
+    "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture any IPv6 addresses present in the email body text and add them as artifacts
-processor.processArtifactCategory(processor.makeIPv6Pattern(
-), "IP Address", "Suspicious IP Address", processor.processIPFully)
+processor.processArtifactCategory(processor.makeIPv6Pattern(), 
+    "IP Address", "Suspicious IP Address", processor.processIPFully)
 
 # Capture 32-character hexadecimal substrings in the email body text and add them as MD5 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    32), "Malware MD5 Hash", "MD5 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(32), 
+    "Malware MD5 Hash", "MD5 hash of potential malware file")
 
 # Capture 40-character hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    40), "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(40), 
+    "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
 
 # Capture 64-character hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
-processor.processArtifactCategory(processor.makeHexPattern(
-    64), "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
+processor.processArtifactCategory(processor.makeHexPattern(64), 
+    "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
 
 # Add email message attachments to incident
 processor.processAttachments()
+
+if SAVE_CONVERSATION:
+    processor.add_email_conversation(emailmessage.headers, 
+        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content, 
+        [attachment.suggested_filename for attachment in emailmessage.attachments])
