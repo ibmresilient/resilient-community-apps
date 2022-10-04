@@ -5,8 +5,12 @@
 """
 
 import logging
-import pymsteams
-from datetime import datetime
+
+from urllib import parse
+from resilient_lib import IntegrationError, RequestsCommon
+
+from fn_teams.lib import constants
+from fn_teams.lib.teams_authentication import TeamsAuthentication
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -17,36 +21,40 @@ SELF_TEST = "selftest"
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Self test function that allows for testing the configurations and
+    credentials by quickly establishing a connection with the endpoint.
+
+    Self Objects:
+    -------------
+        rc      <rc> : Resilient wrapper for Requests object
+        log <logger> : Resilient wrapper for logger object
+
+    Returns:
+    --------
+        result <dict> : Test state and reason
     """
     options = opts.get("fn_teams", {})
+    rc = RequestsCommon(opts, options)
+    required_parameters = {
+        "rc"  : rc,
+        "log" : log}
 
-    # determine if self test is enabled
-    if not options.get(SELF_TEST):
+    try:
+        authenticator = TeamsAuthentication(required_parameters, options)
+        header = authenticator.authenticate()
+        authenticated = True
+
+    except IntegrationError as err:
+        log.error(err)
         return {
-            "state": "unimplemented",
-            "reason": "{} not found in app.config".format((SELF_TEST))
-        }
-    else:
-        webhook = options.get(SELF_TEST)
+            "state": "failure",
+            "reason": str(err)}
 
-        try:
-            card = pymsteams.connectorcard(webhook, http_proxy=opts['proxy_http'] if opts.get('proxy_http') else None,
-                                           https_proxy=opts['proxy_https'] if opts.get('proxy_https') else None,
-                                           http_timeout=60)
+    if authenticated:
+        rc.execute(method="get",
+            url=parse.urljoin(constants.BASE_URL, constants.LIST_USERS),
+            headers=header)
 
-            card.title("Resilient SelfTest")
-            card.text(datetime.ctime(datetime.now()))
-            card.send()
-
-            return {
-                "state": "success",
-                "reason": None
-            }
-        except Exception as err:
-            log.error(err.message)
-            return {
-                "state": "failure",
-                "reason": err.message if err.message else None
-            }
+        return {
+            "state": "success",
+            "reason": "success"}
