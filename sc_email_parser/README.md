@@ -112,9 +112,9 @@ There are two categories of allowlist used in the script: IP address and URL dom
 
 | Variable Name | Line number | Purpose |
 |:------------- | -----------:|:------- |
-| `ipV4AllowList` | 28 | IP v4 allowlist |
-| `ipV6AllowList` | 47 | IP v6 allowlist |
-| `domainAllowList` | 68 | URL domain allowlist |
+| `ipV4AllowList` | 23 | IP v4 allowlist |
+| `ipV6AllowList` | 42 | IP v6 allowlist |
+| `domainAllowList` | 63 | URL domain allowlist |
 
 Initially these allowlists are comprised of commented out entries which serve as examples of the data you might want to exclude from consideration. The allowlists will have no effect unless you uncomment the entries and make a grammatically correct list, or add some entries of your own.
 Please note that, compared to version v1 of the script, the allowlist variable location has changed and formats of the entries have been simplified.
