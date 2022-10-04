@@ -4,12 +4,11 @@
 
 from __future__ import print_function
 
-
 def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[fn_pa_panorama]
+    return u"""[fn_pa_panorama]
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 # Versions of panorama can be used by changing the api_version to use a different API version
@@ -20,4 +19,3 @@ cert=[True|False]
 #http_proxy=http://proxy.domain:3128
 #https_proxy=https://proxy.domain:3128
 """
-    return config_data

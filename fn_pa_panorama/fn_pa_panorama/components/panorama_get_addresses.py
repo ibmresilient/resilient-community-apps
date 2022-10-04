@@ -1,55 +1,35 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
-from fn_pa_panorama.util.panorama_util import PanoramaClient
+from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
+FN_NAME = "panorama_get_address"
 
-log = logging.getLogger(__name__)
-
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'panorama_edit_address_group"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements Resilient function 'panorama_get_address"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_pa_panorama", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get("fn_pa_panorama", {})
-
-    @function("panorama_get_addresses")
-    def _panorama_get_addresses_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Panorama get addresses returns a list of the address objects"""
-        try:
-            yield StatusMessage("Getting list of addresses")
-            rp = ResultPayload("fn_pa_panorama", **kwargs)
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-            # Get the function parameters:
-            location = self.get_select_param(kwargs.get("panorama_location"))  # select
-            vsys = kwargs.get("panorama_vsys")  # text
+        # Log inputs
+        self.LOG.info(fn_inputs)
 
-            # Log inputs
-            if location is None:
-                raise ValueError("panorama_location needs to be set.")
-            log.info("panorama_location: {}".format(location))
-            log.info("panorama_vsys: {}".format(vsys))
+        panorama_util = PanoramaClient(self.opts,
+                                       self.options,
+                                       self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
+                                       getattr(fn_inputs, "panorama_vsys", None))
+        response = panorama_util.get_addresses()
 
-            panorama_util = PanoramaClient(self.opts, location, vsys)
-            response = panorama_util.get_addresses()
+        yield self.status_message(f"{response['result']['@count']} addresses returned.")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            yield StatusMessage("{} addresses returned.".format(response["result"]["@count"]))
-            results = rp.done(True, response)
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(e)
+        # Produce a FunctionResult with the results
+        yield FunctionResult(response)
