@@ -18,13 +18,6 @@ SAVE_CONVERSATION = False
 # A script to create an incident from an email message, add artifacts to the incident based on information
 # present in the body of the message, and add any email attachments to the incident.
 
-# pattern used to find and extract the email message-id
-MESSAGE_PATTERN = re.compile(r"([^<>]+)")
-# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
-DEFANG_PATTERN = re.compile(r"([HTTPSFTPNEWSMAILTOFILE]+):", re.IGNORECASE)
-# replies to message
-REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
-
 
 # Allowlist for IP V4 addresses
 ipV4AllowList = [
@@ -71,6 +64,14 @@ domainAllowList = [
     # "*.ibm.com"
 ]
 
+# pattern used to find and extract the email message-id
+MESSAGE_PATTERN = re.compile(r"([^<>]+)")
+# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
+DEFANG_PATTERN = re.compile(r"([HTTPSFTPNEWSMAILTOFILE]+):", re.IGNORECASE)
+# replies to message
+REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
+# possible message-id names
+MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
 
 class Utils:
     """ A class to collect some utilities used by the rest of the script. """
@@ -563,11 +564,11 @@ class EmailProcessor(object):
       
     @staticmethod
     def get_message_id(headers):
-        uc_headers = {k.lower():v for k,v in headers.items()}
+        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
         # find the message id among several choices
-        msg_id = uc_headers.get("x-original-message-id") or uc_headers.get("x-microsoft-original-message-id") or uc_headers.get("x-google-original-message-id") or uc_headers.get("message-id")
+        msg_id = msg_id_list[0] if msg_id_list else None
         if msg_id:
-            match = MESSAGE_PATTERN.findall(msg_id[0].strip())
+            match = MESSAGE_PATTERN.findall(msg_id[0].strip()) # remove brackets <>
             if match:
                 return match[0]
     
