@@ -21,7 +21,9 @@ SAVE_CONVERSATION = False
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 # check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
-DEFANG_PATTERN = re.compile(r"([HTTPShttpsFTPftpNEWSnewsMAILTOmailtoFILEfile]+):")
+DEFANG_PATTERN = re.compile(r"([HTTPSFTPNEWSMAILTOFILE]+):", re.IGNORECASE)
+# replies to message
+REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
 
 
 # Allowlist for IP V4 addresses
@@ -561,8 +563,9 @@ class EmailProcessor(object):
       
     @staticmethod
     def get_message_id(headers):
+        uc_headers = {k.lower():v for k,v in headers.items()}
         # find the message id among several choices
-        msg_id = headers.get("X-Original-Message-ID") or headers.get("X-Microsoft-Original-Message-ID") or headers.get("X-Google-Original-Message-ID") or headers.get("Message-ID")
+        msg_id = uc_headers.get("x-original-message-id") or uc_headers.get("x-microsoft-original-message-id") or uc_headers.get("x-google-original-message-id") or uc_headers.get("message-id")
         if msg_id:
             match = MESSAGE_PATTERN.findall(msg_id[0].strip())
             if match:
@@ -615,7 +618,7 @@ subject = emailmessage.subject if hasattr(emailmessage, 'subject') else None
 
 # Create a suitable title for an incident based on the email
 newIncidentTitle = "Incident generated from email \"{0}\" via mailbox {1}".format(
-    subject, emailmessage.inbound_mailbox)
+    REPLY_PATTERN.sub("", subject), emailmessage.inbound_mailbox)
 
 # Check to see if a similar incident already exists
 # We will search for an incident which has the same name as we would give a new incident
@@ -637,7 +640,6 @@ if len(incidents) == 0:
 
     # add message-id for easy tracking
     processor.save_message_id(emailmessage.headers)
-    
 else:
     # A similar incident already exists. Associate the email with this preexisting incident.
     log.info(u"Associating with existing incident {0}".format(incidents[0].id))
@@ -669,10 +671,6 @@ processor.processArtifactCategory(processor.makeHexPattern(64),
 
 # Add email message attachments to incident
 processor.processAttachments()
-
-## When using Outbound Email 2.0 or greater
-# add message-id for easy tracking
-processor.save_message_id(emailmessage.headers)
 
 if SAVE_CONVERSATION:
     processor.add_email_conversation(emailmessage.headers, 
