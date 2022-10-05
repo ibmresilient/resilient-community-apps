@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "alertId": "831993910053044226",
+    "closed": true
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_is_malicious": false,
+    "reaqta_alert_id": "831993910053044226",
+    "reaqta_note": "<div class=\"rte\"><div><strong>this is now complete</strong></div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 1065,
+    "timestamp": "2022-02-18 13:54:56"
+  }
+}

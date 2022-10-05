@@ -1,0 +1,18 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": true,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_username": "testUser"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 597,
+    "timestamp": "2022-08-11 08:07:17"
+  }
+}
