@@ -82,11 +82,8 @@ class QRadarUCMClient(object):
         response.raise_for_status()
 
         response_json = response.json()
-        if not response_json:
-            rule_id = None
-        else:
-            rule_id = response_json[0].get("identifier")
-        return rule_id
+        return response_json[0].get("identifier") if response_json else None
+
 
     def get_tactics_of_rule(self, rule_name, rule_id):
         """
@@ -98,5 +95,5 @@ class QRadarUCMClient(object):
                                                    headers=self.http_info.session.headers)
         mitre_results.raise_for_status()
         mitre_tactics = json.loads(mitre_results.text)
-        tactics = mitre_tactics.get(rule_name)
-        return tactics    
+        return mitre_tactics.get(rule_name)
+ 
