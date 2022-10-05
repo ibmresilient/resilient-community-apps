@@ -3,8 +3,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-import xmltodict
-from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME
+from xmltodict import parse
+from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -27,12 +27,15 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
+        # Get configuration for Panorama server specified
+        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
+
         panorama_util = PanoramaClient(self.opts,
-                                       self.options,
+                                       options,
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        None)
         xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
-        dict_response = xmltodict.parse(xml_response)
+        dict_response = parse(xml_response)
 
         user_list = []
         try:

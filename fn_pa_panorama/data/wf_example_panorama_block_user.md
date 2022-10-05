@@ -20,6 +20,7 @@
 ```python
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script
@@ -121,6 +122,7 @@ xml_ending = """
 panorama_xml = panorama_xml + xml_ending
 
 inputs.panorama_user_group_xml = panorama_xml
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script

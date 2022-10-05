@@ -5,7 +5,7 @@
 from logging import getLogger
 from json import loads
 from resilient_lib.components.resilient_common import validate_fields, str_to_bool
-from resilient_lib.components.requests_common import RequestsCommon
+from resilient_lib.components.requests_common import RequestsCommon, IntegrationError
 
 LOG = getLogger(__name__)
 DEFAULT_API_VERSION="9.0"
@@ -108,3 +108,71 @@ class PanoramaClient:
         response = self.rc.execute_call_v2("POST", f"{self.host}/api/?", params=params, verify=self.verify)
         response.raise_for_status()
         return response.text
+
+class PanoramaServers():
+    def __init__(self, opts, options):
+        self.servers, self.server_name_list = self._load_servers(opts)
+
+    def _load_servers(self, opts):
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_data = opts.get(server)
+            if not server_data:
+                raise KeyError(f"Unable to find Panorama server: {server}")
+
+            servers[server] = server_data
+
+        return servers, server_name_list
+
+    def panorama_label_test(panorama_label, servers_list):
+        """
+        Check if the given panorama_label is in the app.config
+        :param panorama_label: User selected server
+        :param servers_list: List of Panorama servers
+        :return: Dictionary of options for choosen server
+        """
+        # If label not given and using previous versions app.config [fn_pa_panorama]
+        if not panorama_label and servers_list.get(PACKAGE_NAME):
+            return servers_list[PACKAGE_NAME]
+        elif not panorama_label:
+            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
+
+        label = PACKAGE_NAME+":"+panorama_label
+        if panorama_label and label in servers_list:
+            options = servers_list[label]
+        elif len(servers_list) == 1:
+            options = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise IntegrationError("{} did not match labels given in the app.config".format(panorama_label))
+
+        return options
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of Panorama server names defined in the app.config in fn_pa_panorama.
+        :param opts: List of options
+        :return: List of servers
+        """
+        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:")]
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list
+
+def get_server_settings(opts, panorama_label):
+    """
+    Used for initilizing or reloading the options variable
+    :param opts: List of options
+    :return: panorama server settings for specified server
+    """
+    server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else PanoramaServers(opts).get_server_name_list()
+
+    # Creates a dictionary that is filled with the panorama servers
+    # and there configurations
+    servers_list = {server_name:opts.get(server_name, {}) for server_name in server_list}
+
+    # Get configuration for panorama server specified
+    return PanoramaServers.panorama_label_test(panorama_label, servers_list)

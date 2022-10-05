@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME
+from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -26,8 +26,11 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
+        # Get configuration for Panorama server specified
+        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
+
         panorama_util = PanoramaClient(self.opts,
-                                       self.options,
+                                       options,
                                        self.get_select_param(fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
 

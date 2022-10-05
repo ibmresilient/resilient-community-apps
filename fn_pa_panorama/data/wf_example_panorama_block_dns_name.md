@@ -20,6 +20,7 @@
 ```python
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script
@@ -99,6 +100,7 @@ Example response:
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script
@@ -216,6 +218,7 @@ body = '''{{
   }}'''.format(group_name, des, list_to_json_str(member_list))
 
 inputs.panorama_request_body = body
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script
@@ -285,6 +288,7 @@ body = '''{{
 }}'''.format(artifact.value, artifact.value, artifact.value)
 
 inputs.panorama_request_body = body
+inputs.panorama_label = rule.properties.panorama_label
 ```
 
 ### Post-Processing Script
