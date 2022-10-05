@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """Function implementation
    test with: resilient-circuits selftest -l fn_qradar_advisor
@@ -8,6 +8,7 @@
 
 import logging
 from fn_qradar_advisor.lib.qradar_advisor_client import QRadarAdvisorClient
+from fn_qradar_advisor.lib.qradar_ucm_client import QRadarUCMClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -32,9 +33,16 @@ def selftest_function(opts):
                                           opts=opts, function_opts=options)
         r = qraw_client.test_connectivity()
         if r.status_code == 200:
-            return {"state": "success", "status_code": r.status_code}
+            ucm_client = QRadarUCMClient(qradar_host=options["qradar_host"],
+                                        qradar_token=options["qradar_ucm_token"],
+                                        advisor_app_id=options["qradar_advisor_app_id"],
+                                        cafile=qradar_verify_cert, log=log,
+                                        opts=opts, function_opts=options)
+            ucm_status_code, ucm_running = ucm_client.test_connectivity()
+            return {"state": 'success' if ucm_running else 'failure', "status_code": ucm_status_code}   
         else:
             return {"state": "failure", "status_code": r.status_code}
+
 
     except Exception as e:
         return {"state": "failure", "status_code": str(e)}
