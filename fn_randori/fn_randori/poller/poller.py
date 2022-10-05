@@ -111,11 +111,10 @@ class PollerComponent(AppFunctionComponent):
         # Validate required fields in app.config are set
         # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
         required_fields = ["polling_interval",
-                        "polling_lookback",
-                        "endpoint_url",
-                        "cafile",
-                        "api_key",
-                        "api_secret"]
+                           "polling_lookback",
+                           "endpoint_url",
+                           "verify",
+                           "api_token"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 

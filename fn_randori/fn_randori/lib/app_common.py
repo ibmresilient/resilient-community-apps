@@ -39,6 +39,7 @@ LINKBACK_URL = "<- ::CHANGE_ME:: ->"
 # define the endpiont api calls your app will make to the endpoint solution. Below are expamples
 #ALERT_URI = "alert/{}/"
 #POLICY_URI = "policy/"
+GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/v1/all-detections-for-target"
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -54,16 +55,12 @@ class AppCommon():
         """
 
         self.package_name = package_name
-        self.api_key = app_configs.get("api_key", "<- ::CHANGE_ME:: change to default for API Key or remove default ->")
-        self.api_secret = app_configs.get("api_secret","<- ::CHANGE_ME:: change to default for API secret or remove default ->")
-        self.endpoint_url = app_configs.get("endpoint_url", "<- ::CHANGE_ME:: change to default for endpoint url or remove default ->")
+        self.api_token = app_configs.get("api_token")
+        self.endpoint_url = app_configs.get("endpoint_url")
         self.rc = rc
-        self.verify = str_to_bool(app_configs.get("cafile", "false"))
+        self.verify = str_to_bool(app_configs.get("verify", "false"))
 
-        # Specify any additional parameters needed to communicate with your endpoint solution
-        self.token = self.header = None
-
-        self.secret = self.authenticate()
+        self.header = self._make_header(self.api_token)
 
     def _get_uri(self, cmd):
         """
@@ -75,7 +72,6 @@ class AppCommon():
         :return: complete URL
         :rtype: str
         """
-        raise IntegrationError("unimplemented")
         return urljoin(self.endpoint_url, cmd)
 
     def _make_header(self, token):
@@ -86,10 +82,10 @@ class AppCommon():
         :return: complete header
         :rtype: dict
         """
-        raise IntegrationError("unimplemented")
+
         header = HEADER.copy()
         # modify to represent how to build the header
-        header['Authorization'] = "Bearer {}".format(self.secret)
+        header['Authorization'] = "Bearer {}".format(self.api_token)
 
         return header
 
@@ -170,14 +166,19 @@ class AppCommon():
         :return: changed entity list
         :rtype: list
         """
-        # <- ::CHANGE_ME:: -> for the specific API calls
-        raise IntegrationError("unimplemented")
         query = {
-            "query_field_name": readable_datetime(timestamp) # utc datetime format
-        }
+            "condition": "AND",
+            "rules": [
+                {
+                    "field": "first_seen",
+                    "operator": "greater_or_equal",
+                    "value": timestamp
+                }
+            ]
+            }
 
         LOG.debug("Querying endpoint with %s", query)
-        response, err_msg = self._api_call("GET", 'alerts', query, refresh_authentication=True)
+        response, err_msg = self._api_call("GET", GET_ALL_DETECTIONS_FOR_TARGET, query, refresh_authentication=True)
         if err_msg:
             LOG.error("%s API call failed: %s", self.package_name, err_msg)
             return None
