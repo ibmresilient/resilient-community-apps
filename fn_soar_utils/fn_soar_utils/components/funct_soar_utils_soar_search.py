@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
             log.debug(template)
 
             # Run the search and return the results
-            yield StatusMessage("Searching...")
+            yield StatusMessage("Searching for Incident data.")
             results = self.rest_client().search(template)
 
             # Produce a FunctionResult with the results

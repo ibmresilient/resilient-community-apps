@@ -273,7 +273,15 @@ if task is not None:
 <p>
 
 ```python
-None
+# The result contains at least these three hashes
+if results.get('sha256', None):
+  incident.addArtifact("Malware SHA-256 Hash", results.get('sha256'), u"SHA-256 hash of '{}'".format(attachment.name))
+
+if results.get('sha1', None):
+  incident.addArtifact("Malware SHA-1 Hash", results.get('sha1'), u"SHA-1 hash of '{}'".format(attachment.name))
+
+if results.get('md5', None):
+  incident.addArtifact("Malware MD5 Hash", results.get('md5'), u"MD5 hash of '{}'".format(attachment.name))
 ```
 
 </p>
@@ -3851,7 +3859,8 @@ if results.success:
   incident.addNote(helper.createRichText(u"Found {} incidents<br>{}".format(results.content['recordsTotal'], '<br>'.join(msgs))))
 
 else:
-  incident.addNote(u"Search error found: {}".format(results.reason))
+  incident.addNote(u"Search error found: {}<br>Filter conditions: {}<br>Sort Fields conditions: {}".format(results.reason, 
+      results.inputs.get("soar_utils_filter_conditions"), results.inputs.get("soar_utils_sort_fields")))
   
 ```
 
@@ -3861,6 +3870,8 @@ else:
 ---
 ## Function - SOAR Utilities: SOAR Search
 This function searches the SOAR platform for incident data according to the criteria specified, and returns the results to your workflow. It can be used to find incidents containing data that matches any string, or incidents currently assigned to a given user, or a very wide range of other search conditions.
+
+NOTE: The search results may include data from incidents that the current SOAR user (the person who triggered the workflow) cannot access. Often your SOAR users have the Default role that allows them to only see incidents where they are members. This function runs with the permissions of your app account, which typically may have much wider access privileges. Use with caution, to avoid information disclosure.
 
  ![screenshot: fn-soar-utilities-soar-search ](./doc/screenshots/fn-soar-utilities-soar-search.png)
 

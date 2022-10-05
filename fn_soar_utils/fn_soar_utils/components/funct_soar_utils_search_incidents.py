@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # Run the search and return the results
-            yield StatusMessage("Searching...")
+            yield StatusMessage("Searching SOAR for '{}'".format(filter))
             try:
                 url = "{}{}{}".format(INCIDENT_QUERY_PAGED, QUERY_PAGED_RETURN_LEVEL,
                                       self.fn_options.get("search_result_level", "normal"))
