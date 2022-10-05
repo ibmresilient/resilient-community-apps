@@ -80,6 +80,7 @@ fn_query_tor_network
 fn_reaqta
 fn_remedy
 fn_rsa_netwitness
+fn_soar_utils
 fn_scheduler
 fn_secureworks_ctp
 fn_sentinelone
