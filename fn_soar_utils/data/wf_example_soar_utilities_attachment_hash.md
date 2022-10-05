@@ -29,7 +29,14 @@ if task is not None:
 
 ### Post-Processing Script
 ```python
-None
+if results.get('sha256', None):
+  incident.addArtifact("Malware SHA-256 Hash", results.get('sha256'), u"SHA-256 hash of '{}'".format(attachment.name))
+
+if results.get('sha1', None):
+  incident.addArtifact("Malware SHA-1 Hash", results.get('sha1'), u"SHA-1 hash of '{}'".format(attachment.name))
+
+if results.get('md5', None):
+  incident.addArtifact("Malware MD5 Hash", results.get('md5'), u"MD5 hash of '{}'".format(attachment.name))
 ```
 
 ---

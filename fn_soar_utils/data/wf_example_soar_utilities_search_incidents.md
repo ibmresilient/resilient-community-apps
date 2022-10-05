@@ -31,8 +31,9 @@ if results.success:
   incident.addNote(helper.createRichText(u"Found {} incidents<br>{}".format(results.content['recordsTotal'], '<br>'.join(msgs))))
 
 else:
-  incident.addNote(u"Search error found: {}".format(results.reason))
-  
+  incident.addNote(u"Search error found: {}<br>Filter conditions: {}<br>Sort Fields conditions: {}".format(results.reason, 
+      results.inputs.get("soar_utils_filter_conditions"), results.inputs.get("soar_utils_sort_fields")))
+
 ```
 
 ---
