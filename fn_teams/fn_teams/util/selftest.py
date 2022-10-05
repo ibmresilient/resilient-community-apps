@@ -37,7 +37,7 @@ def selftest_function(opts):
     rc = RequestsCommon(opts, options)
     required_parameters = {
         "rc"  : rc,
-        "log" : log}
+        "logger" : log}
 
     try:
         authenticator = TeamsAuthentication(required_parameters, options)
