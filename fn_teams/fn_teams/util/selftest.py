@@ -4,7 +4,6 @@
    test with: resilient-circuits selftest -l fn_teams
 """
 
-from curses import ERR
 import logging
 import pymsteams
 
