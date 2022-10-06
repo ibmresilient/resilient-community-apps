@@ -32,7 +32,8 @@ setup(
     install_requires=[
         'resilient_circuits>=45.0.0',
         'resilient_lib',
-        'pymsteams'
+        'pymsteams',
+        "msal"
     ],
     python_requires='>=3.9',
     packages=find_packages(),

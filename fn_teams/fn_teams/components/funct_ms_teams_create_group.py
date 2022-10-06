@@ -2,7 +2,6 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #
 # """AppFunction implementation"""
-import json
 from urllib import parse
 
 from resilient_lib import validate_fields, IntegrationError
