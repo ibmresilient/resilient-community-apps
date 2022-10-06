@@ -133,39 +133,8 @@ inputs.panorama_label = rule.properties.panorama_label
 
 ### Post-Processing Script
 ```python
-"""
-Example Response:
-
-{
-    "content": {
-        "response": {
-            "@code": "20", 
-            "@status": "success", 
-            "msg": "command succeeded"
-        }, 
-        "xml_response": "<response status=\"success\" code=\"20\"><msg>command succeeded</msg></response>"
-    }, 
-    "inputs": {
-        "panorama_user_group_xml": {
-            "content": "<entry name=\"Blocked_Users\"/>", 
-            "format": "text"
-        }, 
-        "panorama_user_group_xpath": "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-    }, 
-    "metrics": {
-        "execution_time_ms": 203, 
-        "host": "", 
-        "package": "fn-pa-panorama", 
-        "package_version": "1.0.0", 
-        "timestamp": "2019-06-27 10:51:51", 
-        "version": "1.0"
-    }, 
-    "raw": "{\"response\": {\"@status\": \"success\", \"@code\": \"20\", \"msg\": \"command succeeded\"}, \"xml_response\": \"<response status=\\\"success\\\" code=\\\"20\\\"><msg>command succeeded</msg></response>\"}", 
-    "reason": null, 
-    "success": true, 
-    "version": "1.0"
-}
-"""
+if results.get("success"):
+  incident.addNote("User account: {} was unblocked.".format(artifact.value))
 ```
 
 ---

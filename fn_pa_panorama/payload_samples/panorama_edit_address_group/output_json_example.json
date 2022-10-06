@@ -1,3 +1,26 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@status": "success",
+    "@code": "20",
+    "msg": "command succeeded"
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_name_parameter": "Blocked Group",
+    "panorama_request_body": "{\n  \"entry\": {\n    \"@name\": \"Blocked Group\",\n    \"description\": \"None\",\n    \"static\": {\n      \"member\": [\"208.113.204.14\"]\n    }\n    }\n  }",
+    "panorama_location": "vsys",
+    "panorama_vsys": "vsys1",
+    "panorama_label": "panorama_label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.2.0",
+    "host": "Richards-MacBook-Pro.local",
+    "execution_time_ms": 502,
+    "timestamp": "2022-10-06 12:34:07"
+  }
 }

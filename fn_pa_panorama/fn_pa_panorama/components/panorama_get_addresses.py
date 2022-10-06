@@ -6,10 +6,10 @@
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
-FN_NAME = "panorama_get_address"
+FN_NAME = "panorama_get_addresses"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements Resilient function 'panorama_get_address"""
+    """Component that implements Resilient function 'panorama_get_addresses"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)

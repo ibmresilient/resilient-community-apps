@@ -99,7 +99,7 @@ if len(users_list) == 1:
 elif len(users_list) > 1:
   # multiple users returned
   for user in users_list:
-    blocked_users.append(unicode(user.get("#text")))
+    blocked_users.append(user.get("#text"))
 
 # Add the user to the blocked list if they are not already there
 if artifact.value not in blocked_users:
@@ -127,39 +127,8 @@ inputs.panorama_label = rule.properties.panorama_label
 
 ### Post-Processing Script
 ```python
-"""
-Example Response:
-
-{
-    "content": {
-        "response": {
-            "@code": "20", 
-            "@status": "success", 
-            "msg": "command succeeded"
-        }, 
-        "xml_response": "<response status=\"success\" code=\"20\"><msg>command succeeded</msg></response>"
-    }, 
-    "inputs": {
-        "panorama_user_group_xml": {
-            "content": "\n<entry name=\"Blocked_Users\">\n    <user>\n      <member>Blocked_User</member>\n    </user>\n</entry>\n", 
-            "format": "text"
-        }, 
-        "panorama_user_group_xpath": "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-    }, 
-    "metrics": {
-        "execution_time_ms": 201, 
-        "host": "", 
-        "package": "fn-pa-panorama", 
-        "package_version": "1.0.0", 
-        "timestamp": "2019-06-27 10:50:50", 
-        "version": "1.0"
-    }, 
-    "raw": "{\"response\": {\"@status\": \"success\", \"@code\": \"20\", \"msg\": \"command succeeded\"}, \"xml_response\": \"<response status=\\\"success\\\" code=\\\"20\\\"><msg>command succeeded</msg></response>\"}", 
-    "reason": null, 
-    "success": true, 
-    "version": "1.0"
-}
-"""
+if results.get("success"):
+  incident.addNote("User account: {} was blocked.".format(artifact.value))
 ```
 
 ---

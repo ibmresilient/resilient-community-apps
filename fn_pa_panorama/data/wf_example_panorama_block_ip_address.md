@@ -223,41 +223,8 @@ inputs.panorama_label = rule.properties.panorama_label
 
 ### Post-Processing Script
 ```python
-"""
-Example Response:
-
-{
-  "content": {
-    "@code": "20",
-    "@status": "success",
-    "msg": "command succeeded"
-  },
-  "inputs": {
-    "panorama_location": {
-      "id": 801,
-      "name": "vsys"
-    },
-    "panorama_name_parameter": "Blocked Group",
-    "panorama_request_body": {
-      "content": "{\n  \"entry\": {\n    \"@name\": \"Blocked Group\",\n    \"description\": \"None\",\n    \"static\": {\n      \"member\": [\"Test\", \"google.com\"]\n    }\n    }\n  }",
-      "format": "text"
-    },
-    "panorama_vsys": "vsys1"
-  },
-  "metrics": {
-    "execution_time_ms": 182,
-    "host": "",
-    "package": "fn-pa-panorama",
-    "package_version": "1.0.0",
-    "timestamp": "2019-06-25 15:19:10",
-    "version": "1.0"
-  },
-  "raw": "{\"msg\": \"command succeeded\", \"@status\": \"success\", \"@code\": \"20\"}",
-  "reason": null,
-  "success": true,
-  "version": "1.0"
-}
-"""
+if results.get("success"):
+  incident.addNote("IP Address: {} was blocked.".format(artifact.value))
 ```
 
 ---

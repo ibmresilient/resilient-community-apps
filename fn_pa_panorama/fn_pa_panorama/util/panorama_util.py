@@ -110,7 +110,7 @@ class PanoramaClient:
         return response.text
 
 class PanoramaServers():
-    def __init__(self, opts, options):
+    def __init__(self, opts):
         self.servers, self.server_name_list = self._load_servers(opts)
 
     def _load_servers(self, opts):

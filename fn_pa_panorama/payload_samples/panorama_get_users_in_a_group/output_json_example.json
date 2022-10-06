@@ -1,3 +1,81 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "response": {
+      "@status": "success",
+      "@code": "19",
+      "result": {
+        "@total-count": "1",
+        "@count": "1",
+        "entry": {
+          "@name": "Blocked_Users",
+          "@admin": "admin",
+          "@dirtyId": "2",
+          "@time": "2022/10/06 12:31:01",
+          "user": {
+            "@admin": "admin",
+            "@dirtyId": "2",
+            "@time": "2022/10/06 12:31:01",
+            "member": [
+              {
+                "@admin": "admin",
+                "@dirtyId": "2",
+                "@time": "2022/10/06 12:31:01",
+                "#text": "Blocked_User"
+              },
+              {
+                "@admin": "admin",
+                "@dirtyId": "2",
+                "@time": "2022/10/06 12:31:01",
+                "#text": "Blocked_user_2"
+              },
+              {
+                "@admin": "admin",
+                "@dirtyId": "2",
+                "@time": "2022/10/06 12:31:01",
+                "#text": "test"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "user_list": [
+      {
+        "@admin": "admin",
+        "@dirtyId": "2",
+        "@time": "2022/10/06 12:31:01",
+        "#text": "Blocked_User"
+      },
+      {
+        "@admin": "admin",
+        "@dirtyId": "2",
+        "@time": "2022/10/06 12:31:01",
+        "#text": "Blocked_user_2"
+      },
+      {
+        "@admin": "admin",
+        "@dirtyId": "2",
+        "@time": "2022/10/06 12:31:01",
+        "#text": "test"
+      }
+    ],
+    "xml_response": "<response status=\"success\" code=\"19\"><result total-count=\"1\" count=\"1\">\n  <entry name=\"Blocked_Users\" admin=\"admin\" dirtyId=\"2\" time=\"2022/10/06 12:31:01\">\n    <user admin=\"admin\" dirtyId=\"2\" time=\"2022/10/06 12:31:01\">\n      <member admin=\"admin\" dirtyId=\"2\" time=\"2022/10/06 12:31:01\">Blocked_User</member>\n      <member admin=\"admin\" dirtyId=\"2\" time=\"2022/10/06 12:31:01\">Blocked_user_2</member>\n      <member admin=\"admin\" dirtyId=\"2\" time=\"2022/10/06 12:31:01\">test</member>\n    </user>\n  </entry>\n</result></response>"
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_location": "vsys",
+    "panorama_user_group_xpath": "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']",
+    "panorama_label": "panorama_label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.2.0",
+    "host": "Richards-MacBook-Pro.local",
+    "execution_time_ms": 483,
+    "timestamp": "2022-10-06 12:33:42"
+  }
 }
