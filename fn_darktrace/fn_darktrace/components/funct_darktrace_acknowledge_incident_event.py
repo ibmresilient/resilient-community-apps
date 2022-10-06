@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+
+"""AppFunction implementation"""
+
+from fn_darktrace.lib.app_common import AppCommon, PACKAGE_NAME
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import validate_fields
+
+FN_NAME = "darktrace_acknowledge_incident_event"
+
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'darktrace_acknowledge_incident_event'"""
+
+    def __init__(self, opts):
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Function: Function to acknowledge an incident event or a list of incident events.
+        Inputs:
+            -   fn_inputs.darktrace_incident_event_id
+        """
+
+        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+
+        self.app_common = AppCommon(self.rc, self.options, self.opts)
+
+        validate_fields(["darktrace_incident_event_id"], fn_inputs)
+
+        uuid = fn_inputs.darktrace_incident_event_id
+        results = self.app_common.acknowledge_incident_event(uuid)
+
+        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+
+        yield FunctionResult(results)
