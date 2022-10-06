@@ -29,7 +29,6 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
-        validate_fields(["base_url"], self.config_options)
 
         self.required_parameters["rc"] = self.rc
         self.required_parameters["logger"] = self.LOG
