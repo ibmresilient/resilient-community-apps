@@ -67,7 +67,7 @@ domainAllowList = [
 # pattern used to find and extract the email message-id
 MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 # check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
-DEFANG_PATTERN = re.compile(r"([HTTPSFTPNEWSMAILTOFILE]+):", re.IGNORECASE)
+DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", re.IGNORECASE)
 # replies to message
 REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
 # possible message-id names
