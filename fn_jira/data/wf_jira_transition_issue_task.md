@@ -19,10 +19,6 @@
 ### Pre-Processing Script
 ```python
 # Example: Jira Transition Issue (Task) pre-processing script
-
-#######################################
-### Define pre-processing functions ###
-#######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
      Supports types: basestring, unicode, bool, int and nested dicts.
@@ -31,14 +27,11 @@ def dict_to_json_str(d):
 
   json_entry = u'"{0}":{1}'
   json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
-    value = d[entry]
-
-    if value is None:
-      value = False
+    value = d[entry] if value else False
 
     if isinstance(value, list):
       helper.fail('dict_to_json_str does not support Python Lists')
@@ -49,9 +42,9 @@ def dict_to_json_str(d):
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
+      value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
@@ -64,12 +57,8 @@ def dict_to_json_str(d):
       helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-  
 
-#####################
-### Define Inputs ###
-#####################
-
+inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
 inputs.jira_issue_id = row.jira_issue_id_col
 inputs.jira_transition_id = "Close"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: Done\n"
@@ -88,7 +77,6 @@ time_now = Date().time
 if results.get("success"):
   row.date = time_now
   row.status = "Closed"
-
 ```
 
 ---

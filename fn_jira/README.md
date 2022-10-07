@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# Atlassian Jira Functions for Resilient
+# Atlassian Jira Functions for SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -63,7 +63,7 @@
 * Bug fixes
 
 ### v1.0.1
-* Support for versions of Resilient 31.0 and beyond
+* Support for versions of SOAR 31.0 and beyond
 
 ### v1.0.0
 * Initial Release
@@ -79,16 +79,9 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This app allows for the tracking of Resilient Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
-
-
-
-It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in Resilient.
-
-
-
-Example rules and workflows can used used or modified to meet your business processes.
-
+This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
+It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
+Example rules and workflows can be used or modified to meet your business processes.
 
 
 ### Key Features
@@ -107,7 +100,7 @@ Example rules and workflows can used used or modified to meet your business proc
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.0.0`
+* SOAR platform >= `v35.0.0`
 * App Host >= `v1.2.132` (if using App Host)
   * To setup up an App Host see:  [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
 * An Integration Server running `resilient_circuits>=32.0.0` (if using an Integration Server)
@@ -128,7 +121,7 @@ Example rules and workflows can used used or modified to meet your business proc
 ---
 
 ### App Configuration
-The following table describes the settings you need to configure in the app.config file. If using App Host, see the Resilient System Administrator Guide. If using the integration server, see the Integration Server Guide.
+The following table describes the settings you need to configure in the app.config file. If using App Host, see the SOAR System Administrator Guide. If using the integration server, see the Integration Server Guide.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -194,7 +187,7 @@ Once you've completed the linked step above, you can continue with the rest of J
 ---
 
 ## Function - Jira Transition Issue
-Transition a Jira issue. This can be used when a Resilient Incident is closed or to change the Jira Issue's workflow state.
+Transition a Jira issue. This can be used when a SOAR Incident is closed or to change the Jira Issue's workflow state.
 See example workflow for configuration of function pre-processor and post-processor scripts
 
  ![screenshot: fn-jira-transition-issue ](./doc/screenshots/fn-jira-transition-issue.png)
@@ -204,7 +197,7 @@ See example workflow for configuration of function pre-processor and post-proces
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `jira_comment` | `text` | No | `"Updated in IBM Resilient"` | The comment to add to the issue in Jira |
+| `jira_comment` | `text` | No | `"Updated in IBM SOAR"` | The comment to add to the issue in Jira |
 | `jira_fields` | `text` | No | `-` | A JSON String of the fields to set in Jira |
 | `jira_issue_id` | `text` | Yes | `JRA-1000` | The ID of the issue in Jira. Also known as the issue key. E.g: "JRA-1330" |
 | `jira_transition_id` | `text` | Yes | `11` | The ID to transition the Jira issue to. More information can be found in the Jira Documentation on transition_id |
@@ -226,7 +219,7 @@ results = {
         'jira_issue_id': 'INT-2106',
         'jira_transition_id': 'Close',
         'jira_fields': '{ "resolution":{ "name":"Done" } }',
-        'jira_comment': 'Closed in IBM Resilient\n\nResolution: Done\n'
+        'jira_comment': 'Closed in IBM SOAR\n\nResolution: Done\n'
     },
     'metrics': {
         'version': '1.0',
@@ -302,7 +295,7 @@ def dict_to_json_str(d):
 
 inputs.jira_issue_id = incident.properties.jira_issue_id
 inputs.jira_transition_id = "Close"
-inputs.jira_comment = u"Closed in IBM Resilient\n\nResolution: {0}\n{1}".format(incident.resolution_id, incident.resolution_summary.content)
+inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: {0}\n{1}".format(incident.resolution_id, incident.resolution_summary.content)
 
 resolution_map = { "unresolved": "Obsolete", "duplicate": "Duplicate", "not an issue": "Won't Do", "resolved": "Done" }
 
@@ -335,7 +328,7 @@ if results.get("success"):
 
 ---
 ## Function - Jira Open Issue
-Create a jira issue. To be used when a Resilient Incident is created.
+Create a jira issue. To be used when a SOAR Incident is created.
 See example workflow for configuration of function pre-processor and post-processor scripts
 
  ![screenshot: fn-jira-open-issue ](./doc/screenshots/fn-jira-open-issue.png)
@@ -441,11 +434,11 @@ results = {
                 },
                 'components': [],
                 'timeoriginalestimate': None,
-                'description': 'IBM Resilient Link: https://example.ibm.com:443/#incidents/2130\n\nThe CEO recieved an email with a malcious attachment',
+                'description': 'IBM SOAR Link: https://example.ibm.com:443/#incidents/2130\n\nThe CEO recieved an email with a malcious attachment',
                 'timetracking': {},
                 'attachment': [],
                 'aggregatetimeestimate': None,
-                'summary': 'IBM Resilient: Malicious email sent to CEO',
+                'summary': 'IBM SOAR: Malicious email sent to CEO',
                 'creator': {
                     'self': 'https://jira1-01.example.com/rest/api/2/user?username=example',
                     'name': 'example',
@@ -510,7 +503,7 @@ results = {
     'raw': '{"issue_url": "https://jira1-01.example.com/browse/INT-2105", "issue_url_internal": "https://jira1-01.example.com/rest/api/2/issue/41939", "issue_key": "INT-2105", "issue": ...
     'inputs': {
         'incident_id': 2130,
-        'jira_fields': '{ "summary":"IBM Resilient: Malicious email sent to CEO","issuetype":"Story","project":"INT","description":"<div class=\\"rte\\"><div>The CEO recieved an email with a malcious attachment</div></div>","priority":{ "name":"High" } }'
+        'jira_fields': '{ "summary":"IBM SOAR: Malicious email sent to CEO","issuetype":"Story","project":"INT","description":"<div class=\\"rte\\"><div>The CEO recieved an email with a malcious attachment</div></div>","priority":{ "name":"High" } }'
     },
     'metrics': {
         'version': '1.0',
@@ -638,8 +631,8 @@ inputs.jira_fields = dict_to_json_str({
   "project": rule.properties.jira_project_id,
   "issuetype": rule.properties.jira_issue_type,
   "priority": jira_priority,
-  "summary": u"IBM Resilient: {0}".format(incident.name),
-  "description": incident.description.content if incident.get("description") else "Created in IBM Resilient"
+  "summary": u"IBM SOAR: {0}".format(incident.name),
+  "description": incident.description.content if incident.get("description") else "Created in IBM SOAR"
 })
 
   ```
@@ -666,7 +659,7 @@ if results.get("success"):
 
 ---
 ## Function - Jira Create Comment
-Create a Jira comment. To be used when a Resilient Note is created.
+Create a Jira comment. To be used when a SOAR Note is created.
 See example workflow for configuration of function pre-processor and post-processor scripts
 
  ![screenshot: fn-jira-create-comment ](./doc/screenshots/fn-jira-create-comment.png)
@@ -676,7 +669,7 @@ See example workflow for configuration of function pre-processor and post-proces
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `jira_comment` | `text` | No | `"Updated in IBM Resilient"` | The comment to add to the issue in Jira |
+| `jira_comment` | `text` | No | `"Updated in IBM soaR"` | The comment to add to the issue in Jira |
 | `jira_issue_id` | `text` | Yes | `JRA-1000` | The ID of the issue in Jira. Also known as the issue key. E.g: "JRA-1330" |
 
 </p>
@@ -838,7 +831,7 @@ jira_task_references
 ---
 
 ## Troubleshooting & Support
-If using the app with an App Host, see the Resilient System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the Resilient platform you are using.
+If using the app with an App Host, see the SOAR System Administrator Guide and the App Host Deployment Guide for troubleshooting procedures. You can find these guides on the [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSBRUQ), where you can select which version of the SOAR platform you are using.
 
 If using the app with an integration server, see the [Integration Server Guide](https://ibm.biz/res-int-server-guide)
 

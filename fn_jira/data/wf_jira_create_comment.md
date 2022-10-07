@@ -19,7 +19,6 @@
 ### Pre-Processing Script
 ```python
 # Example: Jira Create Comment pre-processing script
-
 # If this is a task note, get the taskId
 if note.type == 'task':
   # Set the task_id
@@ -30,8 +29,7 @@ else:
 
 inputs.jira_comment = note.text.content
 inputs.incident_id = incident.id
-
-
+inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
 ```
 
 ### Post-Processing Script

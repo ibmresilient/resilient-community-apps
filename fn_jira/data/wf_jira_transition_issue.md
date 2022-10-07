@@ -11,7 +11,7 @@
 `jira_transition_issue`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_jira`
@@ -19,10 +19,6 @@
 ### Pre-Processing Script
 ```python
 # Example: Jira Transition Issue pre-processing script
-
-#######################################
-### Define pre-processing functions ###
-#######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
      Supports types: basestring, unicode, bool, int and nested dicts.
@@ -31,13 +27,13 @@ def dict_to_json_str(d):
 
   json_entry = u'"{0}":{1}'
   json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
     value = d[entry]
 
-    if value is None:
+    if not value:
       value = False
 
     if isinstance(value, list):
@@ -49,9 +45,9 @@ def dict_to_json_str(d):
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
+      value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
@@ -64,12 +60,8 @@ def dict_to_json_str(d):
       helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-  
 
-#####################
-### Define Inputs ###
-#####################
-
+inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
 inputs.jira_issue_id = incident.properties.jira_issue_id
 inputs.jira_transition_id = "Close"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: {0}\n{1}".format(incident.resolution_id, incident.resolution_summary.content)

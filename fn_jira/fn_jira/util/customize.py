@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
         "workflows": [u"example_jira_open_issue_task", u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue", u"jira_transition_issue_task"],
         "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)", u"Example: Jira Close Issue", u"Example: Jira Close Issue (Task)", u"Example: Jira Create Comment", u"Example: Jira Create Comment (Task)"],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_url"],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_label", u"jira_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
@@ -39,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 42.2.41
+    IBM SOAR Platform Version: 44.0.7585
 
     Contents:
     - Message Destinations:
@@ -64,6 +64,7 @@ def customization_data(client=None):
     - Incident Fields:
         - jira_internal_url
         - jira_issue_id
+        - jira_label
         - jira_url
     - Data Tables:
         - jira_task_references
