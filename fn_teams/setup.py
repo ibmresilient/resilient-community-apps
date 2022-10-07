@@ -24,8 +24,8 @@ setup(
     license='MIT License',
     author='IBM SOAR',
     author_email='',
-    url='http://ibm.biz/soarcommunity',
-    description="This package extends the collaboration functionality of Microsfot Teams to IBM Security QRadar SOAR Platform",
+    url='https://ibm.biz/soarcommunity',
+    description="This package extends the collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform",
     long_description='''This package provides SOAR platform with the ability to interface with Microsoft Teams and create groups and channels.
     Included are example workflows and rules for pushing incident and task information to a Teams channel and to create a group and channel from
     within an incident or task''',

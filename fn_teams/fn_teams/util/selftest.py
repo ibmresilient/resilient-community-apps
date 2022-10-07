@@ -25,6 +25,15 @@ def selftest_function(opts):
     """
     Self test function that allows for testing the configurations and
     credentials by quickly establishing a connection with the endpoint.
+    Two tests are performed here. 
+
+    TEST 1: Authentication
+        This tests the ability of the application to interface with the
+        endpoint and to create groups, teams and channels.
+
+    Test 2 POST CHANNEL MESSAGE:
+        This tests the ability of the application to post a message on a
+        teams channel using webooks.
 
     Self Objects:
     -------------
@@ -44,8 +53,10 @@ def selftest_function(opts):
     rc = RequestsCommon(opts, options)
     required_parameters = {
         "rc"     : rc,
-        "logger" : log}
+        "logger" : log
+        }
 
+    ''' TEST 1: Teams Authentication (Mandatory) '''
     try:
         authenticator = TeamsAuthentication(required_parameters, options)
         header = authenticator.authenticate()
@@ -71,8 +82,8 @@ def selftest_function(opts):
 
 
     if options.get(SELF_TEST):
+        ''' TEST 2: Teams POST MESSAGE (Skipped if selftest option not found in app.conf) '''
         webhook = options.get(SELF_TEST)
-
         try:
             card = pymsteams.connectorcard(
                 webhook, 
@@ -93,6 +104,7 @@ def selftest_function(opts):
             ERR_REASON += constants.MSG_POST_MSG_FAILED.format(str(err))
             TEST_PASS_2 = False
     else:
+        ''' Test2 is skipped if selftest option is not found in app.conf '''
         log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
         TEST_PASS_2 = True
 

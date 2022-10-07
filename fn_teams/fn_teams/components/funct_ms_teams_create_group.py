@@ -44,7 +44,6 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
-            yield self.status_message(constants.STATUS_FAILED_APP.format(FN_NAME))
             yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:

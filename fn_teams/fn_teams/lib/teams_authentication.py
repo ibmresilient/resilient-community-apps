@@ -58,12 +58,12 @@ class TeamsAuthentication:
         --------
             header <dict> : Request header with access_token
         '''
-        bearer_id = self.generate_bearerID()
+        bearer_id = self.generate_bearer_id()
         header = self.generate_header(bearer_id)
         return header
 
 
-    def generate_bearerID(self):
+    def generate_bearer_id(self):
         '''
         This function perfroms MSAL authentication and retrieves the bearer_id which is necessary
         to interact with the Microsoft's endpoint.
@@ -88,8 +88,7 @@ class TeamsAuthentication:
             self.LOG.info(constants.INFO_RETRIEVED_BEARER_ID)
             return response['access_token']
 
-        msg = u"Unable to authenticate: Error: {} {}".format(response.get("error"),
-            response.get("error_description"))
+        msg = f"Unable to authenticate: Error: {response.get('error')} {response.get('error_description')}"
         self.LOG.error(msg)
         raise IntegrationError(msg)
 
@@ -108,7 +107,6 @@ class TeamsAuthentication:
         '''
         if not bearer_id:
             raise IntegrationError("Bearer ID not specified")
-
         self.LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
 
         return {
