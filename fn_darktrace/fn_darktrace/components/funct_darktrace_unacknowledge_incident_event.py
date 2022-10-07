@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        self.app_common = AppCommon(self.rc, self.options, self.opts)
+        self.app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
 
         validate_fields(["darktrace_incident_event_id"], fn_inputs)
 
