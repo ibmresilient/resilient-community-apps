@@ -70,7 +70,7 @@ class TestDarktraceAcknowledgeModelBreach:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_darktrace.lib.app_common.AppCommon.acknowledge_model_breach") as patch_ack:
+        with patch("fn_darktrace.components.funct_darktrace_acknowledge_model_breach.AppCommon.acknowledge_model_breach") as patch_ack:
             patch_ack.return_value = expected_results
             results = call_darktrace_acknowledge_model_breach_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content"))

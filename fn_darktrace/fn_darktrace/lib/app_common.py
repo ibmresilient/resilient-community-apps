@@ -32,6 +32,7 @@ AI_ANALYST_EVENT_COMMENTS_URI = "/aianalyst/incident/comments"
 AI_ANALYST_EVENT_ACKNOWLEDGE_URI = "/aianalyst/acknowledge"
 AI_ANALYST_EVENT_UNACKNOWLEDGE_URI = "/aianalyst/unacknowledge"
 DEVICES_URI = "/devices"
+TAGS_URI = "/tags/entities"
 
 
 # C O N F I G S
@@ -664,6 +665,30 @@ class AppCommon():
         return self._execute_dt_request(
             "POST",
             MODEL_BREACH_ACKNOWLEDGE_URI.format(pbid=pbid),
+            data=body,
+            capture_error=capture_error
+        )
+
+    def add_tag_to_device(self, did: str, tag: str, capture_error: bool = False) -> dict:
+        """
+        Acknowledge a model breach. Requires a model breach ID (pbid).
+
+        Hits the ``/modelbreaches/{pbid}/acknowledge`` endpoint. More information:
+        https://customerportal.darktrace.com/product-guides/main/api-modelbreaches-acknowledge-unacknowledge-request
+
+        :param pbid: model breach id
+        :type pbid: str
+        :param capture_error: if True, will not fail on API error; defaults to False
+        :type capture_error: bool, optional
+        :return: if success, returns {"aianalyst": "SUCCESS"}
+        :rtype: dict
+        """
+
+        body = {"did": did, "tag": tag}
+
+        return self._execute_dt_request(
+            "POST",
+            TAGS_URI,
             data=body,
             capture_error=capture_error
         )

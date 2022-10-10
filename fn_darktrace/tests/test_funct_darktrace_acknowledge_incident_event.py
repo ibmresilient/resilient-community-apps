@@ -70,7 +70,7 @@ class TestDarktraceAcknowledgeIncidentEvent:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_darktrace.lib.app_common.AppCommon.acknowledge_incident_event") as patch_ack:
+        with patch("fn_darktrace.components.funct_darktrace_acknowledge_incident_event.AppCommon.acknowledge_incident_event") as patch_ack:
             patch_ack.return_value = expected_results
             results = call_darktrace_acknowledge_incident_event_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content"))
