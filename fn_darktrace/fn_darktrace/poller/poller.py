@@ -228,7 +228,8 @@ class PollerComponent(AppFunctionComponent):
                     # comments are associated with events, thus, we'll post the comment to the first event
                     # TODO: reimplement this once Darktrace has exposed this endpoint fully for our use
                     # comment_content = f"Synced to SOAR Case {soar_case_id}"
-                    # self.app_common.add_incident_group_comment(entity_id, comment_content, capture_error=True)
+                    # first_incident_event_id = incident_group.get("enhancedIncidentEvents")[0].get("id")
+                    # self.app_common.add_incident_group_comment(first_incident_event_id, comment_content, capture_error=True)
 
                     cases_insert += 1
                     LOG.info("Created SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
