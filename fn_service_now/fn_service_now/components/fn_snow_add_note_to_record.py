@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
                 "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]  # select, text (required)
             }
 
-            # Since v2.0.10, we've changed this to support HTML; the old version cleared the HTML.
+            # Since v2.1.0, we've changed this to support HTML; the old version cleared the HTML.
             # SNOW supports surrounding rich text with "[code]" tags. Within that, basic HTML is supported
             # this is only going to be supported on systems where `glide.ui.security.allow_codetag` is enabled
             # so it is optional
