@@ -5,11 +5,14 @@ import hashlib
 import hmac
 import logging
 from datetime import datetime
-from urllib.parse import urljoin, quote_plus
+from urllib.parse import quote_plus, urljoin
 
+from requests import Session
+from requests.exceptions import ConnectionError
 from resilient_lib import (IntegrationError, RequestsCommon, str_to_bool,
                            validate_fields)
 from resilient_lib.components.templates_common import iso8601
+from retry import retry
 
 LOG = logging.getLogger(__name__)
 
@@ -21,10 +24,13 @@ MODEL_BREACHES_DT = "darktrace_model_breaches_dt"
 # E N D P O I N T S
 SYSTEM_STATUS_URI = "/status"
 MODEL_BREACHES_URI = "/modelbreaches"
-MODEL_BREACHES_COMMENTS_URI = urljoin(MODEL_BREACHES_URI, "/{pbid}/comments")
+MODEL_BREACHES_COMMENTS_URI = MODEL_BREACHES_URI + "/{pbid}/comments"
+MODEL_BREACH_ACKNOWLEDGE_URI = MODEL_BREACHES_URI + "/{pbid}/acknowledge"
 AI_ANALYST_INCIDENT_GROUPS_URI = "/aianalyst/groups"
 AI_ANALYST_EVENTS_URI = "/aianalyst/incidentevents"
 AI_ANALYST_EVENT_COMMENTS_URI = "/aianalyst/incident/comments"
+AI_ANALYST_EVENT_ACKNOWLEDGE_URI = "/aianalyst/acknowledge"
+AI_ANALYST_EVENT_UNACKNOWLEDGE_URI = "/aianalyst/unacknowledge"
 DEVICES_URI = "/devices"
 
 
@@ -80,6 +86,25 @@ class AppCommon():
         self.locale = app_configs.get(LOCALE_CONFIG, DEFAULT_LOCALE)
         self.exclude_did = app_configs.get(EXCLUDE_DEVICE_LIST_CONFIG, "")
         self.auto_sync_comments = str_to_bool(app_configs.get(COMMENT_SYNC_CONFIG, DEFAULT_COMMENT_SYNC))
+
+        self.proxies = rc.get_proxies()
+        self.timeout = rc.get_timeout()
+        self.client_auth = rc.get_clientauth()
+
+        self.__init_session_obj()
+
+    def __init_session_obj(self):
+        """
+        Create a one-for-all-objects Session object.
+
+        Uses ``requests.Session`` to make the poller requests quicker
+        as the TCP connection will be reused.
+        ALSO make the session object a static variable so that it is shared
+        across instances so that it isn't created more than once and can be shared
+        for efficiency
+        """
+        if not hasattr(AppCommon, "darktrace_session"):
+            AppCommon.darktrace_session = Session()
 
     ##################
     # STATIC METHODS #
@@ -164,7 +189,8 @@ class AppCommon():
 
         return signature
 
-    def _execute_dt_request(self, method: str, path_request: str, params: dict = {}, time: str = None, capture_error=False, **kwargs) -> dict:
+    @retry(ConnectionError, tries=3, delay=2, backoff=2, logger=LOG)
+    def _execute_dt_request(self, method: str, path_request: str, params: dict = {}, data: dict = {}, time: str = None, capture_error=False, **kwargs) -> dict:
         """
         Execute a request to Darktrace. Constructs the appropriate "signature" which is the 
         hash of the request path, the public key, and the time of the request, which is required by the DT API.
@@ -175,8 +201,10 @@ class AppCommon():
         :type method: str
         :param path_request: Path to execute in the request
         :type path_request: str
-        :param params: Parameters to use for the request, defaults to {}
+        :param params: Parameters to use for GET requests, defaults to {}
         :type params: dict, optional
+        :param data: Parameters to use for POST requests, used with the data option of execute and becomes the body of the POST request, defaults to {}
+        :type data: dict, optional
         :param time: Time to execute the request for, formatted in %Y%m%dT%H%M%S. 
                      If None, sets time to UTC.now; time must be within 30 minutes of the execute time
         :type time: str, optional
@@ -193,18 +221,32 @@ class AppCommon():
         # need to add the query params to the path_request so that the signature is correct
         # NOTE: cannot specify params as an argument in resilient_lib.execute() because that 
         #       will not generate the correct signature for the DT request
-        path_request = self._generate_query_from_params(path_request, params)
-        signature = self._generate_signature(path_request, time)
+        if method == "GET":
+            path_request = self._generate_query_from_params(path_request, params)
+            signature = self._generate_signature(path_request, time)
+        if method == "POST":
+            temp_path_for_signature = self._generate_query_from_params(path_request, data)
+            signature = self._generate_signature(temp_path_for_signature, time)
         url = urljoin(self.base_url, path_request)
 
         LOG.debug(f"Query endpoint at url={url} with: time={time}, signature={signature}, verify={self.verify}")
 
         try:
-            response = self.rc.execute(method=method, url=url, headers=self._get_headers(time, signature), verify=self.verify, **kwargs)
+            response = AppCommon.darktrace_session.request(
+                method=method,
+                url=url,
+                data=data,
+                headers=self._get_headers(time, signature),
+                verify=self.verify,
+                timeout=self.timeout,
+                proxies=self.proxies,
+                cert=self.client_auth,
+                **kwargs
+            )
         except IntegrationError as err:
             if capture_error:
-                LOG.error("Darktrace API call failed for request %s %s Captured error: %s", method, path_request, str(err))
-                return None
+                LOG.error("Darktrace API call failed for request %s %s %s Captured error: %s", method, path_request, data, str(err))
+                return {}
             raise err
 
         return response.json()
@@ -401,7 +443,7 @@ class AppCommon():
 
         return self._execute_dt_request(
             "GET",
-            MODEL_BREACHES_COMMENTS_URI.format(breach_id),
+            MODEL_BREACHES_COMMENTS_URI.format(pbid=breach_id),
             params=params, 
             capture_error=capture_error
         )
@@ -512,10 +554,6 @@ class AppCommon():
         :return: response from posting the comment
         :rtype: dict
         """
-        # TODO: check this method once/if the API endpoint is actually implemented in Darktrace for our use
-        # if they never expose it for us, we'll leave this here and open a ticket for further considerations
-        # once they do add the functionality
-        return {}
 
         # since this API is pretty simple, we'll require body params and build the body directly in this function
         body = {
@@ -555,6 +593,78 @@ class AppCommon():
             "GET",
             DEVICES_URI,
             params=params,
+            capture_error=capture_error
+        )
+
+    def acknowledge_incident_event(self, uuid: str, capture_error: bool = False) -> dict:
+        """
+        Acknowledge an incident event. Requires a UUID of the incident event.
+
+        More info:
+        https://customerportal.darktrace.com/product-guides/main/api-aianalyst-acknowledge-request
+
+        :param uuid: the uuid of the incident event
+        :type uuid: str
+        :param capture_error: if True, will not fail on API error; defaults to False
+        :type capture_error: bool, optional
+        :return: if success, returns {"aianalyst": "SUCCESS"}
+        :rtype: dict
+        """
+
+        body = {"uuid": uuid}
+
+        return self._execute_dt_request(
+            "POST",
+            AI_ANALYST_EVENT_ACKNOWLEDGE_URI,
+            data=body,
+            capture_error=capture_error
+        )
+
+    def unacknowledge_incident_event(self, uuid: str, capture_error: bool = False) -> dict:
+        """
+        Uncknowledge an incident event. Requires a UUID of the incident event.
+
+        More info:
+        https://customerportal.darktrace.com/product-guides/main/api-aianalyst-acknowledge-request
+
+        :param uuid: the uuid of the incident event
+        :type uuid: str
+        :param capture_error: if True, will not fail on API error; defaults to False
+        :type capture_error: bool, optional
+        :return: if success, returns {"aianalyst": "SUCCESS"}
+        :rtype: dict
+        """
+
+        body = {"uuid": uuid}
+
+        return self._execute_dt_request(
+            "POST",
+            AI_ANALYST_EVENT_UNACKNOWLEDGE_URI,
+            data=body,
+            capture_error=capture_error
+        )
+
+    def acknowledge_model_breach(self, pbid: str, capture_error: bool = False) -> dict:
+        """
+        Acknowledge a model breach. Requires a model breach ID (pbid).
+
+        Hits the ``/modelbreaches/{pbid}/acknowledge`` endpoint. More information:
+        https://customerportal.darktrace.com/product-guides/main/api-modelbreaches-acknowledge-unacknowledge-request
+
+        :param pbid: model breach id
+        :type pbid: str
+        :param capture_error: if True, will not fail on API error; defaults to False
+        :type capture_error: bool, optional
+        :return: if success, returns {"aianalyst": "SUCCESS"}
+        :rtype: dict
+        """
+
+        body = {"acknowledge": "true"}
+
+        return self._execute_dt_request(
+            "POST",
+            MODEL_BREACH_ACKNOWLEDGE_URI.format(pbid=pbid),
+            data=body,
             capture_error=capture_error
         )
     #############
