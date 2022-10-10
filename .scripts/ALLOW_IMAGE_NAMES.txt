@@ -81,6 +81,7 @@ fn_query_tor_network
 fn_reaqta
 fn_remedy
 fn_rsa_netwitness
+fn_soar_utils
 fn_scheduler
 fn_secureworks_ctp
 fn_sentinelone
@@ -106,6 +107,7 @@ fn_utilities
 fn_virustotal
 fn_vmray_analyzer
 fn_watson_translate
+fn_webex
 fn_whois
 fn_whois_rdap
 fn_wiki

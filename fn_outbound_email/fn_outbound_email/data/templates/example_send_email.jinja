@@ -1,14 +1,37 @@
-{% set NOT_FOUND = ["Not Found!","-","None",None] %}
-{% macro get_row(label,field_name) -%}
-	{% set value = template_helper.get_incident_value(incident,field_name) %}
-	{% set style = "font-family: Calibri; color: rgb(31,73,125)" %}
-    {% if value and value not in NOT_FOUND and not value.startswith('-') %}
+{% set NOT_FOUND = ["Not Found!","-","None",None] -%}
+{% set style = "font-family: Calibri; color: rgb(31,73,125)" -%}
+{% macro get_row(label, field_name) -%}
+	{% set value = template_helper.get_incident_value(incident, field_name) -%}
+    {% if value and value not in NOT_FOUND and not value.startswith('-') -%}
     <tr>
         <td width="100" style="{{style}}; font-weight:bold">{{ label }}</td>
         <td style="{{style}}">{{ value | safe }}</td>
     </tr>
-    {% endif %}
-{%- endmacro %}
+    {% endif -%}
+{% endmacro -%}
+
+{% macro get_artifact(art) -%}
+    {% set values = template_helper.get_artifacts(art) -%}
+    {% for a in values -%}
+        <tr>
+            <td width="200" style="{{style}}">{{ a.get("value") | safe }}</td>
+            {% set descr = a.get("description") if a.get("description") else '-' -%}
+            <td width="200" style="{{style}}">{{ descr | safe }}</td>
+        </tr>
+    {% endfor -%}
+{%- endmacro -%}
+
+{% macro get_note(note, get_children=True) -%}
+    {% set values = template_helper.get_notes(note, get_children) -%}
+    {% for n in values -%}
+        {% if n.get("text", "") -%}
+            <tr>
+                <td colspan="2" style="{{style}}">{{ n.get("text", "") | safe }}</td>
+            </tr>
+        {% endif -%}
+    {% endfor -%}
+{% endmacro -%}
+
 <table width="100%" >
 <tr>
     <td colspan="2">
@@ -16,16 +39,53 @@
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
 </tr>
-    {{ get_row('Severity:','severity_code') }}<br>
-    {{ get_row('Status:','plan_status') }}<br>
-    {{ get_row('Created:','create_date') }}<br>
-    {{ get_row('Category:','incident_type_ids') }}<br>
+    {{ get_row('Severity:', 'severity_code') }}<br>
+    {{ get_row('Status:', 'plan_status') }}<br>
+    {{ get_row('Created:', 'create_date') }}<br>
+    {{ get_row('Category:', 'incident_type_ids') }}<br>
 <tr>
     <td colspan="2">
         <br><h3 style="color: rgb(68,114,196)">INCIDENT DESCRIPTION</h3>
         <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
     </td>
-    {{ get_row('Description:','description') }}
+</tr>
+{{ get_row('Description:', 'description') }}
+
+{# UNCOMMENT TO INCLUDE ARTIFACTS #}
+{#
+<tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT ARTIFACTS</h3>
+        <p style="color: rgb(68,114,196)">Note: Artifacts are included in the e-mail if present in the incident.</p>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+{{ get_artifact(artifact) }}
+#}
+
+{# UNCOMMENT TO INCLUDE NOTES #}
+{#
+<tr>
+    <td colspan="2">
+        <br><h3 style="color: rgb(68,114,196)">INCIDENT NOTES</h3>
+        <p style="color: rgb(68,114,196)">Note: Notes are included in the e-mail if present in the incident.</p>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+{{ get_note(note) }}
+#}
+
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT LINK</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+        <a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+    </td>
 </tr>
 </table>
 <br>

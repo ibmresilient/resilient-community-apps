@@ -4,6 +4,7 @@ include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_outbound_email/util *
 recursive-include fn_outbound_email/lib *
+recursive-include fn_outbound_email/bin *
 include fn_outbound_email/LICENSE
 include doc/*.md
 include doc/screenshots/*
