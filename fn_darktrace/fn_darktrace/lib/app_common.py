@@ -32,6 +32,7 @@ AI_ANALYST_EVENT_COMMENTS_URI = "/aianalyst/incident/comments"
 AI_ANALYST_EVENT_ACKNOWLEDGE_URI = "/aianalyst/acknowledge"
 AI_ANALYST_EVENT_UNACKNOWLEDGE_URI = "/aianalyst/unacknowledge"
 DEVICES_URI = "/devices"
+SIMILAR_DEVICES_URI = "/similardevices"
 TAGS_URI = "/tags/entities"
 
 
@@ -593,6 +594,34 @@ class AppCommon():
         return self._execute_dt_request(
             "GET",
             DEVICES_URI,
+            params=params,
+            capture_error=capture_error
+        )
+
+    def get_similar_devices(self, device_id: str, count: int = 3, params: dict = None, capture_error: bool = False) -> list:
+        """
+        Get a list of similar devices to the device given by ``device_id``.
+        Default count is 3, which means return 3 similar devices. Set ``count`` to another
+        number to get another number of similar devices.
+
+        See https://customerportal.darktrace.com/product-guides/main/api-similardevices-schema for response schema.
+
+        :param params: query params to include
+        :type params: dict, optional
+        :param capture_error: if True, failing requests will be captured, logged, but ignored
+        :type capture_error: bool
+        :return: returns the list of devices
+        :rtype: list
+        """
+        # defaults
+        if not params:
+            params = {}
+
+        params.update({"did": device_id, "count": count})
+
+        return self._execute_dt_request(
+            "GET",
+            SIMILAR_DEVICES_URI,
             params=params,
             capture_error=capture_error
         )

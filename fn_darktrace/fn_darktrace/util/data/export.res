@@ -137,8 +137,19 @@
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "0571a05d-48bb-4465-aaab-ff2b8106a02f",
-      "view_items": [],
-      "workflows": []
+      "view_items": [
+        {
+          "content": "d0c9c2b4-db50-406a-8870-a4bf686c1b74",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "darktrace_list_similar_devices"
+      ]
     },
     {
       "automations": [],
@@ -209,7 +220,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1665431837664,
+  "export_date": 1665514903913,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -241,6 +252,36 @@
       "tooltip": "Model Breach ID (PBID) of breach to acknowledge",
       "type_id": 11,
       "uuid": "ae6cc847-f7f7-4cb5-9337-e12bec4ba8d7",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/darktrace_device_count",
+      "hide_notification": false,
+      "id": 322,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "darktrace_device_count",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "darktrace_device_count",
+      "tooltip": "Number of similar devices to return",
+      "type_id": 11,
+      "uuid": "1069a054-b149-4e1e-9801-b4f929f516ac",
       "values": []
     },
     {
@@ -329,6 +370,37 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "5d3e2393-c27e-42f7-b6c3-2fbfca73cc59",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "actioninvocation/darktrace_device_count",
+      "hide_notification": false,
+      "id": 323,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "darktrace_device_count",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Similar Device Count",
+      "tooltip": "How many similar devices to list",
+      "type_id": 6,
+      "uuid": "d0c9c2b4-db50-406a-8870-a4bf686c1b74",
       "values": []
     },
     {
@@ -876,6 +948,58 @@
       ]
     },
     {
+      "created_date": 1665510402391,
+      "description": {
+        "content": "Function to list similar devices to the given device.",
+        "format": "text"
+      },
+      "destination_handle": "fn_darktrace",
+      "display_name": "Darktrace: List Similar Devices",
+      "export_key": "darktrace_list_similar_devices",
+      "id": 7,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1665510402414,
+      "name": "darktrace_list_similar_devices",
+      "tags": [],
+      "uuid": "0cb79caf-2711-4eef-bb20-9ca2a219602f",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "5d3e2393-c27e-42f7-b6c3-2fbfca73cc59",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1069a054-b149-4e1e-9801-b4f929f516ac",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Darktrace: List Similar Devices",
+          "object_type": "darktrace_associated_devices_dt",
+          "programmatic_name": "darktrace_list_similar_devices",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 5
+        }
+      ]
+    },
+    {
       "created_date": 1664912889881,
       "description": {
         "content": "Function to unacknowledge an incident event",
@@ -922,13 +1046,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 31,
+  "id": 33,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1665431835958,
+      "create_date": 1665514901977,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -937,7 +1061,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1665431835958,
+      "update_date": 1665514901977,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1824,6 +1948,25 @@
     {
       "actions": [],
       "content": {
+        "version": 13,
+        "workflow_id": "darktrace_add_tags_to_device",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"darktrace_add_tags_to_device\" isExecutable=\"true\" name=\"Darktrace: Add Tags to Device\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Add tag(s) to a device in Darktrace from the \"Associated Devices\" datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mvkn8f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0rtt1dt\"\u003e\u003cincoming\u003eSequenceFlow_1hw8f36\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0j7fbu7\" name=\"Darktrace: Add Device Tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0f9c7489-9b44-40d5-81cf-6adf13d7d36a\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/span\u0026gt;\\\"\\n\\nif results.success:\\n  added_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"added_tags\\\"))\\n  error_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"error_tags\\\"))\\n  all_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"all_tags\\\"))\\n  \\n  msg = \\\"\\\"\\n  if added_tags:\\n    msg += \\\"Successfully added tag(s) {0} to device {1}.\\\".format(added_tags, row.darktrace_device_dt_id.get(\\\"content\\\"))\\n  if error_tags:\\n    if msg:\\n      msg += \\\"\\\\n\\\"\\n    msg += \\\"Failed to add tag(s) {0} because they weren\u0027t found in Darktrace. Create them in Darktrace first then you can add them to the device.\\\".format(error_tags)\\n    \\n  incident.addNote(msg)\\n  row.darktrace_device_dt_tags = all_tags\\nelse:\\n  incident.addNote(\\\"Failed to add tags {0} to device {1}. Error: {2}\\\".format(results.inputs.get(\\\"darktrace_device_tags\\\"), row.darktrace_device_dt_id, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.darktrace_device_id = row.darktrace_device_dt_id.get(\\\"content\\\")\\ninputs.darktrace_device_tags = rule.properties.darktrace_device_tags\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mvkn8f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hw8f36\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0mvkn8f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j7fbu7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1hw8f36\" sourceRef=\"ServiceTask_0j7fbu7\" targetRef=\"EndEvent_0rtt1dt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rtt1dt\" id=\"EndEvent_0rtt1dt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"544\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"562\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j7fbu7\" id=\"ServiceTask_0j7fbu7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"328\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mvkn8f\" id=\"SequenceFlow_0mvkn8f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"263\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hw8f36\" id=\"SequenceFlow_1hw8f36_di\"\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"544\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"486\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 13,
+      "description": "Add tag(s) to a device in Darktrace from the \"Associated Devices\" datatable.",
+      "export_key": "darktrace_add_tags_to_device",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1665172250302,
+      "name": "Darktrace: Add Tags to Device",
+      "object_type": "darktrace_associated_devices_dt",
+      "programmatic_name": "darktrace_add_tags_to_device",
+      "tags": [],
+      "uuid": "e6d67fd3-fded-4ffb-86cb-a709d550bd4d",
+      "workflow_id": 4
+    },
+    {
+      "actions": [],
+      "content": {
         "version": 10,
         "workflow_id": "darktrace_acknowledge_incident_event",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"darktrace_acknowledge_incident_event\" isExecutable=\"true\" name=\"Darktrace: Acknowledge Incident Event\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Sets the given incident even to \"acknowledged\" in Darktrace]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_056v1bg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_14c9uzg\"\u003e\u003cincoming\u003eSequenceFlow_0g8zkln\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_056v1bg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0q9hyyp\"/\u003e\u003cserviceTask id=\"ServiceTask_0q9hyyp\" name=\"Darktrace: Acknowledge Incident E...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0dc6632b-eeac-4fe0-879c-d13fe273b308\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  unacknowledged = results.content.get(\\\"aianalyst\\\")\\n  \\n  if unacknowledged.upper() == \\\"SUCCESS\\\":\\n    row.darktrace_incident_events_dt_acknowledged = \\\"Yes\\\"\\n    incident.addNote(\\\"Successfully acknowledged Incident Event {0}\\\".format(row.darktrace_incident_events_dt_title.get(\\\"content\\\")))\\n\\nelse:\\n  incident.addNote(\\\"Failed to acknowledge Incident Event {0}\\\".format(row.darktrace_incident_events_dt_title.get(\\\"content\\\")))\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.darktrace_incident_event_id = row.darktrace_incident_events_dt_event_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_056v1bg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0g8zkln\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0g8zkln\" sourceRef=\"ServiceTask_0q9hyyp\" targetRef=\"EndEvent_14c9uzg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14c9uzg\" id=\"EndEvent_14c9uzg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"343\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"361\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_056v1bg\" id=\"SequenceFlow_056v1bg_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"210.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0q9hyyp\" id=\"ServiceTask_0q9hyyp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"223\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0g8zkln\" id=\"SequenceFlow_0g8zkln_di\"\u003e\u003comgdi:waypoint x=\"323\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"333\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -1862,21 +2005,21 @@
     {
       "actions": [],
       "content": {
-        "version": 13,
-        "workflow_id": "darktrace_add_tags_to_device",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"darktrace_add_tags_to_device\" isExecutable=\"true\" name=\"Darktrace: Add Tags to Device\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Add tag(s) to a device in Darktrace from the \"Associated Devices\" datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mvkn8f\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0rtt1dt\"\u003e\u003cincoming\u003eSequenceFlow_1hw8f36\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0j7fbu7\" name=\"Darktrace: Add Device Tags\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0f9c7489-9b44-40d5-81cf-6adf13d7d36a\"\u003e{\"inputs\":{},\"post_processing_script\":\"SPAN_FORMATTER = \\\"\u0026lt;span class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/span\u0026gt;\\\"\\n\\nif results.success:\\n  added_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"added_tags\\\"))\\n  error_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"error_tags\\\"))\\n  all_tags = \\\" \\\".join(SPAN_FORMATTER.format(tag) for tag in results.content.get(\\\"all_tags\\\"))\\n  \\n  msg = \\\"\\\"\\n  if added_tags:\\n    msg += \\\"Successfully added tag(s) {0} to device {1}.\\\".format(added_tags, row.darktrace_device_dt_id.get(\\\"content\\\"))\\n  if error_tags:\\n    if msg:\\n      msg += \\\"\\\\n\\\"\\n    msg += \\\"Failed to add tag(s) {0} because they weren\u0027t found in Darktrace. Create them in Darktrace first then you can add them to the device.\\\".format(error_tags)\\n    \\n  incident.addNote(msg)\\n  row.darktrace_device_dt_tags = all_tags\\nelse:\\n  incident.addNote(\\\"Failed to add tags {0} to device {1}. Error: {2}\\\".format(results.inputs.get(\\\"darktrace_device_tags\\\"), row.darktrace_device_dt_id, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.darktrace_device_id = row.darktrace_device_dt_id.get(\\\"content\\\")\\ninputs.darktrace_device_tags = rule.properties.darktrace_device_tags\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mvkn8f\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hw8f36\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0mvkn8f\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0j7fbu7\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1hw8f36\" sourceRef=\"ServiceTask_0j7fbu7\" targetRef=\"EndEvent_0rtt1dt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rtt1dt\" id=\"EndEvent_0rtt1dt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"544\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"562\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0j7fbu7\" id=\"ServiceTask_0j7fbu7_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"328\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mvkn8f\" id=\"SequenceFlow_0mvkn8f_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"328\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"263\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hw8f36\" id=\"SequenceFlow_1hw8f36_di\"\u003e\u003comgdi:waypoint x=\"428\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"544\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"486\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 12,
+        "workflow_id": "darktrace_list_similar_devices",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"darktrace_list_similar_devices\" isExecutable=\"true\" name=\"Darktrace: List Similar Devices\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Find devices in Darktrace that are similar to the device in the \"Associated Devices\" datatable.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lqwyiz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0c9vk8q\"\u003e\u003cincoming\u003eSequenceFlow_1vct95b\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1lfl8k0\" name=\"Darktrace: List Similar Devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0cb79caf-2711-4eef-bb20-9ca2a219602f\"\u003e{\"inputs\":{},\"post_processing_script\":\"URL_FORMATTER = \\\"\u0026lt;a target=\u0027_blank\u0027 href=\u0027{0}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\n\\nif results.success:\\n  original_device = results.inputs.get(\\\"darktrace_device_id\\\")\\n  similar_devices_list = results.content.get(\\\"similar_devices\\\")\\n  if similar_devices_list:\\n    link_base = results.content.get(\\\"base_url\\\") + \\\"/#device/\\\"\\n    device_ids = [str(device.get(\\\"did\\\")) for device in similar_devices_list]\\n    similar_devices = \\\", \\\".join(URL_FORMATTER.format(link_base + device, device) for device in device_ids)\\n    \\n    incident.addNote(\\\"Found {0} device(s) similar to device {1}: {2}\\\".format(len(similar_devices_list), original_device, similar_devices))\\n  else:\\n    incident.addNote(\\\"No similar devices found for device {0}\\\".format(original_device))\\nelse:\\n  incident.addNote(\\\"Failed to list similar devices for device {0}. Error: {1}\\\".format(original_device, results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.darktrace_device_id = row.darktrace_device_dt_id.get(\\\"content\\\")\\ninputs.darktrace_device_count = rule.properties.darktrace_device_count\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lqwyiz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vct95b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1lqwyiz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1lfl8k0\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1vct95b\" sourceRef=\"ServiceTask_1lfl8k0\" targetRef=\"EndEvent_0c9vk8q\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0c9vk8q\" id=\"EndEvent_0c9vk8q_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"456\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"474\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1lfl8k0\" id=\"ServiceTask_1lfl8k0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lqwyiz\" id=\"SequenceFlow_1lqwyiz_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"238.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vct95b\" id=\"SequenceFlow_1vct95b_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"417.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 13,
-      "description": "Add tag(s) to a device in Darktrace from the \"Associated Devices\" datatable.",
-      "export_key": "darktrace_add_tags_to_device",
+      "content_version": 12,
+      "description": "Find devices in Darktrace that are similar to the device in the \"Associated Devices\" datatable.",
+      "export_key": "darktrace_list_similar_devices",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1665172250302,
-      "name": "Darktrace: Add Tags to Device",
+      "last_modified_time": 1665513329169,
+      "name": "Darktrace: List Similar Devices",
       "object_type": "darktrace_associated_devices_dt",
-      "programmatic_name": "darktrace_add_tags_to_device",
+      "programmatic_name": "darktrace_list_similar_devices",
       "tags": [],
-      "uuid": "e6d67fd3-fded-4ffb-86cb-a709d550bd4d",
-      "workflow_id": 4
+      "uuid": "9c5ee445-c776-4741-8dcd-ac40c8a3a5c0",
+      "workflow_id": 5
     },
     {
       "actions": [],

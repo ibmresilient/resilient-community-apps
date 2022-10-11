@@ -21,8 +21,8 @@ def codegen_reload_data():
     return {
         "package": u"fn_darktrace",
         "message_destinations": [u"fn_darktrace"],
-        "functions": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_device_tags", u"darktrace_unacknowledge_incident_event"],
-        "workflows": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_unacknowledge_incident_event"],
+        "functions": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_device_tags", u"darktrace_list_similar_devices", u"darktrace_unacknowledge_incident_event"],
+        "workflows": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_list_similar_devices", u"darktrace_unacknowledge_incident_event"],
         "actions": [u"Darktrace: Acknowledge Incident Event", u"Darktrace: Acknowledge Model Breach", u"Darktrace: Add Tags to Device", u"Darktrace: Get External Endpoint Details", u"Darktrace: List Similar Devices", u"Darktrace: Send Comment", u"Darktrace: Unacknowledge Incident Event"],
         "incident_fields": [u"darktrace_aianalyst_incident_group_id", u"darktrace_associated_device_ids", u"darktrace_breach_link", u"darktrace_group_category", u"darktrace_group_score", u"darktrace_incident_group_acknowledged", u"darktrace_incident_group_link", u"darktrace_incident_group_start_time", u"darktrace_incident_last_modified", u"darktrace_initiating_device_ids", u"darktrace_number_of_events_in_group", u"darktrace_pbid"],
         "incident_artifact_types": [],
@@ -48,11 +48,13 @@ def customization_data(client=None):
         - darktrace_acknowledge_incident_event
         - darktrace_acknowledge_model_breach
         - darktrace_add_device_tags
+        - darktrace_list_similar_devices
         - darktrace_unacknowledge_incident_event
     - Workflows:
         - darktrace_acknowledge_incident_event
         - darktrace_acknowledge_model_breach
         - darktrace_add_tags_to_device
+        - darktrace_list_similar_devices
         - darktrace_unacknowledge_incident_event
     - Rules:
         - Darktrace: Acknowledge Incident Event
