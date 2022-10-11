@@ -24,7 +24,8 @@ setup(
     author='IBM QRadar SOAR',
     description="SOAR Components to Integrate with the Panorama Platform",
     long_description="This integration contains Functions to interact with address groups, "
-                     "addresses, and user groups within Palo Alto Panorama.",
+                     "addresses, and user groups within Palo Alto Panorama. This integration can be"
+                     " configured to work with one or multiple Jira instances.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.0.186',

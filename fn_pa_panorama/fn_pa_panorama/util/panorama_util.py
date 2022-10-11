@@ -41,7 +41,7 @@ class PanoramaClient:
 
     def __get(self, resource_uri, parameters):
         """Generic GET"""
-        response = self.rc.execute_call_v2("GET", self.__build_url(resource_uri), params=parameters, verify=self.verify)
+        response = self.rc.execute("GET", self.__build_url(resource_uri), params=parameters, verify=self.verify)
         LOG.debug(f"Response: {response}")
         return response.json()
 

@@ -25,7 +25,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 10/2022 | Add multi-tenancy support |
+| 1.2.0 | 10/2022 | Multi-tenancy support added |
 | 1.1.0 | 04/2021 | Support for different API versions. See app.config `api_version` setting |
 | 1.0.1 | 07/2019 | App Host support |
 | 1.0.0 | 10/2020 | Initial release |
@@ -273,7 +273,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 502,
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
     "timestamp": "2022-10-06 12:34:07",
@@ -400,7 +400,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 481,
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
     "timestamp": "2022-10-06 12:33:44",
@@ -534,7 +534,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 604,
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
     "timestamp": "2022-10-06 12:34:05",
@@ -714,7 +714,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 593,
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
     "timestamp": "2022-10-06 12:34:05",
@@ -900,7 +900,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 483,
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
     "timestamp": "2022-10-06 12:33:42",

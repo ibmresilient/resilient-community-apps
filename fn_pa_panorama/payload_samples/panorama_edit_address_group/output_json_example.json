@@ -19,7 +19,7 @@
     "version": "1.0",
     "package": "fn-pa-panorama",
     "package_version": "1.2.0",
-    "host": "Richards-MacBook-Pro.local",
+    "host": "local",
     "execution_time_ms": 502,
     "timestamp": "2022-10-06 12:34:07"
   }

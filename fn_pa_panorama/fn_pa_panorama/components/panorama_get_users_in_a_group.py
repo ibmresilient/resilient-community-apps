@@ -39,7 +39,7 @@ class FunctionComponent(AppFunctionComponent):
 
         user_list = []
         try:
-            members = dict_response["response"]["result"]["entry"]["user"]["member"]
+            members = dict_response.get("response").get("result").get("entry").get("user").get("member")
             if isinstance(members, list):
                 # Multiple existing users
                 user_list = [m for m in members]
