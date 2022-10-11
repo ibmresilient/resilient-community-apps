@@ -32,7 +32,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["darktrace_device_id", "darktrace_device_tags"], fn_inputs)
 
         device_id = clean_html(fn_inputs.darktrace_device_id)
-        tags = fn_inputs.darktrace_device_tags.split(",")
+        tags = [tag.strip() for tag in fn_inputs.darktrace_device_tags.split(",")]
         added_tags = []
         error_tags= []
 

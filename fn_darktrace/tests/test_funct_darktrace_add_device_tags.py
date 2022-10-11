@@ -52,7 +52,7 @@ class TestDarktraceAddDeviceTags:
         assert func is not None
 
     mock_inputs_1 = {
-        "darktrace_device_tags": "test1,test2",
+        "darktrace_device_tags": "test1, test2",
         "darktrace_device_id": "1"
     }
 
