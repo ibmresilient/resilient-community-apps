@@ -604,8 +604,15 @@ class AppCommon():
         Default count is 3, which means return 3 similar devices. Set ``count`` to another
         number to get another number of similar devices.
 
+        NOTE: ``count`` is a maximum. It is possible this request will return fewer similar devices
+        than count specifies.
+
         See https://customerportal.darktrace.com/product-guides/main/api-similardevices-schema for response schema.
 
+        :param device_id: device ID to query against for similar devices
+        :type device_id: str
+        :param count: maximum number of similar devices to return (NOTE: may return less than count)
+        :type count: int, defaults to 3
         :param params: query params to include
         :type params: dict, optional
         :param capture_error: if True, failing requests will be captured, logged, but ignored
@@ -700,13 +707,17 @@ class AppCommon():
 
     def add_tag_to_device(self, did: str, tag: str, capture_error: bool = False) -> dict:
         """
-        Acknowledge a model breach. Requires a model breach ID (pbid).
+        Add a tag to the given device. Only will succeed if the tag already exists in Darktrace.
+        Will return an object with at least {"tags": "DATANOTFOUND ERROR"} if the tag doesn't
+        exist on the Darktrace instance.
 
-        Hits the ``/modelbreaches/{pbid}/acknowledge`` endpoint. More information:
-        https://customerportal.darktrace.com/product-guides/main/api-modelbreaches-acknowledge-unacknowledge-request
+        More information:
+        https://customerportal.darktrace.com/product-guides/main/api-tags-schema
 
-        :param pbid: model breach id
-        :type pbid: str
+        :param did: device id to add tag to
+        :type did: str
+        :param tag: tag to be added to device
+        :type tag: str
         :param capture_error: if True, will not fail on API error; defaults to False
         :type capture_error: bool, optional
         :return: if success, returns {"aianalyst": "SUCCESS"}
