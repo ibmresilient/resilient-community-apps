@@ -43,13 +43,15 @@ def selftest_function(opts):
 
         status = app_common.get_system_status()
 
-        if status.status_code == 200:
+        if "status" not in status:
             return {
                 "state": "success",
                 "reason": "Successfully connected to Darktrace endpoint"
             }
-
-        reason = status.reason
+        else:
+            # system status will return {"status": "<reason>"} if the system status can't be reached
+            # it will not return a "status" value if it was successful
+            reason = status.get("status")
 
     except HTTPError as http_err:
         reason = str(http_err)

@@ -2,9 +2,10 @@
 """Tests using pytest_resilient_circuits"""
 
 from unittest.mock import patch
+
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits import FunctionResult, SubmitTestFunction
+from resilient_circuits.util import get_function_definition
 
 PACKAGE_NAME = "fn_darktrace"
 FUNCTION_NAME = "darktrace_acknowledge_model_breach"

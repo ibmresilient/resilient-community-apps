@@ -2,10 +2,10 @@
 
 """AppFunction implementation"""
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from fn_darktrace.lib.app_common import PACKAGE_NAME, AppCommon
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
 from resilient_lib import clean_html, validate_fields
-
-from fn_darktrace.lib.app_common import AppCommon, PACKAGE_NAME
 
 FN_NAME = "darktrace_add_device_tags"
 
