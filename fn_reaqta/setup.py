@@ -32,9 +32,7 @@ setup(
     long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
     Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.""",
     install_requires=[
-        "resilient-circuits>=43.0.0",
-        "cachetools ~= 2.1",
-        "retry2 ~= 0.9"
+        "resilient-circuits>=46.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
