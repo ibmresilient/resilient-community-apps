@@ -34,7 +34,7 @@ setup(
         'PyPDF2~=2.1.0',
         'python-docx~=0.8.11',
         'defusedxml~=0.7.1',
-        'grpcio==1.48.2;python_version<="3.6"' # subdependency of `google-cloud-dlp` that needs to be fixed for PY36
+        'grpcio==1.48.2;python_version<="3.6"', # subdependency of `google-cloud-dlp` that needs to be fixed for PY36
         'grpcio-status==1.48.2;python_version<="3.6"' # subdependency of `google-cloud-dlp` that needs to be fixed for PY36
     ],
     python_requires='>=3.6',
