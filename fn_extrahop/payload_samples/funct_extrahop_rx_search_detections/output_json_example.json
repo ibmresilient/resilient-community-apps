@@ -1,0 +1,130 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": [
+      {
+        "id": 3,
+        "start_time": 1644540480000,
+        "update_time": 1644642690000,
+        "end_time": 1644556530000,
+        "title": "Daily Summary: Inbound Suspicious Connections",
+        "description": "Over the past day, servers received connections from devices with suspicious IP addresses. These IP addresses are considered suspicious based on threat intelligence found in your Reveal(x) system. Investigate to determine if the IP addresses are from malicious endpoints.\n\nSuspicious IP addresses linked to this detection:\n* 109.237.103.9\n* 45.83.65.214\n* 45.83.67.186\n* 185.220.101.63\n* 185.220.101.191\n* 130.211.54.158\n* 192.241.212.103",
+        "categories": [
+          "sec",
+          "sec.caution"
+        ],
+        "risk_score": 60,
+        "type": "ti_tcp_incoming",
+        "participants": [
+          {
+            "object_type": "device",
+            "object_id": 2,
+            "role": "victim",
+            "external": false,
+            "id": 8
+          },
+          {
+            "object_type": "device",
+            "object_id": 6,
+            "role": "victim",
+            "external": false,
+            "id": 11
+          }
+        ],
+        "ticket_id": null,
+        "assignee": null,
+        "status": "in_progress",
+        "resolution": null,
+        "properties": {
+          "suspicious_ipaddr": {
+            "type": "ipaddr",
+            "value": [
+              "192.168.1.9",
+              "192.168.1.214",
+              "192.168.1.186",
+              "192.168.1.63",
+              "192.168.1.191",
+              "192.168.1.158",
+              "192.168.2.103"
+            ]
+          }
+        },
+        "mitre_tactics": [],
+        "mitre_techniques": [],
+        "appliance_id": 0,
+        "is_user_created": false
+      },
+      {
+        "id": 79,
+        "start_time": 1646741073962,
+        "update_time": 1646741073962,
+        "end_time": 1646741073962,
+        "title": "CVE-2019-0708 RDP Exploit Attempt",
+        "description": "[Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1646741073&interval_type=DT&until=1646741073) received a Remote Desktop Protocol (RDP) connection request that is consistent with a known vulnerability, also known as BlueKeep, in older versions of Microsoft Windows. This vulnerability allows an unauthenticated attacker to remotely run arbitrary code on an RDP server. The attacker can then tamper with data or install malware that could propagate to other Windows devices across the network. Investigate to determine if [Device 02a1d541ff800000](#/metrics/devices/c708d037ae5a46b69ec4dcbf7e4555e5.02a1d541ff800000/overview?from=1646741073&interval_type=DT&until=1646741073) is hosting a version affected by CVE-2019-0708: Windows 7, Windows XP, Windows Vista, Windows Server 2003, and Windows Server 2008.",
+        "categories": [
+          "sec",
+          "sec.exploit"
+        ],
+        "risk_score": 98,
+        "type": "cve_2019_0708",
+        "participants": [
+          {
+            "object_type": "device",
+            "object_id": 2,
+            "role": "victim",
+            "external": false,
+            "id": 194
+          },
+          {
+            "object_type": "ipaddr",
+            "object_value": "216.218.206.66",
+            "role": "offender",
+            "external": true,
+            "id": 195
+          }
+        ],
+        "ticket_id": "2529",
+        "assignee": "a@a.com",
+        "status": "in_progress",
+        "resolution": null,
+        "properties": {
+          "client_port": 45214,
+          "server_port": 3389
+        },
+        "mitre_tactics": [
+          {
+            "id": "TA0008",
+            "name": "Lateral Movement",
+            "url": "https://attack.mitre.org/tactics/TA0008"
+          }
+        ],
+        "mitre_techniques": [
+          {
+            "id": "T1210",
+            "name": "Exploitation of Remote Services",
+            "url": "https://attack.mitre.org/techniques/T1210",
+            "legacy_ids": [
+              "T1210"
+            ]
+          }
+        ],
+        "appliance_id": 0,
+        "is_user_created": false
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_search_filter": "{\"filter\": {\"status\": [\"in_progress\"]}}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 948,
+    "timestamp": "2022-04-13 17:53:38"
+  }
+}
