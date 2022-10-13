@@ -1,0 +1,14 @@
+
+{
+  {# JINJA template for closing a SOAR case from a Symantec DLP incident. #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": {
+    "format": "text",
+    "content": "Symantec DLP Incident closed from IBM SOAR."
+  },
+  {# additional fields may be needed. Add as necessary #}
+  "properties": { 
+      "sdlp_incident_status": "{{ "Resolved" }}"
+  }
+}

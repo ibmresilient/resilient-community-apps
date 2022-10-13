@@ -1,0 +1,5 @@
+include README.md
+recursive-include fn_grpc_interface/util *
+include fn_grpc_interface/LICENSE
+include screenshots/*
+include apikey_permissions.txt

@@ -1,0 +1,330 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dn": {
+            "type": "string"
+          },
+          "accountExpires": {
+            "type": "string"
+          },
+          "adminCount": {
+            "type": "integer"
+          },
+          "badPasswordTime": {
+            "type": "string"
+          },
+          "badPwdCount": {
+            "type": "integer"
+          },
+          "cn": {
+            "type": "string"
+          },
+          "codePage": {
+            "type": "integer"
+          },
+          "countryCode": {
+            "type": "integer"
+          },
+          "dSCorePropagationData": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "distinguishedName": {
+            "type": "string"
+          },
+          "givenName": {
+            "type": "string"
+          },
+          "instanceType": {
+            "type": "integer"
+          },
+          "lastLogoff": {
+            "type": "string"
+          },
+          "lastLogon": {
+            "type": "string"
+          },
+          "lastLogonTimestamp": {
+            "type": "string"
+          },
+          "logonCount": {
+            "type": "integer"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "memberOf": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "objectCategory": {
+            "type": "string"
+          },
+          "objectClass": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectGUID": {
+            "type": "string"
+          },
+          "objectSid": {
+            "type": "string"
+          },
+          "primaryGroupID": {
+            "type": "integer"
+          },
+          "pwdLastSet": {
+            "type": "string"
+          },
+          "sAMAccountName": {
+            "type": "string"
+          },
+          "sAMAccountType": {
+            "type": "integer"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "telephoneNumber": {
+            "type": "string"
+          },
+          "uSNChanged": {
+            "type": "integer"
+          },
+          "uSNCreated": {
+            "type": "integer"
+          },
+          "uid": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userAccountControl": {
+            "type": "integer"
+          },
+          "userPassword": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userPrincipalName": {
+            "type": "string"
+          },
+          "whenChanged": {
+            "type": "string"
+          },
+          "whenCreated": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ldap_domain_name": {
+          "type": "string"
+        },
+        "ldap_search_filter": {
+          "type": "string"
+        },
+        "ldap_search_param": {
+          "type": "string"
+        },
+        "ldap_search_base": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dn": {
+            "type": "string"
+          },
+          "accountExpires": {
+            "type": "string"
+          },
+          "adminCount": {
+            "type": "integer"
+          },
+          "badPasswordTime": {
+            "type": "string"
+          },
+          "badPwdCount": {
+            "type": "integer"
+          },
+          "cn": {
+            "type": "string"
+          },
+          "codePage": {
+            "type": "integer"
+          },
+          "countryCode": {
+            "type": "integer"
+          },
+          "dSCorePropagationData": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "distinguishedName": {
+            "type": "string"
+          },
+          "givenName": {
+            "type": "string"
+          },
+          "instanceType": {
+            "type": "integer"
+          },
+          "lastLogoff": {
+            "type": "string"
+          },
+          "lastLogon": {
+            "type": "string"
+          },
+          "lastLogonTimestamp": {
+            "type": "string"
+          },
+          "logonCount": {
+            "type": "integer"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "memberOf": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "objectCategory": {
+            "type": "string"
+          },
+          "objectClass": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectGUID": {
+            "type": "string"
+          },
+          "objectSid": {
+            "type": "string"
+          },
+          "primaryGroupID": {
+            "type": "integer"
+          },
+          "pwdLastSet": {
+            "type": "string"
+          },
+          "sAMAccountName": {
+            "type": "string"
+          },
+          "sAMAccountType": {
+            "type": "integer"
+          },
+          "sn": {
+            "type": "string"
+          },
+          "telephoneNumber": {
+            "type": "string"
+          },
+          "uSNChanged": {
+            "type": "integer"
+          },
+          "uSNCreated": {
+            "type": "integer"
+          },
+          "uid": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userAccountControl": {
+            "type": "integer"
+          },
+          "userPassword": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userPrincipalName": {
+            "type": "string"
+          },
+          "whenChanged": {
+            "type": "string"
+          },
+          "whenCreated": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
