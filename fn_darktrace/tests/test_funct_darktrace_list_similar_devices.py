@@ -8,9 +8,8 @@ from resilient_circuits import FunctionResult, SubmitTestFunction
 from resilient_circuits.util import get_function_definition
 
 PACKAGE_NAME = "fn_darktrace"
-FUNCTION_NAME = "darktrace_unacknowledge_incident_event"
+FUNCTION_NAME = "darktrace_list_similar_devices"
 
-# Read the default configuration-data section from the package
 config_data = """[fn_darktrace]
 api_key=abcd-efgh
 api_secret=1234-abcd-56789-efgh
@@ -21,9 +20,9 @@ instance_url=https://fake.cloud.darktrace.com
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_darktrace_unacknowledge_incident_event_function(circuits, function_params, timeout=5):
+def call_darktrace_list_similar_devices_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("darktrace_unacknowledge_incident_event", function_params)
+    evt = SubmitTestFunction("darktrace_list_similar_devices", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -38,15 +37,15 @@ def call_darktrace_unacknowledge_incident_event_function(circuits, function_para
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("darktrace_unacknowledge_incident_event_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("darktrace_list_similar_devices_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestDarktraceUnacknowledgeIncidentEvent:
-    """ Tests for the darktrace_unacknowledge_incident_event function"""
+class TestDarktraceListSimilarDevices:
+    """ Tests for the darktrace_list_similar_devices function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -54,16 +53,18 @@ class TestDarktraceUnacknowledgeIncidentEvent:
         assert func is not None
 
     mock_inputs_1 = {
-        "darktrace_incident_event_id": "1234"
+        "darktrace_device_count": 2,
+        "darktrace_device_id": "4"
     }
 
-    expected_results_1 = {"aianalyst": "SUCCESS"}
+    expected_results_1 = {"similar_devices": [{"did": 5}, {"did": 6}], "base_url": "https://fake.cloud.darktrace.com"}
 
     mock_inputs_2 = {
-        "darktrace_incident_event_id": "already_unacknowledged"
+        "darktrace_device_count": 1,
+        "darktrace_device_id": "<a href='https://fake.cloud.darktrace.com/#device/4' target='_blank'>4</a>"
     }
 
-    expected_results_2 = {"aianalyst": "ERROR"}
+    expected_results_2 = {"similar_devices": [{"did": 5}], "base_url": "https://fake.cloud.darktrace.com"}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
@@ -71,9 +72,9 @@ class TestDarktraceUnacknowledgeIncidentEvent:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_darktrace.components.funct_darktrace_unacknowledge_incident_event.AppCommon.unacknowledge_incident_event") as patch_nack:
-            patch_nack.return_value = expected_results
-            results = call_darktrace_unacknowledge_incident_event_function(circuits_app, mock_inputs)
+        with patch("fn_darktrace.components.funct_darktrace_list_similar_devices.AppCommon.get_similar_devices") as patch_get_similar:
+            patch_get_similar.return_value = expected_results.get("similar_devices")
+
+            results = call_darktrace_list_similar_devices_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content"))
-            patch_nack.assert_called
-            patch_nack.assert_called_with(mock_inputs.get("darktrace_incident_event_id"))
+            patch_get_similar.assert_called_once_with("4", count=mock_inputs.get("darktrace_device_count"))

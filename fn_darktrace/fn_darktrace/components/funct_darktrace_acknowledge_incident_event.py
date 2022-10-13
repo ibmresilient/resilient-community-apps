@@ -2,7 +2,7 @@
 
 """AppFunction implementation"""
 
-from fn_darktrace.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_darktrace.lib.app_common import PACKAGE_NAME, AppCommon
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields
