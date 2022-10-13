@@ -110,4 +110,5 @@ class TeamsAuthentication:
         self.LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
 
         return {
-            'Authorization' : 'Bearer {}'.format(bearer_id)}
+            'Authorization' : 'Bearer {}'.format(bearer_id),
+            "Content-type"  : "application/json"}

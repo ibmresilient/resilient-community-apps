@@ -12,7 +12,7 @@ from datetime import datetime
 from resilient_lib import IntegrationError, RequestsCommon
 
 from fn_teams.lib import constants
-from fn_teams.lib.teams_authentication import TeamsAuthentication
+from fn_teams.lib.microsoft_authentication import TeamsAuthentication
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)

@@ -8,11 +8,10 @@ from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_teams.lib import constants
-from fn_teams.lib.teams_authentication import TeamsAuthentication
+from fn_teams.lib.microsoft_authentication import TeamsAuthentication
 
 PACKAGE_NAME = "fn_teams"
 FN_NAME = "ms_teams_create_group"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_delete_teamsrooms'"""
