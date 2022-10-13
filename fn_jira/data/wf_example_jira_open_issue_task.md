@@ -47,16 +47,15 @@ def list_to_json_str(l):
       list_as_str += json_entry.format(unicode(value))
 
     elif isinstance(value, bool):
-      value = 'true' if value else 'false'
-      list_as_str += json_entry.format(value)
+      list_as_str += json_entry.format('true' if value else 'false')
 
     elif isinstance(value, int):
       list_as_str += json_entry.format(value)
 
     else:
-      helper.fail('list_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('list_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'[', list_as_str[:-1], u']')
+  return u'{} {} {}'.format(u'[', list_as_str[:-1], u']')
 
 def dict_to_json_str(d):
   """
@@ -71,7 +70,10 @@ def dict_to_json_str(d):
 
   for entry in d:
     key = entry
-    value = d[entry] if value else False
+    value = d[entry] 
+    
+    if not value:
+      value = False
 
     if isinstance(value, list):
       entries.append(json_entry.format(unicode(key), list_to_json_str(value)))
@@ -87,22 +89,18 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(unicode(key), unicode(value)))
 
     elif isinstance(value, bool):
-      value = 'true' if value else 'false'
-      entries.append(json_entry.format(key, value))
+      entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
 
     else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+  return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-if rule.properties.jira_label;
-  inputs.jira_label = rule.properties.jira_label
-  incident.properties.jira_label = rule.properties.jira_label
-else:
-  inputs.jira_label = incident.properties.jira_label
+inputs.jira_label = rule.properties.jira_label
+
 # ID of this incident
 inputs.incident_id = incident.id
 
@@ -118,7 +116,7 @@ inputs.jira_fields = dict_to_json_str({
   "project": rule.properties.jira_project_id,
   "issuetype": rule.properties.jira_issue_type,
   "priority": jira_priority,
-  "summary": u"IBM SOAR: {0}".format(unicode(task.name)),
+  "summary": u"IBM SOAR: {}".format(unicode(task.name)),
   "description": task.instructions.content if task.get("instructions") else "Created in IBM SOAR"
 })
 ```
@@ -134,8 +132,10 @@ if results.get("success"):
   url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
 
   # Add Note
-  note = "Added Jira Issue: {0}".format(url)
-  task.addNote(helper.createRichText(note))
+  task.addNote(helper.createRichText("Added Jira Issue: {}\nTo server labeled: {}".format(url, rule.properties.jira_label)))
+
+  # Add server label to be used for automatic rules
+  incident.properties.jira_server = rule.properties.jira_label
 
   # Add Row to Jira Data Table
   # default is jira_task_references but can be changed by changing 'jira_dt_name' in app.config
@@ -146,6 +146,7 @@ if results.get("success"):
   row['jira_link'] = helper.createRichText(url)
   row['jira_issue_id_col'] = results_content.get("issue_key")
   row['status'] = 'Open'
+  row['server'] = rule.properties.jira_label
 ```
 
 ---

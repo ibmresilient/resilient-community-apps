@@ -16,6 +16,7 @@ def selftest_function(opts):
     """
     This test will attempt to login to Jira
     """
+    reason = None
     server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else JiraServers(opts).get_server_name_list()
 
     try:

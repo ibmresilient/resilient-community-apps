@@ -11,7 +11,6 @@ def get_module_name(module_path):
     """
     return ntpath.split(module_path)[1].split(".")[0]
 
-
 def snake_to_camel(word):
     """
     Convert a word from snake_case to CamelCase
@@ -27,17 +26,12 @@ setup(
     url='https://ibm.com/mysupport',
     description="Provides integration with JIRA for Issue Creation, Issue Transition and Comment Creation",
     long_description="""This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bidirectional links are saved to allow for easy navigation between the applications.
-
-It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
-
-Example rules and workflows can used used or modified to meet your business processes.
-""",
+                        It also allows for the transitioning of Jira issues when the corresponding incident is closed and adds comments to the Jira issue when a Note is created in SOAR.
+                        Example rules and workflows can used used or modified to meet your business processes.""",
     install_requires=[
         'resilient_circuits>=45.0.0',
-        'jira~=3.2;    python_version>="3.0"',
-        'jira~=2.0;    python_version<"3.0"',
-        'pyjwt~=2.4;   python_version>="3.0"',
-        'pyjwt==1.4.2; python_version<"3.0"'
+        'jira~=3.2',
+        'pyjwt~=2.4',
     ],
     packages=find_packages(),
     include_package_data=True,

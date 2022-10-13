@@ -4,9 +4,13 @@
 """Transition a Jira issue from IBM SOAR"""
 
 from json import loads
-from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
-from resilient_lib import validate_fields, RequestsCommon
-from fn_jira.util.helper import PACKAGE_NAME, validate_app_configs, get_jira_client, to_markdown, get_server_settings
+
+from fn_jira.util.helper import (PACKAGE_NAME, get_jira_client,
+                                 get_server_settings, to_markdown,
+                                 validate_app_configs)
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import RequestsCommon, validate_fields
 
 FN_NAME = "jira_transition_issue"
 
@@ -21,34 +25,28 @@ class FunctionComponent(AppFunctionComponent):
         """Function: Transition a jira issue."""
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get configuration for Panorama server specified
+        # Get configuration for Jira server specified
         options = get_server_settings(self.opts, getattr(fn_inputs, "jira_label", None))
-
-        rc = RequestsCommon(self.opts, options)
-
-        # Get + validate the app.config parameters:
-        self.LOG.info("Validating app configs")
-        app_configs = validate_app_configs(options)
 
         # Get + validate the function parameters:
         self.LOG.info("Validating function app_configs")
-        app_configs = validate_fields(["jira_issue_id", "jira_transition_id"], fn_inputs)
-        self.LOG.info(f"Validated function app_configs: {app_configs}")
+        inputs = validate_fields(["jira_issue_id", "jira_transition_id"], fn_inputs)
+        self.LOG.info(f"Validated function inputs: {inputs}")
 
-        jira_fields = loads(app_configs.get("jira_fields"))
-        jira_comment = to_markdown(app_configs.get("jira_comment"))
+        jira_fields = loads(inputs.get("jira_fields"))
+        jira_comment = to_markdown(inputs.get("jira_comment"))
 
         yield self.status_message("Connecting to JIRA")
 
-        jira_client = get_jira_client(app_configs, rc)
+        jira_client = get_jira_client(validate_app_configs(options), RequestsCommon(self.opts, options))
 
-        yield self.status_message(u"Transition issue {0} to '{1}'".format(app_configs.get("jira_issue_id"), app_configs.get("jira_transition_id")))
+        yield self.status_message(u"Transition issue {} to '{}'".format(inputs.get("jira_issue_id"), inputs.get("jira_transition_id")))
 
         jira_client.transition_issue(
-            issue=app_configs.get("jira_issue_id"),
-            transition=app_configs.get("jira_transition_id"),
-            comment=jira_comment,
-            fields=jira_fields)
+            issue=inputs.get("jira_issue_id"),
+            transition=inputs.get("jira_transition_id"))
+
+        jira_client.issue(inputs.get("jira_issue_id")).update(comment=jira_comment, fields=jira_fields)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

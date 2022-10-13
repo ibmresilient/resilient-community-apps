@@ -5,7 +5,7 @@ from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, str_to_bool, validate_fields
 
 PACKAGE_NAME = "fn_jira"
-SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "OAUTH")
+SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 # Jira datatable constants
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # can be overridden with app.config jira_dt_name value
@@ -50,117 +50,83 @@ def get_jira_client(app_configs, rc):
     """
     # set default to "BASIC" as that is what most users should be using
     auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[1])
-    server = app_configs.get("url")
-    verify = app_configs.get("verify_cert")
-    proxies = rc.get_proxies()
+    oauth = token_auth = basic_auth = auth = None
 
     try:
         timeout = int(app_configs.get("timeout", 10))
     except ValueError:
         raise IntegrationError("Ensure 'timeout' is an integer in your config file")
 
-    # AUTH
-    if auth_method == SUPPORTED_AUTH_METHODS[0]:
-        return JIRA(
-            auth=(app_configs.get("user"), app_configs.get("password")),
-            options={"server": server, "verify": verify},
-            proxies=proxies,
-            timeout=timeout,
-        )
+    # AUTH and BASIC AUTH
+    if auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
+        validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
+                         {"name": "password", "placeholder": "<jira user password or API Key>"}],
+                         app_configs)
+        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0]: # AUTH
+            auth = (app_configs.get("user"), app_configs.get("password"))
+        else: # BASIC
+            basic_auth = (app_configs.get("user"), app_configs.get("password"))
 
-    # BASIC
-    elif auth_method == SUPPORTED_AUTH_METHODS[1]:
-        return JIRA(
-            basic_auth=(app_configs.get("user"), app_configs.get("password")),
-            options={"server": server, "verify": verify},
-            proxies=proxies,
-            timeout=timeout,
-        )
+    # TOKEN
+    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2]:
+        validate_fields(["auth_token"], app_configs)
+        token_auth = (app_configs.get("auth_token"))
 
-    elif auth_method == SUPPORTED_AUTH_METHODS[2]:
+    # OAUTH
+    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[3]:
         key_cert_data = None
+
+        # Validate required fields
+        validate_fields([
+            {"name": "access_token", "placeholder": "<oauth access token>"},
+            {"name": "access_token_secret", "placeholder": "<oauth access token secret>"},
+            {"name": "consumer_key_name", "placeholder": "<oauth consumer key - from Jira incoming link settings>"},
+            {"name": "private_rsa_key_file_path", "placeholder": "<private RSA key matched with public key on Jira>"}
+            ], app_configs)
+
         try:
             with open(app_configs.get("private_rsa_key_file_path"), "r") as private_rsa_key:
                 key_cert_data = private_rsa_key.read()
         except FileNotFoundError as e:
             raise IntegrationError(f"Private Key file not valid: {str(e)}")
 
-        oauth_dict = {
-            "access_token": app_configs.get("access_token"),
-            "access_token_secret": app_configs.get("access_token_secret"),
-            "consumer_key": app_configs.get("consumer_key_name"),
-            "key_cert": key_cert_data
-        }
-
-        # check for missing configs:
-        for key in oauth_dict:
-            if not oauth_dict[key]:
-                raise IntegrationError(f"app.config is missing {key} which is a required configration for auth_method={auth_method}.")
-
-        return JIRA(
-            oauth=oauth_dict,
-            options={"server": server, "verify": verify},
-            proxies=proxies,
-            timeout=timeout,
-        )
+        oauth = {"access_token": app_configs.get("access_token"),
+                 "access_token_secret": app_configs.get("access_token_secret"),
+                 "consumer_key": app_configs.get("consumer_key_name"),
+                 "key_cert": key_cert_data
+                }
 
     else:
         raise IntegrationError(f"{auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
 
+    return JIRA(
+        auth = auth,
+        basic_auth = basic_auth,
+        token_auth = token_auth,
+        oauth = oauth,
+        options = {"server": app_configs.get("url"),
+                   "verify": app_configs.get("verify_cert")},
+        proxies = rc.get_proxies(),
+        timeout = timeout,
+    )
+
 def to_markdown(html):
     """Takes a string of html converts it to Markdown
     and returns it"""
-    parser = MarkdownParser(strikeout="-",
-                            bold="*",
-                            underline="+",
-                            italic="_")
+    return MarkdownParser(strikeout="-", bold="*", underline="+", italic="_").convert(html)
 
-    return parser.convert(html)
-
-def validate_task_id_for_jira_issue_id(res_client, app_configs, incident_id, task_id, fn_inputs):
-    """Validates the input for task_id and sets the value of the task's associated Jira ID
-    by searching for the value in the Jira Datatable
-    
-    :param res_client: the rest client object to communicate to SOAR platform
-    :type res_client: resilient.SimpleClient <resilient.co3.SimpleClient>
-    :param incident_id: ID of the incident within SOAR
-    :type incident_id: string
-    :param task_id: ID of the task within SOAR (note this function is only necessary for tasks)
-    :type task_id: string
-    :param fn_inputs: current set of inputs to the function being called
-    :type fn_inputs: dict
-    :return: Whether the task was a valid task with an associated Jira ID. 
-             if so, modifies fn_inputs obj to store correct jira_issue_id and jira_url
-    :rtype: bool
-    """
-
-    # using datatable in SOAR, grab the jira id and jira url from the correct row in the table
-    # if the table row associated with this task id doesn't exist, returns (None, None)
-    jira_issue_id, jira_link = _get_jira_issue_id(res_client, app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME), incident_id, task_id)
-
-    if not jira_issue_id:
-        # task not yet synced to Jira
-        return False
-
-    # success
-    # set the jira_issue_id in fn_inputs to overwrite the value of the parent incident
-    fn_inputs[JIRA_ISSUE_ID_FUNCT_INPUT_NAME] = jira_issue_id
-    fn_inputs[JIRA_ISSUE_LINK] = jira_link
-    return True
-
-def _get_jira_issue_id(res_client, dt_name, incident_id, task_id):
+def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
     """Returns the jira_issue_id and jira_url that relates to the task_id"""
     row = _get_row(res_client, dt_name, incident_id, "task_id", task_id)
 
     if row:
-        cells = row["cells"]
+        cells = row.get("cells")
         return str(cells[JIRA_DT_ISSUE_ID_COL_NAME]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
 
 def _get_row(res_client, dt_name, incident_id, cell_name, cell_value):
     """Returns the row with a matching value to cell_name and cell_value if found. Returns None if no matching row found"""
-    uri = f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names"
     try:
-        data = res_client.get(uri)
+        data = res_client.get(f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names")
         rows = data["rows"]
     except Exception as err:
         raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)

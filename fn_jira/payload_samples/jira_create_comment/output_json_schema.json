@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -112,16 +112,26 @@
         },
         "updated": {
           "type": "string"
+        },
+        "jira_url": {
+          "type": "string"
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
         "jira_issue_id": {
+          "type": "string"
+        },
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_id": {
+          "type": "integer"
+        },
+        "jira_label": {
           "type": "string"
         },
         "jira_comment": {

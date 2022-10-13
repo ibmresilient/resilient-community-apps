@@ -47,16 +47,15 @@ def list_to_json_str(l):
       list_as_str += json_entry.format(unicode(value))
 
     elif isinstance(value, bool):
-      value = 'true' if value else 'false'
-      list_as_str += json_entry.format(value)
+      list_as_str += json_entry.format('true' if value else 'false')
 
     elif isinstance(value, int):
       list_as_str += json_entry.format(value)
 
     else:
-      helper.fail('list_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('list_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'[', list_as_str[:-1], u']')
+  return u'{} {} {}'.format(u'[', list_as_str[:-1], u']')
 
 def dict_to_json_str(d):
   """
@@ -71,7 +70,10 @@ def dict_to_json_str(d):
 
   for entry in d:
     key = entry
-    value = d[entry] if value else False
+    value = d[entry] 
+    
+    if not value:
+      value = False
 
     if isinstance(value, list):
       entries.append(json_entry.format(unicode(key), list_to_json_str(value)))
@@ -87,20 +89,18 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(unicode(key), unicode(value)))
 
     elif isinstance(value, bool):
-      value = 'true' if value else 'false'
-      entries.append(json_entry.format(key, value))
+      entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
 
     else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+  return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-if rule.properties.jira_label;
+if rule.properties.jira_label:
   inputs.jira_label = rule.properties.jira_label
-  incident.properties.jira_label = rule.properties.jira_label
 else:
   inputs.jira_label = incident.properties.jira_label
 
@@ -128,6 +128,7 @@ if results.get("success"):
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
   incident.properties.jira_issue_id = results_content.get("issue_key")
+  incident.properties.jira_server = rule.properties.jira_label
 ```
 
 ---

@@ -20,16 +20,17 @@
 ```python
 # Example: Jira Create Comment pre-processing script
 # If this is a task note, get the taskId
+note_content = note.text.content
 if note.type == 'task':
   # Set the task_id
   inputs.task_id = task.id
   inputs.jira_issue_id = "" # leave empty for tasks
 else:
   inputs.jira_issue_id = incident.properties.jira_issue_id
-
-inputs.jira_comment = note.text.content
+  
+inputs.jira_label = incident.properties.jira_server
+inputs.jira_comment = note_content
 inputs.incident_id = incident.id
-inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
 ```
 
 ### Post-Processing Script

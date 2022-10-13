@@ -31,7 +31,10 @@ def dict_to_json_str(d):
 
   for entry in d:
     key = entry
-    value = d[entry] if value else False
+    value = d[entry] 
+    
+    if not value:
+      value = False
 
     if isinstance(value, list):
       helper.fail('dict_to_json_str does not support Python Lists')
@@ -44,8 +47,7 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(unicode(key), unicode(value)))
 
     elif isinstance(value, bool):
-      value = 'true' if value else 'false'
-      entries.append(json_entry.format(key, value))
+      entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
@@ -54,19 +56,17 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
 
     else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+  return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
+inputs.jira_label = row.server
 inputs.jira_issue_id = row.jira_issue_id_col
-inputs.jira_transition_id = "Close"
+inputs.jira_transition_id = "Done"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: Done\n"
 
 # Define JIRA fields here
-inputs.jira_fields = dict_to_json_str({
-  "resolution": { "name": "Done" }
-})
+inputs.jira_fields = dict_to_json_str({"resolution": { "name": "Done" }})
 ```
 
 ### Post-Processing Script

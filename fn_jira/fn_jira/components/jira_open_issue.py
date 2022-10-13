@@ -3,11 +3,15 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Create an issue in Jira from IBM SOAR"""
 
-import json
-from fn_jira.util.helper import (PACKAGE_NAME, DEFAULT_JIRA_DT_NAME, get_jira_client, to_markdown,
-                                 validate_app_configs, get_server_settings)
-from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
-from resilient_lib import RequestsCommon, validate_fields, build_incident_url, build_resilient_url
+from json import loads
+
+from fn_jira.util.helper import (DEFAULT_JIRA_DT_NAME, PACKAGE_NAME,
+                                 get_jira_client, get_server_settings,
+                                 to_markdown, validate_app_configs)
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import (RequestsCommon, build_incident_url,
+                           build_resilient_url, validate_fields)
 
 FN_NAME = "jira_open_issue"
 
@@ -23,10 +27,8 @@ class FunctionComponent(AppFunctionComponent):
         """Function: Create a jira issue."""
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get configuration for Panorama server specified
+        # Get configuration for Jira server specified
         options = get_server_settings(self.opts, getattr(fn_inputs, "jira_label", None))
-
-        rc = RequestsCommon(self.opts, options)
 
         # Get + validate the app.config parameters:
         self.LOG.info("Validating app configs")
@@ -34,23 +36,23 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get + validate the function parameters:
         self.LOG.info("Validating function app_configs")
-        app_configs = validate_fields(["incident_id", "jira_fields"], fn_inputs)
-        self.LOG.info(f"Validated function app_configs: {app_configs}")
+        inputs = validate_fields(["incident_id", "jira_fields"], fn_inputs)
+        self.LOG.info(f"Validated function app_configs: {inputs}")
 
         # Get JIRA fields from input
-        jira_fields = json.loads(app_configs.get("jira_fields"))
+        jira_fields = loads(inputs.get("jira_fields"))
 
         yield self.status_message("Connecting to JIRA")
 
-        jira_client = get_jira_client(app_configs, rc)
+        jira_client = get_jira_client(app_configs, RequestsCommon(self.opts, options))
 
         # Build the URL to SOAR
-        resilient_url = build_incident_url(build_resilient_url(self.res_params.get("host"), self.res_params.get("port")), app_configs.get("incident_id"))
-        task_id = app_configs.get("task_id")
+        resilient_url = build_incident_url(build_resilient_url(self.res_params.get("host"), self.res_params.get("port")), inputs.get("incident_id"))
+        task_id = inputs.get("task_id")
         if task_id:
             resilient_url = f"{resilient_url}?task_id={task_id}"
 
-        jira_fields["description"] = u"{0}\n\n{1}".format(f"IBM SOAR Link: {resilient_url}", to_markdown(jira_fields.get("description", ""))).strip()
+        jira_fields["description"] = u"{}\n\n{}".format(f"IBM SOAR Link: {resilient_url}", to_markdown(jira_fields.get("description", ""))).strip()
 
         yield self.status_message("Creating JIRA issue")
 
@@ -64,8 +66,7 @@ class FunctionComponent(AppFunctionComponent):
             "jira_dt_name": app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME)
         }
 
-        yield self.status_message(u"JIRA issue {0} created".format(jira_issue.key))
-
+        yield self.status_message(u"JIRA issue {} created".format(jira_issue.key))
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results

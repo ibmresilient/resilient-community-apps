@@ -61,9 +61,9 @@ def dict_to_json_str(d):
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
-inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_label
+inputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_server
 inputs.jira_issue_id = incident.properties.jira_issue_id
-inputs.jira_transition_id = "Close"
+inputs.jira_transition_id = "Done"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: {0}\n{1}".format(incident.resolution_id, incident.resolution_summary.content)
 
 resolution_map = { "unresolved": "Obsolete", "duplicate": "Duplicate", "not an issue": "Won't Do", "resolved": "Done" }

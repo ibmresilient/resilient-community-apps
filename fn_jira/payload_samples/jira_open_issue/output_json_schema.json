@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -39,11 +39,101 @@
             "fields": {
               "type": "object",
               "properties": {
+                "issuetype": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "iconUrl": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "subtask": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "timespent": {},
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "projectTypeKey": {
+                      "type": "string"
+                    },
+                    "avatarUrls": {
+                      "type": "object",
+                      "properties": {
+                        "48x48": {
+                          "type": "string"
+                        },
+                        "24x24": {
+                          "type": "string"
+                        },
+                        "16x16": {
+                          "type": "string"
+                        },
+                        "32x32": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
                 "fixVersions": {
                   "type": "array"
                 },
+                "customfield_10110": {
+                  "type": "string"
+                },
+                "customfield_10111": {},
+                "aggregatetimespent": {},
                 "resolution": {},
+                "customfield_10107": {},
+                "customfield_10108": {},
+                "customfield_10109": {},
+                "resolutiondate": {},
+                "workratio": {
+                  "type": "integer"
+                },
                 "lastViewed": {},
+                "watches": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "watchCount": {
+                      "type": "integer"
+                    },
+                    "isWatching": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "created": {
+                  "type": "string"
+                },
                 "priority": {
                   "type": "object",
                   "properties": {
@@ -61,11 +151,15 @@
                     }
                   }
                 },
+                "customfield_10100": {},
+                "customfield_10101": {},
+                "customfield_10102": {},
                 "labels": {
                   "type": "array"
                 },
-                "aggregatetimeoriginalestimate": {},
+                "customfield_10103": {},
                 "timeestimate": {},
+                "aggregatetimeoriginalestimate": {},
                 "versions": {
                   "type": "array"
                 },
@@ -73,6 +167,9 @@
                   "type": "array"
                 },
                 "assignee": {},
+                "updated": {
+                  "type": "string"
+                },
                 "status": {
                   "type": "object",
                   "properties": {
@@ -116,8 +213,21 @@
                 "components": {
                   "type": "array"
                 },
+                "timeoriginalestimate": {},
+                "description": {
+                  "type": "string"
+                },
+                "timetracking": {
+                  "type": "object"
+                },
                 "archiveddate": {},
+                "attachment": {
+                  "type": "array"
+                },
                 "aggregatetimeestimate": {},
+                "summary": {
+                  "type": "string"
+                },
                 "creator": {
                   "type": "object",
                   "properties": {
@@ -207,6 +317,9 @@
                     }
                   }
                 },
+                "customfield_10000": {
+                  "type": "string"
+                },
                 "aggregateprogress": {
                   "type": "object",
                   "properties": {
@@ -218,6 +331,8 @@
                     }
                   }
                 },
+                "environment": {},
+                "duedate": {},
                 "progress": {
                   "type": "object",
                   "properties": {
@@ -225,6 +340,23 @@
                       "type": "integer"
                     },
                     "total": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "comments": {
+                      "type": "array"
+                    },
+                    "maxResults": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "startAt": {
                       "type": "integer"
                     }
                   }
@@ -260,145 +392,7 @@
                     }
                   }
                 },
-                "archivedby": {},
-                "issuetype": {
-                  "type": "object",
-                  "properties": {
-                    "self": {
-                      "type": "string"
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "iconUrl": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "subtask": {
-                      "type": "boolean"
-                    },
-                    "avatarId": {
-                      "type": "integer"
-                    }
-                  }
-                },
-                "timespent": {},
-                "project": {
-                  "type": "object",
-                  "properties": {
-                    "self": {
-                      "type": "string"
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "key": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "projectTypeKey": {
-                      "type": "string"
-                    },
-                    "avatarUrls": {
-                      "type": "object",
-                      "properties": {
-                        "48x48": {
-                          "type": "string"
-                        },
-                        "24x24": {
-                          "type": "string"
-                        },
-                        "16x16": {
-                          "type": "string"
-                        },
-                        "32x32": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "projectCategory": {
-                      "type": "object",
-                      "properties": {
-                        "self": {
-                          "type": "string"
-                        },
-                        "id": {
-                          "type": "string"
-                        },
-                        "description": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                },
-                "aggregatetimespent": {},
-                "resolutiondate": {},
-                "workratio": {
-                  "type": "integer"
-                },
-                "watches": {
-                  "type": "object",
-                  "properties": {
-                    "self": {
-                      "type": "string"
-                    },
-                    "watchCount": {
-                      "type": "integer"
-                    },
-                    "isWatching": {
-                      "type": "boolean"
-                    }
-                  }
-                },
-                "created": {
-                  "type": "string"
-                },
-                "updated": {
-                  "type": "string"
-                },
-                "timeoriginalestimate": {},
-                "description": {
-                  "type": "string"
-                },
-                "timetracking": {
-                  "type": "object"
-                },
-                "attachment": {
-                  "type": "array"
-                },
-                "summary": {
-                  "type": "string"
-                },
-                "environment": {},
-                "duedate": {},
-                "comment": {
-                  "type": "object",
-                  "properties": {
-                    "comments": {
-                      "type": "array"
-                    },
-                    "maxResults": {
-                      "type": "integer"
-                    },
-                    "total": {
-                      "type": "integer"
-                    },
-                    "startAt": {
-                      "type": "integer"
-                    }
-                  }
-                }
+                "archivedby": {}
               }
             }
           }
@@ -408,9 +402,7 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -418,6 +410,12 @@
           "type": "integer"
         },
         "jira_fields": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "integer"
+        },
+        "jira_label": {
           "type": "string"
         }
       }
