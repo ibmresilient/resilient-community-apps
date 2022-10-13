@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
+import json
+from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
@@ -33,7 +35,7 @@ LOG = logging.getLogger(__name__)
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "<- ::CHANGE_ME:: ->"
+LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 
 # E N D P O I N T S
 # define the endpiont api calls your app will make to the endpoint solution. Below are expamples
@@ -59,6 +61,7 @@ class AppCommon():
         self.endpoint_url = app_configs.get("endpoint_url")
         self.rc = rc
         self.verify = str_to_bool(app_configs.get("verify", "false"))
+        self.tenant_name = app_configs.get("tenant_name")
 
         self.header = self._make_header(self.api_token)
 
@@ -129,31 +132,6 @@ class AppCommon():
                                verify=self.verify,
                                callback=callback)
 
-    def authenticate(self):
-        """
-        Modify to represent the data structure needed by the authentication API call
-
-        :return: token associated with the authenticated session
-        :rtype: str
-        """
-
-        ################
-        ## <- ::CHANGE_ME:: change to your authentication logic ->
-        ################
-
-        raise IntegrationError("unimplemented")
-        params = {
-            "secret": self.api_secret,
-            "id": self.api_key
-        }
-
-        response, err_msg = self._api_call("POST", 'authenticate', params, refresh_authentication=None)
-        if err_msg:
-            LOG.error("%s authentication failed: %s", self.package_name, err_msg)
-            return None
-
-        # modify to the return correct token used for ongoing api calls
-        return response.json().get("token")
 
     def query_entities_since_ts(self, timestamp, *args, **kwargs):
         """
@@ -167,15 +145,34 @@ class AppCommon():
         :rtype: list
         """
         query = {
-            "condition": "AND",
+            "condition": "OR",
             "rules": [
                 {
-                    "field": "first_seen",
+                    "field": "table.target_first_seen",
+                    "operator": "greater_or_equal",
+                    "value": timestamp
+                },
+                {
+                    "field": "table.temptation_last_modified",
                     "operator": "greater_or_equal",
                     "value": timestamp
                 }
             ]
             }
+        query = json.dumps(query)
+        b64_query = b64encode(query.encode())
+        offset = 0
+        limit = 20
+        params = {
+            'q': b64_query,
+            'offset': offset,
+            'limit': limit
+        }
+        self.rc.execute("GET",
+                        self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET),
+                        params=params,
+                        headers=self.header,
+                        verify=self.verify)
 
         LOG.debug("Querying endpoint with %s", query)
         response, err_msg = self._api_call("GET", GET_ALL_DETECTIONS_FOR_TARGET, query, refresh_authentication=True)
@@ -196,8 +193,8 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        raise IntegrationError("unimplemented")
-        return urljoin(self.endpoint_url, linkback_url.format(entity_id))
+        return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
+                                                              target_id=entity_id))
 
 
 def callback(response):
@@ -210,7 +207,7 @@ def callback(response):
     :rtype: tuple(``requests.Reponse``, str)
     """
     error_msg = None
-    if response.status_code >= 300 and response.status_code < 500:
+    if response.status_code >= 300 and response.status_code <= 500:
         try:
             resp = response.json()
             msg = resp.get('messages') or resp.get('message')

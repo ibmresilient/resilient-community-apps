@@ -1,9 +1,11 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   {# modify to specify your specific **data** fields #}
-  "severity_code": "{{ **severity** | soar_substitute('{"Safe": "Low"}') }}",
-  {# specify your custom fields for your endpoint solution #}
-  "properties": {
-    "**endpoint_tags**": "{{ **tags** | join(', ') }}",
-  }
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else priority_score < 20 %}
+    "severity_code": "High",
+  {% endif %}
 }

@@ -15,11 +15,11 @@ from fn_randori.lib.app_common import AppCommon
 
 
 PACKAGE_NAME = "fn_randori"
-ENTITY_ID = "<- ::CHANGE_ME:: ->"  # name of field in the endpoint entity (alert, case, etc) with the ID value
-ENTITY_CLOSE_FIELD = "<- ::CHANGE_ME:: ->" # name of field in endpoint entity to reference the close state
-SOAR_ENTITY_ID_FIELD = "<- ::CHANGE_ME:: ->" # name of custom IBM SOAR case field to retain the endpoint entity_id
-ENTITY_LABEL = "<- ::CHANGE_ME:: ->" # label the name the case, alert, event, etc. native to your endpoint solution
-ENTITY_COMMENT_HEADER = "Created by <- ::CHANGE_ME:: ->" # header used to identify comments create by the endpoint entity
+ENTITY_ID = "target_id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
+ENTITY_CLOSE_FIELD = "status" # name of field in endpoint entity to reference the close state
+SOAR_ENTITY_ID_FIELD = "randori_target_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
+ENTITY_LABEL = "Randori Target" # label the name the case, alert, event, etc. native to your endpoint solution
+ENTITY_COMMENT_HEADER = "Created by Randori" # header used to identify comments create by the endpoint entity
 
 LOG = logging.getLogger(__name__)
 
@@ -44,11 +44,11 @@ def init_app(rc, options):
     :rtype: ``AppCommon``
     """
     # initialize the class for making API calls to your endpoint
-    endpoint_class = AppCommon(rc, PACKAGE_NAME, options)
+    app_common = AppCommon(rc, PACKAGE_NAME, options)
 
     # <add additional initialization steps for your endpoint as necessary>
 
-    return endpoint_class
+    return app_common
 
 def query_entities(app_common, last_poller_time):
     """
@@ -114,7 +114,8 @@ class PollerComponent(AppFunctionComponent):
                            "polling_lookback",
                            "endpoint_url",
                            "verify",
-                           "api_token"]
+                           "api_token",
+                           "tenant_name"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
@@ -177,7 +178,7 @@ class PollerComponent(AppFunctionComponent):
 
         if query_results:
             # iterate over all the entities.
-            self.process_query_list(query_results.get("result", [])) # <::CHANGE_ME:: update to the correct value for your API>
+            self.process_query_list(query_results.get("data", []))
 
             # Uncomment below if your app has paged results
             #next_page = query_results.get("nextPage") <::CHANGE_ME:: update to your API's name for the next page>
