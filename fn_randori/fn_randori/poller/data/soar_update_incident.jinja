@@ -5,7 +5,10 @@
     "severity_code": "Low",
   {% elif priority_score <= 29.98%}
     "severity_code": "Medium",
-  {% else priority_score < 20 %}
+  {% else %}
     "severity_code": "High",
   {% endif %}
+  "properties": {
+    "randori_target_status": "{{ status }}"
+  }
 }

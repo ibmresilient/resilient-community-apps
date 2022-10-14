@@ -2,12 +2,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import json
+import datetime
+import pytz
 from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, str_to_bool
+from resilient_lib import IntegrationError, str_to_bool
+from resilient_lib.components.templates_common import iso8601
+
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -42,6 +46,8 @@ LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 #ALERT_URI = "alert/{}/"
 #POLICY_URI = "policy/"
 GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/v1/all-detections-for-target"
+
+TARGET_LIMIT = 2000
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -142,45 +148,60 @@ class AppCommon():
         :param *args: additional positional parameters needed for endpoint queries
         :param **kwargs: additional key/value pairs needed for endpoint queries
         :return: changed entity list
-        :rtype: list
+        :rtype: list of targets
         """
+        iso_timestamp = iso8601(timestamp)
+
         query = {
             "condition": "OR",
             "rules": [
                 {
                     "field": "table.target_first_seen",
                     "operator": "greater_or_equal",
-                    "value": timestamp
+                    "value": iso_timestamp
                 },
                 {
                     "field": "table.temptation_last_modified",
                     "operator": "greater_or_equal",
-                    "value": timestamp
+                    "value": iso_timestamp
                 }
             ]
-            }
+        }
+        # Endpoint expects query to be base64 encoded.
         query = json.dumps(query)
         b64_query = b64encode(query.encode())
-        offset = 0
-        limit = 20
+
+
         params = {
-            'q': b64_query,
-            'offset': offset,
-            'limit': limit
+            'q': b64_query, 
+            'limit': TARGET_LIMIT
         }
-        self.rc.execute("GET",
-                        self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET),
-                        params=params,
-                        headers=self.header,
-                        verify=self.verify)
 
         LOG.debug("Querying endpoint with %s", query)
-        response, err_msg = self._api_call("GET", GET_ALL_DETECTIONS_FOR_TARGET, query, refresh_authentication=True)
-        if err_msg:
-            LOG.error("%s API call failed: %s", self.package_name, err_msg)
-            return None
 
-        return response.json()
+        # Make at least one call to the get-all-detections-for-target endpoint to 
+        # get the complete list of targets to be updated or created.  Keep looping
+        # till we get the complete list.
+        total_targets = -1
+        offset = 0
+        targets = []
+        while offset > total_targets:
+            params['offset'] = offset
+            response = self.rc.execute("GET",
+                                   self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET),
+                                   params=params,
+                                   headers=self.header,
+                                   verify=self.verify)
+            response.raise_for_status()
+            response_json = response.json()
+            if response_json.get('count') == 0:
+                break
+            data = response_json.get('data')
+            for target in data:
+                targets.append(target)
+            offset = offset + response_json.get('count')
+            total_targets = response_json.get('total')
+        return targets
 
     def make_linkback_url(self, entity_id, linkback_url=LINKBACK_URL):
         """

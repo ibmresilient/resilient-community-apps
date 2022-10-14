@@ -94,7 +94,7 @@ def is_entity_closed(entity):
     :rtype: bool
     """
     # <::CHANGE_ME:: change this field to reflect the field and logic to determine if the entity is now closed >
-    return bool(entity.get(ENTITY_CLOSE_FIELD, False))
+    return True if entity.get(ENTITY_CLOSE_FIELD, False) in ['Accepted', 'Mitigated'] else False
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -178,14 +178,7 @@ class PollerComponent(AppFunctionComponent):
 
         if query_results:
             # iterate over all the entities.
-            self.process_query_list(query_results.get("data", []))
-
-            # Uncomment below if your app has paged results
-            #next_page = query_results.get("nextPage") <::CHANGE_ME:: update to your API's name for the next page>
-            #while next_page:
-            #    next_page = query_results.get("nextPage")
-            #    query_results = self.app_common.get_next_page(next_page)
-            #    self.process_query_list(query_results.get("result", []))
+            self.process_query_list(query_results)
 
     def process_query_list(self, query_results):
         """
