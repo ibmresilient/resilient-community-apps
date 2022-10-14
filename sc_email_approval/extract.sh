@@ -1,0 +1,2 @@
+resilient-sdk extract --script "Email Approval Process Response" "Email Approval Pre Process Task" "Email Approval Pre Process Artifact"  -w complete_email_approval_process email_approval_process_task email_approval_process_artifact --rule "Process Email Approval Response" "Complete Email Approval Process" "Email Approval Process: Task" "Email Approval Process: Artifact"  --datatable email_approval_process
+mv export-*.res EmailApprovalContactPack.res
