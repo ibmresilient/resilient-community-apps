@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Poller implementation"""
 
 import logging
@@ -11,10 +12,10 @@ from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
 
-from fn_randori.lib.app_common import AppCommon
+from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME
 
 
-PACKAGE_NAME = "fn_randori"
+
 ENTITY_ID = "target_id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
 ENTITY_CLOSE_FIELD = "status" # name of field in endpoint entity to reference the close state
 SOAR_ENTITY_ID_FIELD = "randori_target_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
@@ -115,6 +116,7 @@ class PollerComponent(AppFunctionComponent):
                            "endpoint_url",
                            "verify",
                            "api_token",
+                           "api_version",
                            "tenant_name"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)

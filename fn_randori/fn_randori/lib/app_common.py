@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
 import datetime
@@ -35,6 +36,8 @@ from resilient_lib.components.templates_common import iso8601
 
 LOG = logging.getLogger(__name__)
 
+PACKAGE_NAME = "fn_randori"
+
 # change the header as necessary
 HEADER = { 'Content-Type': 'application/json' }
 
@@ -45,7 +48,8 @@ LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 # define the endpiont api calls your app will make to the endpoint solution. Below are expamples
 #ALERT_URI = "alert/{}/"
 #POLICY_URI = "policy/"
-GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/v1/all-detections-for-target"
+GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/{api_version}/all-detections-for-target"
+GET_TAG = "/recon/api/{api_version}/tag"
 
 TARGET_LIMIT = 2000
 
@@ -65,6 +69,7 @@ class AppCommon():
         self.package_name = package_name
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
+        self.api_version = app_configs.get("api_version")
         self.rc = rc
         self.verify = str_to_bool(app_configs.get("verify", "false"))
         self.tenant_name = app_configs.get("tenant_name")
@@ -81,7 +86,7 @@ class AppCommon():
         :return: complete URL
         :rtype: str
         """
-        return urljoin(self.endpoint_url, cmd)
+        return urljoin(self.endpoint_url, cmd.format(api_version=self.api_version))
 
     def _make_header(self, token):
         """Build API header using authorization token
@@ -217,6 +222,13 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
 
+    def get_tag(self, ):
+        response = self.rc.execute("GET",
+                                   self._get_uri(GET_TAG),
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
 
 def callback(response):
     """
