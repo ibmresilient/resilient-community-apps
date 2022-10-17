@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Add a comment to a Jira Issue"""
 
-from re import findall, subn
+from re import subn, compile
 
 from fn_jira.util import helper
 from requests import get
@@ -13,6 +13,8 @@ from resilient_circuits import (AppFunctionComponent, FunctionError,
 from resilient_lib import IntegrationError, RequestsCommon, validate_fields
 
 FN_NAME = "jira_create_comment"
+src_pattern = compile(r'<img[^>]+src="([^">]+)')
+alt_pattern = compile(r'<img[^>]+alt="([^">]+)')
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'jira_create_comment"""
@@ -75,8 +77,8 @@ class FunctionComponent(AppFunctionComponent):
         html = inputs.get("jira_comment")
         # extract src values and alt values from SOAR's image tags
         # ex: <img src='https://ibm.com/some_pic.jpg' alt='some_pic.jpg' />
-        srcs = findall(r'<img[^>]+src="([^">]+)', html)
-        alts = findall(r'<img[^>]+alt="([^">]+)', html)
+        srcs = src_pattern.findall(html)
+        alts = alt_pattern.findall(html)
 
         # sub in Jira image syntax for each image tag
         for alt in alts:
@@ -98,7 +100,7 @@ class FunctionComponent(AppFunctionComponent):
         for src, alt in imgs:
             try:
                 # Read a url image to a filestream
-                if src.startswith("http"):
+                if src.lower().startswith("http"):
                     # external resource
                     img_data = get(src, headers={"User-agent": "SOAR Apphost"}).content
                 else:

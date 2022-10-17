@@ -165,7 +165,7 @@ class JiraServers():
         elif not jira_label:
             raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
 
-        label = PACKAGE_NAME+":"+jira_label
+        label = f"{PACKAGE_NAME}:{jira_label}"
         if jira_label and label in servers_list:
             options = servers_list[label]
         elif len(servers_list) == 1:
