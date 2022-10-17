@@ -49,7 +49,7 @@ LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 #ALERT_URI = "alert/{}/"
 #POLICY_URI = "policy/"
 GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/{api_version}/all-detections-for-target"
-GET_TAG = "/recon/api/{api_version}/tag"
+GET_VALIDATE = "/auth/api/{api_version}/validate"
 
 TARGET_LIMIT = 2000
 
@@ -222,13 +222,14 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
 
-    def get_tag(self, ):
+    def get_validate(self):
         response = self.rc.execute("GET",
-                                   self._get_uri(GET_TAG),
+                                   self._get_uri(GET_VALIDATE),
                                    headers=self.header,
                                    verify=self.verify)
         response.raise_for_status()
         return response.json()
+
 
 def callback(response):
     """

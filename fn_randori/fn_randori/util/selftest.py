@@ -29,8 +29,8 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Call Randori validate endpoint to make sure we can access 
+    the endpoint and it is configured properly.
     """
 
     try:
@@ -38,9 +38,14 @@ def selftest_function(opts):
         rc = RequestsCommon(opts, app_configs)
 
         app_common = AppCommon(rc, PACKAGE_NAME, app_configs)
-        result = app_common.get_tag()
+        result = app_common.get_validate()
         reason = None
-        state = "success" if result else "failure"
+        # Get the list of permissions
+        perms = result.get("perms")
+        if perms and "authenticated" in perms:
+            state = "success"
+        else:
+            state = "failure"
     except IntegrationError as err:
         state = "failure"
         reason = str(err)
