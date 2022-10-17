@@ -145,15 +145,12 @@ class ArielSearch(SearchWaitCommand):
         :return: search_id returned from QRadar
         """
         auth_info = AuthInfo.get_authInfo()
-        headers = auth_info.headers.copy()
-
-        url = f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES}"
-        utf8 = query.encode("utf-8")
-        data = {"query_expression": utf8}
-
         search_id = ""
         try:
-            response = auth_info.make_call("POST", url, data=data, headers=headers)
+            response = auth_info.make_call("POST",
+                                           f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES}",
+                                           data = {"query_expression": query.encode("utf-8")},
+                                           headers = auth_info.headers.copy())
             json = response.json()
 
             if "search_id" in json:
@@ -175,8 +172,7 @@ class ArielSearch(SearchWaitCommand):
         try:
             response = auth_info.make_call("DELETE",
                                            f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES_DELETE.format(search_id)}",
-                                           headers = auth_info.headers.copy()
-                                          )
+                                           headers = auth_info.headers.copy())
         except Exception as e:
             LOG.error(str(e))
             raise SearchFailure(search_id, None)

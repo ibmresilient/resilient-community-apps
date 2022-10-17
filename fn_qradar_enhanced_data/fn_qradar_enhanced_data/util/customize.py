@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_qradar_enhanced_data",
         "message_destinations": [u"fn_qradar_enhanced_data"],
-        "functions": [u"qradar_offense_summary", u"qradar_top_events"],
+        "functions": [u"qradar_get_offense_mitre_reference", u"qradar_offense_summary", u"qradar_top_events"],
         "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
         "actions": [u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"QRadar Enhanced Data", u"QRadar Enhanced Data Poller", u"QRadar Enhanced Data Refresh"],
         "incident_fields": [u"qr_assigned", u"qr_credibility", u"qr_destination_ip_count", u"qr_event_count", u"qr_flow_count", u"qr_last_updated_time", u"qr_magnitude", u"qr_offense_domain", u"qr_offense_index_type", u"qr_offense_index_value", u"qr_offense_last_updated_time", u"qr_offense_source", u"qr_offense_start_time", u"qr_offense_status", u"qr_relevance", u"qr_severity", u"qr_source_ip_count", u"qradar_destination", u"qradar_id"],
@@ -39,12 +39,13 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 44.0.7585
 
     Contents:
     - Message Destinations:
         - fn_qradar_enhanced_data
     - Functions:
+        - qradar_get_offense_mitre_reference
         - qradar_offense_summary
         - qradar_top_events
     - Workflows:
