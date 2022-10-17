@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "author": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "avatarUrls": {
+              "type": "object",
+              "properties": {
+                "48x48": {
+                  "type": "string"
+                },
+                "24x24": {
+                  "type": "string"
+                },
+                "16x16": {
+                  "type": "string"
+                },
+                "32x32": {
+                  "type": "string"
+                }
+              }
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "timeZone": {
+              "type": "string"
+            }
+          }
+        },
+        "body": {
+          "type": "string"
+        },
+        "updateAuthor": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "avatarUrls": {
+              "type": "object",
+              "properties": {
+                "48x48": {
+                  "type": "string"
+                },
+                "24x24": {
+                  "type": "string"
+                },
+                "16x16": {
+                  "type": "string"
+                },
+                "32x32": {
+                  "type": "string"
+                }
+              }
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "timeZone": {
+              "type": "string"
+            }
+          }
+        },
+        "created": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "jira_issue_id": {
+          "type": "string"
+        },
+        "jira_comment": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
