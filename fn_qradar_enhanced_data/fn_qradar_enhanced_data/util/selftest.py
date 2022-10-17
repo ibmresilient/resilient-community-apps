@@ -18,31 +18,30 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     try:
-
         options = opts.get(PACKAGE_NAME, {})
 
         if not options:
-            servers = QRadarServers(opts, options)
+            servers = QRadarServers(opts)
             server_list = servers.get_server_name_list()
         else:
             server_list = {PACKAGE_NAME}
-        
+
         if GLOBAL_SETTINGS in server_list:
             server_list.remove(GLOBAL_SETTINGS)
 
         for server_name in server_list:
             server = opts.get(server_name, {})
 
-            log.info("Verifying app.config values for {} config section".format(str(server.get("host"))))
+            log.info(f"Verifying app.config values for {str(server.get('host'))} config section")
 
             cafile = False if server.get("verify_cert", "false").lower() == "false" else server.get("verify_cert")
             qradar_client = QRadarClient(host=server.get("host"),
-                                        username=server.get("username", None),
-                                        password=server.get("qradarpassword", None),
-                                        token=server.get("qradartoken", None),
-                                        cafile=cafile,
-                                        opts=opts,
-                                        function_opts=server)
+                                         username=server.get("username", None),
+                                         password=server.get("qradarpassword", None),
+                                         token=server.get("qradartoken", None),
+                                         cafile=cafile,
+                                         opts=opts,
+                                         function_opts=server)
 
             log.info("Verifying QRadar connection...")
 
@@ -50,7 +49,6 @@ def selftest_function(opts):
 
             if connected:
                 log.info("Verifying QRadar GraphQL connection...")
-
                 graphql_installed = qradar_client.verify_graphql_connect()
 
                 if not graphql_installed:
@@ -59,27 +57,19 @@ def selftest_function(opts):
                 else:
                     log.info("Test was successful\n")
 
-        return {
-            "state": "success"
-        }
+        return {"state": "success"}
 
     except Exception as err:
-        err_reason_msg = """Could not connect to QRadar.
-            error: {0}
+        err_reason_msg = f"""Could not connect to QRadar.
+            error: {err}
             ---------
             Current Configs in app.config file::
             ---------
-            host: {1}
-            verify_cert: {2}
-            username: {3}
-            qradarpassword: {4}
-            qradartoken: {5}\n""".format(
-            err,
-            server.get("host"),
-            server.get("verify_cert"),
-            server.get("username"),
-            server.get("qradarpassword"),
-            server.get("qradartoken"))
+            host: {server.get("host")}
+            verify_cert: {server.get("verify_cert")}
+            username: {server.get("username")}
+            qradarpassword: {server.get("qradarpassword")}
+            qradartoken: {server.get("qradartoken")}\n"""
 
         log.error(err_reason_msg)
 

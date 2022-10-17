@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-#
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
 # Util functions
 
 from six import string_types
@@ -42,7 +40,7 @@ def fix_dict_value(events):
         if isinstance(event, dict):
             for key in event:
                 if not isinstance(event[key], string_types):
-                    event[key] = u"{}".format(event[key])
+                    event[key] = f"{event[key]}"
 
     return events
 
@@ -59,8 +57,7 @@ def get_server_settings(opts, qradar_label):
     if options: # If no label given [fn_qradar_integration]
         server_list = {PACKAGE_NAME}
     else: # If label given [fn_qradar_integration:label]
-        servers = qradar_utils.QRadarServers(opts, options)
-        server_list = servers.get_server_name_list()
+        server_list = qradar_utils.QRadarServers(opts).get_server_name_list()
         # If GLOBAL_SETTINGS is in server_list then remove it from list and validate fields
         if GLOBAL_SETTINGS in server_list:
             server_list.remove(GLOBAL_SETTINGS)
@@ -74,8 +71,7 @@ def get_server_settings(opts, qradar_label):
 
     # Get configuration for QRadar server specified
     options = qradar_utils.QRadarServers.qradar_label_test(qradar_label, servers_list)
-    LOG.debug("Connection to {} using {}".format(options.get("host"),
-                                                options.get("username", None) or options.get("qradartoken", None)))
+    LOG.debug(f'Connection to {options.get("host")} using {options.get("username", None) or options.get("qradartoken", None)}')
 
     return options
 
@@ -90,11 +86,11 @@ def get_qradar_client(opts, options):
     qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
     return qradar_utils.QRadarClient(host=options.get("host"),
-                                    username=options.get("username", None),
-                                    password=options.get("qradarpassword", None),
-                                    token=options.get("qradartoken", None),
-                                    cafile=qradar_verify_cert,
-                                    opts=opts, function_opts=options)
+                                     username=options.get("username", None),
+                                     password=options.get("qradarpassword", None),
+                                     token=options.get("qradartoken", None),
+                                     cafile=qradar_verify_cert,
+                                     opts=opts, function_opts=options)
 
 def clear(rest_client, table_name, incident_id):
     """
@@ -105,12 +101,12 @@ def clear(rest_client, table_name, incident_id):
     :return: None
     """
     try:
-        rest_client.delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(incident_id, table_name))
-        LOG.info("Data in table {} in incident {} has been cleared".format(table_name, incident_id))
+        rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
+        LOG.info(f"Data in table {table_name} in incident {incident_id} has been cleared")
 
     except Exception as err_msg:
-        LOG.error("Failed to clear table: {} error: {}".format(table_name, err_msg))
-        raise IntegrationError("Error while clearing table: {}".format(table_name))
+        LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
+        raise IntegrationError(f"Error while clearing table: {table_name}")
 
 def clear_table(rest_client, table_name, incident_id, global_settings):
     """
@@ -125,7 +121,7 @@ def clear_table(rest_client, table_name, incident_id, global_settings):
         if global_settings:
             # If clear_datatables in app.config equals True then clear given data table
             # If clear_datatables does not exist then it defaults to True
-            if str_to_bool(global_settings.get("clear_datatables", True)) == True:
+            if str_to_bool(global_settings.get("clear_datatables", True)):
                 clear(rest_client, table_name, incident_id)
         else: # If global_settings does not exist then clear given data table
             clear(rest_client, table_name, incident_id)

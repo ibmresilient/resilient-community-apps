@@ -52,6 +52,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
 | 1.2.2 | 04/2022 | Delete search on time-out |

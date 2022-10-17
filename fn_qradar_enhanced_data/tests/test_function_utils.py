@@ -1,7 +1,6 @@
-#encoding: utf-8
-#
+# encoding: utf-8
 # Unit tests for function_utils.py
-#
+
 from fn_qradar_enhanced_data.util.function_utils import make_query_string, fix_dict_value
 
 def test_query_string():
@@ -27,10 +26,10 @@ def test_query_string():
     str4 = " Forth part string "
     str5 = " Fifth part string "
 
-    input_string = str1 + "%param1%" + str2 + "%param2%" + str3 + "%param3%" + str4 + "%param4%" + str5
+    input_string = f"{str1}%param1%{str2}%param2%{str3}%param3%{str4}%param4%{str5}"
     params = ["Param1", "Param2", "Param3", "Param4"]
     query_str = make_query_string(input_string, params=params)
-    str_expect = str1 + params[0] + str2 + params[1] + str3 + params[2] + str4 + params[3] + str5
+    str_expect = f"{str1}{params[0]}{str2}{params[1]}{str3}{params[2]}{str4}{params[3]}{str5}"
     assert query_str == str_expect
 
 def test_fix_dict():

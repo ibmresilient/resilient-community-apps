@@ -48,9 +48,9 @@ class PollerComponent(ResilientComponent):
         if not self.polling_interval:
             return False
 
-        LOG.info(u"Poller initiated, polling interval %s", self.polling_interval)
+        LOG.info(f"Poller initiated, polling interval {self.polling_interval}")
         self.last_poller_time = datetime.now() - timedelta(minutes=int(global_settings.get('polling_lookback', 0)))
-        LOG.info("Poller lookback: %s", self.last_poller_time)
+        LOG.info(f"Poller lookback: {self.last_poller_time}")
 
         return True
 
@@ -69,7 +69,7 @@ class PollerComponent(ResilientComponent):
         :return: None
         """
         case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
-        LOG.debug("Cases gathered from SOAR: {}".format(str(case_list)))
+        LOG.debug(f"Cases gathered from SOAR: {str(case_list)}")
 
         if error_msg:
             raise IntegrationError(error_msg)
@@ -94,29 +94,29 @@ class PollerComponent(ResilientComponent):
             # Add the case_id and case_lastPersistedTime fields to the qradar_id dictionary
             # that is inside of the QRadar servers dictionary
             if qradar_id not in case_server:
-                case_server[qradar_id] = { "case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers'] }
+                case_server[qradar_id] = {"case_id": case['id'], "case_lastPersistedTime": case["properties"]["qr_last_updated_time"], "case_ver": case['vers']}
         # :End: QRadar servers dictionary
-        LOG.debug("Dictionary of QRadar servers with cases on SOAR: {}".format(str(case_server_dict)))
+        LOG.debug(f"Dictionary of QRadar servers with cases on SOAR: {str(case_server_dict)}")
 
         for server in case_server_dict:
             # Create filter string which contains the filters for the api call
             filters = ""
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
-                filters = "{}id={}".format(filters, str(id))
+                filters = f"{filters}id={str(id)}"
                 if id_list.index(id) != len(id_list)-1:
-                    filters = "{} or ".format(filters)
+                    filters = f"{filters} or "
 
             # Create connection to QRadar server
-            qradar_client = get_qradar_client(self.opts, get_server_settings(self.opts, server))
+            get_qradar_client(self.opts, get_server_settings(self.opts, server))
 
             auth_info = AuthInfo.get_authInfo()
             # Create url to get all offenses in SOAR from the given QRadar server
-            url = auth_info.api_url + "siem/offenses?fields={}&filter={}".format("id, last_persisted_time", filters)
+            url = f"{auth_info.api_url}siem/offenses?fields=id, last_persisted_time&filter={filters}"
             # Makes GET call to QRadar server using api
             response = auth_info.make_call("GET", url)
             offenses_update_list = response.json()
-            LOG.debug("QRadar returned macthing offenses: {}".format(str(offenses_update_list)))
+            LOG.debug(f"QRadar returned macthing offenses: {str(offenses_update_list)}")
 
             payload = { "patches": {} }
             updated_cases = []
@@ -128,21 +128,19 @@ class PollerComponent(ResilientComponent):
                     case_dict = case_server_dict[server][str(offense['id'])]
                     case_id = case_dict['case_id']
                     case_lastPersistedTime = case_dict['case_lastPersistedTime']
-                    LOG.debug("QRadar last persisted time: {}".format(
-                        datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')))
-                    LOG.debug("SOAR Incident last updated time: {}".format(
-                        datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')))
+                    LOG.debug(f"QRadar last persisted time: {datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
+                    LOG.debug(f"SOAR Incident last updated time: {datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
                     if offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
                         # Create payload to update cases
                         payload['patches'][case_id] = {
                                                 "version": case_dict['case_ver']+1,
-                                                "changes": [ {
-                                                    "old_value": { "date": case_lastPersistedTime },
-                                                    "new_value": { "date": offense_lastPersistedTime },
-                                                    "field": { "name": "qr_last_updated_time" }
-                                                } ]
+                                                "changes": [{
+                                                    "old_value": {"date": case_lastPersistedTime},
+                                                    "new_value": {"date": offense_lastPersistedTime},
+                                                    "field": {"name": "qr_last_updated_time"}
+                                                }]
                                             },
             # If there are changes then fix payload and send put request to SOAR
             if updated_cases:
@@ -158,4 +156,4 @@ class PollerComponent(ResilientComponent):
                 if response['failures']:
                     raise IntegrationError(str(response))
 
-                LOG.info("Incident: {} updated field: qr_last_updated_time".format(str(updated_cases)))
+                LOG.info(f"Incident: {str(updated_cases)} updated field: qr_last_updated_time")

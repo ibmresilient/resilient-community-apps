@@ -28,16 +28,16 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 
             while not exit_event.is_set():
                 try:
-                    LOG.info(u"%s polling start.", package_name)
+                    LOG.info(f"{package_name} polling start.")
                     poller_start = datetime.now()
                     # Function execution with the last poller time in ms
-                    func(self, last_poller_time=int(last_poller_time.timestamp()*1000))
+                    func(self, last_poller_time = int(last_poller_time.timestamp()*1000))
 
                 except Exception as err:
                     LOG.error(str(err))
                     LOG.error(format_exc())
                 finally:
-                    LOG.info(u"%s polling complete.", package_name)
+                    LOG.info(f"{package_name} polling complete.")
                     # Set the last poller time for next cycle
                     last_poller_time = poller_start
 
@@ -52,7 +52,7 @@ class SOARCommon():
     """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
 
     def get_open_soar_cases(search_fields, rest_client, open_cases=True):
-        """ 
+        """
         Find all IBM SOAR cases which are associated with the endpoint platform
         :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
                                  field values can be True/False for 'has_a_value' or 'does_not_have_a_value'
@@ -61,7 +61,7 @@ class SOARCommon():
         :return soar_cases: (list) Returned list of cases
         :return error_msg: (str) Any error during the query or None
         """
-        query = SOARCommon._build_search_query(search_fields, open_cases=open_cases)
+        query = SOARCommon._build_search_query(search_fields, open_cases = open_cases)
 
         try:
             return rest_client.post('/incidents/query?return_level=normal', query), None
@@ -79,10 +79,7 @@ class SOARCommon():
         :return query_string: (dict) json stucture used for cases searching
         """
         query = {
-            "filters": [{
-                "conditions": [
-                 ]
-            }],
+            "filters": [{ "conditions": [] }],
             "sorts": [{
                 "field_name": "create_date",
                 "type": "desc"
@@ -90,18 +87,14 @@ class SOARCommon():
         }
 
         if open_cases:
-            field_search = {
-                            "field_name": "plan_status",
+            field_search = {"field_name": "plan_status",
                             "method": "equals",
-                            "value": "A"
-                          }
+                            "value": "A"}
             query['filters'][0]['conditions'].append(field_search)
 
         if isinstance(search_fields, dict):
             for search_field, search_value in search_fields.items():
-                field_search = {
-                            "field_name": "properties.{0}".format(search_field)
-                        }
+                field_search = {"field_name": f"properties.{search_field}"}
                 if isinstance(search_value, bool):
                     field_search['method'] = "has_a_value" if search_value else "does_not_have_a_value"
                 else:
