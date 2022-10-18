@@ -3,14 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
-import datetime
-import pytz
 from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, str_to_bool
+from resilient_lib import str_to_bool, eval_mapping
 from resilient_lib.components.templates_common import iso8601
 
 
@@ -73,6 +71,7 @@ class AppCommon():
         self.rc = rc
         self.verify = str_to_bool(app_configs.get("verify", "false"))
         self.tenant_name = app_configs.get("tenant_name")
+        self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
         self.header = self._make_header(self.api_token)
 
@@ -143,7 +142,6 @@ class AppCommon():
                                verify=self.verify,
                                callback=callback)
 
-
     def query_entities_since_ts(self, timestamp, *args, **kwargs):
         """
         Get changed entities since last poller run
@@ -157,25 +155,33 @@ class AppCommon():
         """
         iso_timestamp = iso8601(timestamp)
 
-        query = {
-            "condition": "OR",
-            "rules": [
+        # Base query used by the poller to get new and updated targets based on last poll time.
+        query =  {
+            'condition': "AND",
+            'rules': [
                 {
-                    "field": "table.target_first_seen",
-                    "operator": "greater_or_equal",
-                    "value": iso_timestamp
-                },
-                {
-                    "field": "table.temptation_last_modified",
-                    "operator": "greater_or_equal",
-                    "value": iso_timestamp
+                    'condition': "OR",
+                    'rules': [
+                        {
+                            'field': "table.target_first_seen",
+                            'operator': "greater_or_equal",
+                            'value': iso_timestamp
+                        },
+                        {
+                            'field': "table.temptation_last_modified",
+                            'operator': "greater_or_equal",
+                            'value': iso_timestamp
+                        }
+                    ]
                 }
             ]
         }
-        # Endpoint expects query to be base64 encoded.
-        query = json.dumps(query)
-        b64_query = b64encode(query.encode())
+        if self.polling_filters:
+            query = self.build_query_filters(query, self.polling_filters)
 
+        # Endpoint expects query to be base64 encoded.
+        query_string = json.dumps(query)
+        b64_query = b64encode(query_string.encode())
 
         params = {
             'q': b64_query, 
@@ -202,11 +208,49 @@ class AppCommon():
             if response_json.get('count') == 0:
                 break
             data = response_json.get('data')
+
+            # Append targets found to the list of targets to be returned from this function.
             for target in data:
                 targets.append(target)
             offset = offset + response_json.get('count')
             total_targets = response_json.get('total')
         return targets
+
+    def build_query_filters(self, query, filters):
+        """_summary_
+
+        Args:
+            query (json object): json containing base query
+            filters (list of tuples) : List of tuples.  Each tuple specifies a filter containing
+                Randori "field", "operator" and "value"
+
+        Returns:
+            json object: newly formulated query with the specified filters added
+        """
+
+        for filter_tuple in filters:
+            if isinstance(filter_tuple[2], list):
+                # If "value" is a list of values then create a rule (json object) for each 
+                # value and use "OR" condition.
+                condition = {'condition': "OR",
+                                 'rules': []}
+                for value in filter_tuple[2]:
+                    rule = {}
+                    field_name = "table.{0}".format(filter_tuple[0])
+                    rule['field'] = field_name
+                    rule['operator'] = filter_tuple[1]
+                    rule['value'] = value
+                    condition['rules'].append(rule)
+                query['rules'].append(condition)
+            else:
+                # Create a single rule for this tuple
+                rule = {}
+                field_name = "table.{0}".format(filter_tuple[0])
+                rule['field'] = field_name
+                rule['operator'] = filter_tuple[1]
+                rule['value'] = filter_tuple[2]
+                query['rules'].append(rule)
+        return query
 
     def make_linkback_url(self, entity_id, linkback_url=LINKBACK_URL):
         """
@@ -223,6 +267,9 @@ class AppCommon():
                                                               target_id=entity_id))
 
     def get_validate(self):
+        """
+        Call Randori endpoint to validate the connection to Randori from SOAR.
+        """
         response = self.rc.execute("GET",
                                    self._get_uri(GET_VALIDATE),
                                    headers=self.header,

@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [],
         "workflows": [],
         "actions": [],
-        "incident_fields": [],
+        "incident_fields": [u"randori_target_id", u"randori_target_link", u"randori_target_status"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
