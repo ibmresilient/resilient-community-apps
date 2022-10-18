@@ -94,8 +94,7 @@ def is_entity_closed(entity):
     :return: true/false if entity is closed
     :rtype: bool
     """
-    # <::CHANGE_ME:: change this field to reflect the field and logic to determine if the entity is now closed >
-    return True if entity.get(ENTITY_CLOSE_FIELD, False) in ['Accepted', 'Mitigated'] else False
+    return bool(entity.get(ENTITY_CLOSE_FIELD, False) in ['Accepted', 'Mitigated'])
 
 class PollerComponent(AppFunctionComponent):
     """

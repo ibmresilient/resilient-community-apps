@@ -148,8 +148,6 @@ class AppCommon():
 
         :param timestamp: datetime when the last poller ran
         :type timestamp: datetime
-        :param *args: additional positional parameters needed for endpoint queries
-        :param **kwargs: additional key/value pairs needed for endpoint queries
         :return: changed entity list
         :rtype: list of targets
         """
