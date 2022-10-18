@@ -3,12 +3,12 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
+import datetime
 from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
-from requests.exceptions import JSONDecodeError
-from resilient_lib import str_to_bool, eval_mapping
+from resilient_lib import str_to_bool, eval_mapping, RequestsCommon
 from resilient_lib.components.templates_common import iso8601
 
 
@@ -52,7 +52,7 @@ GET_VALIDATE = "/auth/api/{api_version}/validate"
 TARGET_LIMIT = 2000
 
 class AppCommon():
-    def __init__(self, rc, package_name, app_configs):
+    def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
@@ -75,7 +75,7 @@ class AppCommon():
 
         self.header = self._make_header(self.api_token)
 
-    def _get_uri(self, cmd):
+    def _get_uri(self, cmd: str) -> str:
         """
         Build API url
         <- ::CHANGE_ME:: change this to reflect the correct way to build an API call ->
@@ -87,7 +87,7 @@ class AppCommon():
         """
         return urljoin(self.endpoint_url, cmd.format(api_version=self.api_version))
 
-    def _make_header(self, token):
+    def _make_header(self, token: str) -> dict:
         """Build API header using authorization token
 
         :param token: authorization token
@@ -102,52 +102,14 @@ class AppCommon():
 
         return header
 
-    def _api_call(self, method, url, payload=None, refresh_authentication=False):
-        """
-        Make an API call to the endpoint solution and get back the response
-
-        :param method: REST method to execute (GET, POST, PUT, ...)
-        :type method: str
-        :param url: URL to send request to
-        :type url: str
-        :param payload: JSON payload to send if a POST, defaults to None
-        :type payload: dict|None
-        :param refresh_authentication: boolean if a refresh is needed, defaults to False
-        :type refresh_authentication: bool, optional
-        :return: requests.Response object returned from the endpoint call
-        :rtype: ``requests.Response``
-        """    
-        # <- ::CHANGE_ME:: there may be changes needed in here to
-        # work with your endpoint solution ->
-
-
-        if method in ["PUT", "POST"]:
-            return self.rc.execute(method,
-                                   self._get_uri(url),
-                                   json=payload,
-                                   headers=self.header,
-                                   verify=self.verify,
-                                   callback=callback)
-        if payload:
-            return self.rc.execute(method,
-                                   self._get_uri(url),
-                                   params=payload,
-                                   headers=self.header,
-                                   verify=self.verify,
-                                   callback=callback)
-
-        return self.rc.execute(method,
-                               self._get_uri(url),
-                               headers=self.header,
-                               verify=self.verify,
-                               callback=callback)
-
-    def query_entities_since_ts(self, timestamp):
+    def query_entities_since_ts(self, timestamp: datetime, *_args, **_kwargs) -> list:
         """
         Get changed entities since last poller run
 
         :param timestamp: datetime when the last poller ran
         :type timestamp: datetime
+        :param *args: additional positional parameters needed for endpoint queries
+        :param **kwargs: additional key/value pairs needed for endpoint queries
         :return: changed entity list
         :rtype: list of targets
         """
@@ -181,7 +143,7 @@ class AppCommon():
         targets = self.get_detections_for_target(query)
         return targets
         
-    def get_detections_for_target(self, query):
+    def get_detections_for_target(self, query: dict) -> list:
         """get_detections_for_target
 
         Args:
@@ -227,7 +189,7 @@ class AppCommon():
             total_targets = response_json.get('total')
         return targets
 
-    def _build_query_filters(self, query, filters):
+    def _build_query_filters(self, query: dict, filters: list) -> dict:
         """_summary_
 
         Args:
@@ -263,7 +225,7 @@ class AppCommon():
                 query['rules'].append(rule)
         return query
 
-    def make_linkback_url(self, entity_id, linkback_url=LINKBACK_URL):
+    def make_linkback_url(self, entity_id: str, linkback_url : str = LINKBACK_URL) -> str:
         """
         Create a url to link back to the endpoint entity
 
@@ -277,7 +239,7 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
 
-    def get_validate(self):
+    def get_validate(self) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
         """
@@ -288,29 +250,3 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-
-def callback(response):
-    """
-    Callback needed for certain REST API calls to return a formatted error message
-
-    :param response: the requests response object
-    :type response: ``requests.Response``
-    :return: response, error_msg
-    :rtype: tuple(``requests.Reponse``, str)
-    """
-    error_msg = None
-    if response.status_code >= 300 and response.status_code <= 500:
-        try:
-            resp = response.json()
-            msg = resp.get('messages') or resp.get('message')
-            details = resp.get('details')
-        except JSONDecodeError as err:
-            msg = str(err)
-            details = response.text
-
-        error_msg  = u"Error: \n    status code: {0}\n    message: {1}\n    details: {2}".format(
-            response.status_code,
-            msg,
-            details)
-
-    return response, error_msg

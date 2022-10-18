@@ -51,7 +51,7 @@ def init_app(rc, options):
 
     return app_common
 
-def query_entities(app_common, last_poller_time):
+def query_entities(app_common: AppCommon, last_poller_time):
     """
     Method call to query the endpoint solution for newly created or 
     modified entities for synchronization with IBM SOAR
