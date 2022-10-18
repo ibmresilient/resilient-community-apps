@@ -75,7 +75,7 @@
       }
       {% elif item.entityType == 'Url' and item.url -%}
       {% set artifactFlg = True -%}
-      {% set fixed_url = item.url if item.url.startswith("http") else "https://{}".format(item.url) -%}
+      {% set fixed_url = item.url if item.url.lower().startswith("http") else "https://{}".format(item.url) -%}
       {
         "type": {
           "name": "URL"
