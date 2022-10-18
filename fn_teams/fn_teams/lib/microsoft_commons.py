@@ -28,7 +28,7 @@ class ResponseHandler:
     def __init__(self):
         self.msg, self.response = None, None
         self.default_exempt_codes = [204]
-        self.exempt_codes = self.default_exempt_codes
+        self.exempt_codes = self.default_exempt_codes.copy()
 
 
     def clear_exempt_codes(self, default=None):
@@ -42,7 +42,7 @@ class ResponseHandler:
                                else, clears all codes
         """
         if default:
-            self.exempt_codes = self.default_exempt_codes
+            self.exempt_codes = self.default_exempt_codes.copy()
         else:
             self.exempt_codes = []
 
@@ -88,8 +88,10 @@ class ResponseHandler:
             error = "{} {}".format(
                 response.get('error').get('message'),
                 response.get('error_description'))
-            if self.response.status_code == 401:
-                self.msg = constants.MSG_RESPONSE_401.format(error)
+            if self.response.status_code == 400:
+                self.msg = constants.MSG_RESPONSE_400.format(error)
+            elif self.response.status_code == 401:
+                self.msg = constants.MSG_RESPONSE_404.format(error)
             elif self.response.status_code == 404:
                 self.msg = constants.MSG_RESPONSE_404.format(error)
             elif self.response.status_code == 405:
@@ -144,6 +146,7 @@ class ResponseHandler:
         --------
             (<dict>) : Response body with status code.
         """
+        self.msg = None
         self.response = response
         self.monitor_status()
         return self.raise_or_return_erros()

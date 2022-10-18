@@ -8,7 +8,7 @@ from urllib import parse
 from resilient_lib import IntegrationError, validate_fields
 from fn_teams.lib import constants
 
-class TeamsAuthentication:
+class MicrosoftAuthentication:
     """
         This application generates an access token using the the MSAL class to interface with 
         the Microsoft Endpoint using the directory_id, application_id and secret_value that was
