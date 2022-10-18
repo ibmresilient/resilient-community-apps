@@ -98,7 +98,7 @@ class AppCommon():
 
         header = HEADER.copy()
         # modify to represent how to build the header
-        header['Authorization'] = "Bearer {}".format(self.api_token)
+        header['Authorization'] = f"Bearer {token}"
 
         return header
 
@@ -142,7 +142,7 @@ class AppCommon():
                                verify=self.verify,
                                callback=callback)
 
-    def query_entities_since_ts(self, timestamp, *args, **kwargs):
+    def query_entities_since_ts(self, timestamp):
         """
         Get changed entities since last poller run
 
@@ -176,9 +176,22 @@ class AppCommon():
                 }
             ]
         }
+        # Add optional query filters if defined.
         if self.polling_filters:
-            query = self.build_query_filters(query, self.polling_filters)
+            query = self._build_query_filters(query, self.polling_filters)
 
+        targets = self.get_detections_for_target(query)
+        return targets
+        
+    def get_detections_for_target(self, query):
+        """get_detections_for_target
+
+        Args:
+            query (json object): Randori query string for searching for targets.
+
+        Returns:
+            list : List of targets matching the query parameters
+        """
         # Endpoint expects query to be base64 encoded.
         query_string = json.dumps(query)
         b64_query = b64encode(query_string.encode())
@@ -216,7 +229,7 @@ class AppCommon():
             total_targets = response_json.get('total')
         return targets
 
-    def build_query_filters(self, query, filters):
+    def _build_query_filters(self, query, filters):
         """_summary_
 
         Args:
@@ -236,8 +249,8 @@ class AppCommon():
                                  'rules': []}
                 for value in filter_tuple[2]:
                     rule = {}
-                    field_name = "table.{0}".format(filter_tuple[0])
-                    rule['field'] = field_name
+                    # Prepend fieldname with "table." string
+                    rule['field'] = f"table.{filter_tuple[0]}"
                     rule['operator'] = filter_tuple[1]
                     rule['value'] = value
                     condition['rules'].append(rule)
@@ -245,7 +258,7 @@ class AppCommon():
             else:
                 # Create a single rule for this tuple
                 rule = {}
-                field_name = "table.{0}".format(filter_tuple[0])
+                field_name = f"table.{filter_tuple[0]}"
                 rule['field'] = field_name
                 rule['operator'] = filter_tuple[1]
                 rule['value'] = filter_tuple[2]

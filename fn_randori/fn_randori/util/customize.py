@@ -44,6 +44,10 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_randori
+    - Incident Fields:
+        - randori_target_id
+        - randori_target_link
+        - randori_target_status
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

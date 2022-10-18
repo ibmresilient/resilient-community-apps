@@ -32,5 +32,10 @@ verify= false | /path/to/cafile.crt
 #   "value" is the value to be compared against in the query
 # If more than one filter is needed separate each tuple with a comma
 #polling_filters=("target_temptation","greater_or_equal",40),("status","equal",["Needs Resolution", "Needs Review"]),("authority","equal","True")
+# Optional:
+# soar_create_case_template
+# soar_close_case_template
+# soar_update_case_template
+#
 """
     return config_data
