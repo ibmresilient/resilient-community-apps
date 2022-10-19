@@ -202,7 +202,10 @@ class AppCommon():
         """
 
         for filter_tuple in filters:
-            if isinstance(filter_tuple[2], list):
+            if not isinstance(filter_tuple, tuple) or len(filter_tuple) != 3:
+                LOG.error("polling_filters tuple %s : invalid format or does not contain 3 elements - skipping this filter", filter_tuple)
+                continue
+            if isinstance(filter_tuple[2], list) :
                 # If "value" is a list of values then create a rule (json object) for each 
                 # value and use "OR" condition.
                 condition = {'condition': "OR",
