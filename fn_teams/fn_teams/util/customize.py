@@ -22,7 +22,7 @@ def codegen_reload_data():
         "package": u"fn_teams",
         "message_destinations": [u"fn_teams"],
         "functions": [u"ms_teams_create_group", u"teams_post_message"],
-        "workflows": [u"example_post_incident_to_ms_teams", u"example_post_task_to_microsoft_teams", u"incident_create_a_teams_group"],
+        "workflows": [u"example_post_incident_to_ms_teams", u"example_post_task_to_microsoft_teams", u"incident_create_a_microsoft_group"],
         "actions": [u"Example: Post a Task to Microsoft Teams", u"Example: Post an Incident to Microsoft Teams", u"MS Teams: Create Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -50,7 +50,7 @@ def customization_data(client=None):
     - Workflows:
         - example_post_incident_to_ms_teams
         - example_post_task_to_microsoft_teams
-        - incident_create_a_teams_group
+        - incident_create_a_microsoft_group
     - Rules:
         - Example: Post a Task to Microsoft Teams
         - Example: Post an Incident to Microsoft Teams

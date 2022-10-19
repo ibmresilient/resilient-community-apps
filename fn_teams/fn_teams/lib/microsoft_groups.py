@@ -42,9 +42,9 @@ class GroupsInterface:
             mail_name=self.required_parameters["group_mail_nickname"],
             owners=owners)
         self.add_members_group(response.get("id"), members)
-        group_info = self.find_group(
+        groups_info = self.find_group(
             group_mail_nickname=self.required_parameters["group_mail_nickname"])
-        return group_info
+        return groups_info[0]
 
 
     def write_group(self, **kwargs):
