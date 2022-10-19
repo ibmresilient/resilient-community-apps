@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "items": [
+      {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "integer"
+          },
+          "ppid": {
+            "type": "integer"
+          },
+          "privilegeLevel": {
+            "type": "string"
+          },
+          "processName": {
+            "type": "string"
+          },
+          "programPath": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string"
+          },
+          "hasIncident": {
+            "type": "boolean"
+          },
+          "suspended": {
+            "type": "boolean"
+          },
+          "startTime": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pid",
+          "hasIncident",
+          "suspended",
+          "startTime"
+        ]
+      }
+    ]
+  }
