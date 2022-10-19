@@ -10,6 +10,17 @@ from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_S
 
 LOG = getLogger(__name__)
 
+def get_search_timeout(global_settings, options):
+    timeout = 600 # Default timeout to 10 minutes
+    # Check if search_timeout setting is configured in edm_global_settings
+    if global_settings and global_settings.get("search_timeout"):
+        timeout = float(global_settings.get("search_timeout"))
+    # Check if search_timeout setting is configured for given QRadar server
+    elif options.get("search_timeout"):
+        timeout = float(options.get("search_timeout"))
+    
+    return timeout
+
 def make_query_string(query_string, params):
     """
     Substitute parameters into the query

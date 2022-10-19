@@ -67,9 +67,7 @@ def selftest_function(opts):
             ---------
             host: {server.get("host")}
             verify_cert: {server.get("verify_cert")}
-            username: {server.get("username")}
-            qradarpassword: {server.get("qradarpassword")}
-            qradartoken: {server.get("qradartoken")}\n"""
+            username: {server.get("username")}\n"""
 
         log.error(err_reason_msg)
 

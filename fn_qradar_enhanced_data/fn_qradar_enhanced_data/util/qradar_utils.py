@@ -67,7 +67,7 @@ class AuthInfo(object):
             self.username = username
             self.password = password
             self.qradar_auth = b64encode((f'{username}:{password}').encode('ascii'))
-            self.headers['Authorization'] = b"Basic {}".format(self.qradar_auth)
+            self.headers['Authorization'] = b"Basic " + self.qradar_auth
         elif token:
             self.qradar_token = token
             self.headers["SEC"] = self.qradar_token
@@ -80,7 +80,7 @@ class AuthInfo(object):
         self.cafile = cafile
         self.rc = RequestsCommon(opts, function_opts)
 
-    def make_call(self, method, url, headers=None, data=None):
+    def make_call(self, method, url, headers=None, data=None, timeout=None):
         my_headers = headers if headers else self.headers
 
         def make_call_callback(response):
@@ -91,7 +91,7 @@ class AuthInfo(object):
                 response.raise_for_status()
                 return response
 
-        return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
+        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback, timeout=timeout)
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -285,8 +285,10 @@ class QRadarClient(object):
 
         ariel_search.set_query_all(query_all)
 
-        ariel_search.perform_search(temp_query, False) # Execute the query on a temp table
-        return ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
+        response = ariel_search.perform_search(temp_query, False) # Execute the query on a temp table
+        response = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
+
+        return response
 
     def verify_connect(self):
         """

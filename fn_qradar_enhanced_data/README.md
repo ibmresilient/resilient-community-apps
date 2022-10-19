@@ -68,27 +68,20 @@
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
 
 The QRadar Enhanced Offense Data Migration (EDM) app fetches a more complete view of data associated with a QRadar offense and provides live links within the SOAR case back to QRadar, thereby simplifying case management.
 
 ### Key Features
-<!--
-  List the Key Features of the Integration
--->
 * Offense data available in a SOAR incident or case "QR Offense Details" tab to simplify reviewing information in one central and consistent location.
 * Access to detailed offense information by links in SOAR to the QRadar Analyst Workflow.
 * Centralize QRadar Offense IoC's associated with Security Events in the SOAR Artifacts tab, where SOAR enabled integrations can enrich and remediate cases and provide visibility to the response team.
+
 ---
 
 ## Requirements
-<!--
-  List any Requirements
--->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
+QRadar Use Case Manager and IBM Security QRadar Analyst Workflow extensions must be installed
+on the QRadar environment.
 
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.

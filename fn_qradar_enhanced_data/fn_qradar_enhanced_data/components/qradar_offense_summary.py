@@ -51,10 +51,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get global settings from the app.config
             global_settings = self.opts.get(GLOBAL_SETTINGS, {})
-
             # Get configuration for QRadar server specified
             options = get_server_settings(self.opts, qradar_label)
-
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
 

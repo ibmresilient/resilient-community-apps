@@ -10,7 +10,7 @@ from resilient_lib import validate_fields
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
 from fn_qradar_enhanced_data.util.qradar_constants import ARIEL_SEARCH_EVENTS, ARIEL_SEARCH_FLOWS, GLOBAL_SETTINGS
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_qradar_enhanced_data.util.function_utils import make_query_string, clear_table, get_server_settings, get_qradar_client
+from fn_qradar_enhanced_data.util.function_utils import make_query_string, clear_table, get_server_settings, get_qradar_client, get_search_timeout
 
 LOG = getLogger(__name__)
 
@@ -58,19 +58,12 @@ class FunctionComponent(ResilientComponent):
             LOG.info(f"qradar_label: {qradar_label}")
 
             global_settings = self.opts.get(GLOBAL_SETTINGS, {})
-
             # Get configuration for QRadar server specified
             options = get_server_settings(self.opts, qradar_label)
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, options)
-
-            timeout = 600 # Default timeout to 10 minutes
-            # Check if search_timeout setting is configured in edm_global_settings
-            if global_settings and global_settings.get("search_timeout"):
-                timeout = float(global_settings.get("search_timeout"))
-            # Check if search_timeout setting is configured for given QRadar server
-            elif options.get("search_timeout"):
-                timeout = float(options.get("search_timeout"))
+            # Get search_timeout from app.config or set it to default 600 seconds
+            timeout = get_search_timeout(global_settings, options)
 
             temp_table = f"offense-{qradar_search_param3}-events-{qradar_fn_type}-1000-{str(time())}"
 
@@ -140,5 +133,8 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError()
 
     def mapEventData(self, event):
-        l = ["eventtime", "lastpackettime", "FirstPacketTime", "sourcebytes", "sourcepackets", "destinationbytes", "destinationpackets"]
-        return {key: int(float(event[key])) for key in event.keys() if key in l}
+        for key in event.keys():
+            if key in ["eventtime", "lastpackettime", "FirstPacketTime", "sourcebytes", "sourcepackets", "destinationbytes", "destinationpackets"]:
+                event[key] = int(float(event[key]))
+
+        return event
