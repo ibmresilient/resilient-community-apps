@@ -47,8 +47,6 @@ def init_app(rc, options):
     # initialize the class for making API calls to your endpoint
     app_common = AppCommon(rc, PACKAGE_NAME, options)
 
-    # <add additional initialization steps for your endpoint as necessary>
-
     return app_common
 
 def query_entities(app_common: AppCommon, last_poller_time):
@@ -109,7 +107,6 @@ class PollerComponent(AppFunctionComponent):
         :type opts: dict
         """
         # Validate required fields in app.config are set
-        # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
         required_fields = ["polling_interval",
                            "polling_lookback",
                            "endpoint_url",

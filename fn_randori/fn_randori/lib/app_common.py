@@ -24,28 +24,18 @@ from resilient_lib.components.templates_common import iso8601
 #  _get_uri: assemble the parts of your URL (base address, version information, command and arguments)
 #  _api_call: perform the API call, passing parameters and check the returned status code before
 #      returning the response object
-#
-# Review these functions which need modification. Currently they `raise IntegrationError("unimplemented")`
-#   authenticate,
-#   _make_header,
-#   query_entities_since_ts,
-#   make_linkback_url,
-#   _get_uri
 
 LOG = logging.getLogger(__name__)
 
 PACKAGE_NAME = "fn_randori"
 
-# change the header as necessary
+# Randori REST API header
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 
 # E N D P O I N T S
-# define the endpiont api calls your app will make to the endpoint solution. Below are expamples
-#ALERT_URI = "alert/{}/"
-#POLICY_URI = "policy/"
 GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/{api_version}/all-detections-for-target"
 GET_VALIDATE = "/auth/api/{api_version}/validate"
 
@@ -63,14 +53,15 @@ class AppCommon():
         :param app_configs: app.config parameters in order to authenticate and access the endpoint
         :type app_configs: dict
         """
-
+        self.rc = rc
         self.package_name = package_name
+
+        # required configs
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
-        self.rc = rc
-        self.verify = str_to_bool(app_configs.get("verify", "false"))
         self.tenant_name = app_configs.get("tenant_name")
+        self.verify = _get_verify_ssl(app_configs)
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
         self.header = self._make_header(self.api_token)
@@ -78,7 +69,6 @@ class AppCommon():
     def _get_uri(self, cmd: str) -> str:
         """
         Build API url
-        <- ::CHANGE_ME:: change this to reflect the correct way to build an API call ->
 
         :param cmd: portion of API: alerts, endpoints, policies
         :type cmd: str
@@ -178,7 +168,7 @@ class AppCommon():
                                    verify=self.verify)
             response.raise_for_status()
             response_json = response.json()
-            if response_json.get('count') == 0:
+            if response_json.get('count')  <= 0:
                 break
             data = response_json.get('data')
 
@@ -190,7 +180,7 @@ class AppCommon():
         return targets
 
     def _build_query_filters(self, query: dict, filters: list) -> dict:
-        """_summary_
+        """Build query filter json object from the list of filter tuples.
 
         Args:
             query (json object): json containing base query
@@ -253,3 +243,27 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
+def _get_verify_ssl(app_configs):
+    """
+    Get ``verify`` parameter from app config.
+    Value can be set in the [fn_my_app] section
+
+    :param opts: All of the app.config file as a dict
+    :type opts: dict
+    :param app_options: App specific configs
+    :type app_options: dict
+    :return: Value to set ``requests.request.verify`` to. Either a path or a boolean. Defaults to ``True``
+    :rtype: bool|str(path)
+    """
+    # start checking the app specific settings
+    verify = app_configs.get("verify")
+
+    # because verify can be either a boolean or a path,
+    # we need to check if it is a string with a boolean 
+    # value first then, and only then, we convert it to a bool
+    # NOTE: that this will then only support "true" or "false"
+    # (case-insensitive) rather than the normal "true", "yes", etc...
+    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
+        verify = str_to_bool(verify)
+
+    return verify
