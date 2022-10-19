@@ -13,6 +13,26 @@ from fn_teams.lib.microsoft_commons import ResponseHandler
 class GroupsInterface:
 
     def __init__(self, required_parameters):
+        """
+        This application allows for creating a Microsoft Group using the Microsoft Graph API. This
+        provides SOAR with the ability to create Groups from within a SOAR incident or a task.
+
+        Inputs:
+        -------
+            task_id                <str> : If called from task then Task ID
+            incident_id            <str> : Incident ID
+            ms_group_name          <str> : Name of the Microsoft Group to be created
+            ms_owners_list         <str> : List of owners email addresses
+            add_members_from       <str> : Specifies if members to be added form incident or task
+            additional_mambers     <str> : List of email addresses of additional members to be added
+            ms_group_description   <str> : Description for the group to be created
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+
+        Returns:
+        --------
+            Response <dict> : A response with the room/team options and details
+                              or the error message if the meeting creation
+         """
 
         self.members_email_ids = []
         self.user_db, self.app_message = {}, ""
@@ -27,6 +47,21 @@ class GroupsInterface:
 
 
     def create_group(self):
+        """
+        Main wrapper function that orchestrates the creation of a Microsoft Group. This function
+        executes in the following order:
+            * Generates a list of incident or task members that are to be added to the group
+            * These member email addresses are retrieved from the SOAR instance and store
+            * Email addresses are then used to validate the user credentials on the MS endpoint
+            * They are then segregated into owners and members.
+            * Basic group details along with the owners email address is passed on the create 
+              the group
+            * Members are then added in a recursive fashion once the group is created
+
+        Returns:
+        --------
+            response <dict> : Information of the group created
+        """
         self.generate_member_list()
         self.find_all_users()
         members = list(map(lambda id: parse.urljoin(
@@ -48,6 +83,21 @@ class GroupsInterface:
 
 
     def write_group(self, **kwargs):
+        """
+        Creates a group based on all gathered information. This function specifies the owners
+        and members to be added to the group while creation. Do note that only a maximum of 
+        15 users (members + owners) can be added while group creations. Additonal members are
+        to be added later on creation.
+
+        kwargs:
+        ------
+            owners  <list> : list of email addresses of the owners
+            members <list> : list of email addresses of the members
+
+        Returns:
+        -------
+            response <dict> : details of the group created
+        """
         body = {
             "description" : kwargs.get("description", ""),
             "displayName" : kwargs.get("name"),
@@ -80,6 +130,24 @@ class GroupsInterface:
 
 
     def find_group(self, **kwargs):
+        """
+        Allows for locating a group based on its >>display name<< or >>mail nickname<<
+        This function atleast required either the group_name or the group_mail_nickname
+        keyworkd argument.
+
+        Kwargs:
+        -------
+            group_name          <str> : Display name of the group
+            group_mail_nickname <str> : Mail nickname of the gorup
+
+        Raises:
+        -------
+            IntegrationError: Unbable to locate group
+
+        Returns:
+        --------
+            <dict> : Details of the detected group
+        """
 
         if "group_name" in kwargs:
             self.log.info(constants.INFO_FIND_GROUP_BY_NAME)
@@ -114,6 +182,20 @@ class GroupsInterface:
 
 
     def read_user_info(self, user_id, *args):
+        """
+        Fetches information based on the email address of a user and assigns
+        role (member or owner) to this information and stores it in 
+        self.user_db for use later.
+
+        Arguments:
+        ----------
+            user_id (_type_): _description_
+
+        Updates:
+        --------
+            self.user_db      <dict> : User database dictionary with all relavent information
+
+        """
         url = parse.urljoin(
             constants.BASE_URL,
             constants.URL_USERS.format(user_id))
@@ -139,6 +221,24 @@ class GroupsInterface:
 
 
     def find_all_users(self):
+        """
+        The email addresses of the associated users are retrieved from the SOAR instance
+        and passed on to the Microsoft Endpoint to check if they are valid users. If said
+        users are valid, then their email addresses are segregated into owners and members
+        and their general information is saved in a dictionary.
+
+        Inputs:
+        -------
+            self.required_parameters["owners_list"]  <list> : List of owners email addresses
+            self.required_parameters["members_list"] <list> : List of members email addresses
+
+        Updates:
+        ------- 
+            self.owners_list  <list> : List of owners email addresses
+            self.members_list <list> : List of owners members addresses
+            self.user_db      <dict> : User database dictionary with all relavent information
+
+        """
         self.response_handler.add_exempt_codes(404)
 
         if self.required_parameters.get("owners_list"):
@@ -167,6 +267,22 @@ class GroupsInterface:
 
 
     def add_members_group(self, group_id, members_list):
+        """
+        Allows for adding Users to the Microsoft Group. This function plays
+        a vital role as the Group creation call can only support upto 15 
+        members and owners combined. So members are then added in a recursive
+        manner.
+
+        Arguments:
+        ----------
+            group_id     <str>  : ID of the group to which users are to be added
+            members_list <list> : A list of email addresses to be added to the 
+                                  group
+
+        Returns:
+        --------
+            <None> : Makes POST calls to Microsoft endpoint to add members to group
+        """
         self.response_handler.add_exempt_codes(400)
         url = parse.urljoin(
             constants.BASE_URL,
@@ -184,40 +300,20 @@ class GroupsInterface:
         self.response_handler.clear_exempt_codes(default=True)
 
 
-    def find_group_by_mail(self, mail_id):
-
-        if "@" in mail_id:
-            mail_id = mail_id.split("@")[0]
-
-        _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(mail_id)
-        url = parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_GROUPS_QUERY.format(_query))
-
-        response = self.rc.execute(
-            "get",
-            url=url,
-            headers=self.headers)
-
-        print(response, url)
-        self.log.info(json.dumps(response.text, indent=2))
-        return response
-
-
     def is_direct_member(self, incident_member_id, org_member_list):
         """
-        Checks to see if the member Id accquired from the incident belongs to the list of all
-        users from the organization. Upon match, it then extracts the email address for that
-        particular user.
+        Checks to see if the member Id accquired from the incident or task belongs to the 
+        list of all users from the organization. Upon match, it then extracts the email 
+        address for that particular user.
 
         Args:
         -----
-            incident_member_id (<str>) : The user Id accquired from the incident
-            org_member_list    (<list>): The list of member Ids of all organization members
+            incident_member_id <str>  : The user Id accquired from the incident
+            org_member_list    <list> : The list of member Ids of all organization members
 
         Returns:
         --------
-            (<str>): Email address of the incident member
+            <str>: Email address of the incident member
         """
         for user in org_member_list:
             if incident_member_id == user.get("id"):
@@ -226,20 +322,21 @@ class GroupsInterface:
 
     def is_group_member(self, incident_member_id, org_member_list, org_group_list):
         """
-        Checks to see if the member Id accquired from the incident belongs to the list of
-        all groups from the organization. Upon match, it then queries a list of Ids
-        associated with that group and matches with user using the >>is_direct_member<<
-        function
+        Checks to see if the member Id accquired from the incident or task belongs to t
+        he list of all groups from the organization. Upon match, it then queries a list
+        of Ids associated with that group and matches with user using the 
+        >>is_direct_member<< function
 
         Args:
         -----
-            incident_member_id (<str>) : The user Id accquired from the incident
-            org_member_list    (<list>): The list of member Ids of all organization members
-            org_group_list     (<list>): The list of group Ids of all organization members
+            incident_member_id  <str> : The user Id accquired from the incident
+            org_member_list    <list> : The list of member Ids of all organization members
+            org_group_list     <list> : The list of group Ids of all organization members
 
         Returns:
         --------
-            (<list>): list of all email addresses of incident members
+            <list>: list of all email addresses of incident members
+
         """
         ret = []
         for group in org_group_list:
@@ -251,15 +348,17 @@ class GroupsInterface:
 
     def generate_member_list(self):
         """
-        Generates a list of email addresses of the members to be added to the room/team. The
+        Generates a list of email addresses of the members to be added to the Group. The
         function queries incident member list or task member list, organization group list, 
         and organization user list. Using these, it then compares and accquires the email 
-        addresses of all users that are members to the incident or task, if >>addAllMembers<<
-        in enabled. Else just adds the email addresses specified in >>additionalAttendee<<
+        addresses of all users that are members to the incident or task, if >>add members from<<
+        task or incident is selected. Else just adds the email addresses specified in 
+        >>additional members<<
 
         Returns:
         --------
-            members_email_ids (<list>) : a list of all participant email addresses to be added
+            members_email_ids <list> : a list of all participant email addresses to be added
+
         """
         add_members_from = self.required_parameters.get("add_members_from").lower().strip()
         add_members_from = None if add_members_from == "none" else add_members_from
@@ -298,6 +397,30 @@ class GroupsInterface:
 
 
     def delete_group(self):
+        """
+        Microsoft Groups can be deleted using this function. Either the group_name or the
+        group_mail_nickname must be provided. Since group_mail_nickname is a unique value
+        where no two groups can have the same ID, this is recommended to be used for 
+        deletion.
+
+        Inputs:
+        -------
+            group_name          <str> : Name of the group to be deleted
+            group_mail_nickname <str> : Mail nickname of the group to be delete. This is
+                                        preffered over group_name as this value is unique
+
+        Raises:
+        -------
+            IntegrationError: Raised when neither the group name nor the group mail name
+                              is not specified.
+            IntegrationError: Raised when found more than one group. This can happen when
+                              2 or more groups have the same display name. To avoid this,
+                              mail nickname is always recommended to be used.
+
+        Returns:
+            <dict>: Message that reads successfully deleted group and status code
+
+        """
         if "group_name" in self.required_parameters:
             group_details = self.find_group(
                 group_name=self.required_parameters.get("group_name"))

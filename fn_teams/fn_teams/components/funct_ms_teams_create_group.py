@@ -26,6 +26,26 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
+        """
+        This application allows for creating a Microsoft Group using the Microsoft Graph API. This
+        provides SOAR with the ability to create Groups from within a SOAR incident or a task.
+
+        Inputs:
+        -------
+            task_id                <str> : If called from task then Task ID
+            incident_id            <str> : Incident ID
+            ms_group_name          <str> : Name of the Microsoft Group to be created
+            ms_owners_list         <str> : List of owners email addresses
+            add_members_from       <str> : Specifies if members to be added form incident or task
+            additional_mambers     <str> : List of email addresses of additional members to be added
+            ms_group_description   <str> : Description for the group to be created
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+
+        Returns:
+        --------
+            Response <dict> : A response with the room/team options and details
+                              or the error message if the meeting creation
+         """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
