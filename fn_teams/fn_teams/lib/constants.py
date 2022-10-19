@@ -6,6 +6,7 @@
 BASE_URL = "https://graph.microsoft.com/"
 AUTH_URL = "https://login.microsoftonline.com/"
 
+EMAIL = "email"
 DEFAULT_SCOPE = ".default"
 SETTINGS_GROUP_TYPE = "Unified"
 SETTINGS_GROUP_MAIL_ENABLED = False
@@ -27,6 +28,11 @@ URL_GROUP_ADD_MEMBERS = "/v1.0/groups/{}/members/$ref"
 URL_USERS = "/v1.0/users/{}"
 URL_LIST_USERS = "/v1.0/users"
 
+# Soar rest-client URLs
+RES_GROUPS = "/groups"
+RES_USERS = "/users/query_paged?return_level=normal"
+RES_TASK = "/tasks/"
+RES_INCIDENT = "/incidents/"
 
 # LOG & Status Messages
 INFO_RETRIEVED_BEARER_ID = "[Microsoft Authentication] Successfully retrieved Bearer ID"
@@ -36,11 +42,15 @@ INFO_FIND_GROUP_BY_NAME = "[Microsoft Groups] Searching for group using Name"
 INFO_FIND_GROUP_BY_MAIL = "[Microsoft Groups] Searching for group using Mail Nickname"
 INFO_FOUND_GROUP = "[Microsoft Groups] Found one or more Groups"
 INFO_SUCCESSFULLY_DELETED = "Successfully deleted {} {}"
+INFO_ADD_MEMEBERS = "[Microsoft Groups] Members to be added to the Group {}"
 
 DEBUG_BEARER_ID = "[Microsoft Authentication] Bearer ID {}"
 DEBUG_SKIPPING_USER = "[Microsoft Groups] User information already exist"
 
 WARN_DIDNOT_FIND_USER = "[Microsoft Groups] User not found {}"
+WARN_NO_OWNER_EMAIL_ID_PROVIDED = "[Microsoft Groups] No owner Email ID provided. Group preferences cannot be modified until an owner is assigned to the group"
+WARN_NO_ADDITIONAL_PARTICIPANTS = "No participants were added to the {}. ADD MEMBERS FROM field was set to None and no list of participants were provided in the Additional members field."
+WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this incident"
 
 ERROR_AUTHENTICATION_FAILED = "[Microsoft Authentication] Failed to retrieve AccessToken. Check Credentials!"
 ERROR_NO_ARG_PASSED = "[Microsoft Groups] No parameter passed to method read_user_info"

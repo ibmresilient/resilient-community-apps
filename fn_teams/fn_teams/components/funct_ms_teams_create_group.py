@@ -30,23 +30,25 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
         validate_fields([
+            "incident_id",
             "ms_group_name",
-            "ms_owners_list",
             "add_members_from",
-            "group_description",
-            "additional_members",
-            "group_mail_nickname"], fn_inputs)
+            "ms_group_description",
+            "ms_group_mail_nickname"], fn_inputs)
 
         self.required_parameters["rc"] = self.rc
         self.required_parameters["logger"] = self.LOG
         self.required_parameters["resclient"] = self.rest_client()
 
+        self.required_parameters["incident_id"] = fn_inputs.incident_id
         self.required_parameters["group_name"] = fn_inputs.ms_group_name
-        self.required_parameters["owners_list"] = fn_inputs.ms_owners_list
         self.required_parameters["add_members_from"] = fn_inputs.add_members_from
-        self.required_parameters["group_description"] = fn_inputs.group_description
-        self.required_parameters["additional_mambers"] = fn_inputs.additional_members
-        self.required_parameters["group_mail_nickname"] = fn_inputs.group_mail_nickname
+        self.required_parameters["group_description"] = fn_inputs.ms_group_description
+        self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
+
+        self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(fn_inputs, 'task_id') else None
+        self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(fn_inputs, 'ms_owners_list') else None
+        self.required_parameters["additional_mambers"] = fn_inputs.additional_members if hasattr(fn_inputs, 'additional_members') else None
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
@@ -62,7 +64,9 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(None, success=False, reason=str(err))
 
         if authenticated:
-            self.rc.execute(method="get",
-                url=parse.urljoin(constants.BASE_URL, constants.URL_LIST_USERS),
-                headers=self.required_parameters.get("header"))
-            yield FunctionResult({"reason" : constants.STATUS_SUCCESSFULLY_AUTHENTICATED}, success=True)
+            try:
+                group_manager = GroupsInterface(self.required_parameters)
+                response = group_manager.create_group()
+                yield FunctionResult(response, success=True)
+            except IntegrationError as err:
+                yield FunctionResult(rason=str(err), success=False)

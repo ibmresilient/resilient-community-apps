@@ -2,28 +2,32 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-from distutils.log import error
 import json
-from textwrap import indent
-from fn_teams.lib.microsoft_commons import ResponseHandler
+
 from urllib import parse
 from resilient_lib import IntegrationError
 
 from fn_teams.lib import constants
+from fn_teams.lib.microsoft_commons import ResponseHandler
 
 class GroupsInterface:
+
     def __init__(self, required_parameters):
-        self.user_db = {}
+
+        self.members_email_ids = []
+        self.user_db, self.app_message = {}, ""
         self.group_owners, self.group_members = [], []
+        self.required_parameters = required_parameters
+
+        self.response_handler = ResponseHandler()
         self.rc = required_parameters["rc"]
         self.log = required_parameters["logger"]
         self.headers = required_parameters["header"]
-        self.response_handler = ResponseHandler()
-        self.required_parameters = required_parameters
-        self.app_message = ""
+        self.resclient = required_parameters["resclient"]
 
 
     def create_group(self):
+        self.generate_member_list()
         self.find_all_users()
         members = list(map(lambda id: parse.urljoin(
             constants.BASE_URL,
@@ -72,41 +76,6 @@ class GroupsInterface:
             callback=self.response_handler.check_response)
 
         self.log.debug(json.dumps(response, indent=2))
-        return response
-
-
-    def delete_group(self):
-        if "group_name" in self.required_parameters:
-            group_details = self.find_group(
-                group_name=self.required_parameters.get("group_name"))
-
-        elif "group_mail_nickname" in self.required_parameters:
-            group_details = self.find_group(
-                group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
-
-        else:
-            raise IntegrationError(constants.ERROR_MISSING_NAME_MAIL_NAME)
-
-        if len(group_details) > 1:
-            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
-
-        group_id = group_details[0].get("id")
-
-        url = parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_GROUPS.format(group_id))
-
-        response = self.rc.execute(
-            method="delete",
-            url=url,
-            headers=self.headers,
-            callback=self.response_handler.check_response)
-
-        if response.get("status_code") == 204:
-            response["message"] = constants.INFO_SUCCESSFULLY_DELETED.format(
-                "Group",
-                group_details[0].get("displayName"))
-            self.log.info(response["message"])
         return response
 
 
@@ -172,19 +141,26 @@ class GroupsInterface:
     def find_all_users(self):
         self.response_handler.add_exempt_codes(404)
 
-        members_list = self.required_parameters.get("members_list")
-        for member in members_list:
-            if member not in self.user_db:
+        if self.required_parameters.get("owners_list"):
+            owners_list = (self.required_parameters
+                .get("owners_list")
+                .lower()
+                .replace(" ", "")
+                .split(","))
+            for member in owners_list:
+                if member not in self.user_db and member not in self.group_owners:
+                    self.read_user_info(member, "owner")
+                else:
+                    self.log.debug(constants.DEBUG_SKIPPING_USER)
+
+        for member in self.members_email_ids:
+            if member not in self.user_db and member not in self.group_owners:
                 self.read_user_info(member, "member")
             else:
                 self.log.debug(constants.DEBUG_SKIPPING_USER)
 
-        members_list = self.required_parameters.get("owners_list")
-        for member in members_list:
-            if member not in self.user_db:
-                self.read_user_info(member, "owner")
-            else:
-                self.log.debug(constants.DEBUG_SKIPPING_USER)
+        else:
+            self.log.warn(constants.WARN_NO_OWNER_EMAIL_ID_PROVIDED)
 
         self.log.debug(json.dumps(self.user_db, indent=2))
         self.response_handler.clear_exempt_codes(default=True)
@@ -228,7 +204,52 @@ class GroupsInterface:
         return response
 
 
-    def generate_member_list(self, operation_level, add_all_members=False):
+    def is_direct_member(self, incident_member_id, org_member_list):
+        """
+        Checks to see if the member Id accquired from the incident belongs to the list of all
+        users from the organization. Upon match, it then extracts the email address for that
+        particular user.
+
+        Args:
+        -----
+            incident_member_id (<str>) : The user Id accquired from the incident
+            org_member_list    (<list>): The list of member Ids of all organization members
+
+        Returns:
+        --------
+            (<str>): Email address of the incident member
+        """
+        for user in org_member_list:
+            if incident_member_id == user.get("id"):
+                return user.get(constants.EMAIL)
+
+
+    def is_group_member(self, incident_member_id, org_member_list, org_group_list):
+        """
+        Checks to see if the member Id accquired from the incident belongs to the list of
+        all groups from the organization. Upon match, it then queries a list of Ids
+        associated with that group and matches with user using the >>is_direct_member<<
+        function
+
+        Args:
+        -----
+            incident_member_id (<str>) : The user Id accquired from the incident
+            org_member_list    (<list>): The list of member Ids of all organization members
+            org_group_list     (<list>): The list of group Ids of all organization members
+
+        Returns:
+        --------
+            (<list>): list of all email addresses of incident members
+        """
+        ret = []
+        for group in org_group_list:
+            if incident_member_id == group.get("id"):
+                for member in group.get("members"):
+                    ret.append(self.is_direct_member(member, org_member_list))
+        return ret
+
+
+    def generate_member_list(self):
         """
         Generates a list of email addresses of the members to be added to the room/team. The
         function queries incident member list or task member list, organization group list, 
@@ -238,20 +259,24 @@ class GroupsInterface:
 
         Returns:
         --------
-            email_ids (<list>) : a list of all participant email addresses to be added
+            members_email_ids (<list>) : a list of all participant email addresses to be added
         """
+        add_members_from = self.required_parameters.get("add_members_from").lower().strip()
+        add_members_from = None if add_members_from == "none" else add_members_from
+
         email_ids = []
-        if operation_level == "task":
-            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_TASK,
-                "{}/members".format(self.required_parameters.get("task_id"))))
-        else:
-            incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
-                "{}/members".format(self.required_parameters.get("incident_id"))))
         org_member_list = self.resclient.post(constants.RES_USERS, payload={}).get("data")
         org_group_list  = self.resclient.get(constants.RES_GROUPS)
-        if add_all_members:
+
+        if add_members_from:
+            if add_members_from.strip().lower() == "task":
+                incidentMembers = self.resclient.get(parse.urljoin(constants.RES_TASK,
+                    "{}/members".format(self.required_parameters.get("task_id"))))
+            else:
+                incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
+                    "{}/members".format(self.required_parameters.get("incident_id"))))
             if len(incidentMembers.get("members")) == 0:
-                self.LOG.info(constants.LOG_INCIDENT_NO_MEMBERS)
+                self.log.warn(constants.WARN_INCIDENT_NO_MEMBERS )
             for incident_member in incidentMembers.get("members"):
                 if self.is_direct_member(incident_member, org_member_list):
                     email_ids.append(self.is_direct_member(incident_member,
@@ -262,12 +287,46 @@ class GroupsInterface:
                     email_ids.extend(self.is_group_member(incident_member,
                                                          org_member_list,
                                                          org_group_list))
-        elif not self.required_parameters.get("additionalAttendee"):
-            self.LOG.warn(constants.LOG_WARN_NO_ADDITIONAL_PARTICIPANTS.format(
-                self.entity_type))
+            self.log.debug(email_ids)
+        elif not self.required_parameters.get("additiona_members"):
+            self.log.warn(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
 
-        if self.required_parameters.get("additionalAttendee"):
-            email_ids += self.required_parameters.get("additionalAttendee").lower().replace(" ", "").split(",")
-        self.email_ids = set(email_ids)
-        self.LOG.info(constants.LOG_ADD_MEMEBERS.format(
-            self.entity_type, self.email_ids))
+        if self.required_parameters.get("additiona_members"):
+            email_ids += self.required_parameters.get("additiona_members").lower().replace(" ", "").split(",")
+        self.members_email_ids = set(email_ids)
+        self.log.info(constants.INFO_ADD_MEMEBERS.format(self.members_email_ids))
+
+
+    def delete_group(self):
+        if "group_name" in self.required_parameters:
+            group_details = self.find_group(
+                group_name=self.required_parameters.get("group_name"))
+
+        elif "group_mail_nickname" in self.required_parameters:
+            group_details = self.find_group(
+                group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
+
+        else:
+            raise IntegrationError(constants.ERROR_MISSING_NAME_MAIL_NAME)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        group_id = group_details[0].get("id")
+
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_GROUPS.format(group_id))
+
+        response = self.rc.execute(
+            method="delete",
+            url=url,
+            headers=self.headers,
+            callback=self.response_handler.check_response)
+
+        if response.get("status_code") == 204:
+            response["message"] = constants.INFO_SUCCESSFULLY_DELETED.format(
+                "Group",
+                group_details[0].get("displayName"))
+            self.log.info(response["message"])
+        return response

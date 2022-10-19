@@ -31,7 +31,7 @@ class ResponseHandler:
         self.exempt_codes = self.default_exempt_codes.copy()
 
 
-    def clear_exempt_codes(self, default=None):
+    def clear_exempt_codes(self, default=False):
         """
         Clears the exempt code list or resets it back to the
         default value.
