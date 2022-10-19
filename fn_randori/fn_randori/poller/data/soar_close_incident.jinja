@@ -1,6 +1,5 @@
 {
   {# JINJA template for closing a SOAR incident using endpoint data #}
-  {# modify to specify your specific **data** fields #}
   "plan_status": "C",
   "resolution_id": "{{ status | soar_substitute('{"Accepted": "Not an Issue", "Mitigated": "Resolved"}') }}",
   "resolution_summary": "Closed by Randori, Target Status: {{ status }}"

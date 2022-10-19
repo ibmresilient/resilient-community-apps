@@ -1,6 +1,5 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
-  {# modify to specify your specific **data** fields #}
   {% if priority_score <= 20 %}
     "severity_code": "Low",
   {% elif priority_score <= 29.98%}
