@@ -3,7 +3,7 @@
   {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
      for details on available jinja methods. Examples for `soar_substitute` and more are included below.
   #}
-  "name": "Randori Target - {{ vendor }}, {{ name }}",
+  "name": "Randori Target - {{ vendor }}, {{ name }} {{ version }}",
   "description": "{{ description | replace('"', '\\"') }}",
   {# start_date cannot be after discovered_date #}
   {% set start_date = first_seen if first_seen <= target_first_seen else target_first_seen %}
