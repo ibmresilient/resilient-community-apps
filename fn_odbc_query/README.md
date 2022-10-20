@@ -119,6 +119,16 @@ The following table provides the settings you need to configure the app. These s
 | **sql_restricted_sql_statements** | No | `["delete", "insert", "update"]` | *Restricted SQL statements as a list, separated by a comma, using square brackets.* |
 | **sql_query_timeout** | No | `30` | *Query timeout in seconds.* |
 
+#### Drivers
+Use the following drivers in `sql_connection_string`:
+
+| Driver Name | Database |
+| :---------- | :------- |
+| PostgreSQL  | PostgreSQL |
+| MariaDB ODBC 3.0 Driver | mySQL, mariaDB |
+| FreeTDS | Microsoft SQL Server |
+| Oracle 12c ODBC driver | Oracle |
+
 #### 1.1.0 Changes
 Starting in version 1.1.0, more than one ODBC database can be configured for SOAR case data synchronization. For enterprises with only one ODBC database, your app.config file will continue to define the ODBC database under the `[fn_odbc_query]` section header.
 
