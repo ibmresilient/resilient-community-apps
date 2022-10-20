@@ -31,7 +31,7 @@ setup(
     description="IBM SOAR app bidirectional synchronization and functions for Randori",
     long_description="""Bidirectional synchronization of Randori Targets to IBM SOAR.""",
     install_requires=[
-        "resilient-circuits>=47.0.0"
+        "resilient-circuits>=46.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
