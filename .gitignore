@@ -24,5 +24,7 @@ resilient_circuits_lockfile
 *.pytest_cache
 *.bak
 .python-version
+soar_bypass
 
 !.drivers/**
+fn_teams/fn_teams/components/mock.py
