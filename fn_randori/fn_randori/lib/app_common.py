@@ -36,8 +36,8 @@ HEADER = { 'Content-Type': 'application/json' }
 LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 
 # E N D P O I N T S
-GET_ALL_DETECTIONS_FOR_TARGET = "/recon/api/{api_version}/all-detections-for-target"
-GET_VALIDATE = "/auth/api/{api_version}/validate"
+GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
+GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
 
 TARGET_LIMIT = 2000
 
@@ -126,6 +126,7 @@ class AppCommon():
                 }
             ]
         }
+
         # Add optional query filters if defined.
         if self.polling_filters:
             query = self._build_query_filters(query, self.polling_filters)
@@ -162,7 +163,7 @@ class AppCommon():
         while offset > total_targets:
             params['offset'] = offset
             response = self.rc.execute("GET",
-                                   self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET),
+                                   url=self._get_uri(GET_ALL_DETECTIONS_FOR_TARGET_URI),
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
@@ -237,7 +238,7 @@ class AppCommon():
         Call Randori endpoint to validate the connection to Randori from SOAR.
         """
         response = self.rc.execute("GET",
-                                   self._get_uri(GET_VALIDATE),
+                                   self._get_uri(GET_VALIDATE_URI),
                                    headers=self.header,
                                    verify=self.verify)
         response.raise_for_status()
