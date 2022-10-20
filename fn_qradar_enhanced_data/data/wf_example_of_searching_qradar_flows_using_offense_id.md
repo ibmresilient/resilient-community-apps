@@ -26,34 +26,34 @@ inputs.soar_table_name = "qr_flows"
 
 # QRadar graphql search look back time default is 5 days
 inputs.qradar_search_param7 = "5 days"
-# If the poller is running and the qr_last_updated_time is changed the 
+# If the poller is running and the qr_last_updated_time is changed the
 # the QRadar graphql look back time will change to 2 days
 if incident.properties.qr_last_updated_time != incident.create_date:
   inputs.qradar_search_param7 = "2 days"
 # If manual QRadar Update rule is run set the number if days to search to the
 # user entered number
 if rule.properties.number_of_days_to_search:
-  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search)+" days"
+  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search) + " days"
 ```
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for flow in results.events:
+for flow in results.get("content")["events"]:
   qradar_event = incident.addRow("qr_flows")
-  qradar_event.application = link.format(results.offenseid,"application_name",flow.Application,flow.Application)
-  qradar_event.source_ip = link.format(results.offenseid,"sourceip",flow.sourceip,flow.sourceip)
-  qradar_event.source_port = link.format(results.offenseid,"sourceport",flow.sourceport,flow.sourceport)
-  qradar_event.destination_ip = link.format(results.offenseid,"destinationip",flow.destinationip,flow.destinationip)
-  qradar_event.destination_port = link.format(results.offenseid,"destinationport",flow.destinationport,flow.destinationport)
+  qradar_event.application = link.format(results.get("content")["offenseid"], "application_name", flow.Application, flow.Application)
+  qradar_event.source_ip = link.format(results.get("content")["offenseid"], "sourceip", flow.sourceip, flow.sourceip)
+  qradar_event.source_port = link.format(results.get("content")["offenseid"], "sourceport", flow.sourceport, flow.sourceport)
+  qradar_event.destination_ip = link.format(results.get("content")["offenseid"], "destinationip", flow.destinationip, flow.destinationip)
+  qradar_event.destination_port = link.format(results.get("content")["offenseid"], "destinationport", flow.destinationport, flow.destinationport)
   qradar_event.protocol = flow.Protocol
   qradar_event.first_packet_time = int(flow.FirstPacketTime)
   qradar_event.source_bytes = int(flow.sourcebytes)
   qradar_event.source_packets = int(flow.sourcepackets)
   qradar_event.destination_bytes = int(flow.destinationbytes)
   qradar_event.destination_packets = int(flow.destinationpackets)
-  qradar_event.reported_time = results.current_time
+  qradar_event.reported_time = results.get("content")["current_time"]
 ```
 
 ---

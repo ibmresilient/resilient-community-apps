@@ -18,34 +18,34 @@
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_offense_id= incident.properties.qradar_id
+inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_query_type = "offensesummary"
 inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
+link = "<a href=\"https://"+results.get("content").get("qrhost")+"/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
   
-incident.qr_offense_index_type = results.offense.offenseType.name
-incident.qr_offense_index_value = results.offense.offenseSource
-incident.qr_offense_source = results.offense.offenseSource
-incident.qr_source_ip_count = link.format(results.offenseid,"",results.offense.sourceCount)
-incident.qr_destination_ip_count = link.format(results.offenseid,"",results.offense.remoteDestinationCount+results.offense.localDestinationCount)
-incident.qr_event_count = link.format(results.offenseid,"/events?page=1&pagesize=10",results.offense.eventCount)
-incident.qr_flow_count =  link.format(results.offenseid,"/flows?page=1&pagesize=10",results.offense.flowCount)
-incident.qr_assigned = link.format("","?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B"+(results.offense.assignedTo if results.offense.assignedTo is not None else "")+"&page=1&pagesize=10",results.offense.assignedTo) if results.offense.assignedTo else "Unassigned"
-incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitude)
-incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
-incident.qr_severity = link.format(results.offenseid,"",results.offense.severity)
-incident.qr_relevance = link.format(results.offenseid,"",results.offense.relevance)
-incident.qr_offense_status = results.offense.status
+incident.qr_offense_index_type = results.get("content")["offense"]["offenseType"]["name"]
+incident.qr_offense_index_value = results.get("content")["offense"]["offenseSource"]
+incident.qr_offense_source = results.get("content")["offense"]["offenseSource"]
+incident.qr_source_ip_count = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["sourceCount"])
+incident.qr_destination_ip_count = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["remoteDestinationCount"] + results.get("content")["offense"]["localDestinationCount"])
+incident.qr_event_count = link.format(results.get("content")["offenseid"], "/events?page=1&pagesize=10", results.get("content")["offense"]["eventCount"])
+incident.qr_flow_count =  link.format(results.get("content")["offenseid"], "/flows?page=1&pagesize=10", results.get("content")["offense"]["flowCount"])
+incident.qr_assigned = link.format("", "?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B" + (results.get("content")["offense"]["assignedTo"] if results.get("content")["offense"]["assignedTo"] else "") + "&page=1&pagesize=10", results.get("content")["offense"]["assignedTo"]) if results.get("content")["offense"]["assignedTo"] else "Unassigned"
+incident.qr_magnitude = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["magnitude"])
+incident.qr_credibility = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["credibility"])
+incident.qr_severity = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["severity"])
+incident.qr_relevance = link.format(results.get("content")["offenseid"], "", results.get("content")["offense"]["relevance"])
+incident.qr_offense_status = results.get("content")["offense"]["status"]
 incident.qr_offense_domain = "Default Domain"
-if results.offense.domain:
-  incident.qr_offense_domain = results.offense.domain.name
+if results.get("content")["offense"]["domain"]:
+  incident.qr_offense_domain = results.get("content")["offense"]["domain"]["name"]
   
-incident.qr_offense_start_time = int(results.offense.startTime)
-incident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)
+incident.qr_offense_start_time = int(results.get("content")["offense"]["startTime"])
+incident.qr_offense_last_updated_time = int(results.get("content")["offense"]["lastUpdatedTime"])
 ```
 
 ---

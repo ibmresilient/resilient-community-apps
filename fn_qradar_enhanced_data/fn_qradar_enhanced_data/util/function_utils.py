@@ -2,15 +2,21 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # Util functions
 
-from six import string_types
 from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError, str_to_bool
+
 from fn_qradar_enhanced_data.util import qradar_utils
-from fn_qradar_enhanced_data.util.qradar_constants import PACKAGE_NAME, GLOBAL_SETTINGS
+from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS,
+                                                           PACKAGE_NAME)
+from resilient_lib import IntegrationError, str_to_bool, validate_fields
 
 LOG = getLogger(__name__)
 
 def get_search_timeout(global_settings, options):
+    """
+    Get the search_timeout either from app.config or make default value
+    :param global_settings: Global settings for the integration
+    :param options: Settings for specified QRadar server
+    """
     timeout = 600 # Default timeout to 10 minutes
     # Check if search_timeout setting is configured in edm_global_settings
     if global_settings and global_settings.get("search_timeout"):
@@ -18,7 +24,7 @@ def get_search_timeout(global_settings, options):
     # Check if search_timeout setting is configured for given QRadar server
     elif options.get("search_timeout"):
         timeout = float(options.get("search_timeout"))
-    
+
     return timeout
 
 def make_query_string(query_string, params):
@@ -28,15 +34,10 @@ def make_query_string(query_string, params):
     :param params: Values used to substitute
     :return: (str) Query with params substitued
     """
+    for index, param in enumerate(params):
+        query_string = query_string.replace(f"%param{index+1}%", param if param else '')
 
-    index = 1
-    for param in params:
-        if param:
-            to_replace = "%%param%d%%" % index
-            query_string = query_string.replace(to_replace, param)
-        index += 1
-
-    return query_string
+    return " ".join(query_string.split())
 
 def fix_dict_value(events):
     """
@@ -45,15 +46,7 @@ def fix_dict_value(events):
     :param events: List of dicts
     :return: (list) List of dicts
     """
-
-    for event in events:
-        # event is a dict
-        if isinstance(event, dict):
-            for key in event:
-                if not isinstance(event[key], string_types):
-                    event[key] = f"{event[key]}"
-
-    return events
+    return [{key: f"{event[key]}" for key in event} for event in events if isinstance(event, dict)]
 
 def get_server_settings(opts, qradar_label):
     """
@@ -82,7 +75,7 @@ def get_server_settings(opts, qradar_label):
 
     # Get configuration for QRadar server specified
     options = qradar_utils.QRadarServers.qradar_label_test(qradar_label, servers_list)
-    LOG.debug(f'Connection to {options.get("host")} using {options.get("username", None) or options.get("qradartoken", None)}')
+    LOG.debug(f'Connection to {options.get("host")}')
 
     return options
 
@@ -94,7 +87,7 @@ def get_qradar_client(opts, options):
     :return: Client connection to QRadar server
     """
     # Get Certificates for QRadar
-    qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
+    qradar_verify_cert = False if options.get("verify_cert", "false").lower() in ["false", "false|/path/to/cert"] else options.get("verify_cert")
 
     return qradar_utils.QRadarClient(host=options.get("host"),
                                      username=options.get("username", None),
@@ -103,25 +96,9 @@ def get_qradar_client(opts, options):
                                      cafile=qradar_verify_cert,
                                      opts=opts, function_opts=options)
 
-def clear(rest_client, table_name, incident_id):
-    """
-    Clear data in given table on SOAR
-    :param res_rest_client: SOAR rest client connection
-    :param table_name: API access name of the table to clear
-    :param incident_id: SOAR ID for the incident
-    :return: None
-    """
-    try:
-        rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
-        LOG.info(f"Data in table {table_name} in incident {incident_id} has been cleared")
-
-    except Exception as err_msg:
-        LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
-        raise IntegrationError(f"Error while clearing table: {table_name}")
-
 def clear_table(rest_client, table_name, incident_id, global_settings):
     """
-    Calls function to clear SOAR data table based on app.config
+    Clear data in given table on SOAR
     :param res_rest_client: SOAR rest client connection
     :param table_name: API access name of the table to clear
     :param incident_id: SOAR ID for the incident
@@ -129,10 +106,14 @@ def clear_table(rest_client, table_name, incident_id, global_settings):
     :return: None
     """
     if table_name:
-        if global_settings:
+        if global_settings and str_to_bool(global_settings.get("clear_datatables", True)) or not global_settings:
             # If clear_datatables in app.config equals True then clear given data table
             # If clear_datatables does not exist then it defaults to True
-            if str_to_bool(global_settings.get("clear_datatables", True)):
-                clear(rest_client, table_name, incident_id)
-        else: # If global_settings does not exist then clear given data table
-            clear(rest_client, table_name, incident_id)
+            # If global_settings does not exist then clear given data table
+            try:
+                rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
+                LOG.info(f"Data in table {table_name} in incident {incident_id} has been cleared")
+
+            except Exception as err_msg:
+                LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
+                raise IntegrationError(f"Error while clearing table: {table_name}")

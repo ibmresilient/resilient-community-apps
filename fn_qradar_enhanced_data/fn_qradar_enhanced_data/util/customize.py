@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_qradar_enhanced_data"""
+"""Generate the SOAR customizations required for fn_qradar_enhanced_data"""
 
 import base64
 import os
@@ -13,7 +13,6 @@ except ImportError:
 
 RES_FILE = "data/export.res"
 
-
 def codegen_reload_data():
     """
     Parameters required reload codegen for the fn_qradar_enhanced_data package
@@ -22,8 +21,8 @@ def codegen_reload_data():
         "package": u"fn_qradar_enhanced_data",
         "message_destinations": [u"fn_qradar_enhanced_data"],
         "functions": [u"qradar_get_offense_mitre_reference", u"qradar_offense_summary", u"qradar_top_events"],
-        "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
-        "actions": [u"Example: QRadar Get QRadar Rule MITRE Reference", u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"QRadar Enhanced Data", u"QRadar Enhanced Data Poller", u"QRadar Enhanced Data Refresh"],
+        "workflows": [u"example_of_searching_qradar_flows_using_offense_id", u"example_of_searching_qradar_top_events_using_offense_id", u"example_qradar_get_mitre_reference_from_rules", u"qradar_assets_information", u"qradar_categories", u"qradar_destination_ips", u"qradar_offense_summary", u"qradar_source_ips", u"qradar_triggered_rules"],
+        "actions": [u"Create Artifact from Assets info", u"Create artifact from Destination IP info", u"Create Artifact from Events info", u"Create artifact from Source IP info", u"Create Artifacts from Flows Info ", u"Example: QRadar Get QRadar Rule MITRE Reference", u"QRadar Enhanced Data", u"QRadar Enhanced Data Poller", u"QRadar Enhanced Data Refresh"],
         "incident_fields": [u"qr_assigned", u"qr_credibility", u"qr_destination_ip_count", u"qr_event_count", u"qr_flow_count", u"qr_last_updated_time", u"qr_magnitude", u"qr_offense_domain", u"qr_offense_index_type", u"qr_offense_index_value", u"qr_offense_last_updated_time", u"qr_offense_source", u"qr_offense_start_time", u"qr_offense_status", u"qr_relevance", u"qr_severity", u"qr_source_ip_count", u"qradar_destination", u"qradar_id"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -32,7 +31,6 @@ def codegen_reload_data():
         "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info", u"Set Incident Last Updated Time"],
         "playbooks": []
     }
-
 
 def customization_data(client=None):
     """
@@ -51,6 +49,7 @@ def customization_data(client=None):
     - Workflows:
         - example_of_searching_qradar_flows_using_offense_id
         - example_of_searching_qradar_top_events_using_offense_id
+        - example_qradar_get_mitre_reference_from_rules
         - qradar_assets_information
         - qradar_categories
         - qradar_destination_ips
@@ -63,10 +62,10 @@ def customization_data(client=None):
         - Create Artifact from Events info
         - Create artifact from Source IP info
         - Create Artifacts from Flows Info 
+        - Example: QRadar Get QRadar Rule MITRE Reference
         - QRadar Enhanced Data
         - QRadar Enhanced Data Poller
         - QRadar Enhanced Data Refresh
-        - Example: QRadar Get QRadar Rule MITRE Reference
     - Incident Fields:
         - qr_assigned
         - qr_credibility

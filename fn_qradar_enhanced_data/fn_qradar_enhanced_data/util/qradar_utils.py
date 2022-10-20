@@ -80,7 +80,7 @@ class AuthInfo(object):
         self.cafile = cafile
         self.rc = RequestsCommon(opts, function_opts)
 
-    def make_call(self, method, url, headers=None, data=None, timeout=None):
+    def make_call(self, method, url, headers=None, data=None,):
         my_headers = headers if headers else self.headers
 
         def make_call_callback(response):
@@ -91,7 +91,7 @@ class AuthInfo(object):
                 response.raise_for_status()
                 return response
 
-        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback, timeout=timeout)
+        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -145,22 +145,21 @@ class ArielSearch(SearchWaitCommand):
         :return: search_id returned from QRadar
         """
         auth_info = AuthInfo.get_authInfo()
-        search_id = ""
         try:
             response = auth_info.make_call("POST",
                                            f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES}",
                                            data = {"query_expression": query.encode("utf-8")},
                                            headers = auth_info.headers.copy())
-            json = response.json()
-
-            if "search_id" in json:
-                search_id = json["search_id"]
-            elif "cursor_id" in json:
-                search_id = json["cursor_id"]
-
         except Exception as e:
             LOG.error(str(e))
             raise SearchJobFailure(query)
+
+        res = response.json()
+        search_id = ""
+        if "search_id" in res:
+            search_id = res["search_id"]
+        elif "cursor_id" in res:
+            search_id = res["cursor_id"]
 
         return search_id
 
@@ -168,7 +167,6 @@ class ArielSearch(SearchWaitCommand):
         """Deletes an AQL search in case of timeout or error"""
         auth_info = AuthInfo.get_authInfo()
         response = None
-
         try:
             response = auth_info.make_call("DELETE",
                                            f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES_DELETE.format(search_id)}",
@@ -187,6 +185,8 @@ class ArielSearch(SearchWaitCommand):
         """
         auth_info = AuthInfo.get_authInfo()
         headers = auth_info.headers.copy()
+        response = None
+
         # If the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the # if query_all is False.
         # If query_all is True, the Range will not be used and all the results will be returned from the query.
@@ -196,19 +196,16 @@ class ArielSearch(SearchWaitCommand):
         if self.graphql:
             headers["Cookie"] = QRadarClient.get_qr_sessionid(auth_info.api_url.replace("api/", ""))
 
-        response = None
         try:
             response = auth_info.make_call("GET", f"{auth_info.api_url}ariel/searches/{search_id}/results", headers=headers)
         except Exception as e:
             LOG.error(str(e))
             raise SearchFailure(search_id, None)
 
+        res = response.json()
         ret = {}
         if response.status_code in [200, 206]:
-            res = response.json()
-            events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
-            events = fix_dict_value(events)
-            ret = {"events": events}
+            ret = {"events": fix_dict_value(res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"])}
 
         return ret
 
@@ -219,20 +216,19 @@ class ArielSearch(SearchWaitCommand):
         :return: Search status
         """
         auth_info = AuthInfo.get_authInfo()
-        status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
         try:
             response = auth_info.make_call("GET", f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES}/{search_id}")
-
-            json_dict = response.json()
-            if "status" in json_dict:
-                if json_dict["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
-                    status = SearchWaitCommand.SEARCH_STATUS_COMPLETED
-                elif json_dict["status"] in [qradar_constants.SEARCH_STATUS_WAIT, "SORTING", "EXECUTE"]:
-                    status = SearchWaitCommand.SEARCH_STATUS_WAITING
-
         except Exception as e:
             LOG.error(str(e))
             raise SearchFailure(search_id, status)
+
+        res = response.json()
+        status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
+        if res.get("status"):
+            if res["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
+                status = SearchWaitCommand.SEARCH_STATUS_COMPLETED
+            elif res["status"] in [qradar_constants.SEARCH_STATUS_WAIT, "SORTING", "EXECUTE"]:
+                status = SearchWaitCommand.SEARCH_STATUS_WAITING
 
         return status
 
@@ -454,11 +450,7 @@ class QRadarServers():
         :param opts: List of options
         :return: List of servers
         """
-        server_list = []
-        for key in opts.keys():
-            if key.startswith(f"{qradar_constants.PACKAGE_NAME}:"):
-                server_list.append(key)
-        return server_list
+        return [key for key in opts.keys() if key.startswith(f"{qradar_constants.PACKAGE_NAME}:")]
 
     def get_server_name_list(self):
         """Return list of all server names"""

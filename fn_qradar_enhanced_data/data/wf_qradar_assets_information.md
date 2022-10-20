@@ -27,17 +27,18 @@ inputs.soar_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-for event in results.assets:
-  qradar_event = incident.addRow("qr_assets")
-  qradar_event.asset_id = event.id
-  qradar_event.asset_name = event.name
-  qradar_event.ip_address = event.sourceip
-  qradar_event.operating_system = event.osid
-  qradar_event.aggregated_cvss = event.riskScoreSum
-  qradar_event.vulnerabilities = str(event.vulnerabilityCount)
-  qradar_event.last_user = event.users[0].username if len(event.users)>0 and event.users[0].username is not None else ""
-  qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users)>0 and event.users[0].lastSeenProfiler is not None else ""
-  qradar_event.reported_time = results.current_time
+if results.get("content"):
+  for event in results["content"].get("assets"):
+    qradar_event = incident.addRow("qr_assets")
+    qradar_event.asset_id = event.id
+    qradar_event.asset_name = event.name
+    qradar_event.ip_address = event.sourceip
+    qradar_event.operating_system = event.osid
+    qradar_event.aggregated_cvss = event.riskScoreSum
+    qradar_event.vulnerabilities = str(event.vulnerabilityCount)
+    qradar_event.last_user = event.users[0].username if len(event.users) > 0 and event.users[0].username else ""
+    qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users) > 0 and event.users[0].lastSeenProfiler else ""
+    qradar_event.reported_time = results["content"].get("current_time")
 ```
 
 ---

@@ -111,9 +111,8 @@ class SearchWaitCommand(object):
             LOG.error("search_id is None")
             raise SearchJobFailure(query)
 
+        result = None
         if return_result:
             result = self.get_search_result(search_id)
-        else:
-            result = None
 
         return result
