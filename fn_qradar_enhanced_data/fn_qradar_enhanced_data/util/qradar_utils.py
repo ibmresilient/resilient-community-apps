@@ -399,9 +399,19 @@ class QRadarClient(object):
 
 class QRadarServers():
     def __init__(self, opts):
+        """
+        Initialize the odbcDBs class
+        :param opts: Dict of options
+        """
         self.servers, self.server_name_list = self._load_servers(opts)
 
     def _load_servers(self, opts):
+        """
+        Create list of label names and a dictionary of the databases and their configs
+        :param opts: Dict of options
+        :return dbs: Dictonary of all the ODBC databases from the app.config that contains each databases configurations
+        :return db_name_list: List filled with all of the labels for the servers from the app.config
+        """
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:

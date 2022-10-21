@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the SOAR customizations required for fn_qradar_enhanced_data"""
+"""Generate the Resilient customizations required for fn_qradar_enhanced_data"""
 
 import base64
 import os
@@ -12,6 +12,7 @@ except ImportError:
     from resilient_circuits.util import ImportDefinition
 
 RES_FILE = "data/export.res"
+
 
 def codegen_reload_data():
     """
@@ -31,6 +32,7 @@ def codegen_reload_data():
         "scripts": [u"Create Artifact from Assets info", u"Create Artifact from Destination IP info", u"Create Artifact from Events info", u"Create Artifact from Flows info", u"Create Artifact from Source IP info", u"Set Incident Last Updated Time"],
         "playbooks": []
     }
+
 
 def customization_data(client=None):
     """
