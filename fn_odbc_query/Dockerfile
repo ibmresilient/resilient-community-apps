@@ -27,6 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 RUN yum -y update && yum clean all
+RUN yum -y install glibc
 # add yum repo with unixODBC and install
 RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 RUN yum -y install unixODBC-devel
