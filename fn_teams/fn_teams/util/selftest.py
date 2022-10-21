@@ -9,7 +9,7 @@ import pymsteams
 
 from urllib import parse
 from datetime import datetime
-from resilient_lib import IntegrationError, RequestsCommon
+from resilient_lib import RequestsCommon
 
 from fn_teams.lib import constants
 from fn_teams.lib.teams_authentication import TeamsAuthentication
@@ -44,41 +44,39 @@ def selftest_function(opts):
     --------
         result <dict> : Test state and reason
     """
-    AUTHENTICATED = False
-    TEST_PASS_1 = False
-    TEST_PASS_2 = False
-    ERR_REASON  = ""
+
+    err_reason, authenticated = "", False
+    test_pass_1, test_pass_2 = False, False
 
     options = opts.get("fn_teams", {})
     rc = RequestsCommon(opts, options)
     required_parameters = {
         "rc"     : rc,
-        "logger" : log
-        }
+        "logger" : log}
 
     ''' TEST 1: Teams Authentication (Mandatory) '''
     try:
         authenticator = TeamsAuthentication(required_parameters, options)
         header = authenticator.authenticate()
-        AUTHENTICATED = True
-        ERR_REASON += constants.MSG_AUTHENTICATION_PASSED
+        authenticated = True
+        err_reason += constants.MSG_AUTHENTICATION_PASSED
 
     except Exception as err:
         log.error(str(err))
-        ERR_REASON += constants.MSG_AUTHENTICATION_FAILED.format(str(err))
+        err_reason += constants.MSG_AUTHENTICATION_FAILED.format(str(err))
 
-    if AUTHENTICATED:
+    if authenticated:
         try:
             rc.execute(method="get",
                 url=parse.urljoin(constants.BASE_URL, constants.LIST_USERS),
                 headers=header)
-            ERR_REASON += constants.MSG_LIST_USER_PASSED
-            TEST_PASS_1 = True
+            err_reason += constants.MSG_LIST_USER_PASSED
+            test_pass_1 = True
 
         except Exception as err:
             log.error(str(err))
-            ERR_REASON += constants.MSG_LIST_USER_FAILED.format(str(err))
-            TEST_PASS_1 = False
+            err_reason += constants.MSG_LIST_USER_FAILED.format(str(err))
+            test_pass_1 = False
 
 
     if options.get(SELF_TEST):
@@ -87,35 +85,32 @@ def selftest_function(opts):
         try:
             card = pymsteams.connectorcard(
                 webhook, 
-                http_proxy=opts['proxy_http'] if opts.get('proxy_http') else None,
-                https_proxy=opts['proxy_https'] if opts.get('proxy_https') else None,
-                http_timeout=60
-                )
+                http_proxy=opts.get('proxy_http', rc.get_proxies()),
+                https_proxy=opts.get('proxy_https', rc.get_proxies()),
+                http_timeout=60)
 
             card.title("Resilient SelfTest")
             card.text(datetime.ctime(datetime.now()))
             card.send()
 
-            ERR_REASON += constants.MSG_POST_MSG_PASSED
-            TEST_PASS_2 = True
+            err_reason += constants.MSG_POST_MSG_PASSED
+            test_pass_2 = True
 
         except Exception as err:
             log.error(str(err))
-            ERR_REASON += constants.MSG_POST_MSG_FAILED.format(str(err))
-            TEST_PASS_2 = False
+            err_reason += constants.MSG_POST_MSG_FAILED.format(str(err))
+            test_pass_2 = False
     else:
         ''' Test2 is skipped if selftest option is not found in app.conf '''
         log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
-        TEST_PASS_2 = True
+        test_pass_2 = True
 
-    if AUTHENTICATED and TEST_PASS_1 and TEST_PASS_2:
+    if authenticated and test_pass_1 and test_pass_2:
         return{
             "state" : "success",
-            "reason": ERR_REASON
-            }
+            "reason": err_reason}
 
     else:
         return {
             "state": "failure",
-            "reason": ERR_REASON
-            }
+            "reason": err_reason}
