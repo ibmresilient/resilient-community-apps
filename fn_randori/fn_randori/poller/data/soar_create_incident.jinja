@@ -1,0 +1,27 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  "name": "Randori Target - {{ vendor }}, {{ name }} {{ version }}",
+  "description": "{{ description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = first_seen if first_seen <= target_first_seen else target_first_seen %}
+  "discovered_date": {{ target_first_seen | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date| soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  "plan_status": "A",
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "randori_target_id": "{{ target_id }}",
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
+    "randori_target_status": "{{ status }}"
+  }
+}

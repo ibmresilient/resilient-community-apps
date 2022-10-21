@@ -1,0 +1,13 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  "properties": {
+    "randori_target_status": "{{ status }}"
+  }
+}
