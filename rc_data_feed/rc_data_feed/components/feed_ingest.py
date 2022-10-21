@@ -191,6 +191,13 @@ class FeedComponent(ResilientComponent):
             # Some event we are not interested in
             return
 
+        # make sure the key parts of event and message exist before continuing.
+        if not (event.message.get('object_type') is not None and \
+                event.message.get('type_info') is not None and \
+                event.message.get('operation_type') is not None):
+            LOG.warning("Key fields missing in event.message. Skipped: %s", event.message)
+            return
+
         try:
             log = logging.getLogger(__name__)
             log.info("ingesting object")
