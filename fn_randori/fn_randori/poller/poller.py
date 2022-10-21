@@ -12,8 +12,8 @@ from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
 
-from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME
-
+from fn_randori.lib.app_common import (AppCommon, PACKAGE_NAME)
+from fn_randori.poller.configure_tab import (init_randori_tab)
 
 
 ENTITY_ID = "target_id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
@@ -46,6 +46,9 @@ def init_app(rc, options):
     """
     # initialize the class for making API calls to your endpoint
     app_common = AppCommon(rc, PACKAGE_NAME, options)
+
+    # initialize Randori tab in the SOAR UI
+    init_randori_tab()
 
     return app_common
 
