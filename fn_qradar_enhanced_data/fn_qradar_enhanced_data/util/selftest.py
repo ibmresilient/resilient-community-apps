@@ -19,12 +19,7 @@ def selftest_function(opts):
     """
     try:
         options = opts.get(PACKAGE_NAME, {})
-
-        if not options:
-            servers = QRadarServers(opts)
-            server_list = servers.get_server_name_list()
-        else:
-            server_list = {PACKAGE_NAME}
+        server_list = QRadarServers(opts).get_server_name_list() if not options else {PACKAGE_NAME}
 
         if GLOBAL_SETTINGS in server_list:
             server_list.remove(GLOBAL_SETTINGS)

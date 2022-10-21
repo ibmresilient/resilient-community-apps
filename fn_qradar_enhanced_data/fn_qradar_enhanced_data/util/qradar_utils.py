@@ -80,7 +80,7 @@ class AuthInfo(object):
         self.cafile = cafile
         self.rc = RequestsCommon(opts, function_opts)
 
-    def make_call(self, method, url, headers=None, data=None,):
+    def make_call(self, method, url, headers=None, data=None, timeout=None):
         my_headers = headers if headers else self.headers
 
         def make_call_callback(response):
@@ -91,7 +91,7 @@ class AuthInfo(object):
                 response.raise_for_status()
                 return response
 
-        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
+        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback, timeout=timeout)
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -304,12 +304,7 @@ class QRadarClient(object):
         """
         resp = self.get_versions()
 
-        connected = False
-        if resp.status_code == 200 and len(resp.json()) > 0:
-            if "version" in resp.json()[0]:
-                connected = True
-
-        return connected
+        return True if resp.status_code == 200 and len(resp.json()) > 0 and "version" in resp.json()[0] else False
 
     @staticmethod
     def verify_graphql_connect():
@@ -350,23 +345,21 @@ class QRadarClient(object):
         url = f"{auth_info.api_url.replace('api/', '')}{qradar_constants.GRAPHQL_URL}"
         operationName = query_name[query_name.index(" ")+1: query_name.index("(")]
         query_call = query_name[query_name.index("\n")+1: query_name.index("(", query_name.index("\n")+2)]
-        ret = {}
 
         try:
             response = auth_info.make_call("POST", url,
                                            data=dumps({"operationName": operationName, "variables": variables, "query": query_name}),
                                            headers=headers)
-
-            ret["status_code"] = response.status_code
-
-            if add_content_source:
-                ret["content"] = response.json()["data"][query_call.strip()][add_content_source]
-            else:
-                ret["content"] = response.json()["data"][query_call.strip()]
-
         except Exception as e:
             LOG.error(str(e))
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{query_call.strip()} call failed with exception {str(e)}]")
+
+        ret = {"status_code": response.status_code}
+
+        if add_content_source:
+            ret["content"] = response.json()["data"][query_call.strip()][add_content_source]
+        else:
+            ret["content"] = response.json()["data"][query_call.strip()]
 
         return ret
 
@@ -377,30 +370,30 @@ class QRadarClient(object):
         :param host: QRadar address (IP/URL)
         :return: QRadar session ID
         """
+        auth_info = AuthInfo.get_authInfo()
         cookies = {}
 
-        try:
-            auth_info = AuthInfo.get_authInfo()
-
-            if not auth_info.username and not auth_info.password:
-                cookies = {"SEC": auth_info.qradar_token}
-            else:
+        if not auth_info.username and not auth_info.password:
+            cookies = {"SEC": auth_info.qradar_token}
+        else:
+            try:
                 res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
                 cookies = res.cookies.get_dict()
 
                 res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                           data = {"j_username": auth_info.username,
-                                   "j_password": auth_info.password,
-                                   "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                                                     data = {"get_csrf": ""},
-                                                     headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                                                     verify = auth_info.cafile).text
-                                  },
+                            data = {"j_username": auth_info.username,
+                                    "j_password": auth_info.password,
+                                    "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
+                                                      data = {"get_csrf": ""},
+                                                      headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
+                                                      verify = auth_info.cafile).text
+                                   },
                             headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
                             verify = auth_info.cafile)
-                cookies = res.cookies.get_dict()
-        except Exception as e:
-            LOG.error(str(e))
+            except Exception as e:
+                LOG.error(str(e))
+
+        cookies = res.cookies.get_dict()
 
         return "; ".join([f"{x}={cookies[x]}" for x in cookies.keys()])
 
