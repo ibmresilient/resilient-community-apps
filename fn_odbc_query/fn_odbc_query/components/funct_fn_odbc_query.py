@@ -32,6 +32,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.sql_condition_value3
             -   fn_inputs.sql_condition_value1
             -   fn_inputs.sql_condition_value2
+            -   fn_inputs.db_label
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -42,7 +43,7 @@ class FunctionComponent(AppFunctionComponent):
         # Get the function parameters:
         sql_query = fn_inputs.sql_query
         sql_params = [getattr(fn_inputs, f"sql_condition_value{num}", None) for num in range(1, len(fn_inputs)-1)]
-        db_label = getattr(fn_inputs, "db_label")
+        db_label = getattr(fn_inputs, "db_label", None)
 
         # Log parameers
         self.LOG.info(str(sql_params))

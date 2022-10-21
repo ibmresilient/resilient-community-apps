@@ -44,7 +44,7 @@ ODBC Functions for SOAR
 
 ### Key Features
 * Ability to perform SELECT, INSERT, UPDATE, and DELETE operations on relational databases.
-* Support for MySQL/MariaDB, Postgres, and Microsoft SQL Server.
+* Support for MySQL/MariaDB, Postgres, oracle, and Microsoft SQL Server.
 * Compatible with App Host.
 * Supportt for having multiple databases configured in the app.config
 * Contains preconfigured drivers if using the container format.
@@ -80,7 +80,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.10.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -126,14 +126,11 @@ For enterprises with more than one ODBC database, each database will have it's o
 
 Be aware that modifications to the workflows will be needed to correctly pass this label through the `db_label` function input field if the ODBC database/dattabases in the app.config have labels.
 
+If using the app.config from before version 1.1.0 then the `db_label` field can be ignored.
+
 If you have existing custom workflows, see [Creating workflows when database/databases in app.config are labeled](#creating-workflows-when-databasedatabases-in-appconfig-are-labeled) for more information about changing them to reference the `db_label` function input field.
 
 ### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
@@ -156,7 +153,7 @@ sql_condition_value3: value for the question mark - condition value 3
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `db_label` | `text` | No | `-` | Label given to the database you wish to use |
+| `db_label` | `text` | No | `-` | Label given to the database you wish to use or leave blank when databases are not labeled in the app.config.|
 | `sql_condition_value1` | `text` | No | `-` | - |
 | `sql_condition_value2` | `text` | No | `-` | - |
 | `sql_condition_value3` | `text` | No | `-` | - |

@@ -8,6 +8,7 @@ from resilient_lib import IntegrationError
 
 PACKAGE_NAME = "fn_odbc_query"
 SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
+default_timeout = 30 # seconds
 LOG = getLogger(__name__)
 
 class OdbcConnection(object):
@@ -15,11 +16,11 @@ class OdbcConnection(object):
     db_connection = None
     db_cursor = None
 
-    def __init__(self, sql_connection_string, sql_autocommit=False, sql_query_timeout=30):
+    def __init__(self, sql_connection_string, sql_autocommit=False, sql_query_timeout=default_timeout):
         self.db_connection = self.setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout)
 
     @staticmethod
-    def setup_odbc_connection(sql_connection_string, sql_autocommit=False, sql_query_timeout=30):
+    def setup_odbc_connection(sql_connection_string, sql_autocommit=False, sql_query_timeout=default_timeout):
         """
         Setup ODBC connection to a SQL db using connection string obtained from the config file.
         Set autocommit and query timeout values based on the information in config file.
@@ -58,7 +59,7 @@ class OdbcConnection(object):
             #
             # Try to catch a pyodbc.Error, log it as warning and pass.
             try:
-                db_connection.timeout = sql_query_timeout if sql_query_timeout else 30
+                db_connection.timeout = sql_query_timeout if sql_query_timeout else default_timeout
             except pyodbc.Error as e:
                 LOG.warning(f"ODBC driver does not implement the connection timeout attribute. Error code: {e.args[0]} - {e.args[1]}")
 
@@ -87,6 +88,7 @@ class OdbcConnection(object):
             # no additional Unicode configuration is necessary. Using the pyodbc defaults is recommended.
 
     def set_db_cursor(self, db_cursor):
+        """Set cursor"""
         self.db_cursor = db_cursor
 
     def create_cursor(self):
@@ -147,9 +149,19 @@ class OdbcConnection(object):
 
 class odbcDBs():
     def __init__(self, opts):
+        """
+        Initialize the odbcDBs class
+        :param opts: Dict of options
+        """
         self.dbs, self.db_name_list = self._load_databases(opts)
 
     def _load_databases(self, opts):
+        """
+        Create list of label names and a dictionary of the databases and their configs
+        :param opts: Dict of options
+        :return dbs: Dictonary of all the ODBC databases from the app.config that contains each databases configurations
+        :return db_name_list: List filled with all of the labels for the servers from the app.config
+        """
         dbs = {}
         db_name_list = self._get_database_name_list(opts)
         for db in db_name_list:
@@ -187,13 +199,11 @@ class odbcDBs():
     def _get_database_name_list(self, opts):
         """
         Return the list of database names defined in the app.config in fn_odbc_query.
-        :param opts: list of options
+        :param opts: Dict of options
         :return: list of databases
         """
         return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:")]
 
     def get_database_name_list(self):
-        """
-        Return list of all database names
-        """
+        """Return list of all database names"""
         return self.db_name_list

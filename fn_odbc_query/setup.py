@@ -20,6 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_odbc_query',
+    display_name='ODBC Functions for SOAR',
     version='1.1.0',
     license='MIT',
     author='IBM QRadar SOAR',
