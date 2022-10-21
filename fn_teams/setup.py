@@ -30,10 +30,9 @@ setup(
     Included are example workflows and rules for pushing incident and task information to a Teams channel and to create a group and channel from
     within an incident or task''',
     install_requires=[
-        'resilient_circuits>=45.0.0',
-        'resilient_lib',
-        'pymsteams',
-        "msal"
+        "resilient_circuits>=45.0.0",
+        "pymsteams ~= 0.2.1;python_version>='3.6'",
+        "msal ~= 1.19;python_version>='3.5'"
     ],
     packages=find_packages(),
     include_package_data=True,
