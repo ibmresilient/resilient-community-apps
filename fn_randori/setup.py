@@ -30,7 +30,7 @@ setup(
     url="https://ibm.com/mysupport",
     description="IBM SOAR app bidirectional synchronization and functions for Randori",
     long_description="""Bidirectional app for Randori for IBM SOAR. Query Randori for targets based \
-         on user defined query parameters and create and update cases in SOAR.""",
+         on user-defined query parameters and create and update cases in SOAR.""",
     install_requires=[
         "resilient-circuits>=46.0.0"
     ],
