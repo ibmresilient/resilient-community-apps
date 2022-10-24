@@ -1,6 +1,15 @@
 # Resilient Integration with Have I Been Pwned
 **This package contains two functions that allows you to search for breaches and pastes given an email address as an input.**
 
+## History
+| Date | Version | Comments |
+| ---- | ------- | ---- |
+| 10/2022 | 2.0.4 | Fix for proxy support |
+| 5/2022 | 2.0.3 | Updated API call |
+| 6/2020 | 2.0.2 | Added proxy support |
+| 4/2020 | 2.0.1 |  Support added for App Host |
+| 11/2019 | 2.0.0 | Updated to use hibp api v3.0. Now requires an apikey |
+
 
 ## app.config settings:
 Set if using a proxy
