@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 # Teams Authentication
+FN_NAME  = "fn_teams"
 BASE_URL = "https://graph.microsoft.com/"
 AUTH_URL = "https://login.microsoftonline.com/"
 
@@ -16,11 +17,12 @@ QUERY_GROUP_FIND_BY_NAME = "?$filter=displayName eq \'{}\'"
 QUERY_GROUP_FIND_BY_MAIL = "?$filter=mailNickname eq \'{}\'"
 
 # MS GROUPS API call
-URL_GROUPS = "/v1.0/groups/{}"
-URL_LIST_GROUPS = "/v1.0/groups"
-URL_GROUPS_QUERY = "/v1.0/groups{}"
-URL_GROUPS_OWNERS = "/v1.0/groups/{}/owners"
-URL_GROUPS_MEMBERS = "/v1.0/groups/{}/members"
+URL_GROUPS = "/v1.0/groups"
+URL_LIST_GROUPS = URL_GROUPS
+URL_GROUPS_QUERY = URL_GROUPS + "{}"
+URL_LOCATE_GROUPS = URL_GROUPS + "/{}"
+URL_GROUPS_OWNERS = URL_GROUPS + "/{}/owners"
+URL_GROUPS_MEMBERS = URL_GROUPS + "/{}/members"
 URL_DIRECTORY_OBJECT = "/v1.0/directoryObjects/{}"
 URL_GROUP_ADD_MEMBERS = "/v1.0/groups/{}/members/$ref"
 
@@ -29,10 +31,10 @@ URL_USERS = "/v1.0/users/{}"
 URL_LIST_USERS = "/v1.0/users"
 
 # Soar rest-client URLs
-RES_GROUPS = "/groups"
-RES_USERS = "/users/query_paged?return_level=normal"
 RES_TASK = "/tasks/"
+RES_GROUPS = "/groups"
 RES_INCIDENT = "/incidents/"
+RES_USERS = "/users/query_paged?return_level=normal"
 
 # LOG & Status Messages
 INFO_RETRIEVED_BEARER_ID = "[Microsoft Authentication] Successfully retrieved Bearer ID"
