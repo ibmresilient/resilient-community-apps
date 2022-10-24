@@ -20,7 +20,11 @@ class RandoriTab(Tab):
     CONTAINS = [
         Field("randori_target_id"),
         Field("randori_target_status"),
-        Field("randori_target_link")
+        Field("randori_target_link"),
+        Field("randori_target_affiliation_state"),
+        Field("randori_target_impact_score"),
+        Field("randori_target_tech_category"),
+        Field("randori_target_tags")
     ]
     SHOW_IF = [
         Field("randori_target_id").conditions.has_value()

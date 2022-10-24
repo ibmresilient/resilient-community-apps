@@ -21,10 +21,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_randori",
         "message_destinations": [u"fn_randori"],
-        "functions": [],
+        "functions": [u"randori_get_target_data"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"randori_target_id", u"randori_target_link", u"randori_target_status"],
+        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -39,15 +39,21 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
         - fn_randori
+    - Functions:
+        - randori_get_target_data
     - Incident Fields:
+        - randori_target_affiliation_state
         - randori_target_id
+        - randori_target_impact_score
         - randori_target_link
         - randori_target_status
+        - randori_target_tags
+        - randori_target_tech_category
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
