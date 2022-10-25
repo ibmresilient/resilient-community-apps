@@ -1,5 +1,5 @@
 # IBM SOAR Email Approval Process Content Pack
-This content package consists of rules, workflows, scripts and a datatable for an out-of-the-box email approval process. For customers who require a manual approval process before taking remediation actions, this content pack will support outbound emails sent to recipients with a request for action approval and then it parses the reply to update the associated case task with the response.
+This content package consists of rules, workflows, scripts and a datatable for an out-of-the-box email approval process. For customers who require a manual approval process before taking remediation actions, this content pack will support outbound emails sent to recipients with a request for action approval. The reply is then parsed to update the associated case task with the response.
 
 ![screenshot: email main](./screenshots/email_main.png)
 
@@ -22,8 +22,8 @@ This package consists of the following components:
 | Type | Name | Description |
 | :--- | :--- | :---------- |
 | Script | Email Approval Pre Process Artifact | Collect and format data used by the Email Approval Process. It uses the `email_approval` workspace or playbook property. This script relies on the 'create custom task' function from `IBM SOAR Task Utils` to precede it. |
-| Script | Email Approval Pre Process Task | Collect and format data used by the Email Approval Process. Uses the `email_approval` workspace or playbook property. |
-| Script | Email Approval Process Response | Parse email approval emails and make updates to cooresponding incidents and tasks. |
+| Script | Email Approval Pre Process Task | Collect and format data used by the Email Approval Process. Uses the `email_approval` workflow or playbook property. |
+| Script | Email Approval Process Response | Parse email approval emails and make updates to the cooresponding incident and task. |
 | Rule | Email Approval Process: Artifact | Create an email approval for actions on an artifact. |
 | Rule | Email Approval Process: Task | Create an email approval for actions on a task. |
 | Rule | Process Email Approval Response | See script: Email Approval Process Response. |
@@ -44,7 +44,7 @@ In addition to the above SOAR apps, the SOAR inbound email capability needs to b
 ![screenshot: inbound email](./screenshots/inbound_email.png)
 
 ## Installation and Configuration
-It may be useful to place the `Email Approval Process` datatable within a tab, such as Email. This table serves as an audit of the email approval process and shows the sequence of communication. 
+It may be useful to place the `Email Approval Process` datatable within a tab, such as the existing `Email` tab. This table serves as an audit of the email approval process and shows the sequence of communication. 
 
 ![screenshot: layouts](./screenshots/layouts.png)
 
@@ -54,7 +54,7 @@ Before installing, verify that your environment meets the following prerequisite
 * IBM SOAR platform is version 43.1 or later, or Cloud Pak for Security (CP4S) 1.8 or later.
 * You have a IBM SOAR account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings.
 
-**Important:** Repeatedly importing the **EmailApprovalContentPack.res** file will overwrite any changes you have made to the assocated scripts, workflows and rules. To avoid this issue, make new scripts, workflows, rules, etc. with copied data.
+**Important:** Repeatedly importing the **EmailApprovalContentPack.res** file will overwrite any changes you have made to the associated scripts, workflows and rules. To avoid this issue, make new scripts, workflows, rules, etc. with copied data.
 
 1. Log on to the IBM SOAR platform using a suitable account.
 2. Navigate to **Administrator Settings**. For CP4S, navigate to Application Settings, Case Management, **Permissions and access**.
@@ -80,7 +80,7 @@ If you have multiple inbound email connections, add a condition to the Rule to s
 The email approval content package incorporates two processes which are similar. Additional processes can be composed from these components.
 
 ### Artifact Process
-* Email inputs are received from the SOAR operator.
+* Email settings for the approval process are entered by the SOAR operator.
 * A custom task is created to track the approval process in the Respond phase.
 * The email message is composed with data to track the response.
 * The email is sent.
@@ -91,17 +91,17 @@ The email approval content package incorporates two processes which are similar.
 ![screenshot: artifact workflow](./screenshots/artifact_workflow.png)
 
 ### Task Process
-* Email inputs are received from the SOAR operator.
+* Email settings for the approval process are entered by the SOAR operator.
 * The email message is composed with data to track the response.
 * The email is sent.
 * The email message is copied to the Email Conversations and Email Approval datatables.
-* The email response is parsed and captured in the Email Approval Process datatable and as a note to the newly created task.
+* The email response is parsed and captured in the Email Approval Process datatable and as a note to the corresponding task.
 
 ![screenshot: artifact inputs](./screenshots/task_inputs.png)
 ![screenshot: artifact workflow](./screenshots/task_workflow.png)
 
 ### Email Message
-The email message body is composed via a template and is composed of two sections. The first section contains information about the scope of the request (task or artifact) and any additional information about the request. Some emails can include an expiration date when the approval request is no longer valid.
+The email message body is composed via an in-script template and is composed of two sections. The first section contains information about the scope of the request (task or artifact) and any additional information about the request. Some emails can include an expiration date when the approval request is no longer valid.
 
 The second section contains references back to the SOAR case and the task used when the email is replied to. This information is secured by a one-way hash which ensures the case information cannot be altered. 
 
@@ -112,10 +112,10 @@ Replied to emails require SOAR Inbound Email to be configured with an account an
 ## Configuration
 
 ### Email Template
-The email template used is contained in the `Email Approval Pre Process Artifact` and `Email Approval Pre Process Task` scripts. The scripts uses both inline data substitution and data substitution performed on the back-end using a Python Jinja-style template. This template can be changed as long as the data sections are preserved (using the '##-' separators). The logic to parse the email and these separators is contained in the `Email Approval Process Response` script.
+An email template used is contained in the `Email Approval Pre Process Artifact` and `Email Approval Pre Process Task` scripts. The scripts uses both inline data substitution and data substitution performed on the back-end using a Python Jinja-style template. This template can be changed as long as the data sections are preserved (using the '##-' separators). The logic to parse the email and these separators is contained in the `Email Approval Process Response` script.
 
 ### Approval Adjectives
-A list of synonyms exists in the `Email Approval Process Response` script used to determine if the request is approved or rejected. If your language or process is different, edit these lists as needed.
+A list of synonyms exists in the `Email Approval Process Response` script are used to determine if the request is approved or rejected. If your language or process is different, edit these lists as needed.
 
 ```
 APPROVE_LIST = ['yes', 'ok', 'okay', 'approve', 'approved', 'allow', 'proceed', 'continue', 'accept']
@@ -124,7 +124,7 @@ DENY_LIST = ['no', 'disapprove', 'reject', 'rejected', 'deny', 'denied', 'stop',
 
 
 ## Playbooks
-`Email Approval Pre Process Artifact` and `Email Approval Pre Process Task` scripts can be used in both workflows and playbooks. Each rely on activity fields (or Playbook Activation form fields) in place as follows:
+`Email Approval Pre Process Artifact` and `Email Approval Pre Process Task` scripts can be reused in your own workflows and playbooks. Each rely on activity fields (or Playbook Activation form fields) in place as follows:
 
 | Field | Type | Addl. Information |
 | :---- | :--- | :---------- |
@@ -141,8 +141,8 @@ The following playbook shows a recreation of the same logic used in the `Email A
 ## Troubleshooting
 The majority of issues encountered are associated with the parsing the reply message and identifying it with the originating SOAR case and task. The parsing logic identifies the response, 'approved' or 'denied' or any configured synonym, and the SOAR identifiers which refer back to the SOAR case and task. Below is a sample email response.
 
-All message details are needed to accept the response email: msg-id, incident, task, and expiration in the `##- retain this data -##` section.
+All message details are needed to accept the response email: msg-id, incident, task, and expiration are found in the `##- retain this data -##` section.
 
 ![screenshot: approval email](./screenshots/approval_email.png)
 
-Script failures can be found within the SOAR instance at `/var/log/resilient-scripting/resilient-scripting.log`.
+Script failures can be found within the SOAR platform at `/var/log/resilient-scripting/resilient-scripting.log`.
