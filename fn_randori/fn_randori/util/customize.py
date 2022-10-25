@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"Randori: Get Target Data"]
     }
 
 

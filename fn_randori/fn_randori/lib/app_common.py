@@ -37,6 +37,7 @@ LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 
 # E N D P O I N T S
 GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
+GET_SINGLE_TARGET_URI = "/recon/api/{api_version}/target/{target_id}"
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
 
 TARGET_LIMIT = 2000
@@ -232,6 +233,18 @@ class AppCommon():
         """
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
+
+    def get_target(self, target_id) -> dict:
+        """
+        Call Randori endpoint to validate the connection to Randori from SOAR.
+        """
+        url = "/recon/api/{api_version}/target/{target_id}".format(api_version=self.api_version, target_id=target_id)
+        response = self.rc.execute("GET",
+                                   self._get_uri(url),
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
 
     def get_validate(self) -> dict:
         """
