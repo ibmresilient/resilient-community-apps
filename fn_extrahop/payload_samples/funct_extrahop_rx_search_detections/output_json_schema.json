@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "start_time": {
+                "type": "integer"
+              },
+              "update_time": {
+                "type": "integer"
+              },
+              "end_time": {
+                "type": "integer"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "risk_score": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              },
+              "participants": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "object_type": {
+                      "type": "string"
+                    },
+                    "object_id": {
+                      "type": "integer"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "external": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "object_value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "ticket_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "assignee": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "status": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "resolution": {},
+              "properties": {
+                "type": "object",
+                "properties": {
+                  "client_port": {
+                    "type": "integer"
+                  },
+                  "server_port": {
+                    "type": "integer"
+                  },
+                  "jndi_strings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "mitre_tactics": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "mitre_techniques": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "legacy_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "appliance_id": {
+                "type": "integer"
+              },
+              "is_user_created": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "extrahop_search_filter": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
