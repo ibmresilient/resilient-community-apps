@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"Randori: Get Target Data"]
+        "playbooks": [u"randori_get_target_data"]
     }
 
 
@@ -45,6 +45,8 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_randori
     - Functions:
+        - randori_get_target_data
+    - Playbooks:
         - randori_get_target_data
     - Incident Fields:
         - randori_target_affiliation_state
