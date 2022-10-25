@@ -7,15 +7,14 @@
 # commit.  The hook is allowed to edit the commit message file.
 # The hook checks for 2 conventions in a commit message:
 # 1: A JIRA Ticket Number; SOARAPPS-XXXX
-# 2: A package name enclosed in []
-# Full example: SOARAPPS-123 {fn_utilities} added a new feature
+# Full example: SOARAPPS-123 added a new feature to fn_utilities
 # 
 # This also accepts a "Merge"
 # Full example: "Merge branch 'master' into story/SOARAPPS-3104_improve_build"
 # regex to validate in commit msg
 
-commit_regex='(^Merge|INT|SOARAPPS-\d+ \{?.*\})'
-error_msg="INVALID COMMIT MESSAGE. Your commit message is either missing a JIRA Issue ('SOARAPPS-1111'), a package name ('{myapp}') or if its a merge should start with ('Merge'). Example: SOARAPPS-123 {fn_my_package} added new cool action"
+commit_regex='(^Merge|INT-\d+|SOARAPPS-\d+)'
+error_msg="INVALID COMMIT MESSAGE. Your commit message is either missing a JIRA Issue ('SOARAPPS-1111'), or if its a merge should start with ('Merge'). Example: SOARAPPS-123 added new cool action to my package"
 
 # Ensure the commit message contains the ticket 
 if ! grep -iqE "$commit_regex" "$1"; then

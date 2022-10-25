@@ -4,7 +4,7 @@
 # The branch name must adhere to the format:
 # JIRA Type/JIRA Number/Package Name/Brief description
 
-# Example 1: 'epic/INSOARAPPST-0000/fn_my_package'
+# Example 1: 'epic/SOARAPPS-0000/fn_my_package'
 # Example 2: 'story/SOARAPPS-0000/fn_my_package/new_feature'
 # Example 3: 'bug/SOARAPPS-0000/fn_my_package/fix_unicode_error'
 # Example 4: 'task/SOARAPPS-0000/fn_my_package/update_docs'
@@ -14,9 +14,9 @@ LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-valid_branch_regex="^[a-z]+\/INT|SOARAPPS-[0-9]+\/[a-zA-Z_]+"
+valid_branch_regex="^[a-z]+\/INT-[0-9]+\/[a-zA-Z_]+|SOARAPPS-[0-9]+\/[a-zA-Z_]+"
 
-message="INVALID BRANCH NAME. Branch names must adhere to this contract: $valid_branch_regex with the 3rd segment being the package_name. You should rename your branch to a valid name and try again. Example 1: 'story/INT-0000/fn_my_package/new_feature'. Example 2: 'epic/SOARAPPS-0000/fn_my_package'"
+message="INVALID BRANCH NAME. Branch names must adhere to this contract: $valid_branch_regex with the 3rd segment being the package_name. You should rename your branch to a valid name and try again. Example 1: 'story/SOARAPPS-0000/fn_my_package/new_feature'. Example 2: 'epic/SOARAPPS-0000/fn_my_package'"
 
 if [[ ! $local_branch =~ $valid_branch_regex ]] ; then
     echo "$message"
