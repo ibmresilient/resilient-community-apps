@@ -1,3 +1,217 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "affiliation_state": {
+              "type": "string"
+            },
+            "applicability": {
+              "type": "integer"
+            },
+            "attack_note": {
+              "type": "string"
+            },
+            "authority": {
+              "type": "boolean"
+            },
+            "authority_distance": {
+              "type": "integer"
+            },
+            "authority_override": {
+              "type": "boolean"
+            },
+            "authorization_state": {
+              "type": "string"
+            },
+            "characteristic_tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "confidence": {
+              "type": "integer"
+            },
+            "cpe": {
+              "type": "object",
+              "properties": {
+                "cpe_version": {
+                  "type": "string"
+                },
+                "edition": {},
+                "language": {},
+                "other": {},
+                "part": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "str": {
+                  "type": "string"
+                },
+                "sw_edition": {},
+                "target_hw": {},
+                "target_sw": {},
+                "update": {},
+                "vendor": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            },
+            "criticality": {
+              "type": "integer"
+            },
+            "deleted": {
+              "type": "boolean"
+            },
+            "description": {
+              "type": "string"
+            },
+            "enumerability": {
+              "type": "integer"
+            },
+            "first_seen": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "impact_score": {
+              "type": "string"
+            },
+            "last_seen": {
+              "type": "string"
+            },
+            "lens_id": {
+              "type": "string"
+            },
+            "lens_view": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "org_id": {
+              "type": "string"
+            },
+            "perspective": {
+              "type": "string"
+            },
+            "perspective_name": {
+              "type": "string"
+            },
+            "post_exploit": {
+              "type": "integer"
+            },
+            "priority_impact_factor": {
+              "type": "number"
+            },
+            "priority_score": {
+              "type": "number"
+            },
+            "priority_status_factor": {
+              "type": "number"
+            },
+            "priority_tags_factor": {
+              "type": "number"
+            },
+            "private_weakness": {
+              "type": "integer"
+            },
+            "public_weakness": {
+              "type": "integer"
+            },
+            "randori_notes": {
+              "type": "string"
+            },
+            "reference": {
+              "type": "string"
+            },
+            "research": {
+              "type": "integer"
+            },
+            "service_id": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "target_temptation": {
+              "type": "integer"
+            },
+            "tech_category": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "temptation_last_modified": {
+              "type": "string"
+            },
+            "user_tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vendor": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "randori_target_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

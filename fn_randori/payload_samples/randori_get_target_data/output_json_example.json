@@ -1,3 +1,86 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "affiliation_state": "None",
+      "applicability": 3,
+      "attack_note": "",
+      "authority": true,
+      "authority_distance": 0,
+      "authority_override": false,
+      "authorization_state": "None",
+      "characteristic_tags": [
+        "DefaultPage"
+      ],
+      "confidence": 75,
+      "cpe": {
+        "cpe_version": "2.3",
+        "edition": null,
+        "language": null,
+        "other": null,
+        "part": "a",
+        "product": "tomcat",
+        "str": "cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*",
+        "sw_edition": null,
+        "target_hw": null,
+        "target_sw": null,
+        "update": null,
+        "vendor": "apache",
+        "version": "7.0.76"
+      },
+      "criticality": 1,
+      "deleted": false,
+      "description": "Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.",
+      "enumerability": 3,
+      "first_seen": "2022-07-07T07:18:22.029485+00:00",
+      "id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
+      "impact_score": "None",
+      "last_seen": "2022-10-24T06:16:04.127801+00:00",
+      "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
+      "lens_view": "public",
+      "name": "Tomcat",
+      "org_id": "923af5dd-50ce-4d80-a55f-707dfe08411e",
+      "perspective": "00000000-0000-0000-0000-000000000000",
+      "perspective_name": "PUBLIC",
+      "post_exploit": 3,
+      "priority_impact_factor": 0.0,
+      "priority_score": 81.0,
+      "priority_status_factor": 0.1125,
+      "priority_tags_factor": 0.0675,
+      "private_weakness": 0,
+      "public_weakness": 5,
+      "randori_notes": "This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.",
+      "reference": "http://tomcat.apache.org",
+      "research": 3,
+      "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
+      "status": "Needs Resolution",
+      "target_temptation": 45,
+      "tech_category": [
+        "App Servers"
+      ],
+      "temptation_last_modified": "2022-03-31T18:10:37.913851+00:00",
+      "user_tags": [
+        "Google",
+        "Unknown - By Qualys",
+        "Unknown - By Tenable",
+        "Wildcard Cert"
+      ],
+      "vendor": "Apache",
+      "version": "7.0.76"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 312,
+    "timestamp": "2022-10-25 16:50:45"
+  }
 }
