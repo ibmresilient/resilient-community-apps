@@ -107,8 +107,8 @@ def test_ariel_graphql_search():
         sid = search_cmd.get_search_id(query_str)
         mocked_post_call.assert_called_with("POST",
                                             f"https://{host}/api/{ARIEL_SEARCHES}",
-                                            data = {"query_expression": query_str.encode("utf-8")},
-                                            headers = qradar_utils.AuthInfo.get_authInfo().headers.copy())
+                                            headers = qradar_utils.AuthInfo.get_authInfo().headers.copy(),
+                                            data = {"query_expression": query_str.encode("utf-8")})
 
         assert sid == search_id
 

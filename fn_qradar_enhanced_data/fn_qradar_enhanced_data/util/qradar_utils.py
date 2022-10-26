@@ -216,6 +216,7 @@ class ArielSearch(SearchWaitCommand):
         :return: Search status
         """
         auth_info = AuthInfo.get_authInfo()
+        status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
         try:
             response = auth_info.make_call("GET", f"{auth_info.api_url}{qradar_constants.ARIEL_SEARCHES}/{search_id}")
         except Exception as e:
@@ -223,7 +224,6 @@ class ArielSearch(SearchWaitCommand):
             raise SearchFailure(search_id, status)
 
         res = response.json()
-        status = SearchWaitCommand.SEARCH_STATUS_ERROR_STOP
         if res.get("status"):
             if res["status"] == qradar_constants.SEARCH_STATUS_COMPLETED:
                 status = SearchWaitCommand.SEARCH_STATUS_COMPLETED
@@ -373,27 +373,25 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
         cookies = {}
 
-        if not auth_info.username and not auth_info.password:
-            cookies = {"SEC": auth_info.qradar_token}
-        else:
-            try:
-                res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
-                cookies = res.cookies.get_dict()
+        try:
+            if not auth_info.username and not auth_info.password:
+                cookies = {"SEC": auth_info.qradar_token}
+            else:
+                    res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
+                    cookies = res.cookies.get_dict()
 
-                res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                            data = {"j_username": auth_info.username,
-                                    "j_password": auth_info.password,
-                                    "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                                                      data = {"get_csrf": ""},
-                                                      headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                                                      verify = auth_info.cafile).text
-                                   },
-                            headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                            verify = auth_info.cafile)
-            except Exception as e:
-                LOG.error(str(e))
-
-        cookies = res.cookies.get_dict()
+                    res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
+                                data = {"j_username": auth_info.username,
+                                        "j_password": auth_info.password,
+                                        "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
+                                                        data = {"get_csrf": ""},
+                                                        headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
+                                                        verify = auth_info.cafile).text},
+                                headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
+                                verify = auth_info.cafile)
+            cookies = res.cookies.get_dict()
+        except Exception as e:
+            LOG.error(str(e))
 
         return "; ".join([f"{x}={cookies[x]}" for x in cookies.keys()])
 

@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
+from unittest import result
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS, PACKAGE_NAME
@@ -78,7 +79,8 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        # Clear specified data table in SOAR based on app.config settings
-        clear_table(self.rest_client(), getattr(fn_inputs, "soar_table_name", None), getattr(fn_inputs, "soar_incident_id", None), global_settings)
+        if rules_list:
+            # Clear specified data table in SOAR based on app.config settings
+            clear_table(self.rest_client(), getattr(fn_inputs, "soar_table_name", None), getattr(fn_inputs, "soar_incident_id", None), global_settings)
 
         yield FunctionResult({'rules': rules_list})

@@ -123,8 +123,9 @@ class FunctionComponent(AppFunctionComponent):
             "current_time": int(time())*1000
         }
 
-        # Clear specified data table in SOAR based on app.config settings
-        clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
+        if results:
+            # Clear specified data table in SOAR based on app.config settings
+            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
         yield FunctionResult(results)

@@ -99,8 +99,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        # Clear specified data table in SOAR based on app.config settings
-        clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
+        if results:
+            # Clear specified data table in SOAR based on app.config settings
+            clear_table(self.rest_client(), soar_table_name, soar_incident_id, global_settings)
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)
