@@ -1,5 +1,11 @@
 ![IBM Security](https://raw.githubusercontent.com/ibmresilient/resilient-python-api/master/resilient-sdk/assets/IBM_Security_lockup_pos_RGB.png)
 
+
+## Change of Default Branch
+
+*We are updating the default GitHub Branch from `master` to `main`*.
+
+
 # IBM SOAR Community Applications 
 
 This repository contains the source-code for packaged IBM SOAR Apps.

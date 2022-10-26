@@ -5,8 +5,7 @@
 """
 
 import logging
-from resilient_lib import RequestsCommon
-from fn_slack.lib.resilient_common import validate_fields
+from resilient_lib import RequestsCommon, validate_fields
 from fn_slack.lib.slack_common import SlackUtils
 
 log = logging.getLogger(__name__)

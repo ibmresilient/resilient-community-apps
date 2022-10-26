@@ -5,6 +5,7 @@
 import base64
 import os
 import io
+
 try:
     from resilient import ImportDefinition
 except ImportError:
@@ -19,18 +20,26 @@ def codegen_reload_data():
     Parameters required reload codegen for the fn_ocr package
     """
     return {
-        "package": u"fn_ocr",
-        "message_destinations": [u"fn_ocr"],
-        "functions": [u"fn_ocr"],
-        "workflows": [u"ocr_parse_image", u"ocr_parse_image_attachment", u"ocr_parse_image_base64"],
-        "actions": [u"Parse Image (Artifact)", u"Parse Image (Attachment)", u"Parse Image (Base64)"],
+        "package": "fn_ocr",
+        "message_destinations": ["fn_ocr"],
+        "functions": ["fn_ocr"],
+        "workflows": [
+            "ocr_parse_image",
+            "ocr_parse_image_attachment",
+            "ocr_parse_image_base64",
+        ],
+        "actions": [
+            "Parse Image (Artifact)",
+            "Parse Image (Attachment)",
+            "Parse Image (Base64)",
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [],
     }
 
 
@@ -60,6 +69,6 @@ def customization_data(client=None):
     if not os.path.isfile(res_file):
         raise FileNotFoundError("{} not found".format(RES_FILE))
 
-    with io.open(res_file, mode='rt') as f:
-        b64_data = base64.b64encode(f.read().encode('utf-8'))
+    with io.open(res_file, mode="rt") as f:
+        b64_data = base64.b64encode(f.read().encode("utf-8"))
         yield ImportDefinition(b64_data)

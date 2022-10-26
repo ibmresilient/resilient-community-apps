@@ -30,6 +30,7 @@ fn_exchange_online
 fn_extrahop
 fn_geocoding
 fn_google_cloud_dlp
+fn_google_cloud_scc
 fn_googlesafebrowsing
 fn_greynoise
 fn_grpc_interface
@@ -79,6 +80,7 @@ fn_query_tor_network
 fn_reaqta
 fn_remedy
 fn_rsa_netwitness
+fn_soar_utils
 fn_scheduler
 fn_secureworks_ctp
 fn_sentinelone
@@ -94,6 +96,7 @@ fn_symantec_dlp
 fn_task_utils
 fn_teams
 fn_threatminer
+fn_timer
 fn_twilio
 fn_twitter_most_popular
 fn_url_to_dns
@@ -103,6 +106,7 @@ fn_utilities
 fn_virustotal
 fn_vmray_analyzer
 fn_watson_translate
+fn_webex
 fn_whois
 fn_whois_rdap
 fn_wiki
@@ -110,13 +114,17 @@ fn_xforce
 fn_yeti
 fn_zia
 
+#OAuth-Utilities
+#oauth-utils
+
 #Data_Feeder
 rc_data_feed
-#rc-data-feed-plugin-elasticfeed
+rc_data_feed_plugin_elasticfeed
 #rc-data-feed-plugin-kafkafeed
 rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
-#rc-data-feed-plugin-splunkfeed
+rc_data_feed_plugin_splunkfeed
+
 
 #Custom_Threat_Services
 rc-cts-abuseipdb

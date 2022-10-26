@@ -19,14 +19,15 @@ def snake_to_camel(word):
 
 setup(
     name='fn_mcafee_epo',
-    version='1.0.3',
+    display_name='McAfee ePO Integration for SOAR ',
+    version='2.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for functions with McAfee ePO",
-    long_description="Resilient Circuits Components for functions with McAfee ePO",
+    author='IBM SOAR',
+    description="IBM Security SOAR app for McAfee ePO",
+    long_description="The McAfee ePO functions allow for manipilation of tags, systems, users, issues, policies and permission sets.",
+    python_requires='>=3.6',
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=43.0.0',
         'resilient-lib'
     ],
     packages=find_packages(),

@@ -1,8 +1,5 @@
-#
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # Unit tests for fn_odbc_query/util/odbc_utils.py
-#
-#
-#
 try:
     from unittest.mock import patch
 except:
@@ -16,19 +13,18 @@ class PostgresODBCConnection(object):
     def close(self):
         # Variable indicates that closed was called.
         self.closed = True
-        return None
 
-    def commit():
-        return None
+    def commit(self):
+        return
 
     def cursor(self):
-        return None
+        return
 
     def setencoding(self, *args, **kwargs):
-        return None
-            
+        return
+
     def setdecoding(self, *args, **kwargs):
-        return None
+        return
 
     @property
     def timeout(self):
@@ -42,31 +38,27 @@ class FakeDBCursor:
     def close(self):
         # The same with PostgresODBCConnection, allows us to make sure that closed was called.
         self.closed = True
-        return None
 
     @property
     def description(self):
         return ""
 
     def execute(self, sql_query, sql_params):
-        return None
+        return
 
     def fetchmany(self, sql_number_of_records_returned):
-        return None
+        return
 
     def fetchall(self):
-        return None
-
+        return
 
 class TestOdbcUtils:
-    #
     # Test data
     fake_sql_connection_string = "Driver={PostgreSQL};Server=IP Address;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;"
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_odbc_connection_setup_timeout_pyodbc_error_pass(self, mocked_pyodbc_connect):
-        print("Test setup odbc connection set timeout pyodbc.Error pass")
-
+        # Test setup odbc connection set timeout pyodbc.Error pass
         mocked_pyodbc_connect.return_value = PostgresODBCConnection()
 
         try:
@@ -77,18 +69,15 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_odbc_connection_setup_timeout_unknown_error(self, mocked_pyodbc_connect):
-        print("Test setup odbc connection set timeout pyodbc.Error pass")
-
+        # Test setup odbc connection set timeout pyodbc.Error pass
         class PostgresODBCConnection_customexception(object):
-
             @property
             def timeout(self):
                 return 1
 
             @timeout.setter
             def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Driver doesn't support this")
+                raise pyodbc.Error('HY000', "[HY000] Driver doesn't support this")
 
         db_connection = PostgresODBCConnection_customexception()
         mocked_pyodbc_connect.return_value = db_connection
@@ -101,8 +90,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_configure_unicode_settings(self, mocked_pyodbc_connect):
-        print("Test configure unicode settings")
-
+        # Test configure unicode settings
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -118,8 +106,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_set_db_cursor(self, mocked_pyodbc_connect):
-        print("Test set db cursor")
-
+        # Test set db cursor
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -135,8 +122,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_create_cursor(self, mocked_pyodbc_connect):
-        print("Test create cursor")
-
+        # Test create cursor
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -152,8 +138,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_execute_select_statement(self, mocked_pyodbc_connect):
-        print("Test execute select statement")
-
+        # Test execute select statement
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -174,8 +159,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_get_cursor_description(self, mocked_pyodbc_connect):
-        print("Test get cursor description")
-
+        # Test get cursor description
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -193,8 +177,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_execute_odbc_query(self, mocked_pyodbc_connect):
-        print("Test execute odbc query")
-
+        # Test execute odbc query
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -206,12 +189,11 @@ class TestOdbcUtils:
 
         class FakeDBCursor:
             def execute(self, sql_query, sql_params):
-                return None
+                return
 
             @property
             def rowcount(self):
                 return 0
-            
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
@@ -221,8 +203,7 @@ class TestOdbcUtils:
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_close_connections(self, mocked_pyodbc_connect):
-        print("Test close connections")
-
+        # Test close connections
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -230,7 +211,7 @@ class TestOdbcUtils:
         try:
             OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10)
         except Exception:
-            assert False            
+            assert False
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)

@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow App",
-    version="2.0.9",
+    version="2.1.0",
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",
@@ -33,8 +33,7 @@ setup(
         - Sync notes between a related IBM SOAR Incident/Task and a ServiceNow Record.<br>
         - Send Attachments from an IBM SOAR Incident/Task to a related ServiceNow Record.""",
     install_requires=[
-        "resilient_circuits>=43.0.0",
-        "beautifulsoup4>=4.6.3"
+        "resilient_circuits>=46.0"
     ],
     packages=find_packages(),
     include_package_data=True,

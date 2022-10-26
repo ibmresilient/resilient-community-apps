@@ -1,17 +1,24 @@
+# docker build -t ibmresilient/fn_odbc_query:1.1.0 -t ibmresilient/fn_odbc_query:latest .
+
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_odbc_query
-ARG RES_CIRCUITS_VERSION=37.0
+ARG RESILIENT_CIRCUITS_VERSION=46.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
-# update to latest packages, user 0 for root privilege
+# Environment variable for any app to check if running in a container
+ARG APP_HOST_CONTAINER=1
+ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
+
+# Update to latest packages, user 0 for root privilege
 USER 0
+
 # Update to latest pip
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
+RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -20,24 +27,19 @@ RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 # install the base package
 RUN yum -y update && yum clean all
-
 # add yum repo with unixODBC and install
 RUN curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 RUN yum -y install unixODBC-devel
-
 # copy the driver configurations to the container
 COPY ./.drivers/drivers.ini /etc/odbc-drivers.ini
 COPY ./.drivers/drivers /tmp/lib/
-
 # configure unixODBC with the driver information in the .ini file
 RUN odbcinst -i -d -f /etc/odbc-drivers.ini
-
 # install psqlodbc driver
 RUN tar -zxvf /tmp/lib/psqlodbc-12.01.0000.tar.gz
 RUN ./psqlodbc-12.01.0000/configure
 RUN make
 RUN make install
-
 # install mariadb (mysql) driver
 RUN mkdir /usr/local/lib64/mariadb
 RUN mkdir /usr/local/lib64/mariadb/plugin
@@ -53,19 +55,18 @@ RUN install lib64/mariadb/plugin/dialog.so /usr/local/lib64/mariadb/plugin/
 RUN install lib64/mariadb/plugin/mysql_clear_password.so /usr/local/lib64/mariadb/plugin/
 RUN install lib64/mariadb/plugin/sha256_password.so /usr/local/lib64/mariadb/plugin/
 WORKDIR /opt/app-root/src
-
 # install MS SQL driver
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN yum -y install freetds
-
 ##########################
 # At the time of writing this integration, oracle DB was not supported
 # If we do decide to support, uncomment the run commands below to enable apphost support
 ##########################
 ## install Oracle DB driver
-#RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
-#RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
-#RUN yum -y install /tmp/lib/libnsl-2.28-101.el8.x86_64.rpm
+# RUN yum -y install /tmp/lib/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+# RUN yum -y install /tmp/lib/oracle-instantclient-odbc-linuxx64.rpm
+# RUN yum -y install /tmp/lib/libnsl-2.28-101.el8.x86_64.rpm
+
 
 # install the base package
 COPY ./dist /tmp/packages
@@ -96,7 +97,6 @@ RUN mkdir /var/log/${PATH_RESILIENT_CIRCUITS} && \
     chmod -R g=u /var/log/${PATH_RESILIENT_CIRCUITS}
 ENV APP_LOG_DIR /var/log/${PATH_RESILIENT_CIRCUITS}
 
-
 # setup entrypoint for read-only enterprise data used by integration, if needed
 RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
 
@@ -104,7 +104,7 @@ RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
 COPY entrypoint.sh /opt/${PATH_RESILIENT_CIRCUITS}/entrypoint.sh
 
-# remove temporary python files and temporary driver files
+# remove temporary python files
 RUN rm -rf /tmp/packages /tmp/lib
 
 # arbitrary user, support running as non-root. Required on OpenShift. Generally a good practice.

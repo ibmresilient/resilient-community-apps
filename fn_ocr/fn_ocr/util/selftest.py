@@ -38,4 +38,4 @@ def selftest_function(opts):
         return {"state": "failure", "reason": "Tesseract Not Found"}
 
     if version:
-        return {"state": "success","reason":f"Version == {version}"}
+        return {"state": "success", "reason": f"Version == {version}"}

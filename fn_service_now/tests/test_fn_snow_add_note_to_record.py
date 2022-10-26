@@ -44,6 +44,7 @@ class TestFnSnowAddNoteToRecord:
       "sn_ref_id": "INC0010459"
     }
     output1["inputs"]["sn_note_type"] = output1["inputs"]["sn_note_type"]["name"]
+    output1["inputs"]["sn_note_text"] = "[code]" + output1["inputs"]["sn_note_text"] + "[/code]"
 
     inputs2 = {
       "incident_id": 1001,
@@ -59,6 +60,7 @@ class TestFnSnowAddNoteToRecord:
       "sn_ref_id": "INC0010459"
     }
     output2["inputs"]["sn_note_type"] = output2["inputs"]["sn_note_type"]["name"]
+    output2["inputs"]["sn_note_text"] = "[code]" + output2["inputs"]["sn_note_text"] + "[/code]"
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
