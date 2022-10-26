@@ -24,7 +24,7 @@ def test_query_string():
     str2 = " Second part string "
     str3 = " Third part string "
     str4 = " Forth part string "
-    str5 = " Fifth part string "
+    str5 = " Fifth part string"
 
     input_string = f"{str1}%param1%{str2}%param2%{str3}%param3%{str4}%param4%{str5}"
     params = ["Param1", "Param2", "Param3", "Param4"]
