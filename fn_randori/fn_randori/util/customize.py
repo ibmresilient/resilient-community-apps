@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"randori_get_target_data"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category"],
+        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -56,6 +56,7 @@ def customization_data(client=None):
         - randori_target_status
         - randori_target_tags
         - randori_target_tech_category
+        - randori_target_temptation
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

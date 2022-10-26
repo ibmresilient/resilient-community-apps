@@ -303,7 +303,26 @@ None
 <p>
 
 ```python
-None
+target_data = playbook.functions.results.target_data
+
+if not target_data.success:
+  incident.addNote("Randori: Get Target Data: Unable to get data target data from Randori")
+else:
+  content = target_data.get("content", {})
+  data = target_data.content.get("data", {})
+  if data:
+    incident.properties.randori_target_status = data.get("status")
+    incident.properties.randori_target_impact_score = data.get("impact_score")
+    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_affiliation_state = target_data.get("affiliation_state")
+    incident.properties.randori_target_tech_category = ", ".join(data.get("tech_category", []))
+    incident.properties.randori_target_tags = ", ".join(data.get("user_tags", []))
+    incident.addNote("Randori Get Target Data automatic script updated custom fields")
+    
+    randori_notes = data.get("randori_notes")
+    if randori_notes:
+        incident.addNote(helper.createRichText("<b>Note from Randori:</b><br> {}".format(randori_notes))
+      
 ```
 
 </p>
