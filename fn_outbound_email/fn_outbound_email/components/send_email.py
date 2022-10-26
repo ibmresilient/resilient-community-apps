@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
 from __future__ import print_function
@@ -36,8 +36,8 @@ class FunctionComponent(ResilientComponent):
         if "@" not in self.from_email_address:
             if "@" not in self.smtp_user:
                 raise IntegrationError("No sender address specified")
-            else:
-                self.from_email_address = self.smtp_user
+
+            self.from_email_address = self.smtp_user
 
         if self.template_file_path: #If a template file path is given in app.config
 
@@ -62,7 +62,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
 
         def conditional_parameters(mail_body_text):
-            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP:
+            if self.smtp_config_section.get("smtp_ssl_mode") == DEFAULT_TLS_SMTP \
+              or not kwargs.get("mail_from"):
                 mail_from = self.from_email_address
             else:
                 mail_from = kwargs.get("mail_from")  # text
@@ -70,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             mail_body_html = kwargs.get("mail_body_html", None)
             jinja = False
 
-            if mail_body_html:
+            if not mail_body_html:
                 if self.template_file_path:
                     with open(self.template_file_path, "r") as template:
                         jinja = True
@@ -112,7 +113,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("mail_cc: %s", mail_cc)
             LOG.info("mail_bcc: %s", mail_bcc)
             LOG.info("mail_subject: %s", mail_subject)
-            LOG.info("mail_body_html: %s", mail_body_html)
+            LOG.debug("mail_body_html: %s", mail_body_html)
             LOG.info("mail_body_text: %s", mail_body_text)
             LOG.info("mail_attachments: %s", mail_attachments)
 
@@ -130,10 +131,12 @@ class FunctionComponent(ResilientComponent):
             send_smtp_email = SendSMTPEmail(self.opts, mail_data)
 
             incident_data = send_smtp_email.get_incident_data(mail_incident_id)
+            artifact_data = send_smtp_email.get_artifact_data(mail_incident_id)
+            note_data = send_smtp_email.get_note_data(mail_incident_id)
 
             if mail_body_html:
                 LOG.info("Rendering template")
-                rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data)
+                rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data, artifact_data, note_data)
                 LOG.debug(rendered_mail_html)
 
                 if not rendered_mail_html:

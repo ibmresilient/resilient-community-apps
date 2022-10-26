@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'ldap_utilities_add_to_groups' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'ldap_utilities_add_to_groups' running in workflow '{wf_instance_id}'")
 
             # Validate that required fields are given
             validate_fields(["ldap_multiple_user_dn", "ldap_multiple_group_dn"], kwargs)
@@ -48,6 +48,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info("LDAP Group DN: %s", input_ldap_multiple_group_dn_asString)
 
             yield StatusMessage("Function Inputs OK")
+
+            # Initiate variable, so that it does not error when called
+            c = ""
 
             # Instansiate helper (which gets appconfigs from file)
             ldap = LDAPDomains(self.opts)
@@ -75,7 +78,7 @@ class FunctionComponent(ResilientComponent):
                 c.bind()
             except Exception as err:
                 raise ValueError(
-                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+                    f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
             # Inform user
             yield StatusMessage("Connected to Active Directory")
@@ -86,7 +89,7 @@ class FunctionComponent(ResilientComponent):
                 res = ad_add_members_to_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
             except Exception as err:
-                LOG.debug("Error: {}".format(err))
+                LOG.debug(f"Error: {err}")
                 raise ValueError("Ensure all user and group DNs exist")
 
             finally:
@@ -100,7 +103,7 @@ class FunctionComponent(ResilientComponent):
             results["users_dn"] = input_ldap_multiple_user_dn,
             results["groups_dn"] = input_ldap_multiple_group_dn
 
-            yield StatusMessage("Finished 'ldap_utilities_add_to_groups' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Finished 'ldap_utilities_add_to_groups' running in workflow '{wf_instance_id}'")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

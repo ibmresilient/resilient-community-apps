@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": true,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_product_id": "MARCOBA_META",
+    "mcafee_epo_group_id": 5,
+    "mcafee_epo_object_id": 39
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 751,
+    "timestamp": "2022-08-22 12:05:01"
+  }
+}

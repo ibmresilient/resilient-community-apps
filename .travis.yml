@@ -65,7 +65,7 @@ env:
 before_install:
   - pip install -U pip setuptools requests retry2
   - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
-  - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
+  - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH"`
 
 # Exclude these branches from having jobs ran.
 branches:
@@ -216,7 +216,7 @@ matrix:
         - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
         - pip install requests retry2
         - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
-        - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE"`
+        - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH"`
       script:
         - echo "Installing and running SonarQube scan"
         - IS_DATA_FEEDER_PLUGIN=`[[ "$PACKAGE_NAME" == *"rc_data_feed_plugin"* ]]; echo $?`

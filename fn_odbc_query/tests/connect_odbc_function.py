@@ -7,9 +7,7 @@
 #
 # We've tested opening two active connections to the same db and issuing the same select statement on both.
 # PostgreSQL psqlodbc driver and MariaDB Connector/ODBC 3.0.2 driver can handle multiple active connections.
-from fn_odbc_query.util import odbc_utils
-from fn_odbc_query.util import function_utils
-
+from fn_odbc_query.util import odbc_utils, function_utils
 
 def connect_postgreslq():
     # Open odbc connection to test database PostgreSQL server, run locally in Docker.
@@ -29,7 +27,6 @@ def connect_postgreslq():
 
     print(results)
 
-
 def connect_mariadb():
     # Open odbc connection to test database MariaDB server, run locally in Docker.
     # Create cursor and stop at breakpoint.
@@ -48,6 +45,4 @@ def connect_mariadb():
 
     print(results)
 
-
 connect_postgreslq()
-#connect_mariadb()
