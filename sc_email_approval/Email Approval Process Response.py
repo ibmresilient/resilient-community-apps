@@ -22,8 +22,8 @@ DENY_LIST = ['no', 'disapprove', 'reject', 'rejected', 'deny', 'denied', 'stop',
 STRIP_RESPONSE = re.compile(r'(\w*)') # pattern to strip white space and special characters like '.'
 
 # delimeter for sections within the approval message
-COMMENTS = "##-"
-ORIGINAL_EMAIL = [re.compile(r"^> "), re.compile(r"^On "), re.compile(r"wrote:", re.IGNORECASE)] # characters associated with the start of the original message
+RETAIN_COMMENTS = "##- retain"
+ORIGINAL_EMAIL = [re.compile(r"^> "), re.compile(r"^On "), re.compile(r"wrote:", re.IGNORECASE), re.compile(r"From:", re.IGNORECASE)] # characters associated with the start of the original message
 
 # F U N C T I O N S
 def generate_msg_hash(expiration_ts, incident_id, incident_create_date, task_id):
@@ -78,20 +78,23 @@ def get_response(content):
   response = None
 
   # sections are separators between user response and information about the incident
-  section = 0
+  retain_section = False
   original_msg = False
   for line in content.split('\n'):
-    if COMMENTS in line.strip():
-      section += 1
+    # find the section where all the incident data is retained
+    if RETAIN_COMMENTS in line.strip():
+      retain_section = True
+      continue
       
-    if section == 2:
+    if retain_section:
       for key, ptrn in ID_PATTERN_LIST.items():
         match = ptrn.search(line.strip())
         if match:
           id_list_response[key] = match.group(1)
+      continue
         
     # parse the approval response and comments
-    if section == 0 and response is not None and line.strip():
+    if not retain_section and response is not None and line.strip():
       if "<br>" not in line and not original_msg:
         # make sure we haven't started looking through the original email
         for matcher in ORIGINAL_EMAIL:
@@ -101,7 +104,7 @@ def get_response(content):
             
         if not original_msg:
           comments.append(line)
-    elif section == 0 and response is None:
+    elif not retain_section and response is None:
       match = STRIP_RESPONSE.search(line.strip().lower())
       reply = match.group(0) if match else line.strip().lower()
 
@@ -113,7 +116,7 @@ def get_response(content):
       else:
         log.info(f"extraneous: {line}")
 
-  log.info(f"response {response} id_list_response {id_list_response}") # TODO
+  log.info(f"response {response} id_list_response {id_list_response} comments {comments}")
   return response, id_list_response, comments
 
 def find_incident(inc_id):
@@ -135,7 +138,7 @@ def is_valid_msg_id(incident, id_list_response):
                                      incident.create_date,
                                      id_list_response['task-id']
                                      )
-  log.info(confirm_msg_id) ##
+
   return bool(id_list_response['msg-id'] == confirm_msg_id)
 
 def get_attachments(attachments):
