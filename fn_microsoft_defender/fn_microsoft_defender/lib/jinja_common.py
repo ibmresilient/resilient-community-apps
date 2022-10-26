@@ -118,7 +118,7 @@ def render_json(template, data):
     for n in range(1, 32):
         result = result.replace(chr(n), " ")
 
-    # remove duplicate/unnessary commas
+    # remove duplicate/unnecessary commas
     result = DUPLICATE_COMMAS.sub(',', result)
     result = LEADING_COMMAS.sub('[', result)
 
