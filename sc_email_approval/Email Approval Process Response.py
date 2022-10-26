@@ -23,7 +23,13 @@ STRIP_RESPONSE = re.compile(r'(\w*)') # pattern to strip white space and special
 
 # delimeter for sections within the approval message
 RETAIN_COMMENTS = "##- retain"
-ORIGINAL_EMAIL = [re.compile(r"^> "), re.compile(r"^On "), re.compile(r"wrote:", re.IGNORECASE), re.compile(r"From:", re.IGNORECASE)] # characters associated with the start of the original message
+ORIGINAL_EMAIL = [re.compile(r"^> "), 
+                  re.compile(r"^On "), 
+                  re.compile(r"wrote:", 
+                  re.IGNORECASE), 
+                  re.compile(r"From:", re.IGNORECASE),
+                  re.compile(r"^____")
+                 ] # characters associated with the start of the original message
 
 # F U N C T I O N S
 def generate_msg_hash(expiration_ts, incident_id, incident_create_date, task_id):
