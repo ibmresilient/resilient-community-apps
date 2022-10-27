@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -8,11 +7,11 @@ from resilient_lib import IntegrationError, validate_fields
 from fn_randori.lib.app_common import AppCommon
 
 PACKAGE_NAME = "fn_randori"
-FN_NAME = "randori_get_target_data"
+FN_NAME = "randori_get_target"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'randori_get_target_data'"""
+    """Component that implements function 'randori_get_target'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -20,7 +19,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get the Randori target data.
+        Function: Get the target data for a single Randori target instance.
         Inputs:
             -   fn_inputs.randori_target_id
         """
@@ -36,4 +35,3 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
-

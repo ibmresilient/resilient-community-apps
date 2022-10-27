@@ -177,10 +177,10 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
-## Function - Randori: Get Target Data
+## Function - Randori: Get Target
 Get the Randori target data.
 
- ![screenshot: fn-randori-get-target-data ](./doc/screenshots/fn-randori-get-target-data.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -306,23 +306,27 @@ None
 target_data = playbook.functions.results.target_data
 
 if not target_data.success:
-  incident.addNote("Randori: Get Target Data: Unable to get data target data from Randori")
+  incident.addNote("Randori: Update custom fields: Unable to get target data to update custom fields.")
 else:
   content = target_data.get("content", {})
   data = target_data.content.get("data", {})
   if data:
+    # Update custom fileds with Randori target data
     incident.properties.randori_target_status = data.get("status")
     incident.properties.randori_target_impact_score = data.get("impact_score")
     incident.properties.randori_target_temptation = data.get("target_temptation")
-    incident.properties.randori_target_affiliation_state = target_data.get("affiliation_state")
+    incident.properties.randori_target_authority = data.get("authority")
+    incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
+    incident.properties.randori_target_perspective_name = data.get("perspective_name")
     incident.properties.randori_target_tech_category = ", ".join(data.get("tech_category", []))
     incident.properties.randori_target_tags = ", ".join(data.get("user_tags", []))
-    incident.addNote("Randori Get Target Data automatic script updated custom fields")
     
+    incident.addNote("Randori: script updated custom fields in SOAR.")
+    
+    # Add Randori note
     randori_notes = data.get("randori_notes")
     if randori_notes:
-        incident.addNote(helper.createRichText("<b>Note from Randori:</b><br> {}".format(randori_notes))
-      
+        incident.addNote(helper.createRichText("<b>Note from Randori:</b><br> {}".format(randori_notes)))
 ```
 
 </p>

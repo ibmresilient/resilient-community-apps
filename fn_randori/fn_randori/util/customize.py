@@ -21,16 +21,16 @@ def codegen_reload_data():
     return {
         "package": u"fn_randori",
         "message_destinations": [u"fn_randori"],
-        "functions": [u"randori_get_target_data"],
+        "functions": [u"randori_get_target"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
+        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"randori_get_target_data"]
+        "playbooks": [u"randori_update_target_data_in_soar"]
     }
 
 
@@ -39,20 +39,22 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
         - fn_randori
     - Functions:
-        - randori_get_target_data
+        - randori_get_target
     - Playbooks:
-        - randori_get_target_data
+        - randori_update_target_data_in_soar
     - Incident Fields:
         - randori_target_affiliation_state
+        - randori_target_authority
         - randori_target_id
         - randori_target_impact_score
         - randori_target_link
+        - randori_target_perspective_name
         - randori_target_status
         - randori_target_tags
         - randori_target_tech_category
