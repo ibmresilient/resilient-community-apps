@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from unittest import result
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS, PACKAGE_NAME
