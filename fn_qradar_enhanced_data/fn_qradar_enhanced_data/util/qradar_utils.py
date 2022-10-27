@@ -357,9 +357,9 @@ class QRadarClient(object):
         ret = {"status_code": response.status_code}
 
         if add_content_source:
-            ret["content"] = response.json()["data"][query_call.strip()][add_content_source]
+            ret["content"] = response.json()["data"].get(query_call.strip()).get(add_content_source)
         else:
-            ret["content"] = response.json()["data"][query_call.strip()]
+            ret["content"] = response.json()["data"].get(query_call.strip())
 
         return ret
 

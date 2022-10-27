@@ -38,17 +38,19 @@ if rule.properties.number_of_days_to_search:
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in results.get("content")["events"]:
+for event in content.get("events"):
+  offenseid = content.get("offenseid")
   qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.categoryname)
-  qradar_event.magnitude = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.magnitude)
-  qradar_event.event_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.eventcount)
+  qradar_event.category_name = link.format(offenseid, "category_name", event.categoryname, event.categoryname)
+  qradar_event.magnitude = link.format(offenseid, "category_name", event.categoryname, event.magnitude)
+  qradar_event.event_count = link.format(offenseid, "category_name", event.categoryname, event.eventcount)
   qradar_event.event_time = int(event.eventtime)
-  qradar_event.sourceip_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.sourceipcount)
-  qradar_event.destinationip_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.destinationipcount)
-  qradar_event.reported_time = results.get("content")["current_time"]
+  qradar_event.sourceip_count = link.format(offenseid, "category_name", event.categoryname, event.sourceipcount)
+  qradar_event.destinationip_count = link.format(offenseid, "category_name", event.categoryname, event.destinationipcount)
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 ---
@@ -86,16 +88,17 @@ if rule.properties.number_of_days_to_search:
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + .contentget("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in results.get("content")["events"]:
+for event in content.get("events"():
   qradar_event = incident.addRow("qr_categories")
   qradar_event.category_name = event.categoryname
   qradar_event.flow_count = event.flowcount
   qradar_event.last_packet_time = int(event.lastpackettime)
   qradar_event.sourceip_count = event.sourceipcount
   qradar_event.destinationip_count = event.destinationipcount
-  qradar_event.reported_time = results.get("content")["current_time"]
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 ---

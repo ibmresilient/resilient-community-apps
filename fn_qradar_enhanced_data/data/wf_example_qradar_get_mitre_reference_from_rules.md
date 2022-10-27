@@ -26,36 +26,36 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 
 ### Post-Processing Script
 ```python
-for item in results.content['rules']:
-  mapping = item['mapping']
+for item in results.content.get('rules'):
+  mapping = item.get('mapping')
   if mapping:
     for tactic in list(mapping):
-      techniques = mapping[tactic]['techniques']
+      techniques = mapping.get(tactic).get('techniques')
       if techniques:
         for technique in list(techniques):
           new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-          new_row.rule_id = item['id']
-          new_row.rule_identifier = item['identifier']
-          new_row.rule_name = item['name']
+          new_row.rule_id = item.get('id')
+          new_row.rule_identifier = item.get('identifier')
+          new_row.rule_name = item.get('name')
           new_row.mitre_tactic = tactic
-          new_row.mitre_tactic_id = mapping[tactic]['id']
-          new_row.tactic_confidence_level = mapping[tactic]['confidence']
+          new_row.mitre_tactic_id = mapping.get(tactic).get('id')
+          new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
           new_row.mitre_technique = technique
-          new_row.mitre_technique_id = techniques[technique]['id']
-          new_row.technique_confidence_level = techniques[technique]['confidence']
+          new_row.mitre_technique_id = techniques.get(technique).get('id')
+          new_row.technique_confidence_level = techniques.get(technique).get('confidence')
       else:
         new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-        new_row.rule_id = item['id']
-        new_row.rule_identifier = item['identifier']
-        new_row.rule_name = item['name']
+        new_row.rule_id = item.get('id')
+        new_row.rule_identifier = item.get('identifier')
+        new_row.rule_name = item.get('name')
         new_row.mitre_tactic = tactic
-        new_row.mitre_tactic_id = mapping[tactic]['id']
-        new_row.tactic_confidence_level = mapping[tactic]['confidence']
+        new_row.mitre_tactic_id = mapping.get(tactic).get('id')
+        new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
   else:
     new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-    new_row.rule_id = item['id']
-    new_row.rule_identifier = item['identifier']
-    new_row.rule_name = item['name']
+    new_row.rule_id = item.get('id')
+    new_row.rule_identifier = item.get('identifier')
+    new_row.rule_name = item.get('name')
 ```
 
 ---

@@ -38,19 +38,21 @@ if rule.properties.number_of_days_to_search:
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in results.get("content")["events"]:
+for event in content.get("events"):
+  offenseid = content.get("offenseid")
   qradar_event = incident.addRow("qr_top_source_ips")
-  qradar_event.source_ip = link.format(results.get("content")["offenseid"], "sourceip", event.sourceip, event.sourceip)
+  qradar_event.source_ip = link.format(offenseid, "sourceip", event.sourceip, event.sourceip)
   qradar_event.vulnerability_count = event.vulnerabilityCount
   qradar_event.mac = event.macAddress
   qradar_event.network = event.network
   qradar_event.domain = event.domain
   qradar_event.usernames = event.usernamecount
-  qradar_event.event_count = link.format(results.get("content")["offenseid"], "sourceip", event.sourceip, event.eventcount)
-  qradar_event.category_count = link.format(results.get("content")["offenseid"], "sourceip", event.sourceip, event.categorycount)
-  qradar_event.reported_time = results.get("content")["current_time"]
+  qradar_event.event_count = link.format(offenseid, "sourceip", event.sourceip, event.eventcount)
+  qradar_event.category_count = link.format(offenseid, "sourceip", event.sourceip, event.categorycount)
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 ---
@@ -88,9 +90,10 @@ if rule.properties.number_of_days_to_search:
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in results.get("content")["events"]:
+for event in content.get("events"):
   qradar_event = incident.addRow("qr_top_source_ips")
   qradar_event.source_ip = event.sourceip
   qradar_event.vulnerability_count = event.vulnerabilityCount
@@ -100,7 +103,7 @@ for event in results.get("content")["events"]:
   qradar_event.usernames = event.usernamecount
   qradar_event.flow_count = event.flowcount
   qradar_event.category_count = event.categorycount
-  qradar_event.reported_time = results.get("content")["current_time"]
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 ---

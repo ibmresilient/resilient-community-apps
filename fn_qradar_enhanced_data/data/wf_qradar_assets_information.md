@@ -27,8 +27,9 @@ inputs.soar_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-if results.get("content"):
-  for event in results["content"].get("assets"):
+content = results.get("content")
+if content:
+  for event in content.get("assets"):
     qradar_event = incident.addRow("qr_assets")
     qradar_event.asset_id = event.id
     qradar_event.asset_name = event.name
@@ -38,7 +39,7 @@ if results.get("content"):
     qradar_event.vulnerabilities = str(event.vulnerabilityCount)
     qradar_event.last_user = event.users[0].username if len(event.users) > 0 and event.users[0].username else ""
     qradar_event.last_user_seen = int(event.users[0].lastSeenProfiler) if len(event.users) > 0 and event.users[0].lastSeenProfiler else ""
-    qradar_event.reported_time = results["content"].get("current_time")
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 ---

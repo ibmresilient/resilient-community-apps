@@ -76,7 +76,7 @@
           {
             "group": "Log Source Tests",
             "negate": false,
-            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 192.168.0.17</a>",
+            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 1.0.0.0</a>",
             "uid": "0",
             "__typename": "RuleTest"
           },
@@ -194,7 +194,7 @@
           {
             "group": "Log Source Tests",
             "negate": false,
-            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 192.168.0.17</a>",
+            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 1.0.0.0</a>",
             "uid": "0",
             "__typename": "RuleTest"
           },
@@ -290,7 +290,7 @@
           {
             "group": "Log Source Tests",
             "negate": false,
-            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 192.168.0.17</a>",
+            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 1.0.0.0</a>",
             "uid": "0",
             "__typename": "RuleTest"
           },
@@ -393,7 +393,7 @@
           {
             "group": "Log Source Tests",
             "negate": false,
-            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 192.168.0.17</a>",
+            "text": "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Experience Center: AWS Syslog @ 1.0.0.0</a>",
             "uid": "0",
             "__typename": "RuleTest"
           },
@@ -627,7 +627,7 @@
     "soar_incident_id": 2111,
     "soar_table_name": "qradar_rules_and_mitre_tactics_and_techniques",
     "qradar_offense_id": "13",
-    "qradar_label": "qradar_9_55_194_6"
+    "qradar_label": "qradar_label1"
   },
   "metrics": {
     "version": "1.0",

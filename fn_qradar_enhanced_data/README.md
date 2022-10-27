@@ -822,7 +822,7 @@ results = {
     ]
   },
   "inputs": {
-    "qradar_label": "qradar_9_55_194_6",
+    "qradar_label": "qradar_label1",
     "qradar_offense_id": "13",
     "soar_incident_id": 2111,
     "soar_table_name": "qradar_rules_and_mitre_tactics_and_techniques"
@@ -862,36 +862,36 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 <p>
 
 ```python
-for item in results.content['rules']:
-  mapping = item['mapping']
+for item in results.content.get('rules'):
+  mapping = item.get('mapping')
   if mapping:
     for tactic in list(mapping):
-      techniques = mapping[tactic]['techniques']
+      techniques = mapping.get(tactic).get('techniques')
       if techniques:
         for technique in list(techniques):
           new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-          new_row.rule_id = item['id']
-          new_row.rule_identifier = item['identifier']
-          new_row.rule_name = item['name']
+          new_row.rule_id = item.get('id')
+          new_row.rule_identifier = item.get('identifier')
+          new_row.rule_name = item.get('name')
           new_row.mitre_tactic = tactic
-          new_row.mitre_tactic_id = mapping[tactic]['id']
-          new_row.tactic_confidence_level = mapping[tactic]['confidence']
+          new_row.mitre_tactic_id = mapping.get(tactic).get('id')
+          new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
           new_row.mitre_technique = technique
-          new_row.mitre_technique_id = techniques[technique]['id']
-          new_row.technique_confidence_level = techniques[technique]['confidence']
+          new_row.mitre_technique_id = techniques.get(technique).get('id')
+          new_row.technique_confidence_level = techniques.get(technique).get('confidence')
       else:
         new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-        new_row.rule_id = item['id']
-        new_row.rule_identifier = item['identifier']
-        new_row.rule_name = item['name']
+        new_row.rule_id = item.get('id')
+        new_row.rule_identifier = item.get('identifier')
+        new_row.rule_name = item.get('name')
         new_row.mitre_tactic = tactic
-        new_row.mitre_tactic_id = mapping[tactic]['id']
-        new_row.tactic_confidence_level = mapping[tactic]['confidence']
+        new_row.mitre_tactic_id = mapping.get(tactic).get('id')
+        new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
   else:
     new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-    new_row.rule_id = item['id']
-    new_row.rule_identifier = item['identifier']
-    new_row.rule_name = item['name']
+    new_row.rule_id = item.get('id')
+    new_row.rule_identifier = item.get('identifier')
+    new_row.rule_name = item.get('name')
 ```
 
 </p>
@@ -928,10 +928,10 @@ results = {
     "assets": [],
     "current_time": 1666275945000,
     "offenseid": "13",
-    "qrhost": "9.55.194.6"
+    "qrhost": "1.1.1.0"
   },
   "inputs": {
-    "qradar_label": "qradar_9_55_194_6",
+    "qradar_label": "qradar_label1",
     "qradar_offense_id": "13",
     "qradar_query_type": "offenseassets",
     "soar_incident_id": 2111,
@@ -973,18 +973,34 @@ inputs.soar_incident_id = incident.id
 <p>
 
 ```python
-link = "<a href=\"https://" + results.get("content").get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
 
-for event in results.get("content").get("rules_data"):
-  qradar_event = incident.addRow("qr_triggered_rules")
-  qradar_event.rule_name = link.format("rules", event.id, event.name)
-  qradar_event.rule_group = ", ".join(list(map(lambda x: x.name, list(filter(lambda x: x.name is not None, event.groups))))) if len(event.groups) > 0 else ""
-  qradar_event.rule_type = event.type
-  qradar_event.enabled = "True" if event.enabled else "False"
-  qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
-  qradar_event.date_created = int(event.creationDate)
-  qradar_event.last_modified = int(event.modificationDate)
-  qradar_event.reported_time = results.get("content").get("current_time")
+if content:
+  offenseid = content.get("offenseid")
+  offense = content.get("offense")
+  assignedTo = offense.get("assignedTo")
+  offenseSource = offense.get("offenseSource")
+
+  incident.qr_offense_index_type = offense.get("offenseType").get("name")
+  incident.qr_offense_index_value = offenseSource
+  incident.qr_offense_source = offenseSource
+  incident.qr_source_ip_count = link.format(offenseid, "", offense.get("sourceCount"))
+  incident.qr_destination_ip_count = link.format(offenseid, "", int(offense.get("remoteDestinationCount")) + int(offense.get("localDestinationCount")))
+  incident.qr_event_count = link.format(offenseid, "/events?page=1&pagesize=10", offense.get("eventCount"))
+  incident.qr_flow_count =  link.format(offenseid, "/flows?page=1&pagesize=10", offense.get("flowCount"))
+  incident.qr_assigned = link.format("", "?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B{}&page=1&pagesize=10".format(assignedTo if assignedTo else ""), assignedTo) if assignedTo else "Unassigned"
+  incident.qr_magnitude = link.format(offenseid, "", offense.get("magnitude"))
+  incident.qr_credibility = link.format(offenseid, "", offense.get("credibility"))
+  incident.qr_severity = link.format(offenseid, "", offense.get("severity"))
+  incident.qr_relevance = link.format(offenseid, "", offense.get("relevance"))
+  incident.qr_offense_status = offense.get("status")
+  incident.qr_offense_domain = "Default Domain"
+  if offense.get("domain"):
+    incident.qr_offense_domain = offense.get("domain").get("name")
+
+  incident.qr_offense_start_time = int(offense.get("startTime"))
+  incident.qr_offense_last_updated_time = int(offense.get("lastUpdatedTime"))
 ```
 
 </p>
@@ -1035,7 +1051,7 @@ results = {
         "eventcount": "728.0",
         "macAddress": "",
         "network": "",
-        "sourceip": "89.223.26.52",
+        "sourceip": "2.2.2.2",
         "usernamecount": "1.0",
         "vulnerabilityCount": 0
       },
@@ -1047,7 +1063,7 @@ results = {
         "eventcount": "7.0",
         "macAddress": "",
         "network": "",
-        "sourceip": "193.184.16.214",
+        "sourceip": "3.3.3.3",
         "usernamecount": "1.0",
         "vulnerabilityCount": 0
       },
@@ -1059,7 +1075,7 @@ results = {
         "eventcount": "14.0",
         "macAddress": "",
         "network": "",
-        "sourceip": "169.254.3.5",
+        "sourceip": "4.4.4.4",
         "usernamecount": "1.0",
         "vulnerabilityCount": 0
       },
@@ -1071,16 +1087,16 @@ results = {
         "eventcount": "14.0",
         "macAddress": "",
         "network": "",
-        "sourceip": "192.168.0.15",
+        "sourceip": "5.5.5.5",
         "usernamecount": "1.0",
         "vulnerabilityCount": 0
       }
     ],
     "offenseid": "13",
-    "qrhost": "9.55.194.6"
+    "qrhost": "1.1.1.0"
   },
   "inputs": {
-    "qradar_label": "qradar_9_55_194_6",
+    "qradar_label": "qradar_label1",
     "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60",
     "qradar_query_type": "sourceip",
     "qradar_search_param1": "sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)",
@@ -1140,17 +1156,22 @@ if rule.properties.number_of_days_to_search:
 <p>
 
 ```python
-link = "<a href=\"https://" + results.get("content")["qrhost"] + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in results.get("content")["events"]:
-  qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.categoryname)
-  qradar_event.magnitude = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.magnitude)
-  qradar_event.event_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.eventcount)
-  qradar_event.event_time = int(event.eventtime)
-  qradar_event.sourceip_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.sourceipcount)
-  qradar_event.destinationip_count = link.format(results.get("content")["offenseid"], "category_name", event.categoryname, event.destinationipcount)
-  qradar_event.reported_time = results.get("content")["current_time"]
+for event in content.get("events"):
+  offenseid = content.get("offenseid")
+  qradar_event = incident.addRow("qr_offense_top_events")
+  qradar_event.event_name = link.format(offenseid, "event_name", event.event_name, event.event_name)
+  qradar_event.category = link.format(offenseid, "category_name", event.category_name, event.category_name)
+  qradar_event.source_ip = link.format(offenseid, "sourceip", event.sourceip, event.sourceip)
+  qradar_event.destination_ip = link.format(offenseid, "destinationip", event.destinationip, event.destinationip)
+  qradar_event.log_source = link.format(offenseid, "log_source_name", event.logsourcename, event.logsourcename)
+  qradar_event.event_count = link.format(offenseid, "event_name", event.event_name, event.eventcount)
+  qradar_event.event_time = int(event.event_time)
+  qradar_event.magnitude = event.magnitude
+  qradar_event.username = event.username
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 </p>
@@ -1167,29 +1188,20 @@ Create artifact from Assets info for the selected row
 <p>
 
 ```python
-#
 # We create artifacts according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-#
-
-type_mapping = {
-    "IP Address": "IP Address",
-    "Name": "String",
-}
-
 import re
 
-artifact_types = rule.properties.select_to_create_artifact_from_asset_info
+type_mapping = { "IP Address": "IP Address", "Name": "String", }
 
-for type in artifact_types:
+for type in rule.properties.select_to_create_artifact_from_asset_info:
   if type in type_mapping:
-    artifact_description = "QRadar Offense {0}".format(type)
-    if type=="IP Address":
-     incident.addArtifact(type_mapping[type], row.ip_address["content"], artifact_description)
-    elif type=="Name":
-       incident.addArtifact(type_mapping[type], row.asset_name["content"], artifact_description)
-
+    artifact_description = "QRadar Offense {}".format(type)
+    if type == "IP Address":
+      incident.addArtifact(type_mapping.get(type), row.ip_address.get("content"), artifact_description)
+    elif type == "Name":
+      incident.addArtifact(type_mapping.get(type), row.asset_name.get("content"), artifact_description)
 ```
 
 </p>
@@ -1205,26 +1217,18 @@ Create artifact from Destination IP info for the selected row
 <p>
 
 ```python
-#
 # We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-#
-
-type_mapping = {
-    "Destination IP": "IP Address",
-}
-
 import re
 
-artifact_types = rule.properties.select_to_create_artifact_from_destip
+type_mapping = { "Destination IP": "IP Address", }
 
-for type in artifact_types:
+for type in rule.properties.select_to_create_artifact_from_destip:
   if type in type_mapping:
-    artifact_description = "QRadar Offense {0}".format(type)
-    if type=="Destination IP":
-      incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
-
+    artifact_description = "QRadar Offense {}".format(type)
+    if type == "Destination IP":
+      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.destination_ip.get("content")), artifact_description)
 ```
 
 </p>
@@ -1240,32 +1244,22 @@ Create artifact from the Events info of the selected row
 <p>
 
 ```python
-#
 # We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-#
-
-type_mapping = {
-    "Source IP": "IP Address",
-    "Destination IP": "IP Address",
-    "Username": "User Account"
-}
-
 import re
 
-artifact_types = rule.properties.select_to_create_artifact
+type_mapping = { "Source IP": "IP Address", "Destination IP": "IP Address", "Username": "User Account" }
 
-for type in artifact_types:
+for type in rule.properties.select_to_create_artifact:
   if type in type_mapping:
-    artifact_description = "QRadar Offense {0}".format(type)
-    if type=="Source IP":
-      incident.addArtifact(type_mapping[type],re.sub("<[^<>]+>","",row.source_ip["content"]), artifact_description)
-    elif type=="Destination IP":
-      incident.addArtifact(type_mapping[type], re.sub("<[^<>]+>","",row.destination_ip["content"]), artifact_description)
-    elif type=="Username":
-      incident.addArtifact(type_mapping[type], row.username, artifact_description)
-
+    artifact_description = "QRadar Offense {}".format(type)
+    if type == "Source IP":
+      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.source_ip.get("content")), artifact_description)
+    elif type == "Destination IP":
+      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.destination_ip.get("content")), artifact_description)
+    elif type == "Username":
+      incident.addArtifact(type_mapping.get(type), row.username, artifact_description)
 ```
 
 </p>
@@ -1281,11 +1275,10 @@ Create artifact from the Flows info of the selected row
 <p>
 
 ```python
-#
 # We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-#
+import re
 
 type_mapping = {
     "Source IP": "IP Address",
@@ -1294,22 +1287,17 @@ type_mapping = {
     "Destination Port": "Port"
 }
 
-import re
-
-artifact_types = rule.properties.select_to_create_artifact_from_flows_info
-
-for type in artifact_types:
+for type in rule.properties.select_to_create_artifact_from_flows_info:
   if type in type_mapping:
-    artifact_description = "QRadar Offense {0}".format(type)
-    if type=="Source IP":
-      incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
-    elif type=="Destination IP":
-      incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
-    elif type=="Source Port":
-      incident.addArtifact(type_mapping[type],row.source_ip["content"], artifact_description)
-    elif type=="Destination Port":
-      incident.addArtifact(type_mapping[type],row.destination_ip["content"], artifact_description)
-
+    artifact_description = "QRadar Offense {}".format(type)
+    if type == "Source IP":
+      incident.addArtifact(type_mapping.get(type), row.source_ip.get("content"), artifact_description)
+    elif type == "Destination IP":
+      incident.addArtifact(type_mapping.get(type), row.destination_ip.get("content"), artifact_description)
+    elif type == "Source Port":
+      incident.addArtifact(type_mapping.get(type), row.source_ip.get("content"), artifact_description)
+    elif type == "Destination Port":
+      incident.addArtifact(type_mapping.get(type), row.destination_ip.get("content"), artifact_description)
 ```
 
 </p>
@@ -1325,29 +1313,20 @@ Create artifact from Source IP info for the selected row
 <p>
 
 ```python
-#
 # We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-#
-
-type_mapping = {
-    "Source IP": "IP Address",
-    "MAC": "MAC Address",
-}
-
 import re
 
-artifact_types = rule.properties.select_to_create_artifact_from_sourceip
+type_mapping = { "Source IP": "IP Address", "MAC": "MAC Address", }
 
-for type in artifact_types:
+for type in rule.properties.select_to_create_artifact_from_sourceip:
   if type in type_mapping:
-    artifact_description = "QRadar Offense {0}".format(type)
-    if type=="Source IP":
-      incident.addArtifact(type_mapping[type],re.sub("<[^<>]+>","",row.source_ip["content"]), artifact_description)
-    elif type=="MAC":
-      incident.addArtifact(type_mapping[type], row.mac, artifact_description)
-
+    artifact_description = "QRadar Offense {}".format(type)
+    if type == "Source IP":
+      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.source_ip.get("content"), artifact_description)
+    elif type == "MAC":
+      incident.addArtifact(type_mapping.get(type), row.mac, artifact_description)
 ```
 
 </p>
