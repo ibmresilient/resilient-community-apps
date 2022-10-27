@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [u"randori_detections_dt"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"randori_update_target_data_in_soar"]
+        "playbooks": [u"randori_add_artifacts_and_update_detections_data_table", u"randori_update_target_data_in_soar"]
     }
 
 
@@ -48,6 +48,7 @@ def customization_data(client=None):
         - randori_get_detections_of_target
         - randori_get_target
     - Playbooks:
+        - randori_add_artifacts_and_update_detections_data_table
         - randori_update_target_data_in_soar
     - Incident Fields:
         - randori_target_affiliation_state

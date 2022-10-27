@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1666900200388,
+  "export_date": 1666903218628,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -419,13 +419,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 13,
+  "id": 16,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1666900198423,
+      "create_date": 1666903216685,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -434,7 +434,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1666900198423,
+      "update_date": 1666903216685,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -460,6 +460,118 @@
   "overrides": [],
   "phases": [],
   "playbooks": [
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.randori_target_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3\" isExecutable=\"true\" name=\"playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_08csfwq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Detections of Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42164ffc-b935-400a-9e25-ce20ca262c3c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"detection_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08csfwq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0reqz9a\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_08csfwq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Randori: Add Artifacts and Update Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a76a10f6-91db-42dc-ba75-13ea27845a81\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0reqz9a\u003c/incoming\u003e\u003coutgoing\u003eFlow_0g2frw7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0g2frw7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0reqz9a\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0g2frw7\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08csfwq\" id=\"Flow_08csfwq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0reqz9a\" id=\"Flow_0reqz9a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0g2frw7\" id=\"Flow_0g2frw7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1666902661851,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3",
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "display_name": "Randori: Add Artifacts and Update Detections Data Table",
+      "export_key": "randori_add_artifacts_and_update_detections_data_table",
+      "field_type_handle": "playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Randori: Add Artifacts and Update Detections Data Table",
+        "export_key": "playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3",
+        "uuid": "68fead04-a7e3-4179-8db6-8e7c759182e9"
+      },
+      "has_logical_errors": false,
+      "id": 4,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1666902971619,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1666902872663,
+          "description": "Add artifacts and update the Detections data table from the detection data for this target.",
+          "enabled": false,
+          "export_key": "Randori: Add Artifacts and Update Detections Data Table",
+          "id": 5,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1666902872675,
+          "name": "Randori: Add Artifacts and Update Detections Data Table",
+          "object_type": "incident",
+          "playbook_handle": "randori_add_artifacts_and_update_detections_data_table",
+          "programmatic_name": "randori_add_artifacts_and_update_detections_data_table_randori_add_artifacts_and_update_detections_data_table",
+          "script_text": "detection_data = playbook.functions.results.detection_data\n\nincident.addNote(\"detection_data = {}\".format(detection_data))\n\nif not detection_data.success:\n  incident.addNote(\"Randori: Get Target Data: Unable to get target data from Randori\")\nelse:\n  content = detection_data.get(\"content\", {})\n  detection_list = detection_data.content.get(\"detection_list\", [])\n  for detection in detection_list:\n    \n    # Add artifacts\n    ip = detection.get(\"ip\")\n    if ip:\n      incident.addArtifact(\"IP Address\", ip, \"Artifact from Randori\")\n      \n    port = detection.get(\"port\")\n    if port:\n      incident.addArtifact(\"Port\", str(port), \"Artifact from Randori\")\n\n    hostname = detection.get(\"hostname\")\n    if hostname:\n      incident.addArtifact(\"DNS Name\", hostname, \"Artifact from Randori\")\n      \n    path = detection.get(\"path\")\n    if path:\n      incident.addArtifact(\"File Path\", path, \"Artifact from Randori\")\n\n    # Add Detection data to Detections data table\n    detection_row = incident.addRow(\"randori_detections_dt\")\n    detection_row[\u0027randori_dt_path\u0027] = path\n    detection_row[\u0027randori_dt_port\u0027] = port\n    detection_row[\u0027randori_dt_ip\u0027] = ip\n    detection_row[\u0027randori_dt_hostname\u0027] = hostname\n    detection_row[\u0027randori_dt_first_seen\u0027] = detection.get(\"first_seen\")\n    detection_row[\u0027randori_dt_last_seen\u0027] = detection.get(\"last_seen\")",
+          "tags": [],
+          "uuid": "a76a10f6-91db-42dc-ba75-13ea27845a81"
+        }
+      ],
+      "name": "randori_add_artifacts_and_update_detections_data_table",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_5708a99c-ba5e-4897-951d-b9eb71c632f3",
+        "id": 4,
+        "name": "playbook_5708a99c_ba5e_4897_951d_b9eb71c632f3",
+        "type": "playbook",
+        "uuid": "602e7971-6a08-4b65-b2c5-0d875bd7335a"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "5708a99c-ba5e-4897-951d-b9eb71c632f3",
+      "version": 7
+    },
     {
       "activation_details": {
         "activation_conditions": {
