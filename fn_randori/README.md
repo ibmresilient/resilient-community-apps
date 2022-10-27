@@ -41,7 +41,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release | <!-- ::CHANGE_ME:: -->
+| 1.0.0 | 10/2022 | Initial Release | 
 
 ---
 
@@ -118,7 +118,7 @@ Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=47.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Randori Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
@@ -177,20 +177,184 @@ The following table provides the settings you need to configure the app. These s
 
 ---
 
+## Function - Randori: Get Target
+Get the Randori target data.
 
+ ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "affiliation_state": "None",
+      "applicability": 3,
+      "attack_note": "",
+      "authority": true,
+      "authority_distance": 0,
+      "authority_override": false,
+      "authorization_state": "None",
+      "characteristic_tags": [
+        "DefaultPage"
+      ],
+      "confidence": 75,
+      "cpe": {
+        "cpe_version": "2.3",
+        "edition": null,
+        "language": null,
+        "other": null,
+        "part": "a",
+        "product": "tomcat",
+        "str": "cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*",
+        "sw_edition": null,
+        "target_hw": null,
+        "target_sw": null,
+        "update": null,
+        "vendor": "apache",
+        "version": "7.0.76"
+      },
+      "criticality": 1,
+      "deleted": false,
+      "description": "Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.",
+      "enumerability": 3,
+      "first_seen": "2022-07-07T07:18:22.029485+00:00",
+      "id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
+      "impact_score": "None",
+      "last_seen": "2022-10-24T06:16:04.127801+00:00",
+      "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
+      "lens_view": "public",
+      "name": "Tomcat",
+      "org_id": "923af5dd-50ce-4d80-a55f-707dfe08411e",
+      "perspective": "00000000-0000-0000-0000-000000000000",
+      "perspective_name": "PUBLIC",
+      "post_exploit": 3,
+      "priority_impact_factor": 0.0,
+      "priority_score": 81.0,
+      "priority_status_factor": 0.1125,
+      "priority_tags_factor": 0.0675,
+      "private_weakness": 0,
+      "public_weakness": 5,
+      "randori_notes": "This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.",
+      "reference": "http://tomcat.apache.org",
+      "research": 3,
+      "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
+      "status": "Needs Resolution",
+      "target_temptation": 45,
+      "tech_category": [
+        "App Servers"
+      ],
+      "temptation_last_modified": "2022-03-31T18:10:37.913851+00:00",
+      "user_tags": [
+        "Google",
+        "Unknown - By Qualys",
+        "Unknown - By Tenable",
+        "Wildcard Cert"
+      ],
+      "vendor": "Apache",
+      "version": "7.0.76"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 312,
+    "timestamp": "2022-10-25 16:50:45"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+target_data = playbook.functions.results.target_data
+
+if not target_data.success:
+  incident.addNote("Randori: Update custom fields: Unable to get target data to update custom fields.")
+else:
+  content = target_data.get("content", {})
+  data = target_data.content.get("data", {})
+  if data:
+    # Update custom fileds with Randori target data
+    incident.properties.randori_target_status = data.get("status")
+    incident.properties.randori_target_impact_score = data.get("impact_score")
+    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_authority = data.get("authority")
+    incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
+    incident.properties.randori_target_perspective_name = data.get("perspective_name")
+    incident.properties.randori_target_tech_category = ", ".join(data.get("tech_category", []))
+    incident.properties.randori_target_tags = ", ".join(data.get("user_tags", []))
+    
+    incident.addNote("Randori: script updated custom fields in SOAR.")
+    
+    # Add Randori note
+    randori_notes = data.get("randori_notes")
+    if randori_notes:
+        incident.addNote(helper.createRichText("<b>Note from Randori:</b><br> {}".format(randori_notes)))
+```
+
+</p>
+</details>
+
+---
 
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Randori Target Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
 | Randori Target ID | `randori_target_id` | `text` | `properties` | - | - |
+| Randori Target Impact Score | `randori_target_impact_score` | `text` | `properties` | - | - |
 | Randori Target Link | `randori_target_link` | `textarea` | `properties` | - | - |
 | Randori Target Status | `randori_target_status` | `text` | `properties` | - | - |
+| Randori Target Tags | `randori_target_tags` | `text` | `properties` | - | - |
+| Randori Target Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
 
 ---
 
 
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Randori: Get Target Data | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
 
+---
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
