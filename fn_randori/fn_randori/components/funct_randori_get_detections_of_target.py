@@ -4,9 +4,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
-from fn_randori.lib.app_common import AppCommon
+from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_get_detections_of_target"
 
 
@@ -33,7 +32,7 @@ class FunctionComponent(AppFunctionComponent):
         detection_list = app_common.get_detections_for_single_target(fn_inputs.randori_target_id)
 
         results = {"detection_list": detection_list}
-        
+
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
