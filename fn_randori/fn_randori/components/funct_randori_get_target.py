@@ -4,9 +4,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
-from fn_randori.lib.app_common import AppCommon
+from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_get_target"
 
 
