@@ -21,7 +21,7 @@ setup(
     name='fn_pa_panorama',
     version='1.2.0',
     license='MIT',
-    author='IBM QRadar SOAR',
+    author='IBM SOAR',
     description="SOAR Components to Integrate with the Panorama Platform",
     long_description="This integration contains Functions to interact with address groups, "
                      "addresses, and user groups within Palo Alto Panorama. This integration can be"
