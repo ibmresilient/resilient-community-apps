@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "inputs": {
+      "incident_id": 2117,
+      "task_id": null,
+      "sn_resilient_status": "C"
+    },
+    "res_id": "RES-2117",
+    "row_id": 28
+  },
+  "raw": "{\"success\": true, \"inputs\": {\"incident_id\": 2117, \"task_id\": null, \"sn_resilient_status\": \"C\"}, \"res_id\": \"RES-2117\", \"row_id\": 28}",
+  "inputs": {
+    "incident_id": 2117,
+    "task_id": null,
+    "sn_resilient_status": "C"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.0.0",
+    "host": "myhost",
+    "execution_time_ms": 1485,
+    "timestamp": "1971-01-01 00:00:00"
+  },
+  "res_id": "RES-2117",
+  "row_id": 28
+}
