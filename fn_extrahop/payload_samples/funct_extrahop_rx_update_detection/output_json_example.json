@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": "success"
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 3235,
+    "soar_inc_owner_id": "a@a.com",
+    "soar_inc_resolution_id": "Resolved",
+    "extrahop_detection_id": 71,
+    "soar_inc_plan_status": "C"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 1084,
+    "timestamp": "2022-04-13 17:21:32"
+  }
+}
