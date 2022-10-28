@@ -28,6 +28,8 @@ polling_interval=60
 #  if more than one field is specified, all fields need to pass
 #   format: "field1": value: "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]
+# new to v1.1, comma separated list of alert fields to filter. At least one alert needs to meet the filter values
+#alert_filters="serviceSource": ["MicrosoftDefenderForEndpoint"]
 # custom templates to replace the default map of defender incident fields to SOAR incident fields
 #create_incident_template=
 #update_incident_template=
