@@ -130,8 +130,8 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=43.0.0
 
 ### QRadar Requirements
-The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806
-The app also requires QRadar Use Case Manager to be installed on QRadar.
+The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
+If the Mitre function is going to be used then the app, QRadar Use Case Manager is required to be installed on the QRadar server.
 
 ---
 
