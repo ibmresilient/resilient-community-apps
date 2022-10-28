@@ -5,7 +5,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed',
-    version='2.2.1',
+    display_name='Data Feeder for SOAR',
+    version='2.2.2',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

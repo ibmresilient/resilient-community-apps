@@ -55,6 +55,8 @@ class Hibp():
         if proxy_https is not None:
             proxies["https"] = proxy_https
 
+        return proxies
+
     def execute_call(self, url, depth=1):
         """
         make call to HIBP, returning the results

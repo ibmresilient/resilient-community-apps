@@ -48,6 +48,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v1.0.4 | September 2022 | Bugfix on Selftest |
 | v1.0.3 | June 2022 | Add support for Python 3.9. |
 | v1.0.2 | June 2021 | Fix for ``selftest``. |
 | v1.0.1 | December 2020 | Added App Host support, Added proxy support. |

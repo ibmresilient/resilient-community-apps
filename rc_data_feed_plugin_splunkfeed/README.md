@@ -14,6 +14,7 @@ Unless otherwise specified, contents of this repository are published under the 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.1   | 10/2022 | Fix to handle rare corrupt event.message |
 | 1.1.0   | 5/2022 | Replaced base component, adding attachment content, workspace separation, more control over auto data reload. |
 | 1.0.3   | 9/2020 | App Host and Proxy Support |
 
