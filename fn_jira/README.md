@@ -140,7 +140,7 @@ The following table provides the settings you need to configure the app. These s
 #### Multi-tenancy
 Starting in version 2.2.0, more than one Jira instance can be configured for SOAR. For enterprises with only one Jira instance, your app.config file will continue to define the Jira instance under the `[fn_jira]` section header.
 
-For enterprises with more than one Jira instance, each instance will have it's own section header, such as `[fn_jira:jira_label1]` where `jira_label1` represents any label helpful to define you Jira environment.
+For enterprises with more than one Jira instance, each instance will have it's own section header, such as `[fn_jira:jira_label1]` where `jira_label1` represents any label helpful to define you Jira environment. You cannot mix `[fn_jira]` and `[fn_jira:jira_label1]` sections headers.
 
 Be aware that modifications to the workflows will be needed to correctly pass this label through the `jira_label` function input field if the Jira server/servers in the app.config have labels.
 
