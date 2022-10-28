@@ -19,7 +19,7 @@ setup(
     Refer to the documentation on the Data Feed extension for uses cases support and configuration options.
     Also refer to the other Data Feed plugins which can be used in combination.""",
     install_requires=[
-        'rc_data_feed>=2.1.1',
+        'rc_data_feed>=2.2.2',
         'resilient',
         'resilient-lib>=44.0.0'
     ],
