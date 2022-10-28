@@ -22,6 +22,7 @@ class RandoriTab(Tab):
         Field("randori_target_status"),
         Field("randori_target_link"),
         Field("randori_target_temptation"),
+        Field("randori_target_authority")
         Field("randori_target_perspective_name"),
         Field("randori_target_affiliation_state"),
         Field("randori_target_impact_score"),

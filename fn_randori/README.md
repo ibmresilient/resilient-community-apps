@@ -350,7 +350,7 @@ detection_data = playbook.functions.results.detection_data
 incident.addNote("detection_data = {}".format(detection_data))
 
 if not detection_data.success:
-  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori")
+  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori to create artifacts.")
 else:
   content = detection_data.get("content", {})
   detection_list = detection_data.content.get("detection_list", [])
@@ -359,28 +359,19 @@ else:
     # Add artifacts
     ip = detection.get("ip")
     if ip:
-      incident.addArtifact("IP Address", ip, "Artifact from Randori")
+      incident.addArtifact("IP Address", ip, "Artifact from Randori.")
       
     port = detection.get("port")
     if port:
-      incident.addArtifact("Port", str(port), "Artifact from Randori")
+      incident.addArtifact("Port", str(port), "Artifact from Randori.")
 
     hostname = detection.get("hostname")
     if hostname:
-      incident.addArtifact("DNS Name", hostname, "Artifact from Randori")
+      incident.addArtifact("DNS Name", hostname, "Artifact from Randori.")
       
     path = detection.get("path")
     if path:
-      incident.addArtifact("File Path", path, "Artifact from Randori")
-
-    # Add Detection data to Detections data table
-    detection_row = incident.addRow("randori_detections_dt")
-    detection_row['randori_dt_path'] = path
-    detection_row['randori_dt_port'] = port
-    detection_row['randori_dt_ip'] = ip
-    detection_row['randori_dt_hostname'] = hostname
-    detection_row['randori_dt_first_seen'] = detection.get("first_seen")
-    detection_row['randori_dt_last_seen'] = detection.get("last_seen")
+      incident.addArtifact("File Path", path, "Artifact from Randori.")
 ```
 
 </p>
@@ -548,13 +539,16 @@ else:
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Randori Target Authority | `randori_target_authority` | `bool` | `properties` | - | - |
 | Randori Target Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
 | Randori Target ID | `randori_target_id` | `text` | `properties` | - | - |
 | Randori Target Impact Score | `randori_target_impact_score` | `text` | `properties` | - | - |
 | Randori Target Link | `randori_target_link` | `textarea` | `properties` | - | - |
+| Randori Target Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
 | Randori Target Status | `randori_target_status` | `text` | `properties` | - | - |
 | Randori Target Tags | `randori_target_tags` | `text` | `properties` | - | - |
 | Randori Target Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
+| Randori Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
 
 ---
 
@@ -562,7 +556,9 @@ else:
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Randori: Get Target Data | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
+| Randori: Add Artifacts of Detections | Automatic playbook to add artifacts of a detection as artifacts in SOAR.. | incident | `enabled` |
+| Randori: Add Detections to Detections Data Table | Automatic playbook to add detections to Detections data tables | incident | `enabled` |
+| Randori: Update Target Data in SOAR | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
 
 ---
 
