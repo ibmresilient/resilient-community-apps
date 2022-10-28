@@ -12,7 +12,7 @@ from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, MarkdownParser, str_to_bool
 
 
 class FunctionPayload(object):
@@ -61,9 +61,15 @@ class FunctionComponent(ResilientComponent):
                 "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]  # select, text (required)
             }
 
-            # Since v2.0.10, we've changed this to support HTML; the old version cleared the HTML.
+            # Since v2.1.0, we've changed this to support HTML; the old version cleared the HTML.
             # SNOW supports surrounding rich text with "[code]" tags. Within that, basic HTML is supported
-            inputs["sn_note_text"] = "[code]" + inputs["sn_note_text"] + "[/code]"
+            # this is only going to be supported on systems where `glide.ui.security.allow_codetag` is enabled
+            # so it is optional
+            if str_to_bool(self.options.get("render_rich_text", "false")):
+                inputs["sn_note_text"] = "[code]" + inputs["sn_note_text"] + "[/code]"
+            else:
+                parser = MarkdownParser(bold="", italic="", underline="", strikeout="")
+                inputs["sn_note_text"] = parser.convert(inputs["sn_note_text"])
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)

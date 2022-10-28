@@ -1,33 +1,22 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
-import logging
-from fn_mcafee_epo.lib.epo_helper import init_client, get_list
-from resilient_lib import ResultPayload, validate_fields
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-LOG = logging.getLogger(__name__)
+from fn_mcafee_epo.lib.epo_helper import init_client, get_list, PACKAGE_NAME
+from resilient_lib import validate_fields
+from resilient_circuits import FunctionResult, AppFunctionComponent, app_function
 
-PACKAGE_NAME = "fn_mcafee_epo"
+FN_NAME = "mcafee_tag_an_epo_asset"
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mcafee_tag_an_epo_asset"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'mcafee_tag_an_epo_asset"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
-
-    @function("mcafee_tag_an_epo_asset")
-    def _mcafee_tag_an_epo_asset_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """
         Function: A function which takes two inputs:
 
@@ -36,42 +25,28 @@ class FunctionComponent(ResilientComponent):
 
         Applies tag to the systems in ePO.
         """
-        try:
-            yield StatusMessage("Starting...")
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-            # Get the function parameters:
-            validate_fields(["mcafee_epo_systems", "mcafee_epo_tag"], kwargs)
-            mcafee_epo_systems = kwargs.get("mcafee_epo_systems")  # text
-            mcafee_epo_tag = self.get_select_param(kwargs.get("mcafee_epo_tag"))  # text, or multi-select
+        # Get the function parameters:
+        validate_fields(["mcafee_epo_systems", "mcafee_epo_tag"], fn_inputs)
 
-            LOG.info("mcafee_epo_systems: %s", mcafee_epo_systems)
-            LOG.info("mcafee_epo_tag: %s", mcafee_epo_tag)
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
-            # determine if a list of tags was given
-            tag_list = get_list(mcafee_epo_tag)
+        # determine if a list of tags was given
+        tag_list = get_list(fn_inputs.mcafee_epo_tag)
 
-            rc = ResultPayload(PACKAGE_NAME, **kwargs)
-            client = init_client(self.opts, self.options)
+        # Connect to ePO server
+        client = init_client(self.opts, self.options)
 
-            for tag in tag_list:
-                params = {
-                    "names": mcafee_epo_systems.strip(),
-                    "tagName": tag
-                }
-                response = client.request("system.applyTag", params)
+        for tag in tag_list:
+            params = {
+                "names": fn_inputs.mcafee_epo_systems.strip(),
+                "tagName": tag
+            }
+            response = client.request("system.applyTag", params)
 
-            yield StatusMessage("Finished")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            results = rc.done(True, response)
-            # apply backward compatible result parameters
-            results['Systems'] = mcafee_epo_systems
-            results['Tag'] = mcafee_epo_tag
-
-            yield StatusMessage("Tag Applied...")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception as e:
-            LOG.error(e)
-            yield FunctionError(e)
-
+        # Produce a FunctionResult with the results
+        yield FunctionResult(response)

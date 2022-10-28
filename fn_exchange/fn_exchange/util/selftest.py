@@ -28,7 +28,7 @@ def selftest_function(opts):
         account = utils.connect_to_account(username)
 
         # Get mailbox info
-        info = account.protocol.resolve_names([username])
+        info = account.protocol.resolve_names([username], return_full_contact_data=True)
 
         if isinstance(info, list) and info[0].email_address == username:
             return {"state": "success"}
