@@ -176,6 +176,207 @@ The following table provides the settings you need to configure the app. These s
 | **soar_update_case_template** | No | /path/soar_close_case_template.jinja | *Path to custom update case jinja template.* |
 
 ---
+## Function - Randori: Get Detections of Target
+Get the list detections of a specified Randori target given it's target Id.
+
+ ![screenshot: fn-randori-get-detections-of-target ](./doc/screenshots/fn-randori-get-detections-of-target.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "detection_list": [
+      {
+        "affiliation_state": "None",
+        "applicability": 3,
+        "attack_note": "",
+        "authority": true,
+        "authority_distance": 0,
+        "authority_override": false,
+        "authorization_state": "None",
+        "banners_uuid": null,
+        "cert_uuid": "0caabe31-4ede-4e24-9507-f9ebc106951f",
+        "characteristic_tags": [
+          "DefaultPage"
+        ],
+        "characteristics_count": 1,
+        "confidence": 75,
+        "cpe": {
+          "cpe_version": "2.3",
+          "edition": null,
+          "language": null,
+          "other": null,
+          "part": "a",
+          "product": "tomcat",
+          "str": "cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*",
+          "sw_edition": null,
+          "target_hw": null,
+          "target_sw": null,
+          "update": null,
+          "vendor": "apache",
+          "version": "7.0.76"
+        },
+        "criticality": 1,
+        "deleted": false,
+        "description": "Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.",
+        "detection_criteria": {
+          "http": {
+            "host": "ferrari.demo.webernets.online",
+            "method": "GET",
+            "path": "/",
+            "version": 1.1
+          },
+          "ip": {
+            "address": "34.149.126.94",
+            "version": 4
+          },
+          "tcp": {
+            "port": 443
+          },
+          "tls": {
+            "version": 3.3
+          }
+        },
+        "detection_relevance": 1130,
+        "enumerability": 3,
+        "exploitability": 5,
+        "first_seen": "2022-07-07T02:05:22.741389+00:00",
+        "headers_uuid": "047cf2ed-c1ff-4bbf-9501-8e0b6b736093",
+        "hostname": "ferrari.demo.webernets.online",
+        "hostname_id": "82ca6db1-344b-4d12-a7db-5e229e3630d1",
+        "id": "f814e5ef-76d9-41c1-b6e8-52b5c0daeb16,5dbcb688-8591-4574-ad18-6cbc27a1941c",
+        "impact_score": "None",
+        "ip": "34.149.126.94",
+        "ip_id": "5b3beaa8-d24c-4861-97de-27dc3b5f9bf2",
+        "ip_str": "34.149.126.94",
+        "last_seen": "2022-10-25T05:31:43.150093+00:00",
+        "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
+        "lens_view": "public",
+        "name": "Tomcat",
+        "org_id": "923af5dd-50ce-4d80-a55f-707dfe08411e",
+        "path": "/",
+        "perspective": "00000000-0000-0000-0000-000000000000",
+        "perspective_name": "PUBLIC",
+        "poc_email": null,
+        "poc_id": null,
+        "port": 443,
+        "post_exploit": 3,
+        "priority_impact_factor": 0.0,
+        "priority_score": 81.0,
+        "priority_status_factor": 0.1125,
+        "priority_tags_factor": 0.0675,
+        "private_weakness": 0,
+        "protocol": "tcp",
+        "public_weakness": 5,
+        "randori_notes": "This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.",
+        "reference": "http://tomcat.apache.org",
+        "research": 3,
+        "screenshot_uuid": "5afc7cfb-9ab8-4231-a296-909eb7d918e2",
+        "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
+        "status": "Needs Resolution",
+        "target_confidence": 75,
+        "target_first_seen": "2022-07-07T07:18:22.029485+00:00",
+        "target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
+        "target_last_seen": "2022-10-24T06:16:04.127801+00:00",
+        "target_num_detections": 1,
+        "target_temptation": 45,
+        "tech_category": [
+          "App Servers"
+        ],
+        "temptation_last_modified": "2022-03-31T18:10:37.913851+00:00",
+        "thumbnail_uuid": "50adc897-252f-4388-89bb-7ef034b68320",
+        "user_tags": [
+          "Google",
+          "Unknown - By Qualys",
+          "Unknown - By Tenable",
+          "Wildcard Cert"
+        ],
+        "vendor": "Apache",
+        "version": "7.0.76"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 315,
+    "timestamp": "2022-10-27 16:37:20"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+detection_data = playbook.functions.results.detection_data
+
+incident.addNote("detection_data = {}".format(detection_data))
+
+if not detection_data.success:
+  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori to create artifacts.")
+else:
+  content = detection_data.get("content", {})
+  detection_list = detection_data.content.get("detection_list", [])
+  for detection in detection_list:
+    
+    # Add artifacts
+    ip = detection.get("ip")
+    if ip:
+      incident.addArtifact("IP Address", ip, "Artifact from Randori.")
+      
+    port = detection.get("port")
+    if port:
+      incident.addArtifact("Port", str(port), "Artifact from Randori.")
+
+    hostname = detection.get("hostname")
+    if hostname:
+      incident.addArtifact("DNS Name", hostname, "Artifact from Randori.")
+      
+    path = detection.get("path")
+    if path:
+      incident.addArtifact("File Path", path, "Artifact from Randori.")
+```
+
+</p>
+</details>
+
 
 ## Function - Randori: Get Target
 Get the Randori target data.
@@ -338,13 +539,16 @@ else:
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Randori Target Authority | `randori_target_authority` | `bool` | `properties` | - | - |
 | Randori Target Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
 | Randori Target ID | `randori_target_id` | `text` | `properties` | - | - |
 | Randori Target Impact Score | `randori_target_impact_score` | `text` | `properties` | - | - |
 | Randori Target Link | `randori_target_link` | `textarea` | `properties` | - | - |
+| Randori Target Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
 | Randori Target Status | `randori_target_status` | `text` | `properties` | - | - |
 | Randori Target Tags | `randori_target_tags` | `text` | `properties` | - | - |
 | Randori Target Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
+| Randori Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
 
 ---
 
@@ -352,7 +556,9 @@ else:
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Randori: Get Target Data | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
+| Randori: Add Artifacts of Detections | Automatic playbook to add artifacts of a detection as artifacts in SOAR.. | incident | `enabled` |
+| Randori: Add Detections to Detections Data Table | Automatic playbook to add detections to Detections data tables | incident | `enabled` |
+| Randori: Update Target Data in SOAR | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
 
 ---
 

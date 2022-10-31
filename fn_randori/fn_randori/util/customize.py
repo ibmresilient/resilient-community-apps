@@ -21,16 +21,16 @@ def codegen_reload_data():
     return {
         "package": u"fn_randori",
         "message_destinations": [u"fn_randori"],
-        "functions": [u"randori_get_target"],
+        "functions": [u"randori_get_detections_of_target", u"randori_get_target"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"randori_detections_dt"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"randori_update_target_data_in_soar"]
+        "playbooks": [u"randori_add_artifacts_of_detections", u"randori_add_detections_to_detections_data_table", u"randori_update_target_data_in_soar"]
     }
 
 
@@ -45,8 +45,11 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_randori
     - Functions:
+        - randori_get_detections_of_target
         - randori_get_target
     - Playbooks:
+        - randori_add_artifacts_of_detections
+        - randori_add_detections_to_detections_data_table
         - randori_update_target_data_in_soar
     - Incident Fields:
         - randori_target_affiliation_state
@@ -59,6 +62,8 @@ def customization_data(client=None):
         - randori_target_tags
         - randori_target_tech_category
         - randori_target_temptation
+    - Data Tables:
+        - randori_detections_dt
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

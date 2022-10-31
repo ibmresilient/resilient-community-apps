@@ -247,6 +247,30 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
+    def get_detections_for_single_target(self, target_id) -> list:
+        """
+        Get changed entities
+
+        :return: changed entity list
+        :rtype: list of targets
+        """
+
+        # Base query used by the poller to get new and updated targets based on last poll time.
+        query =  {
+            'condition': "OR",
+            'rules': [
+                {
+                'field': "table.target_id",
+                'operator': "equal",
+                'value': target_id
+                }
+              ]
+         }
+
+        detections = self.get_detections_for_target(query)
+
+        return detections
+
     def get_validate(self) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
