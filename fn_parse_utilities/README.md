@@ -368,7 +368,7 @@ results = {
   "metrics": {
     "execution_time_ms": 1347,
     "host": "My Host",
-    "package": "fn-utilities",
+    "package": "fn-parse-utilities",
     "package_version": "2.1.1",
     "timestamp": "2022-10-13 15:50:56",
     "version": "1.0"
@@ -582,6 +582,8 @@ workflow.addProperty('convert_json_to_rich_text', {
 ---
 ## Function - Parse Utilities: PDFID
 Produces summary information about the structure of a PDF file, using Didier Stevens' PDFID (https://blog.didierstevens.com/programs/pdf-tools/).
+
+This function is useful in initial triage of suspicious email attachments and other files. It allows you to identify PDF documents that contain (for example) JavaScript or that execute an action when opened. PDFiD also handles name obfuscation. The combination of PDF automatic action and JavaScript makes a document very suspicious.
 
  ![screenshot: fn-parse-utilities-pdfid ](./doc/screenshots/fn-parse-utilities-pdfid.png)
 

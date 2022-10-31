@@ -15,7 +15,6 @@
 import logging
 import json
 import datetime
-import tempfile
 import OpenSSL # Used for certificates
 from cryptography import x509 # Used for certificates
 from cryptography.x509 import DNSName, ExtensionNotFound, ExtensionOID
@@ -24,7 +23,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements SOAR function 'utilities_parse_ssl_certificate"""
+    """Component that implements SOAR function 'parse_utilities_parse_ssl_certificate"""
 
     @function("parse_utilities_parse_ssl_certificate")
     def _utilities_parse_ssl_certificate_function(self, event, *args, **kwargs):
@@ -43,9 +42,9 @@ class FunctionComponent(ResilientComponent):
         }"""
         try:
             # Get the function parameters:
-            artifact_id = kwargs.get("artifact_id")  # number
+            artifact_id = kwargs.get("parse_utilities_artifact_id")  # number
             certificate = kwargs.get("parse_utilities_certificate")  # text
-            incident_id = kwargs.get("incident_id")  # number
+            incident_id = kwargs.get("parse_utilities_incident_id")  # number
 
             log = logging.getLogger(__name__)
             log.info("artifact_id: %s", artifact_id)

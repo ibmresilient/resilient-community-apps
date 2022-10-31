@@ -20,7 +20,6 @@
 ```python
 #inputs.xml_stylesheet = "cdcatalog.xslt"
 # In most cases, the xml_soure will come from other sources. 
-# If need be, use fn_utilities to capture data from attachments
 inputs.parse_utilities_xml_source = """
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog>

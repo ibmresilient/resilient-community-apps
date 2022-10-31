@@ -24,11 +24,11 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             base64content = kwargs.get("parse_utilities_base64content")  # text
-            filename = kwargs.get("filename")  # text
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            attachment_id = kwargs.get("attachment_id")  # number
-            artifact_id = kwargs.get("artifact_id")  # number
+            filename = kwargs.get("parse_utilities_filename")  # text
+            incident_id = kwargs.get("parse_utilities_incident_id")  # number
+            task_id = kwargs.get("parse_utilities_task_id")  # number
+            attachment_id = kwargs.get("parse_utilities_attachment_id")  # number
+            artifact_id = kwargs.get("parse_utilities_artifact_id")  # number
 
             if base64content == None:
                 client = self.rest_client()

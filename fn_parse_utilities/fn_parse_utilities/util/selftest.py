@@ -19,6 +19,7 @@ Return examples:
 """
 
 import logging
+from os.path import join, exists, isfile
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -31,6 +32,14 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     app_configs = opts.get("fn_parse_utilities", {})
+
+    # Get the stylesheet
+    stylesheet_dir = join(app_configs.get("xml_stylesheet_dir"))
+    if not (exists(stylesheet_dir)):
+        return{
+            "state": "failure",
+            "reason": "Stylesheet directory not found."
+        }
 
     return {
         "state": "success",

@@ -82,7 +82,7 @@ class TestParseUtilitiesPdfid:
         """ Test calling with sample values for the parameters """
         function_params = {
             "parse_utilities_base64content": base64content,
-            "filename": "sample1.pdf"
+            "parse_utilities_filename": "sample1.pdf"
         }
         results = call_parse_utilities_pdfid_function(circuits_app, function_params)
         assert(expected_results == results)

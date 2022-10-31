@@ -19,12 +19,12 @@
 ### Pre-Processing Script
 ```python
 # Define incident_id and attachment_id
-inputs.incident_id = incident.id
-inputs.attachment_id = attachment.id
+inputs.parse_utilities_incident_id = incident.id
+inputs.parse_utilities_attachment_id = attachment.id
 
 # If this is a "task attachment" then we will additionally have a task-id
 if task is not None:
-  inputs.task_id = task.id
+  inputs.parse_utilities_task_id = task.id
 
 # Setting this to True will add any found attachments as an Email Attachment Artifact
 inputs.parse_utilities_email_attachments = True

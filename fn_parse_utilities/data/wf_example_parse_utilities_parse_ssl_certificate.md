@@ -19,8 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.parse_utilities_certificate = artifact.value
-inputs.artifact_id = artifact.id
-inputs.incident_id = incident.id
+inputs.parse_utilities_artifact_id = artifact.id
+inputs.parse_utilities_incident_id = incident.id
 ```
 
 ### Post-Processing Script

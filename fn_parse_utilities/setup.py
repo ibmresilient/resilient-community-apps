@@ -30,7 +30,7 @@ setup(
     description="Useful workflow/playbook functions to use for common parsing in the SOAR platform",
     long_description="""This package contains functions to parse information from emails, ssl certificates, and PDFs as well as a function to transform an XML document using a preexisting xsl stylesheet.""",
     install_requires=[
-        "resilient-circuits>=46.0.0",
+        "resilient-circuits",
         'pdfid~=1.1',
         'defusedxml~=0.7.1',
         'lxml~=4.8',

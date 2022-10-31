@@ -4,13 +4,16 @@
 """Function implementation"""
 
 from logging import getLogger
+from fn_parse_utilities.components.funct_parse_utilities_email_parse import PACKAGE_NAME
 from lxml import etree
 from defusedxml import lxml as defused_etree
 from os.path import isdir, join, exists, isfile
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, get_file_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 LOG = getLogger(__name__)
+
+PACKAGE_NAME = "fn_parse_utilities"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'utilities_xml_transformation"""
@@ -20,12 +23,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_parse_utilities", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_parse_utilities", {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @function("parse_utilities_xml_transformation")
     def _utilities_xml_transformation_function(self, event, *args, **kwargs):
@@ -44,10 +47,20 @@ class FunctionComponent(ResilientComponent):
             LOG.info("xml_source: %s", xml_source)
             LOG.info("xml_stylesheet: %s", xml_stylesheet)
 
+            if xml_source is None:
+                res_client = self.rest_client()
+                xml_source = get_file_attachment(
+                    res_client=res_client,
+                    incident_id=kwargs.get("parse_utilities_incident_id"),
+                    artifact_id=kwargs.get("parse_utilities_artifact_id"),
+                    task_id=kwargs.get("parse_utilities_task_id"),
+                    attachment_id=kwargs.get("parse_utilities_attachment_id")
+                )
+
             # Get the stylesheet
             stylesheet = join(self.options.get(FunctionComponent.XML_DIR), xml_stylesheet)
             if not (exists(stylesheet) and isfile(stylesheet)):
-                raise ValueError("stylesheet file not found: {}".format(stylesheet))
+                raise ValueError("Stylesheet file not found: {}".format(stylesheet))
 
             yield StatusMessage("Starting...")
 

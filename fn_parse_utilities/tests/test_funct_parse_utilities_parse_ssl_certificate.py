@@ -56,9 +56,9 @@ class TestParseUtilitiesParseSslCertificate:
     def test_success(self, circuits_app, artifact_id, certificate, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
-            "artifact_id": artifact_id,
+            "parse_utilities_artifact_id": artifact_id,
             "parse_utilities_certificate": certificate,
-            "incident_id": incident_id
+            "parse_utilities_incident_id": incident_id
         }
         results = call_parse_utilities_parse_ssl_certificate_function(circuits_app, function_params)
         verify_subset(expected_results, results)

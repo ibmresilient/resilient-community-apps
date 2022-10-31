@@ -19,8 +19,8 @@
 ### Pre-Processing Script
 ```python
 # Define incident_id and artifact_id
-inputs.incident_id = incident.id
-inputs.artifact_id = artifact.id
+inputs.parse_utilities_incident_id = incident.id
+inputs.parse_utilities_artifact_id = artifact.id
 
 # Setting this to True will add any found attachments as an Email Attachment Artifact
 inputs.parse_utilities_email_attachments = True

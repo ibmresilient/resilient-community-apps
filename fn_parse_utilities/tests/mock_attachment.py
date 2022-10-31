@@ -5,7 +5,7 @@ from __future__ import print_function
 from os.path import join, dirname
 from base64 import b64encode
 from requests_mock import create_response
-from fn_parse_utilities.util.utils_common import b_to_s
+from resilient_lib import b_to_s
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 
 class AttachmentMock(BasicResilientMock):

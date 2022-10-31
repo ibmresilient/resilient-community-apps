@@ -4,7 +4,7 @@
 from __future__ import print_function
 import pytest
 from tests.mock_artifact import ArtifactMock
-from fn_parse_utilities.util.utils_common import b_to_s
+from resilient_lib import b_to_s
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -78,7 +78,7 @@ class TestParseUtilitiesEmailParse:
         """ Test calling with sample values for the parameters """
         function_params = {
             "parse_utilities_base64content": b_to_s(base64content),
-            "incident_id": 1001
+            "parse_utilities_incident_id": 1001
         }
         result = call_parse_utilities_email_parse_function(circuits_app, function_params)
         verify_subset(expected_result, result["content"])

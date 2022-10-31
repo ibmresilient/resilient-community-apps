@@ -4,7 +4,7 @@
 from __future__ import print_function
 from os.path import dirname, join, realpath
 import pytest
-from fn_parse_utilities.util.utils_common import b_to_s
+from resilient_lib import b_to_s
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 

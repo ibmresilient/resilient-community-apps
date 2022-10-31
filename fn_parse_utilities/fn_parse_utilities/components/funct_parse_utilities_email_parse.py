@@ -11,10 +11,9 @@ from shutil import rmtree
 from base64 import b64decode
 from logging import getLogger
 
-from fn_parse_utilities.util.utils_common import b_to_s, s_to_b
 from mailparser import parse_from_bytes, parse_from_file_msg
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
+from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file, b_to_s, s_to_b
 
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
@@ -23,7 +22,7 @@ RE_BASE64 = compile("^[A-Za-z0-9+/\r\n]+={0,2}$")
 RE_START_BASE64 = compile("\n\n")
 
 LOG = getLogger(__name__)
-PACKAGE_NAME = 'fn_utilities'
+PACKAGE_NAME = 'fn_parse_utilities'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'email_message_parts"""
@@ -38,7 +37,7 @@ class FunctionComponent(ResilientComponent):
             parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
 
             # Get the function inputs:
-            fn_inputs = validate_fields(["incident_id"], kwargs)
+            fn_inputs = validate_fields(["parse_utilities_incident_id"], kwargs)
 
             # Instansiate ResultPayload
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
@@ -61,19 +60,19 @@ class FunctionComponent(ResilientComponent):
                 # Get attachment metadata
                 attachment_metadata = get_file_attachment_metadata(
                     res_client=res_client,
-                    incident_id=fn_inputs.get("incident_id"),
-                    artifact_id=fn_inputs.get("artifact_id"),
-                    task_id=fn_inputs.get("task_id"),
-                    attachment_id=fn_inputs.get("attachment_id")
+                    incident_id=fn_inputs.get("parse_utilities_incident_id"),
+                    artifact_id=fn_inputs.get("parse_utilities_artifact_id"),
+                    task_id=fn_inputs.get("parse_utilities_task_id"),
+                    attachment_id=fn_inputs.get("parse_utilities_attachment_id")
                 )
 
                 # Get attachment content
                 attachment_contents = get_file_attachment(
                     res_client=res_client,
-                    incident_id=fn_inputs.get("incident_id"),
-                    artifact_id=fn_inputs.get("artifact_id"),
-                    task_id=fn_inputs.get("task_id"),
-                    attachment_id=fn_inputs.get("attachment_id")
+                    incident_id=fn_inputs.get("parse_utilities_incident_id"),
+                    artifact_id=fn_inputs.get("parse_utilities_artifact_id"),
+                    task_id=fn_inputs.get("parse_utilities_task_id"),
+                    attachment_id=fn_inputs.get("parse_utilities_attachment_id")
                 )
 
                 # Get the file_extension
