@@ -34,7 +34,6 @@ setup(
         "pymsteams ~= 0.2.1;python_version>='3.6'",
         "msal ~= 1.19;python_version>='3.6'"
     ],
-    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
