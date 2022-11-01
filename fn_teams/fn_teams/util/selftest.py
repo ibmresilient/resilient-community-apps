@@ -52,21 +52,20 @@ def selftest_function(opts):
     rc = RequestsCommon(opts, options)
     required_parameters = {
         "rc"     : rc,
-        "logger" : log
-        }
+        "logger" : log}
 
     ''' TEST 1: Teams Authentication (Mandatory) '''
     try:
         authenticator = MicrosoftAuthentication(required_parameters, options)
         header = authenticator.authenticate()
-        AUTHENTICATED = True
+        authenticated = True
         err_reason += constants.MSG_AUTHENTICATION_PASSED
 
     except Exception as err:
         log.error(str(err))
         err_reason += constants.MSG_AUTHENTICATION_FAILED.format(str(err))
 
-    if AUTHENTICATED:
+    if authenticated:
         try:
             rc.execute(method="get",
                 url=parse.urljoin(constants.BASE_URL, constants.LIST_USERS),
@@ -86,10 +85,9 @@ def selftest_function(opts):
         try:
             card = pymsteams.connectorcard(
                 webhook, 
-                http_proxy=opts['proxy_http'] if opts.get('proxy_http') else None,
-                https_proxy=opts['proxy_https'] if opts.get('proxy_https') else None,
-                http_timeout=60
-                )
+                http_proxy=opts.get('proxy_http', rc.get_proxies().get('http')),
+                https_proxy=opts.get('proxy_http', rc.get_proxies().get('https')),
+                http_timeout=60)
 
             card.title("Resilient SelfTest")
             card.text(datetime.ctime(datetime.now()))
@@ -107,14 +105,12 @@ def selftest_function(opts):
         log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
         test_pass_2 = True
 
-    if AUTHENTICATED and test_pass_1 and test_pass_2:
+    if authenticated and test_pass_1 and test_pass_2:
         return{
             "state" : "success",
-            "reason": err_reason
-            }
+            "reason": err_reason}
 
     else:
         return {
             "state": "failure",
-            "reason": err_reason
-            }
+            "reason": err_reason}
