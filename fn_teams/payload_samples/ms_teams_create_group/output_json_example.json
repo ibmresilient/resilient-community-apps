@@ -1,0 +1,61 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "929212a4-0569-44a3-bfce-4c72a2fb114c",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2022-10-24T14:22:58Z",
+    "creationOptions": [],
+    "description": "Incident 2096: MS Teams Group",
+    "displayName": "MSGroup",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "yup@5rf2xs.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "MailBox",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:MailBox@5rf2xs.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2022-10-24T14:22:58Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-2459046564-1151534441-1917636287-1276246946",
+    "theme": null,
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": []
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2096,
+    "ms_group_description": "Incident 2096: MS Teams Group",
+    "additional_members": null,
+    "ms_owners_list": "AdminSoarMS@5rf2xs.onmicrosoft.com",
+    "ms_group_name": "MSGroup",
+    "ms_group_mail_nickname": "MailBox",
+    "add_members_from": "Incident"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 6013,
+    "timestamp": "2022-10-24 15:22:59"
+  }
+}

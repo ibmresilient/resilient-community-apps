@@ -19,18 +19,22 @@ def snake_to_camel(word):
 
 setup(
     name='fn_teams',
-    version='1.0.2',
+    display_name="Microsoft Teams",
+    version='2.0.0',
     license='MIT License',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='Resilient Labs',
-    description="Resilient Circuits Components for 'fn_teams'",
-    long_description="Resilient Circuits Components for 'fn_teams'. Included are example workflows and rules for pushing incident and task information to a Teams channel",
+    author='IBM SOAR',
+    author_email='',
+    url='https://ibm.biz/soarcommunity',
+    description="This app extends the collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform",
+    long_description='''This app provides SOAR platform with the ability to interface with Microsoft Teams and create groups and channels.
+    Included are example workflows and rules for pushing incident and task information to a Teams channel and to create a group and channel from
+    within an incident or task''',
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib',
-        'pymsteams'
+        "resilient_circuits>=45.0.0",
+        "pymsteams ~= 0.2.1",
+        "msal ~= 1.19"
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
