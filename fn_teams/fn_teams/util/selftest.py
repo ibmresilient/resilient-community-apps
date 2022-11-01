@@ -83,10 +83,11 @@ def selftest_function(opts):
         ''' TEST 2: Teams POST MESSAGE (Skipped if selftest option not found in app.conf) '''
         webhook = options.get(SELF_TEST)
         try:
+            proxy = rc.get_proxies() if rc.get_proxies() else {}
             card = pymsteams.connectorcard(
                 webhook, 
-                http_proxy=opts.get('proxy_http', rc.get_proxies().get('http')),
-                https_proxy=opts.get('proxy_http', rc.get_proxies().get('https')),
+                http_proxy=opts.get('proxy_http', proxy.get('http')),
+                https_proxy=opts.get('proxy_http', proxy.get('https')),
                 http_timeout=60)
 
             card.title("Resilient SelfTest")
