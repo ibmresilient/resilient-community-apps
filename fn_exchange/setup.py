@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_exchange',
     display_name='Microsoft Exchange',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',

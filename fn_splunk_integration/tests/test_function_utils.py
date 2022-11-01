@@ -8,10 +8,9 @@ from fn_splunk_integration.util.function_utils import make_query_string, make_it
 
 def test_query_string():
     print("Testing query string substitution....")
-    input_string = "index = %param1% source=%param2% AND %param3%=%param4%"
-    params = ["_internal", "*splunkd*", "clientip", "127.0.0.1"]
 
-    query = make_query_string(input_string, params)
+    query = make_query_string("index = %param1% source=%param2% AND %param3%=%param4%",
+                              ["_internal", "*splunkd*", "clientip", "127.0.0.1"])
     expect = "index = _internal source=*splunkd* AND clientip=127.0.0.1"
 
     assert query == expect
@@ -35,8 +34,8 @@ def test_make_item_dict():
     # Test null key
     try:
         item_dict = make_item_dict(["p1", "p2",
-                        None, "p4",
-                        "p5", "p6"])
+                                    None, "p4",
+                                    "p5", "p6"])
         assert item_dict["p1"] == "p2" and item_dict["p5"] == "p6"
         assert "p4" not in item_dict
     except IntegrationError:
@@ -46,5 +45,5 @@ def test_make_item_dict():
     try:
         item_dict = make_item_dict(["p1", None])
         assert not item_dict["p1"]
-    except:
+    except Exception:
         assert False

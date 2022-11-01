@@ -28,7 +28,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 7/2022 | Migrated to REST api and added the ability to create rooms and teams for incidents |
+| 2.0.0 | 7/2022 | Migrated to REST API and added the ability to create rooms, teams and meetings |
 | 1.1.1 | 8/2021 | Rebuild app.zip |
 | 1.1.0 | 2/2021 | App Host Support|
 | 1.0.0 | 8/2018 | Initial Release |

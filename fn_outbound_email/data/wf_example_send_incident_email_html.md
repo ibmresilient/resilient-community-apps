@@ -11,7 +11,7 @@
 `send_email`
 
 ### Output Name
-``
+`outbound_email_results`
 
 ### Message Destination
 `email_outbound`
@@ -22,7 +22,7 @@ inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
-inputs.mail_from = "changeme@resilientsystems.com"
+inputs.mail_from = rule.properties.mail_from
 inputs.mail_subject = u"[{0}] {1}".format(incident.id, incident.name)
 
 inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
@@ -54,6 +54,18 @@ inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
     </td>
     {{ get_row('Description:','description') }}
 </tr>
+<tr>
+    <td colspan="2">
+        <h3 style="color: rgb(68,114,196)">INCIDENT LINK</h3>
+        <hr size="1" width="100%" noshade style="color:#FFDF57" align="center"/>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        {% set inc_url = template_helper.generate_incident_url(incident.id) %}
+        <a target='_blank' href='{{ inc_url }}'>{{ incident.id }}: {{ incident.name }}</a>
+    </td>
+</tr>
 </table>
 <br>
 """
@@ -61,13 +73,7 @@ inputs.mail_body_html = """{% set NOT_FOUND = ["Not Found!","-","None",None] %}
 
 ### Post-Processing Script
 ```python
-if results.success:
-  noteText = u"""Email Sent if mail server is valid/authenticated\n 
-  <br>From: {0}<br> To: {1}<br> CC: {2}<br> BCC: {3}<br> Subject: {4} <br> 
-  Body: {5} <br>""".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text)
-else:
-  noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
-incident.addNote(helper.createRichText(noteText))
+None
 ```
 
 ---

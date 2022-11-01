@@ -1,55 +1,51 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
-"""Function implementation"""
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+"""AppFunction implementation"""
 
-import logging
-from fn_mcafee_epo.lib.epo_helper import init_client
-from resilient_lib import ResultPayload, validate_fields
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_mcafee_epo.lib.epo_helper import init_client, PACKAGE_NAME
+from resilient_lib import validate_fields
+from resilient_circuits import FunctionResult, AppFunctionComponent, app_function
 
-PACKAGE_NAME = "fn_mcafee_epo"
+FN_NAME = "mcafee_epo_find_a_system"
 
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mcafee_epo_find_a_system''"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'mcafee_epo_find_a_system''"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE_NAME, {})
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """Function: Find ePO systems based on property such as system name, tag, IP address, MAC address, etc.
+           Return: List of systems found and information about the systems"""
 
-    @function("mcafee_epo_find_a_system")
-    def _mcafee_epo_find_a_system_function(self, event, *args, **kwargs):
-        """Function: Find an ePO system based on property such as system name, tag, IP address, MAC address, etc."""
-        try:
-            # Get the function parameters:
-            validate_fields(["mcafee_epo_systems"], kwargs)
-            mcafee_epo_systems = kwargs.get("mcafee_epo_systems")  # text
-            client = init_client(self.opts, self.options)
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-            log = logging.getLogger(__name__)
-            log.info("mcafee_epo_systems: %s", mcafee_epo_systems)
+        # Get the function parameters:
+        validate_fields(["mcafee_epo_systems"], fn_inputs)
 
-            yield StatusMessage("Starting")
+        # Connect to ePO server
+        client = init_client(self.opts, self.options)
 
-            rc = ResultPayload(PACKAGE_NAME, **kwargs)
+        # Log parameters
+        self.LOG.info(str(fn_inputs))
 
-            params = {"searchText": mcafee_epo_systems.strip()}
-            response = client.request("system.find", params)
+        def response(systems):
+            return client.request(
+                "system.find",
+                {"searchText": systems.strip().replace(",","")}
+            )
 
-            yield StatusMessage("Finished")
+        if ',' in fn_inputs.mcafee_epo_systems:
+            results = []
+            systems = fn_inputs.mcafee_epo_systems.split()
+            for system in systems:
+                results.append(response(system)[0])
+        else:
+            results = response(fn_inputs.mcafee_epo_systems)
 
-            results = rc.done(True, response)
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(results)

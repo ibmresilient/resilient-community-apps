@@ -128,7 +128,7 @@ class FunctionComponent(ResilientComponent):
         for device_id in netdevice_ids.split(','):
 
             # find the access information
-            device_info = self.opts.get(device_id.strip(), None)
+            device_info = self.opts.get(device_id.strip(), {}).copy()
             if not device_info:
                 msg = u"Unable to find section for '{}'".format(device_id)
                 result[device_id] = {
@@ -139,8 +139,7 @@ class FunctionComponent(ResilientComponent):
 
                 log.warning(msg)
                 continue
-
-            device_commit = str_to_bool(device_info.pop('use_commit', 'False')) # pop
+            device_commit = str_to_bool(device_info.pop('use_commit', 'False')) # pop - required because `execute` passes the dict directly to ConnectHandler; we cannot have any extra keys
             result[device_id] = execute(device_info, netdevice_cmd, netdevice_config, device_commit, use_textfsm)
 
         return rc, result
