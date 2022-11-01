@@ -8,7 +8,7 @@ from urllib import parse
 from resilient_lib import IntegrationError, validate_fields
 from fn_teams.lib import constants
 
-class TeamsAuthentication:
+class MicrosoftAuthentication:
     """
         This application generates an access token using the the MSAL class to interface with 
         the Microsoft Endpoint using the directory_id, application_id and secret_value that was
@@ -16,9 +16,7 @@ class TeamsAuthentication:
         form of a dictionary: requiredParameters. The below mentioned inputs need to be available
         in the requiredParameters dictionary for the authenticator to work. All required credentials
         for an integration can be found at:
-
             portal.azure.com > App registrations > Integration Name
-
         Inputs:
         -------
             directory_id   <str> : Directory (tenant) ID found at azure portal
@@ -26,7 +24,6 @@ class TeamsAuthentication:
             secret_value   <str> : Secret Value found for the integration
             scope          <str> : Specifies required access permission for this
                                    application to function
-
         Returns:
         --------
             RequestHeader <dict> : An authorization Bearer ID and Content-Type as 
@@ -38,7 +35,7 @@ class TeamsAuthentication:
 
         self.required_parameters = required_parameters
         self.rc  = required_parameters.get("rc")
-        self.LOG = self.required_parameters.get("logger")
+        self.LOG = required_parameters.get("logger")
 
         self.required_parameters["scope"] = constants.DEFAULT_SCOPE
         self.required_parameters["application_id"] = app_config.get("application_id")
@@ -53,7 +50,6 @@ class TeamsAuthentication:
         Helper method that establishes a connection with the Client servers and performs an OAuth
         authentication. The server returns a beareID for the session, which then is used to make
         requests. This bearer_id is incorporated with the header for every request henceforth
-
         Returns:
         --------
             header <dict> : Request header with access_token
@@ -67,11 +63,9 @@ class TeamsAuthentication:
         '''
         This function perfroms MSAL authentication and retrieves the bearer_id which is necessary
         to interact with the Microsoft's endpoint.
-
         Raises:
         -------
             <IntegrationError> : Access_token not found in response
-
         Returns:
         --------
             bearer_id <str> : Access_token on successful authentication
@@ -110,4 +104,5 @@ class TeamsAuthentication:
         self.LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
 
         return {
-            'Authorization' : 'Bearer {}'.format(bearer_id)}
+            'Authorization' : 'Bearer {}'.format(bearer_id),
+            "Content-type"  : "application/json"}

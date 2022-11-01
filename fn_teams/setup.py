@@ -25,15 +25,16 @@ setup(
     author='IBM SOAR',
     author_email='',
     url='https://ibm.biz/soarcommunity',
-    description="This package extends the collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform",
-    long_description='''This package provides SOAR platform with the ability to interface with Microsoft Teams and create groups and channels.
+    description="This app extends the collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform",
+    long_description='''This app provides SOAR platform with the ability to interface with Microsoft Teams and create groups and channels.
     Included are example workflows and rules for pushing incident and task information to a Teams channel and to create a group and channel from
     within an incident or task''',
     install_requires=[
         "resilient_circuits>=45.0.0",
         "pymsteams ~= 0.2.1;python_version>='3.6'",
-        "msal ~= 1.19;python_version>='3.5'"
+        "msal ~= 1.19;python_version>='3.6'"
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

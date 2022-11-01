@@ -9,5 +9,6 @@ include doc/screenshots/*
 include icons/*.png
 recursive-include payload_samples/*/ *.json
 include tox.ini
-recursive-include tests/ *
+recursive-include tests/*
+recursive-include fn_teams/lib/*
 global-exclude *.bak
