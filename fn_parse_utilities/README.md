@@ -35,6 +35,7 @@
 - [Function - Parse Utilities: Parse SSL Certificate](#function---parse-utilities-parse-ssl-certificate)
 - [Function - Parse Utilities: PDFID](#function---parse-utilities-pdfid)
 - [Function - Parse Utilities: XML Transformation](#function---parse-utilities-xml-transformation)
+- [Script - Convert JSON to rich text v1.0](#script---convert-json-to-rich-text-v10)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
@@ -46,7 +47,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 10/2022 | Initial Release |
+| 1.0.0 | 11/2022 | Initial Release |
 
 ---
 
@@ -84,12 +85,15 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `43.1.49`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=46.0.0`.
+* Integration server is running `resilient-circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | All Incidents | Read |
+  | All Incident Notes | Edit |
+
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -100,7 +104,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.7.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -122,7 +126,7 @@ Additional package dependencies may exist for each of these packages:
 * mail-parser~=3.15
 * pdfid~=1.1
 * pyOpenSSL~=22.0
-* resilient-circuits>=46.0.0
+* resilient-circuits
 
 ---
 
@@ -139,7 +143,6 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **xml_stylesheet_dir** | Yes | /Path/to/stylesheet | Path to stylesheet for transforming XML document |
 
-
 ---
 
 ## Function - Parse Utilities: Email Parse
@@ -154,12 +157,12 @@ Any attachments found are added to the incident as artifacts if `parse_utilities
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `artifact_id` | `number` | No | `-` | - |
-| `attachment_id` | `number` | No | `-` | - |
-| `incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | - |
+| `parse_utilities_attachment_id` | `number` | No | `-` | - |
 | `parse_utilities_base64content` | `text` | No | `-` | - |
 | `parse_utilities_email_attachments` | `boolean` | No | `-` | If set to True, attachments found in the email file will be attached as Artifacts |
-| `task_id` | `number` | No | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_task_id` | `number` | No | `-` | - |
 
 </p>
 </details>
@@ -172,7 +175,7 @@ Any attachments found are added to the incident as artifacts if `parse_utilities
 ```python
 results = {
   "content": {
-    "authentication-results": "spf=none (sender IP is 169.55.84.251)\r\n smtp.mailfrom=example1.fyre.ibm.com; dkim=none (message not signed)\r\n header.d=none;dmarc=fail action=none header.from=us.ibm.com;",
+    "authentication-results": "spf=none (sender IP is 169.55.84.251)\r\n smtp.mailfrom=example.fyre.ibm.com; dkim=none (message not signed)\r\n header.d=none;dmarc=fail action=none header.from=us.ibm.com;",
     "body": "\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\u003ctable cellpadding=\"4\"\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eCongratulations, you\u0027re all ready to go!!\r\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\r\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr bgcolor=\"orange\"\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eEmbers\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003ePublic\r\nIP\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003ePrivate IP \u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eAdditional Disks\u003c/th\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd align=\"left\" bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e\u003cb\u003elead1\u003c/b\u003e.fyre.ibm.com \u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e9.30.211.110\u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e10.11.38.164\u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e--\u003c/td\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cbr\u003e\u003cb\u003eLogin Credentials:\u003c/b\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e You can now log\r\ninto the node(s) of your cluster with the following credentials:\r\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e Username: root\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e Password: Your personal root password that you\r\nset on the Fyre webpage. \u003cbr\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cb\u003eSecurity schedule\u003cb\u003e:\r\n\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\r\nYour cluster will be kept compliant automatically and will be patched\r\nand rebooted on the 1st weekend of each month.  You can change this\r\nschedule or disable it on a per-cluster basis from the Fyre\r\nGUI.\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cb\u003eTerms of Use\u003cb\u003e: \u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eBy using Fyre and/or Fyre resources\r\n(vms, clusters, etc), you agree to always abide by the Fyre Terms of\r\nUse.  \u003cbr\u003e\r\n\tThese terms can be found here: \u003ca href=\"https://fyre.ibm.com/help#fyre-termsofuse\"\u003ehttps://fyre.ibm.com/help#fyre-termsofuse\u003c/a\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\r\n\u003cbr\u003e\u003cbr\u003eThanks!\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e ~ The Fyre Team\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\r\n",
     "content-type": "text/html; charset=\"UTF-8\"",
     "date": "2022-10-10T19:54:18",
@@ -183,126 +186,19 @@ results = {
       ]
     ],
     "has_defects": false,
-    "html_body": "[\"\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\u003ctable cellpadding=\\\"4\\\"\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eCongratulations, you\u0027re all ready to go!!\\r\\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\\r\\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr bgcolor=\\\"orange\\\"\u003e\u003cth\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eEmbers\u003c/th\u003e\u003cth\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003ePublic\\r\\nIP\u003c/th\u003e\u003cth\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003ePrivate IP \u003c/th\u003e\u003cth\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eAdditional Disks\u003c/th\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" bgcolor=\\\"#f0f0f0\\\"\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\u003cb\u003elead1\u003c/b\u003e.fyre.ibm.com \u003c/td\u003e\u003ctd bgcolor=\\\"#f0f0f0\\\"\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e9.30.211.110\u003c/td\u003e\u003ctd bgcolor=\\\"#f0f0f0\\\"\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e10.11.38.164\u003c/td\u003e\u003ctd bgcolor=\\\"#f0f0f0\\\"\u003e\u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e--\u003c/td\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\u003cbr\u003e\u003cbr\u003e\u003cb\u003eLogin Credentials:\u003c/b\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e You can now log\\r\\ninto the node(s) of your cluster with the following credentials:\\r\\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e Username: root\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e Password: Your personal root password that you\\r\\nset on the Fyre webpage. \u003cbr\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\u003cbr\u003e\u003cb\u003eSecurity schedule\u003cb\u003e:\\r\\n\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\\r\\nYour cluster will be kept compliant automatically and will be patched\\r\\nand rebooted on the 1st weekend of each month.  You can change this\\r\\nschedule or disable it on a per-cluster basis from the Fyre\\r\\nGUI.\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\u003cbr\u003e\u003cb\u003eTerms of Use\u003cb\u003e: \u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eBy using Fyre and/or Fyre resources\\r\\n(vms, clusters, etc), you agree to always abide by the Fyre Terms of\\r\\nUse.  \u003cbr\u003e\\r\\n\\tThese terms can be found here: \u003ca href=\\\"https://fyre.ibm.com/help#fyre-termsofuse\\\"\u003ehttps://fyre.ibm.com/help#fyre-termsofuse\u003c/a\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e\\r\\n\u003cbr\u003e\u003cbr\u003eThanks!\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\"4\\\" align=\\\"left\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003e ~ The Fyre Team\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\\r\\n\"]",
-    "message-id": "\u003c202210101954.29AJsIaP1141965@example1.fyre.ibm.com\u003e",
+    "html_body": "[\"\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\u003ctable cellpadding=\\\"4\\\"\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eCongratulations, you\u0027re all ready to go!!\\r\\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\\r\\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr]",
+    "message-id": "\u003c202210101954.29AJsIaP1141965@example.fyre.ibm.com\u003e",
     "mime-version": "1.0",
     "plain_body": "",
     "received": [
       {
-        "by": "example1.fyre.ibm.com 8.15.2/8.15.2/Submit",
+        "by": "example.fyre.ibm.com 8.15.2/8.15.2/Submit",
         "date": "Mon, 10 Oct 2022 12:54:18 -0700",
         "date_utc": "2022-10-10T19:54:18",
         "delay": 0,
         "from": "www-data@localhost",
         "hop": 1,
         "id": "29AJsIaP1141965"
-      },
-      {
-        "by": "example1.fyre.ibm.com 8.15.2/8.15.2/Debian-10",
-        "date": "Mon, 10 Oct 2022 12:54:18 -0700",
-        "date_utc": "2022-10-10T19:54:18",
-        "delay": 0.0,
-        "for": "\u003cexample@ibm.com\u003e",
-        "from": "example1.fyre.ibm.com localhost 127.0.0.1",
-        "hop": 2,
-        "id": "29AJsIxo1141966",
-        "with": "ESMTP"
-      },
-      {
-        "by": "b01ledav005.gho.pok.ibm.com Postfix",
-        "date": "Mon, 10 Oct 2022 19:54:18 +0000 GMT",
-        "date_utc": "2022-10-10T19:54:18",
-        "delay": 0.0,
-        "for": "\u003cexample@ibm.com\u003e",
-        "from": "example1.fyre.ibm.com unknown 9.30.166.9",
-        "hop": 3,
-        "with": "ESMTPS"
-      },
-      {
-        "by": "IMSVA Postfix",
-        "date": "Mon, 10 Oct 2022 19:54:18 +0000 GMT",
-        "date_utc": "2022-10-10T19:54:18",
-        "delay": 0.0,
-        "for": "\u003cexample@ibm.com\u003e",
-        "from": "b01ledav005.gho.pok.ibm.com unknown 127.0.0.1",
-        "hop": 4,
-        "id": "F0260AE060",
-        "with": "ESMTP"
-      },
-      {
-        "by": "IMSVA Postfix",
-        "date": "Mon, 10 Oct 2022 19:54:19 +0000 GMT",
-        "date_utc": "2022-10-10T19:54:19",
-        "delay": 1.0,
-        "for": "\u003cexample@ibm.com\u003e",
-        "from": "b01ledav005.gho.pok.ibm.com unknown 127.0.0.1",
-        "hop": 5,
-        "id": "3203BAE066",
-        "with": "ESMTP"
-      },
-      {
-        "by": "b01cxnp23034.gho.pok.ibm.com 8.14.9/8.14.9/NCO v10.0",
-        "date": "Mon, 10 Oct 2022 19:54:19 GMT",
-        "date_utc": "2022-10-10T19:54:19",
-        "delay": 0.0,
-        "for": "\u003cexample@ibm.com\u003e",
-        "from": "b01ledav005.gho.pok.ibm.com b01ledav005.gho.pok.ibm.com 9.57.199.110",
-        "hop": 6,
-        "id": "29AJsJhU4784872\r version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK",
-        "with": "ESMTP"
-      },
-      {
-        "by": "m01ex002.gmx.ibm.com 10.148.53.59",
-        "date": "Mon, 10 Oct 2022 15:54:19 -0400",
-        "date_utc": "2022-10-10T19:54:19",
-        "delay": 0.0,
-        "from": "b01cxnp23034.gho.pok.ibm.com 9.57.198.29",
-        "hop": 7,
-        "id": "15.1.2507.12",
-        "via": "Frontend Transport",
-        "with": "Microsoft SMTP Server\r version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-      },
-      {
-        "by": "m01ex004.gmx.ibm.com\r 10.148.53.60",
-        "date": "Mon, 10 Oct\r 2022 15:54:19 -0400",
-        "date_utc": "2022-10-10T19:54:19",
-        "delay": 0.0,
-        "from": "m01ex002.gmx.ibm.com 10.148.53.59",
-        "hop": 8,
-        "id": "15.1.2507.12",
-        "with": "Microsoft SMTP Server version=TLS1_2,\r cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-      },
-      {
-        "by": "MW2NAM12FT057.mail.protection.outlook.com 10.13.181.5",
-        "date": "Mon, 10 Oct 2022 19:54:24 +0000",
-        "date_utc": "2022-10-10T19:54:24",
-        "delay": 5.0,
-        "from": "gmx.mail.ibm.com 169.55.84.251",
-        "hop": 9,
-        "id": "15.20.5723.11",
-        "via": "Frontend Transport",
-        "with": "Microsoft SMTP\r Server version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-      },
-      {
-        "by": "MW4PR03CA0145.outlook.office365.com\r 2603:10b6:303:8c::30",
-        "date": "Mon, 10 Oct 2022 19:54:24 +0000",
-        "date_utc": "2022-10-10T19:54:24",
-        "delay": 0.0,
-        "from": "MW2NAM12FT057.eop-nam12.prod.protection.outlook.com\r 2603:10b6:303:8c:cafe::42",
-        "hop": 10,
-        "id": "15.20.5709.19",
-        "via": "Frontend\r Transport",
-        "with": "Microsoft SMTP Server version=TLS1_2,\r cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
-      },
-      {
-        "by": "MN2PR15MB2877.namprd15.prod.outlook.com 2603:10b6:208:ee::17",
-        "date": "Mon, 10 Oct\r 2022 19:54:24 +0000",
-        "date_utc": "2022-10-10T19:54:24",
-        "delay": 0.0,
-        "from": "MW4PR03CA0145.namprd03.prod.outlook.com 2603:10b6:303:8c::30",
-        "hop": 11,
-        "id": "15.20.5709.15",
-        "with": "Microsoft SMTP Server version=TLS1_2,\r cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
       },
       {
         "by": "BYAPR15MB2296.namprd15.prod.outlook.com",
@@ -314,9 +210,9 @@ results = {
         "with": "HTTPS"
       }
     ],
-    "received-spf": "None (protection.outlook.com: example.example.ibm.com does not\r\n designate permitted sender hosts)",
-    "return-path": "www-data@example.example.ibm.com",
-    "subject": "Example stack : \u0027lead\u0027 ready",
+    "received-spf": "None (protection.outlook.com: example.fyre.ibm.com does not\r\n designate permitted sender hosts)",
+    "return-path": "www-data@example.fyre.ibm.com",
+    "subject": "Fyre stack : \u0027lead\u0027 ready",
     "timezone": "-7.0",
     "to": [
       [
@@ -327,34 +223,7 @@ results = {
     "to_domains": [
       "ibm.com"
     ],
-    "x-crosspremisesheadersfiltered": "MW2NAM12FT057.eop-nam12.prod.protection.outlook.com",
-    "x-crosspremisesheaderspromoted": "MW2NAM12FT057.eop-nam12.prod.protection.outlook.com",
-    "x-eopattributedmessage": "0",
-    "x-forefront-antispam-report": "CIP:169.55.84.251;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:NSPM;H:gmx.mail.ibm.com;PTR:fb.54.37a9.ip4.static.sl-reverse.com;CAT:NONE;SFS:;DIR:INB;",
-    "x-microsoft-antispam": "BCL:0;",
-    "x-microsoft-antispam-mailbox-delivery": "ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);",
-    "x-microsoft-antispam-message-info": "FxHn9SLBjgFF4dnkfttJCPKsph9Xn/sEQCFV3yiLJGtgKZtqncl8KfT/dUhKZ0/gsMGuWHSea0qfzrAZ8+JHELx2xhOikG7lgDFxpsHiT9xi6/rannm53Ur5JqbUAGkXzJGXDA/BAUb1pjGogswkrl3NyGAq3+QSJ0XGJfOok63/Pa3ua6sCwzRjdEtzV0wK4YiTcMCMdhedpFPWf01iBcQPezd6aEHOg5EdMEnSFPFjSVfixP3nIqOsMSQLPS72ubUMz8JDhXycm1XennS6cGMb/WwByYS9YhfpFIiJqE3jFFLRnmzucI6msgFHRgQAS7nx2KYUZnnjJZbN1kS6bICVaRh4h2BrRhjb3G4b+HkkoW2Cqrhn4p+VnYIFH/hBPWuuophaKvQt/lJ0gIfR/svy0WBVtx1iRHY+lGgW8temE8vG4CS0oTgbztcMlMTmU5MNMszcSGHgeZZODkyeQPzi84QmpJdmiowkQqYynyv6yoYugLy3iIQfzv3XI0GChyctAVEzL34SAxwn+FCojNM/VYTp9XiZN3GSuqgvgwDpQNJpK6fxxdXhRsF6UG4eJpiQjHpCTYAg1y5njTGekjCqVsLkMeI5XYFdwOXKtceUos0vVCnUNVZxnEVxS2vJQWPZHziRd2tv8n/sMxdnIfXkQIDUSnby6M+X86IIYJYtf6vGPbTFaaYy8d8TVeHeEQNbnkyLuCmpKNek9xHHXBkz/5SSJ2JYb7/P6hzcVAXiIL2zlfLeUygHwl5yIupHY5QgqGOapnypnY4AfJWbIjpUL/EiB3aO0Mu+spvWoGZp3alMeYkvTTMmZcJrPOUJjY8Mgo4nhmJ+SWOo7VbAyoHwuJQrnfokBs3YCfHAHtub8WPcWDmimJ8mXViuT65QrPDc56ygK2NaCX6e++zOI/XKPTTbql4f1lsVoD8BFhmCfXZow1YDjsIwpn9ON5nWW86F7QveWQABZj0dGZb6OR/240k2FreC4u2H0l1X+Sa4H/bPVMwmJF6OEyKXVRWez4qdwfPw92kKLm3wD1kAOx/XTo0nJnrtrnOS+T+6BtLy+3m3u1Hehem6mDete3v3UJAWaZB0ofTJKzlrteo9/UCG3pwwYfLD9NHP0QsPUuD4qQmSee8TZO5XTZ3wkGEglIVs0lA9guRiVYMnX9kEFWrOcIAZYHpUMJDmY9YEc9tzJ9cRPVv/4WR1Gmf96p2s1tc5WkvYUXXotr+uyKp1d82lseuiW0fnVM2cfHD39URVCYJ7Jqmf2pnXRGuldbaWd/RFmyYBDHzeOX0jiZ+1cQLcn5kmOfowBxmDgBNKv4MPPvanY0jEkCqxM6YerTsJGs2fMN8JlUH5ToKMdk87JX8BEHYBuCHiGZWG/Zk6hdTL6QrfVL7gYwXOuhB+mBZYORylMH5SlNbNUzco0P2UwSHndiHBS/alLU9pzKPpCWaotNrvy3u9o0F0bBSHLqFoqjzhcwuY559ScjzUaAC7ASAS9G9Puy7d9PIl1UNH5Po8rvxmlkXlSv+YVHynHOsHo+2w/rkJP21IDz1Y6OT6SDoCBBU6vnuIkcmdKo+c4QyuOmmKnjf1gK3lRUOssWPEglg/2guLzVunyzpiafNeWoQZ6nGGE7pDHT24FzXjvi3X7zJLQiS+dkIjOYPEWABN140mLxbIODzhJ9MpsLMH1mh9ZQq3z3KELEtpXvlltJnf9lgcnZKDxv7R5L7ApHHvcRz3hyoJXc7PoQ1eBdwRi0bCA9aY+Q3m74Rmq+VEGRj7QpJS+fm7ALEdSqJw1f+HHKxtnMzdGSMMkXdOgSM4lW+y7wndHdXrqGXS+52z0Fhd4bzMLDKSSa/6HjdZtEjDQy2J8wLhrXK8e5sPaJgPPOpf+VIW1Xg/Qj968zigOEWb87TDN0NUM+WBF/t4QnebfQCnFCRiA8ZajnnlDa8dZA==",
-    "x-ms-exchange-crosstenant-authas": "Anonymous",
-    "x-ms-exchange-crosstenant-authsource": "m01ex002.gmx.ibm.com",
-    "x-ms-exchange-crosstenant-fromentityheader": "HybridOnPrem",
-    "x-ms-exchange-crosstenant-id": "fcf67057-50c9-4ad4-98f3-ffca64add9e9",
-    "x-ms-exchange-crosstenant-network-message-id": "467954c2-54fc-491f-6f45-08daaaf93b34",
-    "x-ms-exchange-crosstenant-originalarrivaltime": "10 Oct 2022 19:54:24.1967\r\n (UTC)",
-    "x-ms-exchange-crosstenant-originalattributedtenantconnectingip": "TenantId=fcf67057-50c9-4ad4-98f3-ffca64add9e9;Ip=[169.55.84.251];Helo=[gmx.mail.ibm.com]",
-    "x-ms-exchange-organization-authas": "Anonymous",
-    "x-ms-exchange-organization-authsource": "m01ex002.gmx.ibm.com",
-    "x-ms-exchange-organization-expirationinterval": "1:00:00:00.0000000",
-    "x-ms-exchange-organization-expirationintervalreason": "OriginalSubmit",
-    "x-ms-exchange-organization-expirationstarttime": "10 Oct 2022 19:54:24.3217\r\n (UTC)",
-    "x-ms-exchange-organization-expirationstarttimereason": "OriginalSubmit",
-    "x-ms-exchange-organization-messagedirectionality": "Originating",
-    "x-ms-exchange-organization-network-message-id": "467954c2-54fc-491f-6f45-08daaaf93b34",
-    "x-ms-exchange-organization-scl": "-1",
-    "x-ms-exchange-processed-by-bccfoldering": "15.20.5709.018",
-    "x-ms-exchange-transport-crosstenantheadersstamped": "MN2PR15MB2877",
-    "x-ms-exchange-transport-endtoendlatency": "00:00:14.1482542",
-    "x-ms-office365-filtering-correlation-id": "467954c2-54fc-491f-6f45-08daaaf93b34",
-    "x-ms-publictraffictype": "Email",
+    
     "x-ms-traffictypediagnostic": "MW2NAM12FT057:EE_|MN2PR15MB2877:EE_",
     "x-organizationheaderspreserved": "m01ex004.gmx.ibm.com",
     "x-originatororg": "mail.ibm.com",
@@ -368,12 +237,12 @@ results = {
   "metrics": {
     "execution_time_ms": 1347,
     "host": "My Host",
-    "package": "fn-parse-utilities",
+    "package": "fn-utilities",
     "package_version": "2.1.1",
     "timestamp": "2022-10-13 15:50:56",
     "version": "1.0"
   },
-  "raw": "{\"received\": [{\"from\": \"www-data@localhost\", size=\\\\\\\"2\\\\\\\"\u003ePublic\\\\r\\\\nIP\u003c/th\u003e\u003cth\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003ePrivate IP \u003c/th\u003e\u003cth\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003eAdditional Disks\u003c/th\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd align=\\\\\\\"left\\\\\\\" bgcolor=\\\\\\\"#f0f0f0\\\\\\\"\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e\u003cb\u003elead1\u003c/b\u003e.fyre.ibm.com \u003c/td\u003e\u003ctd bgcolor=\\\\\\\"#f0f0f0\\\\\\\"\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e9.30.211.110\u003c/td\u003e\u003ctd bgcolor=\\\\\\\"#f0f0f0\\\\\\\"\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e10.11.38.164\u003c/td\u003e\u003ctd bgcolor=\\\\\\\"#f0f0f0\\\\\\\"\u003e\u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e--\u003c/td\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd colspan=\\\\\\\"4\\\\\\\" align=\\\\\\\"left\\\\\\\"\u003e \u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e\u003cbr\u003e\u003cbr\u003e\u003cb\u003eLogin Credentials:\u003c/b\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\\\\\\\"4\\\\\\\" align=\\\\\\\"left\\\\\\\"\u003e \u003cfont face=\\\\\\\"verdana\\\\\\\" size=\\\\\\\"2\\\\\\\"\u003e}",
+  "raw": "{\"received\": [{\"from\": \"www-data@localhost\", \"by\": \"example.fyre.ibm.com 8.15.2/8.15.2/Submit\", \"FxHn9SLBjgFF4dnkfttJCPKsph9Xn/sEQCFV3yiLJGtgKZtqncl8KfT/dUhKZ0/gsMGuWHSea0qfzrAZ8+JHELx2xhOikG7lgDFxpsHiT9xi6/rannm53Ur5JqbUAGkXzJGXDA/BAUb1pjGogswkrl3NyGAq3+QSJ0XGJfOok63/Pa3ua6sCwzRjdEtzV0wK4YiTcMCMdhedpFPWf01iBcQPezd6aEHOg5EdMEnSFPFjSVfixP3nIqOsMSQLPS72ubUMz8JDhXycm1XennS6cGMb/WwByYS9YhfpFIiJqE3jFFLRnmzucI6msgFHRgQAS7nx2KYUZnnjJZbN1kS6bICVaRh4h2BrRhjb3G4b+HkkoW2Cqrhn4p+VnYIFH/hBPWuuophaKvQt/lJ0gIfR/svy0WBVtx1iRHY+lGgW8temE8vG4CS0oTgbztcMlMTmU5MNMszcSGHgeZZODkyeQPzi84QmpJdmiowkQqYynyv6yoYugLy3iIQfzv3XI0GChyctAVEzL34SAxwn+FCojNM/}",
   "reason": null,
   "success": true,
   "version": "1.0"
@@ -388,8 +257,8 @@ results = {
 
 ```python
 # Define incident_id and artifact_id
-inputs.incident_id = incident.id
-inputs.artifact_id = artifact.id
+inputs.parse_utilities_incident_id = incident.id
+inputs.parse_utilities_artifact_id = artifact.id
 
 # Setting this to True will add any found attachments as an Email Attachment Artifact
 inputs.parse_utilities_email_attachments = True
@@ -505,9 +374,9 @@ This function produces the structured data from a provided SSL certificate. Thre
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `artifact_id` | `number` | No | `-` | - |
-| `incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | - |
 | `parse_utilities_certificate` | `text` | No | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
 
 </p>
 </details>
@@ -543,8 +412,8 @@ results = {
 
 ```python
 inputs.parse_utilities_certificate = artifact.value
-inputs.artifact_id = artifact.id
-inputs.incident_id = incident.id
+inputs.parse_utilities_artifact_id = artifact.id
+inputs.parse_utilities_incident_id = incident.id
 ```
 
 </p>
@@ -592,12 +461,12 @@ This function is useful in initial triage of suspicious email attachments and ot
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `artifact_id` | `number` | No | `-` | - |
-| `attachment_id` | `number` | No | `-` | - |
-| `filename` | `text` | No | `-` | - |
-| `incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | - |
+| `parse_utilities_attachment_id` | `number` | No | `-` | - |
 | `parse_utilities_base64content` | `text` | No | `-` | - |
-| `task_id` | `number` | No | `-` | - |
+| `parse_utilities_filename` | `text` | No | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_task_id` | `number` | No | `-` | - |
 
 </p>
 </details>
@@ -644,8 +513,8 @@ results = {
 
 ```python
 # Required inputs are: incident_id artifact_id
-inputs.incident_id = incident.id
-inputs.artifact_id = artifact.id
+inputs.parse_utilities_incident_id = incident.id
+inputs.parse_utilities_artifact_id = artifact.id
 ```
 
 </p>
@@ -672,7 +541,7 @@ if not results.isPdf:
   incident.addNote(helper.createRichText(u"Not a PDF file: {}".format(results.get("filename"))))
 else:
   # In this example we just write them to a note in the incident
-  note_data = [u"PDFiD report for {} ({}):".format(results.get("filename"), results.header)]
+  note_data = [u"PDFID report for {} ({}):".format(results.get("filename"), results.header)]
 
   for section in interesting_sections:
     value = results.get(section)
@@ -691,22 +560,19 @@ else:
 
 ---
 ## Function - Parse Utilities: XML Transformation
-Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned.
+Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned. The XML document can be an artifact or attachment.
 
- ![screenshot: fn-parse-utilities-xml-transformation ](./doc/screenshots/fn-parse-utilities-xml-transformation.png) 
-
-### For App Host Environments:
-Set the app.config xml_stylesheet_dir setting as follows:
-
-xml_stylesheet_dir= /var/rescircuits/xmltransformation
-
-Add your transformation file to the App Configuration tab to refer to the same directory as used in xml_stylesheet_dir.
+ ![screenshot: fn-parse-utilities-xml-transformation ](./doc/screenshots/fn-parse-utilities-xml-transformation.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `parse_utilities_artifact_id` | `number` | No | `-` | - |
+| `parse_utilities_attachment_id` | `number` | No | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_task_id` | `number` | No | `-` | - |
 | `parse_utilities_xml_source` | `text` | No | `-` | xml document to transform or empty when using attachments |
 | `parse_utilities_xml_stylesheet` | `text` | No | `transform.xslt` | name of stylesheet to use for the transformation |
 
@@ -731,46 +597,12 @@ results = {
 <p>
 
 ```python
-#inputs.xml_stylesheet = "cdcatalog.xslt"
-# In most cases, the xml_soure will come from other sources. 
-# If need be, use fn_utilities to capture data from attachments
-inputs.parse_utilities_xml_source = """
-<?xml version="1.0" encoding="UTF-8"?>
-<catalog>
-  <cd>
-    <title>Empire Burlesque</title>
-    <artist>Bob Dylan</artist>
-    <country>USA</country>
-    <company>Columbia</company>
-    <price>10.90</price>
-    <year>1985</year>
-  </cd>
-  <cd>
-    <title>Hide your heart</title>
-    <artist>Bonnie Tyler</artist>
-    <country>UK</country>
-    <company>CBS Records</company>
-    <price>9.90</price>
-    <year>1988</year>
-  </cd>
-  <cd>
-    <title>Greatest Hits</title>
-    <artist>Dolly Parton</artist>
-    <country>USA</country>
-    <company>RCA</company>
-    <price>9.90</price>
-    <year>1982</year>
-  </cd>
-  <cd>
-    <title>Still got the blues</title>
-    <artist>Gary Moore</artist>
-    <country>UK</country>
-    <company>Virgin records</company>
-    <price>10.20</price>
-    <year>1990</year>
-  </cd>
-</catalog>
-"""
+inputs.parse_utilities_incident_id = incident.id
+inputs.parse_utilities_attachment_id = attachment.id
+
+# If this is a "task attachment" then we will additionally have a task-id
+if task is not None:
+  inputs.parse_utilities_task_id = task.id
 ```
 
 </p>
@@ -790,6 +622,255 @@ incident.addNote(content)
 
 ---
 
+## Script - Convert JSON to rich text v1.0
+This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note. A workflow property is used to share the json to convert and identify parameters used on how to perform the conversion.
+Typically, a function will create workflow property and this script will run after that function to perform the conversion.
+  Features:
+    * Display the hierarchical nature of json, presenting the json keys (sorted if specified) as bold labels
+    * Provide links to found URLs
+    * Create either an incident note or add results to an incident (custom) rich text field.
+
+**Object:** incident
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+VERSION = 1.0
+"""
+  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
+  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
+  Typically, a function will create workflow property and this script will run after that function to perform the conversion.
+  Features:
+    * Display the hierarchical nature of json, presenting the json keys as bold labels
+    * Provide links to found URLs
+    * Create either an incident note or add results to an incident (custom) rich text field.
+  
+  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
+  Workflow properties can be added using a command similar to this:
+  workflow.addProperty('convert_json_to_rich_text', { 
+    "version": 1.0,
+    "header": "Artifact scan results for".format(artifact.value),
+    "padding": 10,
+    "separator": u"<br />",
+    "sort": True,
+    "json": results.content,
+    "json_omit_list": ["omit"],
+    "incident_field": None
+  })
+  
+  Format of workflow.property.convert_json_to_rich_text:
+  { 
+    "version": 1.0, [this is for future compatibility]
+    "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
+    "padding": 10, [padding for nested json elements, or defaults to 10]
+    "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
+                                                If a list, then the data is brackets by the pair specified]
+    "sort": True|False, [sort the json keys at each level when displayed]
+    "json": json, [required json to convert]
+    "json_omit_list": [list of json keys to exclude or None]
+    "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description' 
+                                          or a custom rich text field in the format: 'properties.<field>'. default: create an incident note]
+  }
+"""
+
+import re
+
+# needed for python 3
+try:
+    unicode("abc")
+except:
+    unicode = str
+
+
+rc = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+
+class ConvertJson:
+    """Class to hold the conversion parameters and perform the conversion"""
+
+    def __init__(self, omit_keys=[], padding=10, separator=u"<br />", sort_keys=False):
+        self.omit_keys = omit_keys
+        self.padding = padding
+        self.separator = separator
+        self.sort_keys = sort_keys
+
+
+    def format_link(self, item):
+        """[summary]
+          Find embedded urls (http(s)) and add html anchor tags to display as links
+          Args:
+              item ([string])
+
+          Returns:
+              [str]: None|original text if no links|text with html links
+        """
+        formatted_item = item
+        if item and not isinstance(item, (int, bool, float)):
+            list = rc.findall(item)
+            if list:
+                for link in list:
+                    formatted_item = formatted_item.replace(link, u"<a target='blank' href='{0}'>{0}</a>".format(link))
+
+        return formatted_item
+
+    def expand_list(self, list_value, is_list=False):
+        """[summary]
+          convert items to html, adding indents to nested dictionaries.
+          Args:
+              list_value ([dict|list]): json element
+
+          Returns:
+              [str]: html converted code
+        """
+        if not isinstance(list_value, list):
+            return self.format_link(list_value)
+        elif not list_value:
+            return u"None<br>"
+
+        try:
+            items_list = []  # this will ensure list starts on second line of key label
+            for item in list_value:
+                if isinstance(item, dict):
+                    result = self.convert_json_to_rich_text(item)
+                    if is_list:
+                        items_list.append(u"<li>{}</li>".format(result))
+                    else:
+                        items_list.append(result)
+                elif isinstance(item, list):
+                    items_list.append(self.expand_list(item, is_list=True))
+                elif is_list:
+                    items_list.append(u"<li>{}</li>".format(self.format_link(unicode(item))))
+                else:
+                    items_list.append(self.format_link(unicode(item)))
+
+            expand_list_result = self.add_separator(self.separator if not is_list else u"",
+                                                    items_list,
+                                                    is_list=is_list)
+
+            if is_list:
+                return u"<ul>{}</ul>".format(expand_list_result)
+            else:
+                return u"<div style='padding:5px'>{}</div>".format(expand_list_result)
+        except Exception as err:
+            return str(err)
+
+    def convert_json_to_rich_text(self, sub_dict):
+        """[summary]
+          Walk dictionary tree and convert to html for better display
+          Args:
+              sub_dict ([type]): [description]
+
+          Returns:
+              [type]: [description]
+        """
+        notes = []
+        if sub_dict:
+            keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()
+
+            for key in keys:
+                if key not in self.omit_keys:
+                    value = sub_dict[key]
+                    is_list = isinstance(value, list)
+                    item_list = [u"<strong>{0}</strong>: ".format(key)]
+                    if isinstance(value, dict):
+                        convert_result = self.convert_json_to_rich_text(value)
+                        if convert_result:
+                            item_list.append(u"<div style='padding:{}px'>{}</div>".format(self.padding, convert_result))
+                        else:
+                            item_list.append(u"None<br>")
+                    else:
+                        item_list.append(self.expand_list(value, is_list=is_list))
+                    notes.append(self.add_separator(self.separator, u"".join(unicode(v) for v in item_list), is_list=is_list))
+
+        result_notes = u"".join(notes)
+        if isinstance(self.separator, list):
+            return result_notes
+        else:
+            return result_notes.replace(
+                u"</div>{0}".format(self.separator), u"</div>").replace(
+                u"{0}</div>".format(self.separator), u"</div>"
+            )  # tighten up result
+
+    def add_separator(self, separator, items, is_list=False):
+        """
+        apply the separator to the data
+        :param separator: None, str or list such as ['<span>', '</span>']
+        :param items: str or list to add separator
+        :return: text with separator applied
+        """
+        _items = items
+
+        if not _items:
+            return "<br>"
+
+        if not isinstance(_items, list):
+            _items = [_items]
+
+        if isinstance(separator, list):
+            return u"".join([u"{}{}{}".format(separator[0], item, separator[1]) for item in _items])
+
+        return u"{}{}".format(separator.join(_items), separator if not is_list else u"")
+
+def get_properties(property_name):
+    """
+    Logic to collect the json and parameters from a workflow property.
+    Args:
+      property_name: workflow property to reference
+    Returns:
+      padding, separator, header, json_omit_list, incident_field, json, sort_keys
+    """
+    if not workflow.properties.get(property_name):
+        helper.fail("workflow.properties.{} undefined".format(property_name))
+    if not workflow.properties[property_name].get('json'):
+        helper.fail("workflow.properties.{}.json undefined".format(property_name))
+
+    padding = int(workflow.properties[property_name].get("padding", 10))
+    separator = workflow.properties[property_name].get("separator", u"<br />")
+    if isinstance(separator, list) and len(separator) != 2:
+        helper.fail("list of separators should be specified as a pair such as ['<div>', '</div>']: {}".format(separator))
+
+    header = workflow.properties[property_name].get("header")
+    json_omit_list = workflow.properties[property_name].get("json_omit_list")
+    if not json_omit_list:
+        json_omit_list = []
+    incident_field = workflow.properties[property_name].get("incident_field")
+    json = workflow.properties[property_name].get("json")
+    if not isinstance(json, dict):
+        helper.fail("json element is not formatted correctly: {}".format(json))
+    sort_keys = bool(workflow.properties[property_name].get("sort", False))
+
+    return padding, separator, header, json_omit_list, incident_field, json, sort_keys
+
+
+## S T A R T
+if 'workflow' in globals():
+    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties('convert_json_to_rich_text')
+
+    if header:
+        if isinstance(separator, list):
+            hdr = u"{0}{1}{2}".format(separator[0], header, separator[1])
+        else:
+            hdr = u"{0}{1}".format(header, separator)
+    else:
+        hdr = u""
+
+    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
+    converted_json = convert.convert_json_to_rich_text(json)
+    result = u"{}{}".format(hdr, converted_json)
+
+    rich_text_note = helper.createRichText(result)
+    if incident_field:
+        incident[incident_field] = rich_text_note
+    else:
+        incident.addNote(rich_text_note)
+
+```
+
+</p>
+</details>
+
+---
 
 
 
@@ -801,7 +882,9 @@ incident.addNote(content)
 | Example: Parse Utilities Email Parsing (Attachment) | attachment | `example_parse_utilities_email_parsing_attachment` |
 | Example: Parse Utilities Parse SSL Certificate | artifact | `example_parse_utilities_parse_ssl_certificate` |
 | Example: Parse Utilities PDFID (Artifact) | artifact | `example_parse_utilities_pdfid` |
+| Example: Parse Utilities PDFID (Attachment) | attachment | `example_parse_utilities_pdfid_attachment` |
 | Example: Parse Utilities XML Transformation | artifact | `example_parse_utilities_xml_transformation` |
+| Example: Parse Utilities XML Transformation (Attachment) | attachment | `example_parse_utilities_xml_attachment` |
 
 ---
 

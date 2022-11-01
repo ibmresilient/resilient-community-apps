@@ -22,8 +22,8 @@ def codegen_reload_data():
         "package": u"fn_parse_utilities",
         "message_destinations": [u"fn_parse_utilities"],
         "functions": [u"parse_utilities_email_parse", u"parse_utilities_parse_ssl_certificate", u"parse_utilities_pdfid", u"parse_utilities_xml_transformation"],
-        "workflows": [u"example_parse_utilities_email_parsing_artifact", u"example_parse_utilities_email_parsing_attachment", u"example_parse_utilities_parse_ssl_certificate", u"example_parse_utilities_pdfid", u"example_parse_utilities_pdfid_attachment", u"example_parse_utilities_xml_transformation"],
-        "actions": [u"Example: Parse Utilities Email Parsing (Artifact)", u"Example: Parse Utilities Email Parsing (Attachment)", u"Example: Parse Utilities Parse SSL Certificate", u"Example: Parse Utilities PDFID (Artifact)", u"Example: Parse Utilities PDFID (Attachment)", u"Example: Parse Utilities XML Transformation"],
+        "workflows": [u"example_parse_utilities_email_parsing_artifact", u"example_parse_utilities_email_parsing_attachment", u"example_parse_utilities_parse_ssl_certificate", u"example_parse_utilities_pdfid", u"example_parse_utilities_pdfid_attachment", u"example_parse_utilities_xml_attachment", u"example_parse_utilities_xml_transformation"],
+        "actions": [u"Example: Parse Utilities Email Parsing (Artifact)", u"Example: Parse Utilities Email Parsing (Attachment)", u"Example: Parse Utilities Parse SSL Certificate", u"Example: Parse Utilities PDFID (Artifact)", u"Example: Parse Utilities PDFID (Attachment)", u"Example: Parse Utilities XML Transformation", u"Example: Parse Utilities XML Transformation (Attachment)"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -55,6 +55,7 @@ def customization_data(client=None):
         - example_parse_utilities_parse_ssl_certificate
         - example_parse_utilities_pdfid
         - example_parse_utilities_pdfid_attachment
+        - example_parse_utilities_xml_attachment
         - example_parse_utilities_xml_transformation
     - Rules:
         - Example: Parse Utilities Email Parsing (Artifact)
@@ -63,6 +64,7 @@ def customization_data(client=None):
         - Example: Parse Utilities PDFID (Artifact)
         - Example: Parse Utilities PDFID (Attachment)
         - Example: Parse Utilities XML Transformation
+        - Example: Parse Utilities XML Transformation (Attachment)
     - Scripts:
         - Convert JSON to rich text v1.0
     """

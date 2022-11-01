@@ -50,9 +50,9 @@ class FunctionComponent(ResilientComponent):
 
             else:
                 # Validate that either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id) is defined
-                if not (fn_inputs.get("incident_id") and (fn_inputs.get("attachment_id") or fn_inputs.get("artifact_id"))) and \
-                   not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
-                    raise FunctionError("You must define either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id)")
+                if not (fn_inputs.get("parse_utilities_incident_id") and (fn_inputs.get("parse_utilities_attachment_id") or fn_inputs.get("parse_utilities_artifact_id"))) and \
+                   not (fn_inputs.get("parse_utilities_task_id") and fn_inputs.get("parse_utilities_attachment_id")):
+                    raise FunctionError("You must define either: (parse_utilities_incident_id AND (parse_utilities_attachment_id OR parse_utilities_artifact_id)) OR (parse_utilities_task_id AND parse_utilities_attachment_id)")
 
                 # Instansiate new SOAR API object
                 res_client = self.rest_client()

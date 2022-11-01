@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
             xml_source = kwargs.get("parse_utilities_xml_source")  # text
             xml_stylesheet = kwargs.get("parse_utilities_xml_stylesheet")  # text
 
-            validate_fields(("parse_utilities_xml_source", "parse_utilities_xml_stylesheet"), kwargs)
+            validate_fields(("parse_utilities_xml_stylesheet"), kwargs)
             # Confirm that our required parameter exists and is a directory
             if not (self.options[FunctionComponent.XML_DIR] and isdir(self.options[FunctionComponent.XML_DIR])):
                 raise ValueError("Missing or incorrectly specified configuration property: {}".format(FunctionComponent.XML_DIR))
@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("xml_source: %s", xml_source)
             LOG.info("xml_stylesheet: %s", xml_stylesheet)
 
-            if xml_source is None:
+            if not xml_source:
                 res_client = self.rest_client()
                 xml_source = get_file_attachment(
                     res_client=res_client,

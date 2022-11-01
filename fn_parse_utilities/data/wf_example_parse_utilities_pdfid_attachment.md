@@ -21,6 +21,10 @@
 # Required inputs are: incident_id attachment_id
 inputs.parse_utilities_incident_id = incident.id
 inputs.parse_utilities_attachment_id = attachment.id
+
+# If this is a "task attachment" then we will additionally have a task-id
+if task is not None:
+  inputs.parse_utilities_task_id = task.id
 ```
 
 ### Post-Processing Script
