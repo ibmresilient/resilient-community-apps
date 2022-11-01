@@ -8,9 +8,9 @@ from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_teams.lib import constants
-from fn_teams.lib.teams_authentication import TeamsAuthentication
+from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
-PACKAGE_NAME = "fn_teams"
+PACKAGE_NAME = constants.FN_NAME
 FN_NAME = "ms_teams_create_group"
 
 
@@ -19,9 +19,7 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
         self.required_parameters = {}
-        self.config_options = opts.get(PACKAGE_NAME, {})
 
 
     @app_function(FN_NAME)
@@ -35,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
-            authenticator = TeamsAuthentication(self.required_parameters, self.config_options)
+            authenticator = MicrosoftAuthentication(self.required_parameters, self.options)
             self.required_parameters["header"] = authenticator.authenticate()
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)

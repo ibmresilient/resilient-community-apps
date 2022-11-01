@@ -18,7 +18,6 @@ def config_section_data():
 #
 # secret_value can be found at
 #   portal.azure.com > App registrations > Integration Name > Certificates & secrets
-
 directory_id = <Directory (tenant) ID>
 application_id = <Application (client) ID>
 secret_value = <Secret Value>

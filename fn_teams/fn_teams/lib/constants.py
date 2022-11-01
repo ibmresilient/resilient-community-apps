@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 # Teams Authentication
+FN_NAME  = "fn_teams"
 BASE_URL = "https://graph.microsoft.com/"
 AUTH_URL = "https://login.microsoftonline.com/"
 
