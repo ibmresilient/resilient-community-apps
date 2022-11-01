@@ -31,9 +31,10 @@ setup(
     within an incident or task''',
     install_requires=[
         "resilient_circuits>=45.0.0",
-        "pymsteams ~= 0.2.1;python_version>='3.6'",
-        "msal ~= 1.19;python_version>='3.6'"
+        "pymsteams ~= 0.2.1",
+        "msal ~= 1.19"
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
