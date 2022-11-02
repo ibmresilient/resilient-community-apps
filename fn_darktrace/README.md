@@ -65,7 +65,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Bi-directional App for Darktrace. Pulls in new AI Analyst Events as they are created and creates 
+Bi-directional poller app for Darktrace. A poller provides near real-time pulls of AI Analyst Events as they are created and creates 
 a case in SOAR for each group of events.
 
 As new events are added to a group, the case automatically updates with the new data.
