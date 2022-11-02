@@ -50,8 +50,14 @@ saas_only=False
 # OPTIONAL: use the 'verify' config to set a value for SSL verification
 # if 'False', no SSL will be used. if 'True' or unset, the default SSL root cert
 # will be used. if 'verify' is a path, the value of the path will override the
-# root cert bundle and the file found at the path will be used for server-side SSL
+# root cert bundle and the file found at the path will be used for server-side SSL.
 # verify=
+
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_close_case_template=
 
 # OPTIONAL: Specify paths to files if client-side certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>

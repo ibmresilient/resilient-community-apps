@@ -115,7 +115,6 @@ class PollerComponent(AppFunctionComponent):
         :type opts: dict
         """
         # Validate required fields in app.config are set
-        # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
         required_fields = ["polling_interval", "polling_lookback"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)

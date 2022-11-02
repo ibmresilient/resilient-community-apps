@@ -37,19 +37,6 @@ class IncidentGroupsTab(Tab):
         Field("darktrace_aianalyst_incident_group_id").conditions.has_value()
     ]
 
-class ModelBreachesTab(Tab):
-    SECTION = PACKAGE_NAME
-    NAME = "Darktrace Model Breaches"
-    UUID = "b3f650f8-07da-462f-9ac9-2f036c0d702d"
-
-    CONTAINS = [
-        Field("darktrace_pbid"),
-    ]
-
-    SHOW_IF = [
-        Field("darktrace_pbid").conditions.has_value()
-    ]
-
 # Continue if exception is thrown
 def init_incident_groups_tab():
     try:
