@@ -37,19 +37,6 @@ class IncidentGroupsTab(Tab):
         Field("darktrace_aianalyst_incident_group_id").conditions.has_value()
     ]
 
-class ModelBreachesTab(Tab):
-    SECTION = PACKAGE_NAME
-    NAME = "Darktrace Model Breaches"
-    UUID = "b3f650f8-07da-462f-9ac9-2f036c0d702d"
-
-    CONTAINS = [
-        Field("darktrace_pbid"),
-    ]
-
-    SHOW_IF = [
-        Field("darktrace_pbid").conditions.has_value()
-    ]
-
 # Continue if exception is thrown
 def init_incident_groups_tab():
     try:
@@ -58,6 +45,9 @@ def init_incident_groups_tab():
     except SystemExit as e:
         LOG.warning("Failed to create tab: %s.\nERROR: %s", IncidentGroupsTab.NAME, e)
 
-# extra UUIDs if needed
+# extra UUIDs if needed. found by running:
+# >>> import uuid
+# >>> uuid.uuid4()
+#
 # UUID('b27793a5-7a40-407f-a8a6-ab0376875813')
 # UUID('f986581c-93e7-4c71-a6fb-a0dd01993ff1')

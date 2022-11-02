@@ -12,8 +12,6 @@
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start }},
   "start_date": {{ start }},
-  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
-  {# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}
   "plan_status": "A",
   "severity_code": "{{ category | soar_substitute(severity_mapping) }}",
   {# specify your custom fields for your endpoint solution #}

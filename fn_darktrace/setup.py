@@ -36,7 +36,7 @@ setup(
         sending notes to Darktrace, listing similar devices in Darktrace,\
         and getting external endpoint details from Darktrace.""",
     install_requires=[
-        "resilient-circuits>=46.0.0"
+        "resilient-circuits>=47.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
