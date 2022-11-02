@@ -56,6 +56,8 @@ class FunctionComponent(ResilientComponent):
                     task_id=kwargs.get("parse_utilities_task_id"),
                     attachment_id=kwargs.get("parse_utilities_attachment_id")
                 )
+            else:
+                xml_source = xml_source.encode("utf-8")
 
             # Get the stylesheet
             stylesheet = join(self.options.get(FunctionComponent.XML_DIR), xml_stylesheet)
@@ -72,7 +74,7 @@ class FunctionComponent(ResilientComponent):
             transform = etree.XSLT(xsl_root)
 
             # Read xml
-            xml_root = defused_etree.fromstring(xml_source.encode("utf-8"), parser=parser)
+            xml_root = defused_etree.fromstring(xml_source, parser=parser)
 
             # Transform xml with xslt
             transformation_doc = transform(xml_root)

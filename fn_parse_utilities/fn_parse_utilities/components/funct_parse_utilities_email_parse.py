@@ -127,7 +127,7 @@ class FunctionComponent(ResilientComponent):
                         # Loop attachments found
                         for attachment in attachments_found:
 
-                            yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("incident_id")))
+                            yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("parse_utilities_incident_id")))
 
                             # Write the attachment.payload to a temp file
                             path_tmp_file, path_tmp_dir = write_to_tmp_file(data=s_to_b(attachment.get("payload")),
@@ -137,7 +137,7 @@ class FunctionComponent(ResilientComponent):
                             artifact_description = u"This email attachment was found in the parsed email message from: '{0}'".format(u"provided base64content" if fn_inputs.get("parse_utilities_base64content") else attachment_metadata.get("name"))
 
                             # POST the artifact to SOAR as an 'Email Attachment' Artifact
-                            res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("incident_id")),
+                            res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("parse_utilities_incident_id")),
                                                           artifact_type=7,
                                                           artifact_filepath=path_tmp_file,
                                                           description=artifact_description,

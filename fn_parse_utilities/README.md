@@ -175,24 +175,24 @@ Any attachments found are added to the incident as artifacts if `parse_utilities
 ```python
 results = {
   "content": {
-    "authentication-results": "spf=none (sender IP is 169.55.84.251)\r\n smtp.mailfrom=example.fyre.ibm.com; dkim=none (message not signed)\r\n header.d=none;dmarc=fail action=none header.from=us.ibm.com;",
-    "body": "\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\u003ctable cellpadding=\"4\"\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eCongratulations, you\u0027re all ready to go!!\r\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\r\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr bgcolor=\"orange\"\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eEmbers\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003ePublic\r\nIP\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003ePrivate IP \u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eAdditional Disks\u003c/th\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd align=\"left\" bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e\u003cb\u003elead1\u003c/b\u003e.fyre.ibm.com \u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e9.30.211.110\u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e10.11.38.164\u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e--\u003c/td\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cbr\u003e\u003cb\u003eLogin Credentials:\u003c/b\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e You can now log\r\ninto the node(s) of your cluster with the following credentials:\r\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e Username: root\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e Password: Your personal root password that you\r\nset on the Fyre webpage. \u003cbr\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cb\u003eSecurity schedule\u003cb\u003e:\r\n\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\r\nYour cluster will be kept compliant automatically and will be patched\r\nand rebooted on the 1st weekend of each month.  You can change this\r\nschedule or disable it on a per-cluster basis from the Fyre\r\nGUI.\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\u003cbr\u003e\u003cb\u003eTerms of Use\u003cb\u003e: \u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eBy using Fyre and/or Fyre resources\r\n(vms, clusters, etc), you agree to always abide by the Fyre Terms of\r\nUse.  \u003cbr\u003e\r\n\tThese terms can be found here: \u003ca href=\"https://fyre.ibm.com/help#fyre-termsofuse\"\u003ehttps://fyre.ibm.com/help#fyre-termsofuse\u003c/a\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e\r\n\u003cbr\u003e\u003cbr\u003eThanks!\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd colspan=\"4\" align=\"left\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003e ~ The Fyre Team\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e\r\n",
+    "authentication-results": "spf=none (sender is)\r\n smtp.mailfrom=example.ibm.com; dkim=none (message not signed)\r\n header.d=none;dmarc=fail action=none header.from=us.ibm.com;",
+    "body": "\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\u003ctable cellpadding=\"4\"\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eCongratulations, you\u0027re all ready to go!!\r\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\"left\" colspan=\"4\"\u003e \u003cfont face=\"verdana\" size=\"2\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\r\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr bgcolor=\"orange\"\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eEmbers\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003ePublic\r\nIP\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e\u003c/th\u003e\u003cth\u003e\u003cfont face=\"verdana\" size=\"2\"\u003eAdditional Disks\u003c/th\u003e\u003ctr\u003e\u003ctr\u003e\u003ctd align=\"left\" bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e\u003cb\u003elead1\u003c/b\u003e.ibm.com \u003c/td\u003e\u003ctd bgcolor=\"#f0f0f0\"\u003e\u003cfont face=\"verdana\" size=\"2\"\u003e9.30.211.110\u003c/td\u003e\u003ctd",
     "content-type": "text/html; charset=\"UTF-8\"",
     "date": "2022-10-10T19:54:18",
     "from": [
       [
-        "Fyre Admin",
-        "fyre@us.ibm.com"
+        "Example Admin",
+        "example@us.ibm.com"
       ]
     ],
     "has_defects": false,
     "html_body": "[\"\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\u003ctable cellpadding=\\\"4\\\"\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eCongratulations, you\u0027re all ready to go!!\\r\\n\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd align=\\\"left\\\" colspan=\\\"4\\\"\u003e \u003cfont face=\\\"verdana\\\" size=\\\"2\\\"\u003eYour cluster \u003cb\u003elead\u003c/b\u003e has been built with the following\\r\\nconfiguration :\u003c/b\u003e\u003cbr\u003e\u003c/td\u003e\u003c/tr\u003e\u003ctr]",
-    "message-id": "\u003c202210101954.29AJsIaP1141965@example.fyre.ibm.com\u003e",
+    "message-id": "\u003c202210101954.29AJsIaP1141965@example.ibm.com\u003e",
     "mime-version": "1.0",
     "plain_body": "",
     "received": [
       {
-        "by": "example.fyre.ibm.com 8.15.2/8.15.2/Submit",
+        "by": "example.ibm.com 8.15.2/8.15.2/Submit",
         "date": "Mon, 10 Oct 2022 12:54:18 -0700",
         "date_utc": "2022-10-10T19:54:18",
         "delay": 0,
@@ -210,9 +210,9 @@ results = {
         "with": "HTTPS"
       }
     ],
-    "received-spf": "None (protection.outlook.com: example.fyre.ibm.com does not\r\n designate permitted sender hosts)",
-    "return-path": "www-data@example.fyre.ibm.com",
-    "subject": "Fyre stack : \u0027lead\u0027 ready",
+    "received-spf": "None (protection.outlook.com: example..ibm.com does not\r\n designate permitted sender hosts)",
+    "return-path": "www-data@example.ibm.com",
+    "subject": "stack : \u0027lead\u0027 ready",
     "timezone": "-7.0",
     "to": [
       [
@@ -237,12 +237,12 @@ results = {
   "metrics": {
     "execution_time_ms": 1347,
     "host": "My Host",
-    "package": "fn-utilities",
+    "package": "fn-parse-utilities",
     "package_version": "2.1.1",
     "timestamp": "2022-10-13 15:50:56",
     "version": "1.0"
   },
-  "raw": "{\"received\": [{\"from\": \"www-data@localhost\", \"by\": \"example.fyre.ibm.com 8.15.2/8.15.2/Submit\", \"FxHn9SLBjgFF4dnkfttJCPKsph9Xn/sEQCFV3yiLJGtgKZtqncl8KfT/dUhKZ0/gsMGuWHSea0qfzrAZ8+JHELx2xhOikG7lgDFxpsHiT9xi6/rannm53Ur5JqbUAGkXzJGXDA/BAUb1pjGogswkrl3NyGAq3+QSJ0XGJfOok63/Pa3ua6sCwzRjdEtzV0wK4YiTcMCMdhedpFPWf01iBcQPezd6aEHOg5EdMEnSFPFjSVfixP3nIqOsMSQLPS72ubUMz8JDhXycm1XennS6cGMb/WwByYS9YhfpFIiJqE3jFFLRnmzucI6msgFHRgQAS7nx2KYUZnnjJZbN1kS6bICVaRh4h2BrRhjb3G4b+HkkoW2Cqrhn4p+VnYIFH/hBPWuuophaKvQt/lJ0gIfR/svy0WBVtx1iRHY+lGgW8temE8vG4CS0oTgbztcMlMTmU5MNMszcSGHgeZZODkyeQPzi84QmpJdmiowkQqYynyv6yoYugLy3iIQfzv3XI0GChyctAVEzL34SAxwn+FCojNM/}",
+  "raw": "{\"received\": [{\"from\": \"www-data@localhost\", \"by\": \"example.ibm.com 8.15.2/8.15.2/Submit\", \"FxHn9SLBjgFF4dnkfttJCPKsph9Xn/sEQCFV3yiLJGtgKZtqncl8KfT/dUhKZ0/gsMGuWHSea0qfzrAZ8+JHELx2xhOikG7lgDFxpsHiT9xi6/rannm53Ur5JqbUAGkXzJGXDA/BAUb1pjGogswkrl3NyGAq3+QSJ0XGJfOok63/Pa3ua6sCwzRjdEtzV0wK4YiTcMCMdhedpFPWf01iBcQPezd6aEHOg5EdMEnSFPFjSVfixP3nIqOsMSQLPS72ubUMz8JDhXycm1XennS6cGMb/WwByYS9YhfpFIiJqE3jFFLRnmzucI6msgFHRgQAS7nx2KYUZnnjJZbN1kS6bICVaRh4h2BrRhjb3G4b+HkkoW2Cqrhn4p+VnYIFH/hBPWuuophaKvQt/lJ0gIfR/svy0WBVtx1iRHY+lGgW8temE8vG4CS0oTgbztcMlMTmU5MNMszcSGHgeZZODkyeQPzi84QmpJdmiowkQqYynyv6yoYugLy3iIQfzv3XI0GChyctAVEzL34SAxwn+FCojNM/}",
   "reason": null,
   "success": true,
   "version": "1.0"
@@ -563,6 +563,14 @@ else:
 Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned. The XML document can be an artifact or attachment.
 
  ![screenshot: fn-parse-utilities-xml-transformation ](./doc/screenshots/fn-parse-utilities-xml-transformation.png)
+
+ ### For App Host Environments:
+* Set the app.config `xml_stylesheet_dir` setting as follows:
+
+     xml_stylesheet_dir= /var/rescircuits/xmltransformation
+* Add your transformation file to the App Configuration tab to refer to the same directory as used in `xml_stylesheet_dir`.
+
+![screenshot: fn-parse-utilities-apphost-XMTransformations](./doc/screenshots/fn-parse-utilities-apphost-XMTransformations.png)
 
 <details><summary>Inputs:</summary>
 <p>
