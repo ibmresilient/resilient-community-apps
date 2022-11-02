@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
-# """AppFunction implementation"""
-from urllib import parse
 
+"""AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
@@ -64,9 +62,12 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["group_description"] = fn_inputs.ms_group_description
         self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
 
-        self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(fn_inputs, 'task_id') else None
-        self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(fn_inputs, 'ms_owners_list') else None
-        self.required_parameters["additional_mambers"] = fn_inputs.additional_members if hasattr(fn_inputs, 'additional_members') else None
+        self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(
+            fn_inputs, 'task_id') else None
+        self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(
+            fn_inputs, 'ms_owners_list') else None
+        self.required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
+            fn_inputs, 'additional_members') else None
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
@@ -79,7 +80,7 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.error(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
             yield self.status_message(constants.STATUS_AUTHENTICATION_FAILED)
             authenticated = False
-            yield FunctionResult(None, success=False, reason=str(err))
+            yield FunctionResult({}, success=False, reason=str(err))
 
         if authenticated:
             try:
@@ -87,4 +88,4 @@ class FunctionComponent(AppFunctionComponent):
                 response = group_manager.create_group()
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
-                yield FunctionResult(rason=str(err), success=False)
+                yield FunctionResult({}, success=False, reason=str(err))

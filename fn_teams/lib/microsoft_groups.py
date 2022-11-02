@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+'''
+ (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+'''
 
 import json
 
@@ -11,9 +13,7 @@ from fn_teams.lib import constants
 from fn_teams.lib.microsoft_commons import ResponseHandler
 
 class GroupsInterface:
-
-    def __init__(self, required_parameters):
-        """
+    """
         This application allows for creating a Microsoft Group using the Microsoft Graph API. This
         provides SOAR with the ability to create Groups from within a SOAR incident or a task.
 
@@ -32,8 +32,8 @@ class GroupsInterface:
         --------
             Response <dict> : A response with the room/team options and details
                               or the error message if the meeting creation
-         """
-
+    """
+    def __init__(self, required_parameters):
         self.members_email_ids = []
         self.user_db, self.app_message = {}, ""
         self.group_owners, self.group_members = [], []
@@ -46,46 +46,10 @@ class GroupsInterface:
         self.resclient = required_parameters["resclient"]
 
 
-    def create_group(self):
-        """
-        Main wrapper function that orchestrates the creation of a Microsoft Group. This function
-        executes in the following order:
-            * Generates a list of incident or task members that are to be added to the group
-            * These member email addresses are retrieved from the SOAR instance and store
-            * Email addresses are then used to validate the user credentials on the MS endpoint
-            * They are then segregated into owners and members.
-            * Basic group details along with the owners email address is passed on the create 
-              the group
-            * Members are then added in a recursive fashion once the group is created
-
-        Returns:
-        --------
-            response <dict> : Information of the group created
-        """
-        self.generate_member_list()
-        self.find_all_users()
-        members = list(map(lambda id: parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_DIRECTORY_OBJECT.format(id)), self.group_members))
-        owners = list(map(lambda id: parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_USERS.format(id)), self.group_owners))
-        self.log.info(constants.INFO_CREATING_GROUP)
-        response = self.write_group(
-            description=self.required_parameters["group_description"],
-            name=self.required_parameters["group_name"],
-            mail_name=self.required_parameters["group_mail_nickname"],
-            owners=owners)
-        self.add_members_group(response.get("id"), members)
-        groups_info = self.find_group(
-            group_mail_nickname=self.required_parameters["group_mail_nickname"])
-        return groups_info[0]
-
-
-    def write_group(self, **kwargs):
+    def _write_group(self, **kwargs):
         """
         Creates a group based on all gathered information. This function specifies the owners
-        and members to be added to the group while creation. Do note that only a maximum of 
+        and members to be added to the group while creation. Do note that only a maximum of
         15 users (members + owners) can be added while group creations. Additonal members are
         to be added later on creation.
 
@@ -100,10 +64,10 @@ class GroupsInterface:
         """
         body = {
             "description" : kwargs.get("description", ""),
-            "displayName" : kwargs.get("name"),
+            "displayName" : kwargs.get("displayName"),
             "groupTypes"  : [constants.SETTINGS_GROUP_TYPE],
             "mailEnabled" : constants.SETTINGS_GROUP_MAIL_ENABLED,
-            "mailNickname": kwargs.get("mail_name"),
+            "mailNickname": kwargs.get("mailNickname"),
             "securityEnabled" : constants.SETTINGS_GROUP_SECURITY_ENABLED}
 
         if "owners" in kwargs:
@@ -129,7 +93,7 @@ class GroupsInterface:
         return response
 
 
-    def find_group(self, **kwargs):
+    def _find_group(self, **kwargs):
         """
         Allows for locating a group based on its >>display name<< or >>mail nickname<<
         This function atleast required either the group_name or the group_mail_nickname
@@ -176,15 +140,15 @@ class GroupsInterface:
         if len(response.get("value")) > 0 :
             self.log.info(constants.INFO_FOUND_GROUP)
             return response.get("value")
-        else:
-            self.log.error(error_msg)
-            raise IntegrationError(error_msg)
+
+        self.log.error(error_msg)
+        raise IntegrationError(error_msg)
 
 
-    def read_user_info(self, user_id, *args):
+    def _read_user_info(self, user_id, *args):
         """
         Fetches information based on the email address of a user and assigns
-        role (member or owner) to this information and stores it in 
+        role (member or owner) to this information and stores it in
         self.user_db for use later.
 
         Arguments:
@@ -193,7 +157,9 @@ class GroupsInterface:
 
         Updates:
         --------
-            self.user_db      <dict> : User database dictionary with all relavent information
+            self.user_db <dict> : User database dictionary with all relavent information
+            self.group_owners <dict> : Owners database dictionary with all relavent information
+            self.group_members <dict> : Members database dictionary with all relavent information
 
         """
         url = parse.urljoin(
@@ -220,7 +186,7 @@ class GroupsInterface:
             self.log.warn(_msg)
 
 
-    def find_all_users(self):
+    def _find_all_users(self):
         """
         The email addresses of the associated users are retrieved from the SOAR instance
         and passed on to the Microsoft Endpoint to check if they are valid users. If said
@@ -233,7 +199,7 @@ class GroupsInterface:
             self.required_parameters["members_list"] <list> : List of members email addresses
 
         Updates:
-        ------- 
+        -------
             self.owners_list  <list> : List of owners email addresses
             self.members_list <list> : List of owners members addresses
             self.user_db      <dict> : User database dictionary with all relavent information
@@ -249,34 +215,33 @@ class GroupsInterface:
                 .split(","))
             for member in owners_list:
                 if member not in self.user_db and member not in self.group_owners:
-                    self.read_user_info(member, "owner")
+                    self._read_user_info(member, "owner")
                 else:
                     self.log.debug(constants.DEBUG_SKIPPING_USER)
+        else:
+            self.log.warn(constants.WARN_NO_OWNER_EMAIL_ID_PROVIDED)
 
         for member in self.members_email_ids:
             if member not in self.user_db and member not in self.group_owners:
-                self.read_user_info(member, "member")
+                self._read_user_info(member, "member")
             else:
                 self.log.debug(constants.DEBUG_SKIPPING_USER)
-
-        else:
-            self.log.warn(constants.WARN_NO_OWNER_EMAIL_ID_PROVIDED)
 
         self.log.debug(json.dumps(self.user_db, indent=2))
         self.response_handler.clear_exempt_codes(default=True)
 
 
-    def add_members_group(self, group_id, members_list):
+    def _add_members_group(self, group_id, members_list):
         """
         Allows for adding Users to the Microsoft Group. This function plays
-        a vital role as the Group creation call can only support upto 15 
+        a vital role as the Group creation call can only support upto 15
         members and owners combined. So members are then added in a recursive
         manner.
 
         Arguments:
         ----------
             group_id     <str>  : ID of the group to which users are to be added
-            members_list <list> : A list of email addresses to be added to the 
+            members_list <list> : A list of email addresses to be added to the
                                   group
 
         Returns:
@@ -287,7 +252,8 @@ class GroupsInterface:
         url = parse.urljoin(
             constants.BASE_URL,
             constants.URL_GROUP_ADD_MEMBERS.format(group_id))
-        self.log.debug("Adding members to Group object {}".format(url))
+        self.log.debug(constants.DEBUG_ADDING_MEMBER_TO_GROUP.format(url))
+        self.log.debug(members_list)
         for member in members_list:
             body = {"@odata.id" : member}
             self.rc.execute(
@@ -296,14 +262,13 @@ class GroupsInterface:
                 data=json.dumps(body),
                 headers=self.headers,
                 callback=self.response_handler.check_response)
-
         self.response_handler.clear_exempt_codes(default=True)
 
 
-    def is_direct_member(self, incident_member_id, org_member_list):
+    def _is_direct_member(self, incident_member_id, org_member_list):
         """
-        Checks to see if the member Id accquired from the incident or task belongs to the 
-        list of all users from the organization. Upon match, it then extracts the email 
+        Checks to see if the member Id accquired from the incident or task belongs to the
+        list of all users from the organization. Upon match, it then extracts the email
         address for that particular user.
 
         Args:
@@ -320,11 +285,11 @@ class GroupsInterface:
                 return user.get(constants.EMAIL)
 
 
-    def is_group_member(self, incident_member_id, org_member_list, org_group_list):
+    def _is_group_member(self, incident_member_id, org_member_list, org_group_list):
         """
         Checks to see if the member Id accquired from the incident or task belongs to t
         he list of all groups from the organization. Upon match, it then queries a list
-        of Ids associated with that group and matches with user using the 
+        of Ids associated with that group and matches with user using the
         >>is_direct_member<< function
 
         Args:
@@ -342,17 +307,17 @@ class GroupsInterface:
         for group in org_group_list:
             if incident_member_id == group.get("id"):
                 for member in group.get("members"):
-                    ret.append(self.is_direct_member(member, org_member_list))
+                    ret.append(self._is_direct_member(member, org_member_list))
         return ret
 
 
-    def generate_member_list(self):
+    def _generate_member_list(self):
         """
         Generates a list of email addresses of the members to be added to the Group. The
-        function queries incident member list or task member list, organization group list, 
-        and organization user list. Using these, it then compares and accquires the email 
+        function queries incident member list or task member list, organization group list,
+        and organization user list. Using these, it then compares and accquires the email
         addresses of all users that are members to the incident or task, if >>add members from<<
-        task or incident is selected. Else just adds the email addresses specified in 
+        task or incident is selected. Else just adds the email addresses specified in
         >>additional members<<
 
         Returns:
@@ -360,47 +325,90 @@ class GroupsInterface:
             members_email_ids <list> : a list of all participant email addresses to be added
 
         """
+        org_member_list  = self.resclient.post(constants.RES_USERS, payload={}).get("data")
+        org_group_list   = self.resclient.get(constants.RES_GROUPS)
         add_members_from = self.required_parameters.get("add_members_from").lower().strip()
         add_members_from = None if add_members_from == "none" else add_members_from
 
         email_ids = []
-        org_member_list = self.resclient.post(constants.RES_USERS, payload={}).get("data")
-        org_group_list  = self.resclient.get(constants.RES_GROUPS)
-
         if add_members_from:
             if add_members_from.strip().lower() == "task":
-                incidentMembers = self.resclient.get(parse.urljoin(constants.RES_TASK,
-                    "{}/members".format(self.required_parameters.get("task_id"))))
+                incident_members = self.resclient.get(parse.urljoin(constants.RES_TASK,
+                    constants.MEMBERS_URL.format(self.required_parameters.get("task_id"))))
             else:
-                incidentMembers = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
-                    "{}/members".format(self.required_parameters.get("incident_id"))))
-            if len(incidentMembers.get("members")) == 0:
-                self.log.warn(constants.WARN_INCIDENT_NO_MEMBERS )
-            for incident_member in incidentMembers.get("members"):
-                if self.is_direct_member(incident_member, org_member_list):
-                    email_ids.append(self.is_direct_member(incident_member,
+                incident_members = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
+                    constants.MEMBERS_URL.format(self.required_parameters.get("incident_id"))))
+            if len(incident_members.get("members")) == 0:
+                self.log.warn(constants.WARN_INCIDENT_NO_MEMBERS)
+            for incident_member in incident_members.get("members"):
+                if self._is_direct_member(incident_member, org_member_list):
+                    email_ids.append(self._is_direct_member(incident_member,
                                                             org_member_list))
-                elif self.is_group_member(incident_member,
+                elif self._is_group_member(incident_member,
                                           org_member_list,
                                           org_group_list):
-                    email_ids.extend(self.is_group_member(incident_member,
+                    email_ids.extend(self._is_group_member(incident_member,
                                                          org_member_list,
                                                          org_group_list))
             self.log.debug(email_ids)
-        elif not self.required_parameters.get("additiona_members"):
+        elif not self.required_parameters.get("additional_members"):
             self.log.warn(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
-
-        if self.required_parameters.get("additiona_members"):
-            email_ids += self.required_parameters.get("additiona_members").lower().replace(" ", "").split(",")
-        self.members_email_ids = set(email_ids)
+        if self.required_parameters.get("additional_members"):
+            email_ids += (self.required_parameters
+            .get("additional_members")
+            .lower()
+            .replace(" ", "")
+            .split(","))
+        self.members_email_ids = list(set(email_ids))
         self.log.info(constants.INFO_ADD_MEMEBERS.format(self.members_email_ids))
+
+
+    def create_group(self):
+        """
+        Main wrapper function that orchestrates the creation of a Microsoft Group. This function
+        executes in the following order:
+            * Generates a list of incident or task members that are to be added to the group
+            * These member email addresses are retrieved from the SOAR instance and store
+            * Email addresses are then used to validate the user credentials on the MS endpoint
+            * They are then segregated into owners and members.
+            * Basic group details along with the owners email address is passed on the create
+              the group
+            * Members are then added in a recursive fashion once the group is created
+
+        Returns:
+        --------
+            response <dict> : Information of the group created
+        """
+        self._generate_member_list()
+        self._find_all_users()
+
+        members = list(map(lambda id: parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_DIRECTORY_OBJECT.format(id)), self.group_members))
+        owners = list(map(lambda id: parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_USERS.format(id)), self.group_owners))
+
+        self.log.info(constants.INFO_CREATING_GROUP)
+        response = self._write_group(
+            description=self.required_parameters["group_description"],
+            displayName=self.required_parameters["group_name"],
+            mailNickname=self.required_parameters["group_mail_nickname"],
+            owners=owners)
+
+        self._add_members_group(response.get("id"), members)
+
+        groups_info = self._find_group(
+            group_mail_nickname=self.required_parameters["group_mail_nickname"])
+
+        return groups_info[0]
 
 
     def delete_group(self):
         """
         Microsoft Groups can be deleted using this function. Either the group_name or the
         group_mail_nickname must be provided. Since group_mail_nickname is a unique value
-        where no two groups can have the same ID, this is recommended to be used for 
+        where no two groups can have the same ID, this is recommended to be used for
         deletion.
 
         Inputs:
@@ -419,14 +427,13 @@ class GroupsInterface:
 
         Returns:
             <dict>: Message that reads successfully deleted group and status code
-
         """
         if "group_name" in self.required_parameters:
-            group_details = self.find_group(
+            group_details = self._find_group(
                 group_name=self.required_parameters.get("group_name"))
 
         elif "group_mail_nickname" in self.required_parameters:
-            group_details = self.find_group(
+            group_details = self._find_group(
                 group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
 
         else:
