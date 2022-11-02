@@ -1,7 +1,7 @@
 # IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
-  - [v2.0.10](#v2010)
+  - [v2.1.0](#v210)
   - [v2.0.9](#v209)
 - [Overview](#overview)
 - [Key Features](#key-features)
@@ -16,7 +16,7 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v2.0.10
+### v2.1.0
 * Added optional `render_rich_text` configuration. If set to True, rich text notes will be sent to SNOW.
 * Verified on ServiceNow Tokyo release
 

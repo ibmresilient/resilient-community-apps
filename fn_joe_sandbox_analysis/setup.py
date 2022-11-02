@@ -21,20 +21,21 @@ def snake_to_camel(word):
 
 setup(
     name='fn_joe_sandbox_analysis',
-    version='1.0.4',
+    display_name="Joe Sandbox Function for IBM SOAR",
+    version='1.0.5',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Joe Sandbox Function",
-    long_description="Resilient Circuits Joe Sandbox Function",
+    description="Joe Sandbox Function for IBM SOAR",
+    long_description="Joe Sandbox Function for IBM SOAR",
     install_requires=[
         'resilient_circuits>=32.0.0',
-        'jbxapi==2.10.1',
-        'resilient_lib'
+        'jbxapi==2.10.1'
     ],
     packages=find_packages(),
     include_package_data=True,
+    python_requires='>=3.6',
     platforms='any',
     classifiers=[
         'Programming Language :: Python',
