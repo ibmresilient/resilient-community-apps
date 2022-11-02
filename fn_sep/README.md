@@ -33,12 +33,12 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.1
-- Support added for App Host.
- 
-### v1.0.0
-* Initial Release
----
+
+| Date | Version | Notes |
+| ---: | :------: | :---- |
+| 11/2022 | 1.0.2 | Bug fix for osname |
+| 11/2020 | 1.0.1 | Support added for App Host |
+| 08/2019 | 1.0.0 | Initial Release |
 
 ## Overview
 <!--
