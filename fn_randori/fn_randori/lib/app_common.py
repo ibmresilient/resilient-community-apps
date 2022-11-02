@@ -36,12 +36,16 @@ HEADER = { 'Content-Type': 'application/json' }
 LINKBACK_URL = "{tenant_name}/targets/{target_id}"
 
 # E N D P O I N T S
+GET_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
 GET_SINGLE_TARGET_URI = "/recon/api/{api_version}/target/{target_id}"
 GET_SINGLE_DETECTION_FOR_TARGET_URI = "/recon/api/{api_version}/single-detection-for-target"
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
+PATCH_TARGET_URI = "/recon/api/{api_version}/target"
+POST_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 
 TARGET_LIMIT = 2000
+COMMENT_LIMIT = 500
 
 class AppCommon():
     def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
@@ -235,6 +239,26 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
 
+    def update_notes(self, soar_case_id, target_id):
+        results = self.get_comment(target_id)
+
+    def get_target_comments(self, target_id) -> list:
+        """
+        Call Randori endpoint to get commments for the specified target.
+        """
+
+        url = self._get_uri(GET_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        response = self.rc.execute("GET",
+                                   url=url,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        response_json = response.json()
+
+        comment_list = response_json.get('comments', [])
+
+        return comment_list
+
     def get_target(self, target_id) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
@@ -270,6 +294,45 @@ class AppCommon():
         detections = self.get_detections_for_target(query)
 
         return detections
+
+    def update_target_status(self, target_id, status):
+        """ Update the Randori target status field in Randori
+
+        Args:
+            target_id (string_): Randori target id
+            status (string): String indicating the status of the target in Randori.
+        """
+        status_data = {
+            "data": {"status": status},
+            "operations": [
+                {
+                    "op":"add",
+                    "path":"/tags/A Tag",
+                    "value": status
+                }
+            ],
+            "q":{            
+                'condition': "OR",
+                'rules': [
+                    {
+                    "id":"table.id",
+                    "field":"table.id",
+                    "type":"object",
+                    "input":"text",
+                    "operator":"equal",
+                    "value":target_id
+                    }
+                ]
+            }
+        }
+
+        response = self.rc.execute("PATCH",
+                                   self._get_uri(PATCH_TARGET_URI),
+                                   data=status_data,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
 
     def get_validate(self) -> dict:
         """

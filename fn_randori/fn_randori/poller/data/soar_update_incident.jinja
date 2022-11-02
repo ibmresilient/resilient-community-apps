@@ -8,6 +8,22 @@
     "severity_code": "High",
   {% endif %}
   "properties": {
-    "randori_target_status": "{{ status }}"
-  }
+    "randori_target_authority": {{ authority | lower }},
+
+    {% if target_temptation is not none %}
+    "randori_target_temptation": {{ target_temptation }},
+    {% endif %}
+
+    {% if tech_category is not none %}
+    "randori_target_tech_category": "{{ tech_category | join(', ') }}",
+    {% endif %}
+
+    {% if user_tags is not none %}
+    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    "randori_target_perspective_name": "{{ perspective_name }}",
+    "randori_target_status": "{{ status }}",
+    "randori_target_impact_score": "{{ impact_score }}"
+    }
 }
