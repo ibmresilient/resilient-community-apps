@@ -1,0 +1,61 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "98dce5ba-52e1-4658-93df-4e30624fe891",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2022-11-02T13:19:25Z",
+    "creationOptions": [],
+    "description": "Incident 2098: MS Teams",
+    "displayName": "SOAR MS Group",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "soarGroupMs@5rf2xs.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "soarGroupMs",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:soarGroupMs@5rf2xs.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2022-11-02T13:19:25Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-2564613562-1180193505-810475411-2447920994",
+    "theme": null,
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": []
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2098,
+    "ms_group_description": "Incident 2098: MS Teams",
+    "additional_members": "newUser@5rf2xs.onmicrosoft.com,newuser2@5rf2xs.onmicrosoft.com",
+    "ms_owners_list": "AdminSoarMS@5rf2xs.onmicrosoft.com",
+    "ms_group_name": "SOAR MS Group",
+    "ms_group_mail_nickname": "soarGroupMs",
+    "add_members_from": "Incident"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 19041,
+    "timestamp": "2022-11-02 13:19:34"
+  }
+}
