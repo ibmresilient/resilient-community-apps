@@ -3,12 +3,11 @@
   "success": true,
   "reason": null,
   "content": {
-    "success": true,
-    "notes_created": 1
+    "count": 1
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2252,
+    "randori_target_impact_score": "Medium",
     "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
   },
   "metrics": {
@@ -16,7 +15,7 @@
     "package": "fn-randori",
     "package_version": "1.0.0",
     "host": "MacBook-Pro.local",
-    "execution_time_ms": 11680,
-    "timestamp": "2022-11-02 16:02:33"
+    "execution_time_ms": 11629,
+    "timestamp": "2022-11-02 17:25:49"
   }
 }

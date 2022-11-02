@@ -259,6 +259,23 @@ class AppCommon():
 
         return comment_list
 
+    def post_target_comment(self, target_id, comment_text):
+        """
+        Call Randori endpoint to post a commment for the specified target.
+        """
+
+        url = self._get_uri(POST_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        data = {'comment': comment_text}
+        response = self.rc.execute("POST",
+                                   url=url,
+                                   json=data,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        response_json = response.json()
+
+        return response_json
+
     def get_target(self, target_id) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
@@ -295,6 +312,39 @@ class AppCommon():
 
         return detections
 
+    def update_target_impact_score(self, target_id, impact_score):
+        """ Update the Randori target impact_score field in Randori
+
+        Args:
+            target_id (string_): Randori target id
+            impact_score (string): String indicating the impact_score of the target in Randori.
+        """
+        data = {
+            "data": {"impact_score": impact_score},
+            "q": {
+                  "condition": "OR",
+                  "rules": [
+                            {
+                              "id": "table.id",
+                              "field": "table.id",
+                              "type": "object",
+                              "input": "text",
+                              "operator": "equal",
+                              "value": target_id
+                            }
+                  ]
+                }
+            }
+        data_string = json.dumps(data)
+
+        response = self.rc.execute("PATCH",
+                                   self._get_uri(PATCH_TARGET_URI),
+                                   data=data_string,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
+
     def update_target_status(self, target_id, status):
         """ Update the Randori target status field in Randori
 
@@ -304,31 +354,25 @@ class AppCommon():
         """
         status_data = {
             "data": {"status": status},
-            "operations": [
-                {
-                    "op":"add",
-                    "path":"/tags/A Tag",
-                    "value": status
+            "q": {
+                  "condition": "OR",
+                  "rules": [
+                            {
+                              "id": "table.id",
+                              "field": "table.id",
+                              "type": "object",
+                              "input": "text",
+                              "operator": "equal",
+                              "value": target_id
+                            }
+                  ]
                 }
-            ],
-            "q":{            
-                'condition': "OR",
-                'rules': [
-                    {
-                    "id":"table.id",
-                    "field":"table.id",
-                    "type":"object",
-                    "input":"text",
-                    "operator":"equal",
-                    "value":target_id
-                    }
-                ]
             }
-        }
+        status_string = json.dumps(status_data)
 
         response = self.rc.execute("PATCH",
                                    self._get_uri(PATCH_TARGET_URI),
-                                   data=status_data,
+                                   data=status_string,
                                    headers=self.header,
                                    verify=self.verify)
         response.raise_for_status()

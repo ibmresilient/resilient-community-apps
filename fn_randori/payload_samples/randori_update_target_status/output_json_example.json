@@ -1,3 +1,21 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "count": 1
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_status": "Needs Investigation",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "AnnMaries-MacBook-Pro.local",
+    "execution_time_ms": 190378,
+    "timestamp": "2022-11-02 15:52:00"
+  }
 }

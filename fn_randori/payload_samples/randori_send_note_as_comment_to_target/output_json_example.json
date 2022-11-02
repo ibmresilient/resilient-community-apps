@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "action": null,
+    "comment": "Added {} notes from Randori Target",
+    "created_at": "2022-11-02T17:37:25.576771+00:00",
+    "id": "af217af0-b6d6-4659-86b0-5fc876eac7e8",
+    "is_author": true,
+    "is_bulk_applied": false,
+    "name": "QRadar SOAR Development",
+    "rel_id": "16543836-9b71-4614-8c73-4a5b440a8c62",
+    "status": "ACTIVE"
+  },
+  "raw": null,
+  "inputs": {
+    "randori_comment_text": "Added {} notes from Randori Target",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 10124,
+    "timestamp": "2022-11-02 13:37:29"
+  }
+}

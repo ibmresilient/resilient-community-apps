@@ -15,9 +15,11 @@
         "banners_uuid": null,
         "cert_uuid": "0caabe31-4ede-4e24-9507-f9ebc106951f",
         "characteristic_tags": [
-          "DefaultPage"
+          "DefaultPage",
+          "NoCSS",
+          "OldCopyright"
         ],
-        "characteristics_count": 1,
+        "characteristics_count": 3,
         "confidence": 75,
         "cpe": {
           "cpe_version": "2.3",
@@ -63,11 +65,11 @@
         "hostname": "ferrari.demo.webernets.online",
         "hostname_id": "82ca6db1-344b-4d12-a7db-5e229e3630d1",
         "id": "f814e5ef-76d9-41c1-b6e8-52b5c0daeb16,5dbcb688-8591-4574-ad18-6cbc27a1941c",
-        "impact_score": "None",
+        "impact_score": "Medium",
         "ip": "34.149.126.94",
         "ip_id": "5b3beaa8-d24c-4861-97de-27dc3b5f9bf2",
         "ip_str": "34.149.126.94",
-        "last_seen": "2022-10-25T05:31:43.150093+00:00",
+        "last_seen": "2022-10-31T11:22:49.122136+00:00",
         "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
         "lens_view": "public",
         "name": "Tomcat",
@@ -79,10 +81,10 @@
         "poc_id": null,
         "port": 443,
         "post_exploit": 3,
-        "priority_impact_factor": 0.0,
-        "priority_score": 81.0,
+        "priority_impact_factor": 0.084375,
+        "priority_score": 135.0,
         "priority_status_factor": 0.1125,
-        "priority_tags_factor": 0.0675,
+        "priority_tags_factor": 0.253125,
         "private_weakness": 0,
         "protocol": "tcp",
         "public_weakness": 5,
@@ -91,11 +93,11 @@
         "research": 3,
         "screenshot_uuid": "5afc7cfb-9ab8-4231-a296-909eb7d918e2",
         "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
-        "status": "Needs Resolution",
+        "status": "Needs Investigation",
         "target_confidence": 75,
         "target_first_seen": "2022-07-07T07:18:22.029485+00:00",
         "target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
-        "target_last_seen": "2022-10-24T06:16:04.127801+00:00",
+        "target_last_seen": "2022-10-31T11:32:10.769721+00:00",
         "target_num_detections": 1,
         "target_temptation": 45,
         "tech_category": [
@@ -123,7 +125,7 @@
     "package": "fn-randori",
     "package_version": "1.0.0",
     "host": "MacBook-Pro.local",
-    "execution_time_ms": 315,
-    "timestamp": "2022-10-27 16:37:20"
+    "execution_time_ms": 167,
+    "timestamp": "2022-11-02 16:57:13"
   }
 }

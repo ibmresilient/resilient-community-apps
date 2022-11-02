@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_randori",
         "message_destinations": [u"fn_randori"],
-        "functions": [u"randori_get_detections_of_target", u"randori_get_target", u"randori_update_notes_from_randori_target", u"randori_update_target_status"],
+        "functions": [u"randori_get_detections_of_target", u"randori_get_target", u"randori_send_note_as_comment_to_target", u"randori_update_notes_from_randori_target", u"randori_update_target_impact_score", u"randori_update_target_status"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
@@ -47,7 +47,9 @@ def customization_data(client=None):
     - Functions:
         - randori_get_detections_of_target
         - randori_get_target
+        - randori_send_note_as_comment_to_target
         - randori_update_notes_from_randori_target
+        - randori_update_target_impact_score
         - randori_update_target_status
     - Playbooks:
         - randori_add_artifacts_of_detections

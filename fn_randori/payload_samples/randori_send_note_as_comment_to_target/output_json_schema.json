@@ -12,8 +12,30 @@
     "content": {
       "type": "object",
       "properties": {
-        "count": {
-          "type": "integer"
+        "action": {},
+        "comment": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "is_author": {
+          "type": "boolean"
+        },
+        "is_bulk_applied": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rel_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
         }
       }
     },
@@ -21,7 +43,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "randori_target_status": {
+        "randori_comment_text": {
           "type": "string"
         },
         "randori_target_id": {
