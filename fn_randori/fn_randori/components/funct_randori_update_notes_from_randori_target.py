@@ -38,24 +38,26 @@ class FunctionComponent(AppFunctionComponent):
 
         target_comments = app_common.get_target_comments(target_id)
 
+        # Create a list of formatted text for filtering just new commments.
         target_comment_text = []
         for comment in target_comments:
-            comment_text = comment.get('comment',"")
-            if comment_text:
-                created_at = comment.get('created_at',"")
-                name = comment.get('name',"")
-                text = f"{comment_text}<br>Created at: {created_at}<br>By: {name}"
-                target_comment_text.append(text)
+            formatted_text = app_common.format_randori_comment(comment)
+            if formatted_text:
+                target_comment_text.append(formatted_text)
 
-        # Filter out the new comments
+        # Filter out the new Randori comments by checking for header in the comment.
         new_comments = soar_common.filter_soar_comments(incident_id, target_comment_text)
 
+        # Reverse the order so that older notes are post first.
+        new_comments.reverse()
+
+        # Create a new note in SOAR for each new Randori comment
         for comment in new_comments:
             soar_common.create_case_comment(case_id=incident_id,
                                             note=comment,
                                             entity_comment_header="Created by Randori")
-        results = {"success": True,
-                   "notes_created": len(new_comments)}      
+
+        results = {"notes_created": len(new_comments)}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

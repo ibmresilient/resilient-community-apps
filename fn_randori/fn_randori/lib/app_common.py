@@ -239,10 +239,8 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
                                                               target_id=entity_id))
 
-    def update_notes(self, soar_case_id, target_id):
-        results = self.get_comment(target_id)
 
-    def get_target_comments(self, target_id) -> list:
+    def get_target_comments(self, target_id: str) -> list:
         """
         Call Randori endpoint to get commments for the specified target.
         """
@@ -259,7 +257,7 @@ class AppCommon():
 
         return comment_list
 
-    def post_target_comment(self, target_id, comment_text):
+    def post_target_comment(self, target_id: str, comment_text: str) -> dict:
         """
         Call Randori endpoint to post a commment for the specified target.
         """
@@ -276,7 +274,7 @@ class AppCommon():
 
         return response_json
 
-    def get_target(self, target_id) -> dict:
+    def get_target(self, target_id: str) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
         """
@@ -288,7 +286,7 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-    def get_detections_for_single_target(self, target_id) -> list:
+    def get_detections_for_single_target(self, target_id: str) -> list:
         """
         Get changed entities
 
@@ -312,7 +310,7 @@ class AppCommon():
 
         return detections
 
-    def update_target_impact_score(self, target_id, impact_score):
+    def update_target_impact_score(self, target_id: str, impact_score: str) -> dict:
         """ Update the Randori target impact_score field in Randori
 
         Args:
@@ -345,7 +343,7 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-    def update_target_status(self, target_id, status):
+    def update_target_status(self, target_id: str, status: str) -> dict:
         """ Update the Randori target status field in Randori
 
         Args:
@@ -389,7 +387,25 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-def _get_verify_ssl(app_configs):
+    def format_randori_comment(self, comment: dict) -> str:
+        """_summary_
+
+        Args:
+            comment (_type_): Randori comment (json object)
+
+        Returns:
+            _type_: _description_
+        """
+        comment_text = comment.get('comment',"")
+        if comment_text:
+            created_at = comment.get('created_at',"")
+            name = comment.get('name',"")
+            text = f"{comment_text}<br><br>Created at: {created_at}<br>By: {name}"
+            return text
+        else:
+            return None
+
+def _get_verify_ssl(app_configs: dict):
     """
     Get ``verify`` parameter from app config.
     Value can be set in the [fn_my_app] section
