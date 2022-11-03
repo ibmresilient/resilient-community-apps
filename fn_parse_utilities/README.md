@@ -136,6 +136,23 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
+### Supporting Outlook .msg files
+* This function relies on `mail-parser>=3.15`.
+
+#### For Integrations Servers:
+* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool.
+* `msgconvert` is a tool written in Perl and can be found in `Email::Outlook::Message` (Centos/RHEL).
+* See https://github.com/SpamScope/mail-parser for more information on the packaged used.
+
+#### Install `msgconvert` on CentOS/RHEL based systems:
+```
+$ sudo yum install cpan
+$ sudo cpan -fTi install Email::Outlook::Message
+```
+
+#### For App Host Environments:
+* The packages required to parse Outlook .msg  files is built into the container.
+
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
