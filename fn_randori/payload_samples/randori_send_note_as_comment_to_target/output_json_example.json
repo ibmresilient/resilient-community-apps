@@ -4,7 +4,7 @@
   "reason": null,
   "content": {
     "action": null,
-    "comment": "Added {} notes from Randori Target",
+    "comment": "Added note from Randori Target",
     "created_at": "2022-11-02T17:37:25.576771+00:00",
     "id": "af217af0-b6d6-4659-86b0-5fc876eac7e8",
     "is_author": true,
@@ -15,7 +15,7 @@
   },
   "raw": null,
   "inputs": {
-    "randori_comment_text": "Added {} notes from Randori Target",
+    "randori_comment_text": "Added note from Randori Target",
     "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
   },
   "metrics": {
