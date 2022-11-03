@@ -11,6 +11,7 @@ def config_section_data():
 
     config_data = u"""[fn_parse_utilities]
 
-    xml_stylesheet_dir =
+    # This is the path to your transformation file directory. Do not include the filename.
+    xml_stylesheet_dir = /path/to/stylesheet/directory/
     """
     return config_data

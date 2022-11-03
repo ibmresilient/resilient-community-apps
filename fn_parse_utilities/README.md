@@ -141,7 +141,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **xml_stylesheet_dir** | Yes | /Path/to/stylesheet | Path to stylesheet for transforming XML document |
+| **xml_stylesheet_dir** | Yes | /Path/to/stylesheet/directory | Path to the directory that the stylesheet is found (not the actual file) for transforming XML document |
 
 ---
 
@@ -157,12 +157,12 @@ Any attachments found are added to the incident as artifacts if `parse_utilities
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `parse_utilities_artifact_id` | `number` | No | `-` | - |
-| `parse_utilities_attachment_id` | `number` | No | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_attachment_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 | `parse_utilities_base64content` | `text` | No | `-` | - |
 | `parse_utilities_email_attachments` | `boolean` | No | `-` | If set to True, attachments found in the email file will be attached as Artifacts |
-| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
-| `parse_utilities_task_id` | `number` | No | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_task_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 
 </p>
 </details>
@@ -374,9 +374,9 @@ This function produces the structured data from a provided SSL certificate. Thre
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `parse_utilities_artifact_id` | `number` | No | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 | `parse_utilities_certificate` | `text` | No | `-` | - |
-| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | Only needed when collecting data from an file-base artifact |
 
 </p>
 </details>
@@ -461,12 +461,12 @@ This function is useful in initial triage of suspicious email attachments and ot
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `parse_utilities_artifact_id` | `number` | No | `-` | - |
-| `parse_utilities_attachment_id` | `number` | No | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_attachment_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 | `parse_utilities_base64content` | `text` | No | `-` | - |
-| `parse_utilities_filename` | `text` | No | `-` | - |
-| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
-| `parse_utilities_task_id` | `number` | No | `-` | - |
+| `parse_utilities_filename` | `text` | No | `-` | Only needed when base64content is given |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_task_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 
 </p>
 </details>
@@ -577,10 +577,10 @@ Transforms an XML document using a preexisting `xsl` stylesheet. The resulting c
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `parse_utilities_artifact_id` | `number` | No | `-` | - |
-| `parse_utilities_attachment_id` | `number` | No | `-` | - |
-| `parse_utilities_incident_id` | `number` | Yes | `-` | - |
-| `parse_utilities_task_id` | `number` | No | `-` | - |
+| `parse_utilities_artifact_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_attachment_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_incident_id` | `number` | Yes | `-` | Only needed when collecting data from an file-base artifact |
+| `parse_utilities_task_id` | `number` | No | `-` | Only needed when collecting data from an file-base artifact |
 | `parse_utilities_xml_source` | `text` | No | `-` | xml document to transform or empty when using attachments |
 | `parse_utilities_xml_stylesheet` | `text` | No | `transform.xslt` | name of stylesheet to use for the transformation |
 
