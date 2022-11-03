@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1667507577627,
+  "export_date": 1667512766977,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -847,13 +847,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 32,
+  "id": 34,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1667507575590,
+      "create_date": 1667512765031,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -862,7 +862,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1667507575590,
+      "update_date": 1667512765031,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1213,7 +1213,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2656efd_e403_4205_9e37_ded29a525928\" isExecutable=\"true\" name=\"playbook_f2656efd_e403_4205_9e37_ded29a525928\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1hwpe2p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Send Note as Comment to Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a56db20b-20c7-4751-9b74-bd82ec4c2d71\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_comment_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"note_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hwpe2p\u003c/incoming\u003e\u003coutgoing\u003eFlow_0pb55w0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1hwpe2p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fvy4m1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0pb55w0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Update SOAR Note to Indicate Sent to Randori\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"92c7afc4-eaab-4ed7-a904-e30eae913736\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0pb55w0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fvy4m1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1fvy4m1\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2656efd_e403_4205_9e37_ded29a525928\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fvy4m1\" id=\"Flow_1fvy4m1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0pb55w0\" id=\"Flow_0pb55w0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hwpe2p\" id=\"Flow_1hwpe2p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"347.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667400100612,
@@ -1265,7 +1265,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667410470463,
+      "last_modified_time": 1667512043901,
       "local_scripts": [
         {
           "actions": [],
@@ -1276,12 +1276,12 @@
           "id": 11,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1667410463683,
+          "last_modified_time": 1667512040560,
           "name": "Update SOAR Note to Indicate Sent to Randori",
           "object_type": "note",
           "playbook_handle": "randori_send_soar_note_to_randori_target",
           "programmatic_name": "randori_send_soar_note_to_randori_target_update_soar_note_to_indicate_sent_to_randori",
-          "script_text": "# Edit note in SOAR to indicate it was sent to SentinelOne\nif results.success:\n  # Get the current time\n  now = datetime.now()\n  note.text = u\"\u003cb\u003eSent to Randori at {0}\u003c/b\u003e\u003cbr\u003e{1}\".format(now, note.text.content))",
+          "script_text": "from datetime import datetime\n\n# Edit note in SOAR to indicate it was sent to Randori\nif results.success:\n  # Get the current time\n  now = datetime.now()\n  note.text = u\"\u003cb\u003eSent to Randori at {0}\u003c/b\u003e\u003cbr\u003e{1}\".format(now, note.text.content)",
           "tags": [],
           "uuid": "92c7afc4-eaab-4ed7-a904-e30eae913736"
         }
@@ -1306,7 +1306,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f2656efd-e403-4205-9e37-ded29a525928",
-      "version": 10
+      "version": 11
     },
     {
       "activation_type": "manual",
