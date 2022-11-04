@@ -1,0 +1,87 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "852892681737605120",
+    "machineId": "9f75814184f0e13f5c3229937d30312d660cf8f9256a1e3d6b279da882095981",
+    "osType": 1,
+    "cpuVendor": 1,
+    "arch": 2,
+    "cpuDescr": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "kernel": "10.0",
+    "os": "Windows 10 Enterprise",
+    "name": "LAPTOP-377CDOSQ",
+    "state": 1,
+    "registrationTime": "2022-04-14T14:11:01.315Z",
+    "agentVersion": "3.6.1",
+    "componentsVersions": [
+      {
+        "name": "keeper",
+        "version": "3.6.0",
+        "build": "19.1627291555548.commit"
+      },
+      {
+        "name": "probos",
+        "version": "3.5.0",
+        "build": "3.5.0"
+      },
+      {
+        "name": "rqtsentry",
+        "version": "3.6.1",
+        "build": "119.1632119719010.commit"
+      },
+      {
+        "name": "rqtnetsentry",
+        "version": "3.6.0",
+        "build": "44.1627295520120.commit"
+      },
+      {
+        "name": "installer",
+        "version": "3.6.1",
+        "build": ""
+      }
+    ],
+    "isVirtualMachine": false,
+    "isDomainController": false,
+    "isServer": false,
+    "sessionStart": "2022-04-14T14:11:27.543Z",
+    "sessionEnd": "2022-04-15T16:09:25.661Z",
+    "lastSeenAt": "2022-04-15T16:04:25.661Z",
+    "disconnectionReason": 0,
+    "localAddr": "192.168.2.176",
+    "hvStatus": 19,
+    "macs": [
+      "98:fa:9b:cb:d4:0e",
+      "50:eb:71:1b:8f:9a",
+      "00:05:9a:3c:7a:00",
+      "00:50:56:c0:00:01",
+      "00:50:56:c0:00:08",
+      "80:6d:97:04:b8:08"
+    ],
+    "isolated": false,
+    "connected": true,
+    "tags": [],
+    "groups": [
+      {
+        "id": "825429906883088391",
+        "name": "National Market",
+        "description": "National Market"
+      }
+    ],
+    "avInstalled": false
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_hive": "rhiveam",
+    "reaqta_endpoint_id": "852892681737605120"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 524,
+    "timestamp": "2022-04-15 12:05:10"
+  }
+}

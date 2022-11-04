@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "content_type": {
+          "type": "string"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "creator_id": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "task_id": {},
+        "task_name": {},
+        "task_custom": {},
+        "task_members": {},
+        "task_at_id": {},
+        "vers": {
+          "type": "integer"
+        },
+        "inc_id": {
+          "type": "integer"
+        },
+        "inc_name": {
+          "type": "string"
+        },
+        "inc_owner": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "reaqta_program_path": {
+          "type": "string"
+        },
+        "reaqta_endpoint_id": {
+          "type": "string"
+        },
+        "reaqta_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
