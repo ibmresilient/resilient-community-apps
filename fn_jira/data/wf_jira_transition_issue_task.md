@@ -19,10 +19,6 @@
 ### Pre-Processing Script
 ```python
 # Example: Jira Transition Issue (Task) pre-processing script
-
-#######################################
-### Define pre-processing functions ###
-#######################################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
      Supports types: basestring, unicode, bool, int and nested dicts.
@@ -31,13 +27,13 @@ def dict_to_json_str(d):
 
   json_entry = u'"{0}":{1}'
   json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
+  entries = []
 
   for entry in d:
     key = entry
-    value = d[entry]
-
-    if value is None:
+    value = d[entry] 
+    
+    if not value:
       value = False
 
     if isinstance(value, list):
@@ -49,10 +45,9 @@ def dict_to_json_str(d):
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(unicode(key), unicode(value)))
-    
+
     elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
-      entries.append(json_entry.format(key, value))
+      entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
@@ -61,23 +56,17 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
 
     else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-  
+  return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-#####################
-### Define Inputs ###
-#####################
-
+inputs.jira_label = row.server
 inputs.jira_issue_id = row.jira_issue_id_col
-inputs.jira_transition_id = "Close"
+inputs.jira_transition_id = "Done"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: Done\n"
 
 # Define JIRA fields here
-inputs.jira_fields = dict_to_json_str({
-  "resolution": { "name": "Done" }
-})
+inputs.jira_fields = dict_to_json_str({"resolution": { "name": "Done" }})
 ```
 
 ### Post-Processing Script
@@ -88,7 +77,6 @@ time_now = Date().time
 if results.get("success"):
   row.date = time_now
   row.status = "Closed"
-
 ```
 
 ---

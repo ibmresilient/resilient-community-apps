@@ -1,21 +1,22 @@
 {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
   "content": "Done",
-  "raw": "\"Done\"",
+  "raw": null,
   "inputs": {
-    "jira_issue_id": "HYD-8",
-    "jira_transition_id": "Ready for Development",
-    "jira_fields": "{  }",
-    "jira_comment": "Closed in IBM SOAR\n\nResolution: Resolved\n<div class=\"rte\"><div>Resolved</div></div>"
+    "jira_issue_id": "JRA-5",
+    "jira_transition_id": "Done",
+    "jira_fields": "{ \"resolution\":{ \"name\":\"Done\" } }",
+    "jira_label": "jira_label2",
+    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-jira",
-    "package_version": "2.1.0",
-    "host": "myhost",
-    "execution_time_ms": 23377,
-    "timestamp": "2022-03-21 11:44:57"
+    "package_version": "2.2.0",
+    "host": "local",
+    "execution_time_ms": 269,
+    "timestamp": "2022-10-13 11:17:33"
   }
 }
