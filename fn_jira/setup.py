@@ -34,6 +34,7 @@ setup(
         'pyjwt~=2.4',
     ],
     packages=find_packages(),
+    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[
