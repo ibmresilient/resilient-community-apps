@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
@@ -11,7 +12,6 @@ from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
 PACKAGE_NAME = constants.PACKAGE_NAME
 FN_NAME = "ms_teams_create_group"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'webex_delete_teamsrooms'"""

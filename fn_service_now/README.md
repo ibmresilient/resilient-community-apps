@@ -1,6 +1,8 @@
 # IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
+  - [v2.0.10](#v2010)
+  - [v2.0.9](#v209)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Requirements](#requirements)
@@ -14,6 +16,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.0.10
+* Added optional `render_rich_text` configuration. If set to True, rich text notes will be sent to SNOW.
+* Verified on ServiceNow Tokyo release
 
 ### v2.0.9
 * Support added for ServiceNow Security Incident Response (SIR)
@@ -22,23 +27,23 @@
 * App renamed to IBM Security QRadar SOAR App for ServiceNow
 * Verified on ServiceNow San Diego release
 
-### v1.0.5
+### v1.0.5 <!-- omit in toc -->
 * Verified on ServiceNow Quebec release
 
-### v1.0.4
+### v1.0.4 <!-- omit in toc -->
 * Verified on ServiceNow Paris release
 
-### v1.0.3
+### v1.0.3 <!-- omit in toc -->
 * Verified on ServiceNow Orlando release
 * Support added for SOAR AppHost
 
-### v1.0.2
+### v1.0.2 <!-- omit in toc -->
 * Verified on ServiceNow New York release
 
-### v1.0.1
+### v1.0.1 <!-- omit in toc -->
 * Verified on ServiceNow Madrid release
 
-### v1.0.0
+### v1.0.0 <!-- omit in toc -->
 * Initial release
 
 ---

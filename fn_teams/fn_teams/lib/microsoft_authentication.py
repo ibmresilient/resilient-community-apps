@@ -17,7 +17,7 @@ class MicrosoftAuthentication:
         form of a dictionary: requiredParameters. The below mentioned inputs need to be available
         in the requiredParameters dictionary for the authenticator to work. All required credentials
         for an integration can be found at:
-
+        
             portal.azure.com > App registrations > Integration Name
 
         Inputs:

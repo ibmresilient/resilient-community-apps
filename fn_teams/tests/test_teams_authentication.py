@@ -86,3 +86,4 @@ def test_generate_bearer_id(msal, mocked_authenticator):
     response = mocked_authenticator._generate_bearer_id()
     assert response
     assert response == "access_token 123"
+    

@@ -1,5 +1,14 @@
 include README.md
-include fn_qradar_advisor/util/*
-include fn_qradar_advisor/lib/*
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_qradar_advisor/util *
 include fn_qradar_advisor/LICENSE
-include fn_qradar_advisor/doc/*
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

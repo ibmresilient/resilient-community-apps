@@ -25,5 +25,10 @@ sn_password=<ServiceNow Password>
 # ex: if host is my-cases-rest.cp4s.ibmsecurity.com, cp4s_cases_prefix=my-cases-rest
 # If you don't have a custom cases rest endpoint there is no need to use this config value
 #cp4s_cases_prefix=<CP4S Cases Rest Custom Prefix>
+
+# OPTIONAL: render notes in rich, formatted text when sent to SNOW
+# only available to users who have `glide.ui.security.allow_codetag`
+# enabled on their SNOW system. Set to `True` to properly render HTML notes
+# render_rich_text = False
 """
     return config_data

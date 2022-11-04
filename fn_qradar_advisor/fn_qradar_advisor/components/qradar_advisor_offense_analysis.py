@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """Function implementation"""
 
@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             log.info("qradar_analysis_restart_if_existed: %s", qradar_analysis_restart_if_existed)
 
             qradar_verify_cert = True
-            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+            if "verify_cert" in self.options and self.options["verify_cert"].lower() == "false":
                 qradar_verify_cert = False
 
             yield StatusMessage("starting...")

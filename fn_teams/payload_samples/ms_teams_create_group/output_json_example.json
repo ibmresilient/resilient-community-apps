@@ -36,6 +36,7 @@
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
     "securityIdentifier": "S-1-12-1-*******-1179341755-1073654704-3590577661",
+
     "theme": null,
     "visibility": "Public",
     "onPremisesProvisioningErrors": []

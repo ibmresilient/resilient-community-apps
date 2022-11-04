@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 # (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 
 import calendar
-import datetime
 import logging
 import time
 from msal import ConfidentialClientApplication
@@ -28,6 +27,7 @@ ALERTS_URL = "api/alerts"
 EXPAND_PARAMS = {
     "$expand": "evidence"
 }
+EXPAND_PARAMS_URL = "$expand=evidence"
 
 # extra parameters possible in sentinel section for requests calls
 REQUEST_PARAMS = {

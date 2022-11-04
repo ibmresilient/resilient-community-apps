@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting 'ldap_utilities_toggle_access' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'ldap_utilities_toggle_access' running in workflow '{wf_instance_id}'")
 
             # Validate that required fields are given
             validate_fields(["ldap_dn", "ldap_toggle_access"], kwargs)
@@ -50,6 +50,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info("LDAP Toggle Access: %s", input_ldap_toggle_access)
 
             yield StatusMessage("Function Inputs OK")
+
+            # Initiate variable, so that it does not error when called
+            c = ""
 
             # Instansiate helper (which gets appconfigs from file)
             ldap = LDAPDomains(self.opts)
@@ -80,18 +83,18 @@ class FunctionComponent(ResilientComponent):
                 c.bind()
             except Exception as err:
                 raise ValueError(
-                    "Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {}".format(err))
+                    f"Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {err}")
 
             # Inform user
-            yield StatusMessage("Connected to {}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
+            yield StatusMessage(f"Connected to {'Active Directory' if helper.LDAP_IS_ACTIVE_DIRECTORY else 'LDAP Server'}")
 
             try:
-                yield StatusMessage("Attempting to {} {}".format(input_ldap_toggle_access, input_ldap_dn))
+                yield StatusMessage(f"Attempting to {input_ldap_toggle_access} {input_ldap_dn}")
                 # Perform the Modify operation
                 res = c.modify(input_ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
             except Exception as err:
-                LOG.debug("Error: {}".format(err))
+                LOG.debug(f"Error: {err}")
                 raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
 
             finally:
@@ -105,7 +108,7 @@ class FunctionComponent(ResilientComponent):
             results["user_dn"] = input_ldap_dn
             results["user_status"] = input_ldap_toggle_access
 
-            yield StatusMessage("Finished 'ldap_utilities_toggle_access' running in workflow '{}'".format(wf_instance_id))
+            yield StatusMessage(f"Finished 'ldap_utilities_toggle_access' running in workflow '{wf_instance_id}'")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -16,7 +16,7 @@
 ###############
 PATH_COMMON_SCIPTS_SAVE_LOC=$1
 PATH_COMMON_SCRIPTS_REPO=$2
-PATH_DOWNLOAD_SCRIPT_SAVE_LOC="$TRAVIS_BUILD_DIR/download_script.py"
+PATH_DOWNLOAD_SCRIPT_SAVE_LOC=$3
 
 ##################
 ## Check params ##
@@ -28,6 +28,11 @@ fi
 
 if [ -z "$2" ] ; then
     echo "ERROR: Must provide raw.github.ibm.com to file to download e.g. https://raw.github.ibm.com/Resilient/hydra-common-scripts/main/download_files_from_other_repo.py"
+    exit 1
+fi
+
+if [ -z "$3" ] ; then
+    echo "ERROR: Must provide PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
     exit 1
 fi
 

@@ -1,0 +1,16 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_playbook_maker/components *
+recursive-include fn_playbook_maker/util *
+recursive-include fn_playbook_maker/lib *
+include fn_playbook_maker/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak
