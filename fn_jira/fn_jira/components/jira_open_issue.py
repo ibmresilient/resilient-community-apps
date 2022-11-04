@@ -1,89 +1,73 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-
 """Create an issue in Jira from IBM SOAR"""
 
-import json
-import logging
+from json import loads
 
-from fn_jira.util.helper import (CONFIG_DATA_SECTION, DEFAULT_JIRA_DT_NAME,
-                                 build_url_to_resilient, get_jira_client,
-                                 prepend_text, to_markdown,
-                                 validate_app_configs)
-from resilient_circuits import (FunctionError, FunctionResult,
-                                ResilientComponent, StatusMessage, function,
-                                handler)
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from fn_jira.util.helper import (DEFAULT_JIRA_DT_NAME, PACKAGE_NAME,
+                                 get_jira_client, get_server_settings,
+                                 to_markdown, validate_app_configs)
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import (RequestsCommon, build_incident_url,
+                           build_resilient_url, validate_fields)
 
-PACKAGE_NAME = CONFIG_DATA_SECTION
+FN_NAME = "jira_open_issue"
 
-
-class FunctionComponent(ResilientComponent):
-
-    """Component that implements Resilient function 'jirs_open_issue"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function 'jira_open_issue"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get(PACKAGE_NAME, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.res_params = opts.get("resilient", {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get(PACKAGE_NAME, {})
-        self.res_params = opts.get("resilient", {})
-
-    @function("jira_open_issue")
-    def _jira_open_issue_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Create a jira issue."""
-        try:
-            log = logging.getLogger(__name__)
-            rc = RequestsCommon(self.opts, self.options)
-            rp = ResultPayload(PACKAGE_NAME, **kwargs)
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-            # Get + validate the app.config parameters:
-            log.info("Validating app configs")
-            app_configs = validate_app_configs(self.options)
+        # Get configuration for Jira server specified
+        options = get_server_settings(self.opts, getattr(fn_inputs, "jira_label", None))
 
-            # Get + validate the function parameters:
-            log.info("Validating function inputs")
-            fn_inputs = validate_fields(["incident_id", "jira_fields"], kwargs)
-            log.info("Validated function inputs: %s", fn_inputs)
+        # Get + validate the app.config parameters:
+        self.LOG.info("Validating app configs")
+        app_configs = validate_app_configs(options)
 
-            # Get JIRA fields from input
-            jira_fields = json.loads(fn_inputs.get("jira_fields"))
+        # Get + validate the function parameters:
+        self.LOG.info("Validating function app_configs")
+        inputs = validate_fields(["incident_id", "jira_fields"], fn_inputs)
+        self.LOG.info(f"Validated function app_configs: {inputs}")
 
-            yield StatusMessage("Connecting to JIRA")
+        # Get JIRA fields from input
+        jira_fields = loads(inputs.get("jira_fields"))
 
-            jira_client = get_jira_client(app_configs, rc)
+        yield self.status_message("Connecting to JIRA")
 
-            # Build the URL to SOAR
-            resilient_url = build_url_to_resilient(self.res_params.get("host"), self.res_params.get("port"), fn_inputs.get("incident_id"), fn_inputs.get("task_id"))
+        jira_client = get_jira_client(app_configs, RequestsCommon(self.opts, options))
 
-            jira_fields["description"] = prepend_text("IBM SOAR Link: {0}".format(resilient_url), to_markdown(jira_fields.get("description", "")))
+        # Build the URL to SOAR
+        resilient_url = build_incident_url(build_resilient_url(self.res_params.get("host"), self.res_params.get("port")), inputs.get("incident_id"))
+        task_id = inputs.get("task_id")
+        if task_id:
+            resilient_url = f"{resilient_url}?task_id={task_id}"
 
-            yield StatusMessage("Creating JIRA issue")
+        jira_fields["description"] = u"{}\n\n{}".format(f"IBM SOAR Link: {resilient_url}", to_markdown(jira_fields.get("description", ""))).strip()
 
-            jira_issue = jira_client.create_issue(fields=jira_fields)
+        yield self.status_message("Creating JIRA issue")
 
-            results_contents = {
-                "issue_url": jira_issue.permalink(),
-                "issue_url_internal": jira_issue.self,
-                "issue_key": jira_issue.key,
-                "issue": jira_issue.raw,
-                "jira_dt_name": app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME)
-            }
+        jira_issue = jira_client.create_issue(fields=jira_fields)
 
-            yield StatusMessage(u"JIRA issue {0} created".format(jira_issue.key))
+        results_contents = {
+            "issue_url": jira_issue.permalink(),
+            "issue_url_internal": jira_issue.self,
+            "issue_key": jira_issue.key,
+            "issue": jira_issue.raw,
+            "jira_dt_name": app_configs.get("jira_dt_name", DEFAULT_JIRA_DT_NAME)
+        }
 
-            results = rp.done(success=True, content=results_contents)
+        yield self.status_message(u"JIRA issue {} created".format(jira_issue.key))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            log.info("Complete")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-
-        except Exception as err:
-            yield FunctionError(err)
+        # Produce a FunctionResult with the results
+        yield FunctionResult(results_contents)

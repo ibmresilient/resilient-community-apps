@@ -19,10 +19,6 @@
 ### Pre-Processing Script
 ```python
 # Example: Jira Open Issue [Incident] pre-processing script
-
-#######################################
-### Define pre-processing functions ###
-#######################################
 def list_to_json_str(l):
   """
   Function that converts a list into a JSON string.
@@ -34,8 +30,7 @@ def list_to_json_str(l):
   json_entry_str = u'"{0}",'
 
   for value in l:
-
-    if value is None:
+    if not value:
       value = False
 
     if isinstance(value, list):
@@ -45,24 +40,22 @@ def list_to_json_str(l):
       list_as_str += json_entry.format(dict_to_json_str(value))
 
     elif isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      value = value.replace("\n", "\\n")
+      value = value.replace(u'"', u'\\"').replace("\n", "\\n")
       list_as_str += json_entry_str.format(unicode(value))
 
     elif isinstance(value, unicode):
       list_as_str += json_entry.format(unicode(value))
 
     elif isinstance(value, bool):
-      value = 'true' if value is True else 'false'
-      list_as_str += json_entry.format(value)
+      list_as_str += json_entry.format('true' if value else 'false')
 
     elif isinstance(value, int):
       list_as_str += json_entry.format(value)
 
     else:
-      helper.fail('list_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('list_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'[', list_as_str[:-1], u']')
+  return u'{} {} {}'.format(u'[', list_as_str[:-1], u']')
 
 def dict_to_json_str(d):
   """
@@ -77,9 +70,9 @@ def dict_to_json_str(d):
 
   for entry in d:
     key = entry
-    value = d[entry]
-
-    if value is None:
+    value = d[entry] 
+    
+    if not value:
       value = False
 
     if isinstance(value, list):
@@ -89,28 +82,27 @@ def dict_to_json_str(d):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
 
     elif isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      value = value.replace("\n", "\\n")
+      value = value.replace(u'"', u'\\"').replace("\n", "\\n")
       entries.append(json_entry_str.format(unicode(key), unicode(value)))
 
     elif isinstance(value, unicode):
       entries.append(json_entry.format(unicode(key), unicode(value)))
 
     elif isinstance(value, bool):
-      value = 'true' if value is True else 'false'
-      entries.append(json_entry.format(key, value))
+      entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
       entries.append(json_entry.format(unicode(key), value))
 
     else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+      helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+  return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-#####################
-### Define Inputs ###
-#####################
+if rule.properties.jira_label:
+  inputs.jira_label = rule.properties.jira_label
+else:
+  inputs.jira_label = incident.properties.jira_label
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -127,17 +119,16 @@ inputs.jira_fields = dict_to_json_str({
   "summary": u"IBM SOAR: {0}".format(incident.name),
   "description": incident.description.content if incident.get("description") else "Created in IBM SOAR"
 })
-
 ```
 
 ### Post-Processing Script
 ```python
-
 if results.get("success"):
   results_content = results.get("content", {})
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
   incident.properties.jira_issue_id = results_content.get("issue_key")
+  incident.properties.jira_server = rule.properties.jira_label
 ```
 
 ---
