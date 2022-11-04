@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """
         This application allows for deleting a Microsoft Group using the Microsoft Graph API. This
-        provides SOAR with the ability to delete Groups from within a SOAR incident or a task. 
+        provides SOAR with the ability to delete Groups from within a SOAR incident or a task.
         ms_group_mail_nickname is a unique value and so using this attribute to delete a group
         is highly recommended. If the ms_group_name attribute is used for deletion, there could
         exist two groups with the same name, in that case, the program would return an error.

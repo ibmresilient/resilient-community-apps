@@ -25,7 +25,7 @@ elif rule.properties.ms_group_name:
     inputs.ms_group_name = rule.properties.ms_group_name
 
 else:
-    helper.fail("Atlest one option must be specified to delete a group")
+    helper.fail("Atleast one option must be specified to delete a group")
 ```
 
 ### Post-Processing Script
