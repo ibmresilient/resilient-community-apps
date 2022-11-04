@@ -5,13 +5,13 @@
 
 # Example: Post Incident to Microsoft Teams
 
-## Function - Teams Post Message
+## Function - MS Teams: Post Message
 
 ### API Name
-`teams_post_message`
+`ms_teams_post_message`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_teams`

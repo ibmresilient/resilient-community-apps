@@ -122,6 +122,8 @@ class GroupsInterface:
         if "group_mail_nickname" in kwargs:
             self.log.info(constants.INFO_FIND_GROUP_BY_MAIL)
             _name = kwargs.get("group_mail_nickname")
+            if "@" in _name:
+                _name = _name.split("@")[0]
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
             _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
 
@@ -428,14 +430,12 @@ class GroupsInterface:
         Returns:
             <dict>: Message that reads successfully deleted group and status code
         """
-        if "group_name" in self.required_parameters:
-            group_details = self._find_group(
-                group_name=self.required_parameters.get("group_name"))
-
-        elif "group_mail_nickname" in self.required_parameters:
+        if  self.required_parameters.get("group_mail_nickname"):
             group_details = self._find_group(
                 group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
-
+        elif self.required_parameters.get("group_name"):
+            group_details = self._find_group(
+                group_name=self.required_parameters.get("group_name"))
         else:
             raise IntegrationError(constants.ERROR_MISSING_NAME_MAIL_NAME)
 
@@ -446,8 +446,8 @@ class GroupsInterface:
 
         url = parse.urljoin(
             constants.BASE_URL,
-            constants.URL_GROUPS.format(group_id))
-
+            constants.URL_LOCATE_GROUPS.format(group_id))
+        self.log.debug(url)
         response = self.rc.execute(
             method="delete",
             url=url,

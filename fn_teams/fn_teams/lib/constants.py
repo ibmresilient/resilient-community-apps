@@ -3,7 +3,7 @@
 ''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
 
 # Teams Authentication
-FN_NAME  = "fn_teams"
+PACKAGE_NAME  = "fn_teams"
 BASE_URL = "https://graph.microsoft.com/"
 AUTH_URL = "https://login.microsoftonline.com/"
 
@@ -18,6 +18,16 @@ SETTINGS_GROUP_SECURITY_ENABLED = False
 
 QUERY_GROUP_FIND_BY_NAME = "?$filter=displayName eq \'{}\'"
 QUERY_GROUP_FIND_BY_MAIL = "?$filter=mailNickname eq \'{}\'"
+
+# MS Post Message
+TEXT = "text"
+TASK = "Task"
+TITLE = "title"
+INCIDENT = "Incident"
+TIMEOUT = 60
+TASK_FRAGMENT = "?task="
+ERROR_UNABLE_TO_FIND_CHANNEL = "Unable to find channel name {} in app.config"
+SUCCESSFULLY_POSTED_MESSAGE = "Information successfully posted in channel {}"
 
 # MS GROUPS API call
 URL_GROUPS = "/v1.0/groups"
@@ -46,7 +56,7 @@ INFO_GROUP_CREATION_REQUEST = "[Microsoft Groups] Group creation request:"
 INFO_FIND_GROUP_BY_NAME = "[Microsoft Groups] Searching for group using Name"
 INFO_FIND_GROUP_BY_MAIL = "[Microsoft Groups] Searching for group using Mail Nickname"
 INFO_FOUND_GROUP = "[Microsoft Groups] Found one or more Groups"
-INFO_SUCCESSFULLY_DELETED = "Successfully deleted {} {}"
+INFO_SUCCESSFULLY_DELETED = "Successfully deleted {}: {}"
 INFO_ADD_MEMEBERS = "[Microsoft Groups] Members to be added to the Group {}"
 
 DEBUG_BEARER_ID = "[Microsoft Authentication] Bearer ID {}"
@@ -75,6 +85,7 @@ STATUS_GENERATE_HEADER = "Retriving AccessToken for this session"
 STATUS_SUCCESSFULLY_AUTHENTICATED = "Secure connection Established!"
 STATUS_AUTHENTICATION_FAILED = "Authentication failed! Could not retrieve AccessToken."
 STATUS_FAILED_APP = "Failed to run App Function : {}"
+STATUS_STARTING_APP = "App successfully executed!"
 
 # Self Test LOG MESSAGES
 MSG_AUTHENTICATION_PASSED = "TEST AUTHENTICATION: Passed! "
