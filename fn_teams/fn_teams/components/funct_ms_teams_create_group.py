@@ -66,7 +66,7 @@ class FunctionComponent(AppFunctionComponent):
         self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(
             fn_inputs, 'task_id') else None
         self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(
-            fn_inputs, 'ms_owners_list') else None
+            fn_inputs, 'ms_owners_list') else  None
         self.required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
             fn_inputs, 'additional_members') else None
 
