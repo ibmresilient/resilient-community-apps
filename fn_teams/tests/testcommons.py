@@ -28,7 +28,7 @@ class MockResponse:
 
 def check_request_parameters(**kwargs):
     assert "url" in kwargs
-    assert "method" in kwargs and kwargs["method"].lower() in ["post", "get"]
+    assert "method" in kwargs and kwargs["method"].lower() in ["post", "get", "delete"]
     assert "headers" in kwargs
     assert "callback" in kwargs
     if "body" in kwargs:

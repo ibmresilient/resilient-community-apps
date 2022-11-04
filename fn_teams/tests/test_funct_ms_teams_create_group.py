@@ -15,7 +15,7 @@ from fn_teams.lib.microsoft_groups import GroupsInterface
 from fn_teams.lib.microsoft_authentication import MicrosoftAuthentication
 
 
-PACKAGE_NAME = constants.FN_NAME
+PACKAGE_NAME = constants.PACKAGE_NAME
 FUNCTION_NAME = "ms_teams_create_group"
 APP_CONFIG = {
     "directory_id"   : "1d8a5928-8678-408e-ab06-50ca7e01766a",

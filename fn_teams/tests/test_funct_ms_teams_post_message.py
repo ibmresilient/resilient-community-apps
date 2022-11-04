@@ -22,7 +22,7 @@ def call_teams_post_message_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait(" ".join([FUNCTION_NAME, "_result"]), parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("".join([FUNCTION_NAME, "_result"]), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -57,8 +57,7 @@ class TestTeamsPostMessage:
             "task_id": task_id,
             "teams_channel": teams_channel,
             "teams_payload": teams_payload,
-            "teams_mrkdown": teams_mrkdown
-        }
+            "teams_mrkdown": teams_mrkdown}
 
         results = call_teams_post_message_function(circuits_app, function_params)
         assert results['success']
