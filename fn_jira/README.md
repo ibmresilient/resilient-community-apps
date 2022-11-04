@@ -201,7 +201,7 @@ See example workflow for configuration of function pre-processor and post-proces
 | `incident_id` | `number` | No | `-` | - |
 | `jira_comment` | `text` | No | `"Updated in IBM SOAR"` | The comment to add to the issue in Jira |
 | `jira_issue_id` | `text` | Yes | `JRA-1000` | The ID of the issue in Jira. Also known as the issue key. E.g: "JRA-1330" |
-| `jira_label` | `text` | No | `-` | Enter the label of the server you wish to use |
+| `jira_label` | `text` | No | `-` | Enter the label of the server you wish to use. |
 | `task_id` | `number` | No | `-` | - |
 
 </p>
@@ -325,6 +325,20 @@ See example workflow for configuration of function pre-processor and post-proces
 | `jira_fields` | `text` | No | `-` | A JSON String of the fields to set in Jira |
 | `jira_label` | `text` | No | `-` | Enter the label of the server you wish to use |
 | `task_id` | `number` | No | `-` | - |
+
+### Notes
+* jira_fields example:
+```
+{
+  "project": "ENG",
+  "issuetype": "BUG",
+  "priority": {"name": "Low"},
+  "summary": "IBM SOAR: Review artifact '1.2.3.4'",
+  "description": "Created from IBM SOAR"
+}
+```
+* If using the Rule activity fields `jira_project_id` or `jira_issue_type`, modify the select list to represent your instance of Jira's projects, and issue types, respectively. 
+
 
 </p>
 </details>
