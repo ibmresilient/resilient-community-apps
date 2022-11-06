@@ -47,6 +47,10 @@ POST_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 TARGET_LIMIT = 2000
 COMMENT_LIMIT = 500
 
+IBM_SOAR = "IBM SOAR" # common label
+SOAR_HEADER = "Created by {}".format(IBM_SOAR)
+ENTITY_COMMENT_HEADER = "Created by Randori"
+
 class AppCommon():
     def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
         """
@@ -257,13 +261,16 @@ class AppCommon():
 
         return comment_list
 
-    def post_target_comment(self, target_id: str, comment_text: str) -> dict:
+    def post_target_comment(self, target_id: str, comment_text: str, comment_header: str) -> dict:
         """
         Call Randori endpoint to post a commment for the specified target.
         """
 
         url = self._get_uri(POST_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        if comment_header:
+            comment_text = "{}:  {}".format(comment_header, comment_text)
         data = {'comment': comment_text}
+
         response = self.rc.execute("POST",
                                    url=url,
                                    json=data,

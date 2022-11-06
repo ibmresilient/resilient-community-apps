@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [u"randori_detections_dt"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"randori_add_artifacts_of_detections", u"randori_add_detections_to_detections_data_table", u"randori_create_artifacts_from_detection", u"randori_send_soar_note_to_randori_target", u"randori_update_impact_score_in_randori", u"randori_update_target_data_in_soar", u"randori_update_target_notes", u"randori_update_target_status_in_randori"]
+        "playbooks": [u"randori_add_artifacts_of_detections", u"randori_add_detections_to_detections_data_table", u"randori_close_target", u"randori_create_artifacts_from_detection", u"randori_send_soar_note_to_randori_target", u"randori_update_impact_score_in_randori", u"randori_update_target_data_in_soar", u"randori_update_target_notes", u"randori_update_target_status_in_randori"]
     }
 
 
@@ -54,6 +54,7 @@ def customization_data(client=None):
     - Playbooks:
         - randori_add_artifacts_of_detections
         - randori_add_detections_to_detections_data_table
+        - randori_close_target
         - randori_create_artifacts_from_detection
         - randori_send_soar_note_to_randori_target
         - randori_update_impact_score_in_randori
