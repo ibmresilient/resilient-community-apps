@@ -256,5 +256,4 @@ def generate_member_list(resclient, logger, **kwargs):
         .split(","))
     email_ids = list(set(email_ids))
     log.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
-
     return email_ids
