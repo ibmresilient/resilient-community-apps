@@ -12,10 +12,7 @@
     "content": {
       "type": "object",
       "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "notes_created": {
+        "count": {
           "type": "integer"
         }
       }

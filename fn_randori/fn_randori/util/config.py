@@ -15,8 +15,8 @@ def config_section_data():
 api_token=xxx
 # Randori REST API endpoint
 endpoint_url=https://app.randori.io
-# Randori tenant name
-tenant_name=xxx
+# Randori organization name
+organization_name=xxx
 # Randori REST API version
 api_version=v1
 # Number of seconds between poller cycles. A value of 0 disables the poller

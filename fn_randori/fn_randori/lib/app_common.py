@@ -33,7 +33,7 @@ PACKAGE_NAME = "fn_randori"
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "{tenant_name}/targets/{target_id}"
+LINKBACK_URL = "{organization_name}/targets/{target_id}"
 
 # E N D P O I N T S
 GET_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
@@ -45,7 +45,7 @@ PATCH_TARGET_URI = "/recon/api/{api_version}/target"
 POST_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 
 TARGET_LIMIT = 2000
-COMMENT_LIMIT = 500
+COMMENT_LIMIT = 100
 
 IBM_SOAR = "IBM SOAR" # common label
 SOAR_HEADER = "Created by {}".format(IBM_SOAR)
@@ -70,7 +70,7 @@ class AppCommon():
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
-        self.tenant_name = app_configs.get("tenant_name")
+        self.organization_name = app_configs.get("organization_name")
         self.verify = _get_verify_ssl(app_configs)
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
@@ -240,7 +240,7 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
+        return urljoin(self.endpoint_url, linkback_url.format(organization_name=self.organization_name, 
                                                               target_id=entity_id))
 
 
@@ -250,8 +250,10 @@ class AppCommon():
         """
 
         url = self._get_uri(GET_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        params = {'limit': COMMENT_LIMIT}
         response = self.rc.execute("GET",
                                    url=url,
+                                   params=params,
                                    headers=self.header,
                                    verify=self.verify)
         response.raise_for_status()
@@ -411,6 +413,7 @@ class AppCommon():
             return text
         else:
             return None
+
 
 def _get_verify_ssl(app_configs: dict):
     """

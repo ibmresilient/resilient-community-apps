@@ -24,6 +24,9 @@
         "randori_target_status": {
           "type": "string"
         },
+        "randori_note": {
+          "type": "string"
+        },
         "randori_target_id": {
           "type": "string"
         }

@@ -168,7 +168,7 @@ The following table provides the settings you need to configure the app. These s
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
 | **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
 | **polling_lookback** | Yes | `120` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
-| **tenant_name** | Yes | `webernets-companyname` | *Randori tenant name* |
+| **organization_name** | Yes | `webernets-companyname` | *Randori organization name* |
 | **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |

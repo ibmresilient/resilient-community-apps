@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1667762092140,
+  "export_date": 1667858750422,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -112,6 +112,7 @@
       "placeholder": "",
       "prefix": null,
       "read_only": false,
+      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
@@ -187,6 +188,36 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/randori_data_table_name",
+      "hide_notification": false,
+      "id": 304,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "randori_data_table_name",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "randori_data_table_name",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "22117ece-1b1e-4828-8da7-01849dfdf093",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/randori_target_impact_score",
       "hide_notification": false,
       "id": 295,
@@ -199,6 +230,7 @@
       "placeholder": "",
       "prefix": null,
       "read_only": false,
+      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
@@ -262,7 +294,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Authority",
+      "text": "Authority",
       "tooltip": "",
       "type_id": 0,
       "uuid": "a4314fa2-8d15-42df-8301-5463c6a05928",
@@ -292,7 +324,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target ID",
+      "text": "Target ID",
       "tooltip": "",
       "type_id": 0,
       "uuid": "a861c8f2-8aab-4f03-a379-ecf8a0680cbe",
@@ -322,7 +354,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Tech Category",
+      "text": "Tech Category",
       "tooltip": "",
       "type_id": 0,
       "uuid": "b2e4775e-98f2-4041-9b81-33482ce3bbf2",
@@ -352,7 +384,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Perspective Name",
+      "text": "Perspective Name",
       "tooltip": "",
       "type_id": 0,
       "uuid": "b73a8ef7-402e-49fd-8f55-5a439b0ae97e",
@@ -382,7 +414,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Link",
+      "text": "Link to Target",
       "tooltip": "",
       "type_id": 0,
       "uuid": "d1470448-7bb8-4d02-bfc9-af342ab91761",
@@ -412,7 +444,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Affiliation State",
+      "text": "Affiliation State",
       "tooltip": "",
       "type_id": 0,
       "uuid": "d9c41965-38ce-439c-b4ea-25f548810bc0",
@@ -442,7 +474,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Status",
+      "text": "Target Status",
       "tooltip": "",
       "type_id": 0,
       "uuid": "1a4730da-3333-48c4-a4bc-211b4a0dc061",
@@ -527,7 +559,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Tags",
+      "text": "User Tags",
       "tooltip": "",
       "type_id": 0,
       "uuid": "2b21d499-cd74-49c2-a0ff-78e8326f5223",
@@ -557,7 +589,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Impact Score",
+      "text": "Impact Score",
       "tooltip": "",
       "type_id": 0,
       "uuid": "37a8637d-28e2-487d-9697-019847901ec4",
@@ -624,7 +656,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Randori Target Temptation",
+      "text": "Target Temptation",
       "tooltip": "",
       "type_id": 0,
       "uuid": "66b82f38-f8bb-483c-bb8a-d79a3f46cedf",
@@ -643,6 +675,47 @@
     }
   ],
   "functions": [
+    {
+      "created_date": 1667764529539,
+      "description": {
+        "content": "Clear the specified Randori data table",
+        "format": "text"
+      },
+      "destination_handle": "fn_randori",
+      "display_name": "Randori: Clear Data Table",
+      "export_key": "randori_clear_data_table",
+      "id": 9,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1667827035559,
+      "name": "randori_clear_data_table",
+      "tags": [],
+      "uuid": "007634bb-7d7f-4e62-b201-fd3563f827be",
+      "version": 3,
+      "view_items": [
+        {
+          "content": "e1b5b365-9c80-4c0c-ad07-d4fed4828ddc",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "22117ece-1b1e-4828-8da7-01849dfdf093",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
     {
       "created_date": 1666894519376,
       "description": {
@@ -892,13 +965,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 42,
+  "id": 55,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1667762090237,
+      "create_date": 1667858748429,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -907,7 +980,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1667762090237,
+      "update_date": 1667858748429,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -939,6 +1012,13 @@
           "conditions": [
             {
               "evaluation_id": null,
+              "field_name": "incident.plan_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            },
+            {
+              "evaluation_id": null,
               "field_name": "incident.properties.randori_target_id",
               "method": "has_a_value",
               "type": null,
@@ -957,7 +1037,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 8,
+        "content_version": 10,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_beae0dcd_063c_4523_8efb_04e30f399c34\" isExecutable=\"true\" name=\"playbook_beae0dcd_063c_4523_8efb_04e30f399c34\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wef8tk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Detections of Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42164ffc-b935-400a-9e25-ce20ca262c3c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"detection_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wef8tk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1te1obp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1wef8tk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Randori: Add Detection Data as Artifacts\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a7651621-c72c-4100-b787-fe29ceb21d74\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1te1obp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0x7kfjf\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1te1obp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0x7kfjf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0x7kfjf\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_beae0dcd_063c_4523_8efb_04e30f399c34\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x7kfjf\" id=\"Flow_0x7kfjf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1te1obp\" id=\"Flow_1te1obp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wef8tk\" id=\"Flow_1wef8tk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1666971484025,
@@ -972,12 +1052,12 @@
         "content": "Automatic playbook to add artifacts of a detection as artifacts in SOAR.",
         "format": "text"
       },
-      "display_name": "Randori: Add Artifacts of Detections",
+      "display_name": "Randori: Automatic Add Artifacts of Detections",
       "export_key": "randori_add_artifacts_of_detections",
       "field_type_handle": "playbook_beae0dcd_063c_4523_8efb_04e30f399c34",
       "fields_type": {
         "actions": [],
-        "display_name": "Randori: Add Artifacts of Detections",
+        "display_name": "Randori: Automatic Add Artifacts of Detections",
         "export_key": "playbook_beae0dcd_063c_4523_8efb_04e30f399c34",
         "fields": {},
         "for_actions": false,
@@ -1009,7 +1089,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667591102791,
+      "last_modified_time": 1667858351749,
       "local_scripts": [
         {
           "actions": [],
@@ -1043,33 +1123,48 @@
       "tags": [],
       "type": "default",
       "uuid": "beae0dcd-063c-4523-8efb-04e30f399c34",
-      "version": 12
+      "version": 15
     },
     {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": null,
+              "evaluation_id": 1,
+              "field_name": "incident.plan_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            },
+            {
+              "evaluation_id": 2,
               "field_name": "incident.properties.randori_target_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": null,
+              "evaluation_id": 4,
+              "field_name": "incident.properties.randori_target_temptation",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 3,
               "field_name": null,
               "method": "object_added",
               "type": null,
               "value": null
             }
           ],
-          "logic_type": "all"
+          "custom_condition": "(1 AND 2 AND 3) OR (1 AND 2 AND 4)",
+          "logic_type": "advanced"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 13,
+        "content_version": 16,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\" isExecutable=\"true\" name=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z28n8w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Detections of Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42164ffc-b935-400a-9e25-ce20ca262c3c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"detection_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z28n8w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wbstou\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0z28n8w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Randori: Add Detections to Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"65ad90ef-98d0-4d89-9cc6-830c1a38537d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wbstou\u003c/incoming\u003e\u003coutgoing\u003eFlow_16p18oq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wbstou\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_16p18oq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16p18oq\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16p18oq\" id=\"Flow_16p18oq_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wbstou\" id=\"Flow_0wbstou_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z28n8w\" id=\"Flow_0z28n8w_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1666972112178,
@@ -1084,12 +1179,12 @@
         "content": "Automatic playbook to add detections to Detections data tables.",
         "format": "text"
       },
-      "display_name": "Randori: Add Detections to Detections Data Table",
+      "display_name": "Randori: Automatic Add Detections to Detections Data Table",
       "export_key": "randori_add_detections_to_detections_data_table",
       "field_type_handle": "playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77",
       "fields_type": {
         "actions": [],
-        "display_name": "Randori: Add Detections to Detections Data Table",
+        "display_name": "Randori: Automatic Add Detections to Detections Data Table",
         "export_key": "playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77",
         "fields": {},
         "for_actions": false,
@@ -1121,7 +1216,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667591103716,
+      "last_modified_time": 1667858429563,
       "local_scripts": [
         {
           "actions": [],
@@ -1155,7 +1250,134 @@
       "tags": [],
       "type": "default",
       "uuid": "a96f711c-09fc-4f05-8da6-8ee64ef5bc77",
-      "version": 19
+      "version": 23
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": 4,
+              "field_name": "incident.plan_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            },
+            {
+              "evaluation_id": 2,
+              "field_name": "incident.properties.randori_target_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 3,
+              "field_name": "incident.properties.randori_target_temptation",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 1,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "custom_condition": "(1 AND 2 AND 4) OR (2 AND 3 AND 4)",
+          "logic_type": "advanced"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 11,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\" isExecutable=\"true\" name=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_180aswe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Notes from Randori Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7deecb02-2324-46a0-9b5b-79b43daabd6c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"note_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_180aswe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rjvxqo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_180aswe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11pe46r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rjvxqo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Check function to add new Randori notes\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"569ed600-2404-4987-9c67-43ef50b7fdda\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rjvxqo\u003c/incoming\u003e\u003coutgoing\u003eFlow_11pe46r\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_11pe46r\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11pe46r\" id=\"Flow_11pe46r_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rjvxqo\" id=\"Flow_1rjvxqo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_180aswe\" id=\"Flow_180aswe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"337.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1667564819743,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6",
+      "description": {
+        "content": "Automatic playbook to add Randori notes to the case on case creation.",
+        "format": "text"
+      },
+      "display_name": "Randori: Automatic Add Target Notes",
+      "export_key": "randori_add_target_notes",
+      "field_type_handle": "playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Randori: Automatic Add Target Notes",
+        "export_key": "playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6",
+        "uuid": "6fe7ab13-3a86-4a5d-a06b-a975d68470c7"
+      },
+      "has_logical_errors": false,
+      "id": 13,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1667858378502,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1667565852426,
+          "description": "Check the status of function to add new notes from Randori.",
+          "enabled": false,
+          "export_key": "Randori: Check function to add new Randori notes",
+          "id": 14,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667585616142,
+          "name": "Randori: Check function to add new Randori notes",
+          "object_type": "incident",
+          "playbook_handle": "randori_add_target_notes",
+          "programmatic_name": "randori_add_target_notes_randori_check_function_to_add_new_randori_notes",
+          "script_text": "note_data = playbook.functions.results.note_data\n\nif note_data.success:\n  incident.addNote(\"Randori: automatic playbook added {} notes from Randori\".format(note_data.content.count))\nelse:\n  incident.addNote(\"Randori: ERROR in automatic playbook to get Randori notes - function not succcessful.\")",
+          "tags": [],
+          "uuid": "569ed600-2404-4987-9c67-43ef50b7fdda"
+        }
+      ],
+      "name": "randori_add_target_notes",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_089ad55b-a0c3-4268-89c0-328b4d6dbef6",
+        "id": 13,
+        "name": "playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6",
+        "type": "playbook",
+        "uuid": "5200ddcc-2f2a-4c9d-bbba-b91adec8d61c"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "089ad55b-a0c3-4268-89c0-328b4d6dbef6",
+      "version": 16
     },
     {
       "activation_details": {
@@ -1188,8 +1410,8 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\" isExecutable=\"true\" name=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0nx5nk0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Target Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f452d8b8-5f75-4b6b-9cde-40f496695abb\"\u003e{\"inputs\":{\"24621a5a-cb1b-43af-8110-01013dbb3b19\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"abc484a9-2a33-4162-9f39-873b2f917bcf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"STATUS_LOOKUP = {\\n  7: \\\"Accepted\\\", # Unresolved\\n  8: \\\"Accepted\\\", # Duplicate\\n  9: \\\"Accepted\\\",   # Not an Issue\\n  10: \\\"Mitigated\\\"  # Resolved\\n}\\n\\ninputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_note = incident.resolution_summary.content\\ninputs.randori_target_status = STATUS_LOOKUP.get(incident.resolution_id, \\\"Accepted\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"status_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nx5nk0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ligbmq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0nx5nk0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ligbmq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ligbmq\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ligbmq\" id=\"Flow_0ligbmq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nx5nk0\" id=\"Flow_0nx5nk0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 17,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\" isExecutable=\"true\" name=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0nx5nk0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Target Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f452d8b8-5f75-4b6b-9cde-40f496695abb\"\u003e{\"inputs\":{\"24621a5a-cb1b-43af-8110-01013dbb3b19\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"abc484a9-2a33-4162-9f39-873b2f917bcf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"STATUS_LOOKUP = {\\n  \u0027Unresolved\u0027: \\\"Accepted\\\",   # Unresolved\\n  \u0027Duplicate\u0027: \\\"Accepted\\\",   # Duplicate\\n  \u0027Not an Issue\u0027: \\\"Accepted\\\",   # Not an Issue\\n  \u0027Resolved\u0027: \\\"Mitigated\\\"  # Resolved\\n}\\n\\ninputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_note = incident.resolution_summary.content\\ninputs.randori_target_status = STATUS_LOOKUP.get(incident.resolution_id, \\\"Accepted\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"status_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nx5nk0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ligbmq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0nx5nk0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_06c6j95\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ligbmq\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: confirm status changed.\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"20150bfb-ea9c-4cbe-98c9-c388bdd1bc71\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ligbmq\u003c/incoming\u003e\u003coutgoing\u003eFlow_06c6j95\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06c6j95\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06c6j95\" id=\"Flow_06c6j95_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ligbmq\" id=\"Flow_0ligbmq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nx5nk0\" id=\"Flow_0nx5nk0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"327.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667755698494,
       "creator_principal": {
@@ -1203,12 +1425,12 @@
         "content": "Close a target in Randori if the Case is closed in SOAR.",
         "format": "text"
       },
-      "display_name": "Randori: Close Target",
+      "display_name": "Randori: Automatic Close Target",
       "export_key": "randori_close_target",
       "field_type_handle": "playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec",
       "fields_type": {
         "actions": [],
-        "display_name": "Randori: Close Target",
+        "display_name": "Randori: Automatic Close Target",
         "export_key": "playbook_e3cc0241_b468_4765_a1a1_45fadd2df1ec",
         "fields": {},
         "for_actions": false,
@@ -1240,8 +1462,27 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667760000897,
-      "local_scripts": [],
+      "last_modified_time": 1667858402625,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1667834500252,
+          "description": "Test if target status was successfully updated in Randori and output a note if it was not.",
+          "enabled": false,
+          "export_key": "Randori: confirm status changed.",
+          "id": 18,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667857067817,
+          "name": "Randori: confirm status changed.",
+          "object_type": "incident",
+          "playbook_handle": "randori_close_target",
+          "programmatic_name": "randori_close_target_randori_confirm_status_changed",
+          "script_text": "status_data = playbook.functions.results.status_data\n\nif not status_data.success:\n  incident.addNote(\"ERROR: unable to update target status in Randori\")\nelse:\n  incident.properties.randori_target_status = status_data.inputs.randori_target_status",
+          "tags": [],
+          "uuid": "20150bfb-ea9c-4cbe-98c9-c388bdd1bc71"
+        }
+      ],
       "name": "randori_close_target",
       "object_type": "incident",
       "status": "enabled",
@@ -1255,7 +1496,126 @@
       "tags": [],
       "type": "default",
       "uuid": "e3cc0241-b468-4765-a1a1-45fadd2df1ec",
-      "version": 9
+      "version": 22
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.plan_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.randori_target_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 12,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" isExecutable=\"true\" name=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_043ls5x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"46339b52-4027-4e57-b854-0fbc457c8924\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_043ls5x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i7ulx4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_043ls5x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_009pwov\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Update Target Data in SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"17beabef-9423-4f3e-b40c-9b48da36085c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i7ulx4\u003c/incoming\u003e\u003coutgoing\u003eFlow_009pwov\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1i7ulx4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_009pwov\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_009pwov\" id=\"Flow_009pwov_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i7ulx4\" id=\"Flow_1i7ulx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_043ls5x\" id=\"Flow_043ls5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1666886525354,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "display_name": "Randori: Automatic Update Target Data in SOAR",
+      "export_key": "randori_update_target_data_in_soar",
+      "field_type_handle": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Randori: Automatic Update Target Data in SOAR",
+        "export_key": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+        "uuid": "1aee798f-dd03-4db9-a5d2-1f8b8b367f21"
+      },
+      "has_logical_errors": false,
+      "id": 2,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1667858320619,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1666886864836,
+          "description": "Update the Randori target related custom fields and the randori notes in SOAR.",
+          "enabled": false,
+          "export_key": "Randori: Update Target Data in SOAR",
+          "id": 3,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667843512915,
+          "name": "Randori: Update Target Data in SOAR",
+          "object_type": "incident",
+          "playbook_handle": "randori_update_target_data_in_soar",
+          "programmatic_name": "randori_update_target_data_in_soar_randori_update_target_data_in_soar",
+          "script_text": "target_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = data.get(\"target_temptation\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_tags = \", \".join(user_tags)\n    \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n    \n    # Add Randori note\n    randori_notes = data.get(\"randori_notes\")\n    if randori_notes:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eCreated by Randori:\u003c/b\u003e\u003cbr\u003e {}\".format(randori_notes)))\n",
+          "tags": [],
+          "uuid": "17beabef-9423-4f3e-b40c-9b48da36085c"
+        }
+      ],
+      "name": "randori_update_target_data_in_soar",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_ad15e092-fe90-43f6-8038-40ac9dd6a413",
+        "id": 2,
+        "name": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+        "type": "playbook",
+        "uuid": "5fc6b7a6-5c06-4d5c-a5cf-f02811282d11"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "ad15e092-fe90-43f6-8038-40ac9dd6a413",
+      "version": 17
     },
     {
       "activation_type": "manual",
@@ -1456,28 +1816,162 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 14,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97\" isExecutable=\"true\" name=\"playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_18uqjy6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Target Impact Score\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc52d83b-ee18-405b-a819-c56aef3cdbcf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_target_impact_score = playbook.inputs.randori_target_impact_score\\ninputs.randori_note = playbook.inputs.randori_note.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_impact_score\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_18uqjy6\u003c/incoming\u003e\u003coutgoing\u003eFlow_10ivfvf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1tnfgz5\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Update Impact Score in Randori and SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3714a766-700e-4d9d-8917-7164092186f6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10ivfvf\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tnfgz5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_18uqjy6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_10ivfvf\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1tnfgz5\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tnfgz5\" id=\"Flow_1tnfgz5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"284\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10ivfvf\" id=\"Flow_10ivfvf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"42\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18uqjy6\" id=\"Flow_18uqjy6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-134\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-42\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-186\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"-42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655.042\" y=\"284\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 11,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04\" isExecutable=\"true\" name=\"playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_11ruejc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Detections of Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42164ffc-b935-400a-9e25-ce20ca262c3c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"detection_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11ruejc\u003c/incoming\u003e\u003coutgoing\u003eFlow_045shtv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_11ruejc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cexclusiveGateway default=\"Flow_0d4uxr0\" id=\"ConditionPoint_2\" resilient:documentation=\"Test Detections Success\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_045shtv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0d4uxr0\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1k8ftmw\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_045shtv\" sourceRef=\"ServiceTask_1\" targetRef=\"ConditionPoint_2\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Randori: Clear Data Table\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"007634bb-7d7f-4e62-b201-fd3563f827be\"\u003e{\"inputs\":{},\"pre_processing_script\":\"\\ninputs.incident_id = incident.id\\ninputs.randori_data_table_name = \\\"randori_detections_dt\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"clear_table_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1k8ftmw\u003c/incoming\u003e\u003coutgoing\u003eFlow_052cdpt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_18fio3q\u003c/incoming\u003e\u003cincoming\u003eFlow_1u0ql2a\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Update Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"971b01ac-6362-4f5e-9716-c86c28f5acfc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_052cdpt\u003c/incoming\u003e\u003coutgoing\u003eFlow_18fio3q\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_052cdpt\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_18fio3q\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Randori: Add unable to update Detections data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"70a8cc2f-25ea-4eda-8644-be2f936ac1f1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0d4uxr0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u0ql2a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1u0ql2a\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1k8ftmw\" name=\"Test if getting target Detections data is success.\" sourceRef=\"ConditionPoint_2\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Test if getting target Detections data is success.\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = playbook.functions.results.detection_data.success\\n\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0d4uxr0\" name=\"Else\" sourceRef=\"ConditionPoint_2\" targetRef=\"ScriptTask_6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d4uxr0\" id=\"Flow_0d4uxr0_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"306\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"410\"/\u003e\u003comgdi:waypoint x=\"911\" y=\"410\"/\u003e\u003comgdi:waypoint x=\"911\" y=\"508\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"895\" y=\"455\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1k8ftmw\" id=\"Flow_1k8ftmw_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"306\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"448\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"86\" x=\"647\" y=\"370\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u0ql2a\" id=\"Flow_1u0ql2a_di\"\u003e\u003comgdi:waypoint x=\"911\" y=\"592\"/\u003e\u003comgdi:waypoint x=\"911\" y=\"700\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"700\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"734\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18fio3q\" id=\"Flow_18fio3q_di\"\u003e\u003comgdi:waypoint x=\"620\" y=\"662\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"698\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"734\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_052cdpt\" id=\"Flow_052cdpt_di\"\u003e\u003comgdi:waypoint x=\"620\" y=\"532\"/\u003e\u003comgdi:waypoint x=\"620\" y=\"578\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_045shtv\" id=\"Flow_045shtv_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11ruejc\" id=\"Flow_11ruejc_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"656\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_2\" id=\"ConditionPoint_2_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"301.45\" x=\"599\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"522\" y=\"448\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"734\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"522\" y=\"578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"812.6040554962647\" y=\"507.50160085378866\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1667420475799,
+      "create_date": 1667764647505,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "deployment_id": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+      "deployment_id": "playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04",
       "description": {
-        "content": "Update the impact score of the Randori target in Randori and then update the Randori impact score in SOAR custom incident if successful.  Write the results to an case note.",
+        "content": "Update the Detections data table.\nGet the detections data from Randori, clear the data table and then update with the data. ",
         "format": "text"
       },
-      "display_name": "Randori: Update Impact Score in Randori",
-      "export_key": "randori_update_impact_score_in_randori",
-      "field_type_handle": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+      "display_name": "Randori: Update Detections Data Table",
+      "export_key": "randori_update_detections_data_table",
+      "field_type_handle": "playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04",
       "fields_type": {
         "actions": [],
-        "display_name": "Randori: Update Impact Score in Randori",
-        "export_key": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+        "display_name": "Randori: Update Detections Data Table",
+        "export_key": "playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04",
+        "uuid": "56bf5c0b-0e43-430f-8e8b-9b815eedc8de"
+      },
+      "has_logical_errors": false,
+      "id": 17,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1667857802654,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1667766424897,
+          "description": "",
+          "enabled": false,
+          "export_key": "Populate Detections data table",
+          "id": 16,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667766424912,
+          "name": "Populate Detections data table",
+          "object_type": "incident",
+          "playbook_handle": "randori_update_detections_data_table",
+          "programmatic_name": "randori_update_detections_data_table_populate_detections_data_table",
+          "script_text": "detections_data = playbook.functions.results.detections_data\n\n\n",
+          "tags": [],
+          "uuid": "f917c702-85b7-4b0a-b283-860bf6c52b0c"
+        },
+        {
+          "actions": [],
+          "created_date": 1667849127493,
+          "description": "Add unable to update Detections data table.",
+          "enabled": false,
+          "export_key": "Randori: Add unable to update Detections data table",
+          "id": 19,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667849127506,
+          "name": "Randori: Add unable to update Detections data table",
+          "object_type": "incident",
+          "playbook_handle": "randori_update_detections_data_table",
+          "programmatic_name": "randori_update_detections_data_table_randori_add_unable_to_update_detections_data_table",
+          "script_text": "incident.addNote(\"Randori: Unable to update Detections data table.\")",
+          "tags": [],
+          "uuid": "70a8cc2f-25ea-4eda-8644-be2f936ac1f1"
+        },
+        {
+          "actions": [],
+          "created_date": 1667766670350,
+          "description": "",
+          "enabled": false,
+          "export_key": "Update Detections Data Table",
+          "id": 17,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1667766670363,
+          "name": "Update Detections Data Table",
+          "object_type": "incident",
+          "playbook_handle": "randori_update_detections_data_table",
+          "programmatic_name": "randori_update_detections_data_table_update_detections_data_table",
+          "script_text": "from datetime import datetime\nimport time\nimport calendar\n\ndef soar_datetimeformat(value, date_format=\"%Y-%m-%dT%H:%M:%S\", split_at=None):\n    \"\"\"Custom jinja filter to convert UTC dates to epoch format\n\n    Args:\n        value ([str]): [jinja provided field value]\n        date_format (str, optional): [conversion format]. Defaults to \"%Y-%m-%dT%H:%M:%S\".\n        split_at (str, optional): [character to split the date field to scope the date field.]\n            examples: split_at=\u0027.\u0027 to remove milliseconds for \"2021-10-22T20:53:53.913Z\",\n                      split_at=\u0027+\u0027 tp remove tz information \"2021-10-22T20:53:53+00:00\",\n    Returns:\n        [int]: [epoch value of datetime, in milliseconds]\n    \"\"\"\n    if not value:\n        return value\n\n    if split_at:\n        utc_time = time.strptime(value[:value.rfind(split_at)], date_format)\n    else:\n        utc_time = time.strptime(value, date_format)\n    return calendar.timegm(utc_time)*1000\n############################################################################################   \n\ndetection_data = playbook.functions.results.detection_data\n\nif not detection_data.success:\n  incident.addNote(\"Randori: Get Target Data: Unable to get target data from Randori\")\nelse:\n  content = detection_data.get(\"content\", {})\n  detection_list = detection_data.content.get(\"detection_list\", [])\n  for detection in detection_list:\n    detection_row = incident.addRow(\"randori_detections_dt\")\n    detection_row[\u0027randori_dt_date_added\u0027] = datetime.now()\n    detection_row[\u0027randori_dt_path\u0027] = detection.get(\"path\")\n    detection_row[\u0027randori_dt_port\u0027] = detection.get(\"port\")\n    detection_row[\u0027randori_dt_ip\u0027] = detection.get(\"ip\")\n    detection_row[\u0027randori_dt_hostname\u0027] = detection.get(\"hostname\")\n    detection_row[\u0027randori_dt_first_seen\u0027] = soar_datetimeformat(detection.get(\"first_seen\"), split_at=\u0027.\u0027)\n    detection_row[\u0027randori_dt_last_seen\u0027] = soar_datetimeformat(detection.get(\"last_seen\"), split_at=\u0027.\u0027)\n  incident.addNote(\"Randori: automatic playbook updated Detections data table with {} detections\".format(len(detection_list)))",
+          "tags": [],
+          "uuid": "971b01ac-6362-4f5e-9716-c86c28f5acfc"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "randori_update_detections_data_table",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_f6af091f-0d6b-4f64-b067-6602a8a80d04",
+        "id": 17,
+        "name": "playbook_f6af091f_0d6b_4f64_b067_6602a8a80d04",
+        "type": "playbook",
+        "uuid": "075e0ac6-cbab-4d67-a8a4-648f01a40c5a"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "f6af091f-0d6b-4f64-b067-6602a8a80d04",
+      "version": 16
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\" isExecutable=\"true\" name=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_076wzpv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Target Impact Score\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc52d83b-ee18-405b-a819-c56aef3cdbcf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_target_impact_score = playbook.inputs.randori_target_impact_score\\ninputs.randori_note = playbook.inputs.randori_note.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_impact_score\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_076wzpv\u003c/incoming\u003e\u003coutgoing\u003eFlow_03rl6jo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_076wzpv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Update Impact Score in Randori and SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4ac1b2b7-c230-405c-8eff-5a5f77291cb2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03rl6jo\u003c/incoming\u003e\u003coutgoing\u003eFlow_11kmzm0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11kmzm0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03rl6jo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_11kmzm0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11kmzm0\" id=\"Flow_11kmzm0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03rl6jo\" id=\"Flow_03rl6jo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_076wzpv\" id=\"Flow_076wzpv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1667851511070,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
+      "description": {
+        "content": "Update the Impact Score of the target in Randori.  If an optional note is specified post that as a comment in the Randori target.",
+        "format": "text"
+      },
+      "display_name": "Randori: Update Target Impact Score in Randori",
+      "export_key": "randori_update_target_impact_score_in_randori",
+      "field_type_handle": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Randori: Update Target Impact Score in Randori",
+        "export_key": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
         "fields": {
           "randori_note": {
             "allow_default_value": false,
@@ -1487,9 +1981,9 @@
             "chosen": false,
             "default_chosen_by_server": false,
             "deprecated": false,
-            "export_key": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97/randori_note",
+            "export_key": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8/randori_note",
             "hide_notification": false,
-            "id": 307,
+            "id": 310,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1502,10 +1996,10 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "Randori Note",
+            "text": "Note",
             "tooltip": "",
-            "type_id": 1011,
-            "uuid": "9e8e412f-80b4-4a37-8495-a98f6e4b24e5",
+            "type_id": 1019,
+            "uuid": "a11c6ca1-90bf-43cb-a269-6174f71794c1",
             "values": []
           },
           "randori_target_impact_score": {
@@ -1516,9 +2010,9 @@
             "chosen": false,
             "default_chosen_by_server": false,
             "deprecated": false,
-            "export_key": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97/randori_target_impact_score",
+            "export_key": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8/randori_target_impact_score",
             "hide_notification": false,
-            "id": 303,
+            "id": 311,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1532,10 +2026,10 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "Randori Target Impact Score",
+            "text": "Impact Score",
             "tooltip": "",
-            "type_id": 1011,
-            "uuid": "b106d20c-1b35-493a-80b1-11219ef503e9",
+            "type_id": 1019,
+            "uuid": "14d1f7ef-a752-446a-9218-5e3582fcfbe8",
             "values": [
               {
                 "default": true,
@@ -1543,8 +2037,8 @@
                 "hidden": false,
                 "label": "None",
                 "properties": null,
-                "uuid": "1598d321-cc34-4f17-8927-765dec0acb3d",
-                "value": 87
+                "uuid": "ef0ec3e1-de9e-4306-888d-dfac41b1bae4",
+                "value": 106
               },
               {
                 "default": false,
@@ -1552,8 +2046,8 @@
                 "hidden": false,
                 "label": "Low",
                 "properties": null,
-                "uuid": "34b51203-b998-4556-8016-a120936d01d6",
-                "value": 88
+                "uuid": "0521c8ea-3f48-414a-b6b8-fd4a5c032bb1",
+                "value": 107
               },
               {
                 "default": false,
@@ -1561,8 +2055,8 @@
                 "hidden": false,
                 "label": "Medium",
                 "properties": null,
-                "uuid": "18d1d090-4189-4256-997c-84259a8b0a4e",
-                "value": 89
+                "uuid": "bcabd849-c365-4d09-b911-2760eef82e66",
+                "value": 108
               },
               {
                 "default": false,
@@ -1570,8 +2064,8 @@
                 "hidden": false,
                 "label": "High",
                 "properties": null,
-                "uuid": "6b9f70eb-405f-41a9-a38b-6a66d50af27c",
-                "value": 90
+                "uuid": "5862b6a8-03bd-4f80-bfd3-0ec9924c1d54",
+                "value": 109
               }
             ]
           }
@@ -1592,11 +2086,11 @@
         "scripts": [],
         "tags": [],
         "type_id": 28,
-        "type_name": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
-        "uuid": "c5c6acf3-365f-4576-a9ad-e4ca07102a6a"
+        "type_name": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
+        "uuid": "7b238fc4-8c9f-47bb-981a-20f2d2468649"
       },
       "has_logical_errors": false,
-      "id": 11,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1605,120 +2099,91 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667761543701,
+      "last_modified_time": 1667852108440,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1667422253161,
+          "created_date": 1667851869642,
           "description": "If the Randori target impact score is updated in the calling function, then update the impact score custom field in SOAR and write the playbook results to a note.",
           "enabled": false,
           "export_key": "Update Impact Score in Randori and SOAR",
-          "id": 12,
+          "id": 20,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1667424312079,
+          "last_modified_time": 1667852105081,
           "name": "Update Impact Score in Randori and SOAR",
           "object_type": "incident",
-          "playbook_handle": "randori_update_impact_score_in_randori",
-          "programmatic_name": "randori_update_impact_score_in_randori_update_impact_score_in_randori_and_soar",
+          "playbook_handle": "randori_update_target_impact_score_in_randori",
+          "programmatic_name": "randori_update_target_impact_score_in_randori_update_impact_score_in_randori_and_soar",
           "script_text": "target_impact_score = playbook.functions.results.target_impact_score\n\nif not target_impact_score.success:\n  incident.addNote(\"Randori: ERROR: Unable to Update Target Impact Score to \u003cb\u003e{}\u003c/b\u003e\".format(target_impact_score.inputs.randori_target_impact_score))\nelse:\n  incident.properties.randori_target_impact_score = target_impact_score.inputs.randori_target_impact_score\n  incident.addNote(\"Randori: Updated Target Impact Score to \u003cb\u003e{}\u003c/b\u003e in Randori\".format(incident.properties.randori_target_impact_score))",
           "tags": [],
-          "uuid": "3714a766-700e-4d9d-8917-7164092186f6"
+          "uuid": "4ac1b2b7-c230-405c-8eff-5a5f77291cb2"
         }
       ],
       "manual_settings": {
         "activation_conditions": {
-          "conditions": [
-            {
-              "evaluation_id": null,
-              "field_name": "incident.properties.randori_target_id",
-              "method": "has_a_value",
-              "type": null,
-              "value": null
-            }
-          ],
+          "conditions": [],
           "logic_type": "all"
         },
         "view_items": [
           {
-            "content": "b106d20c-1b35-493a-80b1-11219ef503e9",
+            "content": "14d1f7ef-a752-446a-9218-5e3582fcfbe8",
             "element": "field_uuid",
-            "field_type": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+            "field_type": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
             "show_if": null,
             "show_link_header": false,
             "step_label": null
           },
           {
-            "content": "9e8e412f-80b4-4a37-8495-a98f6e4b24e5",
+            "content": "a11c6ca1-90bf-43cb-a269-6174f71794c1",
             "element": "field_uuid",
-            "field_type": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+            "field_type": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
             "show_if": null,
             "show_link_header": false,
             "step_label": null
           }
         ]
       },
-      "name": "randori_update_impact_score_in_randori",
+      "name": "randori_update_target_impact_score_in_randori",
       "object_type": "incident",
       "status": "enabled",
       "tag": {
-        "display_name": "Playbook_4c07c7c1-6f08-43fa-a58f-1bc651875b97",
-        "id": 11,
-        "name": "playbook_4c07c7c1_6f08_43fa_a58f_1bc651875b97",
+        "display_name": "Playbook_85f5e332-938a-4a6f-902b-691cf5611de8",
+        "id": 19,
+        "name": "playbook_85f5e332_938a_4a6f_902b_691cf5611de8",
         "type": "playbook",
-        "uuid": "3872994b-f6e4-4c0e-97ef-0d98774b5e9f"
+        "uuid": "49ed4eef-d873-40d5-a82a-22468e5b253d"
       },
       "tags": [],
       "type": "default",
-      "uuid": "4c07c7c1-6f08-43fa-a58f-1bc651875b97",
-      "version": 18
+      "uuid": "85f5e332-938a-4a6f-902b-691cf5611de8",
+      "version": 6
     },
     {
-      "activation_details": {
-        "activation_conditions": {
-          "conditions": [
-            {
-              "evaluation_id": null,
-              "field_name": "incident.properties.randori_target_id",
-              "method": "has_a_value",
-              "type": null,
-              "value": null
-            },
-            {
-              "evaluation_id": null,
-              "field_name": null,
-              "method": "object_added",
-              "type": null,
-              "value": null
-            }
-          ],
-          "logic_type": "all"
-        }
-      },
-      "activation_type": "automatic",
+      "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" isExecutable=\"true\" name=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_043ls5x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"46339b52-4027-4e57-b854-0fbc457c8924\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_043ls5x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i7ulx4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_043ls5x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_009pwov\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Update Target Data in SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"17beabef-9423-4f3e-b40c-9b48da36085c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i7ulx4\u003c/incoming\u003e\u003coutgoing\u003eFlow_009pwov\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1i7ulx4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_009pwov\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_009pwov\" id=\"Flow_009pwov_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i7ulx4\" id=\"Flow_1i7ulx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_043ls5x\" id=\"Flow_043ls5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 9,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\" isExecutable=\"true\" name=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jcmxfk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"46339b52-4027-4e57-b854-0fbc457c8924\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jcmxfk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1s8bliw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jcmxfk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hwx7pf\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Update target custom fields\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5af933f7-fce7-4086-8ce2-ceaeddfe7a89\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1s8bliw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hwx7pf\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1s8bliw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1hwx7pf\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hwx7pf\" id=\"Flow_1hwx7pf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s8bliw\" id=\"Flow_1s8bliw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jcmxfk\" id=\"Flow_0jcmxfk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1666886525354,
+      "create_date": 1667578983100,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "deployment_id": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+      "deployment_id": "playbook_71569df3_623d_4529_8611_3bdb61c44885",
       "description": {
-        "content": null,
+        "content": "Manual Playbook to update the Randori target custom field data in SOAR.",
         "format": "text"
       },
-      "display_name": "Randori: Update Target Data in SOAR",
-      "export_key": "randori_update_target_data_in_soar",
-      "field_type_handle": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+      "display_name": "Randori: Update Target in SOAR",
+      "export_key": "randori_update_target_in_soar",
+      "field_type_handle": "playbook_71569df3_623d_4529_8611_3bdb61c44885",
       "fields_type": {
         "actions": [],
-        "display_name": "Randori: Update Target Data in SOAR",
-        "export_key": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+        "display_name": "Randori: Update Target in SOAR",
+        "export_key": "playbook_71569df3_623d_4529_8611_3bdb61c44885",
         "fields": {},
         "for_actions": false,
         "for_custom_fields": false,
@@ -1736,11 +2201,11 @@
         "scripts": [],
         "tags": [],
         "type_id": 28,
-        "type_name": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
-        "uuid": "1aee798f-dd03-4db9-a5d2-1f8b8b367f21"
+        "type_name": "playbook_71569df3_623d_4529_8611_3bdb61c44885",
+        "uuid": "f5957f6d-824b-451a-ba80-8a8f798ae457"
       },
       "has_logical_errors": false,
-      "id": 2,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1749,46 +2214,61 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667587076994,
+      "last_modified_time": 1667858567162,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1666886864836,
-          "description": "Update the Randori target related custom fields and the randori notes in SOAR.",
+          "created_date": 1667579102460,
+          "description": "Update target custom fields",
           "enabled": false,
-          "export_key": "Randori: Update Target Data in SOAR",
-          "id": 3,
+          "export_key": "Update target custom fields",
+          "id": 15,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1667579999435,
-          "name": "Randori: Update Target Data in SOAR",
+          "last_modified_time": 1667579893974,
+          "name": "Update target custom fields",
           "object_type": "incident",
-          "playbook_handle": "randori_update_target_data_in_soar",
-          "programmatic_name": "randori_update_target_data_in_soar_randori_update_target_data_in_soar",
-          "script_text": "target_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = data.get(\"target_temptation\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_tags = \", \".join(user_tags)\n    \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n    \n    # Add Randori note\n    randori_notes = data.get(\"randori_notes\")\n    if randori_notes:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eNote from Randori:\u003c/b\u003e\u003cbr\u003e {}\".format(randori_notes)))\n",
+          "playbook_handle": "randori_update_target_in_soar",
+          "programmatic_name": "randori_update_target_in_soar_update_target_custom_fields",
+          "script_text": "target_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = data.get(\"target_temptation\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_tags = \", \".join(user_tags)\n    \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n",
           "tags": [],
-          "uuid": "17beabef-9423-4f3e-b40c-9b48da36085c"
+          "uuid": "5af933f7-fce7-4086-8ce2-ceaeddfe7a89"
         }
       ],
-      "name": "randori_update_target_data_in_soar",
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.randori_target_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "randori_update_target_in_soar",
       "object_type": "incident",
-      "status": "disabled",
+      "status": "enabled",
       "tag": {
-        "display_name": "Playbook_ad15e092-fe90-43f6-8038-40ac9dd6a413",
-        "id": 2,
-        "name": "playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413",
+        "display_name": "Playbook_71569df3-623d-4529-8611-3bdb61c44885",
+        "id": 14,
+        "name": "playbook_71569df3_623d_4529_8611_3bdb61c44885",
         "type": "playbook",
-        "uuid": "5fc6b7a6-5c06-4d5c-a5cf-f02811282d11"
+        "uuid": "f16522cd-91c5-426e-a5ae-10e8b2019c2b"
       },
       "tags": [],
       "type": "default",
-      "uuid": "ad15e092-fe90-43f6-8038-40ac9dd6a413",
-      "version": 12
+      "uuid": "71569df3-623d-4529-8611-3bdb61c44885",
+      "version": 17
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
+        "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_43e96ffc_d3cb_49eb_8153_7028c276690b\" isExecutable=\"true\" name=\"playbook_43e96ffc_d3cb_49eb_8153_7028c276690b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1v3gmw7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l4bc0p\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Randori: Update Notes from Randori Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7deecb02-2324-46a0-9b5b-79b43daabd6c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_notes\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v3gmw7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l4bc0p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1v3gmw7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1l4bc0p\" sourceRef=\"ServiceTask_2\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_43e96ffc_d3cb_49eb_8153_7028c276690b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l4bc0p\" id=\"Flow_1l4bc0p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"374\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v3gmw7\" id=\"Flow_1v3gmw7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"374\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667315109201,
@@ -1800,7 +2280,7 @@
       },
       "deployment_id": "playbook_43e96ffc_d3cb_49eb_8153_7028c276690b",
       "description": {
-        "content": null,
+        "content": "Update notes in SOAR with comments from the corresponding target in Randori.",
         "format": "text"
       },
       "display_name": "Randori: Update Target Notes",
@@ -1840,7 +2320,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667564593523,
+      "last_modified_time": 1667857632804,
       "local_scripts": [
         {
           "actions": [],
@@ -1889,12 +2369,12 @@
       "tags": [],
       "type": "default",
       "uuid": "43e96ffc-d3cb-49eb-8153-7028c276690b",
-      "version": 11
+      "version": 13
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 13,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\" isExecutable=\"true\" name=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1h43a38\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1jhv7t6\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Randori: Update Target Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f452d8b8-5f75-4b6b-9cde-40f496695abb\"\u003e{\"inputs\":{\"24621a5a-cb1b-43af-8110-01013dbb3b19\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"abc484a9-2a33-4162-9f39-873b2f917bcf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_target_status = playbook.inputs.randori_target_status\\ninputs.randori_note = playbook.inputs.randori_note.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_status\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h43a38\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wydn69\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1h43a38\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Write Update Status Results to a Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"49d61fb2-ab61-40fa-bba9-ac8eb9701d40\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wydn69\u003c/incoming\u003e\u003coutgoing\u003eFlow_1jhv7t6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wydn69\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1jhv7t6\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jhv7t6\" id=\"Flow_1jhv7t6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wydn69\" id=\"Flow_1wydn69_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h43a38\" id=\"Flow_1h43a38_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667233238805,
@@ -1940,7 +2420,7 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "Randori Note",
+            "text": "Note",
             "tooltip": "Note to send to Randori target",
             "type_id": 1008,
             "uuid": "05f1bb59-9f3b-411c-bc4d-4844ca1c9461",
@@ -1970,7 +2450,7 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "randori_target_status",
+            "text": "Status",
             "tooltip": "",
             "type_id": 1008,
             "uuid": "8e10b243-70fe-46c8-978e-0c1a7f1095d8",
@@ -2061,7 +2541,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667761630900,
+      "last_modified_time": 1667852680948,
       "local_scripts": [
         {
           "actions": [],
@@ -2127,7 +2607,7 @@
       "tags": [],
       "type": "default",
       "uuid": "8f658e56-2fc3-4b92-ac5f-56a838587ad5",
-      "version": 18
+      "version": 20
     }
   ],
   "regulators": null,
@@ -2145,7 +2625,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "Randori Detections",
+      "display_name": "Detections",
       "export_key": "randori_detections_dt",
       "fields": {
         "randori_dt_date_added": {

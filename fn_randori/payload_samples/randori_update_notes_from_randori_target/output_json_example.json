@@ -3,20 +3,19 @@
   "success": true,
   "reason": null,
   "content": {
-    "success": true,
-    "notes_created": 1
+    "count": 0
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2252,
-    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+    "incident_id": 2675,
+    "randori_target_id": "80c039c4-625b-42fb-a8f1-3888db45d29e"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-randori",
     "package_version": "1.0.0",
-    "host": "MacBook-Pro.local",
-    "execution_time_ms": 11680,
-    "timestamp": "2022-11-02 16:02:33"
+    "host": "AnnMaries-MacBook-Pro.local",
+    "execution_time_ms": 262,
+    "timestamp": "2022-11-07 11:28:54"
   }
 }

@@ -12,8 +12,13 @@
     "content": {
       "type": "object",
       "properties": {
-        "count": {
-          "type": "integer"
+        "success": {
+          "type": "boolean"
+        },
+        "title": {},
+        "message": {},
+        "hints": {
+          "type": "array"
         }
       }
     },
@@ -21,13 +26,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "randori_note": {
-          "type": "string"
+        "incident_id": {
+          "type": "integer"
         },
-        "randori_target_impact_score": {
-          "type": "string"
-        },
-        "randori_target_id": {
+        "randori_data_table_name": {
           "type": "string"
         }
       }
