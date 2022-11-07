@@ -21,22 +21,9 @@ def codegen_reload_data():
     return {
         "package": u"fn_teams",
         "message_destinations": [u"fn_teams"],
-        "functions": [
-            u"ms_teams_create_group",
-            u"ms_teams_delete_group",
-            u"ms_teams_post_message"],
-        "workflows": [
-            u"incident_post_message_to_teams",
-            u"incident_create_a_microsoft_group",
-            u"incident_delete_a_microsoft_group",
-            u"task_create_a_microsoft_group",
-            u"task_post_message_to_teams",],
-        "actions": [
-            u"MS Teams: Post task information to teams",
-            u"MS Teams: Post incident information to teams",
-            u"MS Teams: Create Group from incident",
-            u"MS Teams: Create Group from task",
-            u"MS Teams: Delete Group from incident"],
+        "functions": [u"ms_teams_create_group", u"ms_teams_create_team", u"ms_teams_delete_group", u"ms_teams_post_message"],
+        "workflows": [u"incident_create_a_microsoft_group", u"incident_delete_a_microsoft_group", u"incident_post_message_to_teams", u"task_create_a_microsoft_group", u"task_post_message_to_teams"],
+        "actions": [u"MS Teams: Create Group from incident", u"MS Teams: Create Group from task", u"MS Teams: Delete Group from incident", u"MS Teams: Post incident information to teams", u"MS Teams: Post task information to teams"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],

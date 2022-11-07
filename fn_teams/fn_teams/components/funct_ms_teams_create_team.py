@@ -7,20 +7,18 @@ from resilient_lib import validate_fields, IntegrationError
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_teams.lib import constants
-from fn_teams.lib.microsoft_groups import GroupsInterface
+from fn_teams.lib.microsoft_teams import TeamsInterface
 from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
 PACKAGE_NAME = constants.PACKAGE_NAME
-FN_NAME = "ms_teams_create_group"
+FN_NAME = "ms_teams_create_team"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'ms_teams_create_group'"""
+    """Component that implements function 'ms_teams_create_team'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.required_parameters = {}
-
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -47,34 +45,43 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
-        validate_fields([
-            "incident_id",
-            "ms_group_name",
-            "add_members_from",
-            "ms_group_description",
-            "ms_group_mail_nickname"], fn_inputs)
+        # validate_fields([
+        #     "incident_id",
+        #     "ms_group_name",
+        #     "add_members_from",
+        #     "ms_group_description",
+        #     "ms_group_mail_nickname"], fn_inputs)
+        required_parameters = {}
+        required_parameters["rc"] = self.rc
+        required_parameters["logger"] = self.LOG
+        required_parameters["resclient"] = self.rest_client()
 
-        self.required_parameters["rc"] = self.rc
-        self.required_parameters["logger"] = self.LOG
-        self.required_parameters["resclient"] = self.rest_client()
+        # self.required_parameters["incident_id"] = fn_inputs.incident_id
+        # self.required_parameters["group_name"] = fn_inputs.ms_group_name
+        # self.required_parameters["add_members_from"] = fn_inputs.add_members_from
+        # self.required_parameters["group_description"] = fn_inputs.ms_group_description
+        # self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
 
-        self.required_parameters["incident_id"] = fn_inputs.incident_id
-        self.required_parameters["group_name"] = fn_inputs.ms_group_name
-        self.required_parameters["add_members_from"] = fn_inputs.add_members_from
-        self.required_parameters["group_description"] = fn_inputs.ms_group_description
-        self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
+        # self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(
+        #     fn_inputs, 'task_id') else None
+        # self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(
+        #     fn_inputs, 'ms_owners_list') else  None
+        # self.required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
+        #     fn_inputs, 'additional_members') else None
 
-        self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(
-            fn_inputs, 'task_id') else None
-        self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(
-            fn_inputs, 'ms_owners_list') else  None
-        self.required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
-            fn_inputs, 'additional_members') else None
+        required_parameters["task_id"] = None
+        required_parameters["incident_id"] = 2098
+        required_parameters["owners_list"] = "AdminSoarMS@5rf2xs.onmicrosoft.com"
+        required_parameters["add_members_from"] = "incident"
+        required_parameters["displayName"] = "newTeam"
+        required_parameters["description"] = "sample incident"
+        required_parameters["teams_description"] = "Sample team"
+        required_parameters["additional_members"] = None
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
-            authenticator = MicrosoftAuthentication(self.required_parameters, self.options)
-            self.required_parameters["header"] = authenticator.authenticate()
+            authenticator = MicrosoftAuthentication(required_parameters, self.options)
+            required_parameters["header"] = authenticator.authenticate()
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
@@ -86,8 +93,8 @@ class FunctionComponent(AppFunctionComponent):
 
         if authenticated:
             try:
-                group_manager = GroupsInterface(self.required_parameters)
-                response = group_manager.create_group()
+                group_manager = TeamsInterface(required_parameters)
+                response = group_manager.create_teams(required_parameters)
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))

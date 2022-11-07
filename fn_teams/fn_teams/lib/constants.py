@@ -42,6 +42,11 @@ URL_DIRECTORY_OBJECT = "/v1.0/directoryObjects/{}"
 # MS USERS API call
 URL_USERS = "/v1.0/users/{}"
 URL_LIST_USERS = "/v1.0/users"
+URL_USERS_QUERY = "/v1.0/users{}"
+
+# MS TEAMS API call
+URL_LIST_TEAMS = "/v1.0/teams"
+URL_TEAMS_STANDARD_TEMPLATE = "/v1.0/teamsTemplates('standard')"
 
 # SOAR rest-client URLs
 RES_TASK = "/tasks/"
