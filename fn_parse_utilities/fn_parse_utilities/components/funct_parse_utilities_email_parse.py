@@ -5,6 +5,7 @@
 """Function implementation"""
 
 from os import path
+from io import BytesIO
 from json import loads
 from re import compile
 from shutil import rmtree
@@ -130,19 +131,18 @@ class FunctionComponent(ResilientComponent):
                             yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("parse_utilities_incident_id")))
 
                             # Write the attachment.payload to a temp file
-                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=s_to_b(attachment.get("payload")),
-                                                                            tmp_file_name=attachment.get("filename"),
-                                                                            path_tmp_dir=path_tmp_dir)
+                            file_content = BytesIO(s_to_b(attachment.get("payload")))
 
                             artifact_description = u"This email attachment was found in the parsed email message from: '{0}'".format(u"provided base64content" if fn_inputs.get("parse_utilities_base64content") else attachment_metadata.get("name"))
 
                             # POST the artifact to SOAR as an 'Email Attachment' Artifact
                             res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("parse_utilities_incident_id")),
                                                           artifact_type=7,
-                                                          artifact_filepath=path_tmp_file,
+                                                          artifact_filepath=None,
                                                           description=artifact_description,
                                                           value=attachment.get("filename"),
-                                                          mimetype=attachment.get("mail_content_type"))
+                                                          mimetype=attachment.get("mail_content_type"),
+                                                          bytes_handle=file_content)
 
                     results = rp.done(True, parsed_email_dict)
 

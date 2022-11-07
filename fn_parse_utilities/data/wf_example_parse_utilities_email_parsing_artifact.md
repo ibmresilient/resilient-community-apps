@@ -32,7 +32,7 @@ import re
 
 if not results.success:
   note_text = u"""Workflow 'Example: Parse Utilities Email Parsing (Artifact)' Failed<br>
-                  <b>Reason:</b> {0}""".format(unicode(results.reason))
+                  <b>Reason:</b> {0}""".format(str(results.reason))
   
   incident.addNote(helper.createRichText(note_text))
 
