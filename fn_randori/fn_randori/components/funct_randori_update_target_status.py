@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["randori_target_id", "randori_target_status", "randori_note"], fn_inputs)
+        validate_fields(["randori_target_id", "randori_target_status"], fn_inputs)
 
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
