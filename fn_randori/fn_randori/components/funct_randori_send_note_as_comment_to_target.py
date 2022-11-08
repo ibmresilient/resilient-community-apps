@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, clean_html
-from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME, SOAR_HEADER
 
 PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_send_note_as_comment_to_target"
@@ -33,7 +33,8 @@ class FunctionComponent(AppFunctionComponent):
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
         results = app_common.post_target_comment(fn_inputs.randori_target_id, 
-                                                 clean_html(fn_inputs.randori_comment_text))
+                                                 clean_html(fn_inputs.randori_comment_text),
+                                                 comment_header=SOAR_HEADER)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
