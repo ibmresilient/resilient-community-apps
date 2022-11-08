@@ -27,11 +27,16 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         validate_fields(["incident_id", "randori_data_table_name"], fn_inputs)
-
-        results = self.rest_client().delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(fn_inputs.incident_id, 
-                                                                                                              fn_inputs.randori_data_table_name))
+        results = {}
+        if fn_inputs.randori_data_table_name in ["randori_detections_dt"]:
+            results = self.rest_client().delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(fn_inputs.incident_id, 
+                                                                                                                  fn_inputs.randori_data_table_name))
+            err_msg = None
+        else:
+            err_msg = "randori_detections_dt {} data table is not found.".format(fn_inputs.randori_data_table_name)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=True if not err_msg else False, reason=err_msg)
+
 
