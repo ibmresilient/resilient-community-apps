@@ -20,9 +20,9 @@ organization_name=xxx
 # Randori REST API version
 api_version=v1
 # Number of seconds between poller cycles. A value of 0 disables the poller
-polling_interval=60
+polling_interval=600
 # Number of minutes to lookback for queries the first time the poller runs.
-polling_lookback=120
+polling_lookback=1200
 verify= false | /path/to/cafile.crt
 #
 # Optional: polling filters that can be applied when querying Randori for new targets or targets to be updated.
