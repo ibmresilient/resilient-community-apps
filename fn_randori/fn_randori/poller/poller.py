@@ -116,7 +116,7 @@ class PollerComponent(AppFunctionComponent):
                            "verify",
                            "api_token",
                            "api_version",
-                           "tenant_name"]
+                           "organization_name"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
