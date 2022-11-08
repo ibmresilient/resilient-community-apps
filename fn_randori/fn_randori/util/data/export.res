@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1667916773841,
+  "export_date": 1667929023254,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -965,13 +965,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 57,
+  "id": 60,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1667916771792,
+      "create_date": 1667929021588,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -980,7 +980,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1667916771792,
+      "update_date": 1667929021588,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1130,41 +1130,33 @@
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": 1,
+              "evaluation_id": null,
               "field_name": "incident.plan_status",
               "method": "equals",
               "type": null,
               "value": "Active"
             },
             {
-              "evaluation_id": 2,
+              "evaluation_id": null,
               "field_name": "incident.properties.randori_target_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": 4,
-              "field_name": "incident.properties.randori_target_temptation",
-              "method": "changed",
-              "type": null,
-              "value": null
-            },
-            {
-              "evaluation_id": 3,
+              "evaluation_id": null,
               "field_name": null,
               "method": "object_added",
               "type": null,
               "value": null
             }
           ],
-          "custom_condition": "(1 AND 2 AND 3) OR (1 AND 2 AND 4)",
-          "logic_type": "advanced"
+          "logic_type": "all"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 16,
+        "content_version": 17,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\" isExecutable=\"true\" name=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z28n8w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Detections of Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42164ffc-b935-400a-9e25-ce20ca262c3c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"detection_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z28n8w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wbstou\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0z28n8w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Randori: Add Detections to Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"65ad90ef-98d0-4d89-9cc6-830c1a38537d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wbstou\u003c/incoming\u003e\u003coutgoing\u003eFlow_16p18oq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wbstou\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_16p18oq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16p18oq\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a96f711c_09fc_4f05_8da6_8ee64ef5bc77\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16p18oq\" id=\"Flow_16p18oq_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wbstou\" id=\"Flow_0wbstou_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z28n8w\" id=\"Flow_0z28n8w_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1666972112178,
@@ -1216,7 +1208,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667858429563,
+      "last_modified_time": 1667928897329,
       "local_scripts": [
         {
           "actions": [],
@@ -1250,48 +1242,40 @@
       "tags": [],
       "type": "default",
       "uuid": "a96f711c-09fc-4f05-8da6-8ee64ef5bc77",
-      "version": 23
+      "version": 24
     },
     {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": 4,
+              "evaluation_id": null,
               "field_name": "incident.plan_status",
               "method": "equals",
               "type": null,
               "value": "Active"
             },
             {
-              "evaluation_id": 2,
+              "evaluation_id": null,
               "field_name": "incident.properties.randori_target_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": 3,
-              "field_name": "incident.properties.randori_target_temptation",
-              "method": "changed",
-              "type": null,
-              "value": null
-            },
-            {
-              "evaluation_id": 1,
+              "evaluation_id": null,
               "field_name": null,
               "method": "object_added",
               "type": null,
               "value": null
             }
           ],
-          "custom_condition": "(1 AND 2 AND 4) OR (2 AND 3 AND 4)",
-          "logic_type": "advanced"
+          "logic_type": "all"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 11,
+        "content_version": 12,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\" isExecutable=\"true\" name=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_180aswe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Notes from Randori Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7deecb02-2324-46a0-9b5b-79b43daabd6c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"note_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_180aswe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rjvxqo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_180aswe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11pe46r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rjvxqo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Check function to add new Randori notes\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"569ed600-2404-4987-9c67-43ef50b7fdda\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rjvxqo\u003c/incoming\u003e\u003coutgoing\u003eFlow_11pe46r\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_11pe46r\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_089ad55b_a0c3_4268_89c0_328b4d6dbef6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11pe46r\" id=\"Flow_11pe46r_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rjvxqo\" id=\"Flow_1rjvxqo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_180aswe\" id=\"Flow_180aswe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"337.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667564819743,
@@ -1343,7 +1327,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667858378502,
+      "last_modified_time": 1667928921531,
       "local_scripts": [
         {
           "actions": [],
@@ -1377,7 +1361,7 @@
       "tags": [],
       "type": "default",
       "uuid": "089ad55b-a0c3-4268-89c0-328b4d6dbef6",
-      "version": 16
+      "version": 17
     },
     {
       "activation_details": {
@@ -1529,7 +1513,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 12,
+        "content_version": 13,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" isExecutable=\"true\" name=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_043ls5x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"46339b52-4027-4e57-b854-0fbc457c8924\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_043ls5x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i7ulx4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_043ls5x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_009pwov\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Update Target Data in SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"17beabef-9423-4f3e-b40c-9b48da36085c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i7ulx4\u003c/incoming\u003e\u003coutgoing\u003eFlow_009pwov\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1i7ulx4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_009pwov\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ad15e092_fe90_43f6_8038_40ac9dd6a413\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_009pwov\" id=\"Flow_009pwov_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i7ulx4\" id=\"Flow_1i7ulx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_043ls5x\" id=\"Flow_043ls5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1666886525354,
@@ -1581,7 +1565,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667858320619,
+      "last_modified_time": 1667928963530,
       "local_scripts": [
         {
           "actions": [],
@@ -1615,7 +1599,7 @@
       "tags": [],
       "type": "default",
       "uuid": "ad15e092-fe90-43f6-8038-40ac9dd6a413",
-      "version": 17
+      "version": 18
     },
     {
       "activation_type": "manual",
