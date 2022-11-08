@@ -32,7 +32,7 @@ setup(
     long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
     Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.""",
     install_requires=[
-        "resilient-circuits>=47.0.0",
+        "resilient-circuits>=46.0.0",
         "cachetools", # versions of cachetools and retry2 are specified in resilient
         "retry2"
     ],
