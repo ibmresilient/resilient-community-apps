@@ -40,7 +40,7 @@ class FunctionComponent(AppFunctionComponent):
         --------
             Response <dict> : A response with the room/team options and details
                               or the error message if the meeting creation
-         """
+        """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 

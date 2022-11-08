@@ -21,9 +21,25 @@ def codegen_reload_data():
     return {
         "package": u"fn_teams",
         "message_destinations": [u"fn_teams"],
-        "functions": [u"ms_teams_create_group", u"ms_teams_create_team", u"ms_teams_delete_group", u"ms_teams_post_message"],
-        "workflows": [u"incident_create_a_microsoft_group", u"incident_delete_a_microsoft_group", u"incident_post_message_to_teams", u"task_create_a_microsoft_group", u"task_post_message_to_teams"],
-        "actions": [u"MS Teams: Create Group from incident", u"MS Teams: Create Group from task", u"MS Teams: Delete Group from incident", u"MS Teams: Post incident information to teams", u"MS Teams: Post task information to teams"],
+        "functions": [
+            u"ms_teams_create_group",
+            u"ms_teams_delete_group",
+            u"ms_teams_post_message",
+            u"ms_teams_create_team"],
+        "workflows": [
+            u"incident_post_message_to_teams",
+            u"incident_create_a_microsoft_group",
+            u"incident_create_a_microsoft_team",
+            u"incident_delete_a_microsoft_group",
+            u"task_create_a_microsoft_group",
+            u"task_post_message_to_teams",],
+        "actions": [
+            u"MS Teams: Post task information to teams",
+            u"MS Teams: Post incident information to teams",
+            u"MS Teams: Create Group from incident",
+            u"MS Teams: Create Group from task",
+            u"MS Teams: Delete Group from incident",
+            u"MS Teams: Create Team from incident"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -51,6 +67,7 @@ def customization_data(client=None):
         - ms_teams_post_message
     - Workflows:
         - incident_create_a_microsoft_group
+        - incident_create_a_microsoft_team
         - incident_delete_a_microsoft_group
         - incident_post_message_to_teams
         - task_create_a_microsoft_group
@@ -58,6 +75,7 @@ def customization_data(client=None):
     - Rules:
         - MS Teams: Create Group from incident
         - MS Teams: Create Group from task
+        - MS Teams: Create Team from incident 
         - MS Teams: Delete Group from incident
         - MS Teams: Post incident information to teams
         - MS Teams: Post task information to teams

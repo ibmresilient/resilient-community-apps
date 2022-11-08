@@ -46,4 +46,3 @@ class TestMsTeamsCreateTeam:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+
+"""AppFunction Common utilities"""
 from urllib import parse
 
 from resilient_lib import IntegrationError
@@ -155,7 +157,6 @@ class ResponseHandler:
         self.response = response
         self._monitor_status()
         return self._raise_or_return_erros()
-
 
 
 def is_direct_member(incident_member_id, org_member_list):

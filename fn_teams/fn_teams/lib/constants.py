@@ -111,4 +111,3 @@ MSG_RESPONSE_400  = "API call failed! Entity or Object already exists. API retur
 MSG_RESPONSE_401  = "API call failed! Security context is invalid. API returned 401! {}"
 MSG_RESPONSE_404  = "API call failed! Item not found. API returned 404! {}"
 MSG_RESPONSE_405  = "API call failed! Method Not Allowed. API returned 405! {}"
-
