@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1667931280101,
+  "export_date": 1668000465472,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -750,6 +750,39 @@
       "workflows": []
     },
     {
+      "created_date": 1667939126437,
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "destination_handle": "fn_randori",
+      "display_name": "Randori: Get Paths",
+      "export_key": "randori_get_paths",
+      "id": 10,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1668000322749,
+      "name": "randori_get_paths",
+      "tags": [],
+      "uuid": "a5177e7c-d677-4607-ae54-201b85301437",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "24621a5a-cb1b-43af-8110-01013dbb3b19",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1666882474677,
       "description": {
         "content": "Get the target data for a single Randori target instance.",
@@ -965,13 +998,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 62,
+  "id": 67,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1667931278218,
+      "create_date": 1668000463881,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -980,7 +1013,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1667931278218,
+      "update_date": 1668000463881,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],

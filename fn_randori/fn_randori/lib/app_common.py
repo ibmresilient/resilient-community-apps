@@ -38,6 +38,7 @@ LINKBACK_URL = "{organization_name}/targets/{target_id}"
 # E N D P O I N T S
 GET_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
+GET_PATHS_URI = "/recon/api/{api_version}/paths"
 GET_SINGLE_TARGET_URI = "/recon/api/{api_version}/target/{target_id}"
 GET_SINGLE_DETECTION_FOR_TARGET_URI = "/recon/api/{api_version}/single-detection-for-target"
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
@@ -414,6 +415,22 @@ class AppCommon():
         else:
             return None
 
+    def get_paths(self, target_id: str) -> dict:
+        """
+        Call Randori endpoint to get the paths data for target from Randori.
+        """
+        params = {
+            'terminal': target_id
+        }
+
+        url = self._get_uri(GET_PATHS_URI.format(api_version=self.api_version))
+        response = self.rc.execute("GET",
+                                   url=url,
+                                   params=params,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
 
 def _get_verify_ssl(app_configs: dict):
     """
