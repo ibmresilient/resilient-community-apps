@@ -5,9 +5,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, SOARCommon
-from fn_randori.lib.app_common import AppCommon, ENTITY_COMMENT_HEADER
+from fn_randori.lib.app_common import (AppCommon, ENTITY_COMMENT_HEADER, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_update_notes_from_randori_target"
 
 

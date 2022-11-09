@@ -5,8 +5,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
+from fn_randori.lib.app_common import (PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_clear_data_table"
 
 
