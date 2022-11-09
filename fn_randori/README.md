@@ -695,7 +695,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 262,
-    "host": "AnnMaries-MacBook-Pro.local",
+    "host": "MacBook-Pro.local",
     "package": "fn-randori",
     "package_version": "1.0.0",
     "timestamp": "2022-11-07 11:28:54",
