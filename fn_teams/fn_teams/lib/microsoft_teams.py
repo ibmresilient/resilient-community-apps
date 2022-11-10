@@ -4,7 +4,7 @@
 
 ''' Helper function for funct_ms_teams_create_teams'''
 
-import json
+import json, re
 
 from urllib import parse
 from resilient_lib import IntegrationError
@@ -12,41 +12,34 @@ from resilient_lib import IntegrationError
 from fn_teams.lib import constants, microsoft_commons
 from fn_teams.lib.microsoft_commons import ResponseHandler
 
-'''
-POST https://graph.microsoft.com/v1.0/teams
-Content-Type: application/json
-'''
-{
-   "template@odata.bind":"https://graph.microsoft.com/v1.0/teamsTemplates('standard')",
-   "displayName":"My Sample Team",
-   "description":"My Sample Team’s Description",
-   "members":[
-      {
-         "@odata.type":"#microsoft.graph.aadUserConversationMember",
-         "roles":["owner"],
-         "user@odata.bind":"https://graph.microsoft.com/v1.0/users('0040b377-61d8-43db-94f5-81374122dc7e')"
-      }
-   ]
-}
-
-
-{
-  "template@odata.bind": "https://graph.microsoft.com/v1.0/teamsTemplates('standard')",
-  "description": "sample incident",
-  "displayName": "newTeam",
-  "members": [
-    {
-      "@odata.type": "#microsoft.graph.aadUserConversationMember",
-      "roles": [
-        "owner"
-      ],
-      "user@odata.bind": "https://graph.microsoft.com/v1.0/users('6c259569-f2c0-430b-af73-40081b5de19d')"
-    }
-  ]
-}
 
 class TeamsInterface:
+    '''
+        This application allows for creating a Microsoft Team using the Microsoft Graph API. This
+        provides SOAR with the ability to create Teams from within a SOAR incident or a task. Teams
+        can be created in two different ways:
+
+                - Create Team using an existing MS Group
+                - Create a Team from scratch
+
+        Inputs:
+        -------
+            task_id                <str> : If called from task then Task ID
+            incident_id            <str> : Incident ID
+            ms_group_name          <str> : Name of the Microsoft Group to be created
+            ms_owners_list         <str> : List of owners email addresses
+            add_members_from       <str> : Specifies if members to be added form incident or task
+            additional_mambers     <str> : List of email addresses of additional members to be added
+            ms_group_description   <str> : Description for the group to be created
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+
+        Returns:
+        --------
+            Response <dict> : A response with the room/team options and details
+                              or the error message if the meeting creation
+    '''
     def __init__(self, required_parameters):
+        self.users_not_found = []
         self.response_handler = ResponseHandler()
         self.rc = required_parameters["rc"]
         self.log = required_parameters["logger"]
@@ -74,8 +67,9 @@ class TeamsInterface:
                     constants.URL_USERS_QUERY.format("".join(["('", response.get("id"), "')"])))
                 }
         if owner:
-            raise IndentationError(constants.WARN_DIDNOT_FIND_USER.format(email_id))
+            raise IntegrationError(constants.WARN_DIDNOT_FIND_USER.format(email_id))
         else:
+            self.users_not_found.append(email_id)
             self.log.warn(constants.WARN_DIDNOT_FIND_USER.format(email_id))
 
 
@@ -93,15 +87,39 @@ class TeamsInterface:
             additional_members=additional_members)
 
         member_list = [self._build_member_format(member) for member in member_list]
-        self.log.info("Owners Information")
-        self.log.info(json.dumps(owners_list, indent=2))
-        self.log.info("Members Information")
-        self.log.info(json.dumps(member_list, indent=2))
         self.response_handler.clear_exempt_codes(default=True)
         return owners_list, member_list
 
 
-    def create_teams(self, required_parameters):
+    def _add_members(self, team_id, members):
+
+        self.log.info("Members Information")
+        self.log.info(json.dumps(members, indent=2))
+
+        url = parse.urljoin(
+                parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_LOCATE_TEAM.format(team_id)),
+                constants.URL_ADD_MEMBER_CONTEXT)
+        
+        self.log.debug(url)
+
+        self.response_handler.set_return_raw(False)
+        self.log.info("Adding members to the team {}".format(team_id))
+
+        body = json.dumps({"values" : members})
+
+        response = self.rc.execute(
+            method="post",
+            url=url,
+            data=body,
+            headers=self.headers,
+            callback=self.response_handler.check_response)
+
+        self.log.debug(json.dumps(response, indent=2))
+
+
+    def create_team(self, required_parameters):
 
         owners_email_list, members_email_list = self._get_all_emails(
             required_parameters.get("owners_list"),
@@ -114,22 +132,61 @@ class TeamsInterface:
             constants.BASE_URL,
             constants.URL_LIST_TEAMS)
 
-        body = {
+        body = json.dumps({
             "template@odata.bind" : parse.urljoin(
                 constants.BASE_URL,
                 constants.URL_TEAMS_STANDARD_TEMPLATE),
             "displayName" : required_parameters.get("displayName"),
             "description" : required_parameters.get("description"),
-            "members"     : owners_email_list}
+            "members"     : owners_email_list}, indent=2)
+        self.log.debug(body)
 
-        self.log.debug(json.dumps(body, indent=2))
+        self.response_handler.add_empty_response_code(202)
+        self.response_handler.set_return_raw(True)
         response = self.rc.execute(
             method="post",
             url=url,
-            data=json.dumps(body),
+            data=body,
+            headers=self.headers,
+            callback=self.response_handler.check_response)
+        self.log.debug(response.raw.info())
+
+        _team_id = (response
+            .raw
+            .info()
+            .get("location"))
+        if not _team_id:
+            raise IndentationError(constants.ERROR_COULDNOT_CREATE_TEAM)
+        _team_id = re.search(constants.TEAM_ID_REGEX, _team_id).group(1)
+
+        if len(members_email_list) > 0: 
+            self._add_members(_team_id, members_email_list)
+
+        return {
+            "teamId"       : _team_id,
+            "displayName"  : required_parameters.get("displayName"),
+            "description"  : required_parameters.get("description"),
+            "unfoundUsers" : self.users_not_found if len(self.users_not_found) > 0 else None}
+
+
+    def create_team_from_group(self, group_id):
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_TEAM_FROM_GROUP.format(group_id))
+
+        self.log.debug("URL " + url)
+        self.log.debug("body " +  json.dumps(constants.TEAMS_FROM_GROUP_CONFIGURATION, indent=2))
+
+        response = self.rc.execute(
+            method="put",
+            url=url,
+            data=json.dumps(constants.TEAMS_FROM_GROUP_CONFIGURATION),
             headers=self.headers,
             callback=self.response_handler.check_response)
 
-        self.log.debug("\n\n\n")
-        self.log.debug(json.dumps(response, indent=2))
-        return response
+        self.log.debug( json.dumps(response))
+
+        return{
+            "teamId"      : response.get("id"),
+            "displayName" : response.get("displayName"),
+            "description" : response.get("description")}

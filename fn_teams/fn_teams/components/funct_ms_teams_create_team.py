@@ -18,6 +18,7 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self._app_function("")
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -29,12 +30,11 @@ class FunctionComponent(AppFunctionComponent):
         -------
             task_id                <str> : If called from task then Task ID
             incident_id            <str> : Incident ID
-            ms_group_name          <str> : Name of the Microsoft Group to be created
+            ms_team_name           <str> : Name of the Microsoft Team to be created
             ms_owners_list         <str> : List of owners email addresses
             add_members_from       <str> : Specifies if members to be added form incident or task
             additional_mambers     <str> : List of email addresses of additional members to be added
-            ms_group_description   <str> : Description for the group to be created
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_team_description    <str> : Description for the group to be created
 
         Returns:
         --------
@@ -44,38 +44,34 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
-        # validate_fields([
-        #     "incident_id",
-        #     "ms_group_name",
-        #     "add_members_from",
-        #     "ms_group_description",
-        #     "ms_group_mail_nickname"], fn_inputs)
         required_parameters = {}
         required_parameters["rc"] = self.rc
         required_parameters["logger"] = self.LOG
         required_parameters["resclient"] = self.rest_client()
 
-        # self.required_parameters["incident_id"] = fn_inputs.incident_id
-        # self.required_parameters["group_name"] = fn_inputs.ms_group_name
-        # self.required_parameters["add_members_from"] = fn_inputs.add_members_from
-        # self.required_parameters["group_description"] = fn_inputs.ms_group_description
-        # self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
+        if hasattr(fn_inputs, 'ms_group_id'):
+            # Creates a Team using an existing MS Group setting
+            required_parameters["group_id"] = fn_inputs.ms_group_id
 
-        # self.required_parameters["task_id"] = fn_inputs.task_id if hasattr(
-        #     fn_inputs, 'task_id') else None
-        # self.required_parameters["owners_list"] = fn_inputs.ms_owners_list if hasattr(
-        #     fn_inputs, 'ms_owners_list') else  None
-        # self.required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
-        #     fn_inputs, 'additional_members') else None
+        else:
+            # Creates a Team from scratch
+            validate_fields([
+                "incident_id",
+                "ms_team_name",
+                "ms_owners_list",
+                "add_members_from"], fn_inputs)
 
-        required_parameters["task_id"] = None
-        required_parameters["incident_id"] = 2098
-        required_parameters["owners_list"] = "AdminSoarMS@5rf2xs.onmicrosoft.com"
-        required_parameters["add_members_from"] = "incident"
-        required_parameters["displayName"] = "newTeam"
-        required_parameters["description"] = "sample incident"
-        required_parameters["teams_description"] = "Sample team"
-        required_parameters["additional_members"] = None
+            required_parameters["incident_id"] = fn_inputs.incident_id
+            required_parameters["displayName"] = fn_inputs.ms_team_name
+            required_parameters["owners_list"] = fn_inputs.ms_owners_list
+            required_parameters["add_members_from"] = fn_inputs.add_members_from
+
+            required_parameters["task_id"] = fn_inputs.task_id if hasattr(
+                fn_inputs, 'task_id') else None
+            required_parameters["description"] = fn_inputs.ms_team_description if hasattr(
+                fn_inputs, 'ms_team_description') else ""
+            required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
+                fn_inputs, 'additional_members') else None
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
@@ -91,9 +87,12 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult({}, success=False, reason=str(err))
 
         if authenticated:
+            team_manager = TeamsInterface(required_parameters)
+            if "group_id" in required_parameters:
+                response = team_manager.create_team_from_group(required_parameters.get("group_id"))
+            else:
+                response = team_manager.create_team(required_parameters)
             try:
-                group_manager = TeamsInterface(required_parameters)
-                response = group_manager.create_teams(required_parameters)
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))

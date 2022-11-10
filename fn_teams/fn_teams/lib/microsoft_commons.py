@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction Common utilities"""
+import json
 from urllib import parse
 
 from resilient_lib import IntegrationError
@@ -34,8 +35,14 @@ class ResponseHandler:
     """
     def __init__(self):
         self.msg, self.response = None, None
-        self.default_exempt_codes = [204]
+        self.return_raw = False
+        self.default_exempt_codes = []
+        self.empty_response_codes = [204]
         self.exempt_codes = self.default_exempt_codes.copy()
+
+
+    def set_return_raw(self, value: bool = False):
+        self.return_raw = value
 
 
     def _monitor_status(self):
@@ -50,7 +57,7 @@ class ResponseHandler:
         """
         if self.response is None:
             raise IntegrationError(constants.MSG_RESPONSE_NONE)
-        if self.response.status_code == 204:
+        if self.response.status_code in self.empty_response_codes:
             self.msg = constants.MSG_RESPONSE_204
         elif "error" in self.response.json():
             response = self.response.json()
@@ -86,21 +93,27 @@ class ResponseHandler:
             (<dict>): If the methord doesnot raise an error, it the returns the response
                       in the form of a dictionary.
         """
-        if self.msg:
-            if self.response.status_code in self.exempt_codes:
+        if self.return_raw:
+            return self.response
 
-                if self.response.status_code == 204:
-                    res = {}
-                else:
-                    res = self.response.json()
-                res["status_code"] = self.response.status_code
-                if self.msg:
-                    res["message"] = self.msg
-                return res
+        if not self.msg:
+            res = self.response.json()
+            res["status_code"] = self.response.status_code
+            return res
+
+        if self.response.status_code not in self.exempt_codes and (
+            self.response.status_code not in self.empty_response_codes):
             raise IntegrationError(self.msg)
-        res = self.response.json()
+
+        if self.response.status_code in self.empty_response_codes:
+            res = {}
+        else:
+            res = self.response.json()
         res["status_code"] = self.response.status_code
+        if self.msg:
+            res["message"] = self.msg
         return res
+
 
 
     def clear_exempt_codes(self, default=False):
@@ -137,6 +150,43 @@ class ResponseHandler:
             self.exempt_codes.append(codes)
         elif isinstance(codes, list):
             self.exempt_codes.extend(codes)
+        else:
+            raise IntegrationError(constants.MSG_UNSUPPORTED_TYPE.format(codes))
+
+    def clear_empty_response_codes(self, default=False):
+        """
+        Clears the exempt code list or resets it back to the
+        default value.
+
+        Arguments:
+        ----------
+            default (<bool>) : Resets the code to default list of codes
+                               else, clears all codes
+        """
+        if default:
+            self.empty_response_codes = [204]
+        else:
+            self.empty_response_codes = []
+
+
+    def add_empty_response_code(self, codes):
+        """
+        Allows for adding codes to the exempt list
+
+        Args:
+        -----
+            codes (<int>) or (<list>): A code or a list of codes to be added
+                                       to the exempt code list
+
+        Raises:
+        -------
+            TypeError: When unsupported type supplied for codes.
+            Supported type <list> or <int>
+        """
+        if isinstance(codes, int):
+            self.empty_response_codes.append(codes)
+        elif isinstance(codes, list):
+            self.empty_response_codes.extend(codes)
         else:
             raise IntegrationError(constants.MSG_UNSUPPORTED_TYPE.format(codes))
 
@@ -228,6 +278,11 @@ def generate_member_list(resclient, logger, **kwargs):
     add_members_from = add_members_from.lower().strip()
     add_members_from = None if add_members_from == "none" else add_members_from
 
+    log.debug(f"task_id            : {task_id}")
+    log.debug(f"incident_id        : {incident_id}")
+    log.debug(f"add_members_from   : {add_members_from}")
+    log.debug(f"additional_members : {additional_members}")
+
     email_ids = []
     if add_members_from:
         if add_members_from.strip().lower() == "task":
@@ -258,3 +313,62 @@ def generate_member_list(resclient, logger, **kwargs):
     email_ids = list(set(email_ids))
     log.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
     return email_ids
+
+
+def find_group(self, required_parameters, **kwargs):
+    """
+    Allows for locating a group based on its >>display name<< or >>mail nickname<<
+    This function atleast required either the group_name or the group_mail_nickname
+    keyworkd argument.
+
+    Kwargs:
+    -------
+        group_name          <str> : Display name of the group
+        group_mail_nickname <str> : Mail nickname of the gorup
+
+    Raises:
+    -------
+        IntegrationError: Unbable to locate group
+
+    Returns:
+    --------
+        <dict> : Details of the detected group
+    """
+
+    rc = required_parameters.get("rc")
+    log = required_parameters.get("log")
+    headers = required_parameters.get("headers")
+    response_handler = required_parameters.get("response_handler")
+
+    if "group_name" in kwargs:
+        log.info(constants.INFO_FIND_GROUP_BY_NAME)
+        _name = kwargs.get("group_name")
+        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
+        _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
+
+    if "group_mail_nickname" in kwargs:
+        log.info(constants.INFO_FIND_GROUP_BY_MAIL)
+        _name = kwargs.get("group_mail_nickname")
+        if "@" in _name:
+            _name = _name.split("@")[0]
+        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
+        _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
+
+    url = parse.urljoin(
+        constants.BASE_URL,
+        constants.URL_GROUPS_QUERY.format(_query))
+
+    response = rc.execute(
+        method="get",
+        url=url,
+        headers=headers,
+        callback=response_handler.check_response)
+
+    log.debug(json.dumps(response, indent=2))
+
+    if len(response.get("value")) > 0 :
+        log.info(constants.INFO_FOUND_GROUP)
+        return response.get("value")
+
+    log.error(error_msg)
+    raise IntegrationError(error_msg)

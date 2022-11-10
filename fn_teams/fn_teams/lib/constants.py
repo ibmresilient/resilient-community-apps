@@ -45,8 +45,27 @@ URL_LIST_USERS = "/v1.0/users"
 URL_USERS_QUERY = "/v1.0/users{}"
 
 # MS TEAMS API call
-URL_LIST_TEAMS = "/v1.0/teams"
+TEAM_ID_REGEX = '\'(.+?)\''
+URL_TEAMS = "/v1.0/teams"
+URL_LIST_TEAMS = URL_TEAMS
+URL_LOCATE_TEAM = URL_TEAMS + "/{}/"
+URL_TEAM_FROM_GROUP = URL_GROUPS + "/{}/team"
+URL_ADD_MEMBER_CONTEXT = "members/add"
 URL_TEAMS_STANDARD_TEMPLATE = "/v1.0/teamsTemplates('standard')"
+
+TEAMS_FROM_GROUP_CONFIGURATION = {  
+    "memberSettings": {
+        "allowCreatePrivateChannels": True,
+        "allowCreateUpdateChannels": True},
+
+    "messagingSettings": {
+        "allowUserEditMessages": True,
+        "allowUserDeleteMessages": True},
+
+    "funSettings": {
+        "allowGiphy": True,
+        "giphyContentRating": "strict"}
+    }
 
 # SOAR rest-client URLs
 RES_TASK = "/tasks/"
@@ -79,11 +98,13 @@ WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this inciden
 ERROR_AUTHENTICATION_FAILED = '''[Microsoft Authentication] Failed to retrieve AccessToken.
  Check Credentials!'''
 ERROR_NO_ARG_PASSED = "[Microsoft Groups] No parameter passed to method read_user_info"
-ERROR_DIDNOT_FIND_GROUP = "[Microsoft Groups] Did not find any group with {} {}"
+ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
 ERROR_MISSING_NAME_MAIL_NAME = '''[Microsoft Groups] Either the Group's name or the
  Mail Nickname has to be specified to find the group'''
 ERROR_FOUND_MANY_GROUP = '''[Microsoft Groups] Foud more than one group with the same name.
  Please specify the Mail Nickname to delete the group'''
+
+ERROR_COULDNOT_CREATE_TEAM = "[Microsoft Team] Unable to create team"
 
 STATUS_STARTING_APP = "Starting App Function: {}"
 STATUS_GENERATE_HEADER = "Retriving AccessToken for this session"
