@@ -2,17 +2,17 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #   Util classes for qradar
 
-from json import dumps
-from six import binary_type
 from base64 import b64encode
+from json import dumps
 from logging import getLogger
-from requests import get, post
 from urllib.parse import quote as quote_func
-from resilient_lib import RequestsCommon, IntegrationError
-from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
+from requests import get, post
+from resilient_lib import IntegrationError, RequestsCommon
+from six import binary_type
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
+from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_SYSTEMDATE
-from fn_qradar_enhanced_data.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
+from fn_qradar_enhanced_data.util.SearchWaitCommand import (SearchFailure, SearchJobFailure, SearchWaitCommand)
 
 LOG = getLogger(__name__)
 

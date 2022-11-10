@@ -2,9 +2,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 import functools
-from threading import Event
 from datetime import datetime
 from logging import getLogger
+from threading import Event
 from traceback import format_exc
 from resilient import SimpleHTTPException
 

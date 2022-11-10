@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""AppFunction implementation"""
 
 from time import time
+from resilient_circuits import (AppFunctionComponent, FunctionResult, app_function)
 from resilient_lib import validate_fields
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS, PACKAGE_NAME
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
-from fn_qradar_enhanced_data.util.function_utils import clear_table, get_qradar_client, get_server_settings
+from fn_qradar_enhanced_data.util.function_utils import (clear_table, get_qradar_client, get_server_settings)
+from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 
 FN_NAME = "qradar_offense_summary"
 

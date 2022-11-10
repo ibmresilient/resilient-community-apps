@@ -3,11 +3,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from resilient_circuits import (AppFunctionComponent, FunctionResult, app_function)
 from resilient_lib import validate_fields
-from fn_qradar_enhanced_data.util.qradar_constants import GLOBAL_SETTINGS, PACKAGE_NAME
-from fn_qradar_enhanced_data.util.function_utils import clear_table, get_qradar_client, get_server_settings, get_search_timeout
 import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_queries
+from fn_qradar_enhanced_data.util.function_utils import (clear_table, get_qradar_client, get_search_timeout, get_server_settings)
+from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 
 FN_NAME = "qradar_get_offense_mitre_reference"
@@ -49,6 +49,8 @@ class FunctionComponent(AppFunctionComponent):
         api_url = auth_info.api_url
         # Get search_timeout from app.config or set it to default 600 seconds
         timeout = get_search_timeout(global_settings, options)
+        # Get api call header
+        header = auth_info.headers.copy()
 
         # Get rules
         rules_list = qradar_client.graphql_query({"id": fn_inputs.qradar_offense_id}, qradar_graphql_queries.GRAPHQL_RULESQUERY)["content"]["rules"]
@@ -57,7 +59,7 @@ class FunctionComponent(AppFunctionComponent):
         # Create a dict that contains the rules ID and UUID
         rule_uuid = auth_info.make_call("GET",
             f"{api_url}analytics/rules?fields=id, identifier&filter=id in ({ids_list_str})",
-            auth_info.headers.copy(), timeout=timeout).json()
+            headers=header, timeout=timeout).json()
 
         # Get the mappings for all of the rules associated with the QRadar case
         for rule in rules_list:
@@ -66,12 +68,13 @@ class FunctionComponent(AppFunctionComponent):
             for uuid in rule_uuid:
                 if str(uuid.get("id")) == rule.get("id"):
                     rules_list[rules_list.index(rule)]["identifier"] = uuid.get("identifier")
+                    rule_uuid.remove(uuid) # Removes the uuid from the rule_uuid list after it has been added to rules_list
                     break # Exits the loop after it finds a match
 
             # Get the MITRE mappings for the rule
             mitre_results = auth_info.make_call("GET",
                 f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mitre/mitre_coverage/{rule.get('identifier')}",
-                auth_info.headers.copy()).json()
+                headers=header).json()
 
             # Add the mapping to the rule
             rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']

@@ -3,11 +3,9 @@
 # Util functions
 
 from logging import getLogger
-
-from fn_qradar_enhanced_data.util import qradar_utils
-from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS,
-                                                           PACKAGE_NAME)
 from resilient_lib import IntegrationError, str_to_bool, validate_fields
+from fn_qradar_enhanced_data.util import qradar_utils
+from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 
 LOG = getLogger(__name__)
 
