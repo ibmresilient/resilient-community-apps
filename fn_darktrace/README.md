@@ -2006,9 +2006,9 @@ group_category = incident.properties.darktrace_group_category
 | Darktrace: Unacknowledge Incident Event | Sets the given incident event to "unacknowledged" in Darktrace | darktrace_incident_events_dt | `enabled` |
 | Darktrace: Unacknowledge Model Breach | Sets the given model breach to "unacknowledged" in Darktrace | darktrace_model_breaches_dt | `enabled` |
 | Darktrace: Update All Data Tables | Refreshes all data tables associated with Darktrace | incident | `enabled` |
-| Darktrace: Update Devices Data Table | None | incident | `enabled` |
-| Darktrace: Update Incident Events Data Table | None | incident | `enabled` |
-| Darktrace: Update Model Breaches Data Table | None | incident | `enabled` |
+| Darktrace: Update Devices Data Table | Refreshes data table associated with Darktrace devices | incident | `enabled` |
+| Darktrace: Update Incident Events Data Table | Refreshes data table associated with Darktrace incident events | incident | `enabled` |
+| Darktrace: Update Model Breaches Data Table | Refreshes data table associated with Darktrace model breaches | incident | `enabled` |
 
 ---
 
