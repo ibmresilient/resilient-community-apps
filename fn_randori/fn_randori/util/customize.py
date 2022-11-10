@@ -27,7 +27,7 @@ def codegen_reload_data():
         "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"randori_detections_dt"],
+        "datatables": [u"randori_detections_dt", u"randori_discovery_path_dt"],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [u"randori_update_discovery_path_data_table", u"randori_automatic_update_discovery_path_data_table", u"randori_add_artifacts_of_detections", u"randori_add_detections_to_detections_data_table", u"randori_add_target_notes", u"randori_close_target", u"randori_create_artifacts_from_detection", u"randori_send_soar_note_to_randori_target", u"randori_update_detections_data_table", u"randori_update_target_data_in_soar", u"randori_update_target_impact_score_in_randori", u"randori_update_target_in_soar", u"randori_update_target_notes", u"randori_update_target_status_in_randori"]
