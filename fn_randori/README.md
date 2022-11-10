@@ -30,7 +30,17 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
+- [Function - Randori: Clear Data Table](#function---randori-clear-data-table)
+- [Function - Randori: Get Detections of Target](#function---randori-get-detections-of-target)
+- [Function - Randori: Get Target](#function---randori-get-target)
+- [Function - Randori: Send Note as Comment to Target](#function---randori-send-note-as-comment-to-target)
+- [Function - Randori: Update Notes from Randori Target](#function---randori-update-notes-from-randori-target)
+- [Function - Randori: Update Target Impact Score](#function---randori-update-target-impact-score)
+- [Function - Randori: Update Target Status](#function---randori-update-target-status)
+- [Data Table - Detections](#data-table---detections)
 - [Custom Fields](#custom-fields)
+- [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -41,7 +51,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 10/2022 | Initial Release | 
+| 1.0.0 | 11/2022 | Initial Release | 
 
 ---
 
@@ -54,7 +64,8 @@
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-Bidirectional synchronization of Randori Targets to IBM SOAR.
+Bidirectional app for Randori for IBM SOAR. Query Randori for targets based 
+         on user-defined query parameters and create and update cases in SOAR.
 
 ### Key Features
 <!--
@@ -114,11 +125,11 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=47.0.0
 
-### Randori Development Version
+### <!-- ::CHANGE_ME:: --> Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
@@ -163,17 +174,103 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
 | **api_token** | Yes | `xxx` | *Randori API token.* |
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
 | **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
 | **polling_lookback** | Yes | `120` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
-| **tenant_name** | Yes | `webernets-companyname` | *Randori tenant name* |
+| **organization_name** | Yes | `webernets-companyname` | *Randori organization name* |
 | **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |
 | **soar_close_case_template** | No | /path/soar_close_case_template.jinja | *Path to custom close case jinja template.* |
-| **soar_update_case_template** | No | /path/soar_close_case_template.jinja | *Path to custom update case jinja template.* |
+| **soar_update_case_template** | No | /path/soar_close_case_template.jinja | *Path to custom update case jinja template.* 
+
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* The following Randori Tab custom layout is included in the app:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
+
+
+---
+
+## Function - Randori: Clear Data Table
+Clear the specified Randori data table
+
+ ![screenshot: fn-randori-clear-data-table ](./doc/screenshots/fn-randori-clear-data-table.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
+| `randori_data_table_name` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "hints": [],
+    "message": null,
+    "success": true,
+    "title": null
+  },
+  "inputs": {
+    "incident_id": 2640,
+    "randori_data_table_name": "randori_detections_dt"
+  },
+  "metrics": {
+    "execution_time_ms": 10072,
+    "host": "MacBook-Pro.local",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-07 08:18:51",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
 
 ---
 ## Function - Randori: Get Detections of Target
@@ -197,10 +294,7 @@ Get the list detections of a specified Randori target given it's target Id.
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
 ```python
-{
-  "version": 2.0,
-  "success": true,
-  "reason": null,
+results = {
   "content": {
     "detection_list": [
       {
@@ -214,9 +308,11 @@ Get the list detections of a specified Randori target given it's target Id.
         "banners_uuid": null,
         "cert_uuid": "0caabe31-4ede-4e24-9507-f9ebc106951f",
         "characteristic_tags": [
-          "DefaultPage"
+          "DefaultPage",
+          "NoCSS",
+          "OldCopyright"
         ],
-        "characteristics_count": 1,
+        "characteristics_count": 3,
         "confidence": 75,
         "cpe": {
           "cpe_version": "2.3",
@@ -262,11 +358,11 @@ Get the list detections of a specified Randori target given it's target Id.
         "hostname": "ferrari.demo.webernets.online",
         "hostname_id": "82ca6db1-344b-4d12-a7db-5e229e3630d1",
         "id": "f814e5ef-76d9-41c1-b6e8-52b5c0daeb16,5dbcb688-8591-4574-ad18-6cbc27a1941c",
-        "impact_score": "None",
+        "impact_score": "Medium",
         "ip": "34.149.126.94",
         "ip_id": "5b3beaa8-d24c-4861-97de-27dc3b5f9bf2",
         "ip_str": "34.149.126.94",
-        "last_seen": "2022-10-25T05:31:43.150093+00:00",
+        "last_seen": "2022-10-31T11:22:49.122136+00:00",
         "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
         "lens_view": "public",
         "name": "Tomcat",
@@ -278,10 +374,10 @@ Get the list detections of a specified Randori target given it's target Id.
         "poc_id": null,
         "port": 443,
         "post_exploit": 3,
-        "priority_impact_factor": 0.0,
-        "priority_score": 81.0,
+        "priority_impact_factor": 0.084375,
+        "priority_score": 135.0,
         "priority_status_factor": 0.1125,
-        "priority_tags_factor": 0.0675,
+        "priority_tags_factor": 0.253125,
         "private_weakness": 0,
         "protocol": "tcp",
         "public_weakness": 5,
@@ -290,11 +386,11 @@ Get the list detections of a specified Randori target given it's target Id.
         "research": 3,
         "screenshot_uuid": "5afc7cfb-9ab8-4231-a296-909eb7d918e2",
         "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
-        "status": "Needs Resolution",
+        "status": "Needs Investigation",
         "target_confidence": 75,
         "target_first_seen": "2022-07-07T07:18:22.029485+00:00",
         "target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
-        "target_last_seen": "2022-10-24T06:16:04.127801+00:00",
+        "target_last_seen": "2022-10-31T11:32:10.769721+00:00",
         "target_num_detections": 1,
         "target_temptation": 45,
         "tech_category": [
@@ -313,18 +409,21 @@ Get the list detections of a specified Randori target given it's target Id.
       }
     ]
   },
-  "raw": null,
   "inputs": {
     "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 167,
+    "host": "MacBook-Pro.local",
     "package": "fn-randori",
     "package_version": "1.0.0",
-    "host": "MacBook-Pro.local",
-    "execution_time_ms": 315,
-    "timestamp": "2022-10-27 16:37:20"
-  }
+    "timestamp": "2022-11-02 16:57:13",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -345,43 +444,17 @@ None
 <p>
 
 ```python
-detection_data = playbook.functions.results.detection_data
-
-incident.addNote("detection_data = {}".format(detection_data))
-
-if not detection_data.success:
-  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori to create artifacts.")
-else:
-  content = detection_data.get("content", {})
-  detection_list = detection_data.content.get("detection_list", [])
-  for detection in detection_list:
-    
-    # Add artifacts
-    ip = detection.get("ip")
-    if ip:
-      incident.addArtifact("IP Address", ip, "Artifact from Randori.")
-      
-    port = detection.get("port")
-    if port:
-      incident.addArtifact("Port", str(port), "Artifact from Randori.")
-
-    hostname = detection.get("hostname")
-    if hostname:
-      incident.addArtifact("DNS Name", hostname, "Artifact from Randori.")
-      
-    path = detection.get("path")
-    if path:
-      incident.addArtifact("File Path", path, "Artifact from Randori.")
+None
 ```
 
 </p>
 </details>
 
-
+---
 ## Function - Randori: Get Target
-Get the Randori target data.
+Get the target data for a single Randori target instance.
 
- ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png)
+ ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -400,9 +473,6 @@ Get the Randori target data.
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
     "data": {
       "affiliation_state": "None",
@@ -413,7 +483,9 @@ results = {
       "authority_override": false,
       "authorization_state": "None",
       "characteristic_tags": [
-        "DefaultPage"
+        "DefaultPage",
+        "NoCSS",
+        "OldCopyright"
       ],
       "confidence": 75,
       "cpe": {
@@ -436,27 +508,27 @@ results = {
       "description": "Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.",
       "enumerability": 3,
       "first_seen": "2022-07-07T07:18:22.029485+00:00",
-      "id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
-      "impact_score": "None",
-      "last_seen": "2022-10-24T06:16:04.127801+00:00",
-      "lens_id": "08a90512-fb94-4766-9cc7-7a945e934638",
+      "id": "5dbcb688-aaaa-4574-ad18-6cbc27a1941c",
+      "impact_score": "Medium",
+      "last_seen": "2022-10-31T11:32:10.769721+00:00",
+      "lens_id": "08a90512-aaaa-4766-9cc7-7a945e934638",
       "lens_view": "public",
       "name": "Tomcat",
-      "org_id": "923af5dd-50ce-4d80-a55f-707dfe08411e",
+      "org_id": "923af5dd-aaaa-bbbb-cccc-707dfe08411e",
       "perspective": "00000000-0000-0000-0000-000000000000",
       "perspective_name": "PUBLIC",
       "post_exploit": 3,
-      "priority_impact_factor": 0.0,
-      "priority_score": 81.0,
+      "priority_impact_factor": 0.084375,
+      "priority_score": 135.0,
       "priority_status_factor": 0.1125,
-      "priority_tags_factor": 0.0675,
+      "priority_tags_factor": 0.253125,
       "private_weakness": 0,
       "public_weakness": 5,
       "randori_notes": "This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.",
       "reference": "http://tomcat.apache.org",
       "research": 3,
-      "service_id": "15d7435d-3469-450f-8ef9-f9e12dde6f68",
-      "status": "Needs Resolution",
+      "service_id": "15d7435d-aaaa-bbbb-cccc-f9e12dde6f68",
+      "status": "Needs Investigation",
       "target_temptation": 45,
       "tech_category": [
         "App Servers"
@@ -472,18 +544,21 @@ results = {
       "version": "7.0.76"
     }
   },
-  "raw": null,
   "inputs": {
     "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 339,
+    "host": "MacBook-Pro.local",
     "package": "fn-randori",
     "package_version": "1.0.0",
-    "host": "MacBook-Pro.local",
-    "execution_time_ms": 312,
-    "timestamp": "2022-10-25 16:50:45"
-  }
+    "timestamp": "2022-11-02 16:57:13",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -504,30 +579,295 @@ None
 <p>
 
 ```python
-target_data = playbook.functions.results.target_data
+None
+```
 
-if not target_data.success:
-  incident.addNote("Randori: Update custom fields: Unable to get target data to update custom fields.")
-else:
-  content = target_data.get("content", {})
-  data = target_data.content.get("data", {})
-  if data:
-    # Update custom fileds with Randori target data
-    incident.properties.randori_target_status = data.get("status")
-    incident.properties.randori_target_impact_score = data.get("impact_score")
-    incident.properties.randori_target_temptation = data.get("target_temptation")
-    incident.properties.randori_target_authority = data.get("authority")
-    incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
-    incident.properties.randori_target_perspective_name = data.get("perspective_name")
-    incident.properties.randori_target_tech_category = ", ".join(data.get("tech_category", []))
-    incident.properties.randori_target_tags = ", ".join(data.get("user_tags", []))
-    
-    incident.addNote("Randori: script updated custom fields in SOAR.")
-    
-    # Add Randori note
-    randori_notes = data.get("randori_notes")
-    if randori_notes:
-        incident.addNote(helper.createRichText("<b>Note from Randori:</b><br> {}".format(randori_notes)))
+</p>
+</details>
+
+---
+## Function - Randori: Send Note as Comment to Target
+Post a SOAR note as a comment in the corresponding Randori target.
+
+ ![screenshot: fn-randori-send-note-as-comment-to-target ](./doc/screenshots/fn-randori-send-note-as-comment-to-target.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_comment_text` | `text` | No | `-` | - |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "action": null,
+    "comment": "Added note from Randori Target",
+    "created_at": "2022-11-02T17:37:25.576771+00:00",
+    "id": "af217af0-b6d6-4659-86b0-5fc876eac7e8",
+    "is_author": true,
+    "is_bulk_applied": false,
+    "name": "QRadar SOAR Development",
+    "rel_id": "16543836-9b71-4614-8c73-4a5b440a8c62",
+    "status": "ACTIVE"
+  },
+  "inputs": {
+    "randori_comment_text": "Added note from Randori Target",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "execution_time_ms": 10124,
+    "host": "MacBook-Pro.local",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-02 13:37:29",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+## Function - Randori: Update Notes from Randori Target
+Query Randori target and add any new notes to the SOAR case.
+
+ ![screenshot: fn-randori-update-notes-from-randori-target ](./doc/screenshots/fn-randori-update-notes-from-randori-target.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "count": 0
+  },
+  "inputs": {
+    "incident_id": 2675,
+    "randori_target_id": "80c039c4-625b-42fb-a8f1-3888db45d29e"
+  },
+  "metrics": {
+    "execution_time_ms": 262,
+    "host": "MacBook-Pro.local",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-07 11:28:54",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+## Function - Randori: Update Target Impact Score
+Update the specified target in Randori with the specified target impact score.
+
+ ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/fn-randori-update-target-impact-score.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_note` | `text` | No | `-` | - |
+| `randori_target_id` | `text` | Yes | `-` | - |
+| `randori_target_impact_score` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "count": 1
+  },
+  "inputs": {
+    "randori_note": "from SOAR",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
+    "randori_target_impact_score": "Low"
+  },
+  "metrics": {
+    "execution_time_ms": 626,
+    "host": "MacBook-Pro.local",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-07 13:08:40",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+## Function - Randori: Update Target Status
+Update the specified target in Randori with the specified target status and /or impact score.
+
+ ![screenshot: fn-randori-update-target-status ](./doc/screenshots/fn-randori-update-target-status.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_note` | `text` | No | `-` | - |
+| `randori_target_id` | `text` | Yes | `-` | - |
+| `randori_target_status` | `select` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "count": 1
+  },
+  "inputs": {
+    "randori_note": "\u003cdiv class=\"rte\"\u003e\u003cdiv\u003emarking as resolved from SOAR\u003c/div\u003e\u003c/div\u003e",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c",
+    "randori_target_status": "Accepted"
+  },
+  "metrics": {
+    "execution_time_ms": 704,
+    "host": "MacBook-Pro.local",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-07 13:14:30",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
 ```
 
 </p>
@@ -536,29 +876,59 @@ else:
 ---
 
 
+## Data Table - Detections
+
+ ![screenshot: dt-detections](./doc/screenshots/dt-detections.png) <!-- ::CHANGE_ME:: -->
+
+#### API Name:
+randori_detections_dt
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Date Added | `randori_dt_date_added` | `datetimepicker` | - |
+| First Seen | `randori_dt_first_seen` | `datetimepicker` | - |
+| Hostname | `randori_dt_hostname` | `text` | - |
+| IP | `randori_dt_ip` | `text` | - |
+| Last Seen | `randori_dt_last_seen` | `datetimepicker` | - |
+| Path | `randori_dt_path` | `text` | - |
+| Port | `randori_dt_port` | `text` | - |
+
+---
+
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| Randori Target Authority | `randori_target_authority` | `bool` | `properties` | - | - |
-| Randori Target Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
-| Randori Target ID | `randori_target_id` | `text` | `properties` | - | - |
-| Randori Target Impact Score | `randori_target_impact_score` | `text` | `properties` | - | - |
-| Randori Target Link | `randori_target_link` | `textarea` | `properties` | - | - |
-| Randori Target Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
-| Randori Target Status | `randori_target_status` | `text` | `properties` | - | - |
-| Randori Target Tags | `randori_target_tags` | `text` | `properties` | - | - |
-| Randori Target Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
-| Randori Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
+| Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
+| Authority | `randori_target_authority` | `boolean` | `properties` | - | - |
+| Target ID | `randori_target_id` | `text` | `properties` | - | - |
+| Impact Score | `randori_target_impact_score` | `select` | `properties` | - | - |
+| Link to Target | `randori_target_link` | `textarea` | `properties` | - | - |
+| Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
+| Target Status | `randori_target_status` | `select` | `properties` | - | - |
+| User Tags | `randori_target_tags` | `text` | `properties` | - | - |
+| Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
+| Target Temptation | `randori_target_temptation` | `number` | `properties` | - | - |
 
 ---
+
 
 
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Randori: Add Artifacts of Detections | Automatic playbook to add artifacts of a detection as artifacts in SOAR.. | incident | `enabled` |
-| Randori: Add Detections to Detections Data Table | Automatic playbook to add detections to Detections data tables | incident | `enabled` |
-| Randori: Update Target Data in SOAR | Update the Randori Target custom fields in SOAR. | incident | `enabled` |
+| Randori: Automatic Add Artifacts of Detections | Automatic playbook to add artifacts of a detection as artifacts in SOAR. | incident | `enabled` |
+| Randori: Automatic Add Detections to Detections Data Table | Automatic playbook to add detections to Detections data tables. | incident | `enabled` |
+| Randori: Automatic Add Target Notes | Automatic playbook to add Randori notes to the case on case creation. | incident | `enabled` |
+| Randori: Automatic Close Target | Close a target in Randori if the Case is closed in SOAR. | incident | `enabled` |
+| Randori: Create Artifacts from Detection | Add the column values of the Detections data table row as artifacts in SOAR. Types created are File Path, IP Address, Port and DNS Name.  | randori_detections_dt | `enabled` |
+| Randori: Send SOAR Note to Randori Target | Send a SOAR note to the corresponding target as a comment in Randori. Edit the note in SOAR to incident was sent to Randori so the note is not sent more than once. | note | `enabled` |
+| Randori: Update Detections Data Table | Update the Detections data table. Get the detections data from Randori, clear the data table and then update with the data.  | incident | `enabled` |
+| Randori: Automatic Update Target Data in SOAR | Automatic playbook to update the Randori target custom field data in SOAR. | incident | `enabled` |
+| Randori: Update Target Impact Score in Randori | Update the Impact Score of the target in Randori.  If an optional note is specified post that as a comment in the Randori target. | incident | `enabled` |
+| Randori: Update Target in SOAR | Manual Playbook to update the Randori target custom field data in SOAR. | incident | `enabled` |
+| Randori: Update Target Notes | Update notes in SOAR with comments from the corresponding target in Randori. | incident | `enabled` |
+| Randori: Update Target Status in Randori | Update the status of the specified Randori target in Randori.  Add optional note as a comment in Randori. | incident | `enabled` |
 
 ---
 

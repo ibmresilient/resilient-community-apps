@@ -33,15 +33,23 @@ PACKAGE_NAME = "fn_randori"
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "{tenant_name}/targets/{target_id}"
+LINKBACK_URL = "{organization_name}/targets/{target_id}"
 
 # E N D P O I N T S
+GET_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
 GET_SINGLE_TARGET_URI = "/recon/api/{api_version}/target/{target_id}"
 GET_SINGLE_DETECTION_FOR_TARGET_URI = "/recon/api/{api_version}/single-detection-for-target"
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
+PATCH_TARGET_URI = "/recon/api/{api_version}/target"
+POST_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 
 TARGET_LIMIT = 2000
+COMMENT_LIMIT = 100
+
+IBM_SOAR = "IBM SOAR" # common label
+SOAR_HEADER = "Created by {}".format(IBM_SOAR)
+ENTITY_COMMENT_HEADER = "Created by Randori"
 
 class AppCommon():
     def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
@@ -62,7 +70,7 @@ class AppCommon():
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
-        self.tenant_name = app_configs.get("tenant_name")
+        self.organization_name = app_configs.get("organization_name")
         self.verify = _get_verify_ssl(app_configs)
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
@@ -232,10 +240,50 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        return urljoin(self.endpoint_url, linkback_url.format(tenant_name=self.tenant_name, 
+        return urljoin(self.endpoint_url, linkback_url.format(organization_name=self.organization_name, 
                                                               target_id=entity_id))
 
-    def get_target(self, target_id) -> dict:
+
+    def get_target_comments(self, target_id: str) -> list:
+        """
+        Call Randori endpoint to get commments for the specified target.
+        """
+
+        url = self._get_uri(GET_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        params = {'limit': COMMENT_LIMIT}
+        response = self.rc.execute("GET",
+                                   url=url,
+                                   params=params,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        response_json = response.json()
+
+        comment_list = response_json.get('comments', [])
+
+        return comment_list
+
+    def post_target_comment(self, target_id: str, comment_text: str, comment_header: str) -> dict:
+        """
+        Call Randori endpoint to post a commment for the specified target.
+        """
+
+        url = self._get_uri(POST_COMMENT_URI.format(api_version=self.api_version, target_id=target_id))
+        if comment_header:
+            comment_text = "{}:  {}".format(comment_header, comment_text)
+        data = {'comment': comment_text}
+
+        response = self.rc.execute("POST",
+                                   url=url,
+                                   json=data,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        response_json = response.json()
+
+        return response_json
+
+    def get_target(self, target_id: str) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
         """
@@ -247,7 +295,7 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-    def get_detections_for_single_target(self, target_id) -> list:
+    def get_detections_for_single_target(self, target_id: str) -> list:
         """
         Get changed entities
 
@@ -271,6 +319,72 @@ class AppCommon():
 
         return detections
 
+    def update_target_impact_score(self, target_id: str, impact_score: str) -> dict:
+        """ Update the Randori target impact_score field in Randori
+
+        Args:
+            target_id (string_): Randori target id
+            impact_score (string): String indicating the impact_score of the target in Randori.
+        """
+        data = {
+            "data": {"impact_score": impact_score},
+            "q": {
+                  "condition": "OR",
+                  "rules": [
+                            {
+                              "id": "table.id",
+                              "field": "table.id",
+                              "type": "object",
+                              "input": "text",
+                              "operator": "equal",
+                              "value": target_id
+                            }
+                  ]
+                }
+            }
+        data_string = json.dumps(data)
+
+        response = self.rc.execute("PATCH",
+                                   self._get_uri(PATCH_TARGET_URI),
+                                   data=data_string,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
+
+    def update_target_status(self, target_id: str, status: str) -> dict:
+        """ Update the Randori target status field in Randori
+
+        Args:
+            target_id (string_): Randori target id
+            status (string): String indicating the status of the target in Randori.
+        """
+        status_data = {
+            "data": {"status": status},
+            "q": {
+                  "condition": "OR",
+                  "rules": [
+                            {
+                              "id": "table.id",
+                              "field": "table.id",
+                              "type": "object",
+                              "input": "text",
+                              "operator": "equal",
+                              "value": target_id
+                            }
+                  ]
+                }
+            }
+        status_string = json.dumps(status_data)
+
+        response = self.rc.execute("PATCH",
+                                   self._get_uri(PATCH_TARGET_URI),
+                                   data=status_string,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response.raise_for_status()
+        return response.json()
+
     def get_validate(self) -> dict:
         """
         Call Randori endpoint to validate the connection to Randori from SOAR.
@@ -282,7 +396,26 @@ class AppCommon():
         response.raise_for_status()
         return response.json()
 
-def _get_verify_ssl(app_configs):
+    def format_randori_comment(self, comment: dict) -> str:
+        """_summary_
+
+        Args:
+            comment (_type_): Randori comment (json object)
+
+        Returns:
+            _type_: _description_
+        """
+        comment_text = comment.get('comment',"")
+        if comment_text:
+            created_at = comment.get('created_at',"")
+            name = comment.get('name',"")
+            text = f"{comment_text}<br><br>Created at: {created_at}<br>By: {name}"
+            return text
+        else:
+            return None
+
+
+def _get_verify_ssl(app_configs: dict):
     """
     Get ``verify`` parameter from app config.
     Value can be set in the [fn_my_app] section

@@ -116,7 +116,7 @@ class PollerComponent(AppFunctionComponent):
                            "verify",
                            "api_token",
                            "api_version",
-                           "tenant_name"]
+                           "organization_name"]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
@@ -155,7 +155,7 @@ class PollerComponent(AppFunctionComponent):
         self.soar_close_case_template = options.get("soar_close_case_template")
 
         # rest_client is used to make IBM SOAR API calls
-        self.rest_client = get_client(opts)
+        self.rest_client = self.rest_client()
         self.soar_common = SOARCommon(self.rest_client)
         self.app_common = init_app(self.rc, options)
 

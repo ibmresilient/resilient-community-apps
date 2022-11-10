@@ -18,7 +18,7 @@ APP_CONFIG = {
     "api_token": "abcd-efgh",
     "api_version": "v1",
     "endpoint_url": "https://fake.app.randori.io",
-    "tenant_name": "my-randori-tenant",
+    "organization_name": "my-randori-organization",
     "polling_interval": 60,
     "polling_lookback": 120,
     "verify": "false"
