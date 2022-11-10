@@ -25,6 +25,7 @@ inputs.darktrace_model_breach_pbid = row.darktrace_model_breaches_dt_breach_id
 ```python
 if results.success and results.get("content", {}).get("response", "").upper() == "SUCCESS":
   incident.addNote("Successfully acknowledged Darktrace Model Breach {0}".format(row.darktrace_model_breaches_dt_name.get("content")))
+  row.darktrace_model_breaches_dt_acknowledged = "Yes"
 elif results.success and results.get("content", {}).get("response", "").upper() == "ERROR":
   incident.addNote("Darktrace Model Breach {0} is already acknowledged in Darktrace".format(row.darktrace_model_breaches_dt_name.get("content")))
 else:

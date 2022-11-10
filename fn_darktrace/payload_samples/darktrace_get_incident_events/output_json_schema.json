@@ -1,0 +1,828 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "incident_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "summariser": {
+                "type": "string"
+              },
+              "acknowledged": {
+                "type": "boolean"
+              },
+              "pinned": {
+                "type": "boolean"
+              },
+              "createdAt": {
+                "type": "integer"
+              },
+              "attackPhases": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "incidentEventUrl": {
+                "type": "string"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "category": {
+                "type": "string"
+              },
+              "currentGroup": {
+                "type": "string"
+              },
+              "groupCategory": {
+                "type": "string"
+              },
+              "groupScore": {
+                "type": "number"
+              },
+              "groupPreviousGroups": {
+                "type": "array"
+              },
+              "activityId": {
+                "type": "string"
+              },
+              "groupingIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "groupByActivity": {
+                "type": "boolean"
+              },
+              "userTriggered": {
+                "type": "boolean"
+              },
+              "externalTriggered": {
+                "type": "boolean"
+              },
+              "aiaScore": {
+                "type": "number"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "periods": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "integer"
+                    },
+                    "end": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "breachDevices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "identifier": {
+                      "type": "string"
+                    },
+                    "hostname": {
+                      "type": "string"
+                    },
+                    "ip": {
+                      "type": "string"
+                    },
+                    "mac": {},
+                    "subnet": {},
+                    "did": {
+                      "type": "integer"
+                    },
+                    "sid": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "relatedBreaches": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "modelName": {
+                      "type": "string"
+                    },
+                    "pbid": {
+                      "type": "integer"
+                    },
+                    "threatScore": {
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    },
+                    "acknowledged": {
+                      "type": "boolean"
+                    },
+                    "commentCount": {
+                      "type": "integer"
+                    },
+                    "time": {
+                      "type": "integer"
+                    },
+                    "creationTime": {
+                      "type": "integer"
+                    },
+                    "aianalystData": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "uuid": {
+                            "type": "string"
+                          },
+                          "related": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "summariser": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "model": {
+                      "type": "object",
+                      "properties": {
+                        "then": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "pid": {
+                              "type": "integer"
+                            },
+                            "phid": {
+                              "type": "integer"
+                            },
+                            "uuid": {
+                              "type": "string"
+                            },
+                            "logic": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "cid": {
+                                        "type": "integer"
+                                      },
+                                      "weight": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                },
+                                "targetScore": {
+                                  "type": "integer"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "version": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "throttle": {
+                              "type": "integer"
+                            },
+                            "sharedEndpoints": {
+                              "type": "boolean"
+                            },
+                            "actions": {
+                              "type": "object",
+                              "properties": {
+                                "alert": {
+                                  "type": "boolean"
+                                },
+                                "antigena": {
+                                  "type": "object"
+                                },
+                                "breach": {
+                                  "type": "boolean"
+                                },
+                                "model": {
+                                  "type": "boolean"
+                                },
+                                "setPriority": {
+                                  "type": "boolean"
+                                },
+                                "setTag": {
+                                  "type": "boolean"
+                                },
+                                "setType": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "interval": {
+                              "type": "integer"
+                            },
+                            "delay": {
+                              "type": "integer"
+                            },
+                            "sequenced": {
+                              "type": "boolean"
+                            },
+                            "active": {
+                              "type": "boolean"
+                            },
+                            "modified": {
+                              "type": "string"
+                            },
+                            "activeTimes": {
+                              "type": "object",
+                              "properties": {
+                                "devices": {
+                                  "type": "object"
+                                },
+                                "tags": {
+                                  "type": "object"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "version": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "autoUpdatable": {
+                              "type": "boolean"
+                            },
+                            "autoUpdate": {
+                              "type": "boolean"
+                            },
+                            "autoSuppress": {
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "behaviour": {
+                              "type": "string"
+                            },
+                            "created": {
+                              "type": "object",
+                              "properties": {
+                                "by": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "edited": {
+                              "type": "object",
+                              "properties": {
+                                "by": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "version": {
+                              "type": "integer"
+                            },
+                            "priority": {
+                              "type": "integer"
+                            },
+                            "category": {
+                              "type": "string"
+                            },
+                            "compliance": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "now": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "pid": {
+                              "type": "integer"
+                            },
+                            "phid": {
+                              "type": "integer"
+                            },
+                            "uuid": {
+                              "type": "string"
+                            },
+                            "logic": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "cid": {
+                                        "type": "integer"
+                                      },
+                                      "weight": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                },
+                                "targetScore": {
+                                  "type": "integer"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "version": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "throttle": {
+                              "type": "integer"
+                            },
+                            "sharedEndpoints": {
+                              "type": "boolean"
+                            },
+                            "actions": {
+                              "type": "object",
+                              "properties": {
+                                "alert": {
+                                  "type": "boolean"
+                                },
+                                "antigena": {
+                                  "type": "object"
+                                },
+                                "breach": {
+                                  "type": "boolean"
+                                },
+                                "model": {
+                                  "type": "boolean"
+                                },
+                                "setPriority": {
+                                  "type": "boolean"
+                                },
+                                "setTag": {
+                                  "type": "boolean"
+                                },
+                                "setType": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "interval": {
+                              "type": "integer"
+                            },
+                            "delay": {
+                              "type": "integer"
+                            },
+                            "sequenced": {
+                              "type": "boolean"
+                            },
+                            "active": {
+                              "type": "boolean"
+                            },
+                            "modified": {
+                              "type": "string"
+                            },
+                            "activeTimes": {
+                              "type": "object",
+                              "properties": {
+                                "devices": {
+                                  "type": "object"
+                                },
+                                "tags": {
+                                  "type": "object"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "version": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "autoUpdatable": {
+                              "type": "boolean"
+                            },
+                            "autoUpdate": {
+                              "type": "boolean"
+                            },
+                            "autoSuppress": {
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "behaviour": {
+                              "type": "string"
+                            },
+                            "created": {
+                              "type": "object",
+                              "properties": {
+                                "by": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "edited": {
+                              "type": "object",
+                              "properties": {
+                                "by": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "version": {
+                              "type": "integer"
+                            },
+                            "priority": {
+                              "type": "integer"
+                            },
+                            "category": {
+                              "type": "string"
+                            },
+                            "compliance": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "triggeredComponents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "time": {
+                            "type": "integer"
+                          },
+                          "cbid": {
+                            "type": "integer"
+                          },
+                          "cid": {
+                            "type": "integer"
+                          },
+                          "chid": {
+                            "type": "integer"
+                          },
+                          "size": {
+                            "type": "integer"
+                          },
+                          "threshold": {
+                            "type": "integer"
+                          },
+                          "interval": {
+                            "type": "integer"
+                          },
+                          "logic": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "object",
+                                "properties": {
+                                  "left": {
+                                    "type": "object",
+                                    "properties": {
+                                      "left": {
+                                        "type": "string"
+                                      },
+                                      "operator": {
+                                        "type": "string"
+                                      },
+                                      "right": {
+                                        "type": "object",
+                                        "properties": {
+                                          "left": {
+                                            "type": "string"
+                                          },
+                                          "operator": {
+                                            "type": "string"
+                                          },
+                                          "right": {
+                                            "type": "object",
+                                            "properties": {
+                                              "left": {
+                                                "type": "string"
+                                              },
+                                              "operator": {
+                                                "type": "string"
+                                              },
+                                              "right": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "operator": {
+                                    "type": "string"
+                                  },
+                                  "right": {
+                                    "type": "object",
+                                    "properties": {
+                                      "left": {
+                                        "type": "string"
+                                      },
+                                      "operator": {
+                                        "type": "string"
+                                      },
+                                      "right": {
+                                        "type": "object",
+                                        "properties": {
+                                          "left": {
+                                            "type": "string"
+                                          },
+                                          "operator": {
+                                            "type": "string"
+                                          },
+                                          "right": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "version": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "metric": {
+                            "type": "object",
+                            "properties": {
+                              "mlid": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "triggeredFilters": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "cfid": {
+                                  "type": "integer"
+                                },
+                                "id": {
+                                  "type": "string"
+                                },
+                                "filterType": {
+                                  "type": "string"
+                                },
+                                "arguments": {
+                                  "type": "object",
+                                  "properties": {
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "comparatorType": {
+                                  "type": "string"
+                                },
+                                "trigger": {
+                                  "type": "object",
+                                  "properties": {
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "score": {
+                      "type": "number"
+                    },
+                    "device": {
+                      "type": "object",
+                      "properties": {
+                        "did": {
+                          "type": "integer"
+                        },
+                        "ip": {
+                          "type": "string"
+                        },
+                        "ips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ip": {
+                                "type": "string"
+                              },
+                              "timems": {
+                                "type": "integer"
+                              },
+                              "time": {
+                                "type": "string"
+                              },
+                              "sid": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "sid": {
+                          "type": "integer"
+                        },
+                        "hostname": {
+                          "type": "string"
+                        },
+                        "firstSeen": {
+                          "type": "integer"
+                        },
+                        "lastSeen": {
+                          "type": "integer"
+                        },
+                        "typename": {
+                          "type": "string"
+                        },
+                        "typelabel": {
+                          "type": "string"
+                        },
+                        "credentials": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "header": {
+                        "type": "string"
+                      },
+                      "contents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "values": {
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": [
+                                      "integer",
+                                      "string"
+                                    ]
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "identifier": {
+                                        "type": "string"
+                                      },
+                                      "hostname": {
+                                        "type": "string"
+                                      },
+                                      "ip": {
+                                        "type": "string"
+                                      },
+                                      "mac": {},
+                                      "subnet": {},
+                                      "did": {
+                                        "type": "integer"
+                                      },
+                                      "sid": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "base_model_breach_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "darktrace_incident_group_id": {
+          "type": "string"
+        },
+        "darktrace_include_model_breach_data": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

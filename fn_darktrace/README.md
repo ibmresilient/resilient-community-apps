@@ -28,7 +28,7 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
+  - [Darktrace Development Version](#darktrace-development-version)
     - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Install](#install)
@@ -38,13 +38,21 @@
 - [Function - Darktrace: Acknowledge Incident Event](#function---darktrace-acknowledge-incident-event)
 - [Function - Darktrace: Acknowledge Model Breach](#function---darktrace-acknowledge-model-breach)
 - [Function - Darktrace: Add Device Tags](#function---darktrace-add-device-tags)
+- [Function - Darktrace: Clear Data Table](#function---darktrace-clear-data-table)
+- [Function - Darktrace: Get Devices](#function---darktrace-get-devices)
+- [Function - Darktrace: Get Incident Events](#function---darktrace-get-incident-events)
 - [Function - Darktrace: List Similar Devices](#function---darktrace-list-similar-devices)
 - [Function - Darktrace: Unacknowledge Incident Event](#function---darktrace-unacknowledge-incident-event)
+- [Function - Darktrace: Unacknowledge Model Breach](#function---darktrace-unacknowledge-model-breach)
+- [Script - Parse Darktrace Device Details to Artifacts](#script---parse-darktrace-device-details-to-artifacts)
+- [Script - Parse Darktrace Device Details to Data Table](#script---parse-darktrace-device-details-to-data-table)
+- [Script - Parse Darktrace Incident Events Details to Data Table](#script---parse-darktrace-incident-events-details-to-data-table)
+- [Script - Parse Darktrace Model Breaches Details to Data Table](#script---parse-darktrace-model-breaches-details-to-data-table)
 - [Data Table - Associated Devices](#data-table---associated-devices)
 - [Data Table - Incident Events](#data-table---incident-events)
 - [Data Table - Model Breaches](#data-table---model-breaches)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
+- [Playbooks](#playbooks)
 - [For Support](#for-support)
 
 ---
@@ -89,11 +97,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `44.0.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `44.0.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=47.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -106,20 +114,20 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Layouts | Read & Edit |
 
 The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= `1.9.1`.
-* Cloud Pak is configured with an Edge Host.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
-* _Edge Gateway Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
@@ -132,7 +140,7 @@ Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * `resilient-circuits>=47.0.0`
 
-### Endpoint Developed With
+### Darktrace Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API Version |
@@ -197,8 +205,8 @@ Below are the default templates used which can be copied, modified, and used wit
     "DEFAULT": "Low"
   }'''
   %}
-  "name": "Darktrace Incident - {{ enhancedIncidentEvents[0]['title'] }}",
-  "description": "{{ enhancedIncidentEvents[0]['summary'] }}",
+  "name": "Darktrace AI Analyst Incident - {{ incidentEvents|map(attribute='title')|join(', ') }}",
+  "description": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident Event Group</a> created from Darktrace",
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start }},
   "start_date": {{ start }},
@@ -211,8 +219,8 @@ Below are the default templates used which can be copied, modified, and used wit
     "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
     "darktrace_incident_last_modified": {{ end }},
     "darktrace_incident_group_start_time": {{ start }},
-    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices involved)",
-    "darktrace_initiating_device_ids": "{{ initialDevices }}",
+    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
+    "darktrace_initiating_device_ids": "{{ initialDevices|join(', ') }}",
     "darktrace_group_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category|camel }}</span>",
     "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
     "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
@@ -225,71 +233,6 @@ Below are the default templates used which can be copied, modified, and used wit
         "content": "<b>Created by Darktrace</b>"
       }
     }
-  ],
-  {# add artifacts as necessary #}
-  "artifacts": [
-    {% for device in enhancedDevices %}
-        {% set artifactFound = False %}
-      {% set device_description = "Darktrace Device (Type: " + device["typelabel"] + ") (ID: " + device["id"]|string() + ")" %}
-      {% if 'ip' in device %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "IP Address"
-          },
-          "value": "{{ device['ip'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'macaddress' in device %}
-        {% if artifactFound %},{% endif %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "MAC Address"
-          },
-          "value": "{{ device['macaddress'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'hostname' in device %}
-        {% if artifactFound %},{% endif %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "System Name"
-          },
-          "value": "{{ device['hostname'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'credentials' in device %}
-        {% if artifactFound %},{% endif %}
-          {% for cred in device['credentials'] %}
-            {
-                "type": {
-                  "name": "User Account"
-                },
-                "value": "{{ cred['credential'] }}",
-                "description": {
-                  "format": "html",
-                  "content": "{{ device_description }} (Last Seen {{cred['lastSeen']|iso8601}})"
-                }
-            }
-            {% if not loop.last %},{% endif %}
-          {% endfor %}
-      {% endif %}
-      {% if not loop.last %},{% endif %}
-    {% endfor %}
   ]
 }
 
@@ -303,7 +246,7 @@ Below are the default templates used which can be copied, modified, and used wit
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "properties": {
     "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices involved)",
+    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
     "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
     "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
     "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
@@ -323,7 +266,7 @@ Below are the default templates used which can be copied, modified, and used wit
   "resolution_summary": "Acknowledged in Darktrace",
   "properties": {
     "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices involved)",
+    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
     "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
     "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
     "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
@@ -395,6 +338,8 @@ inputs.darktrace_incident_event_id = row.darktrace_incident_events_dt_event_id
 <p>
 
 ```python
+results = playbook.functions.results.acknowledge_inc_output
+
 if results.success:
   unacknowledged = results.content.get("aianalyst")
   
@@ -404,7 +349,7 @@ if results.success:
 
 else:
   incident.addNote("Failed to acknowledge Incident Event {0}".format(row.darktrace_incident_events_dt_title.get("content")))
-  
+
 ```
 
 </p>
@@ -471,8 +416,11 @@ inputs.darktrace_model_breach_pbid = row.darktrace_model_breaches_dt_breach_id
 <p>
 
 ```python
+results = playbook.functions.results.acknowledge_md_output
+
 if results.success and results.get("content", {}).get("response", "").upper() == "SUCCESS":
   incident.addNote("Successfully acknowledged Darktrace Model Breach {0}".format(row.darktrace_model_breaches_dt_name.get("content")))
+  row.darktrace_model_breaches_dt_acknowledged = "Yes"
 elif results.success and results.get("content", {}).get("response", "").upper() == "ERROR":
   incident.addNote("Darktrace Model Breach {0} is already acknowledged in Darktrace".format(row.darktrace_model_breaches_dt_name.get("content")))
 else:
@@ -546,7 +494,7 @@ results = {
 
 ```python
 inputs.darktrace_device_id = row.darktrace_device_dt_id.get("content")
-inputs.darktrace_device_tags = rule.properties.darktrace_device_tags
+inputs.darktrace_device_tags = playbook.inputs.darktrace_device_tags
 ```
 
 </p>
@@ -556,6 +504,8 @@ inputs.darktrace_device_tags = rule.properties.darktrace_device_tags
 <p>
 
 ```python
+results = playbook.functions.results.add_tags_output
+
 SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{0}</span>"
 
 if results.success:
@@ -575,6 +525,893 @@ if results.success:
   row.darktrace_device_dt_tags = all_tags
 else:
   incident.addNote("Failed to add tags {0} to device {1}. Error: {2}".format(results.inputs.get("darktrace_device_tags"), row.darktrace_device_dt_id, results.reason))
+```
+
+</p>
+</details>
+
+---
+## Function - Darktrace: Clear Data Table
+Clear a given data table so it can be updated
+
+ ![screenshot: fn-darktrace-clear-data-table ](./doc/screenshots/fn-darktrace-clear-data-table.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required |
+| ---- | :--: | :------: |
+| `darktrace_data_table_name` | `text` | Yes |
+| `darktrace_soar_case_id` | `text` | No |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {},
+  "inputs": {
+    "darktrace_data_table_name": "darktrace_associated_devices_dt",
+    "darktrace_soar_case_id": "2119"
+  },
+  "metrics": {
+    "execution_time_ms": 976,
+    "host": "local",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-10 16:46:34",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.darktrace_soar_case_id = str(incident.id)
+inputs.darktrace_data_table_name = "darktrace_associated_devices_dt"
+```
+
+</p>
+</details>
+
+---
+## Function - Darktrace: Get Devices
+Get the details of all the devices of an AI Analyst Incident
+
+ ![screenshot: fn-darktrace-get-devices ](./doc/screenshots/fn-darktrace-get-devices.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `darktrace_incident_group_id` | `text` | Yes | `-` | Group ID of the incident to get devices from |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "base_device_url": "https://euw2-75824-01.cloud.darktrace.com/#device/",
+    "devices": [
+      {
+        "did": 4,
+        "endtime": 1668116335000,
+        "hostname": "dc.windomain.local",
+        "id": 4,
+        "ip": "0.0.0.0",
+        "ips": [
+          {
+            "ip": "0.0.0.0",
+            "sid": 1,
+            "time": "2022-11-10 21:00:00",
+            "timems": 1668114000000
+          }
+        ],
+        "os": "Windows 7, 8 or 10",
+        "sid": 1,
+        "tags": [
+          {
+            "data": {
+              "auto": false,
+              "color": 200,
+              "description": "",
+              "visibility": ""
+            },
+            "expiry": 0,
+            "isReferenced": true,
+            "name": "Admin",
+            "restricted": false,
+            "thid": 16,
+            "tid": 16
+          },
+          {
+            "data": {
+              "auto": false,
+              "color": 112,
+              "description": "Devices receiving and making DNS queries",
+              "visibility": "Public"
+            },
+            "expiry": 0,
+            "isReferenced": true,
+            "name": "DNS Server",
+            "restricted": false,
+            "thid": 22,
+            "tid": 22
+          },
+          {
+            "data": {
+              "auto": false,
+              "color": 168,
+              "description": "",
+              "visibility": "Public"
+            },
+            "expiry": 0,
+            "isReferenced": true,
+            "name": "Microsoft Windows",
+            "restricted": false,
+            "thid": 29,
+            "tid": 29
+          },
+          {
+            "data": {
+              "auto": false,
+              "color": 0,
+              "description": "",
+              "visibility": "Public"
+            },
+            "expiry": 0,
+            "isReferenced": false,
+            "name": "Test",
+            "restricted": false,
+            "thid": 113,
+            "tid": 113
+          }
+        ],
+        "time": 1646057145000,
+        "typelabel": "DNS Server",
+        "typename": "dnsserver"
+      }
+    ]
+  },
+  "inputs": {
+    "darktrace_incident_group_id": "g53091596-76ed-48e3-90d1-7f93ed7954ef"
+  },
+  "metrics": {
+    "execution_time_ms": 239,
+    "host": "local",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-10 16:46:31",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Script to Fill Data Table:</summary>
+<p>
+
+```python
+DEVICE_DT_NAME = "darktrace_associated_devices_dt"
+URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{0}</span>"
+
+devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
+base_device_url = playbook.functions.results.devices_output.get("content", {}).get("base_device_url")
+
+for device in devices:
+  device_id = str(device.get("id"))
+  label = device.get("devicelabel")
+  device_type = device.get("typelabel")
+  tags = device.get("tags")
+  ip = device.get("ip")
+  hostname = device.get("hostname")
+  mac_address = device.get("macaddress")
+  os = device.get("os")
+  credentials = device.get("credentials")
+  first_seen = device.get("time")
+  last_seen = device.get("endtime")
+
+
+  device_url = None
+  if device_id:
+      device_url = base_device_url + device_id
+      device_url = URL_FORMATTER.format(device_url, device_id)
+  credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
+  tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
+  
+  row = incident.addRow(DEVICE_DT_NAME)
+  
+  row.darktrace_device_dt_id = device_url
+  row.darktrace_device_dt_label = label
+  row.darktrace_device_dt_type = device_type
+  row.darktrace_device_dt_tags = tags
+  row.darktrace_device_dt_ip = ip
+  row.darktrace_device_dt_hostname = hostname
+  row.darktrace_device_dt_mac_address = mac_address
+  row.darktrace_device_dt_os = os
+  row.darktrace_device_dt_credentials = credentials
+  row.darktrace_device_dt_first_seen = first_seen
+  row.darktrace_device_dt_last_seen = last_seen
+```
+
+</p>
+</details>
+
+<details><summary>Example Script to Parse Artifacts:</summary>
+<p>
+
+```python
+devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
+
+if playbook.functions.results.devices_output.get("success"):
+  for device in devices:
+    device_description = f"Darktrace Device (Type: {device.get('typelabel')}) (ID: {device.get('id')})"
+    
+    if device.get("ip"):
+      incident.addArtifact("IP Address", device.get("ip"), device_description)
+    if device.get("macaddress"):
+      incident.addArtifact("MAC Address", device.get("macaddress"), device_description)
+    if device.get("hostname"):
+      incident.addArtifact("System Name", device.get("hostname"), device_description)
+    for credential in device.get("credentials", []):
+      incident.addArtifact("User Account", credential.get("credential"), device_description)
+else:
+  incident.addNote("Failed to automatically populate artifacts for this case.")
+```
+
+</p>
+</details>
+
+---
+## Function - Darktrace: Get Incident Events
+Get the details of all the incident events of an AI Analyst Incident Group
+
+ ![screenshot: fn-darktrace-get-incident-events ](./doc/screenshots/fn-darktrace-get-incident-events.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `darktrace_incident_group_id` | `text` | Yes | `-` | Group ID to get incident events from |
+| `darktrace_include_model_breach_data` | `boolean` | No | `-` | If `True`, detailed Model breach data will be returned. Defaults to `False` |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "base_model_breach_url": "https://my.darktrace.com/#modelbreach/",
+    "incident_events": [
+      {
+        "acknowledged": false,
+        "activityId": "da39a3ee",
+        "aiaScore": 52.0,
+        "attackPhases": [
+          5
+        ],
+        "breachDevices": [
+          {
+            "did": 9,
+            "hostname": "win10.windomain.local",
+            "identifier": "win10.windomain.local",
+            "ip": "0.0.0.0",
+            "mac": null,
+            "sid": 1,
+            "subnet": null
+          }
+        ],
+        "category": "suspicious",
+        "children": [
+          "da042c57-3e45-4e65-aca5-63dbcdf8df0c"
+        ],
+        "createdAt": 1663207439360,
+        "currentGroup": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "details": [
+          [
+            {
+              "contents": [
+                {
+                  "key": "Source device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "did": 9,
+                      "hostname": "win10.windomain.local",
+                      "identifier": "win10.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "sid": 1,
+                      "subnet": null
+                    }
+                  ]
+                },
+                {
+                  "key": "Username observed prior to activity",
+                  "type": "string",
+                  "values": [
+                    "vagrant"
+                  ]
+                },
+                {
+                  "key": "Source of username",
+                  "type": "string",
+                  "values": [
+                    "NTLM login"
+                  ]
+                },
+                {
+                  "key": "Time observed",
+                  "type": "timestamp",
+                  "values": [
+                    1663207315000
+                  ]
+                },
+                {
+                  "key": "Event UID",
+                  "type": "string",
+                  "values": [
+                    "CxC9C21vzm9i5FmHse01"
+                  ]
+                }
+              ],
+              "header": "Breaching device"
+            }
+          ],
+          [
+            {
+              "contents": [
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "11.txt.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "did": 4,
+                      "hostname": "dc.windomain.local",
+                      "identifier": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "sid": 1,
+                      "subnet": null
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207328000
+                  ]
+                },
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "11.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "did": 4,
+                      "hostname": "dc.windomain.local",
+                      "identifier": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "sid": 1,
+                      "subnet": null
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207328000
+                  ]
+                },
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "27.txt.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "did": 4,
+                      "hostname": "dc.windomain.local",
+                      "identifier": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "sid": 1,
+                      "subnet": null
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207329000
+                  ]
+                }
+              ],
+              "header": "Files Written"
+            }
+          ]
+        ],
+        "externalTriggered": false,
+        "groupByActivity": false,
+        "groupCategory": "suspicious",
+        "groupPreviousGroups": [],
+        "groupScore": 0.9796746496148376,
+        "groupingIds": [
+          "0ade7c2c"
+        ],
+        "id": "da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "incidentEventUrl": "https://my.darktrace.com/#aiaincidentevent/da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "periods": [
+          {
+            "end": 1663207329000,
+            "start": 1663207328000
+          }
+        ],
+        "pinned": true,
+        "relatedBreaches": [
+          {
+            "acknowledged": false,
+            "aianalystData": [
+              {
+                "related": [
+                  182
+                ],
+                "summariser": "SmbWriteSummary",
+                "uuid": "da042c57-3e45-4e65-aca5-63dbcdf8df0c"
+              }
+            ],
+            "commentCount": 0,
+            "creationTime": 1663207327000,
+            "device": {
+              "credentials": [
+                "vagrant"
+              ],
+              "did": 9,
+              "firstSeen": 1646081506000,
+              "hostname": "win10.windomain.local",
+              "ip": "0.0.0.0",
+              "ips": [
+                {
+                  "ip": "0.0.0.0",
+                  "sid": 1,
+                  "time": "2022-11-10 21:00:00",
+                  "timems": 1668114000000
+                }
+              ],
+              "lastSeen": 1668115594000,
+              "sid": 1,
+              "typelabel": "Desktop",
+              "typename": "desktop"
+            },
+            "model": {
+              "now": {
+                "actions": {
+                  "alert": true,
+                  "antigena": {},
+                  "breach": true,
+                  "model": true,
+                  "setPriority": false,
+                  "setTag": false,
+                  "setType": false
+                },
+                "active": true,
+                "activeTimes": {
+                  "devices": {},
+                  "tags": {},
+                  "type": "exclusions",
+                  "version": 2
+                },
+                "autoSuppress": true,
+                "autoUpdatable": true,
+                "autoUpdate": true,
+                "behaviour": "decreasing",
+                "category": "Suspicious",
+                "compliance": false,
+                "created": {
+                  "by": "System"
+                },
+                "delay": 0,
+                "description": "A device is writing suspicious terms to network file shares that may indicate a threat. This is particularly relevant for ransomware infections that overwrite internal data.\\n\\nAction: Investigate the file writes that are occurring to see if they are overwriting important internal data.",
+                "edited": {
+                  "by": "System"
+                },
+                "interval": 300,
+                "logic": {
+                  "data": [
+                    {
+                      "cid": 8330,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8328,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8329,
+                      "weight": 1
+                    }
+                  ],
+                  "targetScore": 1,
+                  "type": "weightedComponentList",
+                  "version": 1
+                },
+                "message": "Added new regex filter to the last component",
+                "modified": "2022-09-22 11:48:13",
+                "name": "Compromise::Ransomware::Ransom or Offensive Words Written to SMB",
+                "phid": 3000,
+                "pid": 629,
+                "priority": 4,
+                "sequenced": false,
+                "sharedEndpoints": true,
+                "tags": [
+                  "AP: Exploit"
+                ],
+                "throttle": 3600,
+                "uuid": "80010119-6d7f-0000-0305-5e0000000325",
+                "version": 100
+              },
+              "then": {
+                "actions": {
+                  "alert": true,
+                  "antigena": {},
+                  "breach": true,
+                  "model": true,
+                  "setPriority": false,
+                  "setTag": false,
+                  "setType": false
+                },
+                "active": true,
+                "activeTimes": {
+                  "devices": {},
+                  "tags": {},
+                  "type": "exclusions",
+                  "version": 2
+                },
+                "autoSuppress": true,
+                "autoUpdatable": true,
+                "autoUpdate": true,
+                "behaviour": "decreasing",
+                "category": "Suspicious",
+                "compliance": false,
+                "created": {
+                  "by": "System"
+                },
+                "delay": 0,
+                "description": "A device is writing suspicious terms to network file shares that may indicate a threat. This is particularly relevant for ransomware infections that overwrite internal data.\\n\\nAction: Investigate the file writes that are occurring to see if they are overwriting important internal data.",
+                "edited": {
+                  "by": "System"
+                },
+                "interval": 300,
+                "logic": {
+                  "data": [
+                    {
+                      "cid": 8067,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8065,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8066,
+                      "weight": 1
+                    }
+                  ],
+                  "targetScore": 1,
+                  "type": "weightedComponentList",
+                  "version": 1
+                },
+                "modified": "2022-09-05 15:04:11",
+                "name": "Compromise::Ransomware::Ransom or Offensive Words Written to SMB",
+                "phid": 2865,
+                "pid": 629,
+                "priority": 4,
+                "sequenced": false,
+                "sharedEndpoints": true,
+                "tags": [
+                  "AP: Exploit"
+                ],
+                "throttle": 3600,
+                "uuid": "80010119-6d7f-0000-0305-5e0000000325",
+                "version": 99
+              }
+            },
+            "modelName": "Compromise / Ransomware / Ransom or Offensive Words Written to SMB",
+            "pbid": 182,
+            "score": 0.871,
+            "threatScore": 88.0,
+            "time": 1663207316000,
+            "timestamp": 1663207316000,
+            "triggeredComponents": [
+              {
+                "cbid": 186,
+                "chid": 10353,
+                "cid": 8065,
+                "interval": 300,
+                "logic": {
+                  "data": {
+                    "left": {
+                      "left": "A",
+                      "operator": "AND",
+                      "right": {
+                        "left": "C",
+                        "operator": "AND",
+                        "right": {
+                          "left": "E",
+                          "operator": "AND",
+                          "right": "F"
+                        }
+                      }
+                    },
+                    "operator": "OR",
+                    "right": {
+                      "left": "B",
+                      "operator": "AND",
+                      "right": {
+                        "left": "C",
+                        "operator": "AND",
+                        "right": "F"
+                      }
+                    }
+                  },
+                  "version": "v0.1"
+                },
+                "metric": {
+                  "label": "SMB Move Success",
+                  "mlid": 291,
+                  "name": "smbmovesuccess"
+                },
+                "size": 5,
+                "threshold": 4,
+                "time": 1663207315000,
+                "triggeredFilters": [
+                  {
+                    "arguments": {
+                      "value": "someregex"
+                    },
+                    "cfid": 71760,
+                    "comparatorType": "matches regular expression",
+                    "filterType": "Message",
+                    "id": "A",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=\u003cn/a\u003e rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  },
+                  {
+                    "arguments": {
+                      "value": "out"
+                    },
+                    "cfid": 71762,
+                    "comparatorType": "is",
+                    "filterType": "Direction",
+                    "id": "C",
+                    "trigger": {
+                      "value": "out"
+                    }
+                  },
+                  {
+                    "arguments": {
+                      "value": "BackupData.dat.locked"
+                    },
+                    "cfid": 71763,
+                    "comparatorType": "does not contain",
+                    "filterType": "Message",
+                    "id": "E",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=\u003cn/a\u003e rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  },
+                  {
+                    "arguments": {},
+                    "cfid": 71764,
+                    "comparatorType": "is",
+                    "filterType": "Unique message fields",
+                    "id": "F",
+                    "trigger": {
+                      "value": "true"
+                    }
+                  },
+                  {
+                    "arguments": {},
+                    "cfid": 71765,
+                    "comparatorType": "display",
+                    "filterType": "Message",
+                    "id": "d1",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=\u003cn/a\u003e rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "summariser": "SmbWriteSummary",
+        "summary": "The device win10.windomain.local was observed transferring suspicious files over SMB to dc.windomain.local.\n\nThis activity was identified as unusual compared to the source device\u0027s normal SMB activity.\n\nSuch transfers may indicate an attempt to move laterally through the network, by transferring malicious software to victim devices before executing it.\n\nConsequently, if this activity was not expected, the security team may wish to determine the reason for these file transfers.",
+        "title": "SMB Writes of Suspicious Files",
+        "userTriggered": false
+      }
+    ]
+  },
+  "inputs": {
+    "darktrace_incident_group_id": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+    "darktrace_include_model_breach_data": true
+  },
+  "metrics": {
+    "execution_time_ms": 245,
+    "host": "local",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-10 16:41:35",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id
+inputs.darktrace_include_model_breach_data = False
+```
+
+</p>
+</details>
+
+<details><summary>Example Script to Parse Results to Data Table:</summary>
+<p>
+
+```python
+EVENT_DT_NAME = "darktrace_incident_events_dt"
+URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+
+results = playbook.functions.results.incident_events_output
+
+events = results.get("content", {}).get("incident_events")
+
+for event in events:
+  event_url = event.get("incidentEventUrl")
+  event_id = str(event.get("id"))
+  event_acknowledged = event.get("acknowledged")
+  event_create_time = event.get("createdAt")
+  event_title = event.get("title")
+  event_summary = event.get("summary")
+  event_category = event.get("category")
+  event_aia_score = event.get("aiaScore")
+  event_devices = event.get("breachDevices")
+
+  # format fields
+  event_title = URL_FORMATTER.format(event_url, event_title)
+  event_acknowledged = "Yes" if event_acknowledged else "No"
+  event_aia_score = str(event_aia_score)
+  event_devices = ", ".join(str(d.get("did")) for d in event_devices)
+
+  row = incident.addRow(EVENT_DT_NAME)
+
+  row.darktrace_incident_events_dt_title = event_title
+  row.darktrace_incident_events_dt_summary = event_summary
+  row.darktrace_incident_events_dt_acknowledged = event_acknowledged
+  row.darktrace_incident_events_dt_created_at = event_create_time
+  row.darktrace_incident_events_dt_initiating_device_id = event_devices
+  row.darktrace_incident_events_dt_category = event_category
+  row.darktrace_incident_events_dt_ai_analyst_score = event_aia_score
+  row.darktrace_incident_events_dt_event_id = event_id
 ```
 
 </p>
@@ -696,7 +1533,7 @@ results = {
 
 ```python
 inputs.darktrace_device_id = row.darktrace_device_dt_id.get("content")
-inputs.darktrace_device_count = rule.properties.darktrace_device_count
+inputs.darktrace_device_count = playbook.inputs.darktrace_device_count
 ```
 
 </p>
@@ -706,6 +1543,8 @@ inputs.darktrace_device_count = rule.properties.darktrace_device_count
 <p>
 
 ```python
+results = playbook.functions.results.similar_devices_output
+
 URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
 
 if results.success:
@@ -787,6 +1626,8 @@ inputs.darktrace_incident_event_id = row.darktrace_incident_events_dt_event_id
 <p>
 
 ```python
+results = playbook.functions.results.unack_output
+
 if results.success:
   unacknowledged = results.content.get("aianalyst")
   
@@ -802,7 +1643,276 @@ else:
 </details>
 
 ---
+## Function - Darktrace: Unacknowledge Model Breach
+Function to unacknowledge a model breach.
 
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Tooltip |
+| ---- | :--: | :------: | ------- |
+| `darktrace_model_breach_pbid` | `text` | Yes | Model Breach ID (PBID) of breach to acknowledge |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "response": "SUCCESS"
+  },
+  "inputs": {
+    "darktrace_model_breach_pbid": "199"
+  },
+  "metrics": {
+    "execution_time_ms": 113,
+    "host": "local",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-10 16:44:26",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.darktrace_model_breach_pbid = row.darktrace_model_breaches_dt_breach_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.unack_output
+
+if results.success and results.get("content", {}).get("response", "").upper() == "SUCCESS":
+  incident.addNote("Successfully unacknowledged Darktrace Model Breach {0}".format(row.darktrace_model_breaches_dt_name.get("content")))
+  row.darktrace_model_breaches_dt_acknowledged = "No"
+elif results.success and results.get("content", {}).get("response", "").upper() == "ERROR":
+  incident.addNote("Darktrace Model Breach {0} is already unacknowledged in Darktrace".format(row.darktrace_model_breaches_dt_name.get("content")))
+else:
+  incident.addNote("Failed to unacknowledge Darktrace Model Breach {0}".format(row.darktrace_model_breaches_dt_name.get("content")))
+```
+
+</p>
+</details>
+
+---
+
+## Script - Parse Darktrace Device Details to Artifacts
+
+
+**Object:** `incident`
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
+
+if playbook.functions.results.devices_output.get("success"):
+  for device in devices:
+    device_description = f"Darktrace Device (Type: {device.get('typelabel')}) (ID: {device.get('id')})"
+    
+    if device.get("ip"):
+      incident.addArtifact("IP Address", device.get("ip"), device_description)
+    if device.get("macaddress"):
+      incident.addArtifact("MAC Address", device.get("macaddress"), device_description)
+    if device.get("hostname"):
+      incident.addArtifact("System Name", device.get("hostname"), device_description)
+    for credential in device.get("credentials", []):
+      incident.addArtifact("User Account", credential.get("credential"), device_description)
+else:
+  incident.addNote("Failed to automatically populate artifacts for this case.")
+  
+```
+
+</p>
+</details>
+
+---
+## Script - Parse Darktrace Device Details to Data Table
+
+
+**Object:** `incident`
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+DEVICE_DT_NAME = "darktrace_associated_devices_dt"
+URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+SPAN_FORMATTER = "<span class='label' rel='tooltip' title='{0}'>{0}</span>"
+
+devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
+base_device_url = playbook.functions.results.devices_output.get("content", {}).get("base_device_url")
+
+for device in devices:
+  device_id = str(device.get("id"))
+  label = device.get("devicelabel")
+  device_type = device.get("typelabel")
+  tags = device.get("tags")
+  ip = device.get("ip")
+  hostname = device.get("hostname")
+  mac_address = device.get("macaddress")
+  os = device.get("os")
+  credentials = device.get("credentials")
+  first_seen = device.get("time")
+  last_seen = device.get("endtime")
+
+
+  device_url = None
+  if device_id:
+      device_url = base_device_url + device_id
+      device_url = URL_FORMATTER.format(device_url, device_id)
+  credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
+  tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
+  
+  row = incident.addRow(DEVICE_DT_NAME)
+  
+  row.darktrace_device_dt_id = device_url
+  row.darktrace_device_dt_label = label
+  row.darktrace_device_dt_type = device_type
+  row.darktrace_device_dt_tags = tags
+  row.darktrace_device_dt_ip = ip
+  row.darktrace_device_dt_hostname = hostname
+  row.darktrace_device_dt_mac_address = mac_address
+  row.darktrace_device_dt_os = os
+  row.darktrace_device_dt_credentials = credentials
+  row.darktrace_device_dt_first_seen = first_seen
+  row.darktrace_device_dt_last_seen = last_seen
+  
+  
+```
+
+</p>
+</details>
+
+---
+## Script - Parse Darktrace Incident Events Details to Data Table
+
+
+**Object:** `incident`
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+EVENT_DT_NAME = "darktrace_incident_events_dt"
+URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+
+results = playbook.functions.results.incident_events_output
+
+events = results.get("content", {}).get("incident_events")
+
+for event in events:
+  event_url = event.get("incidentEventUrl")
+  event_id = str(event.get("id"))
+  event_acknowledged = event.get("acknowledged")
+  event_create_time = event.get("createdAt")
+  event_title = event.get("title")
+  event_summary = event.get("summary")
+  event_category = event.get("category")
+  event_aia_score = event.get("aiaScore")
+  event_devices = event.get("breachDevices")
+
+  # format fields
+  event_title = URL_FORMATTER.format(event_url, event_title)
+  event_acknowledged = "Yes" if event_acknowledged else "No"
+  event_aia_score = str(event_aia_score)
+  event_devices = ", ".join(str(d.get("did")) for d in event_devices)
+
+  row = incident.addRow(EVENT_DT_NAME)
+
+  row.darktrace_incident_events_dt_title = event_title
+  row.darktrace_incident_events_dt_summary = event_summary
+  row.darktrace_incident_events_dt_acknowledged = event_acknowledged
+  row.darktrace_incident_events_dt_created_at = event_create_time
+  row.darktrace_incident_events_dt_initiating_device_id = event_devices
+  row.darktrace_incident_events_dt_category = event_category
+  row.darktrace_incident_events_dt_ai_analyst_score = event_aia_score
+  row.darktrace_incident_events_dt_event_id = event_id
+
+
+```
+
+</p>
+</details>
+
+---
+## Script - Parse Darktrace Model Breaches Details to Data Table
+
+
+**Object:** `incident`
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+MODEL_BREACHES_DT = "darktrace_model_breaches_dt"
+URL_FORMATTER = "<a target='_blank' href='{0}'>{1}</a>"
+
+results = playbook.functions.results.incident_events_output
+
+events = results.get("content", {}).get("incident_events")
+base_model_breach_url = results.get("content", {}).get("base_model_breach_url")
+
+for event in events:
+  event_url = event.get("incidentEventUrl")
+  event_title = event.get("title")
+  event_title = URL_FORMATTER.format(event_url, event_title)
+
+  # each event should have a list of related model breaches
+  # loop through and add each to the table
+  for breach in event.get("relatedBreaches"):
+      breach_id = str(breach.get("pbid"))
+      breach_acknowledged = breach.get("acknowledged")
+      breach_url = breach.get("breachUrl")
+      if not breach_url and base_model_breach_url:
+          breach_url = base_model_breach_url + breach_id
+      breach_name = breach.get("modelName")
+      breach_score = str(breach.get("threatScore"))
+      breach_create_time = breach.get("timestamp")
+
+      # format items as needed
+      if breach_url:
+          breach_url = URL_FORMATTER.format(breach_url, breach_name)
+      breach_acknowledged = "Yes" if breach_acknowledged else "No"
+          
+      row = incident.addRow(MODEL_BREACHES_DT)
+      
+      row.darktrace_model_breaches_dt_name = breach_url
+      row.darktrace_model_breaches_dt_acknowledged = breach_acknowledged
+      row.darktrace_model_breaches_dt_breach_id = breach_id
+      row.darktrace_model_breaches_dt_threat_score = breach_score
+      row.darktrace_model_breaches_dt_time_occurred = breach_create_time
+      row.darktrace_model_breaches_dt_associated_event = event_title
+      
+      
+```
+
+</p>
+</details>
+
+---
 
 ## Data Table - Associated Devices
 
@@ -851,6 +1961,7 @@ else:
 #### Columns: <!-- omit in toc -->
 | Column Name | API Access Name | Type |
 | ----------- | --------------- | ---- |
+| Acknowledged | `darktrace_model_breaches_dt_acknowledged` | `text` |
 | Associated Event | `darktrace_model_breaches_dt_associated_event` | `textarea` |
 | Breach ID | `darktrace_model_breaches_dt_breach_id` | `text` |
 | Name | `darktrace_model_breaches_dt_name` | `textarea` |
@@ -882,14 +1993,22 @@ group_category = incident.properties.darktrace_group_category
 ---
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Darktrace: Acknowledge Incident Event | darktrace_incident_events_dt | `darktrace_acknowledge_incident_event` |
-| Darktrace: Acknowledge Model Breach | darktrace_model_breaches_dt | `darktrace_acknowledge_model_breach` |
-| Darktrace: Add Tags to Device | darktrace_associated_devices_dt | `darktrace_add_tags_to_device` |
-| Darktrace: List Similar Devices | darktrace_associated_devices_dt | `darktrace_list_similar_devices` |
-| Darktrace: Unacknowledge Incident Event | darktrace_incident_events_dt | `darktrace_unacknowledge_incident_event` |
+
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Darktrace: Acknowledge Incident Event | Sets the given incident event to "acknowledged" in Darktrace | darktrace_incident_events_dt | `enabled` |
+| Darktrace: Acknowledge Model Breach | Sets the given model breach to "acknowledged" in Darktrace | darktrace_model_breaches_dt | `enabled` |
+| Darktrace: Add Tags to Device | Add tag(s) to a device in Darktrace from the "Associated Devices" data table. | darktrace_associated_devices_dt | `enabled` |
+| Darktrace: Automatic Populate Incident Events and Model Breaches Tables | This playbook automatically populates the incident events table after a case is created from Darktrace | incident | `enabled` |
+| Darktrace: List Similar Devices | Find devices in Darktrace that are similar to the device in the "Associated Devices" data table. | darktrace_associated_devices_dt | `enabled` |
+| Darktrace: Automatic Populate Devices Table and Artifacts | Automatic playbook to populate the devices data table and artifacts when a case is created from Darktrace | incident | `enabled` |
+| Darktrace: Unacknowledge Incident Event | Sets the given incident event to "unacknowledged" in Darktrace | darktrace_incident_events_dt | `enabled` |
+| Darktrace: Unacknowledge Model Breach | Sets the given model breach to "unacknowledged" in Darktrace | darktrace_model_breaches_dt | `enabled` |
+| Darktrace: Update All Data Tables | Refreshes all data tables associated with Darktrace | incident | `enabled` |
+| Darktrace: Update Devices Data Table | None | incident | `enabled` |
+| Darktrace: Update Incident Events Data Table | None | incident | `enabled` |
+| Darktrace: Update Model Breaches Data Table | None | incident | `enabled` |
 
 ---
 

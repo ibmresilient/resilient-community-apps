@@ -26,12 +26,12 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        self.app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
+        app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
 
         validate_fields(["darktrace_incident_event_id"], fn_inputs)
 
         uuid = fn_inputs.darktrace_incident_event_id
-        results = self.app_common.unacknowledge_incident_event(uuid)
+        results = app_common.unacknowledge_incident_event(uuid)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

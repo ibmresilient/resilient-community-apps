@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        self.app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
+        app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
 
         validate_fields(["darktrace_device_id", "darktrace_device_tags"], fn_inputs)
 
@@ -38,7 +38,7 @@ class FunctionComponent(AppFunctionComponent):
 
         for tag in tags:
             self.LOG.debug(f"Adding tag {tag} to device {device_id}")
-            resp = self.app_common.add_tag_to_device(device_id, tag, capture_error=False)
+            resp = app_common.add_tag_to_device(device_id, tag, capture_error=False)
             if resp.get("tags", "").upper() == "DATANOTFOUND ERROR":
                 self.LOG.warning(f"Tag {tag} doesn't exist on the Darktrace server.")
                 error_tags.append(tag)
@@ -48,7 +48,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # query back to the device to get the full list of tags
         self.LOG.debug(f"Querying device for full list of tags")
-        device_info = self.app_common.get_devices(params={"did": device_id, "includetags": "true"}, capture_error=False)
+        device_info = app_common.get_devices(params={"did": device_id, "includetags": "true"}, capture_error=False)
         all_tags = [tag.get("name") for tag in device_info.get("tags", [])]
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

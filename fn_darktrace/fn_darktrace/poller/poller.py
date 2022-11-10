@@ -10,7 +10,7 @@ from fn_darktrace.lib.app_common import (DEVICE_DT_NAME, EVENT_DT_NAME,
                                          MODEL_BREACHES_DT, PACKAGE_NAME,
                                          AppCommon)
 from fn_darktrace.poller.configure_tab import init_incident_groups_tab
-from resilient import SimpleClient, get_client
+from resilient import SimpleClient
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
@@ -154,7 +154,7 @@ class PollerComponent(AppFunctionComponent):
         self.soar_close_case_template = options.get("soar_close_case_template")
 
         # rest_client is used to make IBM SOAR API calls
-        self.rest_client = get_client(opts)
+        self.rest_client = self.rest_client()
         self.soar_common = SOARCommon(self.rest_client)
         self.app_common = init_app(self.rc, options, opts.get("integrations", {}))
 
@@ -204,7 +204,6 @@ class PollerComponent(AppFunctionComponent):
         try:
             cases_insert = cases_closed = cases_updated = 0
             for incident_group in query_results:
-                create_soar_case = close_soar_case = None
 
                 entity_id = get_entity_id(incident_group)
 
@@ -225,7 +224,7 @@ class PollerComponent(AppFunctionComponent):
                     # comments are associated with events, thus, we'll post the comment to the first event
                     # TODO: reimplement this once Darktrace has exposed this endpoint fully for our use
                     # comment_content = f"Synced to SOAR Case {soar_case_id}"
-                    # first_incident_event_id = incident_group.get("enhancedIncidentEvents")[0].get("id")
+                    # first_incident_event_id = incident_group.get("incidentEvents")[0].get("uuid")
                     # self.app_common.add_incident_group_comment(first_incident_event_id, comment_content, capture_error=True)
 
                     cases_insert += 1
@@ -240,7 +239,7 @@ class PollerComponent(AppFunctionComponent):
                                 self.soar_close_case_template,
                                 CLOSE_INCIDENT_TEMPLATE,
                                 incident_group)
-                            close_soar_case = self.soar_common.update_soar_case(soar_case_id, soar_close_payload)
+                            _close_soar_case = self.soar_common.update_soar_case(soar_case_id, soar_close_payload)
 
                             cases_closed += 1
                             LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
@@ -254,38 +253,6 @@ class PollerComponent(AppFunctionComponent):
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-                    else:
-                        # check to see if any individual incident events were acknowledged without the
-                        # incident group as a whole being acknowledged
-                        event_acknowledged = False
-                        for event in incident_group.get("enhancedIncidentEvents"):
-                            if event.get("acknowledged", False):
-                                # if any 1 event is acknowledged, the whole
-                                # dt will be cleared and updated any way so
-                                # it is ok to break out of the loop here and update the dt
-                                event_acknowledged = True
-                                break
-
-                        # update DT
-                        # NOTE: because of the logic for DT updates below, this will never run
-                        # at the same time that other updates detailed below are running
-                        if event_acknowledged:
-                            clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
-                            fill_events_dt(incident_group, soar_case_id, self.soar_common, EVENT_DT_NAME)
-
-
-                # clear datatables as that's the simplest way to keep things correctly up to date
-                # then fill datatables
-                # NOTE: table updates only need to happen if the case was just created,
-                # closed, or updated. if ``allow_updates`` is False, DTs only need to be cleared
-                # and repopulated if the case was created or closed
-                if allow_updates or (close_soar_case or create_soar_case):
-                    clear_dt(self.rest_client, EVENT_DT_NAME, soar_case_id)
-                    fill_events_dt(incident_group, soar_case_id, self.soar_common, EVENT_DT_NAME)
-                    clear_dt(self.rest_client, DEVICE_DT_NAME, soar_case_id)
-                    fill_devices_dt(incident_group, soar_case_id, self.soar_common, DEVICE_DT_NAME)
-                    clear_dt(self.rest_client, MODEL_BREACHES_DT, soar_case_id)
-                    fill_model_breaches_dt(incident_group, soar_case_id, self.soar_common, MODEL_BREACHES_DT)
 
             if cases_insert or cases_closed or cases_updated:
                 LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
@@ -333,7 +300,7 @@ class PollerComponent(AppFunctionComponent):
         # for efficiency (only one API call), get a list of all the group_ids and join
         # them together in a comma-separated string to use in the get_incident_groups API call
         group_ids = ",".join([case.get("properties", {}).get(SOAR_ENTITY_ID_FIELD) for case in cases])
-        incident_groups = self.app_common.query_groups(query={"groupid": group_ids}, enhance=True)
+        incident_groups = self.app_common.get_incident_groups({"groupid": group_ids})
 
         # if no incident groups were found, exit gracefully
         if not incident_groups:
@@ -344,146 +311,3 @@ class PollerComponent(AppFunctionComponent):
         # but don't make any updates to the case as that is handled elsewhere
         # and would be too frequent (thus the `allow_updates=False`)
         self.process_query_list(incident_groups, allow_updates=False)
-
-
-
-def fill_events_dt(entity, soar_case_id, soar_common, dt_name):
-    """
-    Helper method to add all incident events as rows to a datatable
-    """
-    LOG.debug("Adding events to datatable %s in incident %s", dt_name, soar_case_id)
-
-    events = entity.get("enhancedIncidentEvents")
-
-    for event in events:
-        event_url = event.get("incidentEventUrl")
-        event_id = str(event.get("id"))
-        event_acknowledged = event.get("acknowledged")
-        event_create_time = event.get("createdAt")
-        event_title = event.get("title")
-        event_summary = event.get("summary")
-        event_category = event.get("category")
-        event_aia_score = event.get("aiaScore")
-        event_devices = event.get("breachDevices")
-
-        # format fields
-        event_title = URL_FORMATTER.format(event_url, event_title)
-        event_acknowledged = "Yes" if event_acknowledged else "No"
-        event_aia_score = str(event_aia_score)
-        event_devices = ", ".join(str(d.get("did")) for d in event_devices)
-
-        row_data = {
-            "darktrace_incident_events_dt_title": event_title,
-            "darktrace_incident_events_dt_summary": event_summary,
-            "darktrace_incident_events_dt_acknowledged": event_acknowledged,
-            "darktrace_incident_events_dt_created_at": event_create_time,
-            "darktrace_incident_events_dt_initiating_device_id": event_devices,
-            "darktrace_incident_events_dt_category": event_category,
-            "darktrace_incident_events_dt_ai_analyst_score": event_aia_score,
-            "darktrace_incident_events_dt_event_id": event_id
-        }
-
-        soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
-
-def fill_model_breaches_dt(entity, soar_case_id, soar_common: SOARCommon, dt_name):
-    """
-    Helper method to add all model breaches as rows to a datatable
-    """
-    LOG.debug("Adding model breaches to datatable %s in incident %s", dt_name, soar_case_id)
-
-    events = entity.get("enhancedIncidentEvents")
-    base_model_breach_url = entity.get("baseUrl") + "/#modelbreach/"
-
-    for event in events:
-        event_url = event.get("incidentEventUrl")
-        event_title = event.get("title")
-        event_title = URL_FORMATTER.format(event_url, event_title)
-
-        # each event should have a list of related model breaches
-        # loop through and add each to the table
-        for breach in event.get("relatedBreaches"):
-            breach_id = str(breach.get("pbid"))
-            breach_url = breach.get("breachUrl")
-            if not breach_url and base_model_breach_url:
-                breach_url = base_model_breach_url + breach_id
-            breach_name = breach.get("modelName")
-            breach_score = str(breach.get("threatScore"))
-            breach_create_time = breach.get("timestamp")
-
-            # format items as needed
-            if breach_url:
-                breach_url = URL_FORMATTER.format(breach_url, breach_name)
-
-            row_data = {
-                "darktrace_model_breaches_dt_name": breach_url,
-                "darktrace_model_breaches_dt_breach_id": breach_id,
-                "darktrace_model_breaches_dt_threat_score": breach_score,
-                "darktrace_model_breaches_dt_time_occurred": breach_create_time,
-                "darktrace_model_breaches_dt_associated_event": event_title
-            }
-
-            soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
-
-def fill_devices_dt(entity, soar_case_id, soar_common: SOARCommon, dt_name):
-    """
-    Helper method to add all devices as rows to a datatable
-    """
-    LOG.debug("Adding devices to datatable %s in incident %s", dt_name, soar_case_id)
-
-    devices = entity.get("enhancedDevices")
-
-    base_device_url = entity.get("baseUrl") + "/#device/"
-
-    for device in devices:
-        device_id = str(device.get("id"))
-        label = device.get("devicelabel")
-        device_type = device.get("typelabel")
-        tags = device.get("tags")
-        ip = device.get("ip")
-        hostname = device.get("hostname")
-        mac_address = device.get("macaddress")
-        os = device.get("os")
-        credentials = device.get("credentials")
-        first_seen = device.get("time")
-        last_seen = device.get("endtime")
-
-
-        device_url = None
-        if device_id:
-            device_url = base_device_url + device_id
-            device_url = URL_FORMATTER.format(device_url, device_id)
-        credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
-        tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
-
-        row_data = {
-            "darktrace_device_dt_id": device_url,
-            "darktrace_device_dt_label": label,
-            "darktrace_device_dt_type": device_type,
-            "darktrace_device_dt_tags": tags,
-            "darktrace_device_dt_ip": ip,
-            "darktrace_device_dt_hostname": hostname,
-            "darktrace_device_dt_mac_address": mac_address,
-            "darktrace_device_dt_os": os,
-            "darktrace_device_dt_credentials": credentials,
-            "darktrace_device_dt_first_seen": first_seen,
-            "darktrace_device_dt_last_seen": last_seen
-        }
-
-        soar_common.create_datatable_row(soar_case_id, dt_name, row_data)
-
-def clear_dt(rest_client: SimpleClient, table_name, incident_id):
-    """
-    Clear data in given table on SOAR
-    
-    :param res_rest_client: SOAR rest client connection
-    :param table_name: API access name of the table to clear
-    :param incident_id: SOAR ID for the incident
-    :return: None
-    """
-    try:
-        rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
-        LOG.debug(f"Data in table {table_name} in incident {incident_id} has been cleared")
-
-    except Exception as err_msg:
-        LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")
-        raise IntegrationError(f"Error while clearing table: {table_name}")

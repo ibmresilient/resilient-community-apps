@@ -64,12 +64,9 @@ def test_query_entities_since_ts(mock_api: requests_mock.Mocker, app_common: App
 
     assert resp
     assert len(resp) == 1
-    assert "enhancedIncidentEvents" in resp[0]
-    assert "baseUrl" in resp[0]
-    assert resp[0]["baseUrl"][-1] != "/" # the method we're testing removes any trailing slashes
-    assert "enhancedDevices" in resp[0]
+    assert "incidentEvents" in resp[0]
+    assert "devices" in resp[0]
     assert mock_api.called
-    assert mock_api.call_count >= 4
 
 def test_query_entities_since_ts_no_candidate_events(mock_api: requests_mock.Mocker, app_common: AppCommon):
     # overwrite the default mocked behavior
