@@ -32,7 +32,7 @@ setup(
     long_description="""Bidirectional app for Randori for IBM SOAR. Query Randori for targets based \
          on user-defined query parameters and create and update cases in SOAR.""",
     install_requires=[
-        "resilient-circuits>=47.0.0"
+        "resilient-circuits>=46.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
