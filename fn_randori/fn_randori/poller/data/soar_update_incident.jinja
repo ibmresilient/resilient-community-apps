@@ -8,6 +8,7 @@
     "severity_code": "High",
   {% endif %}
   "properties": {
+    "randori_target_affiliation_state": "{{ affiliation_state }}",
     "randori_target_authority": {{ authority | lower }},
 
     {% if target_temptation is not none %}

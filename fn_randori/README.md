@@ -132,9 +132,9 @@ Additional package dependencies may exist for each of these packages:
 ### <!-- ::CHANGE_ME:: --> Development Version
 
 This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| Randori| <!-- ::CHANGE_ME:: --> | https://app.randori.io | v1 |
+| Product Name | API URL | API Version |
+| ------------ | --------------- | ------- |
+| Randori | https://app.randori.io | v1 |
 
 #### Prerequisites
 <!--
@@ -202,9 +202,9 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - Randori: Clear Data Table
-Clear the specified Randori data table
+Clear the specified Randori data table.
 
- ![screenshot: fn-randori-clear-data-table ](./doc/screenshots/fn-randori-clear-data-table.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-clear-data-table ](./doc/screenshots/fn-randori-clear-data-table.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -451,6 +451,156 @@ None
 </details>
 
 ---
+## Function - Randori: Get Paths
+Get the paths data for a Randori target.
+
+ ![screenshot: fn-randori-get-paths ](./doc/screenshots/fn-randori-get-paths.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "edges": {
+        "329a6ff4-4e2a-4932-b39c-32c5d847e3c0": {
+          "content": {},
+          "dst": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "id": "329a6ff4-4e2a-4932-b39c-32c5d847e3c0",
+          "src": "f62ab0f7-954c-4205-a39d-5f170f6131b7",
+          "type": "Passive DNS Records"
+        },
+        "4be17e67-cc0f-4e28-b39f-3844edb09b68": {
+          "content": {},
+          "dst": "afd6c37d-1280-48ac-bf2d-46ae4286c54b",
+          "id": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "src": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "type": "Detection-Target connection"
+        },
+        "7d52abd6-f390-4f7b-8312-6367011b1d93": {
+          "content": {},
+          "dst": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "id": "7d52abd6-f390-4f7b-8312-6367011b1d93",
+          "src": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "type": "DNS Record"
+        },
+        "be5f636f-1189-49ee-906c-2a5aff984283": {
+          "content": {},
+          "dst": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "id": "be5f636f-1189-49ee-906c-2a5aff984283",
+          "src": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "type": "Port Scan"
+        }
+      },
+      "nodes": {
+        "4be17e67-cc0f-4e28-b39f-3844edb09b68": {
+          "content": {
+            "hostname": "",
+            "ip_str": "52.90.36.58",
+            "path": "",
+            "port": 23,
+            "protocol": "tcp"
+          },
+          "id": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "type": "detection"
+        },
+        "a5f818c5-68c4-40ec-a574-60bfae787651": {
+          "content": {
+            "ip_str": "52.90.36.58"
+          },
+          "id": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "type": "ip"
+        },
+        "afd6c37d-1280-48ac-bf2d-46ae4286c54b": {
+          "content": {
+            "name": "telnetd",
+            "vendor": "Linux",
+            "version": ""
+          },
+          "id": "afd6c37d-1280-48ac-bf2d-46ae4286c54b",
+          "type": "target"
+        },
+        "b4a3b681-c96b-49ba-a0d5-7a576996e703": {
+          "content": {
+            "hostname": "telnet.webernets.online"
+          },
+          "id": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "type": "hostname"
+        },
+        "f62ab0f7-954c-4205-a39d-5f170f6131b7": {
+          "content": {
+            "hostname": "webernets.online"
+          },
+          "id": "f62ab0f7-954c-4205-a39d-5f170f6131b7",
+          "type": "hostname"
+        }
+      },
+      "paths": [
+        [
+          "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "be5f636f-1189-49ee-906c-2a5aff984283",
+          "7d52abd6-f390-4f7b-8312-6367011b1d93",
+          "329a6ff4-4e2a-4932-b39c-32c5d847e3c0"
+        ]
+      ]
+    },
+    "base_url": "https://app.randori.io/myorg"
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_id": "afd6c37d-1280-48ac-bf2d-46ae4286c54b"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 6479,
+    "timestamp": "2022-11-09 18:42:30"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
 ## Function - Randori: Get Target
 Get the target data for a single Randori target instance.
 
@@ -589,7 +739,7 @@ None
 ## Function - Randori: Send Note as Comment to Target
 Post a SOAR note as a comment in the corresponding Randori target.
 
- ![screenshot: fn-randori-send-note-as-comment-to-target ](./doc/screenshots/fn-randori-send-note-as-comment-to-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-send-note-as-comment-to-target ](./doc/screenshots/fn-randori-send-note-as-comment-to-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -666,7 +816,7 @@ None
 ## Function - Randori: Update Notes from Randori Target
 Query Randori target and add any new notes to the SOAR case.
 
- ![screenshot: fn-randori-update-notes-from-randori-target ](./doc/screenshots/fn-randori-update-notes-from-randori-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-notes-from-randori-target ](./doc/screenshots/fn-randori-update-notes-from-randori-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -735,7 +885,11 @@ None
 ## Function - Randori: Update Target Impact Score
 Update the specified target in Randori with the specified target impact score.
 
- ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/fn-randori-update-target-impact-score.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/fn-randori-update-target-impact-score.png)
+
+The following activation pop-up dialog box prompts the user for input for updating the target impact score in Randori and allows for input of an optional note to be post to Randori as a target comment.
+
+ ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/update-impact-score.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -806,8 +960,12 @@ None
 ## Function - Randori: Update Target Status
 Update the specified target in Randori with the specified target status and /or impact score.
 
- ![screenshot: fn-randori-update-target-status ](./doc/screenshots/fn-randori-update-target-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-target-status ](./doc/screenshots/fn-randori-update-target-status.png)
 
+
+The following activation pop-up dialog box prompts the user for input for updating the target status in Randori and allows for input of an optional note to be post in Randori as a target comment.
+
+  ![screenshot: update-target-status ](./doc/screenshots/update-target-status.png)
 <details><summary>Inputs:</summary>
 <p>
 
@@ -878,7 +1036,15 @@ None
 
 ## Data Table - Detections
 
- ![screenshot: dt-detections](./doc/screenshots/dt-detections.png) <!-- ::CHANGE_ME:: -->
+The Detections data table displays the dections found for a target.  A Detection describes one of possibly many ways an attacker could navigate to a specific Target.
+
+ ![screenshot: dt-detections](./doc/screenshots/dt-detections.png)
+
+ ## Data Table - Discovery Path
+
+ The Discovery Path data table replicates the Discovery Path table found in Randori.  The discovery path shows exact research steps taken by Randori, or an attacker, to find an entity.  The **View Details** link takes you to Randori for more information on that entity.
+
+ ![screenshot: dt-discovery-path](./doc/screenshots/dt-discovery-path.png)
 
 #### API Name:
 randori_detections_dt
