@@ -244,6 +244,14 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(organization_name=self.organization_name, 
                                                               target_id=entity_id))
 
+    def get_randori_base_url(self) -> str:
+        """
+        Create a base URL string for Randori
+
+        :rtype: str
+        """
+        return urljoin(self.endpoint_url, self.organization_name)
+
 
     def get_target_comments(self, target_id: str) -> list:
         """

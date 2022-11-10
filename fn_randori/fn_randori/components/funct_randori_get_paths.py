@@ -30,7 +30,8 @@ class FunctionComponent(AppFunctionComponent):
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
         results = app_common.get_paths(fn_inputs.randori_target_id)
-
+        results["base_url"] = app_common.get_randori_base_url()
+        
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
