@@ -291,16 +291,17 @@ def generate_member_list(resclient, logger, **kwargs):
         else:
             incident_members = resclient.get(parse.urljoin(constants.RES_INCIDENT,
                 constants.MEMBERS_URL.format(incident_id)))
-        if len(incident_members.get("members")) == 0:
+        if not incident_members.get("members") or len(incident_members.get("members")) == 0:
             log.warn(constants.WARN_INCIDENT_NO_MEMBERS)
-        for incident_member in incident_members.get("members"):
-            if is_direct_member(incident_member, org_member_list):
-                email_ids.append(
-                    is_direct_member(incident_member, org_member_list))
-            elif is_group_member(incident_member, org_member_list, org_group_list):
-                email_ids.extend(
-                    is_group_member(
-                        incident_member, org_member_list, org_group_list))
+        else:
+            for incident_member in incident_members.get("members"):
+                if is_direct_member(incident_member, org_member_list):
+                    email_ids.append(
+                        is_direct_member(incident_member, org_member_list))
+                elif is_group_member(incident_member, org_member_list, org_group_list):
+                    email_ids.extend(
+                        is_group_member(
+                            incident_member, org_member_list, org_group_list))
         log.debug(email_ids)
     elif not additional_members:
         log.warn(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
@@ -315,7 +316,7 @@ def generate_member_list(resclient, logger, **kwargs):
     return email_ids
 
 
-def find_group(self, required_parameters, **kwargs):
+def find_group(rc, logger, response_handler, **kwargs):
     """
     Allows for locating a group based on its >>display name<< or >>mail nickname<<
     This function atleast required either the group_name or the group_mail_nickname
@@ -334,20 +335,16 @@ def find_group(self, required_parameters, **kwargs):
     --------
         <dict> : Details of the detected group
     """
-
-    rc = required_parameters.get("rc")
-    log = required_parameters.get("log")
-    headers = required_parameters.get("headers")
-    response_handler = required_parameters.get("response_handler")
+    headers = kwargs.get("headers")
 
     if "group_name" in kwargs:
-        log.info(constants.INFO_FIND_GROUP_BY_NAME)
+        logger.info(constants.INFO_FIND_GROUP_BY_NAME)
         _name = kwargs.get("group_name")
         error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
         _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
 
     if "group_mail_nickname" in kwargs:
-        log.info(constants.INFO_FIND_GROUP_BY_MAIL)
+        logger.info(constants.INFO_FIND_GROUP_BY_MAIL)
         _name = kwargs.get("group_mail_nickname")
         if "@" in _name:
             _name = _name.split("@")[0]
@@ -364,11 +361,11 @@ def find_group(self, required_parameters, **kwargs):
         headers=headers,
         callback=response_handler.check_response)
 
-    log.debug(json.dumps(response, indent=2))
+    logger.debug(json.dumps(response, indent=2))
 
     if len(response.get("value")) > 0 :
-        log.info(constants.INFO_FOUND_GROUP)
+        logger.info(constants.INFO_FOUND_GROUP)
         return response.get("value")
 
-    log.error(error_msg)
+    logger.error(error_msg)
     raise IntegrationError(error_msg)

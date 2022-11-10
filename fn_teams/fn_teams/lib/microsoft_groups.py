@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-'''
- (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-'''
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
 
 from urllib import parse
 from resilient_lib import IntegrationError
 
-from fn_teams.lib import constants
+from fn_teams.lib import constants, microsoft_commons
 from fn_teams.lib.microsoft_commons import ResponseHandler
 
 class GroupsInterface:
@@ -91,60 +89,6 @@ class GroupsInterface:
 
         self.log.debug(json.dumps(response, indent=2))
         return response
-
-
-    def _find_group(self, **kwargs):
-        """
-        Allows for locating a group based on its >>display name<< or >>mail nickname<<
-        This function atleast required either the group_name or the group_mail_nickname
-        keyworkd argument.
-
-        Kwargs:
-        -------
-            group_name          <str> : Display name of the group
-            group_mail_nickname <str> : Mail nickname of the gorup
-
-        Raises:
-        -------
-            IntegrationError: Unbable to locate group
-
-        Returns:
-        --------
-            <dict> : Details of the detected group
-        """
-
-        if "group_name" in kwargs:
-            self.log.info(constants.INFO_FIND_GROUP_BY_NAME)
-            _name = kwargs.get("group_name")
-            error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
-            _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
-
-        if "group_mail_nickname" in kwargs:
-            self.log.info(constants.INFO_FIND_GROUP_BY_MAIL)
-            _name = kwargs.get("group_mail_nickname")
-            if "@" in _name:
-                _name = _name.split("@")[0]
-            error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
-            _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
-
-        url = parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_GROUPS_QUERY.format(_query))
-
-        response = self.rc.execute(
-            method="get",
-            url=url,
-            headers=self.headers,
-            callback=self.response_handler.check_response)
-
-        self.log.debug(json.dumps(response, indent=2))
-
-        if len(response.get("value")) > 0 :
-            self.log.info(constants.INFO_FOUND_GROUP)
-            return response.get("value")
-
-        self.log.error(error_msg)
-        raise IntegrationError(error_msg)
 
 
     def _read_user_info(self, user_id, *args):
@@ -267,104 +211,6 @@ class GroupsInterface:
         self.response_handler.clear_exempt_codes(default=True)
 
 
-    def _is_direct_member(self, incident_member_id, org_member_list):
-        """
-        Checks to see if the member Id accquired from the incident or task belongs to the
-        list of all users from the organization. Upon match, it then extracts the email
-        address for that particular user.
-
-        Args:
-        -----
-            incident_member_id <str>  : The user Id accquired from the incident
-            org_member_list    <list> : The list of member Ids of all organization members
-
-        Returns:
-        --------
-            <str>: Email address of the incident member
-        """
-        for user in org_member_list:
-            if incident_member_id == user.get("id"):
-                return user.get(constants.EMAIL)
-
-
-    def _is_group_member(self, incident_member_id, org_member_list, org_group_list):
-        """
-        Checks to see if the member Id accquired from the incident or task belongs to t
-        he list of all groups from the organization. Upon match, it then queries a list
-        of Ids associated with that group and matches with user using the
-        >>is_direct_member<< function
-
-        Args:
-        -----
-            incident_member_id  <str> : The user Id accquired from the incident
-            org_member_list    <list> : The list of member Ids of all organization members
-            org_group_list     <list> : The list of group Ids of all organization members
-
-        Returns:
-        --------
-            <list>: list of all email addresses of incident members
-
-        """
-        ret = []
-        for group in org_group_list:
-            if incident_member_id == group.get("id"):
-                for member in group.get("members"):
-                    ret.append(self._is_direct_member(member, org_member_list))
-        return ret
-
-
-    def _generate_member_list(self):
-        """
-        Generates a list of email addresses of the members to be added to the Group. The
-        function queries incident member list or task member list, organization group list,
-        and organization user list. Using these, it then compares and accquires the email
-        addresses of all users that are members to the incident or task, if >>add members from<<
-        task or incident is selected. Else just adds the email addresses specified in
-        >>additional members<<
-
-        Returns:
-        --------
-            members_email_ids <list> : a list of all participant email addresses to be added
-
-        """
-        org_member_list  = self.resclient.post(constants.RES_USERS, payload={}).get("data")
-        org_group_list   = self.resclient.get(constants.RES_GROUPS)
-        add_members_from = self.required_parameters.get("add_members_from").lower().strip()
-        add_members_from = None if add_members_from == "none" else add_members_from
-
-        email_ids = []
-        if add_members_from:
-            if add_members_from.strip().lower() == "task":
-                incident_members = self.resclient.get(parse.urljoin(constants.RES_TASK,
-                    constants.MEMBERS_URL.format(self.required_parameters.get("task_id"))))
-            else:
-                incident_members = self.resclient.get(parse.urljoin(constants.RES_INCIDENT,
-                    constants.MEMBERS_URL.format(self.required_parameters.get("incident_id"))))
-            if len(incident_members.get("members")) == 0:
-                self.log.warn(constants.WARN_INCIDENT_NO_MEMBERS)
-            for incident_member in incident_members.get("members"):
-                if self._is_direct_member(incident_member, org_member_list):
-                    email_ids.append(self._is_direct_member(incident_member,
-                                                            org_member_list))
-                elif self._is_group_member(incident_member,
-                                          org_member_list,
-                                          org_group_list):
-                    email_ids.extend(self._is_group_member(incident_member,
-                                                         org_member_list,
-                                                         org_group_list))
-            self.log.debug(email_ids)
-        elif not self.required_parameters.get("additional_members"):
-            self.log.warn(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
-        if self.required_parameters.get("additional_members"):
-            email_ids += (self.required_parameters
-            .get("additional_members")
-            .lower()
-            .replace(" ", "")
-            .split(","))
-        self.members_email_ids = list(set(email_ids))
-        self.log.info(constants.INFO_ADD_MEMEBERS.format(self.members_email_ids))
-
-
     def create_group(self):
         """
         Main wrapper function that orchestrates the creation of a Microsoft Group. This function
@@ -381,7 +227,13 @@ class GroupsInterface:
         --------
             response <dict> : Information of the group created
         """
-        self._generate_member_list()
+        microsoft_commons.generate_member_list(
+            self.resclient,
+            self.log,
+            task_id=self.required_parameters.get("task_id"),
+            incident_id=self.required_parameters.get("incident_id"),
+            add_members_from=self.required_parameters.get("add_members_from"),
+            additional_members=self.required_parameters.get("additional_members"))
         self._find_all_users()
 
         members = list(map(lambda id: parse.urljoin(
@@ -400,7 +252,11 @@ class GroupsInterface:
 
         self._add_members_group(response.get("id"), members)
 
-        groups_info = self._find_group(
+        groups_info = microsoft_commons.find_group(
+            rc = self.rc,
+            logger = self.log,
+            response_handler=self.response_handler,
+            headers = self.headers,
             group_mail_nickname=self.required_parameters["group_mail_nickname"])
 
         return groups_info[0]
@@ -431,10 +287,18 @@ class GroupsInterface:
             <dict>: Message that reads successfully deleted group and status code
         """
         if  self.required_parameters.get("group_mail_nickname"):
-            group_details = self._find_group(
+            group_details = microsoft_commons.find_group(
+                rc=self.rc,
+                logger=self.log,
+                response_handler=self.response_handler,
+                headers=self.headers,
                 group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
         elif self.required_parameters.get("group_name"):
-            group_details = self._find_group(
+            group_details = microsoft_commons.find_group(
+                rc=self.rc,
+                logger=self.log,
+                response_handler=self.response_handler,
+                headers=self.headers,
                 group_name=self.required_parameters.get("group_name"))
         else:
             raise IntegrationError(constants.ERROR_MISSING_NAME_MAIL_NAME)

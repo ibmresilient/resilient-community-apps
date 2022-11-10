@@ -3,21 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "40aaf240-53bb-464b-b0ab-fe3ffddd03d6",
+    "id": "901ee687-****-****-a26d-f27ec24c3a18",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-11-03T13:40:00Z",
+    "createdDateTime": "2022-11-10T11:57:04Z",
     "creationOptions": [],
-    "description": "Incident 2098: MS Teams Task 152 : MS TEAMS TEST TASK None",
-    "displayName": "cloudPack",
+    "description": "Incident 2095: MS Teams Task : Investigate Exposure of Personal Information/Data ",
+    "displayName": "SoarApps",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "cloudPack@****.onmicrosoft.com",
+    "mail": "fromtask5@5rf2xs.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "cloudPack",
+    "mailNickname": "SoarApps",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,34 +29,33 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:cloudPack@****.onmicrosoft.com"
+      "SMTP:fromtask5@5rf2xs.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-11-03T13:40:00Z",
+    "renewedDateTime": "2022-11-10T11:57:04Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-*******-1179341755-1073654704-3590577661",
-
+    "securityIdentifier": "S-1-12-1-2417944199-1130085491-2129816994-406473922",
     "theme": null,
     "visibility": "Public",
     "onPremisesProvisioningErrors": []
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2098,
-    "ms_group_description": "Incident 2098: MS Teams Task 152 : MS TEAMS test",
-    "ms_owners_list": "AdminSoarMS@****.onmicrosoft.com",
-    "ms_group_name": "cloudPack",
-    "ms_group_mail_nickname": "cloudPack",
-    "add_members_from": "Task",
-    "task_id": 152
+    "incident_id": 2095,
+    "ms_group_description": "Incident 2095: MS Teams Task 1 : Investigate Exposure of Personal Information/Data ",
+    "ms_owners_list": "AdminSoarMS@5rf2xs.onmicrosoft.com",
+    "ms_group_name": "SoarApps",
+    "ms_group_mail_nickname": "SoarApps",
+    "add_members_from": "None",
+    "task_id": 1
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
     "host": "AppHost",
-    "execution_time_ms": 5552,
-    "timestamp": "2022-11-03 13:40:01"
+    "execution_time_ms": 5883,
+    "timestamp": "2022-11-10 11:57:05"
   }
 }

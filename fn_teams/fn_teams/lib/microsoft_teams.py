@@ -18,20 +18,18 @@ class TeamsInterface:
         This application allows for creating a Microsoft Team using the Microsoft Graph API. This
         provides SOAR with the ability to create Teams from within a SOAR incident or a task. Teams
         can be created in two different ways:
-
-                - Create Team using an existing MS Group
-                - Create a Team from scratch
+                * Create Team using an existing MS Group
+                * Create a Team from scratch
 
         Inputs:
         -------
             task_id                <str> : If called from task then Task ID
             incident_id            <str> : Incident ID
-            ms_group_name          <str> : Name of the Microsoft Group to be created
+            ms_team_name           <str> : Name of the Microsoft Team to be created
             ms_owners_list         <str> : List of owners email addresses
             add_members_from       <str> : Specifies if members to be added form incident or task
             additional_mambers     <str> : List of email addresses of additional members to be added
-            ms_group_description   <str> : Description for the group to be created
-            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_team_description    <str> : Description for the Team to be created
 
         Returns:
         --------
@@ -138,7 +136,8 @@ class TeamsInterface:
                 constants.URL_TEAMS_STANDARD_TEMPLATE),
             "displayName" : required_parameters.get("displayName"),
             "description" : required_parameters.get("description"),
-            "members"     : owners_email_list}, indent=2)
+            "members"     : owners_email_list}.update(
+                constants.TEAMS_FROM_GROUP_CONFIGURATION), indent=2)
         self.log.debug(body)
 
         self.response_handler.add_empty_response_code(202)
@@ -170,6 +169,12 @@ class TeamsInterface:
 
 
     def create_team_from_group(self, group_id):
+        '''
+        Creates a MS Team from an existing MS Group. Major attributes like the members, description
+        etc, is inherited from the Group. While creating a MS Team, certain configurations are 
+        required and so the Microsoft recommended bare minimum settings is used create a team.
+        These settings are available in the constants folder.
+        '''
         url = parse.urljoin(
             constants.BASE_URL,
             constants.URL_TEAM_FROM_GROUP.format(group_id))

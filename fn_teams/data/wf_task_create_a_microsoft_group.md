@@ -39,12 +39,11 @@ if rule.properties.add_members_task is not None:
 if rule.properties.additional_members.content is not None:
     inputs.additional_members = rule.properties.additional_members.content
     
-if rule.properties.ms_group_description.content is not None:
-    inputs.ms_group_description = rule.properties.ms_group_description.content
+if rule.properties.ms_group_description is not None:
+    inputs.ms_group_description = rule.properties.ms_group_description
 else:
-    inputs.ms_group_description = f"[Incident] {incident.id}: {incident.name} [Task] {task.id} : {task.name} {task.description}"
+    inputs.ms_group_description = f"Incident {incident.id}: {incident.name} Task {task.id} : {task.name} {task.description}"
   
-
 if rule.properties.ms_group_mail_nickname is not None:
     inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
 
