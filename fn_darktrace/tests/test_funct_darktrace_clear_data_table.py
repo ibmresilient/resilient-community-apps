@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import pytest
 import requests_mock
-from requests import HTTPError
+from resilient import SimpleHTTPException
 from resilient_circuits import FunctionResult, SubmitTestFunction
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_lib import IntegrationError
@@ -80,11 +80,17 @@ class TestDarktraceClearDataTable:
             "darktrace_data_table_name": "mock_dt",
             "darktrace_soar_case_id": 1234
         }
+        class FakeResponse:
+            reason = ""
+            text = ""
 
         with patch("fn_darktrace.components.funct_darktrace_clear_data_table.FunctionComponent.rest_client") as mock_delete:
             # can't use requests_mock like above for negative testing
             # because of the default retry parameters -- will timeout before test is complete
-            mock_delete.side_effect = HTTPError("Failed to delete on the server")
+            fake_response = FakeResponse()
+            fake_response.reason = "Failed to delete on server"
+            fake_response.text = "Because this is a test"
+            mock_delete.side_effect = SimpleHTTPException(fake_response)
             with pytest.raises(IntegrationError):
                 call_darktrace_clear_data_table_function(circuits_app, mock_inputs)
 
