@@ -164,7 +164,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **instance_url** | Yes | `https://<instance>.cloud.darktrace.com` | *URL to your instance of Darktrace.* |
+| **darktrace_base_url** | Yes | `https://<instance>.cloud.darktrace.com` | *URL to your instance of Darktrace.* |
 | **api_key** | Yes |  | *API Access Token generated in Darktrace.* |
 | **api_secret** | Yes |  | *Secret associated with above API Token.* |
 | **polling_interval** | Yes | `60` | *Number of **seconds** between polling queries for new findings. Use value 0 to disable automatic case creation from findings.* |
@@ -534,8 +534,6 @@ else:
 ## Function - Darktrace: Clear Data Table
 Clear a given data table so it can be updated
 
- ![screenshot: fn-darktrace-clear-data-table ](./doc/screenshots/fn-darktrace-clear-data-table.png) <!-- ::CHANGE_ME:: -->
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -592,7 +590,6 @@ inputs.darktrace_data_table_name = "darktrace_associated_devices_dt"
 ## Function - Darktrace: Get Devices
 Get the details of all the devices of an AI Analyst Incident
 
- ![screenshot: fn-darktrace-get-devices ](./doc/screenshots/fn-darktrace-get-devices.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -612,7 +609,7 @@ Get the details of all the devices of an AI Analyst Incident
 ```python
 results = {
   "content": {
-    "base_device_url": "https://euw2-75824-01.cloud.darktrace.com/#device/",
+    "base_device_url": "https://my.darktrace.com/#device/",
     "devices": [
       {
         "did": 4,
@@ -737,64 +734,20 @@ devices = playbook.functions.results.devices_output.get("content", {}).get("devi
 base_device_url = playbook.functions.results.devices_output.get("content", {}).get("base_device_url")
 
 for device in devices:
-  device_id = str(device.get("id"))
-  label = device.get("devicelabel")
-  device_type = device.get("typelabel")
-  tags = device.get("tags")
-  ip = device.get("ip")
-  hostname = device.get("hostname")
-  mac_address = device.get("macaddress")
-  os = device.get("os")
-  credentials = device.get("credentials")
-  first_seen = device.get("time")
-  last_seen = device.get("endtime")
-
-
-  device_url = None
-  if device_id:
-      device_url = base_device_url + device_id
-      device_url = URL_FORMATTER.format(device_url, device_id)
-  credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
-  tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
   
   row = incident.addRow(DEVICE_DT_NAME)
   
-  row.darktrace_device_dt_id = device_url
-  row.darktrace_device_dt_label = label
-  row.darktrace_device_dt_type = device_type
-  row.darktrace_device_dt_tags = tags
-  row.darktrace_device_dt_ip = ip
-  row.darktrace_device_dt_hostname = hostname
-  row.darktrace_device_dt_mac_address = mac_address
-  row.darktrace_device_dt_os = os
-  row.darktrace_device_dt_credentials = credentials
-  row.darktrace_device_dt_first_seen = first_seen
-  row.darktrace_device_dt_last_seen = last_seen
-```
-
-</p>
-</details>
-
-<details><summary>Example Script to Parse Artifacts:</summary>
-<p>
-
-```python
-devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
-
-if playbook.functions.results.devices_output.get("success"):
-  for device in devices:
-    device_description = f"Darktrace Device (Type: {device.get('typelabel')}) (ID: {device.get('id')})"
-    
-    if device.get("ip"):
-      incident.addArtifact("IP Address", device.get("ip"), device_description)
-    if device.get("macaddress"):
-      incident.addArtifact("MAC Address", device.get("macaddress"), device_description)
-    if device.get("hostname"):
-      incident.addArtifact("System Name", device.get("hostname"), device_description)
-    for credential in device.get("credentials", []):
-      incident.addArtifact("User Account", credential.get("credential"), device_description)
-else:
-  incident.addNote("Failed to automatically populate artifacts for this case.")
+  row.darktrace_device_dt_id = URL_FORMATTER.format(f"{base_device_url}{str(device.get('id'))}", str(device.get("id"))) if device.get("id") else None
+  row.darktrace_device_dt_label = device.get("devicelabel")
+  row.darktrace_device_dt_type = device.get("typelabel")
+  row.darktrace_device_dt_tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in device.get("tags", [])]) if device.get("tags") else None
+  row.darktrace_device_dt_ip = device.get("ip")
+  row.darktrace_device_dt_hostname = device.get("hostname")
+  row.darktrace_device_dt_mac_address = device.get("macaddress")
+  row.darktrace_device_dt_os = device.get("os")
+  row.darktrace_device_dt_credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in device.get("credentials", [])]) if device.get("credentials") else None
+  row.darktrace_device_dt_first_seen = device.get("time")
+  row.darktrace_device_dt_last_seen = device.get("endtime")
 ```
 
 </p>
@@ -803,8 +756,6 @@ else:
 ---
 ## Function - Darktrace: Get Incident Events
 Get the details of all the incident events of an AI Analyst Incident Group
-
- ![screenshot: fn-darktrace-get-incident-events ](./doc/screenshots/fn-darktrace-get-incident-events.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1386,32 +1337,17 @@ results = playbook.functions.results.incident_events_output
 events = results.get("content", {}).get("incident_events")
 
 for event in events:
-  event_url = event.get("incidentEventUrl")
-  event_id = str(event.get("id"))
-  event_acknowledged = event.get("acknowledged")
-  event_create_time = event.get("createdAt")
-  event_title = event.get("title")
-  event_summary = event.get("summary")
-  event_category = event.get("category")
-  event_aia_score = event.get("aiaScore")
-  event_devices = event.get("breachDevices")
-
-  # format fields
-  event_title = URL_FORMATTER.format(event_url, event_title)
-  event_acknowledged = "Yes" if event_acknowledged else "No"
-  event_aia_score = str(event_aia_score)
-  event_devices = ", ".join(str(d.get("did")) for d in event_devices)
 
   row = incident.addRow(EVENT_DT_NAME)
 
-  row.darktrace_incident_events_dt_title = event_title
-  row.darktrace_incident_events_dt_summary = event_summary
-  row.darktrace_incident_events_dt_acknowledged = event_acknowledged
-  row.darktrace_incident_events_dt_created_at = event_create_time
-  row.darktrace_incident_events_dt_initiating_device_id = event_devices
-  row.darktrace_incident_events_dt_category = event_category
-  row.darktrace_incident_events_dt_ai_analyst_score = event_aia_score
-  row.darktrace_incident_events_dt_event_id = event_id
+  row.darktrace_incident_events_dt_title = URL_FORMATTER.format(event.get("incidentEventUrl"), event.get("title"))
+  row.darktrace_incident_events_dt_summary = event.get("summary")
+  row.darktrace_incident_events_dt_acknowledged = "Yes" if event.get("acknowledged") else "No"
+  row.darktrace_incident_events_dt_created_at = event.get("createdAt")
+  row.darktrace_incident_events_dt_initiating_device_id = ", ".join(str(d.get("did")) for d in event.get("breachDevices"))
+  row.darktrace_incident_events_dt_category = event.get("category")
+  row.darktrace_incident_events_dt_ai_analyst_score = str(event.get("aiaScore"))
+  row.darktrace_incident_events_dt_event_id = str(event.get("id"))
 ```
 
 </p>
@@ -1726,23 +1662,24 @@ else:
 <p>
 
 ```python
+TYPE_MAPPING = {"ip": "IP Address", "macaddress": "MAC Address", "hostname": "System Name"}
+
 devices = playbook.functions.results.devices_output.get("content", {}).get("devices")
 
 if playbook.functions.results.devices_output.get("success"):
   for device in devices:
     device_description = f"Darktrace Device (Type: {device.get('typelabel')}) (ID: {device.get('id')})"
     
-    if device.get("ip"):
-      incident.addArtifact("IP Address", device.get("ip"), device_description)
-    if device.get("macaddress"):
-      incident.addArtifact("MAC Address", device.get("macaddress"), device_description)
-    if device.get("hostname"):
-      incident.addArtifact("System Name", device.get("hostname"), device_description)
+    # handle single artifacts
+    for artifact_type in TYPE_MAPPING:
+      if device.get(artifact_type):
+        incident.addArtifact(TYPE_MAPPING.get(artifact_type), device.get(artifact_type), device_description)
+    
+    # handle list of credentials as User Account artifacts
     for credential in device.get("credentials", []):
       incident.addArtifact("User Account", credential.get("credential"), device_description)
 else:
   incident.addNote("Failed to automatically populate artifacts for this case.")
-  
 ```
 
 </p>
@@ -1766,41 +1703,20 @@ devices = playbook.functions.results.devices_output.get("content", {}).get("devi
 base_device_url = playbook.functions.results.devices_output.get("content", {}).get("base_device_url")
 
 for device in devices:
-  device_id = str(device.get("id"))
-  label = device.get("devicelabel")
-  device_type = device.get("typelabel")
-  tags = device.get("tags")
-  ip = device.get("ip")
-  hostname = device.get("hostname")
-  mac_address = device.get("macaddress")
-  os = device.get("os")
-  credentials = device.get("credentials")
-  first_seen = device.get("time")
-  last_seen = device.get("endtime")
-
-
-  device_url = None
-  if device_id:
-      device_url = base_device_url + device_id
-      device_url = URL_FORMATTER.format(device_url, device_id)
-  credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in credentials]) if credentials else credentials
-  tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in tags]) if tags else tags
   
   row = incident.addRow(DEVICE_DT_NAME)
   
-  row.darktrace_device_dt_id = device_url
-  row.darktrace_device_dt_label = label
-  row.darktrace_device_dt_type = device_type
-  row.darktrace_device_dt_tags = tags
-  row.darktrace_device_dt_ip = ip
-  row.darktrace_device_dt_hostname = hostname
-  row.darktrace_device_dt_mac_address = mac_address
-  row.darktrace_device_dt_os = os
-  row.darktrace_device_dt_credentials = credentials
-  row.darktrace_device_dt_first_seen = first_seen
-  row.darktrace_device_dt_last_seen = last_seen
-  
-  
+  row.darktrace_device_dt_id = URL_FORMATTER.format(f"{base_device_url}{str(device.get('id'))}", str(device.get("id"))) if device.get("id") else None
+  row.darktrace_device_dt_label = device.get("devicelabel")
+  row.darktrace_device_dt_type = device.get("typelabel")
+  row.darktrace_device_dt_tags = " ".join([SPAN_FORMATTER.format(t.get("name")) for t in device.get("tags", [])]) if device.get("tags") else None
+  row.darktrace_device_dt_ip = device.get("ip")
+  row.darktrace_device_dt_hostname = device.get("hostname")
+  row.darktrace_device_dt_mac_address = device.get("macaddress")
+  row.darktrace_device_dt_os = device.get("os")
+  row.darktrace_device_dt_credentials = " ".join([SPAN_FORMATTER.format(c.get("credential")) for c in device.get("credentials", [])]) if device.get("credentials") else None
+  row.darktrace_device_dt_first_seen = device.get("time")
+  row.darktrace_device_dt_last_seen = device.get("endtime")
 ```
 
 </p>
@@ -1824,34 +1740,17 @@ results = playbook.functions.results.incident_events_output
 events = results.get("content", {}).get("incident_events")
 
 for event in events:
-  event_url = event.get("incidentEventUrl")
-  event_id = str(event.get("id"))
-  event_acknowledged = event.get("acknowledged")
-  event_create_time = event.get("createdAt")
-  event_title = event.get("title")
-  event_summary = event.get("summary")
-  event_category = event.get("category")
-  event_aia_score = event.get("aiaScore")
-  event_devices = event.get("breachDevices")
-
-  # format fields
-  event_title = URL_FORMATTER.format(event_url, event_title)
-  event_acknowledged = "Yes" if event_acknowledged else "No"
-  event_aia_score = str(event_aia_score)
-  event_devices = ", ".join(str(d.get("did")) for d in event_devices)
 
   row = incident.addRow(EVENT_DT_NAME)
 
-  row.darktrace_incident_events_dt_title = event_title
-  row.darktrace_incident_events_dt_summary = event_summary
-  row.darktrace_incident_events_dt_acknowledged = event_acknowledged
-  row.darktrace_incident_events_dt_created_at = event_create_time
-  row.darktrace_incident_events_dt_initiating_device_id = event_devices
-  row.darktrace_incident_events_dt_category = event_category
-  row.darktrace_incident_events_dt_ai_analyst_score = event_aia_score
-  row.darktrace_incident_events_dt_event_id = event_id
-
-
+  row.darktrace_incident_events_dt_title = URL_FORMATTER.format(event.get("incidentEventUrl"), event.get("title"))
+  row.darktrace_incident_events_dt_summary = event.get("summary")
+  row.darktrace_incident_events_dt_acknowledged = "Yes" if event.get("acknowledged") else "No"
+  row.darktrace_incident_events_dt_created_at = event.get("createdAt")
+  row.darktrace_incident_events_dt_initiating_device_id = ", ".join(str(d.get("did")) for d in event.get("breachDevices"))
+  row.darktrace_incident_events_dt_category = event.get("category")
+  row.darktrace_incident_events_dt_ai_analyst_score = str(event.get("aiaScore"))
+  row.darktrace_incident_events_dt_event_id = str(event.get("id"))
 ```
 
 </p>
@@ -1876,37 +1775,20 @@ events = results.get("content", {}).get("incident_events")
 base_model_breach_url = results.get("content", {}).get("base_model_breach_url")
 
 for event in events:
-  event_url = event.get("incidentEventUrl")
-  event_title = event.get("title")
-  event_title = URL_FORMATTER.format(event_url, event_title)
+  event_title = URL_FORMATTER.format(event.get("incidentEventUrl"), event.get("title"))
 
   # each event should have a list of related model breaches
   # loop through and add each to the table
   for breach in event.get("relatedBreaches"):
-      breach_id = str(breach.get("pbid"))
-      breach_acknowledged = breach.get("acknowledged")
-      breach_url = breach.get("breachUrl")
-      if not breach_url and base_model_breach_url:
-          breach_url = base_model_breach_url + breach_id
-      breach_name = breach.get("modelName")
-      breach_score = str(breach.get("threatScore"))
-      breach_create_time = breach.get("timestamp")
 
-      # format items as needed
-      if breach_url:
-          breach_url = URL_FORMATTER.format(breach_url, breach_name)
-      breach_acknowledged = "Yes" if breach_acknowledged else "No"
-          
       row = incident.addRow(MODEL_BREACHES_DT)
       
-      row.darktrace_model_breaches_dt_name = breach_url
-      row.darktrace_model_breaches_dt_acknowledged = breach_acknowledged
-      row.darktrace_model_breaches_dt_breach_id = breach_id
-      row.darktrace_model_breaches_dt_threat_score = breach_score
-      row.darktrace_model_breaches_dt_time_occurred = breach_create_time
+      row.darktrace_model_breaches_dt_name = URL_FORMATTER.format(f"{base_model_breach_url}{str(breach.get('pbid'))}", breach.get("modelName"))
+      row.darktrace_model_breaches_dt_acknowledged = "Yes" if breach.get("acknowledged") else "No"
+      row.darktrace_model_breaches_dt_breach_id = str(breach.get("pbid"))
+      row.darktrace_model_breaches_dt_threat_score = str(breach.get("threatScore"))
+      row.darktrace_model_breaches_dt_time_occurred = breach.get("timestamp")
       row.darktrace_model_breaches_dt_associated_event = event_title
-      
-      
 ```
 
 </p>

@@ -19,7 +19,7 @@ from resilient_lib import RequestsCommon
 APP_CONFIG = {
     "api_key": "abcd-efgh",
     "api_secret": "1234-abcd-56789-efgh",
-    "instance_url": "https://fake.cloud.darktrace.com/"
+    "darktrace_base_url": "https://fake.cloud.darktrace.com/"
 }
 
 BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_data")

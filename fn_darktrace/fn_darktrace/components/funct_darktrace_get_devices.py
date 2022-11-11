@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -48,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
         query = {"did": ",".join(map(str, group.get("devices", []))) + ",", "includetags": "true"}
         devices_details = app_common.get_devices(query)
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         results = {
             "devices": devices_details, 

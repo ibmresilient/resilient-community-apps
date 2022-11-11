@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -24,15 +25,14 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.darktrace_incident_event_id
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
 
         validate_fields(["darktrace_incident_event_id"], fn_inputs)
 
-        uuid = fn_inputs.darktrace_incident_event_id
-        results = app_common.unacknowledge_incident_event(uuid)
+        results = app_common.unacknowledge_incident_event(fn_inputs.darktrace_incident_event_id)
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)

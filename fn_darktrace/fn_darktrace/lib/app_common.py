@@ -40,7 +40,7 @@ TAGS_URI = "/tags/entities"
 # C O N F I G S
 PUBLIC_KEY_CONFIG = "api_key"
 PRIVATE_KEY_CONFIG = "api_secret"
-URL_CONFIG = "instance_url"
+URL_CONFIG = "darktrace_base_url"
 MIN_SCORE_CONFIG = "min_score"
 LOCALE_CONFIG = "locale"
 EXCLUDE_DEVICE_LIST_CONFIG = "exclude_did"
@@ -471,7 +471,7 @@ class AppCommon():
 
     ########
     # TODO: there is an endpoint that allows you to download an event as a PDF — this should be exposed!
-    # EX: GET https://euw2-75824-01.cloud.darktrace.com/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
+    # EX: GET https://<darktrace_base_url>/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
     ########
 
     def get_incident_event_comments(self, incident_id: str = None, params: dict = None, capture_error: bool = False) -> dict:

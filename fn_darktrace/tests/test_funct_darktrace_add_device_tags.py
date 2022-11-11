@@ -13,7 +13,7 @@ FUNCTION_NAME = "darktrace_add_device_tags"
 config_data = """[fn_darktrace]
 api_key=abcd-efgh
 api_secret=1234-abcd-56789-efgh
-instance_url=https://fake.cloud.darktrace.com
+darktrace_base_url=https://fake.cloud.darktrace.com
 """
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)

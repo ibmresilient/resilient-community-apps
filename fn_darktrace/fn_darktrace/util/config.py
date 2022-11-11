@@ -12,7 +12,7 @@ def config_section_data():
     config_data = u"""[fn_darktrace]
 # enter the base URL to your Darktrace instance and
 # the public and private keys you generated for this app
-instance_url=https://<instance>.cloud.darktrace.com
+darktrace_base_url=https://<instance>.cloud.darktrace.com
 api_key=
 api_secret=
 

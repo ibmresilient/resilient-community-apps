@@ -83,7 +83,7 @@
         "typelabel": "DNS Server"
       }
     ],
-    "base_device_url": "https://euw2-75824-01.cloud.darktrace.com/#device/"
+    "base_device_url": "https://my.darktrace.com/#device/"
   },
   "raw": null,
   "inputs": {
