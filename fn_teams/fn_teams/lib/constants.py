@@ -89,7 +89,10 @@ DEBUG_ADDING_MEMBER_TO_GROUP = "[Microsoft Groups] Adding members to Group objec
 
 WARN_DIDNOT_FIND_USER = "[Microsoft Groups] User not found {}"
 WARN_NO_OWNER_EMAIL_ID_PROVIDED = '''[Microsoft Groups] No owner Email ID provided.
- Group preferences cannot be modified until an owner is assigned to the group'''
+ Either no Owner Id was provided or the ID has no valid MS account. Group preferences
+ cannot be modified until an owner is assigned to the group'''
+WARN_NO_MEMBER_EMAIL_ID_PROVIDED = '''[Microsoft Groups] No member Email ID found.
+ Unable to find a user associated with the Incident/Task who has a valid MS account'''
 WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the {}.
  ADD MEMBERS FROM field was set to None and no list of participants were provided
  in the Additional members field.'''

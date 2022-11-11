@@ -41,7 +41,7 @@ class ResponseHandler:
         self.exempt_codes = self.default_exempt_codes.copy()
 
 
-    def set_return_raw(self, value: bool = False):
+    def set_return_raw(self, value: bool=False):
         self.return_raw = value
 
 
@@ -209,15 +209,117 @@ class ResponseHandler:
         return self._raise_or_return_erros()
 
 
+def get_user_info(user_id, **kwargs):
+    """
+    Fetches information using the email address of the SOAR user and assigns
+    a role (member or owner) depending upon the information that was provided
+    in the function, and saves this information in self.user_db for later use.
+
+    Arguments:
+    ----------
+        user_id          <str>  : Email address used for information retrieval
+        request_common   <obj>  : rc object that allows for making external requests
+        response_handler <obj>  : response handler that monitors responses
+        logger           <obj>  : Logger object
+        headers          <dict> : Authorization headers for MS endpoint
+
+    Updates:
+    --------
+         response <dict> : User information retrieved from the MS Endpoint
+    """
+
+    rc  = kwargs.get("request_common")
+    rh  = kwargs.get("response_handler")
+    log = kwargs.get("logger")
+    headers = kwargs.get("headers")
+
+    url = parse.urljoin(
+        constants.BASE_URL,
+        constants.URL_USERS.format(user_id))
+
+    response = rc.execute(
+        method="get",
+        url=url,
+        headers=headers,
+        callback=rh.check_response)
+
+    if "mail" in response:
+        return response
+    else:
+        log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
+
+
+def find_group(**kwargs):
+    """
+    Allows for locating a group based on its displayName or mailNickname attribute
+    This function at least required either the group_name or the group_mail_nickname
+    keyword argument.
+
+    Kwargs:
+    -------
+        request_common      <obj>  : rc object that allows for making external requests
+        response_handler    <obj>  : response handler that monitors responses
+        logger              <obj>  : Logger object
+        headers             <dict> : Authorization headers for MS endpoint
+        group_name          <str>  : Display name of the group
+        group_mail_nickname <str>  : Mail nickname of the group
+
+    Raises:
+    -------
+        IntegrationError: Unable to locate the group
+
+    Returns:
+    --------
+        <dict> : Details of the detected group
+    """
+    rc  = kwargs.get("request_common")
+    rh  = kwargs.get("response_handler")
+    log = kwargs.get("logger")
+    headers = kwargs.get("headers")
+
+    if "group_name" in kwargs:
+        log.info(constants.INFO_FIND_GROUP_BY_NAME)
+        _name = kwargs.get("group_name")
+        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
+        _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
+
+    if "group_mail_nickname" in kwargs:
+        log.info(constants.INFO_FIND_GROUP_BY_MAIL)
+        _name = kwargs.get("group_mail_nickname")
+        if "@" in _name:
+            _name = _name.split("@")[0]
+        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
+        _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
+
+    url = parse.urljoin(
+        constants.BASE_URL,
+        constants.URL_GROUPS_QUERY.format(_query))
+
+    response = rc.execute(
+        method="get",
+        url=url,
+        headers=headers,
+        callback=rh.check_response)
+
+    log.debug(json.dumps(response, indent=2))
+
+    if len(response.get("value")) > 0 :
+        log.info(constants.INFO_FOUND_GROUP)
+        return response.get("value")
+
+    log.error(error_msg)
+    raise IntegrationError(error_msg)
+
+
 def is_direct_member(incident_member_id, org_member_list):
     """
-    Checks to see if the member Id accquired from the incident or task belongs to the
-    list of all users from the organization. Upon match, it then extracts the email
+    Checks to see if the member Id acquired from the incident or task belongs to the
+    list of users from the organization. Upon a match, it then extracts the email
     address for that particular user.
 
     Args:
     -----
-        incident_member_id <str>  : The user Id accquired from the incident
+        incident_member_id <str>  : The user Id acquired from the incident
         org_member_list    <list> : The list of member Ids of all organization members
 
     Returns:
@@ -231,21 +333,20 @@ def is_direct_member(incident_member_id, org_member_list):
 
 def is_group_member(incident_member_id, org_member_list, org_group_list):
     """
-    Checks to see if the member Id accquired from the incident or task belongs to t
-    he list of all groups from the organization. Upon match, it then queries a list
-    of Ids associated with that group and matches with user using the
+    Checks to see if the member Id acquired from the incident or task belongs to
+    the list of all groups from the organization. Upon a match, it then queries a list
+    of Ids associated with that group and matches with a user using the
     >>is_direct_member<< function
 
     Args:
     -----
-        incident_member_id  <str> : The user Id accquired from the incident
+        incident_member_id  <str> : The user Id acquired from the incident
         org_member_list    <list> : The list of member Ids of all organization members
         org_group_list     <list> : The list of group Ids of all organization members
 
     Returns:
     --------
         <list>: list of all email addresses of incident members
-
     """
     ret = []
     for group in org_group_list:
@@ -255,24 +356,36 @@ def is_group_member(incident_member_id, org_member_list, org_group_list):
     return ret
 
 
-def generate_member_list(resclient, logger, **kwargs):
+def generate_member_list(**kwargs):
     """
-    Generates a list of email addresses of the members to be added to the Group. The
-    function queries incident member list or task member list, organization group list,
-    and organization user list. Using these, it then compares and accquires the email
-    addresses of all users that are members to the incident or task, if >>add members from<<
-    task or incident is selected. Else just adds the email addresses specified in
-    >>additional members<<
+    Generates a list of email addresses of the members of a SOAR instance. The main 
+    goal is to extract user email addresses from the SOAR instance for specific users.
+    While querying an incident or a task for members, user ids are returned as appose to
+    entire user data. These ids are then converted to useful information (in this case
+    user email address) by fetching user information based on the retrieved ids.
+
+    kwargs:
+    -------
+        logger             <obj> : Logger object
+        resclient          <obj> : Client object to interface with Resilient SOAR
+        task_id            <str> : Task ID number
+        incident_id        <str> : Incident ID number
+        add_members_from   <str> : Read members from task or incident level
+        additional_members <str> : Add additional member email addresses to be added
 
     Returns:
     --------
-        members_email_ids <list> : a list of all participant email addresses to be added
+        email_ids <list> : a list of all participant email addresses to be added
     """
-    log = logger
+
+    log = kwargs.get("logger")
+    resclient = kwargs.get("resclient")
+
     task_id = kwargs.get("task_id")
     incident_id = kwargs.get("incident_id")
     add_members_from = kwargs.get("add_members_from")
     additional_members = kwargs.get("additional_members")
+
     org_member_list  = resclient.post(constants.RES_USERS, payload={}).get("data")
     org_group_list   = resclient.get(constants.RES_GROUPS)
     add_members_from = add_members_from.lower().strip()
@@ -314,58 +427,3 @@ def generate_member_list(resclient, logger, **kwargs):
     email_ids = list(set(email_ids))
     log.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
     return email_ids
-
-
-def find_group(rc, logger, response_handler, **kwargs):
-    """
-    Allows for locating a group based on its >>display name<< or >>mail nickname<<
-    This function atleast required either the group_name or the group_mail_nickname
-    keyworkd argument.
-
-    Kwargs:
-    -------
-        group_name          <str> : Display name of the group
-        group_mail_nickname <str> : Mail nickname of the gorup
-
-    Raises:
-    -------
-        IntegrationError: Unbable to locate group
-
-    Returns:
-    --------
-        <dict> : Details of the detected group
-    """
-    headers = kwargs.get("headers")
-
-    if "group_name" in kwargs:
-        logger.info(constants.INFO_FIND_GROUP_BY_NAME)
-        _name = kwargs.get("group_name")
-        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
-        _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
-
-    if "group_mail_nickname" in kwargs:
-        logger.info(constants.INFO_FIND_GROUP_BY_MAIL)
-        _name = kwargs.get("group_mail_nickname")
-        if "@" in _name:
-            _name = _name.split("@")[0]
-        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
-        _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
-
-    url = parse.urljoin(
-        constants.BASE_URL,
-        constants.URL_GROUPS_QUERY.format(_query))
-
-    response = rc.execute(
-        method="get",
-        url=url,
-        headers=headers,
-        callback=response_handler.check_response)
-
-    logger.debug(json.dumps(response, indent=2))
-
-    if len(response.get("value")) > 0 :
-        logger.info(constants.INFO_FOUND_GROUP)
-        return response.get("value")
-
-    logger.error(error_msg)
-    raise IntegrationError(error_msg)
