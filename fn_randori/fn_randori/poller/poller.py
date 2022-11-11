@@ -29,9 +29,9 @@ TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 # Default Templates used to create/update/close SOAR cases.
 #   Mostly they will be modified to include custom SOAR fields
-CREATE_INCIDENT_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_create_incident.jinja")
-UPDATE_INCIDENT_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_update_incident.jinja")
-CLOSE_INCIDENT_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_close_incident.jinja")
+CREATE_CASE_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_create_case.jinja")
+UPDATE_CASE_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_update_case.jinja")
+CLOSE_CASE_TEMPLATE = os.path.join(TEMPLATE_DIR, "soar_close_case.jinja")
 
 def init_app(rc, options):
     """
@@ -209,7 +209,7 @@ class PollerComponent(AppFunctionComponent):
                     # create the SOAR case
                     soar_create_payload = make_payload_from_template(
                         self.soar_create_case_template,
-                        CREATE_INCIDENT_TEMPLATE,
+                        CREATE_CASE_TEMPLATE,
                         entity)
                     create_soar_case = self.soar_common.create_soar_case(
                         soar_create_payload)
@@ -226,7 +226,7 @@ class PollerComponent(AppFunctionComponent):
                             # close the SOAR case
                             soar_close_payload = make_payload_from_template(
                                 self.soar_close_case_template,
-                                CLOSE_INCIDENT_TEMPLATE,
+                                CLOSE_CASE_TEMPLATE,
                                 entity)
                             _close_soar_case = self.soar_common.update_soar_case(
                                 soar_case_id,
@@ -238,7 +238,7 @@ class PollerComponent(AppFunctionComponent):
                         # perform an update operation on the existing SOAR case
                         soar_update_payload = make_payload_from_template(
                             self.soar_update_case_template,
-                            UPDATE_INCIDENT_TEMPLATE,
+                            UPDATE_CASE_TEMPLATE,
                             entity)
                         _update_soar_case = self.soar_common.update_soar_case(
                             soar_case_id,

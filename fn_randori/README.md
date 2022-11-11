@@ -129,7 +129,7 @@ Python 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=47.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Randori Development Version
 
 This app has been implemented using:
 | Product Name | API URL | API Version |
@@ -604,7 +604,7 @@ None
 ## Function - Randori: Get Target
 Get the target data for a single Randori target instance.
 
- ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1044,7 +1044,7 @@ The Detections data table displays the dections found for a target.  A Detection
 
  The Discovery Path data table replicates the Discovery Path table found in Randori.  The discovery path shows exact research steps taken by Randori, or an attacker, to find an entity.  The **View Details** link takes you to Randori for more information on that entity.
 
- ![screenshot: dt-discovery-path](./doc/screenshots/dt-discovery-path.png)
+![screenshot: dt-discovery-path](./doc/screenshots/dt-discovery-path.png)
 
 #### API Name:
 randori_detections_dt
@@ -1098,6 +1098,96 @@ randori_detections_dt
 
 ---
 
+## Templates for SOAR Cases
+It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
+`soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
+
+### soar_create_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+
+```
+{
+  {# JINJA template for creating a new SOAR case from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  "name": "Randori Target - {{ vendor }}, {{ name }} {{ version }}",
+  "description": "{{ description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = first_seen if first_seen <= target_first_seen else target_first_seen %}
+  "discovered_date": {{ target_first_seen | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date| soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  "plan_status": "A",
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "randori_target_id": "{{ target_id }}",
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
+    "randori_target_status": "{{ status }}"
+  }
+}
+```
+
+### soar_close_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for closing a SOAR case using endpoint data #}
+  "plan_status": "C",
+  "resolution_id": "{{ status | soar_substitute('{"Accepted": "Not an Issue", "Mitigated": "Resolved"}') }}",
+  "resolution_summary": "Closed by Randori, Target Status: {{ status }}"
+  {# add additional fields based on your 'on close' field requirements #}
+  {#
+  ,"properties": {
+      "randori_target_status": "{{ status }}"
+  }
+  #}
+}
+```
+
+### soar_update_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for updating a new SOAR case from an endpoint #}
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  "properties": {
+    "randori_target_affiliation_state": "{{ affiliation_state }}",
+    "randori_target_authority": {{ authority | lower }},
+
+    {% if target_temptation is not none %}
+    "randori_target_temptation": {{ target_temptation }},
+    {% endif %}
+
+    {% if tech_category is not none %}
+    "randori_target_tech_category": "{{ tech_category | join(', ') }}",
+    {% endif %}
+
+    {% if user_tags is not none %}
+    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    "randori_target_perspective_name": "{{ perspective_name }}",
+    "randori_target_status": "{{ status }}",
+    "randori_target_impact_score": "{{ impact_score }}"
+    }
+}
+
+```
+---
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 

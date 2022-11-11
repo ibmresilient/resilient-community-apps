@@ -178,7 +178,6 @@ class AppCommon():
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
-            response.raise_for_status()
             response_json = response.json()
             if response_json.get('count')  <= 0:
                 break
@@ -265,7 +264,6 @@ class AppCommon():
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         response_json = response.json()
 
         comment_list = response_json.get('comments', [])
@@ -287,7 +285,6 @@ class AppCommon():
                                    json=data,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         response_json = response.json()
 
         return response_json
@@ -301,7 +298,6 @@ class AppCommon():
                                    self._get_uri(url),
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def get_detections_for_single_target(self, target_id: str) -> list:
@@ -358,7 +354,6 @@ class AppCommon():
                                    data=data_string,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def update_target_status(self, target_id: str, status: str) -> dict:
@@ -391,7 +386,6 @@ class AppCommon():
                                    data=status_string,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def get_validate(self) -> dict:
@@ -402,7 +396,6 @@ class AppCommon():
                                    self._get_uri(GET_VALIDATE_URI),
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def format_randori_comment(self, comment: dict) -> str:
@@ -437,7 +430,6 @@ class AppCommon():
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
 def _get_verify_ssl(app_configs: dict):
