@@ -57,7 +57,8 @@ class TestDarktraceGetIncidentEvents:
         assert func is not None
 
     mock_inputs_1 = {
-        "darktrace_incident_group_id": "sample text"
+        "darktrace_incident_group_id": "sample text",
+        "darktrace_include_model_breach_data": True
     }
 
     expected_results_1 = {
