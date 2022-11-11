@@ -256,17 +256,63 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.randori_data_table_name = "randori_detections_dt"
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Fill the Data Table:</summary>
 <p>
 
 ```python
-None
+from datetime import datetime
+import time
+import calendar
+
+def soar_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S", split_at=None):
+    """Custom jinja filter to convert UTC dates to epoch format
+
+    Args:
+        value ([str]): [jinja provided field value]
+        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
+        split_at (str, optional): [character to split the date field to scope the date field.]
+            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",
+                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",
+    Returns:
+        [int]: [epoch value of datetime, in milliseconds]
+    """
+    if not value:
+        return value
+
+    if split_at:
+        utc_time = time.strptime(value[:value.rfind(split_at)], date_format)
+    else:
+        utc_time = time.strptime(value, date_format)
+    return calendar.timegm(utc_time)*1000
+############################################################################################   
+
+detection_data = playbook.functions.results.detection_data
+
+if not detection_data.success:
+  incident.addNote("Randori: Unable to update Detections data table - error getting detections data.")
+else:
+  clear_table_output = playbook.functions.results.clear_table_output
+  if not clear_table_output.success:
+    incident.addNote("Randori: ERROR - Unable to clear the Detections data table before updating it.")
+  content = detection_data.get("content", {})
+  detection_list = detection_data.content.get("detection_list", [])
+  for detection in detection_list:
+    detection_row = incident.addRow("randori_detections_dt")
+    detection_row['randori_dt_date_added'] = datetime.now()
+    detection_row['randori_dt_path'] = detection.get("path")
+    detection_row['randori_dt_port'] = detection.get("port")
+    detection_row['randori_dt_ip'] = detection.get("ip")
+    detection_row['randori_dt_hostname'] = detection.get("hostname")
+    detection_row['randori_dt_first_seen'] = soar_datetimeformat(detection.get("first_seen"), split_at='.')
+    detection_row['randori_dt_last_seen'] = soar_datetimeformat(detection.get("last_seen"), split_at='.')
+  incident.addNote("Randori: manual playbook updated Detections data table with {} detections".format(len(detection_list)))
 ```
 
 </p>
@@ -434,17 +480,59 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Fill Detections Data Table:</summary>
 <p>
 
 ```python
-None
+from datetime import datetime
+import time
+import calendar
+
+def soar_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S", split_at=None):
+    """Custom jinja filter to convert UTC dates to epoch format
+
+    Args:
+        value ([str]): [jinja provided field value]
+        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
+        split_at (str, optional): [character to split the date field to scope the date field.]
+            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",
+                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",
+    Returns:
+        [int]: [epoch value of datetime, in milliseconds]
+    """
+    if not value:
+        return value
+
+    if split_at:
+        utc_time = time.strptime(value[:value.rfind(split_at)], date_format)
+    else:
+        utc_time = time.strptime(value, date_format)
+    return calendar.timegm(utc_time)*1000
+############################################################################################   
+
+detection_data = playbook.functions.results.detection_data
+
+if not detection_data.success:
+  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori")
+else:
+  content = detection_data.get("content", {})
+  detection_list = detection_data.content.get("detection_list", [])
+  for detection in detection_list:
+    detection_row = incident.addRow("randori_detections_dt")
+    detection_row['randori_dt_date_added'] = datetime.now()
+    detection_row['randori_dt_path'] = detection.get("path")
+    detection_row['randori_dt_port'] = detection.get("port")
+    detection_row['randori_dt_ip'] = detection.get("ip")
+    detection_row['randori_dt_hostname'] = detection.get("hostname")
+    detection_row['randori_dt_first_seen'] = soar_datetimeformat(detection.get("first_seen"), split_at='.')
+    detection_row['randori_dt_last_seen'] = soar_datetimeformat(detection.get("last_seen"), split_at='.')
+  incident.addNote("Randori: automatic playbook updated Detections data table with {} detections".format(len(detection_list)))
 ```
 
 </p>
@@ -584,17 +672,84 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Fill Data Table:</summary>
 <p>
 
 ```python
-None
+
+from datetime import datetime
+
+def add_node_to_dt(node, randori_base_url):
+  
+  content = node.get("content")
+
+  row = incident.addRow("randori_discovery_path_dt")
+  row["randori_dt_date_added"] = int(datetime.now().timestamp()*1000) 
+  
+  # For each node type formatting is different.
+  if node.get("type") == "target":
+    target_name = content.get("name")
+    target_version = content.get("version")
+    row["randori_dt_discovery_step"] = "{} {}".format(target_name, target_version)
+  elif node.get("type") == "hostname":
+    hostname = content.get("hostname")
+    row["randori_dt_discovery_step"] = "{}".format(hostname)
+    link = "{0}/hostnames/{1}".format(randori_base_url, node.get("id"))
+    ref_html = u"""<a href='{0}'>View Details</a>""".format(link)
+    row["randori_dt_link"] = helper.createRichText(ref_html)
+  elif node.get("type") == "ip":
+    ip = content.get("ip_str")
+    row["randori_dt_discovery_step"] = "{}".format(ip)
+    link = "{0}/ips/{1}".format(randori_base_url, node.get("id"))
+    ref_html = u"""<a href='{0}'>View Details</a>""".format(link)
+    row["randori_dt_link"] = helper.createRichText(ref_html)
+  elif node.get("type") == "detection":
+    hostname = content.get("hostname")
+    ip = content.get("ip_str")
+    row["randori_dt_discovery_step"] = "detection: {} {}".format(hostname, ip)
+
+    
+#########################################################################################
+paths_data = playbook.functions.results.paths_data
+
+if not paths_data.success:
+  incident.addNote("Randori: Unable to get paths data to populate Discovery Path data table.")
+else:
+
+  paths_data_content = paths_data.get("content")
+  randori_base_url = paths_data_content.get("base_url")
+  data = paths_data_content.get('data')
+  edges = data.get("edges")
+  nodes = data.get("nodes")
+  paths_list_list = data.get("paths")
+
+  for path_list in paths_list_list:
+    for path in path_list:
+      edge = edges.get(path)
+      dst = edge.get("dst")
+      node = nodes.get(dst)
+      
+      # Add node to the data table
+      add_node_to_dt(node, randori_base_url)
+  
+      # Add edge type to the data table
+      row = incident.addRow("randori_discovery_path_dt")
+      row["randori_dt_date_added"] = int(datetime.now().timestamp()*1000) 
+      row["randori_dt_discovery_step"] = "{}".format(edge.get("type"))
+      
+    # Last node is the src
+    src = edge.get("src")
+    node = nodes.get(src)
+    add_node_to_dt(node, randori_base_url)
+  
+  incident.addNote("Randori: Discovery Path table refreshed.")
+
 ```
 
 </p>
@@ -719,17 +874,39 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Update Custom Fields:</summary>
 <p>
 
 ```python
-None
+target_data = playbook.functions.results.target_data
+
+if not target_data.success:
+  incident.addNote("Randori: Update custom fields: Unable to get target data to update custom fields.")
+else:
+  content = target_data.get("content", {})
+  data = target_data.content.get("data", {})
+  if data:
+    # Update custom fields with Randori target data
+    incident.properties.randori_target_status = data.get("status")
+    incident.properties.randori_target_impact_score = data.get("impact_score")
+    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_authority = data.get("authority")
+    incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
+    incident.properties.randori_target_perspective_name = data.get("perspective_name")
+    tech_category = data.get("tech_category", [])
+    if tech_category:
+      incident.properties.randori_target_tech_category = ", ".join(tech_category)
+    user_tags = data.get("user_tags", [])
+    if user_tags:
+      incident.properties.randori_target_tags = ", ".join(user_tags)
+    
+    incident.addNote("Randori: Update Target Data in SOAR script updated custom fields in SOAR.")
 ```
 
 </p>
@@ -865,7 +1042,8 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
@@ -940,7 +1118,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
+inputs.randori_target_impact_score = playbook.inputs.randori_target_impact_score
+inputs.randori_note = playbook.inputs.randori_note.content
 ```
 
 </p>
@@ -950,7 +1130,13 @@ None
 <p>
 
 ```python
-None
+target_impact_score = playbook.functions.results.target_impact_score
+
+if not target_impact_score.success:
+  incident.addNote("Randori: ERROR: Unable to Update Target Impact Score to <b>{}</b>".format(target_impact_score.inputs.randori_target_impact_score))
+else:
+  incident.properties.randori_target_impact_score = target_impact_score.inputs.randori_target_impact_score
+  incident.addNote("Randori: Updated Target Impact Score to <b>{}</b> in Randori".format(incident.properties.randori_target_impact_score))
 ```
 
 </p>
@@ -1015,7 +1201,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
+inputs.randori_target_status = playbook.inputs.randori_target_status
+inputs.randori_note = playbook.inputs.randori_note.content
 ```
 
 </p>
@@ -1025,7 +1213,13 @@ None
 <p>
 
 ```python
-None
+target_status = playbook.functions.results.target_status
+
+if not target_status.success:
+  incident.addNote("Randori: ERROR: Unable to Update Target Status to <b>{}</b>".format(target_status.inputs.randori_target_status))
+else:
+  incident.properties.randori_target_status = target_status.inputs.randori_target_status
+  incident.addNote("Randori: Updated Target Status to <b>{}</b> in Randori".format(incident.properties.randori_target_status))
 ```
 
 </p>
