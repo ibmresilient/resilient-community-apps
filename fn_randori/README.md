@@ -62,18 +62,26 @@
 -->
 **IBM SOAR app bidirectional synchronization and functions for Randori**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
-Bidirectional app for Randori for IBM SOAR. Query Randori for targets based 
-         on user-defined query parameters and create and update cases in SOAR.
+Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.
+ ![screenshot: main](./doc/screenshots/randori-functions.png)
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+* Sync Randori targets to SOAR cases via user defined filter criteria
+* Sync Randori target comments to notes in SOAR
+* Set the Target Impact Score in Randori from SOAR
+* Set the Target Status in Randori from SOAR
+* List the Discovery Path of a Target with links back to Randori
+* List the Detections of a Target in SOAR
+* Add Detection data as artifacts in SOAR of the following types:
+  * DNS Name
+  * File Path
+  * IP Address
+  * Port 
 
 ---
 
@@ -174,8 +182,6 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
 | **api_token** | Yes | `xxx` | *Randori API token.* |
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
@@ -194,10 +200,15 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* The following Randori Tab custom layout is included in the app:
+The following Randori Tab custom layout is included in the app:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
+## Poller Considerations
+
+The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
+
+When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 
 ---
 
