@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_bigfix"""
+"""Generate the SOAR customizations required for fn_bigfix"""
 
 import base64
 import os

@@ -67,15 +67,14 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info(str(params))
 
-        yield self.status_message(u"Running BigFix Query for Artifact id {}, with value {} ...".format(params["artifact_id"], params["artifact_value"]))
+        yield self.status_message(f"Running BigFix Query for Artifact id {params['artifact_id']}, with value {params['artifact_value']} ...")
         bigfix_client = BigFixClient(self.opts, self.options)
 
         try:
             if params["incident_plan_status"] != 'C':
                 # If incident isn't closed
                 if params["artifact_type"] == "IP Address":
-                    artifact_data = bigfix_client.get_bf_computer_by_ip(
-                        params["artifact_value"])
+                    artifact_data = bigfix_client.get_bf_computer_by_ip(params["artifact_value"])
                 elif params["artifact_type"] == "File Path":
                     artifact_data = bigfix_client.get_bf_computer_by_file_path(
                         params["artifact_value"])
@@ -89,30 +88,27 @@ class FunctionComponent(AppFunctionComponent):
                     artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(
                         params["artifact_value"], params["artifact_properties_name"], params["artifact_properties_value"])
                 else:
-                    raise ValueError("Unsupported artifact type {}.".format(
-                        params["artifact_type"]))
+                    raise ValueError(f"Unsupported artifact type {params['artifact_type']}.")
         except Exception as e:
-            yield self.status_message("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
+            yield self.status_message(f"Failed with exception '{type(e).__name__}' while trying to query BigFix.")
 
         results = {}
         if params["incident_plan_status"] == 'C':
-            yield self.status_message("Ignoring action, incident {} is closed".format(params["incident_id"]))
+            yield self.status_message(f"Ignoring action, incident {params['incident_id']} is closed")
         elif not artifact_data:
-            yield self.status_message("Could not find data about the artifact {}".format(params["artifact_value"]))
+            yield self.status_message(f"Could not find data about the artifact {params['artifact_value']}")
         else:
             hits = get_hits(artifact_data)
             hits_len = len(hits)
             if not hits_len:
-                yield self.status_message("No hits detected for artifact id '{}' with value '{}' and of type '{}'.".format(params["artifact_id"], params["artifact_value"], params["artifact_type"]))
+                yield self.status_message(f"No hits detected for artifact id '{params['artifact_id']}' with value '{params['artifact_value']}' and of type '{params['artifact_type']}'.")
             elif hits_len > int(self.options.get("bigfix_hunt_results_limit", "200")):
                 yield self.status_message("Adding artifact data as an incident attachment")
                 # Define file name and content to add as an attachment
-                file_name = u"query_for_artifact_{}_{}_{}.txt".format(
-                    params["artifact_id"], params["artifact_type"], datetime.today().strftime('%Y%m%d'))
+                file_name = f'query_for_artifact_{params["artifact_id"]}_{params["artifact_type"]}_{datetime.today().strftime("%Y%m%d")}.txt'
                 file_content = u""
                 for data in hits:
-                    file_content += u"Resource ID: {}. Resource Name: {}. Artifact value: {}. Artifact Type: {} \n".format(
-                        data["computer_id"], data["computer_name"], params["artifact_value"], params["artifact_type"])
+                    file_content += f'Resource ID: {data["computer_id"]}. Resource Name: {data["computer_name"]}. Artifact value: {params["artifact_value"]}. Artifact Type: {params["artifact_type"]} \n'
                 # Create an attachment
                 att_report = create_attachment(
                     self.rest_client(), file_name, file_content, params)
@@ -124,7 +120,7 @@ class FunctionComponent(AppFunctionComponent):
                     "query_execution_date": datetime.now().strftime('%m-%d-%Y %H:%M:%S'),
                     "hits_over_limit": False}
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)

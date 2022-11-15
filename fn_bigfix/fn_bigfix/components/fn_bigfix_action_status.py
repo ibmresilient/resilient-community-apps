@@ -11,7 +11,7 @@ from re import sub
 from resilient_lib import validate_fields
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import poll_action_status
-from fn_bigfix.util.helpers import validate_opts, PACKAGE_NAME
+from fn_bigfix.util.helpers import PACKAGE_NAME
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 
 FN_NAME = "fn_bigfix_action_status"
@@ -37,45 +37,46 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        validate_opts(self)
+        # Check app.config is set correctly
+        validate_fields(["bigfix_url", "bigfix_port", "bigfix_user", "bigfix_pass",
+                         "bigfix_hunt_results_limit", "bigfix_polling_interval",
+                         "bigfix_polling_timeout", "bigfix_endpoints_wait"], self.options)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """Function: SOAR Function: Bigfix action status - Get status for Bigfix action id."""
-        yield self.status_message("Starting App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate parameters
         validate_fields(["bigfix_action_id"], fn_inputs)
 
-        self.LOG.info("bigfix_action_id: {}".format(fn_inputs.bigfix_action_id))
-
-        yield self.status_message("Running Query BigFix for BigFix action id '{}' ...".format(fn_inputs.bigfix_action_id))
-        bigfix_client = BigFixClient(self.opts, self.options)
+        self.LOG.info(f"bigfix_action_id: {fn_inputs.bigfix_action_id}")
+        yield self.status_message(f"Running Query BigFix for BigFix action id '{fn_inputs.bigfix_action_id}' ...")
 
         # Check status every 'retry_interval' secs up to 'retry_timeout' secs
+        status = None
         try:
-            status = None
-            (status, message) = poll_action_status(bigfix_client, fn_inputs.bigfix_action_id,
+            (status, message) = poll_action_status(BigFixClient(self.opts, self.options), fn_inputs.bigfix_action_id,
                 int(self.options.get("bigfix_polling_interval")), int(self.options.get("bigfix_polling_timeout")))
         except Exception as e:
-            yield self.status_message("Failed with exception '{}' while trying to poll BigFix action status.".format(type(e).__name__))
+            yield self.status_message(f"Failed with exception '{type(e).__name__}' while trying to poll BigFix action status.")
 
         results = {}
         if not status:
             raise FunctionError(
-                "Function 'poll_action_status' returned bad status {}.".format(status))
+                f"Function 'poll_action_status' returned bad status {status}.")
         elif status == "OK":
-            yield self.status_message("Received successful status message '{}' for BigFix action {}.".format(sub('\.$', '', message), fn_inputs.bigfix_action_id))
+            yield self.status_message(f"Received successful status message '{sub('\.$', '', message)}' for BigFix action {fn_inputs.bigfix_action_id}.")
             results = {"status": "OK", "status_message": message}
         elif status == "Failed":
-            yield self.status_message("Received error status {} for BigFix action {}.".format(message, fn_inputs.bigfix_action_id))
+            yield self.status_message(f"Received error status {message} for BigFix action {fn_inputs.bigfix_action_id}.")
             results = {"status": "Failed", "status_message": message}
         elif status == "Unsupported":
-            yield self.status_message("Received  unexpected status {} while retrieving status for BigFix action {}.".format(message, fn_inputs.bigfix_action_id))
+            yield self.status_message(f"Received  unexpected status {message} while retrieving status for BigFix action {fn_inputs.bigfix_action_id}.")
         elif status == "Timedout":
-            yield self.status_message("Timed out getting action status for BigFix action {}".format(fn_inputs.bigfix_action_id))
+            yield self.status_message(f"Timed out getting action status for BigFix action {fn_inputs.bigfix_action_id}")
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)

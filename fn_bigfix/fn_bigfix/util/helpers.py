@@ -10,31 +10,6 @@ from tempfile import NamedTemporaryFile
 LOG = getLogger(__name__)
 PACKAGE_NAME = "fn_bigfix"
 
-def validate_opts(func):
-    """"Check options set correctly.
-    :param func: SOAR Function instance reference
-     """
-    if "bigfix_url" not in func.options or not func.options["bigfix_url"]:
-        raise ValueError("Mandatory config setting 'bigfix_url' not set.")
-    if "bigfix_port" not in func.options or not func.options["bigfix_port"]:
-        raise ValueError("Mandatory config setting 'bigfix_port' not set.")
-    if "bigfix_user" not in func.options or not func.options["bigfix_user"]:
-        raise ValueError("Mandatory config setting 'bigfix_user' not set.")
-    if "bigfix_pass" not in func.options or not func.options["bigfix_pass"]:
-        raise ValueError("Mandatory config setting 'bigfix_pass' not set.")
-    if "bigfix_hunt_results_limit" not in func.options or not func.options["bigfix_hunt_results_limit"]:
-        raise ValueError(
-            "Mandatory config setting 'bigfix_hunt_results_limit' not set.")
-    if "bigfix_polling_interval" not in func.options or not func.options["bigfix_polling_interval"]:
-        raise ValueError(
-            "Mandatory config setting 'bigfix_polling_interval' not set.")
-    if "bigfix_polling_timeout" not in func.options or not func.options["bigfix_polling_timeout"]:
-        raise ValueError(
-            "Mandatory config setting 'bigfix_polling_timeout' not set.")
-    if "bigfix_endpoints_wait" not in func.options or not func.options["bigfix_endpoints_wait"]:
-        raise ValueError(
-            "Mandatory config setting 'bigfix_endpoints_wait' not set.")
-
 def create_attachment(rest_client, file_name, file_content, params):
     """"Add file as SOAR incident attachment.
     :param rest_client: SOAR Rest client
@@ -52,13 +27,12 @@ def create_attachment(rest_client, file_name, file_content, params):
         temp_file.flush()
         try:
             # Post file to SOAR
-            att_report = rest_client.post_attachment("/incidents/{}/attachments".format(params["incident_id"]),
+            att_report = rest_client.post_attachment(f"/incidents/{params['incident_id']}/attachments",
                                                      temp_file.name,
                                                      file_name,
                                                      "text/plain",
                                                      "")
-            LOG.info("New attachment added to incident {}".format(
-                params["incident_id"]))
+            LOG.info(f"New attachment added to incident {params['incident_id']}")
         except Exception as err:
             raise err
         finally:

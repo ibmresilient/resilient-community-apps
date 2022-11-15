@@ -21,7 +21,7 @@ def get_hits(artifact_data):
             hits.append(d)
     # if no hits result will be an empty list.
     if hits:
-        LOG.info("Detected hits on {} endpoints.".format(len(hits)))
+        LOG.info(f"Detected hits on {len(hits)} endpoints.")
     else:
         LOG.info("Detected no hits.")
 
@@ -51,8 +51,7 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
     while retry_timeout >= 0 and not finished:
         status_message = None
         try:
-            status_message = bigfix_client.get_bf_action_status(
-                bigfix_action_id)
+            status_message = bigfix_client.get_bf_action_status(bigfix_action_id)
             if status_message:
                 if status_message == "The action executed successfully." or "is not relevant" in status_message:
                     status = "OK"

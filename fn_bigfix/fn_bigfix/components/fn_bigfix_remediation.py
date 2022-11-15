@@ -53,7 +53,7 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info(str(params))
 
-        yield self.status_message(u"Running BigFix remediation for Artifact '{}' on endpoint '{}' ...".format(params["artifact_value"], params["asset_id"]))
+        yield self.status_message(f"Running BigFix remediation for Artifact '{params['artifact_value']}' on endpoint '{params['asset_id']}' ...")
         bigfix_client = BigFixClient(self.opts, self.options)
 
         # Send a remediation message to BigFix
@@ -65,15 +65,15 @@ class FunctionComponent(AppFunctionComponent):
                 response = bigfix_client.send_stop_service_remediation_message(params["artifact_value"], params["asset_id"])
             elif params["artifact_type"] == "Registry Key":
                 if len(params["artifact_value"].split('\\')) <= 2:
-                    yield self.status_message("Warning: Delete not allowed for root level key {}.".format(params["artifact_value"]))
+                    yield self.status_message(f"Warning: Delete not allowed for root level key {params['artifact_value']}.")
                 else:
                     # Test if registry key has 1 or more subkeys
                     result = bigfix_client.check_exists_subkey(params["artifact_value"], params["asset_id"])
                     # Query should return array with single result.
                     if not result or not result[0]:
-                        yield self.status_message("Warning: Delete not allowed for key '{}'. BigFix subkey query did not return a valid result.".format(params["artifact_value"]))
+                        yield self.status_message(f"Warning: Delete not allowed for key '{params['artifact_value']}'. BigFix subkey query did not return a valid result.")
                     elif (not result[0]["failure"] or result[0]["failure"] == "False") and result[0]["result"] == "True":
-                        yield self.status_message("Warning: Delete not allowed, key '{}' has 1 or more subkeys.".format(params["artifact_value"]))
+                        yield self.status_message(f"Warning: Delete not allowed, key '{params['artifact_value']}' has 1 or more subkeys.")
                     else:
                         response = bigfix_client.send_delete_registry_key_remediation_message(params["artifact_value"], params["asset_id"])
             elif params["artifact_type"] == "File Path":
@@ -81,20 +81,20 @@ class FunctionComponent(AppFunctionComponent):
                 result = bigfix_client.check_is_folder(params["artifact_value"], params["asset_id"])
                 # Query should return array with single result.
                 if not result or not result[0]:
-                    yield self.status_message("Warning: Delete not allowed for artifact '{}'. BigFix subkey query did not return a valid result".format(params["artifact_value"]))
+                    yield self.status_message(f"Warning: Delete not allowed for artifact '{params['artifact_value']}'. BigFix subkey query did not return a valid result")
                 elif (not result[0]["failure"] or result[0]["failure"] == "False") and result[0]["result"] == "True":
-                    yield self.status_message("Warning: Delete not allowed for folder artifact '{}'.".format(params["artifact_value"]))
+                    yield self.status_message(f"Warning: Delete not allowed for folder artifact '{params['artifact_value']}'.")
                 else:
                     response = bigfix_client.send_delete_file_remediation_message(params["artifact_value"], params["asset_id"])
             else:
-                raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+                raise ValueError(f"Unsupported artifact type '{params['artifact_type']}'.")
         except Exception as e:
-            yield self.status_message("Failed with exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
+            yield self.status_message(f"Failed with exception '{type(e).__name__}' while trying to run a BigFix remediation.")
 
         if response:
             results = {"status": "OK", "status_message": "BigFix action created successfully.", "remediation_date": datetime.today().strftime('%m-%d-%Y %H:%M:%S'), "action_id": response}
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)

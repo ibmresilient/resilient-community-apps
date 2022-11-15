@@ -23,7 +23,6 @@ class FunctionComponent(AppFunctionComponent):
 
             bigfix_asset_name, bigfix_asset_id, bigfix_incident_id
 
-
         An example of a set of query parameter might look like the following:
 
                 bigfix_asset_name
@@ -47,8 +46,7 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """Function: Resilient Function : Bigfix assets - Get properties in BigFix for an endpoint."""
 
-        validate_fields(["bigfix_asset_name", "bigfix_asset_id",
-                        "bigfix_incident_id"], fn_inputs)
+        validate_fields(["bigfix_asset_name", "bigfix_asset_id", "bigfix_incident_id"], fn_inputs)
 
         params = {"asset_name": fn_inputs.bigfix_asset_name,
                   "asset_id": fn_inputs.bigfix_asset_id,
@@ -56,28 +54,25 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info(str(params))
 
-        yield self.status_message(u"Running BigFix Query for Endpoint id {}, with name {} ...".format(params["asset_id"], params["asset_name"]))
-        bigfix_client = BigFixClient(self.opts, self.options)
+        yield self.status_message(f"Running BigFix Query for Endpoint id {params['asset_id']}, with name {params['asset_name']} ...")
 
         try:
             # Perform the BigFix Query
-            response = bigfix_client.get_bf_computer_properties(
-                params["asset_id"])
+            response = BigFixClient(self.opts, self.options).get_bf_computer_properties(params["asset_id"])
         except Exception as e:
-            yield self.status_message("Failed with exception '{}' while trying to query a BigFix asset".format(type(e).__name__))
+            yield self.status_message(f"Failed with exception '{type(e).__name__}' while trying to query a BigFix asset")
 
         results = {}
         if not response:
-            yield self.status_message("No properties retrieved for the asset id '{}'".format(params["asset_id"]))
+            yield self.status_message(f"No properties retrieved for the asset id '{params['asset_id']}'")
         else:
             # Create a SOAR attachment
-            file_name = "bigfix-properties-{}-{}.xml".format(
-                params["asset_name"], datetime.today().strftime('%Y%m%d'))
+            file_name = f"bigfix-properties-{params['asset_name']}-{datetime.today().strftime('%Y%m%d')}.xml"
             att_report = create_attachment(
                 self.rest_client(), file_name, response, params)
             results = {"status": "OK", "att_name": att_report["name"]}
 
-        yield self.status_message("Finished running App Function: '{}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)
