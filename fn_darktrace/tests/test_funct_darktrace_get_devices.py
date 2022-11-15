@@ -104,5 +104,5 @@ class TestDarktraceGetDevices:
         with pytest.raises(IntegrationError):
             call_darktrace_get_devices_function(circuits_app, mock_inputs)
 
-        assert "Multiple incidents found" in caplog.text or "No incidents found" in caplog.text
+        assert "Multiple groups found" in caplog.text or "No groups found" in caplog.text
 
