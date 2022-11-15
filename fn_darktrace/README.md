@@ -28,10 +28,13 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
+  - [Darktrace Development Version](#darktrace-development-version)
+    - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+  - [Templates for SOAR Cases](#templates-for-soar-cases)
 - [Function - Darktrace: Acknowledge Incident Event](#function---darktrace-acknowledge-incident-event)
 - [Function - Darktrace: Acknowledge Model Breach](#function---darktrace-acknowledge-model-breach)
 - [Function - Darktrace: Add Device Tags](#function---darktrace-add-device-tags)
@@ -52,7 +55,7 @@
 - [Data Table - Model Breaches](#data-table---model-breaches)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [For Support](#for-support)
 
 ---
 
