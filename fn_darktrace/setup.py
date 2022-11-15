@@ -30,11 +30,15 @@ setup(
     url="https://ibm.com/mysupport",
     description="IBM SOAR app for bi-directional synchronization with Darktrace Threat Visualizer",
     long_description="""Bi-directional App for Darktrace. Pulls in new AI Analyst Events as they are created \
-        and creates a case in SOAR for each group of events.
-    <br>As new events are added to a group, the case automatically updates with the new data.
-    <br><br>Also provides functionality for acknowledging an event, group, or breach,\
+        and creates a case in SOAR for each group of events.<br>
+        As new events are added to a group, the case automatically updates with the new data.<br>
+
+        Also provides functionality for acknowledging an event, group, or breach,\
         sending notes to Darktrace, listing similar devices in Darktrace,\
-        and getting external endpoint details from Darktrace.""",
+        and getting external endpoint details from Darktrace.
+        
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         "resilient-circuits>=47.0.0"
     ],
