@@ -17,15 +17,7 @@
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "darktrace_aianalyst_incident_group_id": "{{ id }}",
-    "darktrace_incident_group_link": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident</a>",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_incident_last_modified": {{ end }},
-    "darktrace_incident_group_start_time": {{ start }},
-    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
-    "darktrace_initiating_device_ids": "{{ initialDevices|join(', ') }}",
-    "darktrace_group_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category|camel }}</span>",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_last_modified": {{ end }}
   },
   {# add comments as necessary #}
   "comments": [

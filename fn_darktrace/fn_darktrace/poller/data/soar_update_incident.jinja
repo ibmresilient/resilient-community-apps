@@ -1,10 +1,6 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "properties": {
-    "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_last_modified": {{ end }}
   }
 }

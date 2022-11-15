@@ -28,22 +28,21 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Darktrace Development Version](#darktrace-development-version)
-    - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-  - [Templates for SOAR Cases](#templates-for-soar-cases)
 - [Function - Darktrace: Acknowledge Incident Event](#function---darktrace-acknowledge-incident-event)
 - [Function - Darktrace: Acknowledge Model Breach](#function---darktrace-acknowledge-model-breach)
 - [Function - Darktrace: Add Device Tags](#function---darktrace-add-device-tags)
 - [Function - Darktrace: Clear Data Table](#function---darktrace-clear-data-table)
 - [Function - Darktrace: Get Devices](#function---darktrace-get-devices)
 - [Function - Darktrace: Get Incident Events](#function---darktrace-get-incident-events)
+- [Function - Darktrace: Get Incident Group](#function---darktrace-get-incident-group)
 - [Function - Darktrace: List Similar Devices](#function---darktrace-list-similar-devices)
 - [Function - Darktrace: Unacknowledge Incident Event](#function---darktrace-unacknowledge-incident-event)
 - [Function - Darktrace: Unacknowledge Model Breach](#function---darktrace-unacknowledge-model-breach)
+- [Script - Parse Darktrace Details to Incident Properties](#script---parse-darktrace-details-to-incident-properties)
 - [Script - Parse Darktrace Device Details to Artifacts](#script---parse-darktrace-device-details-to-artifacts)
 - [Script - Parse Darktrace Device Details to Data Table](#script---parse-darktrace-device-details-to-data-table)
 - [Script - Parse Darktrace Incident Events Details to Data Table](#script---parse-darktrace-incident-events-details-to-data-table)
@@ -53,7 +52,7 @@
 - [Data Table - Model Breaches](#data-table---model-breaches)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
-- [For Support](#for-support)
+- [Troubleshooting & Support](#troubleshooting--support)
 
 ---
 
@@ -79,8 +78,8 @@ a case in SOAR for each group of events.
 As new events are added to a group, the case automatically updates with the new data.
 
 Also provides functionality for acknowledging an event, group, or breach,
-sending notes to Darktrace, listing similar devices in Darktrace,
-and getting external endpoint details from Darktrace.
+        sending notes to Darktrace, listing similar devices in Darktrace,
+        and getting external endpoint details from Darktrace.
 
 ### Key Features
 * Automatic syncronization of Incident Events and their associated Model Breaches and Devices from Darktrace to SOAR.
@@ -215,15 +214,7 @@ Below are the default templates used which can be copied, modified, and used wit
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "darktrace_aianalyst_incident_group_id": "{{ id }}",
-    "darktrace_incident_group_link": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident</a>",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_incident_last_modified": {{ end }},
-    "darktrace_incident_group_start_time": {{ start }},
-    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
-    "darktrace_initiating_device_ids": "{{ initialDevices|join(', ') }}",
-    "darktrace_group_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category|camel }}</span>",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_last_modified": {{ end }}
   },
   {# add comments as necessary #}
   "comments": [
@@ -245,11 +236,7 @@ Below are the default templates used which can be copied, modified, and used wit
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "properties": {
-    "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_last_modified": {{ end }}
   }
 }
 
@@ -266,10 +253,7 @@ Below are the default templates used which can be copied, modified, and used wit
   "resolution_summary": "Acknowledged in Darktrace",
   "properties": {
     "darktrace_incident_last_modified": {{ end }},
-    "darktrace_associated_device_ids": "{{ devices|join(', ') }} ({{ devices|length }} total devices involved)",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}"
   }
 }
 
@@ -1354,6 +1338,142 @@ for event in events:
 </details>
 
 ---
+## Function - Darktrace: Get Incident Group
+Get the details of all the incident events of an AI Analyst Incident Group
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Tooltip |
+| ---- | :--: | :------: | ------- |
+| `darktrace_incident_group_id` | `text` | Yes | Group ID to get incident events from |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "incident_group": {
+      "acknowledged": false,
+      "active": false,
+      "category": "suspicious",
+      "devices": [
+        9,
+        4
+      ],
+      "edges": [
+        {
+          "description": "SMB File Write",
+          "details": [
+            {
+              "key": null,
+              "type": "string",
+              "values": [
+                "11.txt.txt.txt",
+                "11.txt.txt",
+                "27.txt.txt.txt"
+              ]
+            }
+          ],
+          "incidentEvent": "da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+          "isAction": true,
+          "source": {
+            "nodeType": "device",
+            "value": 9
+          },
+          "start": 1663207328000,
+          "target": {
+            "nodeType": "device",
+            "value": 4
+          }
+        }
+      ],
+      "end": 1663207329000,
+      "externalTriggered": false,
+      "groupScore": 0.9796746496148376,
+      "groupUrl": "https://my.cloud.darktrace.com/#aiagroup/gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+      "id": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+      "incidentEvents": [
+        {
+          "start": 1663207328000,
+          "title": "SMB Writes of Suspicious Files",
+          "triggerDid": 9,
+          "uuid": "da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+          "visible": true
+        }
+      ],
+      "initialDevices": [
+        9
+      ],
+      "pinned": true,
+      "previousIds": [],
+      "start": 1663207328000,
+      "userTriggered": false
+    }
+  },
+  "inputs": {
+    "darktrace_incident_group_id": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c"
+  },
+  "metrics": {
+    "execution_time_ms": 130,
+    "host": "local",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "timestamp": "2022-11-15 09:12:30",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Script to Refresh Incident Properties:</summary>
+<p>
+
+```python
+results = playbook.functions.results.incident_group_output
+group_content = results.get("content", {}).get("incident_group")
+
+if results.get("success"):
+  incident.properties.darktrace_incident_group_link = f"<a target='_blank' href='{group_content.get('groupUrl')}'>AI Analyst Incident</a>"
+  incident.properties.darktrace_incident_group_acknowledged = "Yes" if group_content.get("acknowledged") else "No"
+  incident.properties.darktrace_incident_last_modified = group_content.get("end")
+  incident.properties.darktrace_incident_group_start_time = group_content.get("start")
+  devices = group_content.get("devices")
+  incident.properties.darktrace_associated_device_ids = f"{', '.join(map(str, devices))} ({len(devices)} total devices involved)"
+  incident.properties.darktrace_initiating_device_ids = ', '.join(map(str, group_content.get('initialDevices', [])))
+  category = group_content.get("category")
+  incident.properties.darktrace_group_category = f"<span class='label' rel='tooltip' title='{category}'>{category.title()}</span>"
+  incident.properties.darktrace_group_score = f"{group_content.get('groupScore', 0):.2f}"
+  incident.properties.darktrace_number_of_events_in_group = f"{len(group_content.get('incidentEvents', []))}"
+
+```
+
+</p>
+</details>
+
+---
 ## Function - Darktrace: List Similar Devices
 Function to list similar devices to the given device.
 
@@ -1653,6 +1773,37 @@ else:
 
 ---
 
+## Script - Parse Darktrace Details to Incident Properties
+
+
+**Object:** `incident`
+
+<details><summary>Script Text:</summary>
+<p>
+
+```python
+results = playbook.functions.results.incident_group_output
+group_content = results.get("content", {}).get("incident_group")
+
+if results.get("success"):
+  incident.properties.darktrace_incident_group_link = f"<a target='_blank' href='{group_content.get('groupUrl')}'>AI Analyst Incident</a>"
+  incident.properties.darktrace_incident_group_acknowledged = "Yes" if group_content.get("acknowledged") else "No"
+  incident.properties.darktrace_incident_last_modified = group_content.get("end")
+  incident.properties.darktrace_incident_group_start_time = group_content.get("start")
+  devices = group_content.get("devices")
+  incident.properties.darktrace_associated_device_ids = f"{', '.join(map(str, devices))} ({len(devices)} total devices involved)"
+  incident.properties.darktrace_initiating_device_ids = ', '.join(map(str, group_content.get('initialDevices', [])))
+  category = group_content.get("category")
+  incident.properties.darktrace_group_category = f"<span class='label' rel='tooltip' title='{category}'>{category.title()}</span>"
+  incident.properties.darktrace_group_score = f"{group_content.get('groupScore', 0):.2f}"
+  incident.properties.darktrace_number_of_events_in_group = f"{len(group_content.get('incidentEvents', []))}"
+
+```
+
+</p>
+</details>
+
+---
 ## Script - Parse Darktrace Device Details to Artifacts
 
 
@@ -1675,7 +1826,7 @@ if playbook.functions.results.devices_output.get("success"):
       if device.get(artifact_type):
         incident.addArtifact(TYPE_MAPPING.get(artifact_type), device.get(artifact_type), device_description)
     
-    # handle list of credentials as User Account artifacts
+    # handle list of credentials
     for credential in device.get("credentials", []):
       incident.addArtifact("User Account", credential.get("credential"), device_description)
 else:
@@ -1891,6 +2042,7 @@ group_category = incident.properties.darktrace_group_category
 | Darktrace: Update Devices Data Table | Refreshes data table associated with Darktrace devices | incident | `enabled` |
 | Darktrace: Update Incident Events Data Table | Refreshes data table associated with Darktrace incident events | incident | `enabled` |
 | Darktrace: Update Model Breaches Data Table | Refreshes data table associated with Darktrace model breaches | incident | `enabled` |
+| Dartkrace: Automatic Populate AI Analyst Group Details | Automatic playbook to fill in details of an AI Analyst Incident Group when an event is created in SOAR from Darktrace | incident | `enabled` |
 
 ---
 

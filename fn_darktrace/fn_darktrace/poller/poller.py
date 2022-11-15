@@ -6,13 +6,10 @@ import logging
 import os
 from threading import Thread
 
-from fn_darktrace.lib.app_common import (DEVICE_DT_NAME, EVENT_DT_NAME,
-                                         MODEL_BREACHES_DT, PACKAGE_NAME,
-                                         AppCommon)
+from fn_darktrace.lib.app_common import PACKAGE_NAME, AppCommon
 from fn_darktrace.poller.configure_tab import init_incident_groups_tab
-from resilient import SimpleClient
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
+from resilient_lib import (SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
 
 ENTITY_ID = "id"

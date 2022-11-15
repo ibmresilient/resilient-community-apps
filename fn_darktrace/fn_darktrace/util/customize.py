@@ -3,8 +3,9 @@
 """Generate the Resilient customizations required for fn_darktrace"""
 
 import base64
-import os
 import io
+import os
+
 try:
     from resilient import ImportDefinition
 except ImportError:
@@ -21,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_darktrace",
         "message_destinations": [u"fn_darktrace"],
-        "functions": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_device_tags", u"darktrace_clear_data_table", u"darktrace_get_devices", u"darktrace_get_incident_events", u"darktrace_list_similar_devices", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach"],
+        "functions": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_device_tags", u"darktrace_clear_data_table", u"darktrace_get_devices", u"darktrace_get_incident_events", u"darktrace_get_incident_group", u"darktrace_list_similar_devices", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"darktrace_aianalyst_incident_group_id", u"darktrace_associated_device_ids", u"darktrace_breach_link", u"darktrace_group_category", u"darktrace_group_score", u"darktrace_incident_group_acknowledged", u"darktrace_incident_group_link", u"darktrace_incident_group_start_time", u"darktrace_incident_last_modified", u"darktrace_initiating_device_ids", u"darktrace_number_of_events_in_group"],
@@ -29,8 +30,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"darktrace_associated_devices_dt", u"darktrace_incident_events_dt", u"darktrace_model_breaches_dt"],
         "automatic_tasks": [],
-        "scripts": [u"Parse Darktrace Device Details to Artifacts", u"Parse Darktrace Device Details to Data Table", u"Parse Darktrace Incident Events Details to Data Table", u"Parse Darktrace Model Breaches Details to Data Table"],
-        "playbooks": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_automatic_populate_incident_events_table", u"darktrace_list_similar_devices", u"darktrace_populate_devices_table", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach", u"darktrace_update_all_data_tables", u"darktrace_update_devices_data_table", u"darktrace_update_incident_events_data_table", u"darktrace_update_model_breaches_data_table"]
+        "scripts": [u"Parse Darktrace Details to Incident Properties", u"Parse Darktrace Device Details to Artifacts", u"Parse Darktrace Device Details to Data Table", u"Parse Darktrace Incident Events Details to Data Table", u"Parse Darktrace Model Breaches Details to Data Table"],
+        "playbooks": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_automatic_populate_incident_events_table", u"darktrace_list_similar_devices", u"darktrace_populate_devices_table", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach", u"darktrace_update_all_data_tables", u"darktrace_update_devices_data_table", u"darktrace_update_incident_events_data_table", u"darktrace_update_model_breaches_data_table", u"dartkrace_automatic_populate_ai_analyst_group_details"]
     }
 
 
@@ -51,6 +52,7 @@ def customization_data(client=None):
         - darktrace_clear_data_table
         - darktrace_get_devices
         - darktrace_get_incident_events
+        - darktrace_get_incident_group
         - darktrace_list_similar_devices
         - darktrace_unacknowledge_incident_event
         - darktrace_unacknowledge_model_breach
@@ -67,6 +69,7 @@ def customization_data(client=None):
         - darktrace_update_devices_data_table
         - darktrace_update_incident_events_data_table
         - darktrace_update_model_breaches_data_table
+        - dartkrace_automatic_populate_ai_analyst_group_details
     - Incident Fields:
         - darktrace_aianalyst_incident_group_id
         - darktrace_associated_device_ids
@@ -84,6 +87,7 @@ def customization_data(client=None):
         - darktrace_incident_events_dt
         - darktrace_model_breaches_dt
     - Scripts:
+        - Parse Darktrace Details to Incident Properties
         - Parse Darktrace Device Details to Artifacts
         - Parse Darktrace Device Details to Data Table
         - Parse Darktrace Incident Events Details to Data Table

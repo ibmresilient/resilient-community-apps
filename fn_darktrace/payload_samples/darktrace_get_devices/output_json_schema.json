@@ -109,6 +109,20 @@
               },
               "typelabel": {
                 "type": "string"
+              },
+              "credentials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "lastSeen": {
+                      "type": "integer"
+                    },
+                    "credential": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }

@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["darktrace_incident_group_id"], fn_inputs)
 
         # group ID is required as that is needed to get incident event details
-        group_id = fn_inputs.darktrace_incident_group_id
+        group_id = fn_inputs.darktrace_incident_group_id.strip()
         # model breach data is only included if requested by the playbook/workflow
         include_model_breach = getattr(fn_inputs, "darktrace_include_model_breach_data", False)
 

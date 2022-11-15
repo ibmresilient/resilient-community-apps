@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1668179424434,
+  "export_date": 1668521347597,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -839,6 +839,39 @@
       "workflows": []
     },
     {
+      "created_date": 1668454544553,
+      "description": {
+        "content": "Get the details of all the incident events of an AI Analyst Incident Group",
+        "format": "text"
+      },
+      "destination_handle": "fn_darktrace",
+      "display_name": "Darktrace: Get Incident Group",
+      "export_key": "darktrace_get_incident_group",
+      "id": 10,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1668454544578,
+      "name": "darktrace_get_incident_group",
+      "tags": [],
+      "uuid": "ca3aa473-28c6-4a4c-baa5-95ea94553a1e",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "9a0ca0da-d286-4bba-b7f6-ca540c9fcce7",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1668026269835,
       "description": {
         "content": "Function to list similar devices to the given device.",
@@ -948,13 +981,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 7,
+  "id": 12,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1668179422376,
+      "create_date": 1668521346006,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -963,7 +996,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1668179422376,
+      "update_date": 1668521346006,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1366,27 +1399,42 @@
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": null,
+              "evaluation_id": 3,
+              "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 1,
               "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": null,
+              "evaluation_id": 4,
+              "field_name": "incident.properties.darktrace_incident_last_modified",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 2,
               "field_name": null,
               "method": "object_added",
               "type": null,
               "value": null
             }
           ],
-          "logic_type": "all"
+          "custom_condition": "(1 AND 2) OR (3 AND 1) OR (4 AND 1)",
+          "logic_type": "advanced"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\" isExecutable=\"true\" name=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1831vuh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01cg4sr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1831vuh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Darktrace: Get Devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"709b6237-8fdc-4c00-9dab-15ebcd42b9b1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"devices_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1831vuh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1e5md5o\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1byrpjm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1e5md5o\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Parse Darktrace Device Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ab4326a5-542c-483e-b15b-80f8df439e33\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e5md5o\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ql0aki\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Parse Darktrace Device Details to Artifacts\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c14c7f94-1999-4f15-8ea2-fcccd0d9ed6b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1byrpjm\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rkyzi5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1byrpjm\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cparallelGateway id=\"CollectionPoint_5\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1ql0aki\u003c/incoming\u003e\u003cincoming\u003eFlow_1rkyzi5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01cg4sr\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1ql0aki\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_1rkyzi5\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_01cg4sr\" sourceRef=\"CollectionPoint_5\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01cg4sr\" id=\"Flow_01cg4sr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"586\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"644\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rkyzi5\" id=\"Flow_1rkyzi5_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"560\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"560\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ql0aki\" id=\"Flow_1ql0aki_di\"\u003e\u003comgdi:waypoint x=\"530\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"560\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"560\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1byrpjm\" id=\"Flow_1byrpjm_di\"\u003e\u003comgdi:waypoint x=\"819\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e5md5o\" id=\"Flow_1e5md5o_di\"\u003e\u003comgdi:waypoint x=\"623\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1831vuh\" id=\"Flow_1831vuh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"644\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"432\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"802\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_5\" id=\"CollectionPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"652\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 12,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\" isExecutable=\"true\" name=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1831vuh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_13jq6gs\u003c/incoming\u003e\u003cincoming\u003eFlow_15goqav\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1831vuh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Darktrace: Get Devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"709b6237-8fdc-4c00-9dab-15ebcd42b9b1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"devices_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1831vuh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hsvvqx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Parse Darktrace Device Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ab4326a5-542c-483e-b15b-80f8df439e33\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hrjbq9\u003c/incoming\u003e\u003coutgoing\u003eFlow_13jq6gs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Parse Darktrace Device Details to Artifacts\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c14c7f94-1999-4f15-8ea2-fcccd0d9ed6b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ivnp1a\u003c/incoming\u003e\u003coutgoing\u003eFlow_15goqav\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cserviceTask id=\"ServiceTask_7\" name=\"Darktrace: Clear Data Table\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4d55e84-9e97-450b-a5bf-ac2f15d36da6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_soar_case_id = str(incident.id)\\ninputs.darktrace_data_table_name = \\\"darktrace_associated_devices_dt\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"clear_data_table_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tvwc6z\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hrjbq9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1hrjbq9\" sourceRef=\"ServiceTask_7\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_13jq6gs\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"Get Devices Failed\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"39802b81-f36d-4c4c-89b6-9af4b6f62b4b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0agjwtx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1c2kzzv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cinclusiveGateway default=\"Flow_0agjwtx\" id=\"ConditionPoint_6\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1hsvvqx\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tvwc6z\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0agjwtx\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ivnp1a\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1hsvvqx\" sourceRef=\"ServiceTask_2\" targetRef=\"ConditionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_15goqav\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_1\"/\u003e\u003cendEvent id=\"EndPoint_9\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1c2kzzv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1c2kzzv\" sourceRef=\"ScriptTask_8\" targetRef=\"EndPoint_9\"/\u003e\u003csequenceFlow id=\"Flow_0tvwc6z\" name=\"Check GET Devices Success\" sourceRef=\"ConditionPoint_6\" targetRef=\"ServiceTask_7\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Check GET Devices Success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = playbook.functions.results.devices_output.get(\\\"success\\\")\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0ivnp1a\" name=\"Check GET Devices Success\" sourceRef=\"ConditionPoint_6\" targetRef=\"ScriptTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Check GET Devices Success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = playbook.functions.results.devices_output.get(\\\"success\\\")\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0agjwtx\" name=\"Else\" sourceRef=\"ConditionPoint_6\" targetRef=\"ScriptTask_8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f6e0c993_2e41_4c90_b045_3ae7e9329a32\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0agjwtx\" id=\"Flow_0agjwtx_di\"\u003e\u003comgdi:waypoint x=\"841\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"518\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"938\" y=\"308\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tvwc6z\" id=\"Flow_0tvwc6z_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"356\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"398\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"87\" x=\"636\" y=\"356\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ivnp1a\" id=\"Flow_0ivnp1a_di\"\u003e\u003comgdi:waypoint x=\"599\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"460\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"460\" y=\"518\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"87\" x=\"376\" y=\"366\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c2kzzv\" id=\"Flow_1c2kzzv_di\"\u003e\u003comgdi:waypoint x=\"1050\" y=\"602\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15goqav\" id=\"Flow_15goqav_di\"\u003e\u003comgdi:waypoint x=\"460\" y=\"602\"/\u003e\u003comgdi:waypoint x=\"460\" y=\"780\"/\u003e\u003comgdi:waypoint x=\"653\" y=\"780\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hsvvqx\" id=\"Flow_1hsvvqx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"304\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13jq6gs\" id=\"Flow_13jq6gs_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"602\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hrjbq9\" id=\"Flow_1hrjbq9_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"518\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1831vuh\" id=\"Flow_1831vuh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"653\" y=\"754\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"621\" y=\"518\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"362\" y=\"518\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_7\" id=\"ServiceTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"620.5\" y=\"397.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"951.5\" y=\"517.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_6\" id=\"ConditionPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"238.633\" x=\"599\" y=\"304\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_9\" id=\"EndPoint_9_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"983.5\" y=\"753.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1668026272022,
       "creator_principal": {
@@ -1437,8 +1485,27 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668179397638,
-      "local_scripts": [],
+      "last_modified_time": 1668463264753,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1668458066619,
+          "description": "",
+          "enabled": false,
+          "export_key": "Get Devices Failed",
+          "id": 19,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1668458066666,
+          "name": "Get Devices Failed",
+          "object_type": "incident",
+          "playbook_handle": "darktrace_populate_devices_table",
+          "programmatic_name": "darktrace_populate_devices_table_get_devices_failed",
+          "script_text": "incident.addNote(\"Failed to get devices data -- not updating data table\")",
+          "tags": [],
+          "uuid": "39802b81-f36d-4c4c-89b6-9af4b6f62b4b"
+        }
+      ],
       "name": "darktrace_populate_devices_table",
       "object_type": "incident",
       "status": "enabled",
@@ -1452,34 +1519,49 @@
       "tags": [],
       "type": "default",
       "uuid": "f6e0c993-2e41-4c90-b045-3ae7e9329a32",
-      "version": 5
+      "version": 14
     },
     {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": null,
+              "evaluation_id": 3,
+              "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 1,
               "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": null,
+              "evaluation_id": 4,
+              "field_name": "incident.properties.darktrace_incident_last_modified",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 2,
               "field_name": null,
               "method": "object_added",
               "type": null,
               "value": null
             }
           ],
-          "logic_type": "all"
+          "custom_condition": "(1 AND 2) OR (1 AND 3) OR (1 AND 4)",
+          "logic_type": "advanced"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\" isExecutable=\"true\" name=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1jtkn9u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1oq3x37\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Darktrace: Get Incident Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bdb65705-7695-4c91-9a06-02672b41fd11\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id\\ninputs.darktrace_include_model_breach_data = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"incident_events_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1jtkn9u\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tvp6oa\u003c/outgoing\u003e\u003coutgoing\u003eFlow_10bp79r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1jtkn9u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Parse Darktrace Incident Events Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f2b8e33a-4ee0-4eef-b8e6-f66f6e697fe4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1tvp6oa\u003c/incoming\u003e\u003coutgoing\u003eFlow_0alpn15\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0alpn15\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_1tvp6oa\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Parse Darktrace Model Breaches Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dc88d4b2-aab4-4b0b-87e7-0126e3c267eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10bp79r\u003c/incoming\u003e\u003coutgoing\u003eFlow_07im3ys\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_10bp79r\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cparallelGateway id=\"CollectionPoint_5\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_0alpn15\u003c/incoming\u003e\u003cincoming\u003eFlow_07im3ys\u003c/incoming\u003e\u003coutgoing\u003eFlow_1oq3x37\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1oq3x37\" sourceRef=\"CollectionPoint_5\" targetRef=\"EndPoint_1\"/\u003e\u003csequenceFlow id=\"Flow_07im3ys\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07im3ys\" id=\"Flow_07im3ys_di\"\u003e\u003comgdi:waypoint x=\"850\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"644\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oq3x37\" id=\"Flow_1oq3x37_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"696\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10bp79r\" id=\"Flow_10bp79r_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tvp6oa\" id=\"Flow_1tvp6oa_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0alpn15\" id=\"Flow_0alpn15_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"644\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jtkn9u\" id=\"Flow_1jtkn9u_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"754\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"752\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_5\" id=\"CollectionPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"652\" y=\"644\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 10,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\" isExecutable=\"true\" name=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1jtkn9u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_039waln\u003c/incoming\u003e\u003cincoming\u003eFlow_1tlwxsb\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Darktrace: Get Incident Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bdb65705-7695-4c91-9a06-02672b41fd11\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id\\ninputs.darktrace_include_model_breach_data = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"incident_events_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1jtkn9u\u003c/incoming\u003e\u003coutgoing\u003eFlow_0l60h1q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1jtkn9u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Parse Darktrace Incident Events Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f2b8e33a-4ee0-4eef-b8e6-f66f6e697fe4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0y77q00\u003c/incoming\u003e\u003coutgoing\u003eFlow_039waln\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Parse Darktrace Model Breaches Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dc88d4b2-aab4-4b0b-87e7-0126e3c267eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0heq5i8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tlwxsb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cinclusiveGateway default=\"Flow_0ojd2px\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0l60h1q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1r9igmn\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0q4nyqo\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ojd2px\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_6\" name=\"Darktrace: Clear Data Table\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4d55e84-9e97-450b-a5bf-ac2f15d36da6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_soar_case_id = str(incident.id)\\ninputs.darktrace_data_table_name = \\\"darktrace_incident_events_dt\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"clear_datatable_inc\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1r9igmn\u003c/incoming\u003e\u003coutgoing\u003eFlow_0y77q00\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0l60h1q\" sourceRef=\"ServiceTask_2\" targetRef=\"ConditionPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0y77q00\" sourceRef=\"ServiceTask_6\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_039waln\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003cserviceTask id=\"ServiceTask_7\" name=\"Darktrace: Clear Data Table\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4d55e84-9e97-450b-a5bf-ac2f15d36da6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_soar_case_id = str(incident.id)\\ninputs.darktrace_data_table_name = \\\"darktrace_model_breaches_dt\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"clear_datatable_mb\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0q4nyqo\u003c/incoming\u003e\u003coutgoing\u003eFlow_0heq5i8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0heq5i8\" sourceRef=\"ServiceTask_7\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1tlwxsb\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_1\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"Get Incident Failed\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"60d382b0-275e-4352-8c42-a9111f858181\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ojd2px\u003c/incoming\u003e\u003coutgoing\u003eFlow_06iab8x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_9\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_06iab8x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_06iab8x\" sourceRef=\"ScriptTask_8\" targetRef=\"EndPoint_9\"/\u003e\u003csequenceFlow id=\"Flow_1r9igmn\" name=\"Check GET Incident Success\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_6\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Check GET Incident Success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = playbook.functions.results.incident_events_output.get(\\\"success\\\")\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0q4nyqo\" name=\"Check GET Incident Success\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_7\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Check GET Incident Success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"result = playbook.functions.results.incident_events_output.get(\\\"success\\\")\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0ojd2px\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"ScriptTask_8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b832db82_ecd1_4e1f_abc6_40873a705e1c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ojd2px\" id=\"Flow_0ojd2px_di\"\u003e\u003comgdi:waypoint x=\"840\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1170\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1170\" y=\"578\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"1000\" y=\"338\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1r9igmn\" id=\"Flow_1r9igmn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"386\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"417\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"417\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"448\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"86\" x=\"527\" y=\"403\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0q4nyqo\" id=\"Flow_0q4nyqo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"386\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"417\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"417\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"448\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"27\" width=\"86\" x=\"877\" y=\"403\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06iab8x\" id=\"Flow_06iab8x_di\"\u003e\u003comgdi:waypoint x=\"1170\" y=\"662\"/\u003e\u003comgdi:waypoint x=\"1170\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tlwxsb\" id=\"Flow_1tlwxsb_di\"\u003e\u003comgdi:waypoint x=\"850\" y=\"662\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"708\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"708\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0heq5i8\" id=\"Flow_0heq5i8_di\"\u003e\u003comgdi:waypoint x=\"850\" y=\"532\"/\u003e\u003comgdi:waypoint x=\"850\" y=\"578\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_039waln\" id=\"Flow_039waln_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"662\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"708\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"708\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"754\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y77q00\" id=\"Flow_0y77q00_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"532\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"578\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0l60h1q\" id=\"Flow_0l60h1q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jtkn9u\" id=\"Flow_1jtkn9u_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"754\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"752\" y=\"578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"238.633\" x=\"601.5\" y=\"333.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_6\" id=\"ServiceTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"511.5\" y=\"447.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_7\" id=\"ServiceTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"751.5\" y=\"447.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1071.5\" y=\"577.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_9\" id=\"EndPoint_9_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1103.5\" y=\"753.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1668026272472,
       "creator_principal": {
@@ -1530,8 +1612,27 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668179046716,
-      "local_scripts": [],
+      "last_modified_time": 1668463288552,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1668458412206,
+          "description": "",
+          "enabled": false,
+          "export_key": "Get Incident Failed",
+          "id": 20,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1668458412244,
+          "name": "Get Incident Failed",
+          "object_type": "incident",
+          "playbook_handle": "darktrace_automatic_populate_incident_events_table",
+          "programmatic_name": "darktrace_automatic_populate_incident_events_table_get_incident_failed",
+          "script_text": "incident.addNote(\"Failed to get incident event data -- not updating data table\")",
+          "tags": [],
+          "uuid": "60d382b0-275e-4352-8c42-a9111f858181"
+        }
+      ],
       "name": "darktrace_automatic_populate_incident_events_table",
       "object_type": "incident",
       "status": "enabled",
@@ -1545,7 +1646,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b832db82-ecd1-4e1f-abc6-40873a705e1c",
-      "version": 4
+      "version": 12
     },
     {
       "activation_type": "manual",
@@ -2360,11 +2461,137 @@
       "type": "default",
       "uuid": "778e00b9-025f-4141-bfcf-2efd33ed277c",
       "version": 7
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": 3,
+              "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 1,
+              "field_name": "incident.properties.darktrace_aianalyst_incident_group_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 4,
+              "field_name": "incident.properties.darktrace_incident_last_modified",
+              "method": "changed",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 2,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "custom_condition": "(1 AND 2) OR (1 AND 3) OR (1 AND 4)",
+          "logic_type": "advanced"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 26,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4\" isExecutable=\"true\" name=\"playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_079ispk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08yxcke\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Parse Darktrace Details to Incident Properties\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"edaadf85-7a8f-4d04-9868-2ffdde2db141\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14rmqdk\u003c/incoming\u003e\u003coutgoing\u003eFlow_08yxcke\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08yxcke\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_1\"/\u003e\u003csequenceFlow id=\"Flow_079ispk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Darktrace: Get Incident Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ca3aa473-28c6-4a4c-baa5-95ea94553a1e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.darktrace_incident_group_id = incident.properties.darktrace_aianalyst_incident_group_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"incident_group_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_079ispk\u003c/incoming\u003e\u003coutgoing\u003eFlow_14rmqdk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_14rmqdk\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14rmqdk\" id=\"Flow_14rmqdk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079ispk\" id=\"Flow_079ispk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08yxcke\" id=\"Flow_08yxcke_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"443.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"307.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1668454107519,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4",
+      "description": {
+        "content": "Automatic playbook to fill in details of an AI Analyst Incident Group when an event is created in SOAR from Darktrace",
+        "format": "text"
+      },
+      "display_name": "Dartkrace: Automatic Populate AI Analyst Group Details",
+      "export_key": "dartkrace_automatic_populate_ai_analyst_group_details",
+      "field_type_handle": "playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Dartkrace: Automatic Populate AI Analyst Group Details",
+        "export_key": "playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4",
+        "uuid": "73a788c8-c685-4a97-9f29-42cc801bc01d"
+      },
+      "has_logical_errors": false,
+      "id": 14,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1668464575938,
+      "local_scripts": [],
+      "name": "dartkrace_automatic_populate_ai_analyst_group_details",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_ef63344b-fa19-4630-a31d-8e4fe924dbe4",
+        "id": 14,
+        "name": "playbook_ef63344b_fa19_4630_a31d_8e4fe924dbe4",
+        "type": "playbook",
+        "uuid": "ff200f71-cdeb-4010-a544-92a4da8bbd12"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "ef63344b-fa19-4630-a31d-8e4fe924dbe4",
+      "version": 31
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [
+    {
+      "actions": [],
+      "created_date": 1668451371241,
+      "description": "",
+      "enabled": false,
+      "export_key": "Parse Darktrace Details to Incident Properties",
+      "id": 17,
+      "language": "python3",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1668459934364,
+      "name": "Parse Darktrace Details to Incident Properties",
+      "object_type": "incident",
+      "playbook_handle": null,
+      "programmatic_name": "parse_darktrace_details_to_incident_properties",
+      "script_text": "results = playbook.functions.results.incident_group_output\ngroup_content = results.get(\"content\", {}).get(\"incident_group\")\n\nif results.get(\"success\"):\n  incident.properties.darktrace_incident_group_link = f\"\u003ca target=\u0027_blank\u0027 href=\u0027{group_content.get(\u0027groupUrl\u0027)}\u0027\u003eAI Analyst Incident\u003c/a\u003e\"\n  incident.properties.darktrace_incident_group_acknowledged = \"Yes\" if group_content.get(\"acknowledged\") else \"No\"\n  incident.properties.darktrace_incident_last_modified = group_content.get(\"end\")\n  incident.properties.darktrace_incident_group_start_time = group_content.get(\"start\")\n  devices = group_content.get(\"devices\")\n  incident.properties.darktrace_associated_device_ids = f\"{\u0027, \u0027.join(map(str, devices))} ({len(devices)} total devices involved)\"\n  incident.properties.darktrace_initiating_device_ids = \u0027, \u0027.join(map(str, group_content.get(\u0027initialDevices\u0027, [])))\n  category = group_content.get(\"category\")\n  incident.properties.darktrace_group_category = f\"\u003cspan class=\u0027label\u0027 rel=\u0027tooltip\u0027 title=\u0027{category}\u0027\u003e{category.title()}\u003c/span\u003e\"\n  incident.properties.darktrace_group_score = f\"{group_content.get(\u0027groupScore\u0027, 0):.2f}\"\n  incident.properties.darktrace_number_of_events_in_group = f\"{len(group_content.get(\u0027incidentEvents\u0027, []))}\"\n",
+      "tags": [],
+      "uuid": "edaadf85-7a8f-4d04-9868-2ffdde2db141"
+    },
     {
       "actions": [],
       "created_date": 1668026268732,

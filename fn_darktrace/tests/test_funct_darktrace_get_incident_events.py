@@ -57,7 +57,7 @@ class TestDarktraceGetIncidentEvents:
         assert func is not None
 
     mock_inputs_1 = {
-        "darktrace_incident_group_id": "sample text",
+        "darktrace_incident_group_id": "fake_id",
         "darktrace_include_model_breach_data": True
     }
 
@@ -69,7 +69,7 @@ class TestDarktraceGetIncidentEvents:
     expected_results_1["incident_events"][0]["relatedBreaches"][0].update(load_json(PATH_MODELBREACHES_MOCK))
 
     mock_inputs_2 = {
-        "darktrace_incident_group_id": "sample text",
+        "darktrace_incident_group_id": "fake_id",
         "darktrace_include_model_breach_data": False
     }
 

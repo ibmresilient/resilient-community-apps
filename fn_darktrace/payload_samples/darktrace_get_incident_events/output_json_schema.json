@@ -148,6 +148,9 @@
                     "acknowledged": {
                       "type": "boolean"
                     },
+                    "breachUrl": {
+                      "type": "string"
+                    },
                     "commentCount": {
                       "type": "integer"
                     },
