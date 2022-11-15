@@ -85,10 +85,10 @@ Also provides functionality for acknowledging an event, group, or breach,
         and getting external endpoint details from Darktrace.
 
 ### Key Features
-* Automatic syncronization of Incident Events and their associated Model Breaches and Devices from Darktrace to SOAR.
-* Manual rules in SOAR to enhance cases with details from Darktrace.
-* Manual rules in SOAR to acknowledge or unacknowledge entities in Darktrace.
-* Manual rules in SOAR to add new tags to entities in order to trigger certain actions in Darktrace.
+* Automatic synchronization of Incident Events and their associated Model Breaches and Devices from Darktrace to SOAR.
+* Manual playbooks in SOAR to enhance cases with details from Darktrace.
+* Manual playbooks in SOAR to acknowledge or unacknowledge entities in Darktrace.
+* Manual playbooks in SOAR to add new tags to entities in order to trigger certain actions in Darktrace.
 
 ---
 
