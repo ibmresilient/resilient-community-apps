@@ -3,7 +3,10 @@
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 import logging
 import defusedxml.ElementTree as ET
+from resilient_lib import IntegrationError
 from resilient import SimpleHTTPException
+from requests import RequestException
+import posixpath
 
 LOG = logging.getLogger(__name__)
 
@@ -19,6 +22,8 @@ ACTION_MAP = {
     'userTask': 'Tasks'
 }
 
+IMPORT_URL = "/playbooks/import"
+PLAYBOOK_URL = "/playbooks"
 PLAYBOOK_QUERY_PAGED_URL = "/playbooks/query_paged?return_level=full"
 PLAYBOOK_QUERY_PAGED_FILTER = {
   "filters": [
@@ -94,7 +99,7 @@ def get_incident_limit(restclient, sort="desc"):
         [int]: [min or max incident_id]
     """
     inc_id = 0
-    query_filter = QUERY_PAGED_FILTER.copy()
+    query_filter = dict(QUERY_PAGED_FILTER)
     query_filter['sorts'][0]['type'] = sort
     results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter)
 
@@ -164,6 +169,24 @@ def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
 
     return min_incident_id, max_incident_id
 
+def get_playbooks(rest_client, pb_types, pb_filter):
+    filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
+
+    if pb_types and pb_types != 'all':
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "equals",
+                        "field_name": "status",
+                        "value": pb_types
+                    })
+    if pb_filter:
+        filter_conditions['query'] = pb_filter
+
+    LOG.debug(filter_conditions)
+    try:
+        return rest_client.post(PLAYBOOK_QUERY_PAGED_URL, filter_conditions)
+    except SimpleHTTPException:
+        return {}
+
 def get_playbook(rest_client, playbook_id):
     """[get a specific playbook from all playbooks]
 
@@ -174,7 +197,7 @@ def get_playbook(rest_client, playbook_id):
     Returns:
         [str]: [xml document for the found workflow or None]
     """
-    filter_conditions = PLAYBOOK_QUERY_PAGED_FILTER.copy()
+    filter_conditions = dict(PLAYBOOK_QUERY_PAGED_FILTER)
     filter_conditions['filters'][0]['conditions'][0]['value'] = playbook_id
     playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
     # find our specific workflow
@@ -184,6 +207,40 @@ def get_playbook(rest_client, playbook_id):
 
     return playbook_xml
 
+def export_playbook(rest_client, playbook_id, playbook_name):
+    payload = {}
+
+    if playbook_id:
+        payload['id'] = playbook_id
+    if playbook_name:
+        payload['name'] = playbook_name
+
+    return rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"), payload=payload)
+
+def import_playbook(rest_client, playbook_body):
+    try:
+        result = rest_client.post(IMPORT_URL, playbook_body)
+    except RequestException as upload_exception:
+        LOG.debug(playbook_body)
+        raise IntegrationError(upload_exception)
+    else:
+        assert isinstance(result, dict)
+    if result.get("status", '') == "PENDING":
+        confirm_playbook_import(rest_client, result, result.get("id"))
+    else:
+        raise IntegrationError(
+            "Could not import because the server did not return an import ID")
+
+
+def confirm_playbook_import(rest_client, import_result, import_id):
+    import_result["status"] = "ACCEPTED"      # Have to confirm changes
+    uri = f"{IMPORT_URL}/{import_id}/status"
+    try:
+        rest_client.put(uri, "ACCEPTED")
+        LOG.info("Imported playbook changes successfully to SOAR")
+    except RequestException as import_exception:
+        raise IntegrationError(repr(import_exception))
+
 def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
     """[summary]
 
@@ -192,7 +249,7 @@ def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
         min_id ([type]): [description]
         max_id ([type]): [description]
     """
-    filter_conditions = PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER.copy()
+    filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
     if min_incident_id:
         filter_conditions['filters'][0]['conditions'].append({
                         "method": "gte",
