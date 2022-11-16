@@ -1,0 +1,11 @@
+{
+    "start": 1563446215136,
+    "stderr_json": null,
+    "end": 1563446215476,
+    "stderr": "",
+    "stdout": "Server:\t\t9.0.138.50\nAddress:\t9.0.138.50#53\n\nName:\tibm.com\nAddress: 129.42.38.10\n\n",
+    "stdout_json": null,
+    "commandline": "nslookup 'ibm.com'",
+    "exitcode": 0,
+    "elapsed": 339
+}
