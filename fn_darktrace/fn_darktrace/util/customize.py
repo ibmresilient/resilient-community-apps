@@ -3,9 +3,8 @@
 """Generate the Resilient customizations required for fn_darktrace"""
 
 import base64
-import io
 import os
-
+import io
 try:
     from resilient import ImportDefinition
 except ImportError:
