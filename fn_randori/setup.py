@@ -22,17 +22,20 @@ def snake_to_camel(word):
 
 setup(
     name="fn_randori",
-     display_name="Randori",
+    display_name="Randori",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
     description="IBM SOAR app bidirectional synchronization and functions for Randori",
-    long_description="""Bidirectional app for Randori for IBM SOAR. Query Randori for targets based \
-         on user-defined query parameters and create and update cases in SOAR.""",
+    long_description="""Bi-directional App for Randori. Query Randori for Targets based \
+         on user-defined query parameters and create and update cases in SOAR.<br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=46.0.0"
+        "resilient-circuits>=47.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
