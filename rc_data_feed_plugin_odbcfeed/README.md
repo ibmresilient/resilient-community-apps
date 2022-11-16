@@ -1,5 +1,6 @@
 ## Release Notes
 
+* v1.0.7 Fixes for mariaDB and mySQL DB access within App Host
 * v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance
 * v1.0.5 Support for attachment content
 * v1.0.4 Oracle definitions for AppHost
@@ -111,7 +112,7 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
 
   #[mysql_feed]
   #class=ODBCFeed
-  #odbc_connect=Driver={MySQL};Server=127.0.0.1;DB=<db>;Port=3306;connectTimeout=0
+  #odbc_connect=Driver={MariaDB};Server=127.0.0.1;DB=<db>;Port=3306;connectTimeout=0
   #sql_dialect=MariaDBDialect
   #uid=<acct>
   #pwd=<pwd>
@@ -140,7 +141,7 @@ The following table lists additional database connection strings for the other s
 
 | Database | Connection Strings |
 | :------- | :----------------- |
-| MariaDB | Driver={MySQL};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0 |
+| MariaDB | Driver={MariaDB};Server=127.0.0.1;Port=3306; DB=<yourDB>;connectTimeout=0 |
 | Oracle | <service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SID=<youSID>))) |
 | SQLServer | DRIVER={FreeTDS};SERVER=127.0.0.1;PORT=1433;DATABASE=<yourDB>; |
 
@@ -193,9 +194,9 @@ The following configuration items are supported:
 Description=ODBC for PostgreSQL
 Driver=/usr/local/lib/psqlodbcw.la
 
-[MariaDB ODBC 3.0 Driver]
+[MariaDB]
 Description=MariaDB Connector/ODBC v.3.0
-Driver=/usr/local/lib64/mariadb/libmaodbc.so
+Driver=/usr/lib64/libmaodbc.so
 
 [FreeTDS]
 Description=Freetds v 0.95
