@@ -208,27 +208,43 @@ Here is an polling filter example that adds or updates targets that have a "targ
 
 The list of Randori supported JQuery `operators`:
 
-* equal
-* not_equal
-* in
-* not_in
-* less
-* less_or_equal
-* greater
-* greater_or_equal
-* between
-* not_between
-* begins_with
-* not_begins_with
-* contains
-* not_contains
-* ends_with
-* not_ends_with
-* is_empty
-* is_not_empty
-* is_null
-* is_not_null
-
+  * begins_with
+  * between
+  * contains
+  * ends_with
+  * equal
+  * greater
+  * greater_or_equal
+  * greater_or_equal_utc_seconds_ago
+  * greater_utc_seconds_ago
+  * icontains
+  * in
+  * is_empty
+  * is_not_empty
+  * is_not_null
+  * is_null
+  * less
+  * less_or_equal
+  * less_or_equal_utc_seconds_ago
+  * less_utc_seconds_ago
+  * not_begins_with
+  * not_contains
+  * not_ends_with
+  * not_equal
+  * not_icontains
+  * not_in
+  * contained_by
+  * contains
+  * equal
+  * has_key
+  * is_empty
+  * is_not_empty
+  * is_not_null
+  * is_null
+  * not_contained_by
+  * not_contains
+  * not_equal
+  * not_has_key
 
 ---
 
