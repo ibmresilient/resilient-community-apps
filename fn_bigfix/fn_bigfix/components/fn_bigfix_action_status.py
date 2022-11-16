@@ -63,10 +63,9 @@ class FunctionComponent(AppFunctionComponent):
 
         results = {}
         if not status:
-            raise FunctionError(
-                f"Function 'poll_action_status' returned bad status {status}.")
+            raise FunctionError(f"Function 'poll_action_status' returned bad status {status}.")
         elif status == "OK":
-            yield self.status_message(f"Received successful status message '{sub('\.$', '', message)}' for BigFix action {fn_inputs.bigfix_action_id}.")
+            yield self.status_message("Received successful status message '{}' for BigFix action {}.".format(sub('\.$', '', message), fn_inputs.bigfix_action_id))
             results = {"status": "OK", "status_message": message}
         elif status == "Failed":
             yield self.status_message(f"Received error status {message} for BigFix action {fn_inputs.bigfix_action_id}.")

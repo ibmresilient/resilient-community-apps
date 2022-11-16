@@ -442,7 +442,7 @@ class BigFixClient(object):
                     elif insertion_count == 2:
                         v = elt.text
                         # Convert "<none>" value to "None" else xml will be un-readable.
-                        v = v.replace("<none>", "None")
+                        v = "None" if v == "<none>" else v
                         response += f"\t\t<value> {v} </value> \n"
 
                     insertion_count += 1
