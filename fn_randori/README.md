@@ -62,6 +62,8 @@
 -->
 **IBM SOAR app bidirectional synchronization and functions for Randori**
 
+Randori is an Attack Surface Management Platform.  
+
  ![screenshot: main](./doc/screenshots/main.png)
 
 Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.
@@ -71,25 +73,23 @@ Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on u
 <!--
   List the Key Features of the Integration
 -->
-* Sync Randori targets to SOAR cases via user defined filter criteria
-* Sync Randori target comments to notes in SOAR
+* Sync Randori Targets to SOAR cases via user defined filter criteria
+* Sync Randori Target comments to notes in SOAR
 * Set the Target Impact Score in Randori from SOAR
 * Set the Target Status in Randori from SOAR
 * List the Discovery Path of a Target with links back to Randori
 * List the Detections of a Target in SOAR
-* Add Detection data as artifacts in SOAR of the following types:
+* Add Detection data as artifacts in SOAR for the following types:
   * DNS Name
   * File Path
   * IP Address
-  * Port 
-
+  * Port
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -148,26 +148,8 @@ This app has been implemented using:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
-
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Randori account 
+* Randori API Token
 
 ---
 
@@ -185,9 +167,9 @@ The following table provides the settings you need to configure the app. These s
 | **api_token** | Yes | `xxx` | *Randori API token.* |
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
-| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
-| **organization_name** | Yes | `webernets-companyname` | *Randori organization name* |
+| **polling_interval** | Yes | `600` | *Poller interval time in seconds. Value of zero to turn poller off.* |
+| **polling_lookback** | Yes | `1200` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
+| **organization_name** | Yes | `webernets-companyname` | *Your organization name in Randori.* |
 | **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |
@@ -206,9 +188,47 @@ The following Randori Tab custom layout is included in the app:
 
 ## Poller Considerations
 
-The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
-
+The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
+<p>
 When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+<p>
+
+### Target Filtering 
+To limit the number of Targets escalated to SOAR, consider using the optional `polling_filter` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","operator","value"),
+Where:
+  * "field" is the Randori Target field to be queried
+  * "operator" is a string operator performed in query 
+  * "value" is the value to be compared against in the query
+<p>
+If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes.
+<p>
+Here is an polling filter example that adds or updates targets that have a "target_temptation" greater or equal to 50 AND whose status is "Needs Investigation", "Needs Resolution", "Needs Review", or "None":
+
+    poller_fillers=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
+
+The list of Randori supported JQuery `operators`:
+
+* equal
+* not_equal
+* in
+* not_in
+* less
+* less_or_equal
+* greater
+* greater_or_equal
+* between
+* not_between
+* begins_with
+* not_begins_with
+* contains
+* not_contains
+* ends_with
+* not_ends_with
+* is_empty
+* is_not_empty
+* is_null
+* is_not_null
+
 
 ---
 
@@ -724,6 +744,8 @@ def add_node_to_dt(node, randori_base_url):
     hostname = content.get("hostname")
     ip = content.get("ip_str")
     row["randori_dt_discovery_step"] = "detection: {} {}".format(hostname, ip)
+  elif node.get("type") == "social":
+    row["randori_dt_discovery_step"] = "social:"
 
     
 #########################################################################################
@@ -1064,7 +1086,15 @@ inputs.randori_target_id = incident.properties.randori_target_id
 <p>
 
 ```python
-None
+from datetime import datetime
+
+note_data = playbook.functions.results.note_data
+
+# Edit note in SOAR to indicate it was sent to Randori
+if note_data.success:
+  # Get the current time
+  now = datetime.now()
+  note.text = u"<b>Sent to Randori at {0}</b><br>{1}".format(now, note.text.content)
 ```
 
 </p>
@@ -1241,7 +1271,7 @@ else:
 
 ## Data Table - Detections
 
-The Detections data table displays the dections found for a target.  A Detection describes one of possibly many ways an attacker could navigate to a specific Target.
+The Detections data table displays the detections found for a target.  A Detection describes one of possibly many ways an attacker could navigate to a specific Target.
 
  ![screenshot: dt-detections](./doc/screenshots/dt-detections.png)
 
