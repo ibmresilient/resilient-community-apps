@@ -72,7 +72,7 @@ class FunctionComponent(AppFunctionComponent):
                     # Query should return array with single result.
                     if not result or not result[0]:
                         yield self.status_message(f"Warning: Delete not allowed for key '{params['artifact_value']}'. BigFix subkey query did not return a valid result.")
-                    elif (not result[0]["failure"] or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                    elif (not result[0].get("failure") or result[0].get("failure") == "False") and result[0].get("result") == "True":
                         yield self.status_message(f"Warning: Delete not allowed, key '{params['artifact_value']}' has 1 or more subkeys.")
                     else:
                         response = bigfix_client.send_delete_registry_key_remediation_message(params["artifact_value"], params["asset_id"])
@@ -82,7 +82,7 @@ class FunctionComponent(AppFunctionComponent):
                 # Query should return array with single result.
                 if not result or not result[0]:
                     yield self.status_message(f"Warning: Delete not allowed for artifact '{params['artifact_value']}'. BigFix subkey query did not return a valid result")
-                elif (not result[0]["failure"] or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                elif (not result[0].get("failure") or result[0].get("failure") == "False") and result[0].get("result") == "True":
                     yield self.status_message(f"Warning: Delete not allowed for folder artifact '{params['artifact_value']}'.")
                 else:
                     response = bigfix_client.send_delete_file_remediation_message(params["artifact_value"], params["asset_id"])

@@ -10,7 +10,6 @@
 from datetime import datetime
 from json import loads, dumps
 from resilient_lib import validate_fields
-from fn_bigfix.lib.bigfix_helpers import get_hits
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_bigfix.util.helpers import create_attachment, PACKAGE_NAME
@@ -98,8 +97,11 @@ class FunctionComponent(AppFunctionComponent):
         elif not artifact_data:
             yield self.status_message(f"Could not find data about the artifact {params['artifact_value']}")
         else:
-            hits = get_hits(artifact_data)
+            # Get endpoints with hits from results returned from BigFix
+            hits = [hit for hit in artifact_data if hit.get("failure") in [0, "False"]]
+            # Get number of hits found
             hits_len = len(hits)
+
             if not hits_len:
                 yield self.status_message(f"No hits detected for artifact id '{params['artifact_id']}' with value '{params['artifact_value']}' and of type '{params['artifact_type']}'.")
             elif hits_len > int(self.options.get("bigfix_hunt_results_limit", "200")):
@@ -108,12 +110,10 @@ class FunctionComponent(AppFunctionComponent):
                 file_name = f'query_for_artifact_{params["artifact_id"]}_{params["artifact_type"]}_{datetime.today().strftime("%Y%m%d")}.txt'
                 file_content = u""
                 for data in hits:
-                    file_content += f'Resource ID: {data["computer_id"]}. Resource Name: {data["computer_name"]}. Artifact value: {params["artifact_value"]}. Artifact Type: {params["artifact_type"]} \n'
+                    file_content += f'Resource ID: {data.get("computer_id")}. Resource Name: {data.get("computer_name")}. Artifact value: {params["artifact_value"]}. Artifact Type: {params["artifact_type"]} \n'
                 # Create an attachment
-                att_report = create_attachment(
-                    self.rest_client(), file_name, file_content, params)
-                results = {"hits_over_limit": True,
-                           "att_name": att_report["name"], "hits_count": hits_len}
+                att_report = create_attachment(self.rest_client(), file_name, file_content, params)
+                results = {"hits_over_limit": True, "att_name": att_report.get("name"), "hits_count": hits_len}
             else:
                 results = {"endpoint_hits": loads(dumps(hits)),
                     "hits_count": hits_len,

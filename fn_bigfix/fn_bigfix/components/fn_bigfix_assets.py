@@ -62,15 +62,14 @@ class FunctionComponent(AppFunctionComponent):
         except Exception as e:
             yield self.status_message(f"Failed with exception '{type(e).__name__}' while trying to query a BigFix asset")
 
-        results = {}
         if not response:
             yield self.status_message(f"No properties retrieved for the asset id '{params['asset_id']}'")
+            results = {}
         else:
             # Create a SOAR attachment
             file_name = f"bigfix-properties-{params['asset_name']}-{datetime.today().strftime('%Y%m%d')}.xml"
-            att_report = create_attachment(
-                self.rest_client(), file_name, response, params)
-            results = {"status": "OK", "att_name": att_report["name"]}
+            att_report = create_attachment(self.rest_client(), file_name, response, params)
+            results = {"status": "OK", "att_name": att_report.get("name")}
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

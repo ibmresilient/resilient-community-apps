@@ -8,25 +8,6 @@ from logging import getLogger
 
 LOG = getLogger(__name__)
 
-def get_hits(artifact_data):
-    """Get endpoints with hits from results returned from BigFix.
-    :param artifact_data: Data returned from Bigfix
-    :return hits: Dictionary of endpoints with hit
-    """
-    LOG.debug("Filtering endpoint responses for hits.")
-
-    hits = []
-    for d in artifact_data:
-        if (d.get("failure") == 0 or d.get("failure") == "False"):
-            hits.append(d)
-    # if no hits result will be an empty list.
-    if hits:
-        LOG.info(f"Detected hits on {len(hits)} endpoints.")
-    else:
-        LOG.info("Detected no hits.")
-
-    return hits
-
 def poll_retry_sleep(retry_timeout, retry_interval, finished):
     """"Sleep for 'retry_interval' if 'retry_timeout' not reached.
     :param retry_timeout: Timeout value for poll status (secs)
@@ -52,25 +33,23 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
         status_message = None
         try:
             status_message = bigfix_client.get_bf_action_status(bigfix_action_id)
-            if status_message:
-                if status_message == "The action executed successfully." or "is not relevant" in status_message:
-                    status = "OK"
-                elif status_message == "The action failed.":
-                    status = "Failed"
-                elif status_message == "Evaluating relevance and action constraints." or status_message == "The action is currently running.":
-                    retry_timeout = poll_retry_sleep(
-                        retry_timeout, retry_interval, finished)
-                    continue
-                else:
-                    status = "Unsupported"
-                finished = True
-
         except Exception as ex:
             LOG.error(ex)
             raise ex
 
-        retry_timeout = poll_retry_sleep(
-            retry_timeout, retry_interval, finished)
+        if status_message:
+            if status_message == "The action executed successfully." or "is not relevant" in status_message:
+                status = "OK"
+            elif status_message == "The action failed.":
+                status = "Failed"
+            elif status_message in ["Evaluating relevance and action constraints.", "The action is currently running."]:
+                retry_timeout = poll_retry_sleep(retry_timeout, retry_interval, finished)
+                continue
+            else:
+                status = "Unsupported"
+            finished = True
+
+        retry_timeout = poll_retry_sleep(retry_timeout, retry_interval, finished)
 
     if not finished:
         status = "Timedout"

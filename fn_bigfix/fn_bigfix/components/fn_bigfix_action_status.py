@@ -71,7 +71,7 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message(f"Received error status {message} for BigFix action {fn_inputs.bigfix_action_id}.")
             results = {"status": "Failed", "status_message": message}
         elif status == "Unsupported":
-            yield self.status_message(f"Received  unexpected status {message} while retrieving status for BigFix action {fn_inputs.bigfix_action_id}.")
+            yield self.status_message(f"Received unexpected status {message} while retrieving status for BigFix action {fn_inputs.bigfix_action_id}.")
         elif status == "Timedout":
             yield self.status_message(f"Timed out getting action status for BigFix action {fn_inputs.bigfix_action_id}")
 

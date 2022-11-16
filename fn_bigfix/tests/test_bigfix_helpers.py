@@ -6,22 +6,10 @@
 from __future__ import print_function
 import pytest
 from time import time
-from fn_bigfix.lib.bigfix_helpers import get_hits, poll_action_status
-from mock_artifacts import get_artifact_data_1, get_artifact_data_2, mocked_bigfix_client
+from fn_bigfix.lib.bigfix_helpers import poll_action_status
+from mock_artifacts import mocked_bigfix_client
 
 """Suite of tests to test BigFix Helper functions"""
-
-class TestBigFixHelpersGetHits:
-    """ Test for get_hits using mocked data. """
-    @pytest.mark.parametrize("artifact_data, params, expected_results_1, expected_results_2", [
-        (get_artifact_data_1(), {
-         "incident_id": 12345, "artifact_id": 6789}, 2, 1),
-        (get_artifact_data_2(), {
-         "incident_id": 23456, "artifact_id": 7891}, 5, 2)
-    ])
-    def test_get_hits(self, artifact_data, params, expected_results_1, expected_results_2):
-        assert (len(artifact_data)) == expected_results_1
-        assert (len(get_hits(artifact_data))) == expected_results_2
 
 class TestBigFixHelperPollActionStatus:
     """ Test for poll_action_status using mocked data. """

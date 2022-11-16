@@ -98,9 +98,7 @@ class BigFixClient(object):
         :return resp: Response from query
         """
         head, tail = split(file_path)
-        query = f'exists file \"{head}\"'
-        if tail:
-            query = f'exists file \"{tail}\" of folder \"{head}\"'
+        query = f'exists file \"{tail}\" of folder \"{head}\"' if tail else f'exists file \"{head}\"'
         LOG.debug("get_bf_computer_by_file_path triggered")
         return self.get_bfclientquery(self.post_bfclientquery(query), self.retry_interval, self.retry_timeout)
 
@@ -122,25 +120,19 @@ class BigFixClient(object):
         :return resp: Response from query
         """
         # strip off the prefix if it exists for current user
-        if key.lower().startswith(("hkcu", "hkey_current_user")):
-            # The hkcu hive maps to a corresponding entry in hku for each user.
-            # For hkcu search instead in hku for existence of key for each actual user.
-            # The hku entries top-level keys are the sids for the users which can have an hkcu hive loaded.
-            # e.g 'HKEY_USERS\S-1-5-18' or 'HKEY_USERS\S-1-5-21-0123456789-0123456789-0123456789-1000' for a system or
-            # standard account.
-            # The regex pattern 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$' is used to match an sid in the hku hive.
-            key = key.split('\\', 1)[1]
-            namevaluekey = "exists values \"{}\" whose (it=\"{}\") of keys \"{}\" of keys whose (exists "\
-                "matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) of keys \"HKU\" of "\
-                "(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            namekey = "exists values \"{}\" of keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) "\
-                "of (it as string) ) of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            keyonly = "exists keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) "\
-                "of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-        else:
-            namevaluekey = "exists values \"{}\" whose (it=\"{}\") of keys \"{}\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            namekey = "exists values \"{}\" of keys \"{}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            keyonly = "exists keys \"{}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        key = key.split('\\', 1)[1]
+        namevaluekey = "exists values \"{}\" whose (it=\"{}\") of keys \"{}\" of keys whose (exists "\
+            "matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) of keys \"HKU\" of "\
+            "(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        namekey = "exists values \"{}\" of keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) "\
+            "of (it as string) ) of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        keyonly = "exists keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) "\
+            "of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
+        if not key.lower().startswith(("hkcu", "hkey_current_user")):
+            namevaluekey = f"{namevaluekey[:47]}{namevaluekey[157:]}"
+            namekey = f"{namekey[:34]}{namekey[144:]}"
+            keyonly = f"{keyonly[:19]}{keyonly[129:]}"
 
         LOG.debug("get_bf_computer_by_registry_key_name_value triggered")
 
@@ -294,38 +286,39 @@ class BigFixClient(object):
             if r.status_code == 200:
                 try:
                     response = loads(r.text)
-                    if response['totalResults'] == 0:
-                        LOG.debug("No results yet, retrying")
-                    elif response['totalResults'] > 0:
-                        response_timedout = False
-                        LOG.debug(f"Received responses from {response['totalResults']} endpoints.")
-                        for i in range(response['totalResults']):
-                            result.append({
-                                "computer_id": response['results'][i]['computerID'],
-                                "computer_name": response['results'][i]['computerName'],
-                                "query_id": response['results'][i]['subQueryID'],
-                                "failure": response['results'][i]['isFailure'],
-                                "result": response['results'][i]['result'],
-                                "resp_time": response['results'][i]['ResponseTime']
-                            }
-                            )
-                        if hasattr(self, "endpoints_wait") and self.endpoints_wait:
-                            # Set new timeout value to wait for all results.
-                            if not wait_for_endpoints:
-                                LOG.info(f"Waiting {self.endpoints_wait} seconds for all endpoints to report.")
-                                # Reset timeout value to 'self.endpoints_wait' and add 'wait' value as it will
-                                # be stripped off again below.
-                                timeout = self.endpoints_wait + wait
-                                wait_for_endpoints = True
-                        else:
-                            break
-                    else:
-                        LOG.exception(f"Got unexpected number of results ({response['totalResults']})")
-                        break
-
                 except Exception as e:
                     LOG.exception(f"XML processing, Got exception type: {e.__repr__()}, msg: {e.message}")
                     raise e
+
+                totalResults = response.get('totalResults')
+                if totalResults == 0:
+                    LOG.debug("No results yet, retrying")
+                elif totalResults > 0:
+                    response_timedout = False
+                    LOG.debug(f"Received responses from {totalResults} endpoints.")
+                    for i in range(totalResults):
+                        rs = response['results'][i]
+                        result.append({
+                            "computer_id": rs.get('computerID'),
+                            "computer_name": rs.gett('computerName'),
+                            "query_id": rs.gett('subQueryID'),
+                            "failure": rs.get('isFailure'),
+                            "result": rs.get('result'),
+                            "resp_time": rs.get('ResponseTime')
+                        })
+                    if hasattr(self, "endpoints_wait") and self.endpoints_wait:
+                        # Set new timeout value to wait for all results.
+                        if not wait_for_endpoints:
+                            LOG.info(f"Waiting {self.endpoints_wait} seconds for all endpoints to report.")
+                            # Reset timeout value to 'self.endpoints_wait' and add 'wait' value as it will
+                            # be stripped off again below.
+                            timeout = self.endpoints_wait + wait
+                            wait_for_endpoints = True
+                    else:
+                        break
+                else:
+                    LOG.exception(f"Got unexpected number of results ({response['totalResults']})")
+                    break
             else:
                 LOG.exception(f"Unexpected HTTP status code: {r.status_code}")
 
@@ -364,11 +357,8 @@ class BigFixClient(object):
 
         if r.status_code == 200:
             try:
-                xmlroot = elementTree.fromstring(r.text)
-                results = xmlroot.findall(".//ClientQuery/ID")
-                query_id = int(results[0].text)
-                LOG.debug(f"** Client Query ID: {query_id}")
-                return query_id
+                results = elementTree.fromstring(r.text).findall(".//ClientQuery/ID")
+                return int(results[0].text)
             except Exception as e:
                 LOG.exception(f"XML processing, Got exception type: {e.__repr__()}, msg: {e.message}")
                 raise e
@@ -404,8 +394,7 @@ class BigFixClient(object):
 
         if r.status_code == 200:
             try:
-                xmlroot = elementTree.fromstring(r.text)
-                results = xmlroot.findall(".//Action/ID")
+                results = elementTree.fromstring(r.text).findall(".//Action/ID")
                 if len(results) > 1:
                     LOG.error("size of results larger than 1, only the first one will be used.")
                 #  Urg, hardcoded index...
@@ -428,8 +417,7 @@ class BigFixClient(object):
         :return response: Response transformed to xml format
         """
         try:
-            xmlroot = elementTree.fromstring(
-                response_text.text.encode('utf8', 'ignore'))
+            xmlroot = elementTree.fromstring(response_text.text.encode('utf8', 'ignore'))
             results = xmlroot.findall(".//Query/Result/Tuple/Answer")
             if len(results):
                 response = f"<?xml version='1.0'?>\n<report> {title}: \n"
@@ -450,7 +438,7 @@ class BigFixClient(object):
                         response += "\t</property>\n"
                         insertion_count = 0
 
-                return response + "</report>"
+                return f"{response}</report>"
         except elementTree.ParseError as e:
             LOG.error("There was an error trying to process XML. Returning RAW XML")
             LOG.exception(f"XML processing, Got exception type: {e.__repr__()}, msg: {e.message}")
@@ -470,13 +458,9 @@ class BigFixClient(object):
 
         if r.status_code == 200:
             try:
-                status = None
-                xmlroot = elementTree.fromstring(r.text)
-                results = xmlroot.findall(".//ActionResults/Computer/Status")
-                if len(results) > 0:
-                    status = results[0].text
-                LOG.debug(
-                    f"BigFix Action Status: {status} BigFix Action ID: {action_id}.")
+                results = elementTree.fromstring(r.text).findall(".//ActionResults/Computer/Status")
+                status = results[0].text if len(results) > 0 else None
+                LOG.debug(f"BigFix Action Status: {status} BigFix Action ID: {action_id}.")
             except Exception as e:
                 LOG.exception(f"XML processing, Got exception type: {e.__repr__()}, msg: {e.message}")
                 raise e
