@@ -4,7 +4,7 @@
 
 ''' Helper function for funct_ms_teams_create_teams'''
 
-import json, re
+import json, re, logging
 
 from urllib import parse
 from resilient_lib import IntegrationError
@@ -40,7 +40,7 @@ class TeamsInterface:
         self.users_not_found = []
         self.response_handler = ResponseHandler()
         self.rc = required_parameters["rc"]
-        self.log = required_parameters["logger"]
+        self.log = logging.getLogger(__file__)
         self.headers = required_parameters["header"]
         self.resclient = required_parameters["resclient"]
 
@@ -76,9 +76,10 @@ class TeamsInterface:
         owners_list = owners_list.split(",") if owners_list else owners_list
         owners_list = [self._build_member_format(owner, True) for owner in owners_list]
 
+        self.log.info("Successfully gathered Owners' information")
+
         member_list = microsoft_commons.generate_member_list(
-            self.resclient,
-            self.log,
+            resclient=self.resclient,
             task_id=task_id,
             incident_id=incident_id,
             add_members_from=add_members_from,
@@ -86,6 +87,7 @@ class TeamsInterface:
 
         member_list = [self._build_member_format(member) for member in member_list]
         self.response_handler.clear_exempt_codes(default=True)
+        self.log.info("Successfully gathered Users' information")
         return owners_list, member_list
 
 
@@ -130,14 +132,19 @@ class TeamsInterface:
             constants.BASE_URL,
             constants.URL_LIST_TEAMS)
 
-        body = json.dumps({
+        body = {
             "template@odata.bind" : parse.urljoin(
                 constants.BASE_URL,
                 constants.URL_TEAMS_STANDARD_TEMPLATE),
             "displayName" : required_parameters.get("displayName"),
             "description" : required_parameters.get("description"),
-            "members"     : owners_email_list}.update(
-                constants.TEAMS_FROM_GROUP_CONFIGURATION), indent=2)
+            "members"     : owners_email_list}
+        body.update(
+                constants.TEAMS_FROM_GROUP_CONFIGURATION)
+
+        body = json.dumps(body, indent=2)
+
+        self.log.debug("Request body for Team creation")
         self.log.debug(body)
 
         self.response_handler.add_empty_response_code(202)
@@ -149,6 +156,7 @@ class TeamsInterface:
             headers=self.headers,
             callback=self.response_handler.check_response)
         self.log.debug(response.raw.info())
+        self.response_handler.set_return_raw(False)
 
         _team_id = (response
             .raw
@@ -161,26 +169,44 @@ class TeamsInterface:
         if len(members_email_list) > 0: 
             self._add_members(_team_id, members_email_list)
 
-        return {
-            "teamId"       : _team_id,
-            "displayName"  : required_parameters.get("displayName"),
-            "description"  : required_parameters.get("description"),
-            "unfoundUsers" : self.users_not_found if len(self.users_not_found) > 0 else None}
+        group_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+        group_details = group_finder.find_group(
+            {"group_id" : _team_id})
+
+        group_detail = group_details[0]
+        group_detail.update({
+            "teamsEnabled" : True,
+            "unfoundUsers" : self.users_not_found if len(self.users_not_found) > 0 else None})
+        return group_detail
 
 
-    def create_team_from_group(self, group_id):
+    def enable_team_group(self, options):
         '''
         Creates a MS Team from an existing MS Group. Major attributes like the members, description
         etc, is inherited from the Group. While creating a MS Team, certain configurations are 
         required and so the Microsoft recommended bare minimum settings is used create a team.
         These settings are available in the constants folder.
         '''
+        group_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+        group_details = group_finder.find_group(options)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        group_id = group_details[0].get("id")
+
         url = parse.urljoin(
             constants.BASE_URL,
             constants.URL_TEAM_FROM_GROUP.format(group_id))
 
-        self.log.debug("URL " + url)
-        self.log.debug("body " +  json.dumps(constants.TEAMS_FROM_GROUP_CONFIGURATION, indent=2))
+        self.log.debug(f"URL  {url}")
+        self.log.debug(f"body {json.dumps(constants.TEAMS_FROM_GROUP_CONFIGURATION, indent=2)}")
 
         response = self.rc.execute(
             method="put",
@@ -189,9 +215,60 @@ class TeamsInterface:
             headers=self.headers,
             callback=self.response_handler.check_response)
 
-        self.log.debug( json.dumps(response))
+        self.log.debug(json.dumps(response))
+        group_details = group_details[0]
 
-        return{
-            "teamId"      : response.get("id"),
-            "displayName" : response.get("displayName"),
-            "description" : response.get("description")}
+        if response.get("status_code") == 201:
+            group_details["message"] = constants.INFO_SUCCESSFULLY_ENABLED.format(
+                group_details.get("displayName"))
+            group_details.update({
+                "teamsEnabled" : True})
+        return group_details
+
+
+    def archive_unarchive_team(self, options):
+        operation = options.get("operation").lower().strip()
+        group_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+        group_details = group_finder.find_group(options)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        team_id = group_details[0].get("id")
+
+        if operation == "archive":
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_TEAMS_ARCHIVE.format(team_id))
+        elif operation == "unarchive":
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_TEAMS_UNARCHIVE.format(team_id))
+
+        self.log.debug(f"URL {url}")
+
+        self.response_handler.add_empty_response_code(202)
+        response = self.rc.execute(
+            method="post",
+            url=url,
+            headers=self.headers,
+            callback=self.response_handler.check_response)
+        self.response_handler.clear_empty_response_codes(default=True)
+
+        group_details = group_details[0]
+
+        if response.get("status_code") == 202:
+            if operation == "archive":
+                group_details["message"] = constants.INFO_SUCCESSFULLY_ARCHIVED.format(
+                    group_details.get("displayName"))
+                group_details.update({
+                    "teamsEnabled" : "Archived"})
+            else:
+                group_details["message"] = constants.INFO_SUCCESSFULLY_UNARCHIVED.format(
+                    group_details.get("displayName"))
+                group_details.update({
+                    "teamsEnabled" : "Unarchived"})
+        return group_details

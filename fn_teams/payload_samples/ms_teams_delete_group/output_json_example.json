@@ -4,18 +4,18 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted Group: SOAR_APPS"
+    "message": "Successfully deleted Group: benben"
   },
   "raw": null,
   "inputs": {
-    "ms_group_name": "SOAR_APPS"
+    "ms_group_name": "benben"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "AppHost",
-    "execution_time_ms": 2587,
-    "timestamp": "2022-11-10 11:57:30"
+    "host": "Calvins-MacBook-Pro.local",
+    "execution_time_ms": 3157,
+    "timestamp": "2022-11-16 12:17:00"
   }
 }

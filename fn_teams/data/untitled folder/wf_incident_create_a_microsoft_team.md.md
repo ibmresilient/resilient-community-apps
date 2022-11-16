@@ -18,29 +18,33 @@
 
 ### Pre-Processing Script
 ```python
-if task:
-    inputs.task_id = task.id
-  
-inputs.incident_id = str(incident.id)
-inputs.ms_team_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name
+if rule.properties.ms_group_id:
+  inputs.ms_group_id = rule.properties.ms_group_id
 
-if rule.properties.ms_owners_list is not None:
-    inputs.ms_owners_list = rule.properties.ms_owners_list
-    
-if rule.properties.add_members_incident is not None:
-  _value = rule.properties.add_members_incident.lower().strip()
-  if _value == "all incident members":
-    inputs.add_members_from = "Incident"
-  else:
-    inputs.add_members_from = "None"
-    
-if rule.properties.additional_members.content is not None:
-    inputs.additional_members = rule.properties.additional_members.content
-    
-if rule.properties.ms_group_description is not None:
-    inputs.ms_team_description = rule.properties.ms_group_description
 else:
-    inputs.ms_team_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
+  if task:
+      inputs.task_id = task.id
+    
+  inputs.incident_id = str(incident.id)
+  inputs.ms_team_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name
+  
+  if rule.properties.ms_owners_list is not None:
+      inputs.ms_owners_list = rule.properties.ms_owners_list
+      
+  if rule.properties.add_members_incident is not None:
+    _value = rule.properties.add_members_incident.lower().strip()
+    if _value == "all incident members":
+      inputs.add_members_from = "Incident"
+    else:
+      inputs.add_members_from = "None"
+      
+  if rule.properties.additional_members.content is not None:
+      inputs.additional_members = rule.properties.additional_members.content
+      
+  if rule.properties.ms_group_description is not None:
+      inputs.ms_team_description = rule.properties.ms_group_description
+  else:
+      inputs.ms_team_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
 
 ```
 

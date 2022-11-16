@@ -83,6 +83,12 @@
         },
         "onPremisesProvisioningErrors": {
           "type": "array"
+        },
+        "teamsEnabled": {
+          "type": "boolean"
+        },
+        "unfoundUsers": {
+          "type": "array"
         }
       }
     },
@@ -107,9 +113,6 @@
         },
         "add_members_from": {
           "type": "string"
-        },
-        "task_id": {
-          "type": "integer"
         }
       }
     },

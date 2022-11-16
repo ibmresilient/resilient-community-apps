@@ -2,6 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 ''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
 
+import logging
 from urllib import parse
 
 import msal
@@ -39,7 +40,7 @@ class MicrosoftAuthentication:
 
         self.required_parameters = required_parameters
         self.rc  = required_parameters.get("rc")
-        self.LOG = required_parameters.get("logger")
+        self.LOG = logging.getLogger(__name__)
 
         self.required_parameters["scope"] = constants.DEFAULT_SCOPE
         self.required_parameters["application_id"] = app_config.get("application_id")

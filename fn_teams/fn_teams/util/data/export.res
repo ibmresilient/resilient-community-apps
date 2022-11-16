@@ -22,8 +22,8 @@
       "uuid": "f63657ce-d1d9-4459-bb26-e8ee61eb71cf",
       "view_items": [
         {
-          "content": "This is a heading",
-          "element": "header",
+          "content": "\u003ch5\u003eRequired\u003c/h5\u003e \n\u003cbr /\u003e",
+          "element": "html",
           "field_type": null,
           "show_if": null,
           "show_link_header": false,
@@ -54,7 +54,7 @@
           "step_label": null
         },
         {
-          "content": "\u003chr /\u003e",
+          "content": "\u003ch5\u003eOptional\u003c/h5\u003e \n\u003cbr /\u003e",
           "element": "html",
           "field_type": null,
           "show_if": null,
@@ -111,6 +111,14 @@
       "uuid": "1452ff67-bf9c-41ed-930b-a126783f0eed",
       "view_items": [
         {
+          "content": "\u003ch5\u003eRequired\u003c/h5\u003e \n\u003cbr /\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
           "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
           "element": "field_uuid",
           "field_type": "actioninvocation",
@@ -130,6 +138,14 @@
           "content": "befdf4d5-dfc1-4763-907a-54ed7fec6821",
           "element": "field_uuid",
           "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003ch5\u003eOptional\u003c/h5\u003e \n\u003cbr /\u003e",
+          "element": "html",
+          "field_type": null,
           "show_if": null,
           "show_link_header": false,
           "step_label": null
@@ -183,38 +199,6 @@
       "type": 1,
       "uuid": "2f6e7c88-8159-422e-8db0-17de597b1ac9",
       "view_items": [
-        {
-          "content": "Create a team using a Microsoft Group",
-          "element": "header",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "371c7b60-656c-4592-a429-dc2408b9b222",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "\u003cbr /\u003e \n\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch3\u003e -- or -- \u003c/h3\u003e\n\u003c/div\u003e",
-          "element": "html",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "Create a Microsoft team",
-          "element": "header",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
         {
           "content": "\u003ch5\u003eRequired\u003c/h5\u003e \n\u003cbr /\u003e",
           "element": "html",
@@ -297,38 +281,6 @@
       "uuid": "98b5468c-fba1-4da7-acb3-44d826fa4e99",
       "view_items": [
         {
-          "content": "Create a team using a Microsoft Group",
-          "element": "header",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "371c7b60-656c-4592-a429-dc2408b9b222",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "\u003cbr /\u003e \n\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch3\u003e -- or -- \u003c/h3\u003e\n\u003c/div\u003e",
-          "element": "html",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "Create a Microsoft team",
-          "element": "header",
-          "field_type": null,
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
           "content": "\u003ch5\u003eRequired\u003c/h5\u003e \n\u003cbr /\u003e",
           "element": "html",
           "field_type": null,
@@ -410,7 +362,7 @@
       "uuid": "a7581e16-da65-48c3-a21f-8a55a949ceaa",
       "view_items": [
         {
-          "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
+          "content": "371c7b60-656c-4592-a429-dc2408b9b222",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -418,7 +370,7 @@
           "step_label": null
         },
         {
-          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch3\u003e -- or -- \u003c/h3\u003e\n\u003c/div\u003e",
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
           "element": "html",
           "field_type": null,
           "show_if": null,
@@ -432,10 +384,34 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003cbr /\u003e\n\u003cp style=\"font-size: 12.0px;\"\u003e\u003cb\u003e*\u003cu\u003eNote\u003c/u\u003e: \u003c/b\u003eEnabling Teams for a Group using the \u003cb\u003eGroup Name\u003c/b\u003e attribute is not recommended, as there can exist multiple Groups with the same name. Use this option if you are sure that the Group name is unique.\u003c/p\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
-        "incident_delete_a_microsoft_group"
+        "common_delete_a_microsoft_group"
       ]
     },
     {
@@ -459,7 +435,7 @@
       "uuid": "0ffc17b8-69d2-4e66-9529-5370607edb5e",
       "view_items": [
         {
-          "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
+          "content": "371c7b60-656c-4592-a429-dc2408b9b222",
           "element": "field_uuid",
           "field_type": "actioninvocation",
           "show_if": null,
@@ -467,7 +443,7 @@
           "step_label": null
         },
         {
-          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch3\u003e -- or -- \u003c/h3\u003e\n\u003c/div\u003e",
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
           "element": "html",
           "field_type": null,
           "show_if": null,
@@ -481,10 +457,110 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003cbr /\u003e\n\u003cp style=\"font-size: 12.0px;\"\u003e\u003cb\u003e*\u003cu\u003eNote\u003c/u\u003e: \u003c/b\u003eEnabling Teams for a Group using the \u003cb\u003eGroup Name\u003c/b\u003e attribute is not recommended, as there can exist multiple Groups with the same name. Use this option if you are sure that the Group name is unique.\u003c/p\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": [
-        "task_delete_a_microsoft_group"
+        "common_delete_a_microsoft_group"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "MS Teams: Enable Teams for an existing Group",
+      "id": 27,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "MS Teams: Enable Teams for an existing Group",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "9ebf076e-df68-42a4-875b-bf8443834975",
+      "view_items": [
+        {
+          "content": "\u003cp style=\"font-size: 15.0px;\"\u003eThis action enables Microsoft Teams functionality for an existing Microsoft Group\u003c/p\u003e\u003cbr /\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "371c7b60-656c-4592-a429-dc2408b9b222",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "80a3cfc0-209d-45d2-a422-54531b7123a8",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003cdiv style=\"text-align: center;\"\u003e\n\u003ch5\u003e -- OR -- \u003c/h5\u003e\n\u003c/div\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "27cd3210-769a-4443-b25e-947b4270ebc8",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "\u003cbr /\u003e\n\u003cp style=\"font-size: 12.0px;\"\u003e\u003cb\u003e*\u003cu\u003eNote\u003c/u\u003e: \u003c/b\u003eEnabling Teams for a Group using the \u003cb\u003eGroup Name\u003c/b\u003e attribute is not recommended, as there can exist multiple Groups with the same name. Use this option if you are sure that the Group name is unique.\u003c/p\u003e",
+          "element": "html",
+          "field_type": null,
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "common_enable_microsoft_team_for_group"
       ]
     },
     {
@@ -515,11 +591,11 @@
       "automations": [],
       "conditions": [],
       "enabled": true,
-      "export_key": "MS Teams: Post task information to teams",
+      "export_key": "MS Teams: Post Task Information to Teams",
       "id": 24,
       "logic_type": "all",
       "message_destinations": [],
-      "name": "MS Teams: Post task information to teams",
+      "name": "MS Teams: Post Task Information to Teams",
       "object_type": "task",
       "tags": [
         {
@@ -538,7 +614,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1668087365954,
+  "export_date": 1668602986050,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -941,6 +1017,54 @@
       "type_id": 11,
       "uuid": "3f35f1a9-f5d6-440a-a825-66a340aeaefe",
       "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/archive_operation",
+      "hide_notification": false,
+      "id": 318,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "archive_operation",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "archive_operation",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Archive",
+          "properties": null,
+          "uuid": "11cbdf5e-aa22-4b99-85d3-98790f9de82e",
+          "value": 102
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Unarchive",
+          "properties": null,
+          "uuid": "7fd9bd61-5f26-4063-8436-5b686ea4d817",
+          "value": 103
+        }
+      ]
     },
     {
       "allow_default_value": false,
@@ -1414,6 +1538,84 @@
   ],
   "functions": [
     {
+      "created_date": 1668520433334,
+      "description": {
+        "content": "Function to archive a MS Team",
+        "format": "text"
+      },
+      "destination_handle": "fn_teams",
+      "display_name": "MS Teams: Archive Team",
+      "export_key": "ms_teams_archive_team",
+      "id": 10,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1668531515859,
+      "name": "ms_teams_archive_team",
+      "tags": [],
+      "uuid": "553efbec-00dc-4205-8845-fbda91742028",
+      "version": 5,
+      "view_items": [
+        {
+          "content": "5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "9cefbe23-f9c0-4276-9d61-934a2273e7a9",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "8c740ee5-6b2d-4555-be2e-e0dce0fe93fc",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Common: Archive/Unarchive a Microsoft Team",
+          "object_type": "incident",
+          "programmatic_name": "common_archive_a_microsoft_team",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 17
+        },
+        {
+          "actions": [],
+          "description": null,
+          "name": "common_archive_unarchive_a_microsoft_team",
+          "object_type": "incident",
+          "programmatic_name": "common_archive_unarchive_a_microsoft_team",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 19
+        }
+      ]
+    },
+    {
       "created_date": 1667910029620,
       "description": {
         "content": "A function to create a Microsoft Group",
@@ -1556,7 +1758,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668080250199,
+      "last_modified_time": 1668427927010,
       "name": "ms_teams_create_team",
       "output_json_example": "{}",
       "output_json_schema": "{}",
@@ -1567,16 +1769,8 @@
         }
       ],
       "uuid": "9acc046d-60f3-4be8-97cf-c966436e6f9b",
-      "version": 5,
+      "version": 6,
       "view_items": [
-        {
-          "content": "9cefbe23-f9c0-4276-9d61-934a2273e7a9",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
         {
           "content": "958f0953-8b6f-4472-b786-b9ae4351ddfe",
           "element": "field_uuid",
@@ -1683,7 +1877,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668080266978,
+      "last_modified_time": 1668436021764,
       "name": "ms_teams_delete_group",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"status_code\": 204, \"message\": \"Successfully deleted Group: cloudPack\"}, \"raw\": null, \"inputs\": {\"ms_group_name\": \"cloudPack\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"Apphost\", \"execution_time_ms\": 3335, \"timestamp\": \"2022-11-03 15:08:08\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_group_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1694,10 +1888,83 @@
         }
       ],
       "uuid": "c710fb72-c934-45ce-9205-e36794fee376",
-      "version": 3,
+      "version": 4,
+      "view_items": [
+        {
+          "content": "9cefbe23-f9c0-4276-9d61-934a2273e7a9",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "d6f67e8d-3562-48a3-8164-c2440b2c70f0",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Common: Delete a Microsoft Group",
+          "object_type": "incident",
+          "programmatic_name": "common_delete_a_microsoft_group",
+          "tags": [
+            {
+              "tag_handle": "fn_teams",
+              "value": null
+            }
+          ],
+          "uuid": null,
+          "workflow_id": 14
+        }
+      ]
+    },
+    {
+      "created_date": 1668427903292,
+      "description": {
+        "content": "Allows for enabling a team for an existing Group",
+        "format": "text"
+      },
+      "destination_handle": "fn_teams",
+      "display_name": "MS Teams: Enable Team",
+      "export_key": "ms_teams_enable_team",
+      "id": 9,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1668427916992,
+      "name": "ms_teams_enable_team",
+      "tags": [],
+      "uuid": "0e597a9e-7ce0-4580-86fa-11204e2f1caf",
+      "version": 2,
       "view_items": [
         {
           "content": "d6f67e8d-3562-48a3-8164-c2440b2c70f0",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "9cefbe23-f9c0-4276-9d61-934a2273e7a9",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1717,32 +1984,12 @@
         {
           "actions": [],
           "description": null,
-          "name": "Incident: Delete a Microsoft Group",
+          "name": "Common: Enable Microsoft Team for an existing Group",
           "object_type": "incident",
-          "programmatic_name": "incident_delete_a_microsoft_group",
-          "tags": [
-            {
-              "tag_handle": "fn_teams",
-              "value": null
-            }
-          ],
+          "programmatic_name": "common_enable_microsoft_team_for_group",
+          "tags": [],
           "uuid": null,
-          "workflow_id": 10
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Delete a Microsoft group",
-          "object_type": "task",
-          "programmatic_name": "task_delete_a_microsoft_group",
-          "tags": [
-            {
-              "tag_handle": "fn_teams",
-              "value": null
-            }
-          ],
-          "uuid": null,
-          "workflow_id": 12
+          "workflow_id": 15
         }
       ]
     },
@@ -1852,13 +2099,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 11,
+  "id": 28,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1668087363521,
+      "create_date": 1668602983523,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1867,7 +2114,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1668087363521,
+      "update_date": 1668602983523,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1915,15 +2162,87 @@
     {
       "actions": [],
       "content": {
-        "version": 6,
-        "workflow_id": "incident_create_a_microsoft_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"incident_create_a_microsoft_group\" isExecutable=\"true\" name=\"Incident: Create a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Group from an incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rhfah8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xcbxw8\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"AdminSoarMS@5rf2xs.onmicrosoft.com\"}},\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if task:\\n    inputs.task_id = task.id\\n  \\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_group_name is None else rule.properties.ms_group_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_incident is not None:\\n  _value = rule.properties.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_group_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_group_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n  \\n\\nif rule.properties.ms_group_mail_nickname is not None:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rhfah8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19sx12p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_00djqtl\"\u003e\u003cincoming\u003eSequenceFlow_19sx12p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_19sx12p\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"EndEvent_00djqtl\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0rhfah8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xcbxw8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_17bn2hx\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_name, owners_list, members_list, group_description, additional_members, group_mailNickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14jwjkk\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"TextAnnotation_17bn2hx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0so7w7l\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wzfeh6\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"TextAnnotation_0so7w7l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1cot0pb\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nzxqcp\" sourceRef=\"EndEvent_00djqtl\" targetRef=\"TextAnnotation_1cot0pb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"145\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"140\" y=\"233\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"160\" x=\"88\" y=\"326\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"163\" xsi:type=\"omgdc:Point\" y=\"238\"/\u003e\u003comgdi:waypoint x=\"163\" xsi:type=\"omgdc:Point\" y=\"326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xcbxw8\" id=\"ServiceTask_0xcbxw8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"381\" y=\"176\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00djqtl\" id=\"EndEvent_00djqtl_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"681\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"699\" y=\"237\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19sx12p\" id=\"SequenceFlow_19sx12p_di\"\u003e\u003comgdi:waypoint x=\"481\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"581\" y=\"194\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rhfah8\" id=\"SequenceFlow_0rhfah8_di\"\u003e\u003comgdi:waypoint x=\"181\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"305\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_17bn2hx\" id=\"TextAnnotation_17bn2hx_di\"\u003e\u003comgdc:Bounds height=\"137\" width=\"176\" x=\"75\" y=\"-15\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14jwjkk\" id=\"Association_14jwjkk_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0so7w7l\" id=\"TextAnnotation_0so7w7l_di\"\u003e\u003comgdc:Bounds height=\"91\" width=\"157\" x=\"620\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wzfeh6\" id=\"Association_1wzfeh6_di\"\u003e\u003comgdi:waypoint x=\"481\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1cot0pb\" id=\"TextAnnotation_1cot0pb_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"150\" x=\"624\" y=\"325\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nzxqcp\" id=\"Association_1nzxqcp_di\"\u003e\u003comgdi:waypoint x=\"699\" xsi:type=\"omgdc:Point\" y=\"239\"/\u003e\u003comgdi:waypoint x=\"699\" xsi:type=\"omgdc:Point\" y=\"325\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 4,
+        "workflow_id": "task_create_a_microsoft_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_create_a_microsoft_group\" isExecutable=\"true\" name=\"Task: Create a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Group from a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uejmnm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0q75ylm\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"AdminSoarMS@5rf2xs.onmicrosoft.com\"}},\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n\\nnote = helper.createRichText(text)\\ntask.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if task:\\n    inputs.task_id = task.id\\n  \\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_group_name is None else rule.properties.ms_group_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_task is not None:\\n  _value = rule.properties.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  elif _value == \\\"all task members\\\":\\n    inputs.add_members_from = \\\"Task\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_group_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_group_description = f\\\"Incident {incident.id}: {incident.name} Task {task.id} : {task.name} {task.description}\\\"\\n  \\nif rule.properties.ms_group_mail_nickname is not None:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uejmnm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1avwvjy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0g889x3\"\u003e\u003cincoming\u003eSequenceFlow_1avwvjy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1avwvjy\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"EndEvent_0g889x3\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1uejmnm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0q75ylm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0j0q9b4\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19zhmo7\" sourceRef=\"EndEvent_0g889x3\" targetRef=\"TextAnnotation_0j0q9b4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0jkumgn\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_name, owners_list, members_list, group_description, group_mail_nickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g7juie\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"TextAnnotation_0jkumgn\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1fg0k49\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created group details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_16nskn7\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"TextAnnotation_1fg0k49\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"139\" x=\"110\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"179\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0q75ylm\" id=\"ServiceTask_0q75ylm_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"341.3485838779956\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0g889x3\" id=\"EndEvent_0g889x3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"605.3485838779957\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"623.3485838779957\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1avwvjy\" id=\"SequenceFlow_1avwvjy_di\"\u003e\u003comgdi:waypoint x=\"441\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"605\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uejmnm\" id=\"SequenceFlow_1uejmnm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"269.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0j0q9b4\" id=\"TextAnnotation_0j0q9b4_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"573\" y=\"329\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19zhmo7\" id=\"Association_19zhmo7_di\"\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"329\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0jkumgn\" id=\"TextAnnotation_0jkumgn_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"233\" x=\"128\" y=\"15\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g7juie\" id=\"Association_1g7juie_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"284\" xsi:type=\"omgdc:Point\" y=\"95\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1fg0k49\" id=\"TextAnnotation_1fg0k49_di\"\u003e\u003comgdc:Bounds height=\"85\" width=\"165\" x=\"511\" y=\"12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_16nskn7\" id=\"Association_16nskn7_di\"\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"538\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 6,
+      "content_version": 4,
+      "description": "A sample workflow to create a MS Group from a task",
+      "export_key": "task_create_a_microsoft_group",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1668080587085,
+      "name": "Task: Create a Microsoft Group",
+      "object_type": "task",
+      "programmatic_name": "task_create_a_microsoft_group",
+      "tags": [
+        {
+          "tag_handle": "fn_teams",
+          "value": null
+        }
+      ],
+      "uuid": "1a53cc12-68ce-4824-a7ab-c3ddd814f642",
+      "workflow_id": 9
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "common_delete_a_microsoft_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"common_delete_a_microsoft_group\" isExecutable=\"true\" name=\"Common: Delete a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to delete a MS Group from within an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_07l5bga\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tk0xvp\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to delete Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text = u\\\"\u0026lt;b\u0026gt;Microsoft Groups:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;{}\\\".format(content.get(\\\"message\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_id:\\n    inputs.ms_group_id = rule.properties.ms_group_id\\n\\nelif rule.properties.ms_group_mail_nickname:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\\nelif rule.properties.ms_group_name:\\n    inputs.ms_group_name = rule.properties.ms_group_name\\n\\nelse:\\n    helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_07l5bga\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1q6a4wt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1eb2hkm\"\u003e\u003cincoming\u003eSequenceFlow_1q6a4wt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1q6a4wt\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"EndEvent_1eb2hkm\"/\u003e\u003csequenceFlow id=\"SequenceFlow_07l5bga\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tk0xvp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1se85ex\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: Group name or Mail nickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1p7fhja\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_1se85ex\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10kzg48\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m6api6\" sourceRef=\"EndEvent_1eb2hkm\" targetRef=\"TextAnnotation_10kzg48\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_142txyo\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident Note with group name that was deleted\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0lc1nip\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_142txyo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"169\" x=\"95\" y=\"312\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"174\" xsi:type=\"omgdc:Point\" y=\"312\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tk0xvp\" id=\"ServiceTask_1tk0xvp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"363\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1eb2hkm\" id=\"EndEvent_1eb2hkm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"631\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"649\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1q6a4wt\" id=\"SequenceFlow_1q6a4wt_di\"\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"631\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"502\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07l5bga\" id=\"SequenceFlow_07l5bga_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"235.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1se85ex\" id=\"TextAnnotation_1se85ex_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"144\" x=\"108\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1p7fhja\" id=\"Association_1p7fhja_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"94\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10kzg48\" id=\"TextAnnotation_10kzg48_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"143\" x=\"577\" y=\"314\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m6api6\" id=\"Association_1m6api6_di\"\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"314\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_142txyo\" id=\"TextAnnotation_142txyo_di\"\u003e\u003comgdc:Bounds height=\"83\" width=\"172\" x=\"563\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0lc1nip\" id=\"Association_0lc1nip_di\"\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"586\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "A sample workflow to delete a MS Group from within an Incident",
+      "export_key": "common_delete_a_microsoft_group",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1668436070144,
+      "name": "Common: Delete a Microsoft Group",
+      "object_type": "incident",
+      "programmatic_name": "common_delete_a_microsoft_group",
+      "tags": [
+        {
+          "tag_handle": "fn_teams",
+          "value": null
+        }
+      ],
+      "uuid": "7c9c7265-41fb-46fb-9cf0-843b20a1d3d9",
+      "workflow_id": 14
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "task_create_a_microsoft_team",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_create_a_microsoft_team\" isExecutable=\"true\" name=\"Task: Create a Microsoft Team\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Team from a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oiq2cc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0gte7jh\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Teams:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Team ID: {}\\\".format(content.get(\\\"teamId\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\ntask.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"\\nif task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_task is not None:\\n  _value = rule.properties.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  elif _value == \\\"all task members\\\":\\n    inputs.add_members_from = \\\"Task\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_team_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_team_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oiq2cc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vvaq5z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dph6pf\"\u003e\u003cincoming\u003eSequenceFlow_1vvaq5z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vvaq5z\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"EndEvent_0dph6pf\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1oiq2cc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gte7jh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qchpws\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e2dtli\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_0qchpws\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19ww9ld\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_id (or) team_name, owners_list, members_list, team_description, additional_members\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18j4hck\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_19ww9ld\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lpcw80\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ak25sa\" sourceRef=\"EndEvent_0dph6pf\" targetRef=\"TextAnnotation_1lpcw80\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"236\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"231\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"204\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gte7jh\" id=\"ServiceTask_0gte7jh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dph6pf\" id=\"EndEvent_0dph6pf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"764\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"737\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vvaq5z\" id=\"SequenceFlow_1vvaq5z_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"764\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"622\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oiq2cc\" id=\"SequenceFlow_1oiq2cc_di\"\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"326\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qchpws\" id=\"TextAnnotation_0qchpws_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"163\" x=\"700\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e2dtli\" id=\"Association_0e2dtli_di\"\u003e\u003comgdi:waypoint x=\"568\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"718\" xsi:type=\"omgdc:Point\" y=\"74\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19ww9ld\" id=\"TextAnnotation_19ww9ld_di\"\u003e\u003comgdc:Bounds height=\"105\" width=\"124\" x=\"192\" y=\"-22\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18j4hck\" id=\"Association_18j4hck_di\"\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lpcw80\" id=\"TextAnnotation_1lpcw80_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"732\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ak25sa\" id=\"Association_0ak25sa_di\"\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
+      "description": "A sample workflow to create a MS Team from a task",
+      "export_key": "task_create_a_microsoft_team",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1668598959261,
+      "name": "Task: Create a Microsoft Team",
+      "object_type": "task",
+      "programmatic_name": "task_create_a_microsoft_team",
+      "tags": [
+        {
+          "tag_handle": "fn_teams",
+          "value": null
+        }
+      ],
+      "uuid": "ea822586-8b16-48d3-9193-1ad8e9fe8904",
+      "workflow_id": 13
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 11,
+        "workflow_id": "incident_create_a_microsoft_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"incident_create_a_microsoft_group\" isExecutable=\"true\" name=\"Incident: Create a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Group from an incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0rhfah8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0xcbxw8\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"AdminSoarMS@5rf2xs.onmicrosoft.com\"}},\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Teams Enabled: {}\\\".format(content.get(\\\"teamsEnabled\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if task:\\n    inputs.task_id = task.id\\n  \\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_group_name is None else rule.properties.ms_group_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_incident is not None:\\n  _value = rule.properties.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_group_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_group_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n  \\n\\nif rule.properties.ms_group_mail_nickname is not None:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rhfah8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_19sx12p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_00djqtl\"\u003e\u003cincoming\u003eSequenceFlow_19sx12p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_19sx12p\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"EndEvent_00djqtl\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0rhfah8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0xcbxw8\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_17bn2hx\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_name, owners_list, members_list, group_description, additional_members, group_mailNickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14jwjkk\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"TextAnnotation_17bn2hx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0so7w7l\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1wzfeh6\" sourceRef=\"ServiceTask_0xcbxw8\" targetRef=\"TextAnnotation_0so7w7l\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1cot0pb\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nzxqcp\" sourceRef=\"EndEvent_00djqtl\" targetRef=\"TextAnnotation_1cot0pb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"145\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"140\" y=\"233\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"160\" x=\"88\" y=\"326\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"163\" xsi:type=\"omgdc:Point\" y=\"238\"/\u003e\u003comgdi:waypoint x=\"163\" xsi:type=\"omgdc:Point\" y=\"326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0xcbxw8\" id=\"ServiceTask_0xcbxw8_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"381\" y=\"176\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_00djqtl\" id=\"EndEvent_00djqtl_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"681\" y=\"198\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"699\" y=\"237\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_19sx12p\" id=\"SequenceFlow_19sx12p_di\"\u003e\u003comgdi:waypoint x=\"481\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"581\" y=\"194\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rhfah8\" id=\"SequenceFlow_0rhfah8_di\"\u003e\u003comgdi:waypoint x=\"181\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"216\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"305\" y=\"209\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_17bn2hx\" id=\"TextAnnotation_17bn2hx_di\"\u003e\u003comgdc:Bounds height=\"137\" width=\"176\" x=\"75\" y=\"-15\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14jwjkk\" id=\"Association_14jwjkk_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0so7w7l\" id=\"TextAnnotation_0so7w7l_di\"\u003e\u003comgdc:Bounds height=\"91\" width=\"157\" x=\"620\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1wzfeh6\" id=\"Association_1wzfeh6_di\"\u003e\u003comgdi:waypoint x=\"481\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003comgdi:waypoint x=\"620\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1cot0pb\" id=\"TextAnnotation_1cot0pb_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"150\" x=\"624\" y=\"325\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nzxqcp\" id=\"Association_1nzxqcp_di\"\u003e\u003comgdi:waypoint x=\"699\" xsi:type=\"omgdc:Point\" y=\"239\"/\u003e\u003comgdi:waypoint x=\"699\" xsi:type=\"omgdc:Point\" y=\"325\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 11,
       "description": "A sample workflow to create a MS Group from an incident",
       "export_key": "incident_create_a_microsoft_group",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1668086340144,
+      "last_modified_time": 1668517696892,
       "name": "Incident: Create a Microsoft Group",
       "object_type": "incident",
       "programmatic_name": "incident_create_a_microsoft_group",
@@ -1939,74 +2258,21 @@
     {
       "actions": [],
       "content": {
-        "version": 5,
-        "workflow_id": "task_delete_a_microsoft_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_delete_a_microsoft_group\" isExecutable=\"true\" name=\"Task: Delete a Microsoft group\"\u003e\u003cdocumentation\u003eA sample workflow to delete a MS Group from within an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_07l5bga\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tk0xvp\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to delete Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text = u\\\"\u0026lt;b\u0026gt;Microsoft Groups:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;{}\\\".format(content.get(\\\"message\\\"))\\n\\nnote = helper.createRichText(text)\\ntask.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_mail_nickname:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\\nelif rule.properties.ms_group_name:\\n    inputs.ms_group_name = rule.properties.ms_group_name\\n\\nelse:\\n    helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_07l5bga\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1q6a4wt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1eb2hkm\"\u003e\u003cincoming\u003eSequenceFlow_1q6a4wt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1q6a4wt\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"EndEvent_1eb2hkm\"/\u003e\u003csequenceFlow id=\"SequenceFlow_07l5bga\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tk0xvp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1se85ex\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: Group name or Mail nickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1p7fhja\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_1se85ex\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10kzg48\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m6api6\" sourceRef=\"EndEvent_1eb2hkm\" targetRef=\"TextAnnotation_10kzg48\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_142txyo\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident Note with group name that was deleted\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0lc1nip\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_142txyo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"169\" x=\"95\" y=\"312\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"174\" xsi:type=\"omgdc:Point\" y=\"312\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tk0xvp\" id=\"ServiceTask_1tk0xvp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"363\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1eb2hkm\" id=\"EndEvent_1eb2hkm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"631\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"649\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1q6a4wt\" id=\"SequenceFlow_1q6a4wt_di\"\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"631\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"502\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07l5bga\" id=\"SequenceFlow_07l5bga_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"235.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1se85ex\" id=\"TextAnnotation_1se85ex_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"144\" x=\"108\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1p7fhja\" id=\"Association_1p7fhja_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"94\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10kzg48\" id=\"TextAnnotation_10kzg48_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"143\" x=\"577\" y=\"314\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m6api6\" id=\"Association_1m6api6_di\"\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"314\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_142txyo\" id=\"TextAnnotation_142txyo_di\"\u003e\u003comgdc:Bounds height=\"83\" width=\"172\" x=\"563\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0lc1nip\" id=\"Association_0lc1nip_di\"\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"586\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 8,
+        "workflow_id": "common_enable_microsoft_team_for_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"common_enable_microsoft_team_for_group\" isExecutable=\"true\" name=\"Common: Enable Microsoft Team for an existing Group\"\u003e\u003cdocumentation\u003eA sample workflow to archive an active MS Team\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_16uh319\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1022ens\" name=\"MS Teams: Enable Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0e597a9e-7ce0-4580-86fa-11204e2f1caf\"\u003e{\"inputs\":{},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Teams functionality has now been enabled for this Group.\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Teams Enabled: {}\\\".format(content.get(\\\"teamsEnabled\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_id:\\n  inputs.ms_group_id = rule.properties.ms_group_id\\nelif rule.properties.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\nelif rule.properties.ms_group_name:\\n  inputs.ms_group_name = rule.properties.ms_group_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_16uh319\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_109ugi5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_07fzmrb\"\u003e\u003cincoming\u003eSequenceFlow_109ugi5\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_109ugi5\" sourceRef=\"ServiceTask_1022ens\" targetRef=\"EndEvent_07fzmrb\"/\u003e\u003csequenceFlow id=\"SequenceFlow_16uh319\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1022ens\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_083j983\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_023kete\" sourceRef=\"EndEvent_07fzmrb\" targetRef=\"TextAnnotation_083j983\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"130\" y=\"303\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"177\" xsi:type=\"omgdc:Point\" y=\"303\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1022ens\" id=\"ServiceTask_1022ens_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"366\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_07fzmrb\" id=\"EndEvent_07fzmrb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"678\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"696\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_109ugi5\" id=\"SequenceFlow_109ugi5_di\"\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"678\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"572\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16uh319\" id=\"SequenceFlow_16uh319_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"282\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_083j983\" id=\"TextAnnotation_083j983_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"646\" y=\"303\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_023kete\" id=\"Association_023kete_di\"\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"303\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 5,
-      "description": "A sample workflow to delete a MS Group from within an Incident",
-      "export_key": "task_delete_a_microsoft_group",
+      "content_version": 8,
+      "description": "A sample workflow to archive an active MS Team",
+      "export_key": "common_enable_microsoft_team_for_group",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1668081989705,
-      "name": "Task: Delete a Microsoft group",
-      "object_type": "task",
-      "programmatic_name": "task_delete_a_microsoft_group",
-      "tags": [
-        {
-          "tag_handle": "fn_teams",
-          "value": null
-        }
-      ],
-      "uuid": "eb54c7c5-dc2e-40fc-8fa6-b4e2b2776aa5",
-      "workflow_id": 12
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 12,
-        "workflow_id": "incident_create_a_microsoft_team",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"incident_create_a_microsoft_team\" isExecutable=\"true\" name=\"Incident: Create a Microsoft Team\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Team form a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oiq2cc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0gte7jh\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Teams:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Team ID: {}\\\".format(content.get(\\\"teamId\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_id:\\n  inputs.ms_group_id = rule.properties.ms_group_id\\n\\nelse:\\n  if task:\\n      inputs.task_id = task.id\\n    \\n  inputs.incident_id = str(incident.id)\\n  inputs.ms_team_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name\\n  \\n  if rule.properties.ms_owners_list is not None:\\n      inputs.ms_owners_list = rule.properties.ms_owners_list\\n      \\n  if rule.properties.add_members_incident is not None:\\n    _value = rule.properties.add_members_incident.lower().strip()\\n    if _value == \\\"all incident members\\\":\\n      inputs.add_members_from = \\\"Incident\\\"\\n    else:\\n      inputs.add_members_from = \\\"None\\\"\\n      \\n  if rule.properties.additional_members.content is not None:\\n      inputs.additional_members = rule.properties.additional_members.content\\n      \\n  if rule.properties.ms_group_description is not None:\\n      inputs.ms_team_description = rule.properties.ms_group_description\\n  else:\\n      inputs.ms_team_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oiq2cc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vvaq5z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dph6pf\"\u003e\u003cincoming\u003eSequenceFlow_1vvaq5z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vvaq5z\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"EndEvent_0dph6pf\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1oiq2cc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gte7jh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qchpws\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e2dtli\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_0qchpws\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19ww9ld\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_id (or) team_name, owners_list, members_list, team_description, additional_members\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18j4hck\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_19ww9ld\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lpcw80\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ak25sa\" sourceRef=\"EndEvent_0dph6pf\" targetRef=\"TextAnnotation_1lpcw80\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"236\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"231\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"204\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gte7jh\" id=\"ServiceTask_0gte7jh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dph6pf\" id=\"EndEvent_0dph6pf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"764\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"737\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vvaq5z\" id=\"SequenceFlow_1vvaq5z_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"764\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"622\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oiq2cc\" id=\"SequenceFlow_1oiq2cc_di\"\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"326\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qchpws\" id=\"TextAnnotation_0qchpws_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"163\" x=\"700\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e2dtli\" id=\"Association_0e2dtli_di\"\u003e\u003comgdi:waypoint x=\"568\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"718\" xsi:type=\"omgdc:Point\" y=\"74\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19ww9ld\" id=\"TextAnnotation_19ww9ld_di\"\u003e\u003comgdc:Bounds height=\"105\" width=\"124\" x=\"192\" y=\"-22\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18j4hck\" id=\"Association_18j4hck_di\"\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lpcw80\" id=\"TextAnnotation_1lpcw80_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"732\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ak25sa\" id=\"Association_0ak25sa_di\"\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 12,
-      "description": "A sample workflow to create a MS Team form a task",
-      "export_key": "incident_create_a_microsoft_team",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1668086392876,
-      "name": "Incident: Create a Microsoft Team",
+      "last_modified_time": 1668519054407,
+      "name": "Common: Enable Microsoft Team for an existing Group",
       "object_type": "incident",
-      "programmatic_name": "incident_create_a_microsoft_team",
-      "tags": [
-        {
-          "tag_handle": "fn_teams",
-          "value": null
-        }
-      ],
-      "uuid": "4dbd2397-ab9d-465e-a7e0-28de2df30f73",
-      "workflow_id": 7
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "incident_delete_a_microsoft_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"incident_delete_a_microsoft_group\" isExecutable=\"true\" name=\"Incident: Delete a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to delete a MS Group from within an Incident\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_07l5bga\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1tk0xvp\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to delete Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text = u\\\"\u0026lt;b\u0026gt;Microsoft Groups:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;{}\\\".format(content.get(\\\"message\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_mail_nickname:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\\nelif rule.properties.ms_group_name:\\n    inputs.ms_group_name = rule.properties.ms_group_name\\n\\nelse:\\n    helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_07l5bga\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1q6a4wt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1eb2hkm\"\u003e\u003cincoming\u003eSequenceFlow_1q6a4wt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1q6a4wt\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"EndEvent_1eb2hkm\"/\u003e\u003csequenceFlow id=\"SequenceFlow_07l5bga\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1tk0xvp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1se85ex\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: Group name or Mail nickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1p7fhja\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_1se85ex\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_10kzg48\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1m6api6\" sourceRef=\"EndEvent_1eb2hkm\" targetRef=\"TextAnnotation_10kzg48\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_142txyo\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident Note with group name that was deleted\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0lc1nip\" sourceRef=\"ServiceTask_1tk0xvp\" targetRef=\"TextAnnotation_142txyo\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"169\" x=\"95\" y=\"312\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"174\" xsi:type=\"omgdc:Point\" y=\"312\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1tk0xvp\" id=\"ServiceTask_1tk0xvp_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"363\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1eb2hkm\" id=\"EndEvent_1eb2hkm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"631\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"649\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1q6a4wt\" id=\"SequenceFlow_1q6a4wt_di\"\u003e\u003comgdi:waypoint x=\"463\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"631\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"502\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07l5bga\" id=\"SequenceFlow_07l5bga_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"235.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1se85ex\" id=\"TextAnnotation_1se85ex_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"144\" x=\"108\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1p7fhja\" id=\"Association_1p7fhja_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"225\" xsi:type=\"omgdc:Point\" y=\"94\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_10kzg48\" id=\"TextAnnotation_10kzg48_di\"\u003e\u003comgdc:Bounds height=\"40\" width=\"143\" x=\"577\" y=\"314\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1m6api6\" id=\"Association_1m6api6_di\"\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"649\" xsi:type=\"omgdc:Point\" y=\"314\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_142txyo\" id=\"TextAnnotation_142txyo_di\"\u003e\u003comgdc:Bounds height=\"83\" width=\"172\" x=\"563\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0lc1nip\" id=\"Association_0lc1nip_di\"\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"586\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "A sample workflow to delete a MS Group from within an Incident",
-      "export_key": "incident_delete_a_microsoft_group",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1667910030749,
-      "name": "Incident: Delete a Microsoft Group",
-      "object_type": "incident",
-      "programmatic_name": "incident_delete_a_microsoft_group",
-      "tags": [
-        {
-          "tag_handle": "fn_teams",
-          "value": null
-        }
-      ],
-      "uuid": "ca256b94-e3cb-4b3e-9595-12ab0f9607d9",
-      "workflow_id": 10
+      "programmatic_name": "common_enable_microsoft_team_for_group",
+      "tags": [],
+      "uuid": "77c369e6-f908-4be4-824a-cef762837586",
+      "workflow_id": 15
     },
     {
       "actions": [],
@@ -2035,54 +2301,6 @@
     {
       "actions": [],
       "content": {
-        "version": 6,
-        "workflow_id": "task_create_a_microsoft_team",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_create_a_microsoft_team\" isExecutable=\"true\" name=\"Task: Create a Microsoft Team\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Team from a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oiq2cc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0gte7jh\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Teams:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Team ID: {}\\\".format(content.get(\\\"teamId\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\ntask.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.ms_group_id:\\n  inputs.ms_group_id = rule.properties.ms_group_id\\n\\nelse:\\n  if task:\\n    inputs.task_id = task.id\\n  \\n  inputs.incident_id = str(incident.id)\\n  inputs.ms_team_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name\\n  \\n  if rule.properties.ms_owners_list is not None:\\n      inputs.ms_owners_list = rule.properties.ms_owners_list\\n      \\n  if rule.properties.add_members_task is not None:\\n    _value = rule.properties.add_members_task.lower().strip()\\n    if _value == \\\"all incident members\\\":\\n      inputs.add_members_from = \\\"Incident\\\"\\n    elif _value == \\\"all task members\\\":\\n      inputs.add_members_from = \\\"Task\\\"\\n    else:\\n      inputs.add_members_from = \\\"None\\\"\\n      \\n  if rule.properties.additional_members.content is not None:\\n      inputs.additional_members = rule.properties.additional_members.content\\n      \\n  if rule.properties.ms_group_description is not None:\\n      inputs.ms_team_description = rule.properties.ms_group_description\\n  else:\\n      inputs.ms_team_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oiq2cc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vvaq5z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dph6pf\"\u003e\u003cincoming\u003eSequenceFlow_1vvaq5z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vvaq5z\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"EndEvent_0dph6pf\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1oiq2cc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gte7jh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qchpws\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e2dtli\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_0qchpws\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19ww9ld\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_id (or) team_name, owners_list, members_list, team_description, additional_members\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18j4hck\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_19ww9ld\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lpcw80\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ak25sa\" sourceRef=\"EndEvent_0dph6pf\" targetRef=\"TextAnnotation_1lpcw80\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"236\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"231\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"204\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gte7jh\" id=\"ServiceTask_0gte7jh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dph6pf\" id=\"EndEvent_0dph6pf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"764\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"737\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vvaq5z\" id=\"SequenceFlow_1vvaq5z_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"764\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"622\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oiq2cc\" id=\"SequenceFlow_1oiq2cc_di\"\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"326\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qchpws\" id=\"TextAnnotation_0qchpws_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"163\" x=\"700\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e2dtli\" id=\"Association_0e2dtli_di\"\u003e\u003comgdi:waypoint x=\"568\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"718\" xsi:type=\"omgdc:Point\" y=\"74\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19ww9ld\" id=\"TextAnnotation_19ww9ld_di\"\u003e\u003comgdc:Bounds height=\"105\" width=\"124\" x=\"192\" y=\"-22\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18j4hck\" id=\"Association_18j4hck_di\"\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lpcw80\" id=\"TextAnnotation_1lpcw80_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"732\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ak25sa\" id=\"Association_0ak25sa_di\"\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "description": "A sample workflow to create a MS Team from a task",
-      "export_key": "task_create_a_microsoft_team",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1668086447372,
-      "name": "Task: Create a Microsoft Team",
-      "object_type": "task",
-      "programmatic_name": "task_create_a_microsoft_team",
-      "tags": [
-        {
-          "tag_handle": "fn_teams",
-          "value": null
-        }
-      ],
-      "uuid": "ea822586-8b16-48d3-9193-1ad8e9fe8904",
-      "workflow_id": 13
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "task_create_a_microsoft_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_create_a_microsoft_group\" isExecutable=\"true\" name=\"Task: Create a Microsoft Group\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Group from a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1uejmnm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0q75ylm\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"AdminSoarMS@5rf2xs.onmicrosoft.com\"}},\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n\\nnote = helper.createRichText(text)\\ntask.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if task:\\n    inputs.task_id = task.id\\n  \\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_group_name is None else rule.properties.ms_group_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_task is not None:\\n  _value = rule.properties.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  elif _value == \\\"all task members\\\":\\n    inputs.add_members_from = \\\"Task\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_group_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_group_description = f\\\"Incident {incident.id}: {incident.name} Task {task.id} : {task.name} {task.description}\\\"\\n  \\nif rule.properties.ms_group_mail_nickname is not None:\\n    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1uejmnm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1avwvjy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0g889x3\"\u003e\u003cincoming\u003eSequenceFlow_1avwvjy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1avwvjy\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"EndEvent_0g889x3\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1uejmnm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0q75ylm\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0j0q9b4\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_19zhmo7\" sourceRef=\"EndEvent_0g889x3\" targetRef=\"TextAnnotation_0j0q9b4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0jkumgn\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_name, owners_list, members_list, group_description, group_mail_nickname\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1g7juie\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"TextAnnotation_0jkumgn\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1fg0k49\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created group details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_16nskn7\" sourceRef=\"ServiceTask_0q75ylm\" targetRef=\"TextAnnotation_1fg0k49\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"34\" width=\"139\" x=\"110\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"179\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0q75ylm\" id=\"ServiceTask_0q75ylm_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"341.3485838779956\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0g889x3\" id=\"EndEvent_0g889x3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"605.3485838779957\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"623.3485838779957\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1avwvjy\" id=\"SequenceFlow_1avwvjy_di\"\u003e\u003comgdi:waypoint x=\"441\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"605\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"523\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uejmnm\" id=\"SequenceFlow_1uejmnm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"341\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"269.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0j0q9b4\" id=\"TextAnnotation_0j0q9b4_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"573\" y=\"329\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_19zhmo7\" id=\"Association_19zhmo7_di\"\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"329\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0jkumgn\" id=\"TextAnnotation_0jkumgn_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"233\" x=\"128\" y=\"15\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1g7juie\" id=\"Association_1g7juie_di\"\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"284\" xsi:type=\"omgdc:Point\" y=\"95\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1fg0k49\" id=\"TextAnnotation_1fg0k49_di\"\u003e\u003comgdc:Bounds height=\"85\" width=\"165\" x=\"511\" y=\"12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_16nskn7\" id=\"Association_16nskn7_di\"\u003e\u003comgdi:waypoint x=\"437\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"538\" xsi:type=\"omgdc:Point\" y=\"97\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "A sample workflow to create a MS Group from a task",
-      "export_key": "task_create_a_microsoft_group",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1668080587085,
-      "name": "Task: Create a Microsoft Group",
-      "object_type": "task",
-      "programmatic_name": "task_create_a_microsoft_group",
-      "tags": [
-        {
-          "tag_handle": "fn_teams",
-          "value": null
-        }
-      ],
-      "uuid": "1a53cc12-68ce-4824-a7ab-c3ddd814f642",
-      "workflow_id": 9
-    },
-    {
-      "actions": [],
-      "content": {
         "version": 2,
         "workflow_id": "task_post_message_to_teams",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"task_post_message_to_teams\" isExecutable=\"true\" name=\"Task: Post message to Teams\"\u003e\u003cdocumentation\u003eExample of posting incident and task information to Teams as two sections\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0q5lshb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_17n68bf\" name=\"MS Teams: Post Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0c8e4497-c131-4d5d-bdf3-3153d30b9bbc\"\u003e{\"inputs\":{\"76023ce3-fc17-41d1-9002-2392283ce315\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"testchannel\"}},\"fa64a099-f3d4-4caa-bd64-72ffdb46414f\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to Post message\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n  text = helper.createRichText(text)\\n  task.addNote(text)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"from java.util import Date\\n\\ninputs.incident_id = incident.id\\ninputs.task_id = task.id\\n\\\"\\\"\\\"\\nformat of a payload. * = optional\\n{ \\\"title\\\"*: xx, \\n  \\\"summary\\\": xx, \\n  \\\"sections\\\": [{ \\\"title\\\"*: yy, \\\"text\\\"*: yy, \\n                        \\\"facts\\\"*: [{\\\"name\\\": zz, \\\"value\\\": zz}]\\n              }]\\n}\\n\\\"\\\"\\\"\\n\\npayload = u\\\"\\\"\\\"{{ \\\"summary\\\": \\\"Resilient Incident\\\", \\\"sections\\\": [ \\n  {{ \\\"facts\\\": [ \\n    {{ \\\"name\\\": \\\"Name\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Description\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Id\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Types\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"NIST Attack Vectors\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Create Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Date Occurred\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Discovered Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Confirmed\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Severity\\\", \\\"value\\\": \\\"{}\\\" }} \\n   ]\\n  }},\\n  {{ \\\"text\\\": \\\"Task\\\", \\\"facts\\\": [ \\n    {{ \\\"name\\\": \\\"Task\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"{}\\\" }},\\n    {{ \\\"name\\\": \\\"Instructions\\\", \\\"value\\\": \\\"{}\\\" }},\\n    {{ \\\"name\\\": \\\"Due Date\\\", \\\"value\\\": \\\"{}\\\" }}\\n    ]\\n  }}\\n ] \\n}} \\n\\\"\\\"\\\".format(incident.name, incident.description.content.replace(\u0027\\\"\u0027, \u0027\\\\\\\\\\\"\u0027) if incident.description else \\\"-\\\", incident.id,\\n   incident.owner_id if incident.owner_id else \\\"-\\\",\\n   \\\", \\\".join(str(x) for x in incident.incident_type_ids), \\\", \\\".join(str(x) for x in incident.nist_attack_vectors),\\n   Date(incident.create_date), Date(incident.start_date) if incident.start_date else \\\"-\\\", Date(incident.discovered_date),\\n   \\\"True\\\" if incident.confirmed else \\\"False\\\",\\n   \\\"-\\\" if not incident.severity_code else incident.severity_code,\\n   task.name, task.owner_id if task.owner_id else \\\"-\\\", task.instructions.content.replace(\u0027\\\"\u0027, \\\"\u0027\\\") if task.instructions else \\\"-\\\", Date(task.due_date) if task.due_date else \\\"-\\\"\\n   )\\n\\ninputs.teams_payload = payload\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0q5lshb\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1j9da45\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0q5lshb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_17n68bf\"/\u003e\u003cendEvent id=\"EndEvent_1d26c7r\"\u003e\u003cincoming\u003eSequenceFlow_1j9da45\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1j9da45\" sourceRef=\"ServiceTask_17n68bf\" targetRef=\"EndEvent_1d26c7r\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1q8nu40\"\u003e\u003ctext\u003eFormat teams_payload as a json object. See pre-processor script for format.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1925sdu\" sourceRef=\"ServiceTask_17n68bf\" targetRef=\"TextAnnotation_1q8nu40\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_17n68bf\" id=\"ServiceTask_17n68bf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"251\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0q5lshb\" id=\"SequenceFlow_0q5lshb_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"224.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1d26c7r\" id=\"EndEvent_1d26c7r_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"415\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"433\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1j9da45\" id=\"SequenceFlow_1j9da45_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"415\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"383\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1q8nu40\" id=\"TextAnnotation_1q8nu40_di\"\u003e\u003comgdc:Bounds height=\"68\" width=\"185\" x=\"130\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1925sdu\" id=\"Association_1925sdu_di\"\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"249\" xsi:type=\"omgdc:Point\" y=\"136\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
@@ -2103,6 +2321,49 @@
       ],
       "uuid": "2500846e-793a-4f40-8945-004fd7a736b6",
       "workflow_id": 11
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "common_archive_unarchive_a_microsoft_team",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"common_archive_unarchive_a_microsoft_team\" isExecutable=\"true\" name=\"common_archive_unarchive_a_microsoft_team\"\u003e\u003cdocumentation\u003eArchives the Team for a Microsoft Group\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1mmyyd8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1e5tmyy\" name=\"MS Teams: Archive Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"553efbec-00dc-4205-8845-fbda91742028\"\u003e{\"inputs\":{\"5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11cbdf5e-aa22-4b99-85d3-98790f9de82e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;The Team associated with this Group has now been {}.\u0026lt;br /\u0026gt;\\\".format(content.get(\\\"teamsEnabled\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Teams Enabled: {}\\\".format(content.get(\\\"teamsEnabled\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if rule.properties.archive_operation:\\n  inputs.archive_operation = rule.properties.archive_operation\\n\\nif rule.properties.ms_group_id:\\n  inputs.ms_group_id = rule.properties.ms_group_id\\nelif rule.properties.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname\\nelif rule.properties.ms_team_name:\\n  inputs.ms_team_name = rule.properties.ms_team_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1mmyyd8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1tq2ksy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_02twd8l\"\u003e\u003cincoming\u003eSequenceFlow_1tq2ksy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1tq2ksy\" sourceRef=\"ServiceTask_1e5tmyy\" targetRef=\"EndEvent_02twd8l\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1mmyyd8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1e5tmyy\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rb46or\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_03q7rfn\" sourceRef=\"EndEvent_02twd8l\" targetRef=\"TextAnnotation_0rb46or\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"138\" x=\"111\" y=\"285\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"176\" xsi:type=\"omgdc:Point\" y=\"285\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1e5tmyy\" id=\"ServiceTask_1e5tmyy_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"358\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02twd8l\" id=\"EndEvent_02twd8l_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"645.0007824726134\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"663.0007824726134\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1tq2ksy\" id=\"SequenceFlow_1tq2ksy_di\"\u003e\u003comgdi:waypoint x=\"458\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"645\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"551.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mmyyd8\" id=\"SequenceFlow_1mmyyd8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"278\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rb46or\" id=\"TextAnnotation_0rb46or_di\"\u003e\u003comgdc:Bounds height=\"31\" width=\"133\" x=\"596\" y=\"293\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_03q7rfn\" id=\"Association_03q7rfn_di\"\u003e\u003comgdi:waypoint x=\"663\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"663\" xsi:type=\"omgdc:Point\" y=\"293\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Archives the Team for a Microsoft Group",
+      "export_key": "common_archive_unarchive_a_microsoft_team",
+      "last_modified_by": "38822800-3765-4267-9a0a-1667cbb71a2b",
+      "last_modified_time": 1668602902316,
+      "name": "common_archive_unarchive_a_microsoft_team",
+      "object_type": "incident",
+      "programmatic_name": "common_archive_unarchive_a_microsoft_team",
+      "tags": [],
+      "uuid": "a93b239b-b203-47a2-84a5-d36fba4ab5da",
+      "workflow_id": 19
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 15,
+        "workflow_id": "incident_create_a_microsoft_team",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"incident_create_a_microsoft_team\" isExecutable=\"true\" name=\"Incident: Create a Microsoft Team\"\u003e\u003cdocumentation\u003eA sample workflow to create a MS Team form a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1oiq2cc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0gte7jh\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}}},\"post_processing_script\":\"content = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create Microsoft Group\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  text  = u\\\"\u0026lt;b\u0026gt;Microsoft Group Details:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += u\\\"\u0026lt;br /\u0026gt;Name: {}\\\".format(content.get(\\\"displayName\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Description: {}\\\".format(content.get(\\\"description\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Teams Enabled: {}\\\".format(content.get(\\\"teamsEnabled\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;ID: {}\\\".format(content.get(\\\"id\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Mail: {}\\\".format(content.get(\\\"mail\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Visibility: {}\\\".format(content.get(\\\"visibility\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Group Types: {}\\\".format(content.get(\\\"groupTypes\\\"))\\n  text += u\\\"\u0026lt;br /\u0026gt;Created date and time: {}\\\".format(content.get(\\\"createdDateTime\\\"))\\n  if content.get(\\\"unfoundUsers\\\"):\\n    text += u\\\"\u0026lt;br /\u0026gt;*Note the following users were unable to be added to the group: {}\\\".format(content.get(\\\"unfoundUsers\\\"))\\n\\nnote = helper.createRichText(text)\\nincident.addNote(note)\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"if task:\\n    inputs.task_id = task.id\\n  \\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = \\\"Incident {}: {}\\\".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name\\n\\nif rule.properties.ms_owners_list is not None:\\n    inputs.ms_owners_list = rule.properties.ms_owners_list\\n    \\nif rule.properties.add_members_incident is not None:\\n  _value = rule.properties.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n    \\nif rule.properties.additional_members.content is not None:\\n    inputs.additional_members = rule.properties.additional_members.content\\n    \\nif rule.properties.ms_group_description is not None:\\n    inputs.ms_team_description = rule.properties.ms_group_description\\nelse:\\n    inputs.ms_team_description = f\\\"Incident {incident.id}: {incident.name} {incident.description.content}\\\"\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1oiq2cc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1vvaq5z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0dph6pf\"\u003e\u003cincoming\u003eSequenceFlow_1vvaq5z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1vvaq5z\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"EndEvent_0dph6pf\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1oiq2cc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gte7jh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0qchpws\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Incident note with created team details\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e2dtli\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_0qchpws\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19ww9ld\"\u003e\u003ctext\u003e\u003c![CDATA[Inputs: group_id (or) team_name, owners_list, members_list, team_description, additional_members\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18j4hck\" sourceRef=\"ServiceTask_0gte7jh\" targetRef=\"TextAnnotation_19ww9ld\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lpcw80\"\u003e\u003ctext\u003e\u003c![CDATA[Workflow ends here\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0ak25sa\" sourceRef=\"EndEvent_0dph6pf\" targetRef=\"TextAnnotation_1lpcw80\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"236\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"231\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"204\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"250\" xsi:type=\"omgdc:Point\" y=\"223\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gte7jh\" id=\"ServiceTask_0gte7jh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0dph6pf\" id=\"EndEvent_0dph6pf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"764\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"737\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vvaq5z\" id=\"SequenceFlow_1vvaq5z_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"764\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"622\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1oiq2cc\" id=\"SequenceFlow_1oiq2cc_di\"\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"326\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0qchpws\" id=\"TextAnnotation_0qchpws_di\"\u003e\u003comgdc:Bounds height=\"86\" width=\"163\" x=\"700\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e2dtli\" id=\"Association_0e2dtli_di\"\u003e\u003comgdi:waypoint x=\"568\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"718\" xsi:type=\"omgdc:Point\" y=\"74\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19ww9ld\" id=\"TextAnnotation_19ww9ld_di\"\u003e\u003comgdc:Bounds height=\"105\" width=\"124\" x=\"192\" y=\"-22\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18j4hck\" id=\"Association_18j4hck_di\"\u003e\u003comgdi:waypoint x=\"472\" xsi:type=\"omgdc:Point\" y=\"174\"/\u003e\u003comgdi:waypoint x=\"316\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lpcw80\" id=\"TextAnnotation_1lpcw80_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"732\" y=\"327\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0ak25sa\" id=\"Association_0ak25sa_di\"\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"782\" xsi:type=\"omgdc:Point\" y=\"327\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 15,
+      "description": "A sample workflow to create a MS Team form a task",
+      "export_key": "incident_create_a_microsoft_team",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1668599008820,
+      "name": "Incident: Create a Microsoft Team",
+      "object_type": "incident",
+      "programmatic_name": "incident_create_a_microsoft_team",
+      "tags": [
+        {
+          "tag_handle": "fn_teams",
+          "value": null
+        }
+      ],
+      "uuid": "4dbd2397-ab9d-465e-a7e0-28de2df30f73",
+      "workflow_id": 7
     }
   ],
   "workspaces": []

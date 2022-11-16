@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-import json
+import json, logging
 
 from urllib import parse
 from resilient_lib import IntegrationError
@@ -34,10 +34,9 @@ class GroupsInterface:
     def __init__(self, required_parameters):
         self.app_message = ""
         self.required_parameters = required_parameters
-
+        self.log = logging.getLogger(__name__)
         self.response_handler = ResponseHandler()
         self.rc = required_parameters["rc"]
-        self.log = required_parameters["logger"]
         self.headers = required_parameters["header"]
         self.resclient = required_parameters["resclient"]
 
@@ -113,15 +112,15 @@ class GroupsInterface:
         group_owners, group_members, unfound_user = [], [], []
         self.response_handler.add_exempt_codes(404)
 
+        user_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+
         if owners_list:
             for member in owners_list:
                 if member not in group_owners:
-                    response = microsoft_commons.get_user_info(
-                        member,
-                        request_common=self.rc,
-                        response_handler=self.response_handler,
-                        logger=self.log,
-                        headers=self.headers)
+                    response = user_finder.find_user(member)
                     if response:
                         response["owner"] = True
                         group_owners.append(response.get("id"))
@@ -137,12 +136,7 @@ class GroupsInterface:
         if members_list:
             for member in members_list:
                 if member not in group_owners:
-                    response = microsoft_commons.get_user_info(
-                        member,
-                        request_common=self.rc,
-                        response_handler=self.response_handler,
-                        logger=self.log,
-                        headers=self.headers)
+                    response = user_finder.find_user(member)
                     if response:
                         response["owner"] = False
                         group_members.append(response.get("id"))
@@ -217,7 +211,6 @@ class GroupsInterface:
             .split(","))
 
         members_list = microsoft_commons.generate_member_list(
-            logger=self.log,
             resclient=self.resclient,
             task_id=self.required_parameters.get("task_id"),
             incident_id=self.required_parameters.get("incident_id"),
@@ -242,17 +235,21 @@ class GroupsInterface:
 
         self._add_members_group(response.get("id"), members)
 
-        groups_info = microsoft_commons.find_group(
-            request_common=self.rc,
-            logger=self.log,
-            response_handler=self.response_handler,
-            headers=self.headers,
-            group_mail_nickname=self.required_parameters["group_mail_nickname"])
+        group_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+        groups_info = group_finder.find_group(
+            {"group_mail_nickname" : self.required_parameters["group_mail_nickname"]})
 
-        return groups_info[0]
+        group_info = groups_info[0]
+        group_info.update({
+            "teamsEnabled" : False,
+            "unfoundUsers" : unfound_users})
+        return group_info
 
 
-    def delete_group(self):
+    def delete_group(self, options):
         """
         Microsoft Groups can be deleted using this function. Either the group_name or the
         group_mail_nickname must be provided. Since group_mail_nickname is a unique value
@@ -278,23 +275,11 @@ class GroupsInterface:
         Returns:
             <dict>: Message that reads successfully deleted group and status code
         """
-        if  self.required_parameters.get("group_mail_nickname"):
-            group_details = microsoft_commons.find_group(
-                rc=self.rc,
-                logger=self.log,
-                response_handler=self.response_handler,
-                headers=self.headers,
-                group_mail_nickname=self.required_parameters.get("group_mail_nickname"))
-
-        elif self.required_parameters.get("group_name"):
-            group_details = microsoft_commons.find_group(
-                rc=self.rc,
-                logger=self.log,
-                response_handler=self.response_handler,
-                headers=self.headers,
-                group_name=self.required_parameters.get("group_name"))
-        else:
-            raise IntegrationError(constants.ERROR_MISSING_NAME_MAIL_NAME)
+        group_finder = microsoft_commons.MSFinder(
+            rc=self.rc,
+            rh=self.response_handler,
+            headers=self.headers)
+        group_details = group_finder.find_group(options)
 
         if len(group_details) > 1:
             raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
@@ -305,6 +290,7 @@ class GroupsInterface:
             constants.BASE_URL,
             constants.URL_LOCATE_GROUPS.format(group_id))
         self.log.debug(url)
+
         response = self.rc.execute(
             method="delete",
             url=url,

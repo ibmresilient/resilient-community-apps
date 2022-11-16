@@ -12,9 +12,6 @@
     "content": {
       "type": "object",
       "properties": {
-        "@odata.context": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
@@ -24,10 +21,7 @@
           "type": "string"
         },
         "creationOptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "array"
         },
         "description": {
           "type": "string"
@@ -72,10 +66,7 @@
           "type": "string"
         },
         "resourceBehaviorOptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "array"
         },
         "resourceProvisioningOptions": {
           "type": "array",
@@ -96,32 +87,22 @@
         "onPremisesProvisioningErrors": {
           "type": "array"
         },
-        "status_code": {
-          "type": "integer"
+        "message": {
+          "type": "string"
         },
         "teamsEnabled": {
-          "type": "boolean"
-        },
-        "unfoundUsers": {}
+          "type": "string"
+        }
       }
     },
     "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_team_name": {
+        "archive_operation": {
           "type": "string"
         },
-        "incident_id": {
-          "type": "integer"
-        },
-        "ms_owners_list": {
-          "type": "string"
-        },
-        "add_members_from": {
-          "type": "string"
-        },
-        "ms_team_description": {
+        "ms_group_mail_nickname": {
           "type": "string"
         }
       }

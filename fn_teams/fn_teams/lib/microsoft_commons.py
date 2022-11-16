@@ -3,11 +3,13 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction Common utilities"""
-import json
+import json, logging
 from urllib import parse
 
 from resilient_lib import IntegrationError
 from fn_teams.lib import constants
+
+log = logging.getLogger(__name__)
 
 class ResponseHandler:
     """
@@ -72,6 +74,10 @@ class ResponseHandler:
                 self.msg = constants.MSG_RESPONSE_404.format(error)
             elif self.response.status_code == 405:
                 self.msg = constants.MSG_RESPONSE_405.format(error)
+            elif self.response.status_code == 409:
+                self.msg = constants.MSG_RESPONSE_409.format(error)
+            else:
+                self.msg = error
 
 
     def _raise_or_return_erros(self):
@@ -209,106 +215,124 @@ class ResponseHandler:
         return self._raise_or_return_erros()
 
 
-def get_user_info(user_id, **kwargs):
+class MSFinder():
     """
-    Fetches information using the email address of the SOAR user and assigns
-    a role (member or owner) depending upon the information that was provided
-    in the function, and saves this information in self.user_db for later use.
+        Fetches user or group information from the Microsoft Endpoint. Users can be found
+        using their UserID or their PrincipalName (email address). Groups can be located
+        using the group_id (unique id generated during creation), group_mailNickname or the
+        group_displayName. The group_displayName is the least preferred option as there could
+        exist multiple groups with the similar group name.
 
-    Arguments:
-    ----------
-        user_id          <str>  : Email address used for information retrieval
-        request_common   <obj>  : rc object that allows for making external requests
-        response_handler <obj>  : response handler that monitors responses
-        logger           <obj>  : Logger object
-        headers          <dict> : Authorization headers for MS endpoint
+        Kwargs:
+        -------
+            request_common      <obj>  : rc object that allows for making external requests
+            response_handler    <obj>  : response handler that monitors responses
+            headers             <dict> : Authorization headers for MS endpoint
 
-    Updates:
-    --------
-         response <dict> : User information retrieved from the MS Endpoint
+        Returns:
+        --------
+            <dict> : Details of the detected group or person
     """
+    def __init__(self, rc, rh, headers):
+        self.rc = rc
+        self.rh = rh
+        self.headers = headers
 
-    rc  = kwargs.get("request_common")
-    rh  = kwargs.get("response_handler")
-    log = kwargs.get("logger")
-    headers = kwargs.get("headers")
+    def find_user(self, user_id):
+        """
+        Fetches information using the email address of the SOAR user and assigns
+        a role (member or owner) depending upon the information that was provided
+        in the function, and saves this information in self.user_db for later use.
 
-    url = parse.urljoin(
-        constants.BASE_URL,
-        constants.URL_USERS.format(user_id))
+        Arguments:
+        ----------
+            user_id  <str>  : Email address used for information retrieval
 
-    response = rc.execute(
-        method="get",
-        url=url,
-        headers=headers,
-        callback=rh.check_response)
+        Updates:
+        --------
+            response <dict> : User information retrieved from the MS Endpoint
+        """
 
-    if "mail" in response:
-        return response
-    else:
-        log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_USERS.format(user_id))
 
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            callback=self.rh.check_response)
 
-def find_group(**kwargs):
-    """
-    Allows for locating a group based on its displayName or mailNickname attribute
-    This function at least required either the group_name or the group_mail_nickname
-    keyword argument.
+        if "mail" in response:
+            return response
+        else:
+            log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
 
-    Kwargs:
-    -------
-        request_common      <obj>  : rc object that allows for making external requests
-        response_handler    <obj>  : response handler that monitors responses
-        logger              <obj>  : Logger object
-        headers             <dict> : Authorization headers for MS endpoint
-        group_name          <str>  : Display name of the group
-        group_mail_nickname <str>  : Mail nickname of the group
+    def find_group(self, options):
+        """
+        Allows for locating a group based on its displayName or mailNickname attribute
+        This function at least required either the group_name or the group_mail_nickname
+        keyword argument.
 
-    Raises:
-    -------
-        IntegrationError: Unable to locate the group
+        Kwargs:
+        -------
+            group_name          <str>  : Display name of the group
+            group_mail_nickname <str>  : Mail nickname of the group
 
-    Returns:
-    --------
-        <dict> : Details of the detected group
-    """
-    rc  = kwargs.get("request_common")
-    rh  = kwargs.get("response_handler")
-    log = kwargs.get("logger")
-    headers = kwargs.get("headers")
+        Raises:
+        -------
+            IntegrationError: Unable to locate the group
 
-    if "group_name" in kwargs:
-        log.info(constants.INFO_FIND_GROUP_BY_NAME)
-        _name = kwargs.get("group_name")
-        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
-        _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
+        Returns:
+        --------
+            <dict> : Details of the detected group
+        """
 
-    if "group_mail_nickname" in kwargs:
-        log.info(constants.INFO_FIND_GROUP_BY_MAIL)
-        _name = kwargs.get("group_mail_nickname")
-        if "@" in _name:
-            _name = _name.split("@")[0]
-        error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
-        _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
+        if "group_id" in options:
+            log.info(constants.INFO_FIND_GROUP_BY_ID)
+            _id = options.get("group_id")
+            error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group ID", _id)
+            _query = f"/{_id}"
 
-    url = parse.urljoin(
-        constants.BASE_URL,
-        constants.URL_GROUPS_QUERY.format(_query))
+        elif "group_mail_nickname" in options:
+            log.info(constants.INFO_FIND_GROUP_BY_MAIL)
+            _name = options.get("group_mail_nickname")
+            if "@" in _name:
+                _name = _name.split("@")[0]
+            error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Mail Nickname", _name)
+            _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
 
-    response = rc.execute(
-        method="get",
-        url=url,
-        headers=headers,
-        callback=rh.check_response)
+        elif "group_name" in options:
+            log.info(constants.INFO_FIND_GROUP_BY_NAME)
+            _name = options.get("group_name")
+            error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
+            _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
 
-    log.debug(json.dumps(response, indent=2))
+        else:
+            raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
 
-    if len(response.get("value")) > 0 :
-        log.info(constants.INFO_FOUND_GROUP)
-        return response.get("value")
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_GROUPS_QUERY.format(_query))
 
-    log.error(error_msg)
-    raise IntegrationError(error_msg)
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            callback=self.rh.check_response)
+
+        log.debug(json.dumps(response, indent=2))
+
+        if "group_id" in options and response.get("status_code") == 200:
+            log.info(constants.INFO_FOUND_GROUP)
+            return [response]
+
+        elif len(response.get("value")) > 0 :
+            log.info(constants.INFO_FOUND_GROUP)
+            return response.get("value")
+
+        log.error(error_msg)
+        raise IntegrationError(error_msg)
 
 
 def is_direct_member(incident_member_id, org_member_list):
@@ -366,7 +390,6 @@ def generate_member_list(**kwargs):
 
     kwargs:
     -------
-        logger             <obj> : Logger object
         resclient          <obj> : Client object to interface with Resilient SOAR
         task_id            <str> : Task ID number
         incident_id        <str> : Incident ID number
@@ -378,9 +401,7 @@ def generate_member_list(**kwargs):
         email_ids <list> : a list of all participant email addresses to be added
     """
 
-    log = kwargs.get("logger")
     resclient = kwargs.get("resclient")
-
     task_id = kwargs.get("task_id")
     incident_id = kwargs.get("incident_id")
     add_members_from = kwargs.get("add_members_from")

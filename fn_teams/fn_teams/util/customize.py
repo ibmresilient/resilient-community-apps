@@ -21,9 +21,33 @@ def codegen_reload_data():
     return {
         "package": u"fn_teams",
         "message_destinations": [u"fn_teams"],
-        "functions": [u"ms_teams_create_group", u"ms_teams_create_team", u"ms_teams_delete_group", u"ms_teams_post_message"],
-        "workflows": [u"incident_create_a_microsoft_group", u"incident_create_a_microsoft_team", u"incident_delete_a_microsoft_group", u"incident_post_message_to_teams", u"task_create_a_microsoft_group", u"task_create_a_microsoft_team", u"task_delete_a_microsoft_group", u"task_post_message_to_teams"],
-        "actions": [u"MS Teams: Create Group from incident", u"MS Teams: Create Group from task", u"MS Teams: Create Team from incident ", u"MS Teams: Create Team from task", u"MS Teams: Delete Group from incident", u"MS Teams: Delete Group from task", u"MS Teams: Post incident information to teams", u"MS Teams: Post task information to teams"],
+        "functions": [
+            u"ms_teams_create_group",
+            u"ms_teams_delete_group",
+            u"ms_teams_post_message",
+            u"ms_teams_create_team",
+            u"ms_teams_enable_team",
+            u"ms_teams_archive_team"],
+        "workflows": [
+            u"incident_post_message_to_teams",
+            u"incident_create_a_microsoft_group",
+            u"incident_create_a_microsoft_team",
+            u"task_create_a_microsoft_group",
+            u"task_create_a_microsoft_team",
+            u"task_post_message_to_teams",
+            u"common_delete_a_microsoft_group",
+            u"common_archive_unarchive_a_microsoft_team",
+            u"common_enable_microsoft_team_for_group"],
+        "actions": [
+            u"MS Teams: Post Task Information to Teams",
+            u"MS Teams: Post incident information to teams",
+            u"MS Teams: Create Group from incident",
+            u"MS Teams: Create Group from task",
+            u"MS Teams: Delete Group from incident",
+            u"MS Teams: Delete Group from task",
+            u"MS Teams: Create Team from incident",
+            u"MS Teams: Create Team from task",
+            u"MS Teams: Enable Teams for an existing Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -45,18 +69,21 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_teams
     - Functions:
+        - ms_teams_archive_team
         - ms_teams_create_group
         - ms_teams_create_team
         - ms_teams_delete_group
+        - ms_teams_enable_team
         - ms_teams_post_message
     - Workflows:
+        - common_archive_unarchive_a_microsoft_team
+        - common_delete_a_microsoft_group
+        - common_enable_microsoft_team_for_group
         - incident_create_a_microsoft_group
         - incident_create_a_microsoft_team
-        - incident_delete_a_microsoft_group
         - incident_post_message_to_teams
         - task_create_a_microsoft_group
         - task_create_a_microsoft_team
-        - task_delete_a_microsoft_group
         - task_post_message_to_teams
     - Rules:
         - MS Teams: Create Group from incident
@@ -65,8 +92,9 @@ def customization_data(client=None):
         - MS Teams: Create Team from task
         - MS Teams: Delete Group from incident
         - MS Teams: Delete Group from task
+        - MS Teams: Enable Teams for an existing Group
         - MS Teams: Post incident information to teams
-        - MS Teams: Post task information to teams
+        - MS Teams: Post Task Information to Teams
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

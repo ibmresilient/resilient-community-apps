@@ -3,26 +3,70 @@
   "success": true,
   "reason": null,
   "content": {
-    "teamId": "2afa8b7b-****-****-afdd-2af9a852c04d",
-    "displayName": "SoarApps",
-    "description": "Incident 2095: MS Teams",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "db7350fc-b6df-4041-b6cd-2cd7588fa7da",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2022-11-16T12:11:47Z",
+    "creationOptions": [
+      "Team",
+      "ExchangeProvisioningFlags:3552"
+    ],
+    "description": "SOARAPPS",
+    "displayName": "SOARGROUP",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "soargroup@****.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "soargroup",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:soargroup@****.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2022-11-16T12:11:47Z",
+    "resourceBehaviorOptions": [
+      "HideGroupInOutlook",
+      "SubscribeMembersToCalendarEventsDisabled",
+      "WelcomeEmailDisabled"
+    ],
+    "resourceProvisioningOptions": [
+      "Team"
+    ],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-3681767676-1078048479-3610037686-3668414296",
+    "theme": null,
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": [],
+    "status_code": 200,
+    "teamsEnabled": true,
     "unfoundUsers": null
   },
   "raw": null,
   "inputs": {
-    "ms_team_name": "SoarApps",
+    "ms_team_name": "SOARAPPS",
     "incident_id": 2095,
-    "ms_owners_list": "AdminSoarMS@5rf2xs.onmicrosoft.com",
-    "add_members_from": "Task",
-    "task_id": 1,
-    "ms_team_description": "Incident 2095: MS Teams"
+    "ms_owners_list": "AdminSoarMS@****.onmicrosoft.com",
+    "add_members_from": "Incident",
+    "ms_team_description": "soargroup"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
     "host": "AppHost",
-    "execution_time_ms": 6885,
-    "timestamp": "2022-11-10 11:55:53"
+    "execution_time_ms": 18257,
+    "timestamp": "2022-11-16 12:11:53"
   }
 }

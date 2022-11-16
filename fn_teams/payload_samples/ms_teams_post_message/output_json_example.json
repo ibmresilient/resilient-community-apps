@@ -1,22 +1,23 @@
 {
   "version": 2.0,
   "success": true,
-  "reason": "",
-  "content": {},
+  "reason": null,
+  "content": {
+    "message": "Information successfully posted in channel resilient"
+  },
   "raw": null,
   "inputs": {
-    "teams_channel": "testchannel",
-    "incident_id": 2098,
-    "task_id": 152,
+    "teams_channel": "resilient",
+    "incident_id": 2095,
     "teams_mrkdown": true,
-    "teams_payload": "{ \"summary\": \"Resilient Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"MS Teams\" }, \n    { \"name\": \"Description\", \"value\": \"<div class=\\\"rte\\\"><div>Sample incident to test MS Teams integration</div></div>\" }, \n    { \"name\": \"Id\", \"value\": \"2098\" }, \n    { \"name\": \"Owner\", \"value\": \"c.wynne9+soar1@nuigalway.ie\" }, \n    { \"name\": \"Types\", \"value\": \"Other\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"Other\" }, \n    { \"name\": \"Create Date\", \"value\": \"Wed Sep 21 11:20:06 IST 2022\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"-\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"Wed Sep 21 11:18:39 IST 2022\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"Low\" } \n   ]\n  },\n  { \"text\": \"Task\", \"facts\": [ \n    { \"name\": \"Task\", \"value\": \"MS TEAMS TEST TASK\" }, \n    { \"name\": \"Owner\", \"value\": \"alexw@5rf2xs.onmicrosoft.com\" },\n    { \"name\": \"Instructions\", \"value\": \"-\" },\n    { \"name\": \"Due Date\", \"value\": \"-\" }\n    ]\n  }\n ] \n} \n"
+    "teams_payload": "{ \"summary\": \"Resilient Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"MS Teams\" }, \n    { \"name\": \"Description\", \"value\": \"<div class=\\\"rte\\\"><div>This is a sample incident created for MS teams in SOAR v45</div></div>\" }, \n    { \"name\": \"Id\", \"value\": \"2095\" }, \n    { \"name\": \"Owner\", \"value\": \"admin@example.com\" }, \n    { \"name\": \"Types\", \"value\": \"\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"Mon Nov 07 16:56:14 GMT 2022\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"-\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"Mon Nov 07 16:54:34 GMT 2022\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"Low\" } \n   ]\n  }\n ] \n} \n"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "AppHost",
-    "execution_time_ms": 0,
-    "timestamp": "2022-11-04 11:09:40"
+    "host": "calvins-mbp.galway.ie.ibm.com",
+    "execution_time_ms": 2540,
+    "timestamp": "2022-11-15 12:36:09"
   }
 }

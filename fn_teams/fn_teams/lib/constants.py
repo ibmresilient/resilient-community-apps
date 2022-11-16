@@ -49,6 +49,8 @@ TEAM_ID_REGEX = '\'(.+?)\''
 URL_TEAMS = "/v1.0/teams"
 URL_LIST_TEAMS = URL_TEAMS
 URL_LOCATE_TEAM = URL_TEAMS + "/{}/"
+URL_TEAMS_ARCHIVE = URL_TEAMS + "/{}/archive"
+URL_TEAMS_UNARCHIVE = URL_TEAMS + "/{}/unarchive"
 URL_TEAM_FROM_GROUP = URL_GROUPS + "/{}/team"
 URL_ADD_MEMBER_CONTEXT = "members/add"
 URL_TEAMS_STANDARD_TEMPLATE = "/v1.0/teamsTemplates('standard')"
@@ -64,8 +66,7 @@ TEAMS_FROM_GROUP_CONFIGURATION = {
 
     "funSettings": {
         "allowGiphy": True,
-        "giphyContentRating": "strict"}
-    }
+        "giphyContentRating": "strict"}}
 
 # SOAR rest-client URLs
 RES_TASK = "/tasks/"
@@ -79,9 +80,13 @@ INFO_CREATING_GROUP = "[Microsoft Groups] Creating new Group"
 INFO_GROUP_CREATION_REQUEST = "[Microsoft Groups] Group creation request:"
 INFO_FIND_GROUP_BY_NAME = "[Microsoft Groups] Searching for group using Name"
 INFO_FIND_GROUP_BY_MAIL = "[Microsoft Groups] Searching for group using Mail Nickname"
+INFO_FIND_GROUP_BY_ID = "Searching for group using Group ID"
 INFO_FOUND_GROUP = "[Microsoft Groups] Found one or more Groups"
 INFO_SUCCESSFULLY_DELETED = "Successfully deleted {}: {}"
 INFO_ADD_MEMEBERS = "[Microsoft Groups] Members to be added to the Group {}"
+INFO_SUCCESSFULLY_ENABLED = "Successfully enabled Teams for Group: {}"
+INFO_SUCCESSFULLY_ARCHIVED = "Successfully archived Team: {}"
+INFO_SUCCESSFULLY_UNARCHIVED = "Successfully unarchived Team: {}"
 
 DEBUG_BEARER_ID = "[Microsoft Authentication] Bearer ID {}"
 DEBUG_SKIPPING_USER = "[Microsoft Groups] User information already exist"
@@ -100,7 +105,7 @@ WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this inciden
 
 ERROR_AUTHENTICATION_FAILED = '''[Microsoft Authentication] Failed to retrieve AccessToken.
  Check Credentials!'''
-ERROR_NO_ARG_PASSED = "[Microsoft Groups] No parameter passed to method read_user_info"
+ERROR_NO_ARG_PASSED = "[Microsoft Groups] No parameter passed to method"
 ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
 ERROR_MISSING_NAME_MAIL_NAME = '''[Microsoft Groups] Either the Group's name or the
  Mail Nickname has to be specified to find the group'''
@@ -108,6 +113,7 @@ ERROR_FOUND_MANY_GROUP = '''[Microsoft Groups] Foud more than one group with the
  Please specify the Mail Nickname to delete the group'''
 
 ERROR_COULDNOT_CREATE_TEAM = "[Microsoft Team] Unable to create team"
+ERROR_INVALID_OPTION_PASSED = "Invalid Option passed!"
 
 STATUS_STARTING_APP = "Starting App Function: {}"
 STATUS_GENERATE_HEADER = "Retriving AccessToken for this session"
@@ -131,7 +137,8 @@ MSG_UNSUPPORTED_TYPE = "Unsupported object specified to function. Accepted types
 MSG_RESPONSE_NONE = '''API call failed! Invalid METHOD passed to rc.execute()!
  Response returned was None'''
 MSG_RESPONSE_204  = "API call successful! No content returned"
-MSG_RESPONSE_400  = "API call failed! Entity or Object already exists. API returned 401! {}"
+MSG_RESPONSE_400  = "API call failed! API returned 401! {}"
 MSG_RESPONSE_401  = "API call failed! Security context is invalid. API returned 401! {}"
 MSG_RESPONSE_404  = "API call failed! Item not found. API returned 404! {}"
 MSG_RESPONSE_405  = "API call failed! Method Not Allowed. API returned 405! {}"
+MSG_RESPONSE_409  = "API call failed! Conflict in the request. API returned 405! {}"
