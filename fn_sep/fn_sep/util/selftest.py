@@ -24,7 +24,7 @@ def selftest_function(opts):
 
         r = sep.test_connectivity()
 
-        if r == '':
+        if r:
             return {"state": "success"}
         else:
             return {"state": "failure"}
