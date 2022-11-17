@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from urllib.parse import quote_plus, urljoin
 
-from requests import Session
+from requests import Session, HTTPError
 from requests.exceptions import ConnectionError
 from resilient_lib import (IntegrationError, RequestsCommon, str_to_bool,
                            validate_fields)
@@ -26,6 +26,7 @@ SYSTEM_STATUS_URI = "/status"
 MODEL_BREACHES_URI = "/modelbreaches"
 MODEL_BREACHES_COMMENTS_URI = MODEL_BREACHES_URI + "/{pbid}/comments"
 MODEL_BREACH_ACKNOWLEDGE_URI = MODEL_BREACHES_URI + "/{pbid}/acknowledge"
+MODEL_BREACH_UNACKNOWLEDGE_URI = MODEL_BREACHES_URI + "/{pbid}/unacknowledge"
 AI_ANALYST_INCIDENT_GROUPS_URI = "/aianalyst/groups"
 AI_ANALYST_EVENTS_URI = "/aianalyst/incidentevents"
 AI_ANALYST_EVENT_COMMENTS_URI = "/aianalyst/incident/comments"
@@ -39,7 +40,7 @@ TAGS_URI = "/tags/entities"
 # C O N F I G S
 PUBLIC_KEY_CONFIG = "api_key"
 PRIVATE_KEY_CONFIG = "api_secret"
-URL_CONFIG = "instance_url"
+URL_CONFIG = "darktrace_base_url"
 MIN_SCORE_CONFIG = "min_score"
 LOCALE_CONFIG = "locale"
 EXCLUDE_DEVICE_LIST_CONFIG = "exclude_did"
@@ -55,7 +56,6 @@ DEFAULT_LOCALE = "en_US"
 DEFAULT_COMMENT_SYNC = "true"
 
 # O T H E R   C O N S T A N T S
-UNSET_GROUP_ID = "UNSET"
 DT_TIME_FORMATTER = "%Y%m%dT%H%M%S"
 
 class AppCommon():
@@ -245,11 +245,13 @@ class AppCommon():
                 cert=self.client_auth,
                 **kwargs
             )
-        except IntegrationError as err:
+            response.raise_for_status()
+        except HTTPError as err:
             if capture_error:
                 LOG.error("Darktrace API call failed for request %s %s %s Captured error: %s", method, path_request, data, str(err))
                 return {}
-            raise err
+            else:
+                raise err
 
         return response.json()
     #############################
@@ -304,50 +306,11 @@ class AppCommon():
                 return []
 
             base_query.update({"includegroupurl": "true", "groupid": group_ids})
-            return self.query_groups(base_query)
+            return self.get_incident_groups(base_query)
 
         except IntegrationError as err:
             LOG.error("%s poller fetch failed: %s", PACKAGE_NAME, str(err))
             return []
-
-    def query_groups(self, query: dict, enhance: bool = True) -> list:
-        """
-        Get the list of incident groups given a query. Used to be called from
-        ``query_entities_since_ts`` and for enhanced updates from the poller
-        directly. For that reason, ``query`` should always have at least a value
-        set for ``"groupid"`` in it.
-
-        ``enhance`` can be set to false if all that is desired is the incident groups.
-        When ``enhance`` is set to False, this method is equivalent to directly calling
-        ``get_incident_groups`` with ``capture_error=False``.
-
-        :param query: /aianalyst/groups query params
-        :type query: dict
-        :param enhance: whether or not to enhance the data with extra API calls, defaults to True
-        :type enhance: bool, optional
-        :return: list of ai analyst incident groups with enhanced data for presentation in a SOAR case
-        :rtype: list
-        """
-        LOG.debug("Querying Darktrace for incident groups with query %s", query)
-        incident_groups = self.get_incident_groups(query)
-
-        if enhance:
-            # enhance data for each group
-            for group in incident_groups:
-
-                # enhance events
-                group["enhancedIncidentEvents"] = self.get_incident_events(group_id=group.get("id"), capture_error=True)
-                group["baseUrl"] = self.base_url.rstrip("/") # remove any trailing slashes for consistency
-
-                # enhance devices.
-                # NOTE the endpoint allows for comma-separated list of did's
-                # but will only return a list if there is at least a comma in there -- thus we
-                # need to include the last comma there otherwise if there was only one device
-                # we'd get a dict result rather than a list
-                query = {"did": ",".join(map(str, group.get("devices", []))) + ",", "includetags": "true"}
-                group["enhancedDevices"] = self.get_devices(query, capture_error=True)
-
-        return incident_groups
 
     def query_group_comments(self, group_id: str) -> list:
         """
@@ -508,7 +471,7 @@ class AppCommon():
 
     ########
     # TODO: there is an endpoint that allows you to download an event as a PDF — this should be exposed!
-    # EX: GET https://euw2-75824-01.cloud.darktrace.com/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
+    # EX: GET https://<darktrace_base_url>/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
     ########
 
     def get_incident_event_comments(self, incident_id: str = None, params: dict = None, capture_error: bool = False) -> dict:
@@ -701,6 +664,30 @@ class AppCommon():
         return self._execute_dt_request(
             "POST",
             MODEL_BREACH_ACKNOWLEDGE_URI.format(pbid=pbid),
+            data=body,
+            capture_error=capture_error
+        )
+
+    def unacknowledge_model_breach(self, pbid: str, capture_error: bool = False) -> dict:
+        """
+        Unacknowledge a model breach. Requires a model breach ID (pbid).
+
+        Hits the ``/modelbreaches/{pbid}/acknowledge`` endpoint. More information:
+        https://customerportal.darktrace.com/product-guides/main/api-modelbreaches-acknowledge-unacknowledge-request
+
+        :param pbid: model breach id
+        :type pbid: str
+        :param capture_error: if True, will not fail on API error; defaults to False
+        :type capture_error: bool, optional
+        :return: if success, returns {"aianalyst": "SUCCESS"}
+        :rtype: dict
+        """
+
+        body = {"unacknowledge": "true"}
+
+        return self._execute_dt_request(
+            "POST",
+            MODEL_BREACH_UNACKNOWLEDGE_URI.format(pbid=pbid),
             data=body,
             capture_error=capture_error
         )

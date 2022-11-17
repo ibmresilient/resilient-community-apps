@@ -12,7 +12,7 @@ def config_section_data():
     config_data = u"""[fn_darktrace]
 # enter the base URL to your Darktrace instance and
 # the public and private keys you generated for this app
-instance_url=https://<instance>.cloud.darktrace.com
+darktrace_base_url=https://<instance>.cloud.darktrace.com
 api_key=
 api_secret=
 
@@ -34,9 +34,8 @@ locale=en_US
 # OPTIONAL: turn off comment synchronization
 # This will stop polling Darktrace for new comments on open incidents.
 # By default this is turned on (i.e. True) but should be turned off if
-# Darktrace comments are not needed in SOAR. Comments from SOAR can still
-# be sent individually to Darktrace.
-auto_sync_darktrace_comments = True
+# Darktrace comments are not needed in SOAR.
+auto_sync_darktrace_comments=True
 
 # OPTIONAL: comma-separated list of device IDs to be ignored when polling for new
 # AI Analyst incidents. This is useful when a certain device repeatedly causes

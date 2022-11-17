@@ -7,8 +7,8 @@
     "DEFAULT": "Low"
   }'''
   %}
-  "name": "Darktrace Incident - {{ enhancedIncidentEvents[0]['title'] }}",
-  "description": "{{ enhancedIncidentEvents[0]['summary'] }}",
+  "name": "Darktrace AI Analyst Incident - {{ incidentEvents|map(attribute='title')|join(', ') }}",
+  "description": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident Event Group</a> created from Darktrace",
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start }},
   "start_date": {{ start }},
@@ -17,15 +17,7 @@
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "darktrace_aianalyst_incident_group_id": "{{ id }}",
-    "darktrace_incident_group_link": "<a target='_blank' href='{{ groupUrl }}'>AI Analyst Incident</a>",
-    "darktrace_incident_group_acknowledged": "{% if acknowledged %}Yes{% else %}No{% endif %}",
-    "darktrace_incident_last_modified": {{ end }},
-    "darktrace_incident_group_start_time": {{ start }},
-    "darktrace_associated_device_ids": "{{ devices }} ({{ devices|length }} total devices involved)",
-    "darktrace_initiating_device_ids": "{{ initialDevices }}",
-    "darktrace_group_category": "<span class='label' rel='tooltip' title='{{ category }}'>{{ category|camel }}</span>",
-    "darktrace_group_score": "{{ '%0.2f'|format(groupScore|float) }}",
-    "darktrace_number_of_events_in_group": "{{ incidentEvents|length }}"
+    "darktrace_incident_last_modified": {{ end }}
   },
   {# add comments as necessary #}
   "comments": [
@@ -35,70 +27,5 @@
         "content": "<b>Created by Darktrace</b>"
       }
     }
-  ],
-  {# add artifacts as necessary #}
-  "artifacts": [
-    {% for device in enhancedDevices %}
-        {% set artifactFound = False %}
-      {% set device_description = "Darktrace Device (Type: " + device["typelabel"] + ") (ID: " + device["id"]|string() + ")" %}
-      {% if 'ip' in device %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "IP Address"
-          },
-          "value": "{{ device['ip'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'macaddress' in device %}
-        {% if artifactFound %},{% endif %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "MAC Address"
-          },
-          "value": "{{ device['macaddress'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'hostname' in device %}
-        {% if artifactFound %},{% endif %}
-        {% set artifactFound = True %}
-        {
-          "type": {
-            "name": "System Name"
-          },
-          "value": "{{ device['hostname'] }}",
-          "description": {
-            "format": "html",
-            "content": "{{ device_description }}"
-          }
-        }
-      {% endif %}
-      {% if 'credentials' in device %}
-        {% if artifactFound %},{% endif %}
-          {% for cred in device['credentials'] %}
-            {
-                "type": {
-                  "name": "User Account"
-                },
-                "value": "{{ cred['credential'] }}",
-                "description": {
-                  "format": "html",
-                  "content": "{{ device_description }} (Last Seen {{cred['lastSeen']|iso8601}})"
-                }
-            }
-            {% if not loop.last %},{% endif %}
-          {% endfor %}
-      {% endif %}
-      {% if not loop.last %},{% endif %}
-    {% endfor %}
   ]
 }

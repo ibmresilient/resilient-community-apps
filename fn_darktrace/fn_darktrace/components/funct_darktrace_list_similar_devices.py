@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 
@@ -25,9 +26,9 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.darktrace_device_id
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        self.app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
+        app_common = AppCommon(self.rc, self.options, self.opts.get("integrations", {}))
 
         validate_fields(["darktrace_device_count", "darktrace_device_id"], fn_inputs)
 
@@ -35,10 +36,10 @@ class FunctionComponent(AppFunctionComponent):
         device_id = clean_html(fn_inputs.darktrace_device_id)
         count = fn_inputs.darktrace_device_count
 
-        similar_devices = self.app_common.get_similar_devices(device_id, count=count)
+        similar_devices = app_common.get_similar_devices(device_id, count=count)
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
-        
-        results = {"similar_devices": similar_devices, "base_url": self.app_common.base_url.rstrip("/")}
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+
+        results = {"similar_devices": similar_devices, "base_url": app_common.base_url.rstrip("/")}
 
         yield FunctionResult(results)

@@ -7,9 +7,12 @@ import pytest
 from resilient_circuits import FunctionResult, SubmitTestFunction
 from resilient_circuits.util import get_function_definition
 
-PACKAGE_NAME = "fn_darktrace"
-FUNCTION_NAME = "darktrace_list_similar_devices"
+from .test_app_common import PATH_AIANALYST_GROUPS_MOCK, load_json
 
+PACKAGE_NAME = "fn_darktrace"
+FUNCTION_NAME = "darktrace_get_incident_group"
+
+# Read the default configuration-data section from the package
 config_data = """[fn_darktrace]
 api_key=abcd-efgh
 api_secret=1234-abcd-56789-efgh
@@ -20,9 +23,9 @@ darktrace_base_url=https://fake.cloud.darktrace.com
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_darktrace_list_similar_devices_function(circuits, function_params, timeout=5):
+def call_darktrace_get_incident_group_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("darktrace_list_similar_devices", function_params)
+    evt = SubmitTestFunction("darktrace_get_incident_group", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -37,15 +40,15 @@ def call_darktrace_list_similar_devices_function(circuits, function_params, time
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("darktrace_list_similar_devices_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("darktrace_get_incident_group_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestDarktraceListSimilarDevices:
-    """ Tests for the darktrace_list_similar_devices function"""
+class TestDarktraceGetIncidentGroup:
+    """ Tests for the darktrace_get_incident_group function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -53,28 +56,22 @@ class TestDarktraceListSimilarDevices:
         assert func is not None
 
     mock_inputs_1 = {
-        "darktrace_device_count": 2,
-        "darktrace_device_id": "4"
+        "darktrace_incident_group_id": "fake-id"
     }
 
-    expected_results_1 = {"similar_devices": [{"did": 5}, {"did": 6}], "base_url": "https://fake.cloud.darktrace.com"}
-
-    mock_inputs_2 = {
-        "darktrace_device_count": 1,
-        "darktrace_device_id": "<a href='https://fake.cloud.darktrace.com/#device/4' target='_blank'>4</a>"
+    expected_results_1 = {
+        "incident_group": load_json(PATH_AIANALYST_GROUPS_MOCK)[0]
     }
 
-    expected_results_2 = {"similar_devices": [{"did": 5}], "base_url": "https://fake.cloud.darktrace.com"}
-
+    @patch("fn_darktrace.components.funct_darktrace_list_similar_devices.AppCommon.get_incident_groups")
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, patch_get_groups, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_darktrace.components.funct_darktrace_list_similar_devices.AppCommon.get_similar_devices") as patch_get_similar:
-            patch_get_similar.return_value = expected_results.get("similar_devices")
 
-            results = call_darktrace_list_similar_devices_function(circuits_app, mock_inputs)
-            assert(expected_results == results.get("content"))
-            patch_get_similar.assert_called_once_with("4", count=mock_inputs.get("darktrace_device_count"))
+        patch_get_groups.return_value = load_json(PATH_AIANALYST_GROUPS_MOCK)
+
+        results = call_darktrace_get_incident_group_function(circuits_app, mock_inputs)
+        assert(expected_results == results.get("content"))
+        assert patch_get_groups.called
