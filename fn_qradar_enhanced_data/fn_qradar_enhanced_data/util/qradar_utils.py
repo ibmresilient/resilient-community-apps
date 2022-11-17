@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#   Util classes for qradar
+# Util classes for qradar
 
 from base64 import b64encode
 from json import dumps
@@ -10,7 +10,6 @@ from requests import get, post
 from resilient_lib import IntegrationError, RequestsCommon
 from six import binary_type
 import fn_qradar_enhanced_data.util.qradar_constants as qradar_constants
-from fn_qradar_enhanced_data.util.function_utils import fix_dict_value
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_SYSTEMDATE
 from fn_qradar_enhanced_data.util.SearchWaitCommand import (SearchFailure, SearchJobFailure, SearchWaitCommand)
 
@@ -205,7 +204,8 @@ class ArielSearch(SearchWaitCommand):
         res = response.json()
         ret = {}
         if response.status_code in [200, 206]:
-            ret = {"events": fix_dict_value(res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"])}
+            events = res["events"] if "events" in res else res["flows"] if "flows" in res else res["other"]
+            ret = {"events": [{key: f"{event[key]}" for key in event} for event in events if isinstance(event, dict)]}
 
         return ret
 

@@ -37,15 +37,6 @@ def make_query_string(query_string, params):
 
     return " ".join(query_string.split())
 
-def fix_dict_value(events):
-    """
-    When the returned data from QRadar is used to update a datatable, we need to
-    convert types like dict/list into strings
-    :param events: List of dicts
-    :return: (list) List of dicts
-    """
-    return [{key: f"{event[key]}" for key in event} for event in events if isinstance(event, dict)]
-
 def get_server_settings(opts, qradar_label):
     """
     Used for initilizing or reloading the options variable

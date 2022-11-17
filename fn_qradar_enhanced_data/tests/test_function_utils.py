@@ -1,7 +1,7 @@
 # encoding: utf-8
 # Unit tests for function_utils.py
 
-from fn_qradar_enhanced_data.util.function_utils import make_query_string, fix_dict_value
+from fn_qradar_enhanced_data.util.function_utils import make_query_string
 
 def test_query_string():
     """
@@ -31,26 +31,3 @@ def test_query_string():
     query_str = make_query_string(input_string, params=params)
     str_expect = f"{str1}{params[0]}{str2}{params[1]}{str3}{params[2]}{str4}{params[3]}{str5}"
     assert query_str == str_expect
-
-def test_fix_dict():
-    """
-    Test the fix_dict_value function
-    :return: None
-    """
-    input_dict = {"key1": 10,
-                  "key2": "string",
-                  "key3": ["l1", "l2"],
-                  "key4": {"k1": "v1",
-                           "k2": "v2"},
-                  "key5": "çø∂",
-                  "key6": u"çø∂",
-                  "key7": [u"çø∂", "çø∂"]}
-    ret_dicts = fix_dict_value([input_dict])
-
-    assert ret_dicts[0]["key1"] == "10"
-    assert ret_dicts[0]["key2"] == "string"
-    assert ret_dicts[0]["key3"] == str(input_dict["key3"])
-    assert ret_dicts[0]["key4"] == str(input_dict["key4"])
-    assert ret_dicts[0]["key5"] == "çø∂"
-    assert ret_dicts[0]["key6"] == u"çø∂"
-    assert ret_dicts[0]["key7"]
