@@ -300,8 +300,8 @@ class BigFixClient(object):
                         rs = response['results'][i]
                         result.append({
                             "computer_id": rs.get('computerID'),
-                            "computer_name": rs.gett('computerName'),
-                            "query_id": rs.gett('subQueryID'),
+                            "computer_name": rs.get('computerName'),
+                            "query_id": rs.get('subQueryID'),
                             "failure": rs.get('isFailure'),
                             "result": rs.get('result'),
                             "resp_time": rs.get('ResponseTime')
