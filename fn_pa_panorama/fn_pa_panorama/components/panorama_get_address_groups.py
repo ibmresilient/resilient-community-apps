@@ -17,7 +17,14 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: List address groups in Panorama."""
+        """
+        Function: List address groups in Panorama.
+        Inputs:
+            -   fn_inputs.panorama_name_parameter
+            -   fn_inputs.panorama_vsys
+            -   fn_inputs.panorama_label
+            -   fn_inputs.panorama_location
+        """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate required parameters
@@ -26,17 +33,15 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Get configuration for Panorama server specified
-        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
-
+        # Create connection to the user specifiec Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       options,
+                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
         response = panorama_util.get_address_groups(fn_inputs.panorama_name_parameter)
 
-        yield self.status_message(f"{response['result']['@count']} groups returned.")
+        yield self.status_message(f"{response['result'].get('@count')} groups returned.")
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results

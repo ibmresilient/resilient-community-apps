@@ -18,7 +18,13 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Lists users part of a group in Panorama."""
+        """
+        Function: Lists users part of a group in Panorama.
+        Inputs:
+            -   fn_inputs.panorama_user_group_xpath
+            -   fn_inputs.panorama_label
+            -   fn_inputs.panorama_location
+        """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate required parameters
@@ -27,34 +33,31 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Get configuration for Panorama server specified
-        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
-
+        # Create connection to the user specifiec Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       options,
+                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        None)
-        xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
-        dict_response = parse(xml_response)
 
-        user_list = []
         try:
-            members = dict_response.get("response").get("result").get("entry").get("user").get("member")
-            if isinstance(members, list):
-                # Multiple existing users
-                user_list = [m for m in members]
-            else:
-                # Single user in group
-                user_list = [members.get("#text")]
+            # Get the users in a group in xml format
+            xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
         except KeyError:
-            # No users returned
-            yield self.status_message("No users returned.")
+            yield self.status_message("No users returned.") # No users returned
+
+        # Create results dictionary from the above results
+        results = parse(xml_response)
+
+        members = results.get("response").get("result").get("entry").get("user").get("member")
+        # Create a list of the returned users
+        user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
 
         yield self.status_message(f"{len(user_list)} users returned.")
 
-        # add to dict_response to allow for more options in Resilient scripting and make some actions easier
-        dict_response["user_list"] = user_list
-        dict_response["xml_response"] = xml_response
+        # Add list of users recieved from the get_users_in_a_group call to the results dict
+        results["user_list"] = user_list
+        # Add get_users_in_a_group response to the results dict in xml format
+        results["xml_response"] = xml_response
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(dict_response)
+        yield FunctionResult(results)

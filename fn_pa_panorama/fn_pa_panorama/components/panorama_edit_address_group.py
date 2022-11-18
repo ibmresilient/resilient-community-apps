@@ -20,6 +20,12 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Panorama edit address group edits an address group,
         ie: add or remove ip addresses from the group
+        Inputs:
+            -   fn_inputs.panorama_request_body
+            -   fn_inputs.panorama_vsys
+            -   fn_inputs.panorama_location
+            -   fn_inputs.panorama_name_parameter
+            -   fn_inputs.panorama_label
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -29,18 +35,14 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Get configuration for Panorama server specified
-        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
-
+        # Create connection to the user specifiec Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       options,
+                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
-
-        response = panorama_util.edit_address_groups(fn_inputs.panorama_name_parameter,
-                                             self.get_textarea_param(fn_inputs.panorama_request_body))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(response)
+        yield FunctionResult(panorama_util.edit_address_groups(fn_inputs.panorama_name_parameter,
+                             self.get_textarea_param(fn_inputs.panorama_request_body)))

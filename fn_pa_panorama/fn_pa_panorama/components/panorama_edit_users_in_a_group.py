@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Function implementation"""
 
-import xmltodict
+from xmltodict import parse
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 from resilient_lib import validate_fields
@@ -18,7 +18,14 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Edits users in a group in Panorama."""
+        """
+        Function: Edits users in a group in Panorama.
+        Inputs:
+            -   fn_inputs.panorama_user_group_xpath
+            -   fn_inputs.panorama_user_group_xml
+            -   fn_inputs.panorama_label
+            -   fn_inputs.panorama_location
+        """
         # Response code should equal 20 indicating the call went through successfully
         PASS_CONSTANT = "20"
 
@@ -30,27 +37,24 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Get configuration for Panorama server specified
-        options = get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None))
-
+        # Create connection to the user specifiec Panorama Server
         panorama_util = PanoramaClient(self.opts,
-                                       options,
+                                       get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        None)
 
-        xml_response = panorama_util.edit_users_in_a_group(fn_inputs.panorama_user_group_xpath,
-                                                           self.get_textarea_param(fn_inputs.panorama_user_group_xml))
-        dict_response = xmltodict.parse(xml_response)
-
         try:
-            if dict_response["response"].get("@code") == PASS_CONSTANT:
-                yield self.status_message("User group was successfully edited.")
-            else:
-                raise FunctionError("Editing the user group was unsuccessful with code {}, raising FunctionError.".
-                                    format(dict_response["response"]["@code"]))
+            xml_response = panorama_util.edit_users_in_a_group(fn_inputs.panorama_user_group_xpath,
+                           self.get_textarea_param(fn_inputs.panorama_user_group_xml))
+            dict_response = parse(xml_response)
         except KeyError as e:
             yield self.status_message("Editing the user group was unsuccessful.")
             raise FunctionError(e)
+
+        if dict_response["response"].get("@code") == PASS_CONSTANT:
+            yield self.status_message("User group was successfully edited.")
+        else:
+            raise FunctionError(f"Editing the user group was unsuccessful with code {dict_response['response'].get('@code')}, raising FunctionError.")
 
         # add to dict_response to allow for more options in Resilient scripting and make some actions easier
         dict_response["xml_response"] = xml_response

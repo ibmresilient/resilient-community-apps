@@ -8,7 +8,7 @@ from resilient_lib.components.resilient_common import validate_fields, str_to_bo
 from resilient_lib.components.requests_common import RequestsCommon, IntegrationError
 
 LOG = getLogger(__name__)
-DEFAULT_API_VERSION="9.0"
+DEFAULT_API_VERSION = "9.0"
 URI_PATH = "restapi"
 PACKAGE_NAME = "fn_pa_panorama"
 
@@ -27,11 +27,9 @@ class PanoramaClient:
         self.verify = str_to_bool(pan_config.get("cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
-        self.query_parameters = {
-                                    "key": self.__key,
-                                    "location": location,
-                                    "output-format": "json"
-                                }
+        self.query_parameters = {"key": self.__key,
+                                 "location": location,
+                                 "output-format": "json"}
         if location in ["vsys", "panorama-pushed"]:
             self.query_parameters["vsys"] = self.__vsys
 
@@ -82,29 +80,23 @@ class PanoramaClient:
 
     def get_users_in_a_group(self, xpath):
         """Gets list of users in a group, uses custom POST method due to this being a SOAP based call.
-           Returns XML string
-        """
-        params = {
-            "type": "config",
-            "action": "get",
-            "key": self.__key,
-            "xpath": xpath
-        }
+           Returns XML string"""
+        params = {"type": "config",
+                  "action": "get",
+                  "key": self.__key,
+                  "xpath": xpath}
         response = self.rc.execute_call_v2("POST", f"{self.host}/api/", params=params, verify=self.verify)
         response.raise_for_status()
         return response.text
 
     def edit_users_in_a_group(self, xpath, xml_object):
         """Edits list of users in a group, uses custom POST method due to this being a SOAP based call.
-           Returns XML string
-        """
-        params = {
-            "type": "config",
-            "action": "edit",
-            "key": self.__key,
-            "xpath": xpath,
-            "element": xml_object
-        }
+           Returns XML string"""
+        params = {"type": "config",
+                  "action": "edit",
+                  "key": self.__key,
+                  "xpath": xpath,
+                  "element": xml_object}
         response = self.rc.execute_call_v2("POST", f"{self.host}/api/?", params=params, verify=self.verify)
         response.raise_for_status()
         return response.text
