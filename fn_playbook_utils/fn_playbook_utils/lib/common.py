@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 #(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
+import base64
 import logging
-import defusedxml.ElementTree as ET
-from resilient_lib import IntegrationError
+from resilient_lib import IntegrationError, b_to_s
 from resilient import SimpleHTTPException
 from requests import RequestException
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 import posixpath
 
 LOG = logging.getLogger(__name__)
@@ -215,7 +216,24 @@ def export_playbook(rest_client, playbook_id, playbook_name):
     if playbook_name:
         payload['name'] = playbook_name
 
-    return rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"), payload=payload)
+    # ensure the playbook is found
+    find_result = rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"), 
+                                   payload=payload)
+    if find_result.get("success", True):
+        multipart_data = {
+                "file_name": "Unnused"
+            }
+        multipart_data.update({})
+        encoder = MultipartEncoder(fields=multipart_data)
+
+        # now down the specific export
+        find_result = rest_client.post(posixpath.join(PLAYBOOK_URL, "exports", str(find_result.get("export_id"))),
+                                       encoder,
+                                       headers={"content-type": encoder.content_type})
+
+        return True, b_to_s(base64.b64encode(find_result))
+
+    return False, find_result
 
 def import_playbook(rest_client, playbook_body):
     try:
