@@ -3,6 +3,7 @@
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 import base64
 import logging
+from io import BytesIO
 from resilient_lib import IntegrationError, b_to_s
 from resilient import SimpleHTTPException
 from requests import RequestException
@@ -23,7 +24,6 @@ ACTION_MAP = {
     'userTask': 'Tasks'
 }
 
-IMPORT_URL = "/playbooks/import"
 PLAYBOOK_URL = "/playbooks"
 PLAYBOOK_QUERY_PAGED_URL = "/playbooks/query_paged?return_level=full"
 PLAYBOOK_QUERY_PAGED_FILTER = {
@@ -237,25 +237,32 @@ def export_playbook(rest_client, playbook_id, playbook_name):
 
 def import_playbook(rest_client, playbook_body):
     try:
-        result = rest_client.post(IMPORT_URL, playbook_body)
+        filehandle = BytesIO(base64.b64decode(playbook_body))
+        multipart_data = {"file": ("export.resz", filehandle, "application/octet-stream")}
+        multipart_data.update({})
+        encoder = MultipartEncoder(fields=multipart_data)
+        
+        result = rest_client.post(posixpath.join(PLAYBOOK_URL, "imports"), 
+                                  encoder,
+                                  headers={"content-type": encoder.content_type})
     except RequestException as upload_exception:
         LOG.debug(playbook_body)
         raise IntegrationError(upload_exception)
     else:
         assert isinstance(result, dict)
-    if result.get("status", '') == "PENDING":
-        confirm_playbook_import(rest_client, result, result.get("id"))
+    
+    # excepted result?
+    if result.get("status", "") == "PENDING":
+        return confirm_playbook_import(rest_client, result.get("id"))
     else:
         raise IntegrationError(
             "Could not import because the server did not return an import ID")
 
 
-def confirm_playbook_import(rest_client, import_result, import_id):
-    import_result["status"] = "ACCEPTED"      # Have to confirm changes
-    uri = f"{IMPORT_URL}/{import_id}/status"
+def confirm_playbook_import(rest_client, import_id, status="ACCEPTED"):
+    uri = posixpath.join(PLAYBOOK_URL, "imports", str(import_id), "status")
     try:
-        rest_client.put(uri, "ACCEPTED")
-        LOG.info("Imported playbook changes successfully to SOAR")
+        return rest_client.put(uri, status, headers={"content-type": "text/plain"})
     except RequestException as import_exception:
         raise IntegrationError(repr(import_exception))
 

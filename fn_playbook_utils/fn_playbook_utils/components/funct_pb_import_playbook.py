@@ -20,16 +20,15 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Import a playbook
         Inputs:
-            -   fn_inputs.pbm_body
+            -   fn_inputs.pbm_resz_body
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["pbm_body"], fn_inputs)
+        validate_fields(["pbm_resz_body"], fn_inputs)
 
-        results = import_playbook(self.rest_client(), fn_inputs.pbm_body)
+        results = import_playbook(self.rest_client(), fn_inputs.pbm_resz_body)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")
