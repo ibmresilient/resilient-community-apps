@@ -31,10 +31,11 @@ class FunctionComponent(AppFunctionComponent):
             ValueError("Specify either playbook ID or Name")
 
         status, results = export_playbook(self.rest_client(),
-                                  getattr(fn_inputs, 'pbm_id', None), 
-                                  getattr(fn_inputs, 'pbm_name', None))
+                                          getattr(fn_inputs, 'pbm_id', None), 
+                                          getattr(fn_inputs, 'pbm_name', None))
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
-        yield FunctionResult(results, success=status,
+        yield FunctionResult(results if results else {},
+                             success=status,
                              reason=results if not status else None)

@@ -30,11 +30,6 @@ PLAYBOOK_QUERY_PAGED_FILTER = {
   "filters": [
     {
       "conditions": [
-        {
-          "method": "equals",
-          "field_name": "id",
-          "value": None
-        }
       ]
     }
   ]
@@ -188,38 +183,48 @@ def get_playbooks(rest_client, pb_types, pb_filter):
     except SimpleHTTPException:
         return {}
 
-def get_playbook(rest_client, playbook_id):
-    """[get a specific playbook from all playbooks]
+def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
+    """[query for a specific playbook from all playbooks]
 
     Args:
         rest_client ([obj]): [class to make SOAR API calls]
         playbook_id ([int]): [playbook id to search]
+        playbook_name ([str]): [name of playbook as option rather than playbook id]
 
     Returns:
-        [str]: [xml document for the found workflow or None]
+        [list]: [list playbooks which meet the query citeria]
     """
     filter_conditions = dict(PLAYBOOK_QUERY_PAGED_FILTER)
-    filter_conditions['filters'][0]['conditions'][0]['value'] = playbook_id
-    playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
-    # find our specific workflow
-    playbook_xml = None
-    if playbooks.get('data'):
-        playbook_xml = playbooks['data'][0]['content']['xml']
-
-    return playbook_xml
-
-def export_playbook(rest_client, playbook_id, playbook_name):
-    payload = {}
 
     if playbook_id:
-        payload['id'] = playbook_id
+        id_condition = {
+            "method": "equals",
+            "field_name": "id",
+            "value": playbook_id
+            }
+        filter_conditions['filters'][0]['conditions'].append(id_condition)
+
     if playbook_name:
-        payload['name'] = playbook_name
+        filter_conditions['query'] = playbook_name
+
+    playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
+
+    return playbooks['data']
+
+def export_playbook(rest_client, playbook_id, playbook_name):
+    # find the playbook by id or name
+    find_result = query_playbooks(rest_client,
+                               playbook_id=playbook_id,
+                               playbook_name=playbook_name,
+                               data_result=None)
+    if not find_result:
+        return False, "Playbook not found"
 
     # ensure the playbook is found
-    find_result = rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"), 
-                                   payload=payload)
-    if find_result.get("success", True):
+    export_start_result = rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"),
+                                     payload={"id": find_result[0].get("id")})
+
+    if export_start_result.get("success", True):
         multipart_data = {
                 "file_name": "Unnused"
             }
@@ -227,13 +232,13 @@ def export_playbook(rest_client, playbook_id, playbook_name):
         encoder = MultipartEncoder(fields=multipart_data)
 
         # now down the specific export
-        find_result = rest_client.post(posixpath.join(PLAYBOOK_URL, "exports", str(find_result.get("export_id"))),
-                                       encoder,
-                                       headers={"content-type": encoder.content_type})
+        export_result = rest_client.post(posixpath.join(PLAYBOOK_URL, "exports", str(export_start_result.get("export_id"))),
+                                         encoder,
+                                         headers={"content-type": encoder.content_type})
 
-        return True, b_to_s(base64.b64encode(find_result))
+        return True, b_to_s(base64.b64encode(export_result))
 
-    return False, find_result
+    return False, export_start_result
 
 def import_playbook(rest_client, playbook_body):
     try:
@@ -241,8 +246,8 @@ def import_playbook(rest_client, playbook_body):
         multipart_data = {"file": ("export.resz", filehandle, "application/octet-stream")}
         multipart_data.update({})
         encoder = MultipartEncoder(fields=multipart_data)
-        
-        result = rest_client.post(posixpath.join(PLAYBOOK_URL, "imports"), 
+
+        result = rest_client.post(posixpath.join(PLAYBOOK_URL, "imports"),
                                   encoder,
                                   headers={"content-type": encoder.content_type})
     except RequestException as upload_exception:
@@ -250,7 +255,7 @@ def import_playbook(rest_client, playbook_body):
         raise IntegrationError(upload_exception)
     else:
         assert isinstance(result, dict)
-    
+
     # excepted result?
     if result.get("status", "") == "PENDING":
         return confirm_playbook_import(rest_client, result.get("id"))
