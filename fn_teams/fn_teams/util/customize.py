@@ -27,7 +27,9 @@ def codegen_reload_data():
             u"ms_teams_post_message",
             u"ms_teams_create_team",
             u"ms_teams_enable_team",
-            u"ms_teams_archive_team"],
+            u"ms_teams_archive_team",
+            u"ms_teams_create_channel",
+            u"ms_teams_delete_channel"],
         "workflows": [
             u"incident_post_message_to_teams",
             u"incident_create_a_microsoft_group",
@@ -37,17 +39,20 @@ def codegen_reload_data():
             u"task_post_message_to_teams",
             u"common_delete_a_microsoft_group",
             u"common_archive_unarchive_a_microsoft_team",
-            u"common_enable_microsoft_team_for_group"],
+            u"common_enable_microsoft_team_for_group",
+            u"common_create_a_teams_channel",
+            u"common_delete_a_teams_channel"],
         "actions": [
             u"MS Teams: Post Task Information to Teams",
-            u"MS Teams: Post incident information to teams",
-            u"MS Teams: Create Group from incident",
-            u"MS Teams: Create Group from task",
-            u"MS Teams: Delete Group from incident",
-            u"MS Teams: Delete Group from task",
-            u"MS Teams: Create Team from incident",
-            u"MS Teams: Create Team from task",
-            u"MS Teams: Enable Teams for an existing Group"],
+            u"MS Teams: Post Incident Information to Teams",
+            u"MS Teams: Create Group From Incident",
+            u"MS Teams: Create Group From Task",
+            u"MS Teams: Delete Group From Incident",
+            u"MS Teams: Delete Group From Task",
+            u"MS Teams: Create Team From Incident",
+            u"MS Teams: Create Team From Task",
+            u"MS Teams: Create Channel From Incident",
+            u"MS Teams: Enable Teams for an Existing Group"],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -70,14 +75,18 @@ def customization_data(client=None):
         - fn_teams
     - Functions:
         - ms_teams_archive_team
+        - ms_teams_create_channel
         - ms_teams_create_group
         - ms_teams_create_team
+        - ms_teams_delete_channel
         - ms_teams_delete_group
         - ms_teams_enable_team
         - ms_teams_post_message
     - Workflows:
         - common_archive_unarchive_a_microsoft_team
+        - common_create_a_teams_channel
         - common_delete_a_microsoft_group
+        - common_delete_a_teams_channel
         - common_enable_microsoft_team_for_group
         - incident_create_a_microsoft_group
         - incident_create_a_microsoft_team
@@ -86,14 +95,15 @@ def customization_data(client=None):
         - task_create_a_microsoft_team
         - task_post_message_to_teams
     - Rules:
-        - MS Teams: Create Group from incident
-        - MS Teams: Create Group from task
-        - MS Teams: Create Team from incident 
-        - MS Teams: Create Team from task
-        - MS Teams: Delete Group from incident
-        - MS Teams: Delete Group from task
-        - MS Teams: Enable Teams for an existing Group
-        - MS Teams: Post incident information to teams
+        - MS Teams: Create Channel From Incident
+        - MS Teams: Create Group From Incident
+        - MS Teams: Create Group From Task
+        - MS Teams: Create Team From Incident
+        - MS Teams: Create Team From Task
+        - MS Teams: Delete Group From Incident
+        - MS Teams: Delete Group From Task
+        - MS Teams: Enable Teams for an Existing Group
+        - MS Teams: Post Incident Information to Teams
         - MS Teams: Post Task Information to Teams
     """
 

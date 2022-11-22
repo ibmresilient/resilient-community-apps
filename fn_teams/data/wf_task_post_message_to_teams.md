@@ -32,7 +32,7 @@ format of a payload. * = optional
 }
 """
 
-payload = u"""{{ "summary": "Resilient Incident", "sections": [ 
+payload = u"""{{ "summary": "SOAR Incident", "sections": [ 
   {{ "facts": [ 
     {{ "name": "Name", "value": "{}" }}, 
     {{ "name": "Description", "value": "{}" }}, 

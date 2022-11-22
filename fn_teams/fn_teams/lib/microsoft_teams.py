@@ -7,6 +7,7 @@
 import json, re, logging
 
 from urllib import parse
+from retry.api import retry_call
 from resilient_lib import IntegrationError
 
 from fn_teams.lib import constants, microsoft_commons
@@ -78,14 +79,19 @@ class TeamsInterface:
 
         self.log.info("Successfully gathered Owners' information")
 
-        member_list = microsoft_commons.generate_member_list(
+        _member_list = microsoft_commons.generate_member_list(
             resclient=self.resclient,
             task_id=task_id,
             incident_id=incident_id,
             add_members_from=add_members_from,
             additional_members=additional_members)
 
-        member_list = [self._build_member_format(member) for member in member_list]
+        member_list = []
+        for member in _member_list:
+            _user = self._build_member_format(member)
+            if _user:
+                member_list.append(_user)
+        
         self.response_handler.clear_exempt_codes(default=True)
         self.log.info("Successfully gathered Users' information")
         return owners_list, member_list
@@ -93,21 +99,19 @@ class TeamsInterface:
 
     def _add_members(self, team_id, members):
 
-        self.log.info("Members Information")
-        self.log.info(json.dumps(members, indent=2))
-
         url = parse.urljoin(
                 parse.urljoin(
                 constants.BASE_URL,
                 constants.URL_LOCATE_TEAM.format(team_id)),
                 constants.URL_ADD_MEMBER_CONTEXT)
-        
         self.log.debug(url)
 
         self.response_handler.set_return_raw(False)
         self.log.info("Adding members to the team {}".format(team_id))
 
-        body = json.dumps({"values" : members})
+        body = json.dumps({"values" : members}, indent=2)
+        self.log.debug("Members Information")
+        self.log.debug(body)
 
         response = self.rc.execute(
             method="post",
@@ -173,8 +177,13 @@ class TeamsInterface:
             rc=self.rc,
             rh=self.response_handler,
             headers=self.headers)
-        group_details = group_finder.find_group(
-            {"group_id" : _team_id})
+        group_details = retry_call(
+            group_finder.find_group,
+            fargs=[{"group_id" : _team_id}],
+            exceptions=IntegrationError,
+            delay=3,
+            backoff=2,
+            tries=5)
 
         group_detail = group_details[0]
         group_detail.update({

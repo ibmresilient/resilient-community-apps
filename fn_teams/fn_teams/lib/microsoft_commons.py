@@ -268,6 +268,7 @@ class MSFinder():
         else:
             log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
 
+
     def find_group(self, options):
         """
         Allows for locating a group based on its displayName or mailNickname attribute
@@ -333,6 +334,41 @@ class MSFinder():
 
         log.error(error_msg)
         raise IntegrationError(error_msg)
+
+
+    def find_channel(self, options):
+
+        channel_name = options.get("channel_name").strip()
+        group_details = self.find_group(options)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        group_detail = group_details[0]
+        group_id = group_detail.get("id")
+
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_LIST_CHANNEL.format(group_id))
+        
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            callback=self.rh.check_response)
+
+        channel_list = response.get("value")
+        channel_details = list(filter(
+            lambda channel: channel.get("displayName") == channel_name, channel_list))
+        log.debug(json.dumps(channel_details, indent=2))
+
+        if len(channel_details) == 0:
+            raise IntegrationError(constants.ERROR_COULDNOT_FIND_CHANNEL)
+
+        channel_details = channel_details[0]
+        channel_details["group_id"] = group_id
+
+        return channel_details
 
 
 def is_direct_member(incident_member_id, org_member_list):
