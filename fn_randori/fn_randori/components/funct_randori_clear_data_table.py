@@ -3,10 +3,11 @@
 
 """AppFunction implementation"""
 
+from resilient import SimpleHTTPException
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
+from resilient_lib import (validate_fields, IntegrationError)
+from fn_randori.lib.app_common import (PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_clear_data_table"
 
 
@@ -28,16 +29,20 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         validate_fields(["incident_id", "randori_data_table_name"], fn_inputs)
-        results = {}
-        if fn_inputs.randori_data_table_name in ["randori_detections_dt", "randori_discovery_path_dt"]:
-            results = self.rest_client().delete("/incidents/{}/table_data/{}/row_data?handle_format=names".format(fn_inputs.incident_id, 
-                                                                                                                  fn_inputs.randori_data_table_name))
-            err_msg = None
-        else:
-            err_msg = "Data table {} not found.".format(fn_inputs.randori_data_table_name)
+        data_table_name = fn_inputs.randori_data_table_name
+        case_id = fn_inputs.incident_id
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        self.LOG.debug(f"Attempting to clear datatable '{data_table_name}' in case {case_id}")
 
-        yield FunctionResult(results, success=True if not err_msg else False, reason=err_msg)
+        try:
+            self.rest_client().delete(f"/incidents/{case_id}/table_data/{data_table_name}/row_data?handle_format=names")
+            self.LOG.debug(f"Data in table {data_table_name} in incident {case_id} has been cleared")
+
+            yield self.status_message(f"Successfully cleared {data_table_name} in case {case_id}")
+        except SimpleHTTPException as err_msg:
+            self.LOG.error(f"Failed to clear table: {data_table_name} error: {err_msg}")
+            raise IntegrationError(f"Error while clearing table: {data_table_name}")
+
+        yield FunctionResult({})
 
 
