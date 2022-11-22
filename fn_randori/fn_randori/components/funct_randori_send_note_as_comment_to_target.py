@@ -5,9 +5,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, clean_html
-from fn_randori.lib.app_common import AppCommon, PACKAGE_NAME, SOAR_HEADER
+from fn_randori.lib.app_common import (AppCommon, PACKAGE_NAME, SOAR_HEADER)
 
-PACKAGE_NAME = "fn_randori"
 FN_NAME = "randori_send_note_as_comment_to_target"
 
 

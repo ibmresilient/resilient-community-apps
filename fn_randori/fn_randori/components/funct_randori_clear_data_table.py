@@ -6,6 +6,7 @@
 from resilient import SimpleHTTPException
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import (validate_fields, IntegrationError)
+
 from fn_randori.lib.app_common import (PACKAGE_NAME)
 
 FN_NAME = "randori_clear_data_table"
