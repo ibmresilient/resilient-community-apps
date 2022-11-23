@@ -52,26 +52,26 @@ class FunctionComponent(AppFunctionComponent):
             'incident_id',
             'teams_channel',
             'teams_payload'], fn_inputs)
-
-        required_parameters = {}
-        required_parameters["incident_id"] = fn_inputs.incident_id
-        required_parameters["teams_channel"] = fn_inputs.teams_channel
-        required_parameters["teams_payload"] = fn_inputs.teams_payload
-
-        required_parameters["task_id"] = fn_inputs.task_id if hasattr(fn_inputs,
-            'task_id') else False
-        required_parameters["teams_mrkdown"] = fn_inputs.teams_mrkdown if hasattr(fn_inputs,
-            'teams_mrkdown') else False
-        required_parameters["webhook_url"] = self.options.get(
-            required_parameters["teams_channel"])
-
+        
+        teams_channel = fn_inputs.teams_channel
         try:
             message_client = PostMessageClient(self.rc, self.LOG)
-            status = message_client.post_message(self.opts, required_parameters)
+            status = message_client.post_message(
+                self.opts,
+                teams_channel = teams_channel,
+                webhook_url = self.options.get(teams_channel),
+                teams_payload = fn_inputs.teams_payload,
+                org_id = self.rest_client().org_id,
+                incident_id = fn_inputs.incident_id,
+                task_id = fn_inputs.task_id if hasattr(fn_inputs,
+                    'task_id') else False,
+                teams_mrkdown = fn_inputs.teams_mrkdown if hasattr(fn_inputs,
+                    'teams_mrkdown') else False)
+
             yield FunctionResult({
                 "message" : (constants
                     .SUCCESSFULLY_POSTED_MESSAGE
-                    .format(required_parameters["teams_channel"]))}, success=status)
+                    .format(teams_channel))}, success=status)
 
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

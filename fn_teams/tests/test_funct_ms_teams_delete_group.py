@@ -2,6 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 import os
 import logging
+import json
 import pytest
 
 from urllib import parse
@@ -65,15 +66,12 @@ def patch_delete_group(method, url, headers, callback):
 
 @patch('resilient_lib.RequestsCommon.execute', side_effect=patch_delete_group)
 def test_delete_group(patch, required_parameters):
-    required_parameters["group_mail_nickname"] = "MailBoxs@5rf2xs.onmicrosoft.com"
     gi = GroupsInterface(required_parameters)
-    gi.delete_group()
+    gi.delete_group({
+        "group_mail_nickname" : "MailBoxs@5rf2xs.onmicrosoft.com"})
 
-    required_parameters["group_mail_nickname"] = "MailBoxs"
-    gi = GroupsInterface(required_parameters)
-    gi.delete_group()
+    gi.delete_group({
+        "group_mail_nickname" : "MailBoxs"})
 
     with pytest.raises(AssertionError):
-        required_parameters["group_mail_nickname"] = "----"
-        gi = GroupsInterface(required_parameters)
-        gi.delete_group()
+        gi.delete_group({"group_mail_nickname" : "----"})

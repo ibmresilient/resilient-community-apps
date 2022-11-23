@@ -2,6 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 import os
 import logging
+import json
 import pytest
 
 from urllib import parse
@@ -9,7 +10,7 @@ from unittest.mock import patch
 from resilient_lib import RequestsCommon
 
 from tests import testcommons
-from fn_teams.lib import constants
+from fn_teams.lib import constants, microsoft_commons
 from fn_teams.lib.microsoft_groups import GroupsInterface
 
 
@@ -102,40 +103,37 @@ def test_write_group(patch_rc, required_parameters):
 
 
 def test_generate_member_list(patch_generate_members: tuple):
+    required_parameters = patch_generate_members[0]
     expected_users = patch_generate_members[1]
-    gi = GroupsInterface(patch_generate_members[0])
-    gi._generate_member_list()
+    response = microsoft_commons.generate_member_list(
+        resclient=required_parameters.get("resclient"),
+        logger=required_parameters.get("logger"),
+        task_id=required_parameters.get("task_id"),
+        incident_id = required_parameters.get("incident_id"),
+        add_members_from = required_parameters.get("add_members_from"),
+        additional_members = required_parameters.get("additional_members")
+        )
     for user in map(lambda user_info: user_info.get('email'), expected_users):
-        assert user in gi.members_email_ids
+        assert user in response
 
 
 def test_is_direct_member(required_parameters):
     user_list = testcommons.json_read(PATH_RESILIENT_USERS)
-    gi = GroupsInterface(required_parameters)
-    assert gi._is_direct_member(31, user_list)
-    assert gi._is_direct_member(32, user_list)
-    assert gi._is_direct_member(33, user_list)
-    assert not gi._is_direct_member(1, user_list)
-    assert not gi._is_direct_member(2, user_list)
-    assert not gi._is_direct_member(3, user_list)
+    assert microsoft_commons.is_direct_member(31, user_list)
+    assert microsoft_commons.is_direct_member(32, user_list)
+    assert microsoft_commons.is_direct_member(33, user_list)
+    assert not microsoft_commons.is_direct_member(1, user_list)
+    assert not microsoft_commons.is_direct_member(2, user_list)
+    assert not microsoft_commons.is_direct_member(3, user_list)
 
 
 def test_is_group_member(required_parameters):
     user_list = testcommons.json_read(PATH_RESILIENT_USERS)
     group_list = testcommons.json_read(PATH_RESILIENT_GROUP)
-    gi = GroupsInterface(required_parameters)
-    users = gi._is_group_member(46, user_list, group_list)
+    users = microsoft_commons.is_group_member(46, user_list, group_list)
     expected_users = list(
         filter(
             lambda groups: groups.get("id") == 46, group_list))[0].get("output_group_membrs")
     assert len(users) == 6
     for user in users:
         assert user in expected_users
-
-
-@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_read_user_info)
-def test_read_user_info(patch_rc, required_parameters: dict):
-    gi = GroupsInterface(required_parameters)
-    user_info = testcommons.json_read(PATH_MS_USERS)
-    for user in user_info:
-        print(gi._read_user_info(user_info[user].get("id")))
