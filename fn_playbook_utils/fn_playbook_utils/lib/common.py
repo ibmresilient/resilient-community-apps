@@ -214,9 +214,8 @@ def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
 def export_playbook(rest_client, playbook_id, playbook_name):
     # find the playbook by id or name
     find_result = query_playbooks(rest_client,
-                               playbook_id=playbook_id,
-                               playbook_name=playbook_name,
-                               data_result=None)
+                                  playbook_id=playbook_id,
+                                  playbook_name=playbook_name)
     if not find_result:
         return False, "Playbook not found"
 

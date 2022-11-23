@@ -4,7 +4,7 @@
 
 """AppFunction implementation"""
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_playbook_utils.lib.common import get_playbook, get_process_elements
+from fn_playbook_utils.lib.common import export_playbook, get_process_elements
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_get_playbook_content"
@@ -26,11 +26,11 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        playbook_xml = get_playbook(self.rest_client(), fn_inputs.pb_id)
-        if not playbook_xml:
+        status, playbook_results = export_playbook(self.rest_client(), fn_inputs.pb_id, None)
+        if not status:
             msg = "playbook_id not found: {}".format(fn_inputs.pb_id)
             yield self.status_message(msg)
             yield FunctionResult({}, success=False, reason=msg)
         else:
-            results = get_process_elements(playbook_xml)
+            results = get_process_elements(playbook_results['playbooks'][0]['content']['xml'])
             yield FunctionResult(results)
