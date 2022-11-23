@@ -89,7 +89,7 @@ def selftest_function(opts):
                 https_proxy=opts.get('proxy_http', proxy.get('https')),
                 http_timeout=60)
 
-            card.title("Resilient SelfTest")
+            card.title("SOAR SelfTest")
             card.text(datetime.ctime(datetime.now()))
             card.send()
 
