@@ -26,6 +26,12 @@ class PostMessageClient:
         """
         This method is responsible for the construction and sending of the message
 
+        options:  
+        --------
+            options from app.conf file
+            host <str> : Host URL of the SOAR Instance
+            port <int> : Port number 
+
         required_parameters:
         -------------------
             task_id       <str> : If called from task then Task ID
@@ -72,7 +78,6 @@ class PostMessageClient:
         return card.send()
 
 
-
     def build_conversation(self, options, card, **kwargs):
         """
         Constructs the message to be posted in the teams channel
@@ -101,8 +106,8 @@ class PostMessageClient:
 
         incident_url = build_incident_url( 
             build_resilient_url(
-                options['host'],
-                options['port']),
+                options.get('host'),
+                options.get('port')),
                 orgId=org_id,
                 incidentId=incident_id)
         case_type = constants.INCIDENT.title()
@@ -112,8 +117,8 @@ class PostMessageClient:
         if task_id:
             incident_url = build_task_url(
                 build_resilient_url(
-                    options['host'],
-                    options['port']),
+                    options.get('host'),
+                    options.get('port')),
                 org_id=org_id,
                 task_id=task_id,
                 incident_id=incident_id)
