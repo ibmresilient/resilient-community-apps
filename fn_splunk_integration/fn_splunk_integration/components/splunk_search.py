@@ -39,7 +39,8 @@ class FunctionComponent(AppFunctionComponent):
 
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
 
-        if fn_inputs.splunk_max_return:
+
+        if getattr(fn_inputs, "splunk_max_return", None):
             splunk.set_max_return(fn_inputs.splunk_max_return)
 
         splunk_result = splunk.execute_query(query_string)
