@@ -26,7 +26,7 @@ TASK = "Task"
 TITLE = "title"
 INCIDENT = "Incident"
 TIMEOUT = 60
-TASK_FRAGMENT = "?task="
+TASK_FRAGMENT = "?task={}"
 ERROR_UNABLE_TO_FIND_CHANNEL = "Unable to find channel name {} in app.config"
 SUCCESSFULLY_POSTED_MESSAGE = "Information successfully posted in channel {}"
 
@@ -82,7 +82,7 @@ RES_INCIDENT = "/incidents/"
 RES_USERS = "/users/query_paged?return_level=normal"
 
 # LOG & Status Messages
-INFO_RETRIEVED_BEARER_ID = "[Microsoft Authentication] Successfully retrieved Bearer ID"
+INFO_RETRIEVED_BEARER_ID = " Successfully retrieved Bearer ID"
 INFO_CREATING_GROUP = " Creating new Group"
 INFO_GROUP_CREATION_REQUEST = " Group creation request:"
 INFO_FIND_GROUP_BY_NAME = " Searching for group using Name"
@@ -97,7 +97,7 @@ INFO_SUCCESSFULLY_UNARCHIVED = "Successfully unarchived Team: {}"
 INFO_SUCCESSFULLY_CREATED_CHANNEL = "Successfully created channel: {}"
 INFO_SUCCESSFULLY_DELETED_CHANNEL = "Successfully deleted channel: {}"
 
-DEBUG_BEARER_ID = "[Microsoft Authentication] Bearer ID {}"
+DEBUG_BEARER_ID = " Bearer ID {}"
 DEBUG_SKIPPING_USER = " User information already exist"
 DEBUG_ADDING_MEMBER_TO_GROUP = " Adding members to Group object {}"
 
@@ -112,7 +112,7 @@ WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the {}.
  in the Additional members field.'''
 WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this incident"
 
-ERROR_AUTHENTICATION_FAILED = '''[Microsoft Authentication] Failed to retrieve AccessToken.
+ERROR_AUTHENTICATION_FAILED = ''' Failed to retrieve AccessToken.
  Check Credentials!'''
 ERROR_NO_ARG_PASSED = " No parameter passed to method"
 ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
