@@ -28,7 +28,8 @@ class RandoriTab(Tab):
         Field("randori_target_impact_score"),
         Field("randori_target_tech_category"),
         Field("randori_target_tags"),
-        Datatable("randori_detections_dt")
+        Datatable("randori_detections_dt"),
+        Datatable("randori_discovery_path_dt")
     ]
     SHOW_IF = [
         Field("randori_target_id").conditions.has_value()

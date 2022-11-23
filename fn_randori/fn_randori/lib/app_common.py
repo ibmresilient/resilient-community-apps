@@ -38,6 +38,7 @@ LINKBACK_URL = "{organization_name}/targets/{target_id}"
 # E N D P O I N T S
 GET_COMMENT_URI = "/recon/api/{api_version}/entity/{target_id}/comment"
 GET_ALL_DETECTIONS_FOR_TARGET_URI = "/recon/api/{api_version}/all-detections-for-target"
+GET_PATHS_URI = "/recon/api/{api_version}/paths"
 GET_SINGLE_TARGET_URI = "/recon/api/{api_version}/target/{target_id}"
 GET_SINGLE_DETECTION_FOR_TARGET_URI = "/recon/api/{api_version}/single-detection-for-target"
 GET_VALIDATE_URI = "/auth/api/{api_version}/validate"
@@ -177,7 +178,6 @@ class AppCommon():
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
-            response.raise_for_status()
             response_json = response.json()
             if response_json.get('count')  <= 0:
                 break
@@ -243,6 +243,14 @@ class AppCommon():
         return urljoin(self.endpoint_url, linkback_url.format(organization_name=self.organization_name, 
                                                               target_id=entity_id))
 
+    def get_randori_base_url(self) -> str:
+        """
+        Create a base URL string for Randori
+
+        :rtype: str
+        """
+        return urljoin(self.endpoint_url, self.organization_name)
+
 
     def get_target_comments(self, target_id: str) -> list:
         """
@@ -256,7 +264,6 @@ class AppCommon():
                                    params=params,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         response_json = response.json()
 
         comment_list = response_json.get('comments', [])
@@ -278,7 +285,6 @@ class AppCommon():
                                    json=data,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         response_json = response.json()
 
         return response_json
@@ -292,7 +298,6 @@ class AppCommon():
                                    self._get_uri(url),
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def get_detections_for_single_target(self, target_id: str) -> list:
@@ -349,7 +354,6 @@ class AppCommon():
                                    data=data_string,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def update_target_status(self, target_id: str, status: str) -> dict:
@@ -382,7 +386,6 @@ class AppCommon():
                                    data=status_string,
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def get_validate(self) -> dict:
@@ -393,7 +396,6 @@ class AppCommon():
                                    self._get_uri(GET_VALIDATE_URI),
                                    headers=self.header,
                                    verify=self.verify)
-        response.raise_for_status()
         return response.json()
 
     def format_randori_comment(self, comment: dict) -> str:
@@ -414,6 +416,21 @@ class AppCommon():
         else:
             return None
 
+    def get_paths(self, target_id: str) -> dict:
+        """
+        Call Randori endpoint to get the paths data for target from Randori.
+        """
+        params = {
+            'terminal': target_id
+        }
+
+        url = self._get_uri(GET_PATHS_URI.format(api_version=self.api_version))
+        response = self.rc.execute("GET",
+                                   url=url,
+                                   params=params,
+                                   headers=self.header,
+                                   verify=self.verify)
+        return response.json()
 
 def _get_verify_ssl(app_configs: dict):
     """

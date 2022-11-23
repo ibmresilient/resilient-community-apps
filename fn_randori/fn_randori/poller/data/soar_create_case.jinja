@@ -1,5 +1,5 @@
 {
-  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# JINJA template for creating a new SOAR case from an endpoint #}
   {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
      for details on available jinja methods. Examples for `soar_substitute` and more are included below.
   #}
@@ -21,6 +21,9 @@
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "randori_target_id": "{{ target_id }}",
+    {% if target_temptation is not none %}
+    "randori_target_temptation": {{ target_temptation }},
+    {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"
   }

@@ -62,26 +62,34 @@
 -->
 **IBM SOAR app bidirectional synchronization and functions for Randori**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+Randori is an Attack Surface Management Platform.  
 
-Bidirectional app for Randori for IBM SOAR. Query Randori for targets based 
-         on user-defined query parameters and create and update cases in SOAR.
+ ![screenshot: main](./doc/screenshots/main.png)
+
+Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.
+ ![screenshot: main](./doc/screenshots/randori-functions.png)
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
-
+* Sync Randori Targets to SOAR cases via user defined filter criteria
+* Sync Randori Target comments to notes in SOAR
+* Set the Target Impact Score in Randori from SOAR
+* Set the Target Status in Randori from SOAR
+* List the Discovery Path of a Target with links back to Randori
+* List the Detections of a Target in SOAR
+* Add Detection data as artifacts in SOAR for the following types:
+  * DNS Name
+  * File Path
+  * IP Address
+  * Port
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -129,37 +137,19 @@ Python 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=47.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Randori Development Version
 
 This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| Randori| <!-- ::CHANGE_ME:: --> | https://app.randori.io | v1 |
+| Product Name | API URL | API Version |
+| ------------ | --------------- | ------- |
+| Randori | https://app.randori.io | v1 |
 
 #### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
-
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Randori account 
+* Randori API Token
 
 ---
 
@@ -174,14 +164,12 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
 | **api_token** | Yes | `xxx` | *Randori API token.* |
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
-| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
-| **organization_name** | Yes | `webernets-companyname` | *Randori organization name* |
+| **polling_interval** | Yes | `600` | *Poller interval time in seconds. Value of zero to turn poller off.* |
+| **polling_lookback** | Yes | `1200` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
+| **organization_name** | Yes | `webernets-companyname` | *Your organization name in Randori.* |
 | **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |
@@ -194,17 +182,76 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* The following Randori Tab custom layout is included in the app:
+The following Randori Tab custom layout is included in the app:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
+## Poller Considerations
+
+The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
+<p>
+When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+<p>
+
+### Target Filtering 
+To limit the number of Targets escalated to SOAR, consider using the optional `polling_filter` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","operator","value"),
+Where:
+  * "field" is the Randori Target field to be queried
+  * "operator" is a string operator performed in query 
+  * "value" is the value to be compared against in the query
+<p>
+If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes.
+<p>
+Here is an polling filter example that adds or updates targets that have a "target_temptation" greater or equal to 50 AND whose status is "Needs Investigation", "Needs Resolution", "Needs Review", or "None":
+
+    poller_fillers=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
+
+The list of Randori supported JQuery `operators`:
+
+  * begins_with
+  * between
+  * contains
+  * ends_with
+  * equal
+  * greater
+  * greater_or_equal
+  * greater_or_equal_utc_seconds_ago
+  * greater_utc_seconds_ago
+  * icontains
+  * in
+  * is_empty
+  * is_not_empty
+  * is_not_null
+  * is_null
+  * less
+  * less_or_equal
+  * less_or_equal_utc_seconds_ago
+  * less_utc_seconds_ago
+  * not_begins_with
+  * not_contains
+  * not_ends_with
+  * not_equal
+  * not_icontains
+  * not_in
+  * contained_by
+  * contains
+  * equal
+  * has_key
+  * is_empty
+  * is_not_empty
+  * is_not_null
+  * is_null
+  * not_contained_by
+  * not_contains
+  * not_equal
+  * not_has_key
 
 ---
 
 ## Function - Randori: Clear Data Table
-Clear the specified Randori data table
+Clear the specified Randori data table.
 
- ![screenshot: fn-randori-clear-data-table ](./doc/screenshots/fn-randori-clear-data-table.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-clear-data-table ](./doc/screenshots/fn-randori-clear-data-table.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -256,17 +303,63 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.randori_data_table_name = "randori_detections_dt"
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Fill the Data Table:</summary>
 <p>
 
 ```python
-None
+from datetime import datetime
+import time
+import calendar
+
+def soar_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S", split_at=None):
+    """Custom jinja filter to convert UTC dates to epoch format
+
+    Args:
+        value ([str]): [jinja provided field value]
+        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
+        split_at (str, optional): [character to split the date field to scope the date field.]
+            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",
+                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",
+    Returns:
+        [int]: [epoch value of datetime, in milliseconds]
+    """
+    if not value:
+        return value
+
+    if split_at:
+        utc_time = time.strptime(value[:value.rfind(split_at)], date_format)
+    else:
+        utc_time = time.strptime(value, date_format)
+    return calendar.timegm(utc_time)*1000
+############################################################################################   
+
+detection_data = playbook.functions.results.detection_data
+
+if not detection_data.success:
+  incident.addNote("Randori: Unable to update Detections data table - error getting detections data.")
+else:
+  clear_table_output = playbook.functions.results.clear_table_output
+  if not clear_table_output.success:
+    incident.addNote("Randori: ERROR - Unable to clear the Detections data table before updating it.")
+  content = detection_data.get("content", {})
+  detection_list = detection_data.content.get("detection_list", [])
+  for detection in detection_list:
+    detection_row = incident.addRow("randori_detections_dt")
+    detection_row['randori_dt_date_added'] = datetime.now()
+    detection_row['randori_dt_path'] = detection.get("path")
+    detection_row['randori_dt_port'] = detection.get("port")
+    detection_row['randori_dt_ip'] = detection.get("ip")
+    detection_row['randori_dt_hostname'] = detection.get("hostname")
+    detection_row['randori_dt_first_seen'] = soar_datetimeformat(detection.get("first_seen"), split_at='.')
+    detection_row['randori_dt_last_seen'] = soar_datetimeformat(detection.get("last_seen"), split_at='.')
+  incident.addNote("Randori: manual playbook updated Detections data table with {} detections".format(len(detection_list)))
 ```
 
 </p>
@@ -434,17 +527,278 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Fill Detections Data Table:</summary>
 <p>
 
 ```python
-None
+from datetime import datetime
+import time
+import calendar
+
+def soar_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S", split_at=None):
+    """Custom jinja filter to convert UTC dates to epoch format
+
+    Args:
+        value ([str]): [jinja provided field value]
+        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
+        split_at (str, optional): [character to split the date field to scope the date field.]
+            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",
+                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",
+    Returns:
+        [int]: [epoch value of datetime, in milliseconds]
+    """
+    if not value:
+        return value
+
+    if split_at:
+        utc_time = time.strptime(value[:value.rfind(split_at)], date_format)
+    else:
+        utc_time = time.strptime(value, date_format)
+    return calendar.timegm(utc_time)*1000
+############################################################################################   
+
+detection_data = playbook.functions.results.detection_data
+
+if not detection_data.success:
+  incident.addNote("Randori: Get Target Data: Unable to get target data from Randori")
+else:
+  content = detection_data.get("content", {})
+  detection_list = detection_data.content.get("detection_list", [])
+  for detection in detection_list:
+    detection_row = incident.addRow("randori_detections_dt")
+    detection_row['randori_dt_date_added'] = datetime.now()
+    detection_row['randori_dt_path'] = detection.get("path")
+    detection_row['randori_dt_port'] = detection.get("port")
+    detection_row['randori_dt_ip'] = detection.get("ip")
+    detection_row['randori_dt_hostname'] = detection.get("hostname")
+    detection_row['randori_dt_first_seen'] = soar_datetimeformat(detection.get("first_seen"), split_at='.')
+    detection_row['randori_dt_last_seen'] = soar_datetimeformat(detection.get("last_seen"), split_at='.')
+  incident.addNote("Randori: automatic playbook updated Detections data table with {} detections".format(len(detection_list)))
+```
+
+</p>
+</details>
+
+---
+## Function - Randori: Get Paths
+Get the paths data for a Randori target.
+
+ ![screenshot: fn-randori-get-paths ](./doc/screenshots/fn-randori-get-paths.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `randori_target_id` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "edges": {
+        "329a6ff4-4e2a-4932-b39c-32c5d847e3c0": {
+          "content": {},
+          "dst": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "id": "329a6ff4-4e2a-4932-b39c-32c5d847e3c0",
+          "src": "f62ab0f7-954c-4205-a39d-5f170f6131b7",
+          "type": "Passive DNS Records"
+        },
+        "4be17e67-cc0f-4e28-b39f-3844edb09b68": {
+          "content": {},
+          "dst": "afd6c37d-1280-48ac-bf2d-46ae4286c54b",
+          "id": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "src": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "type": "Detection-Target connection"
+        },
+        "7d52abd6-f390-4f7b-8312-6367011b1d93": {
+          "content": {},
+          "dst": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "id": "7d52abd6-f390-4f7b-8312-6367011b1d93",
+          "src": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "type": "DNS Record"
+        },
+        "be5f636f-1189-49ee-906c-2a5aff984283": {
+          "content": {},
+          "dst": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "id": "be5f636f-1189-49ee-906c-2a5aff984283",
+          "src": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "type": "Port Scan"
+        }
+      },
+      "nodes": {
+        "4be17e67-cc0f-4e28-b39f-3844edb09b68": {
+          "content": {
+            "hostname": "",
+            "ip_str": "52.90.36.58",
+            "path": "",
+            "port": 23,
+            "protocol": "tcp"
+          },
+          "id": "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "type": "detection"
+        },
+        "a5f818c5-68c4-40ec-a574-60bfae787651": {
+          "content": {
+            "ip_str": "52.90.36.58"
+          },
+          "id": "a5f818c5-68c4-40ec-a574-60bfae787651",
+          "type": "ip"
+        },
+        "afd6c37d-1280-48ac-bf2d-46ae4286c54b": {
+          "content": {
+            "name": "telnetd",
+            "vendor": "Linux",
+            "version": ""
+          },
+          "id": "afd6c37d-1280-48ac-bf2d-46ae4286c54b",
+          "type": "target"
+        },
+        "b4a3b681-c96b-49ba-a0d5-7a576996e703": {
+          "content": {
+            "hostname": "telnet.webernets.online"
+          },
+          "id": "b4a3b681-c96b-49ba-a0d5-7a576996e703",
+          "type": "hostname"
+        },
+        "f62ab0f7-954c-4205-a39d-5f170f6131b7": {
+          "content": {
+            "hostname": "webernets.online"
+          },
+          "id": "f62ab0f7-954c-4205-a39d-5f170f6131b7",
+          "type": "hostname"
+        }
+      },
+      "paths": [
+        [
+          "4be17e67-cc0f-4e28-b39f-3844edb09b68",
+          "be5f636f-1189-49ee-906c-2a5aff984283",
+          "7d52abd6-f390-4f7b-8312-6367011b1d93",
+          "329a6ff4-4e2a-4932-b39c-32c5d847e3c0"
+        ]
+      ]
+    },
+    "base_url": "https://app.randori.io/myorg"
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_id": "afd6c37d-1280-48ac-bf2d-46ae4286c54b"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 6479,
+    "timestamp": "2022-11-09 18:42:30"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.randori_target_id = incident.properties.randori_target_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script to Fill Data Table:</summary>
+<p>
+
+```python
+
+from datetime import datetime
+
+def add_node_to_dt(node, randori_base_url):
+  
+  content = node.get("content")
+
+  row = incident.addRow("randori_discovery_path_dt")
+  row["randori_dt_date_added"] = int(datetime.now().timestamp()*1000) 
+  
+  # For each node type formatting is different.
+  if node.get("type") == "target":
+    target_name = content.get("name")
+    target_version = content.get("version")
+    row["randori_dt_discovery_step"] = "{} {}".format(target_name, target_version)
+  elif node.get("type") == "hostname":
+    hostname = content.get("hostname")
+    row["randori_dt_discovery_step"] = "{}".format(hostname)
+    link = "{0}/hostnames/{1}".format(randori_base_url, node.get("id"))
+    ref_html = u"""<a href='{0}'>View Details</a>""".format(link)
+    row["randori_dt_link"] = helper.createRichText(ref_html)
+  elif node.get("type") == "ip":
+    ip = content.get("ip_str")
+    row["randori_dt_discovery_step"] = "{}".format(ip)
+    link = "{0}/ips/{1}".format(randori_base_url, node.get("id"))
+    ref_html = u"""<a href='{0}'>View Details</a>""".format(link)
+    row["randori_dt_link"] = helper.createRichText(ref_html)
+  elif node.get("type") == "detection":
+    hostname = content.get("hostname")
+    ip = content.get("ip_str")
+    row["randori_dt_discovery_step"] = "detection: {} {}".format(hostname, ip)
+  elif node.get("type") == "social":
+    row["randori_dt_discovery_step"] = "social:"
+
+    
+#########################################################################################
+paths_data = playbook.functions.results.paths_data
+
+if not paths_data.success:
+  incident.addNote("Randori: Unable to get paths data to populate Discovery Path data table.")
+else:
+
+  paths_data_content = paths_data.get("content")
+  randori_base_url = paths_data_content.get("base_url")
+  data = paths_data_content.get('data')
+  edges = data.get("edges")
+  nodes = data.get("nodes")
+  paths_list_list = data.get("paths")
+
+  for path_list in paths_list_list:
+    for path in path_list:
+      edge = edges.get(path)
+      dst = edge.get("dst")
+      node = nodes.get(dst)
+      
+      # Add node to the data table
+      add_node_to_dt(node, randori_base_url)
+  
+      # Add edge type to the data table
+      row = incident.addRow("randori_discovery_path_dt")
+      row["randori_dt_date_added"] = int(datetime.now().timestamp()*1000) 
+      row["randori_dt_discovery_step"] = "{}".format(edge.get("type"))
+      
+    # Last node is the src
+    src = edge.get("src")
+    node = nodes.get(src)
+    add_node_to_dt(node, randori_base_url)
+  
+  incident.addNote("Randori: Discovery Path table refreshed.")
+
 ```
 
 </p>
@@ -454,7 +808,7 @@ None
 ## Function - Randori: Get Target
 Get the target data for a single Randori target instance.
 
- ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-get-target ](./doc/screenshots/fn-randori-get-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -569,17 +923,39 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Script to Update Custom Fields:</summary>
 <p>
 
 ```python
-None
+target_data = playbook.functions.results.target_data
+
+if not target_data.success:
+  incident.addNote("Randori: Update custom fields: Unable to get target data to update custom fields.")
+else:
+  content = target_data.get("content", {})
+  data = target_data.content.get("data", {})
+  if data:
+    # Update custom fields with Randori target data
+    incident.properties.randori_target_status = data.get("status")
+    incident.properties.randori_target_impact_score = data.get("impact_score")
+    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_authority = data.get("authority")
+    incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
+    incident.properties.randori_target_perspective_name = data.get("perspective_name")
+    tech_category = data.get("tech_category", [])
+    if tech_category:
+      incident.properties.randori_target_tech_category = ", ".join(tech_category)
+    user_tags = data.get("user_tags", [])
+    if user_tags:
+      incident.properties.randori_target_tags = ", ".join(user_tags)
+    
+    incident.addNote("Randori: Update Target Data in SOAR script updated custom fields in SOAR.")
 ```
 
 </p>
@@ -589,7 +965,7 @@ None
 ## Function - Randori: Send Note as Comment to Target
 Post a SOAR note as a comment in the corresponding Randori target.
 
- ![screenshot: fn-randori-send-note-as-comment-to-target ](./doc/screenshots/fn-randori-send-note-as-comment-to-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-send-note-as-comment-to-target ](./doc/screenshots/fn-randori-send-note-as-comment-to-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -666,7 +1042,7 @@ None
 ## Function - Randori: Update Notes from Randori Target
 Query Randori target and add any new notes to the SOAR case.
 
- ![screenshot: fn-randori-update-notes-from-randori-target ](./doc/screenshots/fn-randori-update-notes-from-randori-target.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-notes-from-randori-target ](./doc/screenshots/fn-randori-update-notes-from-randori-target.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -715,7 +1091,8 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.randori_target_id = incident.properties.randori_target_id
 ```
 
 </p>
@@ -725,7 +1102,15 @@ None
 <p>
 
 ```python
-None
+from datetime import datetime
+
+note_data = playbook.functions.results.note_data
+
+# Edit note in SOAR to indicate it was sent to Randori
+if note_data.success:
+  # Get the current time
+  now = datetime.now()
+  note.text = u"<b>Sent to Randori at {0}</b><br>{1}".format(now, note.text.content)
 ```
 
 </p>
@@ -735,7 +1120,11 @@ None
 ## Function - Randori: Update Target Impact Score
 Update the specified target in Randori with the specified target impact score.
 
- ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/fn-randori-update-target-impact-score.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/fn-randori-update-target-impact-score.png)
+
+The following activation pop-up dialog box prompts the user for input for updating the target impact score in Randori and allows for input of an optional note to be post to Randori as a target comment.
+
+ ![screenshot: fn-randori-update-target-impact-score ](./doc/screenshots/update-impact-score.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -786,7 +1175,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
+inputs.randori_target_impact_score = playbook.inputs.randori_target_impact_score
+inputs.randori_note = playbook.inputs.randori_note.content
 ```
 
 </p>
@@ -796,7 +1187,13 @@ None
 <p>
 
 ```python
-None
+target_impact_score = playbook.functions.results.target_impact_score
+
+if not target_impact_score.success:
+  incident.addNote("Randori: ERROR: Unable to Update Target Impact Score to <b>{}</b>".format(target_impact_score.inputs.randori_target_impact_score))
+else:
+  incident.properties.randori_target_impact_score = target_impact_score.inputs.randori_target_impact_score
+  incident.addNote("Randori: Updated Target Impact Score to <b>{}</b> in Randori".format(incident.properties.randori_target_impact_score))
 ```
 
 </p>
@@ -806,8 +1203,12 @@ None
 ## Function - Randori: Update Target Status
 Update the specified target in Randori with the specified target status and /or impact score.
 
- ![screenshot: fn-randori-update-target-status ](./doc/screenshots/fn-randori-update-target-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-randori-update-target-status ](./doc/screenshots/fn-randori-update-target-status.png)
 
+
+The following activation pop-up dialog box prompts the user for input for updating the target status in Randori and allows for input of an optional note to be post in Randori as a target comment.
+
+  ![screenshot: update-target-status ](./doc/screenshots/update-target-status.png)
 <details><summary>Inputs:</summary>
 <p>
 
@@ -857,7 +1258,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.randori_target_id = incident.properties.randori_target_id
+inputs.randori_target_status = playbook.inputs.randori_target_status
+inputs.randori_note = playbook.inputs.randori_note.content
 ```
 
 </p>
@@ -867,7 +1270,13 @@ None
 <p>
 
 ```python
-None
+target_status = playbook.functions.results.target_status
+
+if not target_status.success:
+  incident.addNote("Randori: ERROR: Unable to Update Target Status to <b>{}</b>".format(target_status.inputs.randori_target_status))
+else:
+  incident.properties.randori_target_status = target_status.inputs.randori_target_status
+  incident.addNote("Randori: Updated Target Status to <b>{}</b> in Randori".format(incident.properties.randori_target_status))
 ```
 
 </p>
@@ -878,7 +1287,15 @@ None
 
 ## Data Table - Detections
 
- ![screenshot: dt-detections](./doc/screenshots/dt-detections.png) <!-- ::CHANGE_ME:: -->
+The Detections data table displays the detections found for a target.  A Detection describes one of possibly many ways an attacker could navigate to a specific Target.
+
+ ![screenshot: dt-detections](./doc/screenshots/dt-detections.png)
+
+ ## Data Table - Discovery Path
+
+ The Discovery Path data table replicates the Discovery Path table found in Randori.  The discovery path shows exact research steps taken by Randori, or an attacker, to find an entity.  The **View Details** link takes you to Randori for more information on that entity.
+
+![screenshot: dt-discovery-path](./doc/screenshots/dt-discovery-path.png)
 
 #### API Name:
 randori_detections_dt
@@ -932,6 +1349,96 @@ randori_detections_dt
 
 ---
 
+## Templates for SOAR Cases
+It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
+`soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
+
+### soar_create_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+
+```
+{
+  {# JINJA template for creating a new SOAR case from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  "name": "Randori Target - {{ vendor }}, {{ name }} {{ version }}",
+  "description": "{{ description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = first_seen if first_seen <= target_first_seen else target_first_seen %}
+  "discovered_date": {{ target_first_seen | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date| soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  "plan_status": "A",
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "randori_target_id": "{{ target_id }}",
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
+    "randori_target_status": "{{ status }}"
+  }
+}
+```
+
+### soar_close_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for closing a SOAR case using endpoint data #}
+  "plan_status": "C",
+  "resolution_id": "{{ status | soar_substitute('{"Accepted": "Not an Issue", "Mitigated": "Resolved"}') }}",
+  "resolution_summary": "Closed by Randori, Target Status: {{ status }}"
+  {# add additional fields based on your 'on close' field requirements #}
+  {#
+  ,"properties": {
+      "randori_target_status": "{{ status }}"
+  }
+  #}
+}
+```
+
+### soar_update_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for updating a new SOAR case from an endpoint #}
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  "properties": {
+    "randori_target_affiliation_state": "{{ affiliation_state }}",
+    "randori_target_authority": {{ authority | lower }},
+
+    {% if target_temptation is not none %}
+    "randori_target_temptation": {{ target_temptation }},
+    {% endif %}
+
+    {% if tech_category is not none %}
+    "randori_target_tech_category": "{{ tech_category | join(', ') }}",
+    {% endif %}
+
+    {% if user_tags is not none %}
+    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    "randori_target_perspective_name": "{{ perspective_name }}",
+    "randori_target_status": "{{ status }}",
+    "randori_target_impact_score": "{{ impact_score }}"
+    }
+}
+
+```
+---
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 

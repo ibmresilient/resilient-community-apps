@@ -1,5 +1,5 @@
 {
-  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# JINJA template for updating a new SOAR case from an endpoint #}
   {% if priority_score <= 20 %}
     "severity_code": "Low",
   {% elif priority_score <= 29.98%}
@@ -8,6 +8,7 @@
     "severity_code": "High",
   {% endif %}
   "properties": {
+    "randori_target_affiliation_state": "{{ affiliation_state }}",
     "randori_target_authority": {{ authority | lower }},
 
     {% if target_temptation is not none %}
