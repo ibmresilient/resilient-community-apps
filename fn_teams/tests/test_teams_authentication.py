@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 import logging
-from multiprocessing.sharedctypes import Value
-from unittest import mock
 import pytest
 
 from urllib import parse

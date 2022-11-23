@@ -2,7 +2,6 @@
 """Tests using pytest_resilient_circuits"""
 import os
 import logging
-import json
 import pytest
 
 from urllib import parse

@@ -33,30 +33,27 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
-            ms_group_name          <str> : Name of the Microsoft Group to be deleted
+            ms_group_id            <str> : The unique Id generated while creating a group
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group to be deleted
 
         Returns:
         --------
             Response <dict> : A response with the room/team options and details
                               or the error message if the meeting creation
-         """
+        """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
 
-        self.required_parameters["rc"] = self.rc
-        self.required_parameters["logger"] = self.LOG
-        self.required_parameters["resclient"] = self.rest_client()
-
-        self.required_parameters["group_name"] = fn_inputs.ms_group_name if hasattr(
-            fn_inputs, 'ms_group_name') else None
-        self.required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname if hasattr(
-            fn_inputs, 'ms_group_mail_nickname') else None
+        required_parameters = {}
+        required_parameters["rc"] = self.rc
+        required_parameters["logger"] = self.LOG
+        required_parameters["resclient"] = self.rest_client()
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
-            authenticator = MicrosoftAuthentication(self.required_parameters, self.options)
-            self.required_parameters["header"] = authenticator.authenticate()
+            authenticator = MicrosoftAuthentication(required_parameters, self.options)
+            required_parameters["header"] = authenticator.authenticate()
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
@@ -68,8 +65,18 @@ class FunctionComponent(AppFunctionComponent):
 
         if authenticated:
             try:
-                group_manager = GroupsInterface(self.required_parameters)
-                response = group_manager.delete_group()
+                group_manager = GroupsInterface(required_parameters)
+                if hasattr(fn_inputs, 'ms_group_id'):
+                    response = group_manager.delete_group(
+                        {"group_id" : fn_inputs.ms_group_id})
+                elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
+                    response = group_manager.delete_group(
+                        {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
+                elif hasattr(fn_inputs, 'ms_group_name'):
+                    response = group_manager.delete_group(
+                        {"group_name" : fn_inputs.ms_group_name})
+                else:
+                    raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))

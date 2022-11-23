@@ -1,6 +1,4 @@
-import os
 import json
-
 
 class MockRestClient:
     def __init__(self):

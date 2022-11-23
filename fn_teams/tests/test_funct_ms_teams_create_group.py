@@ -2,7 +2,6 @@
 """Tests using pytest_resilient_circuits"""
 import os
 import logging
-import json
 import pytest
 
 from urllib import parse
@@ -12,7 +11,6 @@ from resilient_lib import RequestsCommon
 from tests import testcommons
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_groups import GroupsInterface
-from fn_teams.lib.microsoft_authentication import MicrosoftAuthentication
 
 
 PACKAGE_NAME = constants.PACKAGE_NAME
