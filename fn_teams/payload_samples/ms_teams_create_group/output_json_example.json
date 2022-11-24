@@ -3,21 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "929212a4-0569-44a3-bfce-4c72a2fb114c",
+    "id": "40aaf240-53bb-464b-b0ab-fe3ffddd03d6",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-10-24T14:22:58Z",
+    "createdDateTime": "2022-11-03T13:40:00Z",
     "creationOptions": [],
-    "description": "Incident 2096: MS Teams Group",
-    "displayName": "MSGroup",
+    "description": "Incident 2098: MS Teams Task 152 : MS TEAMS TEST TASK None",
+    "displayName": "cloudPack",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "yup@5rf2xs.onmicrosoft.com",
+    "mail": "cloudPack@****.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "MailBox",
+    "mailNickname": "cloudPack",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,33 +29,34 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:MailBox@5rf2xs.onmicrosoft.com"
+      "SMTP:cloudPack@****.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-10-24T14:22:58Z",
+    "renewedDateTime": "2022-11-03T13:40:00Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-2459046564-1151534441-1917636287-1276246946",
+    "securityIdentifier": "S-1-12-1-*******-1179341755-1073654704-3590577661",
+
     "theme": null,
     "visibility": "Public",
     "onPremisesProvisioningErrors": []
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2096,
-    "ms_group_description": "Incident 2096: MS Teams Group",
-    "additional_members": null,
-    "ms_owners_list": "AdminSoarMS@5rf2xs.onmicrosoft.com",
-    "ms_group_name": "MSGroup",
-    "ms_group_mail_nickname": "MailBox",
-    "add_members_from": "Incident"
+    "incident_id": 2098,
+    "ms_group_description": "Incident 2098: MS Teams Task 152 : MS TEAMS test",
+    "ms_owners_list": "AdminSoarMS@****.onmicrosoft.com",
+    "ms_group_name": "cloudPack",
+    "ms_group_mail_nickname": "cloudPack",
+    "add_members_from": "Task",
+    "task_id": 152
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
     "host": "AppHost",
-    "execution_time_ms": 6013,
-    "timestamp": "2022-10-24 15:22:59"
+    "execution_time_ms": 5552,
+    "timestamp": "2022-11-03 13:40:01"
   }
 }

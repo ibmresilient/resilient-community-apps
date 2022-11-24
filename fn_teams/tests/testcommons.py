@@ -1,6 +1,4 @@
-import os
 import json
-
 
 class MockRestClient:
     def __init__(self):
@@ -26,15 +24,16 @@ class MockResponse:
         self.message = message
 
 
-def check_request_parameters(method, url, body, headers, callback):
-    assert url
-    assert method.lower() in ["post", "get"]
-    assert headers
-    assert callback
-    try :
-        return json.loads(body)
-    except TypeError as err:
-        raise "Request Error: Improper body format"
+def check_request_parameters(**kwargs):
+    assert "url" in kwargs
+    assert "method" in kwargs and kwargs["method"].lower() in ["post", "get", "delete"]
+    assert "headers" in kwargs
+    assert "callback" in kwargs
+    if "body" in kwargs:
+        try :
+            return json.loads(kwargs["body"])
+        except TypeError as err:
+            raise "Request Error: Improper body format"
 
 
 def json_read(path):

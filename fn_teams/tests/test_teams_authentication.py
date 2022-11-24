@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 import logging
-from multiprocessing.sharedctypes import Value
-from unittest import mock
 import pytest
 
 from urllib import parse
 from unittest.mock import patch
 from resilient_lib import RequestsCommon
 
-from tests import commons
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_authentication import MicrosoftAuthentication
 
@@ -71,7 +68,7 @@ def test_authenticator_initialization(mocked_authenticator):
 
 
 def test_generate_header(mocked_authenticator):
-    header = mocked_authenticator.generate_header("ID123")
+    header = mocked_authenticator._generate_header("ID123")
     assert header
     assert "Authorization" in header
     assert "Content-type" in header
@@ -84,6 +81,7 @@ def test_generate_header(mocked_authenticator):
 
 @patch('msal.ConfidentialClientApplication', side_effect=MockMSAL)
 def test_generate_bearer_id(msal, mocked_authenticator):
-    response = mocked_authenticator.generate_bearer_id()
+    response = mocked_authenticator._generate_bearer_id()
     assert response
     assert response == "access_token 123"
+    

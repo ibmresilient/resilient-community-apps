@@ -21,9 +21,23 @@ def codegen_reload_data():
     return {
         "package": u"fn_teams",
         "message_destinations": [u"fn_teams"],
-        "functions": [u"ms_teams_create_group", u"teams_post_message"],
-        "workflows": [u"example_post_incident_to_ms_teams", u"example_post_task_to_microsoft_teams", u"incident_create_a_teams_group"],
-        "actions": [u"Example: Post a Task to Microsoft Teams", u"Example: Post an Incident to Microsoft Teams", u"MS Teams: Create Group"],
+        "functions": [
+            u"ms_teams_create_group",
+            u"ms_teams_delete_group",
+            u"ms_teams_post_message"],
+        "workflows": [
+            u"incident_post_message_to_teams",
+            u"incident_create_a_microsoft_group",
+            u"common_delete_a_microsoft_group",
+            u"task_create_a_microsoft_group",
+            u"task_post_message_to_teams"],
+        "actions": [
+            u"MS Teams: Post Task Information to Teams",
+            u"MS Teams: Post Incident Information to Teams",
+            u"MS Teams: Create Group From Incident",
+            u"MS Teams: Create Group From Task",
+            u"MS Teams: Delete Group From Incident",
+            u"MS Teams: Delete Group From Task",],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -39,22 +53,33 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
         - fn_teams
     - Functions:
+        - ms_teams_archive_team
+        - ms_teams_create_channel
         - ms_teams_create_group
-        - teams_post_message
+        - ms_teams_create_team
+        - ms_teams_delete_channel
+        - ms_teams_delete_group
+        - ms_teams_enable_team
+        - ms_teams_post_message
     - Workflows:
-        - example_post_incident_to_ms_teams
-        - example_post_task_to_microsoft_teams
-        - incident_create_a_teams_group
+        - common_delete_a_microsoft_group
+        - incident_create_a_microsoft_group
+        - incident_post_message_to_teams
+        - task_create_a_microsoft_group
+        - task_post_message_to_teams
     - Rules:
-        - Example: Post a Task to Microsoft Teams
-        - Example: Post an Incident to Microsoft Teams
-        - MS Teams: Create Group
+        - MS Teams: Create Group From Incident
+        - MS Teams: Create Group From Task
+        - MS Teams: Delete Group From Incident
+        - MS Teams: Delete Group From Task
+        - MS Teams: Post Incident Information to Teams
+        - MS Teams: Post Task Information to Teams
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

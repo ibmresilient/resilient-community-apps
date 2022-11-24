@@ -96,7 +96,6 @@
         "ms_group_description": {
           "type": "string"
         },
-        "additional_members": {},
         "ms_owners_list": {
           "type": "string"
         },
@@ -108,6 +107,9 @@
         },
         "add_members_from": {
           "type": "string"
+        },
+        "task_id": {
+          "type": "integer"
         }
       }
     },
