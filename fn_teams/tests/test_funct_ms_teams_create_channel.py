@@ -1,78 +1,78 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
+import os
+import pytest, random
 
-import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from unittest.mock import patch
+from resilient_lib import IntegrationError
 
-PACKAGE_NAME = "fn_teams"
-FUNCTION_NAME = "ms_teams_create_channel"
-
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
-
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+from tests import testcommons
+from tests.testcommons import required_parameters
+from fn_teams.lib.microsoft_channels import ChannelInterface
 
 
-def call_ms_teams_create_channel_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("ms_teams_create_channel", function_params)
+def patch_create_channel(method, url, headers, callback, data=None):
+    ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
+    body = testcommons.check_request_parameters(
+        method=method,
+        url=url,
+        body=data,
+        headers=headers,
+        callback=callback)
+    if method == "get":
+        if "=" in url:
+            base_url, query = url.split("=")
+            assert base_url == "https://graph.microsoft.com/v1.0/groups?$filter"
+            assert "mailNickname" in query or "displayName" in query
+        else:
+            query = "id"
+            assert "https://graph.microsoft.com/v1.0/groups/" in url
+            assert url.split("/")[-1].strip() == ret["value"][0]["id"]
+            response = ret["value"][0]
+            response["status_code"] = 200
+            return response
 
-    # Fire a message to the function
-    circuits.manager.fire(evt)
+        if "mailNickname" in query:
+            assert "@" not in query
+            assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["mailNickname"]
+        elif "displayName" in query:
+            assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["displayName"]
+        return ret
 
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("ms_teams_create_channel_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    elif method == "post":
+        print(body)
+        print(url)
+        url_sections = url.split("/")
+        assert "graph.microsoft.com" in url_sections
+        assert 'v1.0' in url_sections
+        assert "teams" in url_sections
+        assert "channels" in url_sections
+        assert ret["value"][0]["id"] in url_sections
+        assert "displayName" in body and body.get("displayName")
+        assert "description" in body and body.get("description")
+        return {
+            "status_code" : 201}
 
 
-class TestMsTeamsCreateChannel:
-    """ Tests for the ms_teams_create_channel function"""
+@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_create_channel)
+def test_create_channel(patch, required_parameters):
+    ci = ChannelInterface(required_parameters)
+    ci.create_channel({
+        "displayName" : "ChannelTest",
+        "description" : "Test description",
+        "group_mail_nickname" : "MailBoxs@5rf2xs.onmicrosoft.com"})
 
-    def test_function_definition(self):
-        """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+    with pytest.raises(AssertionError):
+        ci.create_channel({
+            "description" : "Test description",
+            "group_mail_nickname" : "MailBoxs"})
 
-    mock_inputs_1 = {
-        "ms_group_id": "sample text",
-        "ms_channel_name": "sample text",
-        "ms_team_description": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "ms_group_name": "sample text"
-    }
+    with pytest.raises(AssertionError):
+        ci.create_channel({
+            "displayName" : "ChannelTest",
+            "group_mail_nickname" : "MailBoxs"})
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "ms_group_id": "sample text",
-        "ms_channel_name": "sample text",
-        "ms_team_description": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "ms_group_name": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
-        """ Test calling with sample values for the parameters """
-
-        results = call_ms_teams_create_channel_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+    with pytest.raises(IntegrationError):
+        ci.create_channel({
+            "displayName" : "ChannelTest",
+            "description" : "Test description"})

@@ -1,74 +1,86 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-
+import os
+import logging
+import json
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_teams"
-FUNCTION_NAME = "ms_teams_enable_team"
+from urllib import parse
+from unittest.mock import patch
+from resilient_lib import RequestsCommon, IntegrationError
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
-
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+from tests import testcommons
+from tests.testcommons import required_parameters
+from fn_teams.lib import constants
+from fn_teams.lib.microsoft_teams import TeamsInterface
 
 
-def call_ms_teams_enable_team_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("ms_teams_enable_team", function_params)
+def patch_archive_unarchive_team(method, url, headers, callback, data=None):
+    ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
+    testcommons.check_request_parameters(
+        method=method,
+        url=url,
+        headers=headers,
+        callback=callback)
+    
+    if method == "get":
+        if "=" in url:
+            base_url, query = url.split("=")
+            assert base_url == "https://graph.microsoft.com/v1.0/groups?$filter"
+            assert "mailNickname" in query or "displayName" in query
+        else:
+            query = "id"
+            assert "https://graph.microsoft.com/v1.0/groups/" in url
+            assert url.split("/")[-1].strip() == ret["value"][0]["id"]
+            response = ret["value"][0]
+            response["status_code"] = 200
+            return response
 
-    # Fire a message to the function
-    circuits.manager.fire(evt)
+        if "mailNickname" in query:
+            assert "@" not in query
+            assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["mailNickname"]
+        elif "displayName" in query:
+            assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["displayName"]
+        return ret
 
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("ms_teams_enable_team_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    elif method == "put":
+        print(url)
+        url_sections = url.split("/")
+        assert "team" in url_sections and "groups" in url_sections
+        assert "graph.microsoft.com" in url_sections
+        assert 'v1.0' in url_sections
+        assert ret["value"][0]["id"] in url_sections
+        return {
+            "status_code" : 204}
 
 
-class TestMsTeamsEnableTeam:
-    """ Tests for the ms_teams_enable_team function"""
+@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_archive_unarchive_team)
+def test_delete_group(patch, required_parameters):
+    ti = TeamsInterface(required_parameters)
+    ti.enable_team_group({
+        "group_mail_nickname" : "MailBoxs@5rf2xs.onmicrosoft.com"})
 
-    def test_function_definition(self):
-        """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
+    ti.enable_team_group({
+        "group_mail_nickname" : "MailBoxs"})
 
-    mock_inputs_1 = {
-        "ms_group_id": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "ms_group_name": "sample text"
-    }
+    ti.enable_team_group({
+        "group_name" : "Unittest Group1"})
 
-    expected_results_1 = {"value": "xyz"}
+    ti.enable_team_group({
+        "group_id": "40bd9442-ca0f-4c7c-ba64-5e0fa56f3fb9"})
 
-    mock_inputs_2 = {
-        "ms_group_id": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "ms_group_name": "sample text"
-    }
+    with pytest.raises(AssertionError):
+        ti.enable_team_group({
+            "group_mail_nickname" : ""})
 
-    expected_results_2 = {"value": "xyz"}
+    with pytest.raises(AssertionError):
+        ti.enable_team_group({
+            "group_name" : ""})
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
-        """ Test calling with sample values for the parameters """
+    with pytest.raises(AssertionError):
+        ti.enable_team_group({
+            "group_id" : ""})
 
-        results = call_ms_teams_enable_team_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+    with pytest.raises(IntegrationError):
+        ti.enable_team_group({ 
+            "id": ""})

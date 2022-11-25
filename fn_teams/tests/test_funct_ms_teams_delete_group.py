@@ -7,57 +7,47 @@ import pytest
 
 from urllib import parse
 from unittest.mock import patch
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, IntegrationError
 
 from tests import testcommons
+from tests.testcommons import required_parameters
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_groups import GroupsInterface
 
 
-PACKAGE_NAME = constants.PACKAGE_NAME
-FUNCTION_NAME = "ms_teams_delete_group"
-
-PATH_TEST_DATA = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
-PATH_MS_GROUP = os.path.join(PATH_TEST_DATA, "find_group.json")
-
-
-@pytest.fixture(scope="function")
-def required_parameters():
-    log = logging.getLogger(__name__)
-    log.setLevel(logging.INFO)
-    log.addHandler(logging.StreamHandler())
-    header = {
-        'Authorization': 'Bearer ID123',
-        'Content-type': 'application/json'}
-    yield {
-        "rc" : RequestsCommon(),
-        "logger" : log,
-        "header" : header,
-        "resclient" : None}
-
-
 def patch_delete_group(method, url, headers, callback):
-    ret = testcommons.json_read(PATH_MS_GROUP)
-    body = testcommons.check_request_parameters(
+    ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
+    testcommons.check_request_parameters(
         method=method,
         url=url,
         headers=headers,
         callback=callback)
     
     if method == "get":
-        base_url, query = url.split("=")
-        assert base_url == "https://graph.microsoft.com/v1.0/groups?$filter"
-        assert "mailNickname" in query or "displayName" in query
+        if "=" in url:
+            base_url, query = url.split("=")
+            assert base_url == "https://graph.microsoft.com/v1.0/groups?$filter"
+            assert "mailNickname" in query or "displayName" in query
+        else:
+            query = "id"
+            assert "https://graph.microsoft.com/v1.0/groups/" in url
+            assert url.split("/")[-1].strip() == ret["value"][0]["id"]
+            response = ret["value"][0]
+            response["status_code"] = 200
+            return response
+
         if "mailNickname" in query:
             assert "@" not in query
             assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["mailNickname"]
         elif "displayName" in query:
             assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["displayName"]
         return ret
-    
+
     elif method == "delete":
+        print(url)
         url_sections = url.split("/")
         assert "graph.microsoft.com" in url_sections
+        assert 'v1.0' in url_sections
         assert "groups" in url_sections
         assert ret["value"][0]["id"] in url_sections
         return {
@@ -66,15 +56,27 @@ def patch_delete_group(method, url, headers, callback):
 
 @patch('resilient_lib.RequestsCommon.execute', side_effect=patch_delete_group)
 def test_delete_group(patch, required_parameters):
-    required_parameters["group_mail_nickname"] = "MailBoxs@5rf2xs.onmicrosoft.com"
     gi = GroupsInterface(required_parameters)
-    gi.delete_group()
+    gi.delete_group({
+        "group_mail_nickname" : "MailBoxs@5rf2xs.onmicrosoft.com"})
 
-    required_parameters["group_mail_nickname"] = "MailBoxs"
-    gi = GroupsInterface(required_parameters)
-    gi.delete_group()
+    gi.delete_group({
+        "group_mail_nickname" : "MailBoxs"})
+
+    gi.delete_group({
+        "group_name" : "Unittest Group1"})
+
+    gi.delete_group({
+        "group_id": "40bd9442-ca0f-4c7c-ba64-5e0fa56f3fb9"})
 
     with pytest.raises(AssertionError):
-        required_parameters["group_mail_nickname"] = "----"
-        gi = GroupsInterface(required_parameters)
-        gi.delete_group()
+        gi.delete_group({"group_mail_nickname" : ""})
+
+    with pytest.raises(AssertionError):
+        gi.delete_group({"group_name" : ""})
+
+    with pytest.raises(AssertionError):
+        gi.delete_group({"group_id" : ""})
+
+    with pytest.raises(IntegrationError):
+        gi.delete_group({"id": ""})

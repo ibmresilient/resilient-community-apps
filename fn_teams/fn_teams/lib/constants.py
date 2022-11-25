@@ -82,7 +82,7 @@ RES_INCIDENT = "/incidents/"
 RES_USERS = "/users/query_paged?return_level=normal"
 
 # LOG & Status Messages
-INFO_RETRIEVED_BEARER_ID = "[Microsoft Authentication] Successfully retrieved Bearer ID"
+INFO_RETRIEVED_BEARER_ID = "Successfully retrieved Bearer ID"
 INFO_CREATING_GROUP = " Creating new Group"
 INFO_GROUP_CREATION_REQUEST = " Group creation request:"
 INFO_FIND_GROUP_BY_NAME = " Searching for group using Name"
@@ -97,7 +97,7 @@ INFO_SUCCESSFULLY_UNARCHIVED = "Successfully unarchived Team: {}"
 INFO_SUCCESSFULLY_CREATED_CHANNEL = "Successfully created channel: {}"
 INFO_SUCCESSFULLY_DELETED_CHANNEL = "Successfully deleted channel: {}"
 
-DEBUG_BEARER_ID = "[Microsoft Authentication] Bearer ID {}"
+DEBUG_BEARER_ID = "Bearer ID {}"
 DEBUG_SKIPPING_USER = " User information already exist"
 DEBUG_ADDING_MEMBER_TO_GROUP = " Adding members to Group object {}"
 
@@ -112,7 +112,7 @@ WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the {}.
  in the Additional members field.'''
 WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this incident"
 
-ERROR_AUTHENTICATION_FAILED = '''[Microsoft Authentication] Failed to retrieve AccessToken.
+ERROR_AUTHENTICATION_FAILED = '''Failed to retrieve AccessToken.
  Check Credentials!'''
 ERROR_NO_ARG_PASSED = " No parameter passed to method"
 ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
@@ -122,7 +122,7 @@ ERROR_FOUND_MANY_GROUP = ''' Foud more than one group with the same name.
  Please specify the Mail Nickname to delete the group'''
 ERROR_INVALID_OPTION_PASSED = "Invalid Option passed!"
 
-ERROR_COULDNOT_CREATE_TEAM = "[Microsoft Team] Unable to create team"
+ERROR_COULDNOT_CREATE_TEAM = "Unable to create team"
 ERROR_COULDNOT_CREATE_CHANNEL = "Unable to create channel"
 ERROR_COULDNOT_FIND_CHANNEL = "Unable to locate channel: {}"
 ERROR_COULDNOT_DELETE_CHANNEL = "Unable to delete channel"
