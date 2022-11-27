@@ -75,7 +75,8 @@ class PostMessageClient:
             teams_payload=payload_json,
             teams_mrkdown=kwargs.get("teams_mrkdown"))
 
-        return card.send()
+        status = card.send()
+        return status
 
 
     def build_conversation(self, options, card, **kwargs):
@@ -146,3 +147,6 @@ class PostMessageClient:
 
             card.addSection(cardsection)
         return card
+
+    
+    def read_message
