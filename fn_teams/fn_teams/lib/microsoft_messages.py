@@ -148,5 +148,3 @@ class PostMessageClient:
             card.addSection(cardsection)
         return card
 
-    
-    def read_message
