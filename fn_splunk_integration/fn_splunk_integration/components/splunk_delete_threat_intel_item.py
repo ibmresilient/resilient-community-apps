@@ -20,8 +20,7 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """Function: Delete a threat intel item:
         splunk_threat_intel_type: ip_intel, email_intel....., registry_intel
-        splunk_threat_intel_key: _key returned from Splunk ES for this item
-        """
+        splunk_threat_intel_key: _key returned from Splunk ES for this item"""
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
