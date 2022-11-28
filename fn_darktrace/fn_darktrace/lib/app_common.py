@@ -91,7 +91,7 @@ class AppCommon():
 
         self.proxies = rc.get_proxies()
         self.timeout = rc.get_timeout()
-        self.client_auth = rc.get_clientauth()
+        self.client_auth = rc.get_client_auth()
 
         self.__init_session_obj()
 
