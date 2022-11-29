@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """AppFunction implementation"""
+import base64
 from fn_playbook_utils.lib.common import import_playbook
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import IntegrationError, validate_fields, s_to_b
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_import_playbook"
@@ -20,14 +21,19 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Import a playbook
         Inputs:
-            -   fn_inputs.pbm_resz_body
+            -   fn_inputs.pbm_body
+            -   fn_inputs.pbm_base64_content
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        validate_fields(["pbm_resz_body"], fn_inputs)
+        validate_fields(["pbm_body"], fn_inputs)
 
-        results = import_playbook(self.rest_client(), fn_inputs.pbm_resz_body)
+        content = fn_inputs.pbm_body
+        if getattr(fn_inputs, "pbm_base64_content", False):
+            content = base64.b64decode(content)
+
+        results = import_playbook(self.rest_client(), content)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

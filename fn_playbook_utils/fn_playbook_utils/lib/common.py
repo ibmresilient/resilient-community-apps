@@ -4,10 +4,11 @@
 import base64
 import logging
 from io import BytesIO
-from resilient_lib import IntegrationError, b_to_s
+from resilient_lib import IntegrationError, s_to_b, b_to_s
 from resilient import SimpleHTTPException
 from requests import RequestException
 from requests_toolbelt.multipart.encoder import MultipartEncoder
+from xml.etree import ElementTree as ET
 import posixpath
 
 LOG = logging.getLogger(__name__)
@@ -235,13 +236,13 @@ def export_playbook(rest_client, playbook_id, playbook_name):
                                          encoder,
                                          headers={"content-type": encoder.content_type})
 
-        return True, b_to_s(base64.b64encode(export_result))
+        return True, export_result
 
     return False, export_start_result
 
 def import_playbook(rest_client, playbook_body):
     try:
-        filehandle = BytesIO(base64.b64decode(playbook_body))
+        filehandle = BytesIO(s_to_b(playbook_body))
         multipart_data = {"file": ("export.resz", filehandle, "application/octet-stream")}
         multipart_data.update({})
         encoder = MultipartEncoder(fields=multipart_data)

@@ -23,15 +23,21 @@ def snake_to_camel(word):
 setup(
     name="fn_playbook_utils",
     display_name="Playbook Utils",
-    version="1.0.1",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://github.com/ibmresilient/resilient-community-apps",
-    description="Tools to mine information about workflow and playbook usage",
-    long_description="""This app includes functions to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.""",
+    description="Tools to perform activities on playbooks",
+    long_description="""This app includes functions
+    <br>
+    <ul>
+    <li>to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.</li>
+    <li>import and export playbooks</li>
+    </ul>""",
     install_requires=[
         "resilient-circuits>=41.0.0",
+        "resilient>=47.0", #47.1
         "cachetools",
         "defusedxml"
     ],

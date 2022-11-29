@@ -5,7 +5,7 @@
 import base64
 from fn_playbook_utils.lib.common import export_playbook
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, b_to_s
+from resilient_lib import IntegrationError, validate_fields, b_to_s, s_to_b
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_export_playbook"
@@ -36,7 +36,7 @@ class FunctionComponent(AppFunctionComponent):
                                           getattr(fn_inputs, 'pbm_name', None))
 
         if status:
-            results = b_to_s(base64.b64encode(results))
+            results = b_to_s(base64.b64encode(s_to_b(results)))
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
