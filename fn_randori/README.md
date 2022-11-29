@@ -108,7 +108,9 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incidents | Create, Read, Edit, Edit Status |
+  | Incidents | Read, Create |
+  | Edit Incidents | Fields, Status |
+  | Layouts | Read, Edit |
 
 The following SOAR platform guides provide additional information: 
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -168,8 +170,8 @@ The following table provides the settings you need to configure the app. These s
 | **api_version** | Yes | `v1` | *Randori REST API version.* |
 | **endpoint_url** | Yes | `https://app.randori.io` | *Randori endpoint URL.* |
 | **polling_interval** | Yes | `600` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `1200` | *Number of minutes to look back for threat updates. Value is only used on the first time polling when the app starts.* |
-| **organization_name** | Yes | `webernets-companyname` | *Your organization name in Randori.* |
+| **polling_lookback** | Yes | `1200` | *Number of minutes to look back for target updates. Value is only used on the first time polling when the app starts.* |
+| **organization_name** | Yes | `organization-name` | *Your organization name in Randori.* |
 | **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |
@@ -204,7 +206,7 @@ If more than one filter is needed, separate each tuple with a comma. Enclose str
 <p>
 Here is an polling filter example that adds or updates targets that have a "target_temptation" greater or equal to 50 AND whose status is "Needs Investigation", "Needs Resolution", "Needs Review", or "None":
 
-    poller_fillers=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
+    poller_filters=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
 
 The list of Randori supported JQuery `operators`:
 
