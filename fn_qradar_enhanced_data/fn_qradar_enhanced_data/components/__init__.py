@@ -35,7 +35,8 @@ class QRadarTab(Tab):
         Datatable("qr_top_destination_ips"),
         Datatable("qr_top_source_ips"),
         Datatable("qr_categories"),
-        Datatable("qr_assets")
+        Datatable("qr_assets"),
+        Datatable("qradar_rules_and_mitre_tactics_and_techniques")
     ]
 
     SHOW_IF = [
@@ -46,4 +47,4 @@ class QRadarTab(Tab):
 try:
     create_tab(QRadarTab, AppArgumentParser().parse_args(), update_existing=True)
 except SystemExit as e:
-    LOG.warning("Failed trying to create_tab.\nERROR: %s", e)
+    LOG.warning(f"Failed trying to create_tab.\nERROR: {e}")

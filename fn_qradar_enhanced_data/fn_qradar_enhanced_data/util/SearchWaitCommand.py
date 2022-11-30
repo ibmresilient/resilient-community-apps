@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-#
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
 # Template Method Design Pattern for a search-and-wait-for-result command
-#
 # This file can be reused for composite commands.
-#
+
 from time import time, sleep
 from logging import getLogger
 LOG = getLogger(__name__)
@@ -13,21 +10,18 @@ LOG = getLogger(__name__)
 class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
     def __init__(self, search_id, search_status):
-        fail_msg = "Query [{}] timed out. Final Status was [{}]".format(search_id, search_status)
-        super(SearchTimeout, self).__init__(fail_msg)
+        super(SearchTimeout, self).__init__(f"Query [{search_id}] timed out. Final Status was [{search_status}]")
         self.search_status = search_status
 
 class SearchJobFailure(Exception):
     """ Search job creation failure """
     def __init__(self, query):
-        fail_msg = "Failed to create search job for query [{}] ".format(query)
-        super(SearchJobFailure, self).__init__(fail_msg)
+        super(SearchJobFailure, self).__init__(f"Failed to create search job for query [{query}] ")
 
 class SearchFailure(Exception):
     """ Search failed to execute """
     def __init__(self, search_id, search_status):
-        fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
-        super(SearchFailure, self).__init__(fail_msg)
+        super(SearchFailure, self).__init__(f"Query [{search_id}] failed with status [{search_status}]")
         self.search_status = search_status
 
 class SearchWaitCommand(object):
@@ -117,9 +111,4 @@ class SearchWaitCommand(object):
             LOG.error("search_id is None")
             raise SearchJobFailure(query)
 
-        if return_result:
-            result = self.get_search_result(search_id)
-        else:
-            result=None
-
-        return result
+        return self.get_search_result(search_id) if return_result else None

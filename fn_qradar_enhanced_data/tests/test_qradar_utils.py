@@ -1,7 +1,6 @@
 # encoding: utf-8
-#
 # Unit tests for fn_qradar_enhanced_data/util/py
-#
+
 import pytest
 from mock import patch
 from base64 import b64encode
@@ -49,7 +48,6 @@ def test_auth_info():
     Test singleton AuthInfo
     :return: None
     """
-
     auth_info = qradar_utils.AuthInfo.get_authInfo()
     auth_info.create(host,
                      username=username,
@@ -57,10 +55,10 @@ def test_auth_info():
                      token=None,
                      cafile=cafile)
 
-    assert auth_info.api_url == "https://{}/api/".format(host)
+    assert auth_info.api_url == f"https://{host}/api/"
     assert auth_info.cafile == cafile
     assert auth_info.qradar_token == None
-    assert auth_info.headers["Authorization"] == b"Basic " + b64encode((username + ':' + password).encode("ascii"))
+    assert auth_info.headers["Authorization"] == b"Basic " + b64encode((f'{username}:{password}').encode("ascii"))
     assert auth_info.headers["Accept"] == "application/json"
 
     # use token to auth
@@ -80,9 +78,9 @@ def test_qradar_client():
                                                   token=None,
                                                   cafile=cafile)
         mocked_get_call.return_value = _generateResponse([
-            {"id":1,"deprecated":False,"root_resource_ids":[],"removed":True,"version":"0.1"},
-            {"id":2,"deprecated":False,"root_resource_ids":[],"removed":True,"version":"0.2"},
-            {"id":3,"deprecated":False,"root_resource_ids":[],"removed":True,"version":"1.0"}], 200)
+            {"id": 1, "deprecated": False, "root_resource_ids": [], "removed": True, "version": "0.1"},
+            {"id": 2, "deprecated": False, "root_resource_ids": [], "removed": True, "version": "0.2"},
+            {"id": 3, "deprecated": False, "root_resource_ids": [], "removed": True, "version": "1.0"}], 200)
 
         connected = qradar_client.verify_connect()
         assert connected == True
@@ -107,12 +105,10 @@ def test_ariel_graphql_search():
         mocked_post_call.return_value = _generateResponse({"cursor_id": search_id}, 200)
 
         sid = search_cmd.get_search_id(query_str)
-        expected_url = "https://" + host + "/api/" + ARIEL_SEARCHES
-        utf8 = query_str.encode("utf-8")
-        data = {"query_expression": utf8}
-        headers =  qradar_utils.AuthInfo.get_authInfo().headers.copy()
-        mocked_post_call.assert_called_with("POST", expected_url,
-                                            data=data, headers=headers)
+        mocked_post_call.assert_called_with("POST",
+                                            f"https://{host}/api/{ARIEL_SEARCHES}",
+                                            headers = qradar_utils.AuthInfo.get_authInfo().headers.copy(),
+                                            data = {"query_expression": query_str.encode("utf-8")})
 
         assert sid == search_id
 
@@ -173,15 +169,13 @@ def test_get_offense_summary_data(mocked_make_call, mocked_qr_call):
                                               cafile=cafile)
 
     offense_summary = {
-        "data":{
-            "getOffense":{
+        "data": {
+            "getOffense": {
                 "id": 1,
-                "offenseType":{
-                    "name": "Source IP"
-                }
-             }
+                "offenseType": {"name": "Source IP"}
             }
         }
+    }
 
     mocked_make_call.return_value = _generateResponse(offense_summary, 200)
 
@@ -203,14 +197,9 @@ def test_get_rules_data(mocked_make_call, mocked_qr_call):
                                               cafile=cafile)
 
     rules_data = {
-        "data":{
+        "data": {
             "getOffense": {
-                "rules": [
-                    {
-                        "id":1,
-                        "name":"test rule"
-                    }
-                ]
+                "rules": [{"id":1, "name":"test rule"}]
             }
         }
     }
@@ -235,26 +224,20 @@ def test_get_sourceip_data(mocked_make_call, mocked_qr_call):
                                               cafile=cafile)
 
     sourceip_data = {
-        "data":{
-            "getAsset":{
+        "data": {
+            "getAsset": {
                 "id": 1,
-                "interfaces":[
-                    {
-                      "macAddress": "00:00:00:a1:2b:bb"
-                    }],
-                    "riskScoreSum":5,
-                    "vulnerabilityCount":2
+                "interfaces": [{"macAddress": "00:00:00:a1:2b:bb"}],
+                "riskScoreSum": 5,
+                "vulnerabilityCount": 2
             }
         }
     }
 
     mocked_make_call.return_value = _generateResponse(sourceip_data, 200)
 
-    test_source = {
-        "sourceip": "127.0.0.1",
-        "domainid": 0
-    }
-    ret = qradar_client.graphql_query({"domainId":test_source["domainid"],"ipAddress":test_source["sourceip"]}, qradar_graphql_queries.GRAPHQL_SOURCEIP)
+    test_source = {"sourceip": "127.0.0.1", "domainid": 0}
+    ret = qradar_client.graphql_query({"domainId": test_source["domainid"], "ipAddress": test_source["sourceip"]}, qradar_graphql_queries.GRAPHQL_SOURCEIP)
 
     assert ret["content"]["id"] == sourceip_data["data"]["getAsset"]["id"]
     assert ret["content"]["interfaces"][0]["macAddress"] == sourceip_data["data"]["getAsset"]["interfaces"][0]["macAddress"]
@@ -272,22 +255,16 @@ def test_get_offense_source(mocked_make_call, mocked_qr_call):
                                               cafile=cafile)
 
     offense_source_data = {
-        "data":{
-            "getOffense":{
-              "sourceAddresses": [
-                {
-                    "id": 1,
-                    "domainId":0,
-                    "sourceIp":"127.0.0.1"
-                 }
-                ]
-         }
+        "data": {
+            "getOffense": {
+              "sourceAddresses": [{"id": 1, "domainId": 0, "sourceIp": "127.0.0.1"}]
+            }
         }
     }
 
     mocked_make_call.return_value = _generateResponse(offense_source_data, 200)
 
-    ret = qradar_client.graphql_query({"id":1}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
+    ret = qradar_client.graphql_query({"id": 1}, qradar_graphql_queries.GRAPHQL_OFFENSESOURCE, "sourceAddresses")
 
     assert ret["content"][0]["id"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["id"]
     assert ret["content"][0]["sourceIp"] == offense_source_data["data"]["getOffense"]["sourceAddresses"][0]["sourceIp"]
@@ -308,22 +285,14 @@ def get_offense_asset_data(mocked_make_call, mocked_qr_call):
         "data": {
             "getAsset": {
                 "id": 1,
-                "users":[
-                    {
-                      "id": 1,
-                      "username":"test"
-                    }
-                ]
+                "users": [{"id": 1, "username":"test"}]
             }
         }
     }
 
     mocked_make_call.return_value = _generateResponse(asset_data, 200)
 
-    test_source = {
-        "sourceip": "127.0.0.1",
-        "domainid": 0
-    }
+    test_source = {"sourceip": "127.0.0.1", "domainid": 0}
 
     ret = qradar_client.offense_asset_data(test_source)
 
