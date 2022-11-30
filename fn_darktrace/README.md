@@ -187,7 +187,7 @@ The following table provides the settings you need to configure the app. These s
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ### Poller Considerations
-The poller is just one way to escalate Darktrace Incident Groups to SOAR cases. It's also possible to send Darktrace information to a SIEM, such as IBM QRadar, which would then coorelate Incident Groups into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Darktrace Incident Group ID is preserved in the custom case field `darktrace_aianalyst_incident_group_id`, then all the remaining details about the group will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Darktrace Incident Group ID.
+The poller is just one way to escalate Darktrace Incident Groups to SOAR cases. It's also possible to send Darktrace information to a SIEM, such as IBM QRadar, which would then coorelate Incident Groups into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Darktrace Incident Group ID is preserved in the custom case field `darktrace_aianalyst_incident_group_id`, then all the remaining details about the group will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Darktrace Incident Group ID.
 
 When using another source of Darktrace Incident Group escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 
