@@ -74,7 +74,7 @@ This app fetches the data associated with the QRadar Offense and provides live l
 * Offense data available in a SOAR incident or case "QR Offense Details" tab to simplify reviewing information in one central and consistent location.
 * Access to detailed offense information by links in SOAR to the QRadar Analyst Workflow.
 * Centralize QRadar Offense IoC's associated with Security Events in the SOAR Artifacts tab, where SOAR enabled integrations can enrich and remediate cases and provide visibility to the response team.
-* Pulls Rules from Qradar and checks if there is a defined Mitre Tactic in relation to the Rule.
+* Pulls Rules from QRadar and checks if there is a defined Mitre Tactic in relation to the Rule.
 * Builds a Data Table displaying those relations, even if there is multiple!
 
 ---
@@ -188,8 +188,8 @@ Get the MITRE Tactics and Techniques in relation to the rules that were fired to
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
-| `soar_incident_id` | `number` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
-| `soar_table_name` | `text` | No | `-` | ID of the SOAR incident the function is running in |
+| `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
+| `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
 </p>
 </details>
@@ -1619,8 +1619,6 @@ Example app.config server label: [fn_qradar_integration:qradar_4]
 ## For Customers that are having performance issues related to the poller
 To resolve some performance issues that relate to the poller, it is advised to increase the num_workers setting for the [resilient] section in the app.config file from the default value of 10.
 The max value of num_workers is 500.
+
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
-
-### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
