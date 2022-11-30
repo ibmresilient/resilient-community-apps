@@ -14,6 +14,17 @@ from fn_teams.lib.microsoft_commons import ResponseHandler
 
 
 class ChannelInterface:
+    """
+        An interface that allows for creating MS Channels for an MS Team or deleting
+        an existing channel from an MS Team. An MS Team can have multiple channels.
+
+        required_parameters:
+        --------------------
+            rc               <obj> : request_common object from AppFunctionComponent
+            headers          <dct> : Request header generated during Authentication
+            response_handler <obj> : Handler for endpoint responses
+    """
+
     def __init__(self, required_parameters):
         self.rc = required_parameters.get("rc")
         self.log = logging.getLogger(__file__)
@@ -22,6 +33,38 @@ class ChannelInterface:
 
 
     def create_channel(self, options):
+        """
+        A MS Team can have multiple channels. This function can be used to add a Channel
+        to an existing MS Team. Here a request is formulated and posted to the Microsoft
+        Graph API for channel creation. To create a Channel for an MS Team, 4 key
+        attributes are required, namely: teamId, displayName, description, and
+        membershipType. Out of these attributes, teamId is crucial as the MS Team must be
+        properly identified before channel addition operation can take place. The MSFinder
+        class from microsoft_commons is being used. A team or a group can be located using
+        any one of the 3 mentioned attributes.
+
+            -> ms_groupteam_id
+            -> ms_group_mail_nickname
+            -> ms_groupteam_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
+        other two options. 
+
+        options:
+        --------
+            displayName            <str> : Name of the MS Channel to be created
+            description            <str> : Description of the Channel being created
+            ms_description         <str> : Desciption for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
+        """
 
         group_finder = microsoft_commons.MSFinder(
             rc=self.rc,
@@ -63,6 +106,37 @@ class ChannelInterface:
 
 
     def delete_channel(self, options):
+        """
+        A MS Team can have multiple channels. This function can be used to delete a Channel
+        of an existing MS Team. Here a request is formulated and posted to the Microsoft
+        Graph API for channel deletion. To delete a Channel for an MS Team, 2 key
+        attributes are required, namely: channelId and groupID/teamID. The MSFinder
+        class from microsoft_commons is being used. The MSFinder has a find_channel method
+        that allows for locating a channel and extracting its channel Id. To located the
+        group or team for which the channel is associated, one of the following options
+        can be used:
+
+            -> ms_groupteam_id
+            -> ms_group_mail_nickname
+            -> ms_groupteam_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
+        other two options. 
+
+        options:
+        --------
+            channel_name           <str> : Name of the MS Channel to be deleted
+            ms_description         <str> : Desciption for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
+        """
 
         channel_finder = microsoft_commons.MSFinder(
             rc=self.rc,
@@ -86,7 +160,6 @@ class ChannelInterface:
             response["message"] = (constants
                 .INFO_SUCCESSFULLY_DELETED_CHANNEL
                 .format(channel.get("displayName")))
-            print(json.dumps(response, indent=2))
             return response
         else:
             raise IntegrationError(constants.ERROR_COULDNOT_DELETE_CHANNEL)

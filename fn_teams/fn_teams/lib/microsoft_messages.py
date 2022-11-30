@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """ Helper function for funct_ms_teams_post_message"""
-import json
+import json, logging
 import pymsteams
 from urllib import parse
 
@@ -13,27 +13,38 @@ from fn_teams.lib import constants
 
 
 class PostMessageClient:
-    def __init__(self, rc, logger, **kwargs):
-        """
-        A pymsteams wrapper object that allows for posting incident or task
-        information in a teams channel
-        """
+    """
+        This application allows for posting Incident/Task details to a MS Teams channel.
+        The application can be triggered from either incident or task level where,
+        information about the incident or task is formulated and posted in a convenient
+        manner. This information is posted to a channel specified by the teams_channel
+        input. This channel name (specified by teams_channel) is used to lookup
+        app.config to retrieve the appropriate channel webhook url.
+
+        Args:
+        -----
+            rc <obj> : request_common object from AppFunctionComponent
+        
+        Returns:
+        --------
+            status  <bool> : True/False
+    """
+    def __init__(self, rc):
         self.rc  = rc
-        self.log = logger
+        self.log = logging.getLogger(__file__)
 
 
     def post_message(self, options, **kwargs):
         """
         This method is responsible for the construction and sending of the message
 
-        options:  
+        options:  (options from app.conf file)
         --------
-            options from app.conf file
             host <str> : Host URL of the SOAR Instance
             port <int> : Port number 
 
-        required_parameters:
-        -------------------
+        kwargs:
+        -------
             task_id       <str> : If called from task then Task ID
             incident_id   <str> : Incident ID
             teams_channel <str> : Name of the channel
@@ -113,8 +124,6 @@ class PostMessageClient:
                 incidentId=incident_id)
         case_type = constants.INCIDENT.title()
 
-        # build url back to resilient
-
         if task_id:
             incident_url = build_task_url(
                 build_resilient_url(
@@ -125,7 +134,6 @@ class PostMessageClient:
                 incident_id=incident_id)
             case_type = constants.TASK.title()
 
-        # url back to resilient
         card.addLinkButton(f"View {case_type}", incident_url)
         if teams_payload.get(constants.TITLE):
             card.title(teams_payload.get(constants.TITLE))
@@ -147,4 +155,3 @@ class PostMessageClient:
 
             card.addSection(cardsection)
         return card
-

@@ -23,8 +23,20 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        This application allows for creating a Microsoft Group using the Microsoft Graph API. This
-        provides SOAR with the ability to create Groups from within a SOAR incident or a task.
+        This application allows for enabling a Microsoft Team for an MS Group using the
+        MS Graph API. It provides SOAR with the ability to enable MS Teams from within
+        a SOAR incident or task. When an MS Group is created, the teams' functionality
+        is not enabled by default. To enable this for an MS Group that was recently created
+        or an existing Group, this function can be used. To locate the group, one of the
+        following inputs can be used:
+
+            -> ms_group_id
+            -> ms_group_mail_nickname
+            -> ms_group_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
+        the other two options
 
         Inputs:
         -------

@@ -19,11 +19,38 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.required_parameters = {}
-
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
+        """
+        This application allows for archiving or unarchivig a Microsoft Team using the
+        Microsoft Graph API. This provides SOAR with the ability to archive an existing
+        MS Team or unarchive a previously archived MS Team within a SOAR incident or a 
+        task. "archive_operation" specifies if the team is to be archived or unarchived.
+        To locate this team for the archival/unarchival operation, one of the following
+        inputs can be used:
+
+            -> ms_groupteam_id
+            -> ms_group_mail_nickname
+            -> ms_groupteam_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
+        the other two options
+
+        Inputs:
+        -------
+            archive_operation      <str> : Option that specifies the operation to be performed
+            ms_groupteam_id        <str> : The unique Id generated while creating a group
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_groupteam_name      <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
+        """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
         validate_fields(["archive_operation"], fn_inputs)
@@ -49,9 +76,9 @@ class FunctionComponent(AppFunctionComponent):
         if authenticated:
             team_manager = TeamsInterface(required_parameters)
 
-            if hasattr(fn_inputs, 'ms_group_id'):
+            if hasattr(fn_inputs, 'ms_groupteam_id'):
                 response = team_manager.archive_unarchive_team(
-                    {"group_id"  : fn_inputs.ms_group_id,
+                    {"group_id"  : fn_inputs.ms_groupteam_id,
                      "operation" : fn_inputs.archive_operation})
 
             elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
@@ -59,9 +86,9 @@ class FunctionComponent(AppFunctionComponent):
                     {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname,
                      "operation" : fn_inputs.archive_operation})
 
-            elif hasattr(fn_inputs, 'ms_team_name'):
+            elif hasattr(fn_inputs, 'ms_groupteam_name'):
                 response = team_manager.archive_unarchive_team(
-                    {"group_name" : fn_inputs.ms_team_name,
+                    {"group_name" : fn_inputs.ms_groupteam_name,
                      "operation"  : fn_inputs.archive_operation})
 
             else:

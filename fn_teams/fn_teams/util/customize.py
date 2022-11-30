@@ -45,13 +45,19 @@ def codegen_reload_data():
         "actions": [
             u"MS Teams: Post Task Information to Teams",
             u"MS Teams: Post Incident Information to Teams",
+
             u"MS Teams: Create Group From Incident",
             u"MS Teams: Create Group From Task",
             u"MS Teams: Delete Group From Incident",
             u"MS Teams: Delete Group From Task",
+
             u"MS Teams: Create Team From Incident",
             u"MS Teams: Create Team From Task",
+            u"MS Teams: Archive team from Incident",
+            u"MS Teams: Archive Team From Task",
+
             u"MS Teams: Create Channel From Incident",
+
             u"MS Teams: Enable Teams for an Existing Group"],
         "incident_fields": [],
         "incident_artifact_types": [],

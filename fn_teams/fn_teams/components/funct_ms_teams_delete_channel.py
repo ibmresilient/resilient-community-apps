@@ -23,19 +23,32 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        This application allows for creating a Microsoft Group using the Microsoft Graph API. This
-        provides SOAR with the ability to create Groups from within a SOAR incident or a task.
+        This application allows for deleting a MS Channel using the Microsoft Graph API.
+        This provides SOAR with the ability to delete an existing MS Channel of a Team.
+        A MS Team can have multiple channels, but each MS Group can have only one Team.
+        Inorder to delete an MS Channel, its MS Team/Group needs to be identified. To
+        locate this team for this operation, one of the following inputs can be used:
+
+            -> ms_groupteam_id
+            -> ms_group_mail_nickname
+            -> ms_groupteam_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
+        the other two options
 
         Inputs:
         -------
-            ms_group_id            <str> : The unique Id generated while creating a group
+            ms_channel_name        <str> : Name of the channel to be deleted
+            ms_groupteam_id        <str> : The unique Id generated while creating a group
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group
+            ms_groupteam_name      <str> : Name of the Microsoft Group
 
         Returns:
         --------
-            Response <dict> : A response with the room/team options and details
-                              or the error message if the meeting creation
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
          """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
