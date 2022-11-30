@@ -11,7 +11,7 @@
 `ms_teams_post_message`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_teams`
@@ -79,6 +79,8 @@ if not results.success:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
   text = helper.createRichText(text)
   task.addNote(text)
+  
+incident.addNote(str(results))
 ```
 
 ---

@@ -21,14 +21,17 @@
 if rule.properties.archive_operation:
   inputs.archive_operation = rule.properties.archive_operation
 
-if rule.properties.ms_group_id:
-  inputs.ms_group_id = rule.properties.ms_group_id
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+
 elif rule.properties.ms_group_mail_nickname:
   inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
-elif rule.properties.ms_team_name:
-  inputs.ms_team_name = rule.properties.ms_team_name
+
+elif rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
+
 else:
-  helper.fail("No input was provided.")
+  helper.fail("No input was provided")
 ```
 
 ### Post-Processing Script

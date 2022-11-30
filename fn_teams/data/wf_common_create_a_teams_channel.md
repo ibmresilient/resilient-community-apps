@@ -19,7 +19,7 @@
 ### Pre-Processing Script
 ```python
 inputs.ms_channel_name = rule.properties.ms_channel_name if rule.properties.ms_channel_name else f"Incident {incident.id} {incident.name}"
-inputs.ms_group_description = rule.properties.ms_group_description if rule.properties.ms_group_description else f"{incident.description.content}"
+inputs.ms_description = rule.properties.ms_description if rule.properties.ms_description else f"{incident.description.content}"
 
 if rule.properties.ms_groupteam_id:
   inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
