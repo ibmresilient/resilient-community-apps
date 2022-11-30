@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-#
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#
 #   QRadar graph queries
 
 # URL from https://qradar_instance/console/graphql

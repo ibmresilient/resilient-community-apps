@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_offense_id= incident.properties.qradar_id
+inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_query_type = "offenserules"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_table_name = "qr_triggered_rules"
@@ -27,18 +27,19 @@ inputs.soar_incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
 
-for event in results.rules_data:
+for event in content.get("rules_data"):
   qradar_event = incident.addRow("qr_triggered_rules")
-  qradar_event.rule_name = link.format("rules",event.id,event.name)
-  qradar_event.rule_group = ", ".join(list(map(lambda x:x.name,list(filter(lambda x:x.name is not None,event.groups))))) if len(event.groups)>0 else ""
+  qradar_event.rule_name = link.format("rules", event.id, event.name)
+  qradar_event.rule_group = ", ".join(list(map(lambda x: x.name, list(filter(lambda x: x.name is not None, event.groups))))) if len(event.groups) > 0 else ""
   qradar_event.rule_type = event.type
   qradar_event.enabled = "True" if event.enabled else "False"
   qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
   qradar_event.date_created = int(event.creationDate)
   qradar_event.last_modified = int(event.modificationDate)
-  qradar_event.reported_time = results.current_time
+  qradar_event.reported_time = content.get("current_time")
 ```
 
 ---

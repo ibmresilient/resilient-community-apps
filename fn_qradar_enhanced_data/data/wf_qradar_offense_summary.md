@@ -18,34 +18,41 @@
 
 ### Pre-Processing Script
 ```python
-inputs.qradar_offense_id= incident.properties.qradar_id
+inputs.qradar_offense_id = incident.properties.qradar_id
 inputs.qradar_query_type = "offensesummary"
 inputs.qradar_label = incident.properties.qradar_destination
 ```
 
 ### Post-Processing Script
 ```python
-link = "<a href=\"https://"+results.qrhost+"/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
-  
-incident.qr_offense_index_type = results.offense.offenseType.name
-incident.qr_offense_index_value = results.offense.offenseSource
-incident.qr_offense_source = results.offense.offenseSource
-incident.qr_source_ip_count = link.format(results.offenseid,"",results.offense.sourceCount)
-incident.qr_destination_ip_count = link.format(results.offenseid,"",results.offense.remoteDestinationCount+results.offense.localDestinationCount)
-incident.qr_event_count = link.format(results.offenseid,"/events?page=1&pagesize=10",results.offense.eventCount)
-incident.qr_flow_count =  link.format(results.offenseid,"/flows?page=1&pagesize=10",results.offense.flowCount)
-incident.qr_assigned = link.format("","?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B"+(results.offense.assignedTo if results.offense.assignedTo is not None else "")+"&page=1&pagesize=10",results.offense.assignedTo) if results.offense.assignedTo else "Unassigned"
-incident.qr_magnitude = link.format(results.offenseid,"",results.offense.magnitude)
-incident.qr_credibility = link.format(results.offenseid,"",results.offense.credibility)
-incident.qr_severity = link.format(results.offenseid,"",results.offense.severity)
-incident.qr_relevance = link.format(results.offenseid,"",results.offense.relevance)
-incident.qr_offense_status = results.offense.status
-incident.qr_offense_domain = "Default Domain"
-if results.offense.domain:
-  incident.qr_offense_domain = results.offense.domain.name
+content = results.get("content")
+link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
 
-incident.qr_offense_start_time = int(results.offense.startTime)
-incident.qr_offense_last_updated_time = int(results.offense.lastUpdatedTime)
+if content:
+  offenseid = content.get("offenseid")
+  offense = content.get("offense")
+  assignedTo = offense.get("assignedTo")
+  offenseSource = offense.get("offenseSource")
+
+  incident.qr_offense_index_type = offense.get("offenseType").get("name")
+  incident.qr_offense_index_value = offenseSource
+  incident.qr_offense_source = offenseSource
+  incident.qr_source_ip_count = link.format(offenseid, "", offense.get("sourceCount"))
+  incident.qr_destination_ip_count = link.format(offenseid, "", int(offense.get("remoteDestinationCount")) + int(offense.get("localDestinationCount")))
+  incident.qr_event_count = link.format(offenseid, "/events?page=1&pagesize=10", offense.get("eventCount"))
+  incident.qr_flow_count =  link.format(offenseid, "/flows?page=1&pagesize=10", offense.get("flowCount"))
+  incident.qr_assigned = link.format("", "?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B{}&page=1&pagesize=10".format(assignedTo if assignedTo else ""), assignedTo) if assignedTo else "Unassigned"
+  incident.qr_magnitude = link.format(offenseid, "", offense.get("magnitude"))
+  incident.qr_credibility = link.format(offenseid, "", offense.get("credibility"))
+  incident.qr_severity = link.format(offenseid, "", offense.get("severity"))
+  incident.qr_relevance = link.format(offenseid, "", offense.get("relevance"))
+  incident.qr_offense_status = offense.get("status")
+  incident.qr_offense_domain = "Default Domain"
+  if offense.get("domain"):
+    incident.qr_offense_domain = offense.get("domain").get("name")
+
+  incident.qr_offense_start_time = int(offense.get("startTime"))
+  incident.qr_offense_last_updated_time = int(offense.get("lastUpdatedTime"))
 ```
 
 ---

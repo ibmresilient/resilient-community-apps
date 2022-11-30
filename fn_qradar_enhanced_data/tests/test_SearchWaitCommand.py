@@ -1,10 +1,7 @@
-#
 # Unit test for SearchWaitCommand.py
-#
 # This is common code, just need to be test in one function
-#
 # 100% coverage
-#
+
 import time
 from mock import patch
 from fn_qradar_enhanced_data.util.qradar_utils import ArielSearch
@@ -82,7 +79,7 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
         # It should stop here
         assert False
     except SearchWaitCommand.SearchTimeout as e:
-        print("Times out after {} sec.".format(str(time.time()-start_time)))
+        print(f"Times out after {str(time.time()-start_time)} sec.")
         assert True
     except Exception:
         assert False
@@ -96,7 +93,7 @@ def test_search_and_wait_command(mocked_get_search_id, mocked_check_status, mock
         # It should stop here
         assert False
     except SearchWaitCommand.SearchTimeout as e:
-        print("Times out after {} sec.".format(str(time.time() - start_time)))
+        print(f"Times out after {str(time.time()-start_time)} sec.")
         assert True
     except Exception:
         assert False
