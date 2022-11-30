@@ -1622,3 +1622,6 @@ The max value of num_workers is 500.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
+
+### For Support
+ This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.
