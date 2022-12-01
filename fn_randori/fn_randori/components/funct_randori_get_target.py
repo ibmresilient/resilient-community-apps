@@ -31,7 +31,8 @@ class FunctionComponent(AppFunctionComponent):
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
         results = app_common.get_target(fn_inputs.randori_target_id)
-
+        results["entity_url"] = app_common.make_linkback_url(fn_inputs.randori_target_id)
+        
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
