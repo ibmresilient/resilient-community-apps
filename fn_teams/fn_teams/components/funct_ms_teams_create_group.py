@@ -42,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
             ms_description         <str> : Description for the group to be created
             ms_owners_list         <str> : List of owners email addresses
             add_members_from       <str> : Specifies if members to be added form incident or task
-            additional_mambers     <str> : List of email addresses of additional members to be added
+            additional_members     <str> : List of email addresses of additional members to be added
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
 
         Returns:
