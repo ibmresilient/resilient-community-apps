@@ -22,7 +22,15 @@
   "properties": {
     "randori_target_id": "{{ target_id }}",
     {% if target_temptation is not none %}
-    "randori_target_temptation": {{ target_temptation }},
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
     {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"
