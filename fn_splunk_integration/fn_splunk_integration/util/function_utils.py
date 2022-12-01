@@ -81,7 +81,7 @@ def get_servers_list(opts):
 
 def function_basics(fn_inputs, servers_list, utils=True):
     # Make that calls that all of the functions use
-    options = SplunkServers.splunk_label_test(fn_inputs.splunk_label, servers_list)
+    options = SplunkServers.splunk_label_test(getattr(fn_inputs, "splunk_label", None), servers_list)
 
     splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
 

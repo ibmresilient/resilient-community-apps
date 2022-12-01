@@ -32,10 +32,8 @@ class FunctionComponent(AppFunctionComponent):
         # Validate required parameters
         validate_fields(["splunk_threat_intel_type"], fn_inputs)
 
-        params_list = []
-        for input, value in fn_inputs._asdict().items():
-            if QUERY_PARAM in input:
-                params_list.append(value)
+        # Build list of parameters
+        params_list = [value for input, value in fn_inputs._asdict().items() if QUERY_PARAM in input]
 
         # Build the dict used to add threat intel item
         item_dict = make_item_dict(params_list)
