@@ -33,8 +33,8 @@ class FunctionComponent(AppFunctionComponent):
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
         splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
-                                              comment=fn_inputs.comment,
-                                              status=fn_inputs.notable_event_status,
+                                              comment=getattr(fn_inputs, "comment", None),
+                                              status=getattr(fn_inputs, "notable_event_status", None),
                                               cafile=splunk_verify_cert)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

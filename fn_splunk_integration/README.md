@@ -36,6 +36,7 @@
 | 1.1.1 | 04/2022 | Fix for splunk_max_count |
 | 1.2.0 | 05/2022 | Add more documentation and bug fix |
 | 1.3.0 | 06/222 | Add authentication using tokens |
+| 1.3.1 | 11/2022 | Bug Fix |
 
 * For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.1.0 Changes](#1.1.0-changes)
 
