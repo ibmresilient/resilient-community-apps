@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [u"darktrace_associated_devices_dt", u"darktrace_incident_events_dt", u"darktrace_model_breaches_dt"],
         "automatic_tasks": [],
         "scripts": [u"Parse Darktrace Details to Incident Properties", u"Parse Darktrace Device Details to Artifacts", u"Parse Darktrace Device Details to Data Table", u"Parse Darktrace Incident Events Details to Data Table", u"Parse Darktrace Model Breaches Details to Data Table"],
-        "playbooks": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_automatic_populate_incident_events_table", u"darktrace_list_similar_devices", u"darktrace_populate_devices_table", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach", u"darktrace_update_all_data_tables", u"darktrace_update_devices_data_table", u"darktrace_update_incident_events_data_table", u"darktrace_update_model_breaches_data_table", u"dartkrace_automatic_populate_ai_analyst_group_details"]
+        "playbooks": [u"darktrace_acknowledge_incident_event", u"darktrace_acknowledge_model_breach", u"darktrace_add_tags_to_device", u"darktrace_automatic_populate_incident_events_table", u"darktrace_list_similar_devices", u"darktrace_populate_devices_table", u"darktrace_unacknowledge_incident_event", u"darktrace_unacknowledge_model_breach", u"darktrace_update_all_data_tables", u"darktrace_update_devices_data_table", u"darktrace_update_incident_events_data_table", u"darktrace_update_model_breaches_data_table", u"dartkrace_automatic_populate_ai_analyst_group_details", u"dartkrace_update_ai_analyst_group_details"]
     }
 
 
@@ -69,6 +69,7 @@ def customization_data(client=None):
         - darktrace_update_incident_events_data_table
         - darktrace_update_model_breaches_data_table
         - dartkrace_automatic_populate_ai_analyst_group_details
+        - dartkrace_update_ai_analyst_group_details
     - Incident Fields:
         - darktrace_aianalyst_incident_group_id
         - darktrace_associated_device_ids

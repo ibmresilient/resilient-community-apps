@@ -34,7 +34,8 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-  - [Templates for SOAR Cases](#templates-for-soar-cases)
+  - [Poller Considerations](#poller-considerations)
+    - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
 - [Function - Darktrace: Acknowledge Incident Event](#function---darktrace-acknowledge-incident-event)
 - [Function - Darktrace: Acknowledge Model Breach](#function---darktrace-acknowledge-model-breach)
 - [Function - Darktrace: Add Device Tags](#function---darktrace-add-device-tags)
@@ -112,7 +113,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Org Data | Read |
   | Function | Read |
   | Incidents | Read & Create |
-  | Edit Incidents | Fields, Status, & Notes |
+  | Edit Incidents | Fields & Status |
   | Layouts | Read & Edit |
 
 The following SOAR platform guides provide additional information: 
@@ -169,23 +170,28 @@ The following table provides the settings you need to configure the app. These s
 | **darktrace_base_url** | Yes | `https://<instance>.cloud.darktrace.com` | *URL to your instance of Darktrace.* |
 | **api_key** | Yes |  | *API Access Token generated in Darktrace.* |
 | **api_secret** | Yes |  | *Secret associated with above API Token.* |
-| **polling_interval** | Yes | `60` | *Number of **seconds** between polling queries for new findings. Use value 0 to disable automatic case creation from findings.* |
-| **polling_lookback** | Yes | `120` | *Number of **minutes** to look back for new findings the first time the app starts or restarts.* |
+| **polling_interval** | Yes | `60` | *Number of **seconds** between polling queries for new incident events. Use value 0 to disable automatic case creation from incident events.* |
+| **polling_lookback** | Yes | `120` | *Number of **minutes** to look back for new incident events the first time the app starts or restarts.* |
 | **auto_sync_darktrace_comments** | No | `True` | *Whether or not to sync comments from Darktrace to SOAR. Defaults to `True`.* |
 | **exclude_did** | No | `1,4,99` | *Comma separated list of device IDs you wish to be excluded from syncronization.* |
 | **locale** | No | `en_US` | *Language locale to use when pulling Incident Events and their descriptions. Defaults to `en_US`. See Darktrace Customer Portal for updated list of locale options.* |
 | **min_score** | No | `0.0` | *Minimum incident score for the incident it is associated with to be synced to SOAR. Accepts values between 0 and 100. Defaults to 0.* |
 | **saas_only** | No | `False` | *If `True`, restricts synced Darktrace incidents to only those that contain a minimum of one SaaS incident event. Defaults to `False`.* |
-| **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
-| **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
-| **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Templates for SOAR Cases](#templates-for-soar-cases).* |
+| **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
+| **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
+| **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
 
 ### Custom Layouts
 * The app automatically creates a custom "Darktrace Incident" tab on first install. But more customization can be made in that tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
-### Templates for SOAR Cases
+### Poller Considerations
+The poller is just one way to escalate Darktrace Incident Groups to SOAR cases. It's also possible to send Darktrace information to a SIEM, such as IBM QRadar, which would then coorelate Incident Groups into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Darktrace Incident Group ID is preserved in the custom case field `darktrace_aianalyst_incident_group_id`, then all the remaining details about the group will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Darktrace Incident Group ID.
+
+When using another source of Darktrace Incident Group escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+
+#### Poller Templates for SOAR Cases
 It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
 
 This is especially relevant if you have required custom _close_ fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case_template` and reference those required close fields in the template.
@@ -1478,7 +1484,7 @@ if results.get("success"):
 
 ---
 ## Function - Darktrace: List Similar Devices
-Function to list similar devices to the given device.
+Function to list similar devices to the given device. The example playbook provided with the app adds a note to the incident with the list of similar devices. Note that the input `darktrace_device_count` is a *maximum*, and if there are fewer than that number of devices similar to the source device, the list may not have the full count
 
  ![screenshot: fn-darktrace-list-similar-devices ](./doc/screenshots/fn-darktrace-list-similar-devices.png)
  ![screenshot: fn-darktrace-list-similar-devices ](./doc/screenshots/fn-darktrace-list-similar-devices-1.png)
@@ -2046,6 +2052,7 @@ group_category = incident.properties.darktrace_group_category
 | Darktrace: Update Incident Events Data Table | Refreshes data table associated with Darktrace incident events | incident | `enabled` |
 | Darktrace: Update Model Breaches Data Table | Refreshes data table associated with Darktrace model breaches | incident | `enabled` |
 | Dartkrace: Automatic Populate AI Analyst Group Details | Automatic playbook to fill in details of an AI Analyst Incident Group when an event is created in SOAR from Darktrace | incident | `enabled` |
+| Dartkrace: Update AI Analyst Group Details | Refresh details of an AI Analyst Incident Group when an event is created in SOAR from Darktrace | incident | `enabled` |
 
 ---
 

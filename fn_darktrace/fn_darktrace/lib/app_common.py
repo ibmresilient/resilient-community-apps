@@ -91,7 +91,7 @@ class AppCommon():
 
         self.proxies = rc.get_proxies()
         self.timeout = rc.get_timeout()
-        self.client_auth = rc.get_client_auth()
+        self.client_auth = rc.get_clientauth()
 
         self.__init_session_obj()
 
@@ -429,6 +429,7 @@ class AppCommon():
         # defaults
         if not params:
             params = {}
+        params.update({"locale": self.locale})
 
         return self._execute_dt_request(
             "GET",
@@ -456,7 +457,8 @@ class AppCommon():
         """
         # defaults
         if not params:
-            params = {"includeacknowledged": "true", "includeincidenteventurl": "true", "locale": self.locale}
+            params = {"includeacknowledged": "true", "includeincidenteventurl": "true"}
+        params.update({"locale": self.locale})
 
         # if group_id is provided, add/overwrite the value in the params
         if group_id:
@@ -468,11 +470,6 @@ class AppCommon():
             params=params,
             capture_error=capture_error
         )
-
-    ########
-    # TODO: there is an endpoint that allows you to download an event as a PDF — this should be exposed!
-    # EX: GET https://<darktrace_base_url>/aianalyst/incidentevents?filename=test2.pdf&locale=en_US&format=pdf&uuid=c4d450cd-a4a4-4840-bd95-042b73a2ca3f
-    ########
 
     def get_incident_event_comments(self, incident_id: str = None, params: dict = None, capture_error: bool = False) -> dict:
         """
