@@ -4,18 +4,18 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted Group: benben"
+    "message": "Successfully deleted Group: John's Team"
   },
   "raw": null,
   "inputs": {
-    "ms_group_name": "benben"
+    "ms_group_mail_nickname": "JohnsTeam@5rf2xs.onmicrosoft.com"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "Calvins-MacBook-Pro.local",
-    "execution_time_ms": 3157,
-    "timestamp": "2022-11-16 12:17:00"
+    "host": "calvins-mbp.galway.ie.ibm.com",
+    "execution_time_ms": 2996,
+    "timestamp": "2022-11-22 12:14:11"
   }
 }

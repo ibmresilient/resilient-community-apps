@@ -3,21 +3,24 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "489acc09-3bac-4c43-a168-544df4bf40ff",
+    "id": "4dfde5ae-4c27-4461-955d-e90791504987",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-11-15T16:30:37Z",
-    "creationOptions": [],
-    "description": "Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45",
-    "displayName": "SOAR",
+    "createdDateTime": "2022-11-17T19:38:40Z",
+    "creationOptions": [
+      "Team",
+      "ExchangeProvisioningFlags:3552"
+    ],
+    "description": "Sample",
+    "displayName": "Admin",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "SOAR@****.onmicrosoft.com",
+    "mail": "Admin@5rf2xs.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "SOAR",
+    "mailNickname": "Admin",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,33 +32,37 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SPO:SPO_cdfc79da-***********-408e-ab06-50ca7e01766a",
-      "SMTP:SOAR@****.onmicrosoft.com"
+      "SPO:SPO_6a9b33c4-5b75-4854-8cd8-***********_1d8a5928-8678-408e-ab06-50ca7e01766a",
+      "SMTP:Admin@5rf2xs.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-11-15T16:30:37Z",
-    "resourceBehaviorOptions": [],
+    "renewedDateTime": "2022-11-17T19:38:40Z",
+    "resourceBehaviorOptions": [
+      "HideGroupInOutlook",
+      "SubscribeMembersToCalendarEventsDisabled",
+      "WelcomeEmailDisabled"
+    ],
     "resourceProvisioningOptions": [
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-**********-1297377441-4282433524",
+    "securityIdentifier": "S-1-12-1-********-1147227175-132734357-2269728913",
     "theme": null,
     "visibility": "Public",
     "onPremisesProvisioningErrors": [],
-    "message": "Successfully unarchived Team: SOAR",
-    "teamsEnabled": "Unarchived"
+    "message": "Successfully archived Team: Admin",
+    "teamsEnabled": "Archived"
   },
   "raw": null,
   "inputs": {
-    "archive_operation": "Unarchive",
-    "ms_group_mail_nickname": "SOAR@****.onmicrosoft.com"
+    "ms_team_name": "Admin",
+    "archive_operation": "Archive"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "Apphost",
-    "execution_time_ms": 3397,
-    "timestamp": "2022-11-16 11:40:36"
+    "host": "appHost",
+    "execution_time_ms": 5367,
+    "timestamp": "2022-11-22 11:21:47"
   }
 }

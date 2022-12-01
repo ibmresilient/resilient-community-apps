@@ -24,7 +24,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_group_name": {
+        "ms_group_mail_nickname": {
           "type": "string"
         }
       }

@@ -102,7 +102,12 @@
         "teamsEnabled": {
           "type": "boolean"
         },
-        "unfoundUsers": {}
+        "unfoundUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "raw": {},

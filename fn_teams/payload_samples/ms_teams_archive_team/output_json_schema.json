@@ -21,7 +21,10 @@
           "type": "string"
         },
         "creationOptions": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "description": {
           "type": "string"
@@ -66,7 +69,10 @@
           "type": "string"
         },
         "resourceBehaviorOptions": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "resourceProvisioningOptions": {
           "type": "array",
@@ -99,10 +105,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "archive_operation": {
+        "ms_team_name": {
           "type": "string"
         },
-        "ms_group_mail_nickname": {
+        "archive_operation": {
           "type": "string"
         }
       }

@@ -88,7 +88,10 @@
           "type": "boolean"
         },
         "unfoundUsers": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
