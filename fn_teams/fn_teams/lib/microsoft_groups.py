@@ -153,7 +153,7 @@ class GroupsInterface:
         return group_owners, group_members, unfound_user
 
 
-    def _add_members_group(self, group_id, members_list):
+    def _add_members_group(self, group_id: str, members_list: list):
         """
         Allows for adding Users to the Microsoft Group. This function plays
         a vital role as the Group creation call can only support up to 15 objects

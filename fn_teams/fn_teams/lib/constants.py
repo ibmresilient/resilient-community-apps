@@ -26,7 +26,7 @@ TASK = "Task"
 TITLE = "title"
 INCIDENT = "Incident"
 TIMEOUT = 60
-TASK_FRAGMENT = "?task="
+TASK_FRAGMENT = "?task={}"
 ERROR_UNABLE_TO_FIND_CHANNEL = "Unable to find channel name {} in app.config"
 SUCCESSFULLY_POSTED_MESSAGE = "Information successfully posted in channel {}"
 

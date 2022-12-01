@@ -44,6 +44,10 @@ class ResponseHandler:
         self.exempt_codes = self.default_exempt_codes.copy()
 
 
+    def set_return_raw(self, value: bool=False):
+        self.return_raw = value
+
+
     def _monitor_status(self):
         """
         Monitors the response recieved from the endpoint and generates a custom message
@@ -117,7 +121,7 @@ class ResponseHandler:
             res["message"] = self.msg
         return res
 
-
+ 
     def set_return_raw(self, value: bool=False):
         """
         Allows for returning the response object as is without performing any response
@@ -224,7 +228,6 @@ class ResponseHandler:
         return self._raise_or_return_erros()
 
 
-
 class MSFinder():
     """
         Allows for identifying Microsoft Groups, Teams, Channels, and Users in the endpoint
@@ -248,7 +251,6 @@ class MSFinder():
         self.rc = rc
         self.rh = rh
         self.headers = headers
-
 
     def find_group(self, options):
         """

@@ -89,7 +89,6 @@ class PostMessageClient:
         status = card.send()
         return status
 
-
     def build_conversation(self, options, card, **kwargs):
         """
         Constructs the message to be posted in the teams channel
