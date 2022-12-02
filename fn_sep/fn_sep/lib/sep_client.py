@@ -136,7 +136,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["auth"])
         json = {"username": self.username, "password": self.password, "domain": self.domain}
-        r = self._req.execute_call('post', url, verify_flag=False, json=json)
+        r = self._req.execute_call('post', url, verify=False, json=json)
 
         return r["token"]
 
@@ -147,7 +147,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["version"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
@@ -160,7 +160,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
 
-        r = self._req.execute_call('head', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('head', url, verify=False, headers=self._headers)
 
         return r
 
@@ -171,7 +171,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["domains"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
@@ -197,7 +197,7 @@ class Sepclient(object):
         params = {"computerName": computername, "domain": domain, "lastUpdate": lastupdate, "order":order, "os":os,
                   "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -208,7 +208,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["clients_online_status"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
@@ -230,7 +230,7 @@ class Sepclient(object):
         params = {"domain": domain, "fullPathName": fullpathname, "order": order, "pageIndex": pageindex,
                   "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -250,7 +250,7 @@ class Sepclient(object):
 
         params = {"domainId": domainid, "name": fingerprintlist_name}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -262,7 +262,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
 
-        r = self._req.execute_call('delete', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('delete', url, verify=False, headers=self._headers)
 
         return r
 
@@ -290,7 +290,7 @@ class Sepclient(object):
         payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid, "hashType": hash_type,
                               "data": [hash_value]})
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -316,7 +316,7 @@ class Sepclient(object):
 
         payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid,
                               "hashType": hash_type, "data": hash_values})
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -332,7 +332,7 @@ class Sepclient(object):
 
         payload = json.dumps({"group_id": groupid, "fingerprint_id": fingerprintlist_id})
 
-        r = self._req.execute_call('put', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('put', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -355,7 +355,7 @@ class Sepclient(object):
         params = {"file_path": file_path, "computer_ids": computer_ids, "sha256": sha256, "md5": md5, "sha1": sha1,
                   "source": source}
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -378,7 +378,7 @@ class Sepclient(object):
 
         params = {"order": order, "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -390,7 +390,7 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["file_content"]).format(file_id)
         headers = self._headers
         headers.update({"content-type":"application/json; charset=UTF-8", "Accept-Encoding": "gzip, deflate, compress"})
-        r = self._req.execute_call('get', url, verify_flag=False, headers=headers, stream=True)
+        r = self._req.execute_call('get', url, verify=False, headers=headers, stream=True)
 
         return r
 
@@ -414,7 +414,7 @@ class Sepclient(object):
         if undo is not None:
             params.update({"undo": undo})
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -445,7 +445,7 @@ class Sepclient(object):
 
         payload = self.setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action)
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params, data=payload)
 
         return r
 
@@ -460,7 +460,7 @@ class Sepclient(object):
 
         payload = json.dumps([{"group": {"id": groupid}, "hardwareKey": hardwarekey}])
 
-        r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('patch', url, verify=False, headers=self._headers, data=payload)
 
         return r
 

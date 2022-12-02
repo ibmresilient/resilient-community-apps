@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """ Process https requests """
 import logging
@@ -10,6 +10,7 @@ from zipfile import ZipFile
 from io import BytesIO
 from sys import version_info
 from requests import request, HTTPError
+from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
 # Magic number for zip file
@@ -29,6 +30,8 @@ class RequestsSep(object):
         self.base_path = opts.get("sep_base_path")
         self.function_opts = function_opts
 
+        self.rc = RequestsCommon(opts, function_opts)
+
     def get_proxies(self):
         """ proxies can be specified globally for all integrations or specifically per function """
         proxies = None
@@ -40,7 +43,14 @@ class RequestsSep(object):
 
         return proxies
 
-    def execute_call(self, verb, url, params=None, data=None, json=None, basicauth=None, verify_flag=True,
+    def execute_call(self, verb, url, **kwargs):
+
+        return self.rc.execute(verb, url,
+                               callback=callback,
+                               **kwargs)
+
+
+    def x_execute_call(self, verb, url, params=None, data=None, json=None, basicauth=None, verify=True,
                      headers=None, proxies=None, timeout=None, stream=False):
         """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH,
         PUT, DELETE AND HEAD. Retries are attempted if a Rate limit exception (429) is  detected.
@@ -58,7 +68,7 @@ class RequestsSep(object):
 
         if verb.upper() in ["GET", "HEAD", "PATCH", "POST", "PUT", "DELETE"]:
             try:
-                r = request(verb.upper(), url, verify=verify_flag, headers=headers, params=params,
+                r = request(verb.upper(), url, verify=verify, headers=headers, params=params,
                             auth=basicauth, timeout=timeout, stream=stream, proxies=proxies, data=data, json=json)
 
                 r.raise_for_status()  # If the request fails throw an error.
@@ -89,8 +99,8 @@ class RequestsSep(object):
         #  Firstly check if a zip file is returned.
         key = content = None
         if r.content.startswith(ZIP_MAGIC):
-            (key, content) = self.get_unzipped_contents(r.content)
-            return self.decrypt_xor(content, key)
+            (key, content) = get_unzipped_contents(r.content)
+            return decrypt_xor(content, key)
         #  Else try to see if is json.
         try:
             return r.json()
@@ -98,50 +108,78 @@ class RequestsSep(object):
             # Default response likely not in json format just return content as is.
             return r.content
 
-    @staticmethod
-    def get_unzipped_contents(content):
-        """ Unzip file content zip file returned in response.
-        Response zip will have contents as follows:
+def get_unzipped_contents(content):
+    """ Unzip file content zip file returned in response.
+    Response zip will have contents as follows:
 
-            |- <file with hash (sha256) as name>
-            |- metadata.xml
+        |- <file with hash (sha256) as name>
+        |- metadata.xml
 
-        :param content: Response content.
-        :return: Tuple with Unzipped file with hash as name and key.
-        """
-        key = c_unzipped = meta = None
-        try:
-            with ZipFile(BytesIO(content), 'r') as zfile:
-                for zip_file_name in zfile.namelist():
-                    if len(zip_file_name) in HASH_LENGTHS or zip_file_name == "metadata.xml":
-                        f = zfile.open(zip_file_name)
-                        if len(zip_file_name) in HASH_LENGTHS:
-                            # Get the hash file name.
-                            c_unzipped = f.read()
-                        elif zip_file_name == "metadata.xml":
-                            # Get the key.
-                            if version_info.major == 3:
-                                meta = ET.fromstring(f.read())
-                            else:
-                                meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
-                            for item in meta.findall('File'):
-                                key = item.attrib["Key"]
-                    else:
-                        raise ValueError('Unknown hash type or key for zipfile contents: ' + zip_file_name)
-            return (key, c_unzipped)
+    :param content: Response content.
+    :return: Tuple with Unzipped file with hash as name and key.
+    """
+    key = c_unzipped = meta = None
+    try:
+        with ZipFile(BytesIO(content), 'r') as zfile:
+            for zip_file_name in zfile.namelist():
+                if len(zip_file_name) in HASH_LENGTHS or zip_file_name == "metadata.xml":
+                    f = zfile.open(zip_file_name)
+                    if len(zip_file_name) in HASH_LENGTHS:
+                        # Get the hash file name.
+                        c_unzipped = f.read()
+                    elif zip_file_name == "metadata.xml":
+                        # Get the key.
+                        if version_info.major == 3:
+                            meta = ET.fromstring(f.read())
+                        else:
+                            meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
+                        for item in meta.findall('File'):
+                            key = item.attrib["Key"]
+                else:
+                    raise ValueError('Unknown hash type or key for zipfile contents: ' + zip_file_name)
+        return (key, c_unzipped)
 
-        except ET.ParseError as e:
-            LOG.error("During metadata file XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
-            raise e
+    except ET.ParseError as e:
+        LOG.error("During metadata file XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
+        raise e
 
-    @staticmethod
-    def decrypt_xor(data, key):
-        """ Unencrypt XORed data.
+def decrypt_xor(data, key):
+    """ Unencrypt XORed data.
 
-        :param data: XORed zip file data.
-        :return: Unencrypted data.
-        """
-        data = bytearray(data)
-        for i in range(len(data)):
-            data[i] ^= int(key)
-        return data
+    :param data: XORed zip file data.
+    :return: Unencrypted data.
+    """
+    data = bytearray(data)
+    for i in range(len(data)):
+        data[i] ^= int(key)
+    return data
+
+def callback(response):
+    if response.status_code == 410 and \
+            re.findall("/policy-objects/fingerprints.*$", response.url):
+        # We are probably trying to access/delete fingerprint list which doesn't exist.
+        LOG.error("Got '410' error, possible attempt to access a fingerprint list which doesn't exist.")
+        # Allow error to bubble up to the Resilient function.
+    elif response.status_code == 400 and \
+            re.findall("/groups/.*/system-lockdown/fingerprints/.*$", response.url):
+        # We are probably trying to re-add a hash to fingerprint list which already exists.
+        LOG.error("Got '400' error, possible attempt to access a fingerprint list which doesn't exist.")
+        # Allow error to bubble up to the Resilient function.
+    elif response.status_code == 409 and \
+            re.findall("/policy-objects/fingerprints.*$", response.url):
+        # We are probably trying to re-add a hash to fingerprint list which already exists.
+        LOG.error("Got '409' error, possible attempt to re-add a hash to a fingerprint list.")
+        # Allow error to bubble up to the Resilient function.
+    else:
+        #  Firstly check if a zip file is returned.
+        key = content = None
+        if response.content and response.content.startswith(ZIP_MAGIC):
+            (key, content) = get_unzipped_contents(response.content)
+            return decrypt_xor(content, key)
+
+    #  Else try to see if is json.
+    try:
+        return response.json()
+    except ValueError:
+        # Default response likely not in json format just return content as is.
+        return response.content
