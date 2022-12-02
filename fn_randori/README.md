@@ -931,6 +931,18 @@ inputs.randori_target_id = incident.properties.randori_target_id
 <p>
 
 ```python
+def map_temptation(temptation_score):
+  if not temptation_score:
+    return None
+  if temptation_score <= 14:
+    return "Low"
+  elif temptation_score >= 15 and temptation_score <= 29:
+    return "Medium"
+  elif temptation_score >= 30 and temptation_score <= 39:
+    return "High"
+  elif temptation_score >= 40:
+    return "Critical"
+
 target_data = playbook.functions.results.target_data
 
 if not target_data.success:
@@ -942,7 +954,10 @@ else:
     # Update custom fields with Randori target data
     incident.properties.randori_target_status = data.get("status")
     incident.properties.randori_target_impact_score = data.get("impact_score")
-    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_temptation = map_temptation(data.get("target_temptation"))
+    incident.properties.randori_target_name = data.get("name")
+    incident.properties.randori_target_vendor = data.get("vendor")
+    incident.properties.randori_target_version = data.get("version")
     incident.properties.randori_target_authority = data.get("authority")
     incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
     incident.properties.randori_target_perspective_name = data.get("perspective_name")
@@ -1328,6 +1343,9 @@ randori_detections_dt
 | Impact Score | `randori_target_impact_score` | `select` | `properties` | - | - |
 | Link to Target | `randori_target_link` | `textarea` | `properties` | - | - |
 | Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
+| Service Name | `randori_target_name` | `text` | `properties` | - | - |
+| Service Vendor | `randori_target_vendor` | `text` | `properties` | - | - |
+| Service Version | `randori_target_version` | `text` | `properties` | - | - |
 | Target Status | `randori_target_status` | `select` | `properties` | - | - |
 | User Tags | `randori_target_tags` | `text` | `properties` | - | - |
 | Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
