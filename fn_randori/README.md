@@ -948,7 +948,7 @@ else:
     incident.properties.randori_target_perspective_name = data.get("perspective_name")
     entity_url = content.get("entity_url")
     if entity_url:
-      incident.properties.randori_target_link = "<a target='_blank' href='{{ entity_url }}'>Link</a>"
+      incident.properties.randori_target_link = "<a target='_blank' href='{0}'>Link</a>".format(entity_url)
     tech_category = data.get("tech_category", [])
     if tech_category:
       incident.properties.randori_target_tech_category = ", ".join(tech_category)
