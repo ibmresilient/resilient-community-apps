@@ -1331,7 +1331,7 @@ randori_detections_dt
 | Target Status | `randori_target_status` | `select` | `properties` | - | - |
 | User Tags | `randori_target_tags` | `text` | `properties` | - | - |
 | Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
-| Target Temptation | `randori_target_temptation` | `number` | `properties` | - | - |
+| Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
 
 ---
 
@@ -1386,6 +1386,17 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "randori_target_id": "{{ target_id }}",
+    {% if target_temptation is not none %}
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
+    {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"
   }
@@ -1426,7 +1437,15 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_authority": {{ authority | lower }},
 
     {% if target_temptation is not none %}
-    "randori_target_temptation": {{ target_temptation }},
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
     {% endif %}
 
     {% if tech_category is not none %}
@@ -1442,7 +1461,6 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_impact_score": "{{ impact_score }}"
     }
 }
-
 ```
 ---
 ## Troubleshooting & Support
