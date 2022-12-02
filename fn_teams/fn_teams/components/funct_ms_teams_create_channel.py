@@ -62,7 +62,7 @@ class FunctionComponent(AppFunctionComponent):
         required_parameters["resclient"] = self.rest_client()
 
         options["displayName"] = fn_inputs.ms_channel_name
-        options["description"] = fn_inputs.ms_group_description
+        options["description"] = fn_inputs.ms_description
 
 
         try:

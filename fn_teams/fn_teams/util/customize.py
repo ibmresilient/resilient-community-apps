@@ -47,20 +47,16 @@ def codegen_reload_data():
             u"MS Teams: Create Group From Task",
             u"MS Teams: Delete Group From Incident",
             u"MS Teams: Delete Group From Task",
-
             u"MS Teams: Create Team From Incident",
             u"MS Teams: Create Team From Task",
             u"MS Teams: Archive Team From Incident",
             u"MS Teams: Archive Team From Task",
-
             u"MS Teams: Create Channel From Incident",
             u"MS Teams: Delete Channel From Incident",
             u"MS Teams: Create Channel From Task",
             u"MS Teams: Delete Channel From Task",
-
             u"MS Teams: Post Task Information to Teams",
             u"MS Teams: Post Incident Information to Teams",
-
             u"MS Teams: Enable Teams for Group From Incident",
             u"MS Teams: Enable Teams for Group From Task"],
         "incident_fields": [],
@@ -71,6 +67,7 @@ def codegen_reload_data():
         "scripts": [],
         "playbooks": []
     }
+
 
 
 def customization_data(client=None):

@@ -37,10 +37,10 @@ if rule.properties.add_members_incident is not None:
 if rule.properties.additional_members.content is not None:
     inputs.additional_members = rule.properties.additional_members.content
     
-if rule.properties.ms_group_description is not None:
-    inputs.ms_group_description = rule.properties.ms_group_description
+if rule.properties.ms_description is not None:
+    inputs.ms_description = rule.properties.ms_description
 else:
-    inputs.ms_group_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
+    inputs.ms_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
   
 
 if rule.properties.ms_group_mail_nickname is not None:

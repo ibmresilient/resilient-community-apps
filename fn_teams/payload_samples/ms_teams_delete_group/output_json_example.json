@@ -8,13 +8,13 @@
   },
   "raw": null,
   "inputs": {
-    "ms_group_mail_nickname": "JohnsTeam@5rf2xs.onmicrosoft.com"
+    "ms_group_mail_nickname": "ProductionTeamm@******.onmicrosoft.com"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "calvins-mbp.galway.ie.ibm.com",
+    "host": "AppHost",
     "execution_time_ms": 2996,
     "timestamp": "2022-11-22 12:14:11"
   }
