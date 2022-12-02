@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
-"""Function implementation"""
+"""AppFunction implementation"""
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
@@ -19,8 +19,6 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
-        self.required_parameters = {}
-
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -55,7 +53,7 @@ class FunctionComponent(AppFunctionComponent):
         
         teams_channel = fn_inputs.teams_channel
         try:
-            message_client = PostMessageClient(self.rc, self.LOG)
+            message_client = PostMessageClient(self.rc)
             status = message_client.post_message(
                 self.opts,
                 teams_channel = teams_channel,

@@ -11,6 +11,7 @@ from fn_teams.lib import constants
 
 log = logging.getLogger(__name__)
 
+
 class ResponseHandler:
     """
     Handles the responses received from the Webex endpoint.
@@ -120,6 +121,18 @@ class ResponseHandler:
             res["message"] = self.msg
         return res
 
+ 
+    def set_return_raw(self, value: bool=False):
+        """
+        Allows for returning the response object as is without performing any response
+        handling operations.
+
+        Args:
+        -----
+            value <bool> : Turns on/off return raw feature
+
+        """
+        self.return_raw = value
 
 
     def clear_exempt_codes(self, default=False):
@@ -217,76 +230,60 @@ class ResponseHandler:
 
 class MSFinder():
     """
-        Fetches user or group information from the Microsoft Endpoint. Users can be found
-        using their UserID or their PrincipalName (email address). Groups can be located
-        using the group_id (unique id generated during creation), group_mailNickname or the
-        group_displayName. The group_displayName is the least preferred option as there could
-        exist multiple groups with the similar group name.
+        Allows for identifying Microsoft Groups, Teams, Channels, and Users in the endpoint
+        using the Microsoft Graph API. This is vital as different MS Objects can be created
+        or exists with the same principal name. To locate such objects, unique identification
+        attributes can be used. This class uses these attributes to locate and fetch the
+        information on such objects from the MS endpoint, using certain Graph API calls.
 
         Kwargs:
         -------
-            request_common      <obj>  : rc object that allows for making external requests
-            response_handler    <obj>  : response handler that monitors responses
-            headers             <dict> : Authorization headers for MS endpoint
+            request_common   <obj>  : rc object that allows for making external requests
+            response_handler <obj>  : response handler that monitors responses
+            headers          <dict> : Authorization headers for MS endpoint
 
         Returns:
         --------
-            <dict> : Details of the detected group or person
+            response <dict> : Informatoin of the MS Group, User, Team or Channel fetchec from the
+                              endpoint
     """
     def __init__(self, rc, rh, headers):
         self.rc = rc
         self.rh = rh
         self.headers = headers
 
-    def find_user(self, user_id):
-        """
-        Fetches information using the email address of the SOAR user and assigns
-        a role (member or owner) depending upon the information that was provided
-        in the function, and saves this information in self.user_db for later use.
-
-        Arguments:
-        ----------
-            user_id  <str>  : Email address used for information retrieval
-
-        Updates:
-        --------
-            response <dict> : User information retrieved from the MS Endpoint
-        """
-
-        url = parse.urljoin(
-            constants.BASE_URL,
-            constants.URL_USERS.format(user_id))
-
-        response = self.rc.execute(
-            method="get",
-            url=url,
-            headers=self.headers,
-            callback=self.rh.check_response)
-
-        if "mail" in response:
-            return response
-        else:
-            log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
-
-
     def find_group(self, options):
         """
-        Allows for locating a group based on its displayName or mailNickname attribute
-        This function at least required either the group_name or the group_mail_nickname
-        keyword argument.
+        Multiple Microsoft Groups can be created with the same displayName in an Organization.
+        This makes it much more difficult to locate an MS Group using only its name alone, as
+        an Organization can have thousands of groups with same or similar name. Performing any
+        CRUD operations on such groups, especially Update and delete could be extremely dangerous
+        as users can accidentally be added to another group or worse, the entire group being
+        deleted. To overcome this problem, this function is used. A MS group can be located using
+        any one of the 3 mentioned attributes. 
 
-        Kwargs:
-        -------
-            group_name          <str>  : Display name of the group
-            group_mail_nickname <str>  : Mail nickname of the group
+            -> ms_group_id            : This is a unique ID generted while creating a group.
+            -> ms_group_mail_nickname : Unique mail address thats automatically assigned
+            -> ms_group_name          : Name of the group ( THIS IS NOT UNIQUE! )
 
-        Raises:
-        -------
-            IntegrationError: Unable to locate the group
+        If multiple options are provided to locate the Graph Object then ms_group_mail_nickname
+        supersedes ms_groupteam_name and ms_groupteam_id supersedes the other two options. 
+
+        If ms_group_name attribute is used to locate a group, the could exists multiple groups with
+        the same name. If multiple groups are identified with the same name, all the group information
+        is retured as a response.
+
+        options:
+        --------
+            ms_description         <str> : Desciption for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
-            <dict> : Details of the detected group
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
         """
 
         if "group_id" in options:
@@ -334,6 +331,91 @@ class MSFinder():
 
         log.error(error_msg)
         raise IntegrationError(error_msg)
+
+
+    def find_user(self, user_id):
+        """
+        Locates the user on the endpoint using the email address of the user. Then fetches
+        all relevant information from the endpoint and returns it as a dictionary. If the
+        user is no found in the endpoint, the function simply logs a warning.
+
+        Arguments:
+        ----------
+            user_id  <str>  : Email address used for information retrieval
+
+        Returns:
+        --------
+            response <dict> : User information retrieved from the MS Endpoint
+        """
+
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_USERS.format(user_id))
+
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            callback=self.rh.check_response)
+
+        if "mail" in response:
+            return response
+        else:
+            log.warn(constants.WARN_DIDNOT_FIND_USER.format(user_id))
+
+
+    def find_channel(self, options):
+        """
+        Locates a channel of MS Team on the endpoint using the Channel Name and Group
+        or Team attributes. The Team or Group to which the channel belongs must be
+        firstly located, as there could exist multiple channels belonging to different
+        groups or teams with the same name. This then fetches all relevant information
+        from the endpoint and returns it as a dictionary. If the channel is not found
+        using the provided attributes, an error is raised.
+
+        options:
+        ----------
+            channel_name  <str> : Name of the channel to be located
+            ms_description         <str> : Desciption for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            response <dict> : Channel information retrieved from the MS Endpoint
+        """
+
+        channel_name = options.get("channel_name").strip()
+        group_details = self.find_group(options)
+
+        if len(group_details) > 1:
+            raise IntegrationError(constants.ERROR_FOUND_MANY_GROUP)
+
+        group_detail = group_details[0]
+        group_id = group_detail.get("id")
+
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_LIST_CHANNEL.format(group_id))
+        
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            callback=self.rh.check_response)
+
+        channel_list = response.get("value")
+        channel_details = list(filter(
+            lambda channel: channel.get("displayName") == channel_name, channel_list))
+        log.debug(json.dumps(channel_details, indent=2))
+
+        if len(channel_details) == 0:
+            raise IntegrationError(constants.ERROR_COULDNOT_FIND_CHANNEL)
+
+        channel_details = channel_details[0]
+        channel_details["group_id"] = group_id
+
+        return channel_details
 
 
 def is_direct_member(incident_member_id, org_member_list):

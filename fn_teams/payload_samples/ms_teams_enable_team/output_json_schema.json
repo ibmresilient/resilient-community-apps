@@ -84,14 +84,11 @@
         "onPremisesProvisioningErrors": {
           "type": "array"
         },
+        "message": {
+          "type": "string"
+        },
         "teamsEnabled": {
           "type": "boolean"
-        },
-        "unfoundUsers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -99,22 +96,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "incident_id": {
-          "type": "integer"
-        },
-        "ms_group_description": {
-          "type": "string"
-        },
-        "ms_owners_list": {
-          "type": "string"
-        },
-        "ms_group_name": {
-          "type": "string"
-        },
         "ms_group_mail_nickname": {
-          "type": "string"
-        },
-        "add_members_from": {
           "type": "string"
         }
       }

@@ -12,6 +12,33 @@
     "content": {
       "type": "object",
       "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isFavoriteByDefault": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "webUrl": {
+          "type": "string"
+        },
+        "membershipType": {
+          "type": "string"
+        },
         "status_code": {
           "type": "integer"
         },
@@ -24,7 +51,13 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_group_mail_nickname": {
+        "ms_channel_name": {
+          "type": "string"
+        },
+        "ms_group_description": {
+          "type": "string"
+        },
+        "ms_groupteam_name": {
           "type": "string"
         }
       }

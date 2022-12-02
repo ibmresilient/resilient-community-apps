@@ -12,10 +12,10 @@ from resilient_lib import RequestsCommon, IntegrationError
 from tests import testcommons
 from tests.testcommons import required_parameters
 from fn_teams.lib import constants
-from fn_teams.lib.microsoft_groups import GroupsInterface
+from fn_teams.lib.microsoft_teams import TeamsInterface
 
 
-def patch_delete_group(method, url, headers, callback):
+def patch_archive_unarchive_team(method, url, headers, callback, data=None):
     ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
     testcommons.check_request_parameters(
         method=method,
@@ -43,40 +43,44 @@ def patch_delete_group(method, url, headers, callback):
             assert query.split("eq")[-1].strip().replace("'", "") == ret["value"][0]["displayName"]
         return ret
 
-    elif method == "delete":
+    elif method == "put":
         print(url)
         url_sections = url.split("/")
+        assert "team" in url_sections and "groups" in url_sections
         assert "graph.microsoft.com" in url_sections
         assert 'v1.0' in url_sections
-        assert "groups" in url_sections
         assert ret["value"][0]["id"] in url_sections
         return {
             "status_code" : 204}
 
 
-@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_delete_group)
+@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_archive_unarchive_team)
 def test_delete_group(patch, required_parameters):
-    gi = GroupsInterface(required_parameters)
-    gi.delete_group({
+    ti = TeamsInterface(required_parameters)
+    ti.enable_team_group({
         "group_mail_nickname" : "MailBoxs@5rf2xs.onmicrosoft.com"})
 
-    gi.delete_group({
+    ti.enable_team_group({
         "group_mail_nickname" : "MailBoxs"})
 
-    gi.delete_group({
+    ti.enable_team_group({
         "group_name" : "Unittest Group1"})
 
-    gi.delete_group({
+    ti.enable_team_group({
         "group_id": "40bd9442-ca0f-4c7c-ba64-5e0fa56f3fb9"})
 
     with pytest.raises(AssertionError):
-        gi.delete_group({"group_mail_nickname" : ""})
+        ti.enable_team_group({
+            "group_mail_nickname" : ""})
 
     with pytest.raises(AssertionError):
-        gi.delete_group({"group_name" : ""})
+        ti.enable_team_group({
+            "group_name" : ""})
 
     with pytest.raises(AssertionError):
-        gi.delete_group({"group_id" : ""})
+        ti.enable_team_group({
+            "group_id" : ""})
 
     with pytest.raises(IntegrationError):
-        gi.delete_group({"id": ""})
+        ti.enable_team_group({ 
+            "id": ""})

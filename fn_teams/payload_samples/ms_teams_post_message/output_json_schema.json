@@ -8,11 +8,14 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "string"
-    },
+    "reason": {},
     "content": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
     },
     "raw": {},
     "inputs": {

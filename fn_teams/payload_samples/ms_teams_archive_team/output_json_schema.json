@@ -21,7 +21,10 @@
           "type": "string"
         },
         "creationOptions": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "description": {
           "type": "string"
@@ -66,10 +69,16 @@
           "type": "string"
         },
         "resourceBehaviorOptions": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "resourceProvisioningOptions": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "securityEnabled": {
           "type": "boolean"
@@ -84,14 +93,11 @@
         "onPremisesProvisioningErrors": {
           "type": "array"
         },
-        "teamsEnabled": {
-          "type": "boolean"
+        "message": {
+          "type": "string"
         },
-        "unfoundUsers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "teamsEnabled": {
+          "type": "string"
         }
       }
     },
@@ -99,22 +105,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "incident_id": {
-          "type": "integer"
-        },
-        "ms_group_description": {
+        "ms_team_name": {
           "type": "string"
         },
-        "ms_owners_list": {
-          "type": "string"
-        },
-        "ms_group_name": {
-          "type": "string"
-        },
-        "ms_group_mail_nickname": {
-          "type": "string"
-        },
-        "add_members_from": {
+        "archive_operation": {
           "type": "string"
         }
       }

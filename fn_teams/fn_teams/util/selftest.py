@@ -67,7 +67,7 @@ def selftest_function(opts):
     if authenticated:
         try:
             rc.execute(method="get",
-                url=parse.urljoin(constants.BASE_URL, constants.LIST_USERS),
+                url=parse.urljoin(constants.BASE_URL, constants.URL_LIST_USERS),
                 headers=header)
             err_reason += constants.MSG_LIST_USER_PASSED
             test_pass_1 = True

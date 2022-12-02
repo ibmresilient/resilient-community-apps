@@ -3,15 +3,15 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
-from resilient_lib import IntegrationError
+from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_teams.lib import constants
-from fn_teams.lib.microsoft_groups import GroupsInterface
+from fn_teams.lib.microsoft_teams import TeamsInterface
 from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
 PACKAGE_NAME = constants.PACKAGE_NAME
-FN_NAME = "ms_teams_delete_group"
+FN_NAME = "ms_teams_archive_team"
 
 
 class FunctionComponent(AppFunctionComponent):
@@ -23,13 +23,16 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        This application allows for deleting a MS Group using the Microsoft Graph API.
-        This provides SOAR with the ability to delete an existing MS Group. To locate
-        this Group for this operation, one of the following inputs can be used:
+        This application allows for archiving or unarchivig a Microsoft Team using the
+        Microsoft Graph API. This provides SOAR with the ability to archive an existing
+        MS Team or unarchive a previously archived MS Team within a SOAR incident or a 
+        task. "archive_operation" specifies if the team is to be archived or unarchived.
+        To locate this team for the archival/unarchival operation, one of the following
+        inputs can be used:
 
-            -> ms_group_id
+            -> ms_groupteam_id
             -> ms_group_mail_nickname
-            -> ms_group_name
+            -> ms_groupteam_name
 
         Note: If multiple options are provided to locate the Graph Object then
         ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
@@ -37,17 +40,20 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
-            ms_group_id            <str> : The unique Id generated while creating a group
+            archive_operation      <str> : Option that specifies the operation to be performed
+            ms_groupteam_id        <str> : The unique Id generated while creating a group
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_group_name          <str> : Name of the Microsoft Group to be deleted
+            ms_groupteam_name      <str> : Name of the Microsoft Group
 
         Returns:
         --------
-            Response <dict> : A response with the room/team options and details
-                              or the error message if the meeting creation
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
         """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
+        validate_fields(["archive_operation"], fn_inputs)
 
         required_parameters = {}
         required_parameters["rc"] = self.rc
@@ -68,19 +74,26 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult({}, success=False, reason=str(err))
 
         if authenticated:
+            team_manager = TeamsInterface(required_parameters)
+
+            if hasattr(fn_inputs, 'ms_groupteam_id'):
+                response = team_manager.archive_unarchive_team(
+                    {"group_id"  : fn_inputs.ms_groupteam_id,
+                     "operation" : fn_inputs.archive_operation})
+
+            elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
+                response = team_manager.archive_unarchive_team(
+                    {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname,
+                     "operation" : fn_inputs.archive_operation})
+
+            elif hasattr(fn_inputs, 'ms_groupteam_name'):
+                response = team_manager.archive_unarchive_team(
+                    {"group_name" : fn_inputs.ms_groupteam_name,
+                     "operation"  : fn_inputs.archive_operation})
+
+            else:
+                raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
             try:
-                group_manager = GroupsInterface(required_parameters)
-                if hasattr(fn_inputs, 'ms_group_id'):
-                    response = group_manager.delete_group(
-                        {"group_id" : fn_inputs.ms_group_id})
-                elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
-                    response = group_manager.delete_group(
-                        {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
-                elif hasattr(fn_inputs, 'ms_group_name'):
-                    response = group_manager.delete_group(
-                        {"group_name" : fn_inputs.ms_group_name})
-                else:
-                    raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))
