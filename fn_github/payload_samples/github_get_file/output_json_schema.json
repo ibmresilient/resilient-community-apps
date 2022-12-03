@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "string"
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "github_ref": {
+          "type": "string"
+        },
+        "github_owner": {
+          "type": "string"
+        },
+        "github_return_base64": {
+          "type": "boolean"
+        },
+        "github_file_path": {
+          "type": "string"
+        },
+        "github_repo": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

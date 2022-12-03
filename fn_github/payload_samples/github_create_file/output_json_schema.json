@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "Last-Modified": {
+          "type": "string"
+        },
+        "ETag": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "github_ref": {
+          "type": "string"
+        },
+        "github_owner": {
+          "type": "string"
+        },
+        "github_commit_message": {
+          "type": "string"
+        },
+        "github_committer": {
+          "type": "string"
+        },
+        "github_file_contents": {
+          "type": "string"
+        },
+        "github_file_path": {
+          "type": "string"
+        },
+        "github_repo": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
