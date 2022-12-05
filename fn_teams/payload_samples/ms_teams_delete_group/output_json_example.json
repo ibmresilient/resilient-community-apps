@@ -4,7 +4,7 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted Group: John's Team"
+    "message": "Successfully deleted Group: Production Team"
   },
   "raw": null,
   "inputs": {
