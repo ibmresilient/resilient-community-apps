@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_github",
         "message_destinations": [u"fn_github"],
-        "functions": [u"github_create_branch", u"github_create_file", u"github_create_release", u"github_delete_branch", u"github_delete_file", u"github_get_branch", u"github_get_commit", u"github_get_commits", u"github_get_file", u"github_get_latest_release", u"github_get_release", u"github_get_releases", u"github_get_repositories", u"github_update_file"],
+        "functions": [u"github_create_branch", u"github_create_file", u"github_create_release", u"github_delete_branch", u"github_delete_file", u"github_get_branch", u"github_get_commit", u"github_get_commits", u"github_get_file", u"github_get_latest_release", u"github_get_release", u"github_get_releases", u"github_get_repositories", u"github_list_directory", u"github_update_file"],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -30,7 +30,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [u"Convert JSON to rich text v1.3"],
-        "playbooks": [u"github_create_branch", u"github_create_file", u"github_create_release", u"github_delete_branch", u"github_delete_file", u"github_get_branch", u"github_get_commit", u"github_get_commits", u"github_get_file", u"github_get_latest_release", u"github_get_release", u"github_list_repositories"]
+        "playbooks": [u"github_create_branch", u"github_create_file", u"github_create_release", u"github_delete_branch", u"github_delete_file", u"github_get_branch", u"github_get_commit", u"github_get_commits", u"github_get_file", u"github_get_latest_release", u"github_get_release", u"github_list_directory_files", u"github_list_repositories"]
     }
 
 
@@ -58,6 +58,7 @@ def customization_data(client=None):
         - github_get_release
         - github_get_releases
         - github_get_repositories
+        - github_list_directory
         - github_update_file
     - Playbooks:
         - github_create_branch
@@ -71,6 +72,7 @@ def customization_data(client=None):
         - github_get_file
         - github_get_latest_release
         - github_get_release
+        - github_list_directory_files
         - github_list_repositories
     - Scripts:
         - Convert JSON to rich text v1.3

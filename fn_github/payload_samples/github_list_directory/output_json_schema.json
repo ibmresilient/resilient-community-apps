@@ -12,17 +12,23 @@
     "content": {
       "type": "object",
       "properties": {
-        "content": {
-          "type": "string"
-        },
-        "commit": {
-          "type": "string"
-        },
-        "Last-Modified": {
-          "type": "string"
-        },
-        "ETag": {
-          "type": "string"
+        "testit.txt": {
+          "type": "object",
+          "properties": {
+            "git_url": {
+              "type": "string"
+            },
+            "html_url": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "size": {
+              "type": "integer"
+            },
+            "encoding": {}
+          }
         }
       }
     },
@@ -30,17 +36,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "github_ref": {
-          "type": "string"
-        },
         "github_owner": {
           "type": "string"
         },
-        "github_commit_message": {
-          "type": "string"
-        },
-        "github_committer": {},
-        "github_file_contents": {
+        "github_branch": {
           "type": "string"
         },
         "github_file_path": {

@@ -209,9 +209,34 @@ class GitHubHelper():
             results = repo.commits(path=args.get('github_optional_file_path'),
                                    sha=args.get('github_branch'),
                                    since=args.get('github_since_date'),
-                                   until=args.get('github_until_date')
+                                   until=args.get('github_until_date'),
+                                   number=args.get('github_limit') if args.get('github_limit')  else -1
                                   )
             return results, None
+        except GitHubException as err:
+            return None, str(err)
+
+    def  get_directory(self: object, inputs: dict) -> Tuple[dict, str]:
+        """Get a file object based on it's repository, file path and branch (if any)
+
+        :param inputs: 
+            github_owner
+            github_repo
+            githib_file_path
+            github_branch
+        :type inputs: dict
+        :return: return contents of file object and err_msg or None
+        :rtype: Tuple[str, str]
+        """
+
+        try:
+            repo = self._get_repository(inputs.get("github_owner"), inputs.get("github_repo"))
+            results = repo.directory_contents(inputs.get("github_file_path"), 
+                                              ref=inputs.get("github_branch"),
+                                              return_as=dict)
+            return results, None
+        except GitHubError as err:
+            return None, str(err)
         except GitHubException as err:
             return None, str(err)
 

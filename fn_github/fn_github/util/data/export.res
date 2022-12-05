@@ -3,10 +3,39 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1670258974585,
+  "export_date": 1670277513056,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/github_limit",
+      "hide_notification": false,
+      "id": 2914,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "github_limit",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "github_limit",
+      "tooltip": "Number of commits to limit the result return",
+      "type_id": 11,
+      "uuid": "850c3130-5c24-4ce7-96ff-7bcecbfa5ab3",
+      "values": []
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -29,36 +58,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_file_path",
       "tooltip": "file path",
@@ -87,20 +87,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_return_base64",
       "tooltip": "choose to return base64 or decoded content",
@@ -129,16 +116,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_until_date",
       "tooltip": "",
@@ -168,20 +146,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_release_tag",
       "tooltip": "",
@@ -210,16 +175,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_release_description",
       "tooltip": "",
@@ -248,16 +204,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_since_date",
       "tooltip": "",
@@ -286,16 +233,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_prerelease",
       "tooltip": "",
@@ -324,16 +262,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_optional_file_path",
       "tooltip": "",
@@ -363,24 +292,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_file_contents",
       "tooltip": "String or base64 contents of file to create",
@@ -409,16 +321,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_release_draft",
       "tooltip": "",
@@ -448,28 +351,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_commit_message",
       "tooltip": "",
@@ -498,16 +380,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_128151b7_92b6_496a_8ce8_c948cec7f994",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_repo_type",
       "tooltip": "",
@@ -582,32 +455,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_ref",
       "tooltip": "Reference a commit, branch, or tag ",
@@ -636,28 +484,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_committer",
       "tooltip": "provide full name and email address separated by a colon (:)",
@@ -686,12 +513,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "playbook_128151b7_92b6_496a_8ce8_c948cec7f994",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_filter_name",
       "tooltip": "search using \u0027contains\u0027 logic",
@@ -721,72 +543,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_bac180c1_481a_489f_8212_4e6061bbcf4f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_be36faf5_1e35_405e_b12c_8e2ef1ea8574",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_owner",
       "tooltip": "repo owner",
@@ -815,36 +572,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_branch",
       "tooltip": "",
@@ -874,72 +602,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_bac180c1_481a_489f_8212_4e6061bbcf4f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_be36faf5_1e35_405e_b12c_8e2ef1ea8574",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_repo",
       "tooltip": "repository name",
@@ -969,16 +632,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_based_on_branch_or_sha",
       "tooltip": "Name of branch or sha1 commit",
@@ -1007,16 +661,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_release_name",
       "tooltip": "",
@@ -1046,16 +691,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "github_sha",
       "tooltip": "",
@@ -1079,7 +715,7 @@
     {
       "created_date": 1668095631105,
       "description": {
-        "content": null,
+        "content": "Create a new branch, optionally based on a commit SHA or an existing branch",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1092,26 +728,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669233884249,
+      "last_modified_time": 1670266473708,
       "name": "github_create_branch",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"ref\": \"refs/heads/test-branch9\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_repo_commit_sha\": \"main\", \"github_branch\": \"test-branch9\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 2603, \"timestamp\": \"2022-11-10 13:41:21\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"ref\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo_commit_sha\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"ref\": \"refs/heads/sample_branch\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_branch\": \"sample_branch\", \"github_based_on_branch_or_sha\": \"main\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 2653, \"timestamp\": \"2022-12-03 11:30:19\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"ref\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_based_on_branch_or_sha\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "4d8ea609-9d57-457a-8b47-2f056fc2f554",
-      "version": 9,
+      "version": 12,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1151,7 +774,7 @@
     {
       "created_date": 1667858803937,
       "description": {
-        "content": null,
+        "content": "Create a GitHub file, optionally in an existing branch",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1164,26 +787,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171198830,
+      "last_modified_time": 1670262669165,
       "name": "github_create_file",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": \"81492db8e011652ca79593041f362c77dd6eebd4\", \"commit\": \"e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"Last-Modified\": \"\", \"ETag\": \"\\\"b099650136fa6cc97fbeddecb641b9df43db2c380534c44f2b642b9da9ab4c86:dtagent10251220909040818RT0R\\\"\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_commit_message\": \"initial\", \"github_branch\": null, \"github_committer\": \"Mark Scherfling:mark.scherfling@ibm.com\", \"github_file_contents\": \"some\\nnew \\ntext\", \"github_file_path\": \"create2.txt\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 2487, \"timestamp\": \"2022-11-07 20:20:55\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"string\"}, \"commit\": {\"type\": \"string\"}, \"Last-Modified\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_commit_message\": {\"type\": \"string\"}, \"github_branch\": {}, \"github_committer\": {\"type\": \"string\"}, \"github_file_contents\": {\"type\": \"string\"}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": \"1c943a98887754f364fafaa1da3ac56e0e0875a9\", \"commit\": \"4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"Last-Modified\": \"\", \"ETag\": \"\\\"9683de062b98f63f5d1be56538a01e923115c78102ab71d6442579998228ad7b\\\"\"}, \"raw\": null, \"inputs\": {\"github_ref\": \"sample_branch\", \"github_owner\": \"test-owner\", \"github_commit_message\": \"sample\", \"github_committer\": \"A Example:a@example.com\", \"github_file_contents\": \"a\\nb\\nc\", \"github_file_path\": \"sample_file\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 2152, \"timestamp\": \"2022-12-03 11:31:18\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"string\"}, \"commit\": {\"type\": \"string\"}, \"Last-Modified\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_ref\": {\"type\": \"string\"}, \"github_owner\": {\"type\": \"string\"}, \"github_commit_message\": {\"type\": \"string\"}, \"github_committer\": {\"type\": \"string\"}, \"github_file_contents\": {\"type\": \"string\"}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "b740ad33-66bd-4334-9317-a8e160315676",
-      "version": 7,
+      "version": 9,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1247,7 +857,7 @@
     {
       "created_date": 1668030082455,
       "description": {
-        "content": "create_release(tag_name, target_commitish=None, name=None, body=None, draft=False, prerelease=False)",
+        "content": "Create a repository release, optionally tagged as draft or release",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1260,22 +870,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670085692107,
+      "last_modified_time": 1670262742869,
       "name": "github_create_release",
-      "output_json_example": "{}",
-      "output_json_schema": "{}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170764\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170764/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170764/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/untagged-f35ad45a1f57b45713d7\", \"id\": 1170764, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA3NjQ=\", \"tag_name\": \"v1.0.1-beta\", \"target_commitish\": \"main\", \"name\": \"v1.0.1-beta\", \"draft\": true, \"prerelease\": true, \"created_at\": \"2022-12-03T16:42:39Z\", \"published_at\": null, \"assets\": [], \"tarball_url\": null, \"zipball_url\": null, \"body_html\": \"\u003cp\u003erelease beta\u003c/p\u003e\", \"body_text\": \"release beta\", \"body\": \"release beta\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_prerelease\": true, \"github_release_draft\": true, \"github_release_description\": \"release beta\", \"github_release_name\": \"v1.0.1-beta\", \"github_repo\": \"personal\", \"github_release_tag\": \"v1.0.1-beta\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 442, \"timestamp\": \"2022-12-03 11:42:39\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\"}, \"assets_url\": {\"type\": \"string\"}, \"upload_url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"node_id\": {\"type\": \"string\"}, \"tag_name\": {\"type\": \"string\"}, \"target_commitish\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"draft\": {\"type\": \"boolean\"}, \"prerelease\": {\"type\": \"boolean\"}, \"created_at\": {\"type\": \"string\"}, \"published_at\": {}, \"assets\": {\"type\": \"array\"}, \"tarball_url\": {}, \"zipball_url\": {}, \"body_html\": {\"type\": \"string\"}, \"body_text\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_prerelease\": {\"type\": \"boolean\"}, \"github_release_draft\": {\"type\": \"boolean\"}, \"github_release_description\": {\"type\": \"string\"}, \"github_release_name\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}, \"github_release_tag\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "af99ccb5-e345-4c3a-b4a4-e1cd134c828d",
-      "version": 5,
+      "version": 7,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1352,16 +953,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670019402574,
+      "last_modified_time": 1670262008507,
       "name": "github_delete_branch",
-      "tags": [
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": false, \"reason\": null, \"content\": {}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_branch\": \"testit_20221202_171242\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 2271, \"timestamp\": \"2022-12-03 11:03:06\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "c2ecc558-51d9-4222-9951-472eb751521f",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1393,11 +991,11 @@
     {
       "created_date": 1670016428869,
       "description": {
-        "content": "Delete a GitHub from a specific branch",
+        "content": "Delete a GitHub file from a specific branch",
         "format": "text"
       },
       "destination_handle": "fn_github",
-      "display_name": "GitHub Delete File",
+      "display_name": "GitHub: Delete File",
       "export_key": "github_delete_file",
       "id": 350,
       "last_modified_by": {
@@ -1406,16 +1004,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670016428961,
+      "last_modified_time": 1670266204424,
       "name": "github_delete_file",
-      "tags": [
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": null, \"commit\": \"aa916f54d4e2bdf424a8e36a5fa2252770cbcbf3\", \"Last-Modified\": \"\", \"ETag\": \"W/\\\"b6929ec040fc733128de56e0dadbb6d6211fd6169ac2150af9df4bc0d47f1a1a\\\"\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_commit_message\": \"deleting this\", \"github_branch\": \"testit_20221202_143109\", \"github_committer\": null, \"github_file_path\": \"test_folder/testit.txt\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 2247, \"timestamp\": \"2022-12-02 17:04:27\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {}, \"commit\": {\"type\": \"string\"}, \"Last-Modified\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_commit_message\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_committer\": {}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "b147fa6f-b05a-4bc3-9f4f-48bcc5587189",
-      "version": 1,
+      "version": 4,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1471,7 +1066,7 @@
     {
       "created_date": 1669234942722,
       "description": {
-        "content": null,
+        "content": "Return information about an existing repository branch",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1484,20 +1079,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669234942804,
+      "last_modified_time": 1670262770319,
       "name": "github_get_branch",
-      "tags": [
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"name\": \"sample_branch\", \"commit\": {\"sha\": \"cd9f8f74430fa82254987d8c01e4316fb82102d7\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODpjZDlmOGY3NDQzMGZhODIyNTQ5ODdkOGMwMWU0MzE2ZmI4MjEwMmQ3\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-12-03T16:38:31Z\"}, \"committer\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-12-03T16:38:31Z\"}, \"message\": \"update\", \"tree\": {\"sha\": \"a4066fa7f2fa3b28d9f6ad4fc556d77074d0800a\", \"url\": \"https://github.com/api/v3/repos/test-owner/personal/git/trees/a4066fa7f2fa3b28d9f6ad4fc556d77074d0800a\"}, \"url\": \"https://github.com/api/v3/repos/test-owner/personal/git/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7\", \"html_url\": \"https://github.com/test-owner/personal/commit/cd9f8f74430fa82254987d8c01e4316fb82102d7\", \"comments_url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7/comments\", \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"parents\": [{\"sha\": \"4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"html_url\": \"https://github.com/test-owner/personal/commit/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\"}]}, \"_links\": {\"self\": \"https://github.com/api/v3/repos/test-owner/personal/branches/sample_branch\", \"html\": \"https://github.com/test-owner/personal/tree/sample_branch\"}, \"protected\": false, \"protection\": {\"enabled\": false, \"required_status_checks\": {\"enforcement_level\": \"off\", \"contexts\": []}}, \"protection_url\": \"https://github.com/api/v3/repos/test-owner/personal/branches/sample_branch/protection\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_branch\": \"sample_branch\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 260, \"timestamp\": \"2022-12-03 12:03:24\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"commit\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"node_id\": {\"type\": \"string\"}, \"commit\": {\"type\": \"object\", \"properties\": {\"author\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"message\": {\"type\": \"string\"}, \"tree\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}, \"comment_count\": {\"type\": \"integer\"}, \"verification\": {\"type\": \"object\", \"properties\": {\"verified\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"signature\": {}, \"payload\": {}}}}}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"parents\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}}}, \"_links\": {\"type\": \"object\", \"properties\": {\"self\": {\"type\": \"string\"}, \"html\": {\"type\": \"string\"}}}, \"protected\": {\"type\": \"boolean\"}, \"protection\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"required_status_checks\": {\"type\": \"object\", \"properties\": {\"enforcement_level\": {\"type\": \"string\"}, \"contexts\": {\"type\": \"array\"}}}}}, \"protection_url\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "5b36451e-07a8-47db-8da9-6a26665b56ac",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1542,22 +1130,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199094,
+      "last_modified_time": 1670262008966,
       "name": "github_get_commit",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"sha\": \"e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODplMWM2NDBlMWNmYjUxN2U4OGMzYWM4NGY5ODE1ZGMxMGYzM2U5MTkx\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"mark.scherfling@ibm.com\", \"date\": \"2022-11-08T01:20:52Z\"}, \"committer\": {\"name\": \"Mark Scherfling\", \"email\": \"mark.scherfling@ibm.com\", \"date\": \"2022-11-08T01:20:52Z\"}, \"message\": \"initial\", \"tree\": {\"sha\": \"e6286c09b61c7dd7ee7ab40913f534c56d9ffb74\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees/e6286c09b61c7dd7ee7ab40913f534c56d9ffb74\"}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191/comments\", \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"parents\": [{\"sha\": \"04353e436d33a26a28849ac1d385308e4baeb0e3\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/04353e436d33a26a28849ac1d385308e4baeb0e3\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/04353e436d33a26a28849ac1d385308e4baeb0e3\"}], \"stats\": {\"total\": 3, \"additions\": 3, \"deletions\": 0}, \"files\": [{\"sha\": \"81492db8e011652ca79593041f362c77dd6eebd4\", \"filename\": \"create2.txt\", \"status\": \"added\", \"additions\": 3, \"deletions\": 0, \"changes\": 3, \"blob_url\": \"https://github.ibm.com/Mark-Scherfling/personal/blob/e1c640e1cfb517e88c3ac84f9815dc10f33e9191/create2.txt\", \"raw_url\": \"https://github.ibm.com/Mark-Scherfling/personal/raw/e1c640e1cfb517e88c3ac84f9815dc10f33e9191/create2.txt\", \"contents_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/contents/create2.txt?ref=e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"patch\": \"@@ -0,0 +1,3 @@\\n+some\\n+new \\n+text\\n\\\\ No newline at end of file\"}]}, \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_sha\": \"e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"marks-mbp13.cambridge.ibm.com\", \"execution_time_ms\": 630, \"timestamp\": \"2022-11-09 16:25:54\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"node_id\": {\"type\": \"string\"}, \"commit\": {\"type\": \"object\", \"properties\": {\"author\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"message\": {\"type\": \"string\"}, \"tree\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}, \"comment_count\": {\"type\": \"integer\"}, \"verification\": {\"type\": \"object\", \"properties\": {\"verified\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"signature\": {}, \"payload\": {}}}}}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"parents\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}, \"stats\": {\"type\": \"object\", \"properties\": {\"total\": {\"type\": \"integer\"}, \"additions\": {\"type\": \"integer\"}, \"deletions\": {\"type\": \"integer\"}}}, \"files\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"filename\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"additions\": {\"type\": \"integer\"}, \"deletions\": {\"type\": \"integer\"}, \"changes\": {\"type\": \"integer\"}, \"blob_url\": {\"type\": \"string\"}, \"raw_url\": {\"type\": \"string\"}, \"contents_url\": {\"type\": \"string\"}, \"patch\": {\"type\": \"string\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_sha\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"sha\": \"4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODo0YmU2ZjU2ZmRkMzdjOWQzYWEwNTRhMTVjZGZjYjA5MWJiMTZmYTRk\", \"commit\": {\"author\": {\"name\": \"A Example\", \"email\": \"a@example.com\", \"date\": \"2022-12-03T16:31:16Z\"}, \"committer\": {\"name\": \"A Example\", \"email\": \"a@example.com\", \"date\": \"2022-12-03T16:31:16Z\"}, \"message\": \"sample\", \"tree\": {\"sha\": \"cf973382698e6d6fb61d6fe6c9e241cb66afff98\", \"url\": \"https://github.com/api/v3/repos/test-owner/personal/git/trees/cf973382698e6d6fb61d6fe6c9e241cb66afff98\"}, \"url\": \"https://github.com/api/v3/repos/test-owner/personal/git/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"html_url\": \"https://github.com/test-owner/personal/commit/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"comments_url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/comments\", \"author\": null, \"committer\": null, \"parents\": [{\"sha\": \"9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288\", \"url\": \"https://github.com/api/v3/repos/test-owner/personal/commits/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288\", \"html_url\": \"https://github.com/test-owner/personal/commit/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288\"}], \"stats\": {\"total\": 3, \"additions\": 3, \"deletions\": 0}, \"files\": [{\"sha\": \"1c943a98887754f364fafaa1da3ac56e0e0875a9\", \"filename\": \"sample_file\", \"status\": \"added\", \"additions\": 3, \"deletions\": 0, \"changes\": 3, \"blob_url\": \"https://github.com/test-owner/personal/blob/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/sample_file\", \"raw_url\": \"https://github.com/test-owner/personal/raw/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/sample_file\", \"contents_url\": \"https://github.com/api/v3/repos/test-owner/personal/contents/sample_file?ref=4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"patch\": \"@@ -0,0 +1,3 @@\\n+a\\n+b\\n+c\\n\\\\ No newline at end of file\"}]}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_sha\": \"4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 380, \"timestamp\": \"2022-12-03 11:36:03\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"node_id\": {\"type\": \"string\"}, \"commit\": {\"type\": \"object\", \"properties\": {\"author\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"message\": {\"type\": \"string\"}, \"tree\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}, \"comment_count\": {\"type\": \"integer\"}, \"verification\": {\"type\": \"object\", \"properties\": {\"verified\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"signature\": {}, \"payload\": {}}}}}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"author\": {}, \"committer\": {}, \"parents\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}, \"stats\": {\"type\": \"object\", \"properties\": {\"total\": {\"type\": \"integer\"}, \"additions\": {\"type\": \"integer\"}, \"deletions\": {\"type\": \"integer\"}}}, \"files\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"filename\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"additions\": {\"type\": \"integer\"}, \"deletions\": {\"type\": \"integer\"}, \"changes\": {\"type\": \"integer\"}, \"blob_url\": {\"type\": \"string\"}, \"raw_url\": {\"type\": \"string\"}, \"contents_url\": {\"type\": \"string\"}, \"patch\": {\"type\": \"string\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_sha\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "6d73883b-7a26-4e29-a974-390d20d0411a",
-      "version": 6,
+      "version": 7,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1602,22 +1181,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199222,
+      "last_modified_time": 1670274867035,
       "name": "github_get_commits",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"sha\": \"f4502b276771c6b726c0a0f31d7961c51ef4b71e\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODpmNDUwMmIyNzY3NzFjNmI3MjZjMGEwZjMxZDc5NjFjNTFlZjRiNzFl\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-11-08T02:33:05Z\"}, \"committer\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-11-08T02:33:05Z\"}, \"message\": \"2nd commit\", \"tree\": {\"sha\": \"348fd037b19297520326e150c79c0ac0d9290c23\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees/348fd037b19297520326e150c79c0ac0d9290c23\"}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits/f4502b276771c6b726c0a0f31d7961c51ef4b71e\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/f4502b276771c6b726c0a0f31d7961c51ef4b71e\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/f4502b276771c6b726c0a0f31d7961c51ef4b71e\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/f4502b276771c6b726c0a0f31d7961c51ef4b71e/comments\", \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"parents\": [{\"sha\": \"e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\"}]}, {\"sha\": \"e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODplMWM2NDBlMWNmYjUxN2U4OGMzYWM4NGY5ODE1ZGMxMGYzM2U5MTkx\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"mark.scherfling@ibm.com\", \"date\": \"2022-11-08T01:20:52Z\"}, \"committer\": {\"name\": \"Mark Scherfling\", \"email\": \"mark.scherfling@ibm.com\", \"date\": \"2022-11-08T01:20:52Z\"}, \"message\": \"initial\", \"tree\": {\"sha\": \"e6286c09b61c7dd7ee7ab40913f534c56d9ffb74\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees/e6286c09b61c7dd7ee7ab40913f534c56d9ffb74\"}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/e1c640e1cfb517e88c3ac84f9815dc10f33e9191\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/e1c640e1cfb517e88c3ac84f9815dc10f33e9191/comments\", \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"parents\": [{\"sha\": \"04353e436d33a26a28849ac1d385308e4baeb0e3\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/04353e436d33a26a28849ac1d385308e4baeb0e3\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/04353e436d33a26a28849ac1d385308e4baeb0e3\"}]}, {\"sha\": \"04353e436d33a26a28849ac1d385308e4baeb0e3\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODowNDM1M2U0MzZkMzNhMjZhMjg4NDlhYzFkMzg1MzA4ZTRiYWViMGUz\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-11-08T01:04:03Z\"}, \"committer\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-11-08T01:04:03Z\"}, \"message\": \"initial\", \"tree\": {\"sha\": \"1f61ae10723efc34dd200fc932762f1a2ee5fff6\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees/1f61ae10723efc34dd200fc932762f1a2ee5fff6\"}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits/04353e436d33a26a28849ac1d385308e4baeb0e3\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/04353e436d33a26a28849ac1d385308e4baeb0e3\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/04353e436d33a26a28849ac1d385308e4baeb0e3\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/04353e436d33a26a28849ac1d385308e4baeb0e3/comments\", \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"parents\": [{\"sha\": \"5e9bedb58394ff960a34c4d3257c401beeb70513\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/5e9bedb58394ff960a34c4d3257c401beeb70513\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/5e9bedb58394ff960a34c4d3257c401beeb70513\"}]}, {\"sha\": \"5e9bedb58394ff960a34c4d3257c401beeb70513\", \"node_id\": \"MDY6Q29tbWl0MTM2NzQwODo1ZTliZWRiNTgzOTRmZjk2MGEzNGM0ZDMyNTdjNDAxYmVlYjcwNTEz\", \"commit\": {\"author\": {\"name\": \"Mark Scherfling\", \"email\": \"Mark.Scherfling@ibm.com\", \"date\": \"2022-11-08T00:06:50Z\"}, \"committer\": {\"name\": \"GitHub Enterprise\", \"email\": \"noreply@github.ibm.com\", \"date\": \"2022-11-08T00:06:50Z\"}, \"message\": \"Initial commit\", \"tree\": {\"sha\": \"113f4ee63694f993876c141f94cf1cbc7b3dcf34\", \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees/113f4ee63694f993876c141f94cf1cbc7b3dcf34\"}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits/5e9bedb58394ff960a34c4d3257c401beeb70513\", \"comment_count\": 0, \"verification\": {\"verified\": false, \"reason\": \"unsigned\", \"signature\": null, \"payload\": null}}, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/5e9bedb58394ff960a34c4d3257c401beeb70513\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/commit/5e9bedb58394ff960a34c4d3257c401beeb70513\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits/5e9bedb58394ff960a34c4d3257c401beeb70513/comments\", \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"committer\": null, \"parents\": []}], \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_until_date\": null, \"github_optional_file_path\": null, \"github_branch\": null, \"github_repo\": \"personal\", \"github_since_date\": 1667865600000}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"marks-mbp13.cambridge.ibm.com\", \"execution_time_ms\": 464, \"timestamp\": \"2022-11-09 14:19:02\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"node_id\": {\"type\": \"string\"}, \"commit\": {\"type\": \"object\", \"properties\": {\"author\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"committer\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\"}}}, \"message\": {\"type\": \"string\"}, \"tree\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}, \"comment_count\": {\"type\": \"integer\"}, \"verification\": {\"type\": \"object\", \"properties\": {\"verified\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"signature\": {}, \"payload\": {}}}}}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"committer\": {}, \"parents\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sha\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_until_date\": {}, \"github_optional_file_path\": {}, \"github_branch\": {}, \"github_repo\": {\"type\": \"string\"}, \"github_since_date\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [\"9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288\", \"4313a3fc6fe92d6fddf3ce95bf171a033c09bfcf\", \"2a75e6631e25ac1c998747ba1fd7dfac679ddc85\", \"81d1985def1840b92a0fc109761345e2966043a7\"], \"raw\": null, \"inputs\": {\"github_ref\": null, \"github_owner\": \"test-owner\", \"github_until_date\": null, \"github_optional_file_path\": null, \"github_repo\": \"personal\", \"github_since_date\": 1669939200000}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 325, \"timestamp\": \"2022-12-03 12:07:32\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_ref\": {}, \"github_owner\": {\"type\": \"string\"}, \"github_until_date\": {}, \"github_optional_file_path\": {}, \"github_repo\": {\"type\": \"string\"}, \"github_since_date\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "9899ed77-ce8b-433d-8112-2324cf77e2a4",
-      "version": 5,
+      "version": 7,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1666,6 +1236,14 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "850c3130-5c24-4ce7-96ff-7bcecbfa5ab3",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": []
@@ -1673,11 +1251,11 @@
     {
       "created_date": 1667835938491,
       "description": {
-        "content": null,
+        "content": "Get the contents of a given repository file. Base64 contents can be converted to string representation",
         "format": "text"
       },
       "destination_handle": "fn_github",
-      "display_name": "Github: Get File",
+      "display_name": "GitHub: Get File",
       "export_key": "github_get_file",
       "id": 232,
       "last_modified_by": {
@@ -1686,26 +1264,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199353,
+      "last_modified_time": 1670267322585,
       "name": "github_get_file",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": \"2nd\\ncontent\\n3rd\\n\", \"raw\": null, \"inputs\": {\"github_ref\": null, \"github_owner\": \"mark-scherfling\", \"github_return_text\": true, \"github_file_path\": \"create_file.txt\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 365, \"timestamp\": \"2022-11-09 20:51:29\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_ref\": {}, \"github_owner\": {\"type\": \"string\"}, \"github_return_text\": {\"type\": \"boolean\"}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": \"a\\nb\\nc\", \"raw\": null, \"inputs\": {\"github_ref\": \"sample_branch\", \"github_owner\": \"test-owner\", \"github_return_base64\": false, \"github_file_path\": \"sample_file\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 247, \"timestamp\": \"2022-12-03 11:33:58\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_ref\": {\"type\": \"string\"}, \"github_owner\": {\"type\": \"string\"}, \"github_return_base64\": {\"type\": \"boolean\"}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "34a39bea-3bed-49c8-99a7-fb407729d8d6",
-      "version": 9,
+      "version": 12,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1757,7 +1322,7 @@
         "format": "text"
       },
       "destination_handle": "fn_github",
-      "display_name": "GitHub Get Latest Release",
+      "display_name": "GitHub: Get Latest Release",
       "export_key": "github_get_latest_release",
       "id": 349,
       "last_modified_by": {
@@ -1766,16 +1331,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670017824577,
+      "last_modified_time": 1670262930947,
       "name": "github_get_latest_release",
-      "tags": [
-        {
-          "tag_handle": "playbook_be36faf5_1e35_405e_b12c_8e2ef1ea8574",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170504\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170504/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170504/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0_20221202_152441\", \"id\": 1170504, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA1MDQ=\", \"tag_name\": \"v1.0.0_20221202_152441\", \"target_commitish\": \"main\", \"name\": \"Test Release_20221202_152441\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-12-02T18:55:23Z\", \"published_at\": \"2022-12-02T20:34:09Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0_20221202_152441\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0_20221202_152441\", \"body_html\": \"\u003cp\u003eRelease Description\u003c/p\u003e\", \"body_text\": \"Release Description\", \"body\": \"Release Description\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 249, \"timestamp\": \"2022-12-03 11:36:31\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\"}, \"assets_url\": {\"type\": \"string\"}, \"upload_url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"node_id\": {\"type\": \"string\"}, \"tag_name\": {\"type\": \"string\"}, \"target_commitish\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"draft\": {\"type\": \"boolean\"}, \"prerelease\": {\"type\": \"boolean\"}, \"created_at\": {\"type\": \"string\"}, \"published_at\": {\"type\": \"string\"}, \"assets\": {\"type\": \"array\"}, \"tarball_url\": {\"type\": \"string\"}, \"zipball_url\": {\"type\": \"string\"}, \"body_html\": {\"type\": \"string\"}, \"body_text\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "f64c8d09-351c-4ba0-b2c0-48abc0a381f9",
-      "version": 2,
+      "version": 4,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1799,7 +1361,7 @@
     {
       "created_date": 1668030396632,
       "description": {
-        "content": null,
+        "content": "Get information about a given repository release",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1812,22 +1374,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199484,
+      "last_modified_time": 1670262805856,
       "name": "github_get_release",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": \"{\\\"url\\\": \\\"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1150808\\\", \\\"assets_url\\\": \\\"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1150808/assets\\\", \\\"upload_url\\\": \\\"https://github.ibm.com/api/uploads/repos/Mark-Scherfling/personal/releases/1150808/assets{?name,label}\\\", \\\"html_url\\\": \\\"https://github.ibm.com/Mark-Scherfling/personal/releases/tag/v1.0.0\\\", \\\"id\\\": 1150808, \\\"author\\\": {\\\"login\\\": \\\"Mark-Scherfling\\\", \\\"id\\\": 133011, \\\"node_id\\\": \\\"MDQ6VXNlcjEzMzAxMQ==\\\", \\\"avatar_url\\\": \\\"https://avatars.github.ibm.com/u/133011?\\\", \\\"gravatar_id\\\": \\\"\\\", \\\"url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling\\\", \\\"html_url\\\": \\\"https://github.ibm.com/Mark-Scherfling\\\", \\\"followers_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\\\", \\\"following_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\\\", \\\"gists_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\\\", \\\"starred_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\\\", \\\"subscriptions_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\\\", \\\"organizations_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\\\", \\\"repos_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\\\", \\\"events_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\\\", \\\"received_events_url\\\": \\\"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\\\", \\\"type\\\": \\\"User\\\", \\\"site_admin\\\": false}, \\\"node_id\\\": \\\"MDc6UmVsZWFzZTExNTA4MDg=\\\", \\\"tag_name\\\": \\\"v1.0.0\\\", \\\"target_commitish\\\": \\\"main\\\", \\\"name\\\": \\\"Initial Release\\\", \\\"draft\\\": false, \\\"prerelease\\\": false, \\\"created_at\\\": \\\"2022-11-08T02:33:05Z\\\", \\\"published_at\\\": \\\"2022-11-09T21:29:39Z\\\", \\\"assets\\\": [], \\\"tarball_url\\\": \\\"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/tarball/v1.0.0\\\", \\\"zipball_url\\\": \\\"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/zipball/v1.0.0\\\", \\\"body_html\\\": \\\"\u003cp\u003esome description\u003c/p\u003e\\\", \\\"body_text\\\": \\\"some description\\\", \\\"body\\\": \\\"some description\\\"}\", \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_repo\": \"personal\", \"github_release_tag\": \"v1.0.0\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 335, \"timestamp\": \"2022-11-09 19:30:40\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}, \"github_release_tag\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1150808\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1150808/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1150808/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0\", \"id\": 1150808, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNTA4MDg=\", \"tag_name\": \"v1.0.0\", \"target_commitish\": \"main\", \"name\": \"Initial Release\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-11-08T02:33:05Z\", \"published_at\": \"2022-11-09T21:29:39Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0\", \"body_html\": \"\u003cp\u003esome description\u003c/p\u003e\", \"body_text\": \"some description\", \"body\": \"some description\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_repo\": \"personal\", \"github_release_tag\": \"v1.0.0\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 253, \"timestamp\": \"2022-12-03 11:37:07\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\"}, \"assets_url\": {\"type\": \"string\"}, \"upload_url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"node_id\": {\"type\": \"string\"}, \"tag_name\": {\"type\": \"string\"}, \"target_commitish\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"draft\": {\"type\": \"boolean\"}, \"prerelease\": {\"type\": \"boolean\"}, \"created_at\": {\"type\": \"string\"}, \"published_at\": {\"type\": \"string\"}, \"assets\": {\"type\": \"array\"}, \"tarball_url\": {\"type\": \"string\"}, \"zipball_url\": {\"type\": \"string\"}, \"body_html\": {\"type\": \"string\"}, \"body_text\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}, \"github_release_tag\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "03040fe9-e455-4163-ad12-8a80fc9f632b",
-      "version": 4,
+      "version": 6,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1859,7 +1412,7 @@
     {
       "created_date": 1668030316530,
       "description": {
-        "content": null,
+        "content": "Get information about all releases for a repository",
         "format": "text"
       },
       "destination_handle": "fn_github",
@@ -1872,22 +1425,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199632,
+      "last_modified_time": 1670267336867,
       "name": "github_get_releases",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1151026\", \"assets_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1151026/assets\", \"upload_url\": \"https://github.ibm.com/api/uploads/repos/Mark-Scherfling/personal/releases/1151026/assets{?name,label}\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/releases/tag/v1.0.1\", \"id\": 1151026, \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNTEwMjY=\", \"tag_name\": \"v1.0.1\", \"target_commitish\": \"main\", \"name\": \"Bug fix\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-11-10T01:06:20Z\", \"published_at\": \"2022-11-10T01:08:56Z\", \"assets\": [], \"tarball_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/tarball/v1.0.1\", \"zipball_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/zipball/v1.0.1\", \"body_html\": \"\u003cp\u003eupdates to create_file.txt\u003c/p\u003e\", \"body_text\": \"updates to create_file.txt\", \"body\": \"updates to create_file.txt\"}, {\"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1150808\", \"assets_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases/1150808/assets\", \"upload_url\": \"https://github.ibm.com/api/uploads/repos/Mark-Scherfling/personal/releases/1150808/assets{?name,label}\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal/releases/tag/v1.0.0\", \"id\": 1150808, \"author\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNTA4MDg=\", \"tag_name\": \"v1.0.0\", \"target_commitish\": \"main\", \"name\": \"Initial Release\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-11-08T02:33:05Z\", \"published_at\": \"2022-11-09T21:29:39Z\", \"assets\": [], \"tarball_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/tarball/v1.0.0\", \"zipball_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/zipball/v1.0.0\", \"body_html\": \"\u003cp\u003esome description\u003c/p\u003e\", \"body_text\": \"some description\", \"body\": \"some description\"}], \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 419, \"timestamp\": \"2022-11-10 16:59:49\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\"}, \"assets_url\": {\"type\": \"string\"}, \"upload_url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"node_id\": {\"type\": \"string\"}, \"tag_name\": {\"type\": \"string\"}, \"target_commitish\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"draft\": {\"type\": \"boolean\"}, \"prerelease\": {\"type\": \"boolean\"}, \"created_at\": {\"type\": \"string\"}, \"published_at\": {\"type\": \"string\"}, \"assets\": {\"type\": \"array\"}, \"tarball_url\": {\"type\": \"string\"}, \"zipball_url\": {\"type\": \"string\"}, \"body_html\": {\"type\": \"string\"}, \"body_text\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_bac180c1_481a_489f_8212_4e6061bbcf4f",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170764\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170764/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170764/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/untagged-f35ad45a1f57b45713d7\", \"id\": 1170764, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA3NjQ=\", \"tag_name\": \"v1.0.1-beta\", \"target_commitish\": \"main\", \"name\": \"v1.0.1-beta\", \"draft\": true, \"prerelease\": true, \"created_at\": \"2022-12-03T16:42:39Z\", \"published_at\": null, \"assets\": [], \"tarball_url\": null, \"zipball_url\": null, \"body_html\": \"\u003cp\u003erelease beta\u003c/p\u003e\", \"body_text\": \"release beta\", \"body\": \"release beta\"}, {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170561\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170561/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170561/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0_20221202_171442\", \"id\": 1170561, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA1NjE=\", \"tag_name\": \"v1.0.0_20221202_171442\", \"target_commitish\": \"main\", \"name\": \"Test Release_20221202_171442\", \"draft\": false, \"prerelease\": true, \"created_at\": \"2022-12-02T18:55:23Z\", \"published_at\": \"2022-12-02T22:14:46Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0_20221202_171442\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0_20221202_171442\", \"body_html\": \"\u003cp\u003eRelease Description\u003c/p\u003e\", \"body_text\": \"Release Description\", \"body\": \"Release Description\"}, {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170516\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170516/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170516/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0_20221202_153917\", \"id\": 1170516, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA1MTY=\", \"tag_name\": \"v1.0.0_20221202_153917\", \"target_commitish\": \"main\", \"name\": \"Test Release_20221202_153917\", \"draft\": false, \"prerelease\": true, \"created_at\": \"2022-12-02T18:55:23Z\", \"published_at\": \"2022-12-02T20:39:22Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0_20221202_153917\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0_20221202_153917\", \"body_html\": \"\u003cp\u003eRelease Description\u003c/p\u003e\", \"body_text\": \"Release Description\", \"body\": \"Release Description\"}, {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170504\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1170504/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1170504/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0_20221202_152441\", \"id\": 1170504, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNzA1MDQ=\", \"tag_name\": \"v1.0.0_20221202_152441\", \"target_commitish\": \"main\", \"name\": \"Test Release_20221202_152441\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-12-02T18:55:23Z\", \"published_at\": \"2022-12-02T20:34:09Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0_20221202_152441\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0_20221202_152441\", \"body_html\": \"\u003cp\u003eRelease Description\u003c/p\u003e\", \"body_text\": \"Release Description\", \"body\": \"Release Description\"}, {\"url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1150808\", \"assets_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases/1150808/assets\", \"upload_url\": \"https://github.com/api/uploads/repos/test-owner/personal/releases/1150808/assets{?name,label}\", \"html_url\": \"https://github.com/test-owner/personal/releases/tag/v1.0.0\", \"id\": 1150808, \"author\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"node_id\": \"MDc6UmVsZWFzZTExNTA4MDg=\", \"tag_name\": \"v1.0.0\", \"target_commitish\": \"main\", \"name\": \"Initial Release\", \"draft\": false, \"prerelease\": false, \"created_at\": \"2022-11-08T02:33:05Z\", \"published_at\": \"2022-11-09T21:29:39Z\", \"assets\": [], \"tarball_url\": \"https://github.com/api/v3/repos/test-owner/personal/tarball/v1.0.0\", \"zipball_url\": \"https://github.com/api/v3/repos/test-owner/personal/zipball/v1.0.0\", \"body_html\": \"\u003cp\u003esome description\u003c/p\u003e\", \"body_text\": \"some description\", \"body\": \"some description\"}], \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 299, \"timestamp\": \"2022-12-03 12:08:43\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"url\": {\"type\": \"string\"}, \"assets_url\": {\"type\": \"string\"}, \"upload_url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"author\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"node_id\": {\"type\": \"string\"}, \"tag_name\": {\"type\": \"string\"}, \"target_commitish\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"draft\": {\"type\": \"boolean\"}, \"prerelease\": {\"type\": \"boolean\"}, \"created_at\": {\"type\": \"string\"}, \"published_at\": {\"type\": [\"null\", \"string\"]}, \"assets\": {\"type\": \"array\"}, \"tarball_url\": {\"type\": [\"null\", \"string\"]}, \"zipball_url\": {\"type\": [\"null\", \"string\"]}, \"body_html\": {\"type\": \"string\"}, \"body_text\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "555f3b36-977e-4d5f-9a6d-015859b3974e",
-      "version": 3,
+      "version": 6,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -1924,22 +1468,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670015196784,
+      "last_modified_time": 1670262009884,
       "name": "github_get_repositories",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"id\": 1367408, \"node_id\": \"MDEwOlJlcG9zaXRvcnkxMzY3NDA4\", \"name\": \"personal\", \"full_name\": \"Mark-Scherfling/personal\", \"private\": true, \"owner\": {\"login\": \"Mark-Scherfling\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.ibm.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling\", \"html_url\": \"https://github.ibm.com/Mark-Scherfling\", \"followers_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/followers\", \"following_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/following{/other_user}\", \"gists_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/gists{/gist_id}\", \"starred_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/subscriptions\", \"organizations_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/orgs\", \"repos_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/repos\", \"events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/events{/privacy}\", \"received_events_url\": \"https://github.ibm.com/api/v3/users/Mark-Scherfling/received_events\", \"type\": \"User\", \"site_admin\": false}, \"html_url\": \"https://github.ibm.com/Mark-Scherfling/personal\", \"description\": null, \"fork\": false, \"url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal\", \"forks_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/forks\", \"keys_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/keys{/key_id}\", \"collaborators_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/collaborators{/collaborator}\", \"teams_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/teams\", \"hooks_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/hooks\", \"issue_events_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/issues/events{/number}\", \"events_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/events\", \"assignees_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/assignees{/user}\", \"branches_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/branches{/branch}\", \"tags_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/tags\", \"blobs_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/blobs{/sha}\", \"git_tags_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/tags{/sha}\", \"git_refs_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/refs{/sha}\", \"trees_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/trees{/sha}\", \"statuses_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/statuses/{sha}\", \"languages_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/languages\", \"stargazers_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/stargazers\", \"contributors_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/contributors\", \"subscribers_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/subscribers\", \"subscription_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/subscription\", \"commits_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/commits{/sha}\", \"git_commits_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/git/commits{/sha}\", \"comments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/comments{/number}\", \"issue_comment_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/issues/comments{/number}\", \"contents_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/contents/{+path}\", \"compare_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/compare/{base}...{head}\", \"merges_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/merges\", \"archive_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/{archive_format}{/ref}\", \"downloads_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/downloads\", \"issues_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/issues{/number}\", \"pulls_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/pulls{/number}\", \"milestones_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/milestones{/number}\", \"notifications_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/notifications{?since,all,participating}\", \"labels_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/labels{/name}\", \"releases_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/releases{/id}\", \"deployments_url\": \"https://github.ibm.com/api/v3/repos/Mark-Scherfling/personal/deployments\", \"created_at\": \"2022-11-08T00:06:50Z\", \"updated_at\": \"2022-11-08T02:33:09Z\", \"pushed_at\": \"2022-11-08T02:33:07Z\", \"git_url\": \"git://github.ibm.com/Mark-Scherfling/personal.git\", \"ssh_url\": \"git@github.ibm.com:Mark-Scherfling/personal.git\", \"clone_url\": \"https://github.ibm.com/Mark-Scherfling/personal.git\", \"svn_url\": \"https://github.ibm.com/Mark-Scherfling/personal\", \"homepage\": null, \"size\": 2, \"stargazers_count\": 0, \"watchers_count\": 0, \"language\": null, \"has_issues\": true, \"has_projects\": true, \"has_downloads\": true, \"has_wiki\": true, \"has_pages\": false, \"forks_count\": 0, \"mirror_url\": null, \"archived\": false, \"disabled\": false, \"open_issues_count\": 0, \"license\": null, \"forks\": 0, \"open_issues\": 0, \"watchers\": 0, \"default_branch\": \"main\", \"permissions\": {\"admin\": true, \"maintain\": true, \"push\": true, \"triage\": true, \"pull\": true}}], \"raw\": null, \"inputs\": {\"github_repo_type\": \"owner\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"marks-mbp13.cambridge.ibm.com\", \"execution_time_ms\": 632, \"timestamp\": \"2022-11-09 15:49:32\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"full_name\": {\"type\": \"string\"}, \"private\": {\"type\": \"boolean\"}, \"owner\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"html_url\": {\"type\": \"string\"}, \"description\": {}, \"fork\": {\"type\": \"boolean\"}, \"url\": {\"type\": \"string\"}, \"forks_url\": {\"type\": \"string\"}, \"keys_url\": {\"type\": \"string\"}, \"collaborators_url\": {\"type\": \"string\"}, \"teams_url\": {\"type\": \"string\"}, \"hooks_url\": {\"type\": \"string\"}, \"issue_events_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"assignees_url\": {\"type\": \"string\"}, \"branches_url\": {\"type\": \"string\"}, \"tags_url\": {\"type\": \"string\"}, \"blobs_url\": {\"type\": \"string\"}, \"git_tags_url\": {\"type\": \"string\"}, \"git_refs_url\": {\"type\": \"string\"}, \"trees_url\": {\"type\": \"string\"}, \"statuses_url\": {\"type\": \"string\"}, \"languages_url\": {\"type\": \"string\"}, \"stargazers_url\": {\"type\": \"string\"}, \"contributors_url\": {\"type\": \"string\"}, \"subscribers_url\": {\"type\": \"string\"}, \"subscription_url\": {\"type\": \"string\"}, \"commits_url\": {\"type\": \"string\"}, \"git_commits_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"issue_comment_url\": {\"type\": \"string\"}, \"contents_url\": {\"type\": \"string\"}, \"compare_url\": {\"type\": \"string\"}, \"merges_url\": {\"type\": \"string\"}, \"archive_url\": {\"type\": \"string\"}, \"downloads_url\": {\"type\": \"string\"}, \"issues_url\": {\"type\": \"string\"}, \"pulls_url\": {\"type\": \"string\"}, \"milestones_url\": {\"type\": \"string\"}, \"notifications_url\": {\"type\": \"string\"}, \"labels_url\": {\"type\": \"string\"}, \"releases_url\": {\"type\": \"string\"}, \"deployments_url\": {\"type\": \"string\"}, \"created_at\": {\"type\": \"string\"}, \"updated_at\": {\"type\": \"string\"}, \"pushed_at\": {\"type\": \"string\"}, \"git_url\": {\"type\": \"string\"}, \"ssh_url\": {\"type\": \"string\"}, \"clone_url\": {\"type\": \"string\"}, \"svn_url\": {\"type\": \"string\"}, \"homepage\": {}, \"size\": {\"type\": \"integer\"}, \"stargazers_count\": {\"type\": \"integer\"}, \"watchers_count\": {\"type\": \"integer\"}, \"language\": {}, \"has_issues\": {\"type\": \"boolean\"}, \"has_projects\": {\"type\": \"boolean\"}, \"has_downloads\": {\"type\": \"boolean\"}, \"has_wiki\": {\"type\": \"boolean\"}, \"has_pages\": {\"type\": \"boolean\"}, \"forks_count\": {\"type\": \"integer\"}, \"mirror_url\": {}, \"archived\": {\"type\": \"boolean\"}, \"disabled\": {\"type\": \"boolean\"}, \"open_issues_count\": {\"type\": \"integer\"}, \"license\": {}, \"forks\": {\"type\": \"integer\"}, \"open_issues\": {\"type\": \"integer\"}, \"watchers\": {\"type\": \"integer\"}, \"default_branch\": {\"type\": \"string\"}, \"permissions\": {\"type\": \"object\", \"properties\": {\"admin\": {\"type\": \"boolean\"}, \"maintain\": {\"type\": \"boolean\"}, \"push\": {\"type\": \"boolean\"}, \"triage\": {\"type\": \"boolean\"}, \"pull\": {\"type\": \"boolean\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_repo_type\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_128151b7_92b6_496a_8ce8_c948cec7f994",
-          "value": "Playbook Tag"
-        }
-      ],
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"id\": 1367408, \"node_id\": \"MDEwOlJlcG9zaXRvcnkxMzY3NDA4\", \"name\": \"personal\", \"full_name\": \"test-owner/personal\", \"private\": true, \"owner\": {\"login\": \"test-owner\", \"id\": 133011, \"node_id\": \"MDQ6VXNlcjEzMzAxMQ==\", \"avatar_url\": \"https://avatars.github.com/u/133011?\", \"gravatar_id\": \"\", \"url\": \"https://github.com/api/v3/users/test-owner\", \"html_url\": \"https://github.com/test-owner\", \"followers_url\": \"https://github.com/api/v3/users/test-owner/followers\", \"following_url\": \"https://github.com/api/v3/users/test-owner/following{/other_user}\", \"gists_url\": \"https://github.com/api/v3/users/test-owner/gists{/gist_id}\", \"starred_url\": \"https://github.com/api/v3/users/test-owner/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://github.com/api/v3/users/test-owner/subscriptions\", \"organizations_url\": \"https://github.com/api/v3/users/test-owner/orgs\", \"repos_url\": \"https://github.com/api/v3/users/test-owner/repos\", \"events_url\": \"https://github.com/api/v3/users/test-owner/events{/privacy}\", \"received_events_url\": \"https://github.com/api/v3/users/test-owner/received_events\", \"type\": \"User\", \"site_admin\": false}, \"html_url\": \"https://github.com/test-owner/personal\", \"description\": null, \"fork\": false, \"url\": \"https://github.com/api/v3/repos/test-owner/personal\", \"forks_url\": \"https://github.com/api/v3/repos/test-owner/personal/forks\", \"keys_url\": \"https://github.com/api/v3/repos/test-owner/personal/keys{/key_id}\", \"collaborators_url\": \"https://github.com/api/v3/repos/test-owner/personal/collaborators{/collaborator}\", \"teams_url\": \"https://github.com/api/v3/repos/test-owner/personal/teams\", \"hooks_url\": \"https://github.com/api/v3/repos/test-owner/personal/hooks\", \"issue_events_url\": \"https://github.com/api/v3/repos/test-owner/personal/issues/events{/number}\", \"events_url\": \"https://github.com/api/v3/repos/test-owner/personal/events\", \"assignees_url\": \"https://github.com/api/v3/repos/test-owner/personal/assignees{/user}\", \"branches_url\": \"https://github.com/api/v3/repos/test-owner/personal/branches{/branch}\", \"tags_url\": \"https://github.com/api/v3/repos/test-owner/personal/tags\", \"blobs_url\": \"https://github.com/api/v3/repos/test-owner/personal/git/blobs{/sha}\", \"git_tags_url\": \"https://github.com/api/v3/repos/test-owner/personal/git/tags{/sha}\", \"git_refs_url\": \"https://github.com/api/v3/repos/test-owner/personal/git/refs{/sha}\", \"trees_url\": \"https://github.com/api/v3/repos/test-owner/personal/git/trees{/sha}\", \"statuses_url\": \"https://github.com/api/v3/repos/test-owner/personal/statuses/{sha}\", \"languages_url\": \"https://github.com/api/v3/repos/test-owner/personal/languages\", \"stargazers_url\": \"https://github.com/api/v3/repos/test-owner/personal/stargazers\", \"contributors_url\": \"https://github.com/api/v3/repos/test-owner/personal/contributors\", \"subscribers_url\": \"https://github.com/api/v3/repos/test-owner/personal/subscribers\", \"subscription_url\": \"https://github.com/api/v3/repos/test-owner/personal/subscription\", \"commits_url\": \"https://github.com/api/v3/repos/test-owner/personal/commits{/sha}\", \"git_commits_url\": \"https://github.com/api/v3/repos/test-owner/personal/git/commits{/sha}\", \"comments_url\": \"https://github.com/api/v3/repos/test-owner/personal/comments{/number}\", \"issue_comment_url\": \"https://github.com/api/v3/repos/test-owner/personal/issues/comments{/number}\", \"contents_url\": \"https://github.com/api/v3/repos/test-owner/personal/contents/{+path}\", \"compare_url\": \"https://github.com/api/v3/repos/test-owner/personal/compare/{base}...{head}\", \"merges_url\": \"https://github.com/api/v3/repos/test-owner/personal/merges\", \"archive_url\": \"https://github.com/api/v3/repos/test-owner/personal/{archive_format}{/ref}\", \"downloads_url\": \"https://github.com/api/v3/repos/test-owner/personal/downloads\", \"issues_url\": \"https://github.com/api/v3/repos/test-owner/personal/issues{/number}\", \"pulls_url\": \"https://github.com/api/v3/repos/test-owner/personal/pulls{/number}\", \"milestones_url\": \"https://github.com/api/v3/repos/test-owner/personal/milestones{/number}\", \"notifications_url\": \"https://github.com/api/v3/repos/test-owner/personal/notifications{?since,all,participating}\", \"labels_url\": \"https://github.com/api/v3/repos/test-owner/personal/labels{/name}\", \"releases_url\": \"https://github.com/api/v3/repos/test-owner/personal/releases{/id}\", \"deployments_url\": \"https://github.com/api/v3/repos/test-owner/personal/deployments\", \"created_at\": \"2022-11-08T00:06:50Z\", \"updated_at\": \"2022-12-02T18:55:28Z\", \"pushed_at\": \"2022-12-03T16:38:33Z\", \"git_url\": \"git://github.com/test-owner/personal.git\", \"ssh_url\": \"git@github.com:test-owner/personal.git\", \"clone_url\": \"https://github.com/test-owner/personal.git\", \"svn_url\": \"https://github.com/test-owner/personal\", \"homepage\": null, \"size\": 42, \"stargazers_count\": 0, \"watchers_count\": 0, \"language\": null, \"has_issues\": true, \"has_projects\": true, \"has_downloads\": true, \"has_wiki\": true, \"has_pages\": false, \"forks_count\": 0, \"mirror_url\": null, \"archived\": false, \"disabled\": false, \"open_issues_count\": 0, \"license\": null, \"allow_forking\": true, \"is_template\": false, \"visibility\": \"private\", \"forks\": 0, \"open_issues\": 0, \"watchers\": 0, \"default_branch\": \"main\", \"permissions\": {\"admin\": true, \"maintain\": true, \"push\": true, \"triage\": true, \"pull\": true}}], \"raw\": null, \"inputs\": {\"github_repo_type\": \"owner\", \"github_filter_name\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 242, \"timestamp\": \"2022-12-03 12:02:44\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"full_name\": {\"type\": \"string\"}, \"private\": {\"type\": \"boolean\"}, \"owner\": {\"type\": \"object\", \"properties\": {\"login\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"node_id\": {\"type\": \"string\"}, \"avatar_url\": {\"type\": \"string\"}, \"gravatar_id\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"followers_url\": {\"type\": \"string\"}, \"following_url\": {\"type\": \"string\"}, \"gists_url\": {\"type\": \"string\"}, \"starred_url\": {\"type\": \"string\"}, \"subscriptions_url\": {\"type\": \"string\"}, \"organizations_url\": {\"type\": \"string\"}, \"repos_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"received_events_url\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"site_admin\": {\"type\": \"boolean\"}}}, \"html_url\": {\"type\": \"string\"}, \"description\": {}, \"fork\": {\"type\": \"boolean\"}, \"url\": {\"type\": \"string\"}, \"forks_url\": {\"type\": \"string\"}, \"keys_url\": {\"type\": \"string\"}, \"collaborators_url\": {\"type\": \"string\"}, \"teams_url\": {\"type\": \"string\"}, \"hooks_url\": {\"type\": \"string\"}, \"issue_events_url\": {\"type\": \"string\"}, \"events_url\": {\"type\": \"string\"}, \"assignees_url\": {\"type\": \"string\"}, \"branches_url\": {\"type\": \"string\"}, \"tags_url\": {\"type\": \"string\"}, \"blobs_url\": {\"type\": \"string\"}, \"git_tags_url\": {\"type\": \"string\"}, \"git_refs_url\": {\"type\": \"string\"}, \"trees_url\": {\"type\": \"string\"}, \"statuses_url\": {\"type\": \"string\"}, \"languages_url\": {\"type\": \"string\"}, \"stargazers_url\": {\"type\": \"string\"}, \"contributors_url\": {\"type\": \"string\"}, \"subscribers_url\": {\"type\": \"string\"}, \"subscription_url\": {\"type\": \"string\"}, \"commits_url\": {\"type\": \"string\"}, \"git_commits_url\": {\"type\": \"string\"}, \"comments_url\": {\"type\": \"string\"}, \"issue_comment_url\": {\"type\": \"string\"}, \"contents_url\": {\"type\": \"string\"}, \"compare_url\": {\"type\": \"string\"}, \"merges_url\": {\"type\": \"string\"}, \"archive_url\": {\"type\": \"string\"}, \"downloads_url\": {\"type\": \"string\"}, \"issues_url\": {\"type\": \"string\"}, \"pulls_url\": {\"type\": \"string\"}, \"milestones_url\": {\"type\": \"string\"}, \"notifications_url\": {\"type\": \"string\"}, \"labels_url\": {\"type\": \"string\"}, \"releases_url\": {\"type\": \"string\"}, \"deployments_url\": {\"type\": \"string\"}, \"created_at\": {\"type\": \"string\"}, \"updated_at\": {\"type\": \"string\"}, \"pushed_at\": {\"type\": \"string\"}, \"git_url\": {\"type\": \"string\"}, \"ssh_url\": {\"type\": \"string\"}, \"clone_url\": {\"type\": \"string\"}, \"svn_url\": {\"type\": \"string\"}, \"homepage\": {}, \"size\": {\"type\": \"integer\"}, \"stargazers_count\": {\"type\": \"integer\"}, \"watchers_count\": {\"type\": \"integer\"}, \"language\": {}, \"has_issues\": {\"type\": \"boolean\"}, \"has_projects\": {\"type\": \"boolean\"}, \"has_downloads\": {\"type\": \"boolean\"}, \"has_wiki\": {\"type\": \"boolean\"}, \"has_pages\": {\"type\": \"boolean\"}, \"forks_count\": {\"type\": \"integer\"}, \"mirror_url\": {}, \"archived\": {\"type\": \"boolean\"}, \"disabled\": {\"type\": \"boolean\"}, \"open_issues_count\": {\"type\": \"integer\"}, \"license\": {}, \"allow_forking\": {\"type\": \"boolean\"}, \"is_template\": {\"type\": \"boolean\"}, \"visibility\": {\"type\": \"string\"}, \"forks\": {\"type\": \"integer\"}, \"open_issues\": {\"type\": \"integer\"}, \"watchers\": {\"type\": \"integer\"}, \"default_branch\": {\"type\": \"string\"}, \"permissions\": {\"type\": \"object\", \"properties\": {\"admin\": {\"type\": \"boolean\"}, \"maintain\": {\"type\": \"boolean\"}, \"push\": {\"type\": \"boolean\"}, \"triage\": {\"type\": \"boolean\"}, \"pull\": {\"type\": \"boolean\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_repo_type\": {\"type\": \"string\"}, \"github_filter_name\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "17bb2d6f-09d7-4982-891e-e1124fec876a",
-      "version": 7,
+      "version": 8,
       "view_items": [
         {
           "content": "dace2936-f229-4611-aa0c-b680d99bfb82",
@@ -1961,13 +1496,70 @@
       "workflows": []
     },
     {
-      "created_date": 1667870651378,
+      "created_date": 1670274721468,
       "description": {
-        "content": "update(message, content, branch=None, committer=None, author=None)",
+        "content": "List the files within a folder patch and optionally within a branch",
         "format": "text"
       },
       "destination_handle": "fn_github",
-      "display_name": "GitHub Update File",
+      "display_name": "GitHub: List Directory",
+      "export_key": "github_list_directory",
+      "id": 352,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1670274721553,
+      "name": "github_list_directory",
+      "tags": [],
+      "uuid": "f1898eaf-a420-4890-82e7-43a0e2fede44",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "5ff11d05-a666-491e-aebf-d4ba616748a7",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "86fe2b5f-257a-4ed3-bb43-d096e54fe5a1",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "51da4d4c-4fc2-4c98-ba76-c9dff15635e0",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1667870651378,
+      "description": {
+        "content": "Update an existing GitHub file",
+        "format": "text"
+      },
+      "destination_handle": "fn_github",
+      "display_name": "GitHub: Update File",
       "export_key": "github_update_file",
       "id": 238,
       "last_modified_by": {
@@ -1976,26 +1568,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669171199906,
+      "last_modified_time": 1670267397973,
       "name": "github_update_file",
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": \"02965f58131dbd1d8bb6be121edd9299e975ccde\", \"commit\": \"424584ed468a00bb6ad4e1e42a582c800d657db7\", \"Last-Modified\": \"\", \"ETag\": \"W/\\\"3495c92884c1c4bc3e803e2f303a1bc26182c42bc91beaaee49b0e733ba9c95d:dtagent10251220909040818RT0R\\\"\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"mark-scherfling\", \"github_commit_message\": \"refs/heads/test-branch9\", \"github_branch\": \"refs/heads/test-branch9\", \"github_committer\": null, \"github_file_contents\": \"refs/heads/test-branch9\", \"github_file_path\": \"create_file.txt\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"Marks-MBP13.fios-router.home\", \"execution_time_ms\": 3478, \"timestamp\": \"2022-11-10 13:42:38\"}}",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": \"273f9600ddee78a52891b2e4bbd0b7e6929459a3\", \"commit\": \"cd9f8f74430fa82254987d8c01e4316fb82102d7\", \"Last-Modified\": \"\", \"ETag\": \"W/\\\"f23eedc71476022c0fffe53ac794688f0227afc207e20091adf47b304777b92e\\\"\"}, \"raw\": null, \"inputs\": {\"github_owner\": \"test-owner\", \"github_commit_message\": \"update\", \"github_branch\": \"sample_branch\", \"github_committer\": null, \"github_file_contents\": \"d\\ne\\nf\", \"github_file_path\": \"sample_file\", \"github_repo\": \"personal\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-github\", \"package_version\": \"1.0.0\", \"host\": \"host\", \"execution_time_ms\": 2360, \"timestamp\": \"2022-12-03 11:38:33\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"string\"}, \"commit\": {\"type\": \"string\"}, \"Last-Modified\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"github_owner\": {\"type\": \"string\"}, \"github_commit_message\": {\"type\": \"string\"}, \"github_branch\": {\"type\": \"string\"}, \"github_committer\": {}, \"github_file_contents\": {\"type\": \"string\"}, \"github_file_path\": {\"type\": \"string\"}, \"github_repo\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "uuid": "7afd6240-1371-4f65-a766-edc4a76fa92b",
-      "version": 10,
+      "version": 15,
       "view_items": [
         {
           "content": "42380822-c23c-4a49-ac5f-ddf857474cfb",
@@ -2059,13 +1638,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 36,
+  "id": 38,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1670258972661,
+      "create_date": 1670277511225,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2074,7 +1653,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1670258972661,
+      "update_date": 1670277511225,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2091,76 +1670,7 @@
       "export_key": "fn_github",
       "name": "fn_github",
       "programmatic_name": "fn_github",
-      "tags": [
-        {
-          "tag_handle": "fn_github",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_128151b7_92b6_496a_8ce8_c948cec7f994",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_1468956d_681f_4419_b18f_0dec26669ce5",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_bac180c1_481a_489f_8212_4e6061bbcf4f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_be36faf5_1e35_405e_b12c_8e2ef1ea8574",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_c7715da3_eee0_488d_9574_3b851acf71a9",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "users": [
         "a@example.com"
       ],
@@ -3989,8 +3499,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\" isExecutable=\"true\" name=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1q74pv7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"GitHub: Get Commits\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9899ed77-ce8b-433d-8112-2324cf77e2a4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.github_ref = playbook.inputs.file_sha_or_branch\\ninputs.github_optional_file_path = playbook.inputs.file_or_path\\ninputs.github_owner = playbook.inputs.repo_owner\\ninputs.github_repo = playbook.inputs.repo_name\\ninputs.github_since_date = playbook.inputs.commits_since\\ninputs.github_until_date = playbook.inputs.commits_until\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"convert_json_to_rich_text\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q74pv7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0si87hu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1q74pv7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_028nnhr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0si87hu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0si87hu\u003c/incoming\u003e\u003coutgoing\u003eFlow_028nnhr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_028nnhr\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0si87hu\" id=\"Flow_0si87hu_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q74pv7\" id=\"Flow_1q74pv7_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_028nnhr\" id=\"Flow_028nnhr_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 8,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\" isExecutable=\"true\" name=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1q74pv7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"GitHub: Get Commits\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9899ed77-ce8b-433d-8112-2324cf77e2a4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.github_ref = playbook.inputs.file_sha_or_branch\\ninputs.github_optional_file_path = playbook.inputs.file_or_path\\ninputs.github_owner = playbook.inputs.repo_owner\\ninputs.github_repo = playbook.inputs.repo_name\\ninputs.github_since_date = playbook.inputs.commits_since\\ninputs.github_until_date = playbook.inputs.commits_until\\ninputs.github_limit = playbook.inputs.commits_limit\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"convert_json_to_rich_text\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q74pv7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0si87hu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1q74pv7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_028nnhr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0si87hu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0si87hu\u003c/incoming\u003e\u003coutgoing\u003eFlow_028nnhr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_028nnhr\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e846b0ae_6743_42d2_9234_6ed263617d13\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_028nnhr\" id=\"Flow_028nnhr_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0si87hu\" id=\"Flow_0si87hu_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q74pv7\" id=\"Flow_1q74pv7_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1668019416993,
       "creator_principal": {
@@ -4012,6 +3522,35 @@
         "display_name": "GitHub: Get Commits",
         "export_key": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
         "fields": {
+          "commits_limit": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13/commits_limit",
+            "hide_notification": false,
+            "id": 2919,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "commits_limit",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Commits limit",
+            "tooltip": "# of commits to restrict results",
+            "type_id": 1207,
+            "uuid": "166a4fac-7eb1-4f11-8d53-e22dac693c4f",
+            "values": []
+          },
           "commits_since": {
             "allow_default_value": false,
             "blank_option": false,
@@ -4218,7 +3757,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1670167821364,
+      "last_modified_time": 1670275865737,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -4273,6 +3812,14 @@
             "show_if": null,
             "show_link_header": false,
             "step_label": null
+          },
+          {
+            "content": "166a4fac-7eb1-4f11-8d53-e22dac693c4f",
+            "element": "field_uuid",
+            "field_type": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
           }
         ]
       },
@@ -4289,7 +3836,7 @@
       "tags": [],
       "type": "default",
       "uuid": "e846b0ae-6743-42d2-9234-6ed263617d13",
-      "version": 11
+      "version": 12
     },
     {
       "activation_type": "manual",
@@ -5112,6 +4659,237 @@
       "type": "default",
       "uuid": "128151b7-92b6-496a-8ce8-c948cec7f994",
       "version": 15
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3\" isExecutable=\"true\" name=\"playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_011pbkl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"GitHub: List Directory\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f1898eaf-a420-4890-82e7-43a0e2fede44\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.github_owner = playbook.inputs.repo_owner\\ninputs.github_repo = playbook.inputs.repo_name\\ninputs.github_file_path = playbook.inputs.repo_file_path\\ninputs.github_branch = playbook.inputs.repo_branch\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"convert_json_to_rich_text\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_011pbkl\u003c/incoming\u003e\u003coutgoing\u003eFlow_11gpeiv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11gpeiv\u003c/incoming\u003e\u003coutgoing\u003eFlow_09khrpc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_11gpeiv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09khrpc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_09khrpc\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_011pbkl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11gpeiv\" id=\"Flow_11gpeiv_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09khrpc\" id=\"Flow_09khrpc_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_011pbkl\" id=\"Flow_011pbkl_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1670274903195,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "display_name": "GitHub: List Directory Files",
+      "export_key": "github_list_directory_files",
+      "field_type_handle": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+      "fields_type": {
+        "actions": [],
+        "display_name": "GitHub: List Directory Files",
+        "export_key": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+        "fields": {
+          "repo_branch": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3/repo_branch",
+            "hide_notification": false,
+            "id": 2915,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "repo_branch",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Repo Branch",
+            "tooltip": "",
+            "type_id": 1228,
+            "uuid": "118a46f4-0ea0-4e26-933e-f0c1ab30da2b",
+            "values": []
+          },
+          "repo_file_path": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3/repo_file_path",
+            "hide_notification": false,
+            "id": 2916,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "repo_file_path",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "/path/to/file_folder",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Repo File Path",
+            "tooltip": "",
+            "type_id": 1228,
+            "uuid": "93675c7a-1694-4197-a91e-2c0882edbd55",
+            "values": []
+          },
+          "repo_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3/repo_name",
+            "hide_notification": false,
+            "id": 2917,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "repo_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Repo Name",
+            "tooltip": "",
+            "type_id": 1228,
+            "uuid": "ba48cf61-7591-45e4-bdbe-fc229d5959ad",
+            "values": []
+          },
+          "repo_owner": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3/repo_owner",
+            "hide_notification": false,
+            "id": 2918,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "repo_owner",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Repo Owner",
+            "tooltip": "",
+            "type_id": 1228,
+            "uuid": "96893671-11cc-4ab1-8a0b-8ec3ed45e86c",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+        "uuid": "66f6b639-0560-4139-b5a4-9a33ac129640"
+      },
+      "has_logical_errors": false,
+      "id": 196,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1670275772773,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "96893671-11cc-4ab1-8a0b-8ec3ed45e86c",
+            "element": "field_uuid",
+            "field_type": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "ba48cf61-7591-45e4-bdbe-fc229d5959ad",
+            "element": "field_uuid",
+            "field_type": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "93675c7a-1694-4197-a91e-2c0882edbd55",
+            "element": "field_uuid",
+            "field_type": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "118a46f4-0ea0-4e26-933e-f0c1ab30da2b",
+            "element": "field_uuid",
+            "field_type": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "github_list_directory_files",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_3d65561a-5b15-4b27-95af-cb9da6afaaf3",
+        "id": 235,
+        "name": "playbook_3d65561a_5b15_4b27_95af_cb9da6afaaf3",
+        "type": "playbook",
+        "uuid": "b0970cde-51cd-4d9b-a602-20b2b3b565d0"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "3d65561a-5b15-4b27-95af-cb9da6afaaf3",
+      "version": 9
     }
   ],
   "regulators": null,
@@ -5126,70 +4904,13 @@
       "id": 209,
       "language": "python3",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1670166736569,
+      "last_modified_time": 1670269770959,
       "name": "Convert JSON to rich text v1.3",
       "object_type": "incident",
       "playbook_handle": null,
       "programmatic_name": "convert_json_to_rich_text_13",
-      "script_text": "# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.\nVERSION = 1.2\n\"\"\"\n  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note.\n  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.\n  Typically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.\n  \n  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.\n  Workflow properties can be added using a command similar to this:\n  workflow.addProperty(\u0027convert_json_to_rich_text\u0027, {\n    \"version\": 1.2,\n    \"header\": \"Artifact scan results for: {}\".format(artifact.value),\n    \"padding\": 10,\n    \"separator\": u\"\u003cbr /\u003e\",\n    \"sort\": True,\n    \"json\": results.content,\n    \"json_omit_list\": [\"omit\"],\n    \"incident_field\": None\n  })\n  \n  Format of workflow.property.convert_json_to_rich_text:\n  { \n    \"version\": 1.2, [this is for future compatibility]\n    \"header\": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]\n    \"padding\": 10, [padding for nested json elements, or defaults to 10]\n    \"separator\": u\"\u003cbr /\u003e\"|list such as [\u0027\u003cspan\u003e\u0027,\u0027\u003c/span\u003e\u0027], [html separator between json keys and lists or defaults to html break: \u0027\u003cbr /\u003e\u0027. \n                                                If a list, then the data is brackets by the pair specified]\n    \"sort\": True|False, [sort the json keys at each level when displayed]\n    \"json\": json, [required json to convert]\n    \"json_omit_list\": [list of json keys to exclude or None]\n    \"incident_field\": \"\u003cincident_field\u003e\" [indicates a builtin rich text incident field, such as \u0027description\u0027 \n                                          or a custom rich text field in the format: \u0027properties.\u003cfield\u003e\u0027. default: create an incident note]\n  }\n\"\"\"\n\nimport re\n\n# needed for python 3\ntry:\n    unicode(\"abc\") # fails in py3\n    py2 = True\nexcept:\n    unicode = str\n    py2 = False\n\n\nrc = re.compile(r\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+#\\?]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027)\n\nclass ConvertJson:\n    \"\"\"Class to hold the conversion parameters and perform the conversion\"\"\"\n\n    def __init__(self, omit_keys=[], padding=10, separator=u\"\u003cbr /\u003e\", sort_keys=False):\n        self.omit_keys = omit_keys\n        self.padding = padding\n        self.separator = separator\n        self.sort_keys = sort_keys\n\n\n    def format_link(self, item):\n        \"\"\"[summary]\n          Find embedded urls (http(s)) and add html anchor tags to display as links\n          Args:\n              item ([string])\n\n          Returns:\n              [str]: None|original text if no links|text with html links\n        \"\"\"\n        formatted_item = item\n        if py2:\n            num_type = bool(item and isinstance(item, (int, long, bool, float)))\n        else:\n            num_type = bool(item and isinstance(item, (int, bool, float)))\n\n        if item and not num_type:\n            list = rc.findall(item)\n            if list:\n                for link in list:\n                    formatted_item = formatted_item.replace(link, u\"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{0}\u003c/a\u003e\".format(link))\n\n        return formatted_item\n\n    def expand_list(self, list_value, is_list=False):\n        \"\"\"[summary]\n          convert items to html, adding indents to nested dictionaries.\n          Args:\n              list_value ([dict|list]): json element\n\n          Returns:\n              [str]: html converted code\n        \"\"\"\n        if not isinstance(list_value, list):\n            return self.format_link(list_value)\n        elif not list_value:\n            return u\"None\u003cbr\u003e\"\n\n        try:\n            items_list = []  # this will ensure list starts on second line of key label\n            for item in list_value:\n                if isinstance(item, dict):\n                    result = self.convert_json_to_rich_text(item)\n                    if is_list:\n                        items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(result))\n                    else:\n                        items_list.append(result)\n                elif isinstance(item, list):\n                    items_list.append(self.expand_list(item, is_list=True))\n                elif is_list:\n                    items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(self.format_link(unicode(item))))\n                else:\n                    items_list.append(self.format_link(unicode(item)))\n\n            expand_list_result = self.add_separator(self.separator if not is_list else u\"\",\n                                                    items_list,\n                                                    is_list=is_list)\n\n            if is_list:\n                return u\"\u003cul\u003e{}\u003c/ul\u003e\".format(expand_list_result)\n            else:\n                return u\"\u003cdiv style=\u0027padding:5px\u0027\u003e{}\u003c/div\u003e\".format(expand_list_result)\n        except Exception as err:\n            return str(err)\n\n    def convert_json_to_rich_text(self, sub_dict):\n        \"\"\"[summary]\n          Walk dictionary tree and convert to html for better display\n          Args:\n              sub_dict ([type]): [description]\n\n          Returns:\n              [type]: [description]\n        \"\"\"\n        notes = []\n        if sub_dict:\n            if isinstance(sub_dict, list):\n                expanded_list = self.expand_list(sub_dict, is_list=True)\n                notes.append(self.add_separator(self.separator, expanded_list))\n            else:\n                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()\n\n                for key in keys:\n                    if key not in self.omit_keys:\n                        value = sub_dict[key]\n                        is_list = isinstance(value, list)\n                        item_list = [u\"\u003cstrong\u003e{0}\u003c/strong\u003e: \".format(key)]\n                        if isinstance(value, dict):\n                            convert_result = self.convert_json_to_rich_text(value)\n                            if convert_result:\n                                item_list.append(u\"\u003cdiv style=\u0027padding:{}px\u0027\u003e{}\u003c/div\u003e\".format(self.padding, convert_result))\n                            else:\n                                item_list.append(u\"None\u003cbr\u003e\")\n                        else:\n                            item_list.append(self.expand_list(value, is_list=is_list))\n\n                        notes.append(self.add_separator(self.separator, u\"\".join(make_unicode(v) for v in item_list), is_list=is_list))\n\n        result_notes = u\"\".join(notes)\n        if isinstance(self.separator, list):\n            return result_notes\n        else:\n            return result_notes.replace(\n                u\"\u003c/div\u003e{0}\".format(self.separator), u\"\u003c/div\u003e\").replace(\n                u\"{0}\u003c/div\u003e\".format(self.separator), u\"\u003c/div\u003e\"\n            )  # tighten up result\n\n    def add_separator(self, separator, items, is_list=False):\n        \"\"\"\n        apply the separator to the data\n        :param separator: None, str or list such as [\u0027\u003cspan\u003e\u0027, \u0027\u003c/span\u003e\u0027]\n        :param items: str or list to add separator\n        :return: text with separator applied\n        \"\"\"\n        _items = items\n\n        if not _items:\n            return \"\u003cbr\u003e\"\n\n        if not isinstance(_items, list):\n            _items = [_items]\n\n        if isinstance(separator, list):\n            return u\"\".join([u\"{}{}{}\".format(separator[0], item, separator[1]) for item in _items])\n\n        return u\"{}{}\".format(separator.join(_items), separator if not is_list else u\"\")\n\ndef make_unicode(value):\n    if value is None:\n        return \u0027None\u0027\n\n    return unicode(value)\n\ndef get_properties(property_name):\n    \"\"\"\n    Logic to collect the json and parameters from a workflow property.\n    Args:\n      property_name: workflow property to reference\n    Returns:\n      padding, separator, header, json_omit_list, incident_field, json, sort_keys\n    \"\"\"\n    result_properties = None\n    try:\n        result_properties = workflow.properties[property_name]\n    except:\n        try:\n            result_properties = playbook.properties[property_name]\n        except:\n            result_properties = playbook.functions.results[property_name]\n\n    if not result_properties:\n        helper.fail(\"Playbook/workflow property not found: {}\".format(property_name))\n\n    padding = int(result_properties.get(\"padding\", 10))\n    separator = result_properties.get(\"separator\", u\"\u003cbr /\u003e\")\n    if isinstance(separator, list) and len(separator) != 2:\n        helper.fail(\"list of separators should be specified as a pair such as [\u0027\u003cdiv\u003e\u0027, \u0027\u003c/div\u003e\u0027]: {}\".format(separator))\n\n    header = result_properties.get(\"header\")\n    json_omit_list = result_properties.get(\"json_omit_list\")\n    if not json_omit_list:\n        json_omit_list = []\n    incident_field = result_properties.get(\"incident_field\")\n    \n    json = result_properties.get(\"json\")\n    # determine if results.content shuold be used\n    if not json and getattr(result_properties, \"content\", None):\n      json = result_properties[\u0027content\u0027]\n      \n    if not isinstance(json, dict) and not isinstance(json, list):\n        helper.fail(\"json element is not formatted correctly: {}\".format(json))\n    sort_keys = bool(result_properties.get(\"sort\", False))\n\n    return padding, separator, header, json_omit_list, incident_field, json, sort_keys\n\n\n## S T A R T\npadding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(\u0027convert_json_to_rich_text\u0027)\n\nif header:\n    if isinstance(separator, list):\n        hdr = u\"{0}{1}{2}\".format(separator[0], header, separator[1])\n    else:\n        hdr = u\"{0}{1}\".format(header, separator)\nelse:\n    hdr = u\"\"\n\nconvert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)\nconverted_json = convert.convert_json_to_rich_text(json)\nresult = u\"{}{}\".format(hdr, converted_json if converted_json else \"\\nNone\")\n\nrich_text_note = helper.createRichText(result)\nif incident_field:\n    incident[incident_field] = rich_text_note\nelse:\n    incident.addNote(rich_text_note)\n",
-      "tags": [
-        {
-          "tag_handle": "playbook_128151b7_92b6_496a_8ce8_c948cec7f994",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_48f7e04c_21be_486b_ab06_c4215117a05b",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_847e2444_71fa_4c65_8a17_995a5b358430",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_8c1f936a_d600_40cc_bb4f_a6632e660b75",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_917787bb_57ea_46fd_91a3_00d33833c87f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_a74c3935_6a7c_4078_889d_e67161383567",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_bac180c1_481a_489f_8212_4e6061bbcf4f",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_be36faf5_1e35_405e_b12c_8e2ef1ea8574",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d003df15_2ef9_44ef_aa1b_a6b6f368ca7a",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_d974c40e_5ff9_40c8_b12b_b8be5b1a89ab",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e51cef81_8126_46f2_be70_b9efa81bf1cf",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_e846b0ae_6743_42d2_9234_6ed263617d13",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ebf87e46_a8c2_47c5_8b72_b9155eafff16",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_f64760a7_e7f3_42b7_a634_4629d12efad5",
-          "value": "Playbook Tag"
-        }
-      ],
+      "script_text": "# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.\nVERSION = 1.3\n\"\"\"\n  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note.\n  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.\n  Typically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.\n  \n  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.\n  Workflow properties can be added using a command similar to this:\n  workflow.addProperty(\u0027convert_json_to_rich_text\u0027, {\n    \"version\": 1.3,\n    \"header\": \"Artifact scan results for: {}\".format(artifact.value),\n    \"padding\": 10,\n    \"separator\": u\"\u003cbr /\u003e\",\n    \"sort\": True,\n    \"json\": results.content,\n    \"json_omit_list\": [\"omit\"],\n    \"incident_field\": None\n  })\n  \n  Format of workflow.property.convert_json_to_rich_text:\n  { \n    \"version\": 1.3, [this is for future compatibility]\n    \"header\": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]\n    \"padding\": 10, [padding for nested json elements, or defaults to 10]\n    \"separator\": u\"\u003cbr /\u003e\"|list such as [\u0027\u003cspan\u003e\u0027,\u0027\u003c/span\u003e\u0027], [html separator between json keys and lists or defaults to html break: \u0027\u003cbr /\u003e\u0027. \n                                                If a list, then the data is brackets by the pair specified]\n    \"sort\": True|False, [sort the json keys at each level when displayed]\n    \"json\": json, [required json to convert]\n    \"json_omit_list\": [list of json keys to exclude or None]\n    \"incident_field\": \"\u003cincident_field\u003e\" [indicates a builtin rich text incident field, such as \u0027description\u0027 \n                                          or a custom rich text field in the format: \u0027properties.\u003cfield\u003e\u0027. default: create an incident note]\n  }\n\"\"\"\n\nimport re\n\n# needed for python 3\ntry:\n    unicode(\"abc\") # fails in py3\n    py2 = True\nexcept:\n    unicode = str\n    py2 = False\n\n\nrc = re.compile(r\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+#\\?]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027)\n\nclass ConvertJson:\n    \"\"\"Class to hold the conversion parameters and perform the conversion\"\"\"\n\n    def __init__(self, omit_keys=[], padding=10, separator=u\"\u003cbr /\u003e\", sort_keys=False):\n        self.omit_keys = omit_keys\n        self.padding = padding\n        self.separator = separator\n        self.sort_keys = sort_keys\n\n\n    def format_link(self, item):\n        \"\"\"[summary]\n          Find embedded urls (http(s)) and add html anchor tags to display as links\n          Args:\n              item ([string])\n\n          Returns:\n              [str]: None|original text if no links|text with html links\n        \"\"\"\n        formatted_item = item\n        if py2:\n            num_type = bool(item and isinstance(item, (int, long, bool, float)))\n        else:\n            num_type = bool(item and isinstance(item, (int, bool, float)))\n\n        if item and not num_type:\n            list = rc.findall(item)\n            if list:\n                for link in list:\n                    formatted_item = formatted_item.replace(link, u\"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{0}\u003c/a\u003e\".format(link))\n\n        return formatted_item\n\n    def expand_list(self, list_value, is_list=False):\n        \"\"\"[summary]\n          convert items to html, adding indents to nested dictionaries.\n          Args:\n              list_value ([dict|list]): json element\n\n          Returns:\n              [str]: html converted code\n        \"\"\"\n        if not isinstance(list_value, list):\n            return self.format_link(list_value)\n        elif not list_value:\n            return u\"None\u003cbr\u003e\"\n\n        try:\n            items_list = []  # this will ensure list starts on second line of key label\n            for item in list_value:\n                if isinstance(item, dict):\n                    result = self.convert_json_to_rich_text(item)\n                    if is_list:\n                        items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(result))\n                    else:\n                        items_list.append(result)\n                elif isinstance(item, list):\n                    items_list.append(self.expand_list(item, is_list=True))\n                elif is_list:\n                    items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(self.format_link(unicode(item))))\n                else:\n                    items_list.append(self.format_link(unicode(item)))\n\n            expand_list_result = self.add_separator(self.separator if not is_list else u\"\",\n                                                    items_list,\n                                                    is_list=is_list)\n\n            if is_list:\n                return u\"\u003cul\u003e{}\u003c/ul\u003e\".format(expand_list_result)\n            else:\n                return u\"\u003cdiv style=\u0027padding:5px\u0027\u003e{}\u003c/div\u003e\".format(expand_list_result)\n        except Exception as err:\n            return str(err)\n\n    def convert_json_to_rich_text(self, sub_dict):\n        \"\"\"[summary]\n          Walk dictionary tree and convert to html for better display\n          Args:\n              sub_dict ([type]): [description]\n\n          Returns:\n              [type]: [description]\n        \"\"\"\n        notes = []\n        if sub_dict:\n            if isinstance(sub_dict, list):\n                expanded_list = self.expand_list(sub_dict, is_list=True)\n                notes.append(self.add_separator(self.separator, expanded_list))\n            else:\n                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()\n\n                for key in keys:\n                    if key not in self.omit_keys:\n                        value = sub_dict[key]\n                        is_list = isinstance(value, list)\n                        item_list = [u\"\u003cstrong\u003e{0}\u003c/strong\u003e: \".format(key)]\n                        if isinstance(value, dict):\n                            convert_result = self.convert_json_to_rich_text(value)\n                            if convert_result:\n                                item_list.append(u\"\u003cdiv style=\u0027padding:{}px\u0027\u003e{}\u003c/div\u003e\".format(self.padding, convert_result))\n                            else:\n                                item_list.append(u\"None\u003cbr\u003e\")\n                        else:\n                            item_list.append(self.expand_list(value, is_list=is_list))\n\n                        notes.append(self.add_separator(self.separator, u\"\".join(make_unicode(v) for v in item_list), is_list=is_list))\n\n        result_notes = u\"\".join(notes)\n        if isinstance(self.separator, list):\n            return result_notes\n        else:\n            return result_notes.replace(\n                u\"\u003c/div\u003e{0}\".format(self.separator), u\"\u003c/div\u003e\").replace(\n                u\"{0}\u003c/div\u003e\".format(self.separator), u\"\u003c/div\u003e\"\n            )  # tighten up result\n\n    def add_separator(self, separator, items, is_list=False):\n        \"\"\"\n        apply the separator to the data\n        :param separator: None, str or list such as [\u0027\u003cspan\u003e\u0027, \u0027\u003c/span\u003e\u0027]\n        :param items: str or list to add separator\n        :return: text with separator applied\n        \"\"\"\n        _items = items\n\n        if not _items:\n            return \"\u003cbr\u003e\"\n\n        if not isinstance(_items, list):\n            _items = [_items]\n\n        if isinstance(separator, list):\n            return u\"\".join([u\"{}{}{}\".format(separator[0], item, separator[1]) for item in _items])\n\n        return u\"{}{}\".format(separator.join(_items), separator if not is_list else u\"\")\n\ndef make_unicode(value):\n    if value is None:\n        return \u0027None\u0027\n\n    return unicode(value)\n\ndef get_properties(property_name):\n    \"\"\"\n    Logic to collect the json and parameters from a workflow property.\n    Args:\n      property_name: workflow property to reference\n    Returns:\n      padding, separator, header, json_omit_list, incident_field, json, sort_keys\n    \"\"\"\n    result_properties = None\n    try:\n        result_properties = workflow.properties[property_name]\n    except:\n        try:\n            result_properties = playbook.properties[property_name]\n        except:\n            result_properties = playbook.functions.results[property_name]\n\n    if not result_properties:\n        helper.fail(\"Playbook/workflow property not found: {}\".format(property_name))\n\n    padding = int(result_properties.get(\"padding\", 10))\n    separator = result_properties.get(\"separator\", u\"\u003cbr /\u003e\")\n    if isinstance(separator, list) and len(separator) != 2:\n        helper.fail(\"list of separators should be specified as a pair such as [\u0027\u003cdiv\u003e\u0027, \u0027\u003c/div\u003e\u0027]: {}\".format(separator))\n\n    header = result_properties.get(\"header\")\n    json_omit_list = result_properties.get(\"json_omit_list\")\n    if not json_omit_list:\n        json_omit_list = []\n    incident_field = result_properties.get(\"incident_field\")\n    \n    json = result_properties.get(\"json\")\n    # determine if results.content shuold be used\n    if not json and getattr(result_properties, \"content\", None):\n      json = result_properties[\u0027content\u0027]\n      \n    if not isinstance(json, dict) and not isinstance(json, list):\n        helper.fail(\"json element is not formatted correctly: {}\".format(json))\n    sort_keys = bool(result_properties.get(\"sort\", False))\n\n    return padding, separator, header, json_omit_list, incident_field, json, sort_keys\n\n\n## S T A R T\npadding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(\u0027convert_json_to_rich_text\u0027)\n\nif header:\n    if isinstance(separator, list):\n        hdr = u\"{0}{1}{2}\".format(separator[0], header, separator[1])\n    else:\n        hdr = u\"{0}{1}\".format(header, separator)\nelse:\n    hdr = u\"\"\n\nconvert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)\nconverted_json = convert.convert_json_to_rich_text(json)\nresult = u\"{}{}\".format(hdr, converted_json if converted_json else \"\\nNone\")\n\nrich_text_note = helper.createRichText(result)\nif incident_field:\n    incident[incident_field] = rich_text_note\nelse:\n    incident.addNote(rich_text_note)\n",
+      "tags": [],
       "uuid": "64d3e6da-8b56-4d19-9ce8-a75586f71dad"
     }
   ],

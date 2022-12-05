@@ -10,7 +10,12 @@
     },
     "reason": {},
     "content": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "string"
+        }
+      }
     },
     "raw": {},
     "inputs": {

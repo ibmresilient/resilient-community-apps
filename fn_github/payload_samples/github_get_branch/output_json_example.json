@@ -3,27 +3,27 @@
   "success": true,
   "reason": null,
   "content": {
-    "name": "sample_branch",
+    "name": "test_script2",
     "commit": {
-      "sha": "cd9f8f74430fa82254987d8c01e4316fb82102d7",
-      "node_id": "MDY6Q29tbWl0MTM2NzQwODpjZDlmOGY3NDQzMGZhODIyNTQ5ODdkOGMwMWU0MzE2ZmI4MjEwMmQ3",
+      "sha": "ab34d51dabde567d4fc42a00e654bddce8ea0cd8",
+      "node_id": "MDY6Q29tbWl0MTM2NzQwODphYjM0ZDUxZGFiZGU1NjdkNGZjNDJhMDBlNjU0YmRkY2U4ZWEwY2Q4",
       "commit": {
         "author": {
           "name": "Mark Scherfling",
           "email": "Mark.Scherfling@ibm.com",
-          "date": "2022-12-03T16:38:31Z"
+          "date": "2022-12-04T15:23:47Z"
         },
         "committer": {
           "name": "Mark Scherfling",
           "email": "Mark.Scherfling@ibm.com",
-          "date": "2022-12-03T16:38:31Z"
+          "date": "2022-12-04T15:23:47Z"
         },
-        "message": "update",
+        "message": "convert script",
         "tree": {
-          "sha": "a4066fa7f2fa3b28d9f6ad4fc556d77074d0800a",
-          "url": "https://github.ibm.com/api/v3/repos/test-owner/personal/git/trees/a4066fa7f2fa3b28d9f6ad4fc556d77074d0800a"
+          "sha": "9250c97b3c27c164ece0373732e378f883bf39c9",
+          "url": "https://github.com/api/v3/repos/repo-owner/personal/git/trees/9250c97b3c27c164ece0373732e378f883bf39c9"
         },
-        "url": "https://github.ibm.com/api/v3/repos/test-owner/personal/git/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7",
+        "url": "https://github.com/api/v3/repos/repo-owner/personal/git/commits/ab34d51dabde567d4fc42a00e654bddce8ea0cd8",
         "comment_count": 0,
         "verification": {
           "verified": false,
@@ -32,60 +32,60 @@
           "payload": null
         }
       },
-      "url": "https://github.ibm.com/api/v3/repos/test-owner/personal/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7",
-      "html_url": "https://github.ibm.com/test-owner/personal/commit/cd9f8f74430fa82254987d8c01e4316fb82102d7",
-      "comments_url": "https://github.ibm.com/api/v3/repos/test-owner/personal/commits/cd9f8f74430fa82254987d8c01e4316fb82102d7/comments",
+      "url": "https://github.com/api/v3/repos/repo-owner/personal/commits/ab34d51dabde567d4fc42a00e654bddce8ea0cd8",
+      "html_url": "https://github.com/repo-owner/personal/commit/ab34d51dabde567d4fc42a00e654bddce8ea0cd8",
+      "comments_url": "https://github.com/api/v3/repos/repo-owner/personal/commits/ab34d51dabde567d4fc42a00e654bddce8ea0cd8/comments",
       "author": {
-        "login": "test-owner",
+        "login": "repo-owner",
         "id": 133011,
         "node_id": "MDQ6VXNlcjEzMzAxMQ==",
-        "avatar_url": "https://avatars.github.ibm.com/u/133011?",
+        "avatar_url": "https://avatars.github.com/u/133011?",
         "gravatar_id": "",
-        "url": "https://github.ibm.com/api/v3/users/test-owner",
-        "html_url": "https://github.ibm.com/test-owner",
-        "followers_url": "https://github.ibm.com/api/v3/users/test-owner/followers",
-        "following_url": "https://github.ibm.com/api/v3/users/test-owner/following{/other_user}",
-        "gists_url": "https://github.ibm.com/api/v3/users/test-owner/gists{/gist_id}",
-        "starred_url": "https://github.ibm.com/api/v3/users/test-owner/starred{/owner}{/repo}",
-        "subscriptions_url": "https://github.ibm.com/api/v3/users/test-owner/subscriptions",
-        "organizations_url": "https://github.ibm.com/api/v3/users/test-owner/orgs",
-        "repos_url": "https://github.ibm.com/api/v3/users/test-owner/repos",
-        "events_url": "https://github.ibm.com/api/v3/users/test-owner/events{/privacy}",
-        "received_events_url": "https://github.ibm.com/api/v3/users/test-owner/received_events",
+        "url": "https://github.com/api/v3/users/repo-owner",
+        "html_url": "https://github.com/repo-owner",
+        "followers_url": "https://github.com/api/v3/users/repo-owner/followers",
+        "following_url": "https://github.com/api/v3/users/repo-owner/following{/other_user}",
+        "gists_url": "https://github.com/api/v3/users/repo-owner/gists{/gist_id}",
+        "starred_url": "https://github.com/api/v3/users/repo-owner/starred{/owner}{/repo}",
+        "subscriptions_url": "https://github.com/api/v3/users/repo-owner/subscriptions",
+        "organizations_url": "https://github.com/api/v3/users/repo-owner/orgs",
+        "repos_url": "https://github.com/api/v3/users/repo-owner/repos",
+        "events_url": "https://github.com/api/v3/users/repo-owner/events{/privacy}",
+        "received_events_url": "https://github.com/api/v3/users/repo-owner/received_events",
         "type": "User",
         "site_admin": false
       },
       "committer": {
-        "login": "test-owner",
+        "login": "repo-owner",
         "id": 133011,
         "node_id": "MDQ6VXNlcjEzMzAxMQ==",
-        "avatar_url": "https://avatars.github.ibm.com/u/133011?",
+        "avatar_url": "https://avatars.github.com/u/133011?",
         "gravatar_id": "",
-        "url": "https://github.ibm.com/api/v3/users/test-owner",
-        "html_url": "https://github.ibm.com/test-owner",
-        "followers_url": "https://github.ibm.com/api/v3/users/test-owner/followers",
-        "following_url": "https://github.ibm.com/api/v3/users/test-owner/following{/other_user}",
-        "gists_url": "https://github.ibm.com/api/v3/users/test-owner/gists{/gist_id}",
-        "starred_url": "https://github.ibm.com/api/v3/users/test-owner/starred{/owner}{/repo}",
-        "subscriptions_url": "https://github.ibm.com/api/v3/users/test-owner/subscriptions",
-        "organizations_url": "https://github.ibm.com/api/v3/users/test-owner/orgs",
-        "repos_url": "https://github.ibm.com/api/v3/users/test-owner/repos",
-        "events_url": "https://github.ibm.com/api/v3/users/test-owner/events{/privacy}",
-        "received_events_url": "https://github.ibm.com/api/v3/users/test-owner/received_events",
+        "url": "https://github.com/api/v3/users/repo-owner",
+        "html_url": "https://github.com/repo-owner",
+        "followers_url": "https://github.com/api/v3/users/repo-owner/followers",
+        "following_url": "https://github.com/api/v3/users/repo-owner/following{/other_user}",
+        "gists_url": "https://github.com/api/v3/users/repo-owner/gists{/gist_id}",
+        "starred_url": "https://github.com/api/v3/users/repo-owner/starred{/owner}{/repo}",
+        "subscriptions_url": "https://github.com/api/v3/users/repo-owner/subscriptions",
+        "organizations_url": "https://github.com/api/v3/users/repo-owner/orgs",
+        "repos_url": "https://github.com/api/v3/users/repo-owner/repos",
+        "events_url": "https://github.com/api/v3/users/repo-owner/events{/privacy}",
+        "received_events_url": "https://github.com/api/v3/users/repo-owner/received_events",
         "type": "User",
         "site_admin": false
       },
       "parents": [
         {
-          "sha": "4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
-          "url": "https://github.ibm.com/api/v3/repos/test-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
-          "html_url": "https://github.ibm.com/test-owner/personal/commit/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d"
+          "sha": "9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288",
+          "url": "https://github.com/api/v3/repos/repo-owner/personal/commits/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288",
+          "html_url": "https://github.com/repo-owner/personal/commit/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288"
         }
       ]
     },
     "_links": {
-      "self": "https://github.ibm.com/api/v3/repos/test-owner/personal/branches/sample_branch",
-      "html": "https://github.ibm.com/test-owner/personal/tree/sample_branch"
+      "self": "https://github.com/api/v3/repos/repo-owner/personal/branches/test_script2",
+      "html": "https://github.com/repo-owner/personal/tree/test_script2"
     },
     "protected": false,
     "protection": {
@@ -95,12 +95,12 @@
         "contexts": []
       }
     },
-    "protection_url": "https://github.ibm.com/api/v3/repos/test-owner/personal/branches/sample_branch/protection"
+    "protection_url": "https://github.com/api/v3/repos/repo-owner/personal/branches/test_script2/protection"
   },
   "raw": null,
   "inputs": {
-    "github_owner": "test-owner",
-    "github_branch": "sample_branch",
+    "github_owner": "repo-owner",
+    "github_branch": "test_script2",
     "github_repo": "personal"
   },
   "metrics": {
@@ -108,7 +108,7 @@
     "package": "fn-github",
     "package_version": "1.0.0",
     "host": "host",
-    "execution_time_ms": 260,
-    "timestamp": "2022-12-03 12:03:24"
+    "execution_time_ms": 258,
+    "timestamp": "2022-12-04 10:34:24"
   }
 }

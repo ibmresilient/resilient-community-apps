@@ -19,18 +19,21 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "github_ref": {},
+        "github_ref": {
+          "type": "string"
+        },
         "github_owner": {
           "type": "string"
         },
         "github_until_date": {},
+        "github_limit": {
+          "type": "integer"
+        },
         "github_optional_file_path": {},
         "github_repo": {
           "type": "string"
         },
-        "github_since_date": {
-          "type": "integer"
-        }
+        "github_since_date": {}
       }
     },
     "metrics": {

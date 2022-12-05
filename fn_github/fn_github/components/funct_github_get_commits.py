@@ -29,6 +29,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.github_until_date
             -   fn_inputs.github_since_date
             -   fn_inputs.github_branch
+            -   fn_inputs.github_limit
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")

@@ -88,6 +88,15 @@ class TestGithubCreateFile:
         assert(TestGithubCreateFile.get_file_results['content'].get("contents") == TestGithubCreateFile.create_file_setup['github_file_contents'])
 
     @pytest.mark.livetest
+    def test_get_directory_files(self, circuits_app):
+        list_directory_setup = github_config('list_directory')
+        list_directory_setup['github_branch'] = TestGithubCreateFile.branch
+
+        TestGithubCreateFile.list_directory_results = call_function(circuits_app, 'github_list_directory', list_directory_setup)
+        assert(TestGithubCreateFile.list_directory_results['success'])
+        assert(TestGithubCreateFile.list_directory_results['content'])
+
+    @pytest.mark.livetest
     def test_get_commits(self, circuits_app):
         #if not getattr(self, 'create_file_results', None):
         #    assert(False)

@@ -1,17 +1,23 @@
 {
     "create_branch": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_based_on_branch_or_sha": "main",
         "github_repo": "personal",
         "github_branch": "testit"
     },
     "get_branch": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_branch": "testit"
     },
+    "list_directory": {
+        "github_owner": "repo-owner",
+        "github_repo": "personal",
+        "github_file_path": "test_folder",
+        "github_branch": "testit"
+    },
     "create_file": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_ref": "testit",
         "github_committer": "A Tester:a@example.com",
@@ -20,14 +26,14 @@
         "github_commit_message" : "This is a unit test"
     },
     "get_file": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_ref": "testit",
         "github_file_path": "test_folder/testit.txt",
         "github_return_base64": false
     },
     "update_file": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_branch": "testit",
         "github_committer": "B Tester:b@example.com",
@@ -36,7 +42,7 @@
         "github_commit_message": "This is a unit test2"
     },
     "delete_file": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_branch": "testit",
         "github_committer": null,
@@ -44,7 +50,7 @@
         "github_commit_message": "This is a unit test2"
     },
     "get_commits": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_branch": "testit",
         "github_file_path": "test_folder/testit.txt",
@@ -52,12 +58,12 @@
         "github_until_date": null
     },
     "get_commit": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_sha": "sample text"
     },
     "create_release": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_prerelease": true,
         "github_release_draft": false,
@@ -66,20 +72,20 @@
         "github_release_description": "Release Description"
     },
     "get_releases": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal"
     },
     "get_release": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_release_tag": "v1.0.0"
     },
     "get_latest_release": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal"
     },
     "delete_branch": {
-        "github_owner": "<your-acct>",
+        "github_owner": "repo-owner",
         "github_repo": "personal",
         "github_release_tag": "test_it"
     }
