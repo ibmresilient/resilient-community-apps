@@ -29,7 +29,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [u"Convert JSON to rich text v1.3"],
         "playbooks": [u"github_create_branch", u"github_create_file", u"github_create_release", u"github_delete_branch", u"github_delete_file", u"github_get_branch", u"github_get_commit", u"github_get_commits", u"github_get_file", u"github_get_latest_release", u"github_get_release", u"github_list_repositories"]
     }
 
@@ -72,6 +72,8 @@ def customization_data(client=None):
         - github_get_latest_release
         - github_get_release
         - github_list_repositories
+    - Scripts:
+        - Convert JSON to rich text v1.3
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

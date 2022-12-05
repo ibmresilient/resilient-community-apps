@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 
 """AppFunction implementation"""
 
 from fn_github.lib.client_helper import GitHubHelper
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_github"
 FN_NAME = "github_delete_file"
@@ -29,14 +31,14 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.github_commit_message
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         gh = GitHubHelper(self.app_configs._asdict())
 
         validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
             self.app_configs)
 
-        validate_fields(["github_owner", "github_repo", "github_file_path", 
+        validate_fields(["github_owner", "github_repo", "github_file_path",
                          "github_commit_message", "github_branch"], fn_inputs)
 
         committer = None
@@ -59,6 +61,6 @@ class FunctionComponent(AppFunctionComponent):
         if results and results.get('commit'):
             results['commit'] = results['commit'].sha
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results, success=bool(results), reason=err_msg)

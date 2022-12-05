@@ -3,11 +3,13 @@ import json
 from json import JSONDecodeError
 import os
 import pytest
-import sys
+from os.path import exists
 from datetime import datetime
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 TS = datetime.now()
+
+ENV_TEST_CONFIG_FILE = "TEST_GITHUB_CONFIG"
 
 def read_json_file(path):
     """
@@ -20,6 +22,7 @@ def read_json_file(path):
     :rtype: dict
     """
     file_contents = None
+
     with io.open(path, mode="rt", encoding="utf-8") as the_file:
         try:
             file_contents = json.load(the_file)
@@ -32,7 +35,11 @@ def read_json_file(path):
 
 def github_config(function_name):
     # get the file path as an environment variable
-    file_path = os.environ.get("TEST_GITHUB_CONFIG")
+    file_path = os.environ.get(ENV_TEST_CONFIG_FILE)
+    if not file_path or \
+        (file_path and not exists(file_path)):
+        ValueError(f"Specify environment variable '{ENV_TEST_CONFIG_FILE}' and file exists")
+
     return dict(read_json_file(file_path)[function_name])
 
 def create_branch_inputs(ts):

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 
 """
 Function implementation test.
-Usage: 
+Usage:
     resilient-circuits selftest -l fn-github
     resilient-circuits selftest --print-env -l fn-github
 
@@ -21,9 +23,9 @@ Return examples:
 import logging
 from fn_github.lib.client_helper import GitHubHelper
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
+LOG.addHandler(logging.StreamHandler())
 
 
 def selftest_function(opts):

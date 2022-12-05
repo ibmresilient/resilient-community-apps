@@ -85,7 +85,7 @@ class TestGithubCreateFile:
 
         TestGithubCreateFile.get_file_results = call_function(circuits_app, 'github_get_file', get_file_setup)
         assert(TestGithubCreateFile.get_file_results['success'])
-        assert(TestGithubCreateFile.get_file_results['content'] == TestGithubCreateFile.create_file_setup['github_file_contents'])
+        assert(TestGithubCreateFile.get_file_results['content'].get("contents") == TestGithubCreateFile.create_file_setup['github_file_contents'])
 
     @pytest.mark.livetest
     def test_get_commits(self, circuits_app):
@@ -130,7 +130,7 @@ class TestGithubCreateFile:
 
         TestGithubCreateFile.get_file2_results = call_function(circuits_app, 'github_get_file', get_file_setup2)
         assert(TestGithubCreateFile.get_file2_results['success'])
-        assert(TestGithubCreateFile.get_file2_results['content'] == TestGithubCreateFile.update_file_setup['github_file_contents'])
+        assert(TestGithubCreateFile.get_file2_results['content'].get("contents") == TestGithubCreateFile.update_file_setup['github_file_contents'])
 
     @pytest.mark.livetest
     def test_delete_file(self, circuits_app):

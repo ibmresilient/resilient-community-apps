@@ -29,7 +29,9 @@ setup(
     author_email="",
     url="https://github.com/ibmresilient/resilient-community-apps",
     description="SOAR Functions for GitHub",
-    long_description="""Links:
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+<br>
+Links:
 <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
 <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
