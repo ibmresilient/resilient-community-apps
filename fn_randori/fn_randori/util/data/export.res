@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1670250198093,
+  "export_date": 1670276789357,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -518,6 +518,36 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "incident/randori_target_characteristic_tags",
+      "hide_notification": false,
+      "id": 323,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "randori_target_characteristic_tags",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Characteristic Tags",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "1811258b-44dc-47c4-90aa-6f5a86ee3a7f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/randori_target_status",
       "hide_notification": false,
       "id": 299,
@@ -603,13 +633,13 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "incident/randori_target_tags",
+      "export_key": "incident/randori_target_user_tags",
       "hide_notification": false,
       "id": 280,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "name": "randori_target_tags",
+      "name": "randori_target_user_tags",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -1088,13 +1118,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 94,
+  "id": 99,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1670250196305,
+      "create_date": 1670276786215,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1103,7 +1133,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1670250196305,
+      "update_date": 1670276786215,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1912,12 +1942,12 @@
           "id": 3,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1670011952923,
+          "last_modified_time": 1670273435684,
           "name": "Randori: Update Target Data in SOAR",
           "object_type": "incident",
           "playbook_handle": "randori_update_target_data_in_soar",
           "programmatic_name": "randori_update_target_data_in_soar_randori_update_target_data_in_soar",
-          "script_text": "def map_temptation(temptation_score):\n  if not temptation_score:\n    return None\n  if temptation_score \u003c= 14:\n    return \"Low\"\n  elif temptation_score \u003e= 15 and temptation_score \u003c= 29:\n    return \"Medium\"\n  elif temptation_score \u003e= 30 and temptation_score \u003c= 39:\n    return \"High\"\n  elif temptation_score \u003e= 40:\n    return \"Critical\"\n    \ntarget_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = map_temptation(data.get(\"target_temptation\"))\n    incident.properties.randori_target_name = data.get(\"name\")\n    incident.properties.randori_target_vendor = data.get(\"vendor\")\n    incident.properties.randori_target_version = data.get(\"version\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    entity_url = content.get(\"entity_url\")\n    if entity_url:\n      incident.properties.randori_target_link = \"\u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(entity_url)\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_tags = \", \".join(user_tags)\n    \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n    \n    # Add Randori note\n    randori_notes = data.get(\"randori_notes\")\n    if randori_notes:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eCreated by Randori:\u003c/b\u003e\u003cbr\u003e {}\".format(randori_notes)))\n",
+          "script_text": "def map_temptation(temptation_score):\n  if not temptation_score:\n    return None\n  if temptation_score \u003c= 14:\n    return \"Low\"\n  elif temptation_score \u003e= 15 and temptation_score \u003c= 29:\n    return \"Medium\"\n  elif temptation_score \u003e= 30 and temptation_score \u003c= 39:\n    return \"High\"\n  elif temptation_score \u003e= 40:\n    return \"Critical\"\n    \ntarget_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = map_temptation(data.get(\"target_temptation\"))\n    incident.properties.randori_target_name = data.get(\"name\")\n    incident.properties.randori_target_vendor = data.get(\"vendor\")\n    incident.properties.randori_target_version = data.get(\"version\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    entity_url = content.get(\"entity_url\")\n    if entity_url:\n      incident.properties.randori_target_link = \"\u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(entity_url)\n      \n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n      \n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_user_tags = \", \".join(user_tags)\n        \n    characteristic_tags = data.get(\"characteristic_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_characteristic_tags = \", \".join(characteristic_tags)\n      \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n    \n    # Add Randori note\n    randori_notes = data.get(\"randori_notes\")\n    if randori_notes:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eCreated by Randori:\u003c/b\u003e\u003cbr\u003e {}\".format(randori_notes)))\n",
           "tags": [],
           "uuid": "17beabef-9423-4f3e-b40c-9b48da36085c"
         }
@@ -2622,7 +2652,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 13,
+        "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\" isExecutable=\"true\" name=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jcmxfk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Get Target\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"46339b52-4027-4e57-b854-0fbc457c8924\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jcmxfk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1s8bliw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0jcmxfk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hwx7pf\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Update target custom fields\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5af933f7-fce7-4086-8ce2-ceaeddfe7a89\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1s8bliw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hwx7pf\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1s8bliw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1hwx7pf\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_71569df3_623d_4529_8611_3bdb61c44885\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hwx7pf\" id=\"Flow_1hwx7pf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s8bliw\" id=\"Flow_1s8bliw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jcmxfk\" id=\"Flow_0jcmxfk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667578983100,
@@ -2674,7 +2704,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1669997864685,
+      "last_modified_time": 1670273509189,
       "local_scripts": [
         {
           "actions": [],
@@ -2685,12 +2715,12 @@
           "id": 15,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1669997832229,
+          "last_modified_time": 1670273504222,
           "name": "Update target custom fields",
           "object_type": "incident",
           "playbook_handle": "randori_update_target_in_soar",
           "programmatic_name": "randori_update_target_in_soar_update_target_custom_fields",
-          "script_text": "def map_temptation(temptation_score):\n  if not temptation_score:\n    return None\n  if temptation_score \u003c= 14:\n    return \"Low\"\n  elif temptation_score \u003e= 15 and temptation_score \u003c= 29:\n    return \"Medium\"\n  elif temptation_score \u003e= 30 and temptation_score \u003c= 39:\n    return \"High\"\n  elif temptation_score \u003e= 40:\n    return \"Critical\"\n    \ntarget_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = map_temptation(data.get(\"target_temptation\"))\n    incident.properties.randori_target_name = data.get(\"name\")\n    incident.properties.randori_target_vendor = data.get(\"vendor\")\n    incident.properties.randori_target_version = data.get(\"version\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_tags = \", \".join(user_tags)\n    \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n",
+          "script_text": "def map_temptation(temptation_score):\n  if not temptation_score:\n    return None\n  if temptation_score \u003c= 14:\n    return \"Low\"\n  elif temptation_score \u003e= 15 and temptation_score \u003c= 29:\n    return \"Medium\"\n  elif temptation_score \u003e= 30 and temptation_score \u003c= 39:\n    return \"High\"\n  elif temptation_score \u003e= 40:\n    return \"Critical\"\n    \ntarget_data = playbook.functions.results.target_data\n\nif not target_data.success:\n  incident.addNote(\"Randori: Update custom fields: Unable to get target data to update custom fields.\")\nelse:\n  content = target_data.get(\"content\", {})\n  data = target_data.content.get(\"data\", {})\n  if data:\n    # Update custom fields with Randori target data\n    incident.properties.randori_target_status = data.get(\"status\")\n    incident.properties.randori_target_impact_score = data.get(\"impact_score\")\n    incident.properties.randori_target_temptation = map_temptation(data.get(\"target_temptation\"))\n    incident.properties.randori_target_name = data.get(\"name\")\n    incident.properties.randori_target_vendor = data.get(\"vendor\")\n    incident.properties.randori_target_version = data.get(\"version\")\n    incident.properties.randori_target_authority = data.get(\"authority\")\n    incident.properties.randori_target_affiliation_state = data.get(\"affiliation_state\")\n    incident.properties.randori_target_perspective_name = data.get(\"perspective_name\")\n    tech_category = data.get(\"tech_category\", [])\n    if tech_category:\n      incident.properties.randori_target_tech_category = \", \".join(tech_category)\n      \n    user_tags = data.get(\"user_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_user_tags = \", \".join(user_tags)\n        \n    characteristic_tags = data.get(\"characteristic_tags\", [])\n    if user_tags:\n      incident.properties.randori_target_characteristic_tags = \", \".join(characteristic_tags)\n      \n    incident.addNote(\"Randori: Update Target Data in SOAR script updated custom fields in SOAR.\")\n",
           "tags": [],
           "uuid": "5af933f7-fce7-4086-8ce2-ceaeddfe7a89"
         }
@@ -2723,7 +2753,7 @@
       "tags": [],
       "type": "default",
       "uuid": "71569df3-623d-4529-8611-3bdb61c44885",
-      "version": 21
+      "version": 22
     },
     {
       "activation_type": "manual",

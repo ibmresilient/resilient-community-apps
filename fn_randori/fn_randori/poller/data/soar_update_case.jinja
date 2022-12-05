@@ -28,7 +28,11 @@
     {% endif %}
 
     {% if user_tags is not none %}
-    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    "randori_target_user_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    {% if characteristic_tags is not none %}
+    "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
     "randori_target_perspective_name": "{{ perspective_name }}",

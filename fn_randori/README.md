@@ -62,17 +62,23 @@
 -->
 **IBM SOAR app bidirectional synchronization and functions for Randori**
 
-Randori is an Attack Surface Management Platform.  
+Randori Recon is an Attack Surface Management (ASM) solution which helps to identify externally-facing customer assets that could be targeted and lead to a breach.
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.
+Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.  The app will poll Randori for Targets that meet one of the two criteria:
+
+1. Net new Targets on the customer attack surface
+2. Change in Target Temptation for existing Targets on the attack surface
+
  ![screenshot: main](./doc/screenshots/randori-functions.png)
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
+* Randori SOAR cases contain Target details that require further investigation including Service information, location, discovery path and artifacts
+* Randori Priority and Temptation scoring and link back to categorical Guidance to help with remediation and mitigation activities 
 * Sync Randori Targets to SOAR cases via user defined filter criteria
 * Sync Randori Target comments to notes in SOAR
 * Set the Target Impact Score in Randori from SOAR
@@ -964,12 +970,18 @@ else:
     entity_url = content.get("entity_url")
     if entity_url:
       incident.properties.randori_target_link = "<a target='_blank' href='{0}'>Link</a>".format(entity_url)
+
     tech_category = data.get("tech_category", [])
     if tech_category:
       incident.properties.randori_target_tech_category = ", ".join(tech_category)
+
     user_tags = data.get("user_tags", [])
     if user_tags:
-      incident.properties.randori_target_tags = ", ".join(user_tags)
+      incident.properties.randori_target_user_tags = ", ".join(user_tags)
+        
+    characteristic_tags = data.get("characteristic_tags", [])
+    if user_tags:
+      incident.properties.randori_target_characteristic_tags = ", ".join(characteristic_tags)
     
     incident.addNote("Randori: Update Target Data in SOAR script updated custom fields in SOAR.")
     
@@ -1339,6 +1351,7 @@ randori_detections_dt
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
 | Authority | `randori_target_authority` | `boolean` | `properties` | - | - |
+| Characteristic Tags | `randori_target_characteristic_tags` | `text` | `properties` | - | - |
 | Target ID | `randori_target_id` | `text` | `properties` | - | - |
 | Impact Score | `randori_target_impact_score` | `select` | `properties` | - | - |
 | Link to Target | `randori_target_link` | `textarea` | `properties` | - | - |
@@ -1347,7 +1360,7 @@ randori_detections_dt
 | Service Vendor | `randori_target_vendor` | `text` | `properties` | - | - |
 | Service Version | `randori_target_version` | `text` | `properties` | - | - |
 | Target Status | `randori_target_status` | `select` | `properties` | - | - |
-| User Tags | `randori_target_tags` | `text` | `properties` | - | - |
+| User Tags | `randori_target_user_tags` | `text` | `properties` | - | - |
 | Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
 | Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
 
@@ -1471,7 +1484,11 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     {% endif %}
 
     {% if user_tags is not none %}
-    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    "randori_target_user_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    {% if characteristic_tags is not none %}
+    "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
     "randori_target_perspective_name": "{{ perspective_name }}",
