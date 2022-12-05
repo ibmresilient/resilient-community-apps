@@ -15,9 +15,9 @@
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "annMarie@5rf2xs.onmicrosoft.com",
+    "mail": "example@******.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "annMarie",
+    "mailNickname": "example",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,7 +29,7 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:annMarie@5rf2xs.onmicrosoft.com"
+      "SMTP:example@******.onmicrosoft.com"
     ],
     "renewedDateTime": "2022-11-17T15:35:29Z",
     "resourceBehaviorOptions": [],
@@ -44,7 +44,7 @@
   },
   "raw": null,
   "inputs": {
-    "ms_group_mail_nickname": "annMarie@5rf2xs.onmicrosoft.com"
+    "ms_group_mail_nickname": "EngineeringTeam@******.onmicrosoft.com"
   },
   "metrics": {
     "version": "1.0",
