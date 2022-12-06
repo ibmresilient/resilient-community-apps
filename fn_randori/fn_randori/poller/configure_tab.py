@@ -22,12 +22,16 @@ class RandoriTab(Tab):
         Field("randori_target_status"),
         Field("randori_target_link"),
         Field("randori_target_temptation"),
+        Field("randori_target_vendor"),
+        Field("randori_target_name"),
+        Field("randori_target_version"),
         Field("randori_target_authority"),
         Field("randori_target_perspective_name"),
         Field("randori_target_affiliation_state"),
         Field("randori_target_impact_score"),
         Field("randori_target_tech_category"),
-        Field("randori_target_tags"),
+        Field("randori_target_characteristic_tags"),
+        Field("randori_target_user_tags"),
         Datatable("randori_detections_dt"),
         Datatable("randori_discovery_path_dt")
     ]

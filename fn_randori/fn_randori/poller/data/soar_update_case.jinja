@@ -12,7 +12,15 @@
     "randori_target_authority": {{ authority | lower }},
 
     {% if target_temptation is not none %}
-    "randori_target_temptation": {{ target_temptation }},
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
     {% endif %}
 
     {% if tech_category is not none %}
@@ -20,7 +28,11 @@
     {% endif %}
 
     {% if user_tags is not none %}
-    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    "randori_target_user_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    {% if characteristic_tags is not none %}
+    "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
     "randori_target_perspective_name": "{{ perspective_name }}",

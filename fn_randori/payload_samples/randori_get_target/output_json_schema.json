@@ -37,10 +37,7 @@
               "type": "string"
             },
             "characteristic_tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "type": "array"
             },
             "confidence": {
               "type": "integer"
@@ -70,9 +67,7 @@
                 "vendor": {
                   "type": "string"
                 },
-                "version": {
-                  "type": "string"
-                }
+                "version": {}
               }
             },
             "criticality": {
@@ -178,6 +173,9 @@
               "type": "string"
             }
           }
+        },
+        "entity_url": {
+          "type": "string"
         }
       }
     },

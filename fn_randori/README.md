@@ -51,7 +51,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 11/2022 | Initial Release | 
+| 1.0.0 | 12/2022 | Initial Release | 
 
 ---
 
@@ -62,17 +62,23 @@
 -->
 **IBM SOAR app bidirectional synchronization and functions for Randori**
 
-Randori is an Attack Surface Management Platform.  
+Randori Recon is an Attack Surface Management (ASM) solution which helps to identify externally-facing customer assets that could be targeted and lead to a breach.
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.
+Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.  The app will poll Randori for Targets that meet one of the two criteria:
+
+1. Net new Targets on the customer attack surface
+2. Change in Target Temptation for existing Targets on the attack surface
+
  ![screenshot: main](./doc/screenshots/randori-functions.png)
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
+* Randori SOAR cases contain Target details that require further investigation including Service information, location, discovery path and artifacts
+* Randori Priority and Temptation scoring and link back to categorical Guidance to help with remediation and mitigation activities 
 * Sync Randori Targets to SOAR cases via user defined filter criteria
 * Sync Randori Target comments to notes in SOAR
 * Set the Target Impact Score in Randori from SOAR
@@ -190,7 +196,7 @@ The following Randori Tab custom layout is included in the app:
 
 ## Poller Considerations
 
-The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
+The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
 <p>
 When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 <p>
@@ -829,20 +835,19 @@ Get the target data for a single Randori target instance.
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
     "data": {
       "affiliation_state": "None",
-      "applicability": 3,
+      "applicability": 4,
       "attack_note": "",
       "authority": true,
       "authority_distance": 0,
       "authority_override": false,
       "authorization_state": "None",
-      "characteristic_tags": [
-        "DefaultPage",
-        "NoCSS",
-        "OldCopyright"
-      ],
+      "characteristic_tags": [],
       "confidence": 75,
       "cpe": {
         "cpe_version": "2.3",
@@ -850,71 +855,68 @@ results = {
         "language": null,
         "other": null,
         "part": "a",
-        "product": "tomcat",
-        "str": "cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*",
+        "product": "vcenter_server",
+        "str": "cpe:2.3:a:vmware:vcenter_server:*:*:*:*:*:*:*:*",
         "sw_edition": null,
         "target_hw": null,
         "target_sw": null,
         "update": null,
-        "vendor": "apache",
-        "version": "7.0.76"
+        "vendor": "vmware",
+        "version": null
       },
-      "criticality": 1,
+      "criticality": 3,
       "deleted": false,
-      "description": "Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.",
-      "enumerability": 3,
-      "first_seen": "2022-07-07T07:18:22.029485+00:00",
-      "id": "5dbcb688-aaaa-4574-ad18-6cbc27a1941c",
+      "description": "VMware vCenter is the management component of VMware vSphere",
+      "enumerability": 1,
+      "first_seen": "2022-09-10T07:49:26.858689+00:00",
+      "id": "2755b843-9d38-457e-b4a3-3a8d27c47a9c",
       "impact_score": "Medium",
-      "last_seen": "2022-10-31T11:32:10.769721+00:00",
-      "lens_id": "08a90512-aaaa-4766-9cc7-7a945e934638",
+      "last_seen": "2022-11-29T20:13:48.701719+00:00",
+      "lens_id": "6e8476e5-ead9-4ca2-914c-3bc1732ca0fb",
       "lens_view": "public",
-      "name": "Tomcat",
-      "org_id": "923af5dd-aaaa-bbbb-cccc-707dfe08411e",
+      "name": "vCenter",
+      "org_id": "e0c553a8-88f1-4991-8970-f058a82542e8",
       "perspective": "00000000-0000-0000-0000-000000000000",
       "perspective_name": "PUBLIC",
       "post_exploit": 3,
-      "priority_impact_factor": 0.084375,
-      "priority_score": 135.0,
-      "priority_status_factor": 0.1125,
-      "priority_tags_factor": 0.253125,
+      "priority_impact_factor": 0.02625,
+      "priority_score": 39.375,
+      "priority_status_factor": 0.065625,
+      "priority_tags_factor": 0.0,
       "private_weakness": 0,
-      "public_weakness": 5,
-      "randori_notes": "This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.",
-      "reference": "http://tomcat.apache.org",
+      "public_weakness": 2,
+      "randori_notes": "VMware vSphere (and associated services - vCenter) may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html.  Proof-of-Concept exploit code is available for these CVEs. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance https://www.vmware.com/security/advisories/VMSA-2021-0028.html",
+      "reference": "",
       "research": 3,
-      "service_id": "15d7435d-aaaa-bbbb-cccc-f9e12dde6f68",
+      "service_id": "44096166-3213-43c9-8c0e-27945a7fd8ce",
       "status": "Needs Investigation",
-      "target_temptation": 45,
+      "target_temptation": 21,
       "tech_category": [
-        "App Servers"
+        "Network Services"
       ],
-      "temptation_last_modified": "2022-03-31T18:10:37.913851+00:00",
+      "temptation_last_modified": "2022-04-07T20:59:44.451528+00:00",
       "user_tags": [
+        "Cert Expire 60",
         "Google",
-        "Unknown - By Qualys",
-        "Unknown - By Tenable",
         "Wildcard Cert"
       ],
-      "vendor": "Apache",
-      "version": "7.0.76"
-    }
-  },
-  "inputs": {
-    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
-  },
-  "metrics": {
-    "execution_time_ms": 339,
-    "host": "MacBook-Pro.local",
-    "package": "fn-randori",
-    "package_version": "1.0.0",
-    "timestamp": "2022-11-02 16:57:13",
-    "version": "1.0"
+      "vendor": "VMware",
+      "version": ""
+    },
+    "entity_url": "https://app.randori.io/xxxx/targets/2755b843-9d38-457e-b4a3-3a8d27c47a9c"
   },
   "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+  "inputs": {
+    "randori_target_id": "2755b843-9d38-457e-b4a3-3a8d27c47a9c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 29154,
+    "timestamp": "2022-12-01 10:05:54"
+  }
 }
 ```
 
@@ -935,6 +937,18 @@ inputs.randori_target_id = incident.properties.randori_target_id
 <p>
 
 ```python
+def map_temptation(temptation_score):
+  if not temptation_score:
+    return None
+  if temptation_score <= 14:
+    return "Low"
+  elif temptation_score >= 15 and temptation_score <= 29:
+    return "Medium"
+  elif temptation_score >= 30 and temptation_score <= 39:
+    return "High"
+  elif temptation_score >= 40:
+    return "Critical"
+
 target_data = playbook.functions.results.target_data
 
 if not target_data.success:
@@ -946,18 +960,35 @@ else:
     # Update custom fields with Randori target data
     incident.properties.randori_target_status = data.get("status")
     incident.properties.randori_target_impact_score = data.get("impact_score")
-    incident.properties.randori_target_temptation = data.get("target_temptation")
+    incident.properties.randori_target_temptation = map_temptation(data.get("target_temptation"))
+    incident.properties.randori_target_name = data.get("name")
+    incident.properties.randori_target_vendor = data.get("vendor")
+    incident.properties.randori_target_version = data.get("version")
     incident.properties.randori_target_authority = data.get("authority")
     incident.properties.randori_target_affiliation_state = data.get("affiliation_state")
     incident.properties.randori_target_perspective_name = data.get("perspective_name")
+    entity_url = content.get("entity_url")
+    if entity_url:
+      incident.properties.randori_target_link = "<a target='_blank' href='{0}'>Link</a>".format(entity_url)
+
     tech_category = data.get("tech_category", [])
     if tech_category:
       incident.properties.randori_target_tech_category = ", ".join(tech_category)
+
     user_tags = data.get("user_tags", [])
     if user_tags:
-      incident.properties.randori_target_tags = ", ".join(user_tags)
+      incident.properties.randori_target_user_tags = ", ".join(user_tags)
+        
+    characteristic_tags = data.get("characteristic_tags", [])
+    if user_tags:
+      incident.properties.randori_target_characteristic_tags = ", ".join(characteristic_tags)
     
     incident.addNote("Randori: Update Target Data in SOAR script updated custom fields in SOAR.")
+    
+    # Add Randori note
+    randori_notes = data.get("randori_notes")
+    if randori_notes:
+        incident.addNote(helper.createRichText("<b>Created by Randori:</b><br> {}".format(randori_notes)))
 ```
 
 </p>
@@ -1320,14 +1351,18 @@ randori_detections_dt
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | Affiliation State | `randori_target_affiliation_state` | `text` | `properties` | - | - |
 | Authority | `randori_target_authority` | `boolean` | `properties` | - | - |
+| Characteristic Tags | `randori_target_characteristic_tags` | `text` | `properties` | - | - |
 | Target ID | `randori_target_id` | `text` | `properties` | - | - |
 | Impact Score | `randori_target_impact_score` | `select` | `properties` | - | - |
 | Link to Target | `randori_target_link` | `textarea` | `properties` | - | - |
 | Perspective Name | `randori_target_perspective_name` | `text` | `properties` | - | - |
+| Service Name | `randori_target_name` | `text` | `properties` | - | - |
+| Service Vendor | `randori_target_vendor` | `text` | `properties` | - | - |
+| Service Version | `randori_target_version` | `text` | `properties` | - | - |
 | Target Status | `randori_target_status` | `select` | `properties` | - | - |
-| User Tags | `randori_target_tags` | `text` | `properties` | - | - |
+| User Tags | `randori_target_user_tags` | `text` | `properties` | - | - |
 | Tech Category | `randori_target_tech_category` | `text` | `properties` | - | - |
-| Target Temptation | `randori_target_temptation` | `number` | `properties` | - | - |
+| Target Temptation | `randori_target_temptation` | `text` | `properties` | - | - |
 
 ---
 
@@ -1382,6 +1417,17 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   {# specify your custom fields for your endpoint solution #}
   "properties": {
     "randori_target_id": "{{ target_id }}",
+    {% if target_temptation is not none %}
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
+    {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"
   }
@@ -1422,7 +1468,15 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_authority": {{ authority | lower }},
 
     {% if target_temptation is not none %}
-    "randori_target_temptation": {{ target_temptation }},
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
     {% endif %}
 
     {% if tech_category is not none %}
@@ -1430,7 +1484,11 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     {% endif %}
 
     {% if user_tags is not none %}
-    "randori_target_tags": "{{ user_tags | join(', ') }}",
+    "randori_target_user_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    {% if characteristic_tags is not none %}
+    "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
     "randori_target_perspective_name": "{{ perspective_name }}",
@@ -1438,7 +1496,6 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_impact_score": "{{ impact_score }}"
     }
 }
-
 ```
 ---
 ## Troubleshooting & Support

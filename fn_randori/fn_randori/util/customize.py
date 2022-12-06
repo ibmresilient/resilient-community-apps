@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"randori_clear_data_table", u"randori_get_detections_of_target", u"randori_get_paths", u"randori_get_target", u"randori_send_note_as_comment_to_target", u"randori_update_notes_from_randori_target", u"randori_update_target_impact_score", u"randori_update_target_status"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tags", u"randori_target_tech_category", u"randori_target_temptation"],
+        "incident_fields": [u"randori_target_affiliation_state", u"randori_target_authority", u"randori_target_characteristic_tags", u"randori_target_id", u"randori_target_impact_score", u"randori_target_link", u"randori_target_name", u"randori_target_perspective_name", u"randori_target_status", u"randori_target_tech_category", u"randori_target_temptation", u"randori_target_user_tags", u"randori_target_vendor", u"randori_target_version"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"randori_detections_dt", u"randori_discovery_path_dt"],
@@ -71,14 +71,18 @@ def customization_data(client=None):
     - Incident Fields:
         - randori_target_affiliation_state
         - randori_target_authority
+        - randori_target_characteristic_tags
         - randori_target_id
         - randori_target_impact_score
         - randori_target_link
+        - randori_target_name
         - randori_target_perspective_name
         - randori_target_status
-        - randori_target_tags
         - randori_target_tech_category
         - randori_target_temptation
+        - randori_target_user_tags
+        - randori_target_vendor
+        - randori_target_version
     - Data Tables:
         - randori_detections_dt
         - randori_discovery_path_dt
