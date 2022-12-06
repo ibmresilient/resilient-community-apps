@@ -36,7 +36,7 @@ class FunctionComponent(AppFunctionComponent):
                                           getattr(fn_inputs, 'pbm_name', None))
 
         if status:
-            results = b_to_s(base64.b64encode(s_to_b(results)))
+            results = {"contents": b_to_s(base64.b64encode(s_to_b(results)))}
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
