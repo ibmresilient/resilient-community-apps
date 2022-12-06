@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 200,
+    "content": {
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 1,
+      "creation_time": 1440703811218,
+      "name": "SSH Servers",
+      "namespace": "SHARED",
+      "element_type": "IP",
+      "collection_id": 17
+    }
+  },
+  "raw": "{\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1440703811218, \"name\": \"SSH Servers\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 17}}",
+  "inputs": {
+    "qradar_reference_set_name": "SSH Servers",
+    "qradar_reference_set_item_value": "1.1.1.1",
+    "qradar_label": "SOAR_Plugin_Destination_Name"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-qradar-integration",
+    "package_version": "2.2.0",
+    "execution_time_ms": 496,
+    "timestamp": "2022-01-28 13:25:05"
+  }
+}
