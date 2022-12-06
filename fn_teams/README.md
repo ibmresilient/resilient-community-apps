@@ -39,8 +39,12 @@
 
 ---
 
-## Overview
 
+<p align="center">
+<img src="./doc/screenshots/main.png" />
+</p>
+
+## Overview
 This application extends the meeting and collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform. This provides SOAR platform with the ability to interface with Microsoft Endpoint to create Groups, Teams and Channels. Users can also post Incident or task information directly from SOAR to a MS Channel. The Microsoft 365 Group are created with resources that members of the group share, including:
 
 * Outlook conversations
@@ -57,7 +61,9 @@ This application extends the meeting and collaboration functionality of Microsof
 * It is now possible to create It Groups, Teams, and channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization. 
 * Information about the Incident or task can be directly posted to a MS Channel from within SOAR.
 * Example workflows are included that performs the aforementioned operation and stores related information as a incident or a task note.
-* Examples of rules that invoke a menu popup asking the user for inputs to carry out the aforementioned activities are provided. 
+* Examples of rules that invoke a menu popup asking the user for inputs to carry out the aforementioned activities are provided.
+
+
 ---
 
 ## Requirements
