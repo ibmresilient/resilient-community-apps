@@ -45,7 +45,9 @@
 </p>
 
 ## Overview
-This application extends the meeting and collaboration functionality of Microsoft Teams to IBM Security QRadar SOAR Platform. This provides SOAR platform with the ability to interface with Microsoft Endpoint to create Groups, Teams and Channels. Users can also post Incident or task information directly from SOAR to a MS Channel. The Microsoft 365 Group are created with resources that members of the group share, including:
+This IBM Security QRadar SOAR application extends the meeting and collaboration functionality of Microsoft Teams. It includes the ability to create MS Teams Groups, Teams and Channels. Functionality also exists to post SOAR Incident or task information to a MS Teams Channel. 
+
+Microsoft 365 Groups are created with resources that members of the group share, including:
 
 * Outlook conversations
 * Outlook calendar
@@ -56,12 +58,10 @@ This application extends the meeting and collaboration functionality of Microsof
 * Intune device management
 
 ### Key Features
-* This program offers tools for establishing one or more Groups, Teams, and Channels and enables the addition of participants to an incident or task.
-* This program also offers the ability to delete Groups, Channels, and Teams, as well as to archive or un-archive them.
-* It is now possible to create It Groups, Teams, and channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization. 
-* Information about the Incident or task can be directly posted to a MS Channel from within SOAR.
-* Example workflows are included that performs the aforementioned operation and stores related information as a incident or a task note.
-* Examples of rules that invoke a menu popup asking the user for inputs to carry out the aforementioned activities are provided.
+* Create or delete Groups, Channels, and Teams, as well as archive or un-archive Teams. Incident and task members can be assigned to a Team.
+* It is now possible to create Groups, Teams, and Channels with members who are not a part of an incident or task but who have a functioning MS account that is a part of the same organization. 
+* Post information about the Incident or task directly to a MS Channel.
+* Example rules/workflows are included that perform the aforementioned operations and store related information as a incident or a task note.
 
 
 ---
@@ -108,7 +108,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Both Python 3.6 and Python 3.9 are supported.
@@ -120,9 +120,9 @@ Additional package dependencies may exist for each of these packages:
 ### Endpoint Developed With
 
 This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| Microsoft Graph REST API |  | `https://graph.microsoft.com/` | V1.0 |
+| Product Name | API URL | API Version |
+| ------------ | ------- | ----------- |
+| Microsoft Graph REST API |  `https://graph.microsoft.com/` | V1.0 |
 
 ---
 
@@ -131,13 +131,13 @@ This app has been implemented using:
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ## Endpoint Configuration
-This application needs an access token from the Microsoft identity platform since it uses the Microsoft Graph API to communicate with the endpoint.
+This application needs an access token from the Microsoft identity platform for use with Microsoft Graph APIs.
 The access token includes details about the application and the permission it has to use the Microsoft Graph resources and APIs. The app needs to be registered with the Microsoft identity platform and given permission to access the required Microsoft Graph resources by a user or an administrator in order to obtain an access token.
 
 ### Register a new application using the Azure portal
  The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Azure Active Directory (Azure AD). You can learn more about this at [learn.microsoft.com/application-model](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model)
 
-* Sign in to the Azure portal using either a work or school account or a personal Microsoft account.
+* Sign in to the Azure portal using either an enterprise account.
 * If your account gives you access to more than one tenant, select your account in the top right corner, and set your portal session to the Azure AD tenant that you want.
 * In the left-hand navigation pane, select the `Azure Active Directory service`, and then select `App registrations` > `New registration`.
 * When the Register an application page appears, enter your application's registration information:
@@ -149,13 +149,14 @@ The access token includes details about the application and the permission it ha
 <img src="./doc/screenshots/app_registration_overview.png" />
 </p>
 
-* Note down this information as this would be required later while setting up the **app.conf** file.
+* Note this information as this would be required later while setting up the **app.config** file.
 * When finished, select Register.
 * In the left-hand navigation pane under the `Manage` section, select `Authentication`.
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
 
 ### Selecting required API Permissions
-The application requires the resource owner's permission to access a protected resource, such as email or calendar information. The request made by your app may be granted or denied by the resource owner. The appropriate delegated permissions must be granted to the client app. Scopes are another name for delegated permissions. Scopes are permissions that specify what a client application can access on the user's behalf for a specific resource. See scopes and permissions for further details on scopes. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
+<-- this needs to be rewriteen -->
+The application requires the resource owner's permission to access a protected resource, such as email or calendar information. The resource manager role is needed to grant these app changes. The appropriate delegated permissions must be granted to the client app. Scopes are another name for delegated permissions. Scopes are permissions that specify what a client application can access on the user's behalf for a specific resource. See scopes and permissions for further details on scopes. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
 
 * In the left-hand navigation pane under the `Manage` section select `API Permission`.
 * Click `Add a permission`. On the Request API permission screen, select `Microsoft Graph`.
@@ -191,13 +192,13 @@ The following table provides the settings you need to configure the app. These s
 
 
 ## Function - MS Teams: Archive Team
-This function allows for archiving or unarchivig a Microsoft Team using the Microsoft Graph API. This provides SOAR with the ability to archive an existing MS Team or unarchive a previously archived MS Team within a SOAR incident or a  task. `archive_operation` specifies if the team is to be archived or unarchived. Archiving does not delete the MS Team. To locate this team for the archival/unarchival operation, one of the following inputs can be used:
+This function allows for archiving or unarchiving a Microsoft Team. The `archive_operation` input parameter specifies if the team is to be archived or unarchived. Archiving does not delete the MS Team. To identify the team for archival or unarchival, one of the following inputs can be used:
 
 * `ms_groupteam_id`
 * `ms_group_mail_nickname`
 * `ms_groupteam_name`
 
-**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` option will take precedence over the `ms_groupteam_name` option and the `ms_groupteam_id` option will take precedence over the other two options.
+**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two options.
 
 <p align="center">
 <img src="./doc/screenshots/action_archive_team.png" />
@@ -364,13 +365,15 @@ else:
 
 ---
 ## Function - MS Teams: Create Channel
-This function allows for creating a Microsoft Channel for a MS Team using the Graph API. This provides SOAR with the ability to create a channel for a MS Team from within a SOAR incident or a task. A MS Team can have multiple channels. Here a request is formulated and posted to the Microsoft Graph API for channel creation. To create a Channel for an MS Team, 3 key attributes are required, namely: teamId, displayName, and description. Out of these attributes, teamId is crucial as the MS Team must be properly identified before channel addition operation can take place. This function has the ability to find the required teamId using anyone of the below mentioned options:
+This function creates a Microsoft Channel for a MS Team. A MS Team can have multiple channels. 
+
+To create a Channel for an MS Team, 3 key attributes are required, namely: teamId, displayName, and description. Out of these attributes, teamId is crucial as the MS Team must be properly identified before channel addition operation can take place. This function has the ability to find the required teamId using anyone of the below mentioned options:
 
   * `ms_groupteam_id`
   * `ms_group_mail_nickname`
   * `ms_groupteam_name`
 
-**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` option will take precedence over the `ms_groupteam_name` option and the `ms_groupteam_id` option will take precedence over the other two options.
+**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two parameters.
 
 <p align="center">
 <img src="./doc/screenshots/action_create_channel.png" />
@@ -388,8 +391,8 @@ This function allows for creating a Microsoft Channel for a MS Team using the Gr
 | `ms_channel_name` | `text` | No | `Team 2` | Name of the Microsoft Teams channel |
 | `ms_description` | `text` | No | `Engineering SubTeam2` | Description for the MS Graph Object (Group / Team / Channel) that is being created |
 | `ms_group_mail_nickname` | `text` | No | `Engineering2` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
-| `ms_groupteam_id` | `text` | No | `4dfde5ae-4c27-4461` | Unique id assigned to a MS Group or Team while being created |
-| `ms_groupteam_name` | `text` | No | `Engineering` | Name assigned to the MS Group or Team while being created |
+| `ms_groupteam_id` | `text` | No | `4dfde5ae-4c27-4461` | Unique id assigned to the MS Group or Team |
+| `ms_groupteam_name` | `text` | No | `Engineering` | Name assigned to the MS Group or Team |
 
 </p>
 </details>
@@ -490,8 +493,9 @@ incident.addNote(note)
 
 ---
 ## Function - MS Teams: Create group
+This function creates a Microsoft Group with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation. 
 
-This function allows for creating a Microsoft Group using the Microsoft Graph API. This provides SOAR with the ability to create Groups from within a SOAR incident or a task. This function has the ability to create an MS Group with a Name and description from an Incident or a task. It also has the ability to add multiple owners by specifying their email addresses in a comma-separated manner. At least one owner must be mentioned for group creation. The function is developed to automatically add all members of an incident or a task to the MS Group. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
+The function is developed to automatically add all members of an incident or a task to the MS Group. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
 
 <p align="center">
 <img src="./doc/screenshots/action_create_group.png" />
@@ -506,14 +510,14 @@ This function allows for creating a Microsoft Group using the Microsoft Graph AP
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `add_members_from` | `select` | Yes | `Incident/Task` | Allows for adding incident or task members to Team/Group |
-| `additional_members` | `text` | No | `user1@example.com, user2@example.com` | Add members who are not members of this incident or task |
-| `incident_id` | `number` | No | `1098` | Unique id assigned to an incident while being created  |
-| `ms_description` | `text` | No | `-` | Description for the MS Graph Object (Group / Team / Channel) that is being created |
+| `add_members_from` | `select` | Yes | `Incident/Task` | Add incident or task members to Team/Group |
+| `additional_members` | `text` | No | `user1@example.com, user2@example.com` | Add additional Team members who are not members of this incident or task |
+| `incident_id` | `number` | No | `1098` | Incident id of the current incident  |
+| `ms_description` | `text` | No | `-` | Description for the MS Group |
 | `ms_group_mail_nickname` | `text` | No | `SOAR` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
 | `ms_group_name` | `text` | No | `SOAR` | Name of the MS Group |
-| `ms_owners_list` | `text` | No | `AdminSoarMS@.onmicrosoft.com` | A list of owners for the group or team |
-| `task_id` | `number` | No | `-` | Unique id of a task assigned while being created |
+| `ms_owners_list` | `text` | No | `AdminSoarMS@.onmicrosoft.com` | A list of owners for the Group |
+| `task_id` | `number` | No | `-` | Incident task id if creating a Group from a task.|
 
 </p>
 </details>
@@ -664,7 +668,9 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Create team
 
-This function allows for creating a Microsoft Team using the Microsoft Graph API. This provides SOAR with the ability to create a MS Team from within a SOAR incident or a task. This function has the ability to create an MS Team with a Name and description from an Incident or a task. It also has the ability to add multiple owners by specifying their email addresses in a comma-separated manner. At least one owner must be mentioned for group creation. The function is developed to automatically add all members of an incident or a task to the MS Team. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
+This function creates a Microsoft Team with the ability to add multiple owners by specifying their email addresses in a comma-separated list. At least one owner must be mentioned for group creation. 
+
+The function is developed to automatically add all members of an incident or a task to the MS Team. If the function is executed from within a task, in addition to task members, all incident members can also be automatically added if that option is selected. Apart from automatic member addition, individual members can be added by directly specifying their email addresses.
 
 <p align="center">
 <img src="./doc/screenshots/action_create_team.png" />
@@ -679,13 +685,13 @@ This function allows for creating a Microsoft Team using the Microsoft Graph API
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `add_members_from` | `select` | Yes | `Incident/Task` | Allows for adding incident or task members to Team/Group |
+| `add_members_from` | `select` | Yes | `Incident/Task` | Allows for adding incident or task members to Team |
 | `additional_members` | `text` | No | `user1@example.com, user2@example.com` | Add members who are not members of this incident or task |
-| `incident_id` | `number` | No | `1098` | Unique id assigned to an incident while being created  |
-| `ms_description` | `text` | No | `-` | Description for the MS Graph Object (Group / Team / Channel) that is being created |
-| `ms_owners_list` | `text` | No | `AdminSoarMS@.onmicrosoft.com` | A list of owners for the group or team |
+| `incident_id` | `number` | No | `1098` | Incident Id associate with this workflow/playbook  |
+| `ms_description` | `text` | No | `-` | Description for the MS Graph Team that is being created |
+| `ms_owners_list` | `text` | No | `AdminSoarMS@.onmicrosoft.com` | A comma separated list of owners for the group or team |
 | `ms_team_name` | `text` | No | `SoarTeam` | Name of the Microsoft Team |
-| `task_id` | `number` | No | `-` | Unique id of a task assigned while being created |
+| `task_id` | `number` | No | `-` | Incident task id if this Team is associated with a task |
 
 </p>
 </details>
@@ -842,13 +848,13 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Delete Channel
 
-This function allows for deleting a MS Channel using the Microsoft Graph API. This provides SOAR with the ability to delete an existing MS Channel of a Team. A MS Team can have multiple channels, but each MS Group can have only one Team. In order to delete an MS Channel, it's MS Team/Group needs to be identified. To locate this team for this operation, one of the following inputs can be used:
+This function deletes a MS Channel. A MS Team can be assigned to multiple channels. However, each MS Group can have only one Team. In order to delete an Channel, it's MS Team/Group needs to be identified. To locate this team for this operation, one of the following inputs can be used:
 
   * `ms_groupteam_id`
   * `ms_group_mail_nickname`
   * `ms_groupteam_name`
 
-**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` option will take precedence over the `ms_groupteam_name` option and the `ms_groupteam_id` option will take precedence over the other two options.
+**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over `ms_groupteam_name`, and the `ms_groupteam_id` parameter will take precedence over the other two.
 
 <p align="center">
 <img src="./doc/screenshots/action_delete_channel.png" />
@@ -864,7 +870,7 @@ This function allows for deleting a MS Channel using the Microsoft Graph API. Th
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `ms_channel_name` | `text` | No | `Engineering Channel` | Name of the Microsoft Teams channel |
-| `ms_group_mail_nickname` | `text` | No | `engineeringTeam` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
+| `ms_group_mail_nickname` | `text` | No | `engineeringTeam` | Unique nickname for a group. The mail address need not include the domain suffix (i.e. @example.com) |
 | `ms_groupteam_id` | `text` | No | `db7350fc-b6df-4041` | Unique id assigned to a MS Group or Team while being created |
 | `ms_groupteam_name` | `text` | No | `Engineering Team` | Name assigned to the MS Group or Team while being created |
 
@@ -957,13 +963,13 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Delete Group
 
-This function allows for deleting a MS Group using the Microsoft Graph API. This provides SOAR with the ability to delete an existing MS Group. To locate this Group for this operation, one of the following inputs can be used:
+This function deletes a MS Group. To identify this Group, one of the following inputs can be used:
 
   * `ms_group_id`
   * `ms_group_mail_nickname`
   * `ms_group_name`
 
-**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` option will take precedence over the `ms_group_name` option and the `ms_group_id` option will take precedence over the other two options.
+**<ins>Note</ins>**: When multiple parameters are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` parameter will take precedence over the `ms_group_name`, and the `ms_group_id` parameter will take precedence over the other two.
 
 <p align="center">
 <img src="./doc/screenshots/action_delete_group.png" />
@@ -978,8 +984,8 @@ This function allows for deleting a MS Group using the Microsoft Graph API. This
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ms_group_id` | `text` | No | `db7350fc-b6df-4041` | Unique id assigned to a team while being created |
-| `ms_group_mail_nickname` | `text` | No | `ProductionTeam` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
+| `ms_group_id` | `text` | No | `db7350fc-b6df-4041` | Unique id assigned to a group |
+| `ms_group_mail_nickname` | `text` | No | `ProductionTeam` | Unique nickname, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
 | `ms_group_name` | `text` | No | `ProductionTeam` | Name of the MS Group |
 
 </p>
@@ -1064,13 +1070,15 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Enable Team
 
-This function allows for enabling a Microsoft Team for an MS Group using the MS Graph API. It provides SOAR with the ability to enable MS Teams from within a SOAR incident or task. When an MS Group is created, the teams' functionality is not enabled by default. To enable this for an MS Group that was recently created or an existing Group, this function can be used. To locate the group, one of the following inputs can be used:
+This function enables an MS Team for a MS Group. When an MS Group is created, the teams' functionality is not enabled by default. Use this function to enable this for an MS Group that was recently created or for an existing Group. 
+
+To identify the Group, one of the following inputs can be used:
 
   * `ms_group_id`
   * `ms_group_mail_nickname`
   * `ms_group_name`
 
-**<ins>Note</ins>**: When multiple options are provided to locate the Graph object (Group or a Team), the `ms_group_mail_nickname` option will take precedence over the `ms_group_name` option and the `ms_group_id` option will take precedence over the other two options.
+**<ins>Note</ins>**: When multiple parameters are provided to locate the Graph Group, the `ms_group_mail_nickname` parameter will take precedence over `ms_group_name` and the `ms_group_id` parameter will take precedence over the other two.
 
 <p align="center">
 <img src="./doc/screenshots/action_enable_teams.png" />
@@ -1085,8 +1093,8 @@ This function allows for enabling a Microsoft Team for an MS Group using the MS 
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `ms_group_id` | `text` | No | `764a62f2-b759-4dd9` | Unique id assigned to a team while being created |
-| `ms_group_mail_nickname` | `text` | No | `engineeringTeam` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
+| `ms_group_id` | `text` | No | `764a62f2-b759-4dd9` | Group Unique id |
+| `ms_group_mail_nickname` | `text` | No | `engineeringTeam` | Unique nickname, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
 | `ms_group_name` | `text` | No | `Engineering Team` | Name of the MS Group |
 
 </p>
@@ -1214,7 +1222,7 @@ incident.addNote(note)
 ---
 ## Function - MS Teams: Post Message
 
-This application allows for posting Incident/Task details to a MS Teams channel. The application can be triggered from either incident or task level where, information about the incident or task is formulated and posted in a convenient manner. This information is posted to a channel specified by the teams_channel input. This channel name (specified by teams_channel) is used to lookup app.config to retrieve the appropriate channel webhook url.
+This application posts Incident or Task details to a MS Teams channel.  The channel name, specified by the `teams_channel` parameter, is used to lookup the appropriate channel webhook url maintained in app.config.
 
 <p align="center">
 <img src="./doc/screenshots/output_post_teams.png" />
@@ -1229,11 +1237,11 @@ This application allows for posting Incident/Task details to a MS Teams channel.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | No | `-` | Unique id assigned to an incident while being created  |
-| `task_id` | `number` | No | `-` | Unique id of a task assigned while being created |
-| `teams_channel` | `text` | Yes | `-` | Lookup value to channel to post a message |
+| `incident_id` | `number` | No | `-` | Unique id for the associated Incident  |
+| `task_id` | `number` | No | `-` | Unique id for a task if task information will be posted |
+| `teams_channel` | `text` | Yes | `-` | Lookup value of channel to post a message |
 | `teams_mrkdown` | `boolean` | Yes | `-` | - |
-| `teams_payload` | `text` | Yes | `-` | json of teams conversation message: sections, title, text, facts |
+| `teams_payload` | `text` | Yes | `-` | String encoded JSON including incident or task information: sections, title, text, facts |
 
 </p>
 </details>
