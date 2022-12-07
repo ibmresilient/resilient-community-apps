@@ -88,9 +88,9 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult({}, success=False, reason=str(err))
 
         if authenticated:
-            team_manager = TeamsInterface(required_parameters)
-            response = team_manager.create_team(required_parameters)
             try:
+                team_manager = TeamsInterface(required_parameters)
+                response = team_manager.create_team(required_parameters)
                 yield FunctionResult(response, success=True)
             except IntegrationError as err:
                 yield FunctionResult({}, success=False, reason=str(err))

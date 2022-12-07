@@ -16,6 +16,7 @@
   - [Endpoint Configuration](#endpoint-configuration)
     - [Register a new application using the Azure portal](#register-a-new-application-using-the-azure-portal)
     - [Selecting required API Permissions](#selecting-required-api-permissions)
+    - [List of required permissions](#list-of-required-permissions)
     - [Create a client Secret Value](#create-a-client-secret-value)
     - [App Configuration](#app-configuration)
   - [Function - MS Teams: Archive Team](#function---ms-teams-archive-team)
@@ -137,7 +138,7 @@ The access token includes details about the application and the permission it ha
 ### Register a new application using the Azure portal
  The application must be registered with the identity provider for the identity provider to be aware that a specific app is attempting to access user information. The configuration necessary for the application to interface with the Microsoft identity platform is then made available when it registers with Azure Active Directory (Azure AD). You can learn more about this at [learn.microsoft.com/application-model](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-model)
 
-* Sign in to the Azure portal using either an enterprise account.
+* Sign in to the [Azure portal](https://portal.azure.com) using either an enterprise account.
 * If your account gives you access to more than one tenant, select your account in the top right corner, and set your portal session to the Azure AD tenant that you want.
 * In the left-hand navigation pane, select the `Azure Active Directory service`, and then select `App registrations` > `New registration`.
 * When the Register an application page appears, enter your application's registration information:
@@ -149,44 +150,59 @@ The access token includes details about the application and the permission it ha
 <img src="./doc/screenshots/app_registration_overview.png" />
 </p>
 
-* Note this information as this would be required later while setting up the **app.config** file.
+* Note this information as this would be required later while setting up the application in the **SOAR platform**.
 * When finished, select Register.
 * In the left-hand navigation pane under the `Manage` section, select `Authentication`.
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
 
 ### Selecting required API Permissions
-<-- this needs to be rewriteen -->
-The application requires the resource owner's permission to access a protected resource, such as email or calendar information. The resource manager role is needed to grant these app changes. The appropriate delegated permissions must be granted to the client app. Scopes are another name for delegated permissions. Scopes are permissions that specify what a client application can access on the user's behalf for a specific resource. See scopes and permissions for further details on scopes. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
+The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
 
 * In the left-hand navigation pane under the `Manage` section select `API Permission`.
 * Click `Add a permission`. On the Request API permission screen, select `Microsoft Graph`.
+* Select the `Application permissions` option and search for all relevant permissions and add them as shown below.
 * An admin account is required to `Grant admin consent`, to enable these permissions.
-* In Graph API, choose delegated permission and add the required permissions as shown below:
+
+### List of required permissions
+
+| Category | API/Permission | Description |
+| ------ | ------ | ------- |
+| Group | `Create` | Create groups |
+| Group | `ReadWrite.All` | Read and write all groups |
+| GroupMember | `ReadWrite.All` | Read and write all group memberships |
+| Team | `Create` | Create teams |
+| Team | `ReadBasic.All` | Get a list of all teams |
+| TeamMember | `ReadWrite.All` | Add and remove members from all teams |
+| TeamMember | `ReadWriteNonOwnerRole.All` | Add and remove members with non-owner role |
+| TeamSettings | `ReadWrite.All` | Read and change all teams' settings |
+| User | `Read.All` | Read all users' full profiles |
 
 <p align="center">
 <img src="./doc/screenshots/app_scopes_permissions.png" />
 </p>
 
+
+
 ### Create a client Secret Value
 * In the left-hand navigation pane under the `Manage` section, select `Certificate and secrets`.
 * Click on the `New client secret` button.
 * Enter a name for the client secret and click on the `Add` button.
-* Note down this information as this would be required later while setting up the **app.conf** file.
+* Note this information as this would be required later while setting up the application in the **SOAR platform**.
 
 <p align="center">
 <img src="./doc/screenshots/app_certificate_secrets.png" />
 </p>
 
-More information about this process can be found at [OAuth Utilities for IBM SOAR](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
 
 ### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. These values are used by the SOAR platform to establish a secure connection with the Microsoft Endpoint. See the documentation discussed in the [Endpoint Configuration](#endpoint-configuration) section for the procedure. If you have successfully configured that endpoint, you can find these values at [Azure portal](https://portal.azure.com) -> App registration -> (Your application).
+
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **application_id** | Yes | 18d10049-72e3-4652-ac9f-d9b13f24303c | `Application (client) ID` (can be found in the app overview section) |
-| **directory_id** | Yes | 1d8a5928-8678-408e-ab06-50ca7e01766a | `Directory (tenant) ID` (can be found in the app overview section) |
-| **secret_value** | Yes | oCN****************** | `Secret Value` (can be found in the certificate and secrets section) !
+| **application_id** | Yes | 18d10049-72e3-4652-ac9f-d9b13f24303c | Overview -> `Application (client) ID` |
+| **directory_id** | Yes | 1d8a5928-8678-408e-ab06-50ca7e01766a | Overview -> `Directory (tenant) ID` |
+| **secret_value** | Yes | oCN****************** | Certificate & secrets -> `Secret Value` |
 
 ---
 
@@ -936,25 +952,17 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Unable to delete Microsoft Channel"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  url   = u'<a href="{}">Click here</a>'.format(content.get("webUrl"))
-  text  = u"<b>Microsoft Channel Details:</b><br />"
-  text += u"<br />Name: {}".format(content.get("displayName"))
-  text += u"<br />Web URL: {}".format(url)
-  text += u"<br />Description: {}".format(content.get("description"))
-  text += u"<br />Teams Enabled: {}".format(True)
-  text += u"<br />ID: {}".format(content.get("id"))
-  text += u"<br />Mail: {}".format(content.get("email"))
-  text += u"<br />Membership Type: {}".format(content.get("membershipType"))
+  text  = u"<b>Microsoft Channels:</b><br />"
+  text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
-
 ```
 
 </p>
