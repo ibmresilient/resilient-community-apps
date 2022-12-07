@@ -31,6 +31,8 @@
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+        "randori_target_temptation": "In Review",
     {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"

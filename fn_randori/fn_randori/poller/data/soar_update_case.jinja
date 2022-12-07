@@ -21,6 +21,8 @@
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+          "randori_target_temptation": "In Review",
     {% endif %}
 
     {% if tech_category is not none %}

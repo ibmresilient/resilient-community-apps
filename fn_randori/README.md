@@ -938,8 +938,8 @@ inputs.randori_target_id = incident.properties.randori_target_id
 ```python
 def map_temptation(temptation_score):
   if not isinstance(temptation_score, int):
-    return "None"
-    
+    return "In Review"
+
   if temptation_score <= 14:
     return "Low"
   elif temptation_score >= 15 and temptation_score <= 29:
@@ -1427,6 +1427,8 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+          "randori_target_temptation": "In Review",
     {% endif %}
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "randori_target_status": "{{ status }}"
@@ -1477,6 +1479,8 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+          "randori_target_temptation": "In Review",
     {% endif %}
 
     {% if tech_category is not none %}
