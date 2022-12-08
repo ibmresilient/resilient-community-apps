@@ -173,7 +173,7 @@ def get_playbooks(rest_client, pb_types, pb_filter):
         filter_conditions['filters'][0]['conditions'].append({
                         "method": "equals",
                         "field_name": "status",
-                        "value": pb_types
+                        "value": f"[{pb_types}]"
                     })
     if pb_filter:
         filter_conditions['query'] = pb_filter

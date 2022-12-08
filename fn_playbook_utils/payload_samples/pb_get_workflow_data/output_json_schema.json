@@ -1,3 +1,163 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "org_id": {
+          "type": "integer"
+        },
+        "min_id": {
+          "type": "integer"
+        },
+        "max_id": {
+          "type": "integer"
+        },
+        "workflow_content": {
+          "type": "object",
+          "properties": {
+            "2176": {
+              "type": "object",
+              "properties": {
+                "entities": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "workflow_instance_id": {
+                        "type": "integer"
+                      },
+                      "workflow": {
+                        "type": "object",
+                        "properties": {
+                          "workflow_id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "programmatic_name": {
+                            "type": "string"
+                          },
+                          "object_type": {
+                            "type": "integer"
+                          },
+                          "description": {},
+                          "uuid": {},
+                          "actions": {
+                            "type": "array"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "tag_handle": {
+                                  "type": "integer"
+                                },
+                                "value": {}
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "type": "integer"
+                      },
+                      "object": {
+                        "type": "object",
+                        "properties": {
+                          "parent": {},
+                          "object_id": {
+                            "type": "integer"
+                          },
+                          "object_name": {
+                            "type": "string"
+                          },
+                          "type_id": {
+                            "type": "integer"
+                          },
+                          "type_name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "end_date": {
+                        "type": "integer"
+                      },
+                      "terminator": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "display_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "pb_max_incident_id": {
+          "type": "integer"
+        },
+        "pb_min_incident_date": {},
+        "pb_max_incident_date": {},
+        "pb_min_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

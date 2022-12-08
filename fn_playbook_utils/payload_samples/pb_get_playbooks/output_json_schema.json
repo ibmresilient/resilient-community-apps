@@ -1,3 +1,264 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "recordsTotal": {
+          "type": "integer"
+        },
+        "recordsFiltered": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "activation_type": {
+                "type": "string"
+              },
+              "description": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "creator_principal": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "is_deleted": {
+                "type": "boolean"
+              },
+              "type": {
+                "type": "string"
+              },
+              "tag": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "name": {
+                "type": "string"
+              },
+              "object_type": {
+                "type": "integer"
+              },
+              "status": {
+                "type": "string"
+              },
+              "is_locked": {
+                "type": "boolean"
+              },
+              "create_date": {
+                "type": "integer"
+              },
+              "last_modified_principal": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "last_modified_time": {
+                "type": "integer"
+              },
+              "tags": {
+                "type": "array"
+              },
+              "has_logical_errors": {
+                "type": "boolean"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "deployment_id": {
+                "type": "string"
+              },
+              "content": {
+                "type": "object",
+                "properties": {
+                  "xml": {
+                    "type": "string"
+                  },
+                  "content_version": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "field_type_handle": {
+                "type": "integer"
+              },
+              "manual_settings": {
+                "type": "object",
+                "properties": {
+                  "view_items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "step_label": {},
+                        "show_if": {},
+                        "element": {
+                          "type": "string"
+                        },
+                        "field_type": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "show_link_header": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "activation_conditions": {
+                    "type": "object",
+                    "properties": {
+                      "conditions": {
+                        "type": "array"
+                      },
+                      "logic_type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "version": {
+                "type": "integer"
+              },
+              "subplaybook_settings": {
+                "type": "object",
+                "properties": {
+                  "view_items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "step_label": {},
+                        "show_if": {},
+                        "element": {
+                          "type": "string"
+                        },
+                        "field_type": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "show_link_header": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "output_json_schema": {
+                    "type": "string"
+                  },
+                  "output_description": {
+                    "type": "string"
+                  },
+                  "output_json_example": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "pbm_name_contains": {},
+        "pbm_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
