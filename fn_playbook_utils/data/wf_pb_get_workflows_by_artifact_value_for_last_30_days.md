@@ -5,7 +5,7 @@
 
 # PB: Get workflows/playbooks by artifact value for last 30 days
 
-## Function - PB: Get workflow data
+## Function - PB: Get Workflow Data
 
 ### API Name
 `pb_get_workflow_data`
@@ -38,7 +38,7 @@ None
 
 ---
 
-## Function - PB: Get playbook data
+## Function - PB: Get Playbook Data
 
 ### API Name
 `pb_get_playbook_data`

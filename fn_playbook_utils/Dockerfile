@@ -27,6 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
+RUN pip install /tmp/packages/resilient-47.1.3761.tar.gz
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
