@@ -35,21 +35,14 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Unable to delete Microsoft Channel"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  url   = u'<a href="{}">Click here</a>'.format(content.get("webUrl"))
-  text  = u"<b>Microsoft Channel Details:</b><br />"
-  text += u"<br />Name: {}".format(content.get("displayName"))
-  text += u"<br />Web URL: {}".format(url)
-  text += u"<br />Description: {}".format(content.get("description"))
-  text += u"<br />Teams Enabled: {}".format(True)
-  text += u"<br />ID: {}".format(content.get("id"))
-  text += u"<br />Mail: {}".format(content.get("email"))
-  text += u"<br />Membership Type: {}".format(content.get("membershipType"))
+  text  = u"<b>Microsoft Channels:</b><br />"
+  text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
 incident.addNote(note)

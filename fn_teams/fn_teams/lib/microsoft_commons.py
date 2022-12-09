@@ -410,7 +410,7 @@ class MSFinder():
         log.debug(json.dumps(channel_details, indent=2))
 
         if len(channel_details) == 0:
-            raise IntegrationError(constants.ERROR_COULDNOT_FIND_CHANNEL)
+            raise IntegrationError(constants.ERROR_COULDNOT_FIND_CHANNEL.format(channel_name))
 
         channel_details = channel_details[0]
         channel_details["group_id"] = group_id
