@@ -34,7 +34,11 @@
     {% else %}
         "randori_target_temptation": "In Review",
     {% endif %}
-    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
-    "randori_target_status": "{{ status }}"
+
+    {% if user_tags is not none %}
+      "randori_target_status": "{{ status }}",
+    {% endif %}
+
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>"
   }
 }

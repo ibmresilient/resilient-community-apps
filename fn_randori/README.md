@@ -1428,10 +1428,14 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
           "randori_target_temptation": "Critical",
         {% endif %}
     {% else %}
-          "randori_target_temptation": "In Review",
+        "randori_target_temptation": "In Review",
     {% endif %}
-    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
-    "randori_target_status": "{{ status }}"
+
+    {% if user_tags is not none %}
+      "randori_target_status": "{{ status }}",
+    {% endif %}
+
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>"
   }
 }
 ```
@@ -1483,6 +1487,14 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
           "randori_target_temptation": "In Review",
     {% endif %}
 
+    {% if status is not none %}
+    "randori_target_status": "{{ status }}",
+    {% endif %}
+
+    {% if impact_score is not none %}
+    "randori_target_impact_score": "{{ impact_score }}",
+    {% endif %}
+
     {% if tech_category is not none %}
     "randori_target_tech_category": "{{ tech_category | join(', ') }}",
     {% endif %}
@@ -1495,9 +1507,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
-    "randori_target_perspective_name": "{{ perspective_name }}",
-    "randori_target_status": "{{ status }}",
-    "randori_target_impact_score": "{{ impact_score }}"
+    "randori_target_perspective_name": "{{ perspective_name }}"
     }
 }
 ```
