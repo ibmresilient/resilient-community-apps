@@ -23,6 +23,8 @@ HASH_LENGTH_TO_TYPE = {
     32: "MD5",
 }
 
+DEFAULT_COMPUTERS = 10000 # aribrary large value for number of endpoints to return
+
 class Sepclient(object):
     """
     Client class used to expose Symantec SEP Rest API.
@@ -176,7 +178,7 @@ class Sepclient(object):
         return r
 
     def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
+                      pagesize=DEFAULT_COMPUTERS, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
         """Get a list of computers. The paramaters are all optional the default is to return results for all computers/
         endpoints.
 

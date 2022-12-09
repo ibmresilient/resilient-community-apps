@@ -6,7 +6,6 @@
 # Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
-import copy
 import json
 import logging
 import time
