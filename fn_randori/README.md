@@ -768,8 +768,6 @@ def add_node_to_dt(node, randori_base_url):
     hostname = content.get("hostname")
     ip = content.get("ip_str")
     row["randori_dt_discovery_step"] = "detection: {} {}".format(hostname, ip)
-  elif node.get("type") == "social":
-    row["randori_dt_discovery_step"] = "social:"
 
     
 #########################################################################################
@@ -787,6 +785,7 @@ else:
   paths_list_list = data.get("paths")
 
   for path_list in paths_list_list:
+    edge = None
     for path in path_list:
       edge = edges.get(path)
       dst = edge.get("dst")
@@ -800,13 +799,13 @@ else:
       row["randori_dt_date_added"] = int(datetime.now().timestamp()*1000) 
       row["randori_dt_discovery_step"] = "{}".format(edge.get("type"))
       
-    # Last node is the src
-    src = edge.get("src")
-    node = nodes.get(src)
-    add_node_to_dt(node, randori_base_url)
+    if edge is not None:
+      # Last node is the src
+      src = edge.get("src")
+      node = nodes.get(src)
+      add_node_to_dt(node, randori_base_url)
   
   incident.addNote("Randori: Discovery Path table refreshed.")
-
 ```
 
 </p>
@@ -938,8 +937,9 @@ inputs.randori_target_id = incident.properties.randori_target_id
 
 ```python
 def map_temptation(temptation_score):
-  if not temptation_score:
-    return None
+  if not isinstance(temptation_score, int):
+    return "In Review"
+
   if temptation_score <= 14:
     return "Low"
   elif temptation_score >= 15 and temptation_score <= 29:
@@ -1427,9 +1427,15 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+        "randori_target_temptation": "In Review",
     {% endif %}
-    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
-    "randori_target_status": "{{ status }}"
+
+    {% if user_tags is not none %}
+      "randori_target_status": "{{ status }}",
+    {% endif %}
+
+    "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>"
   }
 }
 ```
@@ -1477,6 +1483,16 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         {% elif target_temptation >= 40 %}
           "randori_target_temptation": "Critical",
         {% endif %}
+    {% else %}
+          "randori_target_temptation": "In Review",
+    {% endif %}
+
+    {% if status is not none %}
+    "randori_target_status": "{{ status }}",
+    {% endif %}
+
+    {% if impact_score is not none %}
+    "randori_target_impact_score": "{{ impact_score }}",
     {% endif %}
 
     {% if tech_category is not none %}
@@ -1491,9 +1507,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
     {% endif %}
 
-    "randori_target_perspective_name": "{{ perspective_name }}",
-    "randori_target_status": "{{ status }}",
-    "randori_target_impact_score": "{{ impact_score }}"
+    "randori_target_perspective_name": "{{ perspective_name }}"
     }
 }
 ```

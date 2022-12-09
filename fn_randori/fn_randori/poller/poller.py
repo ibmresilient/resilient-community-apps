@@ -193,9 +193,9 @@ class PollerComponent(AppFunctionComponent):
         :type query_results: list
         """
 
-        try:
-            cases_insert = cases_closed = cases_updated = 0
-            for entity in query_results:
+        cases_insert = cases_closed = cases_updated = 0
+        for entity in query_results:
+            try:
                 entity_id = get_entity_id(entity)
 
                 # create linkback url
@@ -246,8 +246,9 @@ class PollerComponent(AppFunctionComponent):
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+            except Exception as err:
+               LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
-            LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
-                     cases_insert, cases_closed, cases_updated)
-        except Exception as err:
-            LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+        LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
+                 cases_insert, cases_closed, cases_updated)
+
