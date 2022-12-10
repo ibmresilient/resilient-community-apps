@@ -194,9 +194,16 @@ class PollerComponent(AppFunctionComponent):
         """
 
         cases_insert = cases_closed = cases_updated = 0
+        processed_targets = []
         for entity in query_results:
             try:
                 entity_id = get_entity_id(entity)
+
+                # If this target entity has been processed then don't process it again.
+                # The query_results is actually a list of detections since last update time and once a target detection is
+                # processed in this loop (created or updated), it does not need to be updated again.
+                if entity_id in processed_targets:
+                    continue
 
                 # create linkback url
                 entity["entity_url"] = self.app_common.make_linkback_url(entity_id)
@@ -240,15 +247,18 @@ class PollerComponent(AppFunctionComponent):
                             self.soar_update_case_template,
                             UPDATE_CASE_TEMPLATE,
                             entity)
+
                         _update_soar_case = self.soar_common.update_soar_case(
                             soar_case_id,
                             soar_update_payload)
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                # Add this entity to processed list.
+                processed_targets.append(entity_id)
+                LOG.debug("Target %s added to processed list", entity_id)
             except Exception as err:
                LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
 
         LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
                  cases_insert, cases_closed, cases_updated)
-
