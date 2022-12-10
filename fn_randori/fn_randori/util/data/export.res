@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1670605908744,
+  "export_date": 1670698855788,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -542,7 +542,7 @@
     },
     {
       "allow_default_value": false,
-      "blank_option": true,
+      "blank_option": false,
       "calculated": false,
       "changeable": true,
       "chosen": false,
@@ -551,7 +551,7 @@
       "export_key": "incident/randori_target_status",
       "hide_notification": false,
       "id": 299,
-      "input_type": "select",
+      "input_type": "text",
       "internal": false,
       "is_tracked": false,
       "name": "randori_target_status",
@@ -571,7 +571,7 @@
       "values": [
         {
           "default": false,
-          "enabled": true,
+          "enabled": false,
           "hidden": false,
           "label": "Needs Investigation",
           "properties": null,
@@ -580,43 +580,7 @@
         },
         {
           "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Needs Resolution",
-          "properties": null,
-          "uuid": "f44ec4d3-4998-4f9c-85c7-b2b5427dd241",
-          "value": 78
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Needs Review",
-          "properties": null,
-          "uuid": "b69e23e8-f83d-43b1-a40c-62503e9657e7",
-          "value": 79
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Accepted",
-          "properties": null,
-          "uuid": "14c8fa92-2437-46db-be44-e75f82f99b1d",
-          "value": 80
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Mitigated",
-          "properties": null,
-          "uuid": "42946c98-ee9d-4fe7-bd5f-731875bf816e",
-          "value": 81
-        },
-        {
-          "default": false,
-          "enabled": true,
+          "enabled": false,
           "hidden": false,
           "label": "None",
           "properties": null,
@@ -657,7 +621,7 @@
     },
     {
       "allow_default_value": false,
-      "blank_option": true,
+      "blank_option": false,
       "calculated": false,
       "changeable": true,
       "chosen": false,
@@ -666,7 +630,7 @@
       "export_key": "incident/randori_target_impact_score",
       "hide_notification": false,
       "id": 302,
-      "input_type": "select",
+      "input_type": "text",
       "internal": false,
       "is_tracked": false,
       "name": "randori_target_impact_score",
@@ -686,7 +650,7 @@
       "values": [
         {
           "default": false,
-          "enabled": true,
+          "enabled": false,
           "hidden": false,
           "label": "None",
           "properties": null,
@@ -695,30 +659,12 @@
         },
         {
           "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "Low",
-          "properties": null,
-          "uuid": "04dbbf62-226b-4c87-ba60-0c3c81c14e34",
-          "value": 84
-        },
-        {
-          "default": false,
-          "enabled": true,
+          "enabled": false,
           "hidden": false,
           "label": "Medium",
           "properties": null,
           "uuid": "8e443006-f9d4-46d4-a748-c319a784f43b",
           "value": 85
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "High",
-          "properties": null,
-          "uuid": "07a4e5a4-c121-4716-8ae9-8384f21acc4c",
-          "value": 86
         }
       ]
     },
@@ -1118,13 +1064,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 111,
+  "id": 113,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1670605907138,
+      "create_date": 1670698853808,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1133,7 +1079,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1670605907138,
+      "update_date": 1670698853808,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2404,7 +2350,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\" isExecutable=\"true\" name=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_076wzpv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Randori: Update Target Impact Score\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc52d83b-ee18-405b-a819-c56aef3cdbcf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_target_impact_score = playbook.inputs.randori_target_impact_score\\ninputs.randori_note = playbook.inputs.randori_note.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_impact_score\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_076wzpv\u003c/incoming\u003e\u003coutgoing\u003eFlow_03rl6jo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_076wzpv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Update Impact Score in Randori and SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4ac1b2b7-c230-405c-8eff-5a5f77291cb2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03rl6jo\u003c/incoming\u003e\u003coutgoing\u003eFlow_11kmzm0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11kmzm0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03rl6jo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_11kmzm0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_85f5e332_938a_4a6f_902b_691cf5611de8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11kmzm0\" id=\"Flow_11kmzm0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03rl6jo\" id=\"Flow_03rl6jo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_076wzpv\" id=\"Flow_076wzpv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667851511070,
@@ -2486,7 +2432,7 @@
             "uuid": "14d1f7ef-a752-446a-9218-5e3582fcfbe8",
             "values": [
               {
-                "default": true,
+                "default": false,
                 "enabled": true,
                 "hidden": false,
                 "label": "None",
@@ -2553,7 +2499,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668705199769,
+      "last_modified_time": 1670694603855,
       "local_scripts": [
         {
           "actions": [],
@@ -2619,7 +2565,7 @@
       "tags": [],
       "type": "default",
       "uuid": "85f5e332-938a-4a6f-902b-691cf5611de8",
-      "version": 7
+      "version": 8
     },
     {
       "activation_type": "manual",
@@ -2836,7 +2782,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 14,
+        "content_version": 16,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\" isExecutable=\"true\" name=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1h43a38\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1jhv7t6\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Randori: Update Target Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f452d8b8-5f75-4b6b-9cde-40f496695abb\"\u003e{\"inputs\":{\"24621a5a-cb1b-43af-8110-01013dbb3b19\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"abc484a9-2a33-4162-9f39-873b2f917bcf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.randori_target_id = incident.properties.randori_target_id\\ninputs.randori_target_status = playbook.inputs.randori_target_status\\ninputs.randori_note = playbook.inputs.randori_note.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"target_status\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h43a38\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wydn69\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1h43a38\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Randori: Write Update Status Results to a Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"49d61fb2-ab61-40fa-bba9-ac8eb9701d40\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wydn69\u003c/incoming\u003e\u003coutgoing\u003eFlow_1jhv7t6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wydn69\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1jhv7t6\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8f658e56_2fc3_4b92_ac5f_56a838587ad5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jhv7t6\" id=\"Flow_1jhv7t6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wydn69\" id=\"Flow_1wydn69_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h43a38\" id=\"Flow_1h43a38_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1667233238805,
@@ -2918,7 +2864,7 @@
             "uuid": "8e10b243-70fe-46c8-978e-0c1a7f1095d8",
             "values": [
               {
-                "default": true,
+                "default": false,
                 "enabled": true,
                 "hidden": false,
                 "label": "Needs Investigation",
@@ -3003,7 +2949,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1667930615647,
+      "last_modified_time": 1670694984259,
       "local_scripts": [
         {
           "actions": [],
@@ -3069,7 +3015,7 @@
       "tags": [],
       "type": "default",
       "uuid": "8f658e56-2fc3-4b92-ac5f-56a838587ad5",
-      "version": 22
+      "version": 24
     }
   ],
   "regulators": null,
