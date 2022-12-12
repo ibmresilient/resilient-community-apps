@@ -165,7 +165,7 @@ class BigFixClient(object):
 
         return self.get_bfclientquery(self.post_bfclientquery(subkey.format(artifact_value), computer_id), self.retry_interval, self.retry_timeout)
 
-    def check_is_folder(self, artifact_value):
+    def check_is_folder(self, artifact_value, computer_id):
         """ Bigfix query - Determine if artifact value is a folder.
         :param artifact_value: Name of artifact to query
         :return resp: Response from action

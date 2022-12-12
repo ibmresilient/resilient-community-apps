@@ -24,7 +24,7 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """Function: SOAR Function : Bigfix remediation - Remediate hit for endpoint in BigFix."""
 
-        validate_fields(["bigfix_asset_id", "bigfix_artifact_value", "bigfix_artifact_type"], fn_inputs)
+        validate_fields(["bigfix_asset_id", "bigfix_artifact_value", "bigfix_artifact_type", "bigfix_incident_id"], fn_inputs)
 
         asset_id = fn_inputs.bigfix_asset_id
         artifact_value = fn_inputs.bigfix_artifact_value
@@ -58,7 +58,7 @@ class FunctionComponent(AppFunctionComponent):
                         response = bigfix_client.send_delete_registry_key_remediation_message(artifact_value, asset_id)
             elif artifact_type == "File Path":
                 # Test if file path is a folder, if so disallow remediate.
-                result = bigfix_client.check_is_folder(artifact_value)
+                result = bigfix_client.check_is_folder(artifact_value, asset_id)
                 failure = result[0].get("failure")
                 # Query should return array with single result.
                 if not result or not result[0]:
