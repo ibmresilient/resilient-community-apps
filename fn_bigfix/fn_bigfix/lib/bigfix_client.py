@@ -23,7 +23,8 @@ class BigFixClient(object):
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
         self.headers = {'content-type': 'application/json'}
-        self.verify = options.get("bigfix_verify", False)
+        verify = options.get("bigfix_verify", False)
+        self.verify = False if verify.lower() == "false" else (True if verify.lower() == "true" else verify)
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))
         if options.get("bigfix_endpoints_wait"):
