@@ -54,9 +54,9 @@ class FunctionComponent(AppFunctionComponent):
 
                 # Create a new note in SOAR for each new Randori comment
                 for comment in new_comments:
+                    note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, comment)
                     soar_common.create_case_comment(case_id=incident_id,
-                                                    note=comment,
-                                                    entity_comment_header=ENTITY_COMMENT_HEADER)
+                                                    note=note)
 
         results = {"count": len(new_comments)}
 
