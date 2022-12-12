@@ -173,7 +173,7 @@ def get_playbooks(rest_client, pb_types, pb_filter):
         filter_conditions['filters'][0]['conditions'].append({
                         "method": "equals",
                         "field_name": "status",
-                        "value": f"[{pb_types}]"
+                        "value": [pb_types]
                     })
     if pb_filter:
         filter_conditions['query'] = pb_filter
@@ -181,7 +181,8 @@ def get_playbooks(rest_client, pb_types, pb_filter):
     LOG.debug(filter_conditions)
     try:
         return rest_client.post(PLAYBOOK_QUERY_PAGED_URL, filter_conditions)
-    except SimpleHTTPException:
+    except SimpleHTTPException as err:
+        LOG.error(str(err))
         return {}
 
 def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
@@ -297,7 +298,8 @@ def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
     LOG.debug(filter_conditions)
     try:
         return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions)
-    except SimpleHTTPException:
+    except SimpleHTTPException as err:
+        LOG.error(str(err))
         return {}
 
 def get_process_elements(xml, action_map=ACTION_MAP):
