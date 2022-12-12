@@ -39,15 +39,14 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
         -------
             ms_channel_name        <str> : Name of the MS Channel to be created
-            ms_description         <str> : Desciption for the Channel
+            ms_description         <str> : Description for the Channel
             ms_group_mail_nickname <str> : Mail nickname for the group (must be unique)
             ms_group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
-            Response <dict> : A response with the details of the team that was archived or
-                              unarchived, or an error message from the MS Graph api if the
-                              operation fails
+            Response <dict> : A response with the details of the channel that was created,
+                              or an error message from the MS Graph api if the operation fails
         """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))
@@ -67,8 +66,8 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
-            authenticator = MicrosoftAuthentication(required_parameters, self.options)
-            required_parameters["header"] = authenticator.authenticate()
+            authenticator = MicrosoftAuthentication(self.rc, self.options)
+            required_parameters["header"] = authenticator.authenticate_application_permissions()
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 
@@ -83,16 +82,16 @@ class FunctionComponent(AppFunctionComponent):
                 team_manager = ChannelInterface(required_parameters)
 
                 if hasattr(fn_inputs, 'ms_groupteam_id'):
-                        options.update(
-                            {"group_id" : fn_inputs.ms_groupteam_id})
+                    options.update(
+                        {"group_id" : fn_inputs.ms_groupteam_id})
 
                 elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
-                        options.update(
-                            {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
+                    options.update(
+                        {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
 
                 elif hasattr(fn_inputs, 'ms_groupteam_name'):
-                        options.update(
-                            {"group_name" : fn_inputs.ms_groupteam_name})
+                    options.update(
+                        {"group_name" : fn_inputs.ms_groupteam_name})
                 else:
                     raise IntegrationError(constants.ERROR_INVALID_OPTION_PASSED)
 

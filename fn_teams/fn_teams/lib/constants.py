@@ -12,11 +12,24 @@ BEARER = 'Bearer {}'
 MEMBERS_URL = "{}/members"
 DEFAULT_SCOPE = ".default"
 SETTINGS_GROUP_TYPE = "Unified"
-CONTENT_TYPE = "application/json"
 CHANNEL_MEMBERSHIP_TYPE = "standard"
 SETTINGS_GROUP_MAIL_ENABLED = False
 SETTINGS_GROUP_SECURITY_ENABLED = False
 
+
+DELEGATED_GRANT_ACCESS = "authorization_code"
+DELEGATED_GRANT_REFRESH = "refresh_token"
+
+CODE_TYPE_ACCESS = "code"
+CODE_TYPE_REFRESH = DELEGATED_GRANT_REFRESH
+
+CONTENT_TYPE_JSON = "application/json"
+CONTENT_TYPE_URLENCODED = "application/x-www-form-urlencoded"
+
+OAUTH_TOKEN_URL = "oauth2/v2.0/token"
+DEFAULT_REDIRECT_URI = "https://localhost:8080/callback"
+
+# MS Finder
 QUERY_GROUP_FIND_BY_NAME = '?$filter=displayName eq \'{}\''
 QUERY_GROUP_FIND_BY_MAIL = '?$filter=mailNickname eq \'{}\''
 
@@ -59,6 +72,8 @@ URL_TEAMS_STANDARD_TEMPLATE = "/v1.0/teamsTemplates('standard')"
 # MS CHANNELS API call
 URL_LIST_CHANNEL = URL_TEAMS + "/{}/channels"
 URL_LOCATE_CHANNEL = URL_LIST_CHANNEL + "/{}"
+URL_CHANNEL_MSG = URL_LOCATE_CHANNEL + "/messages"
+URL_CHANNEL_MSG_REPLY = URL_CHANNEL_MSG + "/{}/replies"
 
 TEAMS_FROM_GROUP_CONFIGURATION = {
     "visibility": "Private",
@@ -110,7 +125,7 @@ WARN_NO_MEMBER_EMAIL_ID_PROVIDED = ''' No member Email ID found.
 WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the {}.
  ADD MEMBERS FROM field was set to None and no list of participants were provided
  in the Additional members field.'''
-WARN_INCIDENT_NO_MEMBERS = "Webex: There are no members assigned to this incident"
+WARN_INCIDENT_NO_MEMBERS = "There are no members assigned to this incident"
 
 ERROR_AUTHENTICATION_FAILED = '''Failed to retrieve AccessToken.
  Check Credentials!'''
@@ -118,7 +133,7 @@ ERROR_NO_ARG_PASSED = " No parameter passed to method"
 ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
 ERROR_MISSING_NAME_MAIL_NAME = ''' Either the Group's name or the
  Mail Nickname has to be specified to find the group'''
-ERROR_FOUND_MANY_GROUP = ''' Foud more than one group with the same name.
+ERROR_FOUND_MANY_GROUP = ''' Found more than one group with the same name.
  Please specify the Mail Nickname to delete the group'''
 ERROR_INVALID_OPTION_PASSED = "Invalid Option passed!"
 
@@ -126,9 +141,11 @@ ERROR_COULDNOT_CREATE_TEAM = "Unable to create team"
 ERROR_COULDNOT_CREATE_CHANNEL = "Unable to create channel"
 ERROR_COULDNOT_FIND_CHANNEL = "Unable to locate channel: {}"
 ERROR_COULDNOT_DELETE_CHANNEL = "Unable to delete channel"
+ERROR_UNABLE_TO_AUTHENTICATE = "Unable to authenticate: {} {}"
+ERROR_NO_REFRESH_TOKEN = "Unable to find refresh_token in app.conf"
 
 STATUS_STARTING_APP = "Starting App Function: {}"
-STATUS_GENERATE_HEADER = "Retriving AccessToken for this session"
+STATUS_GENERATE_HEADER = "Retrieving AccessToken for this session"
 STATUS_SUCCESSFULLY_AUTHENTICATED = "Secure connection Established!"
 STATUS_AUTHENTICATION_FAILED = "Authentication failed! Could not retrieve AccessToken."
 STATUS_FAILED_APP = "Failed to run App Function : {}"

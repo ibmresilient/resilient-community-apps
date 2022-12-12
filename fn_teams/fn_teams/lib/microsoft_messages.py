@@ -7,12 +7,12 @@ import json, logging
 import pymsteams
 from urllib import parse
 
-from resilient_lib import build_resilient_url, MarkdownParser, build_incident_url, build_task_url
-from resilient_lib import IntegrationError
-from fn_teams.lib import constants
+from resilient_lib import build_resilient_url, build_incident_url, build_task_url
+from resilient_lib import IntegrationError, MarkdownParser
+from fn_teams.lib import constants, microsoft_commons
 
 
-class PostMessageClient:
+class MessageClient:
     """
         This application allows for posting Incident/Task details to a MS Teams channel.
         The application can be triggered from either incident or task level where,
@@ -154,3 +154,68 @@ class PostMessageClient:
 
             card.addSection(cardsection)
         return card
+
+
+    def read_messages(self, dual_headers, options):
+        """
+        A MS Team can have multiple channels. This function can be used to delete a Channel
+        of an existing MS Team. Here a request is formulated and posted to the Microsoft
+        Graph API for channel deletion. To delete a Channel for an MS Team, 2 key
+        attributes are required, namely: channelId and groupID/teamID. The MSFinder
+        class from microsoft_commons is being used. The MSFinder has a find_channel method
+        that allows for locating a channel and extracting its channel Id. To located the
+        group or team for which the channel is associated, one of the following options
+        can be used:
+
+            -> ms_groupteam_id
+            -> ms_group_mail_nickname
+            -> ms_groupteam_name
+
+        Note: If multiple options are provided to locate the Graph Object then
+        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
+        other two options. 
+
+        options:
+        --------
+            channel_name           <str> : Name of the MS Channel to be deleted
+            ms_description         <str> : Description for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            Response <dict> : A response with the details of the team that was archived or
+                              unarchived, or an error message from the MS Graph api if the
+                              operation fails
+        """
+        response_handler = microsoft_commons.ResponseHandler()
+
+        if "message_id" in options:
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_CHANNEL_MSG_REPLY.format(
+                    options.get("group_id"),
+                    options.get("channel_id"),
+                    options.get("message_id")))
+
+        else:
+            channel_finder = microsoft_commons.MSFinder(
+                rc=self.rc,
+                rh=response_handler,
+                headers=dual_headers.get("application"))
+            channel = channel_finder.find_channel(options)
+
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_CHANNEL_MSG.format(
+                    channel.get("group_id"),
+                    channel.get("id")))
+
+        response = self.rc.execute(
+            "get",
+            url=url,
+            headers=dual_headers.get("delegated"),
+            callback=response_handler.check_response)
+
+        self.log.info(response)
+        return response.get("value")
