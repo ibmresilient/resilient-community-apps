@@ -25,13 +25,8 @@
           "randori_target_temptation": "In Review",
     {% endif %}
 
-    {% if status is not none %}
     "randori_target_status": "{{ status }}",
-    {% endif %}
-
-    {% if impact_score is not none %}
     "randori_target_impact_score": "{{ impact_score }}",
-    {% endif %}
 
     {% if tech_category is not none %}
     "randori_target_tech_category": "{{ tech_category | join(', ') }}",
