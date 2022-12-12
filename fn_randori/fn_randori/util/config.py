@@ -23,7 +23,7 @@ api_version=v1
 polling_interval=600
 # Number of minutes to lookback for queries the first time the poller runs.
 polling_lookback=1200
-verify= false | /path/to/cafile.crt
+verify= True
 #
 # Optional: polling filters that can be applied when querying Randori for new targets or targets to be updated.
 # Each filter is a tuple in the following format: ("field","operator","value")
