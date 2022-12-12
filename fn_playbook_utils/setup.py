@@ -37,7 +37,7 @@ setup(
     </ul>""",
     install_requires=[
         "resilient-circuits>=41.0.0",
-        "resilient>=47.0", #47.1
+        "resilient>=47.1",
         "cachetools",
         "defusedxml"
     ],
