@@ -16,28 +16,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 FN_NAME = "fn_bigfix_assets"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements SOAR function 'fn_bigfix_assets' of package fn_bigfix.
-
-        The Function does a BigFix query to retrieve properties of a BigFix endpoint and takes the following
-        parameters:
-
-            bigfix_asset_name, bigfix_asset_id, bigfix_incident_id
-
-        An example of a set of query parameter might look like the following:
-
-                bigfix_asset_name
-                bigfix_asset_id
-                bigfix_incident_id
-
-        The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
-        in JSON format similar to the following.
-
-            {'status': 'OK',
-             'att_name': u'bigfix-properties-DESKTOP-TUKM3HF-20180718.xml'
-            }
-        The Function will also create an attachment with a name similar to following:
-            bigfix-properties-DESKTOP-TUKM3HF-20180718.xml
-    """
+    """Component that implements SOAR function 'fn_bigfix_assets' of package fn_bigfix."""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -55,6 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(str(params))
 
         yield self.status_message(f"Running BigFix Query for Endpoint id {params['asset_id']}, with name {params['asset_name']} ...")
+        response = None
 
         try:
             # Perform the BigFix Query

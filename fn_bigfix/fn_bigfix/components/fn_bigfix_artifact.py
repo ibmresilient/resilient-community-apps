@@ -17,34 +17,7 @@ from fn_bigfix.util.helpers import create_attachment, PACKAGE_NAME
 FN_NAME = "fn_bigfix_artifact"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements SOAR function 'fn_bigfix_artifact' of package fn_bigfix.
-
-        The Function does a BigFix query to determine BigFix endpoints with hits and takes the
-        following parameters:
-
-            bigfix_artifact_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_artifact_properties_name
-            bigfix_artifact_properties_value, bigfix_incident_id, bigfix_incident_plan_status
-
-
-        An example of a set of query parameter might look like the following:
-
-                bigfix_artifact_id =  120
-                bigfix_artifact_value = "HKLM\SOFTWARE\TEST\TEST\com.tst.browsercore"
-                bigfix_artifact_type = "Registry Key"
-                bigfix_artifact_properties_name = "TESTKEY"
-                bigfix_artifact_properties_value = "TESTVAL"
-                bigfix_incident_id = 2095
-                bigfix_incident_plan_status = "A"
-
-        The BigFix Query will execute a REST query against a Bigfix server and the Function returns a result
-        in JSON format similar to the following.
-
-            {'hits_count': 1,
-             'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 0,
-                                u'query_id': 1, u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'}]
-             'query_execution_date': '07-17-2018 17:44:21'
-            }
-        """
+    """Component that implements SOAR function 'fn_bigfix_artifact' of package fn_bigfix."""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -58,8 +31,8 @@ class FunctionComponent(AppFunctionComponent):
 
         params = {"artifact_id": fn_inputs.bigfix_artifact_id,
                   "artifact_value": fn_inputs.bigfix_artifact_value,
-                  "artifact_properties_name": fn_inputs.bigfix_artifact_properties_name if hasattr(fn_inputs, 'bigfix_artifact_properties_name') else None,
-                  "artifact_properties_value": fn_inputs.bigfix_artifact_properties_value if hasattr(fn_inputs, 'bigfix_artifact_properties_value') else None,
+                  "artifact_properties_name": getattr(fn_inputs, 'bigfix_artifact_properties_name', None),
+                  "artifact_properties_value": getattr(fn_inputs, 'bigfix_artifact_properties_value', None),
                   "artifact_type": fn_inputs.bigfix_artifact_type,
                   "incident_id": fn_inputs.bigfix_incident_id,
                   "incident_plan_status": fn_inputs.bigfix_incident_plan_status}
@@ -68,6 +41,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Running BigFix Query for Artifact id {params['artifact_id']}, with value {params['artifact_value']} ...")
         bigfix_client = BigFixClient(self.opts, self.options)
+        artifact_data = None
 
         try:
             if params["incident_plan_status"] != 'C':
@@ -108,7 +82,7 @@ class FunctionComponent(AppFunctionComponent):
                 yield self.status_message("Adding artifact data as an incident attachment")
                 # Define file name and content to add as an attachment
                 file_name = f'query_for_artifact_{params["artifact_id"]}_{params["artifact_type"]}_{datetime.today().strftime("%Y%m%d")}.txt'
-                file_content = u""
+                file_content = ""
                 for data in hits:
                     file_content += f'Resource ID: {data.get("computer_id")}. Resource Name: {data.get("computer_name")}. Artifact value: {params["artifact_value"]}. Artifact Type: {params["artifact_type"]} \n'
                 # Create an attachment

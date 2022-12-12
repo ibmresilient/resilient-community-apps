@@ -97,10 +97,11 @@ class BigFixClient(object):
         :param file_path: File path
         :return resp: Response from query
         """
-        head, tail = split(file_path)
-        query = f'exists file \"{tail}\" of folder \"{head}\"' if tail else f'exists file \"{head}\"'
         LOG.debug("get_bf_computer_by_file_path triggered")
-        return self.get_bfclientquery(self.post_bfclientquery(query), self.retry_interval, self.retry_timeout)
+
+        head, tail = split(file_path)
+        q_id = self.post_bfclientquery(f'exists file \"{tail}\" of folder \"{head}\"' if tail else f'exists file \"{head}\"')
+        return self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
 
     def get_bf_computer_by_ip(self, ip):
         """ Bigfix query - Get endpoints by ip address.
@@ -151,28 +152,22 @@ class BigFixClient(object):
         :param computer_id: BigFix Endpoint id
         :return resp: Response from action
         """
+        subkey = "exists key of keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) "\
+                 "of (it as string) ) of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
         # strip off the prefix if it exists for current user
         if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
             (hive, artifact_value) = artifact_value.split('\\', 1)
-            # The hkcu hive maps to a corresponding entry in hku for each user.
-            # For hkcu get subkey instead in hku for existence of key for each actual user.
-            # The hku entries top-level keys are the sids for the users which can have an hkcu hive loaded.
-            # e.g 'HKEY_USERS\S-1-5-18' or 'HKEY_USERS\S-1-5-21-0123456789-0123456789-0123456789-1000' for a system or
-            # standard account.
-            # The regex pattern 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$' is used to match an sid in the hku hive.
-            subkey = "exists key of keys \"{}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) "\
-                "of (it as string) ) of keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
         else:
-            subkey = "exists key of keys \"{}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            subkey = f"{subkey[:26]}{subkey[137:]}"
 
         LOG.debug("check exists subkey triggered")
 
         return self.get_bfclientquery(self.post_bfclientquery(subkey.format(artifact_value), computer_id), self.retry_interval, self.retry_timeout)
 
-    def check_is_folder(self, artifact_value, computer_id):
+    def check_is_folder(self, artifact_value):
         """ Bigfix query - Determine if artifact value is a folder.
         :param artifact_value: Name of artifact to query
-        :param computer_id: BigFix Endpoint id
         :return resp: Response from action
         """
         LOG.debug("check is folder triggered")
@@ -274,14 +269,14 @@ class BigFixClient(object):
         """
         # Let's give some time (5 secs) to BigFix to get all the data
         sleep(5)
-        clientq_restapi = 'api/clientqueryresults'
-        req_url = f"{self.base_url}/{clientq_restapi}/{query_id}?stats=1&output=json"
         wait_for_endpoints = False
         response_timedout = True
 
         while timeout > 0:
             result = []
-            r = self.rc.execute("get", req_url, auth=(self.bf_user, self.bf_pass),
+            r = self.rc.execute("get",
+                    f"{self.base_url}/api/clientqueryresults/{query_id}?stats=1&output=json",
+                    auth=(self.bf_user, self.bf_pass),
                     verify=self.verify)
             if r.status_code == 200:
                 try:
@@ -290,13 +285,13 @@ class BigFixClient(object):
                     LOG.exception(f"XML processing, Got exception type: {e.__repr__()}, msg: {e.message}")
                     raise e
 
-                totalResults = response.get('totalResults')
-                if totalResults == 0:
+                total_results = response.get('totalResults')
+                if total_results == 0:
                     LOG.debug("No results yet, retrying")
-                elif totalResults > 0:
+                elif total_results > 0:
                     response_timedout = False
-                    LOG.debug(f"Received responses from {totalResults} endpoints.")
-                    for i in range(totalResults):
+                    LOG.debug(f"Received responses from {total_results} endpoints.")
+                    for i in range(total_results):
                         rs = response['results'][i]
                         result.append({
                             "computer_id": rs.get('computerID'),
@@ -317,7 +312,7 @@ class BigFixClient(object):
                     else:
                         break
                 else:
-                    LOG.exception(f"Got unexpected number of results ({response['totalResults']})")
+                    LOG.exception(f"Got unexpected number of results ({total_results})")
                     break
             else:
                 LOG.exception(f"Unexpected HTTP status code: {r.status_code}")
@@ -352,7 +347,7 @@ class BigFixClient(object):
             target_comp_elem = elementTree.SubElement(target_elem, 'CustomRelevance')
             target_comp_elem.text = 'true'
 
-        r = self.rc.execute("post", f"{self.base_url}/{'api/clientquery'}", auth=(self.bf_user, self.bf_pass),
+        r = self.rc.execute("post", f"{self.base_url}/api/clientquery", auth=(self.bf_user, self.bf_pass),
                  verify=self.verify, data=elementTree.tostring(post_xml))
 
         if r.status_code == 200:
