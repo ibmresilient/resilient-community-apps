@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """
@@ -6,77 +7,44 @@ Usage: resilient-circuits selftest -l fn_joe_sandbox_analysis
 """
 
 import logging
-import os
-
 import jbxapi
-from fn_joe_sandbox_analysis.components.fn_joe_sandbox_analysis import get_verify_ssl
-from resilient_lib import RequestsCommon, str_to_bool
+from resilient_lib import str_to_bool, validate_fields
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-
-def get_config_option(option_name, options, optional=False):
-    """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-    option = options.get(option_name)
-
-    if option is None and optional is False:
-        err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(
-            option_name)
-        raise ValueError(err)
-    else:
-        return option
-
-
-def get_proxies(opts, options):
-    rc = RequestsCommon(opts, options)
-    proxies = rc.get_proxies()
-    return proxies
-
 
 def selftest_function(opts):
     """
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    app_configs = opts.get("fn_joe_sandbox_analysis", {})
-    API_KEY = get_config_option("jsb_api_key", app_configs)
-    ANALYSIS_URL = get_config_option("jsb_analysis_url", app_configs)
-    ACCEPT_TAC = str_to_bool(get_config_option("jsb_accept_tac", app_configs))
-    HTTP_PROXY = get_config_option("jsb_http_proxy", app_configs, True)
-    HTTPS_PROXY = get_config_option("jsb_https_proxy", app_configs, True)
+    options = opts.get("fn_joe_sandbox_analysis", {})
 
-    log.info(API_KEY)
+    # Validate that jsb_api_key in the app.config has a value
+    validate_fields(["jsb_api_key"], options)
+
+    # Get proxies from app.config
     proxies = {}
-    test = False
+    HTTP_PROXY = options.get("jsb_http_proxy", None)
+    if HTTP_PROXY:
+        proxies["http"] = HTTP_PROXY
+    HTTPS_PROXY = options.get("jsb_https_proxy", None)
+    if HTTPS_PROXY:
+        proxies["https"] = HTTPS_PROXY
 
-    try:
-        proxies = get_proxies(opts, app_configs)
-        if (HTTP_PROXY) and (len(proxies) == 0):
-            proxies["http"] = HTTP_PROXY
+    # Get verify setting from app.config
+    verify_ssl = options.get("jsb_verify", False)
+    if verify_ssl:
+        verify_ssl = False if verify_ssl.lower() == "false" else (True if verify_ssl.lower() == "true" else verify_ssl)
 
-        if (HTTPS_PROXY) and (len(proxies) == 0):
-            proxies["https"] = HTTPS_PROXY
+    joesandbox = jbxapi.JoeSandbox(apikey=options.get("jsb_api_key"),
+                                   apiurl=options.get("jsb_analysis_url"),
+                                   accept_tac=str_to_bool(options.get("jsb_accept_tac")),
+                                   proxies=proxies,
+                                   verify_ssl=verify_ssl)
 
-        if (len(proxies) == 0):
-            proxies = None
-    except Exception as proxy_error:
-        proxies = None
-
-    verify_ssl = get_verify_ssl(opts, app_configs)
-
-    joesandbox = jbxapi.JoeSandbox(
-        apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies, verify_ssl=verify_ssl)
-
-    test = joesandbox.server_online()
-    if test:
-        return {
-            "state": "success",
-            "reason": "Server Online"
-        }
+    if joesandbox.server_online().get("online"):
+        return {"state": "success", "reason": "Server Online"}
     else:
-        return {
-            "state": "failure",
-            "reason": "Server Offline"
-        }
+        return { "state": "failure", "reason": "Server Offline"}
