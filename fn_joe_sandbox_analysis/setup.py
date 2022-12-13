@@ -5,7 +5,6 @@ from setuptools import setup, find_packages
 import glob
 import ntpath
 
-
 def get_module_name(module_path):
     """
     Return the module name of the module path
@@ -22,7 +21,7 @@ def snake_to_camel(word):
 setup(
     name='fn_joe_sandbox_analysis',
     display_name="Joe Sandbox Function for IBM SOAR",
-    version='1.0.5',
+    version='1.1.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',
