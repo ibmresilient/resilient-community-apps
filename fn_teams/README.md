@@ -86,6 +86,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incident | Read |
   | Group | Read |
   | Users | Read |
 
@@ -97,6 +98,7 @@ The following SOAR platform guides provide additional information:
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
+
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
@@ -165,17 +167,22 @@ The application requires admins consent to access a protected resource, such as 
 
 ### List of required permissions
 
-| Category | API/Permission | Description |
-| ------ | ------ | ------- |
-| Group | `Create` | Create groups |
-| Group | `ReadWrite.All` | Read and write all groups |
-| GroupMember | `ReadWrite.All` | Read and write all group memberships |
-| Team | `Create` | Create teams |
-| Team | `ReadBasic.All` | Get a list of all teams |
-| TeamMember | `ReadWrite.All` | Add and remove members from all teams |
-| TeamMember | `ReadWriteNonOwnerRole.All` | Add and remove members with non-owner role |
-| TeamSettings | `ReadWrite.All` | Read and change all teams' settings |
-| User | `Read.All` | Read all users' full profiles |
+| Category | API/Permission | Permission Type | Description |
+| ------ | ------ | ------- | ------- |
+| Group | `Create` |  Application | Create groups |
+| Group | `ReadWrite.All` | Application | Read and write all groups |
+| GroupMember | `ReadWrite.All` | Application | Read and write all group memberships |
+| Team | `Create` | Application | Create teams |
+| Team | `ReadBasic.All` | Application | Get a list of all teams |
+| TeamMember | `ReadWrite.All` | Application | Add and remove members from all teams |
+| TeamMember | `ReadWriteNonOwnerRole.All` | Application | Add and remove members with non-owner role |
+| TeamSettings | `ReadWrite.All` | Application | Read and change all teams' settings |
+| User | `Read.All` | Application | Read all users' full profiles |
+| ChannelMessage | `Read.All` | Application | Read all messages |
+| ChannelMessage | `ReadWrite` | Delegated | Read and write user channel messages |
+| ChannelMessage | `Send` | Delegated | Send channel messages |
+| offline_access | `--` | Delegated | Maintain access to data you have given it access to |
+
 
 <p align="center">
 <img src="./doc/screenshots/app_scopes_permissions.png" />
@@ -1362,22 +1369,24 @@ if not results.success:
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| MS Teams: Archive Team From Incident | incident | `common_archive_unarchive_a_microsoft_team` |
+| MS Teams: Archive Team | incident | `common_archive_unarchive_a_microsoft_team` |
 | MS Teams: Archive Team From Task | task | `common_archive_unarchive_a_microsoft_team` |
-| MS Teams: Create Channel From Incident | incident | `common_create_a_teams_channel` |
+| MS Teams: Create Channel | incident | `common_create_a_teams_channel` |
 | MS Teams: Create Channel From Task | task | `common_create_a_teams_channel` |
-| MS Teams: Create Group From Incident | incident | `incident_create_a_microsoft_group` |
+| MS Teams: Create Group | incident | `incident_create_a_microsoft_group` |
 | MS Teams: Create Group From Task | task | `task_create_a_microsoft_group` |
-| MS Teams: Create Team From Incident | incident | `incident_create_a_microsoft_team` |
+| MS Teams: Create Team | incident | `incident_create_a_microsoft_team` |
 | MS Teams: Create Team From Task | task | `task_create_a_microsoft_team` |
-| MS Teams: Delete Channel From Incident | incident | `common_delete_a_teams_channel` |
+| MS Teams: Delete Channel | incident | `common_delete_a_teams_channel` |
 | MS Teams: Delete Channel From Task | task | `common_delete_a_teams_channel` |
-| MS Teams: Delete Group From Incident | incident | `common_delete_a_microsoft_group` |
+| MS Teams: Delete Group | incident | `common_delete_a_microsoft_group` |
 | MS Teams: Delete Group From Task | task | `common_delete_a_microsoft_group` |
-| MS Teams: Enable Teams for Group From Incident | incident | `common_enable_microsoft_team_for_group` |
+| MS Teams: Enable Teams for Group | incident | `common_enable_microsoft_team_for_group` |
 | MS Teams: Enable Teams for Group From Task | task | `common_enable_microsoft_team_for_group` |
-| MS Teams: Post Incident Information to Teams | incident | `incident_post_message_to_teams` |
-| MS Teams: Post Task Information to Teams | task | `task_post_message_to_teams` |
+| MS Teams: Post Incident Information | incident | `incident_post_message_to_teams` |
+| MS Teams: Post Task Information | task | `task_post_message_to_teams` |
+| MS Teams: Read Channel Messages | incident | `common_read_a_channels_messages` |
+| MS Teams: Read Channel Messages From task | incident | `common_read_a_channels_messages` |
 
 ---
 
