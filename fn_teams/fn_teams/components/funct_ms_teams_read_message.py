@@ -23,27 +23,35 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
+        The Graph API's read message method is one of Microsoft's protected APIs since
+        it has access to sensitive data. The user must grant this application permission
+        to access their data in order for this application to function. This means that
+        only the resources to which the user has access, such as channels and teams, will
+        be available to this application. This feature allows to read all of the messages
+        on the channel or the replies to a specific message. The function can retrieve all
+        replies to a certain message if it is given the message id for that message. The
+        function will dump all messages in that channel back into SOAR if the channel name
+        attribute is given. This application will required both authentication headers for
+        the application to function. Application permission is used for finding the group,
+        teams and channels, whereas the Delegated permission is used for reading messaged
+        from the channel.
 
-            -> ms_groupteam_id
-            -> ms_group_mail_nickname
-            -> ms_groupteam_name
-
-        Note: If multiple options are provided to locate the Graph Object then
-        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes
-        the other two options
-
-        Inputs:
-        -------
-            ms_channel_name        <str> : Name of the channel to be deleted
-            ms_groupteam_id        <str> : The unique Id generated while creating a group
+        options:
+        --------
+            message_id             <str> : Id of the message who's replies are to be retrieved
+            channel_id             <str> : Id of the channel, the message belongs
+            group_id               <str> : Id of the group, the channel belongs
+            channel_name           <str> : Name of the MS Channel to be deleted
+            ms_description         <str> : Description for the Channel
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
-            ms_groupteam_name      <str> : Name of the Microsoft Group
+            ms_group_name          <str> : Name of the Microsoft Group
 
         Returns:
         --------
-            Response <dict> : A response with the details of the team that was archived or
-                              unarchived, or an error message from the MS Graph api if the
-                              operation fails
+            Response <dict> : A response with all the messages of a channel or the replies
+                              to a particular message and all information related to it,
+                              or an error message from the MS Graph api if the operation
+                              fails
          """
 
         yield self.status_message(constants.STATUS_STARTING_APP.format(FN_NAME))

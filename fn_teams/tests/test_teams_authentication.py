@@ -51,7 +51,7 @@ class MockMSAL:
 @pytest.mark.livetest
 def test_connect_endpoint(required_parameters):
     authenticator = MicrosoftAuthentication(required_parameters, APP_CONFIG)
-    header = authenticator.authenticate()
+    header = authenticator.authenticate_application_permissions()
     assert header
     assert "Authorization" in header
     assert "Content-type" in header
@@ -81,7 +81,6 @@ def test_generate_header(mocked_authenticator):
 
 @patch('msal.ConfidentialClientApplication', side_effect=MockMSAL)
 def test_generate_bearer_id(msal, mocked_authenticator):
-    response = mocked_authenticator._generate_bearer_id()
+    response = mocked_authenticator._generate_application_bearer_id()
     assert response
     assert response == "access_token 123"
-    

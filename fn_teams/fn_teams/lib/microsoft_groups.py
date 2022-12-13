@@ -73,6 +73,8 @@ class GroupsInterface:
         if "members" in kwargs:
             body["members@odata.bind"] = kwargs.get("members")
 
+        body.update(constants.CREATE_GROUP_CONFIGURATION)
+
         self.log.debug(constants.INFO_GROUP_CREATION_REQUEST)
         self.log.debug(json.dumps(body, indent=2))
 

@@ -158,25 +158,21 @@ class MessageClient:
 
     def read_messages(self, dual_headers, options):
         """
-        A MS Team can have multiple channels. This function can be used to delete a Channel
-        of an existing MS Team. Here a request is formulated and posted to the Microsoft
-        Graph API for channel deletion. To delete a Channel for an MS Team, 2 key
-        attributes are required, namely: channelId and groupID/teamID. The MSFinder
-        class from microsoft_commons is being used. The MSFinder has a find_channel method
-        that allows for locating a channel and extracting its channel Id. To located the
-        group or team for which the channel is associated, one of the following options
-        can be used:
-
-            -> ms_groupteam_id
-            -> ms_group_mail_nickname
-            -> ms_groupteam_name
-
-        Note: If multiple options are provided to locate the Graph Object then
-        ms_group_mail_nickname supersedes ms_groupteam_name and ms_groupteam_id supersedes the
-        other two options. 
+        The Graph API's read message method is one of Microsoft's protected APIs since
+        it has access to sensitive data. The user must grant this application permission
+        to access their data in order for this application to function. This means that
+        only the resources to which the user has access, such as channels and teams, will
+        be available to this application. This feature allows to read all of the messages
+        on the channel or the replies to a specific message. The function can retrieve all
+        replies to a certain message if it is given the message id for that message. The
+        function will dump all messages in that channel back into SOAR if the channel name
+        attribute is given. 
 
         options:
         --------
+            message_id             <str> : Id of the message who's replies are to be retrieved
+            channel_id             <str> : Id of the channel, the message belongs
+            group_id               <str> : Id of the group, the channel belongs
             channel_name           <str> : Name of the MS Channel to be deleted
             ms_description         <str> : Description for the Channel
             ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
@@ -184,9 +180,10 @@ class MessageClient:
 
         Returns:
         --------
-            Response <dict> : A response with the details of the team that was archived or
-                              unarchived, or an error message from the MS Graph api if the
-                              operation fails
+            Response <dict> : A response with all the messages of a channel or the replies
+                              to a particular message and all information related to it,
+                              or an error message from the MS Graph api if the operation
+                              fails
         """
         response_handler = microsoft_commons.ResponseHandler()
 

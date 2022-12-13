@@ -1,3 +1,149 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "replyToId": {},
+          "etag": {
+            "type": "string"
+          },
+          "messageType": {
+            "type": "string"
+          },
+          "createdDateTime": {
+            "type": "string"
+          },
+          "lastModifiedDateTime": {
+            "type": "string"
+          },
+          "lastEditedDateTime": {},
+          "deletedDateTime": {},
+          "subject": {},
+          "summary": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "chatId": {},
+          "importance": {
+            "type": "string"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "webUrl": {
+            "type": "string"
+          },
+          "policyViolation": {},
+          "eventDetail": {},
+          "from": {
+            "type": "object",
+            "properties": {
+              "device": {},
+              "user": {},
+              "application": {}
+            }
+          },
+          "body": {
+            "type": "object",
+            "properties": {
+              "contentType": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            }
+          },
+          "channelIdentity": {
+            "type": "object",
+            "properties": {
+              "teamId": {
+                "type": "string"
+              },
+              "channelId": {
+                "type": "string"
+              }
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "contentType": {
+                  "type": "string"
+                },
+                "contentUrl": {},
+                "content": {
+                  "type": "string"
+                },
+                "name": {},
+                "thumbnailUrl": {}
+              }
+            }
+          },
+          "mentions": {
+            "type": "array"
+          },
+          "reactions": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ms_channel_name": {
+          "type": "string"
+        },
+        "ms_groupteam_name": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

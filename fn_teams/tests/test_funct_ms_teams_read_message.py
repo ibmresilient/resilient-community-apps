@@ -1,78 +1,44 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-
+import os
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from unittest.mock import patch
 
-PACKAGE_NAME = "fn_teams"
+from tests import testcommons
+from fn_teams.lib import constants
+from fn_teams.lib.microsoft_messages import MessageClient
+from tests.testcommons import required_parameters
+
+PACKAGE_NAME = constants.PACKAGE_NAME
 FUNCTION_NAME = "ms_teams_read_message"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
-
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+PATH_TEST_DATA = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
+PATH_MS_GROUP = os.path.join(PATH_TEST_DATA, "find_group.json")
 
 
-def call_ms_teams_read_message_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("ms_teams_read_message", function_params)
-
-    # Fire a message to the function
-    circuits.manager.fire(evt)
-
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("ms_teams_read_message_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+def patch_archive_unarchive_team(method, url, headers, callback):
+    ret = testcommons.json_read(PATH_MS_GROUP)
+    testcommons.check_request_parameters(
+        method=method,
+        url=url,
+        headers=headers,
+        callback=callback)
+    
+    if method == "get":
+        if "groups" in url:
+            assert "https://graph.microsoft.com/v1.0/groups" in url
+        elif "channels":
+            assert "teams" in url
+            assert "graph.microsoft.com/v1.0" in url
+        return ret
 
 
-class TestMsTeamsReadMessage:
-    """ Tests for the ms_teams_read_message function"""
+@patch('resilient_lib.RequestsCommon.execute', side_effect=patch_archive_unarchive_team)
+def test_delete_group(patch, required_parameters):
+    mi = MessageClient(required_parameters.get("rc"))
 
-    def test_function_definition(self):
-        """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
-
-    mock_inputs_1 = {
-        "ms_channel_name": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "message_id": "sample text",
-        "ms_groupteam_name": "sample text",
-        "ms_groupteam_id": "sample text"
-    }
-
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "ms_channel_name": "sample text",
-        "ms_group_mail_nickname": "sample text",
-        "message_id": "sample text",
-        "ms_groupteam_name": "sample text",
-        "ms_groupteam_id": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
-        """ Test calling with sample values for the parameters """
-
-        results = call_ms_teams_read_message_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+    dual_headers ={
+        "application" : {'Authorization': 'Bearer id123', 'Content-type': 'application/json'},
+        "delegated"   : {'Authorization': 'Bearer id123', 'Content-type': 'application/json'}}
+    options = {"channel_name" : "Unittest Group1", "group_id" : "1234"}
+    mi.read_messages(dual_headers, options)

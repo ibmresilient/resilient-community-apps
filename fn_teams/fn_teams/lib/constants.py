@@ -53,6 +53,9 @@ URL_GROUPS_MEMBERS = URL_GROUPS + "/{}/members"
 URL_GROUP_ADD_MEMBERS = URL_GROUPS + "/{}/members/$ref"
 URL_DIRECTORY_OBJECT = "/v1.0/directoryObjects/{}"
 
+CREATE_GROUP_CONFIGURATION = {
+    "visibility": "Private"}
+
 # MS USERS API call
 URL_USERS = "/v1.0/users/{}"
 URL_LIST_USERS = "/v1.0/users"
