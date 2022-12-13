@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, SOARCommon
-from fn_randori.lib.app_common import (AppCommon, ENTITY_COMMENT_HEADER, PACKAGE_NAME)
+from fn_randori.lib.app_common import (AppCommon, ENTITY_COMMENT_HEADER, SOAR_HEADER, PACKAGE_NAME)
 
 FN_NAME = "randori_update_notes_from_randori_target"
 
@@ -47,16 +47,16 @@ class FunctionComponent(AppFunctionComponent):
         # Filter out the new Randori comments by checking for header in the comment.
         new_comments = []
         if target_comment_list:
-            new_comments = soar_common.filter_soar_comments(incident_id, target_comment_list)
+            new_comments = soar_common.filter_soar_comments(incident_id, target_comment_list, SOAR_HEADER)
             # Reverse the order so that older notes are post first.
             if new_comments:
                 new_comments.reverse()
 
                 # Create a new note in SOAR for each new Randori comment
                 for comment in new_comments:
+                    note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, comment)
                     soar_common.create_case_comment(case_id=incident_id,
-                                                    note=comment,
-                                                    entity_comment_header=ENTITY_COMMENT_HEADER)
+                                                    note=note)
 
         results = {"count": len(new_comments)}
 
