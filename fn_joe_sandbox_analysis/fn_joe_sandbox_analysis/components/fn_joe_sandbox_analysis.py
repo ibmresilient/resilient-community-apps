@@ -12,8 +12,6 @@ from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import str_to_bool, validate_fields
 
-REQUESTS_VERIFY_ENV_VAR = "REQUESTS_CA_BUNDLE"
-
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'fn_joe_sandbox_analysis"""
 
@@ -94,15 +92,12 @@ class FunctionComponent(ResilientComponent):
             if (entity["type"] == "attachment" or (entity["type"] == "artifact" and entity["data"] != None)):
 
                 # Generate attachment name
-                sample_name = None
+                sample_name = f'[{entity["meta_data"]["inc_id"]}_{entity["meta_data"]["id"]}] - '
 
                 if(entity["type"] == "attachment"):
-                    sample_name = "[{0}_{1}] - {2}".format(
-                        entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"])
-
+                    sample_name = f'{sample_name}{entity["meta_data"]["name"]}'
                 else:
-                    sample_name = "[{0}_{1}] - {2}".format(
-                        entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"])
+                    sample_name = f'{sample_name}{entity["meta_data"]["attachment"]["name"]}'
 
                 # Write to temp file
                 path = write_temp_file(entity["data"], sample_name)
@@ -124,33 +119,26 @@ class FunctionComponent(ResilientComponent):
             report_name = None
 
             if (entity["type"] == "attachment"):
-                report_name = "js-report: {0}.{1}".format(
-                    entity["meta_data"]["name"], jsb_report_type)
+                report_name = f"js-report: {entity['meta_data']['name']}.{jsb_report_type}"
 
             elif (entity["type"] == "artifact" and entity["data"] != None):
-                report_name = "js-report: {0}.{1}".format(
-                    entity["meta_data"]["attachment"]["name"], jsb_report_type)
+                report_name = f"js-report: {entity['meta_data']['attachment']['name']}.{jsb_report_type}"
 
             elif (entity["type"] == "artifact" and entity["uri"] != None):
                 parsed_uri = urlparse(entity["uri"])
                 if(parsed_uri.hostname):
-                    report_name = "js-report: {0}.{1}".format(
-                        parsed_uri.hostname, jsb_report_type)
+                    report_name = f"js-report: {parsed_uri.hostname}.{jsb_report_type}"
                 else:
-                    report_name = "js-report: URL Analysis: {0}.{1}".format(
-                        sample_webid, jsb_report_type)
+                    report_name = f"js-report: URL Analysis: {sample_webid}.{jsb_report_type}"
 
             return report_name
 
         def write_temp_file(data, name=None):
-            path = None
 
             if (name):
-                path = "{0}/{1}".format(tempfile.gettempdir(), name)
-
+                path = f"{tempfile.gettempdir()}/{name}"
             else:
-                tf = tempfile.mkstemp()
-                path = tf[1]
+                path = tempfile.mkstemp()[1]
 
             fo = open(path, 'wb')
             TEMP_FILES.append(path)
@@ -172,8 +160,7 @@ class FunctionComponent(ResilientComponent):
             return joesandbox.info(sample_webid)
 
         def should_timeout(ping_timeout, start_time):
-            returnValue = (time.time() - start_time) > ping_timeout
-            return returnValue
+            return (time.time() - start_time) > ping_timeout
 
         ##############################
         ###### END HELPER FUNCS ######
@@ -181,6 +168,8 @@ class FunctionComponent(ResilientComponent):
 
 
         try:
+            # Validate that jsb_api_key in the app.config has a value
+            validate_fields(["jsb_api_key"], self.options)
             # Get Joe Sandbox options from app.config file
             API_KEY = self.options.get("jsb_api_key")
             ACCEPT_TAC = str_to_bool(self.options.get("jsb_accept_tac"))
@@ -220,7 +209,11 @@ class FunctionComponent(ResilientComponent):
 
             # Instansiate new Joe Sandbox object
             joesandbox = jbxapi.JoeSandbox(
-                apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies, verify_ssl=verify_ssl)
+                apikey=API_KEY,
+                apiurl=ANALYSIS_URL,
+                accept_tac=ACCEPT_TAC,
+                proxies=proxies,
+                verify_ssl=verify_ssl)
 
             # Instansiate new SOAR API object
             client = self.rest_client()
@@ -241,26 +234,22 @@ class FunctionComponent(ResilientComponent):
             # Generate report name
             report_name = generate_report_name(entity, jsb_report_type, sample_webid)
 
-            yield StatusMessage("{} being analyzed by Joe Sandbox".format(report_name))
+            yield StatusMessage(f"{report_name} being analyzed by Joe Sandbox")
 
             # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQUEST_TIMEOUT in seconds has passed
             while (sample_status["status"].lower() != "finished"):
 
                 # Check workflow status, if "terminated, raise error"
-                workflow_status = get_workflow_status(
-                    workflow_instance_id, client)
+                workflow_status = get_workflow_status(workflow_instance_id, client)
 
                 if workflow_status == "terminated":
-                    raise ValueError(
-                        "Analysis report not fetched. Workflow was Terminated")
+                    raise ValueError("Analysis report not fetched. Workflow was Terminated")
 
                 if (should_timeout(ANALYSIS_REPORT_REQUEST_TIMEOUT, start_time)):
-                    raise ValueError("Timed out trying to get Analysis Report after {0} seconds".format(
-                        ANALYSIS_REPORT_REQUEST_TIMEOUT))
+                    raise ValueError(f"Timed out trying to get Analysis Report after {ANALYSIS_REPORT_REQUEST_TIMEOUT} seconds")
 
-                yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ANALYSIS_REPORT_PING_DELAY))
-                sample_status = fetch_report(
-                    joesandbox, sample_webid, ANALYSIS_REPORT_PING_DELAY)
+                yield StatusMessage(f"Analysis Status: {sample_status['status']}. Fetch every {ANALYSIS_REPORT_PING_DELAY}s")
+                sample_status = fetch_report(joesandbox, sample_webid, ANALYSIS_REPORT_PING_DELAY)
 
             yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
             download = joesandbox.download(sample_webid, jsb_report_type)
@@ -269,15 +258,14 @@ class FunctionComponent(ResilientComponent):
             path = write_temp_file(download[1], report_name)
 
             # POST report as attachment to incident
-            jsb_analysis_report = client.post_attachment(
-                '/incidents/{}/attachments'.format(incident_id), path, mimetype=MIMETYPES[jsb_report_type])
+            jsb_analysis_report = client.post_attachment(f'/incidents/{incident_id}/attachments', path, mimetype=MIMETYPES[jsb_report_type])
 
             yield StatusMessage("Upload of attachment complete")
 
             results = {
                 "analysis_report_name": report_name,
                 "analysis_report_id": jsb_analysis_report["id"],
-                "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
+                "analysis_report_url": f"{ANALYSIS_URL}/{sample_webid}",
                 "analysis_status": sample_status["runs"][0]["detection"]
             }
 
