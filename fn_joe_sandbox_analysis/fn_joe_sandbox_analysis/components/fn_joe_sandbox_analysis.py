@@ -10,9 +10,8 @@ import tempfile
 import re
 from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, str_to_bool
+from resilient_lib import str_to_bool, validate_fields
 
-REQUEST_VERIFY_APP_CONFIG = "verify"
 REQUESTS_VERIFY_ENV_VAR = "REQUESTS_CA_BUNDLE"
 
 class FunctionComponent(ResilientComponent):
@@ -40,28 +39,17 @@ class FunctionComponent(ResilientComponent):
 
         # Dict to reference related mimetype
         MIMETYPES = {"pdf": "application/pdf",
-                     "json": "application/json", "html": "text/html"}
+                     "json": "application/json",
+                     "html": "text/html"}
 
         def get_workflow_status(workflow_instance_id, res_client):
             """Function to get the status of the current running workflow"""
-            res = res_client.get(
-                "/workflow_instances/{0}".format(workflow_instance_id))
+            res = res_client.get(f"/workflow_instances/{workflow_instance_id}")
             return res["status"]
 
         def remove_temp_files(files):
             for f in files:
                 os.remove(f)
-
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if option is None and optional is False:
-                err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(
-                    option_name)
-                raise ValueError(err)
-            else:
-                return option
 
         def get_input_entity(client, incident_id, attachment_id, artifact_id):
 
@@ -72,33 +60,26 @@ class FunctionComponent(ResilientComponent):
             if (attachment_id):
                 entity["id"] = attachment_id
                 entity["type"] = "attachment"
-                entity["meta_data"] = client.get(
-                    "/incidents/{0}/attachments/{1}".format(entity["incident_id"], entity["id"]))
-                entity["data"] = client.get_content(
-                    "/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], entity["id"]))
+                entity["meta_data"] = client.get(f"/incidents/{entity['incident_id']}/attachments/{entity['id']}")
+                entity["data"] = client.get_content(f"/incidents/{entity['incident_id']}/attachments/{entity['id']}/contents")
 
             elif (artifact_id):
                 entity["id"] = artifact_id
                 entity["type"] = "artifact"
-                entity["meta_data"] = client.get(
-                    "/incidents/{0}/artifacts/{1}".format(entity["incident_id"], entity["id"]))
+                entity["meta_data"] = client.get(f"/incidents/{entity['incident_id']}/artifacts/{entity['id']}")
 
                 # handle if artifact has attachment
                 if (entity["meta_data"]["attachment"]):
-                    entity["data"] = client.get_content(
-                        "/incidents/{0}/artifacts/{1}/contents".format(entity["incident_id"], entity["id"]))
+                    entity["data"] = client.get_content(f"/incidents/{entity['incident_id']}/artifacts/{entity['id']}/contents")
 
                 # else handle if artifact.value contains an URI using RegEx
                 else:
-                    match = re.match(re_uri_match_pattern,
-                                     entity["meta_data"]["value"])
+                    match = re.match(re_uri_match_pattern,entity["meta_data"]["value"])
 
                     if (match):
                         entity["uri"] = match.group()
-
                     else:
-                        raise FunctionError(
-                            "Artifact has no attachment or supported URI")
+                        raise FunctionError("Artifact has no attachment or supported URI")
 
             else:
                 raise ValueError('attachment_id AND artifact_id both None')
@@ -194,10 +175,6 @@ class FunctionComponent(ResilientComponent):
             returnValue = (time.time() - start_time) > ping_timeout
             return returnValue
 
-        def get_proxies(opts, options):
-            rc = RequestsCommon(opts, options)
-            proxies = rc.get_proxies()
-            return proxies
         ##############################
         ###### END HELPER FUNCS ######
         ##############################
@@ -205,25 +182,34 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get Joe Sandbox options from app.config file
-            API_KEY = get_config_option("jsb_api_key")
-            ACCEPT_TAC = str_to_bool(get_config_option("jsb_accept_tac"))
-            ANALYSIS_URL = get_config_option("jsb_analysis_url")
+            API_KEY = self.options.get("jsb_api_key")
+            ACCEPT_TAC = str_to_bool(self.options.get("jsb_accept_tac"))
+            ANALYSIS_URL = self.options.get("jsb_analysis_url")
             ANALYSIS_REPORT_PING_DELAY = int(
-                get_config_option("jsb_analysis_report_ping_delay"))
+                self.options.get("jsb_analysis_report_ping_delay"))
             ANALYSIS_REPORT_REQUEST_TIMEOUT = float(
-                get_config_option("jsb_analysis_report_request_timeout"))
-            HTTP_PROXY = get_config_option("jsb_http_proxy", True)
-            HTTPS_PROXY = get_config_option("jsb_https_proxy", True)
+                self.options.get("jsb_analysis_report_request_timeout"))
 
-            # Check required inputs are defined
-            incident_id = kwargs.get("incident_id")  # number (required)
-            if not incident_id:
-                raise ValueError("incident_id is required")
+            # Get proxies from app.config
+            proxies = {}
+            HTTP_PROXY = self.options.get("jsb_http_proxy", None)
+            if HTTP_PROXY:
+                proxies["http"] = HTTP_PROXY
+            HTTPS_PROXY = self.options.get("jsb_https_proxy", None)
+            if HTTPS_PROXY:
+                proxies["https"] = HTTPS_PROXY
 
-            jsb_report_type = kwargs.get("jsb_report_type")[
-                "name"]  # select (required)
-            if not jsb_report_type:
-                raise ValueError("jsb_report_type is required")
+            # Get verify setting from app.config
+            verify_ssl = self.options.get("jsb_verify", False)
+            if verify_ssl:
+                verify_ssl = False if verify_ssl.lower() == "false" else (True if verify_ssl.lower() == "true" else verify_ssl)
+
+            # Validate required input fields
+            validate_fields(["incident_id", "jsb_report_type"], kwargs)
+
+            # Define inputs
+            incident_id = kwargs.get("incident_id")
+            jsb_report_type = kwargs.get("jsb_report_type")["name"]
 
             # Get optional inputs, one of these must be defined
             attachment_id = kwargs.get("attachment_id")  # number
@@ -231,27 +217,6 @@ class FunctionComponent(ResilientComponent):
 
             if not attachment_id and not artifact_id:
                 raise ValueError("attachment_id or artifact_id is required")
-
-            # Setup proxies parameter if exist in appconfig file
-            proxies = {}
-
-            try:
-                proxies = get_proxies(self.opts, self.options)
-
-                if (HTTP_PROXY) and (len(proxies) == 0):
-                    proxies["http"] = HTTP_PROXY
-
-                if (HTTPS_PROXY) and (len(proxies) == 0):
-                    proxies["https"] = HTTPS_PROXY
-
-                if (len(proxies) == 0):
-                    proxies = None
-            except Exception as proxy_error:
-                proxies = None
-
-            # get bool or path to custom ca bundle to pass to "verify_ssl"
-            # in jbxapi.JoeSandbox constructor
-            verify_ssl = get_verify_ssl(self.opts, self.options)
 
             # Instansiate new Joe Sandbox object
             joesandbox = jbxapi.JoeSandbox(
@@ -261,8 +226,7 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
 
             # Get entity we are dealing with (either attachment or artifact)
-            entity = get_input_entity(
-                client, incident_id, attachment_id, artifact_id)
+            entity = get_input_entity(client, incident_id, attachment_id, artifact_id)
 
             # Submit the sample and get its related webid
             yield StatusMessage("Submitting sample to Joe Sandbox")
@@ -275,8 +239,7 @@ class FunctionComponent(ResilientComponent):
             start_time = time.time()
 
             # Generate report name
-            report_name = generate_report_name(
-                entity, jsb_report_type, sample_webid)
+            report_name = generate_report_name(entity, jsb_report_type, sample_webid)
 
             yield StatusMessage("{} being analyzed by Joe Sandbox".format(report_name))
 
@@ -326,43 +289,3 @@ class FunctionComponent(ResilientComponent):
 
         finally:
             remove_temp_files(TEMP_FILES)
-
-
-
-def get_verify_ssl(opts, app_options):
-    """
-    Get "verify" parameter from app config or from env var
-    REQUESTS_CA_BUNDLE which is the default way to set
-    verify with python requests library.
-
-    Value can be set in [integrations] or in the [fn_joe_sandbox_analysis] section
-
-    Value in [fn_joe_sandbox_analysis] takes precedence over [integrations]
-    which takes precedence over REQUESTS_CA_BUNDLE
-
-    :param app_options: App config dict
-    :type app_options: dict
-    :return: Value to set requests.session.verify to (as used in jbxapi).
-        Either a path or a boolean
-    :rtype: bool|str(path)
-    """
-
-    verify = app_options.get(REQUEST_VERIFY_APP_CONFIG)
-
-    # NOTE: specifically want ``if verify is None`` rather than
-    # ``if not verify``, as the value of verify can be set to "False"
-    if verify is None:
-        verify = opts.get("integrations", {}).get(REQUEST_VERIFY_APP_CONFIG)
-
-    if verify is None:
-        verify = os.getenv(REQUESTS_VERIFY_ENV_VAR)
-
-    # because verify can be either a boolean or a path,
-    # we need to check if it is a string with a boolean 
-    # value first then, and only then, we convert it to a bool
-    # NOTE: that this will then only support "true" or "false"
-    # (case-insensitive) rather than the normal "true", "yes", etc...
-    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
-        verify = str_to_bool(verify)
-
-    return verify
