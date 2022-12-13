@@ -178,7 +178,7 @@ The following table provides the settings you need to configure the app. These s
 | **polling_interval** | Yes | `600` | *Poller interval time in seconds. Value of zero to turn poller off.* |
 | **polling_lookback** | Yes | `1200` | *Number of minutes to look back for target updates. Value is only used on the first time polling when the app starts.* |
 | **organization_name** | Yes | `organization-name` | *Your organization name in Randori.* |
-| **verify** | Yes | `false` | `/path/to/cafile.crt` | *Path to client SSL certificate.* |
+| **verify** | Yes | `True` | *Boolean indicating whether to verify the Randori client certificate.* |
 | **polling_filters** | No | ("target_temptation","greater_or_equal",40) | *Query filters: Comma separated tuples ("field","operator","value)* |
 | **soar_create_case_template** | No | /path/soar_create_case_template.jinja | *Path to custom create case jinja template.* |
 | **soar_close_case_template** | No | /path/soar_close_case_template.jinja | *Path to custom close case jinja template.* |
@@ -1431,10 +1431,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         "randori_target_temptation": "In Review",
     {% endif %}
 
-    {% if user_tags is not none %}
-      "randori_target_status": "{{ status }}",
-    {% endif %}
-
+    "randori_target_status": "{{ status }}",
     "randori_target_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>"
   }
 }
@@ -1487,13 +1484,8 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
           "randori_target_temptation": "In Review",
     {% endif %}
 
-    {% if status is not none %}
     "randori_target_status": "{{ status }}",
-    {% endif %}
-
-    {% if impact_score is not none %}
     "randori_target_impact_score": "{{ impact_score }}",
-    {% endif %}
 
     {% if tech_category is not none %}
     "randori_target_tech_category": "{{ tech_category | join(', ') }}",
