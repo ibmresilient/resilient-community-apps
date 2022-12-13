@@ -3,14 +3,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import os
-import jbxapi
-import time
-import tempfile
-import re
+from os import remove
+from jbxapi import JoeSandbox
+from time import time, sleep
+from tempfile import gettempdir, mkstemp
+from re import match
 from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import str_to_bool, validate_fields
+
+from fn_joe_sandbox_analysis.util.helper import connect_to_joe_sandbox
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'fn_joe_sandbox_analysis"""
@@ -47,7 +49,7 @@ class FunctionComponent(ResilientComponent):
 
         def remove_temp_files(files):
             for f in files:
-                os.remove(f)
+                remove(f)
 
         def get_input_entity(client, incident_id, attachment_id, artifact_id):
 
@@ -72,10 +74,10 @@ class FunctionComponent(ResilientComponent):
 
                 # else handle if artifact.value contains an URI using RegEx
                 else:
-                    match = re.match(re_uri_match_pattern,entity["meta_data"]["value"])
+                    match_pattern = match(re_uri_match_pattern,entity["meta_data"]["value"])
 
-                    if (match):
-                        entity["uri"] = match.group()
+                    if (match_pattern):
+                        entity["uri"] = match_pattern.group()
                     else:
                         raise FunctionError("Artifact has no attachment or supported URI")
 
@@ -112,7 +114,7 @@ class FunctionComponent(ResilientComponent):
             return sample_webid
 
         def fetch_report(joesandbox, sample_webid, ping_delay):
-            time.sleep(ping_delay)
+            sleep(ping_delay)
             return get_sample_info(joesandbox, sample_webid)
 
         def generate_report_name(entity, jsb_report_type, sample_webid):
@@ -136,9 +138,9 @@ class FunctionComponent(ResilientComponent):
         def write_temp_file(data, name=None):
 
             if (name):
-                path = f"{tempfile.gettempdir()}/{name}"
+                path = f"{gettempdir()}/{name}"
             else:
-                path = tempfile.mkstemp()[1]
+                path = mkstemp()[1]
 
             fo = open(path, 'wb')
             TEMP_FILES.append(path)
@@ -160,38 +162,22 @@ class FunctionComponent(ResilientComponent):
             return joesandbox.info(sample_webid)
 
         def should_timeout(ping_timeout, start_time):
-            return (time.time() - start_time) > ping_timeout
+            return (time() - start_time) > ping_timeout
 
         ##############################
         ###### END HELPER FUNCS ######
         ##############################
 
-
         try:
-            # Validate that jsb_api_key in the app.config has a value
-            validate_fields(["jsb_api_key"], self.options)
             # Get Joe Sandbox options from app.config file
-            API_KEY = self.options.get("jsb_api_key")
-            ACCEPT_TAC = str_to_bool(self.options.get("jsb_accept_tac"))
-            ANALYSIS_URL = self.options.get("jsb_analysis_url")
-            ANALYSIS_REPORT_PING_DELAY = int(
-                self.options.get("jsb_analysis_report_ping_delay"))
-            ANALYSIS_REPORT_REQUEST_TIMEOUT = float(
-                self.options.get("jsb_analysis_report_request_timeout"))
+            ANALYSIS_REPORT_PING_DELAY = int(self.options.get("jsb_analysis_report_ping_delay"))
+            ANALYSIS_REPORT_REQUEST_TIMEOUT = float(self.options.get("jsb_analysis_report_request_timeout"))
 
-            # Get proxies from app.config
-            proxies = {}
-            HTTP_PROXY = self.options.get("jsb_http_proxy", None)
-            if HTTP_PROXY:
-                proxies["http"] = HTTP_PROXY
-            HTTPS_PROXY = self.options.get("jsb_https_proxy", None)
-            if HTTPS_PROXY:
-                proxies["https"] = HTTPS_PROXY
+            # Instansiate new Joe Sandbox object and get ANALYSIS_URL
+            ANALYSIS_URL, joesandbox = connect_to_joe_sandbox(self.options)
 
-            # Get verify setting from app.config
-            verify_ssl = self.options.get("jsb_verify", False)
-            if verify_ssl:
-                verify_ssl = False if verify_ssl.lower() == "false" else (True if verify_ssl.lower() == "true" else verify_ssl)
+            # Instansiate new SOAR API object
+            client = self.rest_client()
 
             # Validate required input fields
             validate_fields(["incident_id", "jsb_report_type"], kwargs)
@@ -207,17 +193,6 @@ class FunctionComponent(ResilientComponent):
             if not attachment_id and not artifact_id:
                 raise ValueError("attachment_id or artifact_id is required")
 
-            # Instansiate new Joe Sandbox object
-            joesandbox = jbxapi.JoeSandbox(
-                apikey=API_KEY,
-                apiurl=ANALYSIS_URL,
-                accept_tac=ACCEPT_TAC,
-                proxies=proxies,
-                verify_ssl=verify_ssl)
-
-            # Instansiate new SOAR API object
-            client = self.rest_client()
-
             # Get entity we are dealing with (either attachment or artifact)
             entity = get_input_entity(client, incident_id, attachment_id, artifact_id)
 
@@ -229,7 +204,7 @@ class FunctionComponent(ResilientComponent):
             sample_status = get_sample_info(joesandbox, sample_webid)
 
             # Get current time in seconds
-            start_time = time.time()
+            start_time = time()
 
             # Generate report name
             report_name = generate_report_name(entity, jsb_report_type, sample_webid)
