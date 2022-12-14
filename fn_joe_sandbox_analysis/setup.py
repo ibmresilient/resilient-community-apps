@@ -21,7 +21,7 @@ def snake_to_camel(word):
 setup(
     name='fn_joe_sandbox_analysis',
     display_name="Joe Sandbox Function for IBM SOAR",
-    version='1.1.0',
+    version='2.0.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',
@@ -30,7 +30,7 @@ setup(
     long_description="Joe Sandbox Function for IBM SOAR",
     install_requires=[
         'resilient_circuits>=32.0.0',
-        'jbxapi==2.10.1'
+        'jbxapi>=3.19.0'
     ],
     packages=find_packages(),
     include_package_data=True,

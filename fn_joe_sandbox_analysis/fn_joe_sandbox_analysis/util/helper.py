@@ -4,6 +4,8 @@
 from jbxapi import JoeSandbox
 from resilient_lib import str_to_bool, validate_fields
 
+PACKAGE_NAME = "fn_joe_sandbox_analysis"
+
 def connect_to_joe_sandbox(options):
     # Validate that jsb_api_key in the app.config has a value
     validate_fields(["jsb_api_key"], options)
