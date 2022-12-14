@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
             if artifact_type in ["IP Address", "DNS Name", "URL", "URI Path"]: # URL type submission
                 submission_id = joesandbox.submit_url(artifact_value)
             elif artifact_type in ["Other File", "Email Attachment"]: # File type submission
-                attachment_content = self.rest_client().get(f"/incidents/{incident_id}/artifacts/{artifact_id}/contents")
+                attachment_content = self.rest_client().get_content(f"/incidents/{incident_id}/artifacts/{artifact_id}/contents")
         else: # Attachment_id given
             pass # Get attachment content
 
