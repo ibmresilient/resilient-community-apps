@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         # Instansiate new Joe Sandbox object and get ANALYSIS_URL
-        ANALYSIS_URL, joesandbox = helper.connect_to_joe_sandbox(self.options)
+        ANALYSIS_URL, joesandbox = helper.connect_to_joe_sandbox(self.opts, self.options)
 
         # Get Joe Sandbox options from app.config file
         ANALYSIS_REPORT_PING_DELAY = int(self.options.get("jsb_analysis_report_ping_delay"))
@@ -36,16 +36,15 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["incident_id", "jsb_report_type"], fn_inputs)
 
         # Define inputs
-        incident_id = getattr(fn_inputs, )
-        kwargs.get("incident_id")
-        jsb_report_type = kwargs.get("jsb_report_type")["name"]
+        incident_id = getattr(fn_inputs, "incident_id", None)
+        jsb_report_type = getattr(fn_inputs, "jsb_report_type", None).get("name")
 
         # Get optional inputs
-        attachment_id = kwargs.get("attachment_id")  # number
-        artifact_id = kwargs.get("artifact_id")  # number
+        attachment_id = getattr(fn_inputs, "attachment_id", None)
+        artifact_value = getattr(fn_inputs, "artifact_value", None)
 
-        if not attachment_id and not artifact_id:
-            raise ValueError("attachment_id or artifact_id is required")
+        if not attachment_id and not artifact_value:
+            raise ValueError("attachment_id or artifact_value is required")
 
 
 

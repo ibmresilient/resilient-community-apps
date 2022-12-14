@@ -2,27 +2,20 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 from jbxapi import JoeSandbox
-from resilient_lib import str_to_bool, validate_fields
+from resilient_lib import str_to_bool, validate_fields, RequestsCommon
 
 PACKAGE_NAME = "fn_joe_sandbox_analysis"
 
-def connect_to_joe_sandbox(options):
+def connect_to_joe_sandbox(opts, options):
     # Validate that jsb_api_key in the app.config has a value
-    validate_fields(["jsb_api_key"], options)
+    validate_fields(["jsb_api_key", "jsb_analysis_url", "jsb_accept_tac"], options)
 
     # Get Joe Sandbox options from app.config file
     API_KEY = options.get("jsb_api_key")
     ACCEPT_TAC = str_to_bool(options.get("jsb_accept_tac"))
     ANALYSIS_URL = options.get("jsb_analysis_url")
-
     # Get proxies from app.config
-    proxies = {}
-    HTTP_PROXY = options.get("jsb_http_proxy", None)
-    if HTTP_PROXY:
-        proxies["http"] = HTTP_PROXY
-    HTTPS_PROXY = options.get("jsb_https_proxy", None)
-    if HTTPS_PROXY:
-        proxies["https"] = HTTPS_PROXY
+    proxies = RequestsCommon(opts, options).get_proxies()
 
     # Get verify setting from app.config
     verify_ssl = options.get("jsb_verify", False)

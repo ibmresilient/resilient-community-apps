@@ -10,7 +10,7 @@ from tempfile import gettempdir, mkstemp
 from re import match
 from urllib.parse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, RequestsCommon
 
 from fn_joe_sandbox_analysis.util.helper import connect_to_joe_sandbox
 
