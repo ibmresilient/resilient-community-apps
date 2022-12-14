@@ -1,5 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-VERSION = 1.2
+VERSION = 1.3
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.
   A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.
@@ -12,7 +12,7 @@ VERSION = 1.2
   In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.
   Workflow properties can be added using a command similar to this:
   workflow.addProperty('convert_json_to_rich_text', {
-    "version": 1.2,
+    "version": 1.3,
     "header": "Artifact scan results for: {}".format(artifact.value),
     "padding": 10,
     "separator": u"<br />",
@@ -24,7 +24,7 @@ VERSION = 1.2
   
   Format of workflow.property.convert_json_to_rich_text:
   { 
-    "version": 1.2, [this is for future compatibility]
+    "version": 1.3, [this is for future compatibility]
     "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]
     "padding": 10, [padding for nested json elements, or defaults to 10]
     "separator": u"<br />"|list such as ['<span>','</span>'], [html separator between json keys and lists or defaults to html break: '<br />'. 
@@ -35,6 +35,11 @@ VERSION = 1.2
     "incident_field": "<incident_field>" [indicates a builtin rich text incident field, such as 'description' 
                                           or a custom rich text field in the format: 'properties.<field>'. default: create an incident note]
   }
+
+  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()
+
+  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the 'content' json element.
+  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.
 """
 
 import re
@@ -201,13 +206,12 @@ def get_properties(property_name):
       padding, separator, header, json_omit_list, incident_field, json, sort_keys
     """
     result_properties = None
-    try:
+    if globals()['workflow'] and workflow.properties[property_name]:
         result_properties = workflow.properties[property_name]
-    except:
-        try:
-            result_properties = playbook.functions.results[property_name]
-        except:
-            result_properties = None
+    elif globals()['playbook'] and playbook.properties[property_name]:
+        result_properties = playbook.properties[property_name]
+    elif globals()['playbook'] and playbook.functions.results[property_name]:
+        result_properties = playbook.functions.results[property_name]
 
     if not result_properties:
         helper.fail("Playbook/workflow property not found: {}".format(property_name))
@@ -223,7 +227,9 @@ def get_properties(property_name):
         json_omit_list = []
     incident_field = result_properties.get("incident_field")
     
-    json = result_properties.get("json", {})
+    # workflow formatted content is 'json'. Standard functions is 'content'
+    json = result_properties.get("json") if result_properties.get("json") else result_properties.get("content")
+      
     if not isinstance(json, dict) and not isinstance(json, list):
         helper.fail("json element is not formatted correctly: {}".format(json))
     sort_keys = bool(result_properties.get("sort", False))

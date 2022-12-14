@@ -13,6 +13,11 @@ Typically, a function will create the workflow property and this script will run
   * Provide links to found URLs
   * Create either an incident note or add results to an incident (custom) rich text field.
 
+## History
+| Date | Version | Notes |
+| ---- | ------- | ----- |
+| 12/2022 | 1.3 | Python 3 support. Support for Playbooks and other fixes |
+
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:

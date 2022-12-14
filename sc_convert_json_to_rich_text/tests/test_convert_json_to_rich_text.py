@@ -11,8 +11,11 @@ else:
     import importlib
 
 import inspect
+import logging
 import pytest
 import os
+
+LOG = logging.getLogger(__name__)
 
 tst_text = "some text here"
 tst_text_py2= u"<strong>test_json</strong>: some text here<br />"
@@ -144,6 +147,10 @@ test_everything_json = {
     "json_omit_list": ["nested"],
     "json": tst_everything,
 }
+
+test_everything_content = {
+    "content": tst_everything
+}
 test_everything_py2 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 test_everything_py3 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 
@@ -161,26 +168,70 @@ test_list_json = [
 test_list_result_py3 = u"<strong>test_json</strong>: <ul><li><strong>item1</strong>: 1<br /><strong>item2</strong>: 2<br /></li><li><strong>item1</strong>: 3<br /><strong>item2</strong>: 4<br /></li></ul>"
 test_list_result_py2 = u"<strong>test_json</strong>: <ul><li><strong>item2</strong>: 2<br /><strong>item1</strong>: 1<br /></li><li><strong>item2</strong>: 4<br /><strong>item1</strong>: 3<br /></li></ul>"
 
+class ScriptingError(Exception):
+    def __init__(self, msg):
+        self.value = msg
+
+    def __str__(self):
+        return repr(self.value)
+
+class NamedProperty():
+    def __init__(self, name, content):
+        self.default = {}
+        if name:
+            setattr(self, name, content)
+        else:
+            self.default = content
+
+    def __getitem__(self, name):
+        # for []
+        if getattr(self, name, None):
+            return getattr(self, name)
+        else:
+            return self.default.get(name, None)
+
+class Results:
+    def __init__(self, content, function=None):
+        if function:
+            self.results = NamedProperty(function, content)
+        else:
+            self.results = content
+
 class Workflow:
-    def __init__(self):
-        self.properties = {'convert_json_to_rich_text': tst_everything}
+    def __init__(self, content, property=None):
+        if property:
+            self.properties = NamedProperty(property, content)
+        else:
+            self.properties = content
+
+class Playbook:
+    def __init__(self, content, function=None):
+        self.properties = NamedProperty(None, content)
+        if function:
+            self.functions = Results(content, function=function)
+        else:
+            self.properties = content
 
 class Incident:
     def addNote(self, text):
-        pass
+        LOG.info(text)
 
 class Helper:
     def createRichText(self, text):
         pass
     def fail(self, message):
-        pass
+        raise ScriptingError(message)
 
 def get_properties(json_dict):
     return json_dict.get('padding', 10), json_dict.get('separator','<br>'), json_dict.get('header'), \
            json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), json_dict.get('json'), \
            json_dict.get('sort', False)
 
-workflow = Workflow()
+# test with workflow = None for playbook tests
+workflow = Workflow(test_everything_json, property='convert_json_to_rich_text')
+playbook = None
+#playbook = Playbook({'convert_json_to_rich_text': test_everything_content}, function='function1')
+#playbook = Playbook({'convert_json_to_rich_text': test_everything_content}) # uncomment for property test
 helper = Helper()
 incident = Incident()
 
@@ -195,6 +246,7 @@ else:
 module.incident = incident
 module.helper = helper
 module.workflow = workflow
+module.playbook = playbook
 
 if sys.version_info[0] >= 3:
     module_spec.loader.exec_module(module)
