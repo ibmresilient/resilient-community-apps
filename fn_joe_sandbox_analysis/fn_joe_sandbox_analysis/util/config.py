@@ -13,8 +13,10 @@ def config_section_data():
   return u"""[fn_joe_sandbox_analysis]
 jsb_accept_tac=True
 jsb_api_key=
-# API endpoint url
+# API endpoint url for free version is below
 jsb_analysis_url=https://www.joesandbox.com/api/
+# If using pro version comment out above jsb_analysis_url and uncomment below jsb_analysis_url
+# jsb_analysis_url=https://jbxcloud.joesecurity.org/api/
 jsb_analysis_report_ping_delay=120
 jsb_analysis_report_request_timeout=1800
 # jsb_verify can be False or a path to a certificate
