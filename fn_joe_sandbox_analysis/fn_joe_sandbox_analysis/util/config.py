@@ -14,12 +14,12 @@ def config_section_data():
 jsb_accept_tac=True
 jsb_api_key=
 # API endpoint url for free version is below
-jsb_analysis_url=https://www.joesandbox.com/api/
-# If using pro version comment out above jsb_analysis_url and uncomment below jsb_analysis_url
-# jsb_analysis_url=https://jbxcloud.joesecurity.org/api/
+jsb_api_url=https://www.joesandbox.com/api/
+# If using pro version comment out above jsb_api_url and uncomment below jsb_api_url
+# jsb_api_url=https://jbxcloud.joesecurity.org/api/
 jsb_analysis_report_ping_delay=120
 jsb_analysis_report_request_timeout=1800
 # jsb_verify can be False or a path to a certificate
 jsb_verify=False
-#jsb_http_proxy=http://user:pass@10.10.1.10:3128
-#jsb_https_proxy=http://user:pass@10.10.1.10:1080"""
+#http_proxy=http://user:pass@10.10.1.10:3128
+#https_proxy=http://user:pass@10.10.1.10:1080"""
