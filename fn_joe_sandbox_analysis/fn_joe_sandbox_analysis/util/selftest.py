@@ -6,14 +6,7 @@ Function implementation test.
 Usage: resilient-circuits selftest -l fn_joe_sandbox_analysis
 """
 
-import logging
-import jbxapi
-from resilient_lib import str_to_bool, validate_fields
 from fn_joe_sandbox_analysis.util.helper import connect_to_joe_sandbox, PACKAGE_NAME
-
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """

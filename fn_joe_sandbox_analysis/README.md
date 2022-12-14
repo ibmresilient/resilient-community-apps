@@ -87,7 +87,7 @@
 | ------ | :------: | ------- | ----------- |
 | **``jsb_accept_tac``** | Yes | `True` | |
 | **``jsb_api_key``** | Yes | | *API Key to Joe Sandbox server with appropriate permissions to submit workflows* |
-| **``jsb_analysis_url``** | Yes | `https://<your_jsb_server>/<path_to_api_endpoint>` | *Base URL for your Joe Sandbox server's API* |
+| **``jsb_api_url``** | Yes | `https://<your_jsb_server>/<path_to_api_endpoint>` | *Base URL for your Joe Sandbox server's API* |
 | **``jsb_analysis_report_ping_delay``** | Yes | `120` | *Ping delay* |
 | **``jsb_analysis_report_request_timeout``** | Yes | `1800` | *Workflow time out (default: 1800 seconds)* |
 
