@@ -3,14 +3,11 @@
 
 from __future__ import print_function
 import pytest
-import json
+from json import loads, dumps
 from requests.exceptions import HTTPError
 from mock import patch
 from resilient_circuits.util import get_function_definition
-from fn_pa_panorama.util.panorama_util import PanoramaClient
-
-PACKAGE_NAME = "fn_pa_panorama"
-
+from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME
 
 class TestPanoramaCreateAddress:
     """ Tests for the panorama_create_address function"""
@@ -34,7 +31,7 @@ class TestPanoramaCreateAddress:
                 self.text = content
 
             def json(self):
-                return json.loads(self.content)
+                return loads(self.content)
 
             def raise_for_status(self):
                 """Same from Requests.Response
@@ -76,7 +73,7 @@ class TestPanoramaCreateAddress:
     def test_function_definition(self, func_name):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, func_name)
-        assert func is not None
+        assert func
 
     @patch("requests.request")
     def test_get_addresses(self, mocked_requests_get):
@@ -117,8 +114,8 @@ class TestPanoramaCreateAddress:
                 ]
             }
         }
-        mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
+        mocked_requests_get.return_value = self._generateResponse(dumps(sim_content), 200)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
         result = pc.get_addresses()
         assert result == sim_content
 
@@ -147,8 +144,8 @@ class TestPanoramaCreateAddress:
                 ]
             }
         }
-        mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
+        mocked_requests_get.return_value = self._generateResponse(dumps(sim_content), 200)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
         result = pc.get_address_groups("Blocked_Group")
         assert result == sim_content
 
@@ -168,9 +165,9 @@ class TestPanoramaCreateAddress:
                 }
             }
         }
-        mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
-        result = pc.edit_address_groups("Blocked_Group", json.dumps(body))
+        mocked_requests_get.return_value = self._generateResponse(dumps(sim_content), 200)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
+        result = pc.edit_address_groups("Blocked_Group", dumps(body))
         assert result == sim_content
 
     @patch("requests.request")
@@ -185,9 +182,9 @@ class TestPanoramaCreateAddress:
             "@status": "success",
             "msg": "command succeeded"
         }
-        mocked_requests_get.return_value = self._generateResponse(json.dumps(sim_content), 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
-        result = pc.add_address("2.2.2.2", json.dumps(body))
+        mocked_requests_get.return_value = self._generateResponse(dumps(sim_content), 200)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
+        result = pc.add_address("2.2.2.2", dumps(body))
         assert result == sim_content
 
     @patch("requests.request")
@@ -195,7 +192,7 @@ class TestPanoramaCreateAddress:
         sim_content = '<response status="success" code="19"><result total-count="1" count="1"><entry name="Blocked_Users" admin="admin" dirtyId="14" time="2019/06/27 07:51:28"/></result></response>'
         body_xpath = "/config/shared/local-user-database/user-group/entry[@name=\\'Blocked_Users\\']"
         mocked_requests_get.return_value = self._generateResponse(sim_content, 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
         result = pc.get_users_in_a_group( body_xpath)
         print(result)
         print(sim_content)
@@ -211,6 +208,6 @@ class TestPanoramaCreateAddress:
                     </user>
                 </entry>"""
         mocked_requests_get.return_value = self._generateResponse(sim_content, 200)
-        pc = PanoramaClient(self.mocked_opts, self.mocked_location, None)
+        pc = PanoramaClient(self.mocked_opts, self.mocked_opts.get(PACKAGE_NAME), self.mocked_location, None)
         result = pc.edit_users_in_a_group(body_xpath, xml)
         assert result == sim_content
