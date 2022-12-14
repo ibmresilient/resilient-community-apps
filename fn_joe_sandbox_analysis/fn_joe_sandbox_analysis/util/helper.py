@@ -8,12 +8,12 @@ PACKAGE_NAME = "fn_joe_sandbox_analysis"
 
 def connect_to_joe_sandbox(opts, options):
     # Validate that jsb_api_key in the app.config has a value
-    validate_fields(["jsb_api_key", "jsb_analysis_url", "jsb_accept_tac"], options)
+    validate_fields(["jsb_api_key", "jsb_api_url", "jsb_accept_tac"], options)
 
     # Get Joe Sandbox options from app.config file
     API_KEY = options.get("jsb_api_key")
     ACCEPT_TAC = str_to_bool(options.get("jsb_accept_tac"))
-    ANALYSIS_URL = options.get("jsb_analysis_url")
+    ANALYSIS_URL = options.get("jsb_api_url")
     # Get proxies from app.config
     proxies = RequestsCommon(opts, options).get_proxies()
 

@@ -19,6 +19,8 @@
 ### Pre-Processing Script
 ```python
 inputs.incident_id = incident.id
+inputs.artifact_value = artifact.value
+inputs.artifact_type = artifact.type
 inputs.artifact_id = artifact.id
 ```
 
