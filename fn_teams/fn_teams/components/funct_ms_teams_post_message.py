@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
             status = message_client.post_message(
                 self.opts,
                 teams_channel = teams_channel,
-                webhook_url = self.options.get(teams_channel),
+                webhook_url = self.options.get(teams_channel.lower()),
                 teams_payload = fn_inputs.teams_payload,
                 org_id = self.rest_client().org_id,
                 incident_id = fn_inputs.incident_id,

@@ -243,7 +243,7 @@ To provide the application with the necessary permission, the [OAuth Utilities D
 
 
 * This tool provides the user with means to login on behalf of the application and provide the application with the required permissions to act on behalf of the user.
-* The application_id, directory_id and secret_value is used to generate a unique *refresh_token*, which is later used in the app.conf file.
+* The application_id, directory_id and secret_value are used to generate a unique *refresh_token*, which is later used in the app.conf file.
 * There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
 * Once such method would be using the CLI. A sample command has been provided below:
 
@@ -256,7 +256,7 @@ oauth-utils oauth2_generate_refresh_token \
 -sc "ChannelMessage.Send ChannelMessage.Read.All offline_access"
 ```
 
-Follow the instructions displayed. Upon successfully completing this process, you will be presented with a **refresh_token**, note this information as this would be required later while setting up the application in the **SOAR platform**.
+Upon successfully completing this process, you will be presented with a **refresh_token**.  Note this information as this is required later while setting up the application in the **SOAR platform**.
 
 
 ### App Configuration (Both Permissions)

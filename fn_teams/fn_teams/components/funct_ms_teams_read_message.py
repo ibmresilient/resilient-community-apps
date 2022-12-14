@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
         it has access to sensitive data. The user must grant this application permission
         to access their data in order for this application to function. This means that
         only the resources to which the user has access, such as channels and teams, will
-        be available to this application. This feature allows to read all of the messages
+        be available to this application. This feature allows read of all messages
         on the channel or the replies to a specific message. The function can retrieve all
         replies to a certain message if it is given the message id for that message. The
         function will dump all messages in that channel back into SOAR if the channel name

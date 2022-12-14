@@ -84,7 +84,6 @@ def selftest_function(opts):
                 test_pass_1 = False
     else:
         log.warn(constants.WARN_NO_APP_PERMISSION)
-        test_pass_1 = True
 
     # TEST 2: Teams Authentication: Delegated permissions
     if DELEGATED_PERMISSION_TEST in options:
@@ -102,7 +101,6 @@ def selftest_function(opts):
     else:
         # Test 2 is skipped if refresh_token is not found in app.conf
         log.warn(constants.WARN_NO_DEL_PERMISSION)
-        test_pass_2 = True
 
     if options.get(SELF_TEST):
         # TEST 3: Teams POST MESSAGE (Skipped if selftest option not found in app.conf)
@@ -130,9 +128,8 @@ def selftest_function(opts):
     else:
         # Test 3 is skipped if selftest option is not found in app.conf
         log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
-        test_pass_3 = True
 
-    if test_pass_1 and test_pass_2 and test_pass_3:
+    if test_pass_1 or test_pass_2 or test_pass_3:
         return {
             "state" : "success",
             "reason": err_reason}

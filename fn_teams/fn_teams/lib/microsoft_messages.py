@@ -7,8 +7,8 @@ import json, logging
 import pymsteams
 from urllib import parse
 
-from resilient_lib import build_resilient_url, build_incident_url, build_task_url
-from resilient_lib import IntegrationError, MarkdownParser
+from resilient_lib import (build_resilient_url, build_incident_url, 
+                           build_task_url, IntegrationError, MarkdownParser)
 from fn_teams.lib import constants, microsoft_commons
 
 
