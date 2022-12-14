@@ -7,7 +7,7 @@
     {
       "attachments": [
         {
-          "content": {"value\": \"\u003cdiv\u003e\u003cdiv\u003eIt begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.\u003c/div\u003e\u003c/div\u003e\"\r\n"},
+          "content": {"value": "It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately"},
           "contentType": "application/vnd.microsoft.teams.card.o365connector",
           "contentUrl": null,
           "id": "7c0997dc1b1f481ab4cacf3da1ad76ac",
