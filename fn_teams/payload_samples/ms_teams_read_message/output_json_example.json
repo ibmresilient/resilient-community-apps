@@ -1,419 +1,192 @@
 {
-  "version": 2.0,
-  "success": true,
+  "raw": null,
   "reason": null,
+  "success": true,
+  "version": 2.0,
   "content": [
     {
-      "id": "1670879176484",
-      "replyToId": null,
-      "etag": "1670879176484",
-      "messageType": "message",
-      "createdDateTime": "2022-12-12T21:06:16.484Z",
-      "lastModifiedDateTime": "2022-12-12T21:06:16.484Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670879176484?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670879176484&parentMessageId=1670879176484",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
-      "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"7c0997dc1b1f481ab4cacf3da1ad76ac\"></attachment>"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
       "attachments": [
         {
+          "content": {"value\": \"\u003cdiv\u003e\u003cdiv\u003eIt begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.\u003c/div\u003e\u003c/div\u003e\"\r\n"},
+          "contentType": "application/vnd.microsoft.teams.card.o365connector",
+          "contentUrl": null,
           "id": "7c0997dc1b1f481ab4cacf3da1ad76ac",
-          "contentType": "application/vnd.microsoft.teams.card.o365connector",
-          "contentUrl": null,
-          "content": "{\r\n  \"text\": \"<p>SOAR Incident</p>\",\r\n  \"sections\": [\r\n    {\r\n      \"facts\": [\r\n        {\r\n          \"name\": \"Name\",\r\n          \"value\": \"<p>Gootloader</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Description\",\r\n          \"value\": \"<div><div>It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.</div></div>\"\r\n        },\r\n        {\r\n          \"name\": \"Id\",\r\n          \"value\": \"<p>2095</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Owner\",\r\n          \"value\": \"<p>admin@example.com</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Types\",\r\n          \"value\": \"<p>Malware</p>\"\r\n        },\r\n        {\r\n          \"name\": \"NIST Attack Vectors\",\r\n          \"value\": \"<p>Other</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Create Date\",\r\n          \"value\": \"<p>Sun Nov 27 14:48:09 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Date Occurred\",\r\n          \"value\": \"<p>Tue Nov 01 00:00:00 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Discovered Date\",\r\n          \"value\": \"<p>Wed Nov 16 14:44:06 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Confirmed\",\r\n          \"value\": \"<p>True</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Severity\",\r\n          \"value\": \"<p>High</p>\"\r\n        }\r\n      ],\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ],\r\n  \"potentialAction\": [\r\n    {\r\n      \"target\": [\r\n        \"https://zygote1.fyre.ibm.com:443/#incidents/2095?orgId=201\"\r\n      ],\r\n      \"@context\": \"http://schema.org\",\r\n      \"@type\": \"ViewAction\",\r\n      \"@id\": \"f11c6e08-5152-4a29-8a99-6c45895a86e0\",\r\n      \"name\": \"View Incident\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
           "name": null,
           "thumbnailUrl": null
         }
       ],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670852936022",
-      "replyToId": null,
-      "etag": "1670852936022",
-      "messageType": "message",
-      "createdDateTime": "2022-12-12T13:48:56.022Z",
-      "lastModifiedDateTime": "2022-12-12T13:48:56.022Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670852936022?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670852936022&parentMessageId=1670852936022",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
       "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"0092b2fad6ea4412ab7f827a2be52ca3\"></attachment>"
+        "content": "\u003cattachment id=\"7c0997dc1b1f481ab4cacf3da1ad76ac\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
       },
       "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
       },
+      "chatId": null,
+      "createdDateTime": "2022-12-12T21:06:16.484Z",
+      "deletedDateTime": null,
+      "etag": "1670879176484",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670879176484",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-12T21:06:16.484Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
+    },
+    {
       "attachments": [
         {
-          "id": "0092b2fad6ea4412ab7f827a2be52ca3",
+          "content": "{\r\n  \"summary\": \"Incoming Webhook is now connected to soarmessages\",\r\n  \"sections\": [\r\n    {\r\n      \"activitySubtitle\": \"\u003cp\u003eMiriam Graham has set up a connection to Incoming Webhook so group members will be notified for this configuration with name \u003cstrong\u003eSOAR\u003c/strong\u003e\u003c/p\u003e\",\r\n      \"activityText\": \"\",\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ]\r\n}",
           "contentType": "application/vnd.microsoft.teams.card.o365connector",
           "contentUrl": null,
-          "content": "{\r\n  \"text\": \"<p>SOAR Incident</p>\",\r\n  \"sections\": [\r\n    {\r\n      \"facts\": [\r\n        {\r\n          \"name\": \"Name\",\r\n          \"value\": \"<p>Gootloader</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Description\",\r\n          \"value\": \"<div><div>It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.</div></div>\"\r\n        },\r\n        {\r\n          \"name\": \"Id\",\r\n          \"value\": \"<p>2095</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Owner\",\r\n          \"value\": \"<p>admin@example.com</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Types\",\r\n          \"value\": \"<p>Malware</p>\"\r\n        },\r\n        {\r\n          \"name\": \"NIST Attack Vectors\",\r\n          \"value\": \"<p>Other</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Create Date\",\r\n          \"value\": \"<p>Sun Nov 27 14:48:09 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Date Occurred\",\r\n          \"value\": \"<p>Tue Nov 01 00:00:00 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Discovered Date\",\r\n          \"value\": \"<p>Wed Nov 16 14:44:06 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Confirmed\",\r\n          \"value\": \"<p>True</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Severity\",\r\n          \"value\": \"<p>High</p>\"\r\n        }\r\n      ],\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ],\r\n  \"potentialAction\": [\r\n    {\r\n      \"target\": [\r\n        \"https://zygote1.fyre.ibm.com:443/#incidents/2095?orgId=201\"\r\n      ],\r\n      \"@context\": \"http://schema.org\",\r\n      \"@type\": \"ViewAction\",\r\n      \"@id\": \"278c1512-de2c-4891-a150-3d57163bc7c5\",\r\n      \"name\": \"View Incident\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
+          "id": "2afcb94fd474482484883803d78a22e1",
           "name": null,
           "thumbnailUrl": null
         }
       ],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670852921622",
-      "replyToId": null,
-      "etag": "1670852921622",
-      "messageType": "message",
-      "createdDateTime": "2022-12-12T13:48:41.622Z",
-      "lastModifiedDateTime": "2022-12-12T13:48:41.622Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670852921622?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670852921622&parentMessageId=1670852921622",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
       "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"9d1d4ddacef34a959956473d28fbcef0\"></attachment>"
+        "content": "\u003cattachment id=\"2afcb94fd474482484883803d78a22e1\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
       },
       "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
       },
-      "attachments": [
-        {
-          "id": "9d1d4ddacef34a959956473d28fbcef0",
-          "contentType": "application/vnd.microsoft.teams.card.o365connector",
-          "contentUrl": null,
-          "content": "{\r\n  \"text\": \"<p>SOAR Incident</p>\",\r\n  \"sections\": [\r\n    {\r\n      \"facts\": [\r\n        {\r\n          \"name\": \"Name\",\r\n          \"value\": \"<p>Gootloader</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Description\",\r\n          \"value\": \"<div><div>It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.</div></div>\"\r\n        },\r\n        {\r\n          \"name\": \"Id\",\r\n          \"value\": \"<p>2095</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Owner\",\r\n          \"value\": \"<p>admin@example.com</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Types\",\r\n          \"value\": \"<p>Malware</p>\"\r\n        },\r\n        {\r\n          \"name\": \"NIST Attack Vectors\",\r\n          \"value\": \"<p>Other</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Create Date\",\r\n          \"value\": \"<p>Sun Nov 27 14:48:09 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Date Occurred\",\r\n          \"value\": \"<p>Tue Nov 01 00:00:00 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Discovered Date\",\r\n          \"value\": \"<p>Wed Nov 16 14:44:06 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Confirmed\",\r\n          \"value\": \"<p>True</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Severity\",\r\n          \"value\": \"<p>High</p>\"\r\n        }\r\n      ],\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ],\r\n  \"potentialAction\": [\r\n    {\r\n      \"target\": [\r\n        \"https://zygote1.fyre.ibm.com:443/#incidents/2095?orgId=201\"\r\n      ],\r\n      \"@context\": \"http://schema.org\",\r\n      \"@type\": \"ViewAction\",\r\n      \"@id\": \"6736e381-feeb-4788-8f9f-7b2a8906fd19\",\r\n      \"name\": \"View Incident\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
-          "name": null,
-          "thumbnailUrl": null
-        }
-      ],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670852840329",
-      "replyToId": null,
-      "etag": "1670852840329",
-      "messageType": "message",
-      "createdDateTime": "2022-12-12T13:47:20.329Z",
-      "lastModifiedDateTime": "2022-12-12T13:47:20.329Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
       "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670852840329?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670852840329&parentMessageId=1670852840329",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
-      "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"52dc5e4108fa43358395ae340c9026fb\"></attachment>"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [
-        {
-          "id": "52dc5e4108fa43358395ae340c9026fb",
-          "contentType": "application/vnd.microsoft.teams.card.o365connector",
-          "contentUrl": null,
-          "content": "{\r\n  \"text\": \"<p>SOAR Incident</p>\",\r\n  \"sections\": [\r\n    {\r\n      \"facts\": [\r\n        {\r\n          \"name\": \"Name\",\r\n          \"value\": \"<p>Gootloader</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Description\",\r\n          \"value\": \"<div><div>It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.</div></div>\"\r\n        },\r\n        {\r\n          \"name\": \"Id\",\r\n          \"value\": \"<p>2095</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Owner\",\r\n          \"value\": \"<p>admin@example.com</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Types\",\r\n          \"value\": \"<p>Malware</p>\"\r\n        },\r\n        {\r\n          \"name\": \"NIST Attack Vectors\",\r\n          \"value\": \"<p>Other</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Create Date\",\r\n          \"value\": \"<p>Sun Nov 27 14:48:09 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Date Occurred\",\r\n          \"value\": \"<p>Tue Nov 01 00:00:00 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Discovered Date\",\r\n          \"value\": \"<p>Wed Nov 16 14:44:06 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Confirmed\",\r\n          \"value\": \"<p>True</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Severity\",\r\n          \"value\": \"<p>High</p>\"\r\n        }\r\n      ],\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ],\r\n  \"potentialAction\": [\r\n    {\r\n      \"target\": [\r\n        \"https://zygote1.fyre.ibm.com:443/#incidents/2095?orgId=201\"\r\n      ],\r\n      \"@context\": \"http://schema.org\",\r\n      \"@type\": \"ViewAction\",\r\n      \"@id\": \"3707e184-88d5-4208-aede-b8bcda65ff16\",\r\n      \"name\": \"View Incident\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
-          "name": null,
-          "thumbnailUrl": null
-        }
-      ],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670582925091",
-      "replyToId": null,
-      "etag": "1670582925091",
-      "messageType": "message",
-      "createdDateTime": "2022-12-09T10:48:45.091Z",
-      "lastModifiedDateTime": "2022-12-09T10:48:45.091Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670582925091?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670582925091&parentMessageId=1670582925091",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "application": null,
-        "device": null,
-        "user": {
-          "id": "6c259569-f2c0-430b-af73-40081b5de19d",
-          "displayName": "user2",
-          "userIdentityType": "aadUser",
-          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a"
-        }
-      },
-      "body": {
-        "contentType": "text",
-        "content": "Hello World"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670520581575",
-      "replyToId": null,
-      "etag": "1670520581575",
-      "messageType": "message",
-      "createdDateTime": "2022-12-08T17:29:41.575Z",
-      "lastModifiedDateTime": "2022-12-08T17:29:41.575Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670520581575?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670520581575&parentMessageId=1670520581575",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
-      "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"80d45270a3664416afdd79481a1509c9\"></attachment>"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [
-        {
-          "id": "80d45270a3664416afdd79481a1509c9",
-          "contentType": "application/vnd.microsoft.teams.card.o365connector",
-          "contentUrl": null,
-          "content": "{\r\n  \"text\": \"<p>SOAR Incident</p>\",\r\n  \"sections\": [\r\n    {\r\n      \"facts\": [\r\n        {\r\n          \"name\": \"Name\",\r\n          \"value\": \"<p>Gootloader</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Description\",\r\n          \"value\": \"<div><div>It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.</div></div>\"\r\n        },\r\n        {\r\n          \"name\": \"Id\",\r\n          \"value\": \"<p>2095</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Owner\",\r\n          \"value\": \"<p>admin@example.com</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Types\",\r\n          \"value\": \"<p>Malware</p>\"\r\n        },\r\n        {\r\n          \"name\": \"NIST Attack Vectors\",\r\n          \"value\": \"<p>Other</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Create Date\",\r\n          \"value\": \"<p>Sun Nov 27 14:48:09 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Date Occurred\",\r\n          \"value\": \"<p>Tue Nov 01 00:00:00 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Discovered Date\",\r\n          \"value\": \"<p>Wed Nov 16 14:44:06 GMT 2022</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Confirmed\",\r\n          \"value\": \"<p>True</p>\"\r\n        },\r\n        {\r\n          \"name\": \"Severity\",\r\n          \"value\": \"<p>High</p>\"\r\n        }\r\n      ],\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ],\r\n  \"potentialAction\": [\r\n    {\r\n      \"target\": [\r\n        \"https://zygote1.fyre.ibm.com:443/#incidents/2095?orgId=201\"\r\n      ],\r\n      \"@context\": \"http://schema.org\",\r\n      \"@type\": \"ViewAction\",\r\n      \"@id\": \"bddc9952-bf4a-43df-8cfb-136a27ba1535\",\r\n      \"name\": \"View Incident\",\r\n      \"isPrimaryAction\": false\r\n    }\r\n  ]\r\n}",
-          "name": null,
-          "thumbnailUrl": null
-        }
-      ],
-      "mentions": [],
-      "reactions": []
-    },
-    {
-      "id": "1670520473277",
-      "replyToId": null,
-      "etag": "1670520473277",
-      "messageType": "message",
       "createdDateTime": "2022-12-08T17:27:53.277Z",
-      "lastModifiedDateTime": "2022-12-08T17:27:53.277Z",
-      "lastEditedDateTime": null,
       "deletedDateTime": null,
+      "etag": "1670520473277",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670520473277",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T17:27:53.277Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
       "subject": null,
       "summary": "Incoming Webhook is now connected to soarmessages",
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670520473277?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670520473277&parentMessageId=1670520473277",
-      "policyViolation": null,
-      "eventDetail": null,
-      "from": {
-        "device": null,
-        "user": null,
-        "application": {
-          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2",
-          "displayName": "SOAR",
-          "applicationIdentityType": "office365Connector"
-        }
-      },
-      "body": {
-        "contentType": "html",
-        "content": "<attachment id=\"2afcb94fd474482484883803d78a22e1\"></attachment>"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [
-        {
-          "id": "2afcb94fd474482484883803d78a22e1",
-          "contentType": "application/vnd.microsoft.teams.card.o365connector",
-          "contentUrl": null,
-          "content": "{\r\n  \"summary\": \"Incoming Webhook is now connected to soarmessages\",\r\n  \"sections\": [\r\n    {\r\n      \"activitySubtitle\": \"<p>Miriam Graham has set up a connection to Incoming Webhook so group members will be notified for this configuration with name <strong>SOAR</strong></p>\",\r\n      \"activityText\": \"\",\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ]\r\n}",
-          "name": null,
-          "thumbnailUrl": null
-        }
-      ],
-      "mentions": [],
-      "reactions": []
+      "webUrl": "https://teams.microsoft.com/l/messages****"
     },
     {
-      "id": "1670500410188",
-      "replyToId": null,
-      "etag": "1670500410188",
-      "messageType": "message",
+      "attachments": [],
+      "body": {
+        "content": "Hello!",
+        "contentType": "text"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
       "createdDateTime": "2022-12-08T11:53:30.188Z",
-      "lastModifiedDateTime": "2022-12-08T11:53:30.188Z",
-      "lastEditedDateTime": null,
       "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
-      "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670500410188?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670500410188&parentMessageId=1670500410188",
-      "policyViolation": null,
+      "etag": "1670500410188",
       "eventDetail": null,
       "from": {
         "application": null,
         "device": null,
         "user": {
-          "id": "6c259569-f2c0-430b-af73-40081b5de19d",
           "displayName": "user2",
-          "userIdentityType": "aadUser",
-          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a"
+          "id": "6c259569-f2c0-430b-af73-40081b5de19d",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
         }
       },
-      "body": {
-        "contentType": "text",
-        "content": "Hello world"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [],
+      "id": "1670500410188",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:53:30.188Z",
+      "locale": "en-us",
       "mentions": [],
-      "reactions": []
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
     },
     {
-      "id": "1670498126534",
-      "replyToId": null,
-      "etag": "1670498126534",
-      "messageType": "message",
-      "createdDateTime": "2022-12-08T11:15:26.534Z",
-      "lastModifiedDateTime": "2022-12-08T11:15:26.534Z",
-      "lastEditedDateTime": null,
-      "deletedDateTime": null,
-      "subject": null,
-      "summary": null,
+      "attachments": [],
+      "body": {
+        "content": "Message 1",
+        "contentType": "text"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
       "chatId": null,
-      "importance": "normal",
-      "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3A2bcae5884bd4439788c6f6639000e7f5%40thread.tacv2/1670498126534?groupId=66475ea6-d085-461b-8d25-7818274b6cf0&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1670498126534&parentMessageId=1670498126534",
-      "policyViolation": null,
+      "createdDateTime": "2022-12-08T11:15:26.534Z",
+      "deletedDateTime": null,
+      "etag": "1670498126534",
       "eventDetail": null,
       "from": {
         "application": null,
         "device": null,
         "user": {
-          "id": "a27544ce-79dc-4d26-a277-d7d4a7cd19cc",
           "displayName": "user1",
-          "userIdentityType": "aadUser",
-          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a"
+          "id": "a27544ce-79dc-4d26-a277-d7d4a7cd19cc",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
         }
       },
-      "body": {
-        "contentType": "text",
-        "content": "Message 1"
-      },
-      "channelIdentity": {
-        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0",
-        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2"
-      },
-      "attachments": [],
+      "id": "1670498126534",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:15:26.534Z",
+      "locale": "en-us",
       "mentions": [],
-      "reactions": []
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/*****"
     }
   ],
-  "raw": null,
   "inputs": {
     "ms_channel_name": "ychannel",
     "ms_groupteam_name": "soarmessages"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 5030,
+    "host": "apphost",
     "package": "fn-teams",
     "package_version": "2.0.0",
-    "host": "apphost",
-    "execution_time_ms": 5030,
-    "timestamp": "2022-12-13 16:56:51"
+    "timestamp": "2022-12-13 16:56:51",
+    "version": "1.0"
   }
 }
