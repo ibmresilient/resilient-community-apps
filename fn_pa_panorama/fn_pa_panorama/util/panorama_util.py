@@ -45,13 +45,13 @@ class PanoramaClient:
 
     def __post(self, resource_uri, params, payload):
         """Generic POST"""
-        response = self.rc.execute_call_v2("POST", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
+        response = self.rc.execute("POST", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
         LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
-        response = self.rc.execute_call_v2("PUT", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
+        response = self.rc.execute("PUT", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
         LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
@@ -85,7 +85,7 @@ class PanoramaClient:
                   "action": "get",
                   "key": self.__key,
                   "xpath": xpath}
-        response = self.rc.execute_call_v2("POST", f"{self.host}/api/", params=params, verify=self.verify)
+        response = self.rc.execute("POST", f"{self.host}/api/", params=params, verify=self.verify)
         response.raise_for_status()
         return response.text
 
@@ -97,7 +97,7 @@ class PanoramaClient:
                   "key": self.__key,
                   "xpath": xpath,
                   "element": xml_object}
-        response = self.rc.execute_call_v2("POST", f"{self.host}/api/?", params=params, verify=self.verify)
+        response = self.rc.execute("POST", f"{self.host}/api/?", params=params, verify=self.verify)
         response.raise_for_status()
         return response.text
 
@@ -130,7 +130,7 @@ class PanoramaServers():
         elif not panorama_label:
             raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
 
-        label = PACKAGE_NAME+":"+panorama_label
+        label = f"{PACKAGE_NAME}:{panorama_label}"
         if panorama_label and label in servers_list:
             options = servers_list[label]
         elif len(servers_list) == 1:

@@ -48,7 +48,7 @@ class FunctionComponent(AppFunctionComponent):
         # Create results dictionary from the above results
         results = parse(xml_response)
 
-        members = results.get("response").get("result").get("entry").get("user").get("member")
+        members = results.get("response", {}).get("result", {}).get("entry", {}).get("user", {}).get("member")
         # Create a list of the returned users
         user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
 
