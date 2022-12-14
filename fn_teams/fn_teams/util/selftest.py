@@ -19,6 +19,8 @@ log.addHandler(logging.StreamHandler())
 
 # channel reference for testing
 SELF_TEST = "selftest"
+APPLICATION_PERMISSION_TEST = "application_id"
+DELEGATED_PERMISSION_TEST = "refresh_token"
 
 def selftest_function(opts):
     """
@@ -26,13 +28,17 @@ def selftest_function(opts):
     credentials by quickly establishing a connection with the endpoint.
     Two tests are performed here.
 
-    TEST 1: Authentication
+    TEST 1: Authentication: Application Permission
         This tests the ability of the application to interface with the
         endpoint and to create groups, teams and channels.
+    
+    TEST 2: Authentication: Delegation Permission
+        This tests the ability of the application to interface with the
+        endpoint and to read messages.
 
-    Test 2 POST CHANNEL MESSAGE:
+    Test 3 POST CHANNEL MESSAGE:
         This tests the ability of the application to post a message on a
-        teams channel using webooks.
+        teams channel using webhooks.
 
     Self Objects:
     -------------
@@ -44,42 +50,63 @@ def selftest_function(opts):
         result <dict> : Test state and reason
     """
     err_reason, authenticated = "", False
-    test_pass_1, test_pass_2 = False, False
+    test_pass_1, test_pass_2, test_pass_3 = False, False, False
 
 
     options = opts.get("fn_teams", {})
     rc = RequestsCommon(opts, options)
-    required_parameters = {
-        "rc"     : rc,
-        "logger" : log}
 
-    # TEST 1: Teams Authentication (Mandatory)
-    try:
-        authenticator = MicrosoftAuthentication(required_parameters, options)
-        header = authenticator.authenticate()
-        authenticated = True
-        err_reason += constants.MSG_AUTHENTICATION_PASSED
-
-    except IntegrationError as err:
-        log.error(str(err))
-        err_reason += constants.MSG_AUTHENTICATION_FAILED.format(str(err))
-
-    if authenticated:
+    # TEST 1: Teams Authentication: Application permissions
+    log.info("Testing Application permissions")
+    if APPLICATION_PERMISSION_TEST in options:
         try:
-            rc.execute(method="get",
-                url=parse.urljoin(constants.BASE_URL, constants.URL_LIST_USERS),
-                headers=header)
-            err_reason += constants.MSG_LIST_USER_PASSED
-            test_pass_1 = True
+            authenticator = MicrosoftAuthentication(rc, options)
+            header = authenticator.authenticate_application_permissions()
+            authenticated = True
+            err_reason += constants.MSG_APP_AUTHENTICATION_PASSED
 
         except IntegrationError as err:
             log.error(str(err))
-            err_reason += constants.MSG_LIST_USER_FAILED.format(str(err))
-            test_pass_1 = False
+            err_reason += constants.MSG_APP_AUTHENTICATION_FAILED.format(str(err))
 
+        if authenticated:
+            log.info("Testing Application scopes")
+            try:
+                rc.execute(method="get",
+                    url=parse.urljoin(constants.BASE_URL, constants.URL_LIST_USERS),
+                    headers=header)
+                err_reason += constants.MSG_LIST_USER_PASSED
+                test_pass_1 = True
+
+            except IntegrationError as err:
+                log.error(str(err))
+                err_reason += constants.MSG_LIST_USER_FAILED.format(str(err))
+                test_pass_1 = False
+    else:
+        log.warn(constants.WARN_NO_APP_PERMISSION)
+        test_pass_1 = True
+
+    # TEST 2: Teams Authentication: Delegated permissions
+    if DELEGATED_PERMISSION_TEST in options:
+        log.info("Testing Delegated permissions")
+        refresh_token = options.get(DELEGATED_PERMISSION_TEST)
+        try:
+            authenticator = MicrosoftAuthentication(rc, options)
+            header = authenticator.authenticate_delegated_permissions(refresh_token)
+            test_pass_2 = True
+            err_reason += constants.MSG_DEL_AUTHENTICATION_PASSED
+
+        except IntegrationError as err:
+            log.error(str(err))
+            err_reason += constants.MSG_DEL_AUTHENTICATION_FAILED.format(str(err))
+    else:
+        # Test 2 is skipped if refresh_token is not found in app.conf
+        log.warn(constants.WARN_NO_DEL_PERMISSION)
+        test_pass_2 = True
 
     if options.get(SELF_TEST):
-        # TEST 2: Teams POST MESSAGE (Skipped if selftest option not found in app.conf)
+        # TEST 3: Teams POST MESSAGE (Skipped if selftest option not found in app.conf)
+        log.info("Testing webhooks")
         webhook = options.get(SELF_TEST)
         try:
             proxy = rc.get_proxies() if rc.get_proxies() else {}
@@ -94,18 +121,18 @@ def selftest_function(opts):
             card.send()
 
             err_reason += constants.MSG_POST_MSG_PASSED
-            test_pass_2 = True
+            test_pass_3 = True
 
         except IntegrationError as err:
             log.error(str(err))
             err_reason += constants.MSG_POST_MSG_FAILED.format(str(err))
-            test_pass_2 = False
+            test_pass_3 = False
     else:
-        # Test2 is skipped if selftest option is not found in app.conf
+        # Test 3 is skipped if selftest option is not found in app.conf
         log.warn(constants.WARN_NO_WEBHOOKS_FOUND)
-        test_pass_2 = True
+        test_pass_3 = True
 
-    if authenticated and test_pass_1 and test_pass_2:
+    if test_pass_1 and test_pass_2 and test_pass_3:
         return {
             "state" : "success",
             "reason": err_reason}

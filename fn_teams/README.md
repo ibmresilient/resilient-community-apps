@@ -15,10 +15,16 @@
   - [Installation](#installation)
   - [Endpoint Configuration](#endpoint-configuration)
     - [Register a new application using the Azure portal](#register-a-new-application-using-the-azure-portal)
-    - [Selecting required API Permissions](#selecting-required-api-permissions)
+    - [API Permissions](#api-permissions)
+    - [Application Permission](#application-permission)
+    - [Delegated Permission](#delegated-permission)
+    - [Setting API Permissions (Both Permissions)](#setting-api-permissions-both-permissions)
     - [List of required permissions](#list-of-required-permissions)
-    - [Create a client Secret Value](#create-a-client-secret-value)
-    - [App Configuration](#app-configuration)
+    - [Create a client Secret Value (Both Permissions)](#create-a-client-secret-value-both-permissions)
+    - [Setting up Incoming Webhooks (Both Permissions)](#setting-up-incoming-webhooks-both-permissions)
+    - [Setting up Delegated permissions (Delegated permissions)](#setting-up-delegated-permissions-delegated-permissions)
+    - [App Configuration (Both Permissions)](#app-configuration-both-permissions)
+  - [| **\<channel\_name\>** | Optional | https://5rf2xs.webhook.office.com/webhookb2/\*\*\* | Webhook URL for a channel |](#-channel_name--optional--https5rf2xswebhookofficecomwebhookb2--webhook-url-for-a-channel-)
   - [Function - MS Teams: Archive Team](#function---ms-teams-archive-team)
   - [Function - MS Teams: Create Channel](#function---ms-teams-create-channel)
   - [Function - MS Teams: Create group](#function---ms-teams-create-group)
@@ -157,8 +163,32 @@ The access token includes details about the application and the permission it ha
 * In the left-hand navigation pane under the `Manage` section, select `Authentication`.
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
 
-### Selecting required API Permissions
-The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
+### API Permissions
+The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc).
+
+This application requires two different types of permissions to access the required Graph Objects:
+* Application permission
+* Delegated permission (Optional)
+
+| Feature | Permission Type |
+| --------- | ------------------ |
+| Archive Team |`Application` |
+| Create Channel | `Application` |
+| Create Group | `Application` |
+| Create Team | `Application` |
+| Delete Channel | `Application` |
+| Delete Group | `Application` |
+| Enable Teams for Group | `Application` |
+| Post Incident Information | `Application` |
+| Read Channel Messages | `Delegated` |
+
+### Application Permission
+Application permissions, also called app roles, allow the app to access data on its own, without a signed-in user. In this access scenario, the application can interact with data on its own, without a signed in user. App-only access is used in scenarios such as automation, and is mostly used by apps that run as background services or daemons. It's suitable when it's undesirable to have a user signed in, or when the data required can't be scoped to a single user.
+
+### Delegated Permission
+This type of permission is optional and is only required for the **Read Channel messages** feature. If you wish to use the application without this feature (read channel messages), you can do so by leaving out the delegated permission setup process and following the remaining steps. Delegated permissions, also called scopes, allow the application to act on behalf of the signed-in user. In this access scenario, the user signs in on behalf of the application and provides it with the required permissions to call the Microsoft Graph API. Both the client and the user must be authorized to make the request. The Graph API's **read message** method is one of Microsoft's protected APIs since it has access to sensitive data. The user must grant this application permission to access their data in order for this application to function. This means that only the resources to which the user has access, such as channels and teams, will be available to this application.
+
+### Setting API Permissions (Both Permissions)
 
 * In the left-hand navigation pane under the `Manage` section select `API Permission`.
 * Click `Add a permission`. On the Request API permission screen, select `Microsoft Graph`.
@@ -189,8 +219,7 @@ The application requires admins consent to access a protected resource, such as 
 </p>
 
 
-
-### Create a client Secret Value
+### Create a client Secret Value (Both Permissions)
 * In the left-hand navigation pane under the `Manage` section, select `Certificate and secrets`.
 * Click on the `New client secret` button.
 * Enter a name for the client secret and click on the `Add` button.
@@ -200,9 +229,40 @@ The application requires admins consent to access a protected resource, such as 
 <img src="./doc/screenshots/app_certificate_secrets.png" />
 </p>
 
+### Setting up Incoming Webhooks (Both Permissions)
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. These values are used by the SOAR platform to establish a secure connection with the Microsoft Endpoint. See the documentation discussed in the [Endpoint Configuration](#endpoint-configuration) section for the procedure. If you have successfully configured that endpoint, you can find these values at [Azure portal](https://portal.azure.com) -> App registration -> (Your application).
+The **SOAR Platform** can share content in Microsoft channels using an incoming webhook.
+The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation [Create Incoming Webhooks](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
+
+
+### Setting up Delegated permissions (Delegated permissions)
+
+This setup process is to provide the application with delegated permissions which is required only for **Read channel message** feature. If you wish to use the application without this feature, you can do so by skipping this process. 
+
+To provide the application with the necessary permission, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used.
+
+
+* This tool provides the user with means to login on behalf of the application and provide the application with the required permissions to act on behalf of the user.
+* The application_id, directory_id and secret_value is used to generate a unique *refresh_token*, which is later used in the app.conf file.
+* There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
+* Once such method would be using the CLI. A sample command has been provided below:
+
+```
+oauth-utils oauth2_generate_refresh_token \
+-tu https://login.microsoftonline.com/<DIRECTORY_ID>/oauth2/v2.0/token \
+-au https://login.microsoftonline.com/<DIRECTORY_ID>/oauth2/v2.0/authorize \
+-ci <APPLICATION_ID> \
+-cs <SECRET_VALUE> \
+-sc "ChannelMessage.Send ChannelMessage.Read.All offline_access"
+```
+
+Follow the instructions displayed. Upon successfully completing this process, you will be presented with a **refresh_token**, note this information as this would be required later while setting up the application in the **SOAR platform**.
+
+
+### App Configuration (Both Permissions)
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. These values are used by the SOAR platform to establish a secure connection with the Microsoft Endpoint. See the documentation discussed in the [Endpoint Configuration](#endpoint-configuration) section for the procedure. If you have successfully configured that endpoint, you can find these values:
+
+  -  [Azure portal](https://portal.azure.com) -> App registration -> (Your application)
 
 
 | Config | Required | Example | Description |
@@ -210,7 +270,8 @@ The following table provides the settings you need to configure the app. These s
 | **application_id** | Yes | 18d10049-72e3-4652-ac9f-d9b13f24303c | Overview -> `Application (client) ID` |
 | **directory_id** | Yes | 1d8a5928-8678-408e-ab06-50ca7e01766a | Overview -> `Directory (tenant) ID` |
 | **secret_value** | Yes | oCN****************** | Certificate & secrets -> `Secret Value` |
-
+| **refresh_token** | Optional | eyxn****************** | Required only for delegated permissions |
+| **<channel_name>** | Optional | https://5rf2xs.webhook.office.com/webhookb2/*** | Webhook URL for a channel |
 ---
 
 

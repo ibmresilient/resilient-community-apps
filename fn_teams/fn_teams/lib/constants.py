@@ -155,14 +155,17 @@ STATUS_FAILED_APP = "Failed to run App Function : {}"
 STATUS_STARTING_APP = "App successfully executed!"
 
 # Self Test LOG MESSAGES
-MSG_AUTHENTICATION_PASSED = "TEST AUTHENTICATION: Passed! "
-MSG_AUTHENTICATION_FAILED = "TEST AUTHENTICATION: Failed! {} "
+MSG_APP_AUTHENTICATION_PASSED = "TEST APPLICATION PERMISSION: Passed! "
+MSG_APP_AUTHENTICATION_FAILED = "TEST APPLICATION PERMISSION: Failed! {} "
+MSG_DEL_AUTHENTICATION_PASSED = "TEST DELEGATION PERMISSION: Passed! "
+MSG_DEL_AUTHENTICATION_FAILED = "TEST DELEGATION PERMISSION: Failed! {} "
 MSG_LIST_USER_PASSED = "TEST LIST_USERS: Passed! "
 MSG_LIST_USER_FAILED = "TEST LIST_USERS: failed! {} "
 MSG_POST_MSG_PASSED = "TEST POST_MESSAGE: Passed! "
 MSG_POST_MSG_FAILED = "TEST POST_MESSAGE: Failed! {} "
-WARN_NO_WEBHOOKS_FOUND = '''No webhook found for selftest. Skipping Selftest for post
- message functionality'''
+WARN_NO_WEBHOOKS_FOUND = "No webhook found for selftest. Skipping webhook test"
+WARN_NO_APP_PERMISSION = "No Application token found. Skipping application permission test"
+WARN_NO_DEL_PERMISSION = "No refresh token found. Skipping delegated permission test"
 
 # Response Handler Messages
 MSG_UNSUPPORTED_TYPE = "Unsupported object specified to function. Accepted types int or list"
