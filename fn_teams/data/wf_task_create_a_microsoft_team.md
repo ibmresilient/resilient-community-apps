@@ -43,7 +43,8 @@ if rule.properties.additional_members.content is not None:
 if rule.properties.ms_description is not None:
     inputs.ms_description = rule.properties.ms_description
 else:
-    inputs.ms_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
+    description = incident.description.content if incident.description else ""
+    inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
 
 ```
 
