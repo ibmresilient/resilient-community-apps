@@ -136,8 +136,7 @@ ERROR_NO_ARG_PASSED = " No parameter passed to method"
 ERROR_DIDNOT_FIND_GROUP = " Did not find any group with {} {}"
 ERROR_MISSING_NAME_MAIL_NAME = ''' Either the Group's name or the
  Mail Nickname has to be specified to find the group'''
-ERROR_FOUND_MANY_GROUP = ''' Found more than one group with the same name.
- Please specify the Mail Nickname to delete the group'''
+ERROR_FOUND_MANY_GROUP = "Found more than one group with the same name"
 ERROR_INVALID_OPTION_PASSED = "Invalid Option passed!"
 
 ERROR_COULDNOT_CREATE_TEAM = "Unable to create team"
