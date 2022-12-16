@@ -33,10 +33,9 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_owner", "github_repo"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.get_releases(fn_inputs.github_owner,
-                                   fn_inputs.github_repo)
+        results, err_msg = gh.get_releases()
 
         if results:
             results = [release.as_dict() for release in results]

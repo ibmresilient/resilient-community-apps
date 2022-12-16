@@ -3,12 +3,10 @@
 # pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 
 from fn_github.lib.client_helper import GitHubHelper
-from resilient_lib import s_to_b
+from resilient_lib import s_to_b, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
 
 """AppFunction implementation"""
-
 PACKAGE_NAME = "fn_github"
 FN_NAME = "github_update_file"
 
@@ -35,13 +33,13 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
         validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
             self.app_configs)
 
         validate_fields(["github_owner", "github_repo", "github_file_path",
-                         "github_file_contents", "github_commit_message", "github_branch"], fn_inputs)
+                         "github_file_contents", "github_commit_message"], fn_inputs)
 
         committer = None
         if getattr(fn_inputs, 'github_committer', None):
@@ -51,14 +49,11 @@ class FunctionComponent(AppFunctionComponent):
                 "email": split_committer[1] if len(split_committer) > 1 else ""
             }
 
-        results, err_msg = gh.update_file(fn_inputs.github_owner,
-                                          fn_inputs.github_repo,
-                                          fn_inputs.github_file_path,
+        results, err_msg = gh.update_file(fn_inputs.github_file_path,
                                           s_to_b(fn_inputs.github_file_contents),
                                           fn_inputs.github_commit_message,
                                           committer,
-                                          branch=fn_inputs.github_branch
-                                        )
+                                          branch=getattr(fn_inputs, 'github_branch', None))
 
         # clean up results so it can be returned
         if results and results.get('commit'):

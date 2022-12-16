@@ -35,9 +35,10 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_owner", "github_repo", "github_based_on_branch_or_sha", "github_branch"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.create_branch(fn_inputs._asdict())
+        results, err_msg = gh.create_branch(fn_inputs.github_branch,
+                                            fn_inputs.github_based_on_branch_or_sha)
 
         if results:
             results = {"ref": results.ref}

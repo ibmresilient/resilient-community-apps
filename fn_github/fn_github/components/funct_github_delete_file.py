@@ -23,17 +23,17 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: Delete a GitHub from a specific branch
         Inputs:
-            -   fn_inputs.github_committer
             -   fn_inputs.github_owner
-            -   fn_inputs.github_branch
             -   fn_inputs.github_repo
+            -   fn_inputs.github_committer
+            -   fn_inputs.github_branch
             -   fn_inputs.github_file_path
             -   fn_inputs.github_commit_message
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
         validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
             self.app_configs)
@@ -49,9 +49,7 @@ class FunctionComponent(AppFunctionComponent):
                 "email": split_committer[1] if len(split_committer) > 1 else ""
             }
 
-        results, err_msg = gh.delete_file(fn_inputs.github_owner,
-                                          fn_inputs.github_repo,
-                                          fn_inputs.github_file_path,
+        results, err_msg = gh.delete_file(fn_inputs.github_file_path,
                                           fn_inputs.github_commit_message,
                                           committer,
                                           branch=fn_inputs.github_branch

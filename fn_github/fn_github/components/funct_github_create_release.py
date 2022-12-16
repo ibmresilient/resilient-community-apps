@@ -39,8 +39,11 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["github_owner", "github_repo", "github_release_name",
                          "github_release_tag"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
-        results, err_msg = gh.create_release(fn_inputs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
+        results, err_msg = gh.create_release(fn_inputs.github_release_tag, fn_inputs.github_release_name,
+                                             fn_inputs.github_release_description,
+                                             getattr(fn_inputs, 'github_release_draft', False),
+                                             getattr(fn_inputs, 'github_prerelease', False))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

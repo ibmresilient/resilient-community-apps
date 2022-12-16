@@ -23,8 +23,8 @@ class FunctionComponent(AppFunctionComponent):
         Function: None
         Inputs:
             -   fn_inputs.github_owner
-            -   fn_inputs.github_branch
             -   fn_inputs.github_repo
+            -   fn_inputs.github_branch
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -35,9 +35,9 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["github_owner", "github_repo", "github_branch"],
                          fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.get_branch(fn_inputs.github_owner, fn_inputs.github_repo, fn_inputs.github_branch)
+        results, err_msg = gh.get_branch(fn_inputs.github_branch)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

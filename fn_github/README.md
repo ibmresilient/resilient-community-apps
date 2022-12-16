@@ -167,8 +167,8 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `` | *API token from your account Settings/Developer settings/Personal access tokens* |
-| **base_url** | Yes | `<https://github.com>` | *Or your enterprise GitHub url* |
+| **api_token** | Yes | `` | *API token from your account Settings/Developer settings/Personal access tokens. * |
+| **base_url** | Yes | `https://github.com` | *change to specify base_url for enterprise versions of GitHub. Otherwise, the SaaS github version is used* |
 | **client_auth_cert** | Yes | `<path_to_cert.pem>` | *Client auth certificate*  |
 | **client_auth_key** | Yes | `<path_to_cert_private_key.pem>` | *Client auth keys* |
 | **verify** | Yes | `True` | *Use False to disable client certificate validation* |
@@ -187,7 +187,7 @@ Delete a GitHub file from a specific branch.
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_branch` | `text` | No | `-` | - |
+| `github_branch` | `text` | No | `-` | Name of branch. If empty, 'main' branch is used.  |
 | `github_commit_message` | `text` | Yes | `-` | - |
 | `github_committer` | `text` | No | `fullname:email_address` | provide full name and email address separated by a colon (:) |
 | `github_file_path` | `text` | Yes | `directory/file_name` | file path |
@@ -332,7 +332,7 @@ Update the properties of a user. These include, enabling or disabling an account
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_branch` | `text` | No | `-` | - |
+| `github_branch` | `text` | No | `-` | Name of branch. If empty, 'main' branch is used. |
 | `github_commit_message` | `text` | Yes | `-` | - |
 | `github_committer` | `text` | No | `fullname:email_address` | provide full name and email address separated by a colon (:) |
 | `github_file_contents` | `text` | Yes | `-` | String or base64 contents of file to create |
@@ -393,8 +393,8 @@ Create a new branch, optionally based on a commit SHA or an existing branch.
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_based_on_branch_or_sha` | `text` | Yes | `-` | Name of branch or sha1 commit |
-| `github_branch` | `text` | No | `-` | - |
+| `github_based_on_branch_or_sha` | `text` | Yes | `-` | Name of branch or sha1 commit to base the new branch |
+| `github_branch` | `text` | Yes | `-` | Name of branch to create |
 
 </p>
 </details>
@@ -450,7 +450,7 @@ Create a GitHub file, optionally in an existing branch.
 | `github_committer` | `text` | No | `fullname:email_address` | provide full name and email address separated by a colon (:) |
 | `github_file_contents` | `text` | Yes | `-` | String or base64 contents of file to create |
 | `github_file_path` | `text` | Yes | `directory/file_name` | file path |
-| `github_ref` | `text` | No | `commit/branch/tag` | Reference a commit, branch, or tag  |
+| `github_ref` | `text` | Yes | `commit/branch/tag` | Reference a commit, branch, or tag  |
 
 </p>
 </details>
@@ -507,11 +507,11 @@ Create a repository release, optionally tagged as draft or release.
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_prerelease` | `boolean` | No | `-` | - |
+| `github_prerelease` | `boolean` | No | `-` | True to mark release as pre-release |
 | `github_release_description` | `text` | No | `-` | - |
-| `github_release_draft` | `boolean` | No | `-` | - |
-| `github_release_name` | `text` | No | `-` | - |
-| `github_release_tag` | `text` | Yes | `-` | - |
+| `github_release_draft` | `boolean` | No | `-` | True to mark release as draft |
+| `github_release_name` | `text` | No | `v1.0.0 GA` | Name to identify a release |
+| `github_release_tag` | `text` | Yes | `1.0.0` | Typically the release number |
 
 </p>
 </details>
@@ -604,7 +604,7 @@ Delete a branch from a repository.
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_branch` | `text` | No | `-` | - |
+| `github_branch` | `text` | Yes | `-` | Branch name to delete |
 
 </p>
 </details>
@@ -654,7 +654,7 @@ Return information about an existing repository branch.
 | ---- | :--: | :------: | ------- | ------- |
 | `github_owner` | `text` | Yes | `-` | repository owner |
 | `github_repo` | `text` | Yes | `-` | repository name |
-| `github_branch` | `text` | No | `-` | - |
+| `github_branch` | `text` | Yes | `-` | Name of branch |
 
 </p>
 </details>

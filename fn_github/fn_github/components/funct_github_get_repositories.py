@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_repo_type"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(None, None, self.options)
 
         results, err_msg = gh.get_repositories(fn_inputs.github_repo_type)
 

@@ -10,13 +10,16 @@ def config_section_data():
     """
 
     config_data = u"""[fn_github]
-# specify base_url for enterprise versions of GitHub. Otherwise leave blank for public github
-base_url=<https://base-url>
+# change to specify base_url for enterprise versions of GitHub. Otherwise, the SaaS github version is used
+base_url=https://base-url
+# specify either api_token (preferred) or username/password combination
 api_token=
+#username=
+#password=
 # Specify paths to files if client certs are needed to authenticate
 client_auth_cert = <path_to_cert.pem>
 client_auth_key = <path_to_cert_private_key.pem>
-# Enable/Disable ssl-certificate verification
+# Enable/Disable ssl-certificate verification (only used for GitHub Enterprise)
 verify=True
 """
     return config_data

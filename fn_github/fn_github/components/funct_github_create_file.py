@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
+
 from fn_github.lib.client_helper import GitHubHelper
-from resilient_lib import s_to_b
+from resilient_lib import s_to_b, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
 
 """AppFunction implementation"""
-
 PACKAGE_NAME = "fn_github"
 FN_NAME = "github_create_file"
 
@@ -49,16 +48,14 @@ class FunctionComponent(AppFunctionComponent):
                 "email": split_committer[1] if len(split_committer) > 1 else ""
             }
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.create_file(fn_inputs.github_owner,
-                                          fn_inputs.github_repo,
-                                          fn_inputs.github_file_path,
+        results, err_msg = gh.create_file(fn_inputs.github_file_path,
                                           s_to_b(fn_inputs.github_file_contents),
                                           fn_inputs.github_commit_message,
                                           committer,
                                           branch=fn_inputs.github_ref
-                                        )
+                                         )
 
         # clean up results so it can be returned
         if results and results.get('commit'):

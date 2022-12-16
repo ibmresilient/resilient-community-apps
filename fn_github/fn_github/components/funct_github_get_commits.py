@@ -39,15 +39,13 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_owner", "github_repo"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        inputs = fn_inputs._asdict()
-        # convert dates
-        for date_ms in ["github_until_date", "github_since_date"]:
-            if inputs.get(date_ms):
-                inputs[date_ms] = datetime.fromtimestamp(inputs[date_ms]/1000).isoformat()
-
-        commits, err_msg = gh.get_commits(inputs)
+        commits, err_msg = gh.get_commits(getattr(fn_inputs, 'github_optional_file_path', None),
+                                          get_iso_date(getattr(fn_inputs, 'github_since_date', None)),
+                                          get_iso_date(getattr(fn_inputs, 'github_until_date', None)),
+                                          getattr(fn_inputs, 'github_branch', None),
+                                          getattr(fn_inputs, 'github_limit', None))
 
         results = []
         if commits:
@@ -56,3 +54,13 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results, success=bool(results), reason=err_msg)
+
+def get_iso_date(date_ms: int) -> str:
+    """convert a millisecond timestamp to iso string format
+
+    :param date_ms: milliseond timestamp
+    :type date_ms: int
+    :return: iso string
+    :rtype: str
+    """
+    return datetime.fromtimestamp(date_ms/1000).isoformat() if date_ms else None

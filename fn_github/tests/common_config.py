@@ -10,6 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 TS = datetime.now()
 
 ENV_TEST_CONFIG_FILE = "TEST_GITHUB_CONFIG"
+DEFAULT_TESTING_CONFIG="sample_testing_config.json"
 
 def read_json_file(path):
     """
@@ -36,6 +37,9 @@ def read_json_file(path):
 def github_config(function_name):
     # get the file path as an environment variable
     file_path = os.environ.get(ENV_TEST_CONFIG_FILE)
+    if not file_path:
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), DEFAULT_TESTING_CONFIG)
+
     if not file_path or \
         (file_path and not exists(file_path)):
         ValueError(f"Specify environment variable '{ENV_TEST_CONFIG_FILE}' and file exists")

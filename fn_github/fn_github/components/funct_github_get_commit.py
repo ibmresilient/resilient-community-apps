@@ -34,11 +34,9 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_owner", "github_repo", "github_sha"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.get_commit(fn_inputs.github_owner,
-                                fn_inputs.github_repo,
-                                fn_inputs.github_sha)
+        results, err_msg = gh.get_commit(fn_inputs.github_sha)
 
         if results:
             results = results.as_dict()

@@ -4,9 +4,8 @@
 
 import base64
 from fn_github.lib.client_helper import GitHubHelper
-from resilient_lib import b_to_s
+from resilient_lib import b_to_s, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
 
 """AppFunction implementation"""
 
@@ -39,13 +38,10 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["github_owner", "github_repo", "github_file_path"], fn_inputs)
 
-        gh = GitHubHelper(self.app_configs._asdict())
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
 
-        results, err_msg = gh.get_file_contents(fn_inputs.github_owner,
-                                                fn_inputs.github_repo,
-                                                fn_inputs.github_file_path,
-                                                getattr(fn_inputs, 'github_ref', None)
-                                               )
+        results, err_msg = gh.get_file_contents(fn_inputs.github_file_path,
+                                                getattr(fn_inputs, 'github_ref', None))
 
         if results and not getattr(fn_inputs, 'github_return_base64', True):
             try:
