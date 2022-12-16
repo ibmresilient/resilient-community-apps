@@ -9,13 +9,13 @@
       "node_id": "MDY6Q29tbWl0MTM2NzQwODphYjM0ZDUxZGFiZGU1NjdkNGZjNDJhMDBlNjU0YmRkY2U4ZWEwY2Q4",
       "commit": {
         "author": {
-          "name": "Mark Scherfling",
-          "email": "Mark.Scherfling@ibm.com",
+          "name": "My Account",
+          "email": "My.Account@ibm.com",
           "date": "2022-12-04T15:23:47Z"
         },
         "committer": {
-          "name": "Mark Scherfling",
-          "email": "Mark.Scherfling@ibm.com",
+          "name": "My Account",
+          "email": "My.Account@ibm.com",
           "date": "2022-12-04T15:23:47Z"
         },
         "message": "convert script",
