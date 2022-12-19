@@ -22,15 +22,15 @@ def codegen_reload_data():
         "package": u"fn_joe_sandbox_analysis",
         "message_destinations": [u"joe_sandbox_message_destination"],
         "functions": [u"fn_joe_sandbox_analysis"],
-        "workflows": [u"example_joe_sandbox_analysis_attachment", u"example_joe_sandbox_artifact"],
-        "actions": [u"Example: Joe Sandbox Analysis [Artifact]", u"Example: Joe Sandbox Analysis [Attachment]"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_joe_sandbox_analysis_artifact", u"example_joe_sandbox_analysis_attachment"]
     }
 
 
@@ -46,12 +46,9 @@ def customization_data(client=None):
         - joe_sandbox_message_destination
     - Functions:
         - fn_joe_sandbox_analysis
-    - Workflows:
+    - Playbooks:
+        - example_joe_sandbox_analysis_artifact
         - example_joe_sandbox_analysis_attachment
-        - example_joe_sandbox_artifact
-    - Rules:
-        - Example: Joe Sandbox Analysis [Artifact]
-        - Example: Joe Sandbox Analysis [Attachment]
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
