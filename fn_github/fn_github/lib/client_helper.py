@@ -14,7 +14,7 @@ class GitHubHelper():
     def __init__(self, repo_owner, repo_name, options):
         verify = str_to_bool(options.get("verify", "True"))
 
-
+        self.gh = None
         if options.get("base_url"):
             if options.get("username") and options.get("password"):
                 self.gh = GitHubEnterprise(url=options.get("base_url"),
@@ -34,7 +34,7 @@ class GitHubHelper():
             raise ValueError("Either 'username' and 'password', or 'api_token' are required")
 
         self.repo = None
-        if repo_owner and repo_name:
+        if self.gh and repo_owner and repo_name:
             self.repo = self.gh.repository(repo_owner, repo_name)
 
 
