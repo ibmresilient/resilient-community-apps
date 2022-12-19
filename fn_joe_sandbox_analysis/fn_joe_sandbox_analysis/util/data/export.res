@@ -1,91 +1,9 @@
 {
   "action_order": [],
-  "actions": [
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "DNS Name"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "Email Attachment"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "IP Address"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "Other File"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "URI Path"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "URL"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: Joe Sandbox Analysis [Artifact]",
-      "id": 217,
-      "logic_type": "any",
-      "message_destinations": [],
-      "name": "Example: Joe Sandbox Analysis [Artifact]",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "050c7c78-5f4d-46f6-a27a-af8a07e7b518",
-      "view_items": [],
-      "workflows": [
-        "example_joe_sandbox_artifact"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "Example: Joe Sandbox Analysis [Attachment]",
-      "id": 218,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: Joe Sandbox Analysis [Attachment]",
-      "object_type": "attachment",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "3df312b3-fd45-46db-9a2c-5eae37d698ca",
-      "view_items": [],
-      "workflows": [
-        "example_joe_sandbox_analysis_attachment"
-      ]
-    }
-  ],
+  "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1671032556143,
+  "export_date": 1671202655390,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -377,39 +295,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Joe Sandbox [Artifact]",
-          "object_type": "artifact",
-          "programmatic_name": "example_joe_sandbox_artifact",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 22
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Joe Sandbox Analysis [Attachment]",
-          "object_type": "attachment",
-          "programmatic_name": "example_joe_sandbox_analysis_attachment",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 21
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 9,
+  "id": 13,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1671032554503,
+      "create_date": 1671202654022,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -418,7 +315,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1671032554503,
+      "update_date": 1671202654022,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -443,7 +340,231 @@
   "notifications": null,
   "overrides": null,
   "phases": [],
-  "playbooks": [],
+  "playbooks": [
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_692f2964_9556_4b2f_8555_4472fd837939\" isExecutable=\"true\" name=\"playbook_692f2964_9556_4b2f_8555_4472fd837939\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1esxilt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Joe Sandbox Analysis\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"76d63c86-c5fd-41f7-a43a-2922d6fb3d91\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"24cd65fa-e06c-4580-8a7b-923585f9d81b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"222faf2b-f446-471e-a3c7-9eb21c807318\"}},\"17c3e652-6559-4935-9f95-74374ca37a7b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8d80daa3-ea09-4d10-b1ec-6fc118f45173\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b8178334-f606-404a-8cc7-689cef3463e2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f6d29475-11ac-403a-87e0-15086e45caea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.artifact_value = artifact.value\\ninputs.artifact_type = artifact.type\\ninputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"artifact_analysis\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1esxilt\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wpbw0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1esxilt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f4970c16-67da-4fd2-bace-570c9bd39f26\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wpbw0q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1v9m8f0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wpbw0q\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1v9m8f0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1v9m8f0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_692f2964_9556_4b2f_8555_4472fd837939\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1esxilt\" id=\"Flow_1esxilt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wpbw0q\" id=\"Flow_0wpbw0q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v9m8f0\" id=\"Flow_1v9m8f0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1671196372690,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 17,
+        "name": "c@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "An example of having an artifact sample analyzed by Joe Sandbox",
+        "format": "text"
+      },
+      "display_name": "Example: Joe Sandbox Analysis [Artifact]",
+      "export_key": "example_joe_sandbox_analysis_artifact",
+      "field_type_handle": "playbook_692f2964_9556_4b2f_8555_4472fd837939",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Joe Sandbox Analysis [Artifact]",
+        "export_key": "playbook_692f2964_9556_4b2f_8555_4472fd837939",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_692f2964_9556_4b2f_8555_4472fd837939",
+        "uuid": "6124d8e3-fcd7-49fb-b5fe-2368da036684"
+      },
+      "has_logical_errors": false,
+      "id": 4,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 17,
+        "name": "c@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1671197059684,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1671196996721,
+          "description": "",
+          "enabled": false,
+          "export_key": "post-process",
+          "id": 21,
+          "language": "python3",
+          "last_modified_by": "c@example.com",
+          "last_modified_time": 1671196996727,
+          "name": "post-process",
+          "object_type": "artifact",
+          "playbook_handle": "example_joe_sandbox_analysis_artifact",
+          "programmatic_name": "example_joe_sandbox_analysis_artifact_post_process",
+          "script_text": "artifact_analysis = playbook.functions.results.artifact_analysis\n\nnoteText = \"\"\"\u003cbr\u003eJoe Sandbox analysis \u003cb\u003e{0}\u003c/b\u003e complete\n              \u003cb\u003eArtifact:\u003c/b\u003e \u0027{1}\u0027\n              \u003cb\u003eReport URL:\u003c/b\u003e \u003ca href=\u0027{2}\u0027\u003e{2}\u003c/a\u003e\n              \u003cb\u003eDetection Status:\u003c/b\u003e \u003cb\u003e{4}\u003c/b\u003e\"\"\".format(artifact_analysis.analysis_report_name, artifact.value, artifact_analysis.analysis_report_url, artifact_analysis.analysis_status)\n\nincident.addNote(noteText)",
+          "tags": [],
+          "uuid": "f4970c16-67da-4fd2-bace-570c9bd39f26"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "DNS Name"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Email Attachment"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "IP Address"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Other File"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "URI Path"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "URL"
+            }
+          ],
+          "logic_type": "any"
+        },
+        "view_items": []
+      },
+      "name": "example_joe_sandbox_analysis_artifact",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tags": [],
+      "type": "default",
+      "uuid": "692f2964-9556-4b2f-8555-4472fd837939",
+      "version": 5
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4a3ecb78_9638_499e_873c_68f44c7b9111\" isExecutable=\"true\" name=\"playbook_4a3ecb78_9638_499e_873c_68f44c7b9111\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_108ycss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Joe Sandbox Analysis\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"76d63c86-c5fd-41f7-a43a-2922d6fb3d91\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"24cd65fa-e06c-4580-8a7b-923585f9d81b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"222faf2b-f446-471e-a3c7-9eb21c807318\"}},\"17c3e652-6559-4935-9f95-74374ca37a7b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8d80daa3-ea09-4d10-b1ec-6fc118f45173\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b8178334-f606-404a-8cc7-689cef3463e2\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f6d29475-11ac-403a-87e0-15086e45caea\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"attachment_analysis\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_108ycss\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wplluk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_108ycss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9e316bff-e7be-4888-bc57-d46e5ed4c0d1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wplluk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1njh1ji\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wplluk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1njh1ji\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1njh1ji\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4a3ecb78_9638_499e_873c_68f44c7b9111\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_108ycss\" id=\"Flow_108ycss_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wplluk\" id=\"Flow_1wplluk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1njh1ji\" id=\"Flow_1njh1ji_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"616\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1671197081123,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 17,
+        "name": "c@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "An example of having an attachment sample analyzed by Joe Sandbox",
+        "format": "text"
+      },
+      "display_name": "Example: Joe Sandbox Analysis [Attachment]",
+      "export_key": "example_joe_sandbox_analysis_attachment",
+      "field_type_handle": "playbook_4a3ecb78_9638_499e_873c_68f44c7b9111",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Joe Sandbox Analysis [Attachment]",
+        "export_key": "playbook_4a3ecb78_9638_499e_873c_68f44c7b9111",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_4a3ecb78_9638_499e_873c_68f44c7b9111",
+        "uuid": "dbc08513-4c80-4bc9-bfcd-3a07cc02b148"
+      },
+      "has_logical_errors": false,
+      "id": 5,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 17,
+        "name": "c@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1671197226840,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1671197115778,
+          "description": "",
+          "enabled": false,
+          "export_key": "post-process",
+          "id": 22,
+          "language": "python3",
+          "last_modified_by": "c@example.com",
+          "last_modified_time": 1671197217526,
+          "name": "post-process",
+          "object_type": "attachment",
+          "playbook_handle": "example_joe_sandbox_analysis_attachment",
+          "programmatic_name": "example_joe_sandbox_analysis_attachment_post_process",
+          "script_text": "attachment_analysis = playbook.functions.results.attachment_analysis\n\nnoteText = \"\"\"\u003cbr\u003eJoe Sandbox analysis \u003cb\u003e{0}\u003c/b\u003e complete\n              \u003cb\u003eAttachment:\u003c/b\u003e \u0027{1}\u0027\n              \u003cb\u003eReport URL:\u003c/b\u003e \u003ca href=\u0027{2}\u0027\u003e{2}\u003c/a\u003e\n              \u003cb\u003eDetection Status:\u003c/b\u003e \u003cb\u003e{4}\u003c/b\u003e\"\"\".format(attachment_analysis.analysis_report_name, attachment.name, attachment_analysis.analysis_report_url, attachment_analysis.analysis_status)\n\nincident.addNote(helper.createRichText(noteText))",
+          "tags": [],
+          "uuid": "9e316bff-e7be-4888-bc57-d46e5ed4c0d1"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "example_joe_sandbox_analysis_attachment",
+      "object_type": "attachment",
+      "status": "enabled",
+      "tags": [],
+      "type": "default",
+      "uuid": "4a3ecb78-9638-499e-873c-68f44c7b9111",
+      "version": 4
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [],
@@ -457,45 +578,6 @@
   "task_order": [],
   "timeframes": null,
   "types": [],
-  "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 15,
-        "workflow_id": "example_joe_sandbox_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_joe_sandbox_artifact\" isExecutable=\"true\" name=\"Example: Joe Sandbox [Artifact]\"\u003e\u003cdocumentation\u003eAn example of having an artifact sample analyzed by Joe Sandbox\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ngud9y\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_16frtlo\"\u003e\u003cincoming\u003eSequenceFlow_1v3ye91\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0gwboyh\" name=\"Joe Sandbox Analysis\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"76d63c86-c5fd-41f7-a43a-2922d6fb3d91\"\u003e{\"inputs\":{\"24cd65fa-e06c-4580-8a7b-923585f9d81b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"222faf2b-f446-471e-a3c7-9eb21c807318\"}}},\"post_processing_script\":\"color = \\\"#45bc27\\\"\\n\\nif (results.analysis_status != \\\"clean\\\"):\\n  color = \\\"#ff402b\\\"\\n  \\nnoteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;Joe Sandbox analysis \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; complete\\n              \u0026lt;b\u0026gt;Artifact:\u0026lt;/b\u0026gt; \u0027{1}\u0027\\n              \u0026lt;b\u0026gt;Report URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{2}\u0027\u0026gt;{2}\u0026lt;/a\u0026gt;\\n              \u0026lt;b\u0026gt;Detection Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {3}\\\"\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\"\\\".format(results.analysis_report_name, artifact.value, results.analysis_report_url, color, results.analysis_status)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.artifact_value = artifact.value\\ninputs.artifact_type = artifact.type\\ninputs.artifact_id = artifact.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ngud9y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1v3ye91\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ngud9y\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0gwboyh\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1v3ye91\" sourceRef=\"ServiceTask_0gwboyh\" targetRef=\"EndEvent_16frtlo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_16frtlo\" id=\"EndEvent_16frtlo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"634\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"652\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0gwboyh\" id=\"ServiceTask_0gwboyh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"352\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ngud9y\" id=\"SequenceFlow_0ngud9y_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"352\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"275\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1v3ye91\" id=\"SequenceFlow_1v3ye91_di\"\u003e\u003comgdi:waypoint x=\"452\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"634\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"543\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 15,
-      "description": "An example of having an artifact sample analyzed by Joe Sandbox",
-      "export_key": "example_joe_sandbox_artifact",
-      "last_modified_by": "c@example.com",
-      "last_modified_time": 1671032551283,
-      "name": "Example: Joe Sandbox [Artifact]",
-      "object_type": "artifact",
-      "programmatic_name": "example_joe_sandbox_artifact",
-      "tags": [],
-      "uuid": "ab6aaa61-0f70-4432-b15f-b994b46b30f5",
-      "workflow_id": 22
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
-        "workflow_id": "example_joe_sandbox_analysis_attachment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_joe_sandbox_analysis_attachment\" isExecutable=\"true\" name=\"Example: Joe Sandbox Analysis [Attachment]\"\u003e\u003cdocumentation\u003eAn example of having an attachment sample analyzed by Joe Sandbox\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12ic7g4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0920lp5\"\u003e\u003cincoming\u003eSequenceFlow_0zk4elj\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_10hkln1\" name=\"Joe Sandbox Analysis\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"76d63c86-c5fd-41f7-a43a-2922d6fb3d91\"\u003e{\"inputs\":{\"24cd65fa-e06c-4580-8a7b-923585f9d81b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"222faf2b-f446-471e-a3c7-9eb21c807318\"}}},\"post_processing_script\":\"color = \\\"#45bc27\\\"\\n\\nif (results.analysis_status != \\\"clean\\\"):\\n  color = \\\"#ff402b\\\"\\n  \\nnoteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;Joe Sandbox analysis \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; complete\\n              \u0026lt;b\u0026gt;Attachment:\u0026lt;/b\u0026gt; \u0027{1}\u0027\\n              \u0026lt;b\u0026gt;Report URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{2}\u0027\u0026gt;{2}\u0026lt;/a\u0026gt;\\n              \u0026lt;b\u0026gt;Detection Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {3}\\\"\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\"\\\".format(results.analysis_report_name, attachment.name, results.analysis_report_url, color, results.analysis_status)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12ic7g4\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0zk4elj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12ic7g4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_10hkln1\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0zk4elj\" sourceRef=\"ServiceTask_10hkln1\" targetRef=\"EndEvent_0920lp5\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0920lp5\" id=\"EndEvent_0920lp5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"583\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"601\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10hkln1\" id=\"ServiceTask_10hkln1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"336\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12ic7g4\" id=\"SequenceFlow_12ic7g4_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"336\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"267\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zk4elj\" id=\"SequenceFlow_0zk4elj_di\"\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"583\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"509.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "description": "An example of having an attachment sample analyzed by Joe Sandbox",
-      "export_key": "example_joe_sandbox_analysis_attachment",
-      "last_modified_by": "c@example.com",
-      "last_modified_time": 1671031185387,
-      "name": "Example: Joe Sandbox Analysis [Attachment]",
-      "object_type": "attachment",
-      "programmatic_name": "example_joe_sandbox_analysis_attachment",
-      "tags": [],
-      "uuid": "b6888a4b-1cdf-4b1e-9414-71eb4bb1232f",
-      "workflow_id": 21
-    }
-  ],
+  "workflows": [],
   "workspaces": []
 }
