@@ -39,7 +39,7 @@ Links:
         "resilient-lib",
         "github3.py @ git+https://github.com/sigmavirus24/github3.py.git"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
