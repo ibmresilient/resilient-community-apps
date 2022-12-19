@@ -80,7 +80,7 @@ if not results.success:
   text = helper.createRichText(text)
   task.addNote(text)
   
-incident.addNote(str(results))
+task.addNote(str(results))
 ```
 
 ---

@@ -35,15 +35,21 @@ def codegen_reload_data():
             u"incident_post_message_to_teams",
             u"incident_create_a_microsoft_group",
             u"incident_create_a_microsoft_team",
+            u"incident_delete_a_microsoft_group",
+            u"incident_archive_unarchive_a_microsoft_team",
+            u"incident_enable_microsoft_team_for_group",
+            u"incident_create_a_teams_channel",
+            u"incident_delete_a_teams_channel",
+            u"incident_read_a_channels_messages",
             u"task_create_a_microsoft_group",
             u"task_create_a_microsoft_team",
             u"task_post_message_to_teams",
-            u"common_delete_a_microsoft_group",
-            u"common_archive_unarchive_a_microsoft_team",
-            u"common_enable_microsoft_team_for_group",
-            u"common_create_a_teams_channel",
-            u"common_delete_a_teams_channel",
-            u"common_read_a_channels_messages"],
+            u"task_delete_a_microsoft_group",
+            u"task_archive_unarchive_a_microsoft_team",
+            u"task_enable_microsoft_team_for_group",
+            u"task_create_a_teams_channel",
+            u"task_delete_a_teams_channel",
+            u"task_read_a_channels_messages"],
         "actions": [
             u"MS Teams: Create Group",
             u"MS Teams: Create Group From Task",
@@ -94,18 +100,24 @@ def customization_data(client=None):
         - ms_teams_post_message
         - ms_teams_read_message
     - Workflows:
-        - common_archive_unarchive_a_microsoft_team
-        - common_create_a_teams_channel
-        - common_delete_a_microsoft_group
-        - common_delete_a_teams_channel
-        - common_enable_microsoft_team_for_group
-        - common_read_a_channels_messages
+        - incident_archive_unarchive_a_microsoft_team
         - incident_create_a_microsoft_group
         - incident_create_a_microsoft_team
+        - incident_create_a_teams_channel
+        - incident_delete_a_microsoft_group
+        - incident_delete_a_teams_channel
+        - incident_enable_microsoft_team_for_group
         - incident_post_message_to_teams
+        - incident_read_a_channels_messages
+        - task_archive_unarchive_a_microsoft_team
         - task_create_a_microsoft_group
         - task_create_a_microsoft_team
+        - task_create_a_teams_channel
+        - task_delete_a_microsoft_group
+        - task_delete_a_teams_channel
+        - task_enable_microsoft_team_for_group
         - task_post_message_to_teams
+        - task_read_a_channels_messages
     - Rules:
         - MS Teams: Archive Team
         - MS Teams: Archive Team From Task
