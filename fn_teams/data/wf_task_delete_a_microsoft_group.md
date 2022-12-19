@@ -46,7 +46,7 @@ else:
   text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
-incident.addNote(note)
+task.addNote(note)
 
 ```
 

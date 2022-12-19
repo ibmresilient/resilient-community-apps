@@ -49,13 +49,13 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Unable to create Microsoft Team"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  text  = u"<b>Microsoft Group Details:</b><br />"
+  text  = u"<b>Microsoft Team Details:</b><br />"
   text += u"<br />Name: {}".format(content.get("displayName"))
   text += u"<br />Description: {}".format(content.get("description"))
   text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))

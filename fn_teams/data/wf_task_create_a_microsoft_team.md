@@ -53,16 +53,21 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Unable to create Microsoft Team"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  text  = u"<b>Microsoft Teams:</b><br />"
+  text  = u"<b>Microsoft Team Details:</b><br />"
   text += u"<br />Name: {}".format(content.get("displayName"))
   text += u"<br />Description: {}".format(content.get("description"))
-  text += u"<br />Team ID: {}".format(content.get("teamId"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("mail"))
+  text += u"<br />Visibility: {}".format(content.get("visibility"))
+  text += u"<br />Group Types: {}".format(content.get("groupTypes"))
+  text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
   if content.get("unfoundUsers"):
     text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 

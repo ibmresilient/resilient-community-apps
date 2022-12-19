@@ -39,13 +39,13 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Unable to archive the Microsoft Team"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  text  = u"<b>Microsoft Group Details:</b><br />"
+  text  = u"<b>Microsoft Team Details:</b><br />"
   text += u"<br />The Team associated with this Group has now been {}.<br />".format(content.get("teamsEnabled"))
   text += u"<br />Name: {}".format(content.get("displayName"))
   text += u"<br />Description: {}".format(content.get("description"))
@@ -59,11 +59,7 @@ else:
     text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
-
-if task:
-  task.addNote(note)
-else:
-  incident.addNote(note)
+task.addNote(note)
 
 ```
 

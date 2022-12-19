@@ -18,7 +18,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.ms_channel_name = rule.properties.ms_channel_name if rule.properties.ms_channel_name else f"Incident {incident.id} {incident.name}"
+inputs.ms_channel_name = rule.properties.ms_channel_name
 
 if rule.properties.ms_groupteam_id:
   inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
@@ -45,7 +45,7 @@ else:
   text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
-incident.addNote(note)
+task.addNote(note)
 
 ```
 

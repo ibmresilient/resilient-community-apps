@@ -24,7 +24,6 @@ if rule.properties.ms_channel_id:
   inputs.ms_channel_id = rule.properties.ms_channel_id
 if rule.properties.ms_groupteam_id:
   inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
-
 if rule.properties.ms_channel_name:
   inputs.ms_channel_name = rule.properties.ms_channel_name
 if rule.properties.ms_groupteam_id:

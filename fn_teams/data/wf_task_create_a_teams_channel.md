@@ -59,7 +59,7 @@ else:
   text += u"<br />Membership Type: {}".format(content.get("membershipType"))
 
 note = helper.createRichText(text)
-incident.addNote(note)
+task.addNote(note)
 
 ```
 

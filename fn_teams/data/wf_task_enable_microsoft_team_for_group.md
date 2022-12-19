@@ -33,7 +33,7 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Microsoft Group"
+  text = u"Could not enable Teams for this MS Group
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
@@ -53,7 +53,7 @@ else:
     text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
-incident.addNote(note)
+task.addNote(note)
 
 ```
 
