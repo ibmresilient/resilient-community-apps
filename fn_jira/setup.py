@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_jira',
     display_name='Jira App for IBM SOAR',
-    version='2.2.0',
+    version='3.0.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',

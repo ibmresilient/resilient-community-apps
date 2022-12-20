@@ -20,7 +20,15 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Transition a jira issue."""
+        """
+        Function: Transition a jira issue.
+        Inputs:
+            -   fn_inputs.jira_issue_id
+            -   fn_inputs.jira_transition_id
+            -   fn_inputs.jira_fields
+            -   fn_inputs.jira_comment
+            -   fn_inputs.jira_label
+        """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get configuration for Jira server specified
