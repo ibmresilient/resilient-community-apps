@@ -66,7 +66,7 @@ class ResponseHandler:
             if self.response.status_code == 400:
                 self.msg = constants.MSG_RESPONSE_400.format(error)
             elif self.response.status_code == 401:
-                self.msg = constants.MSG_RESPONSE_404.format(error)
+                self.msg = constants.MSG_RESPONSE_401.format(error)
             elif self.response.status_code == 404:
                 self.msg = constants.MSG_RESPONSE_404.format(error)
             elif self.response.status_code == 405:
@@ -401,6 +401,8 @@ class MSFinder():
             callback=self.rh.check_response)
 
         channel_list = response.get("value")
+        
+        # filtering out the required channel using the displayName attribute
         channel_details = list(filter(
             lambda channel: channel.get("displayName") == channel_name, channel_list))
         log.debug(json.dumps(channel_details, indent=2))

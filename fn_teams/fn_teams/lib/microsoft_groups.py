@@ -221,6 +221,10 @@ class GroupsInterface:
 
         owners_list, members_list, unfound_users = self._find_all_users(owners_list, members_list)
 
+        # Generating a list of members' and owners' principal URL by joining:
+        # BASE_URL + URL_DIRECTORY_OBJECT + UNIQUE_PRINCIPAL_ID
+        # ex: https://graph.microsoft.com/v1.0/directoryObjects/4562bcc8-****-****-*****-4f8ce89dca5e
+
         members = list(map(lambda id: parse.urljoin(
             constants.BASE_URL,
             constants.URL_DIRECTORY_OBJECT.format(id)), members_list))
