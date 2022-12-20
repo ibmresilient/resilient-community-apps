@@ -171,7 +171,7 @@ MSG_UNSUPPORTED_TYPE = "Unsupported object specified to function. Accepted types
 MSG_RESPONSE_NONE = '''API call failed! Invalid METHOD passed to rc.execute()!
  Response returned was None'''
 MSG_RESPONSE_204  = "API call successful! No content returned"
-MSG_RESPONSE_400  = "API call failed! API returned 401! {}"
+MSG_RESPONSE_400  = "API call failed! API returned 400! {}"
 MSG_RESPONSE_401  = "API call failed! Security context is invalid. API returned 401! {}"
 MSG_RESPONSE_404  = "API call failed! Item not found. API returned 404! {}"
 MSG_RESPONSE_405  = "API call failed! Method Not Allowed. API returned 405! {}"
