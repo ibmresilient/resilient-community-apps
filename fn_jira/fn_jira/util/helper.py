@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from jira import JIRA
-from resilient_lib import IntegrationError, MarkdownParser, str_to_bool, validate_fields
+from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
 
 PACKAGE_NAME = "fn_jira"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
@@ -19,41 +19,34 @@ JIRA_ISSUE_LINK = "jira_url"
 INCIDENT_ID_FUNCT_INPUT_NAME = "incident_id"
 TASK_ID_FUNCT_INPUT_NAME = "task_id"
 
-def validate_app_configs(app_configs):
-    """
-    Validates the app configs for fn_jira. Raises an error
-    if the required configs are not set
-
-    :param app_configs: The app_configs for fn_jira
-    :return: All the app configs
-    :rtype: dict
-    """
-    valid_app_configs = validate_fields([
-        {"name": "url", "placeholder": "https://<jira url>"},
-        {"name": "auth_method"},
-        {"name": "verify_cert"}
-    ], app_configs)
-
-    valid_app_configs["verify_cert"] = str_to_bool(valid_app_configs.get("verify_cert"))
-
-    return valid_app_configs
-
-def get_jira_client(app_configs, rc):
+def get_jira_client(opts, options):
     """
     Function that gets the client for JIRA
-
-    :param app_configs: The app_configs for fn_jira
-    :param rc: resilient_lib.RequestsCommon object used to get proxies
+    :param opts: All of the settings from the app.config
+    :param options: The options for fn_jira from the app.config
     :raise: IntegrationError if auth_method set in app.config is unsupported
     :return: Instance to jira client
     :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
     """
-    # set default to "BASIC" as that is what most users should be using
-    auth_method = app_configs.get("auth_method", SUPPORTED_AUTH_METHODS[1])
+
+    # Validate the app.config settings for fn_jira
+    validate_fields([
+        {"name": "url", "placeholder": "https://<jira url>"},
+        {"name": "auth_method"},
+        {"name": "jira_dt_name"}], options)
+
+    # Set app.config settings to variables
+    auth_method = options.get("auth_method")
     oauth = token_auth = basic_auth = auth = None
+    url = options.get("url")
+
+    # Get verify setting from app.config
+    verify = options.get("verify_cert", False)
+    if verify:
+        verify = False if verify.lower() == "false" else (True if verify.lower() == "true" else verify)
 
     try:
-        timeout = int(app_configs.get("timeout", 10))
+        timeout = int(options.get("timeout", 10))
     except ValueError:
         raise IntegrationError("Ensure 'timeout' is an integer in your config file")
 
@@ -61,16 +54,16 @@ def get_jira_client(app_configs, rc):
     if auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
         validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
                          {"name": "password", "placeholder": "<jira user password or API Key>"}],
-                         app_configs)
-        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0]: # AUTH
-            auth = (app_configs.get("user"), app_configs.get("password"))
+                         options)
+        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0] and ".atlassian.net" not in url: # AUTH
+            auth = (options.get("user"), options.get("password"))
         else: # BASIC
-            basic_auth = (app_configs.get("user"), app_configs.get("password"))
+            basic_auth = (options.get("user"), options.get("password"))
 
     # TOKEN
-    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2]:
-        validate_fields(["auth_token"], app_configs)
-        token_auth = (app_configs.get("auth_token"))
+    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2] and ".atlassian.net" not in url:
+        validate_fields(["auth_token"], options)
+        token_auth = (options.get("auth_token"))
 
     # OAUTH
     elif auth_method.upper() == SUPPORTED_AUTH_METHODS[3]:
@@ -82,21 +75,22 @@ def get_jira_client(app_configs, rc):
             {"name": "access_token_secret", "placeholder": "<oauth access token secret>"},
             {"name": "consumer_key_name", "placeholder": "<oauth consumer key - from Jira incoming link settings>"},
             {"name": "private_rsa_key_file_path", "placeholder": "<private RSA key matched with public key on Jira>"}
-            ], app_configs)
+            ], options)
 
         try:
-            with open(app_configs.get("private_rsa_key_file_path"), "r") as private_rsa_key:
+            with open(options.get("private_rsa_key_file_path"), "r") as private_rsa_key:
                 key_cert_data = private_rsa_key.read()
         except FileNotFoundError as e:
             raise IntegrationError(f"Private Key file not valid: {str(e)}")
 
-        oauth = {"access_token": app_configs.get("access_token"),
-                 "access_token_secret": app_configs.get("access_token_secret"),
-                 "consumer_key": app_configs.get("consumer_key_name"),
-                 "key_cert": key_cert_data
-                }
+        oauth = {"access_token": options.get("access_token"),
+                 "access_token_secret": options.get("access_token_secret"),
+                 "consumer_key": options.get("consumer_key_name"),
+                 "key_cert": key_cert_data}
 
     else:
+        if ".atlassian.net" in url:
+            raise IntegrationError("Only auth_methods BASIC and OAUTH are supported with Jira Cloud platform")
         raise IntegrationError(f"{auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
 
     return JIRA(
@@ -104,9 +98,10 @@ def get_jira_client(app_configs, rc):
         basic_auth = basic_auth,
         token_auth = token_auth,
         oauth = oauth,
-        options = {"server": app_configs.get("url"),
-                   "verify": app_configs.get("verify_cert")},
-        proxies = rc.get_proxies(),
+        options = {"server": url,
+                   "verify": verify,
+                   "rest_api_version": "2"},
+        proxies = RequestsCommon(opts, options).get_proxies(),
         timeout = timeout,
     )
 
@@ -117,24 +112,24 @@ def to_markdown(html):
 
 def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
     """Returns the jira_issue_id and jira_url that relates to the task_id"""
-    row = _get_row(res_client, dt_name, incident_id, "task_id", task_id)
+    cell_name = "task_id"
 
-    if row:
-        cells = row.get("cells")
-        return str(cells[JIRA_DT_ISSUE_ID_COL_NAME]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
-
-def _get_row(res_client, dt_name, incident_id, cell_name, cell_value):
-    """Returns the row with a matching value to cell_name and cell_value if found. Returns None if no matching row found"""
     try:
         data = res_client.get(f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names")
         rows = data["rows"]
     except Exception as err:
         raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)
 
+    found = False
     for row in rows:
         cells = row["cells"]
-        if cells.get(cell_name) and cells[cell_name].get("value") and str(cells[cell_name].get("value")) == str(cell_value):
-            return row
+        if cells.get(cell_name) and cells[cell_name].get("value") and str(cells[cell_name].get("value")) == str(task_id):
+            found = True
+            break
+
+    if row and found:
+        cells = row.get("cells")
+        return str(cells[JIRA_DT_ISSUE_ID_COL_NAME]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
 
 class JiraServers():
     def __init__(self, opts):
