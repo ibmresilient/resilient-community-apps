@@ -10,7 +10,7 @@ read_function
 #
 ## incident permissions
 #create_incident
-#read_all_incidents
+read_all_incidents
 #delete_all_incidents
 #edit_all_incidents_members
 #edit_all_incidents_owner
@@ -24,7 +24,7 @@ read_function
 #
 ## tasks permissions
 #edit_incident_public_task_fields
-#read_all_private_tasks
+read_all_private_tasks
 #edit_incident_private_task_member
 #edit_all_private_task_notes
 #edit_incident_public_task_member

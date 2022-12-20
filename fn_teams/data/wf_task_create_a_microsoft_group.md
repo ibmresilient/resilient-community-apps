@@ -42,7 +42,8 @@ if rule.properties.additional_members.content is not None:
 if rule.properties.ms_description is not None:
     inputs.ms_description = rule.properties.ms_description
 else:
-    inputs.ms_description = f"Incident {incident.id}: {incident.name} Task {task.id} : {task.name} {task.description}"
+    description = incident.description.content if incident.description else ""
+    inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
   
 if rule.properties.ms_group_mail_nickname is not None:
     inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
@@ -63,15 +64,17 @@ else:
   text  = u"<b>Microsoft Group Details:</b><br />"
   text += u"<br />Name: {}".format(content.get("displayName"))
   text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
   text += u"<br />ID: {}".format(content.get("id"))
   text += u"<br />Mail: {}".format(content.get("mail"))
   text += u"<br />Visibility: {}".format(content.get("visibility"))
   text += u"<br />Group Types: {}".format(content.get("groupTypes"))
   text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
+  if content.get("unfoundUsers"):
+    text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
 task.addNote(note)
-
 ```
 
 ---

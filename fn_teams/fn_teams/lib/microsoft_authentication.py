@@ -35,24 +35,29 @@ class MicrosoftAuthentication:
                                    application/json
     """
 
-    def __init__(self, required_parameters, app_config):
-        validate_fields(["directory_id", "application_id", "secret_value"], app_config)
+    def __init__(self, request_common, app_config):
+        validate_fields(["application_id", "secret_value", "directory_id"], app_config)
 
-        self.required_parameters = required_parameters
-        self.rc  = required_parameters.get("rc")
+        self.rc  = request_common
         self.LOG = logging.getLogger(__name__)
+        self.required_parameters = {}
 
         self.required_parameters["scope"] = constants.DEFAULT_SCOPE
         self.required_parameters["application_id"] = app_config.get("application_id")
         self.required_parameters["secret_value"] = app_config.get("secret_value")
+        self.required_parameters["oauth_consent_url"] = app_config.get("oauth_consent_url")
+
         self.required_parameters["directory_id"] = parse.urljoin(
             constants.AUTH_URL,
             app_config.get("directory_id"))
+        self.required_parameters["redirect_uri"] = app_config.get(
+            "redirect_uri",
+            constants.DEFAULT_REDIRECT_URI)
 
 
-    def _generate_bearer_id(self):
+    def _generate_application_bearer_id(self) -> str:
         '''
-        This function perfroms MSAL authentication and retrieves the bearer_id which is necessary
+        This function performs MSAL authentication and retrieves the bearer_id which is necessary
         to interact with the Microsoft's endpoint.
 
         Raises:
@@ -66,8 +71,8 @@ class MicrosoftAuthentication:
         app = msal.ConfidentialClientApplication(
             self.required_parameters["application_id"],
             authority=self.required_parameters["directory_id"],
-            client_credential=self.required_parameters["secret_value"]
-        )
+            client_credential=self.required_parameters["secret_value"])
+
         response = app.acquire_token_for_client(scopes=[
             parse.urljoin(constants.BASE_URL, constants.DEFAULT_SCOPE)])
 
@@ -75,13 +80,14 @@ class MicrosoftAuthentication:
             self.LOG.info(constants.INFO_RETRIEVED_BEARER_ID)
             return response['access_token']
 
-        msg = f'''Unable to authenticate: Error: {response.get('error')}
-         {response.get('error_description')}'''
+        msg = constants.ERROR_UNABLE_TO_AUTHENTICATE.format(
+            response.get('error'),
+            response.get('error_description'))
         self.LOG.error(msg)
         raise IntegrationError(msg)
 
 
-    def _generate_header(self, bearer_id):
+    def _generate_header(self, bearer_id:str) -> dict:
         '''
         Checks for bearer_id and returns it in a json format for request header
 
@@ -98,20 +104,70 @@ class MicrosoftAuthentication:
         self.LOG.debug(constants.DEBUG_BEARER_ID.format(bearer_id))
 
         return {
-            'Authorization' : constants.BEARER.format(bearer_id),
-            "Content-type"  : constants.CONTENT_TYPE}
+            "Authorization" : constants.BEARER.format(bearer_id),
+            "Content-type"  : constants.CONTENT_TYPE_JSON}
 
 
-    def authenticate(self):
+    def authenticate_application_permissions(self) -> dict:
         '''
         Helper method that establishes a connection with the Client servers and performs an OAuth
-        authentication. The server returns a beareID for the session, which then is used to make
+        authentication. The server returns a bearerID for the session, which then is used to make
         requests. This bearer_id is incorporated with the header for every request henceforth
 
         Returns:
         --------
             header <dict> : Request header with access_token
         '''
-        bearer_id = self._generate_bearer_id()
+        bearer_id = self._generate_application_bearer_id()
         header = self._generate_header(bearer_id)
+        return header
+
+
+    def _generate_delegation_tokens(self, grant_type:str, consent_code:str) -> dict:
+
+        if grant_type == constants.DELEGATED_GRANT_REFRESH:
+            code_type = constants.CODE_TYPE_REFRESH
+        else:
+            code_type = constants.CODE_TYPE_ACCESS
+
+        url = parse.urljoin(
+            self.required_parameters["directory_id"] + "/",
+            constants.OAUTH_TOKEN_URL)
+
+        header = {
+            "Content-type"  : constants.CONTENT_TYPE_URLENCODED}
+
+        authorization_body = {
+            code_type       : consent_code,
+            "grant_type"    : grant_type,
+            "client_id"     : self.required_parameters["application_id"],
+            "redirect_uri"  : self.required_parameters["redirect_uri"],
+            "client_secret" : self.required_parameters["secret_value"]}
+
+        response = self.rc.execute(
+            "post",
+            url=url,
+            headers=header,
+            data=authorization_body)
+        response = response.json()
+
+        if "access_token" in response:
+            return response
+
+        msg = constants.ERROR_UNABLE_TO_AUTHENTICATE.format(
+            response.get('error'),
+            response.get('error_description'))
+        self.LOG.error(msg)
+        raise IntegrationError(msg)
+
+
+    def authenticate_delegated_permissions(self, refresh_token:str = None):
+
+        if refresh_token:
+            self.LOG.info("Refreshing existing access token")
+            tokens = self._generate_delegation_tokens(constants.DELEGATED_GRANT_REFRESH, refresh_token)
+        else:
+            raise IntegrationError(constants.ERROR_NO_REFRESH_TOKEN)
+
+        header = self._generate_header(tokens.get("access_token"))
         return header

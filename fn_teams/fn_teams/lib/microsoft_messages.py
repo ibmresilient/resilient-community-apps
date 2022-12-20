@@ -7,12 +7,12 @@ import json, logging
 import pymsteams
 from urllib import parse
 
-from resilient_lib import build_resilient_url, MarkdownParser, build_incident_url, build_task_url
-from resilient_lib import IntegrationError
-from fn_teams.lib import constants
+from resilient_lib import (build_resilient_url, build_incident_url, 
+                           build_task_url, IntegrationError, MarkdownParser)
+from fn_teams.lib import constants, microsoft_commons
 
 
-class PostMessageClient:
+class MessageClient:
     """
         This application allows for posting Incident/Task details to a MS Teams channel.
         The application can be triggered from either incident or task level where,
@@ -154,3 +154,65 @@ class PostMessageClient:
 
             card.addSection(cardsection)
         return card
+
+
+    def read_messages(self, dual_headers, options):
+        """
+        The Graph API's read message method is one of Microsoft's protected APIs since
+        it has access to sensitive data. The user must grant this application permission
+        to access their data in order for this application to function. This means that
+        only the resources to which the user has access, such as channels and teams, will
+        be available to this application. This feature allows to read all of the messages
+        on the channel or the replies to a specific message. The function can retrieve all
+        replies to a certain message if it is given the message id for that message. The
+        function will dump all messages in that channel back into SOAR if the channel name
+        attribute is given. 
+
+        options:
+        --------
+            message_id             <str> : Id of the message who's replies are to be retrieved
+            channel_id             <str> : Id of the channel, the message belongs
+            group_id               <str> : Id of the group, the channel belongs
+            channel_name           <str> : Name of the MS Channel to be deleted
+            ms_description         <str> : Description for the Channel
+            ms_group_mail_nickname <str> : Mail nickname for the group (Must be unique)
+            ms_group_name          <str> : Name of the Microsoft Group
+
+        Returns:
+        --------
+            Response <dict> : A response with all the messages of a channel or the replies
+                              to a particular message and all information related to it,
+                              or an error message from the MS Graph api if the operation
+                              fails
+        """
+        response_handler = microsoft_commons.ResponseHandler()
+
+        if "message_id" in options:
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_CHANNEL_MSG_REPLY.format(
+                    options.get("group_id"),
+                    options.get("channel_id"),
+                    options.get("message_id")))
+
+        else:
+            channel_finder = microsoft_commons.MSFinder(
+                rc=self.rc,
+                rh=response_handler,
+                headers=dual_headers.get("application"))
+            channel = channel_finder.find_channel(options)
+
+            url = parse.urljoin(
+                constants.BASE_URL,
+                constants.URL_CHANNEL_MSG.format(
+                    channel.get("group_id"),
+                    channel.get("id")))
+
+        response = self.rc.execute(
+            "get",
+            url=url,
+            headers=dual_headers.get("delegated"),
+            callback=response_handler.check_response)
+
+        self.log.info(response)
+        return response.get("value")

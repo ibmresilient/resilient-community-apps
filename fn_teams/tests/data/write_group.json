@@ -8,6 +8,7 @@
         "mailEnabled": false,
         "mailNickname": "UnittestMailBox",
         "securityEnabled": false,
+        "visibility": "Private",
         "owners@odata.bind": "resilient.owner1@soar.com,resilient.owner2@soar.com",
         "members@odata.bind": "resilient.user@soar.com",
         "domainSuffix" : "@5rf2xs.onmicrosoft.com"
@@ -47,7 +48,7 @@
         "securityEnabled": false,
         "securityIdentifier": "S-1-12-1-1086166082-1283246607-257844410-3107942309",
         "theme": null,
-        "visibility": "Public",
+        "visibility": "Private",
         "onPremisesProvisioningErrors": [],
         "status_code": 201
     }

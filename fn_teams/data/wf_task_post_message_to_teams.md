@@ -78,9 +78,8 @@ if not results.success:
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
   text = helper.createRichText(text)
-  task.addNote(text)
-  
-incident.addNote(str(results))
+  task.addNote(str(text))
+
 ```
 
 ---

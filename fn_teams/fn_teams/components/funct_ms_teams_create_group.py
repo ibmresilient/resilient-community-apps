@@ -81,8 +81,8 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
-            authenticator = MicrosoftAuthentication(required_parameters, self.options)
-            required_parameters["header"] = authenticator.authenticate()
+            authenticator = MicrosoftAuthentication(self.rc, self.options)
+            required_parameters["header"] = authenticator.authenticate_application_permissions()
             authenticated = True
             yield self.status_message(constants.STATUS_SUCCESSFULLY_AUTHENTICATED)
 

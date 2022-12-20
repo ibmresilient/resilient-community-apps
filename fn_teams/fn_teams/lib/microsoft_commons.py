@@ -44,10 +44,6 @@ class ResponseHandler:
         self.exempt_codes = self.default_exempt_codes.copy()
 
 
-    def set_return_raw(self, value: bool=False):
-        self.return_raw = value
-
-
     def _monitor_status(self):
         """
         Monitors the response recieved from the endpoint and generates a custom message

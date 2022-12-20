@@ -15,10 +15,15 @@
   - [Installation](#installation)
   - [Endpoint Configuration](#endpoint-configuration)
     - [Register a new application using the Azure portal](#register-a-new-application-using-the-azure-portal)
-    - [Selecting required API Permissions](#selecting-required-api-permissions)
+    - [API Permissions](#api-permissions)
+    - [Application Permission](#application-permission)
+    - [Delegated Permission](#delegated-permission)
+    - [Setting up API Permissions (Both Permissions)](#setting-up-api-permissions-both-permissions)
     - [List of required permissions](#list-of-required-permissions)
-    - [Create a client Secret Value](#create-a-client-secret-value)
-    - [App Configuration](#app-configuration)
+    - [Create a client Secret Value (Both Permissions)](#create-a-client-secret-value-both-permissions)
+    - [Setting up Incoming Webhooks (Both Permissions)](#setting-up-incoming-webhooks-both-permissions)
+    - [Setting up Delegated permissions (Delegated permissions)](#setting-up-delegated-permissions-delegated-permissions)
+    - [App Configuration (Both Permissions)](#app-configuration-both-permissions)
   - [Function - MS Teams: Archive Team](#function---ms-teams-archive-team)
   - [Function - MS Teams: Create Channel](#function---ms-teams-create-channel)
   - [Function - MS Teams: Create group](#function---ms-teams-create-group)
@@ -27,6 +32,7 @@
   - [Function - MS Teams: Delete Group](#function---ms-teams-delete-group)
   - [Function - MS Teams: Enable Team](#function---ms-teams-enable-team)
   - [Function - MS Teams: Post Message](#function---ms-teams-post-message)
+  - [Function - MS Teams: Read Message](#function---ms-teams-read-message)
   - [Rules](#rules)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -86,6 +92,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
+  | Incident | Read |
   | Group | Read |
   | Users | Read |
 
@@ -97,6 +104,7 @@ The following SOAR platform guides provide additional information:
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
+
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
@@ -155,8 +163,32 @@ The access token includes details about the application and the permission it ha
 * In the left-hand navigation pane under the `Manage` section, select `Authentication`.
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
 
-### Selecting required API Permissions
-The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc)
+### API Permissions
+The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc).
+
+This application requires two different types of permissions to access the required Graph Objects:
+* Application permission
+* Delegated permission (Optional)
+
+| Feature | Permission Type |
+| --------- | ------------------ |
+| Archive Team |`Application` |
+| Create Channel | `Application` |
+| Create Group | `Application` |
+| Create Team | `Application` |
+| Delete Channel | `Application` |
+| Delete Group | `Application` |
+| Enable Teams for Group | `Application` |
+| Post Incident Information | `Application` |
+| Read Channel Messages | `Delegated` |
+
+### Application Permission
+Application permissions, also called app roles, allow the app to access data on its own, without a signed-in user. In this access scenario, the application can interact with data on its own, without a signed in user. App-only access is used in scenarios such as automation, and is mostly used by apps that run as background services or daemons. It's suitable when it's undesirable to have a user signed in, or when the data required can't be scoped to a single user.
+
+### Delegated Permission
+This type of permission is optional and is only required for the **Read Channel messages** feature. If you wish to use the application without this feature (read channel messages), you can do so by leaving out the delegated permission setup process and following the remaining steps. Delegated permissions, also called scopes, allow the application to act on behalf of the signed-in user. In this access scenario, the user signs in on behalf of the application and provides it with the required permissions to call the Microsoft Graph API. Both the client and the user must be authorized to make the request. The Graph API's **read message** method is one of Microsoft's protected APIs since it has access to sensitive data. The user must grant this application permission to access their data in order for this application to function. This means that only the resources to which the user has access, such as channels and teams, will be available to this application.
+
+### Setting up API Permissions (Both Permissions)
 
 * In the left-hand navigation pane under the `Manage` section select `API Permission`.
 * Click `Add a permission`. On the Request API permission screen, select `Microsoft Graph`.
@@ -165,25 +197,29 @@ The application requires admins consent to access a protected resource, such as 
 
 ### List of required permissions
 
-| Category | API/Permission | Description |
-| ------ | ------ | ------- |
-| Group | `Create` | Create groups |
-| Group | `ReadWrite.All` | Read and write all groups |
-| GroupMember | `ReadWrite.All` | Read and write all group memberships |
-| Team | `Create` | Create teams |
-| Team | `ReadBasic.All` | Get a list of all teams |
-| TeamMember | `ReadWrite.All` | Add and remove members from all teams |
-| TeamMember | `ReadWriteNonOwnerRole.All` | Add and remove members with non-owner role |
-| TeamSettings | `ReadWrite.All` | Read and change all teams' settings |
-| User | `Read.All` | Read all users' full profiles |
+| Category | API/Permission | Permission Type | Description |
+| ------ | ------ | ------- | ------- |
+| Group | `Create` |  Application | Create groups |
+| Group | `ReadWrite.All` | Application | Read and write all groups |
+| GroupMember | `ReadWrite.All` | Application | Read and write all group memberships |
+| Team | `Create` | Application | Create teams |
+| Team | `ReadBasic.All` | Application | Get a list of all teams |
+| TeamMember | `ReadWrite.All` | Application | Add and remove members from all teams |
+| TeamMember | `ReadWriteNonOwnerRole.All` | Application | Add and remove members with non-owner role |
+| TeamSettings | `ReadWrite.All` | Application | Read and change all teams' settings |
+| User | `Read.All` | Application | Read all users' full profiles |
+| ChannelMessage | `Read.All` | Application | Read all messages |
+| ChannelMessage | `ReadWrite` | Delegated | Read and write user channel messages |
+| ChannelMessage | `Send` | Delegated | Send channel messages |
+| offline_access | `--` | Delegated | Maintain access to data you have given it access to |
+
 
 <p align="center">
 <img src="./doc/screenshots/app_scopes_permissions.png" />
 </p>
 
 
-
-### Create a client Secret Value
+### Create a client Secret Value (Both Permissions)
 * In the left-hand navigation pane under the `Manage` section, select `Certificate and secrets`.
 * Click on the `New client secret` button.
 * Enter a name for the client secret and click on the `Add` button.
@@ -193,9 +229,40 @@ The application requires admins consent to access a protected resource, such as 
 <img src="./doc/screenshots/app_certificate_secrets.png" />
 </p>
 
+### Setting up Incoming Webhooks (Both Permissions)
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. These values are used by the SOAR platform to establish a secure connection with the Microsoft Endpoint. See the documentation discussed in the [Endpoint Configuration](#endpoint-configuration) section for the procedure. If you have successfully configured that endpoint, you can find these values at [Azure portal](https://portal.azure.com) -> App registration -> (Your application).
+The **SOAR Platform** can share content in Microsoft channels using an incoming webhook.
+The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation [Create Incoming Webhooks](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
+
+
+### Setting up Delegated permissions (Delegated permissions)
+
+This setup process is to provide the application with delegated permissions which is required only for **Read channel message** feature. If you wish to use the application without this feature, you can do so by skipping this process. 
+
+To provide the application with the necessary permission, the [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf) is to be used.
+
+
+* This tool provides the user with means to login on behalf of the application and provide the application with the required permissions to act on behalf of the user.
+* The application_id, directory_id and secret_value are used to generate a unique *refresh_token*, which is later used in the app.conf file.
+* There are several ways to generate this *Refresh token* using the OAuth Utilities tool, please refer to the documentation [OAuth Utilities Documentation](https://exchange.xforce.ibmcloud.com/api/hub/extensionsNew/504c896aa38087ba897fa054bc79e598/README.pdf)
+* Once such method would be using the CLI. A sample command has been provided below:
+
+```
+oauth-utils oauth2_generate_refresh_token \
+-tu https://login.microsoftonline.com/<DIRECTORY_ID>/oauth2/v2.0/token \
+-au https://login.microsoftonline.com/<DIRECTORY_ID>/oauth2/v2.0/authorize \
+-ci <APPLICATION_ID> \
+-cs <SECRET_VALUE> \
+-sc "ChannelMessage.Send ChannelMessage.Read.All offline_access"
+```
+
+Upon successfully completing this process, you will be presented with a **refresh_token**.  Note this information as this is required later while setting up the application in the **SOAR platform**.
+
+
+### App Configuration (Both Permissions)
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. These values are used by the SOAR platform to establish a secure connection with the Microsoft Endpoint. See the documentation discussed in the [Endpoint Configuration](#endpoint-configuration) section for the procedure. If you have successfully configured that endpoint, you can find these values:
+
+  -  [Azure portal](https://portal.azure.com) -> App registration -> (Your application)
 
 
 | Config | Required | Example | Description |
@@ -203,6 +270,8 @@ The following table provides the settings you need to configure the app. These s
 | **application_id** | Yes | 18d10049-72e3-4652-ac9f-d9b13f24303c | Overview -> `Application (client) ID` |
 | **directory_id** | Yes | 1d8a5928-8678-408e-ab06-50ca7e01766a | Overview -> `Directory (tenant) ID` |
 | **secret_value** | Yes | oCN****************** | Certificate & secrets -> `Secret Value` |
+| **refresh_token** | Optional | eyxn****************** | Required only for delegated permissions |
+| **<channel_name>** | Optional | ****.webhook.office.com/webhookb2/ | Webhook URL for a channel |
 
 ---
 
@@ -1357,27 +1426,329 @@ if not results.success:
 </details>
 
 ---
+## Function - MS Teams: Read Message
+Read messages from a Teams Channel
+
+<p align="center">
+<img src="./doc/screenshots/action_read_message.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/wf_read_message.png" />
+</p>
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `ms_channel_id` | `text` | No | `abs7350fc-b6df-4041` | Unique Id assigned to a channel while being created |
+| `ms_channel_name` | `text` | No | `soarmessages` | Name of the Microsoft Teams channel |
+| `ms_group_mail_nickname` | `text` | No | `soarmailbox` | Unique value, as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com) |
+| `ms_groupteam_id` | `text` | No | `db7350fc-b6df-4041` | Unique id assigned to a MS Group or Team while being created |
+| `ms_groupteam_name` | `text` | No | `soar` | Name of the MS Team or Group |
+| `ms_message_id` | `text` | No | `111233344` | Each message has a unique ID |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": [
+    {
+      "attachments": [
+        {
+          "content": {"value\": \"\u003cdiv\u003e\u003cdiv\u003eIt begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.\u003c/div\u003e\u003c/div\u003e\"\r\n"},
+          "contentType": "application/vnd.microsoft.teams.card.o365connector",
+          "contentUrl": null,
+          "id": "7c0997dc1b1f481ab4cacf3da1ad76ac",
+          "name": null,
+          "thumbnailUrl": null
+        }
+      ],
+      "body": {
+        "content": "\u003cattachment id=\"7c0997dc1b1f481ab4cacf3da1ad76ac\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-12T21:06:16.484Z",
+      "deletedDateTime": null,
+      "etag": "1670879176484",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670879176484",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-12T21:06:16.484Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
+    },
+    {
+      "attachments": [
+        {
+          "content": "{\r\n  \"summary\": \"Incoming Webhook is now connected to soarmessages\",\r\n  \"sections\": [\r\n    {\r\n      \"activitySubtitle\": \"\u003cp\u003eMiriam Graham has set up a connection to Incoming Webhook so group members will be notified for this configuration with name \u003cstrong\u003eSOAR\u003c/strong\u003e\u003c/p\u003e\",\r\n      \"activityText\": \"\",\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ]\r\n}",
+          "contentType": "application/vnd.microsoft.teams.card.o365connector",
+          "contentUrl": null,
+          "id": "2afcb94fd474482484883803d78a22e1",
+          "name": null,
+          "thumbnailUrl": null
+        }
+      ],
+      "body": {
+        "content": "\u003cattachment id=\"2afcb94fd474482484883803d78a22e1\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-08T17:27:53.277Z",
+      "deletedDateTime": null,
+      "etag": "1670520473277",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670520473277",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T17:27:53.277Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": "Incoming Webhook is now connected to soarmessages",
+      "webUrl": "https://teams.microsoft.com/l/messages****"
+    },
+    {
+      "attachments": [],
+      "body": {
+        "content": "Hello!",
+        "contentType": "text"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-08T11:53:30.188Z",
+      "deletedDateTime": null,
+      "etag": "1670500410188",
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "displayName": "user2",
+          "id": "6c259569-f2c0-430b-af73-40081b5de19d",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
+        }
+      },
+      "id": "1670500410188",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:53:30.188Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
+    },
+    {
+      "attachments": [],
+      "body": {
+        "content": "Message 1",
+        "contentType": "text"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-08T11:15:26.534Z",
+      "deletedDateTime": null,
+      "etag": "1670498126534",
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "displayName": "user1",
+          "id": "a27544ce-79dc-4d26-a277-d7d4a7cd19cc",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
+        }
+      },
+      "id": "1670498126534",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:15:26.534Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/*****"
+    }
+  ],
+  "inputs": {
+    "ms_channel_name": "ychannel",
+    "ms_groupteam_name": "soarmessages"
+  },
+  "metrics": {
+    "execution_time_ms": 5030,
+    "host": "apphost",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "timestamp": "2022-12-13 16:56:51",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+if rule.properties.ms_message_id:
+  inputs.ms_message_id = rule.properties.ms_message_id
+if rule.properties.ms_channel_id:
+  inputs.ms_channel_id = rule.properties.ms_channel_id
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+
+if rule.properties.ms_channel_name:
+  inputs.ms_channel_name = rule.properties.ms_channel_name
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+if rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+if rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to read messages from Microsoft Channel"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  text  = u"<b>Microsoft Channels:</b><br />"
+  text += u"Successfully retrieved <b>{}</b> messages <br /><br />".format(len(content))
+  
+  for message in content:
+    url   = u'<a href="{}">Click here</a>'.format(message.get("webUrl"))
+    text += "Message Id : {} <br />".format(message.get("id"))
+    text += "Channel Id : {} <br />".format(message.get("channelIdentity").get("channelId"))
+    text += "Team Id : {} <br />".format(message.get("channelIdentity").get("teamId"))
+  
+    user_messages = message.get("from").get("user")
+    if user_messages:
+      text += "From User : {} <br />".format(user_messages.get("displayName"))
+    else:
+      text += "From Application : {} <br />".format(message.get("from").get("application").get("displayName"))
+  
+    text += "Body Content : {} <br />".format(message.get("body").get("content"))
+    text += "Content Type : {} <br />".format(message.get("body").get("contentType"))
+    text += "Created Time : {} <br />".format(message.get("createdDateTime"))
+    text += "Web URL : {} <br />".format(url)
+    text += "<br />"
+    
+note = helper.createRichText(text)
+incident.addNote(note)
+
+```
+
+</p>
+</details>
+
+---
+
+
+
 
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| MS Teams: Archive Team From Incident | incident | `common_archive_unarchive_a_microsoft_team` |
+| MS Teams: Archive Team | incident | `common_archive_unarchive_a_microsoft_team` |
 | MS Teams: Archive Team From Task | task | `common_archive_unarchive_a_microsoft_team` |
-| MS Teams: Create Channel From Incident | incident | `common_create_a_teams_channel` |
+| MS Teams: Create Channel | incident | `common_create_a_teams_channel` |
 | MS Teams: Create Channel From Task | task | `common_create_a_teams_channel` |
-| MS Teams: Create Group From Incident | incident | `incident_create_a_microsoft_group` |
+| MS Teams: Create Group | incident | `incident_create_a_microsoft_group` |
 | MS Teams: Create Group From Task | task | `task_create_a_microsoft_group` |
-| MS Teams: Create Team From Incident | incident | `incident_create_a_microsoft_team` |
+| MS Teams: Create Team | incident | `incident_create_a_microsoft_team` |
 | MS Teams: Create Team From Task | task | `task_create_a_microsoft_team` |
-| MS Teams: Delete Channel From Incident | incident | `common_delete_a_teams_channel` |
+| MS Teams: Delete Channel | incident | `common_delete_a_teams_channel` |
 | MS Teams: Delete Channel From Task | task | `common_delete_a_teams_channel` |
-| MS Teams: Delete Group From Incident | incident | `common_delete_a_microsoft_group` |
+| MS Teams: Delete Group | incident | `common_delete_a_microsoft_group` |
 | MS Teams: Delete Group From Task | task | `common_delete_a_microsoft_group` |
-| MS Teams: Enable Teams for Group From Incident | incident | `common_enable_microsoft_team_for_group` |
+| MS Teams: Enable Teams for Group | incident | `common_enable_microsoft_team_for_group` |
 | MS Teams: Enable Teams for Group From Task | task | `common_enable_microsoft_team_for_group` |
-| MS Teams: Post Incident Information to Teams | incident | `incident_post_message_to_teams` |
-| MS Teams: Post Task Information to Teams | task | `task_post_message_to_teams` |
+| MS Teams: Post Incident Information | incident | `incident_post_message_to_teams` |
+| MS Teams: Post Task Information | task | `task_post_message_to_teams` |
+| MS Teams: Read Channel Messages | incident | `common_read_a_channels_messages` |
+| MS Teams: Read Channel Messages From task | task | `common_read_a_channels_messages` |
 
 ---
 

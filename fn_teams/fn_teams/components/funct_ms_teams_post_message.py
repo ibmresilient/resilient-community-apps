@@ -7,7 +7,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 
 from fn_teams.lib import constants
-from fn_teams.lib.microsoft_messages import PostMessageClient 
+from fn_teams.lib.microsoft_messages import MessageClient
 
 PACKAGE_NAME = constants.PACKAGE_NAME
 FN_NAME = "ms_teams_post_message"
@@ -18,14 +18,13 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
-        self.opts = opts
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
         This application allows for posting Incident/Task details to a MS Teams channel.
         The application can be triggered from either incident or task level where,
-        information about the incident or task is forumlated and posted in a convenient
+        information about the incident or task is formulated and posted in a convenient
         manner. This information is posted to a channel specified by the teams_channel
         input. This channel name (specified by teams_channel) is used to lookup
         app.config to retrieve the appropriate channel webhook url.
@@ -53,11 +52,11 @@ class FunctionComponent(AppFunctionComponent):
         
         teams_channel = fn_inputs.teams_channel
         try:
-            message_client = PostMessageClient(self.rc)
+            message_client = MessageClient(self.rc)
             status = message_client.post_message(
                 self.opts,
                 teams_channel = teams_channel,
-                webhook_url = self.options.get(teams_channel),
+                webhook_url = self.options.get(teams_channel.lower()),
                 teams_payload = fn_inputs.teams_payload,
                 org_id = self.rest_client().org_id,
                 incident_id = fn_inputs.incident_id,
