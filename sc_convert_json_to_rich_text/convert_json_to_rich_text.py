@@ -206,12 +206,13 @@ def get_properties(property_name):
       padding, separator, header, json_omit_list, incident_field, json, sort_keys
     """
     result_properties = None
-    if globals()['workflow'] and workflow.properties[property_name]:
-        result_properties = workflow.properties[property_name]
-    elif globals()['playbook'] and playbook.properties[property_name]:
-        result_properties = playbook.properties[property_name]
-    elif globals()['playbook'] and playbook.functions.results[property_name]:
+
+    if playbook and playbook.functions.results[property_name] is not None:
         result_properties = playbook.functions.results[property_name]
+    elif playbook and playbook.properties[property_name] is not None:
+        result_properties = playbook.properties[property_name]
+    elif workflow and workflow.properties[property_name] is not None:
+        result_properties = workflow.properties[property_name]
 
     if not result_properties:
         helper.fail("Playbook/workflow property not found: {}".format(property_name))

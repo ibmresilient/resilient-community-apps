@@ -190,12 +190,23 @@ class NamedProperty():
         else:
             return self.default.get(name, None)
 
-class Results:
-    def __init__(self, content, function=None):
-        if function:
-            self.results = NamedProperty(function, content)
+    def get(self, name):
+        print(name)
+        if getattr(self, name, None):
+            return getattr(self, name)
         else:
-            self.results = content
+            return self.default
+
+class Results:
+    def __init__(self, content, named=None):
+        if named:
+            self.results = NamedProperty(named, content)
+        else:
+            self.results = NamedProperty(None, content)
+
+    def __getitem__(self, name):
+        # for []
+        return self.results.get(name)
 
 class Workflow:
     def __init__(self, content, property=None):
@@ -206,11 +217,16 @@ class Workflow:
 
 class Playbook:
     def __init__(self, content, function=None):
-        self.properties = NamedProperty(None, content)
+        self.functions = Results({})
+        self.properties = {}
         if function:
-            self.functions = Results(content, function=function)
+            self.functions = Results(content, named=function)
         else:
             self.properties = content
+
+    def __getitem__(self, name):
+        # for []
+        return self.properties.get(name)
 
 class Incident:
     def addNote(self, text):
@@ -230,7 +246,7 @@ def get_properties(json_dict):
 # test with workflow = None for playbook tests
 workflow = Workflow(test_everything_json, property='convert_json_to_rich_text')
 playbook = None
-#playbook = Playbook({'convert_json_to_rich_text': test_everything_content}, function='function1')
+#playbook = Playbook(test_everything_content, function='convert_json_to_rich_text')
 #playbook = Playbook({'convert_json_to_rich_text': test_everything_content}) # uncomment for property test
 helper = Helper()
 incident = Incident()
@@ -312,3 +328,19 @@ def test_everything_success(workflow_properties, expected_results_py2, expected_
         assert converted_json == expected_results_py2
     else:
         assert converted_json == expected_results_py3
+
+def test_empty_list():
+    convert = cls()
+    converted_json = convert.convert_json_to_rich_text([])
+    assert converted_json == ''
+
+def test_empty_dict():
+    convert = cls()
+    converted_json = convert.convert_json_to_rich_text({})
+    assert converted_json == ''
+
+def test_none():
+    convert = cls()
+    #with pytest.raises(ValueError):
+    converted_json = convert.convert_json_to_rich_text(None)
+    assert converted_json == ''
