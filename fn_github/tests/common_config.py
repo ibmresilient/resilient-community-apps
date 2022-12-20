@@ -52,8 +52,11 @@ def create_branch_inputs(ts):
     setup["github_branch"] = f"{setup['github_branch'] }_{ts.strftime('%Y%m%d_%H%M%S')}"
     return setup
 
-def create_branch(circuits_app, ts):
+def create_branch(circuits_app, ts, based_on=None):
     setup = create_branch_inputs(ts)
+
+    if based_on:
+        setup['github_based_on_branch_or_sha'] = based_on
 
     results = call_github_create_branch_function(circuits_app, setup)
 

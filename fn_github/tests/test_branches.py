@@ -57,15 +57,20 @@ class TestGithubCreateBranch:
         assert(results.get("content", {}).get("ref"))
 
         # do the test again, will return branch already exists
-        results2, branch2 = create_branch(circuits_app, ts)
+        results2, _branch2 = create_branch(circuits_app, ts)
         assert(not results2.get("success"))
         assert(results2.get("reason") == "422 Reference already exists")
 
         setup = github_config('get_branch')
         setup['github_branch'] = branch
 
-        results = call_function(circuits_app, "github_get_branch", setup)
-        assert(results.get('content', {}).get('name') == branch)
+        results3 = call_function(circuits_app, "github_get_branch", setup)
+        assert(results3.get('content', {}).get('name') == branch)
+
+        # create a branch based on this created branch
+        ts2 = datetime.now()
+        results4, _inner_branch = create_branch(circuits_app, ts2, based_on=results.get("content", {}).get("ref"))
+        assert(results4.get("content", {}).get("ref"))
 
         # delete branch
         delete_branch_setup = github_config("delete_branch")

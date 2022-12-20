@@ -35,8 +35,8 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_github", {})
 
-    gh = GitHubHelper(app_configs)
-    results, err_msg = gh.get_repositories("owner")
+    gh = GitHubHelper(None, None, app_configs)
+    _results, err_msg = gh.get_repositories("owner")
 
     return {
         "state": "success" if not err_msg else "failure",
