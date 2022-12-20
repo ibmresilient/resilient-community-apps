@@ -36,7 +36,7 @@ setup(
     <li>import and export playbooks</li>
     </ul>""",
     install_requires=[
-        "resilient-circuits>=41.0.0",
+        "resilient-circuits>=46.0.0",
         "resilient>=47.1",
         "cachetools",
         "defusedxml"

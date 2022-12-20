@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
 
 """AppFunction implementation"""
 import base64
 from fn_playbook_utils.lib.common import import_playbook
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, s_to_b
+from resilient_lib import validate_fields
 
 PACKAGE_NAME = "fn_playbook_utils"
 FN_NAME = "pb_import_playbook"
@@ -25,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.pbm_base64_content
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         validate_fields(["pbm_body"], fn_inputs)
 
@@ -35,6 +37,6 @@ class FunctionComponent(AppFunctionComponent):
 
         results = import_playbook(self.rest_client(), content)
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
-import base64
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
+
 import logging
 from io import BytesIO
-from resilient_lib import IntegrationError, s_to_b, b_to_s
+from resilient_lib import IntegrationError, s_to_b
 from resilient import SimpleHTTPException
 from requests import RequestException
 from requests_toolbelt.multipart.encoder import MultipartEncoder
@@ -271,10 +271,8 @@ def import_playbook(rest_client, playbook_body):
     # excepted result?
     if result.get("status", "") == "PENDING":
         return confirm_playbook_import(rest_client, result.get("id"))
-    else:
-        raise IntegrationError(
-            "Could not import because the server did not return an import ID")
 
+    raise IntegrationError("Could not import because the server did not return an import ID")
 
 def confirm_playbook_import(rest_client, import_id, status="ACCEPTED"):
     uri = posixpath.join(PLAYBOOK_URL, "imports", str(import_id), "status")

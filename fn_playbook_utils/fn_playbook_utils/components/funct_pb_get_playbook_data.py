@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """AppFunction implementation"""
@@ -47,10 +47,10 @@ class FunctionComponent(AppFunctionComponent):
         # get all the incident data to return
         result_dict = {}
         result_data = {
-            "org_id" : self.restclient.org_id,
-            "min_id": min_id,
-            "max_id": max_id,
-            "playbook_content": result_dict
+          "org_id" : self.restclient.org_id,
+          "min_id": min_id,
+          "max_id": max_id,
+          "playbook_content": result_dict
         }
 
         # don't continue if no values

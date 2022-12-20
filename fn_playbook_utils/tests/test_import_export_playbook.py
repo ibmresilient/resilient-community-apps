@@ -71,8 +71,6 @@ class TestPbExportPlaybook:
         "pbm_name": "Sample Playbook"
     }
 
-    expected_export_results_2 = {"value": "xyz"}
-
     @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_export_inputs_1, None)

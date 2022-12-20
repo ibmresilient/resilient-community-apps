@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_playbook_utils.lib.common import get_playbooks
 
 PACKAGE_NAME = "fn_playbook_utils"
