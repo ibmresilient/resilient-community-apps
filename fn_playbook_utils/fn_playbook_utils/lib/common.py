@@ -167,6 +167,17 @@ def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
     return min_incident_id, max_incident_id
 
 def get_playbooks(rest_client, pb_types, pb_filter):
+    """Get all playbooks based on the filter type
+
+    :param rest_client: client object for SOAR API access
+    :type rest_client: object
+    :param pb_types: type of playbook to return: all, enabled, draft
+    :type pb_types: str
+    :param pb_filter: partial name of playbook to further filter
+    :type pb_filter: str
+    :return: dictionary of playbooks returned
+    :rtype: dict
+    """
     filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
 
     if pb_types and pb_types != 'all':
@@ -211,7 +222,7 @@ def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
 
     playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
 
-    return playbooks['data']
+    return playbooks.get('data')
 
 def export_playbook(rest_client, playbook_id, playbook_name):
     # find the playbook by id or name

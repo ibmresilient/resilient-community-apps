@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         if not (getattr(fn_inputs, 'pbm_id', None) or getattr(fn_inputs, 'pbm_name', None)):
-            ValueError("Specify either playbook ID or Name")
+            raise ValueError("Specify either playbook ID or Name")
 
         status, results = export_playbook(self.rest_client(),
                                           getattr(fn_inputs, 'pbm_id', None), 
