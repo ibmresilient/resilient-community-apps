@@ -1,0 +1,19 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": "\"\\nIBM SOAR 23/02/2022 12:44:51\\nthis is a note\"",
+  "raw": null,
+  "inputs": {
+    "reaqta_alert_id": "834099413533065218",
+    "reaqta_note": "<div class=\"rte\"><div>this is a note</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 1114,
+    "timestamp": "2022-02-23 12:44:51"
+  }
+}
