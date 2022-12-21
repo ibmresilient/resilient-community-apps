@@ -3,13 +3,13 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Poller"""
 
-from ast import literal_eval
 from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError
-from fn_jira.util.helper import GLOBAL_SETTINGS
+from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers, get_server_settings, get_jira_client
+from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
+from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
 
@@ -20,7 +20,6 @@ class PollerComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.opts = opts
-        self.rest_client()
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
@@ -52,104 +51,76 @@ class PollerComponent(ResilientComponent):
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
     def run(self, last_poller_time=None):
         """
-        Process to query for changes in datasource entities and the cooresponding update SOAR case
-           The steps taken are to
-            1) Query SOAR for all open cases with qradar_id and qradar_destination fields
-            2) Create dictionary of QRadar servers that have incidents on SOAR, each QRadar server equals a list of the offense ID's to query
-            3) Query each QRadar server in the dictionary for each offense's, in the servers list, last_persisted_time
-            4) Check if the last_persisted_time value received from the QRadar offense is different than the last_persisted_time value in the corresponding SOAR incident
-            5) If the last_persistent_time is different between the offense on QRadar and the corresponding incident on SOAR then the last_persistent_time value on the SOAR incident is update
-            6) When the last_persistent_time value on SOAR is changed it triggers the QRadar Enhanced Data automatic rule on SOAR
+        Get a list of open SOAR cases that contain the field jira_issue_id.
+        Get a list of Jira issues bases on the given search filters.
         :param last_poller_time: (int) Time in milliseconds when the last poller ran
         :return: None
         """
-        case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
-        LOG.debug(f"Cases gathered from SOAR: {str(case_list)}")
 
-        if error_msg:
-            raise IntegrationError(error_msg)
+        # Get a list of open SOAR cases that contain the field jira_issue_id.
+        soar_case_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client())
+        # Check if the found SOAR case need to be updated based of their linked Jira issues
+        self.process_soar_case_list(soar_case_list)
 
-        self.process_case_list(case_list)
+        # Get list of Jira servers configured in the app.config
+        servers_list = JiraServers(self.opts).get_server_name_list()
+        # If no servers labeled then add fn_jira to list
+        if not servers_list:
+            servers_list.append(PACKAGE_NAME)
 
-    def process_case_list(self, case_list):
+        # Get global_setting if definied in the app.config
+        global_settings = self.opts.get(GLOBAL_SETTINGS, {})
+
+        # Loop through all the Jira servers in the app.config
+        for server in servers_list:
+            # Get settings for server from the app.config
+            options = get_server_settings(self.opts, server)
+            # Connect to the Jira server specified in options
+            jira_client = get_jira_client(self.opts, options)
+
+            # If poller_filters and or max_results are defnined in the global_settings, then overwrite them
+            if global_settings:
+                poller_filters = global_settings.get("poller_filters")
+                if poller_filters:
+                    # Validate poller_filter
+                    validate_fields([
+                        {"name": "poller_filters",
+                        "placeholder": "priority in (high, medium, low) and "\
+                        "status in ('to do', 'in progress', done) and project in "\
+                        "(project_name1, project_name2)"}], global_settings)
+                max_results = global_settings.get("max_issues_returned")
+            else:
+                # Get the poller_filters settings from the servers settings
+                poller_filters = options.get("poller_filters")
+                # Validate poller_filter
+                validate_fields([
+                    {"name": "poller_filters",
+                    "placeholder": "priority in (high, medium, low) and "\
+                    "status in ('to do', 'in progress', done) and project in "\
+                    "(project_name1, project_name2)"}], options)
+                # Get the max_results settings from the servers settings
+                max_results = options.get("max_issues_returned")
+
+            # Get a list of Jira issues bases on the given search filters
+            jira_issue_list = JiraCommon.search_jira_issues(jira_client, poller_filters, max_results).get("issues")
+
+            # Process Jira issues returned from search
+            self.process_jira_issue_list(jira_issue_list)
+
+    def process_soar_case_list(self, soar_case_list):
         """
-        Process the open cases
-        :param case_list: List of open cases
+        Process the returned Jira issues
+        :param case_list: List of Jira issues
         :return: None
         """
-        # :Start: Create dictionary of the QRadar servers to query
-        # This is created, so that each QRadar server is only queried once
-        case_server_dict = {}
-        for case in case_list:
-            qradar_id = case.get("properties").get("qradar_id")
-            qradar_destination = case.get("properties").get("qradar_destination")
-            if qradar_destination not in case_server_dict:
-                case_server_dict[qradar_destination] = {}
-            case_server = case_server_dict[qradar_destination]
-            # Add the case_id and case_lastPersistedTime fields to the qradar_id dictionary
-            # that is inside of the QRadar servers dictionary
-            if qradar_id not in case_server:
-                case_server[qradar_id] = {"case_id": case.get("id"),
-                                          "case_lastPersistedTime": case.get("properties").get("qr_last_updated_time"),
-                                          "case_ver": case.get("vers")}
-        # :End: QRadar servers dictionary
-        LOG.debug(f"Dictionary of QRadar servers with cases on SOAR: {str(case_server_dict)}")
+        print("f")
 
-        for server in case_server_dict:
-            # Create filter string which contains the filters for the api call
-            filters = ""
-            id_list = list(case_server_dict[server].keys())
-            for id in id_list:
-                filters = f"{filters}id={str(id)}"
-                if id_list.index(id) != len(id_list)-1:
-                    filters = f"{filters} or "
+    def process_jira_issue_list(self, jira_issue_list):
+        """
+        Process the returned Jira issues
+        :param case_list: List of Jira issues
+        :return: None
+        """
+        print("f")
 
-            # Create connection to QRadar server
-            get_qradar_client(self.opts, get_server_settings(self.opts, server))
 
-            auth_info = AuthInfo.get_authInfo()
-            # Create url to get all offenses in SOAR from the given QRadar server
-            url = f"{auth_info.api_url}siem/offenses?fields=id, last_persisted_time&filter={filters}"
-            # Makes GET call to QRadar server using api
-            offenses_update_list = auth_info.make_call("GET", url).json()
-            LOG.debug(f"QRadar returned macthing offenses: {str(offenses_update_list)}")
-
-            payload = { "patches": {} }
-            updated_cases = []
-
-            if offenses_update_list:
-                # Iterate through list of offenses recieved from QRadar query
-                for offense in offenses_update_list:
-                    offense_lastPersistedTime = int(offense.get('last_persisted_time'))
-                    case_dict = case_server_dict[server][str(offense.get('id'))]
-                    case_id = case_dict.get('case_id')
-                    case_lastPersistedTime = case_dict.get('case_lastPersistedTime')
-                    LOG.debug(f"QRadar last persisted time: {datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
-                    LOG.debug(f"SOAR Incident last updated time: {datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
-                    if offense_lastPersistedTime > case_lastPersistedTime:
-                        # If time is different then update the case
-                        updated_cases.append(case_id)
-                        # Create payload to update cases
-                        payload['patches'][case_id] = {
-                                                "version": case_dict['case_ver']+1,
-                                                "changes": [{
-                                                    "old_value": {"date": case_lastPersistedTime},
-                                                    "new_value": {"date": offense_lastPersistedTime},
-                                                    "field": {"name": "qr_last_updated_time"}
-                                                }]
-                                            },
-            # If there are changes then fix payload and send put request to SOAR
-            if updated_cases:
-                # Removes characters added by python that are not needed
-                payload_str = str(payload).replace('(','').replace(')','').replace(',,',',')
-                payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
-                payload = literal_eval(payload_str)
-
-                # Send put request to SOAR
-                # This will update all cases that need to be updated for the give QRadar server
-                response = self.rest_client().put("/incidents/patch", payload)
-                # If failures dictionary is not empty then raise error
-                if response.get('failures'):
-                    raise IntegrationError(str(response))
-
-                LOG.info(f"Incident: {str(updated_cases)} updated field: qr_last_updated_time")
