@@ -192,7 +192,7 @@ class JiraServers():
         :param opts: List of options
         :return: List of servers
         """
-        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:")]
+        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:") and key != GLOBAL_SETTINGS]
 
     def get_server_name_list(self):
         """
@@ -204,7 +204,8 @@ def get_server_settings(opts, jira_label):
     """
     Used for initilizing or reloading the options variable
     :param opts: List of options
-    :return: jira server settings for specified server
+    :param jira_label: Label of the server in the app.config to use
+    :return: Jira server settings for specified server
     """
     server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else JiraServers(opts).get_server_name_list()
 
