@@ -4,15 +4,12 @@
 # to run: pytest -vv tests/test_convert_json_to_rich_text.py
 #
 import sys
-
-if sys.version_info[0] == 2:
-    import imp
-else:
-    import importlib
-
-import inspect
+import logging
 import pytest
-import os
+
+from .common import Incident, Helper, Workflow, Playbook, get_module_class, ScriptingError
+
+LOG = logging.getLogger(__name__)
 
 tst_text = "some text here"
 tst_text_py2= u"<strong>test_json</strong>: some text here<br />"
@@ -144,6 +141,10 @@ test_everything_json = {
     "json_omit_list": ["nested"],
     "json": tst_everything,
 }
+
+test_everything_content = {
+    "content": tst_everything
+}
 test_everything_py2 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 test_everything_py3 = u"<div><strong>None</strong>: None</div><div><strong>bool</strong>: True</div><div><strong>dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>empty list</strong>: None<br></div><div><strong>empty str</strong>: </div><div><strong>emtpy dict</strong>: None<br></div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>links</strong>: <a target='blank' href='https://abc1.com'>https://abc1.com</a> and <a target='blank' href='http://abc2.com?a=b&c=d'>http://abc2.com?a=b&c=d</a> and more <a target='blank' href='https://abc3.com:3212#something'>https://abc3.com:3212#something</a> here</div><div><strong>list</strong>: <ul><li>c</li><li>a</li><li>b</li></ul></div><div><strong>nested dict</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>float</strong>: 1.1</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested dict list</strong>: <div style='padding:15px'><div><strong>bool</strong>: True</div><div><strong>int</strong>: 1</div><div><strong>text</strong>: some text here</div></div></div><div><strong>nested list</strong>: <ul><li>b</li><li>a</li><li>c</li><ul><li>3</li><li>1</li><li>2</li></ul>None<br><ul><li>b</li><li>1</li><li>1.1</li><li>True</li></ul></ul></div><div><strong>text</strong>: some text here</div><div><strong>unicode</strong>: ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ Ɖ</div>"
 
@@ -161,49 +162,20 @@ test_list_json = [
 test_list_result_py3 = u"<strong>test_json</strong>: <ul><li><strong>item1</strong>: 1<br /><strong>item2</strong>: 2<br /></li><li><strong>item1</strong>: 3<br /><strong>item2</strong>: 4<br /></li></ul>"
 test_list_result_py2 = u"<strong>test_json</strong>: <ul><li><strong>item2</strong>: 2<br /><strong>item1</strong>: 1<br /></li><li><strong>item2</strong>: 4<br /><strong>item1</strong>: 3<br /></li></ul>"
 
-class Workflow:
-    def __init__(self):
-        self.properties = {'convert_json_to_rich_text': tst_everything}
-
-class Incident:
-    def addNote(self, text):
-        pass
-
-class Helper:
-    def createRichText(self, text):
-        pass
-    def fail(self, message):
-        pass
 
 def get_properties(json_dict):
     return json_dict.get('padding', 10), json_dict.get('separator','<br>'), json_dict.get('header'), \
-           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), json_dict.get('json'), \
+           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), \
+           json_dict.get('json'), None, \
            json_dict.get('sort', False)
 
-workflow = Workflow()
-helper = Helper()
-incident = Incident()
 
-abs_path = os.path.abspath('convert_json_to_rich_text.py')
-
-if sys.version_info[0] == 2:
-    module = imp.load_source('convert_json_to_rich_text', abs_path)
-else:
-    module_spec = importlib.util.spec_from_file_location('convert_json_to_rich_text.py', abs_path)
-    module = importlib.util.module_from_spec(module_spec)
-
-module.incident = incident
-module.helper = helper
-module.workflow = workflow
-
-if sys.version_info[0] >= 3:
-    module_spec.loader.exec_module(module)
-
-cls = None
-for member in inspect.getmembers(module):
-    if member[0] == "ConvertJson":
-        cls = member[1]
-
+cls = get_module_class('convert_json_to_rich_text.py',
+                       incident=Incident(),
+                       helper=Helper(),
+                       workflow=None,
+                       playbook=Playbook({'convert_json_to_rich_text': test_everything_json})
+                      )
 
 @pytest.mark.parametrize("test_header, json_fragment, expected_results_py2, expected_results_py3", [
     ("tst_text", tst_text, tst_text_py2, tst_text_py2),
@@ -237,7 +209,7 @@ def test_simple_success(test_header, json_fragment, expected_results_py2, expect
     (test_padding_json, test_padding_result_py2, test_padding_result_py3)
 ])
 def test_success(workflow_properties, expected_results_py2, expected_results_py3):
-    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(workflow_properties)
+    padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(workflow_properties)
     print(header)
     convert = cls(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
     converted_json = convert.convert_json_to_rich_text(json)
@@ -251,7 +223,7 @@ def test_success(workflow_properties, expected_results_py2, expected_results_py3
     (test_everything_json, test_everything_py2, test_everything_py3),
 ])
 def test_everything_success(workflow_properties, expected_results_py2, expected_results_py3):
-    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(workflow_properties)
+    padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(workflow_properties)
     print(header)
     convert = cls(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
     converted_json = convert.convert_json_to_rich_text(json)
@@ -260,3 +232,19 @@ def test_everything_success(workflow_properties, expected_results_py2, expected_
         assert converted_json == expected_results_py2
     else:
         assert converted_json == expected_results_py3
+
+def test_empty_list():
+    convert = cls()
+    converted_json = convert.convert_json_to_rich_text([])
+    assert converted_json == ''
+
+def test_empty_dict():
+    convert = cls()
+    converted_json = convert.convert_json_to_rich_text({})
+    assert converted_json == ''
+
+def test_none():
+    convert = cls()
+    #with pytest.raises(ValueError):
+    converted_json = convert.convert_json_to_rich_text(None)
+    assert converted_json == ''

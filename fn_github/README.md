@@ -85,7 +85,7 @@ Links:
 <!--
   List the Key Features of the Integration
 -->
-* Create, update and delete files, and retrive the contents of a file, optionally in branch
+* Create, update and delete files, and retrieve the contents of a file, optionally in branch
 * Create, list and delete branches
 * Create and list releases
 * Get information about commits
