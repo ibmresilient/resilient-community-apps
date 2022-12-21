@@ -73,7 +73,7 @@ read_workflow
 #edit_data
 #
 ## playbook permissions
-#read_playbook
-#create_playbook
+read_playbook
+create_playbook
 #delete_playbook
-#edit_playbook
+edit_playbook

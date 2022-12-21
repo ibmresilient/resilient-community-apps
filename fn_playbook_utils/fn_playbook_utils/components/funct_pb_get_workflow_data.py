@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
 
 """AppFunction implementation"""
 from cachetools import cached, TTLCache

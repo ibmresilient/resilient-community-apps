@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
+
 import logging
-import defusedxml.ElementTree as ET
+from io import BytesIO
+from resilient_lib import IntegrationError, s_to_b
 from resilient import SimpleHTTPException
+from requests import RequestException
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+from xml.etree import ElementTree as ET
+import posixpath
 
 LOG = logging.getLogger(__name__)
 
@@ -19,16 +25,12 @@ ACTION_MAP = {
     'userTask': 'Tasks'
 }
 
+PLAYBOOK_URL = "/playbooks"
 PLAYBOOK_QUERY_PAGED_URL = "/playbooks/query_paged?return_level=full"
 PLAYBOOK_QUERY_PAGED_FILTER = {
   "filters": [
     {
       "conditions": [
-        {
-          "method": "equals",
-          "field_name": "id",
-          "value": None
-        }
       ]
     }
   ]
@@ -94,7 +96,7 @@ def get_incident_limit(restclient, sort="desc"):
         [int]: [min or max incident_id]
     """
     inc_id = 0
-    query_filter = QUERY_PAGED_FILTER.copy()
+    query_filter = dict(QUERY_PAGED_FILTER)
     query_filter['sorts'][0]['type'] = sort
     results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter)
 
@@ -124,6 +126,17 @@ def get_workflow(rest_client, workflow_id):
     return workflow_xml
 
 def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
+    """get incidents created within a date range
+
+    :param rest_client: client object for SOAR API access
+    :type rest_client: object
+    :param min_incident_date: date in milliseconds for minimum incident creation date
+    :type min_incident_date: int
+    :param max_incident_date: date in milliseconds for maximum incident creation date
+    :type max_incident_date: int
+    :return: json results of API call
+    :rtype: dict
+    """
     filter_conditions = {
         "filters": [
             {
@@ -164,35 +177,167 @@ def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
 
     return min_incident_id, max_incident_id
 
-def get_playbook(rest_client, playbook_id):
-    """[get a specific playbook from all playbooks]
+def get_playbooks(rest_client, pb_types, pb_filter):
+    """Get all playbooks based on the filter type
+
+    :param rest_client: client object for SOAR API access
+    :type rest_client: object
+    :param pb_types: type of playbook to return: all, enabled, draft
+    :type pb_types: str
+    :param pb_filter: partial name of playbook to further filter
+    :type pb_filter: str
+    :return: dictionary of playbooks returned
+    :rtype: dict
+    """
+    filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
+
+    if pb_types and pb_types != 'all':
+        filter_conditions['filters'][0]['conditions'].append({
+                        "method": "equals",
+                        "field_name": "status",
+                        "value": [pb_types]
+                    })
+    if pb_filter:
+        filter_conditions['query'] = pb_filter
+
+    LOG.debug(filter_conditions)
+    try:
+        return rest_client.post(PLAYBOOK_QUERY_PAGED_URL, filter_conditions)
+    except SimpleHTTPException as err:
+        LOG.error(str(err))
+        return {}
+
+def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
+    """[query for a specific playbook from all playbooks]
 
     Args:
         rest_client ([obj]): [class to make SOAR API calls]
         playbook_id ([int]): [playbook id to search]
+        playbook_name ([str]): [name of playbook as option rather than playbook id]
 
     Returns:
-        [str]: [xml document for the found workflow or None]
+        [list]: [list playbooks which meet the query citeria]
     """
-    filter_conditions = PLAYBOOK_QUERY_PAGED_FILTER.copy()
-    filter_conditions['filters'][0]['conditions'][0]['value'] = playbook_id
-    playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
-    # find our specific workflow
-    playbook_xml = None
-    if playbooks.get('data'):
-        playbook_xml = playbooks['data'][0]['content']['xml']
+    filter_conditions = dict(PLAYBOOK_QUERY_PAGED_FILTER)
 
-    return playbook_xml
+    if playbook_id:
+        id_condition = {
+            "method": "equals",
+            "field_name": "id",
+            "value": playbook_id
+            }
+        filter_conditions['filters'][0]['conditions'].append(id_condition)
+
+    if playbook_name:
+        filter_conditions['query'] = playbook_name
+
+    playbooks = rest_client.post(uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions)
+
+    return playbooks.get('data')
+
+def export_playbook(rest_client, playbook_id, playbook_name):
+    """export a playbook into a .resz format
+
+    :param rest_client: object for API calls back to SOAR
+    :type rest_client: object
+    :param playbook_id: id of playbook. Either playbook_id or playbook_name can be used
+    :type playbook_id: str
+    :param playbook_name: name of playbook to export. Either playbook_id or playbook_name can be used
+    :type playbook_name: str
+    :return: export result and json result of api call
+    :rtype: bool, dict
+    """
+    # find the playbook by id or name
+    find_result = query_playbooks(rest_client,
+                                  playbook_id=playbook_id,
+                                  playbook_name=playbook_name)
+    if not find_result:
+        return False, "Playbook not found"
+
+    # ensure the playbook is found
+    export_start_result = rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"),
+                                     payload={"id": find_result[0].get("id")})
+
+    if export_start_result.get("success", True):
+        multipart_data = {
+                "file_name": "Unnused"
+            }
+        multipart_data.update({})
+        encoder = MultipartEncoder(fields=multipart_data)
+
+        # now down the specific export
+        export_result = rest_client.post(posixpath.join(PLAYBOOK_URL, "exports", str(export_start_result.get("export_id"))),
+                                         encoder,
+                                         headers={"content-type": encoder.content_type})
+
+        return True, export_result
+
+    return False, export_start_result
+
+def import_playbook(rest_client, playbook_body):
+    """Import a playbook from a .resz file
+
+    :param rest_client: object to make API calls to SOAR
+    :type rest_client: object
+    :param playbook_body: .resz file to import
+    :type playbook_body: str
+    :raises IntegrationError: error raised if import unsuccessful
+    :return: json result of api call
+    :rtype: dict
+    """
+    try:
+        filehandle = BytesIO(s_to_b(playbook_body))
+        multipart_data = {"file": ("export.resz", filehandle, "application/octet-stream")}
+        multipart_data.update({})
+        encoder = MultipartEncoder(fields=multipart_data)
+
+        result = rest_client.post(posixpath.join(PLAYBOOK_URL, "imports"),
+                                  encoder,
+                                  headers={"content-type": encoder.content_type})
+    except RequestException as upload_exception:
+        LOG.debug(playbook_body)
+        raise IntegrationError(upload_exception)
+    else:
+        assert isinstance(result, dict)
+
+    # excepted result?
+    if result.get("status", "") == "PENDING":
+        return confirm_playbook_import(rest_client, result.get("id"))
+
+    raise IntegrationError("Could not import because the server did not return an import ID")
+
+def confirm_playbook_import(rest_client, import_id, status="ACCEPTED"):
+    """Send confirmation back to SOAR to complete the import
+
+    :param rest_client: object to make API calls to SOAR
+    :type rest_client: object
+    :param import_id: id returned from original import API call
+    :type import_id: int
+    :param status: status to return in API call, defaults to "ACCEPTED"
+    :type status: str, optional
+    :raises IntegrationError: raise error if import is unsuccessful
+    :return: json result of API call
+    :rtype: dict
+    """
+    uri = posixpath.join(PLAYBOOK_URL, "imports", str(import_id), "status")
+    try:
+        return rest_client.put(uri, status, headers={"content-type": "text/plain"})
+    except RequestException as import_exception:
+        raise IntegrationError(repr(import_exception))
 
 def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
-    """[summary]
+    """Find a playbooks instances run on incident(s)
 
-    Args:
-        rest_client ([type]): [description]
-        min_id ([type]): [description]
-        max_id ([type]): [description]
+        :param rest_client: object to make API calls to SOAR
+        :type rest_client: object
+        :param min_id: minimum incident_id
+        :type min_id: int
+        :param max_id: maximum incident_id
+        :type max_id: int
+        :return json result of API call
+        :rtype: dict
     """
-    filter_conditions = PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER.copy()
+    filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
     if min_incident_id:
         filter_conditions['filters'][0]['conditions'].append({
                         "method": "gte",
@@ -210,7 +355,8 @@ def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
     LOG.debug(filter_conditions)
     try:
         return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions)
-    except SimpleHTTPException:
+    except SimpleHTTPException as err:
+        LOG.error(str(err))
         return {}
 
 def get_process_elements(xml, action_map=ACTION_MAP):
