@@ -9,6 +9,7 @@ from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError
+from fn_jira.util.helper import GLOBAL_SETTINGS
 
 LOG = getLogger(__name__)
 

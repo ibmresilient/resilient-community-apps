@@ -5,6 +5,7 @@ from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
 
 PACKAGE_NAME = "fn_jira"
+GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 # Jira datatable constants
@@ -22,6 +23,9 @@ def get_jira_client(opts, options):
     :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
     """
 
+    # Get global_settings if definied in the app.config
+    global_settings = opts.get(GLOBAL_SETTINGS, {})
+
     # Validate the app.config settings for fn_jira
     validate_fields([
         {"name": "url", "placeholder": "https://<jira url>"},
@@ -38,10 +42,23 @@ def get_jira_client(opts, options):
     if verify:
         verify = False if verify.lower() == "false" else (True if verify.lower() == "true" else verify)
 
-    try:
-        timeout = int(options.get("timeout", 10))
-    except ValueError:
-        raise IntegrationError("Ensure 'timeout' is an integer in your config file")
+    # Get timeout from app.config either from global_settings if present or from individual Jira server settings
+    timeout = int(global_settings.get("timeout")) if global_settings.get("timeout", None) else int(options.get("timeout", 10))
+
+    # Set proxies variable as a dict
+    proxies = {}
+    # Check if global_settings is definied in the app.config
+    if global_settings:
+        # Check if proxies are defined in the global_settings
+        if global_settings.get("http_proxy"):
+            proxies["http"] = global_settings.get("http_proxy")
+        if global_settings.get("https_proxy"):
+            proxies["https"] = global_settings.get("https_proxy")
+        if not proxies:
+            proxies = None
+    else:
+        # Call resilient_lib function to find proxies
+        proxies = RequestsCommon(opts, options).get_proxies()
 
     # AUTH and BASIC AUTH
     if auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
@@ -129,6 +146,12 @@ class JiraServers():
         self.servers, self.server_name_list = self._load_servers(opts)
 
     def _load_servers(self, opts):
+        """
+        Create list of label names and a dictionary of the servers and their configs
+        :param opts: Dict of options
+        :return servers: Dictonary of all the Jira servers from the app.config that contains each servers configurations
+        :return server_name_list: List filled with all of the labels for the servers from the app.config
+        """
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:
