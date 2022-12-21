@@ -82,7 +82,8 @@ class Helper:
 
 def get_properties(json_dict):
     return json_dict.get('padding', 10), json_dict.get('separator','<br>'), json_dict.get('header'), \
-           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), json_dict.get('json'), \
+           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), \
+           json_dict.get('json'), None, \
            json_dict.get('sort', False)
 
 def get_module_class(file_name, incident=None, helper=None, workflow=None, playbook=None):

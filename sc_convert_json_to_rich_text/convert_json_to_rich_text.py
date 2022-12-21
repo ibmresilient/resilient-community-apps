@@ -197,6 +197,16 @@ def make_unicode(value):
 
     return unicode(value)
 
+def get_results(property_name):
+    if playbook and playbook.functions.results[property_name] is not None:
+        return playbook.functions.results[property_name]
+    elif playbook and playbook.properties[property_name] is not None:
+        return playbook.properties[property_name]
+    elif workflow and workflow.properties[property_name] is not None:
+        return workflow.properties[property_name]
+
+    return None
+
 def get_properties(property_name):
     """
     Logic to collect the json and parameters from a workflow property.
@@ -205,15 +215,7 @@ def get_properties(property_name):
     Returns:
       padding, separator, header, json_omit_list, incident_field, json, sort_keys
     """
-    result_properties = None
-
-    if playbook and playbook.functions.results[property_name] is not None:
-        result_properties = playbook.functions.results[property_name]
-    elif playbook and playbook.properties[property_name] is not None:
-        result_properties = playbook.properties[property_name]
-    elif workflow and workflow.properties[property_name] is not None:
-        result_properties = workflow.properties[property_name]
-
+    result_properties = get_results(property_name)
     if not result_properties:
         helper.fail("Playbook/workflow property not found: {}".format(property_name))
 
@@ -231,28 +233,31 @@ def get_properties(property_name):
     
     # workflow formatted content is 'json'. Standard functions is 'content'
     json = result_properties.get("json") if result_properties.get("json") else result_properties.get("content")
+    json_err = None
     # is there an issue we need handle now?
     if not json and \
         result_properties.get("success") == False and result_properties.get("reason"):
-        incident.addNote("Result failure: {}".format(result_properties.get("reason")))
+        json_err = result_properties.get("reason")
     
-    return padding, separator, header, json_omit_list, incident_field, json, sort_keys
+    return padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys
 
 
 ## S T A R T
-padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties('convert_json_to_rich_text')
-
-if header:
-    if isinstance(separator, list):
-        hdr = u"{0}{1}{2}".format(separator[0], header, separator[1])
-    else:
-        hdr = u"{0}{1}".format(header, separator)
+padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties('convert_json_to_rich_text')
+if json_err:
+    result = "Result error: {}".format(json_err)
 else:
-    hdr = u""
+    if header:
+        if isinstance(separator, list):
+            hdr = u"{0}{1}{2}".format(separator[0], header, separator[1])
+        else:
+            hdr = u"{0}{1}".format(header, separator)
+    else:
+        hdr = u""
 
-convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
-converted_json = convert.convert_json_to_rich_text(json)
-result = u"{}{}".format(hdr, converted_json if converted_json else "\nNone")
+    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
+    converted_json = convert.convert_json_to_rich_text(json)
+    result = u"{}{}".format(hdr, converted_json if converted_json else "\nNone")
 
 rich_text_note = helper.createRichText(result)
 if incident_field:

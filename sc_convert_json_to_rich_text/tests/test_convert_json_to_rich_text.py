@@ -165,7 +165,8 @@ test_list_result_py2 = u"<strong>test_json</strong>: <ul><li><strong>item2</stro
 
 def get_properties(json_dict):
     return json_dict.get('padding', 10), json_dict.get('separator','<br>'), json_dict.get('header'), \
-           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), json_dict.get('json'), \
+           json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), \
+           json_dict.get('json'), None, \
            json_dict.get('sort', False)
 
 
@@ -208,7 +209,7 @@ def test_simple_success(test_header, json_fragment, expected_results_py2, expect
     (test_padding_json, test_padding_result_py2, test_padding_result_py3)
 ])
 def test_success(workflow_properties, expected_results_py2, expected_results_py3):
-    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(workflow_properties)
+    padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(workflow_properties)
     print(header)
     convert = cls(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
     converted_json = convert.convert_json_to_rich_text(json)
@@ -222,7 +223,7 @@ def test_success(workflow_properties, expected_results_py2, expected_results_py3
     (test_everything_json, test_everything_py2, test_everything_py3),
 ])
 def test_everything_success(workflow_properties, expected_results_py2, expected_results_py3):
-    padding, separator, header, json_omit_list, incident_field, json, sort_keys = get_properties(workflow_properties)
+    padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(workflow_properties)
     print(header)
     convert = cls(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)
     converted_json = convert.convert_json_to_rich_text(json)
