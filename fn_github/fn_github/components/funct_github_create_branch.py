@@ -30,19 +30,18 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
-                        self.app_configs)
-
         validate_fields(["github_owner", "github_repo", "github_based_on_branch_or_sha", "github_branch"], fn_inputs)
 
         gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
+        if gh.repo_err:
+            yield FunctionResult(None, success=False, reason=gh.repo_err)
+        else:
+            results, err_msg = gh.create_branch(fn_inputs.github_branch,
+                                                fn_inputs.github_based_on_branch_or_sha)
 
-        results, err_msg = gh.create_branch(fn_inputs.github_branch,
-                                            fn_inputs.github_based_on_branch_or_sha)
+            if results:
+                results = {"ref": results.ref}
 
-        if results:
-            results = {"ref": results.ref}
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-        yield FunctionResult(results if results else {}, success=bool(results), reason=err_msg)
+            yield FunctionResult(results if results else {}, success=bool(results), reason=err_msg)

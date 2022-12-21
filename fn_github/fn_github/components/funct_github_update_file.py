@@ -33,35 +33,34 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
-
-        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
-            self.app_configs)
-
         validate_fields(["github_owner", "github_repo", "github_file_path",
                          "github_file_contents", "github_commit_message"], fn_inputs)
 
-        committer = None
-        if getattr(fn_inputs, 'github_committer', None):
-            split_committer = fn_inputs.github_committer.split(':')
-            committer = {
-                "name": split_committer[0],
-                "email": split_committer[1] if len(split_committer) > 1 else ""
-            }
+        gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
+        if gh.repo_err:
+            yield FunctionResult(None, success=False, reason=gh.repo_err)
+        else:
+            committer = None
+            if getattr(fn_inputs, 'github_committer', None):
+                split_committer = fn_inputs.github_committer.split(':')
+                committer = {
+                    "name": split_committer[0],
+                    "email": split_committer[1] if len(split_committer) > 1 else ""
+                }
 
-        results, err_msg = gh.update_file(fn_inputs.github_file_path,
-                                          s_to_b(fn_inputs.github_file_contents),
-                                          fn_inputs.github_commit_message,
-                                          committer,
-                                          branch=getattr(fn_inputs, 'github_branch', None))
+            results, err_msg = gh.update_file(fn_inputs.github_file_path,
+                                            s_to_b(fn_inputs.github_file_contents),
+                                            fn_inputs.github_commit_message,
+                                            committer,
+                                            branch=getattr(fn_inputs, 'github_branch', None))
 
-        # clean up results so it can be returned
-        if results and results.get('commit'):
-            results['commit'] = results['commit'].sha
+            # clean up results so it can be returned
+            if results and results.get('commit'):
+                results['commit'] = results['commit'].sha
 
-        if results and results.get('content'):
-            results['content'] = results['content'].sha
+            if results and results.get('content'):
+                results['content'] = results['content'].sha
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results, success=bool(results), reason=err_msg)
+            yield FunctionResult(results, success=bool(results), reason=err_msg)

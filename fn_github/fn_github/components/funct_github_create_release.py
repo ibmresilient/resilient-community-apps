@@ -33,18 +33,18 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
-            self.app_configs)
-
         validate_fields(["github_owner", "github_repo", "github_release_name",
                          "github_release_tag"], fn_inputs)
 
         gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
-        results, err_msg = gh.create_release(fn_inputs.github_release_tag, fn_inputs.github_release_name,
-                                             fn_inputs.github_release_description,
-                                             getattr(fn_inputs, 'github_release_draft', False),
-                                             getattr(fn_inputs, 'github_prerelease', False))
+        if gh.repo_err:
+            yield FunctionResult(None, success=False, reason=gh.repo_err)
+        else:
+            results, err_msg = gh.create_release(fn_inputs.github_release_tag, fn_inputs.github_release_name,
+                                                fn_inputs.github_release_description,
+                                                getattr(fn_inputs, 'github_release_draft', False),
+                                                getattr(fn_inputs, 'github_prerelease', False))
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results, success=bool(results), reason=err_msg)
+            yield FunctionResult(results, success=bool(results), reason=err_msg)

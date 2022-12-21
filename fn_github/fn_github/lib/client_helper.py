@@ -4,7 +4,7 @@
 
 import logging
 from typing import Tuple
-from resilient_lib import str_to_bool
+from resilient_lib import str_to_bool, validate_fields
 from github3 import GitHub, GitHubEnterprise, GitHubError
 from github3.exceptions import GitHubException
 
@@ -12,6 +12,9 @@ LOG = logging.getLogger(__name__)
 
 class GitHubHelper():
     def __init__(self, repo_owner, repo_name, options):
+        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
+                         options)
+
         verify = str_to_bool(options.get("verify", "True"))
 
         self.gh = None
@@ -33,9 +36,13 @@ class GitHubHelper():
         else:
             raise ValueError("Either 'username' and 'password', or 'api_token' are required")
 
-        self.repo = None
+        self.repo = self.repo_err = None
         if self.gh and repo_owner and repo_name:
-            self.repo = self.gh.repository(repo_owner, repo_name)
+            try:
+                self.repo = self.gh.repository(repo_owner, repo_name)
+            except (GitHubError, GitHubException) as err:
+                LOG.error(str(err))
+                self.repo_err = str(err)
 
 
     def get_file_contents(self: object, file_path: str, ref: str) -> Tuple[str, str]:

@@ -29,18 +29,17 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
-            self.app_configs)
-
         validate_fields(["github_owner", "github_repo"], fn_inputs)
 
         gh = GitHubHelper(fn_inputs.github_owner, fn_inputs.github_repo, self.options)
+        if gh.repo_err:
+            yield FunctionResult(None, success=False, reason=gh.repo_err)
+        else:
+            results, err_msg = gh.get_latest_release()
 
-        results, err_msg = gh.get_latest_release()
+            if results:
+                results = results.as_dict()
 
-        if results:
-            results = results.as_dict()
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-        yield FunctionResult(results, success=bool(results), reason=err_msg)
+            yield FunctionResult(results, success=bool(results), reason=err_msg)

@@ -28,23 +28,22 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields([{"name": "base_url", "placeholder": "<https://base-url>"}],
-            self.app_configs)
-
         validate_fields(["github_repo_type"], fn_inputs)
 
         gh = GitHubHelper(None, None, self.options)
+        if gh.repo_err:
+            yield FunctionResult(None, success=False, reason=gh.repo_err)
+        else:
+            results, err_msg = gh.get_repositories(fn_inputs.github_repo_type)
 
-        results, err_msg = gh.get_repositories(fn_inputs.github_repo_type)
+            if results:
+                results = [repo.as_dict() for repo in results]
 
-        if results:
-            results = [repo.as_dict() for repo in results]
-
-        if results and getattr(fn_inputs, 'github_filter_name', None):
-            new_results = [repo for repo in results if fn_inputs.github_filter_name in repo.get('name')]
-            results = new_results
+            if results and getattr(fn_inputs, 'github_filter_name', None):
+                new_results = [repo for repo in results if fn_inputs.github_filter_name in repo.get('name')]
+                results = new_results
 
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results, success=bool(results), reason=err_msg)
+            yield FunctionResult(results, success=bool(results), reason=err_msg)
