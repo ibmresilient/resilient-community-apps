@@ -4,16 +4,10 @@
 # to run: pytest -vv tests/test_convert_json_to_rich_text.py
 #
 import sys
-
-if sys.version_info[0] == 2:
-    import imp
-else:
-    import importlib
-
-import inspect
 import logging
 import pytest
-import os
+
+from .common import Incident, Helper, Workflow, Playbook, get_module_class, ScriptingError
 
 LOG = logging.getLogger(__name__)
 
@@ -168,110 +162,19 @@ test_list_json = [
 test_list_result_py3 = u"<strong>test_json</strong>: <ul><li><strong>item1</strong>: 1<br /><strong>item2</strong>: 2<br /></li><li><strong>item1</strong>: 3<br /><strong>item2</strong>: 4<br /></li></ul>"
 test_list_result_py2 = u"<strong>test_json</strong>: <ul><li><strong>item2</strong>: 2<br /><strong>item1</strong>: 1<br /></li><li><strong>item2</strong>: 4<br /><strong>item1</strong>: 3<br /></li></ul>"
 
-class ScriptingError(Exception):
-    def __init__(self, msg):
-        self.value = msg
-
-    def __str__(self):
-        return repr(self.value)
-
-class NamedProperty():
-    def __init__(self, name, content):
-        self.default = {}
-        if name:
-            setattr(self, name, content)
-        else:
-            self.default = content
-
-    def __getitem__(self, name):
-        # for []
-        if getattr(self, name, None):
-            return getattr(self, name)
-        else:
-            return self.default.get(name, None)
-
-    def get(self, name):
-        print(name)
-        if getattr(self, name, None):
-            return getattr(self, name)
-        else:
-            return self.default
-
-class Results:
-    def __init__(self, content, named=None):
-        if named:
-            self.results = NamedProperty(named, content)
-        else:
-            self.results = NamedProperty(None, content)
-
-    def __getitem__(self, name):
-        # for []
-        return self.results.get(name)
-
-class Workflow:
-    def __init__(self, content, property=None):
-        if property:
-            self.properties = NamedProperty(property, content)
-        else:
-            self.properties = content
-
-class Playbook:
-    def __init__(self, content, function=None):
-        self.functions = Results({})
-        self.properties = {}
-        if function:
-            self.functions = Results(content, named=function)
-        else:
-            self.properties = content
-
-    def __getitem__(self, name):
-        # for []
-        return self.properties.get(name)
-
-class Incident:
-    def addNote(self, text):
-        LOG.info(text)
-
-class Helper:
-    def createRichText(self, text):
-        pass
-    def fail(self, message):
-        raise ScriptingError(message)
 
 def get_properties(json_dict):
     return json_dict.get('padding', 10), json_dict.get('separator','<br>'), json_dict.get('header'), \
            json_dict.get('json_omit_list',[]), json_dict.get('incident_field'), json_dict.get('json'), \
            json_dict.get('sort', False)
 
-# test with workflow = None for playbook tests
-workflow = Workflow(test_everything_json, property='convert_json_to_rich_text')
-playbook = None
-#playbook = Playbook(test_everything_content, function='convert_json_to_rich_text')
-#playbook = Playbook({'convert_json_to_rich_text': test_everything_content}) # uncomment for property test
-helper = Helper()
-incident = Incident()
 
-abs_path = os.path.abspath('convert_json_to_rich_text.py')
-
-if sys.version_info[0] == 2:
-    module = imp.load_source('convert_json_to_rich_text', abs_path)
-else:
-    module_spec = importlib.util.spec_from_file_location('convert_json_to_rich_text.py', abs_path)
-    module = importlib.util.module_from_spec(module_spec)
-
-module.incident = incident
-module.helper = helper
-module.workflow = workflow
-module.playbook = playbook
-
-if sys.version_info[0] >= 3:
-    module_spec.loader.exec_module(module)
-
-cls = None
-for member in inspect.getmembers(module):
-    if member[0] == "ConvertJson":
-        cls = member[1]
-
+cls = get_module_class('convert_json_to_rich_text.py',
+                       incident=Incident(),
+                       helper=Helper(),
+                       workflow=None,
+                       playbook=Playbook({'convert_json_to_rich_text': test_everything_json})
+                      )
 
 @pytest.mark.parametrize("test_header, json_fragment, expected_results_py2, expected_results_py3", [
     ("tst_text", tst_text, tst_text_py2, tst_text_py2),

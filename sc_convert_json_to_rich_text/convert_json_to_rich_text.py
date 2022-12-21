@@ -139,7 +139,7 @@ class ConvertJson:
               [type]: [description]
         """
         notes = []
-        if sub_dict:
+        if sub_dict and isinstance(sub_dict, (list, dict)):
             if isinstance(sub_dict, list):
                 expanded_list = self.expand_list(sub_dict, is_list=True)
                 notes.append(self.add_separator(self.separator, expanded_list))
@@ -223,6 +223,7 @@ def get_properties(property_name):
         helper.fail("list of separators should be specified as a pair such as ['<div>', '</div>']: {}".format(separator))
 
     header = result_properties.get("header")
+    sort_keys = bool(result_properties.get("sort", False))
     json_omit_list = result_properties.get("json_omit_list")
     if not json_omit_list:
         json_omit_list = []
@@ -230,11 +231,11 @@ def get_properties(property_name):
     
     # workflow formatted content is 'json'. Standard functions is 'content'
     json = result_properties.get("json") if result_properties.get("json") else result_properties.get("content")
-      
-    if not isinstance(json, dict) and not isinstance(json, list):
-        helper.fail("json element is not formatted correctly: {}".format(json))
-    sort_keys = bool(result_properties.get("sort", False))
-
+    # is there an issue we need handle now?
+    if not json and \
+        result_properties.get("success") == False and result_properties.get("reason"):
+        incident.addNote("Result failure: {}".format(result_properties.get("reason")))
+    
     return padding, separator, header, json_omit_list, incident_field, json, sort_keys
 
 
