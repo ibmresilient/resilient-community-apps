@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#pragma pylint: disable=unused-argument, line-too-long
 
 from resilient import get_client
 
@@ -33,7 +33,7 @@ def selftest_function(opts):
     Test connectivity back to SOAR
     """
     try:
-        rest_client = get_client(opts)
+        _rest_client = get_client(opts)
 
         return {
             "state": "success",
