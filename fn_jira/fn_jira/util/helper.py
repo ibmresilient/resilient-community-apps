@@ -12,13 +12,6 @@ DEFAULT_JIRA_DT_NAME = "jira_task_references" # can be overridden with app.confi
 JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 
-# Other Jira SOAR variable constants
-JIRA_ISSUE_ID_FUNCT_INPUT_NAME = "jira_issue_id"
-JIRA_COMMENT_FUNCT_INPUT_NAME = "jira_comment"
-JIRA_ISSUE_LINK = "jira_url"
-INCIDENT_ID_FUNCT_INPUT_NAME = "incident_id"
-TASK_ID_FUNCT_INPUT_NAME = "task_id"
-
 def get_jira_client(opts, options):
     """
     Function that gets the client for JIRA
@@ -129,7 +122,7 @@ def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
 
     if row and found:
         cells = row.get("cells")
-        return str(cells[JIRA_DT_ISSUE_ID_COL_NAME]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
+        return str(cells["jira_issue_id"]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
 
 class JiraServers():
     def __init__(self, opts):
@@ -198,3 +191,48 @@ def get_server_settings(opts, jira_label):
 
     # Get configuration for jira server specified
     return JiraServers.jira_label_test(jira_label, servers_list)
+
+def get_jira_issue_info(jira_client, issue_id, filter_fields):
+    """
+    Function: Get the information of a Jira ticket
+    :param jira_client: Client connection to Jira
+    :param issue_id: ID of the Jira ticket
+    :param filter_fields: List of fields to return
+    """
+    return jira_client.issue(id=issue_id, fields=filter_fields).fields
+
+def get_jira_issue_last_updated(jira_client, issue_id):
+    """
+    Function: Get the last updated time of a Jira ticket
+    :param jira_client: Client connection to Jira
+    :param issue_id: ID of the Jira ticket
+    """
+    return jira_client.issue(id=issue_id, fields="updated").fields.updated
+
+def create_soar_incident(res_client, jira_issue_info):
+    """
+    Function: Creates a SOAR incident from a Jira ticket
+    :param res_client: Client connection to SOAR
+    :param jira_issue_info: Information on the Jira ticket
+    """
+
+    name = jira_issue_info.summary
+    description = jira_issue_info.description
+    # Get comments from the Jira ticket
+    comment = jira_issue_info
+
+    # Get attachments from the Jira ticket
+    attachment = []
+    for attach in jira_issue_info.attchment:
+        attachment.append({"content": attach.content, "filename": attach.filename})
+
+
+    payload = {
+        "name": name,
+        "description": {
+            "format": "html",
+            "content": description
+        }
+    }
+    res_client.post("/incidents/", payload)
+
