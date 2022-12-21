@@ -126,6 +126,17 @@ def get_workflow(rest_client, workflow_id):
     return workflow_xml
 
 def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
+    """get incidents created within a date range
+
+    :param rest_client: client object for SOAR API access
+    :type rest_client: object
+    :param min_incident_date: date in milliseconds for minimum incident creation date
+    :type min_incident_date: int
+    :param max_incident_date: date in milliseconds for maximum incident creation date
+    :type max_incident_date: int
+    :return: json results of API call
+    :rtype: dict
+    """
     filter_conditions = {
         "filters": [
             {
@@ -225,6 +236,17 @@ def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
     return playbooks.get('data')
 
 def export_playbook(rest_client, playbook_id, playbook_name):
+    """export a playbook into a .resz format
+
+    :param rest_client: object for API calls back to SOAR
+    :type rest_client: object
+    :param playbook_id: id of playbook. Either playbook_id or playbook_name can be used
+    :type playbook_id: str
+    :param playbook_name: name of playbook to export. Either playbook_id or playbook_name can be used
+    :type playbook_name: str
+    :return: export result and json result of api call
+    :rtype: bool, dict
+    """
     # find the playbook by id or name
     find_result = query_playbooks(rest_client,
                                   playbook_id=playbook_id,
@@ -253,6 +275,16 @@ def export_playbook(rest_client, playbook_id, playbook_name):
     return False, export_start_result
 
 def import_playbook(rest_client, playbook_body):
+    """Import a playbook from a .resz file
+
+    :param rest_client: object to make API calls to SOAR
+    :type rest_client: object
+    :param playbook_body: .resz file to import
+    :type playbook_body: str
+    :raises IntegrationError: error raised if import unsuccessful
+    :return: json result of api call
+    :rtype: dict
+    """
     try:
         filehandle = BytesIO(s_to_b(playbook_body))
         multipart_data = {"file": ("export.resz", filehandle, "application/octet-stream")}
@@ -275,6 +307,18 @@ def import_playbook(rest_client, playbook_body):
     raise IntegrationError("Could not import because the server did not return an import ID")
 
 def confirm_playbook_import(rest_client, import_id, status="ACCEPTED"):
+    """Send confirmation back to SOAR to complete the import
+
+    :param rest_client: object to make API calls to SOAR
+    :type rest_client: object
+    :param import_id: id returned from original import API call
+    :type import_id: int
+    :param status: status to return in API call, defaults to "ACCEPTED"
+    :type status: str, optional
+    :raises IntegrationError: raise error if import is unsuccessful
+    :return: json result of API call
+    :rtype: dict
+    """
     uri = posixpath.join(PLAYBOOK_URL, "imports", str(import_id), "status")
     try:
         return rest_client.put(uri, status, headers={"content-type": "text/plain"})
@@ -282,12 +326,16 @@ def confirm_playbook_import(rest_client, import_id, status="ACCEPTED"):
         raise IntegrationError(repr(import_exception))
 
 def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
-    """[summary]
+    """Find a playbooks instances run on incident(s)
 
-    Args:
-        rest_client ([type]): [description]
-        min_id ([type]): [description]
-        max_id ([type]): [description]
+        :param rest_client: object to make API calls to SOAR
+        :type rest_client: object
+        :param min_id: minimum incident_id
+        :type min_id: int
+        :param max_id: maximum incident_id
+        :type max_id: int
+        :return json result of API call
+        :rtype: dict
     """
     filter_conditions = dict(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER)
     if min_incident_id:
