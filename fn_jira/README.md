@@ -29,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 3.0.0 | 12/2022 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li></ul>
+| 3.0.0 | 12/2022 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul>
 | 2.2.0 | 10/2022 | <ul><li>Added support for multi-tenancy</li><li>Added support for authentication with token</li><li>Removed support for python 2</li></ul> |
 | 2.1.1 | 05/2022 | Updated version for pyjwt dependency |
 | 2.1.0 | 04/2022 | <ul><li>Added support for authentication with OAuth</li><li>Includes new configs: `access_token`, `access_token_secret`, `consumer_key_name`, `private_rsa_key_file_path`</li><li>Added support for sending SOAR task notes to Jira -- see updated example workflow</li><li>Added support for images in notes synchronizing to Jira</li><li>Added config `jira_task_references` for custom datatables</li><li>Added option in example rule to set Jira project ID as activity field</li></ul> |
@@ -54,6 +54,7 @@ This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bid
                         Example rules and workflows can used used or modified to meet your business processes.
 
 ### Key Features
+* Bidirectional sync between SOAR and Jira
 * Issue creation
 * Issue transition
 * Comment creation

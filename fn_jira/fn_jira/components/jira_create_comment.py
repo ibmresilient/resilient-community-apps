@@ -8,7 +8,7 @@ from fn_jira.util import helper
 from io import BytesIO
 from resilient.co3base import BasicHTTPException
 from resilient_circuits import AppFunctionComponent, FunctionError, FunctionResult, app_function
-from resilient_lib import IntegrationError, validate_fields, RequestsCommon
+from resilient_lib import IntegrationError, validate_fields
 
 FN_NAME = "jira_create_comment"
 src_pattern = compile(r'<img[^>]+src="([^">]+)')
@@ -101,7 +101,7 @@ class FunctionComponent(AppFunctionComponent):
                 # Read a url image to a filestream
                 if src.lower().startswith("http"):
                     # external resource
-                    img_data = RequestsCommon(self.opts, options).execute("GET", src, headers={"User-agent": "SOAR Apphost"}).content
+                    img_data = self.rc.execute("GET", src, headers={"User-agent": "SOAR Apphost"}).content
                 else:
                     # resource from the platform
                     img_data = self.rest_client().get(src[src.index("/rest")+len("/rest"):], is_uri_absolute=True, get_response_object=True).content
