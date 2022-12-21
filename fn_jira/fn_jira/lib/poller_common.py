@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+
 import functools
 from datetime import datetime
 from logging import getLogger
@@ -47,3 +48,72 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 
         return wrapped
     return poller_wrapper
+
+class SOARCommon():
+    """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
+
+    def get_open_soar_cases(search_fields, rest_client, open_cases=True):
+        """
+        Find all IBM SOAR cases which are associated with the endpoint platform
+        :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
+                                    field values can be True/False for 'has_a_value' or 'does_not_have_a_value'
+                                    Otherwise a field will use 'equals' for the value
+        NOTE: search_fields only supports custom fields
+        :return soar_cases: (list) Returned list of cases
+        :return error_msg: (str) Any error during the query or None
+        """
+        query = SOARCommon._build_search_query(search_fields, open_cases = open_cases)
+
+        try:
+            return rest_client.post('/incidents/query?return_level=normal', query), None
+        except SimpleHTTPException as err:
+            LOG.error(str(err))
+            LOG.error(query)
+            return None, str(err)
+
+    def _build_search_query(search_fields, open_cases=True):
+        """
+        Build the json structure needed to search for cases
+        :param search_fields: (dict/list) Key/value pairs to search custom fields with specific values.
+                                        If a value contains "*" then a search is used with 'has_a_value'
+        NOTE: search_fields works on custom fields
+        :return query_string: (dict) json stucture used for cases searching
+        """
+        query = {
+            "filters": [{ "conditions": [] }],
+            "sorts": [{
+                "field_name": "create_date",
+                "type": "desc"
+            }]
+        }
+
+        if open_cases:
+            field_search = {"field_name": "plan_status",
+                            "method": "equals",
+                            "value": "A"}
+            query['filters'][0]['conditions'].append(field_search)
+
+        if isinstance(search_fields, dict):
+            for search_field, search_value in search_fields.items():
+                field_search = {"field_name": f"properties.{search_field}"}
+                if isinstance(search_value, bool):
+                    field_search['method'] = "has_a_value" if search_value else "does_not_have_a_value"
+                else:
+                    field_search['method'] = "equals"
+                    field_search['value'] = search_value
+
+                query['filters'][0]['conditions'].append(field_search)
+
+        return query
+
+class JiraCommon():
+    """ Common methods for accessing Jira issues """
+
+    def search_jira_issues(jira_client, search_filters, max_results):
+        """
+        Search for Jira issues with given filters
+        :param jira_client: Client connection to Jira
+        :param search_filters: Search filters for Jira
+        :param max_results: Max number of issues that can be returned from Jira issue search
+        """
+        return jira_client.search_issues(search_filters, maxResults=max_results, json_result=True)

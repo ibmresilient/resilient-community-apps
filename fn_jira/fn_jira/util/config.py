@@ -25,7 +25,11 @@ polling_lookback=60
 # Search filters for Jira tickets to create into SOAR incidents.
 # If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
 #  that are configured under the individual Jira servers will be ignored
-poller_filters="priority": ["high", "medium", "low"], "labels": ["custom_label_1"], "status": ["to do", "in progress", "done"], "project": ["project_name1", "project_name2"]
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+# If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
+#  that are configured under the individual Jira servers will be ignored
+max_issues_returned = 50
 # Proxys to use
 # If proxys are defined under [fn_jira:global_settings], then proxys defined
 #  under the individual Jira servers will be ignored
@@ -53,7 +57,9 @@ jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
 verify_cert=False
 # Search filters for Jira tickets to create into SOAR incidents.
-poller_filters="priority": ["high", "medium", "low"], "labels": ["custom_label_1"], "status": ["to do", "in progress", "done"], "project": ["project_name1", "project_name2"]
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+max_issues_returned = 50
 # Proxys to use
 #http_proxy=
 #https_proxy=
@@ -79,7 +85,9 @@ jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
 verify_cert=False
 # Search filters for Jira tickets to create into SOAR incidents.
-poller_filters="priority": ["high", "medium", "low"], "labels": ["custom_label_1"], "status": ["to do", "in progress", "done"], "project": ["project_name1", "project_name2"]
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+max_issues_returned = 50
 # Proxys to use
 #http_proxy=
 #https_proxy=
