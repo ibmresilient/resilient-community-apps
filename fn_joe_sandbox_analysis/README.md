@@ -21,7 +21,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 12/2022 | Updated jbxapi version used, added new settings in the app.config, and added support for basic version of Joe Sanbox cloud |
+| 2.0.0 | 12/2022 | Updated jbxapi version used, added new settings in the app.config, and added support for basic version of Joe Sandbox cloud |
 | 1.0.5 | 10/2022 | Added support for self-signed certificates when connecting to an on-premises machine |
 | 1.0.4 | 10/2020 | Apphost support |
 | 1.0.3 | 10/2020 | Bug fixes |
