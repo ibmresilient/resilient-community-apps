@@ -29,7 +29,7 @@ class RequestsSep(object):
         self.base_path = opts.get("sep_base_path")
         self.function_opts = function_opts
 
-        self.rc = RequestsCommon(opts, function_opts)
+        self.rc = RequestsCommon(None, opts)
 
     def execute_call(self, verb, url, **kwargs):
         """Perform REST API Call

@@ -36,7 +36,7 @@
 
 | Date | Version | Notes |
 | ---: | :------: | :---- |
-| 12/2022 | 1.0.2 | Bug fix for osname |
+| 12/2022 | 1.0.2 | Bug fix for osname and selftest |
 | 11/2020 | 1.0.1 | Support added for App Host |
 | 08/2019 | 1.0.0 | Initial Release |
 

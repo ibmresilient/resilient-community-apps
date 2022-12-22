@@ -153,19 +153,6 @@ class Sepclient(object):
 
         return r
 
-    def test_connectivity(self):
-        """Connectivity Test which is used by resilient_circuits selftest.
-
-        Calls http 'head' request against 'computers' endpoint.
-
-        :return: Result in json format
-        """
-        url = urljoin(self.base_url, self._endpoints["computers"])
-
-        r = self._req.execute_call('head', url, verify=False, headers=self._headers)
-
-        return r
-
     def get_domains(self):
         """Get a list of domains.
 
