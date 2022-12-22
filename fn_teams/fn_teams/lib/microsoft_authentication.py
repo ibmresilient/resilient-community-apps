@@ -3,6 +3,7 @@
 ''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
 
 import logging
+import posixpath
 from urllib import parse
 
 import msal
@@ -130,8 +131,8 @@ class MicrosoftAuthentication:
         else:
             code_type = constants.CODE_TYPE_ACCESS
 
-        url = parse.urljoin(
-            self.required_parameters["directory_id"] + "/",
+        url = posixpath.join(
+            self.required_parameters["directory_id"],
             constants.OAUTH_TOKEN_URL)
 
         header = {
