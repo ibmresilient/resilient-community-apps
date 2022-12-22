@@ -97,16 +97,20 @@ class FunctionComponent(AppFunctionComponent):
         while submission_status != 'finished':
             self.LOG.debug(f"Submission Status: {submission_status}, sleeping: {ANALYSIS_REPORT_PING_DELAY} seconds.")
             sleep(ANALYSIS_REPORT_PING_DELAY)
-            submission_status = joesandbox.submission_info(submission_id).get("status")
+            submission_info = joesandbox.submission_info(submission_id)
+            submission_status = submission_info.get("status")
 
         yield self.status_message(f"Submission Status: {submission_status}")
         self.LOG.debug(f"Submission Status: {submission_status}")
 
+        # Get the webid from the submission info after status equals finished
+        webid = submission_info.get("analyses")[0].get("webid")
+
         # Get analysis information
-        analysis = joesandbox.analysis_info(submission_id)
+        analysis = joesandbox.analysis_info(webid)
 
         # Download the analysis file
-        name, report = joesandbox.analysis_download(submission_id, jsb_report_type)
+        name, report = joesandbox.analysis_download(webid, jsb_report_type)
 
         MIMETYPES = {"pdf": "application/pdf",
                      "json": "application/json",
@@ -125,8 +129,8 @@ class FunctionComponent(AppFunctionComponent):
         # Fill results
         results = {
             "analysis_report_name": name,
-            "analysis_report_id": submission_id,
-            "analysis_report_url": f"{ANALYSIS_URL}/analysis/{submission_id}",
+            "analysis_report_id": webid,
+            "analysis_report_url": f"{ANALYSIS_URL}/analysis/{webid}",
             "analysis_status": analysis.get("detection")
         }
 

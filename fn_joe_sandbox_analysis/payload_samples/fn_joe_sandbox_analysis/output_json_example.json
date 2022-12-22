@@ -1,3 +1,28 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "analysis_report_name": "report-3d16493b0814a18d6806ed30f4efac31.html",
+    "analysis_report_id": "2875365",
+    "analysis_report_url": "https://jbxcloud.joesecurity.org/api//analysis/2875365",
+    "analysis_status": "unknown"
+  },
+  "raw": null,
+  "inputs": {
+    "jsb_report_type": "html",
+    "incident_id": 2107,
+    "artifact_type": "",
+    "attachment_id": 5,
+    "artifact_value": "",
+    "artifact_id": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-joe-sandbox-analysis",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 245007,
+    "timestamp": "2022-12-22 12:56:30"
+  }
 }
