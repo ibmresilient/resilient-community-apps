@@ -12,7 +12,7 @@ Note: This requires that 'selftest' is defined in app.config
 """
 
 PACKAGE_NAME = "fn_teams"
-FUNCTION_NAME = "teams_post_message"
+FUNCTION_NAME = "ms_teams_post_message"
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -20,9 +20,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_teams_post_message_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("teams_post_message", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("teams_post_message_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("".join([FUNCTION_NAME, "_result"]), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -30,7 +30,7 @@ def call_teams_post_message_function(circuits, function_params, timeout=10):
 
 
 class TestTeamsPostMessage:
-    """ Tests for the teams_post_message function"""
+    """ Tests for the funct_ms_teams_post_message function"""
 
     # Read the default configuration-data section from the package
     config_data = get_config_data(PACKAGE_NAME)
@@ -57,8 +57,7 @@ class TestTeamsPostMessage:
             "task_id": task_id,
             "teams_channel": teams_channel,
             "teams_payload": teams_payload,
-            "teams_mrkdown": teams_mrkdown
-        }
+            "teams_mrkdown": teams_mrkdown}
 
         results = call_teams_post_message_function(circuits_app, function_params)
         assert results['success']

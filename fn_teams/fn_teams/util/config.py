@@ -10,10 +10,25 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_teams]
-# add multiple parameters for the channels to access and their webhook. 
-# The channel name is used in the function input: teams_channel
-#<channel_name>=<teams channel webhook>
-# If supporting a self test capability, add a webhook to a test channel
-#selftest=<teams channel webhook>
+#
+# <channel_name> = <channel webhook url> 
+# (<channel_name> and the <teams_channel> input for the MS Teams: Post Message function must be the same.
+#
+# selftest = <selftest channel webhook url>
+#
+# directory_id and application_id can be found at
+#    portal.azure.com > App registrations > Integration Name > Overview
+#
+# secret_value can be found at
+#   portal.azure.com > App registrations > Integration Name > Certificates & secrets
+#
+# refresh_token can be generated using the OAuth utils tool.
+#   Only required for MS Teams: Read Message function.
+
+directory_id = <Directory (tenant) ID>
+application_id = <Application (client) ID>
+secret_value = <Secret Value>
+# refresh_token = <Refresh token> 
+
 """
     return config_data
