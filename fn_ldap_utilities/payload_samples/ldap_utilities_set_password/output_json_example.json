@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": "65zQ24h7Bx?i",
+    "ldap_return_new_password": true,
+    "ldap_new_auto_password_len": 12
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 0,
+    "timestamp": "2022-05-19 14:52:55"
+  },
+  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+}
