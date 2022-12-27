@@ -63,13 +63,21 @@ class SOARCommon():
         :return error_msg: (str) Any error during the query or None
         """
         query = SOARCommon._build_search_query(search_fields, open_cases = open_cases)
+        cases_list = []
 
         try:
-            return rest_client.post('/incidents/query?return_level=normal', query), None
+            cases_list, err_msg = rest_client.post('/incidents/query?return_level=normal', query), None
         except SimpleHTTPException as err:
             LOG.error(str(err))
             LOG.error(query)
             return None, str(err)
+
+        # Remove case keys that are empty and unused keys
+        for num in range(len(cases_list)):
+            cases_list[num].pop("perms")
+            cases_list[num] = dict([(key,value) for key,value in cases_list[num].items() if value])
+
+        return cases_list, err_msg
 
     def _build_search_query(search_fields, open_cases=True):
         """
@@ -109,11 +117,18 @@ class SOARCommon():
 class JiraCommon():
     """ Common methods for accessing Jira issues """
 
-    def search_jira_issues(jira_client, search_filters, max_results):
+    def search_jira_issues(jira_client, search_filters, max_results=50):
         """
         Search for Jira issues with given filters
         :param jira_client: Client connection to Jira
         :param search_filters: Search filters for Jira
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
-        return jira_client.search_issues(search_filters, maxResults=max_results, json_result=True)
+        issues_list = jira_client.search_issues(search_filters, maxResults=max_results, json_result=True).get("issues")
+
+        # Remove fields that are empty and unused dict keys
+        for issue in issues_list:
+            issue.pop("expand")
+            issue["fields"] = dict([(key,value) for key,value in issue.get("fields").items() if value])
+
+        return issues_list

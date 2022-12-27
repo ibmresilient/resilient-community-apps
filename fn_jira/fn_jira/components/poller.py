@@ -59,8 +59,6 @@ class PollerComponent(ResilientComponent):
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
         soar_case_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client())
-        # Check if the found SOAR case need to be updated based of their linked Jira issues
-        self.process_soar_case_list(soar_case_list)
 
         # Get list of Jira servers configured in the app.config
         servers_list = JiraServers(self.opts).get_server_name_list()
@@ -71,56 +69,57 @@ class PollerComponent(ResilientComponent):
         # Get global_setting if definied in the app.config
         global_settings = self.opts.get(GLOBAL_SETTINGS, {})
 
+        # Validation dictionary for the "poller_filters" app.config setting
+        poller_filters_validator = {"name": "poller_filters",
+                                   "placeholder": "priority in (high, medium, low) and "\
+                                   "status in ('to do', 'in progress', done) and project in "\
+                                   "(project_name1, project_name2)"}
+
+        # Dictionary for Jira Issues
+        jira_issues_dict = {}
+
         # Loop through all the Jira servers in the app.config
         for server in servers_list:
+
+            # If multiple servers are define get just the servers label
+            if server.startswith(f"{PACKAGE_NAME}:"):
+                server = server[len(PACKAGE_NAME)+1:]
+
             # Get settings for server from the app.config
             options = get_server_settings(self.opts, server)
             # Connect to the Jira server specified in options
             jira_client = get_jira_client(self.opts, options)
+            # Get the max_results settings from the servers settings
+            max_results = options.get("max_issues_returned")
 
-            # If poller_filters and or max_results are defnined in the global_settings, then overwrite them
+            # If poller_filters and or max_results are defnined in the global_settings
             if global_settings:
                 poller_filters = global_settings.get("poller_filters")
                 if poller_filters:
                     # Validate poller_filter
-                    validate_fields([
-                        {"name": "poller_filters",
-                        "placeholder": "priority in (high, medium, low) and "\
-                        "status in ('to do', 'in progress', done) and project in "\
-                        "(project_name1, project_name2)"}], global_settings)
+                    validate_fields([poller_filters_validator], global_settings)
+                # Get the max_results settings from the global_settings
                 max_results = global_settings.get("max_issues_returned")
-            else:
+            else: # If poller_filters is defnined in individual Jira server settings
+                # Validate poller_filter
+                validate_fields([poller_filters_validator], options)
                 # Get the poller_filters settings from the servers settings
                 poller_filters = options.get("poller_filters")
-                # Validate poller_filter
-                validate_fields([
-                    {"name": "poller_filters",
-                    "placeholder": "priority in (high, medium, low) and "\
-                    "status in ('to do', 'in progress', done) and project in "\
-                    "(project_name1, project_name2)"}], options)
-                # Get the max_results settings from the servers settings
-                max_results = options.get("max_issues_returned")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list = JiraCommon.search_jira_issues(jira_client, poller_filters, max_results).get("issues")
+            jira_issue_list = JiraCommon.search_jira_issues(jira_client, poller_filters, max_results)
+            # Add list of Jira issues to jira_issues_dict under the server the issues where found in
+            jira_issues_dict[server] = jira_issue_list
 
-            # Process Jira issues returned from search
-            self.process_jira_issue_list(jira_issue_list)
+        # Process Jira issues returned from search
+        self.process_jira_issue_dict(jira_issues_dict, soar_case_list)
 
-    def process_soar_case_list(self, soar_case_list):
+    def process_jira_issue_dict(self, jira_issue_dict, soar_case_list):
         """
         Process the returned Jira issues
         :param case_list: List of Jira issues
         :return: None
         """
-        print("f")
 
-    def process_jira_issue_list(self, jira_issue_list):
-        """
-        Process the returned Jira issues
-        :param case_list: List of Jira issues
-        :return: None
-        """
         print("f")
-
 
