@@ -58,7 +58,7 @@ class PollerComponent(ResilientComponent):
         """
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_case_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client())
+        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client())
 
         # Get list of Jira servers configured in the app.config
         servers_list = JiraServers(self.opts).get_server_name_list()
@@ -87,8 +87,6 @@ class PollerComponent(ResilientComponent):
 
             # Get settings for server from the app.config
             options = get_server_settings(self.opts, server)
-            # Connect to the Jira server specified in options
-            jira_client = get_jira_client(self.opts, options)
             # Get the max_results settings from the servers settings
             max_results = options.get("max_issues_returned")
 
@@ -107,19 +105,89 @@ class PollerComponent(ResilientComponent):
                 poller_filters = options.get("poller_filters")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list = JiraCommon.search_jira_issues(jira_client, poller_filters, max_results)
+            jira_issue_list = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, max_results)
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
         # Process Jira issues returned from search
-        self.process_jira_issue_dict(jira_issues_dict, soar_case_list)
+        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
 
-    def process_jira_issue_dict(self, jira_issue_dict, soar_case_list):
+    def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list):
         """
         Process the returned Jira issues
-        :param case_list: List of Jira issues
+        :param jira_issue_dit: Dictionary of Jira issues based on Jira server
+        :param soar_case_list: List of SOAR cases that contain "Jira Issue ID" field
         :return: None
         """
 
-        print("f")
+        # List of Jira issues to add as incidents on SOAR
+        jira_issues_to_add_to_soar = []
+        # List of Jira issues to update on SOAR
+        jira_issues_to_updated_on_soar = []
 
+        # Loop through the Jira servers dict
+        for jira_server in jira_issues_dict:
+            # Connect to the Jira server specified in options
+            jira_client = get_jira_client(self.opts, get_server_settings(self.opts, jira_server))
+
+            # List of Jira key for the SOAR cases found that link to the current server
+            soar_cases_jira_key = []
+            # Get the Jira issue keys from the SOAR cases that are linked to the current server
+            for soar_case in soar_cases_list:
+                soar_case_jira_server = soar_case.get("properties").get("jira_server")
+                if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
+                    soar_cases_jira_key.append(soar_case.get("properties").get("jira_issue_id"))
+
+            # Delete variables that are no longer needed
+            del soar_case_jira_server, soar_case
+
+            jira_issues_with_soar_case = []
+
+            # Loop through the Jira issues found in the filtered search on the current server
+            for jira_issue in jira_issues_dict[jira_server]:
+                # Get the key for the Jira issue
+                jira_issue_key = jira_issue.get("key")
+
+                if jira_issue_key in soar_cases_jira_key:
+                    jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+                    # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
+                    jira_issues_with_soar_case.append(jira_issue)
+                    # Remove jira_issue_key from soar_cases_jira_key list
+                    soar_cases_jira_key.pop(soar_cases_jira_key.index(jira_issue_key))
+                else:
+                    jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+                    # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
+                    jira_issues_to_add_to_soar.append(jira_issue)
+
+            # Delete variables that are no longer needed
+            del jira_issue, jira_issue_key
+
+            # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
+            if soar_cases_jira_key:
+                cases = str(soar_cases_jira_key).replace("[", "(").replace("]", ")")
+                for jira_issue in JiraCommon.search_jira_issues(jira_client, f"key in {cases}"):
+                    jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+                    jira_issues_with_soar_case.append(jira_issue)
+                jira_client.close() # Close connection to Jira server
+                # Delete variables that are no longer needed
+                del cases, soar_cases_jira_key, jira_client, jira_issue
+
+            # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
+            for soar_case in soar_cases_list:
+                for jira_issue in jira_issues_with_soar_case:
+                    if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
+                        # Convert str time to int time
+                        jira_issue_updated = jira_issue.get("fields").get("updated")
+                        jira_issue_updated = jira_issue_updated[:jira_issue_updated.rindex(".")]
+                        jira_issue_updated = int(datetime.strptime(jira_issue_updated, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+
+                        if jira_issue_updated > soar_case.get("properties").get("soar_case_last_updated"):
+                            jira_issues_to_updated_on_soar.append(jira_issue)
+                            break
+
+            # Delete variables that are no longer needed
+            del jira_issue, jira_issue_updated, soar_case
+
+        # Delete variables that are no longer needed
+        del jira_server, jira_issues_with_soar_case
+        print("f")
