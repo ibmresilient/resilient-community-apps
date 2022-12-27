@@ -6,7 +6,7 @@
 """
 import logging
 from resilient_lib import RequestsCommon
-from fn_jira.util.helper import PACKAGE_NAME, validate_app_configs, get_jira_client, JiraServers
+from fn_jira.util.helper import PACKAGE_NAME, get_jira_client, JiraServers
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -22,7 +22,7 @@ def selftest_function(opts):
     try:
         for server_name in server_list:
             options = opts.get(server_name, {})
-            r = get_jira_client(validate_app_configs(options), RequestsCommon(opts, options))
+            r = get_jira_client(opts, options)
 
             status = True if r else False
             log.info(f"Test for {server_name} was successful")
