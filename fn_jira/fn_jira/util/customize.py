@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the SOAR customizations required for fn_jira"""
+"""Generate the Resilient customizations required for fn_jira"""
 
 import base64
 import os
