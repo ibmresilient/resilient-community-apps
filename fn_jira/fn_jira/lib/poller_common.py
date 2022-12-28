@@ -124,7 +124,9 @@ class JiraCommon():
         :param search_filters: Search filters for Jira
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
-        issues_list = jira_client.search_issues(search_filters, maxResults=max_results, json_result=True).get("issues")
+        fields = ["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comments", "created"]
+
+        issues_list = jira_client.search_issues(search_filters, maxResults=max_results, fields=fields, json_result=True).get("issues")
 
         # Remove fields that are empty and unused dict keys
         for issue in issues_list:

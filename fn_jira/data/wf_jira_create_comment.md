@@ -35,7 +35,8 @@ inputs.incident_id = incident.id
 
 ### Post-Processing Script
 ```python
-None
+import java.util.Date as Date
+incident.properties.soar_case_last_updated = Date()
 ```
 
 ---

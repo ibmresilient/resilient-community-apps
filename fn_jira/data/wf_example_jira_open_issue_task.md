@@ -128,6 +128,7 @@ time_now = Date().time
 
 if results.get("success"):
   results_content = results.get("content", {})
+  incident.properties.soar_case_last_updated = Date()
 
   url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
 
