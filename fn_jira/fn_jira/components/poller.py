@@ -4,12 +4,13 @@
 """Poller"""
 
 from datetime import datetime, timedelta
+from ast import literal_eval
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers, get_server_settings, get_jira_client
 from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 
 LOG = getLogger(__name__)
 
@@ -122,8 +123,9 @@ class PollerComponent(ResilientComponent):
 
         # List of Jira issues to add as incidents on SOAR
         jira_issues_to_add_to_soar = []
-        # List of Jira issues to update on SOAR
-        jira_issues_to_updated_on_soar = []
+
+        # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
+        soar_update_payload = {"patches": {}}
 
         # Loop through the Jira servers dict
         for jira_server in jira_issues_dict:
@@ -176,13 +178,21 @@ class PollerComponent(ResilientComponent):
             for soar_case in soar_cases_list:
                 for jira_issue in jira_issues_with_soar_case:
                     if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
+                        soar_case_last_updated = soar_case.get("properties").get("soar_case_last_updated")
                         # Convert str time to int time
                         jira_issue_updated = jira_issue.get("fields").get("updated")
                         jira_issue_updated = jira_issue_updated[:jira_issue_updated.rindex(".")]
                         jira_issue_updated = int(datetime.strptime(jira_issue_updated, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
 
-                        if jira_issue_updated > soar_case.get("properties").get("soar_case_last_updated"):
-                            jira_issues_to_updated_on_soar.append(jira_issue)
+                        if jira_issue_updated > soar_case_last_updated:
+                            soar_update_payload['patches'][soar_case.get("id")] = {
+                                                "version": soar_case.get("vers")+1,
+                                                "changes": [{
+                                                    "old_value": {"date": soar_case_last_updated},
+                                                    "new_value": {"date": jira_issue_updated},
+                                                    "field": {"name": "soar_case_last_updated"}
+                                                }]
+                                            },
                             break
 
             # Delete variables that are no longer needed
@@ -190,4 +200,19 @@ class PollerComponent(ResilientComponent):
 
         # Delete variables that are no longer needed
         del jira_server, jira_issues_with_soar_case
+
+        # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
+        if soar_update_payload["patches"]:
+            # Removes characters added by python that are not needed
+            payload_str = str(soar_update_payload).replace('(','').replace(')','').replace(',,',',')
+            payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
+            soar_update_payload = literal_eval(payload_str)
+
+            # Send put request to SOAR
+            # This will update all cases that need to be updated for the give Jira server
+            response = self.rest_client().put("/incidents/patch", soar_update_payload)
+            # If failures dictionary is not empty then raise error
+            if response.get('failures'):
+                raise IntegrationError(str(response))
+
         print("f")
