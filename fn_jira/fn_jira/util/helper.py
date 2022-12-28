@@ -216,23 +216,6 @@ def get_server_settings(opts, jira_label):
     # Get configuration for jira server specified
     return JiraServers.jira_label_test(jira_label, servers_list)
 
-def get_jira_issue_info(jira_client, issue_id, filter_fields):
-    """
-    Function: Get the information of a Jira ticket
-    :param jira_client: Client connection to Jira
-    :param issue_id: ID of the Jira ticket
-    :param filter_fields: List of fields to return
-    """
-    return jira_client.issue(id=issue_id, fields=filter_fields).fields
-
-def get_jira_issue_last_updated(jira_client, issue_id):
-    """
-    Function: Get the last updated time of a Jira ticket
-    :param jira_client: Client connection to Jira
-    :param issue_id: ID of the Jira ticket
-    """
-    return jira_client.issue(id=issue_id, fields="updated").fields.updated
-
 def create_soar_incident(res_client, jira_issue_info):
     """
     Function: Creates a SOAR incident from a Jira ticket
