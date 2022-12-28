@@ -66,17 +66,14 @@ inputs.jira_issue_id = incident.properties.jira_issue_id
 inputs.jira_transition_id = "Done"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: {0}\n{1}".format(incident.resolution_id, incident.resolution_summary.content)
 
-resolution_map = { "unresolved": "Obsolete", "duplicate": "Duplicate", "not an issue": "Won't Do", "resolved": "Done" }
-
 # Define JIRA fields here
-inputs.jira_fields = dict_to_json_str({
-  "resolution": { "name": resolution_map.get(str(incident.resolution_id).lower(), "Done") }
-})
+inputs.jira_fields = dict_to_json_str({})
 ```
 
 ### Post-Processing Script
 ```python
-None
+import java.util.Date as Date
+incident.properties.soar_case_last_updated = Date()
 ```
 
 ---

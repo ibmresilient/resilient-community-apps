@@ -66,7 +66,7 @@ inputs.jira_transition_id = "Done"
 inputs.jira_comment = u"Closed in IBM SOAR\n\nResolution: Done\n"
 
 # Define JIRA fields here
-inputs.jira_fields = dict_to_json_str({"resolution": { "name": "Done" }})
+inputs.jira_fields = dict_to_json_str({})
 ```
 
 ### Post-Processing Script
@@ -77,6 +77,7 @@ time_now = Date().time
 if results.get("success"):
   row.date = time_now
   row.status = "Closed"
+  incident.properties.soar_case_last_updated = Date()
 ```
 
 ---

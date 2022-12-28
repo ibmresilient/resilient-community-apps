@@ -8,7 +8,8 @@ from ast import literal_eval
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers, get_server_settings, get_jira_client
+from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,\
+    get_server_settings, get_jira_client, create_soar_incident, str_time_to_int_time
 from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
 from resilient_lib import validate_fields, IntegrationError
 
@@ -129,8 +130,9 @@ class PollerComponent(ResilientComponent):
 
         # Loop through the Jira servers dict
         for jira_server in jira_issues_dict:
+            options = get_server_settings(self.opts, jira_server)
             # Connect to the Jira server specified in options
-            jira_client = get_jira_client(self.opts, get_server_settings(self.opts, jira_server))
+            jira_client = get_jira_client(self.opts, options)
 
             # List of Jira key for the SOAR cases found that link to the current server
             soar_cases_jira_key = []
@@ -146,7 +148,7 @@ class PollerComponent(ResilientComponent):
             jira_issues_with_soar_case = []
 
             # Loop through the Jira issues found in the filtered search on the current server
-            for jira_issue in jira_issues_dict[jira_server]:
+            for count, jira_issue in enumerate(jira_issues_dict.get(jira_server)):
                 # Get the key for the Jira issue
                 jira_issue_key = jira_issue.get("key")
 
@@ -158,11 +160,20 @@ class PollerComponent(ResilientComponent):
                     soar_cases_jira_key.pop(soar_cases_jira_key.index(jira_issue_key))
                 else:
                     jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+                    # If there is attachments on the Jira issue
+                    attachment = jira_issue.get("fields").get("attachment")
+                    if attachment:
+                        for num, attach in enumerate(attachment):
+                            jira_issues_dict.get(jira_server)[count].get("fields").get("attachment")[num] = {
+                                "filename": attach.get("filename"),
+                                "content": jira_client._session.get(attach.get("content")).content
+                            }
+                        del attach, attachment, num
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
             # Delete variables that are no longer needed
-            del jira_issue, jira_issue_key
+            del jira_issue, jira_issue_key, count
 
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:
@@ -180,9 +191,7 @@ class PollerComponent(ResilientComponent):
                     if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
                         soar_case_last_updated = soar_case.get("properties").get("soar_case_last_updated")
                         # Convert str time to int time
-                        jira_issue_updated = jira_issue.get("fields").get("updated")
-                        jira_issue_updated = jira_issue_updated[:jira_issue_updated.rindex(".")]
-                        jira_issue_updated = int(datetime.strptime(jira_issue_updated, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+                        jira_issue_updated = str_time_to_int_time(jira_issue.get("fields").get("updated"))
 
                         if jira_issue_updated > soar_case_last_updated:
                             soar_update_payload['patches'][soar_case.get("id")] = {
@@ -196,7 +205,7 @@ class PollerComponent(ResilientComponent):
                             break
 
             # Delete variables that are no longer needed
-            del jira_issue, jira_issue_updated, soar_case
+            del jira_issue, jira_issue_updated, soar_case, soar_case_last_updated
 
         # Delete variables that are no longer needed
         del jira_server, jira_issues_with_soar_case
@@ -214,5 +223,11 @@ class PollerComponent(ResilientComponent):
             # If failures dictionary is not empty then raise error
             if response.get('failures'):
                 raise IntegrationError(str(response))
+
+        del soar_update_payload
+
+        for jira_issue in jira_issues_to_add_to_soar:
+            create_soar_incident(self.rest_client(), jira_issue)
+            LOG.info(f"SOAR incident created: {jira_issue.get('fields').get('summary')}")
 
         print("f")

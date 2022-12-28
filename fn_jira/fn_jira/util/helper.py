@@ -3,6 +3,8 @@
 
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
+from datetime import datetime
+from io import BytesIO
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -216,30 +218,59 @@ def get_server_settings(opts, jira_label):
     # Get configuration for jira server specified
     return JiraServers.jira_label_test(jira_label, servers_list)
 
-def create_soar_incident(res_client, jira_issue_info):
+def str_time_to_int_time(str_time):
+    """
+    Convert time string to integer epoch time
+    :param str_time: Time in string
+    :return: Epoch time as integrer
+    """
+    str_time = str_time[:str_time.rindex(".")]
+    return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+
+def create_soar_incident(res_client, issue):
     """
     Function: Creates a SOAR incident from a Jira ticket
     :param res_client: Client connection to SOAR
-    :param jira_issue_info: Information on the Jira ticket
+    :param issue: Information on the Jira ticket
     """
 
-    name = jira_issue_info.summary
-    description = jira_issue_info.description
+    issue_fields = issue.get("fields")
+    internal_url = issue.get("self")
+    jira_key = issue.get("key")
+
     # Get comments from the Jira ticket
-    comment = jira_issue_info
-
-    # Get attachments from the Jira ticket
-    attachment = []
-    for attach in jira_issue_info.attchment:
-        attachment.append({"content": attach.content, "filename": attach.filename})
-
+    comments = []
+    if issue_fields.get("comment"):
+        for comment in issue_fields.get("comment").get("comments"):
+            comments.append({
+                "text": {
+                    "format": "text",
+                    "content": comment.get("body")
+                },
+                "type": "incident"
+            })
 
     payload = {
-        "name": name,
-        "description": {
-            "format": "html",
-            "content": description
-        }
+        "name": issue_fields.get("summary"),
+        "description": issue_fields.get("description"),
+        "severity_code": issue_fields.get("priority").get("name"),
+        "create_date": str_time_to_int_time(issue_fields.get("created")),
+        "discovered_date": str_time_to_int_time(issue_fields.get("created")),
+        "properties": {
+            "jira_internal_url": internal_url,
+            "jira_issue_id": jira_key,
+            "jira_server": issue.get("jira_server"),
+            "jira_url": f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>",
+            "jira_project_key": issue_fields.get("project").get("key"),
+            "soar_case_last_updated": str_time_to_int_time(issue_fields.get("updated"))
+        },
+        "comments": comments
     }
-    res_client.post("/incidents/", payload)
+
+    response = res_client.post("/incidents", payload)
+
+    if issue_fields.get("attachment"):
+        # Get attachments from the Jira ticket
+        for attach in issue_fields.get("attachment"):
+            r = res_client.post_attachment(f"/incidents/{response.get('id')}/attachments", filepath=None, filename=attach.get("filename"), bytes_handle=attach.get("content"))
 
