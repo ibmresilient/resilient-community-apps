@@ -229,5 +229,3 @@ class PollerComponent(ResilientComponent):
         for jira_issue in jira_issues_to_add_to_soar:
             create_soar_incident(self.rest_client(), jira_issue)
             LOG.info(f"SOAR incident created: {jira_issue.get('fields').get('summary')}")
-
-        print("f")
