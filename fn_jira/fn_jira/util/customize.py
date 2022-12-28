@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the SOAR customizations required for fn_jira"""
+"""Generate the Resilient customizations required for fn_jira"""
 
 import base64
 import os
@@ -13,6 +13,7 @@ except ImportError:
 
 RES_FILE = "data/export.res"
 
+
 def codegen_reload_data():
     """
     Parameters required reload codegen for the fn_jira package
@@ -23,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
         "workflows": [u"example_jira_open_issue_task", u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue", u"jira_transition_issue_task"],
         "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)", u"Example: Jira Close Issue", u"Example: Jira Close Issue (Task)", u"Example: Jira Create Comment", u"Example: Jira Create Comment (Task)"],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_server", u"jira_url", u"soar_case_last_updated"],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_project_key", u"jira_server", u"jira_url", u"soar_case_last_updated"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
@@ -31,6 +32,7 @@ def codegen_reload_data():
         "scripts": [],
         "playbooks": []
     }
+
 
 def customization_data(client=None):
     """
@@ -62,6 +64,7 @@ def customization_data(client=None):
     - Incident Fields:
         - jira_internal_url
         - jira_issue_id
+        - jira_project_key
         - jira_server
         - jira_url
         - soar_case_last_updated
