@@ -48,7 +48,6 @@ setup(
         'resilient_lib>=46.0.0',
         'Jinja2>=2.9.6',
         'six',
-        'asn1crypto',
         'python-smail',
         'oscrypto'
     ],

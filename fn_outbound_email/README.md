@@ -139,7 +139,6 @@ Additional package dependencies may exist for each of these packages:
 * resilient_lib>=32.0.0
 * six
 * BeautifulSoup
-* asn1crypto
 * python-smail
 * oscrypto
 
