@@ -76,6 +76,26 @@ class SOARCommon():
         for num in range(len(cases_list)):
             cases_list[num].pop("perms")
             cases_list[num] = dict([(key,value) for key,value in cases_list[num].items() if value])
+            cases_list[num].pop("creator")
+            cases_list[num].pop("creator_principal")
+            cases_list[num].pop("exposure_type_id")
+            cases_list[num].pop("workspace")
+            cases_list[num].pop("assessment")
+            cases_list[num].pop("pii")
+            cases_list[num].pop("gdpr")
+            cases_list[num].pop("creator_id")
+            cases_list[num].pop("crimestatus_id")
+            cases_list[num].pop("sequence_code")
+            cases_list[num].pop("owner_id")
+            cases_list[num].pop("plan_status")
+            cases_list[num].pop("phase_id")
+            cases_list[num].pop("org_handle")
+            cases_list[num].pop("task_changes")
+
+            # Change the value of the dict key to the one value that is used in that dict
+            for key, value in cases_list[num].get("properties").items():
+                cases_list[num][key] = value
+            cases_list[num].pop("properties")
 
         return cases_list, err_msg
 
@@ -117,6 +137,15 @@ class SOARCommon():
 class JiraCommon():
     """ Common methods for accessing Jira issues """
 
+    def str_time_to_int_time(str_time):
+        """
+        Convert time string to integer epoch time
+        :param str_time: Time in string
+        :return: Epoch time as integer
+        """
+        str_time = str_time[:str_time.rindex(".")]
+        return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+
     def search_jira_issues(jira_client, search_filters, max_results=50):
         """
         Search for Jira issues with given filters
@@ -128,9 +157,21 @@ class JiraCommon():
 
         issues_list = jira_client.search_issues(search_filters, maxResults=max_results, fields=fields, json_result=True).get("issues")
 
-        # Remove fields that are empty and unused dict keys
+        # Format each dictionary
         for issue in issues_list:
             issue.pop("expand")
-            issue["fields"] = dict([(key,value) for key,value in issue.get("fields").items() if value])
+
+            for key, value in issue.get("fields").items():
+                issue[key] = value
+            issue.pop("fields")
+
+            # Change the value of the dict key to the one value that is used in that dict
+            for key, value in {"issuetype": "name", "project": "key", "priority": "name", "status": "name", "comment": "comments"}.items():
+                if issue.get(key):
+                    issue[key] = issue[key].get(value)
+
+            # Convert the string times to integer epoch time
+            issue["created"] = JiraCommon.str_time_to_int_time(issue.get("created"))
+            issue["updated"] = JiraCommon.str_time_to_int_time(issue.get("updated"))
 
         return issues_list

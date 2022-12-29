@@ -4,7 +4,7 @@
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
 from datetime import datetime
-from io import BytesIO
+from ast import literal_eval
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -218,30 +218,21 @@ def get_server_settings(opts, jira_label):
     # Get configuration for jira server specified
     return JiraServers.jira_label_test(jira_label, servers_list)
 
-def str_time_to_int_time(str_time):
-    """
-    Convert time string to integer epoch time
-    :param str_time: Time in string
-    :return: Epoch time as integrer
-    """
-    str_time = str_time[:str_time.rindex(".")]
-    return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
-
 def create_soar_incident(res_client, issue):
     """
     Function: Creates a SOAR incident from a Jira ticket
     :param res_client: Client connection to SOAR
     :param issue: Information on the Jira ticket
+    :param return: None
     """
 
-    issue_fields = issue.get("fields")
     internal_url = issue.get("self")
     jira_key = issue.get("key")
 
     # Get comments from the Jira ticket
     comments = []
-    if issue_fields.get("comment"):
-        for comment in issue_fields.get("comment").get("comments"):
+    if issue.get("comment"):
+        for comment in issue.get("comment"):
             comments.append({
                 "text": {
                     "format": "text",
@@ -250,27 +241,98 @@ def create_soar_incident(res_client, issue):
                 "type": "incident"
             })
 
+    # Create payload to create incident on SOAR
     payload = {
-        "name": issue_fields.get("summary"),
-        "description": issue_fields.get("description"),
-        "severity_code": issue_fields.get("priority").get("name"),
-        "create_date": str_time_to_int_time(issue_fields.get("created")),
-        "discovered_date": str_time_to_int_time(issue_fields.get("created")),
+        "name": issue.get("summary"),
+        "description": issue.get("description"),
+        "severity_code": issue.get("priority"),
+        "create_date": issue.get("created"),
+        "discovered_date": issue.get("created"),
         "properties": {
             "jira_internal_url": internal_url,
             "jira_issue_id": jira_key,
             "jira_server": issue.get("jira_server"),
             "jira_url": f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>",
-            "jira_project_key": issue_fields.get("project").get("key"),
-            "soar_case_last_updated": str_time_to_int_time(issue_fields.get("updated"))
+            "jira_project_key": issue.get("key"),
+            "soar_case_last_updated": issue.get("updated")
         },
         "comments": comments
     }
 
-    response = res_client.post("/incidents", payload)
+    try:
+        # Create incident on SOAR
+        response = res_client.post("/incidents", payload)
+    except Exception as err:
+        raise IntegrationError(err)
 
-    if issue_fields.get("attachment"):
+    if issue.get("attachment"):
         # Get attachments from the Jira ticket
-        for attach in issue_fields.get("attachment"):
-            r = res_client.post_attachment(f"/incidents/{response.get('id')}/attachments", filepath=None, filename=attach.get("filename"), bytes_handle=attach.get("content"))
+        for attach in issue.get("attachment"):
+            try:
+                # Add the attachment to the SOAR incident
+                res_client.post_attachment(f"/incidents/{response.get('id')}/attachments",
+                                               filepath=None,
+                                               filename=attach.get("filename"),
+                                               bytes_handle=attach.get("content")
+                                              )
+            except Exception as err:
+                raise IntegrationError(err)
+
+def create_update_payload(old_value, new_value, ver, field_name):
+
+     return {
+            "version": ver+1,
+            "changes": [{
+                "old_value": {"date": old_value},
+                "new_value": {"date": new_value},
+                "field": {"name": field_name}
+            }]
+        },
+
+def update_soar_incident(res_client, soar_cases_to_update):
+    """
+    Update the SOAR cases with new data from the corresponding Jira issue
+    :param res_client: Client connection to SOAR
+    :param soar_cases_to_update: A list of lists that contain the SOAR case to update and its corresponding Jira issue
+    :return:
+    """
+
+    # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
+    soar_update_payload = {"patches": {}}
+
+    for update in soar_cases_to_update:
+        jira = update[0]
+        soar = update[1]
+
+        print("f")
+
+        soar_to_jira_fields = {
+            "name": "summary",
+            "description": "description",
+            "severity_code": "priority"
+        }
+
+        for key, value in soar_to_jira_fields.items():
+            jira_fields = jira.get("fields")
+            if soar.get(key) != jira_fields.get(value):
+                soar_update_payload['patches'][soar.get("id")] = create_update_payload(soar.get(key), jira_fields.get(value), soar.get("vers"), key)
+            print("f")
+
+
+
+    # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
+    if soar_update_payload["patches"]:
+        # Removes characters added by python that are not needed
+        payload_str = str(soar_update_payload).replace('(','').replace(')','').replace(',,',',')
+        payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
+        soar_update_payload = literal_eval(payload_str)
+
+        # Send put request to SOAR
+        # This will update all cases that need to be updated for the give Jira server
+        response = res_client.put("/incidents/patch", soar_update_payload)
+        # If failures dictionary is not empty then raise error
+        if response.get('failures'):
+            raise IntegrationError(str(response))
+
+    del soar_update_payload # Delete variables that are no longer needed
 
