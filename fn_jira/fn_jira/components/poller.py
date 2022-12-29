@@ -4,14 +4,13 @@
 """Poller"""
 
 from datetime import datetime, timedelta
-from ast import literal_eval
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,\
-    get_server_settings, get_jira_client, create_soar_incident, str_time_to_int_time
+    get_server_settings, get_jira_client, create_soar_incident, update_soar_incident
 from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields
 
 LOG = getLogger(__name__)
 
@@ -125,55 +124,54 @@ class PollerComponent(ResilientComponent):
         # List of Jira issues to add as incidents on SOAR
         jira_issues_to_add_to_soar = []
 
-        # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
-        soar_update_payload = {"patches": {}}
+        # A list of lists that contain the SOAR case to update and its corresponding Jira issue
+        soar_cases_to_update = []
 
         # Loop through the Jira servers dict
         for jira_server in jira_issues_dict:
-            options = get_server_settings(self.opts, jira_server)
             # Connect to the Jira server specified in options
-            jira_client = get_jira_client(self.opts, options)
+            jira_client = get_jira_client(self.opts, get_server_settings(self.opts, jira_server))
 
             # List of Jira key for the SOAR cases found that link to the current server
             soar_cases_jira_key = []
             # Get the Jira issue keys from the SOAR cases that are linked to the current server
             for soar_case in soar_cases_list:
-                soar_case_jira_server = soar_case.get("properties").get("jira_server")
+                soar_case_jira_server = soar_case.get("jira_server")
                 if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
-                    soar_cases_jira_key.append(soar_case.get("properties").get("jira_issue_id"))
+                    soar_cases_jira_key.append(soar_case.get("jira_issue_id"))
 
             # Delete variables that are no longer needed
             del soar_case_jira_server, soar_case
 
+            # List of Jira Issues that have corresponding SOAR cases
             jira_issues_with_soar_case = []
 
             # Loop through the Jira issues found in the filtered search on the current server
             for count, jira_issue in enumerate(jira_issues_dict.get(jira_server)):
                 # Get the key for the Jira issue
                 jira_issue_key = jira_issue.get("key")
+                jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+                # If there is attachments on the Jira issue
+                attachment = jira_issue.get("attachment")
+                if attachment:
+                    for num, attach in enumerate(attachment):
+                        jira_issues_dict.get(jira_server)[count].get("attachment")[num] = {
+                            "filename": attach.get("filename"),
+                            "content": jira_client._session.get(attach.get("content")).content
+                        }
+                    del attach, num
 
                 if jira_issue_key in soar_cases_jira_key:
-                    jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                     # Remove jira_issue_key from soar_cases_jira_key list
                     soar_cases_jira_key.pop(soar_cases_jira_key.index(jira_issue_key))
                 else:
-                    jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
-                    # If there is attachments on the Jira issue
-                    attachment = jira_issue.get("fields").get("attachment")
-                    if attachment:
-                        for num, attach in enumerate(attachment):
-                            jira_issues_dict.get(jira_server)[count].get("fields").get("attachment")[num] = {
-                                "filename": attach.get("filename"),
-                                "content": jira_client._session.get(attach.get("content")).content
-                            }
-                        del attach, attachment, num
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
             # Delete variables that are no longer needed
-            del jira_issue, jira_issue_key, count
+            del jira_issue, jira_issue_key, count, attachment
 
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:
@@ -188,44 +186,26 @@ class PollerComponent(ResilientComponent):
             # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
             for soar_case in soar_cases_list:
                 for jira_issue in jira_issues_with_soar_case:
-                    if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
-                        soar_case_last_updated = soar_case.get("properties").get("soar_case_last_updated")
-                        # Convert str time to int time
-                        jira_issue_updated = str_time_to_int_time(jira_issue.get("fields").get("updated"))
+                    if jira_issue.get("key") == soar_case.get("jira_issue_id"):
+                        soar_case_last_updated = soar_case.get("soar_case_last_updated")
 
-                        if jira_issue_updated > soar_case_last_updated:
-                            soar_update_payload['patches'][soar_case.get("id")] = {
-                                                "version": soar_case.get("vers")+1,
-                                                "changes": [{
-                                                    "old_value": {"date": soar_case_last_updated},
-                                                    "new_value": {"date": jira_issue_updated},
-                                                    "field": {"name": "soar_case_last_updated"}
-                                                }]
-                                            },
+                        if jira_issue.get("updated") > soar_case_last_updated:
+                            # Add matching SOAR case and Jira issue to soar_cases_to_update list
+                            soar_cases_to_update.append([jira_issue, soar_case])
                             break
 
             # Delete variables that are no longer needed
-            del jira_issue, jira_issue_updated, soar_case, soar_case_last_updated
+            del jira_issue, soar_case, soar_case_last_updated
 
         # Delete variables that are no longer needed
         del jira_server, jira_issues_with_soar_case
 
-        # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
-        if soar_update_payload["patches"]:
-            # Removes characters added by python that are not needed
-            payload_str = str(soar_update_payload).replace('(','').replace(')','').replace(',,',',')
-            payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
-            soar_update_payload = literal_eval(payload_str)
-
-            # Send put request to SOAR
-            # This will update all cases that need to be updated for the give Jira server
-            response = self.rest_client().put("/incidents/patch", soar_update_payload)
-            # If failures dictionary is not empty then raise error
-            if response.get('failures'):
-                raise IntegrationError(str(response))
-
-        del soar_update_payload
-
         for jira_issue in jira_issues_to_add_to_soar:
             create_soar_incident(self.rest_client(), jira_issue)
-            LOG.info(f"SOAR incident created: {jira_issue.get('fields').get('summary')}")
+            LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
+
+        del jira_issues_to_add_to_soar # Delete variables that are no longer needed
+
+        update_soar_incident(self.rest_client, soar_cases_to_update)
+
+        print("f")
