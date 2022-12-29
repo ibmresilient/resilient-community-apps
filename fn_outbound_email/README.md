@@ -442,7 +442,7 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
 | `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
 | `mail_merge_body` | `bool` | No | `Yes` | Flag to merge `mail_body` with either the results from `mail_line_template` or `mail_template_label`. This setting is useful when including the original email message in a reply. |
-| `mail_encryption_recipients` | No | `-----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formated public keys used for encrypting the message for the recipients |
+| `mail_encryption_recipients` | `text` | No | -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formated public keys used for encrypting the message for the recipients |
 
 NOTE: 
 *  When constructing the public certificates for message encryption, ensure to specify it will be used for email signing. Here's an example of generating that certificate using openssl: `openssl x509 -req -days 3650 -in smime_user.csr -CA ca.crt -CAkey ca.key -set_serial 1 -out smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout`.
