@@ -29,6 +29,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.0 | 1/2023 | Added message signing and encryption capabilities |
 | v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
 | v2.0.1 | 10/2022 | Bug fix |
 | v2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
@@ -95,11 +96,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `43.1.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -117,7 +118,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -137,7 +138,10 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=39.0.0
 * resilient_lib>=32.0.0
 * six
-* BeautifulSoup 
+* BeautifulSoup
+* asn1crypto
+* python-smail
+* oscrypto
 
 #### Prerequisites
 <!--
@@ -251,6 +255,10 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 | **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
+| message_signer_private_cert | No | /path/to/private_cert.pem | private key for email signing |
+| private_key_password | No | $USE_PRIVATE_SECRET | password, if any, needed to use private key |
+| message_signer_public_cert | No | /path/to/public_cert.pem | public certificate included with message for email signing | 
+| additional_certs | No | | CSV List of additional certificates to be included (e.g. Intermediate or Root CA certs) |
 
 **_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
 
@@ -434,6 +442,12 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
 | `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
 | `mail_merge_body` | `bool` | No | `Yes` | Flag to merge `mail_body` with either the results from `mail_line_template` or `mail_template_label`. This setting is useful when including the original email message in a reply. |
+| `mail_encryption_recipients` | No | `-----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formated public keys used for encrypting the message for the recipients |
+
+NOTE: 
+*  When constructing the public certificates for message encryption, ensure to specify it will be used for email signing. Here's an example of generating that certificate using openssl: `openssl x509 -req -days 3650 -in smime_user.csr -CA ca.crt -CAkey ca.key -set_serial 1 -out smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout`.
+* Some processes for creating public certificates will use headers and trailers such as `-----BEGIN TRUSTED CERTIFICATE-----`. These will not be recognized by the software and should be edited to remove the 'Trusted' entry.
+
 
 </p>
 </details>
