@@ -257,7 +257,7 @@ The following table provides the settings you need to configure the app. These s
 | message_signer_private_cert | No | /path/to/private_cert.pem | private key for email signing |
 | private_key_password | No | $USE_PRIVATE_SECRET | password, if any, needed to use private key |
 | message_signer_public_cert | No | /path/to/public_cert.pem | public certificate included with message for email signing | 
-| additional_certs | No | | CSV List of additional certificates to be included (e.g. Intermediate or Root CA certs) |
+| additional_certs_dir | No | | Directory of additional certificates to be included for message signing (e.g. Intermediate or Root CA certs) |
 
 **_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
 

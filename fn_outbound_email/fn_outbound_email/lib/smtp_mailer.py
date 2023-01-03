@@ -4,7 +4,7 @@
 import base64
 import logging
 from .crypto_common import sign_email_message, encrypt_email_message, \
-    get_public_key_from_file, get_private_key_from_file
+    get_public_key_from_file, get_private_key_from_file, get_additional_certs
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
@@ -151,7 +151,8 @@ class SendSMTPEmail(ResilientComponent):
             LOG.info("signing content")
             multipart_message = sign_email_message(multipart_message, 
                                                    self.key_signer_cert,
-                                                   self.cert_signer)
+                                                   self.cert_signer,
+                                                   additional_certs=get_additional_certs(self.smtp_config_section.get('additional_certs_dir')))
         if encryption_certs:
             LOG.info("encrypting content")
             multipart_message = encrypt_email_message(multipart_message, encryption_certs)

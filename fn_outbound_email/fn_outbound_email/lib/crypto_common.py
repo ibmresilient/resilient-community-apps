@@ -2,11 +2,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
+import logging
 from oscrypto import asymmetric
+from os import listdir
+from os.path import isdir, join
 from smail import sign_message, encrypt_message
 from resilient_lib import s_to_b
+from email.mime.multipart import MIMEMultipart
 
-def _get_private_key(private_pem: bytes, private_key_password: str=None):
+LOG = logging.getLogger(__name__)
+
+def _get_private_key(private_pem: bytes, private_key_password: str=None) -> asymmetric.PrivateKey:
     """load a private key into the oscrypto.asymmetric.PrivateKey format
 
     :param private_pem: byte content of the private key
@@ -19,9 +25,7 @@ def _get_private_key(private_pem: bytes, private_key_password: str=None):
     if private_pem:
         return asymmetric.load_private_key(private_pem, private_key_password)
 
-
-
-def _get_file(file_path: str):
+def _get_file(file_path: str) -> bytes:
     """read contents of a file into byte format
 
     :param file_path: /path/to/file
@@ -33,7 +37,7 @@ def _get_file(file_path: str):
         with open(file_path, 'r', encoding='utf-8') as f:
             return s_to_b(f.read())
 
-def get_private_key_from_file(private_pem_file_path: str, private_key_password=None):
+def get_private_key_from_file(private_pem_file_path: str, private_key_password: str=None) -> asymmetric.PrivateKey:
     """load a private key into the oscrypto.asymmetric.PrivateKey format
 
     :param private_pem_file_path: /path/to/private.key
@@ -45,7 +49,7 @@ def get_private_key_from_file(private_pem_file_path: str, private_key_password=N
     """
     return _get_private_key(_get_file(private_pem_file_path), private_key_password=private_key_password)
 
-def get_public_key_from_file(public_pem_file_path: str):
+def get_public_key_from_file(public_pem_file_path: str) -> bytes:
     """load a public certificate into oscrypto.asymmetric.PublicKey
 
     :param public_pem_file_path: /path/to/public.crt
@@ -55,8 +59,17 @@ def get_public_key_from_file(public_pem_file_path: str):
     """
     return _get_file(public_pem_file_path) # future ability to convert to an object
 
+def get_additional_certs(cert_dir: str) -> list:
+    cert_list = [_get_file(join(cert_dir, cert_file)) for cert_file in listdir(cert_dir)] \
+        if cert_dir and isdir(cert_dir) else []
 
-def sign_email_message(message, key_signer, cert_signer):
+    if cert_list:
+        LOG.debug(f"Adding additional certs from {cert_dir}")
+
+    return cert_list
+
+def sign_email_message(message: bytes, key_signer: str, cert_signer: str, \
+                       additional_certs: list) -> MIMEMultipart:
     """Sign the email message using the email sender's private key
 
     :param message: message to encrypt
@@ -68,9 +81,9 @@ def sign_email_message(message, key_signer, cert_signer):
     :return: Signed message
     :rtype: MultiPart
     """
-    return sign_message(message, key_signer, cert_signer)
+    return sign_message(message, key_signer, cert_signer, additional_certs=additional_certs)
 
-def encrypt_email_message(message, cert_list: list):
+def encrypt_email_message(message, cert_list: list) -> MIMEMultipart:
     """Encrypt the message using the recipient(s) public key
 
     :param message: message to encrypt
