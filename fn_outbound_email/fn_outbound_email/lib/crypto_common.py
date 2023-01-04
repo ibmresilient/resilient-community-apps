@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
 
+import base64
 from cryptography.hazmat.primitives import serialization
 from email.mime.multipart import MIMEMultipart
 import logging
@@ -9,6 +10,14 @@ from smail import sign_message, encrypt_message
 from resilient_lib import s_to_b
 
 LOG = logging.getLogger(__name__)
+
+def convert_base64(contents: bytes):
+    try:
+        decoded_contents = base64.b64decode(contents)
+        # using 'in' as last char may be \n
+        return decoded_contents if base64.b64encode(decoded_contents) in contents else contents
+    except Exception:
+        return contents
 
 def get_p12_info(file_path: str, private_key: str):
     """read the signer p12 certificate and return the parts
@@ -20,7 +29,8 @@ def get_p12_info(file_path: str, private_key: str):
     :return: private_key, public_cert and additional certificates
     :rtype: serialization.RSAPrivateKey, serialization.Certificate, [list of additional Certificates]
     """
-    p12_cert = _get_file(file_path, mode='rb', return_bytes=False)
+    # get cert data - it may be in base64 format
+    p12_cert = convert_base64(_get_file(file_path, mode='rb', return_bytes=False))
 
     private_key, certificate, additional_certificates = serialization.pkcs12.load_key_and_certificates(
         p12_cert,
@@ -38,8 +48,8 @@ def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
     :param mode: str
     :param return_bytes: True to convert str as bytes
     :param bool
-    :return: byte format of file contents
-    :rtype: bytes
+    :return: byte format of file contents if return_bytes=True
+    :rtype: Any
     """
     if file_path:
         with open(file_path, mode) as f:
