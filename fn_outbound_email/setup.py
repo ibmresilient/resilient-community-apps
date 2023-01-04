@@ -36,12 +36,16 @@ setup(
 <br>* Send attachments with the email at the incident level or task level.
 <br>* Example rules included at the incident and task levels.
 <br>
-<br>New in version 2.0
+<br>New in version 2.X
 <br>* Ability to reference additional email headers: message-id, importance, in-reply-to.
 <br>* Define multiple templates from the app.config file.
 <br>* Capture outbound email conversations including both inbound and outbound messages.
 <br>* Expanded template support to include artifact, notes and SOAR links (case and task).
-<br>* Support for OAuth authentication.""",
+<br>* Support for OAuth authentication.
+<br>* Message Signing and Encryption
+<br>
+<br><ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<br><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'b4',
         'resilient_circuits>=46.0.0',
@@ -49,7 +53,7 @@ setup(
         'Jinja2>=2.9.6',
         'six',
         'python-smail',
-        'oscrypto'
+        'cryptography'
     ],
     packages=find_packages(),
     include_package_data=True,

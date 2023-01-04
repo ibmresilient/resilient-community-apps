@@ -73,12 +73,9 @@ smtp_ssl_mode=starttls
 # template_file=data/templates/example_send_email.jinja
 template_file=data/templates/example_send_email.jinja
 
-# Optional - PEM formatted certs
-#message_signer_private_cert= /path/to/private_cert.pem
-#private_key_password= $USE_PRIVATE_SECRET
-#message_signer_public_cert= /path/to/public_cert.pem
-# directory of additional certificates to be included for message signing (e.g. Intermediate or Root CA certs)
-#additional_certs_dir=
+# Optional - P12 formatted cert for signing/encrypting email account
+p12_signing_encrypting_cert=
+p12_signing_encrypting_cert_password=
 
 [fn_outbound_email:templates]
 ## specify templates for email processing. These templates are added to the mail_template_select activity field

@@ -1,10 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 import base64
 import logging
-from .crypto_common import sign_email_message, encrypt_email_message, \
-    get_public_key_from_file, get_private_key_from_file, get_additional_certs
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
@@ -17,6 +15,7 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
 from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SECTION
 from fn_outbound_email.lib.oauth2 import OAuth2
+from .crypto_common import sign_email_message, encrypt_email_message, get_p12_info
 
 LOG = logging.getLogger(__name__)
 
@@ -37,6 +36,11 @@ PRIORITY_LOOKUP = {
 }
 
 class SendSMTPEmail(ResilientComponent):
+    """Class for all send mail related activities
+
+    :param ResilientComponent: Base environment
+    :type ResilientComponent: object
+    """
 
     def __init__(self, opts, mail_context):
         self.opts = opts
@@ -92,11 +96,24 @@ class SendSMTPEmail(ResilientComponent):
             self.headers[PRIORITY_HEADER] = PRIORITY_LOOKUP.get(self.mail_context['mail_importance'].lower(), 2)
 
         # signing certs
-        self.key_signer_cert = get_private_key_from_file(self.smtp_config_section.get('message_signer_private_cert'),
-                                                         self.smtp_config_section.get('private_key_password'))
-        self.cert_signer = get_public_key_from_file(self.smtp_config_section.get('message_signer_public_cert'))
+        private_key_password = self.smtp_config_section.get('p12_signing_encrypting_cert_password')
+        self.key_signer_cert, self.cert_signer, self.additional_certs = get_p12_info(
+            self.smtp_config_section.get('p12_signing_encrypting_cert'),
+            private_key_password)
 
     def send(self, body_html: str="", body_text: str="", encryption_certs: list=None):
+        """send email
+
+        :param body_html: html formatted message body, defaults to ""
+        :type body_html: str, optional
+        :param body_text: text formatted message body, defaults to ""
+        :type body_text: str, optional
+        :param encryption_certs: list of PEM formatted client public certs, defaults to None
+        :type encryption_certs: list, optional
+        :raises SimpleSendEmailException: errors
+        :return: error message
+        :rtype: str, optional
+        """
         if not self.opts:
             raise SimpleSendEmailException("opts required")
         if not self.from_address:
@@ -149,10 +166,10 @@ class SendSMTPEmail(ResilientComponent):
         # sign and encrypt?
         if self.key_signer_cert and self.cert_signer:
             LOG.info("signing content")
-            multipart_message = sign_email_message(multipart_message, 
+            multipart_message = sign_email_message(multipart_message,
                                                    self.key_signer_cert,
                                                    self.cert_signer,
-                                                   additional_certs=get_additional_certs(self.smtp_config_section.get('additional_certs_dir')))
+                                                   additional_certs=self.additional_certs)
         if encryption_certs:
             LOG.info("encrypting content")
             multipart_message = encrypt_email_message(multipart_message, encryption_certs)

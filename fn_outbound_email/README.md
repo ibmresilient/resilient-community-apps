@@ -140,7 +140,7 @@ Additional package dependencies may exist for each of these packages:
 * six
 * BeautifulSoup
 * python-smail
-* oscrypto
+* cryptography
 
 #### Prerequisites
 <!--
@@ -254,10 +254,8 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 | **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
-| message_signer_private_cert | No | /path/to/private_cert.pem | private key for email signing |
-| private_key_password | No | $USE_PRIVATE_SECRET | password, if any, needed to use private key |
-| message_signer_public_cert | No | /path/to/public_cert.pem | public certificate included with message for email signing | 
-| additional_certs_dir | No | | Directory of additional certificates to be included for message signing (e.g. Intermediate or Root CA certs) |
+| p12_signing_encrypting_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing and encrypting. In p12 format. |
+| p12_signing_encrypting_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
 
 **_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
 
