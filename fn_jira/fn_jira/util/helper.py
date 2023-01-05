@@ -236,7 +236,7 @@ def create_soar_incident(res_client, issue):
             comments.append({
                 "text": {
                     "format": "text",
-                    "content": comment.get("body")
+                    "content": comment
                 },
                 "type": "incident"
             })
@@ -304,14 +304,14 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
     soar_field_type = {
         "name": "text",
-        "description": "content",
+        "description": "textarea",
         "severity_code": "text",
         "create_date": "date",
         "discovered_date": "date",
-        "jira_internal_url": "content",
+        "jira_internal_url": "textarea",
         "jira_issue_id": "text",
         "jira_server": "text",
-        "jira_url": "content",
+        "jira_url": "textarea",
         "jira_project_key": "text",
         "soar_case_last_updated": "date",
         "jira_issue_status": "text"
@@ -321,10 +321,44 @@ def update_soar_incident(res_client, soar_cases_to_update):
     soar_update_payload = {"patches": {}}
 
     for update in soar_cases_to_update:
-        jira = update[0]
-        soar = update[1]
+        jira = update[0] # Get the Jira issue
+        soar = update[1] # Get the SOAR case
 
-        # Check if new comments added or old comments changed
+        del update # Delete variables that are no longer needed
+
+        # Code to check if new comments added or old comments changed/deleted
+        jira_comments = jira.pop("comment") if jira.get("comment") else []
+        soar_comments = soar.pop("comments") if soar.get("comments") else []
+
+        if soar_comments:
+            for num, soar_comment in enumerate(soar_comments):
+                soar_comment_content = soar_comment.get("content")
+                # Delete comment on SOAR if comment is not found on Jira issue
+                if soar_comment_content not in jira_comments:
+                    # Send delete request to SOAR
+                    try:
+                        res_client.delete(f"/incidents/{soar.get('id')}/comments/{soar_comment.get('id')}")
+                    except Exception as e:
+                        raise IntegrationError(str(e))
+                    # Remove comment from list of SOAR comments
+                    soar_comments.pop(num)
+                elif soar_comment_content in jira_comments: # If comment on SOAR and Jira then remove it from jira_comments and soar_comments
+                    jira_comments.pop(jira_comments.index(soar_comment_content))
+                    soar_comments.pop(num)
+
+            # Delete variables that are no longer needed
+            del num, soar_comment
+
+        if jira_comments:
+            for jira_comment in jira_comments:
+                # Send delete request to SOAR
+                try:
+                    res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": jira_comment}})
+                except Exception as e:
+                    raise IntegrationError(str(e))
+
+        # Delete variables that are no longer needed
+        del jira_comments, soar_comments
 
         # Check if new attachments added
 
@@ -359,10 +393,10 @@ def update_soar_incident(res_client, soar_cases_to_update):
     if soar_update_payload["patches"]:
         # Send put request to SOAR
         # This will update all cases that need to be updated for the give Jira server
-        response = res_client.put("/incidents/patch", soar_update_payload)
-        # If failures dictionary is not empty then raise error
-        if response.get('failures'):
-            raise IntegrationError(str(response))
+        try:
+            res_client.put("/incidents/patch", soar_update_payload)
+        except Exception as e:
+            raise IntegrationError(str(e))
 
     del soar_update_payload # Delete variables that are no longer needed
 

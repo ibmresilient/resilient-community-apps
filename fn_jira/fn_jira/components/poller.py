@@ -198,7 +198,7 @@ class PollerComponent(ResilientComponent):
                                 break
 
                 # Delete variables that are no longer needed
-                del jira_issue, soar_case, soar_case_last_updated
+                del soar_case
 
         # Delete variables that are no longer needed
         del jira_server, jira_issues_with_soar_case
