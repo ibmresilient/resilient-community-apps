@@ -62,11 +62,16 @@ class SOARCommon():
         :return soar_cases: (list) Returned list of cases
         :return error_msg: (str) Any error during the query or None
         """
+        fields_to_remove = ["perms", "creator", "creator_principal", "exposure_type_id", "workspace", "assessment", "pii",
+                            "gdpr", "creator_id", "crimestatus_id", "sequence_code", "owner_id", "plan_status", "phase_id",
+                            "org_handle", "task_changes", "cm", "regulators", "hipaa", "actions"]
+
+
         query = SOARCommon._build_search_query(search_fields, open_cases = open_cases)
         cases_list = []
 
         try:
-            cases_list, err_msg = rest_client.post('/incidents/query?return_level=normal', query), None
+            cases_list, err_msg = rest_client.post('/incidents/query?return_level=full&handle_format=names', query), None
         except SimpleHTTPException as err:
             LOG.error(str(err))
             LOG.error(query)
@@ -74,23 +79,9 @@ class SOARCommon():
 
         # Remove case keys that are empty and unused keys
         for num in range(len(cases_list)):
-            cases_list[num].pop("perms")
-            cases_list[num] = dict([(key,value) for key,value in cases_list[num].items() if value])
-            cases_list[num].pop("creator")
-            cases_list[num].pop("creator_principal")
-            cases_list[num].pop("exposure_type_id")
-            cases_list[num].pop("workspace")
-            cases_list[num].pop("assessment")
-            cases_list[num].pop("pii")
-            cases_list[num].pop("gdpr")
-            cases_list[num].pop("creator_id")
-            cases_list[num].pop("crimestatus_id")
-            cases_list[num].pop("sequence_code")
-            cases_list[num].pop("owner_id")
-            cases_list[num].pop("plan_status")
-            cases_list[num].pop("phase_id")
-            cases_list[num].pop("org_handle")
-            cases_list[num].pop("task_changes")
+            cases_list[num] = dict([(key,value) for key,value in cases_list[num].items() if key == "comments" or value])
+            for field in fields_to_remove:
+                cases_list[num].pop(field)
 
             # Change the value of the dict key to the one value that is used in that dict
             for key, value in cases_list[num].get("properties").items():
@@ -153,7 +144,7 @@ class JiraCommon():
         :param search_filters: Search filters for Jira
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
-        fields = ["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comments", "created"]
+        fields = ["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created"]
 
         issues_list = jira_client.search_issues(search_filters, maxResults=max_results, fields=fields, json_result=True).get("issues")
 
