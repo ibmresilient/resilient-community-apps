@@ -3,7 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
-from resilient_lib import validate_fields, str_to_bool
+from resilient_lib import validate_fields, str_to_bool, IntegrationError
 from fn_joe_sandbox_analysis.util.helper import connect_to_joe_sandbox, PACKAGE_NAME
 from io import BytesIO
 from time import sleep
@@ -90,7 +90,8 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info(f"Submission_id: {submission_id}")
 
         # Get submission status
-        submission_status = joesandbox.submission_info(submission_id).get("status")
+        submission_info = joesandbox.submission_info(submission_id)
+        submission_status = submission_info.get("status")
         yield self.status_message(f"Submission ID: {submission_id}, Submission Status: {submission_status}")
 
         # Sleep and loop until submission status equals finished
@@ -125,6 +126,7 @@ class FunctionComponent(AppFunctionComponent):
                                                mimetype=MIMETYPES[jsb_report_type])
         except Exception as e:
             self.LOG.debug(str(e))
+            raise IntegrationError(f"Attachment failed to post with error: {str(e)}")
 
         # Fill results
         results = {
