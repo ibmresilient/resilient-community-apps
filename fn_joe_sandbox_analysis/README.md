@@ -1,4 +1,4 @@
-# Joe Sandbox Function for IBM SOAR
+# Joe Sandbox Analysis Function for IBM SOAR
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -21,7 +21,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 12/2022 | Updated jbxapi version used, added new settings in the app.config, and added support for basic version of Joe Sandbox cloud |
+| 2.0.0 | 12/2022 | <ul><li>Updated jbxapi version to 3.19.0</li><li>Added the following settings to the app.config: jsb_systems, jsb_secondary_results, jsb_email_notification</li><li>Added support for basic version of Joe Sandbox cloud</li></ul>|
 | 1.0.5 | 10/2022 | Added support for self-signed certificates when connecting to an on-premises machine |
 | 1.0.4 | 10/2020 | Apphost support |
 | 1.0.3 | 10/2020 | Bug fixes |
@@ -32,13 +32,11 @@
 
 ## Overview
 
-**Joe Sandbox Function for IBM SOAR**
+**Joe Sandbox Analysis Function for IBM SOAR**
 
 *This package contains a function that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM SOAR.*
 
  ![screenshot: main](./doc/screenshots/main.png)
-
-Joe Sandbox Function for IBM SOAR
 
 ### Key Features
 * Analyze incident attachments
@@ -59,7 +57,7 @@ If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `44.0.7585`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=42.0.0`.
+* Integration server is running `resilient_circuits>=47.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -92,7 +90,7 @@ The app does support a proxy server.
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * jbxapi>=3.19.0
-* resilient_circuits>=42.0.0
+* resilient_circuits>=47.0.0
 
 ---
 
@@ -115,7 +113,7 @@ The following table provides the settings you need to configure the app. These s
 | **jsb_email_notification** | No | `True` | *Send an e-mail upon completion of the analysis* |
 | **jsb_secondary_results** | No | `True` | *Enables secondary Results such as Yara rule generation, classification via Joe Sandbox Class as well as several detail reports.* |
 | **jsb_verify** | No | `False` | *jsb_verify can be False or a path to a certificate* |
-| **jsb_systems** | No | `w7x64` | *Name of system to use or comment out for automatic selection* |
+| **jsb_systems** | No | `w7x64` | *Name of system to use or comment out for automatic selection. IP Addresses, DNS Names, URL, or URI Path will default to w7x64 system if none given. This is to prevent it from failing if automatic server selected is android* |
 
 ---
 
@@ -182,7 +180,10 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.artifact_value = artifact.value
+inputs.artifact_type = artifact.type
+inputs.artifact_id = artifact.id
 ```
 
 </p>
@@ -192,7 +193,12 @@ None
 <p>
 
 ```python
-None
+artifact_analysis = playbook.functions.results.artifact_analysis
+
+incident.addNote("""<br>Joe Sandbox analysis <b>{0}</b> complete
+                    <b>Artifact:</b> '{1}'
+                    <b>Report URL:</b> <a href='{2}'>{2}</a>
+                    <b>Detection Status:</b><b>{3}</b>""".format(artifact_analysis.analysis_report_name, artifact.value, artifact_analysis.analysis_report_url, artifact_analysis.analysis_status))
 ```
 
 </p>
