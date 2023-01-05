@@ -21,6 +21,7 @@ class PollerComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.opts = opts
+        self.rest_client()
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
@@ -134,14 +135,15 @@ class PollerComponent(ResilientComponent):
 
             # List of Jira key for the SOAR cases found that link to the current server
             soar_cases_jira_key = []
-            # Get the Jira issue keys from the SOAR cases that are linked to the current server
-            for soar_case in soar_cases_list:
-                soar_case_jira_server = soar_case.get("jira_server")
-                if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
-                    soar_cases_jira_key.append(soar_case.get("jira_issue_id"))
+            if soar_cases_list:
+                # Get the Jira issue keys from the SOAR cases that are linked to the current server
+                for soar_case in soar_cases_list:
+                    soar_case_jira_server = soar_case.get("jira_server")
+                    if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
+                        soar_cases_jira_key.append(soar_case.get("jira_issue_id"))
 
-            # Delete variables that are no longer needed
-            del soar_case_jira_server, soar_case
+                # Delete variables that are no longer needed
+                del soar_case_jira_server, soar_case
 
             # List of Jira Issues that have corresponding SOAR cases
             jira_issues_with_soar_case = []
@@ -159,7 +161,7 @@ class PollerComponent(ResilientComponent):
                             "filename": attach.get("filename"),
                             "content": jira_client._session.get(attach.get("content")).content
                         }
-                    del attach, num
+                    del attach, num # Delete variables that are no longer needed
 
                 if jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
@@ -183,19 +185,20 @@ class PollerComponent(ResilientComponent):
                 # Delete variables that are no longer needed
                 del cases, soar_cases_jira_key, jira_client, jira_issue
 
-            # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
-            for soar_case in soar_cases_list:
-                for jira_issue in jira_issues_with_soar_case:
-                    if jira_issue.get("key") == soar_case.get("jira_issue_id"):
-                        soar_case_last_updated = soar_case.get("soar_case_last_updated")
+            if soar_cases_list:
+                # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
+                for soar_case in soar_cases_list:
+                    for jira_issue in jira_issues_with_soar_case:
+                        if jira_issue.get("key") == soar_case.get("jira_issue_id"):
+                            soar_case_last_updated = soar_case.get("soar_case_last_updated")
 
-                        if jira_issue.get("updated") > soar_case_last_updated:
-                            # Add matching SOAR case and Jira issue to soar_cases_to_update list
-                            soar_cases_to_update.append([jira_issue, soar_case])
-                            break
+                            if jira_issue.get("updated") > soar_case_last_updated:
+                                # Add matching SOAR case and Jira issue to soar_cases_to_update list
+                                soar_cases_to_update.append([jira_issue, soar_case])
+                                break
 
-            # Delete variables that are no longer needed
-            del jira_issue, soar_case, soar_case_last_updated
+                # Delete variables that are no longer needed
+                del jira_issue, soar_case, soar_case_last_updated
 
         # Delete variables that are no longer needed
         del jira_server, jira_issues_with_soar_case
@@ -206,6 +209,4 @@ class PollerComponent(ResilientComponent):
 
         del jira_issues_to_add_to_soar # Delete variables that are no longer needed
 
-        update_soar_incident(self.rest_client, soar_cases_to_update)
-
-        print("f")
+        update_soar_incident(self.rest_client(), soar_cases_to_update)
