@@ -253,8 +253,9 @@ def create_soar_incident(res_client, issue):
             "jira_issue_id": jira_key,
             "jira_server": issue.get("jira_server"),
             "jira_url": f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>",
-            "jira_project_key": issue.get("key"),
-            "soar_case_last_updated": issue.get("updated")
+            "jira_project_key": issue.get("project"),
+            "soar_case_last_updated": issue.get("updated"),
+            "jira_issue_status": issue.get("status")
         },
         "comments": comments
     }
@@ -278,17 +279,6 @@ def create_soar_incident(res_client, issue):
             except Exception as err:
                 raise IntegrationError(err)
 
-def create_update_payload(old_value, new_value, ver, field_name):
-
-     return {
-            "version": ver+1,
-            "changes": [{
-                "old_value": {"date": old_value},
-                "new_value": {"date": new_value},
-                "field": {"name": field_name}
-            }]
-        },
-
 def update_soar_incident(res_client, soar_cases_to_update):
     """
     Update the SOAR cases with new data from the corresponding Jira issue
@@ -297,6 +287,36 @@ def update_soar_incident(res_client, soar_cases_to_update):
     :return:
     """
 
+    soar_to_jira_fields = {
+        "name": "summary",
+        "description": "description",
+        "severity_code": "priority",
+        "create_date": "created",
+        "discovered_date": "created",
+        "jira_internal_url": "self",
+        "jira_issue_id": "key",
+        "jira_server": "jira_server",
+        "jira_url": "self",
+        "jira_project_key": "project",
+        "soar_case_last_updated": "updated",
+        "jira_issue_status": "status"
+    }
+
+    soar_field_type = {
+        "name": "text",
+        "description": "content",
+        "severity_code": "text",
+        "create_date": "date",
+        "discovered_date": "date",
+        "jira_internal_url": "content",
+        "jira_issue_id": "text",
+        "jira_server": "text",
+        "jira_url": "content",
+        "jira_project_key": "text",
+        "soar_case_last_updated": "date",
+        "jira_issue_status": "text"
+    }
+
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
 
@@ -304,29 +324,39 @@ def update_soar_incident(res_client, soar_cases_to_update):
         jira = update[0]
         soar = update[1]
 
-        print("f")
+        # Check if new comments added or old comments changed
 
-        soar_to_jira_fields = {
-            "name": "summary",
-            "description": "description",
-            "severity_code": "priority"
-        }
+        # Check if new attachments added
+
+        soar_update_payload['patches'][soar.get("id")] = {
+                "version": soar.get("vers")+1,
+                "changes": []
+                }
 
         for key, value in soar_to_jira_fields.items():
-            jira_fields = jira.get("fields")
-            if soar.get(key) != jira_fields.get(value):
-                soar_update_payload['patches'][soar.get("id")] = create_update_payload(soar.get(key), jira_fields.get(value), soar.get("vers"), key)
-            print("f")
+            soar_value = soar.get(key)
+            jira_value = jira.get(value)
 
+            if key == "jira_url": # If the key is equal to jira_url
+                # Create jira_url
+                jira_key = jira.get("key")
+                jira_value = f'<a href="{jira_value[:jira_value.index("/", 8)]}/browse/{jira_key}">{jira_key}</a>'
+                del jira_key
 
+            if soar_value != jira_value: # Check if the current SOAR value is different fromt the current Jira value
+                soar_update_payload['patches'][soar.get("id")]["changes"].append({
+                    "old_value": {soar_field_type[key]: soar_value},
+                    "new_value": {soar_field_type[key]: jira_value},
+                    "field": {"name": key}
+                })
+
+        del key, value, soar_value, jira_value # Delete variables that are no longer needed
+
+    # Delete variables that are no longer needed
+    del soar_field_type, soar_to_jira_fields, soar_cases_to_update
 
     # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
     if soar_update_payload["patches"]:
-        # Removes characters added by python that are not needed
-        payload_str = str(soar_update_payload).replace('(','').replace(')','').replace(',,',',')
-        payload_str = payload_str[0:payload_str.rfind(",")]+payload_str[payload_str.rfind(",")+1:]
-        soar_update_payload = literal_eval(payload_str)
-
         # Send put request to SOAR
         # This will update all cases that need to be updated for the give Jira server
         response = res_client.put("/incidents/patch", soar_update_payload)
