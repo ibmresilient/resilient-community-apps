@@ -46,7 +46,7 @@ class IncidentMock(BasicResilientMock):
         LOG.info("incident_types_get")
         return requests_mock.create_response(request, status_code=200, json=IncidentMock.mock_incident_fields)
 
-    @resilient_endpoint("GET", "/incidents/[0-9]+$")
+    @resilient_endpoint("GET", "/incidents/[0-9]+\?handle_format=names$")
     def incident_get(self, request):
         """ Callback for GET to /orgs/<org_id>/incidents/<inc_id> """
         LOG.info("incident_get")

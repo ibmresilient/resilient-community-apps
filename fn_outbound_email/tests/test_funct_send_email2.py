@@ -62,7 +62,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_no_recipient_to = {
@@ -78,7 +79,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_no_body = {
@@ -94,7 +96,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_both_templates = {
@@ -110,7 +113,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
@@ -168,7 +172,7 @@ class TestSendEmail2:
     }
 
     success_inline_template_with_body = {
-        "mail_inline_template": "{{ incident.id }}\n{{ mail_body }}",
+        "mail_inline_template": "{{ incident.id }}-{{ mail.mail_subject }}",
         "mail_from": None,
         "mail_template_label": None,
         "mail_body": "success_inline_template_with_body",
@@ -189,7 +193,7 @@ class TestSendEmail2:
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (success_body, success_body['mail_body']),
         (success_inline_template, str(success_inline_template['mail_incident_id'])),
-        (success_inline_template_with_body, f"{str(success_inline_template_with_body['mail_incident_id'])}\n{success_inline_template_with_body['mail_body']}")
+        (success_inline_template_with_body, f"{str(success_inline_template_with_body['mail_incident_id'])}-{success_inline_template_with_body['mail_subject']}\n{success_inline_template_with_body['mail_body']}")
     ])
     def test_inline_template(self, mock_send_msg, circuits_app, mock_inputs, expected_results):
         mock_send_msg.return_value = None
