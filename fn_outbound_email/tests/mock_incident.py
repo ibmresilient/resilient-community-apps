@@ -35,15 +35,24 @@ class IncidentMock(BasicResilientMock):
         "vers": 5
     }
 
+    mock_incident_attachments = {
+        "attachments": [],
+        "max_results_exceeded": False
+    }
+
     @resilient_endpoint("GET", "/types/incident$")
     def incident_types_get(self, request):
         """ Callback for GET to /orgs/<org_id>/types/incident """
         LOG.info("incident_types_get")
         return requests_mock.create_response(request, status_code=200, json=IncidentMock.mock_incident_fields)
 
-    @resilient_endpoint("GET", "/incidents/[0-9]+")
+    @resilient_endpoint("GET", "/incidents/[0-9]+$")
     def incident_get(self, request):
         """ Callback for GET to /orgs/<org_id>/incidents/<inc_id> """
         LOG.info("incident_get")
         return requests_mock.create_response(request, status_code=200, json=IncidentMock.incident_1)
 
+    @resilient_endpoint("POST", "/incidents/[0-9]+/attachments/query*")
+    def incident_attachment_post(self, request):
+        LOG.info("incident_attachment_post")
+        return requests_mock.create_response(request, status_code=200, json=IncidentMock.mock_incident_attachments)

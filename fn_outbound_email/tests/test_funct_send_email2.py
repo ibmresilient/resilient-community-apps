@@ -146,7 +146,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     success_inline_template = {
@@ -162,7 +163,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     success_inline_template_with_body = {
@@ -179,7 +181,8 @@ class TestSendEmail2:
         "mail_in_reply_to": None,
         "mail_cc": None,
         "mail_incident_id": 123,
-        "mail_merge_body": True
+        "mail_merge_body": True,
+        "mail_encryption_recipients": None
     }
 
     @patch('fn_outbound_email.components.funct_send_email2.send_msg')
