@@ -38,6 +38,9 @@ def get_p12_info(file_path: str, private_key: str):
     :return: private_key, public_cert and additional certificates
     :rtype: serialization.RSAPrivateKey, serialization.Certificate, [list of additional Certificates]
     """
+    if not file_path:
+        return None, None, None
+
     # get cert data - it may be in base64 format
     p12_cert = convert_base64(_get_file(file_path, mode='rb', return_bytes=False))
 
@@ -100,7 +103,7 @@ def encrypt_email_message(message: MIMEMultipart, cert_list: list[bytes]) -> MIM
 
     :param message: message to encrypt
     :type message: MIMEMultipart
-    :param cert_list: list of recipient public certifcates in PEM format
+    :param cert_list: list of recipient public certificates in PEM format
     :type cert_list: list[bytes]
     :return: encrypted message
     :rtype: MIMEMultipart
@@ -112,6 +115,9 @@ def get_extended_key_usage_from_certificate(certificate: Certificate):
     Given an X.509 certificate, extract and return the extendedKeyUsage
     extension.
     """
+    if not certificate:
+        return []
+
     try:
         return certificate.extensions.get_extension_for_oid(
             oid.ExtensionOID.EXTENDED_KEY_USAGE

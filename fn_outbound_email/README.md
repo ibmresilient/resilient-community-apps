@@ -54,7 +54,7 @@ with inbound mail. This release incorporates many changes which are summarized h
 * Additional header available for outbound email (i.e. message-id, in-reply-to, importance).
 * A new function to preserve the original outbound email capability and allow all the new functionality in
 v2.0 to be added. See [Function - Outbound Email: Send Email2](#function---outbound-email-send-email2).
-* OAuth authenticateion
+* OAuth authentication
 ---
 
 ## Overview
@@ -251,11 +251,26 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS.* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection.* |
 | **smtp_ssl_mode** | Yes | `None` | *Set to 'starttls' when using smtp_user and smtp_password.* |
-| **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
+| **smtp_ssl_cafile** | No | `false or /path/to/smtp_certificate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 | **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
-| p12_signing_encrypting_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing and encrypting. In p12 format. |
-| p12_signing_encrypting_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
+| p12_signing_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing. In p12 format. |
+| p12_signing_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
+
+#### P12 Signing and Unencrypting Certificates
+The signing and unencrypting certificates are bundled in the pkcs12 format which includes both the email sender's private key and public certificate needed for signing emails. 
+The public certificate needs to have the `emailProtection` trust in order to be used for signing. 
+
+It should be noted that this same pkcs12 bundle should be added to the recipients' email client app. Adding the certificate allows the email client to verify the sender's email digital signature. If using a self-signed CA certificate with your email certificate, make sure to also add the CA certificate to each recipient's CA trust store.
+
+Each mail client has it's own way of importing email certificates. Consult your application's documentation on how to configure those certificates. Below is how  the Thunderbird Email Client imports email certificates used for both email signature verification and for unencrypting recipient emails.
+
+![screenshot: fn-send-email ](./doc/screenshots/p12_certificates.png)
+
+When the certificates are properly imported, your emails will have some indication that the digital signature is verified and, if encrypted, that the message was successfully unencrypted.
+
+![screenshot: fn-send-email ](./doc/screenshots/signed_and_encrypted_email.png)
+
 
 #### Notes
 * The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
@@ -799,7 +814,7 @@ To include a link back to the SOAR incident, add the following information to yo
 
 ### Task Links
 
-To include a link back to the SOAR task, add the following information to your inline template. Unfortunetely, this cannot be added to a template defined in your app.config file.
+To include a link back to the SOAR task, add the following information to your inline template. Unfortunately, this cannot be added to a template defined in your app.config file.
 
 ```
 "Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({inc_id}, {task_id}) }}}}'>{task_name}</a>".format(inc_id=incident.id, task_id=task.id, task_name=task.name)
@@ -833,9 +848,34 @@ https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/
 
   https://pepipost.com/blog/what-is-smtp
 
-* Some mailservers do not work with this level of authentication/protocal.
+* Some mail servers do not work with this level of authentication/protocol.
 
+### Message Signing and Encryption
+The following references can be useful if creating your own email signing certificates.
+
+* https://www.dalesandro.net/create-self-signed-smime-certificates/
+* https://access.redhat.com/solutions/28965
+
+The first link refers to the general procedure for creating an email certificate using a self-signed CA certificate. This procedure is sufficient for use with this app.
+
+The second link refers to a way to designate your email certificate with the correct emailProtection enhanced key usage attribute. My 'some_extensions.txt` file has the following setting for emailProtection:
+
+```
+[some_ext]
+extendedKeyUsage = 1.3.6.1.5.5.7.3.4
+```
+
+The modified command to sign the certificate signing request file is:
+```
+openssl x509 -req -days 365 -in your_smime_user.csr -CA your_ca.crt -CAkey your_ca_private.key -set_serial 1 -out your_smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout -extensions some_ext -extfile some_extensions.txt
+```
+
+If this extendedKeyUsage attribute is missing, the certificate bundle is still valid, but your logs will show the following warning which can be ignored:
+
+```
+2023-01-05 21:03:55,584 WARNING [smtp_mailer] Unable to confirm public certificate has trust for 'emailProtection'. Continuing.
+```
 ---
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/soarcommunity for assistance and use the [My Support link](https://ibm.com/mysupport) to open a support case.
+This is an IBM supported app. Please search the Community https://ibm.biz/soarcommunity for community assistance and use the [My Support link](https://ibm.com/mysupport) to open a support case.

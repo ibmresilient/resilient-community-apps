@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-- coding: utf-8 --
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 from setuptools import setup, find_packages

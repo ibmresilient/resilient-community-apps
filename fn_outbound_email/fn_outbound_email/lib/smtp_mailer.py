@@ -96,9 +96,9 @@ class SendSMTPEmail(ResilientComponent):
             self.headers[PRIORITY_HEADER] = PRIORITY_LOOKUP.get(self.mail_context['mail_importance'].lower(), 2)
 
         # signing certs
-        private_key_password = self.smtp_config_section.get('p12_signing_encrypting_cert_password')
+        private_key_password = self.smtp_config_section.get('p12_signing_cert_password')
         self.key_signer_cert, self.cert_signer, self.additional_certs = get_p12_info(
-            self.smtp_config_section.get('p12_signing_encrypting_cert'),
+            self.smtp_config_section.get('p12_signing_cert'),
             private_key_password)
 
         # confirm that the signing cert has the permissions for email signing
