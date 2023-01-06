@@ -98,7 +98,7 @@ def sign_email_message(message: MIMEMultipart,
                         cert_signer.public_bytes(serialization.Encoding.PEM),
                         additional_certs=additional_certs_pem)
 
-def encrypt_email_message(message: MIMEMultipart, cert_list: list[bytes]) -> MIMEMultipart:
+def encrypt_email_message(message: MIMEMultipart, cert_list: list) -> MIMEMultipart:
     """Encrypt the message using the recipient(s) public key
 
     :param message: message to encrypt
