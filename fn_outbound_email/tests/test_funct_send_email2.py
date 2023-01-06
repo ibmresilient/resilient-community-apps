@@ -137,7 +137,7 @@ class TestSendEmail2:
         "mail_inline_template": None,
         "mail_from": None,
         "mail_template_label": None,
-        "mail_body": "This is a body",
+        "mail_body": "success_body",
         "mail_importance": None,
         "mail_bcc": None,
         "mail_attachments": None,
@@ -154,7 +154,7 @@ class TestSendEmail2:
         "mail_inline_template": "{{ incident.id }}",
         "mail_from": None,
         "mail_template_label": None,
-        "mail_body": "This is a body",
+        "mail_body": "success_inline_template",
         "mail_importance": None,
         "mail_bcc": None,
         "mail_attachments": None,
@@ -168,10 +168,10 @@ class TestSendEmail2:
     }
 
     success_inline_template_with_body = {
-        "mail_inline_template": "{{ incident.id }}",
+        "mail_inline_template": "{{ incident.id }}\n{{ mail_body }}",
         "mail_from": None,
         "mail_template_label": None,
-        "mail_body": "This is a body",
+        "mail_body": "success_inline_template_with_body",
         "mail_importance": None,
         "mail_bcc": None,
         "mail_attachments": None,
