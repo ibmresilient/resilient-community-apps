@@ -73,7 +73,7 @@ def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
 def sign_email_message(message: MIMEMultipart,
                        key_signer: RSAPrivateKey,
                        cert_signer: x509Certificate,
-                       additional_certs: list[x509Certificate]) -> MIMEMultipart:
+                       additional_certs: list) -> MIMEMultipart:
     """Sign the email message using the email sender's private key
 
     :param message: message to encrypt
