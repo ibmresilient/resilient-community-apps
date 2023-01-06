@@ -5,7 +5,7 @@
 import base64
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
-from cryptography.x509 import Certificate, ExtensionNotFound, oid
+from cryptography.x509 import Certificate as x509Certificate, ExtensionNotFound, oid
 from email.mime.multipart import MIMEMultipart
 import logging
 from smail import sign_message, encrypt_message
@@ -36,7 +36,7 @@ def get_p12_info(file_path: str, private_key: str):
     :param private_key: private key to decode cert
     :type private_key: str
     :return: private_key, public_cert and additional certificates
-    :rtype: serialization.RSAPrivateKey, serialization.Certificate, [list of additional Certificates]
+    :rtype: serialization.RSAPrivateKey, x509.Certificate, [list of additional x509.Certificates]
     """
     if not file_path:
         return None, None, None
@@ -72,8 +72,8 @@ def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
 
 def sign_email_message(message: MIMEMultipart,
                        key_signer: RSAPrivateKey,
-                       cert_signer: Certificate,
-                       additional_certs: list[Certificate]) -> MIMEMultipart:
+                       cert_signer: x509Certificate,
+                       additional_certs: list[x509Certificate]) -> MIMEMultipart:
     """Sign the email message using the email sender's private key
 
     :param message: message to encrypt
@@ -81,7 +81,7 @@ def sign_email_message(message: MIMEMultipart,
     :param cert_signer: public certificate
     :type cert_signer: bytes
     :param additional_certs: additional certificates to include in the signature
-    :type additional_certs: list[Certificate]
+    :type additional_certs: list[x509Certificate]
     :return: Signed message
     :rtype: MIMEMultipart
     """
@@ -110,7 +110,7 @@ def encrypt_email_message(message: MIMEMultipart, cert_list: list[bytes]) -> MIM
     """
     return encrypt_message(message, cert_list)
 
-def get_extended_key_usage_from_certificate(certificate: Certificate):
+def get_extended_key_usage_from_certificate(certificate: x509Certificate):
     """
     Given an X.509 certificate, extract and return the extendedKeyUsage
     extension.
@@ -125,11 +125,11 @@ def get_extended_key_usage_from_certificate(certificate: Certificate):
     except ExtensionNotFound:
         return []
 
-def isUsageValid(certificate: Certificate, test_usage=oid.ExtendedKeyUsageOID.EMAIL_PROTECTION) ->bool:
+def isUsageValid(certificate: x509Certificate, test_usage=oid.ExtendedKeyUsageOID.EMAIL_PROTECTION) ->bool:
     """Confirm that the certificate has the specified extension
 
     :param certificate: certificate to verify
-    :type certificate: Certificate
+    :type certificate: x509Certificate
     :param test_usage: extension to validate, defaults to oid.ExtendedKeyUsageOID.EMAIL_PROTECTION
     :type test_usage: oid.ExtendedKeyUsageOID, optional
     :return: True if the certificate extension is found
