@@ -4,6 +4,8 @@
 
 import base64
 from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+from cryptography.x509 import Certificate, ExtensionNotFound, oid
 from email.mime.multipart import MIMEMultipart
 import logging
 from smail import sign_message, encrypt_message
@@ -11,7 +13,14 @@ from resilient_lib import s_to_b
 
 LOG = logging.getLogger(__name__)
 
-def convert_base64(contents: bytes):
+def convert_base64(contents: bytes) -> bytes:
+    """determine if data is base64 encoded, and if so, return the decoded content
+
+    :param contents: content which may or may not be base64 encoded
+    :type contents: bytes
+    :return: decoded data
+    :rtype: bytes
+    """
     try:
         decoded_contents = base64.b64decode(contents)
         # using 'in' as last char may be \n
@@ -58,39 +67,67 @@ def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
 
     return None
 
-def sign_email_message(message: bytes,
-                       key_signer,
-                       cert_signer,
-                       additional_certs: list) -> MIMEMultipart:
+def sign_email_message(message: MIMEMultipart,
+                       key_signer: RSAPrivateKey,
+                       cert_signer: Certificate,
+                       additional_certs: list[Certificate]) -> MIMEMultipart:
     """Sign the email message using the email sender's private key
 
     :param message: message to encrypt
-    :type message: MultiPart object
+    :type message: MIMEMultipart
     :param cert_signer: public certificate
     :type cert_signer: bytes
+    :param additional_certs: additional certificates to include in the signature
+    :type additional_certs: list[Certificate]
     :return: Signed message
-    :rtype: MultiPart
+    :rtype: MIMEMultipart
     """
     # convert to bytes for compatible format to sign_message
     private_pem = key_signer.private_bytes(serialization.Encoding.PEM,
                                            serialization.PrivateFormat.TraditionalOpenSSL,
                                            serialization.NoEncryption())
 
-    additional_certs_pem = [cert.public_bytes(serialization.Encoding.PEM)  for cert in additional_certs]
+    additional_certs_pem = [cert.public_bytes(serialization.Encoding.PEM)  for cert in additional_certs] \
+        if additional_certs else []
 
     return sign_message(message,
                         private_pem,
                         cert_signer.public_bytes(serialization.Encoding.PEM),
                         additional_certs=additional_certs_pem)
 
-def encrypt_email_message(message, cert_list: list) -> MIMEMultipart:
+def encrypt_email_message(message: MIMEMultipart, cert_list: list[bytes]) -> MIMEMultipart:
     """Encrypt the message using the recipient(s) public key
 
     :param message: message to encrypt
-    :type message: MultiPart
+    :type message: MIMEMultipart
     :param cert_list: list of recipient public certifcates in PEM format
-    :type cert_list: list
+    :type cert_list: list[bytes]
     :return: encrypted message
-    :rtype: MultiPart
+    :rtype: MIMEMultipart
     """
     return encrypt_message(message, cert_list)
+
+def get_extended_key_usage_from_certificate(certificate: Certificate):
+    """
+    Given an X.509 certificate, extract and return the extendedKeyUsage
+    extension.
+    """
+    try:
+        return certificate.extensions.get_extension_for_oid(
+            oid.ExtensionOID.EXTENDED_KEY_USAGE
+        ).value
+    except ExtensionNotFound:
+        return []
+
+def isUsageValid(certificate: Certificate, test_usage=oid.ExtendedKeyUsageOID.EMAIL_PROTECTION) ->bool:
+    """Confirm that the certificate has the specified extension
+
+    :param certificate: certificate to verify
+    :type certificate: Certificate
+    :param test_usage: extension to validate, defaults to oid.ExtendedKeyUsageOID.EMAIL_PROTECTION
+    :type test_usage: oid.ExtendedKeyUsageOID, optional
+    :return: True if the certificate extension is found
+    :rtype: bool
+    """
+    usages = get_extended_key_usage_from_certificate(certificate)
+    return bool(test_usage in usages)

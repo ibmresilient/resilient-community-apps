@@ -257,11 +257,11 @@ The following table provides the settings you need to configure the app. These s
 | p12_signing_encrypting_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing and encrypting. In p12 format. |
 | p12_signing_encrypting_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
 
-**_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
-
-**_NOTE:_** The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
-
-**_NOTE:_** For customers upgrading from a pervious release, the app.config file must be manually edited.
+#### Notes
+* The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
+* The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+* For customers upgrading from a pervious release, the app.config file must be manually edited.
+* For App Host, the file referenced in `p12_signing_encrypting_cert` needs to be in base64 format.
 
 For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 

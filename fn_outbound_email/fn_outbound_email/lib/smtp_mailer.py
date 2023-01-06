@@ -15,7 +15,7 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
 from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SECTION
 from fn_outbound_email.lib.oauth2 import OAuth2
-from .crypto_common import sign_email_message, encrypt_email_message, get_p12_info
+from .crypto_common import sign_email_message, encrypt_email_message, get_p12_info, isUsageValid
 
 LOG = logging.getLogger(__name__)
 
@@ -100,6 +100,10 @@ class SendSMTPEmail(ResilientComponent):
         self.key_signer_cert, self.cert_signer, self.additional_certs = get_p12_info(
             self.smtp_config_section.get('p12_signing_encrypting_cert'),
             private_key_password)
+
+        # confirm that the signing cert has the permissions for email signing
+        if not isUsageValid(self.cert_signer):
+            LOG.warn("Unable to confirm public certificate has trust for 'emailProtection'. Continuing.")
 
     def send(self, body_html: str="", body_text: str="", encryption_certs: list=None):
         """send email
