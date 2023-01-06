@@ -74,6 +74,7 @@ smtp_ssl_mode=starttls
 template_file=data/templates/example_send_email.jinja
 
 # Optional - P12 formatted cert for signing/encrypting email account
+#  App Host file needs to be *base64* P12 formatted cert
 p12_signing_encrypting_cert=
 p12_signing_encrypting_cert_password=
 
