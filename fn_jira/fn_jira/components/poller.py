@@ -200,4 +200,5 @@ class PollerComponent(ResilientComponent):
 
         del jira_issues_to_add_to_soar # Delete variables that are no longer needed
 
-        update_soar_incident(self.rest_client(), soar_cases_to_update)
+        if soar_cases_to_update:
+            update_soar_incident(self.rest_client(), soar_cases_to_update)

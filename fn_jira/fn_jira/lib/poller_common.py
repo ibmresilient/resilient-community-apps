@@ -199,7 +199,7 @@ class JiraCommon():
                 for attach_num in range(len(attachments)):
                     attachments[attach_num] = {
                         "filename": attachments[attach_num].get("filename"),
-                        "content": jira_client._session.get(attachments[attach_num].get("content")).content
+                        "content": attachments[attach_num].get("content")
                     }
 
         return issues_list
