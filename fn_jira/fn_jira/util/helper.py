@@ -340,18 +340,15 @@ def update_soar_incident(res_client, soar_cases_to_update):
                         res_client.delete(f"/incidents/{soar.get('id')}/comments/{soar_comment.get('id')}")
                     except Exception as e:
                         raise IntegrationError(str(e))
-                    # Remove comment from list of SOAR comments
-                    soar_comments.pop(num)
                 elif soar_comment_content in jira_comments: # If comment on SOAR and Jira then remove it from jira_comments and soar_comments
                     jira_comments.pop(jira_comments.index(soar_comment_content))
-                    soar_comments.pop(num)
 
             # Delete variables that are no longer needed
             del num, soar_comment
 
         if jira_comments:
             for jira_comment in jira_comments:
-                # Send delete request to SOAR
+                # Send post request to SOAR
                 try:
                     res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": jira_comment}})
                 except Exception as e:
