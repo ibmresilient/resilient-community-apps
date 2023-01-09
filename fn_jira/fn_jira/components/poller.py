@@ -153,15 +153,6 @@ class PollerComponent(ResilientComponent):
                 # Get the key for the Jira issue
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
-                # If there is attachments on the Jira issue
-                attachment = jira_issue.get("attachment")
-                if attachment:
-                    for num, attach in enumerate(attachment):
-                        jira_issues_dict.get(jira_server)[count].get("attachment")[num] = {
-                            "filename": attach.get("filename"),
-                            "content": jira_client._session.get(attach.get("content")).content
-                        }
-                    del attach, num # Delete variables that are no longer needed
 
                 if jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
@@ -173,7 +164,7 @@ class PollerComponent(ResilientComponent):
                     jira_issues_to_add_to_soar.append(jira_issue)
 
             # Delete variables that are no longer needed
-            del jira_issue, jira_issue_key, count, attachment
+            del jira_issue, jira_issue_key, count
 
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:

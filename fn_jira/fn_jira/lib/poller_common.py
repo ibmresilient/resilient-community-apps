@@ -197,6 +197,9 @@ class JiraCommon():
             attachments = issue.get("attachment")
             if attachments:
                 for attach_num in range(len(attachments)):
-                    attachments[attach_num] = attachments[attach_num].get("filename")
+                    attachments[attach_num] = {
+                        "filename": attachments[attach_num].get("filename"),
+                        "content": jira_client._session.get(attachments[attach_num].get("content")).content
+                    }
 
         return issues_list
