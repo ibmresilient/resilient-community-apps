@@ -279,6 +279,84 @@ def create_soar_incident(res_client, issue):
             except Exception as err:
                 raise IntegrationError(err)
 
+def soar_update_comments(jira, soar, res_client):
+    """
+    Add comment to the SOAR case that are in the Jira issue and
+    delete comments that are in the SOAR case and not in the Jira issue
+    :param jira: Dict of Jira issue data
+    :param soar: Dict of SOAR case data
+    :param res_client: Client connection to SOAR
+    """
+    # Get comments from the Jira issue
+    jira_comments = jira.pop("comment") if jira.get("comment") else []
+    # Get comments from the SOAR case
+    soar_comments = soar.pop("comments") if soar.get("comments") else []
+
+    if soar_comments:
+        for num, soar_comment in enumerate(soar_comments):
+            soar_comment_content = soar_comment.get("content")
+            # Delete comment on SOAR if comment is not found on Jira issue
+            if soar_comment_content not in jira_comments:
+                # Send delete request to SOAR
+                try:
+                    res_client.delete(f"/incidents/{soar.get('id')}/comments/{soar_comment.get('id')}")
+                except Exception as e:
+                    raise IntegrationError(str(e))
+            elif soar_comment_content in jira_comments: # If comment on SOAR and Jira then remove it from jira_comments
+                jira_comments.pop(jira_comments.index(soar_comment_content))
+
+        # Delete variables that are no longer needed
+        del num, soar_comment
+
+    if jira_comments:
+        for jira_comment in jira_comments:
+            # Send post request to SOAR
+            try:
+                res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": jira_comment}})
+            except Exception as e:
+                raise IntegrationError(str(e))
+
+def soar_update_attachments(jira, soar, res_client):
+    """
+    Add attachments to the SOAR case that are in the Jira issue and
+    delete attachments that are in the SOAR case and not in the Jira issue
+    :param jira: Dict of Jira issue data
+    :param soar: Dict of SOAR case data
+    :param res_client: Client connection to SOAR
+    """
+
+    # Get attachments from the Jira issue
+    jira_attachments = jira.pop("attachment") if jira.get("attachment") else []
+    # Create list of jira attachment names
+    jira_attachments_names = [attach.get("filename") for attach in jira_attachments]
+    # Get attachments from the SOAR case
+    soar_attachments = soar.pop("attachments") if soar.get("attachments") else []
+
+    if soar_attachments:
+        for num, soar_attachment in enumerate(soar_attachments):
+            soar_attachments_name = soar_attachment.get("content")
+            # Delete attachment on SOAR if attachment is not found on Jira issue
+            if soar_attachments_name not in jira_attachments_names:
+                # Send delete request to SOAR
+                try:
+                    res_client.delete(f"/incidents/{soar.get('id')}/attachments/{soar_attachment.get('id')}")
+                except Exception as e:
+                    raise IntegrationError(str(e))
+            elif soar_attachments_name in jira_attachments_names: # If attachment on SOAR and Jira then remove it from jira_attachments
+                jira_attachments_names.pop(jira_attachments_names.index(soar_attachments_name))
+
+        # Delete variables that are no longer needed
+        del num, soar_attachment
+
+    if jira_attachments_names:
+        for filename in jira_attachments_names:
+            # Send post request to SOAR
+            try:
+                content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == filename), None)].get("content")
+                res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=content)
+            except Exception as e:
+                raise IntegrationError(str(e))
+
 def update_soar_incident(res_client, soar_cases_to_update):
     """
     Update the SOAR cases with new data from the corresponding Jira issue
@@ -326,38 +404,11 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
         del update # Delete variables that are no longer needed
 
-        # Code to check if new comments added or old comments changed/deleted
-        jira_comments = jira.pop("comment") if jira.get("comment") else []
-        soar_comments = soar.pop("comments") if soar.get("comments") else []
+        # Check if new comments added or old comments changed/deleted
+        soar_update_comments(jira, soar, res_client)
 
-        if soar_comments:
-            for num, soar_comment in enumerate(soar_comments):
-                soar_comment_content = soar_comment.get("content")
-                # Delete comment on SOAR if comment is not found on Jira issue
-                if soar_comment_content not in jira_comments:
-                    # Send delete request to SOAR
-                    try:
-                        res_client.delete(f"/incidents/{soar.get('id')}/comments/{soar_comment.get('id')}")
-                    except Exception as e:
-                        raise IntegrationError(str(e))
-                elif soar_comment_content in jira_comments: # If comment on SOAR and Jira then remove it from jira_comments and soar_comments
-                    jira_comments.pop(jira_comments.index(soar_comment_content))
-
-            # Delete variables that are no longer needed
-            del num, soar_comment
-
-        if jira_comments:
-            for jira_comment in jira_comments:
-                # Send post request to SOAR
-                try:
-                    res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": jira_comment}})
-                except Exception as e:
-                    raise IntegrationError(str(e))
-
-        # Delete variables that are no longer needed
-        del jira_comments, soar_comments
-
-        # Check if new attachments added
+        # Check if new attachments added or old attachments deleted
+        soar_update_attachments(jira, soar, res_client)
 
         soar_update_payload['patches'][soar.get("id")] = {
                 "version": soar.get("vers")+1,
