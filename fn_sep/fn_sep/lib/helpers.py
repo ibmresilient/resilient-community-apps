@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function
@@ -205,11 +205,11 @@ def add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results):
 
     for i in range(len(eps)):
         ep = {}
-        ep_name = eps[i]["computerName"]
+        ep_name = eps[i].get("computerName")
         if ep_name in non_compliant_endpoints:
             ep["computer_name"] = ep_name
-            ep_osname = eps[i]["osname"]
-            if "windows" in ep_osname.lower(): # Only applicable for MS Windows OSes
+            ep_osname = eps[i].get("osname")
+            if ep_osname and "windows" in ep_osname.lower(): # Only applicable for MS Windows OSes
                 if "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
                     ep["host_integrity_check"] = "Failed"
                 else:
@@ -259,14 +259,14 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
         if eps:
             results["disabled"] = get_engine_status(eps, non_compliant_endpoints)
             for i in range(len(eps)):
-                ep_name = eps[i]["computerName"]
-                ep_osname = eps[i]["osname"]
+                ep_name = eps[i].get("computerName")
+                ep_osname = eps[i].get("osname")
                 for f in EP_PROP_FIELDS:
                     if f == "onlineStatus" and int(eps[i][f]) == 0:
                         results["offline"] += 1
                         if not ep_name in non_compliant_endpoints:
                             non_compliant_endpoints.append(ep_name)
-                    if "windows" in ep_osname.lower():  # Only applicable for MS Windows OSes
+                    if ep_osname and "windows" in ep_osname.lower():  # Only applicable for MS Windows OSes
                         if f == "quarantineDesc" and "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
                             results["hi_failed"] += 1
                             if not ep_name in non_compliant_endpoints:

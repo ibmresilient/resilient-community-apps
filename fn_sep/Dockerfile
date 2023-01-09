@@ -1,10 +1,10 @@
-# docker build -t ibmresilient/fn_sep:1.0.1 -t ibmresilient/fn_sep:latest .
+# docker build -t ibmresilient/fn_sep:1.0.2 -t ibmresilient/fn_sep:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_sep
-ARG RESILIENT_CIRCUITS_VERSION=37
+ARG RESILIENT_CIRCUITS_VERSION=47.1.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -60,6 +60,9 @@ RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
 COPY entrypoint.sh /opt/${PATH_RESILIENT_CIRCUITS}/entrypoint.sh
+
+# remove temporary python files
+RUN rm -rf /tmp/packages /tmp/lib
 
 # arbitrary user, support running as non-root. Required on OpenShift. Generally a good practice.
 USER 1001

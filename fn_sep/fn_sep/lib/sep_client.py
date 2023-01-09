@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 
 """ Class for Resilient circuits Functions supporting REST API client for Symantec SEP  """
 import logging
@@ -22,6 +22,8 @@ HASH_LENGTH_TO_TYPE = {
     40: "SHA-1",
     32: "MD5",
 }
+
+DEFAULT_COMPUTERS = 10000 # aribrary large value for number of endpoints to return
 
 class Sepclient(object):
     """
@@ -136,7 +138,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["auth"])
         json = {"username": self.username, "password": self.password, "domain": self.domain}
-        r = self._req.execute_call('post', url, verify_flag=False, json=json)
+        r = self._req.execute_call('post', url, verify=False, json=json)
 
         return r["token"]
 
@@ -147,20 +149,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["version"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
-
-        return r
-
-    def test_connectivity(self):
-        """Connectivity Test which is used by resilient_circuits selftest.
-
-        Calls http 'head' request against 'computers' endpoint.
-
-        :return: Result in json format
-        """
-        url = urljoin(self.base_url, self._endpoints["computers"])
-
-        r = self._req.execute_call('head', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
@@ -171,12 +160,12 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["domains"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
     def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
+                      pagesize=DEFAULT_COMPUTERS, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
         """Get a list of computers. The paramaters are all optional the default is to return results for all computers/
         endpoints.
 
@@ -197,7 +186,7 @@ class Sepclient(object):
         params = {"computerName": computername, "domain": domain, "lastUpdate": lastupdate, "order":order, "os":os,
                   "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -208,7 +197,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["clients_online_status"])
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers)
 
         return r
 
@@ -230,7 +219,7 @@ class Sepclient(object):
         params = {"domain": domain, "fullPathName": fullpathname, "order": order, "pageIndex": pageindex,
                   "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -250,7 +239,7 @@ class Sepclient(object):
 
         params = {"domainId": domainid, "name": fingerprintlist_name}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -262,7 +251,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
 
-        r = self._req.execute_call('delete', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('delete', url, verify=False, headers=self._headers)
 
         return r
 
@@ -290,7 +279,7 @@ class Sepclient(object):
         payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid, "hashType": hash_type,
                               "data": [hash_value]})
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -316,7 +305,7 @@ class Sepclient(object):
 
         payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid,
                               "hashType": hash_type, "data": hash_values})
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -332,7 +321,7 @@ class Sepclient(object):
 
         payload = json.dumps({"group_id": groupid, "fingerprint_id": fingerprintlist_id})
 
-        r = self._req.execute_call('put', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('put', url, verify=False, headers=self._headers, data=payload)
 
         return r
 
@@ -355,7 +344,7 @@ class Sepclient(object):
         params = {"file_path": file_path, "computer_ids": computer_ids, "sha256": sha256, "md5": md5, "sha1": sha1,
                   "source": source}
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -378,7 +367,7 @@ class Sepclient(object):
 
         params = {"order": order, "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -390,7 +379,7 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["file_content"]).format(file_id)
         headers = self._headers
         headers.update({"content-type":"application/json; charset=UTF-8", "Accept-Encoding": "gzip, deflate, compress"})
-        r = self._req.execute_call('get', url, verify_flag=False, headers=headers, stream=True)
+        r = self._req.execute_call('get', url, verify=False, headers=headers, stream=True)
 
         return r
 
@@ -414,7 +403,7 @@ class Sepclient(object):
         if undo is not None:
             params.update({"undo": undo})
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params)
 
         return r
 
@@ -445,7 +434,7 @@ class Sepclient(object):
 
         payload = self.setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action)
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params, data=payload)
+        r = self._req.execute_call('post', url, verify=False, headers=self._headers, params=params, data=payload)
 
         return r
 
@@ -460,7 +449,7 @@ class Sepclient(object):
 
         payload = json.dumps([{"group": {"id": groupid}, "hardwareKey": hardwarekey}])
 
-        r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, data=payload)
+        r = self._req.execute_call('patch', url, verify=False, headers=self._headers, data=payload)
 
         return r
 

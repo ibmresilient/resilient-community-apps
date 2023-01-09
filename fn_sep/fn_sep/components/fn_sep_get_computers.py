@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Resilient functions component to run a Symantec SEPM query - get computers. """
 
 # Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
-import copy
 import json
 import logging
 import time

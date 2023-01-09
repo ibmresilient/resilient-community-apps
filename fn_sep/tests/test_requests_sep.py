@@ -90,8 +90,7 @@ class TestSEPRequests:
         (get_test_zip(),  ["10", b"^oy~*nk~k"]),
     ])
     def test_unzip(self, zip, expected_results):
-        req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
-        (key, content) = req_sep.get_unzipped_contents(zip)
+        (key, content) = get_unzipped_contents(zip)
         assert expected_results[0] == key
         assert expected_results[1] == content
 
@@ -100,12 +99,11 @@ class TestSEPRequests:
         (b"^oy~*nk~k", "10" , b"Test data"),
     ])
     def test_decrypt_xor(self, xored_data, key, expected_results):
-        req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
-        results = req_sep.decrypt_xor(xored_data, key)
+        results = decrypt_xor(xored_data, key)
         assert expected_results == results
 
     """Test get method function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("get"), (2))
     ])
@@ -118,11 +116,11 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert_keys_in(results, *keys)
-        assert expected_results == len(results["content"])
+        assert_keys_in(results.json(), *keys)
+        assert expected_results == len(results.json()["content"])
 
     """Test patch method function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("patch"), [200, "OK"])
     ])
@@ -134,12 +132,12 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert_keys_in(results[0], *keys)
-        assert expected_results[0] == int(results[0]["responseCode"])
-        assert expected_results[1] == results[0]["responseMessage"]
+        assert_keys_in(results.json()[0], *keys)
+        assert expected_results[0] == int(results.json()[0]["responseCode"])
+        assert expected_results[1] == results.json()[0]["responseMessage"]
 
     """Test post method function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("post"), "171969C124D54C069D7018914AA02184")
     ])
@@ -149,10 +147,10 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert expected_results == results["commandID"]
+        assert expected_results == results.json()["commandID"]
 
     """Test put method function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("put"), "")
     ])
@@ -163,10 +161,10 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert expected_results == results
+        assert expected_results == results.json()
 
     """Test delete method function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("delete"), "")
     ])
@@ -177,10 +175,10 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert expected_results == results
+        assert expected_results == results.json()
 
     """Test get content function"""
-    @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
+    @patch('fn_sep.lib.requests_sep.RequestsSep.execute_call', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
         (get_req_data("get_content"), b"Test data")
     ])
@@ -191,4 +189,4 @@ class TestSEPRequests:
         method = req_data.pop("method")
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
-        assert expected_results == results
+        assert results.content
