@@ -98,6 +98,16 @@ class SOARCommon():
                         "content": case_comments[comment_num].get("text").replace("<div>","").replace("</div>","")
                     })
 
+            # Add attachments to cases
+            case_attachments = rest_client.get(f"/incidents/{cases_list[num].get('id')}/attachments")
+            if case_attachments:
+                cases_list[num]["attachments"] = []
+                for attach_num in range(len(case_attachments)):
+                    cases_list[num]["attachments"].append({
+                        "id": case_attachments[attach_num].get("id"),
+                        "name": case_attachments[attach_num].get("name")
+                    })
+
         return cases_list, err_msg
 
     def _build_search_query(search_fields, open_cases=True):
@@ -176,11 +186,17 @@ class JiraCommon():
             # Create a list of just comment string
             comments = issue.get("comment")
             if comments:
-                for num in range(len(comments)):
-                    comments[num] = comments[num].get("body")
+                for comment_num in range(len(comments)):
+                    comments[comment_num] = comments[comment_num].get("body")
 
             # Convert the string times to integer epoch time
             issue["created"] = JiraCommon.str_time_to_int_time(issue.get("created"))
             issue["updated"] = JiraCommon.str_time_to_int_time(issue.get("updated"))
+
+            # Create a list of just attachment filenames
+            attachments = issue.get("attachment")
+            if attachments:
+                for attach_num in range(len(attachments)):
+                    attachments[attach_num] = attachments[attach_num].get("filename")
 
         return issues_list
