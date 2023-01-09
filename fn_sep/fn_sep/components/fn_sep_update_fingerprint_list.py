@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Resilient functions component to run a Symantec SEPM action - update fingerprint list. """
 
 # Set up:
@@ -10,7 +10,7 @@ import json
 import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload, validate_fields, b_to_s
 from fn_sep.lib.sep_client import Sepclient
 from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
@@ -89,11 +89,12 @@ class FunctionComponent(ResilientComponent):
             sep = Sepclient(self.options, params)
 
             rtn = sep.update_fingerprint_list(**params)
+            LOG.debug(rtn)
+            if isinstance(rtn, bytes):
+                rtn = b_to_s(rtn)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Update Fingerprint List' results")
-
-            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

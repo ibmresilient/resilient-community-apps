@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation
    test with: resilient-circuits selftest -l fn_sep
 """
@@ -19,12 +19,11 @@ def selftest_function(opts):
     """
     options = opts.get("fn_sep", {})
     try:
-
         sep = Sepclient(options, None)
 
-        r = sep.test_connectivity()
+        r = sep.get_computers(pagesize=5)
 
-        if r == '':
+        if r:
             return {"state": "success"}
         else:
             return {"state": "failure"}
