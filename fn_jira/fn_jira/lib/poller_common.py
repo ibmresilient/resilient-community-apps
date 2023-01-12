@@ -89,26 +89,64 @@ class SOARCommon():
             cases_list[num].pop("properties")
 
             # Add comment/notes to case
-            case_comments = rest_client.get(f"/incidents/{cases_list[num].get('id')}/comments")
-            if case_comments:
-                cases_list[num]["comments"] = []
-                for comment_num in range(len(case_comments)):
-                    cases_list[num]["comments"].append({
-                        "id": case_comments[comment_num].get("id"),
-                        "content": case_comments[comment_num].get("text").replace("<div>","").replace("</div>","")
-                    })
+            SOARCommon.add_to_case(rest_client, cases_list, num, "comments")
 
             # Add attachments to cases
-            case_attachments = rest_client.get(f"/incidents/{cases_list[num].get('id')}/attachments")
-            if case_attachments:
-                cases_list[num]["attachments"] = []
-                for attach_num in range(len(case_attachments)):
-                    cases_list[num]["attachments"].append({
-                        "id": case_attachments[attach_num].get("id"),
-                        "name": case_attachments[attach_num].get("name")
+            SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
+
+            # Add Tasks to cases
+            case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
+            if case_tasks:
+                cases_list[num]["tasks"] = []
+                for task_num in range(len(case_tasks)):
+                    task_id = case_tasks[task_num].get("id")
+                    cases_list[num]["tasks"].append({
+                        "id": task_id,
+                        "name": case_tasks[task_num].get("name")
                     })
 
+                    # Get notes
+                    if case_tasks[task_num].get("notes"):
+                        task_notes = case_tasks[task_num].get("notes")
+                        cases_list[num]["tasks"][task_num]["notes"] = []
+                        for note_num in range(len(task_notes)):
+                            cases_list[num]["tasks"][task_num]["notes"].append({
+                                "id": task_notes[note_num].get("id"),
+                                "text": task_notes[note_num].get("text")
+                            })
+
+                    # Get attachments
+                    if case_tasks[task_num].get("attachments_count"):
+                        task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
+                        cases_list[num]["tasks"][task_num]["attachments"] = []
+                        for attach_num in range(len(task_attachments)):
+                            cases_list[num]["tasks"][task_num]["attachments"].append({
+                                "id": task_attachments[attach_num].get("id"),
+                                "name": task_attachments[attach_num].get("name")
+                            })
+
         return cases_list, err_msg
+
+    def add_to_case(rest_client, cases_list, num, field_name):
+        """
+        Function adds comments and attachments on the SOAR incident to the case in the list
+        :param rest_client: Client connection to SOAR
+        :param case_list: List of SOAR cases
+        :param num: The index of the case in case_list
+        :param field_name: Name of the field to add. Either 'attachments' or 'comments'
+        :return: None
+        """
+        url_end = '?want_notes=true' if field_name == 'tasks' else ''
+        case_field = rest_client.get(f"/incidents/{cases_list[num].get('id')}/{field_name}{url_end}")
+        if case_field:
+            cases_list[num][field_name] = []
+            for field_num in range(len(case_field)):
+                field_dict = {"id": case_field[field_num].get("id")}
+                if field_name == "comments":
+                    field_dict["content"] = case_field[field_num].get("text").replace("<div>","").replace("</div>","")
+                if field_name == "attachments":
+                    field_dict["name"] = case_field[field_num].get("name")
+                cases_list[num][field_name].append(field_dict)
 
     def _build_search_query(search_fields, open_cases=True):
         """
