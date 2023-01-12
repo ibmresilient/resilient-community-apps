@@ -165,93 +165,11 @@
       "workflows": [
         "jira_transition_issue_task"
       ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.jira_internal_url",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "note.text",
-          "method": "not_contains",
-          "type": null,
-          "value": "Sent to Jira at"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "task.id",
-          "method": "not_has_a_value",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: Jira Create Comment",
-      "id": 226,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: Jira Create Comment",
-      "object_type": "note",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "8d193e80-bc1f-4195-b1d0-e50bcb849e14",
-      "view_items": [],
-      "workflows": [
-        "jira_create_comment"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "note.text",
-          "method": "not_contains",
-          "type": null,
-          "value": "Sent to Jira at"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "task.id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": null,
-          "method": "object_added",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: Jira Create Comment (Task)",
-      "id": 227,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: Jira Create Comment (Task)",
-      "object_type": "note",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "79b55d55-c388-44d6-aa9b-96cdf844cad4",
-      "view_items": [],
-      "workflows": [
-        "jira_create_comment"
-      ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1672248755551,
+  "export_date": 1673449931863,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -304,7 +222,6 @@
       "placeholder": "JRA-1000",
       "prefix": null,
       "read_only": false,
-      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
@@ -1037,13 +954,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 15,
+  "id": 20,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1672248753782,
+      "create_date": 1673449930389,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1052,7 +969,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1672248753782,
+      "update_date": 1673449930389,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1077,7 +994,134 @@
   "notifications": null,
   "overrides": null,
   "phases": [],
-  "playbooks": [],
+  "playbooks": [
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": 1,
+              "field_name": "incident.properties.jira_internal_url",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 2,
+              "field_name": "note.text",
+              "method": "not_contains",
+              "type": null,
+              "value": "Added from Jira"
+            },
+            {
+              "evaluation_id": 5,
+              "field_name": "task.id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 3,
+              "field_name": "task.id",
+              "method": "not_has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": 4,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "custom_condition": "(1 AND 2 AND 3 AND 4) OR (2 AND 4 AND 5)",
+          "logic_type": "advanced"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\" isExecutable=\"true\" name=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12t2klh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Create Comment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d0e6089a-69f7-469d-8e51-a840ec2c493a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if note.type == \\\"task\\\":\\n  inputs.task_id = task.id\\n  inputs.jira_issue_id = \\\"\\\" # leave empty for tasks\\nelse:\\n  inputs.jira_issue_id = incident.properties.jira_issue_id\\n\\ninputs.jira_label = incident.properties.jira_server\\ninputs.jira_comment = note.text.content\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"comment\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12t2klh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y5q6u9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_12t2klh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-Process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e324f274-da98-4bcd-ba31-25e238b7ae55\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y5q6u9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tja6vg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1y5q6u9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0tja6vg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0tja6vg\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tja6vg\" id=\"Flow_0tja6vg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y5q6u9\" id=\"Flow_1y5q6u9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12t2klh\" id=\"Flow_12t2klh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1673441514332,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "When a note is added to the SOAR incident this playbook will automatically create a comment on the linked Jira issue.",
+        "format": "text"
+      },
+      "display_name": "Example: Jira Create Comment",
+      "export_key": "example_jira_create_comment",
+      "field_type_handle": "playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Jira Create Comment",
+        "export_key": "playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f",
+        "uuid": "873d7e4c-58b8-4e5c-8f98-2a7f9642fde6"
+      },
+      "has_logical_errors": false,
+      "id": 6,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1673449880998,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1673441793602,
+          "description": "",
+          "enabled": false,
+          "export_key": "Post-Process",
+          "id": 23,
+          "language": "python3",
+          "last_modified_by": "e@example.com",
+          "last_modified_time": 1673442304523,
+          "name": "Post-Process",
+          "object_type": "note",
+          "playbook_handle": "example_jira_create_comment",
+          "programmatic_name": "example_jira_create_comment_post_process",
+          "script_text": "from datetime import datetime\nincident.properties.soar_case_last_updated = datetime.now()",
+          "tags": [],
+          "uuid": "e324f274-da98-4bcd-ba31-25e238b7ae55"
+        }
+      ],
+      "name": "example_jira_create_comment",
+      "object_type": "note",
+      "status": "enabled",
+      "tags": [],
+      "type": "default",
+      "uuid": "6757c283-ca2c-435c-b3b8-0debc7d1c38f",
+      "version": 10
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [],
@@ -1366,58 +1410,20 @@
       "actions": [],
       "content": {
         "version": 5,
-        "workflow_id": "jira_transition_issue_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_transition_issue_task\" isExecutable=\"true\" name=\"Example: Jira Transition Issue (Task)\"\u003e\u003cdocumentation\u003eTransition a Jira Issue for a task as maintained in a data table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0f3nkiz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ovio39\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\ntime_now = Date().time\\n\\nif results.get(\\\"success\\\"):\\n  row.date = time_now\\n  row.status = \\\"Closed\\\"\\n  incident.properties.soar_case_last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Transition Issue (Task) pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = row.server\\ninputs.jira_issue_id = row.jira_issue_id_col\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = u\\\"Closed in IBM SOAR\\\\n\\\\nResolution: Done\\\\n\\\"\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f3nkiz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_030izo8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f3nkiz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ovio39\"/\u003e\u003cendEvent id=\"EndEvent_0f4i08o\"\u003e\u003cincoming\u003eSequenceFlow_030izo8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_030izo8\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"EndEvent_0f4i08o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ung4o0\"\u003e\u003ctext\u003e\u003c![CDATA[Choose a Jira Transition Id for the Jira issue\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ie6a60\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0ung4o0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0e4ezg9\"\u003e\u003ctext\u003e\u003c![CDATA[Update status and time in jira_task_references Data Table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1iv5gju\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0e4ezg9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"460\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"455\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ovio39\" id=\"ServiceTask_1ovio39_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"753\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f3nkiz\" id=\"SequenceFlow_0f3nkiz_di\"\u003e\u003comgdi:waypoint x=\"496\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"753\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"579.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0f4i08o\" id=\"EndEvent_0f4i08o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1118\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1091\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_030izo8\" id=\"SequenceFlow_030izo8_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1118\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"940.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ung4o0\" id=\"TextAnnotation_0ung4o0_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"133\" x=\"608\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ie6a60\" id=\"Association_1ie6a60_di\"\u003e\u003comgdi:waypoint x=\"757\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"712\" xsi:type=\"omgdc:Point\" y=\"139\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0e4ezg9\" id=\"TextAnnotation_0e4ezg9_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"164\" x=\"894\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1iv5gju\" id=\"Association_1iv5gju_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"179\"/\u003e\u003comgdi:waypoint x=\"917\" xsi:type=\"omgdc:Point\" y=\"144\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "jira_open_issue",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_open_issue\" isExecutable=\"true\" name=\"Example: Jira Open Issue\"\u003e\u003cdocumentation\u003eOpen a Jira Issue based on the Incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ja7096\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1libp02\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\nif results.get(\\\"success\\\"):\\n  results_content = results.get(\\\"content\\\", {})\\n  issue_key = results_content.get(\\\"issue_key\\\")\\n  incident.properties.jira_url = \\\"\u0026lt;a href=\u0027{}\u0027 target=\u0027blank\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results_content.get(\\\"issue_url\\\"), results_content.get(\\\"issue_key\\\"))\\n  incident.properties.jira_internal_url = results_content.get(\\\"issue_url_internal\\\")\\n  incident.properties.jira_issue_id = issue_key\\n  incident.properties.jira_server = rule.properties.jira_label\\n  incident.properties.soar_case_last_updated = Date()\\n  incident.properties.jira_project_key = issue_key[:issue_key.index(\\\"-\\\")]\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Open Issue [Incident] pre-processing script\\ndef list_to_json_str(l):\\n  \\\"\\\"\\\"\\n  Function that converts a list into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n  list_as_str = \u0027\u0027\\n  json_entry = u\u0027{0},\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\",\u0027\\n\\n  for value in l:\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      list_as_str += json_entry.format(list_to_json_str(value))\\n\\n    elif isinstance(value, dict):\\n      list_as_str += json_entry.format(dict_to_json_str(value))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      list_as_str += json_entry_str.format(unicode(value))\\n\\n    elif isinstance(value, unicode):\\n      list_as_str += json_entry.format(unicode(value))\\n\\n    elif isinstance(value, bool):\\n      list_as_str += json_entry.format(\u0027true\u0027 if value else \u0027false\u0027)\\n\\n    elif isinstance(value, int):\\n      list_as_str += json_entry.format(value)\\n\\n    else:\\n      helper.fail(\u0027list_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027[\u0027, list_as_str[:-1], u\u0027]\u0027)\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"\\n  Function that converts a dictionary into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and nested dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\nif rule.properties.jira_label:\\n  inputs.jira_label = rule.properties.jira_label\\nelse:\\n  inputs.jira_label = incident.properties.jira_label\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({\\n  \\\"project\\\": rule.properties.jira_project_id,\\n  \\\"issuetype\\\": rule.properties.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": u\\\"IBM SOAR: {0}\\\".format(incident.name),\\n  \\\"description\\\": incident.description.content if incident.get(\\\"description\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ja7096\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1aadk7b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ja7096\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1libp02\"/\u003e\u003cendEvent id=\"EndEvent_02i0avr\"\u003e\u003cincoming\u003eSequenceFlow_1aadk7b\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1aadk7b\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"EndEvent_02i0avr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d2s1il\"\u003e\u003ctext\u003eOutput populates a URL back to the created Jira Issue and the jira_issue_id used to add Jira comments or to close the Issue\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0kf5ohc\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"TextAnnotation_1d2s1il\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x10biq\"\u003e\u003ctext\u003eMap the fields set in Jira including the project and issue type\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0af4n58\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"TextAnnotation_0x10biq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"398\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"393\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1libp02\" id=\"ServiceTask_1libp02_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"731\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ja7096\" id=\"SequenceFlow_1ja7096_di\"\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"731\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"537.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02i0avr\" id=\"EndEvent_02i0avr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1124\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1097\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1aadk7b\" id=\"SequenceFlow_1aadk7b_di\"\u003e\u003comgdi:waypoint x=\"831\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1124\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"932.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d2s1il\" id=\"TextAnnotation_1d2s1il_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"374\" x=\"826\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0kf5ohc\" id=\"Association_0kf5ohc_di\"\u003e\u003comgdi:waypoint x=\"831\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003comgdi:waypoint x=\"937\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x10biq\" id=\"TextAnnotation_0x10biq_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"273\" x=\"452\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0af4n58\" id=\"Association_0af4n58_di\"\u003e\u003comgdi:waypoint x=\"731\" xsi:type=\"omgdc:Point\" y=\"183\"/\u003e\u003comgdi:waypoint x=\"651\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 5,
-      "description": "Transition a Jira Issue for a task as maintained in a data table",
-      "export_key": "jira_transition_issue_task",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1671809536019,
-      "name": "Example: Jira Transition Issue (Task)",
-      "object_type": "jira_task_references",
-      "programmatic_name": "jira_transition_issue_task",
-      "tags": [],
-      "uuid": "b643c95a-c025-4754-b6f7-8f03473b0e3e",
-      "workflow_id": 29
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "jira_open_issue",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_open_issue\" isExecutable=\"true\" name=\"Example: Jira Open Issue\"\u003e\u003cdocumentation\u003eOpen a Jira Issue based on the Incident.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ja7096\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1libp02\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\nif results.get(\\\"success\\\"):\\n  results_content = results.get(\\\"content\\\", {})\\n  incident.properties.jira_url = \\\"\u0026lt;a href=\u0027{}\u0027 target=\u0027blank\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results_content.get(\\\"issue_url\\\"), results_content.get(\\\"issue_key\\\"))\\n  incident.properties.jira_internal_url = results_content.get(\\\"issue_url_internal\\\")\\n  incident.properties.jira_issue_id = results_content.get(\\\"issue_key\\\")\\n  incident.properties.jira_server = rule.properties.jira_label\\n  incident.properties.soar_case_last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Open Issue [Incident] pre-processing script\\ndef list_to_json_str(l):\\n  \\\"\\\"\\\"\\n  Function that converts a list into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n  list_as_str = \u0027\u0027\\n  json_entry = u\u0027{0},\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\",\u0027\\n\\n  for value in l:\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      list_as_str += json_entry.format(list_to_json_str(value))\\n\\n    elif isinstance(value, dict):\\n      list_as_str += json_entry.format(dict_to_json_str(value))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      list_as_str += json_entry_str.format(unicode(value))\\n\\n    elif isinstance(value, unicode):\\n      list_as_str += json_entry.format(unicode(value))\\n\\n    elif isinstance(value, bool):\\n      list_as_str += json_entry.format(\u0027true\u0027 if value else \u0027false\u0027)\\n\\n    elif isinstance(value, int):\\n      list_as_str += json_entry.format(value)\\n\\n    else:\\n      helper.fail(\u0027list_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027[\u0027, list_as_str[:-1], u\u0027]\u0027)\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"\\n  Function that converts a dictionary into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and nested dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\nif rule.properties.jira_label:\\n  inputs.jira_label = rule.properties.jira_label\\nelse:\\n  inputs.jira_label = incident.properties.jira_label\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({\\n  \\\"project\\\": rule.properties.jira_project_id,\\n  \\\"issuetype\\\": rule.properties.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": u\\\"IBM SOAR: {0}\\\".format(incident.name),\\n  \\\"description\\\": incident.description.content if incident.get(\\\"description\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ja7096\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1aadk7b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ja7096\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1libp02\"/\u003e\u003cendEvent id=\"EndEvent_02i0avr\"\u003e\u003cincoming\u003eSequenceFlow_1aadk7b\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1aadk7b\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"EndEvent_02i0avr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1d2s1il\"\u003e\u003ctext\u003eOutput populates a URL back to the created Jira Issue and the jira_issue_id used to add Jira comments or to close the Issue\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0kf5ohc\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"TextAnnotation_1d2s1il\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x10biq\"\u003e\u003ctext\u003eMap the fields set in Jira including the project and issue type\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0af4n58\" sourceRef=\"ServiceTask_1libp02\" targetRef=\"TextAnnotation_0x10biq\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"398\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"393\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1libp02\" id=\"ServiceTask_1libp02_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"731\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ja7096\" id=\"SequenceFlow_1ja7096_di\"\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"731\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"537.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02i0avr\" id=\"EndEvent_02i0avr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1124\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1097\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1aadk7b\" id=\"SequenceFlow_1aadk7b_di\"\u003e\u003comgdi:waypoint x=\"831\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1124\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"932.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1d2s1il\" id=\"TextAnnotation_1d2s1il_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"374\" x=\"826\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0kf5ohc\" id=\"Association_0kf5ohc_di\"\u003e\u003comgdi:waypoint x=\"831\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003comgdi:waypoint x=\"937\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x10biq\" id=\"TextAnnotation_0x10biq_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"273\" x=\"452\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0af4n58\" id=\"Association_0af4n58_di\"\u003e\u003comgdi:waypoint x=\"731\" xsi:type=\"omgdc:Point\" y=\"183\"/\u003e\u003comgdi:waypoint x=\"651\" xsi:type=\"omgdc:Point\" y=\"145\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
       "description": "Open a Jira Issue based on the Incident.",
       "export_key": "jira_open_issue",
       "last_modified_by": "e@example.com",
-      "last_modified_time": 1671809511853,
+      "last_modified_time": 1672842243678,
       "name": "Example: Jira Open Issue",
       "object_type": "incident",
       "programmatic_name": "jira_open_issue",
       "tags": [],
       "uuid": "243a3789-d9f8-4384-8bae-f26ab088e87e",
       "workflow_id": 27
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "example_jira_open_issue_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_jira_open_issue_task\" isExecutable=\"true\" name=\"Example: Jira Open Issue (Task)\"\u003e\u003cdocumentation\u003eOpen a Jira Issue based on a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0d2hrps\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0hnqtx4\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\ntime_now = Date().time\\n\\nif results.get(\\\"success\\\"):\\n  results_content = results.get(\\\"content\\\", {})\\n  incident.properties.soar_case_last_updated = Date()\\n\\n  url = \\\"\u0026lt;a href=\u0027{}\u0027 target=\u0027blank\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results_content.get(\\\"issue_url\\\"), results_content.get(\\\"issue_key\\\"))\\n\\n  # Add Note\\n  task.addNote(helper.createRichText(\\\"Added Jira Issue: {}\\\\nTo server labeled: {}\\\".format(url, rule.properties.jira_label)))\\n\\n  # Add server label to be used for automatic rules\\n  incident.properties.jira_server = rule.properties.jira_label\\n\\n  # Add Row to Jira Data Table\\n  # default is jira_task_references but can be changed by changing \u0027jira_dt_name\u0027 in app.config\\n  row = incident.addRow(results_content.get(\\\"jira_dt_name\\\"))\\n  row[\u0027date\u0027] = time_now\\n  row[\u0027task_id\u0027] = task.id\\n  row[\u0027task\u0027] = task.name\\n  row[\u0027jira_link\u0027] = helper.createRichText(url)\\n  row[\u0027jira_issue_id_col\u0027] = results_content.get(\\\"issue_key\\\")\\n  row[\u0027status\u0027] = \u0027Open\u0027\\n  row[\u0027server\u0027] = rule.properties.jira_label\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Open Issue [Task] pre-processing script\\ndef list_to_json_str(l):\\n  \\\"\\\"\\\"\\n  Function that converts a list into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n  list_as_str = \u0027\u0027\\n  json_entry = u\u0027{0},\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\",\u0027\\n\\n  for value in l:\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      list_as_str += json_entry.format(list_to_json_str(value))\\n\\n    elif isinstance(value, dict):\\n      list_as_str += json_entry.format(dict_to_json_str(value))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      list_as_str += json_entry_str.format(unicode(value))\\n\\n    elif isinstance(value, unicode):\\n      list_as_str += json_entry.format(unicode(value))\\n\\n    elif isinstance(value, bool):\\n      list_as_str += json_entry.format(\u0027true\u0027 if value else \u0027false\u0027)\\n\\n    elif isinstance(value, int):\\n      list_as_str += json_entry.format(value)\\n\\n    else:\\n      helper.fail(\u0027list_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027[\u0027, list_as_str[:-1], u\u0027]\u0027)\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"\\n  Function that converts a dictionary into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and nested dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = rule.properties.jira_label\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this task\\ninputs.task_id = task.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({\\n  \\\"project\\\": rule.properties.jira_project_id,\\n  \\\"issuetype\\\": rule.properties.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": u\\\"IBM SOAR: {}\\\".format(unicode(task.name)),\\n  \\\"description\\\": task.instructions.content if task.get(\\\"instructions\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d2hrps\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1k5o4il\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0d2hrps\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0hnqtx4\"/\u003e\u003cendEvent id=\"EndEvent_0n2xl2a\"\u003e\u003cincoming\u003eSequenceFlow_1k5o4il\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1k5o4il\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"EndEvent_0n2xl2a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1534s99\"\u003e\u003ctext\u003eMap the fields set in Jira including the project and issue type\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1mrautp\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"TextAnnotation_1534s99\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19dg19i\"\u003e\u003ctext\u003eAdds a row to the jira_task_references Data Table and also Adds a Note to the Task\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_11zryfq\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"TextAnnotation_19dg19i\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"402\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"397\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hnqtx4\" id=\"ServiceTask_0hnqtx4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"758\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d2hrps\" id=\"SequenceFlow_0d2hrps_di\"\u003e\u003comgdi:waypoint x=\"438\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"598\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"598\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"758\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"568\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n2xl2a\" id=\"EndEvent_0n2xl2a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1180\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1153\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1k5o4il\" id=\"SequenceFlow_1k5o4il_di\"\u003e\u003comgdi:waypoint x=\"858\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1180\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"974\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1534s99\" id=\"TextAnnotation_1534s99_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"185\" x=\"574\" y=\"64\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1mrautp\" id=\"Association_1mrautp_di\"\u003e\u003comgdi:waypoint x=\"763\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"702\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19dg19i\" id=\"TextAnnotation_19dg19i_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"279\" x=\"897\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_11zryfq\" id=\"Association_11zryfq_di\"\u003e\u003comgdi:waypoint x=\"858\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"984\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Open a Jira Issue based on a task",
-      "export_key": "example_jira_open_issue_task",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1671809520136,
-      "name": "Example: Jira Open Issue (Task)",
-      "object_type": "task",
-      "programmatic_name": "example_jira_open_issue_task",
-      "tags": [],
-      "uuid": "17d8085d-a27a-47f5-8c72-491f928a91af",
-      "workflow_id": 28
     },
     {
       "actions": [],
@@ -1437,6 +1443,44 @@
       "tags": [],
       "uuid": "3460a425-4adf-419d-ad67-89b8ba427068",
       "workflow_id": 30
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "jira_transition_issue_task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_transition_issue_task\" isExecutable=\"true\" name=\"Example: Jira Transition Issue (Task)\"\u003e\u003cdocumentation\u003eTransition a Jira Issue for a task as maintained in a data table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0f3nkiz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ovio39\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\ntime_now = Date().time\\n\\nif results.get(\\\"success\\\"):\\n  row.date = time_now\\n  row.status = \\\"Closed\\\"\\n  incident.properties.soar_case_last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Transition Issue (Task) pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = row.server\\ninputs.jira_issue_id = row.jira_issue_id_col\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = u\\\"Closed in IBM SOAR\\\\n\\\\nResolution: Done\\\\n\\\"\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f3nkiz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_030izo8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f3nkiz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ovio39\"/\u003e\u003cendEvent id=\"EndEvent_0f4i08o\"\u003e\u003cincoming\u003eSequenceFlow_030izo8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_030izo8\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"EndEvent_0f4i08o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ung4o0\"\u003e\u003ctext\u003e\u003c![CDATA[Choose a Jira Transition Id for the Jira issue\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ie6a60\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0ung4o0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0e4ezg9\"\u003e\u003ctext\u003e\u003c![CDATA[Update status and time in jira_task_references Data Table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1iv5gju\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0e4ezg9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"460\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"455\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ovio39\" id=\"ServiceTask_1ovio39_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"753\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f3nkiz\" id=\"SequenceFlow_0f3nkiz_di\"\u003e\u003comgdi:waypoint x=\"496\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"753\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"579.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0f4i08o\" id=\"EndEvent_0f4i08o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1118\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1091\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_030izo8\" id=\"SequenceFlow_030izo8_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1118\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"940.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ung4o0\" id=\"TextAnnotation_0ung4o0_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"133\" x=\"608\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ie6a60\" id=\"Association_1ie6a60_di\"\u003e\u003comgdi:waypoint x=\"757\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"712\" xsi:type=\"omgdc:Point\" y=\"139\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0e4ezg9\" id=\"TextAnnotation_0e4ezg9_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"164\" x=\"894\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1iv5gju\" id=\"Association_1iv5gju_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"179\"/\u003e\u003comgdi:waypoint x=\"917\" xsi:type=\"omgdc:Point\" y=\"144\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "description": "Transition a Jira Issue for a task as maintained in a data table",
+      "export_key": "jira_transition_issue_task",
+      "last_modified_by": "e@example.com",
+      "last_modified_time": 1671809536019,
+      "name": "Example: Jira Transition Issue (Task)",
+      "object_type": "jira_task_references",
+      "programmatic_name": "jira_transition_issue_task",
+      "tags": [],
+      "uuid": "b643c95a-c025-4754-b6f7-8f03473b0e3e",
+      "workflow_id": 29
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "example_jira_open_issue_task",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_jira_open_issue_task\" isExecutable=\"true\" name=\"Example: Jira Open Issue (Task)\"\u003e\u003cdocumentation\u003eOpen a Jira Issue based on a task\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0d2hrps\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0hnqtx4\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\ntime_now = Date().time\\n\\nif results.get(\\\"success\\\"):\\n  results_content = results.get(\\\"content\\\", {})\\n  incident.properties.soar_case_last_updated = Date()\\n\\n  url = \\\"\u0026lt;a href=\u0027{}\u0027 target=\u0027blank\u0027\u0026gt;{}\u0026lt;/a\u0026gt;\\\".format(results_content.get(\\\"issue_url\\\"), results_content.get(\\\"issue_key\\\"))\\n\\n  # Add Note\\n  task.addNote(helper.createRichText(\\\"Added Jira Issue: {}\\\\nTo server labeled: {}\\\".format(url, rule.properties.jira_label)))\\n\\n  # Add server label to be used for automatic rules\\n  incident.properties.jira_server = rule.properties.jira_label\\n\\n  # Add Row to Jira Data Table\\n  # default is jira_task_references but can be changed by changing \u0027jira_dt_name\u0027 in app.config\\n  row = incident.addRow(results_content.get(\\\"jira_dt_name\\\"))\\n  row[\u0027date\u0027] = time_now\\n  row[\u0027task_id\u0027] = task.id\\n  row[\u0027task\u0027] = task.name\\n  row[\u0027jira_link\u0027] = helper.createRichText(url)\\n  row[\u0027jira_issue_id_col\u0027] = results_content.get(\\\"issue_key\\\")\\n  row[\u0027status\u0027] = \u0027Open\u0027\\n  row[\u0027server\u0027] = rule.properties.jira_label\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Open Issue [Task] pre-processing script\\ndef list_to_json_str(l):\\n  \\\"\\\"\\\"\\n  Function that converts a list into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n  list_as_str = \u0027\u0027\\n  json_entry = u\u0027{0},\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\",\u0027\\n\\n  for value in l:\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      list_as_str += json_entry.format(list_to_json_str(value))\\n\\n    elif isinstance(value, dict):\\n      list_as_str += json_entry.format(dict_to_json_str(value))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      list_as_str += json_entry_str.format(unicode(value))\\n\\n    elif isinstance(value, unicode):\\n      list_as_str += json_entry.format(unicode(value))\\n\\n    elif isinstance(value, bool):\\n      list_as_str += json_entry.format(\u0027true\u0027 if value else \u0027false\u0027)\\n\\n    elif isinstance(value, int):\\n      list_as_str += json_entry.format(value)\\n\\n    else:\\n      helper.fail(\u0027list_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027[\u0027, list_as_str[:-1], u\u0027]\u0027)\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"\\n  Function that converts a dictionary into a JSON string.\\n  Supports types: basestring, unicode, bool, int, list and nested dicts.\\n  If the value is None, it sets it to False.\\n  \\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    elif isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027).replace(\\\"\\\\n\\\", \\\"\\\\\\\\n\\\")\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = rule.properties.jira_label\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this task\\ninputs.task_id = task.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({\\n  \\\"project\\\": rule.properties.jira_project_id,\\n  \\\"issuetype\\\": rule.properties.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": u\\\"IBM SOAR: {}\\\".format(unicode(task.name)),\\n  \\\"description\\\": task.instructions.content if task.get(\\\"instructions\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d2hrps\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1k5o4il\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0d2hrps\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0hnqtx4\"/\u003e\u003cendEvent id=\"EndEvent_0n2xl2a\"\u003e\u003cincoming\u003eSequenceFlow_1k5o4il\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1k5o4il\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"EndEvent_0n2xl2a\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1534s99\"\u003e\u003ctext\u003eMap the fields set in Jira including the project and issue type\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1mrautp\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"TextAnnotation_1534s99\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19dg19i\"\u003e\u003ctext\u003eAdds a row to the jira_task_references Data Table and also Adds a Note to the Task\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_11zryfq\" sourceRef=\"ServiceTask_0hnqtx4\" targetRef=\"TextAnnotation_19dg19i\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"402\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"397\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0hnqtx4\" id=\"ServiceTask_0hnqtx4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"758\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d2hrps\" id=\"SequenceFlow_0d2hrps_di\"\u003e\u003comgdi:waypoint x=\"438\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"598\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"598\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"758\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"568\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n2xl2a\" id=\"EndEvent_0n2xl2a_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1180\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1153\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1k5o4il\" id=\"SequenceFlow_1k5o4il_di\"\u003e\u003comgdi:waypoint x=\"858\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1180\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"974\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1534s99\" id=\"TextAnnotation_1534s99_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"185\" x=\"574\" y=\"64\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1mrautp\" id=\"Association_1mrautp_di\"\u003e\u003comgdi:waypoint x=\"763\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"702\" xsi:type=\"omgdc:Point\" y=\"122\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19dg19i\" id=\"TextAnnotation_19dg19i_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"279\" x=\"897\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_11zryfq\" id=\"Association_11zryfq_di\"\u003e\u003comgdi:waypoint x=\"858\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"984\" xsi:type=\"omgdc:Point\" y=\"119\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "Open a Jira Issue based on a task",
+      "export_key": "example_jira_open_issue_task",
+      "last_modified_by": "e@example.com",
+      "last_modified_time": 1671809520136,
+      "name": "Example: Jira Open Issue (Task)",
+      "object_type": "task",
+      "programmatic_name": "example_jira_open_issue_task",
+      "tags": [],
+      "uuid": "17d8085d-a27a-47f5-8c72-491f928a91af",
+      "workflow_id": 28
     }
   ],
   "workspaces": []
