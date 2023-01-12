@@ -89,17 +89,18 @@ class PollerComponent(ResilientComponent):
 
             # Get settings for server from the app.config
             options = get_server_settings(self.opts, server)
-            # Get the max_results settings from the servers settings
-            max_results = options.get("max_issues_returned")
+
+            # Get the max_results settings from the global_settings
+            max_results = global_settings.get("max_issues_returned")
+            if not max_results:
+                # Get the max_results settings from the servers settings
+                max_results = options.get("max_issues_returned")
 
             # If poller_filters and or max_results are defnined in the global_settings
-            if global_settings:
-                poller_filters = global_settings.get("poller_filters")
-                if poller_filters:
-                    # Validate poller_filter
-                    validate_fields([poller_filters_validator], global_settings)
-                # Get the max_results settings from the global_settings
-                max_results = global_settings.get("max_issues_returned")
+            poller_filters = global_settings.get("poller_filters")
+            if poller_filters:
+                # Validate poller_filter
+                validate_fields([poller_filters_validator], global_settings)
             else: # If poller_filters is defnined in individual Jira server settings
                 # Validate poller_filter
                 validate_fields([poller_filters_validator], options)
@@ -107,7 +108,7 @@ class PollerComponent(ResilientComponent):
                 poller_filters = options.get("poller_filters")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, max_results)
+            jira_issue_list = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, self.last_poller_time, max_results)
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
@@ -142,14 +143,11 @@ class PollerComponent(ResilientComponent):
                     if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
                         soar_cases_jira_key.append(soar_case.get("jira_issue_id"))
 
-                # Delete variables that are no longer needed
-                del soar_case_jira_server, soar_case
-
             # List of Jira Issues that have corresponding SOAR cases
             jira_issues_with_soar_case = []
 
             # Loop through the Jira issues found in the filtered search on the current server
-            for count, jira_issue in enumerate(jira_issues_dict.get(jira_server)):
+            for jira_issue in jira_issues_dict.get(jira_server):
                 # Get the key for the Jira issue
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
@@ -163,9 +161,6 @@ class PollerComponent(ResilientComponent):
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
-            # Delete variables that are no longer needed
-            del jira_issue, jira_issue_key, count
-
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:
                 cases = str(soar_cases_jira_key).replace("[", "(").replace("]", ")")
@@ -173,8 +168,6 @@ class PollerComponent(ResilientComponent):
                     jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
                     jira_issues_with_soar_case.append(jira_issue)
                 jira_client.close() # Close connection to Jira server
-                # Delete variables that are no longer needed
-                del cases, soar_cases_jira_key, jira_client, jira_issue
 
             if soar_cases_list:
                 # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
@@ -188,17 +181,9 @@ class PollerComponent(ResilientComponent):
                                 soar_cases_to_update.append([jira_issue, soar_case])
                                 break
 
-                # Delete variables that are no longer needed
-                del soar_case
-
-        # Delete variables that are no longer needed
-        del jira_server, jira_issues_with_soar_case
-
         for jira_issue in jira_issues_to_add_to_soar:
             create_soar_incident(self.rest_client(), jira_issue)
             LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
-
-        del jira_issues_to_add_to_soar # Delete variables that are no longer needed
 
         if soar_cases_to_update:
             update_soar_incident(self.rest_client(), soar_cases_to_update)
