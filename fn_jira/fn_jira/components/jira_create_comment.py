@@ -42,13 +42,13 @@ class FunctionComponent(AppFunctionComponent):
 
         # Validate required parameters
         self.LOG.info("Validating function inputs")
-        validate_fields(["jira_issue_id", "jira_comment", "incident_id"], fn_inputs)
+        validate_fields(["jira_comment", "incident_id"], fn_inputs)
 
         self.LOG.info(f"Validated function inputs: {fn_inputs._asdict()}")
 
         # Get inputs
         task_id = getattr(fn_inputs, "task_id", None)
-        jira_issue_id = fn_inputs.jira_issue_id
+        jira_issue_id = getattr(fn_inputs, "jira_issue_id", None)
         incident_id = fn_inputs.incident_id
         url = options.get("url")
 

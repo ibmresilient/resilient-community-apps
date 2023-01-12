@@ -124,24 +124,17 @@ def to_markdown(html):
 
 def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
     """Returns the jira_issue_id and jira_url that relates to the task_id"""
-    cell_name = "task_id"
 
     try:
-        data = res_client.get(f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names")
-        rows = data["rows"]
+        rows = res_client.get(f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names")["rows"]
     except Exception as err:
         raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)
 
-    found = False
-    for row in rows:
-        cells = row["cells"]
-        if cells.get(cell_name) and cells[cell_name].get("value") and str(cells[cell_name].get("value")) == str(task_id):
-            found = True
-            break
+    row = [r for r in rows if str(r["cells"].get("task_id").get("value")) == str(task_id)][0]
 
-    if row and found:
+    if row:
         cells = row.get("cells")
-        return str(cells["jira_issue_id"]["value"]), str(cells[JIRA_DT_ISSUE_LINK_COL_NAME]["value"])
+        return str(cells.get("jira_issue_id_col").get("value")), str(cells.get(JIRA_DT_ISSUE_LINK_COL_NAME).get("value"))
 
 class JiraServers():
     def __init__(self, opts):
@@ -295,6 +288,11 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
         jira_updates = [attach.get("filename") for attach in jira_attachments]
     # Get comments\attachments from the SOAR case
     soar_updates = soar.pop(f"{update_type}s") if soar.get(f"{update_type}s") else []
+    # Remove the text "\nAdded from Jira" from comments if present
+    if update_type == "comment":
+        for num in range(len(soar_updates)):
+            update_content = soar_updates[num].get("content")
+            soar_updates[num]["content"] = update_content.replace("\nAdded from Jira", "").replace('<div class="rte">', "")
 
     if soar_updates:
         for num, soar_update in enumerate(soar_updates):
@@ -320,7 +318,7 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
                     content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == jira_update), None)].get("content")
                     res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=jira_update, bytes_handle=content)
                 else:
-                    res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": jira_update}})
+                    res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": f"{jira_update}\nAdded from Jira"}})
             except Exception as e:
                 raise IntegrationError(str(e))
 
