@@ -95,35 +95,35 @@ class SOARCommon():
             SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
 
             # Add Tasks to cases
-            case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
-            if case_tasks:
-                cases_list[num]["tasks"] = []
-                for task_num in range(len(case_tasks)):
-                    task_id = case_tasks[task_num].get("id")
-                    cases_list[num]["tasks"].append({
-                        "id": task_id,
-                        "name": case_tasks[task_num].get("name")
-                    })
+            # case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
+            # if case_tasks:
+            #     cases_list[num]["tasks"] = []
+            #     for task_num in range(len(case_tasks)):
+            #         task_id = case_tasks[task_num].get("id")
+            #         cases_list[num]["tasks"].append({
+            #             "id": task_id,
+            #             "name": case_tasks[task_num].get("name")
+            #         })
 
-                    # Get notes
-                    if case_tasks[task_num].get("notes"):
-                        task_notes = case_tasks[task_num].get("notes")
-                        cases_list[num]["tasks"][task_num]["notes"] = []
-                        for note_num in range(len(task_notes)):
-                            cases_list[num]["tasks"][task_num]["notes"].append({
-                                "id": task_notes[note_num].get("id"),
-                                "text": task_notes[note_num].get("text")
-                            })
+            #         # Get notes
+            #         if case_tasks[task_num].get("notes"):
+            #             task_notes = case_tasks[task_num].get("notes")
+            #             cases_list[num]["tasks"][task_num]["notes"] = []
+            #             for note_num in range(len(task_notes)):
+            #                 cases_list[num]["tasks"][task_num]["notes"].append({
+            #                     "id": task_notes[note_num].get("id"),
+            #                     "text": task_notes[note_num].get("text")
+            #                 })
 
-                    # Get attachments
-                    if case_tasks[task_num].get("attachments_count"):
-                        task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
-                        cases_list[num]["tasks"][task_num]["attachments"] = []
-                        for attach_num in range(len(task_attachments)):
-                            cases_list[num]["tasks"][task_num]["attachments"].append({
-                                "id": task_attachments[attach_num].get("id"),
-                                "name": task_attachments[attach_num].get("name")
-                            })
+            #         # Get attachments
+            #         if case_tasks[task_num].get("attachments_count"):
+            #             task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
+            #             cases_list[num]["tasks"][task_num]["attachments"] = []
+            #             for attach_num in range(len(task_attachments)):
+            #                 cases_list[num]["tasks"][task_num]["attachments"].append({
+            #                     "id": task_attachments[attach_num].get("id"),
+            #                     "name": task_attachments[attach_num].get("name")
+            #                 })
 
         return cases_list, err_msg
 
@@ -195,15 +195,17 @@ class JiraCommon():
         str_time = str_time[:str_time.rindex(".")]
         return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
 
-    def search_jira_issues(jira_client, search_filters, max_results=50):
+    def search_jira_issues(jira_client, search_filters, last_poller_time, max_results=50):
         """
         Search for Jira issues with given filters
         :param jira_client: Client connection to Jira
         :param search_filters: Search filters for Jira
+        :param poller_last_run_time: Last time the poller ran
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
 
-        issues_list = jira_client.search_issues(search_filters,
+        issues_list = jira_client.search_issues(
+            f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'",
             maxResults=max_results,
             fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created"],
             json_result=True).get("issues")
