@@ -207,7 +207,7 @@ class JiraCommon():
         str_time = str_time[:str_time.rindex(".")]
         return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
 
-    def search_jira_issues(jira_client, search_filters, last_poller_time=None, max_results=50):
+    def search_jira_issues(jira_client, search_filters, last_poller_time=None, max_results=50, data_to_get_from_case=None):
         """
         Search for Jira issues with given filters
         :param jira_client: Client connection to Jira
@@ -240,9 +240,15 @@ class JiraCommon():
                 if issue.get(key):
                     issue[key] = issue[key].get(value)
 
+            data_to_get_from_case[issue.get("id")]["comments"] = False
+            data_to_get_from_case[issue.get("id")]["attachments"] = False
+            tasks = data_to_get_from_case[issue.get("id")].get("tasks")
+            data_to_get_from_case[issue.get("id")]["tasks"] = tasks if tasks else []
+
             # Create a list of just comment string
             comments = issue.get("comment")
             if comments:
+                data_to_get_from_case[issue.get("id")]["comments"] = True
                 for comment_num in range(len(comments)):
                     comments[comment_num] = comments[comment_num].get("body")
 
@@ -253,6 +259,7 @@ class JiraCommon():
             # Create a list of just attachment filenames
             attachments = issue.get("attachment")
             if attachments:
+                data_to_get_from_case[issue.get("id")]["attachments"] = True
                 for attach_num in range(len(attachments)):
                     attachments[attach_num] = {
                         "filename": attachments[attach_num].get("filename"),
@@ -261,6 +268,7 @@ class JiraCommon():
 
             issue_description = issue.get("description")
             if "IBM SOAR Link:" in issue_description and "task_id" in issue_description:
+                
                 task_incident_ids.append({
                     "incident_id": int(issue_description[issue_description.rindex("/")+1:issue_description.index("?")]),
                     "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")])
