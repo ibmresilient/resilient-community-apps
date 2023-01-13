@@ -8,7 +8,7 @@ from logging import getLogger
 from threading import Event
 from traceback import format_exc
 from resilient import SimpleHTTPException
-import json
+from json import dumps
 
 LOG = getLogger(__name__)
 
@@ -53,7 +53,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 class SOARCommon():
     """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
 
-    def get_open_soar_cases(search_fields, rest_client, dt_name, open_cases=True):
+    def get_open_soar_cases(opts, search_fields, rest_client, task_and_incident_ids, open_cases=True):
         """
         Find all IBM SOAR cases which are associated with the endpoint platform
         :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
@@ -96,12 +96,24 @@ class SOARCommon():
             # Add attachments to cases
             SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
 
-            # Add Tasks to cases
-            case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
-            if case_tasks:
-                cases_list[num]["tasks"] = []
-                for task_num in range(len(case_tasks)):
-                    task_id = case_tasks[task_num].get("id")
+            # Check if the current SOAR incident has a task with a linked Jira issue
+            for ids in task_and_incident_ids:
+                if ids.get("incident_id") == cases_list[num].get("id"):
+                    SOARCommon.add_task_to_case(rest_client, cases_list, num, ids.get("task_id"))
+
+        return cases_list, err_msg
+
+    def add_task_to_case(rest_client, cases_list, num, id):
+        """
+        Adds task data to the SOAR case
+        """
+        # Add Tasks to cases
+        case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
+        if case_tasks:
+            cases_list[num]["tasks"] = []
+            for task_num in range(len(case_tasks)):
+                task_id = case_tasks[task_num].get("id")
+                if id == task_id:
                     cases_list[num]["tasks"].append({
                         "id": task_id,
                         "name": case_tasks[task_num].get("name")
@@ -126,8 +138,6 @@ class SOARCommon():
                                 "id": task_attachments[attach_num].get("id"),
                                 "name": task_attachments[attach_num].get("name")
                             })
-
-        return cases_list, err_msg
 
     def add_to_case(rest_client, cases_list, num, field_name):
         """
@@ -205,6 +215,9 @@ class JiraCommon():
         :param last_poller_time: Last time the poller ran
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
+
+        task_incident_ids = []
+
         if last_poller_time:
             search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
 
@@ -246,4 +259,11 @@ class JiraCommon():
                         "content": attachments[attach_num].get("content")
                     }
 
-        return issues_list
+            issue_description = issue.get("description")
+            if "IBM SOAR Link:" in issue_description and "task_id" in issue_description:
+                task_incident_ids.append({
+                    "incident_id": int(issue_description[issue_description.rindex("/")+1:issue_description.index("?")]),
+                    "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")])
+                })
+
+        return issues_list, task_incident_ids
