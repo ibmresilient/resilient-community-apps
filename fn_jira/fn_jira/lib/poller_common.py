@@ -8,6 +8,7 @@ from logging import getLogger
 from threading import Event
 from traceback import format_exc
 from resilient import SimpleHTTPException
+import json
 
 LOG = getLogger(__name__)
 
@@ -52,7 +53,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 class SOARCommon():
     """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
 
-    def get_open_soar_cases(search_fields, rest_client, open_cases=True):
+    def get_open_soar_cases(search_fields, rest_client, dt_name, open_cases=True):
         """
         Find all IBM SOAR cases which are associated with the endpoint platform
         :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
@@ -66,8 +67,9 @@ class SOARCommon():
                             "gdpr", "creator_id", "crimestatus_id", "sequence_code", "owner_id", "plan_status", "phase_id",
                             "org_handle", "task_changes"]
 
+        query = SOARCommon._build_search_query(search_fields, open_cases=open_cases)
 
-        query = SOARCommon._build_search_query(search_fields, open_cases = open_cases)
+        # List of all returned SOAR case dictionaries
         cases_list = []
 
         try:
@@ -95,35 +97,35 @@ class SOARCommon():
             SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
 
             # Add Tasks to cases
-            # case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
-            # if case_tasks:
-            #     cases_list[num]["tasks"] = []
-            #     for task_num in range(len(case_tasks)):
-            #         task_id = case_tasks[task_num].get("id")
-            #         cases_list[num]["tasks"].append({
-            #             "id": task_id,
-            #             "name": case_tasks[task_num].get("name")
-            #         })
+            case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
+            if case_tasks:
+                cases_list[num]["tasks"] = []
+                for task_num in range(len(case_tasks)):
+                    task_id = case_tasks[task_num].get("id")
+                    cases_list[num]["tasks"].append({
+                        "id": task_id,
+                        "name": case_tasks[task_num].get("name")
+                    })
 
-            #         # Get notes
-            #         if case_tasks[task_num].get("notes"):
-            #             task_notes = case_tasks[task_num].get("notes")
-            #             cases_list[num]["tasks"][task_num]["notes"] = []
-            #             for note_num in range(len(task_notes)):
-            #                 cases_list[num]["tasks"][task_num]["notes"].append({
-            #                     "id": task_notes[note_num].get("id"),
-            #                     "text": task_notes[note_num].get("text")
-            #                 })
+                    # Get notes
+                    if case_tasks[task_num].get("notes"):
+                        task_notes = case_tasks[task_num].get("notes")
+                        cases_list[num]["tasks"][task_num]["notes"] = []
+                        for note_num in range(len(task_notes)):
+                            cases_list[num]["tasks"][task_num]["notes"].append({
+                                "id": task_notes[note_num].get("id"),
+                                "text": task_notes[note_num].get("text")
+                            })
 
-            #         # Get attachments
-            #         if case_tasks[task_num].get("attachments_count"):
-            #             task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
-            #             cases_list[num]["tasks"][task_num]["attachments"] = []
-            #             for attach_num in range(len(task_attachments)):
-            #                 cases_list[num]["tasks"][task_num]["attachments"].append({
-            #                     "id": task_attachments[attach_num].get("id"),
-            #                     "name": task_attachments[attach_num].get("name")
-            #                 })
+                    # Get attachments
+                    if case_tasks[task_num].get("attachments_count"):
+                        task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
+                        cases_list[num]["tasks"][task_num]["attachments"] = []
+                        for attach_num in range(len(task_attachments)):
+                            cases_list[num]["tasks"][task_num]["attachments"].append({
+                                "id": task_attachments[attach_num].get("id"),
+                                "name": task_attachments[attach_num].get("name")
+                            })
 
         return cases_list, err_msg
 
@@ -195,17 +197,19 @@ class JiraCommon():
         str_time = str_time[:str_time.rindex(".")]
         return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
 
-    def search_jira_issues(jira_client, search_filters, last_poller_time, max_results=50):
+    def search_jira_issues(jira_client, search_filters, last_poller_time=None, max_results=50):
         """
         Search for Jira issues with given filters
         :param jira_client: Client connection to Jira
         :param search_filters: Search filters for Jira
-        :param poller_last_run_time: Last time the poller ran
+        :param last_poller_time: Last time the poller ran
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
+        if last_poller_time:
+            search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
 
         issues_list = jira_client.search_issues(
-            f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'",
+            search_filters,
             maxResults=max_results,
             fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created"],
             json_result=True).get("issues")
