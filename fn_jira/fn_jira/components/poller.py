@@ -59,8 +59,8 @@ class PollerComponent(ResilientComponent):
         :return: None
         """
 
-        # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client())
+        # List of the Jira datatable names found in the app.config
+        jira_dt_names = []
 
         # Get list of Jira servers configured in the app.config
         servers_list = JiraServers(self.opts).get_server_name_list()
@@ -90,6 +90,11 @@ class PollerComponent(ResilientComponent):
             # Get settings for server from the app.config
             options = get_server_settings(self.opts, server)
 
+            # Add the datatable name specified in the current app.config
+            dt_name = options.get("jira_dt_name")
+            if dt_name not in jira_dt_names:
+                jira_dt_names.append(dt_name)
+
             # Get the max_results settings from the global_settings
             max_results = global_settings.get("max_issues_returned")
             if not max_results:
@@ -111,6 +116,9 @@ class PollerComponent(ResilientComponent):
             jira_issue_list = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, self.last_poller_time, max_results)
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
+
+        # Get a list of open SOAR cases that contain the field jira_issue_id.
+        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client(), jira_dt_names)
 
         # Process Jira issues returned from search
         self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
@@ -151,6 +159,9 @@ class PollerComponent(ResilientComponent):
                 # Get the key for the Jira issue
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
+
+                if "task_id" in jira_issue.get("description"):
+                    print("f")
 
                 if jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
