@@ -160,10 +160,11 @@ class PollerComponent(ResilientComponent):
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
-                if "task_id" in jira_issue.get("description"):
-                    print("f")
-
-                if jira_issue_key in soar_cases_jira_key:
+                issue_description = jira_issue.get("description")
+                if "task_id" in issue_description and "IBM SOAR Link:" in issue_description:
+                    # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
+                    jira_issues_with_soar_case.append(jira_issue)
+                elif jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                     # Remove jira_issue_key from soar_cases_jira_key list
