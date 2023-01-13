@@ -62,6 +62,8 @@ class PollerComponent(ResilientComponent):
         # List of the Jira datatable names found in the app.config
         jira_dt_names = []
 
+        task_and_incident_ids = []
+
         # Get list of Jira servers configured in the app.config
         servers_list = JiraServers(self.opts).get_server_name_list()
         # If no servers labeled then add fn_jira to list
@@ -113,12 +115,14 @@ class PollerComponent(ResilientComponent):
                 poller_filters = options.get("poller_filters")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, self.last_poller_time, max_results)
+            jira_issue_list, task_incident_ids = JiraCommon.search_jira_issues(get_jira_client(self.opts, options), poller_filters, self.last_poller_time, max_results)
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
+            task_and_incident_ids.extend(task_incident_ids)
+
         # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases({"jira_issue_id": True}, self.rest_client(), jira_dt_names)
+        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases(self.opts, {"jira_issue_id": True}, self.rest_client(), task_and_incident_ids)
 
         # Process Jira issues returned from search
         self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
