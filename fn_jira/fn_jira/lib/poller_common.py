@@ -53,7 +53,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
 class SOARCommon():
     """ Common methods for accessing IBM SOAR cases and their entities: comment, attachments, etc. """
 
-    def get_open_soar_cases(opts, search_fields, rest_client, task_and_incident_ids, open_cases=True):
+    def get_open_soar_cases(opts, search_fields, rest_client, data_to_get_from_case, open_cases=True):
         """
         Find all IBM SOAR cases which are associated with the endpoint platform
         :param search_fields: (dict) List of field(s) used to track the relationship with a SOAR case
@@ -90,20 +90,35 @@ class SOARCommon():
                 cases_list[num][key] = value
             cases_list[num].pop("properties")
 
-            # Add comment/notes to case
-            SOARCommon.add_to_case(rest_client, cases_list, num, "comments")
+            # Get the date that needs to be added to the current SOAR case
+            data_to_get = data_to_get_from_case.get(cases_list[num].get("jira_issue_id"))
+            if data_to_get:
 
-            # Add attachments to cases
-            SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
+                if data_to_get.get("comments"): # If comments were on the linked Jira ticket
+                    # Add comment/notes to case
+                    SOARCommon.add_to_case(rest_client, cases_list, num, "comments")
 
-            # Check if the current SOAR incident has a task with a linked Jira issue
-            for ids in task_and_incident_ids:
-                if ids.get("incident_id") == cases_list[num].get("id"):
-                    SOARCommon.add_task_to_case(rest_client, cases_list, num, ids.get("task_id"))
+                if data_to_get.get("attachments"): # If attachments were on the linked Jira ticket
+                    # Add attachments to cases
+                    SOARCommon.add_to_case(rest_client, cases_list, num, "attachments")
+
+            tasks = data_to_get_from_case.get("tasks")
+            if tasks:
+                for task in tasks:
+                    if task.get("incident_id") == cases_list[num].get("id"):
+                        task_data_to_get = data_to_get_from_case.get(task.get("task_key"))
+                        if task_data_to_get:
+                            SOARCommon.add_task_to_case(rest_client,
+                                                        cases_list,
+                                                        num,
+                                                        task.get("task_id"),
+                                                        comments=task_data_to_get.get("comments"),
+                                                        attachments=task_data_to_get.get("attachments")
+                                                       )
 
         return cases_list, err_msg
 
-    def add_task_to_case(rest_client, cases_list, num, id):
+    def add_task_to_case(rest_client, cases_list, num, id, comments=False, attachments=False):
         """
         Adds task data to the SOAR case
         """
@@ -120,7 +135,7 @@ class SOARCommon():
                     })
 
                     # Get notes
-                    if case_tasks[task_num].get("notes"):
+                    if comments:
                         task_notes = case_tasks[task_num].get("notes")
                         cases_list[num]["tasks"][task_num]["notes"] = []
                         for note_num in range(len(task_notes)):
@@ -130,7 +145,7 @@ class SOARCommon():
                             })
 
                     # Get attachments
-                    if case_tasks[task_num].get("attachments_count"):
+                    if attachments:
                         task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
                         cases_list[num]["tasks"][task_num]["attachments"] = []
                         for attach_num in range(len(task_attachments)):
@@ -216,8 +231,6 @@ class JiraCommon():
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
 
-        task_incident_ids = []
-
         if last_poller_time:
             search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
 
@@ -240,15 +253,16 @@ class JiraCommon():
                 if issue.get(key):
                     issue[key] = issue[key].get(value)
 
-            data_to_get_from_case[issue.get("id")]["comments"] = False
-            data_to_get_from_case[issue.get("id")]["attachments"] = False
-            tasks = data_to_get_from_case[issue.get("id")].get("tasks")
-            data_to_get_from_case[issue.get("id")]["tasks"] = tasks if tasks else []
+            if not data_to_get_from_case.get(issue.get("key")):
+                data_to_get_from_case[issue.get("key")] = {}
+
+            data_to_get_from_case[issue.get("key")]["comments"] = False
+            data_to_get_from_case[issue.get("key")]["attachments"] = False
 
             # Create a list of just comment string
             comments = issue.get("comment")
             if comments:
-                data_to_get_from_case[issue.get("id")]["comments"] = True
+                data_to_get_from_case[issue.get("key")]["comments"] = True
                 for comment_num in range(len(comments)):
                     comments[comment_num] = comments[comment_num].get("body")
 
@@ -259,7 +273,7 @@ class JiraCommon():
             # Create a list of just attachment filenames
             attachments = issue.get("attachment")
             if attachments:
-                data_to_get_from_case[issue.get("id")]["attachments"] = True
+                data_to_get_from_case[issue.get("key")]["attachments"] = True
                 for attach_num in range(len(attachments)):
                     attachments[attach_num] = {
                         "filename": attachments[attach_num].get("filename"),
@@ -268,10 +282,10 @@ class JiraCommon():
 
             issue_description = issue.get("description")
             if "IBM SOAR Link:" in issue_description and "task_id" in issue_description:
-                
-                task_incident_ids.append({
+                data_to_get_from_case["tasks"].append({
                     "incident_id": int(issue_description[issue_description.rindex("/")+1:issue_description.index("?")]),
-                    "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")])
+                    "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")]),
+                    "task_key": issue.get("key")
                 })
 
-        return issues_list, task_incident_ids
+        return issues_list, data_to_get_from_case

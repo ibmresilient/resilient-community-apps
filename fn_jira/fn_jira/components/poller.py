@@ -62,9 +62,7 @@ class PollerComponent(ResilientComponent):
         # List of the Jira datatable names found in the app.config
         jira_dt_names = []
 
-        task_and_incident_ids = []
-
-        data_to_get_from_case = {}
+        data_to_get_from_case = {"tasks": []}
 
         # Get list of Jira servers configured in the app.config
         servers_list = JiraServers(self.opts).get_server_name_list()
@@ -117,7 +115,7 @@ class PollerComponent(ResilientComponent):
                 poller_filters = options.get("poller_filters")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list, ids, data_to_get_from_case = JiraCommon.search_jira_issues(
+            jira_issue_list, data_to_get_from_case = JiraCommon.search_jira_issues(
                                                                 get_jira_client(self.opts, options),
                                                                 poller_filters,
                                                                 self.last_poller_time,
@@ -127,15 +125,13 @@ class PollerComponent(ResilientComponent):
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
-            task_and_incident_ids.extend(ids)
-
         # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases(self.opts, {"jira_issue_id": True}, self.rest_client(), task_and_incident_ids)
+        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases(self.opts, {"jira_issue_id": True}, self.rest_client(), data_to_get_from_case)
 
         # Process Jira issues returned from search
-        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
+        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list, data_to_get_from_case)
 
-    def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list):
+    def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list, data_to_get_from_case):
         """
         Process the returned Jira issues
         :param jira_issue_dit: Dictionary of Jira issues based on Jira server
@@ -188,7 +184,7 @@ class PollerComponent(ResilientComponent):
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:
                 cases = str(soar_cases_jira_key).replace("[", "(").replace("]", ")")
-                for jira_issue in JiraCommon.search_jira_issues(jira_client, f"key in {cases}"):
+                for jira_issue in JiraCommon.search_jira_issues(jira_client, f"key in {cases}", data_to_get_from_case=data_to_get_from_case):
                     jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
                     jira_issues_with_soar_case.append(jira_issue)
                 jira_client.close() # Close connection to Jira server
@@ -204,6 +200,8 @@ class PollerComponent(ResilientComponent):
                                 # Add matching SOAR case and Jira issue to soar_cases_to_update list
                                 soar_cases_to_update.append([jira_issue, soar_case])
                                 break
+                        if soar_case.get("tasks"):
+                            print("f")
 
         for jira_issue in jira_issues_to_add_to_soar:
             create_soar_incident(self.rest_client(), jira_issue)
