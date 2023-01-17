@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_utilities',
     display_name='Utility Functions for SOAR',
-    version='2.1.1',
+    version='2.1.2',
     license='MIT',
     author='IBM SOAR',
     url="http://ibm.biz/soarcommunity",
@@ -37,7 +37,7 @@ setup(
         'resilient_circuits>=41.0.0',
         'openpyxl~=3.0',
         'pyOpenSSL~=22.0',
-        'cryptography~=36.0',
+        'cryptography~=38.0',
         'pywinrm~=0.4',
         'json2html~=1.3',
         'lxml~=4.8',
