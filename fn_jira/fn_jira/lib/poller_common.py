@@ -131,7 +131,12 @@ class SOARCommon():
                 if id == task_id:
                     cases_list[num]["tasks"].append({
                         "id": task_id,
-                        "name": case_tasks[task_num].get("name")
+                        "name": case_tasks[task_num].get("name"),
+                        "custom": case_tasks[task_num].get("custom"),
+                        "required": case_tasks[task_num].get("required"),
+                        "inc_training": case_tasks[task_num].get("inc_training"),
+                        "frozen": case_tasks[task_num].get("frozen"),
+                        "active": case_tasks[task_num].get("active")
                     })
 
                     # Get notes
@@ -147,7 +152,8 @@ class SOARCommon():
                     # Get attachments
                     if attachments:
                         task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
-                        cases_list[num]["tasks"][task_num]["attachments"] = []
+                        attach = cases_list[num]["tasks"][task_num].get("attachments")
+                        cases_list[num]["tasks"][task_num]["attachments"] = attach if attach else []
                         for attach_num in range(len(task_attachments)):
                             cases_list[num]["tasks"][task_num]["attachments"].append({
                                 "id": task_attachments[attach_num].get("id"),
