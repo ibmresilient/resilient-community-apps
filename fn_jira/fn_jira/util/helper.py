@@ -322,6 +322,34 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
             except Exception as e:
                 raise IntegrationError(str(e))
 
+def soar_update_task(jira, soar, res_client, task):
+    """
+    Update soar tasks
+    :param jira: Dict of Jira issue data
+    :param soar: Dict of SOAR case data
+    :param res_client: Client connection to SOAR
+    :param task: SOAR task dictionry
+    """
+
+    soar_task_update_payload = {
+        "inc_id": soar.get("id"),
+        "custom": task.get("custom"),
+        "required": task.get("required"),
+        "inc_training": task.get("inc_training"),
+        "frozen": task.get("frozen"),
+        "active": task.get("active")
+    }
+
+    # Update comments/notes
+    if jira.get("comment"):
+        print("f")
+
+    # Update attachments
+    if jira.get("attachment"):
+        print("f")
+
+    print("f")
+
 def update_soar_incident(res_client, soar_cases_to_update):
     """
     Update the SOAR cases with new data from the corresponding Jira issue
@@ -362,12 +390,22 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
+    soar_task_update_payload = {}
 
     for update in soar_cases_to_update:
         jira = update[0] # Get the Jira issue
         soar = update[1] # Get the SOAR case
 
-        del update # Delete variables that are no longer needed
+        jira_issue_description = jira.get("description")
+        # Check if the Jira issue is linked to a SOAR task
+        if "IBM SOAR Link:" in jira_issue_description and "task_id" in jira_issue_description:
+            task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
+            for task in soar.get("tasks"):
+                if task.get("id") == task_id:
+                    # Update SOAR task with Jira data
+                    soar_update_task(jira, soar, res_client, task)
+                    break
+            break
 
         # Check if new comments added or old comments changed/deleted
         soar_update_comments_attachments(jira, soar, res_client, "comment")
@@ -397,11 +435,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     "field": {"name": key}
                 })
 
-        del key, value, soar_value, jira_value # Delete variables that are no longer needed
-
-    # Delete variables that are no longer needed
-    del soar_field_type, soar_to_jira_fields, soar_cases_to_update
-
     # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
     if soar_update_payload["patches"]:
         # Send put request to SOAR
@@ -410,6 +443,3 @@ def update_soar_incident(res_client, soar_cases_to_update):
             res_client.put("/incidents/patch", soar_update_payload)
         except Exception as e:
             raise IntegrationError(str(e))
-
-    del soar_update_payload # Delete variables that are no longer needed
-
