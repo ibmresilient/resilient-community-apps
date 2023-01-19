@@ -29,7 +29,7 @@ setup(
     description="Joe Sandbox Analysis Function for IBM SOAR",
     long_description="Joe Sandbox Analysis Function for IBM SOAR",
     install_requires=[
-        'resilient_circuits>=47.0.0',
+        'resilient_circuits>=47.1.0',
         'jbxapi>=3.19.0'
     ],
     packages=find_packages(),

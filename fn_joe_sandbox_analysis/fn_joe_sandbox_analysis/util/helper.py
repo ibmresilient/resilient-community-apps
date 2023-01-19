@@ -18,7 +18,9 @@ def connect_to_joe_sandbox(opts, options):
     proxies = RequestsCommon(opts, options).get_proxies()
 
     # Get verify setting from app.config
-    verify_ssl = str_to_bool(options.get("jsb_verify", True))
+    verify_ssl = options.get("jsb_verify", True)
+    if verify_ssl:
+        verify_ssl = False if verify_ssl.lower() == "false" else (True if verify_ssl.lower() == "true" else verify_ssl)
 
     return ANALYSIS_URL, JoeSandbox(
         apikey=API_KEY,
