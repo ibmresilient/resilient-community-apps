@@ -25,7 +25,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
-| 2.1.2 | 01/2023 | Bug fix for setup.py |
+| 2.1.2 | 01/2023 | Bug fix for version of cryptography |
 | 2.1.1 | 04/2022 | Bug fix for selftest |
 | 2.1.0 | 03/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
 | 2.0.6 | 07/2021 | pin dependency 'chardet' at v4.0.0 |
@@ -55,7 +55,7 @@ SOAR functions simplify development of integrations by wrapping each external ac
   List any Requirements 
 -->
 * SOAR platform >= `v42.0`
-* An Integration Server running `resilient_circuits>=41.0.0`
+* An Integration Server running `resilient_circuits>=47.1.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
