@@ -57,7 +57,7 @@ If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `44.0.7585`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=47.0.0`.
+* Integration server is running `resilient_circuits>=47.1.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -90,7 +90,7 @@ The app does support a proxy server.
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * jbxapi>=3.19.0
-* resilient_circuits>=47.0.0
+* resilient_circuits>=47.1.0
 
 ---
 
