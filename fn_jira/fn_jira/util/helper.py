@@ -3,8 +3,6 @@
 
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
-from datetime import datetime
-from ast import literal_eval
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -297,6 +295,8 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
     if soar_updates:
         for num, soar_update in enumerate(soar_updates):
             soar_update_content = soar_update.get("content")
+            if update_type == "attachment":
+                soar_update_content = soar_update.get("name")
             # Delete comment\attachment on SOAR if comment\attachment is not found on Jira issue
             if soar_update_content not in jira_updates:
                 # Send delete request to SOAR
@@ -333,22 +333,39 @@ def soar_update_task(jira, soar, res_client, task):
 
     soar_task_update_payload = {
         "inc_id": soar.get("id"),
+        "id": task.get("id"),
+        "name": task.get("name"),
         "custom": task.get("custom"),
         "required": task.get("required"),
         "inc_training": task.get("inc_training"),
         "frozen": task.get("frozen"),
-        "active": task.get("active")
+        "active": task.get("active"),
+        "notes": []
     }
 
     # Update comments/notes
+    comments = jira.get("comment")
     if jira.get("comment"):
-        print("f")
+        for comment in comments:
+            if comment not in task.get("notes"):
+                soar_task_update_payload["notes"].append({
+                    "text": {
+                        "format": "text",
+                        "content": f"{comment}\nAdded from Jira"
+                    }
+                })
 
     # Update attachments
-    if jira.get("attachment"):
-        print("f")
+    attachments = jira.get("attachment")
+    if attachments:
+        task_attachments = [attach.get("filename") for attach in task.get("attachments")]
+        for attach in attachments:
+            filename = attach.get("filename")
+            if filename not in task_attachments:
+                # res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=content)
+                print("f")
 
-    print("f")
+    return soar_task_update_payload
 
 def update_soar_incident(res_client, soar_cases_to_update):
     """
@@ -362,8 +379,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "name": "summary",
         "description": "description",
         "severity_code": "priority",
-        "create_date": "created",
-        "discovered_date": "created",
         "jira_internal_url": "self",
         "jira_issue_id": "key",
         "jira_server": "jira_server",
@@ -377,8 +392,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "name": "text",
         "description": "textarea",
         "severity_code": "text",
-        "create_date": "date",
-        "discovered_date": "date",
         "jira_internal_url": "textarea",
         "jira_issue_id": "text",
         "jira_server": "text",
@@ -390,7 +403,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
-    soar_task_update_payload = {}
+    soar_task_update_payload = []
 
     for update in soar_cases_to_update:
         jira = update[0] # Get the Jira issue
@@ -398,14 +411,14 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
         jira_issue_description = jira.get("description")
         # Check if the Jira issue is linked to a SOAR task
-        if "IBM SOAR Link:" in jira_issue_description and "task_id" in jira_issue_description:
+        if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "task_id=" in jira_issue_description:
             task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
             for task in soar.get("tasks"):
                 if task.get("id") == task_id:
                     # Update SOAR task with Jira data
-                    soar_update_task(jira, soar, res_client, task)
+                    soar_task_update_payload.append(soar_update_task(jira, soar, res_client, task))
                     break
-            break
+            continue
 
         # Check if new comments added or old comments changed/deleted
         soar_update_comments_attachments(jira, soar, res_client, "comment")
