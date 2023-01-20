@@ -8,7 +8,6 @@ from logging import getLogger
 from threading import Event
 from traceback import format_exc
 from resilient import SimpleHTTPException
-from json import dumps
 
 LOG = getLogger(__name__)
 
@@ -144,10 +143,9 @@ class SOARCommon():
                         task_notes = case_tasks[task_num].get("notes")
                         cases_list[num]["tasks"][task_num]["notes"] = []
                         for note_num in range(len(task_notes)):
-                            cases_list[num]["tasks"][task_num]["notes"].append({
-                                "id": task_notes[note_num].get("id"),
-                                "text": task_notes[note_num].get("text")
-                            })
+                            cases_list[num]["tasks"][task_num]["notes"].append(
+                                task_notes[note_num].get("text")
+                            )
 
                     # Get attachments
                     if attachments:
@@ -287,7 +285,7 @@ class JiraCommon():
                     }
 
             issue_description = issue.get("description")
-            if "IBM SOAR Link:" in issue_description and "task_id" in issue_description:
+            if issue_description and "IBM SOAR Link:" in issue_description and "task_id=" in issue_description:
                 data_to_get_from_case["tasks"].append({
                     "incident_id": int(issue_description[issue_description.rindex("/")+1:issue_description.index("?")]),
                     "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")]),

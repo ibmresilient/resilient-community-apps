@@ -169,7 +169,7 @@ class PollerComponent(ResilientComponent):
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
                 issue_description = jira_issue.get("description")
-                if "task_id" in issue_description and "IBM SOAR Link:" in issue_description:
+                if issue_description and "task_id" in issue_description and "IBM SOAR Link:" in issue_description:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                 elif jira_issue_key in soar_cases_jira_key:
@@ -193,20 +193,20 @@ class PollerComponent(ResilientComponent):
             if soar_cases_list:
                 # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
                 for soar_case in soar_cases_list:
+                    soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR case if they exist
                     for jira_issue in jira_issues_with_soar_case:
                         jira_issue_description = jira_issue.get("description") # Get the description of the Jira issue
-                        soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR if they exist
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
-                        if soar_tasks and "IBM SOAR Link:" in jira_issue_description and "task_id=" in jira_issue_description:
+                        if soar_tasks and jira_issue_description and "IBM SOAR Link:" in jira_issue_description \
+                            and "task_id=" in jira_issue_description:
                             task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
                                     soar_cases_to_update = self.compare_last_updated_time(jira_issue, soar_case, soar_cases_to_update)
                                     break
-                            break
                         # Check if SOAR incident needs to be updated
-                        if jira_issue.get("key") == soar_case.get("jira_issue_id") or soar_case.get("tasks"):
+                        if jira_issue.get("key") == soar_case.get("jira_issue_id"):
                             soar_cases_to_update = self.compare_last_updated_time(jira_issue, soar_case, soar_cases_to_update)
                             break
 
