@@ -128,15 +128,16 @@ class SOARCommon():
             for task_num in range(len(case_tasks)):
                 task_id = case_tasks[task_num].get("id")
                 if id == task_id:
-                    cases_list[num]["tasks"].append({
-                        "id": task_id,
-                        "name": case_tasks[task_num].get("name"),
-                        "custom": case_tasks[task_num].get("custom"),
-                        "required": case_tasks[task_num].get("required"),
-                        "inc_training": case_tasks[task_num].get("inc_training"),
-                        "frozen": case_tasks[task_num].get("frozen"),
-                        "active": case_tasks[task_num].get("active")
-                    })
+                    # cases_list[num]["tasks"].append({
+                    #     "id": task_id,
+                    #     "name": case_tasks[task_num].get("name"),
+                    #     "custom": case_tasks[task_num].get("custom"),
+                    #     "required": case_tasks[task_num].get("required"),
+                    #     "inc_training": case_tasks[task_num].get("inc_training"),
+                    #     "frozen": case_tasks[task_num].get("frozen"),
+                    #     "active": case_tasks[task_num].get("active")
+                    # })
+                    cases_list[num]["tasks"].append(case_tasks[task_num])
 
                     # Get notes
                     if comments:
@@ -226,7 +227,7 @@ class JiraCommon():
         str_time = str_time[:str_time.rindex(".")]
         return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
 
-    def search_jira_issues(jira_client, search_filters, last_poller_time=None, max_results=50, data_to_get_from_case=None):
+    def search_jira_issues(opts, jira_client, search_filters, last_poller_time=None, max_results=50, data_to_get_from_case=None):
         """
         Search for Jira issues with given filters
         :param jira_client: Client connection to Jira
@@ -281,7 +282,7 @@ class JiraCommon():
                 for attach_num in range(len(attachments)):
                     attachments[attach_num] = {
                         "filename": attachments[attach_num].get("filename"),
-                        "content": attachments[attach_num].get("content")
+                        "content": jira_client._session.get(attachments[attach_num].get("content")).content
                     }
 
             issue_description = issue.get("description")

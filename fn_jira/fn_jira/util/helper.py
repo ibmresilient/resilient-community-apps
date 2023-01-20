@@ -3,6 +3,7 @@
 
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
+from json import dumps
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -322,50 +323,38 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
             except Exception as e:
                 raise IntegrationError(str(e))
 
-def soar_update_task(jira, soar, res_client, task):
+def soar_update_task(jira, res_client, task):
     """
     Update soar tasks
     :param jira: Dict of Jira issue data
-    :param soar: Dict of SOAR case data
     :param res_client: Client connection to SOAR
     :param task: SOAR task dictionry
     """
 
-    soar_task_update_payload = {
-        "inc_id": soar.get("id"),
-        "id": task.get("id"),
-        "name": task.get("name"),
-        "custom": task.get("custom"),
-        "required": task.get("required"),
-        "inc_training": task.get("inc_training"),
-        "frozen": task.get("frozen"),
-        "active": task.get("active"),
-        "notes": []
-    }
-
     # Update comments/notes
     comments = jira.get("comment")
-    if jira.get("comment"):
+    if comments:
         for comment in comments:
             if comment not in task.get("notes"):
-                soar_task_update_payload["notes"].append({
+                payload = {
                     "text": {
                         "format": "text",
                         "content": f"{comment}\nAdded from Jira"
-                    }
-                })
+                    },
+                    "is_deleted": False
+                }
+                url = f"{res_client.base_url}/rest/orgs/{res_client.org_id}/tasks/{task.get('id')}/comments"
+                d = dumps(payload)
+                r = res_client.post(f"/tasks/{task.get('id')}/comments", dumps(payload))
 
     # Update attachments
     attachments = jira.get("attachment")
     if attachments:
-        task_attachments = [attach.get("filename") for attach in task.get("attachments")]
+        task_attachments = [att.get("name") for att in task.get("attachments")]
         for attach in attachments:
             filename = attach.get("filename")
             if filename not in task_attachments:
-                # res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=content)
-                print("f")
-
-    return soar_task_update_payload
+                res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=attach.get("content"))
 
 def update_soar_incident(res_client, soar_cases_to_update):
     """
@@ -403,7 +392,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
-    soar_task_update_payload = []
 
     for update in soar_cases_to_update:
         jira = update[0] # Get the Jira issue
@@ -416,7 +404,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
             for task in soar.get("tasks"):
                 if task.get("id") == task_id:
                     # Update SOAR task with Jira data
-                    soar_task_update_payload.append(soar_update_task(jira, soar, res_client, task))
+                    soar_update_task(jira, res_client, task)
                     break
             continue
 
@@ -448,10 +436,10 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     "field": {"name": key}
                 })
 
-    # If SOAR payload is not empty then update SOAR fields "soar_case_last_updated" on cases
+    # If SOAR payload is not empty then update SOAR fields on cases
     if soar_update_payload["patches"]:
         # Send put request to SOAR
-        # This will update all cases that need to be updated for the give Jira server
+        # This will update all cases that need to be updated
         try:
             res_client.put("/incidents/patch", soar_update_payload)
         except Exception as e:
