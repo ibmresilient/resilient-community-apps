@@ -116,6 +116,7 @@ class PollerComponent(ResilientComponent):
 
             # Get a list of Jira issues bases on the given search filters
             jira_issue_list, data_to_get_from_case = JiraCommon.search_jira_issues(
+                                                                self.opts,
                                                                 get_jira_client(self.opts, options),
                                                                 poller_filters,
                                                                 self.last_poller_time,
@@ -184,7 +185,7 @@ class PollerComponent(ResilientComponent):
             # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
             if soar_cases_jira_key:
                 cases = str(soar_cases_jira_key).replace("[", "(").replace("]", ")")
-                jira_issues, data_to_get_from_case = JiraCommon.search_jira_issues(jira_client, f"key in {cases}", data_to_get_from_case=data_to_get_from_case)
+                jira_issues, data_to_get_from_case = JiraCommon.search_jira_issues(self.opts, jira_client, f"key in {cases}", data_to_get_from_case=data_to_get_from_case)
                 for issue_num in range(len(jira_issues)):
                     jira_issues[issue_num]["jira_server"] = jira_server # Add jira_server key to jira_issue
                     jira_issues_with_soar_case.append(jira_issues[issue_num])
