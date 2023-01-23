@@ -2,9 +2,17 @@ include apikey_permissions.txt
 include Dockerfile
 include entrypoint.sh
 include README.md
-include icons/*
-include tests/*
+include icons/*.png
+include fn_sep/util/*
 include fn_sep/LICENSE
+include doc/*.md
+include fn_sep/doc/*
+include doc/screenshots/*
+include tox.ini
+
 recursive-include fn_sep/util *
-recursive-exclude fn_sep *.bak
-recursive-exclude fn_sep *.pyc
+recursive-include fn_sep/lib *
+recursive-include payload_samples *.json
+recursive-include tests *
+
+global-exclude *.bak

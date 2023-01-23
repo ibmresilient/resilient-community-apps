@@ -21,7 +21,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_sep",
         "message_destinations": [u"fn_sep"],
-        "functions": [u"fn_sep_add_fingerprint_list", u"fn_sep_assign_fingerprint_list_to_group", u"fn_sep_delete_fingerprint_list", u"fn_sep_get_command_status", u"fn_sep_get_computers", u"fn_sep_get_domains", u"fn_sep_get_file_content_as_base64", u"fn_sep_get_fingerprint_list", u"fn_sep_get_groups", u"fn_sep_move_endpoint", u"fn_sep_quarantine_endpoints", u"fn_sep_scan_endpoints", u"fn_sep_update_fingerprint_list", u"fn_sep_upload_file_to_sepm"],
+        "functions": [u"fn_sep_add_fingerprint_list", u"fn_sep_assign_fingerprint_list_to_group", u"fn_sep_delete_fingerprint_list", u"fn_sep_get_command_status", u"fn_sep_get_computers", u"fn_sep_get_domains", u"fn_sep_get_file_content_as_base64", u"fn_sep_get_fingerprint_list", u"fn_sep_get_groups", u"fn_sep_move_endpoint", u"fn_sep_quarantine_endpoints", u"fn_sep_scan_endpoints", u"fn_sep_update_fingerprint_list", u"fn_sep_upload_file_to_sepm", u"sep_cancel_a_command", u"sep_get_critical_events_info", u"sep_get_exceptions_policy", u"sep_get_firewall_policy", u"sep_get_policy_summary"],
         "workflows": [u"wf_sep_add_fingerprint_list", u"wf_sep_assign_fingerprint_list_to_lockdown_group", u"wf_sep_delete_fingerprint_list", u"wf_sep_delete_hash_from_fingerprint_list", u"wf_sep_get_blacklist_information", u"wf_sep_get_endpoint_details", u"wf_sep_get_endpoint_details_for_artifact", u"wf_sep_get_endpoints_status", u"wf_sep_get_endpoints_status_details", u"wf_sep_get_endpoints_status_refresh", u"wf_sep_get_file_content_as_base64_string", u"wf_sep_get_groups_information", u"wf_sep_get_quarantine_status", u"wf_sep_get_remediation_status", u"wf_sep_get_scan_results", u"wf_sep_get_upload_status", u"wf_sep_initiate_eoc_scan_for_artifact", u"wf_sep_move_endpoint", u"wf_sep_quarantine_endpoint", u"wf_sep_remediate_artifact_on_endpoint", u"wf_sep_upload_file_to_sepm"],
         "actions": [u"Example: SEP - Add Artifact from Scan Result", u"Example: SEP - Add Hash to Blacklist", u"Example: SEP - Assign Blacklist to lockdown group", u"Example: SEP - Delete Blacklist", u"Example: SEP - Delete Hash from Blacklist", u"Example: SEP - Get Blacklist information", u"Example: SEP - Get Endpoint Details", u"Example: SEP - Get Endpoint Details for artifact", u"Example: SEP - Get Endpoints status summary", u"Example: SEP - Get Endpoints status summary (refresh)", u"Example: SEP - Get File Content as Base64 string", u"Example: SEP - Get Groups information", u"Example: SEP - Get Non-Compliant Endpoints status details", u"Example: SEP - Get Quarantine status", u"Example: SEP - Get Remediation status", u"Example: SEP - Get Scan results", u"Example: SEP - Get Upload status", u"Example: SEP - Initiate EOC Scan for Artifact", u"Example: SEP - Move Endpoint", u"Example: SEP - Parse notification", u"Example: SEP - Quarantine Endpoint", u"Example: SEP - Remediate Artifact on Endpoint", u"Example: SEP - Un-Quarantine Endpoint", u"Example: SEP - Upload file to SEPM server"],
         "incident_fields": [],
@@ -39,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -59,6 +59,11 @@ def customization_data(client=None):
         - fn_sep_scan_endpoints
         - fn_sep_update_fingerprint_list
         - fn_sep_upload_file_to_sepm
+        - sep_cancel_a_command
+        - sep_get_critical_events_info
+        - sep_get_exceptions_policy
+        - sep_get_firewall_policy
+        - sep_get_policy_summary
     - Workflows:
         - wf_sep_add_fingerprint_list
         - wf_sep_assign_fingerprint_list_to_lockdown_group
