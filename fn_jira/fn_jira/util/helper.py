@@ -331,6 +331,9 @@ def soar_update_task(jira, res_client, task):
     :param task: SOAR task dictionry
     """
 
+    for num in range(len(task.get("notes"))):
+        task["notes"][num] = task["notes"][num].replace("<br/>Added from Jira", "").replace("<div>", "").replace("</div>", "")
+
     # Update comments/notes
     comments = jira.get("comment")
     if comments:
@@ -343,9 +346,7 @@ def soar_update_task(jira, res_client, task):
                     },
                     "is_deleted": False
                 }
-                url = f"{res_client.base_url}/rest/orgs/{res_client.org_id}/tasks/{task.get('id')}/comments"
-                d = dumps(payload)
-                r = res_client.post(f"/tasks/{task.get('id')}/comments", dumps(payload))
+                res_client.post(f"/tasks/{task.get('id')}/comments", dumps(payload))
 
     # Update attachments
     attachments = jira.get("attachment")

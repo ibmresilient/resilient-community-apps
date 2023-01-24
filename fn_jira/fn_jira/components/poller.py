@@ -62,6 +62,7 @@ class PollerComponent(ResilientComponent):
         # List of the Jira datatable names found in the app.config
         jira_dt_names = []
 
+        # Dictionary of dicts that say what info to get from each SOAR case
         data_to_get_from_case = {"tasks": []}
 
         # Get list of Jira servers configured in the app.config
@@ -137,6 +138,7 @@ class PollerComponent(ResilientComponent):
         Process the returned Jira issues
         :param jira_issue_dit: Dictionary of Jira issues based on Jira server
         :param soar_case_list: List of SOAR cases that contain "Jira Issue ID" field
+        :param data_to_get_from_case: Dictionary of dicts that say what info to get from each SOAR case
         :return: None
         """
 
@@ -204,12 +206,17 @@ class PollerComponent(ResilientComponent):
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
-                                    soar_cases_to_update = self.compare_last_updated_time(jira_issue, soar_case, soar_cases_to_update)
-                                    break
+                                    if jira_issue.get("updated") > task.get("datatable").get("cells").get("last_updated").get("value"):
+                                        # Add matching SOAR case and Jira issue to soar_cases_to_update list
+                                        soar_cases_to_update.append([jira_issue, soar_case])
+                                        break
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("jira_issue_id"):
-                            soar_cases_to_update = self.compare_last_updated_time(jira_issue, soar_case, soar_cases_to_update)
-                            break
+                            soar_case_last_updated = soar_case.get("soar_case_last_updated")
+                            if jira_issue.get("updated") > soar_case_last_updated:
+                                # Add matching SOAR case and Jira issue to soar_cases_to_update list
+                                soar_cases_to_update.append([jira_issue, soar_case])
+                                break
 
         # Create new SOAR cases from Jira issues
         for jira_issue in jira_issues_to_add_to_soar:
@@ -219,16 +226,3 @@ class PollerComponent(ResilientComponent):
         # Update SOAR cases with data from linked Jira issues
         if soar_cases_to_update:
             update_soar_incident(self.rest_client(), soar_cases_to_update)
-
-    def compare_last_updated_time(self, jira_issue, soar_case, soar_cases_to_update):
-        """
-        Compare last updated times of the SOAR case and Jira issue
-        :param jira_issue: Dictionary of Jira issue data
-        :param soar_case: Dictionary of SOAR case data
-        :param soar_cases_to_update: list of lists that contain the SOAR case to update and its corresponding Jira issue
-        """
-        soar_case_last_updated = soar_case.get("soar_case_last_updated")
-        if jira_issue.get("updated") > soar_case_last_updated:
-            # Add matching SOAR case and Jira issue to soar_cases_to_update list
-            soar_cases_to_update.append([jira_issue, soar_case])
-        return soar_cases_to_update

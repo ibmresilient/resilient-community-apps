@@ -120,23 +120,24 @@ class SOARCommon():
     def add_task_to_case(rest_client, cases_list, num, id, comments=False, attachments=False):
         """
         Adds task data to the SOAR case
+        :param rest_client: Client connection to SOAR
+        :param cases_list: List of SOAR cases
+        :param num: The index of the case in case_list
+        :param id: Task ID
+        :param comments: Boolean if to add comments
+        :param attachments: Boolean if to add attachments
+        :return: None
         """
+        case_id = cases_list[num].get('id')
+
         # Add Tasks to cases
-        case_tasks = rest_client.get(f"/incidents/{cases_list[num].get('id')}/tasks?want_notes=true")
+        case_tasks = rest_client.get(f"/incidents/{case_id}/tasks?want_notes=true")
         if case_tasks:
-            cases_list[num]["tasks"] = []
+            task = cases_list[num].get("tasks")
+            cases_list[num]["tasks"] = task if task else []
             for task_num in range(len(case_tasks)):
                 task_id = case_tasks[task_num].get("id")
                 if id == task_id:
-                    # cases_list[num]["tasks"].append({
-                    #     "id": task_id,
-                    #     "name": case_tasks[task_num].get("name"),
-                    #     "custom": case_tasks[task_num].get("custom"),
-                    #     "required": case_tasks[task_num].get("required"),
-                    #     "inc_training": case_tasks[task_num].get("inc_training"),
-                    #     "frozen": case_tasks[task_num].get("frozen"),
-                    #     "active": case_tasks[task_num].get("active")
-                    # })
                     cases_list[num]["tasks"].append(case_tasks[task_num])
 
                     # Get notes
@@ -147,23 +148,41 @@ class SOARCommon():
                             cases_list[num]["tasks"][task_num]["notes"].append(
                                 task_notes[note_num].get("text")
                             )
+                    else:
+                        cases_list[num]["tasks"][task_num]["notes"] = []
 
                     # Get attachments
                     if attachments:
                         task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
                         attach = cases_list[num]["tasks"][task_num].get("attachments")
-                        cases_list[num]["tasks"][task_num]["attachments"] = attach if attach else []
+                        cases_list[num]["tasks"][task_num]["attachments"] = []
                         for attach_num in range(len(task_attachments)):
                             cases_list[num]["tasks"][task_num]["attachments"].append({
                                 "id": task_attachments[attach_num].get("id"),
                                 "name": task_attachments[attach_num].get("name")
                             })
+                    else:
+                        cases_list[num]["tasks"][task_num]["attachments"] = []
+
+                    # Add the data table that contains the task info to the task
+                    case_datatables = rest_client.get(f"/incidents/{case_id}/table_data?handle_format=names")
+                    if case_datatables:
+                        found = False
+                        for datatable in case_datatables:
+                            if found:
+                                break
+                            for row in case_datatables[datatable].get("rows"):
+                                if str(id) == row["cells"].get("task_id").get("value"):
+                                    found = True
+                                    cases_list[num]["tasks"][task_num]["datatable"] = row
+                                    break
+                    break
 
     def add_to_case(rest_client, cases_list, num, field_name):
         """
         Function adds comments and attachments on the SOAR incident to the case in the list
         :param rest_client: Client connection to SOAR
-        :param case_list: List of SOAR cases
+        :param cases_list: List of SOAR cases
         :param num: The index of the case in case_list
         :param field_name: Name of the field to add. Either 'attachments' or 'comments'
         :return: None
