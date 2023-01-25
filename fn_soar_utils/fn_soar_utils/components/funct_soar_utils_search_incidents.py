@@ -51,12 +51,12 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("'{0}' inputs: %s", fn_inputs)
 
-            filter_conditions, reason = convert_json('soar_utils_filter_conditions', fn_inputs['soar_utils_filter_conditions'], default=[])
+            filter_conditions, reason = convert_json('soar_utils_filter_conditions', fn_inputs.get('soar_utils_filter_conditions', None), default=[])
             if reason:
                 yield FunctionResult(rp.done(False, None, reason=reason))
                 return
 
-            sort_fields, reason = convert_json('soar_utils_sort_fields', fn_inputs['soar_utils_sort_fields'], default=[])
+            sort_fields, reason = convert_json('soar_utils_sort_fields', fn_inputs.get('soar_utils_sort_fields', None), default=[])
             if reason:
                 yield FunctionResult(rp.done(False, None, reason=reason))
                 return
