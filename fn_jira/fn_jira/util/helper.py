@@ -4,6 +4,7 @@
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
 from json import dumps
+from re import compile, sub
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -271,6 +272,14 @@ def create_soar_incident(res_client, issue):
             except Exception as err:
                 raise IntegrationError(err)
 
+def remove_html_tags(comment):
+    """
+    Remove html tags from a comment
+    :param comment: Comment from Jira issue
+    :return: Comment without html tags
+    """
+    return sub(compile('<.*?>'), '', comment)
+
 def soar_update_comments_attachments(jira, soar, res_client, update_type):
     """
     Add comment\attchment to the SOAR case that are in the Jira issue and
@@ -291,7 +300,7 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
     if update_type == "comment":
         for num in range(len(soar_updates)):
             update_content = soar_updates[num].get("content")
-            soar_updates[num]["content"] = update_content.replace("\nAdded from Jira", "").replace('<div class="rte">', "")
+            soar_updates[num]["content"] = remove_html_tags(update_content.replace("\nAdded from Jira", ""))
 
     if soar_updates:
         for num, soar_update in enumerate(soar_updates):
@@ -332,7 +341,7 @@ def soar_update_task(jira, res_client, task):
     """
 
     for num in range(len(task.get("notes"))):
-        task["notes"][num] = task["notes"][num].replace("<br/>Added from Jira", "").replace("<div>", "").replace("</div>", "")
+        task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
 
     # Update comments/notes
     comments = jira.get("comment")
@@ -356,6 +365,20 @@ def soar_update_task(jira, res_client, task):
             filename = attach.get("filename")
             if filename not in task_attachments:
                 res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=attach.get("content"))
+
+    # Update data table on SOAR with new information from the updated task
+    datatable = task.get('datatable')
+    datatable_cells = datatable.get("cells")
+
+    payload = {
+        "id": datatable.get("id"),
+        "version": datatable.get("version")
+    }
+    payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
+    payload["cells"]["last_updated"]["value"] = jira.get("updated")
+    payload["cells"]["status"]["value"] = jira.get("status")
+
+    res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", payload)
 
 def update_soar_incident(res_client, soar_cases_to_update):
     """
