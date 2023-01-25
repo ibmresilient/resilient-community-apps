@@ -138,7 +138,9 @@ class SOARCommon():
             for task_num in range(len(case_tasks)):
                 task_id = case_tasks[task_num].get("id")
                 if id == task_id:
-                    cases_list[num]["tasks"].append(case_tasks[task_num])
+
+                    task_fields = ["name", "inc_id", "status", "init_date", "active", "inc_name", "instructions", "notes", "closed_date", "id", "cat_name", "description"]
+                    cases_list[num]["tasks"].append({field: case_tasks[task_num].get(field) for field in task_fields})
 
                     # Get notes
                     if comments:
@@ -174,7 +176,10 @@ class SOARCommon():
                             for row in case_datatables[datatable].get("rows"):
                                 if str(id) == row["cells"].get("task_id").get("value"):
                                     found = True
+                                    for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
+                                        row.pop(field)
                                     cases_list[num]["tasks"][task_num]["datatable"] = row
+                                    cases_list[num]["tasks"][task_num]["datatable"]["table_id"] = case_datatables[datatable].get("id")
                                     break
                     break
 
