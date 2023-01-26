@@ -46,6 +46,7 @@
 - [Function - SOAR Utilities: String to Attachment](#function---soar-utilities-string-to-attachment)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
+- [Appendix - Create Incident Data Model](#appendix---create-incident-data-model)
 ---
 
 ## Release Notes
@@ -55,7 +56,9 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 10/2023 | Bug fix and doc improvements |
 | 1.0.0 | 10/2022 | Initial Release |
+
 
 ---
 
@@ -77,11 +80,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `45`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `45`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -99,7 +102,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.7.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -960,6 +963,18 @@ Function that takes an incident_id and a JSON String of field_name and field_val
 | `incident_id` | `number` | Yes | `-` | - |
 | `soar_utils_close_fields` | `text` | No | `-` | A JSON String of the fields required to close an Incident e.g.: {"resolution_id":"Resolved","resolution_summary":"closing"} |
 
+Example:
+```
+soar_utils_close_fields: {
+  "resolution_id": "Resolved",
+  "resolution_summary": "False Positive"
+}
+```
+Make sure `soar_utils_close_fields` represents a JSON string.
+* use double quotes to surround key names and string values.
+* use `true` or `false` for boolean values.
+* use brackets to surround multi-select field values. Ex. ["some", "thing"].
+* field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
 </p>
 </details>
 
@@ -1035,6 +1050,75 @@ Create an incident from a function
 | ---- | :--: | :------: | ------- | ------- |
 | `soar_utils_create_fields` | `text` | Yes | `{"name": "sample", "description": "sample incident", "discovered_date": 1621110044000}` | json fields to create an incident |
 
+Format `soar_utils_create_fields` in support of the SOAR API call to create an incident. Below is a sample of the fields which can used. The only required fields are `name` and `discovered_date`. Use the `properties` area to add content to custom fields. See the [appendix](#appendix---create-incident-data-model) for a complete listing of all the fields allowed.
+
+Example:
+```
+inc_create_fields: {
+  "name": "sample incident",
+  "description": "something",
+  "discovered_date": 1621110044,
+  "artifacts": [
+    {"type": "IP Address", "value": "1.2.3.4"}
+  ]
+}
+```
+
+Make sure `soar_utils_create_fields` represents a JSON string.
+* use double quotes to surround key names and string values.
+* use `true` or `false` for boolean values.
+* use brackets to surround multi-select field values. Ex. ["some", "thing"].
+* field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
+* custom incident fields are specified within the "properties" heirarchy.
+
+```json
+{
+  "name": "string",
+  "discovered_date": 0,
+  "due_date": 0,
+  "description": {
+    "format": "text",
+    "content": "string"
+  },
+  "severity_code": {
+    "name": "Low|Medium|High"
+  },
+  "incident_type_ids": [
+    "Phishing",
+    "Malware"
+  ],
+  "confirmed": true,
+  "nist_attack_vectors": [
+    null
+  ],
+  "workspace": {
+    "name": "string"
+  },
+  "properties": {
+    "custom_field": "value",
+  },
+  "artifacts": [
+    {
+      "type": {
+        "name": "string"
+      },
+      "value": "string",
+      "description": {
+        "format": "text",
+        "content": "string"
+      }
+    }
+  ],
+  "comments": [
+    {
+      "text": {
+        "format": "text",
+        "content": "string"
+      }
+    }
+  ]
+}
+```
 </p>
 </details>
 
@@ -1416,7 +1500,24 @@ Search for incidents based on filter criteria. Sorting field are optional
 | ---- | :--: | :------: | ------- | ------- |
 | `soar_utils_filter_conditions` | `text` | No | `[{"field_name":"name", "method":"contains", "value":"sample"}]` | json fields to filter incident records to return |
 | `soar_utils_sort_fields` | `text` | No | `[{"field_name":"id", "type": "asc"}]` | json fields to order result set |
+Examples:
+```
+soar_utils_filter_conditions: [
+  {"field_name":"name", "method":"contains", "value":"sample"},
+  {"field_name":"create_date", "method":"gte", "value":1621111014529},
+  {"field_name":"properties.custom_field", "method":"equals", "value":"something"}
+]
 
+soar_utils_sort_fields: [
+  {"field_name":"discovered_date", "type": "asc"}
+]
+```
+
+Make sure `soar_utils_filter_conditions` and `soar_utils_sort_fields` represents a JSON string or they can be left empty.
+* use double quotes to surround key names and string values.
+* use `true` or `false` for boolean values.
+* append `properties.` to custom fields Ex. "properties.custom_field".
+* field types `datepicker` and `datetimepicker` need to be in epoch format in milliseconds. Ex. 1607533205000.
 </p>
 </details>
 
@@ -4092,3 +4193,593 @@ Refer to the documentation listed in the Requirements section for troubleshootin
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+
+## Appendix - Create Incident Data Model
+```json
+{
+  "id": 0,
+  "sequence_code": "string",
+  "name": "string",
+  "discovered_date": 0,
+  "due_date": 0,
+  "create_date": 0,
+  "description": {
+    "format": "text",
+    "content": "string"
+  },
+  "owner_id": {
+    "name": "string"
+  },
+  "phase_id": {
+    "name": "string"
+  },
+  "severity_code": {
+    "name": "string"
+  },
+  "plan_status": "string",
+  "inc_training": true,
+  "inc_last_modified_date": 0,
+  "vers": 0,
+  "addr": "string",
+  "city": "string",
+  "creator_id": {
+    "name": "string"
+  },
+  "creator": {
+    "id": 0,
+    "fname": "string",
+    "lname": "string",
+    "email": "string",
+    "phone": "string",
+    "cell": "string",
+    "title": "string",
+    "notes": "string",
+    "locked": true,
+    "is_external": true,
+    "password_changed": true,
+    "display_name": "string",
+    "ui_theme": "string"
+  },
+  "creator_principal": {
+    "id": 0,
+    "type": "string",
+    "name": "string",
+    "display_name": "string"
+  },
+  "crimestatus_id": {
+    "name": "string"
+  },
+  "employee_involved": true,
+  "end_date": 0,
+  "exposure_dept_id": {
+    "name": "string"
+  },
+  "exposure_individual_name": "string",
+  "exposure_vendor_id": {
+    "name": "string"
+  },
+  "incident_type_ids": [
+    null
+  ],
+  "jurisdiction_name": "string",
+  "jurisdiction_reg_id": 0,
+  "reporter": "string",
+  "start_date": 0,
+  "state": {
+    "name": "string"
+  },
+  "country": {
+    "name": "string"
+  },
+  "zip": "string",
+  "exposure": 0,
+  "org_id": 0,
+  "org_handle": {
+    "name": "string"
+  },
+  "is_scenario": true,
+  "hard_liability": 0,
+  "members": [
+    null
+  ],
+  "negative_pr_likely": true,
+  "perms": {
+    "read": true,
+    "write": true,
+    "comment": true,
+    "assign": true,
+    "close": true,
+    "change_members": true,
+    "attach_file": true,
+    "read_attachments": true,
+    "delete_attachments": true,
+    "create_milestones": true,
+    "list_milestones": true,
+    "create_artifacts": true,
+    "list_artifacts": true,
+    "delete": true,
+    "change_workspace": true
+  },
+  "confirmed": true,
+  "task_changes": {
+    "added": [
+      {
+        "id": 0,
+        "name": "string"
+      }
+    ],
+    "removed": [
+      {
+        "id": 0,
+        "name": "string"
+      }
+    ]
+  },
+  "exposure_type_id": {
+    "name": "string"
+  },
+  "assessment": "string",
+  "data_compromised": true,
+  "nist_attack_vectors": [
+    null
+  ],
+  "workspace": {
+    "name": "string"
+  },
+  "resolution_id": {
+    "name": "string"
+  },
+  "resolution_summary": {
+    "format": "text",
+    "content": "string"
+  },
+  "pii": {
+    "data_compromised": true,
+    "determined_date": 0,
+    "harmstatus_id": {
+      "name": "string"
+    },
+    "data_encrypted": true,
+    "data_contained": true,
+    "impact_likely": true,
+    "data_source_ids": [
+      null
+    ],
+    "data_format": {
+      "name": "string"
+    },
+    "assessment": "string",
+    "exposure": 0,
+    "gdpr_harm_risk": {
+      "name": "string"
+    },
+    "gdpr_lawful_data_processing_categories": [
+      null
+    ],
+    "alberta_health_risk_assessment": true
+  },
+  "gdpr": {
+    "gdpr_breach_circumstances": [
+      null
+    ],
+    "gdpr_breach_type": {
+      "name": "string"
+    },
+    "gdpr_personal_data": {
+      "name": "string"
+    },
+    "gdpr_identification": {
+      "name": "string"
+    },
+    "gdpr_consequences": {
+      "name": "string"
+    },
+    "gdpr_final_assessment": {
+      "name": "string"
+    },
+    "gdpr_breach_type_comment": {
+      "format": "text",
+      "content": "string"
+    },
+    "gdpr_personal_data_comment": {
+      "format": "text",
+      "content": "string"
+    },
+    "gdpr_identification_comment": {
+      "format": "text",
+      "content": "string"
+    },
+    "gdpr_consequences_comment": {
+      "format": "text",
+      "content": "string"
+    },
+    "gdpr_final_assessment_comment": {
+      "format": "text",
+      "content": "string"
+    },
+    "gdpr_subsequent_notification": true
+  },
+  "regulator_risk": {},
+  "cm": {
+    "unassigneds": [
+      {
+        "geo": {
+          "name": "string"
+        },
+        "count": 0
+      }
+    ],
+    "total": 0
+  },
+  "regulators": {
+    "ids": [
+      null
+    ]
+  },
+  "hipaa": {
+    "hipaa_adverse": true,
+    "hipaa_misused": true,
+    "hipaa_acquired": true,
+    "hipaa_additional_misuse": true,
+    "hipaa_breach": true,
+    "hipaa_adverse_comment": "string",
+    "hipaa_misused_comment": "string",
+    "hipaa_acquired_comment": "string",
+    "hipaa_additional_misuse_comment": "string",
+    "hipaa_breach_comment": "string"
+  },
+  "tasks": [
+    {
+      "inc_name": "string",
+      "name": "string",
+      "custom": true,
+      "inc_id": 0,
+      "inc_owner_id": {
+        "name": "string"
+      },
+      "due_date": 0,
+      "required": true,
+      "owner_id": {
+        "name": "string"
+      },
+      "id": 0,
+      "status": "string",
+      "inc_training": true,
+      "frozen": true,
+      "owner_fname": "string",
+      "owner_lname": "string",
+      "cat_name": "string",
+      "description": "string",
+      "init_date": 0,
+      "src_name": "string",
+      "instr_text": "string",
+      "instructions": {
+        "format": "text",
+        "content": "string"
+      },
+      "at_id": {
+        "name": "string"
+      },
+      "active": true,
+      "members": [
+        null
+      ],
+      "perms": {
+        "read": true,
+        "write": true,
+        "comment": true,
+        "assign": true,
+        "close": true,
+        "change_members": true,
+        "attach_file": true,
+        "read_attachments": true,
+        "delete_attachments": true
+      },
+      "notes": [
+        {
+          "id": 0,
+          "parent_id": 0,
+          "user_id": {
+            "name": "string"
+          },
+          "user_fname": "string",
+          "user_lname": "string",
+          "create_date": 0,
+          "modify_date": 0,
+          "modify_user": {
+            "id": {
+              "name": "string"
+            },
+            "first_name": "string",
+            "last_name": "string"
+          },
+          "text": {
+            "format": "text",
+            "content": "string"
+          },
+          "children": [
+            {}
+          ],
+          "mentioned_users": [
+            null
+          ],
+          "comment_perms": {
+            "update": true,
+            "delete": true
+          },
+          "is_deleted": true,
+          "actions": [
+            {
+              "id": 0,
+              "name": "string",
+              "enabled": true
+            }
+          ],
+          "inc_id": 0,
+          "inc_name": "string",
+          "task_id": 0,
+          "task_name": "string",
+          "task_custom": true,
+          "task_at_id": {
+            "name": "string"
+          },
+          "task_members": [
+            null
+          ],
+          "type": "incident",
+          "inc_owner": {
+            "name": "string"
+          },
+          "user_name": "string",
+          "modify_principal": {
+            "id": 0,
+            "type": "string",
+            "name": "string",
+            "display_name": "string"
+          }
+        }
+      ],
+      "closed_date": 0,
+      "actions": [
+        {
+          "id": 0,
+          "name": "string",
+          "enabled": true
+        }
+      ],
+      "phase_id": {
+        "name": "string"
+      },
+      "category_id": {
+        "name": "string"
+      },
+      "notes_count": 0,
+      "attachments_count": 0,
+      "creator_principal": {
+        "id": 0,
+        "type": "string",
+        "name": "string",
+        "display_name": "string"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 0,
+      "type": {
+        "name": "string"
+      },
+      "value": "string",
+      "description": {
+        "format": "text",
+        "content": "string"
+      },
+      "creator": {
+        "id": 0,
+        "fname": "string",
+        "lname": "string",
+        "email": "string",
+        "phone": "string",
+        "cell": "string",
+        "title": "string",
+        "notes": "string",
+        "locked": true,
+        "is_external": true,
+        "password_changed": true,
+        "display_name": "string",
+        "ui_theme": "string"
+      },
+      "hits": [
+        {
+          "id": "string",
+          "value": "string",
+          "threat_source_id": {
+            "name": "string"
+          },
+          "artifact_type_id": {
+            "name": "string"
+          },
+          "active": true
+        }
+      ],
+      "attachment": {
+        "id": 0,
+        "uuid": "string",
+        "name": "string",
+        "content_type": "string",
+        "created": 0,
+        "creator_id": {
+          "name": "string"
+        },
+        "size": 0,
+        "vers": 0,
+        "actions": [
+          {
+            "id": 0,
+            "name": "string",
+            "enabled": true
+          }
+        ],
+        "inc_id": 0,
+        "inc_name": "string",
+        "inc_owner": {
+          "name": "string"
+        },
+        "task_id": 0,
+        "task_name": "string",
+        "task_custom": true,
+        "task_at_id": {
+          "name": "string"
+        },
+        "task_members": [
+          null
+        ],
+        "type": "incident"
+      },
+      "parent_id": 0,
+      "inc_id": 0,
+      "inc_name": "string",
+      "inc_owner": {
+        "name": "string"
+      },
+      "created": 0,
+      "last_modified_by": {
+        "id": 0,
+        "type": "string",
+        "name": "string",
+        "display_name": "string"
+      },
+      "last_modified_time": 0,
+      "pending_sources": [
+        null
+      ],
+      "perms": {
+        "read": true,
+        "write": true,
+        "delete": true
+      },
+      "properties": [
+        {
+          "name": "string",
+          "value": "string"
+        }
+      ],
+      "location": {
+        "latlng": {
+          "lat": 0,
+          "lng": 0
+        },
+        "city": "string",
+        "state": "string",
+        "country": "string",
+        "postalCode": "string"
+      },
+      "whois": {
+        "raw": "string",
+        "pending": true,
+        "invalid": true
+      },
+      "actions": [
+        {
+          "id": 0,
+          "name": "string",
+          "enabled": true
+        }
+      ],
+      "relating": true,
+      "creator_principal": {
+        "id": 0,
+        "type": "string",
+        "name": "string",
+        "display_name": "string"
+      },
+      "ip": {
+        "destination": true,
+        "source": true
+      },
+      "related_incident_count": 0
+    }
+  ],
+  "comments": [
+    {
+      "id": 0,
+      "parent_id": 0,
+      "user_id": {
+        "name": "string"
+      },
+      "user_fname": "string",
+      "user_lname": "string",
+      "create_date": 0,
+      "modify_date": 0,
+      "modify_user": {
+        "id": {
+          "name": "string"
+        },
+        "first_name": "string",
+        "last_name": "string"
+      },
+      "text": {
+        "format": "text",
+        "content": "string"
+      },
+      "children": [
+        {}
+      ],
+      "mentioned_users": [
+        null
+      ],
+      "comment_perms": {
+        "update": true,
+        "delete": true
+      },
+      "is_deleted": true,
+      "actions": [
+        {
+          "id": 0,
+          "name": "string",
+          "enabled": true
+        }
+      ],
+      "inc_id": 0,
+      "inc_name": "string",
+      "task_id": 0,
+      "task_name": "string",
+      "task_custom": true,
+      "task_at_id": {
+        "name": "string"
+      },
+      "task_members": [
+        null
+      ],
+      "type": "incident",
+      "inc_owner": {
+        "name": "string"
+      },
+      "user_name": "string",
+      "modify_principal": {
+        "id": 0,
+        "type": "string",
+        "name": "string",
+        "display_name": "string"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": 0,
+      "name": "string",
+      "enabled": true
+    }
+  ],
+  "timer_field_summarized_incident_data": [
+    {
+      "fieldValue": "string",
+      "incId": 0,
+      "running": true,
+      "fieldLabel": "string",
+      "sum": 0,
+      "fieldName": "string"
+    }
+  ]
+}
+```
