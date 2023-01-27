@@ -138,33 +138,31 @@ class SOARCommon():
             for task_num in range(len(case_tasks)):
                 task_id = case_tasks[task_num].get("id")
                 if id == task_id:
-
-                    task_fields = ["name", "inc_id", "status", "init_date", "active", "inc_name", "instructions", "notes", "closed_date", "id", "cat_name", "description"]
-                    cases_list[num]["tasks"].append({field: case_tasks[task_num].get(field) for field in task_fields})
+                    cases_list[num]["tasks"].append(case_tasks[task_num])
+                    case_task_num = len(cases_list[num]["tasks"])-1
 
                     # Get notes
                     if comments:
                         task_notes = case_tasks[task_num].get("notes")
-                        cases_list[num]["tasks"][task_num]["notes"] = []
+                        cases_list[num]["tasks"][case_task_num]["notes"] = []
                         for note_num in range(len(task_notes)):
-                            cases_list[num]["tasks"][task_num]["notes"].append(
+                            cases_list[num]["tasks"][case_task_num]["notes"].append(
                                 task_notes[note_num].get("text")
                             )
                     else:
-                        cases_list[num]["tasks"][task_num]["notes"] = []
+                        cases_list[num]["tasks"][case_task_num]["notes"] = []
 
                     # Get attachments
                     if attachments:
                         task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
-                        attach = cases_list[num]["tasks"][task_num].get("attachments")
-                        cases_list[num]["tasks"][task_num]["attachments"] = []
+                        cases_list[num]["tasks"][case_task_num]["attachments"] = []
                         for attach_num in range(len(task_attachments)):
-                            cases_list[num]["tasks"][task_num]["attachments"].append({
+                            cases_list[num]["tasks"][case_task_num]["attachments"].append({
                                 "id": task_attachments[attach_num].get("id"),
                                 "name": task_attachments[attach_num].get("name")
                             })
                     else:
-                        cases_list[num]["tasks"][task_num]["attachments"] = []
+                        cases_list[num]["tasks"][case_task_num]["attachments"] = []
 
                     # Add the data table that contains the task info to the task
                     case_datatables = rest_client.get(f"/incidents/{case_id}/table_data?handle_format=names")
@@ -178,8 +176,8 @@ class SOARCommon():
                                     found = True
                                     for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
                                         row.pop(field)
-                                    cases_list[num]["tasks"][task_num]["datatable"] = row
-                                    cases_list[num]["tasks"][task_num]["datatable"]["table_id"] = case_datatables[datatable].get("id")
+                                    cases_list[num]["tasks"][case_task_num]["datatable"] = row
+                                    cases_list[num]["tasks"][case_task_num]["datatable"]["table_id"] = case_datatables[datatable].get("id")
                                     break
                     break
 
@@ -266,7 +264,7 @@ class JiraCommon():
         issues_list = jira_client.search_issues(
             search_filters,
             maxResults=max_results,
-            fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created"],
+            fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created", "resolutiondate"],
             json_result=True).get("issues")
 
         # Format each dictionary
