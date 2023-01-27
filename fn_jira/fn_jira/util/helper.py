@@ -195,6 +195,22 @@ class JiraServers():
         """
         return self.server_name_list
 
+def get_id_from_jira_issue_description(description):
+    """
+    Get the SOAR task id from the description of the
+    given Jira issue
+    :param jira_issue_description: Description of the Jira issue
+    """
+    task_id = None
+    search_end = "]\n\nCreated in IBM SOAR"
+
+    if "IBM SOAR Link: [" in description and search_end in description:
+        task_id = int(description[description.rindex("task_id=")+8:description.index(search_end)])
+    else:
+        task_id = int(description[description.index("task_id=")+8:description.index("\n\nCreated in IBM SOAR")])
+
+    return task_id
+
 def get_server_settings(opts, jira_label):
     """
     Used for initilizing or reloading the options variable
@@ -339,17 +355,35 @@ def soar_update_task(jira, res_client, task):
     :param res_client: Client connection to SOAR
     :param task: SOAR task dictionry
     """
-
-    t_payload = {
-
-    }
-
-    # Check if Jira issue has been closed and if Jira issue is linked to a SOAR task
-    # If the Jira issue has a resolutiondate then it has been closed
     jira_issue_description = jira.get("description")
-    if jira.get("resolutiondate") and check_jira_issue_linked_to_task(jira_issue_description):
+
+    # Add data to task update payload
+    t_payload = task.copy()
+    t_payload["notes"] = []
+    del t_payload["attachments"], t_payload["datatable"]
+
+    # Check if link to SOAR task is in the Jira issue description
+    if check_jira_issue_linked_to_task(jira_issue_description):
+        # Remove link to SOAR task from the description
+        link_end_index = jira_issue_description.index("Created in IBM SOAR")+19
+        if link_end_index > len(jira_issue_description):
+            # Update the SOAR task instructions to be the rest of the Jira issue description
+            t_payload["instructions"] = {
+                "format": "text",
+                "content": jira_issue_description[link_end_index:]
+            }
+    else:
+        t_payload["instructions"] = {
+            "format": "text",
+            "content": jira_issue_description
+        }
+
+    # Check if Jira issue has been closed
+    # If the Jira issue has a resolutiondate then it has been closed
+    if jira.get("resolutiondate"):
         t_payload["status"] = "C"
 
+    # Remove all html tags from the task notes
     for num in range(len(task.get("notes"))):
         task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
 
@@ -358,14 +392,14 @@ def soar_update_task(jira, res_client, task):
     if comments:
         for comment in comments:
             if comment not in task.get("notes"):
-                payload = {
+                comment_payload = {
                     "text": {
                         "format": "text",
                         "content": f"{comment}\nAdded from Jira"
                     },
                     "is_deleted": False
                 }
-                res_client.post(f"/tasks/{task.get('id')}/comments", dumps(payload))
+                res_client.post(f"/tasks/{task.get('id')}/comments", comment_payload)
 
     # Update attachments
     attachments = jira.get("attachment")
@@ -400,7 +434,7 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     """
 
     # Check if the Jira issue is linked to a SOAR task
-    if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "task_id=" in jira_issue_description:
+    if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "?task_id=" in jira_issue_description:
             return True
 
 def update_soar_incident(res_client, soar_cases_to_update):
@@ -441,7 +475,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
     soar_update_payload = {"patches": {}}
 
     # Payload for updating SOAR tasks
-    task_payload = []
+    task_update_payload = []
 
     for update in soar_cases_to_update:
         jira = update[0] # Get the Jira issue
@@ -451,11 +485,11 @@ def update_soar_incident(res_client, soar_cases_to_update):
 
         # Check if the Jira issue is linked to a SOAR task
         if check_jira_issue_linked_to_task(jira_issue_description):
-            task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
+            task_id = get_id_from_jira_issue_description(jira_issue_description)
             for task in soar.get("tasks"):
                 if task.get("id") == task_id:
                     # Update SOAR task with Jira data
-                    task_payload.append(soar_update_task(jira, res_client, task))
+                    task_update_payload.append(soar_update_task(jira, res_client, task))
                     break
             continue
 
@@ -497,11 +531,20 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     "field": {"name": key}
                 })
 
-    # If SOAR payload is not empty then update SOAR fields on cases
+    # If SOAR payload is not empty then update fields on cases
     if soar_update_payload["patches"]:
         # Send put request to SOAR
         # This will update all cases that need to be updated
         try:
             res_client.put("/incidents/patch", soar_update_payload)
+        except Exception as e:
+            raise IntegrationError(str(e))
+
+    # If task update payload is not empty then update fields on tasks
+    if task_update_payload:
+        # Send put request to SOAR
+        # This will update all tasks that need to be updated
+        try:
+            r = res_client.put("/tasks", task_update_payload)
         except Exception as e:
             raise IntegrationError(str(e))
