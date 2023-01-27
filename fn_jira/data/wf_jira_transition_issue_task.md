@@ -77,7 +77,7 @@ time_now = Date().time
 if results.get("success"):
   row.date = time_now
   row.status = "Closed"
-  incident.properties.soar_case_last_updated = Date()
+  row.last_updated = Date()
 ```
 
 ---
