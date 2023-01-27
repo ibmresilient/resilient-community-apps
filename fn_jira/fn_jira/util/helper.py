@@ -340,6 +340,16 @@ def soar_update_task(jira, res_client, task):
     :param task: SOAR task dictionry
     """
 
+    t_payload = {
+
+    }
+
+    # Check if Jira issue has been closed and if Jira issue is linked to a SOAR task
+    # If the Jira issue has a resolutiondate then it has been closed
+    jira_issue_description = jira.get("description")
+    if jira.get("resolutiondate") and check_jira_issue_linked_to_task(jira_issue_description):
+        t_payload["status"] = "C"
+
     for num in range(len(task.get("notes"))):
         task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
 
@@ -370,15 +380,28 @@ def soar_update_task(jira, res_client, task):
     datatable = task.get('datatable')
     datatable_cells = datatable.get("cells")
 
-    payload = {
+    d_payload = {
         "id": datatable.get("id"),
         "version": datatable.get("version")
     }
-    payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
-    payload["cells"]["last_updated"]["value"] = jira.get("updated")
-    payload["cells"]["status"]["value"] = jira.get("status")
+    d_payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
+    d_payload["cells"]["last_updated"]["value"] = jira.get("updated")
+    d_payload["cells"]["status"]["value"] = jira.get("status")
 
-    res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", payload)
+    res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
+
+    return t_payload
+
+def check_jira_issue_linked_to_task(jira_issue_description):
+    """
+    Check if the given Jira issue is linked to a SOAR task
+    :param jira_issue_description: String description of Jira issue
+    :return: Boolean
+    """
+
+    # Check if the Jira issue is linked to a SOAR task
+    if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "task_id=" in jira_issue_description:
+            return True
 
 def update_soar_incident(res_client, soar_cases_to_update):
     """
@@ -417,21 +440,26 @@ def update_soar_incident(res_client, soar_cases_to_update):
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
 
+    # Payload for updating SOAR tasks
+    task_payload = []
+
     for update in soar_cases_to_update:
         jira = update[0] # Get the Jira issue
         soar = update[1] # Get the SOAR case
-
+        # Get the description of the Jira issue
         jira_issue_description = jira.get("description")
+
         # Check if the Jira issue is linked to a SOAR task
-        if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "task_id=" in jira_issue_description:
+        if check_jira_issue_linked_to_task(jira_issue_description):
             task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
             for task in soar.get("tasks"):
                 if task.get("id") == task_id:
                     # Update SOAR task with Jira data
-                    soar_update_task(jira, res_client, task)
+                    task_payload.append(soar_update_task(jira, res_client, task))
                     break
             continue
 
+        # If Jira issue is linked to SOAR incident and not a SOAR task
         # Check if new comments added or old comments changed/deleted
         soar_update_comments_attachments(jira, soar, res_client, "comment")
 
@@ -442,6 +470,15 @@ def update_soar_incident(res_client, soar_cases_to_update):
                 "version": soar.get("vers")+1,
                 "changes": []
                 }
+
+        # Close SOAR incident if linked Jira issue is closed
+        # If the Jira issue has a resolutiondate then it has been closed
+        if jira.get("resolutiondate"):
+            soar_update_payload['patches'][soar.get("id")]["changes"].append({
+                "old_value": {"text": "A"},
+                "new_value": {"text": "C"},
+                "field": {"name": "plan_status"}
+            })
 
         for key, value in soar_to_jira_fields.items():
             soar_value = soar.get(key)
