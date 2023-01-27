@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_parse_utilities",
     display_name="Parse Utilities Function for SOAR",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     url="http://ibm.biz/soarcommunity",
