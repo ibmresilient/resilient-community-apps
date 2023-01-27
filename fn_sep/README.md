@@ -16,7 +16,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Symantec Endpoint Protection Integration for IBM Resilient
+# Symantec Endpoint Protection Integration for IBM SOAR
 
 ## Table of Contents
 
@@ -85,11 +85,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Symantec Endpoint Protection Integration for Resilient**
+**Symantec Endpoint Protection Integration for IBM SOAR**
 
 
  ![screenshot: main](./doc/screenshots/main.png) 
-Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, such as deleting or blacklisting suspicious files from within the Resilient platform.
+Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, such as deleting or blacklisting suspicious files from within the IBM SOAR platform.
 
 ### Key Features
 •	Execute an Evidence of Compromise (EOC) scan for artifacts of type file (name or path) and hash (MD5, SHA1 or SHA256).
@@ -195,7 +195,7 @@ The following table provides the settings you need to configure the app. These s
 | **sep_username** | Yes | `<username>` | *User name for SEP api access.* |
 | **sep_password** | Yes | `<password>` | *User password for SEP api access.*  |
 | **sep_domain** | Yes | `<SEP domain name>` | *User password for McAfee ESM api access.*  |
-| **sep_results_limit** | Yes | `200` | *Limit result sent to Resilient, add full result as an attachment.*  |
+| **sep_results_limit** | Yes | `200` | *Limit result sent to IBM SOAR, add full result as an attachment.*  |
 | **sep_scan_timeout** | Yes | `1800` | *Period of time (seconds) to wait for all endpoints to return a scan result.*  |
 | **https_proxy** | No | `<HTTPS_PROXY>` | *Optional settings for accessing Symantec Endpoint Protection via a https proxy* |
 | **client_auth_cert** | No | `<CLIENT_AUTH_CERT>` | *Specify path to <cert.pem> file if client certs are needed to authenticate* |
@@ -595,7 +595,7 @@ Gets the details of a command status from a command id.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `sep_commandid` | `text` | No | `-` | Command id of SEP job. |
-| `sep_incident_id` | `number` | No | `-` | The resilient incident id. |
+| `sep_incident_id` | `number` | No | `-` | The IBM SOAR incident id. |
 | `sep_matching_endpoint_ids` | `boolean` | No | `-` | Get list of matching endpoints. |
 | `sep_order` | `text` | No | `-` | Specifies whether the results are in ascending order (ASC) or descending order (DESC). |
 | `sep_pageindex` | `number` | No | `-` | The index page that is used for the returned results. The default page index is 1. |
@@ -7126,7 +7126,7 @@ Ex. `id` attribute from following path `content-->id`.
 ---
 
 ## Script - scr_sep_add_artifact_from_scan_results
-Script for Symantec SEP to add a Resilient artifact from a property of the 'Symantec SEP - EOC scan results' data-table.
+Script for Symantec SEP to add a IBM SOAR artifact from a property of the 'Symantec SEP - EOC scan results' data-table.
 The supported artifact types supported are: "File Path", "Malware SHA-256 Hash" and "System Name".
 
 **Object:** sep_eoc_scan_results

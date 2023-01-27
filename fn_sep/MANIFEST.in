@@ -3,7 +3,6 @@ include Dockerfile
 include entrypoint.sh
 include README.md
 include icons/*.png
-include fn_sep/util/*
 include fn_sep/LICENSE
 include doc/*.md
 include fn_sep/doc/*
