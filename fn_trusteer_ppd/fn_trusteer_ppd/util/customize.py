@@ -29,7 +29,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [u"Trusteer PPD: Create case from email"],
         "playbooks": []
     }
 
@@ -44,6 +44,8 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_trusteer_ppd
+    - Scripts:
+        - Trusteer PPD: Create case from email
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
