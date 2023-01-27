@@ -8,7 +8,8 @@ from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,\
-    get_server_settings, get_jira_client, create_soar_incident, update_soar_incident
+    get_id_from_jira_issue_description, get_server_settings, get_jira_client,\
+    create_soar_incident, update_soar_incident, check_jira_issue_linked_to_task
 from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
 from resilient_lib import validate_fields
 
@@ -171,8 +172,7 @@ class PollerComponent(ResilientComponent):
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
-                issue_description = jira_issue.get("description")
-                if issue_description and "task_id" in issue_description and "IBM SOAR Link:" in issue_description:
+                if check_jira_issue_linked_to_task(jira_issue.get("description")):
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                 elif jira_issue_key in soar_cases_jira_key:
@@ -200,9 +200,8 @@ class PollerComponent(ResilientComponent):
                     for jira_issue in jira_issues_with_soar_case:
                         jira_issue_description = jira_issue.get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
-                        if soar_tasks and jira_issue_description and "IBM SOAR Link:" in jira_issue_description \
-                            and "task_id=" in jira_issue_description:
-                            task_id = int(jira_issue_description[jira_issue_description.index("task_id=")+8:jira_issue_description.index("\n")])
+                        if soar_tasks and check_jira_issue_linked_to_task(jira_issue_description):
+                            task_id = get_id_from_jira_issue_description(jira_issue_description)
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
