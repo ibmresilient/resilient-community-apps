@@ -8,6 +8,7 @@ from logging import getLogger
 from threading import Event
 from traceback import format_exc
 from resilient import SimpleHTTPException
+from fn_jira.util.helper import get_id_from_jira_issue_description, check_jira_issue_linked_to_task
 
 LOG = getLogger(__name__)
 
@@ -133,12 +134,19 @@ class SOARCommon():
         # Add Tasks to cases
         case_tasks = rest_client.get(f"/incidents/{case_id}/tasks?want_notes=true")
         if case_tasks:
+            # Add tasks field to the case if the field does not exist
             task = cases_list[num].get("tasks")
             cases_list[num]["tasks"] = task if task else []
+            del task # Delete variable that is no longer needed
+
             for task_num in range(len(case_tasks)):
                 task_id = case_tasks[task_num].get("id")
                 if id == task_id:
-                    cases_list[num]["tasks"].append(case_tasks[task_num])
+                    cases_list[num]["tasks"].append(
+                        {k: v for k, v in case_tasks[task_num].items()\
+                            if v is not None and \
+                                k not in ["perms", "actions", "playbooks", "creator_principal", "regs", "notes_count", "attachments_count", "inc_owner_id", "user_notes", "auto_deactivate", "phase_id"]}
+                    )
                     case_task_num = len(cases_list[num]["tasks"])-1
 
                     # Get notes
@@ -151,6 +159,8 @@ class SOARCommon():
                             )
                     else:
                         cases_list[num]["tasks"][case_task_num]["notes"] = []
+
+                    del comments
 
                     # Get attachments
                     if attachments:
@@ -308,10 +318,11 @@ class JiraCommon():
                     }
 
             issue_description = issue.get("description")
-            if issue_description and "IBM SOAR Link:" in issue_description and "task_id=" in issue_description:
+            if check_jira_issue_linked_to_task(issue_description):
+                task_id = get_id_from_jira_issue_description(issue_description)
                 data_to_get_from_case["tasks"].append({
-                    "incident_id": int(issue_description[issue_description.rindex("/")+1:issue_description.index("?")]),
-                    "task_id": int(issue_description[issue_description.index("task_id=")+8:issue_description.index("\n")]),
+                    "incident_id": int(issue_description[issue_description.index("incidents/")+10:issue_description.index("?task_id")]),
+                    "task_id": task_id,
                     "task_key": issue.get("key")
                 })
 
