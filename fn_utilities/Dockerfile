@@ -20,8 +20,6 @@ RUN pip install --upgrade pip
 # install resilient-circuits
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
-# install and upgrade six to satisfy fn_utilities requirement
-RUN pip install six==1.14.0
 # install and upgrade cryptography to satisfy fn_utilities requirement
 RUN pip install --upgrade cryptography==38.0.4
 
