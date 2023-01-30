@@ -75,7 +75,7 @@ class TestPanoramaCreateAddress:
         func = get_function_definition(PACKAGE_NAME, func_name)
         assert func
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_get_addresses(self, mocked_requests_get):
         sim_content = {
             "@code": "19",
@@ -119,7 +119,7 @@ class TestPanoramaCreateAddress:
         result = pc.get_addresses()
         assert result == sim_content
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_get_addresses_groups(self, mocked_requests_get):
         sim_content = {
             "@code": "19",
@@ -149,7 +149,7 @@ class TestPanoramaCreateAddress:
         result = pc.get_address_groups("Blocked_Group")
         assert result == sim_content
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_edit_address_group(self, mocked_requests_get):
         sim_content = {
             "@code": "20",
@@ -170,7 +170,7 @@ class TestPanoramaCreateAddress:
         result = pc.edit_address_groups("Blocked_Group", dumps(body))
         assert result == sim_content
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_create_address(self, mocked_requests_get):
         sim_content = {
             "@code": "20",
@@ -187,7 +187,7 @@ class TestPanoramaCreateAddress:
         result = pc.add_address("2.2.2.2", dumps(body))
         assert result == sim_content
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_get_users_in_a_group(self, mocked_requests_get):
         sim_content = '<response status="success" code="19"><result total-count="1" count="1"><entry name="Blocked_Users" admin="admin" dirtyId="14" time="2019/06/27 07:51:28"/></result></response>'
         body_xpath = "/config/shared/local-user-database/user-group/entry[@name=\\'Blocked_Users\\']"
@@ -198,7 +198,7 @@ class TestPanoramaCreateAddress:
         print(sim_content)
         assert result == sim_content
 
-    @patch("requests.request")
+    @patch("resilient_lib.components.requests_common.RequestsCommon.execute")
     def test_edit_users_in_a_group(self, mocked_requests_get):
         sim_content = '<response status="success" code="20"><msg>command succeeded</msg></response>'
         body_xpath = "/config/shared/local-user-database/user-group/entry[@name=\\'Blocked_Users\\']"
