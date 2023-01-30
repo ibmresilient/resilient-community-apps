@@ -1,0 +1,10 @@
+include apikey_permissions.txt
+include Dockerfile
+include entrypoint.sh
+include README.md
+include icons/*
+include tests/*
+include fn_sep/LICENSE
+recursive-include fn_sep/util *
+recursive-exclude fn_sep *.bak
+recursive-exclude fn_sep *.pyc
