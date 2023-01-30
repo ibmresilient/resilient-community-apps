@@ -60,6 +60,7 @@ class SOARCommon():
                                     field values can be True/False for 'has_a_value' or 'does_not_have_a_value'
                                     Otherwise a field will use 'equals' for the value
         NOTE: search_fields only supports custom fields
+        :param data_to_get_from_case: Dictionary of dicts that say what info to get from each SOAR case
         :return soar_cases: (list) Returned list of cases
         :return error_msg: (str) Any error during the query or None
         """
