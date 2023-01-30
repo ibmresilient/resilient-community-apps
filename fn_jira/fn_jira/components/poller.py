@@ -132,14 +132,13 @@ class PollerComponent(ResilientComponent):
         soar_cases_list, err_msg = SOARCommon.get_open_soar_cases(self.opts, {"jira_issue_id": True}, self.rest_client(), data_to_get_from_case)
 
         # Process Jira issues returned from search
-        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list, data_to_get_from_case)
+        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
 
-    def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list, data_to_get_from_case):
+    def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list):
         """
         Process the returned Jira issues
         :param jira_issue_dit: Dictionary of Jira issues based on Jira server
         :param soar_case_list: List of SOAR cases that contain "Jira Issue ID" field
-        :param data_to_get_from_case: Dictionary of dicts that say what info to get from each SOAR case
         :return: None
         """
 
@@ -151,8 +150,6 @@ class PollerComponent(ResilientComponent):
 
         # Loop through the Jira servers dict
         for jira_server in jira_issues_dict:
-            # Connect to the Jira server specified in options
-            jira_client = get_jira_client(self.opts, get_server_settings(self.opts, jira_server))
 
             # List of Jira key for the SOAR cases found that link to the current server
             soar_cases_jira_key = []
@@ -178,20 +175,9 @@ class PollerComponent(ResilientComponent):
                 elif jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
-                    # Remove jira_issue_key from soar_cases_jira_key list
-                    soar_cases_jira_key.pop(soar_cases_jira_key.index(jira_issue_key))
-                else:
+                elif not jira_issue.get("resolutiondate"):
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
-
-            # Get the Jira issues that are on SOAR that were not returned from the Jira issue search
-            if soar_cases_jira_key:
-                cases = str(soar_cases_jira_key).replace("[", "(").replace("]", ")")
-                jira_issues, data_to_get_from_case = JiraCommon.search_jira_issues(self.opts, jira_client, f"key in {cases}", data_to_get_from_case=data_to_get_from_case)
-                for issue_num in range(len(jira_issues)):
-                    jira_issues[issue_num]["jira_server"] = jira_server # Add jira_server key to jira_issue
-                    jira_issues_with_soar_case.append(jira_issues[issue_num])
-                jira_client.close() # Close connection to Jira server
 
             if soar_cases_list:
                 # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
