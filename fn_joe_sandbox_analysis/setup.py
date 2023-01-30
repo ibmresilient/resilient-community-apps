@@ -21,7 +21,7 @@ def snake_to_camel(word):
 setup(
     name='fn_joe_sandbox_analysis',
     display_name="Joe Sandbox Analysis Function for IBM SOAR",
-    version='2.0.0',
+    version='1.1.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',

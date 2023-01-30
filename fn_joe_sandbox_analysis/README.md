@@ -21,7 +21,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.0 | 12/2022 | <ul><li>Updated jbxapi version to 3.19.0</li><li>Added the following settings to the app.config: jsb_systems, jsb_secondary_results, jsb_email_notification</li><li>Added support for basic version of Joe Sandbox cloud</li></ul>|
+| 1.1.0 | 12/2022 | <ul><li>Updated jbxapi version to 3.19.0</li><li>Added the following settings to the app.config: jsb_systems, jsb_secondary_results, jsb_email_notification</li><li>Added support for basic version of Joe Sandbox cloud</li></ul>|
 | 1.0.5 | 10/2022 | Added support for self-signed certificates when connecting to an on-premises machine |
 | 1.0.4 | 10/2020 | Apphost support |
 | 1.0.3 | 10/2020 | Bug fixes |
@@ -162,7 +162,7 @@ results = {
     "execution_time_ms": 245007,
     "host": "local",
     "package": "fn-joe-sandbox-analysis",
-    "package_version": "2.0.0",
+    "package_version": "1.2.0",
     "timestamp": "2022-12-22 12:56:30",
     "version": "1.0"
   },
