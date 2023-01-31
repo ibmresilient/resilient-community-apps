@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": 13,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_issue_name": "New issue",
+    "mcafee_epo_issue_properties": null,
+    "mcafee_epo_ticket_server_name": null,
+    "mcafee_epo_issue_due": 1661950852000,
+    "mcafee_epo_issue_state": "Assigned",
+    "mcafee_epo_issue_severity": "Low",
+    "mcafee_epo_issue_description": "Test issue creation",
+    "mcafee_epo_issue_assignee": "Jefferson",
+    "mcafee_epo_issue_type": "Basic",
+    "mcafee_epo_ticket_id": null,
+    "mcafee_epo_issue_priority": "Medium",
+    "mcafee_epo_issue_resolution": "Will Not Fix"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 547,
+    "timestamp": "2022-08-19 09:00:56"
+  }
+}
