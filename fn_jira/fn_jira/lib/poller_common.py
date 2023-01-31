@@ -65,8 +65,7 @@ class SOARCommon():
         :return error_msg: (str) Any error during the query or None
         """
         fields_to_remove = ["perms", "creator", "creator_principal", "exposure_type_id", "workspace", "assessment", "pii",
-                            "gdpr", "creator_id", "crimestatus_id", "sequence_code", "owner_id", "plan_status", "phase_id",
-                            "org_handle", "task_changes"]
+                            "gdpr", "creator_id", "crimestatus_id", "sequence_code", "owner_id", "phase_id", "org_handle", "task_changes"]
 
         query = SOARCommon._build_search_query(search_fields, open_cases=open_cases)
 

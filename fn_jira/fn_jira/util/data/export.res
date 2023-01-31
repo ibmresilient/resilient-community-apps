@@ -1452,12 +1452,12 @@
           "id": 26,
           "language": "python3",
           "last_modified_by": "e@example.com",
-          "last_modified_time": 1674142845207,
+          "last_modified_time": 1675195459008,
           "name": "post-process",
           "object_type": "incident",
           "playbook_handle": "example_jira_close_issue",
           "programmatic_name": "example_jira_close_issue_post_process",
-          "script_text": "import java.util.Date as Date\nincident.properties.soar_case_last_updated = Date()",
+          "script_text": "import java.util.Date as Date\nincident.properties.soar_case_last_updated = Date()\nincident.properties.jira_issue_status = \"Done\"",
           "tags": [],
           "uuid": "a12405e7-af26-4e5b-8934-95eb7524e308"
         }

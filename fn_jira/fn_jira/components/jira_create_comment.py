@@ -12,8 +12,6 @@ from resilient_lib import IntegrationError, validate_fields
 from fn_jira.lib.app_common import AppCommon
 
 FN_NAME = "jira_create_comment"
-src_pattern = compile(r'<img[^>]+src="([^">]+)')
-alt_pattern = compile(r'<img[^>]+alt="([^">]+)')
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'jira_create_comment"""
@@ -79,6 +77,8 @@ class FunctionComponent(AppFunctionComponent):
         jira_comment = fn_inputs.jira_comment
         # Extract src values and alt values from SOAR's image tags
         # ex: <img src='https://ibm.com/some_pic.jpg' alt='some_pic.jpg' />
+        src_pattern = compile(r'<img[^>]+src="([^">]+)')
+        alt_pattern = compile(r'<img[^>]+alt="([^">]+)')
         srcs = src_pattern.findall(jira_comment)
         alts = alt_pattern.findall(jira_comment)
 
