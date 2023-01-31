@@ -5,7 +5,7 @@
 """ Process https requests """
 import logging
 import re
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as ET
 from zipfile import ZipFile
 from io import BytesIO
 from sys import version_info

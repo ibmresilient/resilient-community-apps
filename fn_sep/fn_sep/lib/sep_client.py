@@ -366,7 +366,7 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["command_status"]).format(commandid)
 
         params = {"order": order, "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
-
+        
         r = self._req.execute_call('get', url, verify=False, headers=self._headers, params=params)
 
         return r

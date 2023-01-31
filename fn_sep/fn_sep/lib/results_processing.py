@@ -5,7 +5,7 @@
 """ Process results from command status received form Symantec SEPM server. """
 from __future__ import print_function
 import logging
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as ET
 import time
 from datetime import datetime
 
