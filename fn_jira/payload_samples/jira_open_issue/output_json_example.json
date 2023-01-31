@@ -14,11 +14,8 @@
       "fields": {
         "statuscategorychangedate": "2023-01-31T12:57:59.508-0500",
         "issuetype": {
-          "self": "https://example.com/rest/api/2/issuetype/10007",
           "id": "10007",
-          "description": "Stories track functionality or features expressed as user goals.",
           "iconUrl": "https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-          "name": "Story",
           "subtask": false,
           "avatarId": 10315,
           "entityId": "28f65659-c37e-43ad-a17f-1d00d8d6d9ac",
