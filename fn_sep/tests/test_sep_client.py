@@ -4,7 +4,7 @@
 
 """Test Sep client  class."""
 from __future__ import print_function
-from mock import patch
+from unittest.mock import patch
 import pytest
 from fn_sep.lib.sep_client import *
 from  mock_artifacts import mocked_request

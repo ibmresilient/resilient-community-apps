@@ -5,7 +5,7 @@
 """Tests for fn_sep_upload_file_to_sepm function."""
 from __future__ import print_function
 import pytest
-from mock import patch
+from unittest.mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock_artifacts import mocked_sep_client, get_mock_config
