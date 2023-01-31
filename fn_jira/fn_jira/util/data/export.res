@@ -104,72 +104,11 @@
       "workflows": [
         "example_jira_open_issue_task"
       ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "incident.properties.jira_internal_url",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "incident.resolution_summary",
-          "method": "changed",
-          "type": null,
-          "value": null
-        }
-      ],
-      "enabled": false,
-      "export_key": "Example: Jira Close Issue",
-      "id": 224,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: Jira Close Issue",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 0,
-      "uuid": "1acf7197-4ce3-4b20-82e1-53d3821ec352",
-      "view_items": [],
-      "workflows": [
-        "jira_transition_issue"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "jira_task_references.status",
-          "method": "equals",
-          "type": null,
-          "value": "Open"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Example: Jira Close Issue (Task)",
-      "id": 225,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Example: Jira Close Issue (Task)",
-      "object_type": "jira_task_references",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "3a74a293-5cca-45c9-ad66-96cf73a2d5c9",
-      "view_items": [],
-      "workflows": [
-        "jira_transition_issue_task"
-      ]
     }
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1674745350070,
+  "export_date": 1675178501920,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -780,18 +719,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Jira Create Comment",
-          "object_type": "note",
-          "programmatic_name": "jira_create_comment",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 26
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1671458045935,
@@ -938,39 +866,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Jira Transition Issue",
-          "object_type": "incident",
-          "programmatic_name": "jira_transition_issue",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 30
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Jira Transition Issue (Task)",
-          "object_type": "jira_task_references",
-          "programmatic_name": "jira_transition_issue_task",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 29
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 21,
+  "id": 22,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1674745348479,
+      "create_date": 1675178500269,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -979,7 +886,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1674745348479,
+      "update_date": 1675178500269,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1005,6 +912,200 @@
   "overrides": null,
   "phases": [],
   "playbooks": [
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.jira_internal_url",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.resolution_summary",
+              "method": "changed",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 10,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\" isExecutable=\"true\" name=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0co6vna\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Example: Jira Transition Issue pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\\\"dict_to_json_str does not support this type: {}\\\".format(type(value)))\\n\\n  return \u0027{}{}{}\u0027.format(\\\"{\\\", \\\",\\\".join(entries), \\\"}\\\")\\n\\ninputs.jira_label = incident.properties.jira_server\\ninputs.jira_issue_id = incident.properties.jira_issue_id\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = \\\"Closed in IBM SOAR\\\\n\\\\nResolution: {}\\\\n{}\\\".format(incident.resolution_id, incident.resolution_summary.content)\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0co6vna\u003c/incoming\u003e\u003coutgoing\u003eFlow_0urpd3j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0co6vna\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a12405e7-af26-4e5b-8934-95eb7524e308\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0urpd3j\u003c/incoming\u003e\u003coutgoing\u003eFlow_1klssy9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0urpd3j\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1klssy9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1klssy9\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1klssy9\" id=\"Flow_1klssy9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0urpd3j\" id=\"Flow_0urpd3j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0co6vna\" id=\"Flow_0co6vna_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1674142529999,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Close Jira issue when linked SOAR case is closed.",
+        "format": "text"
+      },
+      "display_name": "Example: Jira Close Issue",
+      "export_key": "example_jira_close_issue",
+      "field_type_handle": "playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Jira Close Issue",
+        "export_key": "playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0",
+        "uuid": "94588f64-fa1d-45da-a37d-2d9448cc8020"
+      },
+      "has_logical_errors": false,
+      "id": 9,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1675176024816,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1674142659805,
+          "description": "",
+          "enabled": false,
+          "export_key": "post-process",
+          "id": 26,
+          "language": "python3",
+          "last_modified_by": "e@example.com",
+          "last_modified_time": 1674142845207,
+          "name": "post-process",
+          "object_type": "incident",
+          "playbook_handle": "example_jira_close_issue",
+          "programmatic_name": "example_jira_close_issue_post_process",
+          "script_text": "import java.util.Date as Date\nincident.properties.soar_case_last_updated = Date()",
+          "tags": [],
+          "uuid": "a12405e7-af26-4e5b-8934-95eb7524e308"
+        }
+      ],
+      "name": "example_jira_close_issue",
+      "object_type": "incident",
+      "status": "enabled",
+      "tags": [],
+      "type": "default",
+      "uuid": "a29bef25-a2fc-4628-9473-73ec6b85eda0",
+      "version": 13
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\" isExecutable=\"true\" name=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0oqz0le\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Example: Jira Transition Issue (Task) pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = row.server\\ninputs.jira_issue_id = row.jira_issue_id_col\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = u\\\"Closed in IBM SOAR\\\\n\\\\nResolution: Done\\\\n\\\"\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0oqz0le\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qtd7av\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0oqz0le\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2d3bc136-f629-4d4f-bfdf-41c2da568f32\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qtd7av\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fie3t1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0qtd7av\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fie3t1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0fie3t1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fie3t1\" id=\"Flow_0fie3t1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qtd7av\" id=\"Flow_0qtd7av_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0oqz0le\" id=\"Flow_0oqz0le_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1675176938357,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "description": {
+        "content": "Close the SOAR task",
+        "format": "text"
+      },
+      "display_name": "Example: Jira Close Issue (Task)",
+      "export_key": "example_jira_close_issue_task",
+      "field_type_handle": "playbook_f936bb8d_c939_464e_90c7_f96947f95be7",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Jira Close Issue (Task)",
+        "export_key": "playbook_f936bb8d_c939_464e_90c7_f96947f95be7",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_f936bb8d_c939_464e_90c7_f96947f95be7",
+        "uuid": "fb7b6789-a9e9-4821-aaf2-fde79b53d450"
+      },
+      "has_logical_errors": false,
+      "id": 10,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 23,
+        "name": "e@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1675178305430,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1675177503294,
+          "description": "",
+          "enabled": false,
+          "export_key": "Post-process",
+          "id": 27,
+          "language": "python3",
+          "last_modified_by": "e@example.com",
+          "last_modified_time": 1675177676542,
+          "name": "Post-process",
+          "object_type": "jira_task_references",
+          "playbook_handle": "example_jira_close_issue_task",
+          "programmatic_name": "example_jira_close_issue_task_post_process",
+          "script_text": "from java.util import Date\ntime_now = Date().time\nclose_task = playbook.functions.results.close_task\n\nif close_task.get(\"success\"):\n  row.date = time_now\n  row.status = \"Closed\"\n  row.last_updated = Date()",
+          "tags": [],
+          "uuid": "2d3bc136-f629-4d4f-bfdf-41c2da568f32"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "example_jira_close_issue_task",
+      "object_type": "jira_task_references",
+      "status": "enabled",
+      "tags": [],
+      "type": "default",
+      "uuid": "f936bb8d-c939-464e-90c7-f96947f95be7",
+      "version": 14
+    },
     {
       "activation_details": {
         "activation_conditions": {
@@ -1436,63 +1537,6 @@
     }
   ],
   "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "jira_create_comment",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_create_comment\" isExecutable=\"true\" name=\"Example: Jira Create Comment\"\u003e\u003cdocumentation\u003eCreate a Jira Comment for an existing linked Jira Issue. The Rule associated with this Workflow should only trigger if a Jira Issue is already linked.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1aibfo6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1770oap\" name=\"Jira Create Comment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d0e6089a-69f7-469d-8e51-a840ec2c493a\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\nincident.properties.soar_case_last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Create Comment pre-processing script\\n# If this is a task note, get the taskId\\nnote_content = note.text.content\\nif note.type == \u0027task\u0027:\\n  # Set the task_id\\n  inputs.task_id = task.id\\n  inputs.jira_issue_id = \\\"\\\" # leave empty for tasks\\nelse:\\n  inputs.jira_issue_id = incident.properties.jira_issue_id\\n  \\ninputs.jira_label = incident.properties.jira_server\\ninputs.jira_comment = note_content\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1aibfo6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01lqba1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1aibfo6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1770oap\"/\u003e\u003cendEvent id=\"EndEvent_0kzcct7\"\u003e\u003cincoming\u003eSequenceFlow_01lqba1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01lqba1\" sourceRef=\"ServiceTask_1770oap\" targetRef=\"EndEvent_0kzcct7\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0555jks\"\u003e\u003ctext\u003e\u003c![CDATA[Input the Jira Issue ID and the SOAR Note text\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_17q3sf8\" sourceRef=\"ServiceTask_1770oap\" targetRef=\"TextAnnotation_0555jks\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wb03cx\"\u003e\u003ctext\u003e\u003c![CDATA[Adds Comment to Jira Issue\nand prepends info to SOAR Note]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_05o616t\" sourceRef=\"ServiceTask_1770oap\" targetRef=\"TextAnnotation_0wb03cx\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"468\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"463\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1770oap\" id=\"ServiceTask_1770oap_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"797\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1aibfo6\" id=\"SequenceFlow_1aibfo6_di\"\u003e\u003comgdi:waypoint x=\"504\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"797\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"605.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0kzcct7\" id=\"EndEvent_0kzcct7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1195\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1168\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01lqba1\" id=\"SequenceFlow_01lqba1_di\"\u003e\u003comgdi:waypoint x=\"897\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1195\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1001\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0555jks\" id=\"TextAnnotation_0555jks_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"152\" x=\"552\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_17q3sf8\" id=\"Association_17q3sf8_di\"\u003e\u003comgdi:waypoint x=\"797\" xsi:type=\"omgdc:Point\" y=\"184\"/\u003e\u003comgdi:waypoint x=\"693\" xsi:type=\"omgdc:Point\" y=\"137\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wb03cx\" id=\"TextAnnotation_0wb03cx_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"228\" x=\"933\" y=\"86\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_05o616t\" id=\"Association_05o616t_di\"\u003e\u003comgdi:waypoint x=\"897\" xsi:type=\"omgdc:Point\" y=\"182\"/\u003e\u003comgdi:waypoint x=\"1003\" xsi:type=\"omgdc:Point\" y=\"131\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Create a Jira Comment for an existing linked Jira Issue. The Rule associated with this Workflow should only trigger if a Jira Issue is already linked.",
-      "export_key": "jira_create_comment",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1671809503333,
-      "name": "Example: Jira Create Comment",
-      "object_type": "note",
-      "programmatic_name": "jira_create_comment",
-      "tags": [],
-      "uuid": "ed7adbfe-2551-4315-a3c4-06ef84b9122d",
-      "workflow_id": 26
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "jira_transition_issue",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_transition_issue\" isExecutable=\"true\" name=\"Example: Jira Transition Issue\"\u003e\u003cdocumentation\u003eEither update a Jira Issue (such as a priority change) or close the Issue when an Incident is closed. The Rule associated with this Workflow should only trigger if a Jira Issue is already linked.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0n9xl5o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qcmweq\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"post_processing_script\":\"import java.util.Date as Date\\nincident.properties.soar_case_last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Transition Issue pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {0}\u0027.format(type(value)))\\n\\n  return u\u0027{0} {1} {2}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = rule.properties.jira_label if rule.properties.jira_label else incident.properties.jira_server\\ninputs.jira_issue_id = incident.properties.jira_issue_id\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = u\\\"Closed in IBM SOAR\\\\n\\\\nResolution: {0}\\\\n{1}\\\".format(incident.resolution_id, incident.resolution_summary.content)\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0n9xl5o\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0t9q33k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0n9xl5o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qcmweq\"/\u003e\u003cendEvent id=\"EndEvent_0hn51d2\"\u003e\u003cincoming\u003eSequenceFlow_0t9q33k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0t9q33k\" sourceRef=\"ServiceTask_0qcmweq\" targetRef=\"EndEvent_0hn51d2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_13lgrjc\"\u003e\u003ctext\u003e\u003c![CDATA[Choose a Jira Transition Id for the Jira issue\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0qln3nr\" sourceRef=\"ServiceTask_0qcmweq\" targetRef=\"TextAnnotation_13lgrjc\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"504\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"499\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qcmweq\" id=\"ServiceTask_0qcmweq_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"756\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0n9xl5o\" id=\"SequenceFlow_0n9xl5o_di\"\u003e\u003comgdi:waypoint x=\"540\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"756\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"603\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0hn51d2\" id=\"EndEvent_0hn51d2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1025\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"998\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0t9q33k\" id=\"SequenceFlow_0t9q33k_di\"\u003e\u003comgdi:waypoint x=\"856\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"945\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"945\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1025\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"915\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_13lgrjc\" id=\"TextAnnotation_13lgrjc_di\"\u003e\u003comgdc:Bounds height=\"66\" width=\"205\" x=\"524\" y=\"64\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0qln3nr\" id=\"Association_0qln3nr_di\"\u003e\u003comgdi:waypoint x=\"756\" xsi:type=\"omgdc:Point\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"130\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Either update a Jira Issue (such as a priority change) or close the Issue when an Incident is closed. The Rule associated with this Workflow should only trigger if a Jira Issue is already linked.",
-      "export_key": "jira_transition_issue",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1671809528427,
-      "name": "Example: Jira Transition Issue",
-      "object_type": "incident",
-      "programmatic_name": "jira_transition_issue",
-      "tags": [],
-      "uuid": "3460a425-4adf-419d-ad67-89b8ba427068",
-      "workflow_id": 30
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 6,
-        "workflow_id": "jira_transition_issue_task",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"jira_transition_issue_task\" isExecutable=\"true\" name=\"Example: Jira Transition Issue (Task)\"\u003e\u003cdocumentation\u003eTransition a Jira Issue for a task as maintained in a data table\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0f3nkiz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ovio39\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\ntime_now = Date().time\\n\\nif results.get(\\\"success\\\"):\\n  row.date = time_now\\n  row.status = \\\"Closed\\\"\\n  row.last_updated = Date()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Example: Jira Transition Issue (Task) pre-processing script\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, unicode, bool, int and nested dicts.\\n     Does not support lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = u\u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = u\u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry] \\n    \\n    if not value:\\n      value = False\\n\\n    if isinstance(value, list):\\n      helper.fail(\u0027dict_to_json_str does not support Python Lists\u0027)\\n\\n    if isinstance(value, basestring):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, unicode):\\n      entries.append(json_entry.format(unicode(key), unicode(value)))\\n\\n    elif isinstance(value, bool):\\n      entries.append(json_entry.format(key, \u0027true\u0027 if value else \u0027false\u0027))\\n\\n    elif isinstance(value, int):\\n      entries.append(json_entry.format(unicode(key), value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      helper.fail(\u0027dict_to_json_str does not support this type: {}\u0027.format(type(value)))\\n\\n  return u\u0027{} {} {}\u0027.format(u\u0027{\u0027, \u0027,\u0027.join(entries), u\u0027}\u0027)\\n\\ninputs.jira_label = row.server\\ninputs.jira_issue_id = row.jira_issue_id_col\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = u\\\"Closed in IBM SOAR\\\\n\\\\nResolution: Done\\\\n\\\"\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dict_to_json_str({})\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0f3nkiz\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_030izo8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0f3nkiz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ovio39\"/\u003e\u003cendEvent id=\"EndEvent_0f4i08o\"\u003e\u003cincoming\u003eSequenceFlow_030izo8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_030izo8\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"EndEvent_0f4i08o\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ung4o0\"\u003e\u003ctext\u003e\u003c![CDATA[Choose a Jira Transition Id for the Jira issue\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ie6a60\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0ung4o0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0e4ezg9\"\u003e\u003ctext\u003e\u003c![CDATA[Update status and time in jira_task_references Data Table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1iv5gju\" sourceRef=\"ServiceTask_1ovio39\" targetRef=\"TextAnnotation_0e4ezg9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"460\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"455\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ovio39\" id=\"ServiceTask_1ovio39_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"753\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0f3nkiz\" id=\"SequenceFlow_0f3nkiz_di\"\u003e\u003comgdi:waypoint x=\"496\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"753\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"579.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0f4i08o\" id=\"EndEvent_0f4i08o_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1118\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"1091\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_030izo8\" id=\"SequenceFlow_030izo8_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1118\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"940.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ung4o0\" id=\"TextAnnotation_0ung4o0_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"133\" x=\"608\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ie6a60\" id=\"Association_1ie6a60_di\"\u003e\u003comgdi:waypoint x=\"757\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"712\" xsi:type=\"omgdc:Point\" y=\"139\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0e4ezg9\" id=\"TextAnnotation_0e4ezg9_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"164\" x=\"894\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1iv5gju\" id=\"Association_1iv5gju_di\"\u003e\u003comgdi:waypoint x=\"853\" xsi:type=\"omgdc:Point\" y=\"179\"/\u003e\u003comgdi:waypoint x=\"917\" xsi:type=\"omgdc:Point\" y=\"144\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 6,
-      "description": "Transition a Jira Issue for a task as maintained in a data table",
-      "export_key": "jira_transition_issue_task",
-      "last_modified_by": "e@example.com",
-      "last_modified_time": 1674575757715,
-      "name": "Example: Jira Transition Issue (Task)",
-      "object_type": "jira_task_references",
-      "programmatic_name": "jira_transition_issue_task",
-      "tags": [],
-      "uuid": "b643c95a-c025-4754-b6f7-8f03473b0e3e",
-      "workflow_id": 29
-    },
     {
       "actions": [],
       "content": {
