@@ -24,10 +24,7 @@
             "self": {
               "type": "string"
             },
-            "name": {
-              "type": "string"
-            },
-            "key": {
+            "accountId": {
               "type": "string"
             },
             "emailAddress": {
@@ -57,6 +54,9 @@
               "type": "boolean"
             },
             "timeZone": {
+              "type": "string"
+            },
+            "accountType": {
               "type": "string"
             }
           }
@@ -70,10 +70,7 @@
             "self": {
               "type": "string"
             },
-            "name": {
-              "type": "string"
-            },
-            "key": {
+            "accountId": {
               "type": "string"
             },
             "emailAddress": {
@@ -104,6 +101,9 @@
             },
             "timeZone": {
               "type": "string"
+            },
+            "accountType": {
+              "type": "string"
             }
           }
         },
@@ -112,6 +112,9 @@
         },
         "updated": {
           "type": "string"
+        },
+        "jsdPublic": {
+          "type": "boolean"
         },
         "jira_url": {
           "type": "string"
