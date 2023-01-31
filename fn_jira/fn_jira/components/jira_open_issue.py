@@ -45,8 +45,7 @@ class FunctionComponent(AppFunctionComponent):
         jira_fields = loads(fn_inputs.jira_fields)
 
         # Build the URL to SOAR
-        res = self.rest_client()
-        resilient_url = build_incident_url(res.base_url, fn_inputs.incident_id)
+        resilient_url = build_incident_url(self.rest_client().base_url, fn_inputs.incident_id)
         task_id = getattr(fn_inputs, "task_id", None)
         if task_id:
             resilient_url = f"{resilient_url}?task_id={task_id}"

@@ -7,9 +7,7 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from fn_jira.util.helper import GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,\
-    get_id_from_jira_issue_description, get_server_settings, get_jira_client,\
-    create_soar_incident, update_soar_incident, check_jira_issue_linked_to_task
+from fn_jira.util import helper
 from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
 from resilient_lib import validate_fields
 
@@ -40,7 +38,7 @@ class PollerComponent(ResilientComponent):
         :param opts: (dict) All settings including SOAR settings
         :return: (bool) True if poller is configured
         """
-        global_settings = self.opts.get(GLOBAL_SETTINGS, {})
+        global_settings = self.opts.get(helper.GLOBAL_SETTINGS, {})
         self.polling_interval = int(global_settings.get("polling_interval", 0))
         if not self.polling_interval:
             return False
@@ -51,7 +49,7 @@ class PollerComponent(ResilientComponent):
 
         return True
 
-    @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
+    @poller('polling_interval', 'last_poller_time', helper.PACKAGE_NAME)
     def run(self, last_poller_time=None):
         """
         Get a list of open SOAR cases that contain the field jira_issue_id.
@@ -67,13 +65,13 @@ class PollerComponent(ResilientComponent):
         data_to_get_from_case = {"tasks": []}
 
         # Get list of Jira servers configured in the app.config
-        servers_list = JiraServers(self.opts).get_server_name_list()
+        servers_list = helper.JiraServers(self.opts).get_server_name_list()
         # If no servers labeled then add fn_jira to list
         if not servers_list:
-            servers_list.append(PACKAGE_NAME)
+            servers_list.append(helper.PACKAGE_NAME)
 
         # Get global_setting if definied in the app.config
-        global_settings = self.opts.get(GLOBAL_SETTINGS, {})
+        global_settings = self.opts.get(helper.GLOBAL_SETTINGS, {})
 
         # Validation dictionary for the "poller_filters" app.config setting
         poller_filters_validator = {"name": "poller_filters",
@@ -88,11 +86,11 @@ class PollerComponent(ResilientComponent):
         for server in servers_list:
 
             # If multiple servers are define get just the servers label
-            if server.startswith(f"{PACKAGE_NAME}:"):
-                server = server[len(PACKAGE_NAME)+1:]
+            if server.startswith(f"{helper.PACKAGE_NAME}:"):
+                server = server[len(helper.PACKAGE_NAME)+1:]
 
             # Get settings for server from the app.config
-            options = get_server_settings(self.opts, server)
+            options = helper.get_server_settings(self.opts, server)
 
             # Add the datatable name specified in the current app.config
             dt_name = options.get("jira_dt_name")
@@ -119,7 +117,7 @@ class PollerComponent(ResilientComponent):
             # Get a list of Jira issues bases on the given search filters
             jira_issue_list, data_to_get_from_case = JiraCommon.search_jira_issues(
                                                                 self.opts,
-                                                                get_jira_client(self.opts, options),
+                                                                helper.get_jira_client(self.opts, options),
                                                                 poller_filters,
                                                                 self.last_poller_time,
                                                                 max_results,
@@ -157,7 +155,7 @@ class PollerComponent(ResilientComponent):
                 # Get the Jira issue keys from the SOAR cases that are linked to the current server
                 for soar_case in soar_cases_list:
                     soar_case_jira_server = soar_case.get("jira_server")
-                    if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == PACKAGE_NAME):
+                    if soar_case_jira_server == jira_server or (not soar_case_jira_server and jira_server == helper.PACKAGE_NAME):
                         soar_cases_jira_key.append(soar_case.get("jira_issue_id"))
 
             # List of Jira Issues that have corresponding SOAR cases
@@ -169,7 +167,7 @@ class PollerComponent(ResilientComponent):
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
-                if check_jira_issue_linked_to_task(jira_issue.get("description")):
+                if helper.check_jira_issue_linked_to_task(jira_issue.get("description")):
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                 elif jira_issue_key in soar_cases_jira_key:
@@ -186,8 +184,8 @@ class PollerComponent(ResilientComponent):
                     for jira_issue in jira_issues_with_soar_case:
                         jira_issue_description = jira_issue.get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
-                        if soar_tasks and check_jira_issue_linked_to_task(jira_issue_description):
-                            task_id = get_id_from_jira_issue_description(jira_issue_description)
+                        if soar_tasks and helper.check_jira_issue_linked_to_task(jira_issue_description):
+                            task_id = helper.get_id_from_jira_issue_description(jira_issue_description)
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
@@ -205,9 +203,9 @@ class PollerComponent(ResilientComponent):
 
         # Create new SOAR cases from Jira issues
         for jira_issue in jira_issues_to_add_to_soar:
-            create_soar_incident(self.rest_client(), jira_issue)
+            helper.create_soar_incident(self.rest_client(), jira_issue)
             LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
         # Update SOAR cases with data from linked Jira issues
         if soar_cases_to_update:
-            update_soar_incident(self.rest_client(), soar_cases_to_update)
+            helper.update_soar_incident(self.rest_client(), soar_cases_to_update)
