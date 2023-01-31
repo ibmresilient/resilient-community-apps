@@ -56,7 +56,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.1 | 10/2023 | Bug fix and doc improvements |
+| 1.0.1 | 1/2023 | Bug fix and doc improvements |
 | 1.0.0 | 10/2022 | Initial Release |
 
 
