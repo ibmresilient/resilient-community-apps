@@ -2937,7 +2937,7 @@ Get the exceptions policy for specified policy id.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `sep_exceptions_id` | `text` | Yes | `-` | The ID of the exceptions policy to get |
+| `sep_exceptions_id` | `text` | Yes | `-` | The ID of the exceptions policy to get. See the Policy Summary function which returns policy IDs. |
 
 </p>
 </details>
@@ -3058,7 +3058,7 @@ Get the firewall policy for specified policy id.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `sep_firewall_id` | `text` | Yes | `-` | The ID of the firewall policy to get. |
+| `sep_firewall_id` | `text` | Yes | `-` | The ID of the firewall policy to get. See the Policy Summary function which returns policy IDs.|
 
 </p>
 </details>
