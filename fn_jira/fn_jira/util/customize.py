@@ -22,15 +22,15 @@ def codegen_reload_data():
         "package": u"fn_jira",
         "message_destinations": [u"fn_jira"],
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
-        "workflows": [u"example_jira_open_issue_task", u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue", u"jira_transition_issue_task"],
-        "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)", u"Example: Jira Close Issue", u"Example: Jira Close Issue (Task)"],
+        "workflows": [u"example_jira_open_issue_task", u"jira_open_issue"],
+        "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)"],
         "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_project_key", u"jira_server", u"jira_url", u"soar_case_last_updated"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"example_jira_create_comment"]
+        "playbooks": [u"example_jira_close_issue", u"example_jira_close_issue_task", u"example_jira_create_comment"]
     }
 
 
@@ -50,17 +50,14 @@ def customization_data(client=None):
         - jira_transition_issue
     - Workflows:
         - example_jira_open_issue_task
-        - jira_create_comment
         - jira_open_issue
-        - jira_transition_issue
-        - jira_transition_issue_task
     - Playbooks:
+        - example_jira_close_issue
+        - example_jira_close_issue_task
         - example_jira_create_comment
     - Rules:
         - Example: Create Jira Issue
         - Example: Create Jira Issue (Task)
-        - Example: Jira Close Issue
-        - Example: Jira Close Issue (Task)
     - Incident Fields:
         - jira_internal_url
         - jira_issue_id

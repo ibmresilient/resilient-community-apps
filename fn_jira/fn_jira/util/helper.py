@@ -541,20 +541,18 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     "field": {"name": key}
                 })
 
-    # If SOAR payload is not empty then update fields on cases
-    if soar_update_payload["patches"]:
-        # Send put request to SOAR
-        # This will update all cases that need to be updated
-        try:
-            re = res_client.put("/incidents/patch", soar_update_payload)
-        except Exception as e:
-            raise IntegrationError(str(e))
+    try:
+        # If SOAR payload is not empty then update fields on cases
+        if soar_update_payload["patches"]:
+            # Send put request to SOAR
+            # This will update all cases that need to be updated
+            res_client.put("/incidents/patch", soar_update_payload)
 
-    # If task update payload is not empty then update fields on tasks
-    if task_update_payload:
-        # Send put request to SOAR
-        # This will update all tasks that need to be updated
-        try:
+        # If task update payload is not empty then update fields on tasks
+        if task_update_payload:
+            # Send put request to SOAR
+            # This will update all tasks that need to be updated
             res_client.put("/tasks", task_update_payload)
-        except Exception as e:
-            raise IntegrationError(str(e))
+
+    except Exception as e:
+        raise IntegrationError(str(e))
