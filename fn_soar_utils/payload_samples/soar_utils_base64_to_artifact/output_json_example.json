@@ -1,0 +1,152 @@
+{
+  "id": 547,
+  "type": 7,
+  "value": "export.res.b64",
+  "description": null,
+  "attachment": {
+    "type": "artifact",
+    "id": 71,
+    "uuid": "b2fb5c8f-92f8-46a8-a2a8-8b9342a1bb64",
+    "name": "tmppe_6ed00",
+    "content_type": "image/jpeg",
+    "created": 1663775473887,
+    "creator_id": 6,
+    "size": 180520,
+    "actions": [
+      {
+        "id": 33,
+        "name": "Example: Virus Total for Attachments",
+        "enabled": true
+      },
+      {
+        "id": 34,
+        "name": "Example: Google Cloud - Inspect Attachment for PII",
+        "enabled": true
+      },
+      {
+        "id": 35,
+        "name": "Example: Google Cloud - Remove PII from Attachment",
+        "enabled": true
+      },
+      {
+        "id": 47,
+        "name": "Example: Attachment Hash",
+        "enabled": true
+      },
+      {
+        "id": 48,
+        "name": "Example: Attachment to Base64",
+        "enabled": true
+      },
+      {
+        "id": 52,
+        "name": "Example: Email Parsing (Attachment)",
+        "enabled": true
+      },
+      {
+        "id": 41,
+        "name": "Example: Post Incident / Task Attachment to Slack",
+        "enabled": true
+      },
+      {
+        "id": 85,
+        "name": "Example: SOAR Utilities Attachment Hash",
+        "enabled": true
+      },
+      {
+        "id": 87,
+        "name": "Example: SOAR Utilities Attachment to Base64",
+        "enabled": true
+      },
+      {
+        "id": 59,
+        "name": "Example: PDFiD",
+        "enabled": true
+      },
+      {
+        "id": 60,
+        "name": "Example: Resilient Search",
+        "enabled": true
+      },
+      {
+        "id": 90,
+        "name": "Example: SOAR Utilities SOAR Search",
+        "enabled": true
+      },
+      {
+        "id": 65,
+        "name": "Example: Use Excel Data",
+        "enabled": false
+      },
+      {
+        "id": 67,
+        "name": "Example: Zip Extract",
+        "enabled": false
+      },
+      {
+        "id": 68,
+        "name": "Example: Zip List",
+        "enabled": false
+      },
+      {
+        "id": 96,
+        "name": "Example: SOAR Utilities Zip List",
+        "enabled": false
+      },
+      {
+        "id": 95,
+        "name": "Example: SOAR Utilities Zip Extract",
+        "enabled": false
+      },
+      {
+        "id": 97,
+        "name": "Example: SOAR Utilities Zip Extract to Artifact",
+        "enabled": false
+      }
+    ],
+    "playbooks": [],
+    "task_id": null,
+    "task_name": null,
+    "task_custom": null,
+    "task_members": null,
+    "task_at_id": null,
+    "vers": 12,
+    "inc_id": 2112,
+    "inc_name": "SOAR Utilities",
+    "inc_owner": 1
+  },
+  "parent_id": null,
+  "inc_id": 2112,
+  "inc_name": "SOAR Utilities",
+  "inc_owner": 1,
+  "hits": [],
+  "created": 1663775473530,
+  "last_modified_time": 1663775473899,
+  "last_modified_by": {
+    "id": 6,
+    "type": "apikey",
+    "name": "0228e00e-2c47-43e6-a736-550f104c94ea",
+    "display_name": "Integration Server v43"
+  },
+  "pending_sources": [],
+  "perms": null,
+  "properties": null,
+  "actions": [],
+  "playbooks": [],
+  "hash": "c670630c6c19434d3d62b9f6e800bffd4cf5d5c361d64c8c92c628f1aba368ee",
+  "relating": true,
+  "creator_principal": {
+    "id": 6,
+    "type": "apikey",
+    "name": "0228e00e-2c47-43e6-a736-550f104c94ea",
+    "display_name": "Integration Server v43"
+  },
+  "related_incident_count": null,
+  "pending_scan_result": false,
+  "global_info": null,
+  "ip": {
+    "source": null,
+    "destination": null
+  },
+  "global_artifact": []
+}

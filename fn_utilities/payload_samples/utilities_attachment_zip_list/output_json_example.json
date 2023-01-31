@@ -1,0 +1,36 @@
+{
+    "namelist": ["sample_ioc_2.pdf", "sample_ioc_1.pdf"],
+    "infolist": [{
+      "comment": "",
+      "external_attr": 2175025152,
+      "create_version": 21,
+      "extract_version": 20,
+      "header_offset": 0,
+      "volume": 0,
+      "CRC": 1976166170,
+      "compress_type": 8,
+      "file_size": 123852,
+      "date_time": 1562684228000,
+      "filename": "sample_ioc_2.pdf",
+      "compress_size": 109933,
+      "flag_bits": 8,
+      "create_system": 3,
+      "internal_attr": 0
+    }, {
+      "comment": "",
+      "external_attr": 2175025152,
+      "create_version": 21,
+      "extract_version": 20,
+      "header_offset": 110334,
+      "volume": 0,
+      "CRC": 1976166170,
+      "compress_type": 8,
+      "file_size": 123852,
+      "date_time": 1562684228000,
+      "filename": "sample_ioc_1.pdf",
+      "compress_size": 109933,
+      "flag_bits": 8,
+      "create_system": 3,
+      "internal_attr": 0
+    }]
+  }
