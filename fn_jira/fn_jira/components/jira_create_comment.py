@@ -11,8 +11,6 @@ from resilient_circuits import AppFunctionComponent, FunctionError, FunctionResu
 from resilient_lib import IntegrationError, validate_fields
 
 FN_NAME = "jira_create_comment"
-src_pattern = compile(r'<img[^>]+src="([^">]+)')
-alt_pattern = compile(r'<img[^>]+alt="([^">]+)')
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'jira_create_comment"""
@@ -67,11 +65,9 @@ class FunctionComponent(AppFunctionComponent):
             if not jira_issue_id:
                 # Gracefully exit if task_id wasn't found in datatable -- i.e. task isn't linked to Jira yet
                 self.LOG.debug(f"Skipped function {FN_NAME} for task note, because task was not synced to Jira.")
-
                 yield FunctionResult({}, success=False)
-                return
             else:
-                # success
+                # Success
                 url = jira_link
                 self.LOG.info(f"Found Jira ID {jira_issue_id} for task {url} in datatable")
 
@@ -80,6 +76,8 @@ class FunctionComponent(AppFunctionComponent):
         jira_comment = fn_inputs.jira_comment
         # Extract src values and alt values from SOAR's image tags
         # ex: <img src='https://ibm.com/some_pic.jpg' alt='some_pic.jpg' />
+        src_pattern = compile(r'<img[^>]+src="([^">]+)')
+        alt_pattern = compile(r'<img[^>]+alt="([^">]+)')
         srcs = src_pattern.findall(jira_comment)
         alts = alt_pattern.findall(jira_comment)
 
@@ -100,10 +98,10 @@ class FunctionComponent(AppFunctionComponent):
             try:
                 # Read a url image to a filestream
                 if src.lower().startswith("http"):
-                    # external resource
+                    # External resource
                     img_data = self.rc.execute("GET", src, headers={"User-agent": "SOAR Apphost"}).content
                 else:
-                    # resource from the platform
+                    # Resource from the platform
                     img_data = self.rest_client().get(src[src.index("/rest")+len("/rest"):], is_uri_absolute=True, get_response_object=True).content
 
                 yield self.status_message(f"Adding attachment '{alt}' to {jira_issue_id} in JIRA")
@@ -119,7 +117,7 @@ class FunctionComponent(AppFunctionComponent):
 
         results = comment.raw
 
-        # for tasks we'll return the link here:
+        # For tasks we'll return the link here:
         if url:
             results["jira_url"] = url
 
