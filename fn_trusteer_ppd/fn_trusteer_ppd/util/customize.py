@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.3934
 
 """Generate the Resilient customizations required for fn_trusteer_ppd"""
 
@@ -21,10 +22,10 @@ def codegen_reload_data():
     return {
         "package": u"fn_trusteer_ppd",
         "message_destinations": [u"fn_trusteer_ppd"],
-        "functions": [],
+        "functions": [u"trusteer_ppd_update_case"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [],
+        "incident_fields": [u"trusteer_ppd_activity", u"trusteer_ppd_application_id", u"trusteer_ppd_event_received_at", u"trusteer_ppd_link_to_alert", u"trusteer_ppd_new_device_indication", u"trusteer_ppd_recommendation", u"trusteer_ppd_risk_score", u"trusteer_ppd_session_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -44,6 +45,17 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_trusteer_ppd
+    - Functions:
+        - trusteer_ppd_update_case
+    - Incident Fields:
+        - trusteer_ppd_activity
+        - trusteer_ppd_application_id
+        - trusteer_ppd_event_received_at
+        - trusteer_ppd_link_to_alert
+        - trusteer_ppd_new_device_indication
+        - trusteer_ppd_recommendation
+        - trusteer_ppd_risk_score
+        - trusteer_ppd_session_id
     - Scripts:
         - Trusteer PPD: Create case from email
     """

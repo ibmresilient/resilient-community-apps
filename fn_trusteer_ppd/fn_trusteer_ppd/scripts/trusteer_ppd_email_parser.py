@@ -15,6 +15,20 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", re.IGNORECASE)
 # possible message-id names
 MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
+LINKBACK_URL = "/account-page?accountId=guid_{account_id}"
+TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED = "Pinpoint Criminal Detection suspicious access detected"
+
+# Trusteer PPD email key names
+ACTIVITY = "Activity"
+APPLICATION_ID = "Application ID"
+EVENT_RECEIVED_AT = "Event received at"
+FEED_ITEM_TYPE = "Feed item type"
+CITY_NAME = "City name"
+COUNTRY_NAME = "Country name"
+NEW_DEVICE_INDICATION = "New Device Indication"
+RECOMMENDATION = "Recommendation"
+RISK_SCORE = "Risk Score"
+SESSION_ID = "Session ID"
 
 COUNTRY_NAMES = {
     "AFG": "Afghanistan",
@@ -291,8 +305,11 @@ class EmailProcessor(object):
             self.email_contents_json = self.build_dict(self.email_contents)
 
     def add_info_to_case(self):
-        # Fill in case fields with info from the Trusteer Pinpoint Detect email
+        # Make sure the feed type is correct.
+        if self.email_contents_json.get("Feed item type") != TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED:
+            log.error("Only Feed item type: %s is supported!", TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED)
 
+        # Fill in case fields with info from the Trusteer Pinpoint Detect email
         newReporterInfo = emailmessage.sender.address
         if hasattr(emailmessage.sender, "name") and emailmessage.sender.name is not None:
             newReporterInfo = u"{0} <{1}>".format(
@@ -301,17 +318,17 @@ class EmailProcessor(object):
             incident.reporter = newReporterInfo
 
         incident.description = "Trusteer Pinpoint Detect Alert"
-        incident.discovered_date = self.email_contents_json.get("Event received at")
-        incident.start_date = self.email_contents_json.get("Event received at")
+        incident.discovered_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
+        incident.start_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
         incident.plan_status = "A"
-        incident.country = COUNTRY_NAMES.get(self.email_contents_json.get("Country name"), "-")
-        incident.city = self.email_contents_json.get("Country name", None)
-        incident.properties.trusteer_ppd_security_event_id = self.email_contents_json.get("Trusteer Security Event ID")
-        incident.properties.trusteer_ppd_feed_item_type = self.email_contents_json.get("Feed item type")
-        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get("New Device Indication")
-        incident.properties.trusteer_ppd_activity = self.email_contents_json.get("Activity")
-        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get("Recommendation")
-        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get("Session ID")
+        incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
+        incident.city = self.email_contents_json.get(CITY_NAME, None)
+        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
+        incident.properties.trusteer_ppd_activity = self.email_contents_json.get(ACTIVITY)
+        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(RECOMMENDATION)
+        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
+        incident.properties.trusteer_ppd_application_id = self.email_contents_json.get(APPLICATION_ID)
+        incident.properties.trusteer_ppd_risk_score = self.email_contents_json.get(RISK_SCORE)
 
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
