@@ -3,7 +3,6 @@
 
 from jira import JIRA
 from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
-from json import dumps
 from re import compile, sub
 
 PACKAGE_NAME = "fn_jira"
@@ -11,7 +10,7 @@ GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 # Jira datatable constants
-DEFAULT_JIRA_DT_NAME = "jira_task_references" # can be overridden with app.config jira_dt_name value
+DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.config jira_dt_name value
 JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 
@@ -22,7 +21,7 @@ def get_jira_client(opts, options):
     :param options: The options for fn_jira from the app.config
     :raise: IntegrationError if auth_method set in app.config is unsupported
     :return: Instance to jira client
-    :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html 
+    :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html
     """
 
     # Get global_settings if definied in the app.config
@@ -281,10 +280,10 @@ def create_soar_incident(res_client, issue):
             try:
                 # Add the attachment to the SOAR incident
                 res_client.post_attachment(f"/incidents/{response.get('id')}/attachments",
-                                               filepath=None,
-                                               filename=attach.get("filename"),
-                                               bytes_handle=attach.get("content")
-                                              )
+                                           filepath=None,
+                                           filename=attach.get("filename"),
+                                           bytes_handle=attach.get("content")
+                                          )
             except Exception as err:
                 raise IntegrationError(err)
 
@@ -304,6 +303,7 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
     :param soar: Dict of SOAR case data
     :param res_client: Client connection to SOAR
     :param update_type: Either attachment or comment
+    :return: None
     """
     # Get comments\attachments from the Jira issue
     jira_updates = jira.pop(update_type) if jira.get(update_type) else []
@@ -353,7 +353,8 @@ def soar_update_task(jira, res_client, task):
     Update soar tasks
     :param jira: Dict of Jira issue data
     :param res_client: Client connection to SOAR
-    :param task: SOAR task dictionry
+    :param task: SOAR task dictionary
+    :return: Payload to update task
     """
     jira_issue_description = jira.get("description")
 
@@ -442,7 +443,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
     Update the SOAR cases with new data from the corresponding Jira issue
     :param res_client: Client connection to SOAR
     :param soar_cases_to_update: A list of lists that contain the SOAR case to update and its corresponding Jira issue
-    :return:
+    :return: None
     """
 
     soar_to_jira_fields = {
