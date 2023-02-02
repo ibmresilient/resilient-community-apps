@@ -20,7 +20,6 @@
 - [Function - Jira Transition Issue](#function---jira-transition-issue)
 - [Data Table - Jira Task References](#data-table---jira-task-references)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
 - [Playbooks](#playbooks)
 - [How to configure to use a single Jira Server](#how-to-configure-to-use-a-single-jira-server)
 - [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled)
@@ -73,11 +72,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `44.0.7585`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `44.0.7585`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -607,12 +606,9 @@ def list_to_json_str(l):
     elif isinstance(value, dict):
       list_as_str += json_entry.format(dict_to_json_str(value))
 
-    elif isinstance(value, basestring):
+    elif isinstance(value, str):
       value = value.replace(u'"', u'\\"').replace("\n", "\\n")
-      list_as_str += json_entry_str.format(unicode(value))
-
-    elif isinstance(value, unicode):
-      list_as_str += json_entry.format(unicode(value))
+      list_as_str += json_entry_str.format(str(value))
 
     elif isinstance(value, bool):
       list_as_str += json_entry.format('true' if value else 'false')
@@ -644,31 +640,28 @@ def dict_to_json_str(d):
       value = False
 
     if isinstance(value, list):
-      entries.append(json_entry.format(unicode(key), list_to_json_str(value)))
+      entries.append(json_entry.format(str(key), list_to_json_str(value)))
 
     elif isinstance(value, dict):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
 
-    elif isinstance(value, basestring):
+    elif isinstance(value, str):
       value = value.replace(u'"', u'\\"').replace("\n", "\\n")
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-
-    elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
+      entries.append(json_entry_str.format(str(key), str(value)))
 
     elif isinstance(value, bool):
       entries.append(json_entry.format(key, 'true' if value else 'false'))
 
     elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
+      entries.append(json_entry.format(str(key), value))
 
     else:
       helper.fail('dict_to_json_str does not support this type: {}'.format(type(value)))
 
   return u'{} {} {}'.format(u'{', ','.join(entries), u'}')
 
-if rule.properties.jira_label:
-  inputs.jira_label = rule.properties.jira_label
+if playbook.inputs.jira_label:
+  inputs.jira_label = playbook.inputs.jira_label
 else:
   inputs.jira_label = incident.properties.jira_label
 
@@ -676,15 +669,15 @@ else:
 inputs.incident_id = incident.id
 
 # A map for JIRA priorities
-priority_map = { "Low": {"name": "Low"}, "Medium": {"name": "Medium"}, "High": {"name": "High"} }
+priority_map = { "Lowest": {"name": "Lowest"}, "Low": {"name": "Low"}, "Medium": {"name": "Medium"}, "High": {"name": "High"}, "Highest": {"name": "Highest"} }
 jira_priority = priority_map.get(incident.severity_code, {"name": "Low"})
 
 # Define JIRA fields here
 inputs.jira_fields = dict_to_json_str({
-  "project": rule.properties.jira_project_id,
-  "issuetype": rule.properties.jira_issue_type,
+  "project": playbook.inputs.jira_project_id,
+  "issuetype": playbook.inputs.jira_issue_type,
   "priority": jira_priority,
-  "summary": u"IBM SOAR: {0}".format(incident.name),
+  "summary": u"IBM SOAR: {}".format(incident.name),
   "description": incident.description.content if incident.get("description") else "Created in IBM SOAR"
 })
 ```
@@ -696,16 +689,18 @@ inputs.jira_fields = dict_to_json_str({
 <p>
 
 ```python
-import java.util.Date as Date
-if results.get("success"):
-  results_content = results.get("content", {})
+from datetime import datetime
+create_result = playbook.functions.results.create_result
+if create_result.get("success"):
+  results_content = create_result.get("content", {})
   issue_key = results_content.get("issue_key")
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), results_content.get("issue_key"))
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
   incident.properties.jira_issue_id = issue_key
-  incident.properties.jira_server = rule.properties.jira_label
-  incident.properties.soar_case_last_updated = Date()
+  incident.properties.jira_server = playbook.inputs.jira_label
+  incident.properties.soar_case_last_updated = datetime.now()
   incident.properties.jira_project_key = issue_key[:issue_key.index("-")]
+  incident.properties.jira_issue_status = "To Do"
 ```
 
 </p>
@@ -772,12 +767,12 @@ results = {
 # Example: Jira Transition Issue pre-processing script
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, unicode, bool, int and nested dicts.
+     Supports types: str, bool, int and nested dicts.
      Does not support lists.
      If the value is None, it sets it to False."""
 
-  json_entry = u'"{0}":{1}'
-  json_entry_str = u'"{0}":"{1}"'
+  json_entry = '"{0}":{1}'
+  json_entry_str = '"{0}":"{1}"'
   entries = []
 
   for entry in d:
@@ -790,19 +785,16 @@ def dict_to_json_str(d):
     if isinstance(value, list):
       helper.fail('dict_to_json_str does not support Python Lists')
 
-    if isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-
-    elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
+    if isinstance(value, str):
+      value = value.replace('"', '\\"')
+      entries.append(json_entry_str.format(str(key), str(value)))
 
     elif isinstance(value, bool):
       value = 'true' if value else 'false'
       entries.append(json_entry.format(key, value))
 
     elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
+      entries.append(json_entry.format(str(key), value))
 
     elif isinstance(value, dict):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
@@ -828,8 +820,9 @@ inputs.jira_fields = dict_to_json_str({})
 <p>
 
 ```python
-import java.util.Date as Date
-incident.properties.soar_case_last_updated = Date()
+from datetime import datetime
+incident.properties.soar_case_last_updated = datetime.now()
+incident.properties.jira_issue_status = "Done"
 ```
 
 </p>
@@ -867,16 +860,9 @@ jira_task_references
 | Jira Project Key | `jira_project_key` | `text` | `properties` | - | The key for the Jira project the issue is in |
 | Jira Server | `jira_server` | `text` | `properties` | - | Label of the server you wish to use |
 | Jira Ticket URL | `jira_url` | `textarea` | `properties` | - | Contains URL back to the Jira issue created via the UI |
-| SOAR Case Last Updated | `soar_case_last_updated` | `datetimepicker` | `properties` | - | - |
+| SOAR Case Last Updated | `soar_case_last_updated` | `datetimepicker` | `properties` | - | The time the SOAR case was last updated |
+| Jira Issue Status | `jira_issue_status` | `text` | `properties` | - | The status of the linked Jira issue |
 
----
-
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Example: Create Jira Issue | incident | `jira_open_issue` |
-| Example: Create Jira Issue (Task) | task | `example_jira_open_issue_task` |
 
 ---
 
@@ -886,6 +872,8 @@ jira_task_references
 | Example: Jira Close Issue | Close Jira issue when linked SOAR case is closed. | incident | `enabled` |
 | Example: Jira Close Issue (Task) | Close the SOAR task | jira_task_references | `enabled` |
 | Example: Jira Create Comment | When a note is added to the SOAR incident this playbook will automatically create a comment on the linked Jira issue. | note | `enabled` |
+| Example: Create Jira Issue | Create a Jira issue from the SOAR incident | `enabled` |
+| Example: Create Jira Issue (Task) | Create a Jira issue from a SOAR task | `enabled` |
 
 ---
 
