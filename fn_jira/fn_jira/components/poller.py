@@ -7,9 +7,9 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from fn_jira.util import helper
-from fn_jira.lib.poller_common import SOARCommon, poller, JiraCommon
-from resilient_lib import validate_fields
+from fn_jira.util import helper, poller_helper
+from fn_jira.lib.poller_common import JiraCommon, poller
+from resilient_lib import validate_fields, SOARCommon
 
 LOG = getLogger(__name__)
 
@@ -49,7 +49,7 @@ class PollerComponent(ResilientComponent):
 
         return True
 
-    @poller('polling_interval', 'last_poller_time', helper.PACKAGE_NAME)
+    @poller('polling_interval', 'last_poller_time')
     def run(self, last_poller_time=None):
         """
         Get a list of open SOAR cases that contain the field jira_issue_id.
@@ -127,10 +127,61 @@ class PollerComponent(ResilientComponent):
             jira_issues_dict[server] = jira_issue_list
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_cases_list, err_msg = SOARCommon.get_open_soar_cases(self.opts, {"jira_issue_id": True}, self.rest_client(), data_to_get_from_case)
+        soar_cases_list, err_msg = SOARCommon(self.rest_client()).get_soar_cases({"jira_issue_id": True})
+
+        soar_cases_list = self.process_soar_cases(soar_cases_list, data_to_get_from_case)
 
         # Process Jira issues returned from search
         self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
+
+    def process_soar_cases(self, cases_list, data_to_get_from_case):
+        """
+        Process the SOAR cases
+        :param cases_list: List of SOAR cases that contain "Jira Issue ID" field
+        :param data_to_get_from_case: Dictionary of dicts that say what info to get from each SOAR case
+        :return: Dict of processed SOAR cases
+        """
+        fields_to_remove = ["perms", "creator", "creator_principal", "exposure_type_id", "workspace", "assessment", "pii",
+                            "gdpr", "creator_id", "crimestatus_id", "sequence_code", "owner_id", "phase_id", "org_handle", "task_changes"]
+
+        # Remove case keys that are empty and unused keys
+        for num in range(len(cases_list)):
+            cases_list[num] = dict([(k,v) for k,v in cases_list[num].items() if v])
+            for field in fields_to_remove:
+                cases_list[num].pop(field)
+
+            # Change the value of the dict key to the one value that is used in that dict
+            for key, value in cases_list[num].get("properties").items():
+                cases_list[num][key] = value
+            cases_list[num].pop("properties")
+
+            # Get the date that needs to be added to the current SOAR case
+            data_to_get = data_to_get_from_case.get(cases_list[num].get("jira_issue_id"))
+            if data_to_get:
+
+                if data_to_get.get("comments"): # If comments were on the linked Jira ticket
+                    # Add comment/notes to case
+                    poller_helper.SOAR.add_to_case(self.rest_client(), cases_list, num, "comments")
+
+                if data_to_get.get("attachments"): # If attachments were on the linked Jira ticket
+                    # Add attachments to cases
+                    poller_helper.SOAR.add_to_case(self.rest_client(), cases_list, num, "attachments")
+
+            tasks = data_to_get_from_case.get("tasks")
+            if tasks:
+                for task in tasks:
+                    if task.get("incident_id") == cases_list[num].get("id"):
+                        task_data_to_get = data_to_get_from_case.get(task.get("task_key"))
+                        if task_data_to_get:
+                            poller_helper.SOAR.add_task_to_case(self.rest_client(),
+                                                        cases_list,
+                                                        num,
+                                                        task.get("task_id"),
+                                                        comments=task_data_to_get.get("comments"),
+                                                        attachments=task_data_to_get.get("attachments")
+                                                       )
+
+        return cases_list
 
     def process_jira_issue_dict(self, jira_issues_dict, soar_cases_list):
         """
