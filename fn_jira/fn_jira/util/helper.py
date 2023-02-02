@@ -13,6 +13,7 @@ SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.config jira_dt_name value
 JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
+JIRA_CLOUD_SUFFIX = ".atlassian.net"
 
 def get_jira_client(opts, options):
     """
@@ -66,13 +67,13 @@ def get_jira_client(opts, options):
         validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
                          {"name": "password", "placeholder": "<jira user password or API Key>"}],
                          options)
-        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0] and ".atlassian.net" not in url: # AUTH
+        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0] and JIRA_CLOUD_SUFFIX not in url: # AUTH
             auth = (options.get("user"), options.get("password"))
         else: # BASIC
             basic_auth = (options.get("user"), options.get("password"))
 
     # TOKEN
-    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2] and ".atlassian.net" not in url:
+    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2] and JIRA_CLOUD_SUFFIX not in url:
         validate_fields(["auth_token"], options)
         token_auth = (options.get("auth_token"))
 
@@ -100,7 +101,7 @@ def get_jira_client(opts, options):
                  "key_cert": key_cert_data}
 
     else:
-        if ".atlassian.net" in url:
+        if JIRA_CLOUD_SUFFIX in url:
             raise IntegrationError("Only auth_methods BASIC and OAUTH are supported with Jira Cloud platform")
         raise IntegrationError(f"{auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
 
@@ -112,7 +113,7 @@ def get_jira_client(opts, options):
         options = {"server": url,
                    "verify": verify,
                    "rest_api_version": "2"},
-        proxies = RequestsCommon(opts, options).get_proxies(),
+        proxies = proxies,
         timeout = timeout,
     )
 
