@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from jira import JIRA
-from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon
+from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon, SOARCommon
 from re import compile, sub
 
 PACKAGE_NAME = "fn_jira"
@@ -126,7 +126,7 @@ def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
     """Returns the jira_issue_id and jira_url that relates to the task_id"""
 
     try:
-        rows = res_client.get(f"/incidents/{incident_id}/table_data/{dt_name}?handle_format=names")["rows"]
+        rows = SOARCommon(res_client)._get_case_info(incident_id, f"table_data/{dt_name}?handle_format=names")["rows"]
     except Exception as err:
         raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)
 
@@ -271,7 +271,7 @@ def create_soar_incident(res_client, issue):
 
     try:
         # Create incident on SOAR
-        response = res_client.post("/incidents", payload)
+        response = SOARCommon(res_client).create_soar_case(payload)
     except Exception as err:
         raise IntegrationError(err)
 
@@ -345,7 +345,7 @@ def soar_update_comments_attachments(jira, soar, res_client, update_type):
                     content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == jira_update), None)].get("content")
                     res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=jira_update, bytes_handle=content)
                 else:
-                    res_client.post(f"/incidents/{soar.get('id')}/comments", {"text": {"content": f"{jira_update}\nAdded from Jira"}})
+                    SOARCommon(res_client).create_case_comment(soar.get('id'), f"{jira_update}\nAdded from Jira")
             except Exception as e:
                 raise IntegrationError(str(e))
 
@@ -439,6 +439,16 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "?task_id=" in jira_issue_description:
             return True
 
+def add_changes_to_soar_payload(field_type, old_value, new_value, field_name):
+    """
+    Add chamges to SOAR update payload
+    """
+    return {
+        "old_value": {field_type: old_value},
+        "new_value": {field_type: new_value},
+        "field": {"name": field_name}
+    }
+
 def update_soar_incident(res_client, soar_cases_to_update):
     """
     Update the SOAR cases with new data from the corresponding Jira issue
@@ -510,21 +520,15 @@ def update_soar_incident(res_client, soar_cases_to_update):
         # Close SOAR incident if linked Jira issue is closed
         # If the Jira issue has a resolutiondate then it has been closed
         if jira.get("resolutiondate"):
-            soar_update_payload['patches'][soar.get("id")]["changes"].append({
-                "old_value": {"text": "A"},
-                "new_value": {"text": "C"},
-                "field": {"name": "plan_status"}
-            })
-            soar_update_payload['patches'][soar.get("id")]["changes"].append({
-                "old_value": {"text": None},
-                "new_value": {"text": "Closed on Jira"},
-                "field": {"name": "resolution_summary"}
-            })
-            soar_update_payload['patches'][soar.get("id")]["changes"].append({
-                "old_value": {"text": None},
-                "new_value": {"text": "Resolved"},
-                "field": {"name": "resolution_id"}
-            })
+            soar_update_payload['patches'][soar.get("id")]["changes"].append(
+                add_changes_to_soar_payload("text", "A", "C", "plan_status")
+            )
+            soar_update_payload['patches'][soar.get("id")]["changes"].append(
+                add_changes_to_soar_payload("text", None, "Closed on Jira", "resolution_summary")
+            )
+            soar_update_payload['patches'][soar.get("id")]["changes"].append(
+                add_changes_to_soar_payload("text", None, "Resolved", "resolution_id")
+            )
 
         for key, value in soar_to_jira_fields.items():
             soar_value = soar.get(key)
@@ -537,11 +541,9 @@ def update_soar_incident(res_client, soar_cases_to_update):
                 del jira_key
 
             if soar_value != jira_value: # Check if the current SOAR value is different fromt the current Jira value
-                soar_update_payload['patches'][soar.get("id")]["changes"].append({
-                    "old_value": {soar_field_type[key]: soar_value},
-                    "new_value": {soar_field_type[key]: jira_value},
-                    "field": {"name": key}
-                })
+                soar_update_payload['patches'][soar.get("id")]["changes"].append(
+                    add_changes_to_soar_payload(soar_field_type[key], soar_value, jira_value, key)
+                )
 
     try:
         # If SOAR payload is not empty then update fields on cases
