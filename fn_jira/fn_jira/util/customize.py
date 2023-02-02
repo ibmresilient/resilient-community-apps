@@ -22,15 +22,15 @@ def codegen_reload_data():
         "package": u"fn_jira",
         "message_destinations": [u"fn_jira"],
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
-        "workflows": [u"example_jira_open_issue_task", u"jira_open_issue"],
-        "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)"],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_project_key", u"jira_server", u"jira_url", u"soar_case_last_updated"],
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_project_key", u"jira_server", u"jira_url", u"soar_case_last_updated"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"example_jira_close_issue", u"example_jira_close_issue_task", u"example_jira_create_comment"]
+        "playbooks": [u"example_create_jira_issue", u"example_create_jira_issue_task", u"example_jira_close_issue", u"example_jira_close_issue_task", u"example_jira_create_comment"]
     }
 
 
@@ -39,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 44.0.7585
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -48,19 +48,16 @@ def customization_data(client=None):
         - jira_create_comment
         - jira_open_issue
         - jira_transition_issue
-    - Workflows:
-        - example_jira_open_issue_task
-        - jira_open_issue
     - Playbooks:
+        - example_create_jira_issue
+        - example_create_jira_issue_task
         - example_jira_close_issue
         - example_jira_close_issue_task
         - example_jira_create_comment
-    - Rules:
-        - Example: Create Jira Issue
-        - Example: Create Jira Issue (Task)
     - Incident Fields:
         - jira_internal_url
         - jira_issue_id
+        - jira_issue_status
         - jira_project_key
         - jira_server
         - jira_url
