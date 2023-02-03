@@ -55,11 +55,12 @@ else:
     text += "Channel Id : {} <br />".format(message.get("channelIdentity").get("channelId"))
     text += "Team Id : {} <br />".format(message.get("channelIdentity").get("teamId"))
   
-    user_messages = message.get("from").get("user")
-    if user_messages:
-      text += "From User : {} <br />".format(user_messages.get("displayName"))
-    else:
-      text += "From Application : {} <br />".format(message.get("from").get("application").get("displayName"))
+    if message.get("from"):
+      user_messages = message.get("from").get("user")
+      if user_messages:
+        text += "From User : {} <br />".format(user_messages.get("displayName"))
+      else:
+        text += "From Application : {} <br />".format(message.get("from").get("application").get("displayName"))
   
     text += "Body Content : {} <br />".format(message.get("body").get("content"))
     text += "Content Type : {} <br />".format(message.get("body").get("contentType"))
@@ -68,7 +69,7 @@ else:
     text += "<br />"
     
 note = helper.createRichText(text)
-task.addNote(note)
+incident.addNote(note)
 
 ```
 
