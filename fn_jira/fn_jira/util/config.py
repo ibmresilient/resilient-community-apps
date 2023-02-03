@@ -55,7 +55,7 @@ timeout=10
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
-verify_cert=False
+verify_cert=True
 # Search filters for Jira issue to sync with SOAR cases.
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
@@ -83,7 +83,7 @@ timeout=10
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
-verify_cert=False
+verify_cert=True
 # Search filters for Jira issue to sync with SOAR cases.
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search

@@ -24,7 +24,7 @@ def codegen_reload_data():
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_project_key", u"jira_server", u"jira_url", u"soar_case_last_updated"],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_project_key", u"jira_server", u"jira_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
@@ -61,7 +61,6 @@ def customization_data(client=None):
         - jira_project_key
         - jira_server
         - jira_url
-        - soar_case_last_updated
     - Data Tables:
         - jira_task_references
     """
