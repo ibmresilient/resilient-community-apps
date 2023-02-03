@@ -24,6 +24,7 @@
 - [How to configure to use a single Jira Server](#how-to-configure-to-use-a-single-jira-server)
 - [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled)
 - [Bidirectional sync with the poller](#bidirectional-sync-with-the-poller)
+- [Configuring bidirectional sync](#configuring-bidirectional-sync)
 - [Troubleshooting & Support](#troubleshooting--support)
 
 ---
@@ -40,7 +41,7 @@
 | 1.0.1 | 04/2019 | Support for versions of SOAR 31.0 and beyond |
 | 1.0.0 | 12/2018 | Initial Release |
 
-* For customers upgrading from a previous release to 2.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [2.2.0 Changes](#2.2.0-changes)
+* For customers upgrading from a previous release to 3.0.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [Configuring bidirectional sync](#configuring-bidirectional-sync)
 
 ---
 
@@ -310,8 +311,6 @@ inputs.incident_id = incident.id
 <p>
 
 ```python
-from datetime import datetime
-incident.properties.soar_case_last_updated = datetime.now()
 ```
 
 </p>
@@ -689,7 +688,6 @@ inputs.jira_fields = dict_to_json_str({
 <p>
 
 ```python
-from datetime import datetime
 create_result = playbook.functions.results.create_result
 if create_result.get("success"):
   results_content = create_result.get("content", {})
@@ -698,7 +696,6 @@ if create_result.get("success"):
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
   incident.properties.jira_issue_id = issue_key
   incident.properties.jira_server = playbook.inputs.jira_label
-  incident.properties.soar_case_last_updated = datetime.now()
   incident.properties.jira_project_key = issue_key[:issue_key.index("-")]
   incident.properties.jira_issue_status = "To Do"
 ```
@@ -820,8 +817,6 @@ inputs.jira_fields = dict_to_json_str({})
 <p>
 
 ```python
-from datetime import datetime
-incident.properties.soar_case_last_updated = datetime.now()
 incident.properties.jira_issue_status = "Done"
 ```
 
@@ -860,7 +855,6 @@ jira_task_references
 | Jira Project Key | `jira_project_key` | `text` | `properties` | - | The key for the Jira project the issue is in |
 | Jira Server | `jira_server` | `text` | `properties` | - | Label of the server you wish to use |
 | Jira Ticket URL | `jira_url` | `textarea` | `properties` | - | Contains URL back to the Jira issue created via the UI |
-| SOAR Case Last Updated | `soar_case_last_updated` | `datetimepicker` | `properties` | - | The time the SOAR case was last updated |
 | Jira Issue Status | `jira_issue_status` | `text` | `properties` | - | The status of the linked Jira issue |
 
 
@@ -950,7 +944,7 @@ Example app.config server label: [fn_jira:jira_label1]
   `jira_label1` will be set to `inputs.jira_label` in the above example.
 
 ## Bidirectional sync with the poller
-If the poller is configured to run in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
+If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
 The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback
 time frame will be recieved from the search.
 The poller will update the following fields on SOAR cases:
@@ -962,7 +956,6 @@ The poller will update the following fields on SOAR cases:
 - Jira Server
 - Jira url
 - Jira Project Key
-- SOAR case last updated
 - Jira Issue Status
 - Plan Status
 - Resolution Summary
@@ -977,6 +970,40 @@ The poller will update the following fields on SOAR tasks:
 - instr_text
 - Status
 It will also update the datatable row that represents the task
+
+## Configuring bidirectional sync
+In version 3.0.0 bidirectional sync between SOAR and Jira was introduced. When updating from a previous version to 3.0.0 the app.config must be manually edited to add the new settings that allow the poller to sync SOAR and Jira tickets.
+The following must be added to the app.config for the poller to run:
+```
+[fn_jira:global_settings]
+# Maximum time in seconds to wait before timeout.
+timeout=10
+# Interval to poll Jira for changes (in seconds)
+# When polling_interval equals 0 the poller is off
+polling_interval=0
+polling_lookback=60
+# Search filters for Jira issue to sync with SOAR cases.
+# If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
+#  that are configured under the individual Jira servers will be ignored
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search.
+# If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
+#  that are configured under the individual Jira servers will be ignored.
+max_issues_returned = 50
+# Proxys to use
+# If proxys are defined under [fn_jira:global_settings], then proxys defined
+#  under the individual Jira servers will be ignored
+#http_proxy=
+#https_proxy
+```
+
+The following settings can be either configure under `[fn_jira:global_settings]` or under each individual Jira server:
+```
+# Search filters for Jira issue to sync with SOAR cases.
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+max_issues_returned = 50
+```
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

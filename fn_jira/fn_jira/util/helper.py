@@ -13,7 +13,8 @@ SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.config jira_dt_name value
 JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
-JIRA_CLOUD_SUFFIX = ".atlassian.net"
+IBM_SOAR_LINK = "IBM SOAR Link:"
+html_tags = compile('<.*?>')
 
 def get_jira_client(opts, options):
     """
@@ -67,13 +68,13 @@ def get_jira_client(opts, options):
         validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
                          {"name": "password", "placeholder": "<jira user password or API Key>"}],
                          options)
-        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0] and JIRA_CLOUD_SUFFIX not in url: # AUTH
+        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0]: # AUTH
             auth = (options.get("user"), options.get("password"))
         else: # BASIC
             basic_auth = (options.get("user"), options.get("password"))
 
     # TOKEN
-    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2] and JIRA_CLOUD_SUFFIX not in url:
+    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2]:
         validate_fields(["auth_token"], options)
         token_auth = (options.get("auth_token"))
 
@@ -101,8 +102,6 @@ def get_jira_client(opts, options):
                  "key_cert": key_cert_data}
 
     else:
-        if JIRA_CLOUD_SUFFIX in url:
-            raise IntegrationError("Only auth_methods BASIC and OAUTH are supported with Jira Cloud platform")
         raise IntegrationError(f"{auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
 
     return JIRA(
@@ -204,7 +203,7 @@ def get_id_from_jira_issue_description(description):
     task_id = None
     search_end = "]\n\n"
 
-    if "IBM SOAR Link: [" in description and search_end in description:
+    if f"{IBM_SOAR_LINK} [" in description and search_end in description:
         task_id = int(description[description.rindex("task_id=")+8:description.index(search_end)])
     else:
         task_id = int(description[description.index("task_id=")+8:description.index("\n\n")])
@@ -263,7 +262,7 @@ def create_soar_incident(res_client, issue):
             "jira_server": issue.get("jira_server"),
             "jira_url": f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>",
             "jira_project_key": issue.get("project"),
-            "soar_case_last_updated": issue.get("updated"),
+            "inc_last_modified_date": issue.get("updated"),
             "jira_issue_status": issue.get("status")
         },
         "comments": comments
@@ -294,7 +293,7 @@ def remove_html_tags(comment):
     :param comment: Comment from Jira issue
     :return: Comment without html tags
     """
-    return sub(compile('<.*?>'), '', comment)
+    return sub(html_tags, '', comment)
 
 def soar_update_comments_attachments(jira, soar, res_client, update_type):
     """
@@ -385,6 +384,25 @@ def soar_update_task(jira, res_client, task):
     if jira.get("resolutiondate"):
         t_payload["status"] = "C"
 
+    # Update comments
+    update_task_comments(res_client, task, jira)
+
+    # Update attachments
+    update_task_attachments(jira, task, res_client)
+
+    # Update datatable
+    update_task_datatable(task, jira, res_client)
+
+    return t_payload
+
+def update_task_comments(res_client, task, jira):
+    """
+    Update the task comments
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
     # Remove all html tags from the task notes
     for num in range(len(task.get("notes"))):
         task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
@@ -403,7 +421,14 @@ def soar_update_task(jira, res_client, task):
                 }
                 res_client.post(f"/tasks/{task.get('id')}/comments", comment_payload)
 
-    # Update attachments
+def update_task_attachments(jira, task, res_client):
+    """
+    Update task attachments
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
     attachments = jira.get("attachment")
     if attachments:
         task_attachments = [att.get("name") for att in task.get("attachments")]
@@ -412,7 +437,14 @@ def soar_update_task(jira, res_client, task):
             if filename not in task_attachments:
                 res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=attach.get("content"))
 
-    # Update data table on SOAR with new information from the updated task
+def update_task_datatable(task, jira, res_client):
+    """
+    Update data table on SOAR with new information from the updated task
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
     datatable = task.get('datatable')
     datatable_cells = datatable.get("cells")
 
@@ -426,8 +458,6 @@ def soar_update_task(jira, res_client, task):
 
     res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
 
-    return t_payload
-
 def check_jira_issue_linked_to_task(jira_issue_description):
     """
     Check if the given Jira issue is linked to a SOAR task
@@ -436,7 +466,7 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     """
 
     # Check if the Jira issue is linked to a SOAR task
-    if jira_issue_description and "IBM SOAR Link:" in jira_issue_description and "?task_id=" in jira_issue_description:
+    if jira_issue_description and IBM_SOAR_LINK in jira_issue_description and "?task_id=" in jira_issue_description:
             return True
 
 def add_changes_to_soar_payload(field_type, old_value, new_value, field_name):
@@ -466,7 +496,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "jira_server": "jira_server",
         "jira_url": "self",
         "jira_project_key": "project",
-        "soar_case_last_updated": "updated",
+        "inc_last_modified_date": "updated",
         "jira_issue_status": "status"
     }
 
@@ -479,7 +509,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "jira_server": "text",
         "jira_url": "textarea",
         "jira_project_key": "text",
-        "soar_case_last_updated": "date",
+        "inc_last_modified_date": "date",
         "jira_issue_status": "text"
     }
 
