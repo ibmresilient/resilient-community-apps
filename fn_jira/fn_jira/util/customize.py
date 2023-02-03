@@ -61,7 +61,6 @@ def customization_data(client=None):
         - jira_project_key
         - jira_server
         - jira_url
-        - soar_case_last_updated
     - Data Tables:
         - jira_task_references
     """

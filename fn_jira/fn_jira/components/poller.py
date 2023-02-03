@@ -20,7 +20,6 @@ class PollerComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.opts = opts
-        self.rest_client()
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
@@ -246,8 +245,7 @@ class PollerComponent(ResilientComponent):
                                         break
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("jira_issue_id"):
-                            soar_case_last_updated = soar_case.get("soar_case_last_updated")
-                            if jira_issue.get("updated") > soar_case_last_updated:
+                            if jira_issue.get("updated") > soar_case.get("inc_last_modified_date"):
                                 # Add matching SOAR case and Jira issue to soar_cases_to_update list
                                 soar_cases_to_update.append([jira_issue, soar_case])
                                 break
