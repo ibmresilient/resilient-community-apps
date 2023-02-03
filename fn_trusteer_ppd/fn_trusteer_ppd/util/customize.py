@@ -24,14 +24,14 @@ def codegen_reload_data():
         "message_destinations": [u"fn_trusteer_ppd"],
         "functions": [u"trusteer_ppd_update_case"],
         "workflows": [],
-        "actions": [],
-        "incident_fields": [u"trusteer_ppd_activity", u"trusteer_ppd_application_id", u"trusteer_ppd_event_received_at", u"trusteer_ppd_link_to_alert", u"trusteer_ppd_new_device_indication", u"trusteer_ppd_recommendation", u"trusteer_ppd_risk_score", u"trusteer_ppd_session_id"],
+        "actions": [u"Trusteer PPD: Parse Trusteer Alert Email"],
+        "incident_fields": [u"trusteer_ppd_activity", u"trusteer_ppd_application_id", u"trusteer_ppd_event_received_at", u"trusteer_ppd_is_targeted", u"trusteer_ppd_link_to_alert", u"trusteer_ppd_new_device_indication", u"trusteer_ppd_reason", u"trusteer_ppd_reason_id", u"trusteer_ppd_recommendation", u"trusteer_ppd_risk_score", u"trusteer_ppd_session_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [u"Trusteer PPD: Create case from email"],
-        "playbooks": []
+        "scripts": [u"Trusteer PPD: Create Case from Email"],
+        "playbooks": [u"trusteer_ppd_update_case"]
     }
 
 
@@ -47,17 +47,24 @@ def customization_data(client=None):
         - fn_trusteer_ppd
     - Functions:
         - trusteer_ppd_update_case
+    - Playbooks:
+        - trusteer_ppd_update_case
+    - Rules:
+        - Trusteer PPD: Parse Trusteer Alert Email
     - Incident Fields:
         - trusteer_ppd_activity
         - trusteer_ppd_application_id
         - trusteer_ppd_event_received_at
+        - trusteer_ppd_is_targeted
         - trusteer_ppd_link_to_alert
         - trusteer_ppd_new_device_indication
+        - trusteer_ppd_reason
+        - trusteer_ppd_reason_id
         - trusteer_ppd_recommendation
         - trusteer_ppd_risk_score
         - trusteer_ppd_session_id
     - Scripts:
-        - Trusteer PPD: Create case from email
+        - Trusteer PPD: Create Case from Email
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

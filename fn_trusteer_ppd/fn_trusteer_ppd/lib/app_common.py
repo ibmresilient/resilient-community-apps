@@ -17,12 +17,12 @@ PACKAGE_NAME = "fn_trusteer_ppd"
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "{organization_name}/targets/{target_id}"
+LINKBACK_URL = "{base_url}/search-results?puid={puid}&type=session"
 
 # E N D P O I N T S
 
 class AppCommon():
-    def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
+    def __init__(self, package_name: str, app_configs: dict) -> None:
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
@@ -33,7 +33,6 @@ class AppCommon():
         :param app_configs: app.config parameters in order to authenticate and access the endpoint
         :type app_configs: dict
         """
-        self.rc = rc
         self.package_name = package_name
 
         # required configs
@@ -72,19 +71,19 @@ class AppCommon():
 
         return header
 
-    def make_linkback_url(self, account_id: str, linkback_url : str = LINKBACK_URL) -> str:
+    def make_linkback_url(self, puid: str, linkback_url : str = LINKBACK_URL) -> str:
         """
         Create a url to link back to the endpoint entity
 
-        :param account_id: id representing the account in Trusteer
-        :type account_id: str
+        :param puid: permanent user ID of the account in Trusteer
+        :type puid: str
         :param linkback_url: _description_, defaults to LINKBACK_URL
         :type linkback_url: str|int, optional
         :return: completed url for linkback
         :rtype: str
         """
-        return urljoin(self.endpoint_url, linkback_url.format(organization_name=self.organization_name, 
-                                                              account_id=account_id))
+        return linkback_url.format(base_url=self.endpoint_url, 
+                                   puid=puid)
 
 def _get_verify_ssl(app_configs: dict):
     """

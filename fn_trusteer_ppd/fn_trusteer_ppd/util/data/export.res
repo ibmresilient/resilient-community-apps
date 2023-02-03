@@ -1,9 +1,33 @@
 {
   "action_order": [],
-  "actions": [],
+  "actions": [
+    {
+      "automations": [
+        {
+          "scripts_to_run": "Trusteer PPD: Create Case from Email",
+          "type": "run_script",
+          "value": null
+        }
+      ],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Trusteer PPD: Parse Trusteer Alert Email",
+      "id": 42,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Trusteer PPD: Parse Trusteer Alert Email",
+      "object_type": "__emailmessage",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 0,
+      "uuid": "8b5a4f26-e817-4a5c-a9d1-8a5560009035",
+      "view_items": [],
+      "workflows": []
+    }
+  ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1675289107107,
+  "export_date": 1675443305224,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -15,13 +39,13 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/incident_id",
+      "export_key": "__function/trusteer_ppd_puid",
       "hide_notification": false,
-      "id": 300,
-      "input_type": "number",
+      "id": 349,
+      "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "name": "incident_id",
+      "name": "trusteer_ppd_puid",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -31,10 +55,10 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "incident_id",
+      "text": "trusteer_ppd_puid",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+      "uuid": "25f7afc6-af7e-4180-9c3b-c5e1532fcaf5",
       "values": []
     },
     {
@@ -57,7 +81,7 @@
       "placeholder": "",
       "prefix": "properties",
       "read_only": false,
-      "rich_text": false,
+      "rich_text": true,
       "short_text": "",
       "tags": [],
       "templates": [],
@@ -65,6 +89,36 @@
       "tooltip": "",
       "type_id": 0,
       "uuid": "a098449e-472c-4114-8721-4b4d9b395a90",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/trusteer_ppd_is_targeted",
+      "hide_notification": false,
+      "id": 352,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "trusteer_ppd_is_targeted",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Is Targeted",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "a7fbd657-0b7d-4734-94a4-c3063be1d53e",
       "values": []
     },
     {
@@ -95,6 +149,36 @@
       "tooltip": "",
       "type_id": 0,
       "uuid": "ab99bd8f-d9ca-4e8d-b7e8-994fd3a0bc5f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/trusteer_ppd_reason_id",
+      "hide_notification": false,
+      "id": 354,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "trusteer_ppd_reason_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Reason ID",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "b292080c-8f20-4ea1-a05e-73b7ec1c311a",
       "values": []
     },
     {
@@ -271,10 +355,40 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Account ID",
+      "text": "Application ID",
       "tooltip": "",
       "type_id": 0,
       "uuid": "70d6911c-d99c-4d5c-b6ad-c62cf402b2f5",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/trusteer_ppd_reason",
+      "hide_notification": false,
+      "id": 345,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "trusteer_ppd_reason",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Reason",
+      "tooltip": "",
+      "type_id": 0,
+      "uuid": "7a9f448a-665d-4e23-a008-213c7af82b82",
       "values": []
     },
     {
@@ -293,7 +407,7 @@
     {
       "created_date": 1675260487706,
       "description": {
-        "content": "Update the Trusteer Poinpoint Detect custom fields in SOAR.",
+        "content": "Update the Trusteer Pinpoint Detect custom fields in SOAR.",
         "format": "text"
       },
       "destination_handle": "fn_trusteer_ppd",
@@ -306,14 +420,14 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1675260487753,
+      "last_modified_time": 1675351003747,
       "name": "trusteer_ppd_update_case",
       "tags": [],
       "uuid": "90abc429-5cfb-4ae7-8ee1-8803597261ba",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+          "content": "25f7afc6-af7e-4180-9c3b-c5e1532fcaf5",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -326,13 +440,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 134,
+  "id": 141,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1675289105520,
+      "create_date": 1675443303753,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -341,7 +455,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1675289105520,
+      "update_date": 1675443303753,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -366,7 +480,120 @@
   "notifications": null,
   "overrides": null,
   "phases": [],
-  "playbooks": [],
+  "playbooks": [
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.trusteer_ppd_puid",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 14,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7f152b95_04b4_46e5_99e4_621e7302b971\" isExecutable=\"true\" name=\"playbook_7f152b95_04b4_46e5_99e4_621e7302b971\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_078232n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Trusteer PPD: Update Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"90abc429-5cfb-4ae7-8ee1-8803597261ba\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.trusteer_ppd_puid = incident.properties.trusteer_ppd_puid\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"trusteer_ppd_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_078232n\u003c/incoming\u003e\u003coutgoing\u003eFlow_0lcqy4t\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_078232n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Trusteer PPD: Update case\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ee1b6f95-1159-4d81-af2a-8c89647bfe26\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0lcqy4t\u003c/incoming\u003e\u003coutgoing\u003eFlow_0chia2h\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0lcqy4t\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0chia2h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0chia2h\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7f152b95_04b4_46e5_99e4_621e7302b971\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0chia2h\" id=\"Flow_0chia2h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"102\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"184\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0lcqy4t\" id=\"Flow_0lcqy4t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-48\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"18\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_078232n\" id=\"Flow_078232n_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-214\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-266\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.542\" y=\"-131.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"18.300003051757812\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"184.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1675260083980,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_7f152b95_04b4_46e5_99e4_621e7302b971",
+      "description": {
+        "content": "Update custom fields in a Trusteer Pinpoint Detect case.",
+        "format": "text"
+      },
+      "display_name": "Trusteer PPD: Update Case",
+      "export_key": "trusteer_ppd_update_case",
+      "field_type_handle": "playbook_7f152b95_04b4_46e5_99e4_621e7302b971",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Trusteer PPD: Update Case",
+        "export_key": "playbook_7f152b95_04b4_46e5_99e4_621e7302b971",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_7f152b95_04b4_46e5_99e4_621e7302b971",
+        "uuid": "97eaa55e-00a6-4f3e-b723-c1b2d2647414"
+      },
+      "has_logical_errors": false,
+      "id": 22,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1675355175216,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1675351182652,
+          "description": "",
+          "enabled": false,
+          "export_key": "Trusteer PPD: Update case",
+          "id": 30,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1675354992674,
+          "name": "Trusteer PPD: Update case",
+          "object_type": "incident",
+          "playbook_handle": "trusteer_ppd_update_case",
+          "programmatic_name": "trusteer_ppd_update_case_trusteer_ppd_update_case",
+          "script_text": "result = playbook.functions.results.trusteer_ppd_result\nif not result.success:\n  incident.addNote(\"Trusteer PPD: Function to update case was not successful.\")\nelse:\n  content = result.get(\"content\", {})\n  link_url = content.get(\"link_url\", {})\n  if link_url:\n    ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink to Trusteer\u003c/a\u003e\"\"\".format(link_url)\n    incident.properties.trusteer_ppd_link_to_alert = helper.createRichText(ref_html)\n  else:\n    incident.addNote(\"Trusteer PPD: Empty link back to Trusteer returned from function.\")",
+          "tags": [],
+          "uuid": "ee1b6f95-1159-4d81-af2a-8c89647bfe26"
+        }
+      ],
+      "name": "trusteer_ppd_update_case",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_7f152b95-04b4-46e5-99e4-621e7302b971",
+        "id": 22,
+        "name": "playbook_7f152b95_04b4_46e5_99e4_621e7302b971",
+        "type": "playbook",
+        "uuid": "3ef23a7c-2439-49ae-ad76-b21137b35090"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "7f152b95-04b4-46e5-99e4-621e7302b971",
+      "version": 20
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [
@@ -375,16 +602,16 @@
       "created_date": 1674841244946,
       "description": "Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the Session ID already in SOAR.",
       "enabled": false,
-      "export_key": "Trusteer PPD: Create case from email",
+      "export_key": "Trusteer PPD: Create Case from Email",
       "id": 29,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1674841283127,
-      "name": "Trusteer PPD: Create case from email",
+      "last_modified_time": 1675369814244,
+      "name": "Trusteer PPD: Create Case from Email",
       "object_type": "__emailmessage",
       "playbook_handle": null,
       "programmatic_name": "trusteer_ppd_create_case_from_email",
-      "script_text": "import re\nimport time\n\n# The new incident owner - the email address of a user or the name of a group and cannot be blank.\n# Change this value to reflect who will be the owner of the incident before running the script.\nnew_case_owner = \"Trusteer Pinpoint Detect owner\"\n\n# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation \nSAVE_CONVERSATION = False\n\n# pattern used to find and extract the email message-id\nMESSAGE_PATTERN = re.compile(r\"([^\u003c\u003e]+)\")\n# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability\nDEFANG_PATTERN = re.compile(r\"(https|http|ftps|ftp|mailto|news|file|mailto):\", re.IGNORECASE)\n# possible message-id names\nMESSAGE_ID_LIST =  [\"x-original-message-id\", \"x-microsoft-original-message-id\", \"x-google-original-message-id\", \"message-id\"]\n\nCOUNTRY_NAMES = {\n    \"AFG\": \"Afghanistan\",\n    \"ALA\": \"\u00c5land Islands\",\n    \"ALB\": \"Albania\",\n    \"DZA\": \"Algeria\",\n    \"ASM\": \"American Samoa\",\n    \"AND\": \"Andorra\",\n    \"AGO\": \"Angola\",\n    \"AIA\": \"Anguilla\",\n    \"ATA\": \"Antarctica\",\n    \"ATG\": \"Antigua and Barbuda\",\n    \"ARG\": \"Argentina\",\n    \"ARM\": \"Armenia\",\n    \"ABW\": \"Aruba\",\n    \"AUS\": \"Australia\",\n    \"AUT\": \"Austria\",\n    \"AZE\": \"Azerbaijan\",\n    \"BHS\": \"Bahamas\",\n    \"BHR\": \"Bahrain\",\n    \"BGD\": \"Bangladesh\",\n    \"BRB\": \"Barbados\",\n    \"BLR\": \"Belarus\",\n    \"BEL\": \"Belgium\",\n    \"BLZ\": \"Belize\",\n    \"BEN\": \"Benin\",\n    \"BMU\": \"Bermuda\",\n    \"BTN\": \"Bhutan\",\n    \"BOL\": \"Plurinational State of Bolivia\",\n    \"BES\": \"Sint Eustatius and Saba Bonaire\",\n    \"BIH\": \"Bosnia and Herzegovina\",\n    \"BWA\": \"Botswana\",\n    \"BVT\": \"Bouvet Island\",\n    \"BRA\": \"Brazil\",\n    \"IOT\": \"British Indian Ocean Territory\",\n    \"VGB\": \"British Virgin Islands\",\n    \"BRN\": \"Brunei Darussalam\",\n    \"BGR\": \"Bulgaria\",\n    \"BFA\": \"Burkina Faso\",\n    \"BDI\": \"Burundi\",\n    \"KHM\": \"Cambodia\",\n    \"CMR\": \"Cameroon\",\n    \"CAN\": \"Canada\",\n    \"CPV\": \"Cape Verde\",\n    \"CYM\": \"Cayman Islands\",\n    \"CAF\": \"Central African Republic\",\n    \"TCD\": \"Chad\",\n    \"CHL\": \"Chile\",\n    \"CHN\": \"China\",\n    \"CXR\": \"Christmas Island\",\n    \"CCK\": \"Cocos (Keeling) Islands\",\n    \"COL\": \"Colombia\",\n    \"COM\": \"Comoros\",\n    \"COK\": \"Cook Islands\",\n    \"CRI\": \"Costa Rica\",\n    \"HRV\": \"Croatia\",\n    \"CUB\": \"Cuba\",\n    \"CUW\": \"Cura\u00e7ao\",\n    \"CYP\": \"Cyprus\",\n    \"CZE\": \"Czech Republic\",\n    \"COD\": \"The Democratic Republic of the Congo\",\n    \"DNK\": \"Denmark\",\n    \"DJI\": \"Djibouti\",\n    \"DMA\": \"Dominica\",\n    \"DOM\": \"Dominican Republic\",\n    \"TLS\": \"Timor-Leste\",\n    \"ECU\": \"Ecuador\",\n    \"EGY\": \"Egypt\",\n    \"SLV\": \"El Salvador\",\n    \"GNQ\": \"Equatorial Guinea\",\n    \"ERI\": \"Eritrea\",\n    \"EST\": \"Estonia\",\n    \"ETH\": \"Ethiopia\",\n    \"FLK\": \"Falkland Islands (Malvinas)\",\n    \"FRO\": \"Faroe Islands\",\n    \"FJI\": \"Fiji\",\n    \"FIN\": \"Finland\",\n    \"FRA\": \"France\",\n    \"GUF\": \"French Guiana\",\n    \"PYF\": \"French Polynesia\",\n    \"ATF\": \"French Southern Territories\",\n    \"GAB\": \"Gabon\",\n    \"GMB\": \"Gambia\",\n    \"GEO\": \"Georgia (Country)\",\n    \"DEU\": \"Germany\",\n    \"GHA\": \"Ghana\",\n    \"GIB\": \"Gibraltar\",\n    \"GRC\": \"Greece\",\n    \"GRL\": \"Greenland\",\n    \"GRD\": \"Grenada\",\n    \"GLP\": \"Guadeloupe\",\n    \"GUM\": \"United States\",\n    \"GTM\": \"Guatemala\",\n    \"GGY\": \"Guernsey\",\n    \"GIN\": \"Guinea\",\n    \"GNB\": \"Guinea-Bissau\",\n    \"GUY\": \"Guyana\",\n    \"HTI\": \"Haiti\",\n    \"HMD\": \"Heard Island and McDonald Islands\",\n    \"HND\": \"Honduras\",\n    \"HKG\": \"Hong Kong S.A.R. of the PRC\",\n    \"HUN\": \"Hungary\",\n    \"ISL\": \"Iceland\",\n    \"IND\": \"India\",\n    \"IDN\": \"Indonesia\",\n    \"IRN\": \"Iran\",\n    \"IRQ\": \"Iraq\",\n    \"IRL\": \"Ireland\",\n    \"IMN\": \"Isle of Man\",\n    \"ISR\": \"Israel\",\n    \"ITA\": \"Italy\",\n    \"CIV\": \"The Republic of C\u00f4te d\u0027Ivoire,\",\n    \"JAM\": \"Jamaica\",\n    \"JPN\": \"Japan\",\n    \"JEY\": \"Jersey\",\n    \"JOR\": \"Jordan\",\n    \"KAZ\": \"Kazakhstan\",\n    \"KEN\": \"Kenya\",\n    \"KIR\": \"Kiribati\",\n    \"XXK\": \"Kosovo\",\n    \"KWT\": \"Kuwait\",\n    \"KGZ\": \"Kyrgyzstan\",\n    \"LAO\": \"Laos People\u0027s Democratic Republic\",\n    \"LVA\": \"Latvia\",\n    \"LBN\": \"Lebanon\",\n    \"LSO\": \"Lesotho\",\n    \"LBR\": \"Liberia\",\n    \"LBY\": \"Libya\",\n    \"LIE\": \"Liechtenstein\",\n    \"LTU\": \"Lithuania\",\n    \"LUX\": \"Luxembourg\",\n    \"MAC\": \"Macao S.A.R. of the PRC\",\n    \"MKD\": \"Republic of Macedonia\",\n    \"MDG\": \"Madagascar\",\n    \"MWI\": \"Malawi\",\n    \"MYS\": \"Malaysia\",\n    \"MDV\": \"Maldives\",\n    \"MLI\": \"Mali\",\n    \"MLT\": \"Malta\",\n    \"MHL\": \"Marshall Islands\",\n    \"MTQ\": \"Martinique\",\n    \"MRT\": \"Mauritania\",\n    \"MUS\": \"Mauritius\",\n    \"MYT\": \"Mayotte\",\n    \"MEX\": \"Mexico\",\n    \"FSM\": \"Federated States of Micronesia\",\n    \"MDA\": \"Republic of Moldova\",\n    \"MCO\": \"Monaco\",\n    \"MNG\": \"Mongolia\",\n    \"MNE\": \"Montenegro\",\n    \"MSR\": \"Montserrat\",\n    \"MAR\": \"Morocco\",\n    \"MOZ\": \"Mozambique\",\n    \"MMR\": \"Myanmar\",\n    \"NAM\": \"Namibia\",\n    \"NRU\": \"Nauru\",\n    \"NPL\": \"Nepal\",\n    \"NLD\": \"Netherlands\",\n    \"NCL\": \"New Caledonia\",\n    \"NZL\": \"New Zealand\",\n    \"NIC\": \"Nicaragua\",\n    \"NER\": \"Niger\",\n    \"NGA\": \"Nigeria\",\n    \"NIU\": \"Niue\",\n    \"NFK\": \"Norfolk Island\",\n    \"PRK\": \"Democratic People\u0027s Republic of Korea\",\n    \"MNP\": \"Northern Mariana Islands\",\n    \"NOR\": \"Norway\",\n    \"OMN\": \"Oman\",\n    \"PAK\": \"Pakistan\",\n    \"PLW\": \"Palau\",\n    \"PSE\": \"State of Palestine\",\n    \"PAN\": \"Panama\",\n    \"PNG\": \"Papua New Guinea\",\n    \"PRY\": \"Paraguay\",\n    \"PER\": \"Peru\",\n    \"PHL\": \"Philippines\",\n    \"PCN\": \"Pitcairn\",\n    \"POL\": \"Poland\",\n    \"PRT\": \"Portugal\",\n    \"PRI\": \"Puerto Rico\",\n    \"QAT\": \"Qatar\",\n    \"COG\": \"Congo\",\n    \"REU\": \"R\u00e9union\",\n    \"ROU\": \"Romania\",\n    \"RUS\": \"Russia Federation\",\n    \"RWA\": \"Rwanda\",\n    \"BLM\": \"Saint Barth\u00e9lemy\",\n    \"SHN\": \"Ascension and Tristan Da Cunha Saint Helena\",\n    \"KNA\": \"Saint Kitts and Nevis\",\n    \"LCA\": \"Saint Lucia\",\n    \"MAF\": \"Saint Martin (French Part)\",\n    \"SPM\": \"Saint Pierre and Miquelon\",\n    \"VCT\": \"Saint Vincent and the Grenadines\",\n    \"WSM\": \"Samoa\",\n    \"SMR\": \"San Marino\",\n    \"STP\": \"Sao Tome and Principe\",\n    \"SAU\": \"Saudi Arabia\",\n    \"SEN\": \"Senegal\",\n    \"SRB\": \"Serbia\",\n    \"SCG\": \"Serbia and Montenegro\",\n    \"SYC\": \"Seychelles\",\n    \"SLE\": \"Sierra Leone\",\n    \"SGP\": \"Singapore\",\n    \"SXM\": \"Sint Maarten (Dutch Part)\",\n    \"SVK\": \"Slovakia\",\n    \"SVN\": \"Slovenia\",\n    \"SLB\": \"Solomon Islands\",\n    \"SOM\": \"Somalia\",\n    \"ZAF\": \"South Africa\",\n    \"SGS\": \"South Georgia and the South Sandwich Islands\",\n    \"KOR\": \"Republic of Korea\",\n    \"SSD\": \"South Sudan\",\n    \"ESP\": \"Spain\",\n    \"LKA\": \"Sri Lanka\",\n    \"SDN\": \"Sudan\",\n    \"SUR\": \"Suriname\",\n    \"SJM\": \"Svalbard and Jan Mayen\",\n    \"SWZ\": \"Swaziland\",\n    \"SWE\": \"Sweden\",\n    \"CHE\": \"Switzerland\",\n    \"SYR\": \"Syrian Arab Republic\",\n    \"TWN\": \"Taiwan\",\n    \"TJK\": \"Tajikistan\",\n    \"TZA\": \"Tanzania\",\n    \"THA\": \"Thailand\",\n    \"TGO\": \"Togo\",\n    \"TKL\": \"Tokelau\",\n    \"TON\": \"Tonga\",\n    \"TTO\": \"Trinidad and Tobago\",\n    \"TUN\": \"Tunisia\",\n    \"TUR\": \"Turkey\",\n    \"TKM\": \"Turkmenistan\",\n    \"TCA\": \"Turks and Caicos Islands\",\n    \"TUV\": \"Tuvalu\",\n    \"VIR\": \"U.S. Virgin Islands\",\n    \"UGA\": \"Uganda\",\n    \"UKR\": \"Ukraine\",\n    \"ARE\": \"United Arab Emirates\",\n    \"GBR\": \"United Kingdom\",\n    \"USA\": \"United States\",\n    \"UMI\": \"United States Minor Outlying Islands\",\n    \"URY\": \"Uruguay\",\n    \"UZB\": \"Uzbekistan\",\n    \"VUT\": \"Vanuatu\",\n    \"VAT\": \"Holy See (Vatican City State)\",\n    \"VEN\": \"Bolivarian Republic of Venezuela\",\n    \"VNM\": \"Viet Nam\",\n    \"WLF\": \"Wallis and Futuna\",\n    \"ESH\": \"Western Sahara\",\n    \"YEM\": \"Yemen\",\n    \"ZMB\": \"Zambia\",\n    \"ZWE\": \"Zimbabwe\"\n}\nclass EmailProcessor(object):\n    \"\"\" A class that facilitates processing the body contents of an email message.\n    Once the EmailProcessor class has been instantiated, the other methods can be used to add artifacts to the\n    incident.\n    \"\"\"\n\n    # The body of the email - the plaintext and html versions of the same email, if present\n    email_contents = []\n    email_contents_json = {}\n\n    def __init__(self):\n        \"\"\"The EmailProcessor constructor.\n        As initialization it retrieves the email body as both text and HTML.\n        \"\"\"\n        if (emailmessage.body.content is not None):\n            self.email_contents = emailmessage.body.content\n        if (len(self.email_contents) == 0):\n            log.error(\"Email message has no contents!\")\n        else:\n            self.email_contents_json = self.build_dict(self.email_contents)\n\n    def add_info_to_case(self):\n        # Fill in case fields with info from the Trusteer Pinpoint Detect email\n\n        newReporterInfo = emailmessage.sender.address\n        if hasattr(emailmessage.sender, \"name\") and emailmessage.sender.name is not None:\n            newReporterInfo = u\"{0} \u003c{1}\u003e\".format(\n                emailmessage.sender.name, emailmessage.sender.address)\n            log.info(u\"Adding reporter field \\\"{0}\\\"\".format(newReporterInfo))\n            incident.reporter = newReporterInfo\n\n        incident.description = \"Trusteer Pinpoint Detect Alert\"\n        incident.discovered_date = self.email_contents_json.get(\"Event received at\")\n        incident.start_date = self.email_contents_json.get(\"Event received at\")\n        incident.plan_status = \"A\"\n        incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(\"Country name\"), \"-\")\n        incident.city = self.email_contents_json.get(\"Country name\", None)\n        incident.properties.trusteer_ppd_security_event_id = self.email_contents_json.get(\"Trusteer Security Event ID\")\n        incident.properties.trusteer_ppd_feed_item_type = self.email_contents_json.get(\"Feed item type\")\n        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(\"New Device Indication\")\n        incident.properties.trusteer_ppd_activity = self.email_contents_json.get(\"Activity\")\n        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(\"Recommendation\")\n        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(\"Session ID\")\n\n        # Add a note containing the email contents\n        incident.addNote(\"Email from Trusteer Pinpoint Detect:\u003cbr\u003e {0}\".format(self.email_contents))\n\n    def get_trusteer_ppd_session_id(self):\n        trusteer_ppd_session_id = self.email_contents_json.get(\"Session ID\", None)\n        if trusteer_ppd_session_id is None:\n            log.error(\"Email message has no  Pinpoint Detect Session ID!\")\n        return trusteer_ppd_session_id\n\n    @staticmethod\n    def build_dict(content):\n        \"\"\"\n        Builds a dictionary from either the rest_headers or rest_cookies\n        :param rest_temp: rest_headers or rest_cookies\n        :return: Dictionary\n        \"\"\"\n        temp_dict = {}\n        if content is not None:\n            lines = content.split(\"\\n\")\n            for line in lines:\n                keyval = line.strip().split(\": \", 1)\n                if len(keyval) == 2:\n                    temp_dict[keyval[0].strip()] = keyval[1].strip()\n        return temp_dict\n\n    def processAttachments(self):\n        \"\"\" A method to process the email attachments, if present. Each non-inline email attachment is added as an\n        attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.\n        No return value.\n        \"\"\"\n        for attachment in emailmessage.attachments:\n            if not attachment.inline:\n                incident.addEmailAttachment(attachment.id)\n                incident.addArtifact(\n                    \"Email Attachment Name\", attachment.suggested_filename, \"\")\n\n    @staticmethod\n    def get_message_id(headers):\n        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]\n        # find the message id among several choices\n        msg_id = msg_id_list[0] if msg_id_list else None\n        if msg_id:\n            match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets \u003c\u003e\n            if match:\n                return match[0]\n    \n    @staticmethod\n    def save_message_id(headers):\n        # extract the message ID and retain\n        msg_id = processor.get_message_id(headers)\n        if msg_id and hasattr(incident.properties, \u0027email_message_id\u0027):\n            incident.properties.email_message_id = msg_id\n\n    @staticmethod\n    def add_email_conversation(headers, msg_body, msg_attachments):\n        # attempt to add to incident datatable, if present\n      \n        def handle_list(value):\n            # convert a list to comma separate list, if neccessary\n            if value and isinstance(value, list):\n                return \", \".join(value)\n        \n            return value\n        \n        try:\n            row = incident.addRow(\u0027email_conversations\u0027)\n            row[\u0027date_sent\u0027] = int(time.time()*1000) # TODO ts from headers.get(\"Date\")\n            row[\u0027source\u0027] = \"inbound\"\n            row[\u0027inbound_id\u0027] = emailmessage.id\n            row[\u0027recipients\u0027] = helper.createRichText(\"To: {}\u003cbr\u003eCc: {}\u003cbr\u003eBcc: {}\".format(handle_list(headers.get(\"To\")), handle_list(headers.get(\"CC\", \u0027\u0027)), handle_list(headers.get(\"BCC\", \u0027\u0027))))\n            row[\u0027from\u0027] = handle_list(headers.get(\"From\"))\n            row[\u0027subject\u0027] = handle_list(headers.get(\"Subject\"))\n            row[\u0027body\u0027] = DEFANG_PATTERN.sub(r\"x_\\1_x:\", msg_body)\n            row[\u0027attachments\u0027] = \", \".join(msg_attachments)\n            row[\u0027message_id\u0027] = processor.get_message_id(headers)\n            row[\u0027in_reply_to\u0027] = handle_list(headers.get(\"References\"))\n            row[\u0027importance\u0027] = handle_list((headers.get(\"Importance\") or {\"1\": \"high\", \"2\": \"normal\", \"3\": \"low\"}.get(headers.get(\"X-Priority\"), \"normal\")))\n        except Exception as err:\n            log.warn(str(err))\n\n###\n# Mainline starts here\n###\n\n# Create the email processor object, loading it with the email message body content.\nprocessor = EmailProcessor()\n\n# We need to check that the email has a subject otherwise the script will fail\nsubject = emailmessage.subject if hasattr(emailmessage, \u0027subject\u0027) else None\n\n# Create a suitable title for an incident based on the email\nnew_case_title = \"Trusteer Case from email \\\"{0}\\\" via mailbox {1}\".format(\n    subject, emailmessage.inbound_mailbox)\n\n# Check to see if a similar incident already exists\n# We will search for an incident which has the same name as we would give a new incident\ntrusteer_ppd_session_id = processor.get_trusteer_ppd_session_id()\nquery_builder.equals(fields.incident.plan_status, \"A\")\nquery_builder.equals(fields.incident.trusteer_ppd_session_id, trusteer_ppd_session_id)\nquery = query_builder.build()\ncases = helper.findIncidents(query)\n\nif len(cases) == 0:\n    # A similar case does not already exist. Create a new case and associate the email with it.\n    log.info(u\"Creating new case {0}\".format(new_case_title))\n\n    # Create an incident with a title based on the email subject, owned identified by variable newIncidentOwner\n    emailmessage.createAssociatedIncident(new_case_title, new_case_owner)\n\n    # Update custom fields of the new case\n    processor.add_info_to_case()\n\n    # add message-id for easy tracking\n    processor.save_message_id(emailmessage.headers)\nelse:\n    # A similar case already exists. Associate the email with this preexisting case.\n    log.info(u\"Associating with existing case {0}\".format(cases[0].id))\n    emailmessage.associateWithIncident(cases[0])\n\n# Add email message attachments to incident\nprocessor.processAttachments()\n\nif SAVE_CONVERSATION:\n    processor.add_email_conversation(emailmessage.headers, \n        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content, \n        [attachment.suggested_filename for attachment in emailmessage.attachments])",
+      "script_text": "# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.\nimport re\nimport time\n\n# The new incident owner - the email address of a user or the name of a group and cannot be blank.\n# Change this value to reflect who will be the owner of the incident before running the script.\nnew_case_owner = \"Trusteer Pinpoint Detect owner\"\n\n# Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation \nSAVE_CONVERSATION = False\n\n# pattern used to find and extract the email message-id\nMESSAGE_PATTERN = re.compile(r\"([^\u003c\u003e]+)\")\n# check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability\nDEFANG_PATTERN = re.compile(r\"(https|http|ftps|ftp|mailto|news|file|mailto):\", re.IGNORECASE)\n# possible message-id names\nMESSAGE_ID_LIST =  [\"x-original-message-id\", \"x-microsoft-original-message-id\", \"x-google-original-message-id\", \"message-id\"]\nLINKBACK_URL = \"/account-page?accountId=guid_{account_id}\"\nTRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED = \"Pinpoint Criminal Detection suspicious access detected\"\n\n# Trusteer PPD email key names\nACTIVITY = \"Activity\"\nAPPLICATION_ID = \"Application ID\"\nEVENT_RECEIVED_AT = \"Event received at\"\nFEED_ITEM_TYPE = \"Feed item type\"\nCITY_NAME = \"City name\"\nCOUNTRY_NAME = \"Country name\"\nNEW_DEVICE_INDICATION = \"New Device Indication\"\nPERMANENT_USER_ID = \"Permanent User ID\"\nRECOMMENDATION = \"Recommendation\"\nRISK_SCORE = \"Risk Score\"\nSESSION_ID = \"Session ID\"\n\nCOUNTRY_NAMES = {\n    \"AFG\": \"Afghanistan\",\n    \"ALA\": \"\u00c5land Islands\",\n    \"ALB\": \"Albania\",\n    \"DZA\": \"Algeria\",\n    \"ASM\": \"American Samoa\",\n    \"AND\": \"Andorra\",\n    \"AGO\": \"Angola\",\n    \"AIA\": \"Anguilla\",\n    \"ATA\": \"Antarctica\",\n    \"ATG\": \"Antigua and Barbuda\",\n    \"ARG\": \"Argentina\",\n    \"ARM\": \"Armenia\",\n    \"ABW\": \"Aruba\",\n    \"AUS\": \"Australia\",\n    \"AUT\": \"Austria\",\n    \"AZE\": \"Azerbaijan\",\n    \"BHS\": \"Bahamas\",\n    \"BHR\": \"Bahrain\",\n    \"BGD\": \"Bangladesh\",\n    \"BRB\": \"Barbados\",\n    \"BLR\": \"Belarus\",\n    \"BEL\": \"Belgium\",\n    \"BLZ\": \"Belize\",\n    \"BEN\": \"Benin\",\n    \"BMU\": \"Bermuda\",\n    \"BTN\": \"Bhutan\",\n    \"BOL\": \"Plurinational State of Bolivia\",\n    \"BES\": \"Sint Eustatius and Saba Bonaire\",\n    \"BIH\": \"Bosnia and Herzegovina\",\n    \"BWA\": \"Botswana\",\n    \"BVT\": \"Bouvet Island\",\n    \"BRA\": \"Brazil\",\n    \"IOT\": \"British Indian Ocean Territory\",\n    \"VGB\": \"British Virgin Islands\",\n    \"BRN\": \"Brunei Darussalam\",\n    \"BGR\": \"Bulgaria\",\n    \"BFA\": \"Burkina Faso\",\n    \"BDI\": \"Burundi\",\n    \"KHM\": \"Cambodia\",\n    \"CMR\": \"Cameroon\",\n    \"CAN\": \"Canada\",\n    \"CPV\": \"Cape Verde\",\n    \"CYM\": \"Cayman Islands\",\n    \"CAF\": \"Central African Republic\",\n    \"TCD\": \"Chad\",\n    \"CHL\": \"Chile\",\n    \"CHN\": \"China\",\n    \"CXR\": \"Christmas Island\",\n    \"CCK\": \"Cocos (Keeling) Islands\",\n    \"COL\": \"Colombia\",\n    \"COM\": \"Comoros\",\n    \"COK\": \"Cook Islands\",\n    \"CRI\": \"Costa Rica\",\n    \"HRV\": \"Croatia\",\n    \"CUB\": \"Cuba\",\n    \"CUW\": \"Cura\u00e7ao\",\n    \"CYP\": \"Cyprus\",\n    \"CZE\": \"Czech Republic\",\n    \"COD\": \"The Democratic Republic of the Congo\",\n    \"DNK\": \"Denmark\",\n    \"DJI\": \"Djibouti\",\n    \"DMA\": \"Dominica\",\n    \"DOM\": \"Dominican Republic\",\n    \"TLS\": \"Timor-Leste\",\n    \"ECU\": \"Ecuador\",\n    \"EGY\": \"Egypt\",\n    \"SLV\": \"El Salvador\",\n    \"GNQ\": \"Equatorial Guinea\",\n    \"ERI\": \"Eritrea\",\n    \"EST\": \"Estonia\",\n    \"ETH\": \"Ethiopia\",\n    \"FLK\": \"Falkland Islands (Malvinas)\",\n    \"FRO\": \"Faroe Islands\",\n    \"FJI\": \"Fiji\",\n    \"FIN\": \"Finland\",\n    \"FRA\": \"France\",\n    \"GUF\": \"French Guiana\",\n    \"PYF\": \"French Polynesia\",\n    \"ATF\": \"French Southern Territories\",\n    \"GAB\": \"Gabon\",\n    \"GMB\": \"Gambia\",\n    \"GEO\": \"Georgia (Country)\",\n    \"DEU\": \"Germany\",\n    \"GHA\": \"Ghana\",\n    \"GIB\": \"Gibraltar\",\n    \"GRC\": \"Greece\",\n    \"GRL\": \"Greenland\",\n    \"GRD\": \"Grenada\",\n    \"GLP\": \"Guadeloupe\",\n    \"GUM\": \"United States\",\n    \"GTM\": \"Guatemala\",\n    \"GGY\": \"Guernsey\",\n    \"GIN\": \"Guinea\",\n    \"GNB\": \"Guinea-Bissau\",\n    \"GUY\": \"Guyana\",\n    \"HTI\": \"Haiti\",\n    \"HMD\": \"Heard Island and McDonald Islands\",\n    \"HND\": \"Honduras\",\n    \"HKG\": \"Hong Kong S.A.R. of the PRC\",\n    \"HUN\": \"Hungary\",\n    \"ISL\": \"Iceland\",\n    \"IND\": \"India\",\n    \"IDN\": \"Indonesia\",\n    \"IRN\": \"Iran\",\n    \"IRQ\": \"Iraq\",\n    \"IRL\": \"Ireland\",\n    \"IMN\": \"Isle of Man\",\n    \"ISR\": \"Israel\",\n    \"ITA\": \"Italy\",\n    \"CIV\": \"The Republic of C\u00f4te d\u0027Ivoire,\",\n    \"JAM\": \"Jamaica\",\n    \"JPN\": \"Japan\",\n    \"JEY\": \"Jersey\",\n    \"JOR\": \"Jordan\",\n    \"KAZ\": \"Kazakhstan\",\n    \"KEN\": \"Kenya\",\n    \"KIR\": \"Kiribati\",\n    \"XXK\": \"Kosovo\",\n    \"KWT\": \"Kuwait\",\n    \"KGZ\": \"Kyrgyzstan\",\n    \"LAO\": \"Laos People\u0027s Democratic Republic\",\n    \"LVA\": \"Latvia\",\n    \"LBN\": \"Lebanon\",\n    \"LSO\": \"Lesotho\",\n    \"LBR\": \"Liberia\",\n    \"LBY\": \"Libya\",\n    \"LIE\": \"Liechtenstein\",\n    \"LTU\": \"Lithuania\",\n    \"LUX\": \"Luxembourg\",\n    \"MAC\": \"Macao S.A.R. of the PRC\",\n    \"MKD\": \"Republic of Macedonia\",\n    \"MDG\": \"Madagascar\",\n    \"MWI\": \"Malawi\",\n    \"MYS\": \"Malaysia\",\n    \"MDV\": \"Maldives\",\n    \"MLI\": \"Mali\",\n    \"MLT\": \"Malta\",\n    \"MHL\": \"Marshall Islands\",\n    \"MTQ\": \"Martinique\",\n    \"MRT\": \"Mauritania\",\n    \"MUS\": \"Mauritius\",\n    \"MYT\": \"Mayotte\",\n    \"MEX\": \"Mexico\",\n    \"FSM\": \"Federated States of Micronesia\",\n    \"MDA\": \"Republic of Moldova\",\n    \"MCO\": \"Monaco\",\n    \"MNG\": \"Mongolia\",\n    \"MNE\": \"Montenegro\",\n    \"MSR\": \"Montserrat\",\n    \"MAR\": \"Morocco\",\n    \"MOZ\": \"Mozambique\",\n    \"MMR\": \"Myanmar\",\n    \"NAM\": \"Namibia\",\n    \"NRU\": \"Nauru\",\n    \"NPL\": \"Nepal\",\n    \"NLD\": \"Netherlands\",\n    \"NCL\": \"New Caledonia\",\n    \"NZL\": \"New Zealand\",\n    \"NIC\": \"Nicaragua\",\n    \"NER\": \"Niger\",\n    \"NGA\": \"Nigeria\",\n    \"NIU\": \"Niue\",\n    \"NFK\": \"Norfolk Island\",\n    \"PRK\": \"Democratic People\u0027s Republic of Korea\",\n    \"MNP\": \"Northern Mariana Islands\",\n    \"NOR\": \"Norway\",\n    \"OMN\": \"Oman\",\n    \"PAK\": \"Pakistan\",\n    \"PLW\": \"Palau\",\n    \"PSE\": \"State of Palestine\",\n    \"PAN\": \"Panama\",\n    \"PNG\": \"Papua New Guinea\",\n    \"PRY\": \"Paraguay\",\n    \"PER\": \"Peru\",\n    \"PHL\": \"Philippines\",\n    \"PCN\": \"Pitcairn\",\n    \"POL\": \"Poland\",\n    \"PRT\": \"Portugal\",\n    \"PRI\": \"Puerto Rico\",\n    \"QAT\": \"Qatar\",\n    \"COG\": \"Congo\",\n    \"REU\": \"R\u00e9union\",\n    \"ROU\": \"Romania\",\n    \"RUS\": \"Russia Federation\",\n    \"RWA\": \"Rwanda\",\n    \"BLM\": \"Saint Barth\u00e9lemy\",\n    \"SHN\": \"Ascension and Tristan Da Cunha Saint Helena\",\n    \"KNA\": \"Saint Kitts and Nevis\",\n    \"LCA\": \"Saint Lucia\",\n    \"MAF\": \"Saint Martin (French Part)\",\n    \"SPM\": \"Saint Pierre and Miquelon\",\n    \"VCT\": \"Saint Vincent and the Grenadines\",\n    \"WSM\": \"Samoa\",\n    \"SMR\": \"San Marino\",\n    \"STP\": \"Sao Tome and Principe\",\n    \"SAU\": \"Saudi Arabia\",\n    \"SEN\": \"Senegal\",\n    \"SRB\": \"Serbia\",\n    \"SCG\": \"Serbia and Montenegro\",\n    \"SYC\": \"Seychelles\",\n    \"SLE\": \"Sierra Leone\",\n    \"SGP\": \"Singapore\",\n    \"SXM\": \"Sint Maarten (Dutch Part)\",\n    \"SVK\": \"Slovakia\",\n    \"SVN\": \"Slovenia\",\n    \"SLB\": \"Solomon Islands\",\n    \"SOM\": \"Somalia\",\n    \"ZAF\": \"South Africa\",\n    \"SGS\": \"South Georgia and the South Sandwich Islands\",\n    \"KOR\": \"Republic of Korea\",\n    \"SSD\": \"South Sudan\",\n    \"ESP\": \"Spain\",\n    \"LKA\": \"Sri Lanka\",\n    \"SDN\": \"Sudan\",\n    \"SUR\": \"Suriname\",\n    \"SJM\": \"Svalbard and Jan Mayen\",\n    \"SWZ\": \"Swaziland\",\n    \"SWE\": \"Sweden\",\n    \"CHE\": \"Switzerland\",\n    \"SYR\": \"Syrian Arab Republic\",\n    \"TWN\": \"Taiwan\",\n    \"TJK\": \"Tajikistan\",\n    \"TZA\": \"Tanzania\",\n    \"THA\": \"Thailand\",\n    \"TGO\": \"Togo\",\n    \"TKL\": \"Tokelau\",\n    \"TON\": \"Tonga\",\n    \"TTO\": \"Trinidad and Tobago\",\n    \"TUN\": \"Tunisia\",\n    \"TUR\": \"Turkey\",\n    \"TKM\": \"Turkmenistan\",\n    \"TCA\": \"Turks and Caicos Islands\",\n    \"TUV\": \"Tuvalu\",\n    \"VIR\": \"U.S. Virgin Islands\",\n    \"UGA\": \"Uganda\",\n    \"UKR\": \"Ukraine\",\n    \"ARE\": \"United Arab Emirates\",\n    \"GBR\": \"United Kingdom\",\n    \"USA\": \"United States\",\n    \"UMI\": \"United States Minor Outlying Islands\",\n    \"URY\": \"Uruguay\",\n    \"UZB\": \"Uzbekistan\",\n    \"VUT\": \"Vanuatu\",\n    \"VAT\": \"Holy See (Vatican City State)\",\n    \"VEN\": \"Bolivarian Republic of Venezuela\",\n    \"VNM\": \"Viet Nam\",\n    \"WLF\": \"Wallis and Futuna\",\n    \"ESH\": \"Western Sahara\",\n    \"YEM\": \"Yemen\",\n    \"ZMB\": \"Zambia\",\n    \"ZWE\": \"Zimbabwe\"\n}\nclass EmailProcessor(object):\n    \"\"\" A class that facilitates processing the body contents of an email message.\n    Once the EmailProcessor class has been instantiated, the other methods can be used to add artifacts to the\n    incident.\n    \"\"\"\n\n    # The body of the email - the plaintext and html versions of the same email, if present\n    email_contents = []\n    email_contents_json = {}\n\n    def __init__(self):\n        \"\"\"The EmailProcessor constructor.\n        As initialization it retrieves the email body as both text and HTML.\n        \"\"\"\n        if (emailmessage.body.content is not None):\n            self.email_contents = emailmessage.body.content\n        if (len(self.email_contents) == 0):\n            log.error(\"Email message has no contents!\")\n        else:\n            self.email_contents_json = self.build_dict(self.email_contents)\n\n    def add_info_to_case(self):\n        # Make sure the feed type is correct.\n        if self.email_contents_json.get(\"Feed item type\") != TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED:\n            log.error(\"Only Feed item type: %s is supported!\", TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED)\n\n        # Fill in case fields with info from the Trusteer Pinpoint Detect email\n        newReporterInfo = emailmessage.sender.address\n        if hasattr(emailmessage.sender, \"name\") and emailmessage.sender.name is not None:\n            newReporterInfo = u\"{0} \u003c{1}\u003e\".format(\n                emailmessage.sender.name, emailmessage.sender.address)\n            log.info(u\"Adding reporter field \\\"{0}\\\"\".format(newReporterInfo))\n            incident.reporter = newReporterInfo\n\n        incident.description = \"Trusteer Pinpoint Detect Alert\"\n        incident.discovered_date = self.email_contents_json.get(EVENT_RECEIVED_AT)\n        incident.start_date = self.email_contents_json.get(EVENT_RECEIVED_AT)\n        incident.plan_status = \"A\"\n        incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), \"-\")\n        incident.city = self.email_contents_json.get(CITY_NAME, None)\n        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)\n        incident.properties.trusteer_ppd_activity = self.email_contents_json.get(ACTIVITY)\n        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(RECOMMENDATION)\n        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)\n        incident.properties.trusteer_ppd_application_id = self.email_contents_json.get(APPLICATION_ID)\n        incident.properties.trusteer_ppd_risk_score = self.email_contents_json.get(RISK_SCORE)\n        incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERMANENT_USER_ID)\n\n        # Add a note containing the email contents\n        incident.addNote(\"Email from Trusteer Pinpoint Detect:\u003cbr\u003e {0}\".format(self.email_contents))\n\n    def get_trusteer_ppd_session_id(self):\n        trusteer_ppd_session_id = self.email_contents_json.get(\"Session ID\", None)\n        if trusteer_ppd_session_id is None:\n            log.error(\"Email message has no  Pinpoint Detect Session ID!\")\n        return trusteer_ppd_session_id\n\n    @staticmethod\n    def build_dict(content):\n        \"\"\"\n        Builds a dictionary from either the rest_headers or rest_cookies\n        :param rest_temp: rest_headers or rest_cookies\n        :return: Dictionary\n        \"\"\"\n        temp_dict = {}\n        if content is not None:\n            lines = content.split(\"\\n\")\n            for line in lines:\n                keyval = line.strip().split(\": \", 1)\n                if len(keyval) == 2:\n                    temp_dict[keyval[0].strip()] = keyval[1].strip()\n        return temp_dict\n\n    def processAttachments(self):\n        \"\"\" A method to process the email attachments, if present. Each non-inline email attachment is added as an\n        attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.\n        No return value.\n        \"\"\"\n        for attachment in emailmessage.attachments:\n            if not attachment.inline:\n                incident.addEmailAttachment(attachment.id)\n                incident.addArtifact(\n                    \"Email Attachment Name\", attachment.suggested_filename, \"\")\n\n    @staticmethod\n    def get_message_id(headers):\n        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]\n        # find the message id among several choices\n        msg_id = msg_id_list[0] if msg_id_list else None\n        if msg_id:\n            match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets \u003c\u003e\n            if match:\n                return match[0]\n    \n    @staticmethod\n    def save_message_id(headers):\n        # extract the message ID and retain\n        msg_id = processor.get_message_id(headers)\n        if msg_id and hasattr(incident.properties, \u0027email_message_id\u0027):\n            incident.properties.email_message_id = msg_id\n\n    @staticmethod\n    def add_email_conversation(headers, msg_body, msg_attachments):\n        # attempt to add to incident datatable, if present\n      \n        def handle_list(value):\n            # convert a list to comma separate list, if neccessary\n            if value and isinstance(value, list):\n                return \", \".join(value)\n        \n            return value\n        \n        try:\n            row = incident.addRow(\u0027email_conversations\u0027)\n            row[\u0027date_sent\u0027] = int(time.time()*1000) # TODO ts from headers.get(\"Date\")\n            row[\u0027source\u0027] = \"inbound\"\n            row[\u0027inbound_id\u0027] = emailmessage.id\n            row[\u0027recipients\u0027] = helper.createRichText(\"To: {}\u003cbr\u003eCc: {}\u003cbr\u003eBcc: {}\".format(handle_list(headers.get(\"To\")), handle_list(headers.get(\"CC\", \u0027\u0027)), handle_list(headers.get(\"BCC\", \u0027\u0027))))\n            row[\u0027from\u0027] = handle_list(headers.get(\"From\"))\n            row[\u0027subject\u0027] = handle_list(headers.get(\"Subject\"))\n            row[\u0027body\u0027] = DEFANG_PATTERN.sub(r\"x_\\1_x:\", msg_body)\n            row[\u0027attachments\u0027] = \", \".join(msg_attachments)\n            row[\u0027message_id\u0027] = processor.get_message_id(headers)\n            row[\u0027in_reply_to\u0027] = handle_list(headers.get(\"References\"))\n            row[\u0027importance\u0027] = handle_list((headers.get(\"Importance\") or {\"1\": \"high\", \"2\": \"normal\", \"3\": \"low\"}.get(headers.get(\"X-Priority\"), \"normal\")))\n        except Exception as err:\n            log.warn(str(err))\n\n###\n# Mainline starts here\n###\n\n# Create the email processor object, loading it with the email message body content.\nprocessor = EmailProcessor()\n\n# We need to check that the email has a subject otherwise the script will fail\nsubject = emailmessage.subject if hasattr(emailmessage, \u0027subject\u0027) else None\n\n# Create a suitable title for an incident based on the email\nnew_case_title = \"Trusteer Case from email \\\"{0}\\\" via mailbox {1}\".format(\n    subject, emailmessage.inbound_mailbox)\n\n# Check to see if a similar incident already exists\n# We will search for an incident which has the same name as we would give a new incident\ntrusteer_ppd_session_id = processor.get_trusteer_ppd_session_id()\nquery_builder.equals(fields.incident.plan_status, \"A\")\nquery_builder.equals(fields.incident.trusteer_ppd_session_id, trusteer_ppd_session_id)\nquery = query_builder.build()\ncases = helper.findIncidents(query)\n\nif len(cases) == 0:\n    # A similar case does not already exist. Create a new case and associate the email with it.\n    log.info(u\"Creating new case {0}\".format(new_case_title))\n\n    # Create an incident with a title based on the email subject, owned identified by variable newIncidentOwner\n    emailmessage.createAssociatedIncident(new_case_title, new_case_owner)\n\n    # Update custom fields of the new case\n    processor.add_info_to_case()\n\n    # add message-id for easy tracking\n    processor.save_message_id(emailmessage.headers)\nelse:\n    # A similar case already exists. Associate the email with this preexisting case.\n    log.info(u\"Associating with existing case {0}\".format(cases[0].id))\n    emailmessage.associateWithIncident(cases[0])\n\n# Add email message attachments to incident\nprocessor.processAttachments()\n\nif SAVE_CONVERSATION:\n    processor.add_email_conversation(emailmessage.headers, \n        emailmessage.getBodyHtmlRaw() if emailmessage.getBodyHtmlRaw() else emailmessage.body.content, \n        [attachment.suggested_filename for attachment in emailmessage.attachments])",
       "tags": [],
       "uuid": "89d7ae06-382e-4222-be63-5292ec13445a"
     }

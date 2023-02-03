@@ -25,10 +25,19 @@ EVENT_RECEIVED_AT = "Event received at"
 FEED_ITEM_TYPE = "Feed item type"
 CITY_NAME = "City name"
 COUNTRY_NAME = "Country name"
+DETECTED_AT = "Detected at"
+GLOBAL_DEVICE_ID = "Global Device ID"
+IS_TARGETED = "Is Targeted"
+MALWARE = "Malware"
 NEW_DEVICE_INDICATION = "New Device Indication"
+PERSISTENT_USER_ID = "Persistent User ID"
+REASON = "Reason"
+REASON_ID = "Reason ID"
 RECOMMENDATION = "Recommendation"
+RESOLUTION_ID = "Resolution ID"
 RISK_SCORE = "Risk Score"
 SESSION_ID = "Session ID"
+TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID = "Trusteer Endpoint Protection Device ID"
 
 COUNTRY_NAMES = {
     "AFG": "Afghanistan",
@@ -317,18 +326,27 @@ class EmailProcessor(object):
             log.info(u"Adding reporter field \"{0}\"".format(newReporterInfo))
             incident.reporter = newReporterInfo
 
+        # Fill in incident data
         incident.description = "Trusteer Pinpoint Detect Alert"
         incident.discovered_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
         incident.start_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
         incident.plan_status = "A"
         incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         incident.city = self.email_contents_json.get(CITY_NAME, None)
-        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
+
+        # Fill in custom fields
         incident.properties.trusteer_ppd_activity = self.email_contents_json.get(ACTIVITY)
-        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(RECOMMENDATION)
-        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
         incident.properties.trusteer_ppd_application_id = self.email_contents_json.get(APPLICATION_ID)
+        incident.properties.trusteer_ppd_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
+        incident.properties.trusteer_ppd_is_targeted = self.email_contents_json.get(IS_TARGETED)
+        incident.properties.trusteer_ppd_global_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
+        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
+        incident.properties.trusteer_ppd_reason = self.email_contents_json.get(REASON)
+        incident.properties.trusteer_ppd_reason_id = self.email_contents_json.get(REASON_ID)
+        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(RECOMMENDATION)
         incident.properties.trusteer_ppd_risk_score = self.email_contents_json.get(RISK_SCORE)
+        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
+        incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
 
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
