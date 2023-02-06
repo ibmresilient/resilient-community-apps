@@ -22,16 +22,16 @@ def codegen_reload_data():
     return {
         "package": u"fn_trusteer_ppd",
         "message_destinations": [u"fn_trusteer_ppd"],
-        "functions": [u"trusteer_ppd_update_case"],
+        "functions": [u"trusteer_ppd_get_url_links_to_trusteer"],
         "workflows": [],
         "actions": [u"Trusteer PPD: Parse Trusteer Alert Email"],
-        "incident_fields": [u"trusteer_ppd_activity", u"trusteer_ppd_application_id", u"trusteer_ppd_event_received_at", u"trusteer_ppd_is_targeted", u"trusteer_ppd_link_to_alert", u"trusteer_ppd_new_device_indication", u"trusteer_ppd_reason", u"trusteer_ppd_reason_id", u"trusteer_ppd_recommendation", u"trusteer_ppd_risk_score", u"trusteer_ppd_session_id"],
+        "incident_fields": [u"trusteer_ppd_device_id", u"trusteer_ppd_link_to_device_id", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid", u"trusteer_ppd_session_id"],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
         "automatic_tasks": [],
         "scripts": [u"Trusteer PPD: Create Case from Email"],
-        "playbooks": [u"trusteer_ppd_update_case"]
+        "playbooks": [u"trusteer_ppd_update_url_links"]
     }
 
 
@@ -46,23 +46,19 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_trusteer_ppd
     - Functions:
-        - trusteer_ppd_update_case
+        - trusteer_ppd_get_url_links_to_trusteer
     - Playbooks:
-        - trusteer_ppd_update_case
+        - trusteer_ppd_update_url_links
     - Rules:
         - Trusteer PPD: Parse Trusteer Alert Email
     - Incident Fields:
-        - trusteer_ppd_activity
-        - trusteer_ppd_application_id
-        - trusteer_ppd_event_received_at
-        - trusteer_ppd_is_targeted
-        - trusteer_ppd_link_to_alert
-        - trusteer_ppd_new_device_indication
-        - trusteer_ppd_reason
-        - trusteer_ppd_reason_id
-        - trusteer_ppd_recommendation
-        - trusteer_ppd_risk_score
+        - trusteer_ppd_device_id
+        - trusteer_ppd_link_to_device_id
+        - trusteer_ppd_link_to_puid
+        - trusteer_ppd_puid
         - trusteer_ppd_session_id
+    - Data Tables:
+        - trusteer_ppd_dt_trusteer_alerts
     - Scripts:
         - Trusteer PPD: Create Case from Email
     """

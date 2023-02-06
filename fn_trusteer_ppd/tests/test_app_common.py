@@ -30,10 +30,6 @@ def mock_api():
     # note that requests to endpoints outside the scope of these that have been implemented
     # will return 
     with requests_mock.Mocker() as mock_api:
-        mock_api.register_uri("GET", url=URI_GET_VALIDATE, 
-                              json=load_json(PATH_VALIDATE_MOCK), status_code=200)
-        mock_api.register_uri("GET", url=URI_GET_DETECTIONS,
-                              json=load_json(PATH_DETECTIONS_MOCK), status_code=200)
         yield mock_api
 
 
@@ -48,6 +44,9 @@ def test_make_headers(app_common: AppCommon):
 
 def test_make_linkback_url(app_common: AppCommon):
     pu_id = "aaaa-bbbb-cccc-dddd"
-    url = app_common.make_linkback_url(pu_id)
+    device_id = "aaaa-bbbb-1111-2222"
+    puid_url = app_common.make_linkback_url(id=pu_id, id_type='puid')
+    device_id_url = app_common.make_linkback_url(id=device_id, id_type='device_id')
 
-    assert url == LINKBACK_URL.format(base_url=APP_CONFIG.get('endpoint_url'), puid=pu_id)
+    assert puid_url == LINKBACK_URL.format(base_url=APP_CONFIG.get('endpoint_url'), id=pu_id, id_type='puid')
+    assert device_id_url == LINKBACK_URL.format(base_url=APP_CONFIG.get('endpoint_url'), id=device_id, id_type='device_id')

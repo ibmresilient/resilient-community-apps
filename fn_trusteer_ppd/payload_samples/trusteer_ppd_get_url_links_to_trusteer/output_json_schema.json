@@ -12,7 +12,10 @@
     "content": {
       "type": "object",
       "properties": {
-        "link_url": {
+        "link_url_puid": {
+          "type": "string"
+        },
+        "link_url_device_id": {
           "type": "string"
         }
       }
@@ -22,6 +25,9 @@
       "type": "object",
       "properties": {
         "trusteer_ppd_puid": {
+          "type": "string"
+        },
+        "trusteer_ppd_device_id": {
           "type": "string"
         }
       }

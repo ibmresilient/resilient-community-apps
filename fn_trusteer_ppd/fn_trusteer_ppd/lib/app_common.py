@@ -17,7 +17,7 @@ PACKAGE_NAME = "fn_trusteer_ppd"
 HEADER = { 'Content-Type': 'application/json' }
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "{base_url}/search-results?puid={puid}&type=session"
+LINKBACK_URL = "{base_url}/search-results?{id_type}={id}&type=session"
 
 # E N D P O I N T S
 
@@ -69,19 +69,20 @@ class AppCommon():
 
         return header
 
-    def make_linkback_url(self, puid: str, linkback_url : str = LINKBACK_URL) -> str:
+    def make_linkback_url(self, id: str, id_type: str, linkback_url : str = LINKBACK_URL) -> str:
         """
         Create a url to link back to the endpoint entity
 
-        :param puid: permanent user ID of the account in Trusteer
-        :type puid: str
+        :param id: A PUID or the Device ID of the session in Trusteer
+        :type id: str
+        :param id_type: 'puid' or 'device_id' indicating the type of id's to link back to in Trusteer
+        :type id: str
         :param linkback_url: _description_, defaults to LINKBACK_URL
         :type linkback_url: str|int, optional
         :return: completed url for linkback
         :rtype: str
         """
-        return linkback_url.format(base_url=self.endpoint_url, 
-                                   puid=puid)
+        return linkback_url.format(base_url=self.endpoint_url, id_type=id_type, id=id)
 
 def _get_verify_ssl(app_configs: dict):
     """

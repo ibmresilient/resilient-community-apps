@@ -333,24 +333,26 @@ class EmailProcessor(object):
         incident.plan_status = "A"
         incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         incident.city = self.email_contents_json.get(CITY_NAME, None)
-
-        # Fill in custom fields
-        incident.properties.trusteer_ppd_activity = self.email_contents_json.get(ACTIVITY)
-        incident.properties.trusteer_ppd_application_id = self.email_contents_json.get(APPLICATION_ID)
-        incident.properties.trusteer_ppd_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
-        incident.properties.trusteer_ppd_is_targeted = self.email_contents_json.get(IS_TARGETED)
-        incident.properties.trusteer_ppd_global_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
-        incident.properties.trusteer_ppd_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
-        incident.properties.trusteer_ppd_reason = self.email_contents_json.get(REASON)
-        incident.properties.trusteer_ppd_reason_id = self.email_contents_json.get(REASON_ID)
-        incident.properties.trusteer_ppd_recommendation = self.email_contents_json.get(RECOMMENDATION)
-        incident.properties.trusteer_ppd_risk_score = self.email_contents_json.get(RISK_SCORE)
         incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
         incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
+        incident.properties.trusteer_ppd_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
 
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
 
+    def update_alert_data_table(self):
+        # Add a new row to the Trusteer Alert data table
+        alert_row = incident.addRow('trusteer_ppd_dt_trusteer_alerts')
+        alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
+        alert_row.trusteer_ppd_dt_trusteer_application_id = self.email_contents_json.get(APPLICATION_ID)
+        alert_row.trusteer_ppd_dt_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
+        alert_row.trusteer_ppd_dt_is_targeted = self.email_contents_json.get(IS_TARGETED)
+        alert_row.trusteer_ppd_dt_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
+        alert_row.trusteer_ppd_dt_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
+        alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
+        alert_row.trusteer_ppd_dt_recommendation = self.email_contents_json.get(RECOMMENDATION)
+        alert_row.trusteer_ppd_dt_risk_score = self.email_contents_json.get(RISK_SCORE)
+        
     def get_trusteer_ppd_session_id(self):
         trusteer_ppd_session_id = self.email_contents_json.get("Session ID", None)
         if trusteer_ppd_session_id is None:

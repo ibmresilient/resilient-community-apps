@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "link_url_puid": "https://fake.trusteer.com/search-results?puid=aaa-bbb-ccc-ddd&type=session",
+    "link_url_device_id": "https://fake.trusteer.com/search-results?device_id=111-222-333-444&type=session"
+  },
+  "raw": null,
+  "inputs": {
+    "trusteer_ppd_puid": "aaa-bbb-ccc-ddd",
+    "trusteer_ppd_device_id": "111-222-333-444"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-trusteer-ppd",
+    "package_version": "1.0.0",
+    "host": "laptop",
+    "execution_time_ms": 7306,
+    "timestamp": "2023-02-06 17:07:38"
+  }
+}

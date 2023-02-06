@@ -18,22 +18,15 @@ class TrusteerPPDTab(Tab):
     UUID = "66239367-306f-4a36-a530-1a34dfcebf3e"
 
     CONTAINS = [
-        Field("trusteer_ppd_activity"),
-        Field("trusteer_ppd_application_id"),
-        Field("trusteer_event_received_at"),
-        Field("trusteer_ppd_is_targeted"),
-        Field("trusteer_ppd_global_device_id"),
-        Field("trusteer_ppd_new_device_indication"),
+        Field("trusteer_ppd_session_id"),
         Field("trusteer_ppd_puid"),
-        Field("trusteer_ppd_reason"),
-        Field("trusteer_ppd_reason_id"),
-        Field("trusteer_ppd_recommendation"),
-        Field("trusteer_ppd_risk_score"),
-        Field("trusteer_ppd_session_id"),        
-        Field("trusteer_ppd_link_to_alert")
+        Field("trusteer_ppd_link_to_puid"),
+        Field("trusteer_ppd_device_id"),
+        Field("trusteer_ppd_link_to_device_id"),
+        Datatable("trusteer_ppd_dt_trusteer_alerts")
     ]
     SHOW_IF = [
-        Field("trusteer_puid").conditions.has_value()
+        Field("trusteer_session_id").conditions.has_value()
     ]
 
 
