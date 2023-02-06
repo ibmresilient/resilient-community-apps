@@ -2,6 +2,7 @@ include README.md
 include Dockerfile
 include entrypoint.sh
 recursive-include fn_jira/util *
+recursive-include fn_jira/poller *
 include fn_jira/lib/*
 include fn_jira/LICENSE
 include doc/*

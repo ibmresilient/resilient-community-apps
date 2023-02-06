@@ -10,6 +10,7 @@ from resilient_circuits import ResilientComponent
 from fn_jira.util import helper, poller_helper
 from fn_jira.lib.poller_common import JiraCommon, poller
 from resilient_lib import validate_fields, SOARCommon
+from fn_jira.poller.configure_tab import init_incident_groups_tab
 
 LOG = getLogger(__name__)
 
@@ -20,6 +21,7 @@ class PollerComponent(ResilientComponent):
         """Constructor provides access to the configuration options"""
         super(PollerComponent, self).__init__(opts)
         self.opts = opts
+        init_incident_groups_tab()
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
