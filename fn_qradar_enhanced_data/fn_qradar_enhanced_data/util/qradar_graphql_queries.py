@@ -4,6 +4,18 @@
 
 # URL from https://qradar_instance/console/graphql
 
+# Query for the poller
+GRAPHQL_POLLERQUERY = '''query pollerQuery($filter: String!){
+                            getOffenses(filter: $filter, limit: 0, offset: 0, orderBy: ID_ASC){
+                                id
+                                notes {
+                                    noteText
+                                    createTime
+                                }
+                            }
+                        }
+                        '''
+
 # Basic offense data query to populate summmary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             getOffense(id: $id) {
