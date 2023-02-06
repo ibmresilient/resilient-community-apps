@@ -46,6 +46,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.0 | 02/2023 | Add notes & assigned sync |
 | 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
@@ -86,13 +87,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `44.0.7585`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `44.0.7585`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=47.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
