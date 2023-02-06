@@ -1,0 +1,9 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# modify to specify your specific **data** fields #}
+  "severity_code": "{{ **severity** | soar_substitute('{"Safe": "Low"}') }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "**endpoint_tags**": "{{ **tags** | join(', ') }}",
+  }
+}
