@@ -315,7 +315,7 @@ class EmailProcessor(object):
 
     def add_info_to_case(self):
         # Make sure the feed type is correct.
-        if self.email_contents_json.get("Feed item type") != TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED:
+        if self.email_contents_json.get(FEED_ITEM_TYPE) != TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED:
             log.error("Only Feed item type: %s is supported!", TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED)
 
         # Fill in case fields with info from the Trusteer Pinpoint Detect email

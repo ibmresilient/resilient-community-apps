@@ -39,9 +39,7 @@ class AppCommon():
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
-        self.organization_name = app_configs.get("organization_name")
         self.verify = _get_verify_ssl(app_configs)
-        self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
         self.header = self._make_header(self.api_token)
 
