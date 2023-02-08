@@ -334,15 +334,14 @@ class EmailProcessor(object):
         incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         incident.city = self.email_contents_json.get(CITY_NAME, None)
         incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
-        incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
-        incident.properties.trusteer_ppd_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
+        #incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
+        #incident.properties.trusteer_ppd_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
 
-        # Add a note containing the email contents
-        incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
 
     def update_alert_data_table(self):
         # Add a new row to the Trusteer Alert data table
         alert_row = incident.addRow('trusteer_ppd_dt_trusteer_alerts')
+        alert_row.trusteer_ppd_dt_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
         alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
         alert_row.trusteer_ppd_dt_trusteer_application_id = self.email_contents_json.get(APPLICATION_ID)
         alert_row.trusteer_ppd_dt_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
@@ -352,6 +351,11 @@ class EmailProcessor(object):
         alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
         alert_row.trusteer_ppd_dt_recommendation = self.email_contents_json.get(RECOMMENDATION)
         alert_row.trusteer_ppd_dt_risk_score = self.email_contents_json.get(RISK_SCORE)
+        alert_row.trusteer_ppd_dt_country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
+        alert_row.trusteer_ppd_dt_city = self.email_contents_json.get(CITY_NAME)
+
+        # Add a note containing the email contents
+        incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
         
     def get_trusteer_ppd_session_id(self):
         trusteer_ppd_session_id = self.email_contents_json.get("Session ID", None)
@@ -468,6 +472,9 @@ else:
     # A similar case already exists. Associate the email with this preexisting case.
     log.info(u"Associating with existing case {0}".format(cases[0].id))
     emailmessage.associateWithIncident(cases[0])
+
+# Update the alert data table
+processor.update_alert_data_table()
 
 # Add email message attachments to incident
 processor.processAttachments()
