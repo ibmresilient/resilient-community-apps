@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_google_cloud_scc",
     display_name="Google Cloud Security Command Center",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -31,7 +31,7 @@ setup(
     description="IBM SOAR app with bidirectional synchronization and functions for Google Cloud SCC",
     long_description="""Bidirectional synchronization of Google Cloud Security Command Center Findings. Additional functions are provided for manual synchronization, manually updating findings, and listing cloud assets monitored in Google SCC.""",
     install_requires=[
-        "resilient-circuits          >= 45.0",
+        "resilient-circuits          >= 47.0",
         "google-cloud-securitycenter ~= 1.11",
         'grpcio==1.48.2;python_version<="3.6"', # subdependency of `google-cloud-securitycenter` that needs to be fixed for PY36
         'grpcio-status==1.48.2;python_version<="3.6"' # subdependency of `google-cloud-securitycenter` that needs to be fixed for PY36

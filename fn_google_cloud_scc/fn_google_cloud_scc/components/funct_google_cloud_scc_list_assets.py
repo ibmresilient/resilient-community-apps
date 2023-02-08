@@ -30,7 +30,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        self.app_common = GoogleSCCCommon(self.options)
+        self.app_common = GoogleSCCCommon(self.options, self.rc)
         self.soar_common = SOARCommon(self.rest_client())
 
         assets_filter = getattr(fn_inputs, "google_scc_filter", None)

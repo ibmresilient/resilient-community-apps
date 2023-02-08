@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import logging
+import os
 import re
 from datetime import datetime, timezone
 from urllib.parse import urlencode
@@ -26,11 +27,16 @@ ORG_NAME_FRAGMENT = "organizations"
 SOAR_ID_MARK = "IBM_SOAR_ID"
 DT_NAME = "google_scc_finding_source_properties_dt"
 
+ENV_HTTP_PROXY = "HTTP_PROXY"
+ENV_HTTPS_PROXY = "HTTPS_PROXY"
+ENV_GRPC_HTTP_PROXY = "http_proxy"
+ENV_GRPC_HTTPS_PROXY = "https_proxy"
+
 LOG = logging.getLogger(__name__)
 
 class GoogleSCCCommon():
 
-    def __init__(self, options):
+    def __init__(self, options, rc):
 
         validate_fields([
             "google_application_credentials_path",
@@ -40,6 +46,8 @@ class GoogleSCCCommon():
 
         self.console_base_url = options.get("google_cloud_base_url")
 
+        self._set_proxies(rc)
+
         cred_file = options.get("google_application_credentials_path")
         self.client = SecurityCenterClient.from_service_account_file(cred_file)
 
@@ -47,6 +55,38 @@ class GoogleSCCCommon():
         self.default_findings_filter = options.get("findings_filter") # ok if None
 
         self.org_name = f"{ORG_NAME_FRAGMENT}/{self.org_id}"
+
+    def _set_proxies(self, rc):
+        """
+        Set the appropriate proxy env variables required for
+        Google SCC connections. This is slightly different from
+        our normal proxies as this requires a Grpc connection
+        which uses a *lower-case* version of the proxy vars
+        that isn't set automatically in our standard framework.
+
+        So we have to check if the proxies are set in the settings
+        or already in the ENV and then use that value to set
+        the appropriate associated lower-case versions.
+
+        :param rc: RequestsCommon object to find app.config proxy settings if present
+        :type rc: resilient_lib.RequestsCommon
+        """
+
+        rc_proxies = rc.get_proxies() # NOTE: this returns None if the requests proxies are set in the ENV
+        if rc_proxies: # check if proxies are set through app settings
+            # don't overwrite the proxies if they're already set
+            if not os.getenv(ENV_GRPC_HTTP_PROXY):
+                os.environ[ENV_GRPC_HTTP_PROXY] = rc_proxies.get("http")
+            if not os.getenv(ENV_GRPC_HTTPS_PROXY):
+                os.environ[ENV_GRPC_HTTPS_PROXY] = rc_proxies.get("https")
+        # if they were set through env variables,
+        # then also set them for the required GRPC variables (lowercase version)
+        else:
+            # Don't overwrite the proxies if they're already set
+            if os.getenv(ENV_HTTP_PROXY) and not os.getenv(ENV_GRPC_HTTP_PROXY):
+                os.environ[ENV_GRPC_HTTP_PROXY] = os.getenv(ENV_HTTP_PROXY)
+            if os.getenv(ENV_HTTPS_PROXY) and not os.getenv(ENV_GRPC_HTTPS_PROXY):
+                os.environ[ENV_GRPC_HTTPS_PROXY] = os.getenv(ENV_HTTPS_PROXY)
 
 
     def query_entities_since_ts(self, timestamp, *_args, **_kwargs):

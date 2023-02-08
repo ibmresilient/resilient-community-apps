@@ -22,7 +22,7 @@ import logging
 
 from google.auth.exceptions import DefaultCredentialsError
 from fn_google_cloud_scc.lib.scc_common import PACKAGE_NAME, GoogleSCCCommon
-from resilient_lib import validate_fields
+from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -38,7 +38,7 @@ def selftest_function(opts):
 
     try:
         # app configs are verified in the constructor of the GoogleSCCCommon obj
-        GoogleSCCCommon(app_configs)
+        GoogleSCCCommon(app_configs, RequestsCommon(opts, app_configs))
         return {
             "state": "success",
             "reason": "Successfully connected to Google Cloud SCC"

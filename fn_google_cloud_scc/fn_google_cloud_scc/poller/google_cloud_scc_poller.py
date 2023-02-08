@@ -6,17 +6,17 @@ import logging
 import os
 from threading import Thread
 
+from resilient import get_client
+from resilient_circuits import AppFunctionComponent, is_this_a_selftest
+from resilient_lib import make_payload_from_template, str_to_bool
+
+from fn_google_cloud_scc.lib.scc_common import (DT_NAME, PACKAGE_NAME,
+                                                SOAR_ID_MARK, GoogleSCCCommon,
+                                                linkify)
 from fn_google_cloud_scc.poller.configure_tab import init_scc_tab
 from fn_google_cloud_scc.poller.soar_common import (SOARCommon,
                                                     get_last_poller_date,
                                                     get_template_dir, poller)
-from fn_google_cloud_scc.lib.scc_common import (DT_NAME, PACKAGE_NAME,
-                                                 SOAR_ID_MARK, GoogleSCCCommon,
-                                                 linkify)
-from resilient import get_client
-from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (make_payload_from_template, str_to_bool,
-                           validate_fields)
 
 ENTITY_ID = "finding"  # name of field in the endpoint entity (alert, case, etc) with the ID value
 ENTITY_CLOSE_FIELD = "state" # name of field in endpoint entity to reference the close state
@@ -33,11 +33,11 @@ CREATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_create_inciden
 UPDATE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_update_incident.jinja")
 CLOSE_INCIDENT_TEMPLATE = os.path.join(get_template_dir(), "soar_close_incident.jinja")
 
-def init_scc_app(options):
+def init_scc_app(options, requests_common):
     """
     Intialize the app common code and create the tab in the platform if it doesn't already exist
     """
-    app_common = GoogleSCCCommon(options)
+    app_common = GoogleSCCCommon(options, requests_common)
 
     init_scc_tab()
 
@@ -138,7 +138,7 @@ class PollerComponent(AppFunctionComponent):
 
         self.soar_common = SOARCommon(get_client(opts))
 
-        self.app_common = init_scc_app(options)
+        self.app_common = init_scc_app(options, self.rc)
 
         return True
 
