@@ -6,8 +6,31 @@ from logging import getLogger
 from resilient_lib import IntegrationError, str_to_bool, validate_fields
 from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
+from re import compile, sub
 
 LOG = getLogger(__name__)
+html_tags = compile('<.*?>')
+
+def remove_html_tags(comment):
+    """
+    Remove html tags from a comment
+    :param comment: Comment string
+    :return: Comment without html tags
+    """
+    return sub(html_tags, '', comment)
+
+def get_sync_notes(global_settings, options):
+    """
+    Get the sync_notes setting either from edm_global_settings or individual server config
+    :param global_settings: Global settings for the integration
+    :param options: Settings for specified QRadar server
+    :return: Boolean
+    """
+    sync_notes = global_settings.get("sync_notes")
+    if sync_notes is None:
+        sync_notes = options.get("sync_notes")
+
+    return str_to_bool(sync_notes)
 
 def get_search_timeout(global_settings, options):
     """
