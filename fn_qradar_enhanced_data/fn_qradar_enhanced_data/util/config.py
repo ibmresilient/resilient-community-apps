@@ -18,6 +18,10 @@ polling_interval=0
 polling_lookback=60
 # If true then data tables given in the workflows will be cleared when incident is updated by poller
 clear_datatables=True
+# If sync_notes under [fn_qradar_integration:edm_global_settings] is configured, then sync_notes
+#  that are configured under the individual QRadar servers will be ignored
+# If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
+sync_notes=True
 
 # Note: If [fn_qradar_integration] is present without a label then all labeled servers will
 # be disregarded and only the server under [fn_qradar_integration] will be used
@@ -33,6 +37,8 @@ qradarpassword=changeme
 qradartoken=changeme
 verify_cert=false|/path/to/cert
 #search_timeout=
+# If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
+#sync_notes=True
 
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
@@ -45,4 +51,6 @@ qradarpassword=changeme
 qradartoken=changeme
 verify_cert=false|/path/to/cert
 #search_timeout=
+# If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
+#sync_notes=True
 '''

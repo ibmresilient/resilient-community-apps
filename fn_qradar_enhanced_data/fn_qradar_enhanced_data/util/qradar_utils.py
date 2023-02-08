@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # Util classes for qradar
 
 from base64 import b64encode
@@ -377,19 +377,19 @@ class QRadarClient(object):
             if not auth_info.username and not auth_info.password:
                 cookies = {"SEC": auth_info.qradar_token}
             else:
-                    res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
-                    cookies = res.cookies.get_dict()
+                res = get(f"{host}console/logon.jsp", verify=auth_info.cafile)
+                cookies = res.cookies.get_dict()
 
-                    res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                                data = {"j_username": auth_info.username,
-                                        "j_password": auth_info.password,
-                                        "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
-                                                        data = {"get_csrf": ""},
-                                                        headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                                                        verify = auth_info.cafile).text},
-                                headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
-                                verify = auth_info.cafile)
-            cookies = res.cookies.get_dict()
+                res = post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
+                            data = {"j_username": auth_info.username,
+                                    "j_password": auth_info.password,
+                                    "LoginCSRF": post(f"{host}{qradar_constants.GRAPHQL_BASICAUTH}",
+                                                      data = {"get_csrf": ""},
+                                                      headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
+                                                      verify = auth_info.cafile).text},
+                            headers = {"Cookie": f"JSESSIONID={cookies['JSESSIONID']}"},
+                            verify = auth_info.cafile)
+                cookies = res.cookies.get_dict()
         except Exception as e:
             LOG.error(str(e))
 

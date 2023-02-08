@@ -6,6 +6,7 @@
 from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
+from re import compile, sub
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError
 from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
@@ -15,6 +16,7 @@ from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQUERY
 
 LOG = getLogger(__name__)
+html_tags = compile('<.*?>')
 
 class PollerComponent(ResilientComponent):
     """Poller to synchronize Offense and Case data"""
@@ -27,7 +29,7 @@ class PollerComponent(ResilientComponent):
 
         # Collect settings necessary and initialize libraries used by the poller
         if not self._init_env():
-            LOG.info(u"Poller interval is not configured, so poller will not run.")
+            LOG.info(u"Poller interval is not configured, so the poller will not run.")
             return
 
         # Create poller thread
@@ -67,14 +69,13 @@ class PollerComponent(ResilientComponent):
         :return: None
         """
         case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
-        LOG.debug(f"Cases gathered from SOAR: {str(case_list)}")
 
         if error_msg:
             raise IntegrationError(error_msg)
 
-        self.process_case_list(case_list)
+        self.process_case_list(case_list, last_poller_time)
 
-    def process_case_list(self, case_list):
+    def process_case_list(self, case_list, last_poller_time):
         """
         Process the open cases
         :param case_list: List of open cases
@@ -89,9 +90,7 @@ class PollerComponent(ResilientComponent):
                 case_server_dict[qradar_destination] = {}
             # Add the case to the dictionary of the server it is from
             case_server_dict[qradar_destination][case.get("properties").get("qradar_id")] = case
-
         # :End: QRadar servers dictionary
-        LOG.debug(f"Dictionary of QRadar servers with cases on SOAR: {str(case_server_dict)}")
 
         for server in case_server_dict:
             # Create filter string which contains the filters for the api call
@@ -114,14 +113,14 @@ class PollerComponent(ResilientComponent):
                                                        f"{auth_info.api_url}siem/offenses?fields=id, last_persisted_time, assigned_to&filter={filters}"
                                                       ).json()
 
-            offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
-
             LOG.debug(f"QRadar returned macthing offenses: {str(offenses_update_list)}")
 
             payload = { "patches": {} }
             updated_cases = []
 
+            # Add to payload to update SOAR cases field qr_last_updated_time
             if offenses_update_list:
+                updated_cases = [case_server_dict[server][str(offense.get('id'))].get("id") for offense in offenses_update_list]
                 # Iterate through list of offenses recieved from QRadar query
                 for offense in offenses_update_list:
                     offense_lastPersistedTime = int(offense.get("last_persisted_time"))
@@ -129,7 +128,7 @@ class PollerComponent(ResilientComponent):
                     case_dict = case_server_dict[server][offense_id]
                     case_id = case_dict.get('id')
                     case_lastPersistedTime = case_dict.get("properties").get("qr_last_updated_time")
-                    LOG.debug(f"QRadar last persisted time: {offense_lastPersistedTime}\nSOAR Incident last updated time: {case_lastPersistedTime}")
+                    LOG.debug(f"QRadar last persisted time: {offense_lastPersistedTime}\nSOAR case last updated time: {case_lastPersistedTime}")
                     if offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
@@ -137,16 +136,33 @@ class PollerComponent(ResilientComponent):
                         payload['patches'][case_id] = {
                                                 "version": case_dict.get("vers")+1,
                                                 "changes": [{
-                                                    "old_value": {"date": case_lastPersistedTime},
-                                                    "new_value": {"date": offense_lastPersistedTime},
-                                                    "field": {"name": "qr_last_updated_time"}
-                                                }]
-                                            }
+                                                "old_value": {"date": case_dict.get("properties").get("qr_last_updated_time")},
+                                                "new_value": {"date": int(offense.get("last_persisted_time"))},
+                                                "field": {"name": "qr_last_updated_time"}
+                                            }]
+                                        }
+
+            # Get notes from all QRadar offenses in filter
+            offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
 
             # Update offense notes
             if offenses_notes:
-
-                print("f")
+                for notes in offenses_notes:
+                    incident_id = case_server_dict[server][notes.get('id')].get('id')
+                    incident_notes = self.rest_client().get(f"/incidents/{incident_id}/comments")
+                    for note in notes.get("notes"):
+                        # Check if the note was created after the poller last ran
+                        if int(note.get("createTime")) > last_poller_time:
+                            inc_notes = [remove_html_tags(n.get("text")).replace("\nAdded from QRadar", "") for n in incident_notes]
+                            if note.get("noteText") not in inc_notes:
+                                comment_payload = {
+                                    "text": {
+                                        "format": "text",
+                                        "content": f"{note.get('noteText')}\nAdded from QRadar"
+                                    },
+                                    "create_date": int(note.get("createTime"))
+                                }
+                                self.rest_client().post(f"/incidents/{incident_id}/comments", comment_payload)
 
             # If there are changes then fix payload and send put request to SOAR
             if updated_cases:
@@ -157,4 +173,12 @@ class PollerComponent(ResilientComponent):
                 if response.get('failures'):
                     raise IntegrationError(str(response))
 
-                LOG.info(f"Incident: {str(updated_cases)} updated field: qr_last_updated_time")
+                LOG.info(f"Case: {str(updated_cases)} updated field: qr_last_updated_time")
+
+def remove_html_tags(comment):
+    """
+    Remove html tags from a comment
+    :param comment: Comment string
+    :return: Comment without html tags
+    """
+    return sub(html_tags, '', comment)
