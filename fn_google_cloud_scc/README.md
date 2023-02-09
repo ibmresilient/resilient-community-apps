@@ -5,7 +5,7 @@
 
 # Google Cloud Security Command Center
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -16,6 +16,7 @@
   - [Python Environment](#python-environment)
   - [Endpoint Developed With](#endpoint-developed-with)
   - [Known Issues](#known-issues)
+  - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -30,8 +31,11 @@
 - [Function - Google Cloud SCC: Update Findings](#function---google-cloud-scc-update-findings)
 - [Function - Google Cloud SCC: Update Security Mark](#function---google-cloud-scc-update-security-mark)
 - [Data Table - Finding Source Properties](#data-table---finding-source-properties)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
 - [Custom Fields](#custom-fields)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -41,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 02/2023 | Proxy bug fix |
 | 1.0.0 | 08/2022 | Initial Release |
 
 ---
@@ -113,7 +118,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app supports a proxy server through the `manageAppHost proxy` command on App Host and through the `HTTPS_PROXY` environment variable when running on an integration server.
+The app supports a proxy server.
 
 ### Python Environment
 Python 3.6 and 3.9 are officially supported.

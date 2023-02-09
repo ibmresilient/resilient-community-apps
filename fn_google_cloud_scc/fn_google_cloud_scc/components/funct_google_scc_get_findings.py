@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["google_scc_close_case_on_change"], fn_inputs)
 
-        self.app_common = GoogleSCCCommon(self.options)
+        self.app_common = GoogleSCCCommon(self.options, self.rc)
         self.soar_common = SOARCommon(self.rest_client())
 
         # this will be set to the app.config default if not given
