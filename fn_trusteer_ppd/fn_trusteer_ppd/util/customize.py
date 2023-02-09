@@ -24,7 +24,7 @@ def codegen_reload_data():
         "message_destinations": [u"fn_trusteer_ppd"],
         "functions": [u"trusteer_ppd_get_url_links_to_trusteer"],
         "workflows": [],
-        "actions": [u"Trusteer PPD: Parse Trusteer Alert Email"],
+        "actions": [u"Trusteer PPD: Parse Trusteer Email"],
         "incident_fields": [u"trusteer_ppd_device_id", u"trusteer_ppd_link_to_device_id", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid", u"trusteer_ppd_session_id"],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -50,7 +50,7 @@ def customization_data(client=None):
     - Playbooks:
         - trusteer_ppd_update_url_links
     - Rules:
-        - Trusteer PPD: Parse Trusteer Alert Email
+        - Trusteer PPD: Parse Trusteer Email
     - Incident Fields:
         - trusteer_ppd_device_id
         - trusteer_ppd_link_to_device_id

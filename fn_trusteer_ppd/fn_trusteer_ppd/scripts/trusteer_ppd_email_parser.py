@@ -30,7 +30,7 @@ GLOBAL_DEVICE_ID = "Global Device ID"
 IS_TARGETED = "Is Targeted"
 MALWARE = "Malware"
 NEW_DEVICE_INDICATION = "New Device Indication"
-PERSISTENT_USER_ID = "Persistent User ID"
+PERMANENT_USER_ID = "Permanent User ID"
 REASON = "Reason"
 REASON_ID = "Reason ID"
 RECOMMENDATION = "Recommendation"
@@ -333,15 +333,13 @@ class EmailProcessor(object):
         incident.plan_status = "A"
         incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         incident.city = self.email_contents_json.get(CITY_NAME, None)
-        incident.properties.trusteer_ppd_session_id = self.email_contents_json.get(SESSION_ID)
-        #incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
-        #incident.properties.trusteer_ppd_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
+        incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERMANENT_USER_ID)
 
 
     def update_alert_data_table(self):
         # Add a new row to the Trusteer Alert data table
         alert_row = incident.addRow('trusteer_ppd_dt_trusteer_alerts')
-        alert_row.trusteer_ppd_dt_puid = self.email_contents_json.get(PERSISTENT_USER_ID)
+        alert_row.trusteer_ppd_dt_session_id = self.email_contents_json.get(SESSION_ID)
         alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
         alert_row.trusteer_ppd_dt_trusteer_application_id = self.email_contents_json.get(APPLICATION_ID)
         alert_row.trusteer_ppd_dt_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
@@ -357,11 +355,11 @@ class EmailProcessor(object):
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
         
-    def get_trusteer_ppd_session_id(self):
-        trusteer_ppd_session_id = self.email_contents_json.get("Session ID", None)
-        if trusteer_ppd_session_id is None:
-            log.error("Email message has no  Pinpoint Detect Session ID!")
-        return trusteer_ppd_session_id
+    def get_trusteer_ppd_puid(self):
+        trusteer_ppd_puid = self.email_contents_json.get("Permanent User ID", None)
+        if trusteer_ppd_puid is None:
+            log.error("Email message has no  Pinpoint Detect Permanent User ID!")
+        return trusteer_ppd_puid
 
     @staticmethod
     def build_dict(content):
@@ -450,9 +448,9 @@ new_case_title = "Trusteer Case from email \"{0}\" via mailbox {1}".format(
 
 # Check to see if a similar incident already exists
 # We will search for an incident which has the same name as we would give a new incident
-trusteer_ppd_session_id = processor.get_trusteer_ppd_session_id()
+trusteer_ppd_puid = processor.get_trusteer_ppd_puid()
 query_builder.equals(fields.incident.plan_status, "A")
-query_builder.equals(fields.incident.trusteer_ppd_session_id, trusteer_ppd_session_id)
+query_builder.equals(fields.incident.trusteer_ppd_puid, trusteer_ppd_puid)
 query = query_builder.build()
 cases = helper.findIncidents(query)
 

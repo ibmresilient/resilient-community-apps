@@ -24,7 +24,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Return the URL links to the Trusteer session PUIDs and the devices.
+        Function: Return the URL links to the Trusteer PUID and the devices.
         Inputs:
             -   fn_inputs.trusteer_ppd_puid
             -   fn_inputs.trusteer_ppd_device_id
@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         link_url_puid = None
         link_url_device_id = None
 
-        # Get the URL link back to Trusteer PUID in the Trusteer session
+        # Get the URL link back to Trusteer PUID.
         if fn_inputs.trusteer_ppd_puid:
             link_url_puid = app_common.make_linkback_url(id=fn_inputs.trusteer_ppd_puid, id_type='puid')
 
