@@ -44,7 +44,7 @@ class FunctionComponent(AppFunctionComponent):
         for parameter in function_parameters:
             self.LOG.info(" ".join([parameter, ":", str(function_parameters.get(parameter))]))
 
-        utils = exchange_utils(self.options, self.opts)
+        utils = exchange_utils(self.rc, self.options)
 
         yield StatusMessage("Finding emails")
         retrieved_emails = utils.get_emails(function_parameters)
