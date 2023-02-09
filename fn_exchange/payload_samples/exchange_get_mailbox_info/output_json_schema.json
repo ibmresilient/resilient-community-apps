@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email_address": {
+      "type": "string"
+    },
+    "routing_type": {
+      "type": "string"
+    },
+    "mailbox_type": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    }
+  }
+}
