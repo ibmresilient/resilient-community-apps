@@ -28,7 +28,7 @@ def get_sync_notes(global_settings, options):
     """
     sync_notes = global_settings.get("sync_notes")
     if sync_notes is None:
-        sync_notes = options.get("sync_notes")
+        sync_notes = options.get("sync_notes", True)
 
     return str_to_bool(sync_notes)
 
