@@ -92,15 +92,15 @@ class PollerComponent(ResilientComponent):
 
         for server in case_server_dict:
             # Create filter string which contains the filters for the api call
-            filter_notes = ""
-            filters = ""
+            filter_note = []
+            filter = []
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
-                filter_notes = f"{filter_notes}id={str(id)}"
-                filters = f"{filters}id={str(id)} and last_persisted_time > {int(case_server_dict[server][id].get('properties').get('qr_last_updated_time'))}"
-                if id_list.index(id) != len(id_list)-1:
-                    filters = f"{filters} or "
-                    filter_notes = f"{filter_notes} or "
+                filter_note.append(f"id={str(id)}")
+                filter.append(f"id={str(id)} and last_persisted_time > {int(case_server_dict[server][id].get('properties').get('qr_last_updated_time'))}")
+
+            filters = " or ".join(filter)
+            filter_notes = " or ".join(filter_note)
 
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, get_server_settings(self.opts, server))
@@ -141,31 +141,7 @@ class PollerComponent(ResilientComponent):
                                             }]
                                         }
 
-            if get_sync_notes(self.global_settings, self.opts.get(f"{PACKAGE_NAME}:{server}", {})):
-                # Get notes from all QRadar offenses in filter
-                offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
-
-                # Update offense notes
-                if offenses_notes:
-                    for notes in offenses_notes:
-                        incident_id = case_server_dict[server][notes.get('id')].get('id') # ID of the SOAR incident
-                        incident_notes = self.rest_client().get(f"/incidents/{incident_id}/comments")
-                        for note in notes.get("notes"):
-                            # Check if the QRadar note was created after the last_poller_time
-                            if int(note.get("createTime")) > int(self.last_poller_time.strftime("%s")) * 1e3:
-                                # Create a list of notes that are on the SOAR incident
-                                inc_notes = [remove_html_tags(n.get("text")).replace("Added from QRadar", "") for n in incident_notes]
-                                if note.get("noteText") not in inc_notes:
-                                    # Create the comment payload
-                                    comment_payload = {
-                                        "text": {
-                                            "format": "text",
-                                            "content": f"{note.get('noteText')}\nAdded from QRadar"
-                                        },
-                                        "create_date": int(note.get("createTime"))
-                                    }
-                                    # Send POST request to SOAR server to add the comment
-                                    self.rest_client().post(f"/incidents/{incident_id}/comments", comment_payload)
+            self.sync_notes(qradar_client, server, filter_notes, case_server_dict)
 
             # If there are changes then fix payload and send put request to SOAR
             if updated_cases:
@@ -177,3 +153,39 @@ class PollerComponent(ResilientComponent):
                     raise IntegrationError(str(response))
 
                 LOG.info(f"Case: {str(updated_cases)} updated field: qr_last_updated_time")
+
+    def sync_notes(self, qradar_client, server, filter_notes, case_server_dict):
+        """
+        Sync QRadar offense notes with SOAR incident
+        :param qradar_client: Client connection to QRadar server
+        :param server: Label of the current server
+        :param filter_notes: Filter to get QRadar offense notes
+        :param case_server_dict: Dictionary of SOAR incidents
+        :return: None
+        """
+
+        if get_sync_notes(self.global_settings, self.opts.get(f"{PACKAGE_NAME}:{server}", {})):
+            # Get notes from all QRadar offenses in filter
+            offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
+
+            # Update offense notes
+            if offenses_notes:
+                for notes in offenses_notes:
+                    incident_id = case_server_dict[server][notes.get('id')].get('id') # ID of the SOAR incident
+                    incident_notes = self.rest_client().get(f"/incidents/{incident_id}/comments")
+                    for note in notes.get("notes"):
+                        # Check if the QRadar note was created after the last_poller_time
+                        if int(note.get("createTime")) > int(self.last_poller_time.strftime("%s")) * 1e3:
+                            # Create a list of notes that are on the SOAR incident
+                            inc_notes = [remove_html_tags(n.get("text")).replace("Added from QRadar", "") for n in incident_notes]
+                            if note.get("noteText") not in inc_notes:
+                                # Create the comment payload
+                                comment_payload = {
+                                    "text": {
+                                        "format": "text",
+                                        "content": f"{note.get('noteText')}\nAdded from QRadar"
+                                    },
+                                    "create_date": int(note.get("createTime"))
+                                }
+                                # Send POST request to SOAR server to add the comment
+                                self.rest_client().post(f"/incidents/{incident_id}/comments", comment_payload)

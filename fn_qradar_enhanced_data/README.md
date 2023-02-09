@@ -1681,4 +1681,4 @@ The max value of num_workers is 500.
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM supported App. For assistance, see [https://ibm.com/mysupport](https://ibm.com/mysupport).
