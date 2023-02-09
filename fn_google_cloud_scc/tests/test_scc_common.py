@@ -3,8 +3,10 @@ from datetime import datetime
 from unittest.mock import patch
 
 import pytest
-from fn_google_cloud_scc.lib.scc_common import GoogleSCCCommon, linkify
 from google.cloud import securitycenter
+from resilient_lib import RequestsCommon
+
+from fn_google_cloud_scc.lib.scc_common import GoogleSCCCommon, linkify
 
 from .data.mock_objs import (MockSecurityCenterClient, assets, config_data,
                              findings, to_dict)
@@ -13,7 +15,7 @@ from .data.mock_objs import (MockSecurityCenterClient, assets, config_data,
 @pytest.fixture(scope="module")
 def fx_scc_common():
     with patch.object(securitycenter.SecurityCenterClient, "from_service_account_file", MockSecurityCenterClient.from_service_account_file) as _:
-        return GoogleSCCCommon(config_data)
+        return GoogleSCCCommon(config_data, RequestsCommon())
 
 
 @patch.object(securitycenter.ListFindingsResponse.ListFindingsResult, "to_dict")

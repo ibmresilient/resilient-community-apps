@@ -32,7 +32,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        self.app_common = GoogleSCCCommon(self.options)
+        self.app_common = GoogleSCCCommon(self.options, self.rc)
 
         validate_fields(["google_scc_update_key"], fn_inputs)
         update_key = fn_inputs.google_scc_update_key
