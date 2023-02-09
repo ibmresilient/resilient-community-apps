@@ -10,21 +10,17 @@ from exchangelib import (DELEGATE, IMPERSONATION, Account, CalendarItem,
                          Configuration, Credentials, EWSDateTime, EWSTimeZone,
                          HTMLBody, Message)
 from exchangelib.attachments import FileAttachment
-# Errors
+
 from exchangelib.errors import (ErrorFolderNotFound,
                                 ErrorImpersonateUserDenied,
                                 ErrorNonExistentMailbox, UnauthorizedError)
+
 from exchangelib.folders import FolderCollection
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 from exchangelib.restriction import Q
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
 from resilient_lib import RequestsCommon
-
-# from exchangelib.folders import ArchiveInbox
-# from exchangelib.version import EXCHANGE_2016
-# BaseProtocol.HTTP_ADAPTER_CLS = NoVerifyHTTPAdapter
-# ArchiveInbox.supported_from = EXCHANGE_2016
 
 
 class NoMailboxError(Exception):
@@ -83,7 +79,6 @@ class exchange_utils:
 
         proxy_base_adapter = HTTPAdapter
 
-        # Don't check certificates
         if not self.verify_cert:
             proxy_base_adapter = NoVerifyHTTPAdapter
 
@@ -114,9 +109,12 @@ class exchange_utils:
         split_path = [path.strip('"') for path in re.findall('(?:[^/"]|"(?:\\.|[^"])*")+', folder_path)]
 
         account = self.connect_to_account(username)
+        account.root.refresh()
         folder = account.root
+
         if folder_path is None:
             return folder
+
         for dir in split_path:
             try:
                 folder = folder / dir
@@ -124,10 +122,24 @@ class exchange_utils:
                 raise FolderError(username, dir, folder_path, account.root.tree().encode('utf-8'))
         return folder
 
-    def get_emails(self, username, folder_path=None, email_ids = None, sender=None, subject=None, body=None,
-                   start_date=None, end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
-                   search_subfolders=False):
+    def get_emails(self, function_parameters):
         """Get queried emails"""
+        
+        username    = function_parameters["username"]
+        num_emails  = function_parameters["num_emails"]
+        email_ids   = function_parameters["email_ids"]
+        folder_path = function_parameters["folder_path"]
+
+        start_date  = function_parameters["start_date"]
+        end_date    = function_parameters["end_date"]
+
+        sender  = function_parameters["sender"]
+        subject = function_parameters["subject"]
+        body    = function_parameters["body"]
+
+        has_attachments  = function_parameters["has_attachments"]
+        order_by_recency  = function_parameters["order_by_recency"]
+        search_subfolders = function_parameters["search_subfolders"]
 
         # Default folder path if no folder path is specified
         folder_path = self.default_folder_path if folder_path is None else folder_path
@@ -152,7 +164,7 @@ class exchange_utils:
         if email_ids:
             id_query = Q()
             for email_id in email_ids.split(','):
-                id_query = id_query | Q(message_id=email_id.strip())
+                id_query = id_query | Q(sender=email_id.strip()) 
             filtered_emails = filtered_emails.filter(id_query)
 
         # filter by sender

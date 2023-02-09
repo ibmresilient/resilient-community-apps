@@ -30,7 +30,7 @@ def selftest_function(opts):
         # Get mailbox info
         info = account.protocol.resolve_names([username], return_full_contact_data=True)
 
-        if isinstance(info, list) and info[0].email_address == username:
+        if isinstance(info, list) and info[0][0].email_address == username:
             return {"state": "success"}
         else:
             return {"state": "failure"}
