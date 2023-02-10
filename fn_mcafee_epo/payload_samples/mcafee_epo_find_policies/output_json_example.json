@@ -1,0 +1,229 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "productId": "MARCOBA_META",
+      "featureName": "MARCOBA_META",
+      "typeName": "General",
+      "objectName": "McAfee Default",
+      "typeId": 19,
+      "featureId": "MARCOBA_META",
+      "objectId": 39,
+      "productName": "Active Response 2.4.4",
+      "objectNotes": ""
+    },
+    {
+      "productId": "MARCOBA_META",
+      "featureName": "MARCOBA_META",
+      "typeName": "General",
+      "objectName": "Full Visibility",
+      "typeId": 19,
+      "featureId": "MARCOBA_META",
+      "objectId": 40,
+      "productName": "Active Response 2.4.4",
+      "objectNotes": ""
+    },
+    {
+      "productId": "MARCOBA_META",
+      "featureName": "MARCOBA_META",
+      "typeName": "General",
+      "objectName": "Full Monitoring",
+      "typeId": 19,
+      "featureId": "MARCOBA_META",
+      "objectId": 41,
+      "productName": "Active Response 2.4.4",
+      "objectNotes": ""
+    },
+    {
+      "productId": "MARCOBA_META",
+      "featureName": "MARCOBA_META",
+      "typeName": "General",
+      "objectName": "My Default",
+      "typeId": 19,
+      "featureId": "MARCOBA_META",
+      "objectId": 42,
+      "productName": "Active Response 2.4.4",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "General",
+      "objectName": "McAfee Default",
+      "typeId": 3,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 4,
+      "productName": "McAfee Agent ",
+      "objectNotes": "The McAfee Default policy is configured with settings recommended by McAfee to protect many environments"
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "General",
+      "objectName": "Large Organization Default",
+      "typeId": 3,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 9,
+      "productName": "McAfee Agent ",
+      "objectNotes": "The Large Organization Default policy is configured with settings recommended by McAfee to protect large enterprise environments."
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "General",
+      "objectName": "My Default",
+      "typeId": 3,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 11,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Repository",
+      "objectName": "McAfee Default",
+      "typeId": 4,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 5,
+      "productName": "McAfee Agent ",
+      "objectNotes": "The McAfee Default policy is configured with settings recommended by McAfee to protect many environments"
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Repository",
+      "objectName": "My Default",
+      "typeId": 4,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 12,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Troubleshooting",
+      "objectName": "McAfee Default",
+      "typeId": 5,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 6,
+      "productName": "McAfee Agent ",
+      "objectNotes": "The McAfee Default policy is configured with settings recommended by McAfee to protect many environments"
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Troubleshooting",
+      "objectName": "My Default",
+      "typeId": 5,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 13,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Custom Properties",
+      "objectName": "McAfee Default",
+      "typeId": 6,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 7,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Custom Properties",
+      "objectName": "My Default",
+      "typeId": 6,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 14,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Product Improvement Program",
+      "objectName": "McAfee Default",
+      "typeId": 7,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 8,
+      "productName": "McAfee Agent ",
+      "objectNotes": "The McAfee Default policy is configured with settings recommended by McAfee to protect many environments"
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "typeName": "Product Improvement Program",
+      "objectName": "My Default",
+      "typeId": 7,
+      "featureId": "EPOAGENTMETA",
+      "objectId": 15,
+      "productName": "McAfee Agent ",
+      "objectNotes": ""
+    },
+    {
+      "productId": "DXLBROKRMETA",
+      "featureName": "McAfee DXL Broker Management",
+      "typeName": "General",
+      "objectName": "McAfee Default",
+      "typeId": 13,
+      "featureId": "DXLBROKRMETA",
+      "objectId": 24,
+      "productName": "McAfee DXL Broker Management 6.0.0",
+      "objectNotes": ""
+    },
+    {
+      "productId": "DXLBROKRMETA",
+      "featureName": "McAfee DXL Broker Management",
+      "typeName": "General",
+      "objectName": "My Default",
+      "typeId": 13,
+      "featureId": "DXLBROKRMETA",
+      "objectId": 28,
+      "productName": "McAfee DXL Broker Management 6.0.0",
+      "objectNotes": ""
+    },
+    {
+      "productId": "DXLCLNT_META",
+      "featureName": "McAfee DXL Client",
+      "typeName": "General",
+      "objectName": "McAfee Default",
+      "typeId": 17,
+      "featureId": "DXLCLNT_META",
+      "objectId": 33,
+      "productName": "McAfee DXL Client 6.0.0",
+      "objectNotes": ""
+    },
+    {
+      "productId": "DXLCLNT_META",
+      "featureName": "McAfee DXL Client",
+      "typeName": "General",
+      "objectName": "My Default",
+      "typeId": 17,
+      "featureId": "DXLCLNT_META",
+      "objectId": 35,
+      "productName": "McAfee DXL Client 6.0.0",
+      "objectNotes": ""
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "incident_id": 2108,
+    "datatable_name": "mcafee_epo_policies"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 620661,
+    "timestamp": "2022-08-22 11:43:00"
+  }
+}

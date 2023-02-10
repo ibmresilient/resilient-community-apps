@@ -1,0 +1,15 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+include apikey_permissions.txt
+recursive-include fn_sentinelone/util *
+recursive-include fn_sentinelone/lib *
+include fn_sentinelone/LICENSE
+include doc/*.md
+include doc/screenshots/*
+recursive-include payload_samples/*/ *.json
+include icons/*.png
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak
