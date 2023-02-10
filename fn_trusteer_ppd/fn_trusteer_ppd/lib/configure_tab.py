@@ -20,7 +20,6 @@ class TrusteerPPDTab(Tab):
     CONTAINS = [
         Field("trusteer_ppd_puid"),
         Field("trusteer_ppd_link_to_puid"),
-        Field("trusteer_ppd_link_to_device_id"),
         Datatable("trusteer_ppd_dt_trusteer_alerts")
     ]
     SHOW_IF = [

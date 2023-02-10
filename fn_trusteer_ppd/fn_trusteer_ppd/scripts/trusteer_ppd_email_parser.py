@@ -1,6 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 import re
 import time
+import calendar
+from datetime import datetime
 
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
 # Change this value to reflect who will be the owner of the incident before running the script.
@@ -15,7 +17,10 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", re.IGNORECASE)
 # possible message-id names
 MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
-LINKBACK_URL = "/account-page?accountId=guid_{account_id}"
+
+# URL prefix to refer back to your console for a specific alert, event, etc.
+LINKBACK_DEVICE_URL = "https://{organization}.trusteer.com/search-results?device_id={id}&type=session"
+
 TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED = "Pinpoint Criminal Detection suspicious access detected"
 
 # Trusteer PPD email key names
@@ -30,6 +35,7 @@ GLOBAL_DEVICE_ID = "Global Device ID"
 IS_TARGETED = "Is Targeted"
 MALWARE = "Malware"
 NEW_DEVICE_INDICATION = "New Device Indication"
+ORGANIZATION = "Organization"
 PERMANENT_USER_ID = "Permanent User ID"
 REASON = "Reason"
 REASON_ID = "Reason ID"
@@ -38,6 +44,7 @@ RESOLUTION_ID = "Resolution ID"
 RISK_SCORE = "Risk Score"
 SESSION_ID = "Session ID"
 TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID = "Trusteer Endpoint Protection Device ID"
+USER_IP_ADDRESS = "User IP Address"
 
 COUNTRY_NAMES = {
     "AFG": "Afghanistan",
@@ -328,8 +335,8 @@ class EmailProcessor(object):
 
         # Fill in incident data
         incident.description = "Trusteer Pinpoint Detect Alert"
-        incident.discovered_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
-        incident.start_date = self.email_contents_json.get(EVENT_RECEIVED_AT)
+        incident.discovered_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
+        incident.start_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         incident.plan_status = "A"
         incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         incident.city = self.email_contents_json.get(CITY_NAME, None)
@@ -339,19 +346,25 @@ class EmailProcessor(object):
     def update_alert_data_table(self):
         # Add a new row to the Trusteer Alert data table
         alert_row = incident.addRow('trusteer_ppd_dt_trusteer_alerts')
+        alert_row.trusteer_ppd_dt_date_added = int(datetime.now().timestamp()*1000) 
         alert_row.trusteer_ppd_dt_session_id = self.email_contents_json.get(SESSION_ID)
         alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
-        alert_row.trusteer_ppd_dt_trusteer_application_id = self.email_contents_json.get(APPLICATION_ID)
-        alert_row.trusteer_ppd_dt_event_received_at = self.email_contents_json.get(EVENT_RECEIVED_AT)
-        alert_row.trusteer_ppd_dt_is_targeted = self.email_contents_json.get(IS_TARGETED)
+        alert_row.trusteer_ppd_dt_event_received_at = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
+        alert_row.trusteer_ppd_dt_user_ip_address = self.email_contents_json.get(USER_IP_ADDRESS)
         alert_row.trusteer_ppd_dt_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
-        alert_row.trusteer_ppd_dt_new_device_indication = self.email_contents_json.get(NEW_DEVICE_INDICATION)
+
+        alert_row.trusteer_ppd_dt_new_device_indication = bool(self.email_contents_json.get(NEW_DEVICE_INDICATION))
+        alert_row.trusteer_ppd_dt_organization = self.email_contents_json.get(ORGANIZATION)
         alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
         alert_row.trusteer_ppd_dt_recommendation = self.email_contents_json.get(RECOMMENDATION)
-        alert_row.trusteer_ppd_dt_risk_score = self.email_contents_json.get(RISK_SCORE)
+        alert_row.trusteer_ppd_dt_risk_score = int(self.email_contents_json.get(RISK_SCORE))
         alert_row.trusteer_ppd_dt_country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         alert_row.trusteer_ppd_dt_city = self.email_contents_json.get(CITY_NAME)
-
+        if alert_row.trusteer_ppd_dt_device_id and alert_row.trusteer_ppd_dt_organization:
+            link = LINKBACK_DEVICE_URL.format(organization=alert_row.trusteer_ppd_dt_organization, 
+                                              id=alert_row.trusteer_ppd_dt_device_id)
+            ref_html = u"""<a href='{0}'>Link</a>""".format(link)
+            alert_row.trusteer_ppd_dt_device_link = helper.createRichText(ref_html)
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
         
@@ -387,6 +400,17 @@ class EmailProcessor(object):
                 incident.addEmailAttachment(attachment.id)
                 incident.addArtifact(
                     "Email Attachment Name", attachment.suggested_filename, "")
+
+    @staticmethod
+    def soar_datetimeformat(value, date_format="%Y-%m-%d %H:%M:%S UTC", split_at=None):
+        if not value:
+            return value
+
+        if split_at:
+            utc_time = time.strptime(value[:value.rfind(split_at)], date_format)
+        else:
+            utc_time = time.strptime(value, date_format)
+        return calendar.timegm(utc_time) * 1000
 
     @staticmethod
     def get_message_id(headers):

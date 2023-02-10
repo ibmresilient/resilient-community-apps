@@ -30,7 +30,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.trusteer_ppd_device_id
         """
 
-        validate_fields(["trusteer_ppd_puid", "trusteer_ppd_device_id"], fn_inputs)
+        validate_fields(["trusteer_ppd_puid"], fn_inputs)
 
         app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
