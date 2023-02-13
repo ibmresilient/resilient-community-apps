@@ -9,7 +9,7 @@ import sys
 from exchangelib.queryset import QuerySet
 from mock import MagicMock
 from exchangelib import Message, FileAttachment, Account, Folder, CalendarItem, EWSDateTime, EWSTimeZone, Q, Mailbox
-from fn_exchange.util.exchange_utils import exchange_utils, FolderError
+from fn_exchange.lib.exchange_utils import exchange_utils, FolderError
 
 from exchangelib.folders import RootOfHierarchy
 

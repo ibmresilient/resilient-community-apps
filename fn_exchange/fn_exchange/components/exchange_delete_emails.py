@@ -3,88 +3,102 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util.exchange_utils import exchange_utils
+from resilient_circuits import (AppFunctionComponent, app_function,
+                                StatusMessage, FunctionResult)
 
+from fn_exchange.lib import constants
+from fn_exchange.lib.exchange_helper import NoEmailError
+from fn_exchange.lib.exchange_utils import exchange_interface
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_delete_emails"""
+FN_NAME = "exchange_delete_emails"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+        super(FunctionComponent, self).__init__(opts, constants.PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Query the server to find emails with the provided parameters and delete them. There
+        are two types of deletion operation that can be performed:
 
-    @function("exchange_delete_emails")
-    def _exchange_delete_emails_function(self, event, *args, **kwargs):
-        """Function: Delete emails with the specified parameters"""
+            * Hard delete : Permanently delete selected emails
+            * Soft delete : Move selected emails to TRASH
+
+        FN Inputs:
+        -------
+            hard_delete           <bool> : Permanently delete email or move to trash
+            username               <str> : Primary email account to be used
+            num_emails             <int> : Limit the number of emails retrieved
+            email_ids              <str> : Retrieve emails from all these senders
+            folder_path            <str> : Custom folder path to find emails
+            sender                 <str> : Only find emails from this specified sender
+            subject                <str> : Retrieve emails with matching message subject
+            body                   <str> : Retrieve emails with matching message body
+            has_attachments       <bool> : Retrieve emails with attachments 
+            order_by_recency      <bool> : Order retrieved emails by recency
+            search_subfolders     <bool> : Specifies whether to query a mailbox's subfolder
+            start_date        <datetime> : Get emails on or after this date
+            end_date          <datetime> : Get emails until after this date
+
+        Returns:
+        --------
+            Response <dict> : A response with the mails retrieved and their attributes
+                              or the error message if the retrieval process failed
+        """
+        function_parameters = {}
+
+        function_parameters["hard_delete"] = getattr(fn_inputs, "exchange_hard_delete", False)
+        function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
+        function_parameters["num_emails"] = getattr(fn_inputs, "exchange_num_emails", None)
+        function_parameters["email_ids"] = getattr(fn_inputs, "exchange_email_ids", None)
+        function_parameters["folder_path"] = getattr(fn_inputs, "exchange_folder_path", None)
+        function_parameters["sender"] = getattr(fn_inputs, "exchange_sender", None)
+        function_parameters["subject"] = getattr(fn_inputs, "exchange_message_subject", None)
+        function_parameters["body"] = getattr(fn_inputs, "exchange_message_body", None)
+        function_parameters["has_attachments"] = getattr(fn_inputs, "exchange_has_attachments", None)
+        function_parameters["order_by_recency"] = getattr(fn_inputs, "exchange_order_by_recency", None)
+        function_parameters["search_subfolders"] = getattr(fn_inputs, "exchange_search_subfolders", None)
+        function_parameters["start_date"] = getattr(fn_inputs, "exchange_start_date", None)
+        function_parameters["end_date"] = getattr(fn_inputs, "exchange_end_date", None)
+
+        if not function_parameters.get("folder_path"):
+            function_parameters["folder_path"] = self.options.get('default_folder_path')
+            self.LOG.info('No folder path was specified, using value from config file')
+
+        for parameter in function_parameters:
+            self.LOG.info(" ".join([parameter, ":", str(function_parameters.get(parameter))]))
+
         try:
-            # Get the function parameters:
-            exchange_email = kwargs.get("exchange_email")  # text
-            exchange_folder_path = kwargs.get("exchange_folder_path")  # text
-            exchange_hard_delete = kwargs.get("exchange_hard_delete") # boolean
-            exchange_email_ids = kwargs.get("exchange_email_ids")  # text
-            exchange_sender = kwargs.get("exchange_sender")  # text
-            exchange_message_subject = kwargs.get("exchange_message_subject") # text
-            exchange_message_body = kwargs.get("exchange_message_body") # text
-            exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
-            exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
-            exchange_has_attachments = kwargs.get("exchange_has_attachments")  # boolean
-            exchange_order_by_recency = kwargs.get("exchange_order_by_recency")  # boolean
-            exchange_num_emails = kwargs.get("exchange_num_emails")  # int
-            exchange_search_subfolders = kwargs.get("exchange_search_subfolders") # boolean
-
-            log = logging.getLogger(__name__)
-            if exchange_folder_path is None:
-                exchange_folder_path = self.options.get('default_folder_path')
-                log.info('No folder path was specified, using value from config file')
-            log.info("exchange_email: %s" % exchange_email)
-            log.info("exchange_folder_path: %s" % exchange_folder_path)
-            log.info("exchange_hard_delete: %s" % exchange_hard_delete)
-            log.info("exchange_email_ids: %s" % exchange_email_ids)
-            log.info("exchange_sender: %s" % exchange_sender)
-            log.info("exchange_message_subject: %s" % exchange_message_subject)
-            log.info("exchange_message_body: %s" % exchange_message_body)
-            log.info("exchange_start_date: %s" % exchange_start_date)
-            log.info("exchange_end_date: %s" % exchange_end_date)
-            log.info("exchange_has_attachments: %s" % exchange_has_attachments)
-            log.info("exchange_order_by_recency: %s" % exchange_order_by_recency)
-            log.info("exchange_num_emails: %s" % exchange_num_emails)
-            log.info("exchange_search_subfolders: %s" % exchange_search_subfolders)
-
-            # Initialize utils
-            utils = exchange_utils(self.options, self.opts)
-
-            # Find emails
+            interface = exchange_interface(self.rc, self.options)
             yield StatusMessage("Finding emails")
-            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_email_ids, exchange_sender,
-                                      exchange_message_subject, exchange_message_body, exchange_start_date,
-                                      exchange_end_date, exchange_has_attachments, exchange_order_by_recency,
-                                      exchange_num_emails, exchange_search_subfolders)
-            yield StatusMessage("Done finding emails")
+            retrieved_emails = interface.get_emails(function_parameters)
+            num_deleted = retrieved_emails.count()
 
-            # Get function results
-            results = utils.create_email_function_results(emails)
-            num_deleted = emails.count()
+            yield StatusMessage(f"Search email operation complete, {num_deleted} emails found")
+            results = interface.create_email_function_results(retrieved_emails)
 
-            # Delete Emails
-            yield StatusMessage("Deleting emails")
-            if exchange_hard_delete:
-                emails.delete()
+            yield StatusMessage("Deleting retrieved emails")
+            if num_deleted == 0:
+                raise NoEmailError()
+
+            elif function_parameters["hard_delete"]:
+                msg = "Hard delete option selected. Permanently deleting emails"
+                StatusMessage(msg)
+                retrieved_emails.delete()
+
             else:
-                for item in emails:
+                msg = "Soft delete option selected. Moving emails to trash"
+                StatusMessage(msg)
+                for item in retrieved_emails:
                     item.move_to_trash()
-            yield StatusMessage("Done deleting emails, %d emails deleted" % num_deleted)
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+            self.log.info(msg)
+
+            yield StatusMessage(f"Completed deleting emails, {num_deleted} emails deleted")
+            yield FunctionResult(results, success=True)
+
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))
