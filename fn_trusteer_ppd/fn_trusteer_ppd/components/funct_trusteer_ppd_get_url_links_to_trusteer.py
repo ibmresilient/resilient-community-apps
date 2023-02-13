@@ -30,20 +30,21 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.trusteer_ppd_device_id
         """
 
-        validate_fields(["trusteer_ppd_puid"], fn_inputs)
-
         app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         link_url_puid = None
         link_url_device_id = None
 
+        trusteer_ppd_puid = getattr(fn_inputs, "trusteer_ppd_puid", None)
+        trusteer_ppd_device_id = getattr(fn_inputs, "trusteer_ppd_device_id", None)
+        
         # Get the URL link back to Trusteer PUID.
-        if fn_inputs.trusteer_ppd_puid:
-            link_url_puid = app_common.make_linkback_url(id=fn_inputs.trusteer_ppd_puid, id_type='puid')
+        if trusteer_ppd_puid:
+            link_url_puid = app_common.make_linkback_url(id=trusteer_ppd_puid, id_type='puid')
 
         # Get the link back to the Device in the Trusteer session.
-        if fn_inputs.trusteer_ppd_device_id:
-            link_url_device_id = app_common.make_linkback_url(id=fn_inputs.trusteer_ppd_device_id, id_type='device_id')
+        if trusteer_ppd_device_id:
+            link_url_device_id = app_common.make_linkback_url(id=trusteer_ppd_device_id, id_type='device_id')
 
         results = {"link_url_puid": link_url_puid,
                    "link_url_device_id": link_url_device_id}

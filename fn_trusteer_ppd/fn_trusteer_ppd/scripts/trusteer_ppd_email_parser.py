@@ -17,10 +17,7 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", re.IGNORECASE)
 # possible message-id names
 MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
-
-# URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_DEVICE_URL = "https://{organization}.trusteer.com/search-results?device_id={id}&type=session"
-
+# Supported Feed type from Trusteer
 TRUSTEER_PPD_FEED_ITEM_TYPE_SUPPORTED = "Pinpoint Criminal Detection suspicious access detected"
 
 # Trusteer PPD email key names
@@ -338,8 +335,6 @@ class EmailProcessor(object):
         incident.discovered_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         incident.start_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         incident.plan_status = "A"
-        incident.country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
-        incident.city = self.email_contents_json.get(CITY_NAME, None)
         incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERMANENT_USER_ID)
 
 
@@ -352,19 +347,15 @@ class EmailProcessor(object):
         alert_row.trusteer_ppd_dt_event_received_at = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         alert_row.trusteer_ppd_dt_user_ip_address = self.email_contents_json.get(USER_IP_ADDRESS)
         alert_row.trusteer_ppd_dt_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
-
         alert_row.trusteer_ppd_dt_new_device_indication = bool(self.email_contents_json.get(NEW_DEVICE_INDICATION))
         alert_row.trusteer_ppd_dt_organization = self.email_contents_json.get(ORGANIZATION)
         alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
         alert_row.trusteer_ppd_dt_recommendation = self.email_contents_json.get(RECOMMENDATION)
-        alert_row.trusteer_ppd_dt_risk_score = int(self.email_contents_json.get(RISK_SCORE))
+        if self.email_contents_json.get(RISK_SCORE) != 'N/A':
+            alert_row.trusteer_ppd_dt_risk_score = int(self.email_contents_json.get(RISK_SCORE))
         alert_row.trusteer_ppd_dt_country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
         alert_row.trusteer_ppd_dt_city = self.email_contents_json.get(CITY_NAME)
-        if alert_row.trusteer_ppd_dt_device_id and alert_row.trusteer_ppd_dt_organization:
-            link = LINKBACK_DEVICE_URL.format(organization=alert_row.trusteer_ppd_dt_organization, 
-                                              id=alert_row.trusteer_ppd_dt_device_id)
-            ref_html = u"""<a href='{0}'>Link</a>""".format(link)
-            alert_row.trusteer_ppd_dt_device_link = helper.createRichText(ref_html)
+
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
         
@@ -377,8 +368,9 @@ class EmailProcessor(object):
     @staticmethod
     def build_dict(content):
         """
-        Builds a dictionary from either the rest_headers or rest_cookies
-        :param rest_temp: rest_headers or rest_cookies
+        Builds a dictionary from either the key, value pairs in the email
+        One key, value pair per line, so split on end of line character.
+        :param content: email plain text content
         :return: Dictionary
         """
         temp_dict = {}
@@ -414,10 +406,13 @@ class EmailProcessor(object):
 
     @staticmethod
     def get_message_id(headers):
-        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
+        #msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
+        for k,v in headers.items():
+            if k.lower() in MESSAGE_ID_LIST:
+                
         # find the message id among several choices
         msg_id = msg_id_list[0] if msg_id_list else None
-        if msg_id:
+        if msg_id and len(msg_id)>0:
             match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets <>
             if match:
                 return match[0]
