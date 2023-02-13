@@ -6,7 +6,7 @@ Usage: resilient-circuits selftest -l fn_exchange
 """
 
 import logging
-from fn_exchange.util.exchange_utils import exchange_utils
+from fn_exchange.lib.exchange_utils import exchange_utils
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)

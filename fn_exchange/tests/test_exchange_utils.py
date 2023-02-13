@@ -3,7 +3,7 @@ import pytest
 from exchangelib import Account, Folder, FolderCollection, EWSTimeZone
 from exchangelib.folders import Root
 from exchangelib.restriction import Q
-from fn_exchange.util.exchange_utils import (FolderError, exchange_utils,
+from fn_exchange.lib.exchange_utils import (FolderError, exchange_utils,
                                              get_config_option, parse_time,
                                              str_to_bool)
 
