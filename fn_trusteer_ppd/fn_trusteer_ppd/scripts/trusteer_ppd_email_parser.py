@@ -44,6 +44,7 @@ TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID = "Trusteer Endpoint Protection Device ID
 USER_IP_ADDRESS = "User IP Address"
 
 COUNTRY_NAMES = {
+    "N/A": "-",
     "AFG": "Afghanistan",
     "ALA": "Åland Islands",
     "ALB": "Albania",
