@@ -1,11 +1,18 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 import hashlib
 import time
 
 try:
-  dialog_inputs = playbook.inputs
-except:
   dialog_inputs = rule.properties
+except:
+  dialog_inputs = None
+
+if not dialog_inputs or not dialog_inputs.get('email_approval_to'):
+  try:
+    dialog_inputs = playbook.inputs
+  except:
+    pass
+  
 
 MESSAGE_ID_DOMAIN = "QRADARSOAR.IBM.COM"
 SUBJECT_PREFIX = "IBM SOAR Approval Requested"
@@ -26,9 +33,9 @@ def generate_msg_hash(expiration, incident_id, incident_create_date, task_id):
 def create_msg_id(msg_hash, domain=MESSAGE_ID_DOMAIN):
   return "{}@{}".format(msg_hash, domain)
 
-msg_content = dialog_inputs.email_approval_details.content.replace('\n', '<br>') if dialog_inputs.email_approval_details.content else None
+msg_content = dialog_inputs.email_approval_details.content.replace('\n', '<br>') if dialog_inputs.get('email_approval_details') else None
 
-expiration_ts = dialog_inputs.email_approval_expiration if dialog_inputs.email_approval_expiration else 0
+expiration_ts = dialog_inputs.email_approval_expiration if dialog_inputs.get('email_approval_expiration') else 0
 # confirm dates in the future
 if expiration_ts and expiration_ts < current_time:
     helper.fail("Expiration date is in the past")
@@ -80,14 +87,19 @@ details = {
   "bcc": None, # change as necessary
   "subject": f"{SUBJECT_PREFIX} for Task: {task.name}",
   "body": "<br>".join(body),
-  "importance": dialog_inputs.email_approval_importance
+  "importance": dialog_inputs.get('email_approval_importance', 'normal')
 }
 
 # add to property for function processing
 try:
   workflow.addProperty("email_approval", details)
 except:
+  pass
+
+try:
   playbook.addProperty("email_approval", details)
+except:
+  pass
 
 # updates to task
 task.due_date = expiration_ts if expiration_ts else task.due_date
