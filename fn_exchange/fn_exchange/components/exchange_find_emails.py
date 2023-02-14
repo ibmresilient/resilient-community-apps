@@ -47,10 +47,10 @@ class FunctionComponent(AppFunctionComponent):
         """
         function_parameters = {}
 
-        function_parameters["username"]    = getattr(fn_inputs, "exchange_email", None)
-        function_parameters["num_emails"]  = getattr(fn_inputs, "exchange_num_emails", None)
-        function_parameters["email_ids"]   = getattr(fn_inputs, "exchange_email_ids", None)
-        function_parameters["folder_path"] = getattr(fn_inputs, "exchange_folder_path", None)
+        function_parameters["username"]   = getattr(fn_inputs, "exchange_email", None)
+        function_parameters["num_emails"] = getattr(fn_inputs, "exchange_num_emails", None)
+        function_parameters["email_ids"]  = getattr(fn_inputs, "exchange_email_ids", None)
+        function_parameters["src_folder"] = getattr(fn_inputs, "exchange_folder_path", None)
         function_parameters["sender"]  = getattr(fn_inputs, "exchange_sender", None)
         function_parameters["subject"] = getattr(fn_inputs, "exchange_message_subject", None)
         function_parameters["body"]    = getattr(fn_inputs, "exchange_message_body", None)
@@ -60,8 +60,8 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters["start_date"] = getattr(fn_inputs, "exchange_start_date", None)
         function_parameters["end_date"]   = getattr(fn_inputs, "exchange_end_date", None)
 
-        if not function_parameters.get("folder_path"):
-            function_parameters["folder_path"] = self.options.get('default_folder_path')
+        if not function_parameters.get("src_folder"):
+            function_parameters["src_folder"] = self.options.get('default_folder_path')
             self.LOG.info('No folder path was specified, using value from config file')
 
         for parameter in function_parameters:

@@ -7,7 +7,6 @@ from resilient_circuits import (AppFunctionComponent, app_function,
                                 StatusMessage, FunctionResult)
 
 from fn_exchange.lib import constants
-from fn_exchange.lib.exchange_helper import NoEmailError
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_delete_emails"
@@ -30,6 +29,7 @@ class FunctionComponent(AppFunctionComponent):
         FN Inputs:
         -------
             hard_delete           <bool> : Permanently delete email or move to trash
+
             username               <str> : Primary email account to be used
             num_emails             <int> : Limit the number of emails retrieved
             email_ids              <str> : Retrieve emails from all these senders
@@ -51,21 +51,22 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters = {}
 
         function_parameters["hard_delete"] = getattr(fn_inputs, "exchange_hard_delete", False)
+
         function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
         function_parameters["num_emails"] = getattr(fn_inputs, "exchange_num_emails", None)
-        function_parameters["email_ids"] = getattr(fn_inputs, "exchange_email_ids", None)
-        function_parameters["folder_path"] = getattr(fn_inputs, "exchange_folder_path", None)
-        function_parameters["sender"] = getattr(fn_inputs, "exchange_sender", None)
+        function_parameters["email_ids"]  = getattr(fn_inputs, "exchange_email_ids", None)
+        function_parameters["src_folder"] = getattr(fn_inputs, "exchange_folder_path", None)
+        function_parameters["sender"]  = getattr(fn_inputs, "exchange_sender", None)
         function_parameters["subject"] = getattr(fn_inputs, "exchange_message_subject", None)
-        function_parameters["body"] = getattr(fn_inputs, "exchange_message_body", None)
+        function_parameters["body"]    = getattr(fn_inputs, "exchange_message_body", None)
         function_parameters["has_attachments"] = getattr(fn_inputs, "exchange_has_attachments", None)
         function_parameters["order_by_recency"] = getattr(fn_inputs, "exchange_order_by_recency", None)
         function_parameters["search_subfolders"] = getattr(fn_inputs, "exchange_search_subfolders", None)
         function_parameters["start_date"] = getattr(fn_inputs, "exchange_start_date", None)
         function_parameters["end_date"] = getattr(fn_inputs, "exchange_end_date", None)
 
-        if not function_parameters.get("folder_path"):
-            function_parameters["folder_path"] = self.options.get('default_folder_path')
+        if not function_parameters.get("src_folder"):
+            function_parameters["src_folder"] = self.options.get('default_folder_path')
             self.LOG.info('No folder path was specified, using value from config file')
 
         for parameter in function_parameters:
@@ -80,24 +81,22 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage(f"Search email operation complete, {num_deleted} emails found")
             results = interface.create_email_function_results(retrieved_emails)
 
-            yield StatusMessage("Deleting retrieved emails")
             if num_deleted == 0:
-                raise NoEmailError()
+                msg = "Failed to perform operation as 0 emails were retrieved"
 
             elif function_parameters["hard_delete"]:
-                msg = "Hard delete option selected. Permanently deleting emails"
-                StatusMessage(msg)
+                msg = "Permanently deleted emails"
                 retrieved_emails.delete()
 
             else:
-                msg = "Soft delete option selected. Moving emails to trash"
-                StatusMessage(msg)
+                msg = "Moved emails to trash"
                 for item in retrieved_emails:
                     item.move_to_trash()
 
-            self.log.info(msg)
+            self.LOG.info(msg)
+            yield StatusMessage(msg)
 
-            yield StatusMessage(f"Completed deleting emails, {num_deleted} emails deleted")
+            yield StatusMessage(f"{num_deleted} emails deleted")
             yield FunctionResult(results, success=True)
 
         except Exception as err:

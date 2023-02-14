@@ -5,7 +5,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util.exchange_utils import exchange_utils
+from fn_exchange.lib import constants
+from fn_exchange.lib.exchange_utils import exchange_interface
 
 
 class FunctionComponent(ResilientComponent):
@@ -33,7 +34,7 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_get_email: %s" % get_user)
 
             # Initialize utils
-            utils = exchange_utils(self.options, self.opts)
+            utils = exchange_interface(self.options, self.opts)
 
             # Connect to server
             username = self.options.get("email")
