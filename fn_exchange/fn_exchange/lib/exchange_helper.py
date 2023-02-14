@@ -7,7 +7,6 @@ import exchangelib
 from exchangelib import EWSTimeZone, folders
 from exchangelib.errors import ErrorFolderNotFound
 
-
 log = logging.getLogger(__file__)
 
 class NoMailboxError(Exception):
@@ -44,12 +43,6 @@ class ImpersonationError(Exception):
         fail_msg = '{} does not have permission to impersonate {}'.format(impersonator, impersonation_target)
         log.error(fail_msg)
         super(ImpersonationError, self).__init__(fail_msg)
-        
-class NoEmailError(Exception):
-    def __init__(self):
-        fail_msg = 'Failed to delete emails as 0 emails were retrieved.'
-        log.error(fail_msg)
-        super(NoEmailError, self).__init__(fail_msg)
 
 
 def get_timezone(format="Etc/GMT") -> EWSTimeZone:

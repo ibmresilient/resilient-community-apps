@@ -6,6 +6,8 @@ import base64
 import logging
 import exchangelib
 
+from resilient_lib import IntegrationError
+
 from exchangelib import (
     DELEGATE, IMPERSONATION, Account, CalendarItem,
     Configuration, Credentials, EWSDateTime,
@@ -103,25 +105,25 @@ class exchange_interface:
     def get_emails(self, function_parameters) -> exchangelib.restriction.Q:
         """Get queried emails"""
 
-        username    = function_parameters["username"]
-        num_emails  = function_parameters["num_emails"]
-        email_ids   = function_parameters["email_ids"]
-        folder_path = function_parameters["folder_path"]
-        start_date  = function_parameters["start_date"]
-        end_date    = function_parameters["end_date"]
-        sender  = function_parameters["sender"]
-        subject = function_parameters["subject"]
-        body    = function_parameters["body"]
-        has_attachments     = function_parameters["has_attachments"]
-        order_by_recency    = function_parameters["order_by_recency"]
-        search_subfolders   = function_parameters["search_subfolders"]
+        username   = function_parameters.get("username")
+        num_emails = function_parameters.get("num_emails")
+        email_ids  = function_parameters.get("email_ids")
+        src_folder = function_parameters.get("src_folder")
+        start_date = function_parameters.get("start_date")
+        end_date   = function_parameters.get("end_date")
+        sender  = function_parameters.get("sender")
+        subject = function_parameters.get("subject")
+        body    = function_parameters.get("body")
+        has_attachments     = function_parameters.get("has_attachments")
+        order_by_recency    = function_parameters.get("order_by_recency")
+        search_subfolders   = function_parameters.get("search_subfolders")
         default_folder_path = self.options.get("default_folder_path")
 
         account = self.connect_to_account(username)
 
-        folder_path = default_folder_path if folder_path is None else folder_path
+        src_folder = default_folder_path if src_folder is None else src_folder
 
-        split_folder_paths = re.findall('(?:[^,"]|"(?:\\.|[^"])*")+', folder_path)
+        split_folder_paths = re.findall('(?:[^,"]|"(?:\\.|[^"])*")+', src_folder)
         folders = [exchange_helper.go_to_folder(username, account, folder.strip()) for folder in split_folder_paths]
 
         # Search subfolders
@@ -138,7 +140,7 @@ class exchange_interface:
         if email_ids:
             id_query = Q()
             for email_id in email_ids.split(','):
-                id_query = id_query | Q(sender=email_id.strip()) 
+                id_query = id_query | Q(message_id=email_id.strip()) 
             filtered_emails = filtered_emails.filter(id_query)
 
         if sender:
@@ -205,7 +207,7 @@ class exchange_interface:
 
 
     def create_meeting(self, function_parameters) -> dict:
-
+        """Create an email message object"""    
         username = function_parameters.get("username")
         start_time = function_parameters.get("start_time")
         end_time = function_parameters.get("end_time")
@@ -245,6 +247,48 @@ class exchange_interface:
             'body': meeting_body,
             'start_time': start_time,
             'end_time': end_time}
+
+
+    def move_emails(self, function_parameters, delete_src_folder=False) -> tuple:
+        """Moving mails to a specified folder"""
+        username   = function_parameters.get("username")
+        src_folder = function_parameters.get("src_folder")
+        dst_folder = function_parameters.get("dst_folder")
+        account    = self.connect_to_account(username)
+        
+        if not delete_src_folder:
+            self.log.info("Querying emails base on provided attributes")
+            retrieved_emails = self.get_emails(function_parameters)
+        else:
+            self.log.info(f"Finding all emails in the {src_folder} and moving them to {dst_folder}")
+            force_delete = function_parameters.get("force_delete")
+
+            if not force_delete:
+                self.log.info("Folder will not be deleted if subfolders detected")
+                _src_folder = exchange_helper.go_to_folder(username, account, src_folder)
+                if _src_folder.child_folder_count != 0:
+                    msg = f'{src_folder} has subfolders'
+                    self.log.error(msg)
+                    raise IntegrationError(msg)
+                else:
+                    self.log.error("No subfolders found. Source folder will be deleted after moving files")
+                    retrieved_emails = _src_folder.all()
+            else:
+                self.log.info("Folder will be deleted even if subfolders detected")
+                retrieved_emails = self.get_emails({
+                    "username"  : username,
+                    "src_folder" : src_folder,
+                    "search_subfolders" : True})
+
+        num_moved = retrieved_emails.count()
+        self.log.info(f"Search email operation complete, {num_moved} emails found")
+        results = self.create_email_function_results(retrieved_emails)
+
+        self.log.info(f"Moving emails to {dst_folder}")
+        results["src_folder"] = exchange_helper.go_to_folder(username, account, src_folder)
+        results["dst_folder"] = exchange_helper.go_to_folder(username, account, dst_folder)
+
+        return results, retrieved_emails
 
 
     def create_email_function_results(self, emails) -> dict:
