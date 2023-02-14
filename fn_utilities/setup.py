@@ -34,7 +34,7 @@ setup(
     the security incident response activities.""",
     install_requires=[
         'resilient_circuits>=47.1.0',
-        'openpyxl~=3.0',
+        'openpyxl~=3.0.10',
         'pyOpenSSL~=23.0',
         'cryptography~=39.0.1',
         'pywinrm~=0.4',
