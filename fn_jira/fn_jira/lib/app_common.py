@@ -1,62 +1,119 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-import logging
+from logging import getLogger
 from urllib.parse import urljoin
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, str_to_bool
+from resilient_lib import IntegrationError, readable_datetime, str_to_bool, validate_fields, RequestsCommon
 
-#----------------------------------------------------------------------------------------
-# This module is an open template for you to develop the methods necessary to interact
-# with your endpoint solution. The only required method is:
-#  query_entities_since_ts: get your entities (alerts, events, etc.) based on a timestamp
-#       since the last time the poller ran
-# Helper functions:
-#  _make_headers: create the necessary API header for your endpoint communication
-#  make_linkback_url: create a url for your alert, event, etc. to navigate back to your endpoint console
-#  _get_uri: assemble the parts of your URL (base address, version information, command and arguments)
-#  _api_call: perform the API call, passing parameters and check the returned status code before
-#      returning the response object
-#
-# Review these functions which need modification. Currently they `raise IntegrationError("UNIMPLEMENTED")`
-#   _make_headers,
-#   query_entities_since_ts,
-#   make_linkback_url,
-#   _get_uri
-#   _api_call
+LOG = getLogger(__name__)
 
-LOG = logging.getLogger(__name__)
+PACKAGE_NAME = "fn_jira"
+GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
+SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 # change the header as necessary
 HEADER = { 'Content-Type': 'application/json' }
 
-# E N D P O I N T S
-# define the endpiont api calls your app will make to the endpoint solution. Below are examples
-#ALERT_URI = "alert/{}/"
-#POLICY_URI = "policy/"
-
 class AppCommon():
-    def __init__(self, rc, package_name, app_configs):
+    def __init__(self, rc, opts, app_configs):
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
+        :param opts: All of the settings from the app.config
+        :type opts: dict
         :param rc: object to resilient_lib.requests_common for making API calls
         :type rc: ``resilient_lib.RequestsCommon``
-        :param package_name: name of the package to be created
-        :type package_name: str
         :param app_configs: app.config parameters in order to authenticate and access the endpoint
         :type app_configs: dict
         """
 
-        self.package_name = package_name
-        self.api_key = app_configs.get("api_key", "<- ::CHANGE_ME:: change to default for API Key or remove default ->")
-        self.api_secret = app_configs.get("api_secret","<- ::CHANGE_ME:: change to default for API secret or remove default ->")
-        self.endpoint_url = app_configs.get("endpoint_url", "<- ::CHANGE_ME:: change to default for endpoint url or remove default ->")
+        # Get global_settings if definied in the app.config
+        global_settings = opts.get(GLOBAL_SETTINGS, {})
+
+        # Validate the app.config settings for fn_jira
+        validate_fields([
+            {"name": "url", "placeholder": "https://<jira url>"},
+            {"name": "auth_method"},
+            {"name": "jira_dt_name"}], app_configs)
+
         self.rc = rc
+
+        # Required configs
+        self.endpoint_url = app_configs.get("url")
+        self.auth_method = app_configs.get("auth_method")
+        self.oauth = self.token_auth = self.basic_auth = self.auth = None
+
+        # Get verify setting from app.config
         self.verify = _get_verify_ssl(app_configs)
 
-        # Specify any additional parameters needed to communicate with your endpoint solution
+        # Get timeout from app.config either from global_settings if present or from individual Jira server settings
+        self.timeout = int(global_settings.get("timeout")) if global_settings.get("timeout", None) else int(app_configs.get("timeout", 10))
+
+        # Set proxies variable as a dict
+        self.proxies = {}
+        # Check if global_settings is definied in the app.config
+        if global_settings:
+            # Check if proxies are defined in the global_settings
+            if global_settings.get("http_proxy"):
+                self.proxies["http"] = global_settings.get("http_proxy")
+            if global_settings.get("https_proxy"):
+                self.proxies["https"] = global_settings.get("https_proxy")
+            if not self.proxies:
+                self.proxies = None
+        else:
+            # Call resilient_lib function to find proxies
+            self.proxies = RequestsCommon(opts, app_configs).get_proxies()
+
+        # AUTH and BASIC AUTH
+        if self.auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
+            validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
+                            {"name": "password", "placeholder": "<jira user password or API Key>"}],
+                            app_configs)
+            if self.auth_method.upper() == SUPPORTED_AUTH_METHODS[0]: # AUTH
+                self.auth = (app_configs.get("user"), app_configs.get("password"))
+            else: # BASIC
+                self.basic_auth = (app_configs.get("user"), app_configs.get("password"))
+
+        # TOKEN
+        elif self.auth_method.upper() == SUPPORTED_AUTH_METHODS[2]:
+            validate_fields(["auth_token"], app_configs)
+            self.token_auth = (app_configs.get("auth_token"))
+
+        # OAUTH
+        elif self.auth_method.upper() == SUPPORTED_AUTH_METHODS[3]:
+            key_cert_data = None
+
+            # Validate required fields
+            validate_fields([
+                {"name": "access_token", "placeholder": "<oauth access token>"},
+                {"name": "access_token_secret", "placeholder": "<oauth access token secret>"},
+                {"name": "consumer_key_name", "placeholder": "<oauth consumer key - from Jira incoming link settings>"},
+                {"name": "private_rsa_key_file_path", "placeholder": "<private RSA key matched with public key on Jira>"}
+                ], app_configs)
+
+            try:
+                with open(app_configs.get("private_rsa_key_file_path"), "r") as private_rsa_key:
+                    key_cert_data = private_rsa_key.read()
+            except FileNotFoundError as e:
+                raise IntegrationError(f"Private Key file not valid: {str(e)}")
+
+            self.oauth = {"access_token": app_configs.get("access_token"),
+                    "access_token_secret": app_configs.get("access_token_secret"),
+                    "consumer_key": app_configs.get("consumer_key_name"),
+                    "key_cert": key_cert_data}
+
+        else:
+            raise IntegrationError(f"{self.auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
+
+    def __init_session_obj(self):
+        """
+        
+        """
+        if not hasattr(AppCommon, "jira_session"):
+            AppCommon.jira_session = Session()
 
     def _get_uri(self, cmd):
         """
@@ -68,7 +125,6 @@ class AppCommon():
         :return: complete URL
         :rtype: str
         """
-        raise IntegrationError("UNIMPLEMENTED")
         return urljoin(self.endpoint_url, cmd)
 
     def _make_headers(self, token):
@@ -79,7 +135,6 @@ class AppCommon():
         :return: complete header
         :rtype: dict
         """
-        raise IntegrationError("UNIMPLEMENTED")
         header = HEADER.copy()
         # modify to represent how to build the header
 
@@ -122,7 +177,6 @@ class AppCommon():
         """
         # <- ::CHANGE_ME:: -> for the specific API calls
         # and make sure to properly handle pagination!
-        raise IntegrationError("UNIMPLEMENTED")
         query = {
             "query_field_name": readable_datetime(timestamp) # utc datetime format
         }
@@ -130,7 +184,7 @@ class AppCommon():
         LOG.debug("Querying endpoint with %s", query)
         response, err_msg = self._api_call("GET", 'alerts', query, refresh_authentication=True)
         if err_msg:
-            LOG.error("%s API call failed: %s", self.package_name, err_msg)
+            LOG.error("%s API call failed: %s", PACKAGE_NAME, err_msg)
             return None
 
         return response.json()
@@ -146,7 +200,6 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        raise IntegrationError("UNIMPLEMENTED")
         return urljoin(self.endpoint_url, linkback_url.format(entity_id))
 
 
@@ -200,3 +253,62 @@ def _get_verify_ssl(app_configs):
         verify = str_to_bool(verify)
 
     return verify
+
+class JiraServers():
+    def __init__(self, opts):
+        self.servers, self.server_name_list = self._load_servers(opts)
+
+    def _load_servers(self, opts):
+        """
+        Create list of label names and a dictionary of the servers and their configs
+        :param opts: Dict of app_configs
+        :return servers: Dictonary of all the Jira servers from the app.config that contains each servers configurations
+        :return server_name_list: List filled with all of the labels for the servers from the app.config
+        """
+        servers = {}
+        server_name_list = self._get_server_name_list(opts)
+        for server in server_name_list:
+            server_data = opts.get(server)
+            if not server_data:
+                raise KeyError(f"Unable to find Jira server: {server}")
+
+            servers[server] = server_data
+
+        return servers, server_name_list
+
+    def jira_label_test(jira_label, servers_list):
+        """
+        Check if the given jira_label is in the app.config
+        :param jira_label: User selected server
+        :param servers_list: List of jira servers
+        :return: Dictionary of app_configs for choosen server
+        """
+        # If label not given and using previous versions app.config [fn_jira]
+        if not jira_label and servers_list.get(PACKAGE_NAME):
+            return servers_list[PACKAGE_NAME]
+        elif not jira_label:
+            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
+
+        label = f"{PACKAGE_NAME}:{jira_label}"
+        if jira_label and label in servers_list:
+            app_configs = servers_list[label]
+        elif len(servers_list) == 1:
+            app_configs = servers_list[list(servers_list.keys())[0]]
+        else:
+            raise IntegrationError("{} did not match labels given in the app.config".format(jira_label))
+
+        return app_configs
+
+    def _get_server_name_list(self, opts):
+        """
+        Return the list of jira server names defined in the app.config in fn_jira.
+        :param opts: List of app_configs
+        :return: List of servers
+        """
+        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:") and key != GLOBAL_SETTINGS]
+
+    def get_server_name_list(self):
+        """
+        Return list of all server names
+        """
+        return self.server_name_list
