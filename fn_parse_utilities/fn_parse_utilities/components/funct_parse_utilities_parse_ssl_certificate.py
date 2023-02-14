@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, broad-except,pointless-string-statement
 """
     Function utilities_parse_ssl_cert receives a certificate as a parameter.
@@ -12,15 +12,16 @@
 
     The results returned by this function can then be saved as a Rich Text note.
 """
-import logging
-import json
-import datetime
-import OpenSSL # Used for certificates
+from logging import getLogger
+from json import dumps, loads
+from datetime import datetime
+from OpenSSL import crypto # Used for certificates
 from cryptography import x509 # Used for certificates
 from cryptography.x509 import DNSName, ExtensionNotFound, ExtensionOID
 from cryptography.hazmat.backends import default_backend
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'parse_utilities_parse_ssl_certificate"""
@@ -29,7 +30,7 @@ class FunctionComponent(ResilientComponent):
     def _utilities_parse_ssl_certificate_function(self, event, *args, **kwargs):
         """Function: Takes in an SSL Certificate.
         Attempts to parse information from this certificate and return it for use.
-        
+
         results =
         {
             "subject": JSON Encoded Array of subject components,
@@ -46,7 +47,6 @@ class FunctionComponent(ResilientComponent):
             certificate = kwargs.get("parse_utilities_certificate")  # text
             incident_id = kwargs.get("parse_utilities_incident_id")  # number
 
-            log = logging.getLogger(__name__)
             log.info("artifact_id: %s", artifact_id)
             log.info("certificate: %s", certificate)
             log.info("incident_id: %s", incident_id)
@@ -61,10 +61,9 @@ class FunctionComponent(ResilientComponent):
 
             try:  # Nested try catch
                 yield StatusMessage("Attempting to parse the cert as JSON")
-                parsed_cert_json = json.loads(certificate)
+                parsed_cert_json = loads(certificate)
                 # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
-                parsed_cert_openssl = OpenSSL.crypto.load_certificate(
-                    OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
+                parsed_cert_openssl = crypto.load_certificate(crypto.FILETYPE_PEM, parsed_cert_json)
 
                 '''
                 For python 2 load_pem_x509_certificate expects a string
@@ -94,46 +93,41 @@ class FunctionComponent(ResilientComponent):
                 """
                 # Get the artifact from the REST API
                 artifact_data = self._get_binary_data_from_file(client, incident_id, artifact_id)
-                parsed_cert_openssl = OpenSSL.crypto.load_certificate(
-                    OpenSSL.crypto.FILETYPE_PEM, artifact_data)
+                parsed_cert_openssl = crypto.load_certificate(crypto.FILETYPE_PEM, artifact_data)
                 # Load cert also with cryptography; this package has better date attributes
                 parsed_cert_crypto = x509.load_pem_x509_certificate(
                     artifact_data, default_backend())
-                
+
             #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
             #  Some fields must be serialised into JSON in order to be compatible with STOMP
             results = {
-                "subject": json.dumps(str(parsed_cert_openssl.get_subject().get_components())),
+                "subject": dumps(str(parsed_cert_openssl.get_subject().get_components())),
                 "notBefore": str(parsed_cert_crypto.not_valid_before),
                 "notAfter": str(parsed_cert_crypto.not_valid_after),
-                "issuer": json.dumps(str(parsed_cert_openssl.get_issuer().get_components())),
+                "issuer": dumps(str(parsed_cert_openssl.get_issuer().get_components())),
                 "version": parsed_cert_openssl.get_version(),
-                "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
+                "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.today()) is True else 'Expired'),
                 "signature_algorithm": str(parsed_cert_openssl.get_signature_algorithm()),
-                "public_key": str(OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey())),
+                "public_key": str(crypto.dump_publickey(crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey())),
                 "extensions": {
-                    "subjectAltNames": json.dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
-                    "basicConstraints": json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
-                    "issuerAltNames": json.dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
+                    "subjectAltNames": dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
+                    "basicConstraints": dumps(self._get_basic_constraints(parsed_cert_crypto)),
+                    "issuerAltNames": dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
                 }
 
             }
             # Return the formatted data we have received.
             yield StatusMessage("Finishing...")
             yield FunctionResult(results)
-        
+
         except Exception:
             yield FunctionError()
 
-            
-
-            
     """
     Takes in 3 params
     :param lower_bound the earliest date acceptable for validation
     :param upper_bound the latest date acceptable
     :param the_date the date we are checking, usually the current date at time of execution
-
 
     This function is used to ensure a SSL Cert is within a provided date range.
 
@@ -172,6 +166,7 @@ class FunctionComponent(ResilientComponent):
         data = client.get_content(data_uri)
 
         return data
+
     """
     Takes in 1 params
     :certificate -- Certificate string we are checking
@@ -181,8 +176,7 @@ class FunctionComponent(ResilientComponent):
     @staticmethod
     def _get_dns_subject_alternative_names(certificate):
         # type: (cryptography.x509.Certificate) -> List[Text]
-        """Retrieve all the DNS entries of the Subject Alternative Name extension.
-        """
+        """Retrieve all the DNS entries of the Subject Alternative Name extension."""
         subj_alt_names = []
         try:
             san_ext = certificate.extensions.get_extension_for_oid(ExtensionOID.SUBJECT_ALTERNATIVE_NAME)
@@ -190,6 +184,7 @@ class FunctionComponent(ResilientComponent):
         except ExtensionNotFound:
             pass
         return subj_alt_names
+
     """
     Takes in 1 params
     :certificate -- Certificate string we are checking
@@ -199,8 +194,7 @@ class FunctionComponent(ResilientComponent):
     @staticmethod
     def _get_issuer_alternative_names(certificate):
         # type: (cryptography.x509.Certificate) -> List[Text]
-        """Retrieve all the DNS entries of the Subject Alternative Name extension.
-        """
+        """Retrieve all the DNS entries of the Subject Alternative Name extension."""
         issuer_alt_names = []
         try:
             san_ext = certificate.extensions.get_extension_for_oid(ExtensionOID.ISSUER_ALTERNATIVE_NAME)

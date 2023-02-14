@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -12,8 +12,6 @@ from resilient_lib import validate_fields, get_file_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 LOG = getLogger(__name__)
-
-PACKAGE_NAME = "fn_parse_utilities"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'utilities_xml_transformation"""
