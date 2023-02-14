@@ -6,6 +6,7 @@ This content package consists of rules, workflows, scripts and a datatable for a
 ## History
 | Version | Date | Comments |
 | ------: | ---: | -------: |
+| 1.0.1 | 2/2023  | fixes for v47 |
 | 1.0.0 | 10/2022 | Initial release |
 
 ## Key Features
