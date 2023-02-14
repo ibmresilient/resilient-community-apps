@@ -42,7 +42,7 @@ def generate_msg_hash(expiration, incident_id, incident_create_date, task_id):
 def create_msg_id(msg_hash, domain=MESSAGE_ID_DOMAIN):
   return "{}@{}".format(msg_hash, domain)
 
-msg_content = dialog_inputs.email_approval_details.content.replace('\n', '<br>') if dialog_inputs.get('email_approval_details') else None
+msg_content = dialog_inputs.email_approval_details.content.replace('\n', '<br>') if dialog_inputs.email_approval_details and  dialog_inputs.email_approval_details.content else None
 
 expiration_ts = dialog_inputs.email_approval_expiration if dialog_inputs.get('email_approval_expiration') else 0
 # confirm dates in the future
