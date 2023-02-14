@@ -4,7 +4,6 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
-import sys
 
 PACKAGE='fn_utilities'
 
@@ -36,8 +35,8 @@ setup(
     install_requires=[
         'resilient_circuits>=47.1.0',
         'openpyxl~=3.0',
-        'pyOpenSSL~=22.0',
-        'cryptography~=38.0.4',
+        'pyOpenSSL~=23.0',
+        'cryptography~=39.0.1',
         'pywinrm~=0.4',
         'json2html~=1.3',
         'lxml~=4.8',

@@ -21,7 +21,7 @@ RUN pip install --upgrade pip
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
 # install and upgrade cryptography to satisfy fn_utilities requirement
-RUN pip install --upgrade cryptography==38.0.4
+RUN pip install --upgrade cryptography==39.0.1
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
